@@ -6,7 +6,9 @@
   - Batch 1: 2021-04-02 23:23:16 through 2021-04-03 01:46:36 (lines 1-320)
   - Batch 2: 2021-04-03 01:46:51 through 2021-05-18 17:49:41 (lines 321-2400)
   - Batch 3: 2021-05-18 17:50:23 through 2021-05-28 19:56:29 (lines 2401-3600)
-- Next starting point: line 3601 (2021-05-28T19:56:29 and later)
+  - Batch 4: 2021-05-28 19:56:29 through 2021-05-31 00:01:06 (lines 3601-4210)
+  - Batch 5: 2021-05-31 00:01:07 through 2021-06-17 16:13:29 (lines 4211-6400)
+  - Next starting point: line 6401 (2021-06-17T16:13:29 and later)
 
 ## Key Findings
 
@@ -76,6 +78,197 @@
 - VSETT’s stock controllers taper output whenever pack voltage hits ~52 V (~10 % remaining), effectively lowering the “battery max” current to protect cells from high-resistance heating—a behaviour the group wants to port into VESC firmware for builds lacking smart BMS data.【F:data/vesc_help_group/text_slices/input_part000.txt†L3326-L3334】
 - Early Spintend Ubox shakedowns show MOSFET temps climbing to ~50 °C within seconds at 50 A battery draw before the BMS begins limiting; VESC’s default thermal limits are much higher (~80 °C), so riders can safely raise thresholds once pack protection is confirmed.【F:data/vesc_help_group/text_slices/input_part000.txt†L3488-L3524】
 
+### Throttle & Sensor Voltage Safety (Batch 4)
+- VESC control logic is referenced to 3.3 V; feeding 5 V hall throttles directly into ADC or UART pins risks exceeding the STM32 absolute maximum (≈4 V on ADC, ≈7.3 V on UART), which has already killed several ESP32-based add-ons.【F:data/vesc_help_group/text_slices/input_part000.txt†L3600-L3655】
+- Builders mitigate by powering SS49E throttles from 5 V but dividing the signal down with 1 kΩ/2 kΩ resistors, or by sourcing 3.3 V-friendly sensors; some low-cost throttles produce zero output at 3.3 V and need a level converter instead.【F:data/vesc_help_group/text_slices/input_part000.txt†L3619-L3665】
+- Residual 0.15 V noise on scaled signals can be filtered with VESC deadband settings rather than extra capacitors.【F:data/vesc_help_group/text_slices/input_part000.txt†L4194-L4210】
+
+### Thermal Limits & Ubox Performance (Batch 4)
+- Spintend’s published defaults start derating at 85 °C MOSFET temperature and shut down at 100 °C, but logs show riders seeing 70–75 °C during long pulls; the underlying FDBL0150N80 devices are rated to 175 °C, so keeping cutback around 100 °C with good frame contact and thermal paste preserves headroom while respecting sensor placement outside the silicon junction.【F:data/vesc_help_group/text_slices/input_part000.txt†L3680-L3708】
+- Community acceleration data confirms Ubox builds hitting target speeds quickly, though square-wave Zero 11X controllers running 72 V/55 A still out-launch 60 V Ubox setups until phase current limits are raised; adding active cooling fans is under consideration for enclosed decks.【F:data/vesc_help_group/text_slices/input_part000.txt†L3710-L3764】
+
+### Battery vs Phase Current Insights (Batch 4)
+- Artem formalised the relationship `I_phase = I_batt * V_batt / V_motor`, explaining why battery current caps determine how long full phase torque is sustained as motor voltage rises, and why output power cannot exceed the input wattage.【F:data/vesc_help_group/text_slices/input_part000.txt†L3770-L3818】
+- Practical takeaway: keep phase current above battery current, and expect battery amps to climb from ~16 A at launch (100 A phase, 10 V back-EMF) toward the configured limit as RPM and motor voltage increase.【F:data/vesc_help_group/text_slices/input_part000.txt†L3786-L3818】
+
+### Cruise Control & Remote Integration (Batch 4)
+- VESC Tool lacks native cruise control, but the Spintend handheld remote offers button-activated cruise, light, and horn outputs via its own receiver—reducing wiring runs for throttle, e-brake, lighting, and display cables by consolidating signals through the radio link.【F:data/vesc_help_group/text_slices/input_part000.txt†L3820-L3850】
+- Koxx’s smart display firmware could add cruise by locking speed with a button-triggered profile, though the project remains open source and contributions are encouraged.【F:data/vesc_help_group/text_slices/input_part000.txt†L3837-L3844】
+
+### Analog Braking Concepts (Batch 4)
+- Most scooter brake levers are digital on/off switches; achieving proportional e-braking requires hall-based sensors such as Xiaomi’s lever or custom SS49E + magnet housings for hydraulic brakes, which the smart display can interpret to blend braking force based on pull speed or throttle position.【F:data/vesc_help_group/text_slices/input_part000.txt†L3880-L3915】
+
+### Battery Experiments & Cell Selection (Batch 4)
+- Long-term abuse of 250 W hub motors with 84 V/2 000 W inputs pushed magnets past 80 °C, causing demagnetisation and permanent speed loss—highlighting the need for thermal monitoring on recycled hardware.【F:data/vesc_help_group/text_slices/input_part000.txt†L3944-L3948】
+- Builders compare recycled 18650 packs (EVE 26V cells limited to ~5 A each) with new Samsung 35E/50S/48X options, noting 21700 formats pack more energy into Xiaomi decks and that Samsung 50S delivers leading Wh at 15–20 A draws despite high cost.【F:data/vesc_help_group/text_slices/input_part000.txt†L3997-L4053】【F:data/vesc_help_group/text_slices/input_part000.txt†L4054-L4090】
+
+### Aerlang & Legal Modes (Batch 4)
+- The Aerlang 500 W scooter pairs a feature-rich 48 V/25 A controller, integrated lighting, NFC alarm, and 17.5 Ah pack for ~€400, but the flat deck plate fatigues and cracks at the neck or rear suspension mounts without reinforcement—making structural upgrades mandatory before exploiting its 45 km/h potential.【F:data/vesc_help_group/text_slices/input_part000.txt†L4120-L4124】
+- Its speed limiter toggles via an eight-click sequence, supporting stealth “police mode” profiles that riders aim to replicate on VESC builds to avoid attention while staying within ~35 km/h when necessary.【F:data/vesc_help_group/text_slices/input_part000.txt†L4130-L4178】
+
+### Capacitor Noise Mitigation & Parallel Pack Wiring (Batch 5)
+- For throttle signal filtering, builders recommend scavenging ~100 nF ceramics from dead electronics instead of grafting oversized drone capacitors; discharge and meter salvaged parts after removal to confirm capacitance before installing them across signal-to-ground.【F:data/vesc_help_group/text_slices/input_part000.txt†L4211-L4306】
+- When paralleling 16 S packs, tie all grounds together, ensure matched cell counts/capacity, pre-balance voltages, and watch for cross-charging to avoid over-stressing the smaller pack despite individual BMS protection.【F:data/vesc_help_group/text_slices/input_part000.txt†L4322-L4383】
+
+### Thermal Interface & Cooling Tweaks (Batch 5)
+- Spintend reiterated that stock firmware derates around 75 °C and encouraged extra airflow; swapping thick thermal pads for copper shims with quality paste can cut MOSFET temperatures roughly 20 % when clamped to the deck.【F:data/vesc_help_group/text_slices/input_part000.txt†L4425-L4509】
+- Field reports show Ubox channels staying near 45 °C while sustaining ~100 A battery / 130 A phase with those interface mods, and Spintend is preparing a Ubox Pro revision to support 150 A phase with improved EMI isolation.【F:data/vesc_help_group/text_slices/input_part000.txt†L4672-L4687】
+
+### Acceleration Logging & Calibration Practices (Batch 5)
+- Riders benchmark 0–70 km/h runs with apps like Dragy/Race Timer, capturing 60 fps footage of calibrated displays and averaging multiple passes in identical conditions to offset GPS lag and accuracy swings.【F:data/vesc_help_group/text_slices/input_part000.txt†L4615-L4641】
+- To align VESC telemetry with GPS, set pole counts correctly and measure wheel diameter under rider load (or full wheel circumference), accounting for tyre compression and ensuring the controller’s reported speed slightly exceeds GPS for safety margins.【F:data/vesc_help_group/text_slices/input_part000.txt†L4652-L4671】
+
+### SmartDisplay Roadmap & Boost Logic (Batch 5)
+- SmartDisplay firmware already offers 25/35/unlimited speed slots and is slated for user-configurable limits plus legal/eco/normal/boost profiles that scale current (e.g., eco at 0.6× phase, 0.7× battery) and gate the temporary boost via MOSFET temperature warnings.【F:data/vesc_help_group/text_slices/input_part000.txt†L4562-L4596】
+
+### Troubleshooting & Repair Lessons (Batch 5)
+- Diagnosing no-power VESCs centers on checking LDO regulators and supply rails; careless probing can arc and vaporize PCB traces, so the group now solders test pigtails or uses current-limited supplies before measuring sensitive components.【F:data/vesc_help_group/text_slices/input_part000.txt†L5000-L5075】
+
+### Battery Current Guidance for 16 S Builds (Batch 5)
+- A 16 S 5 P Samsung 35E pack should be capped near 40 A continuous (50 A short bursts) with phase current around 110–125 A and ABS max at 180 A; regen targets stay below ~7 A battery / 15 A motor to protect cells while FOC keeps motor temps manageable.【F:data/vesc_help_group/text_slices/input_part000.txt†L5203-L5400】
+
+### Shipping & Accessory Insights (Batch 5)
+- Spintend direct orders often arrive in the EU declared as sub-$30 “electric speed controllers,” avoiding VAT when sent by postal carriers, and their remote consolidates throttle, brake, horn, light, and ABS/regen controls to minimize wiring.【F:data/vesc_help_group/text_slices/input_part000.txt†L4950-L4964】【F:data/vesc_help_group/text_slices/input_part000.txt†L5808-L5841】
+
+### Shipping, Drop-in Kits & Cell Sourcing (Batch 6)
+- Bulk orders of Samsung 50S 21700 cells can be arranged for about €4.71 each (≈15 % less when bypassing eBay/PayPal fees), providing an avenue for high-discharge pack builds if buyers are comfortable coordinating the shared purchase.【F:data/vesc_help_group/text_slices/input_part000.txt†L6433-L6434】
+- The Smart+Eye drop-in kit targets riders who want VESC functionality without rewiring controls; the finger-throttle/display bundle keeps labour to €100–150 versus €350–400 for full custom wiring despite ergonomic compromises.【F:data/vesc_help_group/text_slices/input_part000.txt†L6428-L6440】
+
+### Battery Waterproofing & Diagnostics Lessons (Batch 6)
+- Rain-soaked packs can confuse Daly BMS readings without tripping output, so riders now fully open enclosures, dry balance harnesses, and reinforce future builds with layered fish paper, waterproof tape, silicone sealant, and desiccant bags to prevent repeat moisture faults.【F:data/vesc_help_group/text_slices/input_part000.txt†L6512-L6599】
+
+### Brake Sensor Experiments & Compatibility (Batch 6)
+- Builders are prototyping progressive regen by pairing hydro levers with hall-effect pots or magnets, noting Xiaomi’s stock lever already outputs a smooth analog signal even if the plastic hardware feels flimsy.【F:data/vesc_help_group/text_slices/input_part000.txt†L7201-L7246】
+- Spintend’s €10 ADC board supports switch- or pot-based levers at 3.3 V or 5 V logic; Magura MT5e buyers should choose the normally-open (HIGO “closer”) lever variant to match the expected brake input behaviour.【F:data/vesc_help_group/text_slices/input_part000.txt†L8270-L8294】
+
+### Regen & Control Tuning Cautions (Batch 6)
+- Bench-testing regen on ADC2 with modest -15 A motor / -5 A battery limits still tripped a VESC shutdown, reinforcing earlier warnings about voltage spikes when spinning wheels unloaded.【F:data/vesc_help_group/text_slices/input_part000.txt†L7299-L7313】
+- Artem reiterated that phase current sets launch torque while battery amps cap how long that thrust lasts; as battery voltage droops, available watts shrink and the controller must taper phase amps once motor voltage exceeds the battery watt ceiling.【F:data/vesc_help_group/text_slices/input_part000.txt†L8037-L8099】
+
+### Spintend Roadmap & Smart Integration (Batch 6)
+- The upcoming Spintend single (target <€180) carries separate logic/power boards, IMU support, ~75 V/100 A specs, and lessons from the dual Ubox—while transparent BLE passthrough now lets the SmartDisplay act as a USB dongle for Android VESC Tool, easing diagnostics on controllers without onboard Bluetooth.【F:data/vesc_help_group/text_slices/input_part000.txt†L7733-L7772】【F:data/vesc_help_group/text_slices/input_part000.txt†L8005-L8013】【F:data/vesc_help_group/text_slices/input_part000.txt†L8227-L8236】
+
+### Procurement & VAT Changes (Batch 7)
+- EU’s July 2021 VAT reform pushed marketplaces such as AliExpress to adopt IOSS collection, adding ~21 % tax at checkout but eliminating the €24+ handling fees postal carriers were charging on arrival—making direct imports simpler even though sticker prices rise.【F:data/vesc_help_group/text_slices/input_part000.txt†L8321-L8332】
+- Members are lobbying Spintend for a companion BMS and coordinating comments on the esk8.news thread so the vendor can gauge demand for a matched battery management stack.【F:data/vesc_help_group/text_slices/input_part000.txt†L8333-L8338】
+
+### Battery Limit Modeling & Hardware Expectations (Batch 7)
+- Artem shared comparative charts that visualise how raising battery current extends the RPM range where full phase torque is sustained, reiterating the `V_batt × I_batt = V_motor × I_phase` trade-off and noting higher battery limits add motor heat from I²R losses even as top speed improves.【F:data/vesc_help_group/text_slices/input_part000.txt†L8340-L8367】
+- Spintend’s forthcoming single controller remains unreleased—once the beta is official they plan to clarify pricing and warranty terms, but expectations are for parity with the production dual given the company’s past support track record.【F:data/vesc_help_group/text_slices/input_part000.txt†L8373-L8378】
+- Supply updates later in the thread confirm the single’s casing delay pushed availability toward mid-July, so builders are planning interim options accordingly.【F:data/vesc_help_group/text_slices/input_part000.txt†L9030-L9033】
+
+### Brake Hardware & Rotor Sizing Debates (Batch 7)
+- Magura’s CMe5 hydraulic lever works cleanly with VESC braking without needing ABS-specific wiring, offering a sturdier metal assembly than MT5e plastics for those chasing analog brake feel.【F:data/vesc_help_group/text_slices/input_part000.txt†L8384-L8385】
+- A spirited comparison of 140 mm versus 160 mm rotors highlights that Rion scooters lack e-brakes and run small discs, leading to fade after just a couple of hot laps; riders who tracked with 160 mm MDR-C rotors saw them glowing red and temporarily losing bite, reinforcing the need for larger or vented hardware at >100 km/h speeds.【F:data/vesc_help_group/text_slices/input_part000.txt†L8888-L8951】
+- Carbon-Ti’s 160 mm vented rotor offers better airflow than Magura’s MDR-C but costs ~€160 each, so some builders are balancing price against heat rejection when upgrading heavy scooters.【F:data/vesc_help_group/text_slices/input_part000.txt†L8943-L8957】
+
+### Ninebot Max Rental Platform Insights (Batch 7)
+- Rental-spec G30 Max frames ship with dual mechanical brakes and thicker swingarms yet still accept 1200 W hub motors without adapters, letting builders preserve both brakes while upgrading powertrains.【F:data/vesc_help_group/text_slices/input_part000.txt†L8763-L8777】
+- The ex-rental battery module is a 6 P pack using 2 500 mAh cells (≈15 Ah) secured with extensive silicone and hidden screws; once opened, cells tested around 2 700 mAh and the deck includes a remote-controlled latch so fleet techs can hot-swap packs quickly.【F:data/vesc_help_group/text_slices/input_part000.txt†L8788-L8796】【F:data/vesc_help_group/text_slices/input_part000.txt†L9201-L9227】
+
+### Controller & BMS Alternatives (Batch 7)
+- ENNOID is testing a 100 V/75 A ESC measuring roughly 70 mm × 75 mm × 16 mm—compact enough for tight decks but expected to cost about $200 given the brand’s premium BMS line.【F:data/vesc_help_group/text_slices/input_part000.txt†L8396-L8403】
+- Riders weighing 16 S builds but balking at VESC pricing are evaluating Minimotors’ 60 V/30 A controllers (smaller housings, no hall sensors) and Kaboo-branded units, though tax and shipping push landed cost near €150—comparable to entry-level VESC hardware.【F:data/vesc_help_group/text_slices/input_part000.txt†L9140-L9187】
+- Space-constrained decks like the Boosted Rev are trending toward charge-only BMS boards plus external fusing because Ant BMS models with Bluetooth are too tall; Daly’s slimline 120 A 16 S variant fits with a ~20–25 mm enclosure extension, while touchscreen “smart” BMS units add valuable telemetry at the cost of significant bulk.【F:data/vesc_help_group/text_slices/input_part000.txt†L9229-L9269】【F:data/vesc_help_group/text_slices/input_part000.txt†L9380-L9411】【F:data/vesc_help_group/text_slices/input_part000.txt†L9404-L9406】
+
+### SmartDisplay Manufacturing Status (Batch 7)
+- Community testing suggests the Flipsky TFT V2 (a Davega-inspired clone) misbehaves on Spintend Ubox setups, so riders are advised to limit trials to scooters with large (>255 mm) wheels until compatibility issues are solved.【F:data/vesc_help_group/text_slices/input_part000.txt†L9320-L9323】
+- Koxx released the full STL set for the SmartDisplay v2 enclosure and control buttons, enabling resin-print runs while the team finalises PCB sourcing through JLCPCB (all components secured except the temperature/humidity sensor).【F:data/vesc_help_group/text_slices/input_part000.txt†L9342-L9364】
+
+### Battery Pack Fabrication & Cell Selection (Batch 7)
+- Custom battery efforts lean on PETG honeycomb holders modeled in Tinkercad and printed on tuned Ender machines; builders share STL designs and offer to draft bespoke layouts for Boosted and Ninebot packs.【F:data/vesc_help_group/text_slices/input_part000.txt†L9412-L9434】【F:data/vesc_help_group/text_slices/input_part000.txt†L9440-L9458】
+- Artem recommends forming 2 S 6 P blocks with 25 mm nickel strip, welding each layer before folding to minimise resistance, shorten BMS leads, and cut voltage sag versus stitching narrower strips; he also linked cost-effective 25 mm pure nickel stock for large packs.【F:data/vesc_help_group/text_slices/input_part000.txt†L9716-L9731】【F:data/vesc_help_group/text_slices/input_part000.txt†L9723-L9726】
+- Linked tutorials and ongoing debates weigh 18650 versus 21700 formats: VTC6 18650 cells deliver higher Wh/L in cramped decks and tolerate triple the current of Samsung 35E, while 21700 formats (40T, P42A, 50E/G) run cooler at high amperage but consume more volume—underscoring the need to match cell choice to available space and current draw.【F:data/vesc_help_group/text_slices/input_part000.txt†L9752-L9820】
+
+### Battery Geometry & Cell Selection Debates (Batch 8)
+- Builders compared 6 P 21700 layouts against 7 P 18650 packs and stressed evaluating watt-hours instead of amp-hours when space is constrained, pointing newcomers to Lygte discharge curves and recommending ≤0.25 C charging for longevity regardless of cell size.【F:data/vesc_help_group/text_slices/input_part000.txt†L9821-L9860】
+- Artem steered 12 S 5 P high-amp projects toward Samsung 48X or LG 50G cells (≈75 A continuous, 100 A peak) while warning that Samsung 50E chemistry overheats past 10–12 A per cell and thus suits range builds more than performance scooters.【F:data/vesc_help_group/text_slices/input_part000.txt†L10442-L10451】【F:data/vesc_help_group/text_slices/input_part000.txt†L10474-L10485】
+
+### Pack Layout, Charging & Wiring Tips (Batch 8)
+- A spacer-equipped M365 Pro deck can host 12 S 5 P 21700 cells stood vertically, letting riders chase higher discharge packs without abandoning the stock chassis footprint.【F:data/vesc_help_group/text_slices/input_part000.txt†L10452-L10456】
+- Artem prefers 4 mm or twin 3 mm solid-core leads on the long battery-to-BMS run to cut resistance, noting that ampacity tables often assume kilometre-long multi-strand looms and therefore undersell what short, dense conductors can safely deliver in scooters.【F:data/vesc_help_group/text_slices/input_part000.txt†L10539-L10551】
+
+### SmartDisplay Supply Chain & Enclosure Plans (Batch 8)
+- With the AliExpress TFT supplier nearly out of stock, Koxx is contacting the upstream manufacturer for a 20-unit batch while the group explores CNC, sheet-metal pressing, and composite filaments to ship premium aluminium or bronze SmartDisplay housings without ballooning labour costs.【F:data/vesc_help_group/text_slices/input_part000.txt†L9926-L9967】
+
+### Delta Rewiring Experiments & Controller Limits (Batch 8)
+- Delta-wound rental hub experiments pushed 16 S builds to 91 km/h before cooking a G30 controller, reinforcing that factory boards survive only to ~15 S and that the community still needs logged torque/speed graphs to gauge delta’s efficiency versus star wiring at high voltage.【F:data/vesc_help_group/text_slices/input_part000.txt†L10021-L10033】
+
+### Spintend CAN Fault Case Study (Batch 8)
+- Rowan’s dual-Spintend setup lost one internal CAN transceiver and the other’s soft-power latch; Artem suspects the controllers were powered asymmetrically so current back-fed through the CAN harness, underscoring the need to share ground and avoid hot-plugging linked VESCs separately.【F:data/vesc_help_group/text_slices/input_part000.txt†L10290-L10340】
+
+### Rental Deck Modding & Lock Integration Ideas (Batch 8)
+- SNSC/Ninebot builders are carving deck edges, relocating BMS boards, and experimenting with 5 V servo locks tied to VESC aux outputs to retain swappable fleet latches while improving waterproofing—though some still default to sealing the hatch for reliability.【F:data/vesc_help_group/text_slices/input_part000.txt†L11232-L11312】
+
+### Spintend Single Ubox Launch & Voltage Limits (Batch 9)
+- Spintend opened beta sales of a $150 single-channel Ubox with built-in antispark, giving builders a cheaper path to 75 V/100 A hardware while the dual remains pricier and often back-ordered.【F:data/vesc_help_group/text_slices/input_part000.txt†L11322-L11336】【F:data/vesc_help_group/text_slices/input_part000.txt†L11712-L11760】
+- Contributors reiterated that the beta hardware cannot be modded for 20 S packs because multiple subsystems—shunt amplifiers, latch logic, and MOSFET choices—top out around 75 V despite some regulators supporting 100 V.【F:data/vesc_help_group/text_slices/input_part000.txt†L11374-L11394】
+
+### Xiaomi Deck Mounting & Control Wiring Tips (Batch 9)
+- Xiaomi/Ninebot decks are double-walled around the controller cavity; owners have successfully tapped one wall for threads or bonded studs with epoxy when mounting accessories, but many still prefer external nuts for strength.【F:data/vesc_help_group/text_slices/input_part000.txt†L11337-L11352】
+- Shielding the combined ADC/UART harness and tying the braid to ground eliminates throttle noise and keeps VESC UART reliable at 115200 baud even with 120 A phase settings—handy for scooters that route long signal runs.【F:data/vesc_help_group/text_slices/input_part000.txt†L11381-L11386】
+
+### SmartDisplay USB Failure Case & Ubox Build Quality (Batch 9)
+- Plugging a SmartDisplay’s USB into a computer while the linked Ubox remained battery-powered nuked the controller’s 3.3 V rail and possibly the STM32, prompting a hard warning to avoid USB tethering and stick to BLE/Wi-Fi debugging unless the VESC is already sequenced on.【F:data/vesc_help_group/text_slices/input_part000.txt†L11633-L11707】
+- Post-mortem photos highlight hand-soldered power stages and unclear 3.3 V regulation paths on the affected Ubox, underscoring both the repair difficulty and variability in assembly quality on early production runs.【F:data/vesc_help_group/text_slices/input_part000.txt†L11650-L11687】
+
+### EU Shipping & VAT Expectations (Batch 9)
+- Since the July 2021 IOSS changes, EU buyers report couriers like FedEx/UPS always collecting VAT plus handling fees, whereas EMS/postal channels still occasionally slip through but can be rerouted via DHL Global Mail; anything over 150 € now skips pre-paid VAT and risks customs delays.【F:data/vesc_help_group/text_slices/input_part000.txt†L11714-L11866】
+
+### Battery Cell Procurement & Validation (Batch 9)
+- 13 S 5 P packs built from NCR21700A cells fit tightly inside rental decks, offering premium range if you accept the expense and vertical cell orientation.【F:data/vesc_help_group/text_slices/input_part000.txt†L11454-L11476】
+- A delayed NKON shipment arrived with scuffed tops and tab marks, leading veterans to suspect refurbished stock and recommend IR/capacity checks with multi-bay testers like the XTAR VC8 before paying.【F:data/vesc_help_group/text_slices/input_part000.txt†L11756-L11818】
+- Sourcing remains volatile: Chinese wholesalers are quoting Samsung 50G/48X around 4.8–5.1 € per cell, while 21700 pricing now rivals 18650 options on a per-cell basis.【F:data/vesc_help_group/text_slices/input_part000.txt†L12224-L12229】【F:data/vesc_help_group/text_slices/input_part000.txt†L12194-L12217】
+
+### Pack Builds & Parallel BMS Lessons (Batch 9)
+- Running stock MJ1 packs in parallel with auxiliary MH1 bricks can trip SmartBMS short-circuit thresholds (e.g., 115 A) during throttle spikes, so tuners should align current limits and watch for reverse-charge imbalances between disparate chemistries.【F:data/vesc_help_group/text_slices/input_part000.txt†L11827-L11853】
+- Builders debating interim 12 S limits on 13 S packs were reminded to raise low-voltage cutoffs (≈39 V) to protect the higher-series battery when spoofing controller voltage assumptions.【F:data/vesc_help_group/text_slices/input_part000.txt†L11837-L11855】
+
+### Legal Profiles & Throttle Scaling Strategies (Batch 9)
+- VESC stores only one persistent “default” profile; higher-power modes live in RAM until reboot, so keeping the legal tune as the saved configuration plus BLE pairing prevents officers from toggling modes roadside.【F:data/vesc_help_group/text_slices/input_part000.txt†L12160-L12188】
+- Riders chasing dual throttle behaviour (e.g., torque sensor vs thumb throttle) can hardware-scale voltages with resistors or use separate ADC channels, though ADC3 currently requires firmware/tool changes to enable.【F:data/vesc_help_group/text_slices/input_part000.txt†L12172-L12190】
+
+### Motor Current Tuning & Brake Outputs (Batch 9)
+- Artem suggests seeding current limits by dividing motor wattage by 10 for phase amps, capping battery amps at roughly two-thirds of that, and adjusting both by equal percentages to trade launch torque against heat—keeping high-power Ubox builds balanced around 120 A phase/74–80 A battery on 1.2 kW hubs.【F:data/vesc_help_group/text_slices/input_part000.txt†L12491-L12510】
+- Ubox users report rumours that the legacy PPM pin can be remapped as a DAC brake-light output on 75/300-based boards, though maintainers have yet to confirm firmware support.【F:data/vesc_help_group/text_slices/input_part000.txt†L12500-L12512】
+
+### SmartDisplay Hardware Updates & Expansion Buses (Batch 9)
+- The single-core Spintend lacks onboard Bluetooth, making SmartDisplay’s BLE passthrough or external dongles essential if you avoid direct USB while powered; its CAN lead also includes power, so Spintend support is being consulted on safe dual-controller hookups.【F:data/vesc_help_group/text_slices/input_part000.txt†L12516-L12541】
+- Internally the SmartDisplay relies on I²C plus a custom one-wire expansion bus, which tolerates long cable runs better than I²C and is earmarked for future accessory keypads or signal breakout boards.【F:data/vesc_help_group/text_slices/input_part000.txt†L12536-L12547】
+
+### Regen Over-Voltage Hardware (Batch 9)
+- Spintend’s new rheostatic braking module can sink roughly 10 A of regen current when pack voltage spikes, trimming what the battery and controller must absorb during hard stops on high-voltage scooters.【F:data/vesc_help_group/text_slices/input_part000.txt†L12811-L12820】
+
+### Regen Braking Heat Limits on VESC Hardware (Batch 10)
+- Artem reminded builders that if the battery cannot absorb regen energy, the braking current is converted to MOSFET heat, so aggressive regen without a dump load can still cook the controller despite the pack being safe.【F:data/vesc_help_group/text_slices/input_part000.txt†L12821-L12821】
+
+### Vsett Hub Temperature Sensor Retrofit (Batch 10)
+- Detailed the three-hour process for adding a temp probe inside a tightly packed Vsett hub: document the stock wiring, desolder and fan out the stator strands, cut a groove in the insulation jacket, seat one sensor lead in the groove before shrinking, solder the twisted fan-outs, then sleeve the repair with high-voltage loom to keep the harness from binding in the axle.【F:data/vesc_help_group/text_slices/input_part000.txt†L12880-L12896】
+
+### Mixed Brake Sensor Compatibility (Batch 10)
+- Running a hall-based Xiaomi lever alongside a normally-open hydraulic switch on the same ADC input yields mismatched behaviour (progressive vs. on/off); the group advised using only the hall lever or adding a hall sensor to the hydraulic brake instead of mixing signal types.【F:data/vesc_help_group/text_slices/input_part000.txt†L12911-L12949】
+
+### Plexiglass Deck Covers & Load Limits (Batch 10)
+- A 6 mm laser-cut acrylic deck plate can survive light riders when backed by foam and cell supports, but others reported the material fractures under heavier loads, suggesting plexiglass lids remain a prototype-only solution.【F:data/vesc_help_group/text_slices/input_part000.txt†L12963-L12982】【F:data/vesc_help_group/text_slices/input_part000.txt†L12973-L12980】
+
+### Spintend Single-Core Thermal Logs (Batch 10)
+- First rides on the single-channel Spintend at 120 A phase / 80 A battery pushed a 750 W Boosted hub to ~80 °C in under ten minutes while the controller held ~55 °C, confirming the motor—not the ESC—is the bottleneck at that tune.【F:data/vesc_help_group/text_slices/input_part000.txt†L13166-L13178】
+- Follow-up data logging showed the VESC clamps duty cycle once the motor NTC hits its limit and that hard regen events add several degrees of heat, prompting plans to retest at 100/50, 90/45, and 80/40 A to balance speed and temps.【F:data/vesc_help_group/text_slices/input_part000.txt†L13299-L13325】
+
+### Quick Current-Limit Heuristics (Batch 10)
+- Artem proposed a beginner formula: start with motor rated watts ÷ 10 for both phase and battery amps (e.g., 750 W ≈ 75 A), then raise one limit only if the other is reduced by the same percentage to keep heat constant—though veterans cautioned to validate against real thermal logs.【F:data/vesc_help_group/text_slices/input_part000.txt†L13224-L13236】
+- He also restated the fundamental balance that battery voltage × battery current must equal motor voltage × phase current, meaning low battery limits choke phase amps at higher duty and explain why acceleration falls off as speed rises.【F:data/vesc_help_group/text_slices/input_part000.txt†L13334-L13375】
+
+### Pack Rehabilitation & Cell Testing (Batch 10)
+- Builders reviving old packs urged capacity and IR testing on every cell, noting imbalance issues when a single weak parallel cell siphons charge from its peers during storage; tools like XTAR VC8s or custom dischargers help flag suspect groups before rebuilding.【F:data/vesc_help_group/text_slices/input_part000.txt†L13046-L13079】【F:data/vesc_help_group/text_slices/input_part000.txt†L13569-L13709】
+
+### Insulation Materials & Fish Paper Debate (Batch 10)
+- Koxx’s 14 S 6 P build used Repackr groupings plus hot-glued, fish-paper-wrapped p-groups due to the Boosted deck’s tight tolerances, sparking discussion about whether to double-layer insulation in cramped stacks.【F:data/vesc_help_group/text_slices/input_part000.txt†L13480-L13541】
+- Others pitched recyclable kraftplex jackets, but Artem reiterated that any series stack lacking fish paper or holders risks can-to-can shorts because the cell shell is negative, so at minimum insulate between series rows.【F:data/vesc_help_group/text_slices/input_part000.txt†L13506-L13533】
+
+### Nucular Controller Availability Warnings (Batch 10)
+- The group flagged that Nucular’s high-power controllers aren’t VESC-compatible, ship extremely slowly, and have seen repeated price hikes—one buyer cancelled after 18 months of delays—so builders should temper expectations before switching ecosystems.【F:data/vesc_help_group/text_slices/input_part000.txt†L13605-L13619】
+
 ## Open Questions / Follow-ups
 - Validate whether the 20% Flipsky code can be shared or must be redeemed by the original account holder.【F:data/vesc_help_group/text_slices/input_part000.txt†L147-L152】
 - Document wiring steps to integrate the VESC sleep function with the scooter’s stock power button and headlights.【F:data/vesc_help_group/text_slices/input_part000.txt†L66-L109】【F:data/vesc_help_group/text_slices/input_part000.txt†L1113-L1151】
@@ -85,3 +278,5 @@
 - Record real-world fitment data for 16 S 5 P 21700 packs and corresponding deck modifications (spacer heights, enclosure reinforcements).【F:data/vesc_help_group/text_slices/input_part000.txt†L2015-L2085】
 - Prototype and validate the recommended low-ESR capacitor add-on for long cable runs, documenting values, placement, and thermal impact.【F:data/vesc_help_group/text_slices/input_part000.txt†L3084-L3090】
 - Explore how to replicate VSETT’s low-voltage power tapering inside VESC Tool so battery stress cues remain without smart BMS telemetry.【F:data/vesc_help_group/text_slices/input_part000.txt†L3326-L3334】
+- Quantify how much the copper-shim thermal mod and future Ubox Pro revisions extend sustained current limits versus stock pads or firmware settings.【F:data/vesc_help_group/text_slices/input_part000.txt†L4425-L4431】【F:data/vesc_help_group/text_slices/input_part000.txt†L4672-L4687】
+- Capture delta-versus-star performance logs (torque, efficiency, controller temps) once the rewound hub kits are ready so builders can judge when the conversion justifies the extra thermal stress.【F:data/vesc_help_group/text_slices/input_part000.txt†L10018-L10025】
