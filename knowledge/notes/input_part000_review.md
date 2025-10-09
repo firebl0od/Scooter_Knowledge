@@ -5,7 +5,8 @@
 - Coverage:
   - Batch 1: 2021-04-02 23:23:16 through 2021-04-03 01:46:36 (lines 1-320)
   - Batch 2: 2021-04-03 01:46:51 through 2021-05-18 17:49:41 (lines 321-2400)
-- Next starting point: line 2401 (2021-05-18T17:49:41 and later)
+  - Batch 3: 2021-05-18 17:50:23 through 2021-05-28 19:56:29 (lines 2401-3600)
+- Next starting point: line 3601 (2021-05-28T19:56:29 and later)
 
 ## Key Findings
 
@@ -56,6 +57,25 @@
 - Discussions cover bearing replacements (6001 rear, 16003 stainless front for Monorim 500 W motor) and tire clearance limits when upsizing to 2.5–3.0 inch rubber on Xiaomi frames.【F:data/vesc_help_group/text_slices/input_part000.txt†L780-L835】
 - Ninebot Max and Xiaomi Pro deck extensions accommodate up to 16 S 5 P 21700 packs with ~27 mm spacers; builders trim VESC housings or rotate controllers for cleaner installs.【F:data/vesc_help_group/text_slices/input_part000.txt†L2015-L2085】
 
+### Smart Controller & Display Development (Batch 3)
+- Koxx’s ESP32 “smartcontroller” intercepts throttle and brake signals (0–5 V sensors) before forwarding a DAC-shaped 0–3.3 V feed to the VESC, enabling features such as throttle lock-out when the anti-theft beacon is absent and level shifting for MiniMotors EYE throttles that otherwise swing 0.9–4.1 V—above the STM32’s safe range.【F:data/vesc_help_group/text_slices/input_part000.txt†L2430-L2483】
+- The next production batch targets a 100 V regulator and native EYE-throttle support; bare-bones DIY kits run ~100 € in parts plus 40 € R&D and 10 € shipping, but require owners to 3D-print enclosures and solder fine-pitch FPC connectors themselves.【F:data/vesc_help_group/text_slices/input_part000.txt†L2522-L2532】【F:data/vesc_help_group/text_slices/input_part000.txt†L3209-L3217】
+- Switching to a 3.5″ VA TFT with anti-glare glass dramatically improves sunlight legibility, though the current PNP dimming stage dissipates ~130 mA and raises PCB temps to ~52 °C when idling in the box.【F:data/vesc_help_group/text_slices/input_part000.txt†L3234-L3254】
+
+### Wiring & Power Delivery Notes (Batch 3)
+- Never feed VESC ADC inputs directly with 5 V throttle rails; use the 3.3 V reference (or an adapter board) because exceeding 3.3 V can quickly destroy the STM32 ADC despite some Honeywell SS49E throttles preferring 5 V. Deadband or filtering can tame the ~0.02 V noise seen when powering those sensors safely at 3.3 V.【F:data/vesc_help_group/text_slices/input_part000.txt†L2656-L2665】【F:data/vesc_help_group/text_slices/input_part000.txt†L3575-L3599】
+- Long power runs on undersized wire add major sag: a 12 S 7 P pack on 4 m of 16 AWG with XT30 connectors dropped ~0.5 V per cell at 40 A; the group recommends shortening 16 AWG tails, upgrading to XT60/XT90 and 10–12 AWG leads, and eliminating extra connectors wherever possible.【F:data/vesc_help_group/text_slices/input_part000.txt†L2676-L2773】
+- Spintend’s Ubox arrives with an XT90 battery pigtail but only female motor connectors, so builders plan on swapping to 5.5 mm bullets and trimming excess lead length; routing power cables down one deck side and signal/brake harnesses down the other helps minimise EMI in cramped Vsett installs.【F:data/vesc_help_group/text_slices/input_part000.txt†L3371-L3386】【F:data/vesc_help_group/text_slices/input_part000.txt†L3483-L3486】
+
+### ESC Reliability & Mitigations (Batch 3)
+- Multiple Flipsky 7550 controllers stopped spinning motors despite clean detection traces; firmware reflashes and bench tests showed no MOSFET shorts, pointing to dead STM32/USB stages and prompting a community fundraiser plus vendor outreach for replacements.【F:data/vesc_help_group/text_slices/input_part000.txt†L2556-L2635】【F:data/vesc_help_group/text_slices/input_part000.txt†L2748-L2824】
+- To shield controller logic from back-EMF spikes when battery cables are long, add low-ESR 470 µF capacitors near the ESC input—Panasonic FM/FR series in parallel offer lower ESR than a single 1000 µF can and help prevent MCU brownouts or failures.【F:data/vesc_help_group/text_slices/input_part000.txt†L3084-L3090】
+
+### Vehicle Setup & Battery Management Highlights (Batch 3)
+- A Zero 10X build is running 100 A rear / 60 A front phase limits with 80 A/50 A battery settings, delivering smooth launches and pronounced mid-speed acceleration without excessive motor heat so far.【F:data/vesc_help_group/text_slices/input_part000.txt†L3001-L3019】
+- VSETT’s stock controllers taper output whenever pack voltage hits ~52 V (~10 % remaining), effectively lowering the “battery max” current to protect cells from high-resistance heating—a behaviour the group wants to port into VESC firmware for builds lacking smart BMS data.【F:data/vesc_help_group/text_slices/input_part000.txt†L3326-L3334】
+- Early Spintend Ubox shakedowns show MOSFET temps climbing to ~50 °C within seconds at 50 A battery draw before the BMS begins limiting; VESC’s default thermal limits are much higher (~80 °C), so riders can safely raise thresholds once pack protection is confirmed.【F:data/vesc_help_group/text_slices/input_part000.txt†L3488-L3524】
+
 ## Open Questions / Follow-ups
 - Validate whether the 20% Flipsky code can be shared or must be redeemed by the original account holder.【F:data/vesc_help_group/text_slices/input_part000.txt†L147-L152】
 - Document wiring steps to integrate the VESC sleep function with the scooter’s stock power button and headlights.【F:data/vesc_help_group/text_slices/input_part000.txt†L66-L109】【F:data/vesc_help_group/text_slices/input_part000.txt†L1113-L1151】
@@ -63,3 +83,5 @@
 - Confirm whether the observed Flipsky 7550 cutouts stem from BMS limits or controller faults and capture the eventual fix for reference.【F:data/vesc_help_group/text_slices/input_part000.txt†L1640-L1686】
 - Track Spintend’s scooter-focused display/throttle roadmap and any firmware updates that add CAN bus support for noise resilience.【F:data/vesc_help_group/text_slices/input_part000.txt†L1045-L1049】【F:data/vesc_help_group/text_slices/input_part000.txt†L2047-L2067】
 - Record real-world fitment data for 16 S 5 P 21700 packs and corresponding deck modifications (spacer heights, enclosure reinforcements).【F:data/vesc_help_group/text_slices/input_part000.txt†L2015-L2085】
+- Prototype and validate the recommended low-ESR capacitor add-on for long cable runs, documenting values, placement, and thermal impact.【F:data/vesc_help_group/text_slices/input_part000.txt†L3084-L3090】
+- Explore how to replicate VSETT’s low-voltage power tapering inside VESC Tool so battery stress cues remain without smart BMS telemetry.【F:data/vesc_help_group/text_slices/input_part000.txt†L3326-L3334】
