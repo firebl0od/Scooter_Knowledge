@@ -7,9 +7,12 @@ This repository collects and organizes information about electric scooter setup,
 ```
 .
 ├── data/
-│   └── raw/
-│       └── telegram_exports/
-│           └── vesc_help_group/            # Original Telegram JSON export files
+│   ├── raw/
+│   │   └── telegram_exports/
+│   │       └── vesc_help_group/            # Original Telegram JSON export files
+│   └── vesc_help_group/
+│       └── text_slices/
+│           └── input_partXXX.txt           # Plain-text transcript slices aligned with the raw exports
 ├── knowledge/
 │   ├── notes/                              # In-progress findings and research notes
 │   └── processed/                          # Curated articles, guides, and structured outputs
@@ -47,6 +50,11 @@ python tools/telegram_to_text.py \
 - Drop `--output` to print the transcript to the terminal instead of saving it.
 
 The example command above generates a 500-line excerpt in `knowledge/processed/vesc_help_group/transcript_excerpt.txt` for fast reference while the full dataset remains in the raw export directory.
+
+### Working with the pre-extracted transcripts
+
+- When you only need a quick look at the chat without stitching JSON parts yourself, open the plain-text slices stored in `data/vesc_help_group/text_slices/input_partXXX.txt`. Each file mirrors the corresponding Telegram export part and keeps timestamps, senders, and message bodies for fast skimming.【F:data/vesc_help_group/text_slices/input_part000.txt†L1-L27】
+- Use these text files as lightweight references while taking structured notes. They pair well with the extraction log in `knowledge/notes/extraction_log.md`, letting you cross-reference notable findings without leaving the repository.【F:knowledge/notes/extraction_log.md†L1-L18】
 
 ## Contributing guidelines
 
