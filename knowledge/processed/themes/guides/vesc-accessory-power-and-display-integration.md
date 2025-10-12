@@ -17,11 +17,15 @@ This guide distills field reports on powering lights, horns, and dashboards from
 2. **Map every connector before power-up.** MakerBase looms expose 3.3 V/GND/ADC1 at the “comm” header and reroute Bluetooth through the NRF pins; miswired TX/RX leads cause telemetry dropouts or back-power logic rails.【F:knowledge/notes/input_part013_review.md†L368-L368】
 3. **Secure hall boards and sensor looms.** Hall PCBs that peel free can short against the rotor housing and mimic logic-rail failures; inspect adhesive and strain relief during reassembly.【F:knowledge/notes/input_part013_review.md†L603-L604】
 4. **Exploit the ADC harness features.** Spintend’s ADC v3 board already supports spin dial throttles, dual-button pods, and turn-signal LED strips—plan channel assignments before closing the deck and keep phase leads equal length when trimming looms.【F:knowledge/notes/input_part014_review.md†L209-L210】
+5. **Leverage CAN power sync sparingly.** Spintend 85-series controllers share a CAN power line, so a single button can wake both units once linked; treat it as a logic trigger and avoid stacking accessory loads on the shared feed.【F:knowledge/notes/input_part011_review.md†L19016-L19035】
+6. **Use CAN headers for logic, not lighting.** Smart Repair’s harness can back-feed 5 V lights through the CAN plug, but riders add inline resistors and rely on the servo PWM pads when they need flashing indicators instead of constant-on lamps.【F:knowledge/notes/input_part012_review.md†L19323-L19405】
 
 ## Display & Telemetry Options
 - **SimpleVescDisplay (ESP32).** Smart Repair recommends flashing the open-source SimpleVescDisplay and 3D-printing its mount as a reliable alternative when Flipsky Voyage units glitch.【F:knowledge/notes/input_part013_review.md†L367-L367】
 - **VESC-Express (ESP32-S3).** The €20 CAN↔BLE/Wi-Fi bridge adds LED or remote control outputs and modernises telemetry without touching fragile UART dongles.【F:knowledge/notes/input_part013_review.md†L418-L418】
 - **Secondary UART headers.** When Voyage displays misbehave, moving telemetry to MakerBase’s TX2/RX2 header stabilised data without firmware changes; ensure extension leads are shielded if the replacements are short.【F:knowledge/notes/input_part013_review.md†L518-L518】
+- **Split CAN telemetry.** Dual-controller logs can show ~500 A phase on Voyage/Ambrosini dashboards even when each controller only pulls ~250 A—set per-controller CAN IDs or run dual sessions when you need wheel-specific diagnostics.[^per-controller]
+- **Flipsky Voyage quirks.** G2 owners report the Voyage/Flipsky UART display only shows GPS speed even with correct wiring—plan for custom dash scripts or SmartDisplay integrations if you need richer telemetry.[^voyage]
 
 ## Accessory Load Planning Workflow
 1. **Audit native rails.** Before paralleling dual 12 V outputs, verify continuity—builders suspect some Ubox taps share a single buck regulator, making combined 30 W loads risky.【F:knowledge/notes/input_part013_review.md†L547-L547】
@@ -43,3 +47,9 @@ This guide distills field reports on powering lights, horns, and dashboards from
 1. Publish a formal power-sequencing diagram for Flipsky and SimpleVescDisplay installs on Spintend/MakerBase hardware, including connector pinouts and ground references.【F:knowledge/notes/input_part013_review.md†L366-L368】
 2. Capture tested fuse ratings and wire gauges for external 12 V bucks powering horns, lights, and air compressors so builders can size safety hardware confidently.【F:knowledge/notes/input_part013_review.md†L400-L401】
 3. Verify whether Spintend’s Spinny/ADC v2 harness can safely source dual-function tail/brake lights or if relays are required, then publish the findings alongside rail current measurements.【F:knowledge/notes/input_part013_review.md†L430-L431】【F:knowledge/notes/input_part013_review.md†L548-L548】
+
+## Source Notes
+- Accessory rail limits, regen dependencies, and buck converter planning consolidate Smart Repair’s October 2025 integration notes covering Ubox rail continuity, 3.3 V throttle safety, CAN-powered lighting, and parallel-pack regen etiquette.【F:knowledge/notes/input_part013_review.md†L360-L552】【F:knowledge/notes/input_part012_review.md†L19323-L19405】
+- Lighting hardware, accessory sourcing, and controller-rail constraints reflect the broader VESC Help Group coverage of Offbondge projector testing, Voyage/SmartDisplay integration, and Spinny harness current ceilings.【F:knowledge/notes/input_part005_review.md†L404-L571】【F:knowledge/notes/input_part014_review.md†L140-L144】
+[^per-controller]: Voyage/Ambrosini dashboards can display ~500 A combined phase current on dual-controller builds, so configure per-controller CAN IDs or split sessions when you need wheel-specific telemetry.【F:knowledge/notes/input_part013_review.md†L186-L209】
+[^voyage]: Voyage/Flipsky displays on Ninebot G2 builds have been limited to GPS-only readouts despite proper wiring, prompting teams to script custom dashboards or adopt SmartDisplay alternatives.【F:knowledge/notes/input_part014_review.md†L189-L189】

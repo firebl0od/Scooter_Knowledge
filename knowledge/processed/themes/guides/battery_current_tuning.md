@@ -17,9 +17,12 @@ Taming current limits is the difference between a scooter that rips for years an
    - Start with a 2:1 to 3:1 phase-to-battery ratio (e.g., 40 A battery / 110 A phase on 16 S commuter packs).⁵ ⁷
    - Match current targets across front/rear controllers to avoid free-spinning the lighter wheel.⁸
    - Treat dual-motor 16 S7 P Samsung 50E packs as roughly 140 A systems: hold each controller near 70 A battery and add ducted airflow up front before nudging limits higher.²³
+   - Keep Artem’s relationship in mind: `I_phase = I_batt × V_batt ÷ V_motor`, so phase torque fades as ERPM climbs—log both currents to confirm your battery caps aren’t starving the tune mid-pull.[^phase_equation]
 3. **Log, ride, iterate**
    - Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
    - Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
+   - Cross-check real-time power with an external meter or SmartDisplay—unfiltered VESC telemetry overshoots true watts by 10 kW or more on aggressive pulls.²⁴
+   - Treat VESC Tool’s state-of-charge gauge as a rough helper—it linearly maps 4.2–3.3 V per cell (≈66 V on 20 S), so keep your cutoffs a few volts above the BMS trip to prevent surprise throttling once the display reads “empty.”²⁵
 4. **Layer in regen**
    - Add regen after forward currents stabilize. Keep battery regen gentler than your discharge target (−5 A to −10 A is plenty for commuter packs) and ramp up slowly to avoid BMS or controller cutoffs.⁵ ¹¹
 5. **Optional: field weakening & traction control**
@@ -32,7 +35,7 @@ Taming current limits is the difference between a scooter that rips for years an
 | Flipsky 75100 | 16–20 S hubs | 60–80 A | 220–270 A | −10 A / −60 A | Absolute max ≤300 A; repaste and hard-mount before testing.⁴ ¹⁴ |
 | Flipsky 75200 Pro V2 | 20 S commuters | 50–60 A | 100–120 A (idle fix), up to 150 A with cooling | −5 A / −40 A | Requires phase-filter disable + `mxlemming` observer to prevent idle heating.⁵ |
 | MakerX single (GO-FOC HI100) | 16–20 S duals | 60 A | 200 A | −8 A / −45 A | Runs cooler than equivalent Flipsky hardware when bolted to metal decks.⁴ |
-| Spintend Ubox 85/150 | 20 S duals | 80–100 A | 250–300 A | −12 A / −60 A | Firmware clamps phase ≈350 A; keep within 300 A for reliability.¹⁵ |
+| Spintend Ubox 85/150 | 20–22 S duals | 80–100 A (≈200 A max on 22 S) | 250–300 A | −12 A / −60 A | Firmware clamps phase ≈350 A; community keeps 22 S tunes near 200 A battery / 300 A phase for longevity.¹⁵ ²⁶ |
 | Makerbase 84100 HP | 20 S singles | 60–80 A | ≤135 A | −8 A / −35 A | Higher settings have produced instant failures—treat datasheet peaks as marketing.³ |
 | Boutique Tronic X12 | 22–24 S race | 100 A (stock firmware) | 400 A phase, ABS ≈600 A limit | −15 A / −80 A | No-limit firmware lifts ABS but demands extensive cooling and logging.¹⁶ |
 
@@ -46,6 +49,7 @@ Taming current limits is the difference between a scooter that rips for years an
 - Sensorless chatter and long phase cables exaggerate FW-induced current spikes; keep leads short and add halls where possible.³ ²⁰
 - Document duty-cycle ceilings—modern hardware tolerates 98–99 % duty, but stay below 100 % to avoid runaway faults.²¹
 - Spintend 85150 hardware has already sacrificed MOSFETs when riders layered 45 A of FW on top of 105/120 A battery and 150/175 A phase at 20 S—budget HY/HSBL swaps or back FW down before chasing higher ERPM. 【F:knowledge/notes/input_part014_review.md†L21-L21】
+- Rob Ver’s 85/240 build touched 35 kW and 132 km/h on 22×3 hubs with ~80 A of FW, yet a 22 S BMS failure during a 320 A launch still blew MOSFETs—treat high-FW pulls as consumable unless pack protection is rock-solid.[^fw_bms]
 
 ## Troubleshooting Cheatsheet
 | Symptom | Likely Cause | Fix |
@@ -73,7 +77,7 @@ Taming current limits is the difference between a scooter that rips for years an
 [^9]: Logging and calibration workflow (duty-cycle ceilings, GPS alignment).【F:knowledge/notes/input_part003_review.md†L447-L452】【F:knowledge/notes/input_part003_review.md†L451-L452】
 [^10]: Battery sag benchmarks on high-power packs.【F:knowledge/notes/input_part003_review.md†L506-L507】
 [^11]: BMS cutoff coordination and regen guardrails for commuter packs.【F:knowledge/notes/input_part003_review.md†L517-L519】【F:knowledge/notes/input_part008_review.md†L103-L105】
-[^12]: Field-weakening trade-offs on 16–20 S builds.【F:knowledge/notes/input_part003_review.md†L447-L448】【F:knowledge/notes/input_part003_review.md†L24684-L24692】
+[^12]: Field-weakening trade-offs on 16–20 S builds.【F:knowledge/notes/input_part003_review.md†L447-L448】【F:knowledge/notes/input_part003_review.md†L184-L184】
 [^13]: Traction-control cautions to prevent MOSFET surges.【F:knowledge/notes/input_part003_review.md†L505-L506】【F:knowledge/notes/input_part011_review.md†L475-L477】
 [^14]: 75100 absolute-current failure case (450–500 A) reinforcing ≤300 A limits.【F:knowledge/notes/input_part003_review.md†L474-L474】
 [^15]: Spintend 85/250 firmware clamps and CAN power behavior.【F:knowledge/notes/input_part011_review.md†L456-L458】
@@ -85,3 +89,8 @@ Taming current limits is the difference between a scooter that rips for years an
 [^21]: Duty-cycle ceiling observations on modern hardware.【F:knowledge/notes/input_part003_review.md†L451-L452】
 [^22]: ADC noise, throttle shielding, and USB instability troubleshooting.【F:knowledge/notes/input_part001_review.md†L144-L147】【F:knowledge/notes/input_part001_review.md†L489-L489】
 [^23]: Dual 16 S7 P Samsung 50E build logs showing ~140 A pack limits, 70 A per-controller tuning, and the need for supplemental front-mounted airflow.【F:knowledge/notes/input_part001_review.md†L19-L21】
+[^24]: VESC real-time power traces exaggerate true battery watts without ≥100 ms filtering—SmartDisplay logging keeps readings honest during high-current tests.【F:knowledge/notes/input_part014_review.md†L2140-L2154】
+[^25]: VESC Tool interpolates state-of-charge between 4.2 V and 3.3 V per cell (~66 V empty on 20 S), so riders set cutoffs slightly above their BMS trips to avoid surprise throttling.【F:knowledge/notes/input_part007_review.md†L334-L334】
+[^fw_bms]: Rob Ver’s Spintend 85/240 logged 35 kW peaks and 132 km/h on 22×3 hubs with ~80 A FW, but a 22 S BMS failure during a 320 A launch still destroyed MOSFETs—reinforcing the need for pack protection when stacking FW on high-current pulls.【F:knowledge/notes/input_part012_review.md†L436-L436】
+[^26]: Spintend 85/250 riders holding 22 S builds near 200 A battery / 300 A phase for reliability despite higher firmware ceilings.【F:knowledge/notes/input_part012_review.md†L253-L254】【F:knowledge/notes/input_part012_review.md†L334-L334】
+[^phase_equation]: Artem formalised the `I_phase = I_batt × V_batt ÷ V_motor` relationship, reminding tuners that battery amps rise toward the configured limit as ERPM climbs and that output power cannot exceed input watts.【F:knowledge/notes/input_part000_review.md†L3770-L3818】

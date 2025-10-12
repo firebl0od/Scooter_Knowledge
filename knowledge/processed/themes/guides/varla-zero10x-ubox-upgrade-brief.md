@@ -34,13 +34,16 @@ This brief helps Varla Eagle One and Zero 10X owners who have already installed,
 1. **Firmware parity:** Confirm both Ubox controllers run matching firmware before uploading XML profiles; mismatches lock out parameter edits until reflashed.¹⁷
 2. **Thermal mounting:** Repaste controllers, hard-mount them to aluminum decks or dedicated heatsinks, and plan airflow paths. Modern Ubox aluminum singles are markedly more reliable than legacy 100 V boards, but dual units have failed when 250 A battery spikes hit inadequately cooled installs.⁶
 3. **ADC accessory boards:** Log brake-light behavior and ADC V2 board health; firmware 6.0 updates have latched brake inputs after water exposure, so document reflash and diagnostic workflows.¹⁸
+4. **Disable phase filters after detection:** Spintend confirmed the motor-wizard phase filter should only be used during detection—leaving it active during rides reintroduces noise and ABS overcurrent faults.[^phase-filter]
 4. **Hall sensors & traction:** Fit hall-equipped front motors or enable HFI only after verifying detection values; hall-less Dualtron fronts under-pull current versus sensored rears, making traction control tuning uneven.¹⁹
 5. **CAN synchronization:** Balance battery and phase amps across both controllers and run proper 120 Ω termination to avoid bus faults during high-load pulls.²⁰
+6. **Exploit CAN power sync:** Spintend 85-series controllers share a CAN power line, letting one ignition button wake both units once the harness is linked—wire it correctly before removing redundant switches.²⁶
 
 ## Mechanical & Handling Considerations
 - **Stem & chassis stress:** Stock stems crack at cable ports, and legacy twin-stem frames wobble above 60 km/h without dampers, reinforced handlebars, and balanced phase currents.²¹ ²²
 - **Suspension & clearance:** Machined swingarm axles and upgraded pivots are required for 11" hubs; failing to rework clearances twists calipers or fouls springs.²³
 - **Waterproofing:** Resin-coat controller boxes or reroute harnesses—stock enclosures collect water and corrode upgrades quickly.⁴
+- **Earless 85/240 mounting:** New cases still ship without tabs; plan printed brackets, retapped threads, or adhesive adapters before rough roads shake loose under-deck installs.²⁷
 
 ## Validation & Logging
 1. **Instrumentation:** Pair VESC Tool live data with Dragy/GPS logging while dialing wheel diameter (Zero 10X hubs calibrate near 250 mm).²⁴
@@ -57,8 +60,8 @@ This brief helps Varla Eagle One and Zero 10X owners who have already installed,
 - [ ] Baseline ride logs (launch, 60 km/h cruise, regen stop) archived with GPS overlays.
 
 ## Source Notes
-[^1]: Zero 10X decks shipped with 52 V 18.5 Ah packs built from Samsung 32IR cells. 【F:knowledge/notes/input_part006_review.md†L13645-L13655】
-[^2]: Stock pack discharge limits and chronic chassis complaints for Zero 10X-class scooters. 【F:knowledge/notes/input_part006_review.md†L11620-L11636】
+[^1]: Zero 10X decks shipped with 52 V 18.5 Ah packs built from Samsung 32IR cells. 【F:knowledge/notes/input_part006_review.md†L179-L179】
+[^2]: Stock pack discharge limits and chronic chassis complaints for Zero 10X-class scooters. 【F:knowledge/notes/input_part006_review.md†L136-L136】
 [^3]: Varla Eagle One (Zero 10X clone) with Ubox V2 dual controller plateauing at 60–70 km/h on the OEM battery. 【F:knowledge/notes/input_part004_review.md†L347-L352】
 [^4]: Zero 10X electronics boxes pooling water and the need for comprehensive sealing during VESC swaps. 【F:knowledge/notes/input_part006_review.md†L221-L229】
 [^5]: Community guidance that 20 S packs are the “magic number” for high-speed scooters, whereas 48–52 V builds demand disproportionate current. 【F:knowledge/notes/input_part004_review.md†L357-L365】
@@ -72,8 +75,8 @@ This brief helps Varla Eagle One and Zero 10X owners who have already installed,
 [^13]: Triple insulation, epoxy sheets, and careful lead routing for Zero 10X high-voltage packs. 【F:knowledge/notes/input_part007_review.md†L278-L285】【F:knowledge/notes/input_part009_review.md†L18-L23】
 [^14]: Pack builders stacking dual G30 modules and over-insulating balance leads for Zero 10X conversions. 【F:knowledge/notes/input_part007_review.md†L260-L266】
 [^15]: Recommendation for 8 AWG equivalents on 100 A scooters and expectations when using repurposed cells. 【F:knowledge/notes/input_part004_review.md†L236-L242】
-[^16]: Adjustable charger inspection and safe connection sequence guidance. 【F:knowledge/notes/input_part004_review.md†L22000-L22046】
-[^17]: Firmware alignment requirements for Makerbase/Makerbase-derived boards reporting as 75_100 but needing 75_100_V2 firmware. 【F:knowledge/notes/input_part004_review.md†L223-L230】【F:knowledge/notes/input_part004_review.md†L22650-L22694】
+[^16]: Adjustable charger inspection and safe connection sequence guidance. 【F:knowledge/notes/input_part004_review.md†L301-L301】
+[^17]: Firmware alignment requirements for Makerbase/Makerbase-derived boards reporting as 75_100 but needing 75_100_V2 firmware. 【F:knowledge/notes/input_part004_review.md†L327-L327】【F:knowledge/notes/input_part004_review.md†L479-L479】
 [^18]: ADC V2 board failures causing latched brake inputs and the need for diagnostics after firmware updates. 【F:knowledge/notes/input_part004_review.md†L365-L373】
 [^19]: Dualtron front motor underperformance without hall sensors compared to sensored rears. 【F:knowledge/notes/input_part004_review.md†L350-L355】
 [^20]: Zero 10X CAN harness experiments confirming 120 Ω termination requirements. 【F:knowledge/notes/input_part006_review.md†L21-L27】
@@ -82,3 +85,6 @@ This brief helps Varla Eagle One and Zero 10X owners who have already installed,
 [^23]: Swingarm machining requirements for 11" hub swaps and pivot upgrades. 【F:knowledge/notes/input_part006_review.md†L34-L42】【F:knowledge/notes/input_part006_review.md†L214-L222】
 [^24]: Wheel-diameter calibration and GPS logging workflow for Zero 10X builds. 【F:knowledge/notes/input_part007_review.md†L368-L374】
 [^25]: Statorade temperature observations showing persistent case-to-sensor deltas. 【F:knowledge/notes/input_part004_review.md†L320-L327】
+[^26]: Spintend 85-series CAN power line allows a single ignition button to wake linked controllers once harnessed properly.【F:knowledge/notes/input_part011_review.md†L19016-L19035】
+[^27]: Latest earless 85/240 housings forced riders to print brackets, retap threads, or glue adapters so the controllers survive long-travel suspensions.【F:knowledge/notes/input_part012_review.md†L20537-L20587】
+[^phase-filter]: Phase-filter toggles exist to stabilize motor detection—disable them after setup to avoid noise and ABS overcurrent faults on Spintend controllers.【F:knowledge/notes/input_part004_review.md†L31-L31】

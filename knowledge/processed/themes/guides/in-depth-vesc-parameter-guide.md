@@ -128,6 +128,7 @@ Structure for each parameter:
 **Potential Side Effects**
 - Excessively high = thermal runaway in motor windings or ESC MOSFET burnouts.
 - Too low = weak acceleration, under-utilized motor.
+- Firmware quirks matter: Spintend 100/100 controllers on VESC Tool 6.06 refused to spin until owners reverted to 6.05 and rechecked current caps, so log software builds before blaming the limit.[^spintend-606]
 
 
 ### 2.2 Motor Current Max Brake
@@ -161,6 +162,8 @@ Structure for each parameter:
 - The battery current is usually lower than the motor current except at high duty cycles.
 - Some Makerbase 75100 batches under-report real draw by roughly half to one-third; trust verified shunt-calibrated logs from a smart BMS or clamp meter before assuming the GUI shows the truth.[^makerbase-current]
 - Added capacitance on the low-voltage rails can stabilize telemetry on noisy controllers, so confirm current readings only after solving any brownout behaviour.[^makerbase-cap-fix]
+- VESC real-time power traces exaggerate peaks without filtering—compare against SmartDisplay or external meters before assuming a current limit is safe.[^vesc-power]
+- Spintend 85150 builds have plateaued around 150 A battery despite 210–280 A commands, signalling firmware ABS caps or BMS enforcement before hardware saturation—validate those clamps before assuming controller failure.[^spintend-85150-cap]
 
 **How / When to Modify**
 - If your BMS is rated 60A, set ~60A here.
@@ -795,11 +798,13 @@ Params: foc_fw_current_max, foc_fw_duty_start, etc.
 - For 5–30A FW as a start, set duty_start ~0.9.
 - Validate logs on actual rides.
 - Stage FW increases alongside traction-control and phase-current reviews—24 S Rion builds found front-wheel spin and recurring faults when FW stacked on already aggressive 200 A tunes.[^fw-rion]
+- If you dial FW back to zero for efficiency testing, be ready to trim phase current too—one commuter logged controller temps jumping from 46 °C to 55 °C within 15 minutes once extra amps replaced the missing FW headroom.[^fw-zero]
 
 **Potential Side Effects**
 - Excessive FW => bus volt spikes, MOSFET damage, or battery BMS triggers.
 - Motor might overheat if run at high speed heavily.
 - Combining deep FW with maxed phase current can reintroduce grinding noises, traction loss, or ABS faults on high-voltage scooters; back limits down before retesting.[^fw-rion]
+- Halo 60H hubs also started to stutter around 15–20 km/h when riders stacked 350 A phase with 125 A FW, underscoring how saturation compensation and hall health matter as much as raw current.[^fw-halo]
 
 
 ### 6.13 Speed Tracker Position Source
@@ -1136,13 +1141,18 @@ Params under bms.*
 
 ## Footnotes
 
-[^makerbase-current]: Multiple builders found Makerbase 75100 controllers reporting only half to one-third of the programmed battery current, forcing them to validate limits with smart-BMS telemetry or clamp meters before raising power targets.【F:data/vesc_help_group/text_slices/input_part005.txt†L12090-L12130】【F:data/vesc_help_group/text_slices/input_part005.txt†L13970-L14033】
+[^makerbase-current]: Multiple builders found Makerbase 75100 controllers reporting only half to one-third of the programmed battery current, forcing them to validate limits with smart-BMS telemetry or clamp meters before raising power targets.【F:knowledge/notes/input_part005_review.md†L75-L76】【F:knowledge/notes/input_part005_review.md†L106-L106】
 [^makerbase-cap-fix]: Reviewers noted that bolting additional capacitance onto the 12 V/5 V rails of Flipsky and Makerbase hardware reduced brownouts and restored trustworthy telemetry before any current-limit tuning.【F:knowledge/notes/input_part005_review.md†L494-L520】
-[^regen-sizing]: Community guidance for unknown OEM packs recommends starting regen at −5 A to −10 A and increasing only after confirming BMS charge ratings and wiring health, rather than assuming large Laotie/Zero batteries can absorb high current bursts.【F:data/vesc_help_group/text_slices/input_part005.txt†L8289-L8331】
-[^fw-regen]: Field-weakening and long downhills were shown to spike bus voltage on Spintend builds, so riders log pack voltage/temperature while testing regen to avoid surprise BMS cutoffs or controller faults.【F:data/vesc_help_group/text_slices/input_part005.txt†L24644-L24651】
+[^vesc-power]: SmartDisplay telemetry revealed that VESC Tool real-time power overshoots true pack watts by 10 kW+ unless you add ≥100 ms filtering, so builders verify limits with external meters before trusting GUI peaks.【F:knowledge/notes/input_part014_review.md†L2140-L2154】
+[^spintend-606]: Updating Spintend 100/100 controllers to VESC Tool 6.06 left some builds motionless until they downgraded to 6.05 and capped phase current near 130 A / ABS 180 A, underscoring the need to record firmware alongside current limits.【F:knowledge/notes/input_part012_review.md†L80-L82】
+[^spintend-85150-cap]: Matthew’s Spintend 85150 logs plateaued near 150 A battery despite 210–280 A commands, implying firmware ABS caps or BMS intervention before the hardware truly saturates—confirm those clamps before blaming the controller.【F:knowledge/notes/input_part011_review.md†L353-L353】
+[^regen-sizing]: Community guidance for unknown OEM packs recommends starting regen at −5 A to −10 A and increasing only after confirming BMS charge ratings and wiring health, rather than assuming large Laotie/Zero batteries can absorb high current bursts.【F:knowledge/notes/input_part005_review.md†L25-L25】
+[^fw-regen]: Field-weakening and long downhills were shown to spike bus voltage on Spintend builds, so riders log pack voltage/temperature while testing regen to avoid surprise BMS cutoffs or controller faults.【F:knowledge/notes/input_part005_review.md†L259-L259】
 [^fw-loss]: Riders estimate roughly 25 % higher losses when field weakening is active, backing off when logs show efficiency plunging during high-speed pulls.【F:knowledge/notes/input_part002_review.md†L68-L70】
 [^fw-heat]: MP2 builders recorded about 1.5× stator heat rise under field-weakening compared with non-FW runs, motivating them to skip FW until additional cooling is installed.【F:knowledge/notes/input_part010_review.md†L71-L72】
 [^fw-rion]: Jesús’s 24 S Rion experiments showed front-wheel spin near 120 km/h and returning grinding faults whenever phase current and field weakening were maxed simultaneously, prompting a retreat to ~200 A settings before further tests.【F:knowledge/notes/input_part007_review.md†L52-L55】
+[^fw-zero]: Dropping FW to zero only for efficiency forced the controller to replace the lost speed with extra phase amps, sending case temps from 46 °C to 55 °C within 15 minutes—plan staged retests instead of jumping current caps immediately.【F:knowledge/notes/input_part012_review.md†L10882-L10888】
+[^fw-halo]: Halo 60H testing at 350 A phase plus 125 A FW triggered 15–20 km/h stutter until the rider rechecked hall sensors and trimmed phase amps, highlighting saturation-compensation tuning before leaning on high FW numbers.【F:knowledge/notes/input_part012_review.md†L10916-L10946】
 
 # WRAP-UP & FINAL NOTES
 
@@ -1155,3 +1165,7 @@ Params under bms.*
   - Keep an eye on noise or offset at high speeds.
 - Smart BMS: If you have a CAN-based BMS, you can coordinate battery info for smooth limiting. If not, the ESC only sees battery voltage and can’t individually protect cell groups.
 Ride Safely and enjoy the benefits of a finely tuned VESC-based controller. If something behaves oddly, revert to your last known stable config. Detailed logs are your friend!
+
+## Source Notes
+- Parameter tuning workflow, ramp-time effects, observer choices, and ADC precautions consolidate repeated 2025 Slack guidance on VESC configuration, especially the October slices detailing ramp-time targets, throttle-curve blending, and sensor wiring best practices.【F:knowledge/notes/input_part010_review.md†L523-L527】【F:knowledge/notes/input_part011_review.md†L621-L728】【F:knowledge/notes/input_part013_review.md†L329-L337】
+- Current, regen, and thermal guardrails echo Smart Repair’s field logs on Motor/Battery Current limits, regen budgeting, and field-weakening risks from the same transcript reviews.【F:knowledge/notes/input_part012_review.md†L423-L431】【F:knowledge/notes/input_part005_review.md†L202-L214】

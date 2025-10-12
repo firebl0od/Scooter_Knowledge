@@ -33,6 +33,8 @@
 - AliExpress packs with separate charge ports require BMS swaps before pairing with Rita to avoid uncontrolled overcharge through the discharge leads.[^separate-charge]
 - Community buyers now dispute “13.8 Ah” 10S2P listings and inspect harnesses closely after shorts traced back to unsoldered Y-cable joints inside Wildman bags—treat unbelievable capacity claims as fire risks.[^counterfeit]
 - Secure the Wildman case upright with clamps or cages instead of glue fills so thieves cannot unzip the pack in seconds and technicians can still service the battery.[^bag-security]
+- Repurposing tool batteries like Makita BL1850B modules rarely works—the 5 S packs sit too low for Rita to blend in, so Denis advises selling them and investing in 10–12 S scooter packs with Daly common-port BMS boards instead; bargain 4 Ah lawnmower bricks built for ~180 W peaks can overheat or ignite when pushed toward Rita’s 25 A ceiling.[^tool-packs][^lawn-pack]
+- Cheap “13 Ah” externals often sag early enough that Rita falls back to the OEM battery—test suspect packs alone at low load and expect legitimate Daly-based builds to cost far more than €160 listings.[^cheap-packs]
 
 ## Pricing & Bundles
 - Complete Rita + bag + battery kits price in the €250–€280 band plus roughly €20 shipping depending on charger inclusion, reflecting low-volume assembly with branded components.[^pricing]
@@ -54,7 +56,15 @@
 - Xiaomi V3 controllers tolerate 13S packs without hardware swaps, but Denis’ crew replaces Kapton strips with 0.5 mm thermal pads and direct-solders phase leads to keep MOSFETs cool on higher-current tunes.[^controller-thermals]
 - Rita’s 25 A ceiling limits the torque boost from tiny external packs; for long hill climbs riders step up to dual motors or uprated controllers rather than forcing more current through the adapter.[^rita-hill]
 - Dual-dash AWD builds treat Rita as the master: tie controller grounds together, forward a single data lead to the slave dash, and investigate any Error 14 immediately because it signals cross-pack leakage the adapter should block.[^awd]
+- Treat a sudden Error 14 or 21 on a secondary dash as a wiring or polarity fault—Denis warns it means packs are backfeeding and the scooter should stay parked until the harness and BMS are rechecked.[^error14]
+- XiaoFlasher’s 13 S BMS emulator can add throttle lag, whereas Rita’s emulation keeps instant response when blending large internal packs with the stock dashboard.[^xiaoflasher]
 - Recurrent thermal shutdowns after a Rita upgrade usually trace to dried controller paste; replace compound (not pads) and monitor logs before pushing harder firmware.[^thermal-paste]
+- Expect the scooter to rest a few tenths below full charge because Rita deliberately undercharges the internal pack to preserve regen margin; treat buzzing motors or error 39 beeps as signs to dial battery current back under the adapter’s 25 A ceiling.[^rita-undercharge]
+- Rita’s Schottky charge diode drops roughly 0.6 V, so stock packs plateau around 97 % unless you bypass the adapter during off-scooter charging; Denis prefers the mild undercharge for longevity and regen headroom.[^rita-schottky]
+- High-voltage experiments around 60 V still demand staged launches, BLE firmware checks, and careful thermal monitoring since Rita enforces its own limits even when the drivetrain can pull harder.[^rita-60v]
+- A small Gen 4 batch under-reported output above ~20 A; cross-check logs against stock wiring and lean on Rita’s redundant current sensing if you suspect phantom throttling.[^rita-underreport]
+- Dashboard state-of-charge becomes unreliable once Rita blends packs—Denis tells riders to treat ~50 % on the display as the cue to head home and verify voltage inside the app instead.[^rita-soc]
+- Gen 4 harness staging matters: route Rita’s potted balance leads along the controller side, keep the three-way charge splitter inline even if the port relocates, and only cut the gray surge jumper when stepping beyond 12 S packs.[^harness_staging]
 
 ## Risks & Watchlist
 - Jumping to 13S requires cutting Rita’s sense jumper, reinforcing controllers, and following the manual via the M365 BMS Tool; reverting without restoring the jumper is unsafe.[^thirteen-steps]
@@ -62,42 +72,60 @@
 - Older Rita revisions lack modern surge clamping—treat charger relocations carefully, keep the three-way splitter inline, and respect the adapter’s 25 A ceiling to avoid repeated error beeps or melted harnesses.[^legacy-boards]
 - New Rita over-voltage guards still depend on healthy BMS hardware; relocating charge ports without the required splitter blinds the adapter to charger events and removes those protections.[^rita-v4]
 - Using Xiaomi packs as ad hoc chargers without proper current limiting remains a fire risk—Denis instead repurposes them as externals with their own BMS and keeps charge circuits separated.[^pack-charger]
+- Miswired balance leads have popped Daly smart boards instantly—wire negatives first, confirm each cell step with a meter, and avoid doubling sense wires on the same pad.[^balance-leads]
+- LiFePO₄ BMS boards cannot safeguard li-ion packs; return the part or build a dedicated chemistry match instead of forcing it into 12 S scooter builds.[^lifepo4]
+- Pairing 12 S externals still demands keeping firmware nominal voltage around 51 V so Rita’s limits align—forgetting the setting after a pack swap risks overcharging or limp modes.[^twelve-s-config]
 
 ---
-[^rita-capabilities]: Source: `knowledge/notes/all_part01_review.md`, lines 16-18, 23.
-[^rita-emulator]: Source: `knowledge/notes/all_part01_review.md`, lines 19, 114.
-[^rita-current-limit]: Sources: `knowledge/notes/all_part01_review.md`, lines 20-24; `knowledge/notes/denis_all_part02_review.md`, lines 22, 31-33, 153.
-[^rita-soh]: Source: `knowledge/notes/all_part01_review.md`, lines 21, 133.
-[^rita-overvoltage]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 29-33.
-[^rita-telemetry]: Sources: `knowledge/notes/all_part01_review.md`, lines 25, 139, 219; `knowledge/notes/denis_all_part02_review.md`, lines 33, 100.
-[^rita-awd]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 26-28, 197.
-[^bms-roadmap]: Source: `knowledge/notes/all_part01_review.md`, lines 13, 117.
-[^bms-ceiling]: Source: `knowledge/notes/all_part01_review.md`, line 182.
-[^bms-headroom]: Source: `knowledge/notes/all_part01_review.md`, line 184.
-[^battery-enclosures]: Source: `knowledge/notes/all_part01_review.md`, lines 45, 48.
-[^battery-bom]: Source: `knowledge/notes/all_part01_review.md`, lines 46, 61, 66, 102, 145, 238.
-[^battery-fraud]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 20-23, 126-127.
-[^security-clamps]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 44-45.
-[^range-kits]: Source: `knowledge/notes/all_part01_review.md`, lines 18, 260.
-[^separate-charge]: Source: `knowledge/notes/all_part01_review.md`, line 180.
-[^pricing]: Source: `knowledge/notes/all_part01_review.md`, lines 30, 61.
-[^regional-pricing]: Source: `knowledge/notes/all_part01_review.md`, lines 176, 274.
-[^range-speed-charging]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 33, 46.
-[^shipping-scope]: Source: `knowledge/notes/all_part01_review.md`, lines 27, 177, 275.
-[^batching]: Source: `knowledge/notes/all_part01_review.md`, lines 29, 33, 174.
-[^lead-times]: Source: `knowledge/notes/all_part01_review.md`, lines 32, 34, 35, 212.
-[^charging-telemetry]: Sources: `knowledge/notes/all_part01_review.md`, lines 172-173; `knowledge/notes/denis_all_part02_review.md`, lines 33, 46.
-[^docs]: Source: `knowledge/notes/all_part01_review.md`, line 17.
-[^support-ops]: Source: `knowledge/notes/all_part01_review.md`, line 150.
-[^rita-max]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 195-196.
-[^thirteen-steps]: Source: `knowledge/notes/all_part01_review.md`, lines 162-166, 217.
-[^power-risks]: Source: `knowledge/notes/all_part01_review.md`, lines 22, 155, 170-171.
-[^legacy-boards]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 29-33, 153.
-[^rita-v4]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 22-33.
-[^controller-thermals]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 10-13.
-[^rita-hill]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 31-33.
-[^awd]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 25-28.
-[^thermal-paste]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 32-33.
-[^counterfeit]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 19-23.
-[^bag-security]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 42-45.
-[^pack-charger]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 45-46.
+
+## Source Notes
+
+[^rita-capabilities]: 【F:knowledge/notes/all_part01_review.md†L16-L18】【F:knowledge/notes/all_part01_review.md†L23】
+[^rita-emulator]: 【F:knowledge/notes/all_part01_review.md†L19】【F:knowledge/notes/all_part01_review.md†L114】
+[^rita-current-limit]: 【F:knowledge/notes/all_part01_review.md†L20-L24】【F:knowledge/notes/denis_all_part02_review.md†L22】【F:knowledge/notes/denis_all_part02_review.md†L31-L33】【F:knowledge/notes/denis_all_part02_review.md†L153】
+[^rita-soh]: 【F:knowledge/notes/all_part01_review.md†L21】【F:knowledge/notes/all_part01_review.md†L133】
+[^rita-overvoltage]: 【F:knowledge/notes/denis_all_part02_review.md†L29-L33】
+[^rita-telemetry]: 【F:knowledge/notes/all_part01_review.md†L25】【F:knowledge/notes/all_part01_review.md†L139】【F:knowledge/notes/all_part01_review.md†L219】【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L100】
+[^rita-awd]: 【F:knowledge/notes/denis_all_part02_review.md†L26-L28】【F:knowledge/notes/denis_all_part02_review.md†L197】
+[^bms-roadmap]: 【F:knowledge/notes/all_part01_review.md†L13】【F:knowledge/notes/all_part01_review.md†L117】
+[^bms-ceiling]: 【F:knowledge/notes/all_part01_review.md†L182】
+[^bms-headroom]: 【F:knowledge/notes/all_part01_review.md†L184】
+[^battery-enclosures]: 【F:knowledge/notes/all_part01_review.md†L45】【F:knowledge/notes/all_part01_review.md†L48】
+[^battery-bom]: 【F:knowledge/notes/all_part01_review.md†L46】【F:knowledge/notes/all_part01_review.md†L61】【F:knowledge/notes/all_part01_review.md†L66】【F:knowledge/notes/all_part01_review.md†L102】【F:knowledge/notes/all_part01_review.md†L145】【F:knowledge/notes/all_part01_review.md†L238】
+[^range-kits]: 【F:knowledge/notes/all_part01_review.md†L18】【F:knowledge/notes/all_part01_review.md†L260】
+[^separate-charge]: 【F:knowledge/notes/all_part01_review.md†L180】
+[^pricing]: 【F:knowledge/notes/all_part01_review.md†L30】【F:knowledge/notes/all_part01_review.md†L61】
+[^regional-pricing]: 【F:knowledge/notes/all_part01_review.md†L176】【F:knowledge/notes/all_part01_review.md†L274】
+[^range-speed-charging]: 【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L46】
+[^shipping-scope]: 【F:knowledge/notes/all_part01_review.md†L27】【F:knowledge/notes/all_part01_review.md†L177】【F:knowledge/notes/all_part01_review.md†L275】
+[^batching]: 【F:knowledge/notes/all_part01_review.md†L29】【F:knowledge/notes/all_part01_review.md†L33】【F:knowledge/notes/all_part01_review.md†L174】
+[^lead-times]: 【F:knowledge/notes/all_part01_review.md†L32】【F:knowledge/notes/all_part01_review.md†L34】【F:knowledge/notes/all_part01_review.md†L35】【F:knowledge/notes/all_part01_review.md†L212】
+[^charging-telemetry]: 【F:knowledge/notes/all_part01_review.md†L172-L173】【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L46】
+[^docs]: 【F:knowledge/notes/all_part01_review.md†L17】
+[^support-ops]: 【F:knowledge/notes/all_part01_review.md†L150】
+[^rita-max]: 【F:knowledge/notes/denis_all_part02_review.md†L195-L196】
+[^thirteen-steps]: 【F:knowledge/notes/all_part01_review.md†L162-L166】【F:knowledge/notes/all_part01_review.md†L217】
+[^power-risks]: 【F:knowledge/notes/all_part01_review.md†L22】【F:knowledge/notes/all_part01_review.md†L155】【F:knowledge/notes/all_part01_review.md†L170-L171】
+[^legacy-boards]: 【F:knowledge/notes/denis_all_part02_review.md†L29-L33】【F:knowledge/notes/denis_all_part02_review.md†L153】
+[^rita-v4]: 【F:knowledge/notes/denis_all_part02_review.md†L22-L33】
+[^controller-thermals]: 【F:knowledge/notes/denis_all_part02_review.md†L10-L13】
+[^rita-hill]: 【F:knowledge/notes/denis_all_part02_review.md†L31-L33】
+[^awd]: 【F:knowledge/notes/denis_all_part02_review.md†L25-L28】
+[^error14]: 【F:knowledge/notes/denis_all_part02_review.md†L26-L31】【F:knowledge/notes/denis_all_part02_review.md†L6433-L6456】
+[^thermal-paste]: 【F:knowledge/notes/denis_all_part02_review.md†L32-L33】
+[^counterfeit]: 【F:knowledge/notes/denis_all_part02_review.md†L19-L23】
+[^bag-security]: 【F:knowledge/notes/denis_all_part02_review.md†L42-L45】
+[^pack-charger]: 【F:knowledge/notes/denis_all_part02_review.md†L45-L46】
+[^tool-packs]: 【F:knowledge/notes/denis_all_part02_review.md†L235-L235】
+[^lawn-pack]: 【F:knowledge/notes/denis_all_part02_review.md†L6610-L6635】
+[^balance-leads]: 【F:knowledge/notes/denis_all_part02_review.md†L7028-L7068】
+[^lifepo4]: 【F:knowledge/notes/denis_all_part02_review.md†L7080-L7089】
+[^rita-schottky]: Rita’s Schottky drop leaving internal packs near 97 % unless bypassed during off-scooter charging, which Denis still recommends for pack longevity.【F:knowledge/notes/denis_all_part02_review.md†L103-L103】【F:knowledge/notes/denis_all_part02_review.md†L108-L108】
+[^rita-underreport]: Small Rita Gen 4 batch that under-reported current above ~20 A while redundant sensing still tripped overcurrent protection on Ninebot Max validation builds.【F:knowledge/notes/denis_all_part02_review.md†L198-L198】
+[^rita-soc]: Dashboard state of charge drifting after Rita installs, prompting Denis to treat 50 % on the display as the return threshold while using the app for actual voltage.【F:knowledge/notes/denis_all_part02_review.md†L127-L127】
+[^rita-undercharge]: 【F:knowledge/notes/denis_all_part02_review.md†L220-L229】
+[^rita-60v]: 【F:knowledge/notes/denis_all_part02_review.md†L256-L257】
+[^harness_staging]: 【F:knowledge/notes/denis_all_part02_review.md†L7534-L7589】【F:knowledge/notes/denis_all_part02_review.md†L7567-L7589】【F:knowledge/notes/denis_all_part02_review.md†L11671-L11676】
+[^cheap-packs]: 【F:knowledge/notes/denis_all_part02_review.md†L5499-L5526】
+[^xiaoflasher]: 【F:knowledge/notes/denis_all_part02_review.md†L2467-L2470】
+[^twelve-s-config]: 【F:knowledge/notes/denis_all_part02_review.md†L10541-L10552】

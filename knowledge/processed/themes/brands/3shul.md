@@ -20,29 +20,40 @@
 - Treat 32 S marketing as experimental: CL-series failures after 120 V charging prompted veterans to cap operation near 29–30 S without regen and to add external DC/DC rails when voltage climbs.[^voltage_cap]
 - Full-race telemetry keeps 22 S C350 builds alive by disabling regen, holding per-controller battery current near 200 A, and auditing wiring so BMS trips do not hard-cut the power stage.[^race22s]
 - Field logs that chase 400 A phase still lean on traction control, balanced CAN settings, and thorough CSV exports to confirm both controllers share the load before raising limits further.[^tc_fw]
+- CL350-class controllers ride out split-second pack dropouts better than Makerbase peers when riders add auxiliary 12 V capacitance, but the margin is thin—treat BMS trips as faults to fix, not normal operating behavior.[^supply_margin]
 
 ## Tuning & Control Behavior
 - Traction control can shove torque rearward on 22 S 33×2 LY hubs with ~70 % field weakening, but riders disable TC temporarily when mapping limits and re-enable it once hall data, observers, and wheel parameters match across CAN nodes.[^tc_fw]
 - CL350 V4 owners cleared ABS over-current faults by rerunning detection with a 500 µs timing step, swapping to the Ortega observer, and dialing the tune manually per Vedder’s demos—auto-detect defaults proved unreliable at race power.[^abs_fix]
 - Sensor checks remain mandatory: recent rescues traced bogus temperature readings to mismatched 10 k NTC probes and dead powerboards, reinforcing that every harness and daughterboard needs inspection before blaming firmware.[^ntc_check]
 - Delta-to-star rewiring and aggressive field weakening still trade efficiency for top speed; community race logs show ESC thermals stay the bottleneck even as hub KV and FW increase.[^fw_losses]
+- Auto-detect shortcuts still burn hardware: veterans insist CL-series controllers need hand-tuned drive and regen currents because automated regen mirrors whatever drive amps you request, spiking hardware unless you rein it in—newcomers who want plug-and-play behaviour should consider simpler controllers.[^manual_setup]
+- Losing throttle ground still commands full power—builders now strain-relief the ground pin, enable Safe Start voltage checks, and rerun both input and motor detection after traction-control or ramp tweaks to confirm the new limits actually saved.[^throttle_ground]
 
 ## Diagnostics & Support Reality
 - Raphaël Foujiwara and other specialists now charge roughly €60 / hr to revive failed boards, and some owners have spent €1 700 on repairs that still failed to boot—stocking spares or fallback controllers remains prudent.[^repair_cost]
+- Nobrrr and Paolo traced blown hardware to reveal 3Shul’s “custom” MOSFETs are standard ON Semi HSBL009N10T devices (marked N009N10T), so repair benches can source replacements through normal supply chains instead of hunting bespoke silicon.[^mosfet_crossref]
 - Firmware distribution is opaque: the official CL350 V3 sources live in a shared Drive folder, so teams archive binaries locally and keep dual stacks on matching revisions before flashing.[^firmware_repo]
 - Community sentiment still treats 3Shul as the reliable alternative when Makerbase/Tronic stock falters, but buyers accept minimal transparency and shoulder all QC (capacitor staking, harness validation, moisture inspection) themselves.[^community_view]
+- Dual installs require tidy ignition wiring—feed the key-switch lead to each controller (or bridge the 5 V enable rails), isolate any failed Bluetooth daughterboards that can dead-short the logic rail, and remember that the latch circuit stays energized whenever the pack is plugged in.[^ignition_wiring]
 
 ## Motor Pairing & Field-Weakening Insights
 - 3Shul’s C700 motor catalogue documents 70H vs. 75H rim options, ~28.6 KV windings, and 350 A phase capability while warning that counterfeit Panasonic packs marketed alongside the hubs cannot sustain the advertised performance—quality cells and sag monitoring remain non-negotiable.[^c700_hub]
 - Race teams pushing 22 S+ builds still log each pull, monitor pack sag, and treat ≥10 P parallels with copper busbars as the minimum for sustained 200 A-per-controller launches.[^race22s]
+- Volkan’s Langfeite GT2RS telemetry shows twin LY hubs on 24 S 20 P EVE 40PL packs pulling 330 A phase / 170 A battery with ~3 V sag while 100 A of field weakening holds 20 kHz switching; correcting a mis-set 30-pole magnet count to the real 40 poles dropped the claimed 150–160 km/h to ~120 km/h GPS—validate sensors before celebrating speed gains.[^volkan_gt2rs]
 
 ## Packaging & Integration Notes
 - Rage Mechanics is revising C350 packaging with flatter capacitor stacks and dual high-current plugs to squeeze into 100 × 120 × 25 mm cavities where Little FOCer and Tronic boards keep failing—expect install footprints to shrink slightly once those batches land.[^packaging_refresh]
+- EU buyers now route orders through Face de Pin Sucé to secure 2023 batches that ship with 8 AWG motor leads and tidier harness QC instead of gambling on ad-hoc Telegram resellers.[^eu_sourcing]
 - Dual-controller Ninebot decks only fit with stripped housings and tidy harness routing; builders planning AWD conversions pair custom plates with external heatsinks to keep 22 S hardware cool.[^deck_fit]
+- Fresh-batch QA checks now include validating every MOSFET NTC lead before first power-up after a new run shipped with a missing sensor that forced −70 °C readings on a slave controller.[^yoann_ntc]
 
 ## Ecosystem & Roadmap
 - Riders are evaluating 3Shul’s forthcoming SmartDisplay-class dash, multifunction switch pods, and RGB integrations as potential successors to Davega once CAN/BMS data streams stabilize.[^accessory_roadmap]
+- Russia’s billet RTV Ultra superbike underscores the brand’s ceiling: dual 3Shul stacks feed 115 mm stators from 26 S 64 Ah packs for ≈40 kW peaks, but turnkey buyers still quote six-month lead times.[^rtv_ultra]
 - Telemetry comparisons show VESC real-time power overshoots peaks without filtering, so crews pair 3Shul controllers with SmartDisplay or Voyage Megan dashboards to cross-check pack watts against phase estimates.[^community_view]
+- Rage Mechanics’ RM-Light and Thunder-based RM-X race programs continue to showcase tuned 3Shul stacks—expect ≈37 kg curb weights with 22 S 4 P tabless packs for 130–140 km/h sprint events, and plan for aggressive airflow once Thunder builds chase 170 km/h records that already heat hubs past 112 °C within minutes.[^rmx_program]
+- Early CL1400 previews trumpet 30 S / 1 000 A aspirations, but community reviewers already spotted blown MOSFETs in demo footage, so the roadmap still needs independent endurance logs before builders commit.[^cl1400_caution]
 
 ## When to Choose Alternatives
 - Builders lacking access to trusted 3Shul repair pipelines lean toward Spintend 85/250 or Seven 18 controllers despite lower phase ceilings, prioritizing broader distribution and clearer warranty paths.[^community_view]
@@ -53,19 +64,30 @@
 [^support]: Raphaël Foujiwara’s C350 vs. R350 comparison, CAN connector cautions, and the reminder that unpaid support is unsustainable.【F:knowledge/notes/input_part011_review.md†L26-L28】
 [^voltage_cap]: CL-series voltage ceiling warnings and DC/DC sag observations that cap practical operation near 29–30 S without regen.【F:knowledge/notes/input_part006_review.md†L71-L72】
 [^tc_fw]: Traction-control and field-weakening behavior on 22 S LY hubs, plus logging discipline required to avoid inflated speed readings or control faults.【F:knowledge/notes/input_part009_review.md†L109-L124】【F:knowledge/notes/input_part009_review.md†L121-L121】
-[^roadmap]: CL500/CL700/CL1000 roadmap previews, packaging dimensions, and distribution updates from Rage Mechanics.【F:knowledge/notes/input_part004_review.md†L15522-L15541】【F:knowledge/notes/input_part004_review.md†L16149-L16186】
+[^roadmap]: CL500/CL700/CL1000 roadmap previews, packaging dimensions, and distribution updates from Rage Mechanics.【F:knowledge/notes/input_part004_review.md†L288-L288】【F:knowledge/notes/input_part004_review.md†L436-L436】
 [^c350_specs]: Field data confirming the C350’s 400 A phase / 200 A battery envelope on disciplined builds.【F:knowledge/notes/input_part012_review.md†L256-L258】
 [^r350_specs]: R350 feature comparison including the 12 V 3 A rail, smart latch, and 250 A battery rating.【F:knowledge/notes/input_part011_review.md†L26-L28】
 [^cl350_heat]: Reports of CL350 heat and QC variance relative to C350 units on 22 S race scooters.【F:knowledge/notes/input_part008_review.md†L305-L305】
-[^cl500_preview]: Packaging refresh teasers and roadmap notes covering the CL500/CL700/CL1000 series.【F:knowledge/notes/input_part004_review.md†L15522-L15541】【F:knowledge/notes/input_part004_review.md†L16149-L16186】
+[^cl500_preview]: Packaging refresh teasers and roadmap notes covering the CL500/CL700/CL1000 series.【F:knowledge/notes/input_part004_review.md†L288-L288】【F:knowledge/notes/input_part004_review.md†L304-L304】
 [^abs_fix]: Detection workflow (500 µs timing, Ortega observer) that cleared CL350 V4 ABS over-current faults.【F:knowledge/notes/input_part009_review.md†L123-L124】
 [^ntc_check]: Case studies tracing temperature faults to failed powerboards or mismatched 10 k NTC probes on 3Shul installs.【F:knowledge/notes/input_part008_review.md†L42-L43】
-[^fw_losses]: Community notes on 3Shul hub KV, field-weakening losses, and counterfeit Panasonic pack recalls tied to C700 marketing.【F:knowledge/notes/input_part003_review.md†L21001-L21048】
+[^fw_losses]: Community notes on 3Shul hub KV, field-weakening losses, and counterfeit Panasonic pack recalls tied to C700 marketing.【F:knowledge/notes/input_part003_review.md†L160-L160】【F:knowledge/notes/input_part003_review.md†L207-L215】
+[^manual_setup]: Kirill and Happy Giraffe reminded riders that CL-series reliability hinges on manually tuning motor and brake currents—auto-detected regen mirrors drive amps and will spike hardware unless you rein it in.【F:knowledge/notes/input_part007_review.md†L335-L335】
 [^repair_cost]: Regional repair anecdotes including €60 / hr service rates and costly yet unsuccessful rebuild attempts.【F:knowledge/notes/input_part012_review.md†L256-L269】【F:knowledge/notes/input_part012_review.md†L388-L389】
 [^firmware_repo]: Guidance pointing owners to the official Drive share containing CL350 V3 firmware sources.【F:knowledge/notes/input_part008_review.md†L417-L417】
 [^community_view]: Community sentiment that 3Shul remains a high-voltage alternative when other controllers are scarce, alongside praise for capacitor durability and reminders to self-manage QC.【F:knowledge/notes/input_part014_review.md†L15-L20】【F:knowledge/notes/input_part014_review.md†L71-L72】
-[^c700_hub]: 3Shul C700 hub specifications (rim options, KV, phase limits) plus cautions about counterfeit Panasonic packs.【F:knowledge/notes/input_part003_review.md†L21001-L21048】
-[^packaging_refresh]: Packaging refresh teasers describing flatter capacitor layouts and dual connectors for upcoming C350 batches.【F:knowledge/notes/input_part004_review.md†L20064-L20108】
-[^deck_fit]: Dual-controller Ninebot deck packaging examples highlighting the need for stripped casings and precise harness routing.【F:knowledge/notes/input_part004_review.md†L2267-L2273】
+[^c700_hub]: 3Shul C700 hub specifications (rim options, KV, phase limits) plus cautions about counterfeit Panasonic packs.【F:knowledge/notes/input_part003_review.md†L160-L160】【F:knowledge/notes/input_part003_review.md†L215-L215】
+[^packaging_refresh]: Packaging refresh teasers describing flatter capacitor layouts and dual connectors for upcoming C350 batches.【F:knowledge/notes/input_part004_review.md†L304-L304】
+[^eu_sourcing]: European buyers now channel orders through Face de Pin Sucé to guarantee 2023 3Shul batches with 8 AWG leads and improved harness QC rather than relying on informal resellers.【F:knowledge/notes/input_part004_review.md†L234-L234】
+[^deck_fit]: Dual-controller Ninebot deck packaging examples highlighting the need for stripped casings and precise harness routing.【F:knowledge/notes/input_part004_review.md†L28-L28】
 [^accessory_roadmap]: Emerging accessory ecosystem (displays, switch pods, RGB integration) tied to upcoming 3Shul releases.【F:knowledge/notes/input_part014_review.md†L78-L83】
+[^rtv_ultra]: Russia’s RTV Ultra billet scooter specification with dual 3Shul controllers, 26 S 64 Ah packs, 115 mm stators, and long lead times as a reference build.【F:knowledge/notes/input_part012_review.md†L184-L184】
 [^alternatives]: Discussions weighing 3Shul pricing against Spintend/Seven availability and recommending Thor/FarDriver or other platforms for ≥30 S regen builds until CL700/CL1000 data arrives.【F:knowledge/notes/input_part014_review.md†L15-L20】【F:knowledge/notes/input_part014_review.md†L194-L195】
+[^yoann_ntc]: Yoann documented a fresh 3Shul batch that shipped with a missing MOSFET temperature lead, forcing −70 °C readings and reminding installers to validate sensor harnesses before first ride.【F:knowledge/notes/input_part007_review.md†L44-L44】
+[^cl1400_caution]: Community reviewers flagged early CL1400 demo footage that already showed blown MOSFETs despite 30 S / 1 000 A marketing claims, so stress testing is still pending before adoption.【F:knowledge/notes/input_part003_review.md†L686-L686】
+[^supply_margin]: CL350-class controllers absorbing brief supply interruptions when buffered with extra 12 V capacitance, unlike Makerbase peers that die on BMS trips.【F:knowledge/notes/input_part008_review.md†L31-L34】
+[^throttle_ground]: CL350 harness failures that shove 5 V down the throttle signal if ground breaks, plus reminders to rerun detection after traction-control changes because calibration can drop silently.【F:knowledge/notes/input_part005_review.md†L33-L39】【F:knowledge/notes/input_part005_review.md†L43-L48】
+[^rmx_program]: RM-Light race scooter specs (≈37 kg, 22 S 4 P tabless pack, RM-X 2024 motors, Beringer brakes) alongside Thunder-based RM-X record attempts that already log ~112 °C motor temps within minutes at 170 km/h targets.【F:knowledge/notes/input_part012_review.md†L383-L383】【F:knowledge/notes/input_part013_review.md†L204-L204】【F:knowledge/notes/input_part013_review.md†L452-L452】【F:knowledge/notes/input_part009_review.md†L288-L288】
+[^mosfet_crossref]: Community teardown confirming 3Shul’s MOSFETs match ON Semi HSBL009N10T components, easing replacement sourcing after failures.【F:knowledge/notes/input_part013_review.md†L791-L791】
+[^volkan_gt2rs]: Langfeite GT2RS data showing 330 A phase / 170 A battery pulls with ~3 V sag on 24 S 20 P EVE 40PL packs and corrected 120 km/h GPS speeds once the magnet count was set to the proper 40 poles.【F:knowledge/notes/input_part009_review.md†L291-L291】
+[^ignition_wiring]: Key-switch wiring guidance confirming both CL controllers need the ignition lead, that failed Bluetooth boards can dead-short the rail, and that the latch circuit remains live with the pack connected.【F:knowledge/notes/input_part004_review.md†L56-L60】【F:knowledge/notes/input_part004_review.md†L203-L207】【F:knowledge/notes/input_part004_review.md†L292-L296】
