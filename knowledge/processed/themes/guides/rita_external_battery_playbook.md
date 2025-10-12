@@ -7,7 +7,11 @@
 | Inspect harness length and XT30 condition | Rita ships with XT30 pigtails sized for the enclosure; hot-swapping wears them quickly. | Reinforce joints and avoid repeated plugs/unplugs.[^xt30]
 | Vet pack specs and Y-cable build quality | Counterfeit “13.8 Ah” 10S2P packs and unsoldered Y-cables have already shorted bags. | Demand cell-level photos, dispute impossible ratings, and rework joints before mounting.[^ali-audit] |
 | Confirm donor packs are scooter-grade | Lawn mower/tool batteries overheat near 25 A and barely contribute unless voltage matches scooter packs. | Skip five-cell tool packs and verify wattage before strapping externals to Rita.[^tool-warning] |
+| Match external chemistry and wiring | Rita only tolerates identical external packs with common charge/discharge ports—mixing a factory pack and Litokala brick through one harness can pop the adapter. | Keep externals the same series count and BMS topology before paralleling.【F:knowledge/notes/denis_all_part02_review.md†L116206-L116215】 |
+| Leave modern jumpers intact | Current Rita harnesses ship ready for 13 S use—set cell count in the app before connecting packs instead of cutting jumpers on newer boards.【F:knowledge/notes/denis_all_part02_review.md†L122300-L122315】 | Prevents self-inflicted wiring faults on updated hardware. |
+| Stock up on 5–5.5 mm bullet connectors | Rita and Happy harnesses use common “banana” bullets—larger plugs reduce heating on 30 A builds. | Verify diameter before ordering; AliExpress listings vary wildly.[^bullet] |
 | Pre-fit the Wildman 2 L case or equivalent mount | Denis’ 8 Ah/12 S3P modules are sized to the 2 L shell; larger customs need 3 L brackets. | Pad the internal screws and route the lead upward to protect insulation.[^cases]
+| Model bag volume for 13S customs | A 13S4P barely fits 3 L shells; Denis’ own 13S4P bricks just squeeze into the Wildman 2 L, and stacking two builds a 13S8P tower that tames voltage sag for dual 500 W hubs. Expect LG MJ1 cores to droop more than Samsung 35E under the same loads. | Mock up layouts before drilling hardware into the pack.[^bag-volume][^bag-stack]
 | Stage firmware tools (M365 BMS Tool or XiaFlasher) and plan BLE downgrades | Configuration toggles (e.g., permanent emulator, cell count) require legacy BLE versions. | BLE 073/090 restore connectivity when the latest dashboard blocks access.[^ble]
 | Reinforce controllers for ≥12 S or >27 A tunes | Stock traces and MOSFETs overheat above ~1 kW. | Pair firmware changes with soldered copper, thermal paste refresh, and conservative current ramps.[^thermal-prep]
 | Keep Rita’s charge splitter inline | Removing the splitter when relocating charge ports hides charger presence and bypasses surge protections. | Leave the three-way harness installed even when the jack is moved outside the deck.[^splitter]
@@ -35,6 +39,7 @@
 - Cut Rita’s pink jumper only when stepping beyond 10 S, retain XT30 hardware, and continue matching pack voltages before parallel connection.[^jumper]
 - Limit sustained draws near 27 A (~800 W) unless you have robust cooling (ferrofluid, thermal paste refresh) and MOSFET upgrades.[^current-limit]
 - Keep nominal voltage at 51 V in XiaoFlasher/XiaoGen profiles so Rita’s charge thresholds and protections remain aligned after the upgrade.[^fiftyone]
+- Reprogram Rita every time you swap between 10 S and 12 S externals; the workshop explicitly warned that leaving the adapter on 10 S while plugging a 12 S pack will disable braking protections until you correct the setting.[^swap-settings]
 
 ### Clone Scooters without Data Lines
 - Rita can operate as paired smart diodes, sharing current between packs while blocking reverse flow; regenerative braking must remain disabled in this analog mode.[^analog-mode]
@@ -44,17 +49,28 @@
 ### 13 S Experiments (Advanced Only)
 - Cut the sense jumper, reconfigure cell count in the M365 BMS Tool, and raise firmware limits cautiously; reverting to 10 S after cutting the jumper is unsafe.[^13s-setup]
 - Plan for aftermarket controllers or extensive reinforcement—the community still treats 13 S as experimental with limited support.[^13s-risk]
+- Expect additional SMD resistor/capacitor work on Xiaomi controllers and remember that once those parts are moved the board is effectively locked to high-voltage duty.[^smd-lock]
 - Remember that Rita still enforces ~25 A; even 15 S externals only shine when paired with uprated controllers and properly matched internals.[^15s-limit]
 
 ## Operational Practices
 
 ### Charging & Energy Management
 - Rita charges whichever pack sits lower, continuing to top batteries after the scooter powers down; rely on charger LEDs to confirm completion.[^charge-flow]
+- Charging through Rita tops the internal pack first; unplug externals and use a dedicated XT30 harness when you need to fast-charge auxiliary batteries.[^fast-charge]
 - Expect the internal pack to rest a few tenths below full charge—Rita deliberately leaves headroom for regen and will beep error 39 if sustained pulls exceed its 25 A ceiling.[^undercharge]
+- Rita draws a small standby current even while the scooter sleeps; recharge storage packs every few weeks or disconnect externals for long layoffs so BMS protection never hits zero.【F:knowledge/notes/denis_all_part02_review.md†L97264-L97268】
+- During discharge, Rita always favors the higher-voltage pack first; equal-voltage 10S+10S builds share current once voltages converge, so avoid tricks to “force” external-first draining.[^voltage-favor]
+- Regen is blocked on a full auxiliary pack—bleed a few percent off the top and confirm Rita’s cell-count setting before expecting e-brake recovery again.[^regen-block]
+- Set recuperation-off voltage around 4.10 V on 12 S/13 S builds (with future app tweaks toward 4.18 V) and keep braking currents conservative; leaving KERS active on long descents can still overload unreinforced controllers.[^recutoff]
+- Skip series experiments through Rita. Stacking extra 3S boosters trips regen protections and can overcharge internals—wire odd-series packs outside the adapter with their own charge leads instead.[^series-skip]
+- Trickle sources such as 100 W solar panels work while riding so long as the DC/DC feed stays under ~1.7 A and firmware ignores charge mode; anything higher risks burning the converter.[^solar]
 - Treat the internal pack as a rider, not a charger—repurposing it to backfeed other batteries without current limiting is a documented fire risk; build dedicated externals with their own BMS instead.[^pack-fire]
 - External packs support direct charging via dedicated harnesses; Denis is developing XT30-to-Xiaomi adapters for easier off-scooter top-ups.[^offboard-charge]
 - Cap shared-port charging around 2 A to protect the OEM BMS; use dedicated high-current chargers when faster turnaround is needed.[^charge-limit]
 - Store packs near 3.7 V per cell in temperate spaces—cold garages accelerate degradation.[^storage]
+- For oversized Ninebot packs, divide capacity by charger current to plan turnaround times—38 Ah modules take roughly 13 hours on the stock 3 A brick and about 7.5 hours on a vetted 5 A “speed cable,” which the group confirmed sits within Happy/Ninebot limits.[^g2-charge]
+- If Rita “ghosts” an external pack (voltage present but no data), blip the throttle for a second to force re-detection and consult Denis’ living manual for additional recovery steps.[^ghost-pack]
+- Dashboards may briefly jump from ~25 % to ~60–70 % during heavy regen; treat the spike as cosmetic until the firmware patch lands.[^soc-swing]
 
 ### Riding & Thermal Limits
 - Motors and controllers run hotter after voltage upgrades; monitor temperature and raise recuperation-off voltage to 4.15 V to avoid throttle kicks on full batteries.[^thermal-ops]
@@ -72,6 +88,11 @@
 - Keep documentation handy: Denis’ storefront hosts installation guides and expects ticket submissions with order IDs for manual payment reconciliation.[^support]
 - Skip LiFePO₄-specific BMS boards when you are building li-ion packs—the voltage windows do not align, so protections misfire and cells go unprotected.[^lifepo4-bms]
 
+### Hardware Roadmap & Procurement Notes
+- Mid-2021 batches introduced a 40 A “Gen 2” Rita after month-long field tests; treat the higher-current hardware as beta until your own logs confirm stability.[^rita40]
+- Current production harnesses ship with XT60 leads plus an XT30 adapter—rewire external packs with native XT60 (ideally via anti-spark switches) to reduce resistance.[^xt60-batch]
+- Expect roughly one-week fulfillment once Denis returns from vacations; June 2021 buyers saw backlog-clearing shipping the week after ordering.[^leadtime]
+
 ## Troubleshooting Quick Reference
 | Symptom | Likely Cause | Corrective Actions |
 | --- | --- | --- |
@@ -79,11 +100,13 @@
 | Error 14 on dual dashboards | Cross-pack current leakage after Rita install. | Re-check polarity, isolate each controller, and verify Rita blocks inter-pack flow before commuting.[^error14] |
 | Error 18 after controller swap | Damaged hall harness | Replace the hall cable when multiple controllers throw the same fault post-upgrade.[^error18] |
 | Error 24 after wiring changes | Supply voltage out of range | Power-cycle for 10 seconds and inspect the charge splitter plus pack voltages before deeper teardown.[^error24] |
+| Error 21 after an emergency stop | Regen spike likely cooked the controller data line. | Bench-test with a known-good scooter or send the pack in before blaming the BMS.[^error21] |
+| Adapter loses BMS telemetry after flashing | Rita needs a clean reset to the stock harness before reflashing the battery BMS. | Remove the adapter, restore factory wiring, flash the 12800 image via ST-Link, recharge to ≈41–42 V, then reinstall Rita.[^bms-reflash] |
 | Telemetry shows 0 W or flips between packs | Rita reports whichever pack sits ~0.5 V higher; current sensor design hides wattage. | Match voltages, disconnect the higher pack temporarily, or use the pack’s BMS app for readings.[^telemetry-hop]
 | Regen jerks throttle after full charge | Recuperation threshold too low on 12 S/13 S setups. | Raise recuperation-off voltage to ≈4.15 V and retest braking intensity.[^regen-check]
 | Rita fuse blows or pack overheats | Non-common-port BMS or miswired external battery. | Rewire with common-port boards and verify polarity before reconnecting.[^common-port]
 | Controller thermal shutdowns | Excessive current or insufficient reinforcement. | Reduce current-change intensity, add cooling mods, and inspect solder reinforcements.[^thermal-prep]
-| Repeating beeps with error 39 | Charger or regen pushing Rita above ~25 A. | Check firmware battery/regen limits, validate charger voltage, and keep the splitter inline so protections engage.[^error39]
+| Repeating beeps with error 39 | Charger or regen pushing Rita above ~25 A. | Check firmware battery/regen limits, log live amps with m365Tools, validate charger voltage, and keep the splitter inline so protections engage.[^error39][^log-current]
 
 ---
 
@@ -108,6 +131,7 @@
 [^regen-risk]: 【F:knowledge/notes/all_part01_review.md†L171】
 [^telemetry-hop]: 【F:knowledge/notes/all_part01_review.md†L25】【F:knowledge/notes/all_part01_review.md†L139】【F:knowledge/notes/all_part01_review.md†L219】【F:knowledge/notes/all_part01_review.md†L261】
 [^error39]: 【F:knowledge/notes/denis_all_part02_review.md†L22】【F:knowledge/notes/denis_all_part02_review.md†L29-L33】【F:knowledge/notes/denis_all_part02_review.md†L199】
+[^log-current]: 【F:knowledge/notes/denis_all_part02_review.md†L122563-L122575】
 [^undercharge]: 【F:knowledge/notes/denis_all_part02_review.md†L220-L229】
 [^12s-steps]: 【F:knowledge/notes/all_part01_review.md†L57】【F:knowledge/notes/all_part01_review.md†L121】
 [^jumper]: 【F:knowledge/notes/all_part01_review.md†L123-L124】【F:knowledge/notes/all_part01_review.md†L162-L166】
@@ -119,6 +143,9 @@
 [^13s-setup]: 【F:knowledge/notes/all_part01_review.md†L162-L166】
 [^13s-risk]: 【F:knowledge/notes/all_part01_review.md†L217-L218】
 [^15s-limit]: 【F:knowledge/notes/denis_all_part02_review.md†L22】【F:knowledge/notes/denis_all_part02_review.md†L31】【F:knowledge/notes/denis_all_part02_review.md†L115】
+[^swap-settings]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L20056-L20058】【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L122582-L122584】
+[^smd-lock]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L202-L223】【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60029-L60033】
+[^g2-charge]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L131278-L131301】
 [^charge-flow]: 【F:knowledge/notes/all_part01_review.md†L54】【F:knowledge/notes/all_part01_review.md†L172】【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L46】
 [^charging-telemetry-guide]: 【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L46】【F:knowledge/notes/denis_all_part02_review.md†L127】
 [^schottky]: 【F:knowledge/notes/denis_all_part02_review.md†L103-L104】【F:knowledge/notes/denis_all_part02_review.md†L108-L110】
@@ -144,3 +171,19 @@
 [^error18]: 【F:knowledge/notes/denis_all_part02_review.md†L151-L152】
 [^error24]: 【F:knowledge/notes/denis_all_part02_review.md†L152-L153】
 [^rita60v_ext]: Rita 60 V bench tests still demand staged launches, firmware checks, and close monitoring of adapter alarms before anyone relies on the higher voltage for real rides.【F:knowledge/notes/denis_all_part02_review.md†L9495-L9520】
+[^bullet]: 【F:knowledge/notes/denis_all_part02_review.md†L134-L136】
+[^voltage-favor]: 【F:knowledge/notes/denis_all_part02_review.md†L134-L136】
+[^regen-block]: 【F:knowledge/notes/denis_all_part02_review.md†L182-L184】
+[^error21]: 【F:knowledge/notes/denis_all_part02_review.md†L179-L181】
+[^bag-volume]: 【F:knowledge/notes/denis_all_part02_review.md†L164-L167】
+[^bag-stack]: 【F:knowledge/notes/all_part01_review.md†L171-L171】
+[^fast-charge]: 【F:knowledge/notes/all_part01_review.md†L305-L305】
+[^recutoff]: 【F:knowledge/notes/all_part01_review.md†L212-L213】
+[^ghost-pack]: 【F:knowledge/notes/all_part01_review.md†L210-L210】
+[^soc-swing]: 【F:knowledge/notes/all_part01_review.md†L175-L175】
+[^series-skip]: Attempting to stack extra 3 S boosters in series through Rita fails—regen shuts down and the adapter risks overcharging the internal pack unless each segment has its own charger.【F:knowledge/notes/all_part01_review.md†L92303-L92352】
+[^solar]: Rita will pass ~1.6–1.7 A from a 100 W solar panel while riding so long as firmware ignores charge mode; higher current overheats the DC/DC source.【F:knowledge/notes/all_part01_review.md†L93065-L93088】
+[^bms-reflash]: Recovering lost telemetry requires removing Rita, restoring stock wiring, flashing the 12800 BMS image via ST-Link, charging to ~41–42 V, then reinstalling the adapter.【F:knowledge/notes/all_part01_review.md†L92623-L92630】
+[^rita40]: Denis confirmed the 40 A “Gen 2” Rita batch went into production mid-June after extended road tests.【F:knowledge/notes/all_part01_review.md†L105675-L105684】
+[^xt60-batch]: Current kits ship with XT60 pigtails plus an XT30 adapter; Denis still recommends wiring externals with native XT60 and anti-spark hardware.【F:knowledge/notes/all_part01_review.md†L107545-L107567】
+[^leadtime]: Post-vacation fulfillment resumed with roughly one-week lead times as Denis cleared the June backlog.【F:knowledge/notes/all_part01_review.md†L107566-L107573】
