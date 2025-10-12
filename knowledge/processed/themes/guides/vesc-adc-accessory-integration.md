@@ -34,6 +34,7 @@
 - **Skip illuminated combo pods:** Backlit handlebar switches feed accessory voltage into the signal lines and confuse the ADC board unless you gut the lighting—treat them as incompatible without a full rewire.[^22]
 - **Avoid parasitic taps:** Pulling 12 V from internal headlight pins (e.g., X12) drags the logic rail and costs range—draw pack power into a dedicated converter instead.[^15]
 - **Protect logic rails:** Shorting auxiliary leads straight on the controller board has already destroyed logic stages; isolate accessories and fuse every feed.[^16]
+- **Fuse the adapter output:** One builder shorted the 12 V rail on a brand-new Spintend 85240 while wiring lights and killed the buck stage; add inline fuses or external bucks so a single mistake doesn’t scrap the controller.[^16][^22]
 - **Treat buttons as triggers only:** The ADC adapter does not replace a loop key or smart-BMS latch; plan a real kill switch for theft deterrence or maintenance.[^17][^18]
 
 ## Configuration & Validation Workflow
@@ -71,4 +72,5 @@
 [^19]: Pull-down resistors on throttle lines guarantee a zero output if the signal wire opens.[F:knowledge/notes/input_part007_review.md†L223-L223]
 [^20]: Routing throttle through dash adapters adds noticeable lag; direct ADC wiring restores responsiveness.[F:knowledge/notes/input_part007_review.md†L225-L225]
 [^21]: VESC Tool can wipe ADC settings after reconnects unless you explicitly write both motor and app configs.[F:knowledge/notes/input_part005_review.md†L573-L573]
+[^22]: Shorting the Spintend 85240 aux rail to ground killed the unfused buck regulator, reinforcing the need for inline fuses or external converters when powering lighting from the adapter.[F:knowledge/notes/input_part011_review.md†L21413-L21478]
 [^22]: Illuminated AliExpress switch pods leak voltage into ADC signal lines and require major rewiring to behave.[F:knowledge/notes/input_part010_review.md†L74-L77]

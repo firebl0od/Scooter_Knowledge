@@ -24,6 +24,7 @@
 - Add bulk capacitance to the 12 V (and where accessible, 5 V/3.3 V) rails—the retrofit prevents infamous brownouts when BMSs trip or accessories spike load, especially on resin-potted boards. 【F:knowledge/notes/input_part005_review.md†L448-L451】【F:knowledge/notes/input_part005_review.md†L510-L510】
 - Document MOSFET and driver replacements: hot-plug failures often kill only part of a parallel set, so replace all devices on that leg and confirm 12 V/5 V rails before reassembly. 【F:knowledge/notes/input_part004_review.md†L303-L303】【F:knowledge/notes/input_part004_review.md†L363-L363】
 - Verify shunt calibration with clamp meters or smart-BMS telemetry; many 75100s deliver only half the programmed battery amps until you correct the scaling. 【F:knowledge/notes/input_part005_review.md†L75-L76】
+- Bench-test at both low and full pack voltage before installation—one 75 100 that happily booted on 3 S refused to wake on 13–16 S even after reflashing, pointing to high-voltage hardware faults that warrant an immediate RMA instead of more firmware experiments. 【F:knowledge/notes/input_part004_review.md†L82-L83】
 - Skip hard potting unless you accept throwaway repairs—silicone (e.g., 705 RTV) still lets you service ADC pins, add capacitors, or reflash firmware, whereas epoxy-sealed 75100s trap the MCU and driver rails under resin and make ignition or capacitor fixes nearly impossible. 【F:knowledge/notes/input_part005_review.md†L429-L429】【F:knowledge/notes/input_part005_review.md†L582-L584】
 
 ## Setup & Commissioning Checklist
