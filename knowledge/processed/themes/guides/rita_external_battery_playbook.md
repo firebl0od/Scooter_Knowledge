@@ -3,7 +3,6 @@
 ## Pre-Build Checklist
 | Check | Why it Matters | Notes |
 | --- | --- | --- |
-| Confirm both batteries share the same series count (10S or 12S) | Rita only manages parallel packs and will not equalize mismatched voltages. | Balance external packs a few tenths of a volt higher before connecting so telemetry locks onto them cleanly.[^parallel]
 | Use a common-port BMS on every auxiliary pack | Separate charge ports let the charger overrun cells through the discharge lead. | Swap third-party boards before pairing AliExpress packs with Rita.[^common-port]
 | Inspect harness length and XT30 condition | Rita ships with XT30 pigtails sized for the enclosure; hot-swapping wears them quickly. | Reinforce joints and avoid repeated plugs/unplugs.[^xt30]
 | Pre-fit the Wildman 2 L case or equivalent mount | Denis’ 8 Ah/12 S3P modules are sized to the 2 L shell; larger customs need 3 L brackets. | Pad the internal screws and route the lead upward to protect insulation.[^cases]
