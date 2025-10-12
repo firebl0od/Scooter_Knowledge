@@ -12,6 +12,7 @@
 - **Predictable passive balancing.** Expect roughly 100–160 mA of passive bleed—enough for 6–8 p scooter modules once charge rates are sane—while JK is still the only widely available active balancer.[^6]
 - **Survivable current headroom.** Builders routinely cap 18s7p Sony VTC6A packs near 200 A with JBD hardware on 20 kW projects and note that headline 15 kW “limits” rarely matter in practice.[^20]
 - **Alternatives carry their own baggage.** JK hardware continues to cook balance resistors and leave buyers stranded on warranty, Daly boards bleed at just ~30 mA, and budget smart-BMS listings without real protection expose builders to liability.[^8][^9]
+- **Real-world trips prove the protection.** A JK smart BMS recently cut a 20 S build at ~60 A when a short developed, saving the pack but stranding the rider—proof the protection works, and a reminder to stage lower-current limp modes or backup packs if you rely on JK hardware.[^10]
 - **Security needs manual discipline.** Cloud-linked apps can let vandals tweak limits; veterans keep LLT/JBD packs offline or locked to default credentials when unattended.[^10]
 
 ## Community-Vetted Board Options
@@ -52,12 +53,19 @@
 - **Use active balancers sparingly.** External active boards can equalise large packs in about an hour, whereas the onboard JBD bleeders need days; deploy them during rebuilds, then rely on the smart BMS for day-to-day drift.[^19]
 - **Schedule periodic harness checks.** Silicone-isolated output studs and repasted heatsinks should be inspected every service interval to ensure vibration hasn’t crushed insulation.[^16]
 
+## Charging Infrastructure Updates
+- **Adjustable supplies cover odd pack voltages.** Builders chasing 21 S charging have adopted programmable 22 S/18 A supplies paired with ANT sleep timers so dormant packs don’t drift while waiting for the next ride.[^adj_supply]
+- **Multi-voltage bricks plug stock gaps.** When premium 21 S chargers disappear, the community leans on 16–24 S/20 A switchable supplies—worth flagging for travel kits that need one brick for multiple scooters.[^multi_brick]
+- **Mind discharge-less BMS designs.** Jason’s new 32 S-capable board omits discharge FETs entirely, effectively passing unlimited current; treat it as a monitoring tap and keep downstream fusing intact.[^no_fet]
+
 ## Troubleshooting & Field Failures
 - **Watch for JK→JBD retrofit triggers.** Owners burnt by JK resistor failures now default to JBD or ANT hardware; keep spare boards so you can swap without waiting on overseas RMAs.[^9]
 - **Do not bypass discharge FETs.** A bypassed scooter lit its rear controller at just 35–40 km/h when the unprotected pack dumped full current—full-protection smart BMS hardware with proper fusing is non-negotiable on 20 S builds.[^22]
 - **Upgrade after close calls.** Riders who survived BMS bypass incidents immediately budgeted ~$100 for ANT/JBD replacements and rewired temp sensors correctly to prevent repeat brownouts.[^23]
 - **Verify vendor voltage claims.** Jiabada’s “6–22 S” listings actually document 6–21 S support; confirm firmware before building 22 S stacks or commission dual-BMS architectures.[^12]
 - **Log and share failure data.** Community troubleshooters can only help if you export Xiaoxiang logs, especially when chasing intermittent charge overcurrent or regen spikes.[^5][^18]
+- **Treat charger LEDs as advisory only.** Xiaomi/OEM chargers have stayed green while pushing 42 V into 10 S packs—always confirm pack voltage with a meter before assuming the BMS is finished balancing.[^charger-led]
+- **Load-test suspicious externals.** Bargain 10 S packs that collapse under light draws leave the stock battery carrying the ride; run them solo at low amperage before trusting the BMS telemetry or mixing them in parallel.[^sag_test]
 
 ## Deployment Checklist
 - [ ] Measure deck cavity height/width and confirm the BMS plus insulation clears cells and harnesses.[^3][^15]
@@ -68,15 +76,17 @@
 
 ---
 
-[^1]: LLT/JBD smart BMS units earn praise for compact enclosures, configurable protection limits, gentle ~20 A capacitor pre-charge, and Bluetooth/UART telemetry that simplify cramped scooter installations.【F:knowledge/notes/input_part007_review.md†L3415-L3502】
-[^2]: Riders highlighted the 21s 100 A JBD’s narrow footprint and ~€45 sale pricing when width, not height, constrained their builds.【F:knowledge/notes/input_part008_review.md†L17098-L17118】
-[^3]: Community measurements show the so-called “100 A” JBD case grows to roughly 27 mm thick once screws and heatsinks are counted, forcing silicone shims and spacer reprints in tight decks.【F:knowledge/notes/input_part009_review.md†L2041-L2087】
+## Source Notes
+[^1]: LLT/JBD smart BMS units earn praise for compact enclosures, configurable protection limits, gentle ~20 A capacitor pre-charge, and Bluetooth/UART telemetry that simplify cramped scooter installations.【F:knowledge/notes/input_part007_review.md†L192-L192】【F:knowledge/notes/input_part007_review.md†L261-L261】
+[^2]: Riders highlighted the 21s 100 A JBD’s narrow footprint and ~€45 sale pricing when width, not height, constrained their builds.【F:knowledge/notes/input_part008_review.md†L189-L189】
+[^3]: Community measurements show the so-called “100 A” JBD case grows to roughly 27 mm thick once screws and heatsinks are counted, forcing silicone shims and spacer reprints in tight decks.【F:knowledge/notes/input_part009_review.md†L318-L318】
 [^4]: 17 S commuter tuning guidance keeps regen near −5 A battery / −40 A phase to stay within the JBD 100 A board’s comfort zone.【F:knowledge/notes/input_part008_review.md†L104-L104】
-[^5]: Tristan’s JBD-SP17S005 pack logged charge-overcurrent trips from voltage sag, with Smart Repair recommending a full BMS swap when sane settings still triggered faults.【F:knowledge/notes/input_part011_review.md†L21236-L21261】【F:knowledge/notes/input_part011_review.md†L21293-L21297】
-[^6]: Mirono reminded shoppers that JK is the only active-balancing option, while LLT/JBD passive bleeders sit around 100–160 mA—enough for most high-current scooter packs.【F:knowledge/notes/input_part007_review.md†L16221-L16221】
-[^7]: Builders pairing dual Spintend 80100s with Jiabada’s 230 A smart BMS isolate its dual-sided heatsinks from cells to preserve thermal headroom on 20s8p projects.【F:knowledge/notes/input_part007_review.md†L15841-L15858】
-[^8]: Group consensus contrasted JK, ANT, and LLT/JBD offerings—emphasising active balancing and software quality on premium boards while warning that no-name units without real protection invite liability.【F:knowledge/notes/input_part005_review.md†L17595-L17640】
-[^9]: JK smart BMS hardware has cooked balance resistors within a day and left riders with minimal warranty relief, prompting many to switch to ANT or JBD charge/discharge boards.【F:knowledge/notes/input_part007_review.md†L10170-L10200】【F:knowledge/notes/input_part007_review.md†L15112-L15114】
+[^5]: Tristan’s JBD-SP17S005 pack logged charge-overcurrent trips from voltage sag, with Smart Repair recommending a full BMS swap when sane settings still triggered faults.【F:knowledge/notes/input_part011_review.md†L659-L660】
+[^6]: Mirono reminded shoppers that JK is the only active-balancing option, while LLT/JBD passive bleeders sit around 100–160 mA—enough for most high-current scooter packs.【F:knowledge/notes/input_part007_review.md†L179-L179】
+[^7]: Builders pairing dual Spintend 80100s with Jiabada’s 230 A smart BMS isolate its dual-sided heatsinks from cells to preserve thermal headroom on 20s8p projects.【F:knowledge/notes/input_part007_review.md†L180-L180】
+[^8]: Group consensus contrasted JK, ANT, and LLT/JBD offerings—emphasising active balancing and software quality on premium boards while warning that no-name units without real protection invite liability.【F:knowledge/notes/input_part005_review.md†L323-L323】
+[^9]: JK smart BMS hardware has cooked balance resistors within a day and left riders with minimal warranty relief, prompting many to switch to ANT or JBD charge/discharge boards.【F:knowledge/notes/input_part007_review.md†L175-L176】
+[^10]: JK smart BMS boards have already tripped at ≈60 A when shorts developed, saving packs but leaving riders stranded until they rebuilt with lower-current hardware or secondary packs.【F:knowledge/notes/input_part012_review.md†L249-L249】
 [^10]: Leaving smart-BMS apps online invites tampering—JBD’s cloud portal and ANT’s password handling can let outsiders modify limits—so veterans keep packs offline or locked to defaults when parked.【F:knowledge/notes/input_part009_review.md†L33-L33】
 [^11]: Mirono steered dual-controller G30 conversions toward the slim 10–17 S 100 A JBD board as the smallest smart option that still exposes UART/Bluetooth telemetry.【F:knowledge/notes/input_part007_review.md†L262-L262】
 [^12]: Crimekillz noted Jiabada’s “6–22 S” documentation actually caps support at 21 S, so builders confirm firmware limits before trusting those boards in 22 S stacks.【F:knowledge/notes/input_part007_review.md†L64-L64】
@@ -92,3 +102,8 @@
 [^22]: A rider who bypassed discharge protection watched a rear controller ignite at 35–40 km/h, reinforcing the need for full-protection smart BMS units and fuses on high-power scooters.【F:knowledge/notes/input_part012_review.md†L368-L368】
 [^23]: After that fire, builders budgeted high-current ANT/JBD boards (~US $100) and rewired temperature leads correctly instead of running charge-only BMS hardware.【F:knowledge/notes/input_part012_review.md†L369-L369】
 [^25]: A plug-in CAN adapter now lets LLT/JBD smart BMS boards stream telemetry over the existing scooter harness, simplifying monitoring inside VESC Tool or CAN dashboards.【F:knowledge/notes/input_part006_review.md†L365-L365】
+[^charger-led]: GABE documented a Xiaomi charger remaining green while still delivering 42 V to a 10 S pack, reinforcing the need to verify voltage and logs instead of trusting indicator lights alone.【F:knowledge/notes/input_part011_review.md†L18-L18】
+[^sag_test]: Denis’ workshop found cheap “13 Ah” externals sagged immediately, forcing the internal pack to do all the work—test suspect packs alone at low load before trusting their specs or paralleling them with healthy batteries.【F:knowledge/notes/denis_all_part02_review.md†L5499-L5526】
+[^adj_supply]: Adjustable 22 S/18 A supplies paired with ANT sleep timers keep 21 S packs topped without drifting when scooters sit for weeks between rides.【F:knowledge/notes/input_part012_review.md†L11401-L11411】
+[^multi_brick]: Switchable 16–24 S/20 A bricks fill in when premium 21 S chargers are unavailable, giving one charger that can service multiple scooter voltages.【F:knowledge/notes/input_part012_review.md†L11792-L11797】
+[^no_fet]: Jason’s 32 S-capable BMS variant deletes discharge FETs entirely, effectively leaving downstream hardware as the only short-circuit protection.【F:knowledge/notes/input_part012_review.md†L19339-L19342】

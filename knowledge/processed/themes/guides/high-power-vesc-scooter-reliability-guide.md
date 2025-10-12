@@ -6,6 +6,9 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - **Controller tiers:** Treat Makerbase/Flipsky aluminum-PCB boxes as interim ≤15 S 50 A solutions; high-power riders standardize on 3Shul C350/CL350, Ubox duals, or BRIESC units for thermal headroom and QC maturity.[^1][^2][^3]
 - **Boutique ceilings:** Tronic X12 (24 S), Ubox 240, and Spintend 85250 builds all share MOSFET and shunt limits around 331 A; most racers cap hubs near 150–200 A battery and 310–360 A phase even after swapping to upgraded silicon.[^33]
 - **Marketing vs. reality:** Expect Makerbase boxed 75100 units to deliver only one-half to one-third of the configured current, while Flipsky 75350 shunt math caps phase current near 500 A despite brochure claims.[^4][^5]
+- **DIY alternatives:** Ennoid MK8 shares the Spintend footprint but still needs Infineon IPTC017N12NM6 or similar MOSFET upgrades before flirting with 26 S / 500 A goals—plan the reflow work if you want to stretch beyond stock specs.[^39]
+- **Spintend supply shift:** The 85/250 run is over—stock spares or pivot to 85/240/Seven-class hardware now that Spintend routes 240 A controllers through New Jersey with minimal tariffs.[^41]
+- **G300 sprint controllers:** Waterproofed 18-FET G300 builds are logging ≈250 A battery / 500 A phase bursts on 22 S, but riders still report heat soak if they hammer regen—treat them as sprint hardware rather than hill-climb replacements.[^40]
 - **Open-source options:** MP2/CCC_ESC remains a 30 S-capable DIY path when you can populate through-hole MOSFETs, machine heatsinks, and flash ready firmware sourced from the community.[^6]
 - **Motor/power pairing:** Samsung 29E commuter cells fall flat beyond ~80–90 A even in 11 P, so racers swap to P42A or VTC6A chemistry to keep 130 km/h pulls viable.[^7]
 - **Field-weakening ROI:** Expect diminishing returns—adding 25 A of FW only moved a 20×70 kV setup from 66 km/h to ~84 km/h freewheel, topping out around 96 km/h at the hardware cap.[^34]
@@ -33,6 +36,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Re-run input + motor detection after changing traction control or ramp settings on CL350 hardware; writes occasionally drop, erasing throttle calibration.[^20]
 - Slow ABS overcurrent can mask poor current tuning yet saves time when observers are unstable—disable only after fixing detection and ramp configuration.[^21]
 - Avoid triggering permanent BLE pairing (“pairing done”) unless you truly need it; clearing the lockout demands a VESC Tool update and manual flag reset.[^22]
+- When scripting 1WD/2WD toggles on Spintend bridges, isolate CAN or power between controllers—otherwise the “sleeping” ESC keeps mirroring the active unit’s battery current and never actually idles.[^spintend_toggle]
 
 ## 6. Fabrication & Assembly Discipline
 - Use molded cell holders or reinforced 3D-printed fixtures plus flexible adhesives (B7000/E8000) so parallel groups stay serviceable after cell failures.[^23]
@@ -88,7 +92,11 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^32]: Laotie packs sag 8 V under load and can overheat even with 60 A Daly BMS units, so monitor voltage drop and plan upgrades before raising limits.【F:knowledge/notes/input_part005_review.md†L185-L187】
 [^33]: Tronic X12, Ubox 240, and Spintend 85250 tuning envelopes, including 331 A MOSFET limits and typical 150–200 A battery / 310–360 A phase guardrails.【F:knowledge/notes/input_part013_review.md†L364-L369】【F:knowledge/notes/input_part013_review.md†L799-L804】
 [^34]: Field-weakening gains plateauing on 20×70 kV builds after adding 25 A of FW current.【F:knowledge/notes/input_part013_review.md†L29-L31】
-[^35]: PTFE sleeving tips for 6 mm² leads plus AWG 11 silicone upgrades to keep hubs cool on Sevillian climbs.【F:knowledge/notes/input_part013_review.md†L172-L172】【F:knowledge/notes/input_part013_review.md†L7336-L7359】
-[^36]: Parallel-pack lessons covering voltage matching, regen budgeting, and the need to leave charge MOSFETs enabled for braking performance.【F:knowledge/notes/input_part013_review.md†L5118-L5136】【F:knowledge/notes/input_part013_review.md†L5131-L5134】【F:knowledge/notes/input_part013_review.md†L5488-L5492】
-[^37]: CAN telemetry aggregation behaviour and the value of Voyage/Ambrosini dashboards for per-controller diagnostics.【F:knowledge/notes/input_part013_review.md†L6488-L6497】【F:knowledge/notes/input_part013_review.md†L6607-L6610】
-[^38]: Risks of powder-coating hub shells at ≈204 °C cure temperatures and the preference for high-temp paint or ceramic coatings.【F:knowledge/notes/input_part013_review.md†L5205-L5207】【F:knowledge/notes/input_part013_review.md†L5429-L5429】
+[^35]: PTFE sleeving tips for 6 mm² leads plus AWG 11 silicone upgrades to keep hubs cool on Sevillian climbs.【F:knowledge/notes/input_part013_review.md†L48-L48】【F:knowledge/notes/input_part013_review.md†L190-L191】
+[^36]: Parallel-pack lessons covering voltage matching, regen budgeting, and the need to leave charge MOSFETs enabled for braking performance.【F:knowledge/notes/input_part013_review.md†L154-L157】
+[^37]: CAN telemetry aggregation behaviour and the value of Voyage/Ambrosini dashboards for per-controller diagnostics.【F:knowledge/notes/input_part013_review.md†L186-L186】
+[^38]: Risks of powder-coating hub shells at ≈204 °C cure temperatures and the preference for high-temp paint or ceramic coatings.【F:knowledge/notes/input_part013_review.md†L147-L147】
+[^39]: Ennoid MK8 reliability chatter, including the need for IPTC017N12NM6 MOSFET swaps to reach 26 S/500 A envelopes.【F:knowledge/notes/input_part014_review.md†L19-L37】
+[^40]: Waterproofed 18-FET G300 controllers delivering ~250 A battery / 500 A phase bursts on 22 S while overheating under sustained regen, signalling sprint-oriented use cases.【F:knowledge/notes/input_part012_review.md†L398-L399】
+[^41]: Spintend discontinued the 85/250 and now ships 85/240 controllers through a New Jersey hub, letting U.S. builders avoid tariffs while planning alternatives for higher-rated boards.【F:knowledge/notes/input_part012_review.md†L110-L111】【F:knowledge/notes/input_part012_review.md†L379-L405】
+[^spintend_toggle]: Smart Repair’s Spintend bridge experiments showed that one-button 1WD/2WD toggles require CAN or power isolation; otherwise the secondary controller stays awake and mirrors the primary’s current draw.【F:knowledge/notes/input_part011_review.md†L317-L317】【F:knowledge/notes/input_part011_review.md†L79-L79】

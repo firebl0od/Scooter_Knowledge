@@ -33,6 +33,7 @@
 - **Chassis flex:** RX carbon frames feel “chewing gum” at 400 A—plan dampers, reinforcement plates, and tyre upgrades if you chase high-speed stability.[^7]
 - **Motor bottlenecks:** The LY-manufactured hubs remain the limiting factor—pushing phase current past ≈200 A or ignoring lead temperatures risks overheating long before the controllers run out of headroom.[^4]
 - **Logistics churn:** Replacement motors are attainable but shipping shocks can nullify savings—budget for customs fees or arrange local pickup.[^3]
+- **Legacy chassis cracks:** Tear down older Rion frames—Face de Pin Sucé uncovered cracked steering heads, flexing plates, underspec’d Kelly controllers, and fan ducts that just slam into carbon walls until you rework airflow.[^steering_crack][^legacy_fans]
 
 ## Setup Priorities for New Owners
 1. **Audit import paperwork** – confirm VAT/customs payments and document serial numbers before first ride; this simplifies future warranty or resale interactions.[^1]
@@ -43,6 +44,7 @@
 
 ## High-Voltage Tuning Guardrails
 - **Traction still fails first:** 24 S packs and Tronic 250R tunes are spinning the front tyre at ~120 km/h launches, so stagger ramping, warm tyres, and prioritise damper setup before chasing higher phase numbers.[^4]
+- **24 S traction reality:** Even Jesús’ 100 V Tronic 250R build still spins the front wheel near 120 km/h; keep phase ceilings moderate and pair upgrades with serious traction prep before layering on more field weakening.[^24s_traction]
 - **Respect hub lead limits:** Production Rions and the Leo Apex share LY 60 H 22/3 motors with 4 mm phase conductors; riders cap them around 180–200 A continuous despite controller headroom, reserving higher numbers for short dyno pulls only.[^5]
 - **Ease off when faults return:** Over-cranking phase current and heavy field-weakening brought grinding noises and cut-outs back on Jesús’s 24 S tune—dial limits back toward the 200 A region and verify traction-control settings before the next test run.[^4]
 - **Finish diagnostics after repairs:** Swapping MOSFETs alone didn’t save Rosheee’s controller; latent shorts blew the VESC on the next motor detection, so meter the power stage and gate drivers before reconnecting the pack.[^6]
@@ -51,24 +53,31 @@
 - **Battery-first tuning:** Focus on validating cell balance and temperature spread; pursue pack upgrades or parallel modules before increasing controller current limits.[^2]
 - **Motor swaps & spacing:** “Rion 1337” 70 mm magnet hubs ship with ~155–160 mm axles and 9.5 AWG leads—ensure your frame or fork can clear the width (Zero 11X-scale) before ordering and plan for new torque arms.[^6][^8]
 - **Controller pairing:** High-KV hubs routinely cook 75/200-class VESCs; stepping up to Kelly, Sabvoton, or dual Tronic hardware keeps ≥250 A phase targets realistic without sensorless stalls.[^5]
+- **Controller mix:** BAC 4000 twins only appeared on the Thrust prototype; production scooters stayed on Tronic stacks with the BACs simply sharing a throttle signal, so plan wiring and expectations accordingly if you chase non-Tronic swaps.[^bac_pairing]
+- **Throttle ergonomics:** The pricey CNC thumbwheel is still a basic hall sensor—builders cloning it with Spintend Spinny or Davega hardware report similar feel once wiring is sorted, and Spintend is now prototyping a “curve” thumbwheel to mirror the dual-action control without the premium casing.[^throttle_clone][^curve_thumb]
 - **Tyre & brake strategy:** Evaluate slicks or semi-slicks that match the platform’s dry-focus geometry, but keep a wet-weather set and mechanical braking upgrades ready because regen-only setups still falter when BMS charge FETs open.[^2][^9]
+- **Plan future controller swaps:** Some owners are holding firmware experiments until they pair 3Shul 700/1400 controllers with Lonnyo 100 H hubs and 50PL packs, underscoring how major driveline overhauls reshape the Rion upgrade path.[^future_swap]
 - **Service kit:** Stock carbon-safe cleaners, torque-limited tools, spare hall boards, and corrosion inhibitors to maintain the frame after weather sealing efforts.[^2][^5]
 
 ## Market & Procurement Signals
 - Leo Apex pricing now clears €9 000 while still shipping with Nutt brakes; factor in the premium for branding when comparing against custom Rion builds or competing factory frames.[^5]
+- Fresh inventory sightings include 100 V Tronic X12 controllers and 33×2 60 H motors with 125 mm dropouts and 4 mm banana leads around €300 delivered inside the EU, giving owners a benchmark for sourcing spares without paying Rion’s full markup.[^10]
 
 ## Source Notes
 [^1]: Cost breakdowns and skepticism toward 400 A/136 PS marketing around the RE90 import experience.【F:knowledge/notes/input_part000_review.md†L49-L51】
 [^2]: Praise for the 23 S 6 P battery and carbon build alongside warnings about limited waterproofing and dry-optimised tyres.【F:knowledge/notes/input_part000_review.md†L51-L53】
 [^3]: Availability and pricing realities for Rion/Weped FF-spec motors sourced within France.【F:knowledge/notes/input_part000_review.md†L698-L698】
-[^4]: Leo Apex/Rion motor limits, phase-lead size, and premium pricing despite performance bottlenecks.【F:knowledge/notes/input_part010_review.md†L68-L69】
-[^5]: Controller and wiring requirements for high-KV Rion hubs, including ≥250 A phase demand and 4 mm² lead overheating reports.【F:knowledge/notes/input_part001_review.md†L147-L147】【F:knowledge/notes/input_part001_review.md†L163-L163】
-[^6]: “Rion 1337” hub specifications—70 mm magnets, ~9.5 AWG leads, and 155–160 mm axles—plus frame fitment constraints.【F:knowledge/notes/input_part001_review.md†L409-L409】【F:knowledge/notes/input_part001_review.md†L428-L428】
+[^4]: Leo Apex/Rion motor limits, phase-lead size, and traction-limited launches logged on 24 S Tronic builds.【F:knowledge/notes/input_part010_review.md†L67-L69】【F:knowledge/notes/input_part007_review.md†L52-L55】
+[^5]: Controller and wiring requirements for high-KV Rion hubs, including ≥250 A phase demand, 4 mm² lead overheating, and the premium pricing that still ships with Nutt brakes.【F:knowledge/notes/input_part001_review.md†L147-L147】【F:knowledge/notes/input_part001_review.md†L163-L163】【F:knowledge/notes/input_part010_review.md†L68-L69】
+[^6]: “Rion 1337” hub specifications—70 mm magnets, ~9.5 AWG leads, and 155–160 mm axles—plus repair cautions after MOSFET swaps on Tronic hardware.【F:knowledge/notes/input_part001_review.md†L409-L409】【F:knowledge/notes/input_part001_review.md†L428-L428】【F:knowledge/notes/input_part002_review.md†L84-L84】
 [^7]: Rider feedback calling the RX carbon chassis “chewing gum” under modern power levels and noting stability concerns versus Weped builds.【F:knowledge/notes/input_part001_review.md†L51-L51】【F:knowledge/notes/input_part001_review.md†L800-L801】
 [^8]: Reference measurements placing HM, Blade, and Rion hub resistances plus axle width comparisons for swap planning.【F:knowledge/notes/input_part001_review.md†L314-L314】【F:knowledge/notes/input_part001_review.md†L409-L409】
-[^9]: Regen-only braking limits when charge MOSFETs open and the need for mechanical brakes alongside VESC tuning.【F:knowledge/notes/input_part013_review.md†L5488-L5492】【F:knowledge/notes/input_part013_review.md†L5639-L5653】
-[^4]: Community logs from Jesús’s 24 S Tronic 250R setup highlighting front-wheel spin near 120 km/h and the need to moderate phase current and field-weakening on high-voltage Rions.【F:knowledge/notes/input_part007_review.md†L52-L55】
-[^5]: Discussion of Leo Apex/Rion rebrands retaining LY 60 H 22/3 hubs with 4 mm phase wiring, capping sustainable current near 180–200 A, and still shipping with mid-tier brakes despite >€9 000 pricing.【F:knowledge/notes/input_part010_review.md†L68-L69】
-[^6]: Rosheee’s failed controller repair underscoring the need for full diagnostics after MOSFET replacement on Rion hardware.【F:knowledge/notes/input_part002_review.md†L84-L84】
-[^4]: Rebranded Leo Apex/Rion builds still relying on LY 60 H 22/3 hubs with 4 mm leads and topping out near 123 km/h on 24 S because phase current must stay around 180–200 A to avoid overheating.【F:knowledge/notes/input_part010_review.md†L67-L68】
-[^5]: Production pricing above €9 000 while the platform continues shipping with Nutt brakes despite the premium positioning.【F:knowledge/notes/input_part010_review.md†L68-L69】
+[^9]: Regen-only braking limits when charge MOSFETs open and the need for mechanical brakes alongside VESC tuning.【F:knowledge/notes/input_part013_review.md†L157-L157】【F:knowledge/notes/input_part013_review.md†L163-L163】
+[^10]: EU classifieds have listed 100 V Rion X12 controllers and fresh 33×2 60 H motors with 4 mm banana leads for about €300 delivered, highlighting alternative sourcing paths for spare drivetrains.【F:knowledge/notes/input_part011_review.md†L652-L652】
+[^24s_traction]: Jesús’ 24 S Tronic 250R build still spins the front tyre near 120 km/h, and Rochee’s follow-up logs show heavy field weakening brings the grinding faults straight back unless phase ceilings stay conservative.【F:knowledge/notes/input_part007_review.md†L52-L55】
+[^bac_pairing]: Paolo’s teardown confirmed that dual BAC 4000 stacks only shipped on the Thrust while production scooters retained Tronics and simply paralleled the throttle for BAC experiments.【F:knowledge/notes/input_part007_review.md†L53-L53】
+[^throttle_clone]: Builders reverse-engineering the Rion CNC throttle noted it is just a hall sensor assembly; Spintend Spinny and Davega display projects replicate the feel once RX/TX wiring is sorted, so billet housings alone don’t raise performance.【F:knowledge/notes/input_part013_review.md†L519-L520】
+[^curve_thumb]: Spintend is developing a production curve-style thumbwheel after prototyping remote housings to mimic Rion’s dual-action throttle ergonomics.【F:knowledge/notes/input_part001_review.md†L553-L553】【F:knowledge/notes/input_part001_review.md†L648-L648】
+[^steering_crack]: Face de Pin Sucé dissected older Rion frames and found cracked steering heads, flexing plates, under-specced Kelly controllers, and dead-end fan ducts—modern power levels require reinforcement before trusting legacy chassis.【F:knowledge/notes/input_part013_review.md†L716-L716】
+[^legacy_fans]: Face de Pin Sucé noted the legacy RX fan ducts literally blow into carbon walls and pair with underspec’d Kelly controllers, demanding airflow and controller upgrades before modern 400 A tunes.【F:knowledge/notes/input_part013_review.md†L716-L716】
+[^future_swap]: Jose and Yamal are delaying firmware work until they swap in 3Shul 700/1400 controllers and dual Lonnyo 100 H hubs on 50PL cells, signaling how upcoming driveline upgrades reshape Rion tuning plans.【F:knowledge/notes/input_part013_review.md†L39-L39】

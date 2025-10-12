@@ -3,6 +3,7 @@
 ## Build Objectives & Performance Targets
 - **Stealth commuter spec:** Base conversion keeps the platform single-motor with a rear Q5 Evo hub, 20S 6P Molicel pack, and Magura MT7 brake with a Shimano Deore lever so the scooter stays nimble, wheelie-friendly, and outside DGT registration triggers while matching high-power peers for acceleration.【F:knowledge/notes/input_part013_review.md†L350-L353】
 - **Road-legal mindset:** Builders are targeting legal-looking frames (e.g., Thunder 3 shells) and single-motor G2 layouts for Spanish compliance efforts, so conversion plans should preserve OEM lighting, horn, and indicator support where possible.【F:knowledge/notes/input_part013_review.md†L491-L492】【F:knowledge/notes/input_part013_review.md†L349-L353】
+- **80 km/h upgrade recipe:** Community checklists push rear spacing to ≈150 mm, grind the separator plate, install a 65 H 22×3 hub, and pair at least a 20 S 5–6 P 21700 pack with a robust VESC (e.g., Ubox 85/150) before chasing sustained highway speeds.【F:knowledge/notes/input_part011_review.md†L447-L448】【F:knowledge/notes/input_part011_review.md†L18290-L18383】
 
 ## Core Component Options
 | Subsystem | Recommended Parts | Rationale |
@@ -26,12 +27,14 @@
 - **Controller targets:** Riders prepping for the bridge are budgeting roughly 150–175 A battery and 250–300 A phase per controller, so plan CAN telemetry that exposes per-wheel data to avoid misreading aggregated currents.【F:knowledge/notes/input_part013_review.md†L507-L508】
 - **Harness power limits:** Remember that Tronic X12 logic rails only supply ~150 mA at 5 V; heavy accessories still require a dedicated buck when paired with G2 conversions to avoid brownouts.【F:knowledge/notes/input_part013_review.md†L32-L33】【F:knowledge/notes/input_part013_review.md†L360-L360】
 - **ADC safety:** Never feed 5 V into VESC ADC inputs—stay on the 3.3 V rail when adapting OEM throttles and buttons from the G2 loom to prevent MCU damage.【F:knowledge/notes/input_part013_review.md†L329-L329】
+- **Dash limitations:** Flipsky’s UART display still reports only GPS speed on G2 builds even when wired correctly—budget time for custom dash scripts or SmartDisplay integration if you need richer telemetry.[^dash]
 
 ## Battery Architecture & Thermal Management
-- **Pack options & delivery:** NKON’s popular cells can take a month to arrive, while Vapcell ships in 3–5 days but may require top-balancing mixed-voltage lots—plan lead times and QA accordingly before freezing the build schedule.【F:knowledge/notes/input_part013_review.md†L819-L1006】
+- **Pack options & delivery:** NKON’s popular cells can take a month to arrive, while Vapcell ships in 3–5 days but may require top-balancing mixed-voltage lots—plan lead times and QA accordingly before freezing the build schedule.【F:knowledge/notes/input_part013_review.md†L55-L56】
 - **Volume audits:** Jose’s crew is confirming 6P packaging fits by mock-building modules; Diego already proved 16 S works on the OEM controller after upgrading capacitors and is sizing the compartment for 18–20 S VESC hardware next.【F:knowledge/notes/input_part013_review.md†L350-L353】【F:knowledge/notes/input_part013_review.md†L353-L353】
 - **Reinforcement strategy:** When targeting street-legal yet high-discharge packs, fabricate skid plates and adapter brackets early so the added mass does not overstress the swingarm hardware.【F:knowledge/notes/input_part013_review.md†L123-L123】【F:knowledge/notes/input_part013_review.md†L354-L354】
 - **Thermal checks:** Pair the aluminium heat spreader with high-quality thermal paste and stripped paint surfaces; confirm temps after long pulls to validate the interface before sealing the deck.【F:knowledge/notes/input_part013_review.md†L606-L606】
+- **Stock BMS telemetry envelope:** Expect roughly 33 A continuous discharge and brief ~44 A regen bursts when CAN comms stay intact—use those ceilings when staging VESC limits so field-weakening pulls do not trip the pack.【F:knowledge/notes/input_part005_review.md†L138-L138】【F:knowledge/notes/input_part005_review.md†L369-L369】
 
 ## Braking, Suspension & Ride Safety
 - **Hybrid braking setups:** Some conversions lean on −90 A motor brake plus a front drum until displays arrive—treat this as temporary and prioritise fitting the Magura MT7 hydraulic system for repeatable stops.【F:knowledge/notes/input_part013_review.md†L163-L163】
@@ -47,3 +50,11 @@
 2. Release the Smart Repair bridge pinout plus compatibility matrix for Flipsky, Spintend, and MakerX controllers so horn/indicator circuits stay intact.【F:knowledge/notes/input_part013_review.md†L175-L177】【F:knowledge/notes/input_part013_review.md†L516-L518】
 3. Capture torque specs and torque-arm patterns for the dropout-widening bushings to standardise 150 mm conversions.【F:knowledge/notes/input_part013_review.md†L618-L618】
 4. Document telemetry workflows that split per-controller CAN data for dual-drive G2 builds before riders push 300 A per wheel.【F:knowledge/notes/input_part013_review.md†L507-L508】
+- Publish printable battery spacers and dash wiring workarounds now that stock accessories still limit displays to GPS-only readouts.【F:knowledge/notes/input_part014_review.md†L189-L189】
+- Confirm whether bundled VESC Express boards enumerate cleanly—Seven’s headers still require a separate CAN-connected module until firmware catches up, so capture the adapter wiring that G2 conversions will need.[^express_enum]
+
+## Source Notes
+- Single-motor conversion targets, component selections, mechanical packaging, and compliance considerations compile the 2025 Ninebot G2 Max threads covering Q5/Lonnyo motor choices, Monorim suspension, thermal plates, and legal stealth goals for Spanish riders.【F:knowledge/notes/input_part013_review.md†L123-L360】【F:knowledge/notes/input_part013_review.md†L491-L609】
+- Parallel-pack etiquette, regen dependencies, and Smart Repair bridge deliverables reflect the same review’s guidance on BMS charge-path requirements, CAN bridge readiness, and telemetry planning for high-current G2 builds.【F:knowledge/notes/input_part013_review.md†L505-L552】【F:knowledge/notes/input_part013_review.md†L506-L618】
+[^dash]: G2 owners report that Flipsky’s UART display only shows GPS speed despite correct wiring, pushing teams toward custom dash scripts or SmartDisplay swaps.【F:knowledge/notes/input_part014_review.md†L189-L189】
+[^express_enum]: Seven’s bundled VESC Express board currently fails to enumerate; builders still rely on separate CAN-connected modules until firmware and header maps are patched.【F:knowledge/notes/input_part014_review.md†L146-L148】【F:knowledge/notes/input_part014_review.md†L180-L180】

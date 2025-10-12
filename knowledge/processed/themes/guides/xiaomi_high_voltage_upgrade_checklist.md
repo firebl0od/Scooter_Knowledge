@@ -6,6 +6,7 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 - External 36 V packs only extend range; meaningful speed gains begin with 12S/13S packs paired with matching chargers and firmware.[^1]
 - A 13S6P pack built from 2,500 mAh cells roughly doubles the energy of a stock Pro battery while remaining within Rita’s 5 A shared charging envelope when chargers are split.[^2]
 - Riders chasing 40 km/h+ targets often graduate to 14S or dual-motor builds—confirm you have the braking, tires, and frame reinforcement to match the higher kinetic energy.[^1][^3]
+- Tool and lawnmower packs bring little to the table—Rita waits for ≈36 V before blending, so five-cell modules barely contribute and run dangerously hot under scooter loads.[^tool-pack]
 
 ## 2. Hardware Pre-Flight Inspection
 | Checkpoint | Requirement | Notes |
@@ -32,7 +33,9 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 
 ## 4. Charger & BMS Planning
 - Modify OEM chargers by replacing the 10 kΩ feedback resistor with a 30 kΩ+27 kΩ stack (~14.3 kΩ) and fine-tuning the trim pot to 50.4 V for 12S packs.[^10]
+- Validate charge completion with a meter—Xiaomi chargers have stayed green while still delivering 42 V, so confirm pack voltage rather than trusting indicator LEDs.[^charger-led]
 - Avoid 5 A firmware hacks on legacy M365 BMS boards; they reach ~150 °C under sustained charge. Pro-era boards and Samsung 35E cells handle higher current better, but quality Daly-class BMS hardware is still recommended.[^17][^18]
+- Double-check balance-lead order and wire negatives first—miswired Daly smart boards have popped instantly, forcing full harness rebuilds before the first ride.[^balance-leads-xiaomi]
 - Daly “Smart” and Xiaoxiang “Smart Ant” BMS modules are popular for 12S–13S builds thanks to reliable balancing and Bluetooth telemetry.[^18][^19]
 - External packs should remain common-port so Rita (or any Y-cable) can police charge flow; charging 13S packs through Rita’s charge lead is explicitly discouraged.[^14]
 
@@ -50,32 +53,41 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 - Avoid mixing configuration generators or chasing 33 k+ phase amps; veterans have already destroyed MOSFETs with mismatched presets and weak cooling.[^22]
 - Monitor pack temperature after charging—freshly topped 12S4P bricks have hit 50 °C on hard climbs. Let packs rest or dial back firmware before commuting.[^21]
 - High-voltage builds magnify braking and tire demands; run quality CST/Xuancheng casings at 36–50 psi and inspect bearings regularly to keep speed stable.[^25][^26]
+- Treat Rita error 14 as a hard stop when dual dashboards share a pack; re-check polarity and harness routing before riding again so the isolation hardware can still block cross-pack faults.[^27]
+- 60 V experiments remain strictly provisional—monitor Rita’s alarms, confirm firmware, and stage launches before trusting the higher voltage for daily riding.[^rita60v_xiaomi]
 
 ---
 
-[^1]: `knowledge/notes/denis_all_part02_review.md`, lines 114-116.
-[^2]: `knowledge/notes/denis_all_part02_review.md`, lines 101-102, 157-158.
-[^3]: `knowledge/notes/denis_all_part02_review.md`, lines 35-39, 114-116.
-[^4]: `knowledge/notes/denis_all_part02_review.md`, lines 11-12.
-[^5]: `knowledge/notes/denis_all_part02_review.md`, lines 12-13, 32.
-[^6]: `knowledge/notes/denis_all_part02_review.md`, lines 13, 37.
-[^7]: `knowledge/notes/denis_all_part02_review.md`, lines 22, 218.
-[^8]: `knowledge/notes/denis_all_part02_review.md`, lines 38-39, 147.
-[^9]: `knowledge/notes/all_part01_review.md`, lines 121-123; `knowledge/notes/denis_all_part02_review.md`, lines 11, 155-167.
-[^10]: `knowledge/notes/all_part01_review.md`, lines 94-96.
-[^11]: `knowledge/notes/all_part01_review.md`, lines 73-74.
-[^12]: `knowledge/notes/all_part01_review.md`, lines 169-170.
-[^13]: `knowledge/notes/denis_all_part02_review.md`, lines 110-111.
-[^14]: `knowledge/notes/denis_all_part02_review.md`, lines 23, 124.
-[^15]: `knowledge/notes/denis_all_part02_review.md`, lines 101-102.
-[^16]: `knowledge/notes/denis_all_part02_review.md`, lines 136-137.
-[^17]: `knowledge/notes/all_part01_review.md`, lines 102-103.
-[^18]: `knowledge/notes/denis_all_part02_review.md`, lines 124, 158-159.
-[^19]: `knowledge/notes/denis_all_part02_review.md`, lines 158-159.
-[^20]: `knowledge/notes/denis_all_part02_review.md`, lines 50-51, 161-168.
-[^21]: `knowledge/notes/denis_all_part02_review.md`, lines 32, 213.
-[^22]: `knowledge/notes/denis_all_part02_review.md`, lines 153-154, 165-168.
-[^23]: `knowledge/notes/all_part01_review.md`, lines 169-170; `knowledge/notes/denis_all_part02_review.md`, lines 29-33.
-[^24]: `knowledge/notes/all_part01_review.md`, lines 122-123.
-[^25]: `knowledge/notes/denis_all_part02_review.md`, lines 15-17, 56-57.
-[^26]: `knowledge/notes/denis_all_part02_review.md`, lines 56-57, 171-175.
+## Source Notes
+
+[^1]: 【F:knowledge/notes/denis_all_part02_review.md†L114-L116】
+[^2]: 【F:knowledge/notes/denis_all_part02_review.md†L101-L102】【F:knowledge/notes/denis_all_part02_review.md†L157-L158】
+[^3]: 【F:knowledge/notes/denis_all_part02_review.md†L35-L39】【F:knowledge/notes/denis_all_part02_review.md†L114-L116】
+[^4]: 【F:knowledge/notes/denis_all_part02_review.md†L11-L12】
+[^5]: 【F:knowledge/notes/denis_all_part02_review.md†L12-L13】【F:knowledge/notes/denis_all_part02_review.md†L32】
+[^6]: 【F:knowledge/notes/denis_all_part02_review.md†L13】【F:knowledge/notes/denis_all_part02_review.md†L37】
+[^7]: 【F:knowledge/notes/denis_all_part02_review.md†L22】【F:knowledge/notes/denis_all_part02_review.md†L218】
+[^8]: 【F:knowledge/notes/denis_all_part02_review.md†L38-L39】【F:knowledge/notes/denis_all_part02_review.md†L147】
+[^9]: 【F:knowledge/notes/all_part01_review.md†L121-L123】【F:knowledge/notes/denis_all_part02_review.md†L11】【F:knowledge/notes/denis_all_part02_review.md†L155-L167】
+[^10]: 【F:knowledge/notes/all_part01_review.md†L94-L96】
+[^11]: 【F:knowledge/notes/all_part01_review.md†L73-L74】
+[^12]: 【F:knowledge/notes/all_part01_review.md†L169-L170】
+[^13]: 【F:knowledge/notes/denis_all_part02_review.md†L110-L111】
+[^14]: 【F:knowledge/notes/denis_all_part02_review.md†L23】【F:knowledge/notes/denis_all_part02_review.md†L124】
+[^15]: 【F:knowledge/notes/denis_all_part02_review.md†L101-L102】
+[^16]: 【F:knowledge/notes/denis_all_part02_review.md†L136-L137】
+[^17]: 【F:knowledge/notes/all_part01_review.md†L102-L103】
+[^18]: 【F:knowledge/notes/denis_all_part02_review.md†L124】【F:knowledge/notes/denis_all_part02_review.md†L158-L159】
+[^19]: 【F:knowledge/notes/denis_all_part02_review.md†L158-L159】
+[^balance-leads-xiaomi]: 【F:knowledge/notes/denis_all_part02_review.md†L7028-L7068】
+[^20]: 【F:knowledge/notes/denis_all_part02_review.md†L50-L51】【F:knowledge/notes/denis_all_part02_review.md†L161-L168】
+[^21]: 【F:knowledge/notes/denis_all_part02_review.md†L32】【F:knowledge/notes/denis_all_part02_review.md†L213】
+[^22]: 【F:knowledge/notes/denis_all_part02_review.md†L153-L154】【F:knowledge/notes/denis_all_part02_review.md†L165-L168】
+[^23]: 【F:knowledge/notes/all_part01_review.md†L169-L170】【F:knowledge/notes/denis_all_part02_review.md†L29-L33】
+[^24]: 【F:knowledge/notes/all_part01_review.md†L122-L123】
+[^25]: 【F:knowledge/notes/denis_all_part02_review.md†L15-L17】【F:knowledge/notes/denis_all_part02_review.md†L56-L57】
+[^26]: 【F:knowledge/notes/denis_all_part02_review.md†L56-L57】【F:knowledge/notes/denis_all_part02_review.md†L171-L175】
+[^27]: 【F:knowledge/notes/denis_all_part02_review.md†L10541-L10598】
+[^charger-led]: 【F:knowledge/notes/input_part011_review.md†L18-L18】
+[^tool-pack]: 【F:knowledge/notes/denis_all_part02_review.md†L8873-L8893】
+[^rita60v_xiaomi]: 【F:knowledge/notes/denis_all_part02_review.md†L9495-L9520】
