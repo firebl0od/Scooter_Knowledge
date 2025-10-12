@@ -16,6 +16,8 @@
 - Sustains roughly 30 A output, tolerates anti-spark switches between adapter and controller, and ships with XT30 harnesses sized to the enclosure’s thermal and spatial limits.[^rita-hardware]
 - Maintains pack isolation instead of voltage-equalizing, so riders must align state-of-charge manually—especially when mixing internal 12S builds or dual externals.[^rita-soh]
 - Telemetry prioritizes whichever pack sits a few tenths of a volt higher; disconnect or top-charge the auxiliary pack to view its stats.[^rita-telemetry]
+- V4 hardware extends sensing up to 15S while still bottlenecking battery current near 25 A; newer boards add charger and regen over-voltage protection that only works when Rita stays inline with the scooter’s charge path.[^rita-v4]
+- Relocating the Xiaomi charge port outside the bag is acceptable if a three-way splitter remains so Rita can detect chargers and enforce safeguards.[^rita-v4]
 
 ### Repair BMS Program
 - Current production supports 10S4P batteries with ongoing development toward 12S models; units are configurable over simple USB-UART adapters for clone scooters.[^bms-roadmap]
@@ -27,6 +29,8 @@
 - Builds lean on Samsung 35E or equivalent 21700 cells, quality 12 AWG wiring, and Daly 25 A common-port BMS boards; XT30 connectors are intended for semi-permanent joints rather than frequent hot-swaps.[^battery-bom]
 - Range Boost bundles double an M365 Pro’s capacity by matching OEM pack size, while Range+Speed kits demand firmware tweaks whenever the auxiliary pack is removed.[^range-kits]
 - AliExpress packs with separate charge ports require BMS swaps before pairing with Rita to avoid uncontrolled overcharge through the discharge leads.[^separate-charge]
+- Community buyers now dispute “13.8 Ah” 10S2P listings and inspect harnesses closely after shorts traced back to unsoldered Y-cable joints inside Wildman bags—treat unbelievable capacity claims as fire risks.[^counterfeit]
+- Secure the Wildman case upright with clamps or cages instead of glue fills so thieves cannot unzip the pack in seconds and technicians can still service the battery.[^bag-security]
 
 ## Pricing & Bundles
 - Complete Rita + bag + battery kits price in the €250–€280 band plus roughly €20 shipping depending on charger inclusion, reflecting low-volume assembly with branded components.[^pricing]
@@ -41,9 +45,17 @@
 - Denis maintains installation guides for Rita, external batteries, and repair BMS builds on his storefront to avoid marketplace fees and centralize support.[^docs]
 - Customers are urged to include order IDs in support tickets while Denis manually reconciles payments during banking or payment-processor outages.[^support-ops]
 
+## Integration & Maintenance Highlights
+- Xiaomi V3 controllers tolerate 13S packs without hardware swaps, but Denis’ crew replaces Kapton strips with 0.5 mm thermal pads and direct-solders phase leads to keep MOSFETs cool on higher-current tunes.[^controller-thermals]
+- Rita’s 25 A ceiling limits the torque boost from tiny external packs; for long hill climbs riders step up to dual motors or uprated controllers rather than forcing more current through the adapter.[^rita-hill]
+- Dual-dash AWD builds treat Rita as the master: tie controller grounds together, forward a single data lead to the slave dash, and investigate any Error 14 immediately because it signals cross-pack leakage the adapter should block.[^awd]
+- Recurrent thermal shutdowns after a Rita upgrade usually trace to dried controller paste; replace compound (not pads) and monitor logs before pushing harder firmware.[^thermal-paste]
+
 ## Risks & Watchlist
 - Jumping to 13S requires cutting Rita’s sense jumper, reinforcing controllers, and following the manual via the M365 BMS Tool; reverting without restoring the jumper is unsafe.[^thirteen-steps]
 - High-power firmware tunes above ~1 kW or aggressive regen profiles can overheat motors and burn MOSFETs unless paired with controller trace reinforcement and mechanical brake upgrades.[^power-risks]
+- New Rita over-voltage guards still depend on healthy BMS hardware; relocating charge ports without the required splitter blinds the adapter to charger events and removes those protections.[^rita-v4]
+- Using Xiaomi packs as ad hoc chargers without proper current limiting remains a fire risk—Denis instead repurposes them as externals with their own BMS and keeps charge circuits separated.[^pack-charger]
 
 ---
 [^rita-capabilities]: Source: `knowledge/notes/all_part01_review.md`, lines 16-18, 23.
@@ -67,3 +79,11 @@
 [^support-ops]: Source: `knowledge/notes/all_part01_review.md`, line 150.
 [^thirteen-steps]: Source: `knowledge/notes/all_part01_review.md`, lines 162-166, 217.
 [^power-risks]: Source: `knowledge/notes/all_part01_review.md`, lines 22, 155, 170-171.
+[^rita-v4]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 22-33.
+[^controller-thermals]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 10-13.
+[^rita-hill]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 31-33.
+[^awd]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 25-28.
+[^thermal-paste]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 32-33.
+[^counterfeit]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 19-23.
+[^bag-security]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 42-45.
+[^pack-charger]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 45-46.
