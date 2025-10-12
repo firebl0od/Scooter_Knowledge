@@ -1,0 +1,49 @@
+# DIY Battery Supply & Pack Architecture Playbook (2025)
+
+## TL;DR
+- Europe’s salvage stream of EVE 50PL cells pushes landed costs near 1 € per cell while U.S. buyers still face ~$9 retail, so teams are forming cross-border partnerships and stockpiling QS8 hardware ahead of tariff hikes.【F:knowledge/notes/input_part014_review.md†L34-L38】
+- High-power scooters are converging on 22–30 S frames with 8–11 P parallels: Dualtron Achilleus decks accept 22 S9 P packs once controllers move outboard, Nami race builds run 22 S11 P Molicel layouts toward 40 kW, and G30 conversions rely on upgraded skid plates and spacers to clear 20 S+ modules.【F:knowledge/notes/input_part014_review.md†L37-L45】【F:knowledge/notes/input_part014_review.md†L151-L160】【F:knowledge/notes/input_part014_review.md†L168-L169】
+- Smart BMS headroom still lags pack ambition: ANT discharge FETs can latch on failures and balance slowly, so builders pair structural pack supports (no hot glue) with redundant protection, UV inspections, and JBD/JK alternatives sized around 500 A continuous until 700 A units mature.【F:knowledge/notes/input_part014_review.md†L99-L101】【F:knowledge/notes/input_part014_review.md†L155-L156】【F:knowledge/notes/input_part014_review.md†L172-L174】
+
+## Cell & Component Sourcing Reference
+| Component | EU Pricing & Availability | North America Reality | Immediate Actions |
+| --- | --- | --- | --- |
+| **EVE 50PL 21700** | Salvaged Stark Varg modules deliver grade-A cells for ~1 € each after labor; retail bulk hovers 1.5 € with logos shaved yet still grade A.【F:knowledge/notes/input_part014_review.md†L35-L36】 | ~$9 per cell retail with looming import duties.【F:knowledge/notes/input_part014_review.md†L36-L38】 | Form cooperative buys, pre-clear customs brokers, and reserve storage for incoming pallets. |
+| **Samsung/EVE 50E variants** | €1.5–2 each keep commuter packs affordable when 50PL supply tightens.【F:knowledge/notes/input_part014_review.md†L155-L156】 | Similar pricing once landed but subject to tariff swings; easier sourcing than 50PL yet lower discharge ratings.【F:knowledge/notes/input_part014_review.md†L155-L156】 | Stage these as fallback chemistries for ≤200 A builds; adjust wiring gauge accordingly. |
+| **Molicel P45B / Samsung 40T** | Used in 22 S10/11 P race packs with 0.2 mm copper busbars and 350–500 A targets.【F:knowledge/notes/input_part014_review.md†L37-L39】【F:knowledge/notes/input_part014_review.md†L168-L169】 | Importable but pricier; rely on trusted builders when tooling costs outweigh one-off packs.【F:knowledge/notes/input_part014_review.md†L39-L39】【F:knowledge/notes/input_part014_review.md†L156-L156】 | Schedule welding capacity, busbar stock, and thermal monitoring for >300 A continuous expectations. |
+| **QS8 connectors** | Stock through EU vendors today, but panel-mount options remain custom-fabricated.【F:knowledge/notes/input_part014_review.md†L188-L188】 | Tariffs threaten to push unit cost toward $35; panel mounts rare.【F:knowledge/notes/input_part014_review.md†L38-L38】【F:knowledge/notes/input_part014_review.md†L188-L188】 | Bulk-order straight housings, print or machine mounts, and document safe connection sequences. |
+| **Smart BMS (JBD/JK/ANT)** | JBD units land around €50 for 20 S packs; JK units offer higher balancing throughput but larger footprints.【F:knowledge/notes/input_part014_review.md†L155-L155】【F:knowledge/notes/input_part014_review.md†L174-L174】 | ANT advertises 470 A–1 050 A but has logged discharge latch failures; redundancy required.【F:knowledge/notes/input_part014_review.md†L99-L101】 | Combine smart BMS with external fusing/contactors and publish reset workflows for stuck FETs. |
+| **Spot welders (K-Weld, Glitter 811A)** | Proven 0.1 mm copper welds at ≈300 € including PSU; Glitter 811A needs periodic pin cleaning to restore 4.4 kA output.【F:knowledge/notes/input_part014_review.md†L34-L34】【F:knowledge/notes/input_part014_review.md†L152-L152】 | Cheaper 90 € claims lack field proof on copper; shipping heavy welders across the Atlantic adds cost.【F:knowledge/notes/input_part014_review.md†L34-L34】 | Allocate budget for pro-grade welders or coordinate shared tooling with nearby builders. |
+
+## Pack Architecture Patterns
+- **Dualtron Achilleus conversions** – Deck cavity (~485 mm × 181 mm) supports 22 S9 P if controllers move to an external mount; stock decks hold 20 S7–8 P and ~100 A battery before needing relocation or compact ESCs.【F:knowledge/notes/input_part014_review.md†L37-L44】
+- **Nami “hotdog” racers** – 22 S11 P P45 builds pair 100 H rear / 70 H front motors, 500 A phase, 550 A absolute, and 100 % front FW to sync wheel speed, netting 146 km/h GPS with manageable 61 °C stator temps.【F:knowledge/notes/input_part014_review.md†L168-L169】
+- **Ninebot G30 MAX** – Builders drill and trim 3 mm ePowerFun skid plates for €25 stopgap protection, swap in custom spacers, and plan 20 S4 P-to-22 S layouts once rails are clear and pack supports printed.【F:knowledge/notes/input_part014_review.md†L151-L151】【F:knowledge/notes/input_part014_review.md†L118-L118】
+- **30 S prototypes (Segway/Nami/G3)** – Ausias is CNC-ing supports for 22 S10 P Nami decks, while Finn’s G3 conversion fits 30 S3 P (15 S6 P) modules after bracket cuts; 30 S4 P remains too wide without welding and enclosure surgery.【F:knowledge/notes/input_part014_review.md†L159-L160】
+
+## Tooling, Fabrication & Thermal Management
+- Budget welders rated for 0.15 mm copper rarely meet spec; proven setups rely on K-Weld or Glitter 811A plus rip-tests, nickel sandwiching, and calibrated power for 0.1 mm sheet.【F:knowledge/notes/input_part014_review.md†L34-L34】【F:knowledge/notes/input_part014_review.md†L152-L152】
+- Keep skid plates functional: thermal paste is required before 3 mm aluminum plates materially sink heat, and fan kits need ducting rather than flush mounts to avoid recirculating hot air.【F:knowledge/notes/input_part014_review.md†L119-L120】
+- QS8/MT60 panel mounts are mostly custom; teams CAD their own plates to keep phase and battery leads from dangling while preserving access for service loops.【F:knowledge/notes/input_part014_review.md†L188-L188】
+
+## BMS & Protection Strategy
+- ANT 470 A/1 050 A packs have latched discharge FETs after overnight charges; the community now treats ANT as requiring redundant contactors or manual disconnects and documents UV-inspection resets before declaring hardware dead.【F:knowledge/notes/input_part014_review.md†L99-L101】
+- Balance behavior differs: ANT bleeds every cell simultaneously but with limited current, whereas JK hardware addresses two series groups at once, making JK preferable for large parallels needing faster equalization.【F:knowledge/notes/input_part014_review.md†L174-L174】
+- Keep cost spreadsheets realistic: even DIY 20 S packs need €50 BMS units, €50–200 welders, insulation, and shipping cushions—budget builders increasingly hire trusted pack shops when customs make single builds uneconomical.【F:knowledge/notes/input_part014_review.md†L155-L156】
+
+## Structural & Safety Fundamentals
+- Never rely on hot glue alone; use 3D-printed spacers or structural adhesives so weld strips don’t carry mechanical load during transport or crashes.【F:knowledge/notes/input_part014_review.md†L172-L172】
+- Match chemistries inside parallels: mixing pouch and cylindrical cells accelerates swelling even when copper busbars handle 350 A/450 A bursts, so spec unified cells or larger BMS hardware (≈230 A) before blending formats.【F:knowledge/notes/input_part014_review.md†L39-L39】
+- Schedule periodic UV/visual inspections for burned traces on smart BMS boards, especially after preload-failure alarms or unexplained current draw.【F:knowledge/notes/input_part014_review.md†L100-L100】
+
+## Build Checklist
+1. **Lock in cell supply** – confirm volume, customs path, and aging tests for each batch of 50PL/50E/P45B cells before welding.【F:knowledge/notes/input_part014_review.md†L35-L37】【F:knowledge/notes/input_part014_review.md†L155-L156】
+2. **Spec welding & busbars** – validate welder output on scrap strips, target 0.1–0.2 mm copper, and document Glitter/K-Weld maintenance steps for the build log.【F:knowledge/notes/input_part014_review.md†L34-L34】【F:knowledge/notes/input_part014_review.md†L152-L152】
+3. **Mock the enclosure** – dry-fit spacers, skid plates, and controller mounts to prove 22 S9 P–30 S3 P geometries before live welding.【F:knowledge/notes/input_part014_review.md†L37-L45】【F:knowledge/notes/input_part014_review.md†L151-L160】
+4. **Layer protection** – choose BMS hardware with known reset workflows, add external fuses/contactors, and rehearse ANT fault recovery with UV inspection gear.【F:knowledge/notes/input_part014_review.md†L99-L101】【F:knowledge/notes/input_part014_review.md†L174-L174】
+5. **Secure the pack** – replace hot glue with interlocking supports, torque QS8/MT60 mounts, and apply thermal paste before final enclosure torque-down.【F:knowledge/notes/input_part014_review.md†L119-L120】【F:knowledge/notes/input_part014_review.md†L172-L172】【F:knowledge/notes/input_part014_review.md†L188-L188】
+
+## Source Notes
+[^1]: Battery cost, cell sourcing, and spot-welder economics from late-2025 VESC Help Group logs.【F:knowledge/notes/input_part014_review.md†L34-L39】【F:knowledge/notes/input_part014_review.md†L155-L156】
+[^2]: Pack layout, chassis fitment, and race-build current benchmarks documented in the same log slice.【F:knowledge/notes/input_part014_review.md†L37-L45】【F:knowledge/notes/input_part014_review.md†L151-L169】
+[^3]: Smart BMS fault reports, balance behavior comparisons, and safety guidance against hot-glue-only assemblies.【F:knowledge/notes/input_part014_review.md†L99-L101】【F:knowledge/notes/input_part014_review.md†L172-L174】
