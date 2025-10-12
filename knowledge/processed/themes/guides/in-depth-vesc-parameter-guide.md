@@ -159,14 +159,19 @@ Structure for each parameter:
 **Deeper Insights**
 - This must respect your BMS or cell’s discharge capability (continuous/peak).
 - The battery current is usually lower than the motor current except at high duty cycles.
+- Some Makerbase 75100 batches under-report real draw by roughly half to one-third; trust verified shunt-calibrated logs from a smart BMS or clamp meter before assuming the GUI shows the truth.[^makerbase-current]
+- Added capacitance on the low-voltage rails can stabilize telemetry on noisy controllers, so confirm current readings only after solving any brownout behaviour.[^makerbase-cap-fix]
 
 **How / When to Modify**
 - If your BMS is rated 60A, set ~60A here.
 - If your battery is large and robust, you can push it higher.
+- Cross-check real pack current under load—if measured draw never reaches the programmed limit, recalibrate shunts or reduce expectations before raising this number.[^makerbase-current]
+- Step changes in 5–10 A increments while monitoring pack and controller temperature logs to catch sag- or heat-induced cutouts early.
 
 **Potential Side Effects**
 - Battery or BMS overload if set too high, triggering abrupt BMS cut mid-ride.
 - If set too low, your top speed might still be fine at high duty, but acceleration will be limited.
+- Controllers with mis-scaled current sensors may leave you thinking the limit is conservative when the pack is already at its threshold—watch BMS telemetry for unexpected high charge/discharge alarms.[^makerbase-current]
 
 
 ### 2.4 Battery Current Max Regen
@@ -177,16 +182,21 @@ Structure for each parameter:
 - Maximum negative battery current. Limits how much regenerative current is fed back into the battery.
 
 **Deeper Insights**
-- If your battery can handle 10A charging, set about -10A. 
+- If your battery can handle 10A charging, set about -10A.
 - This is separate from motor braking current max: the ESC will limit battery current accordingly.
+- When pack specs are unknown (common on OEM Laotie/Zero-style batteries), start between −5 A and −10 A until you confirm the BMS charge rating and cell chemistry tolerances.[^regen-sizing]
+- Field-weakening or high-speed descents can momentarily spike bus voltage well beyond the steady-state regen current—log both voltage and temperature during testing.[^fw-regen]
 
 **How / When to Modify**
 - If your BMS or cells can handle more charge current, you can set a bigger negative number for stronger regen.
 - If your battery is frequently near full, high regen can cause overvoltage.
+- Raise limits only after validating that charge ports, wiring, and connectors stay within their ampacity and temperature ratings during long descents.
+- Pair adjustments with Motor Current Max Brake so mechanical and electrical braking remain balanced—strong phase braking with weak battery regen simply heats the MOSFETs.[^regen-sizing]
 
 **Potential Side Effects**
 - If set too negative, you risk BMS triggers or cell damage from large charge bursts.
 - If set not negative enough, your regen braking power is minimal.
+- Excessive regen on a full pack can trigger BMS over-voltage cut while field weakening is still active, abruptly killing power steering—plan for a mechanical brake fallback.[^fw-regen]
 
 
 ### 2.5 Input Current Limit Map Start
@@ -1120,6 +1130,13 @@ Params under bms.*
 - If BMS data is invalid or missing, the ESC might clamp power incorrectly. 
 - Misconfigured voltage or SOC limits can hamper performance or cause weird cutouts.
 
+
+## Footnotes
+
+[^makerbase-current]: Multiple builders found Makerbase 75100 controllers reporting only half to one-third of the programmed battery current, forcing them to validate limits with smart-BMS telemetry or clamp meters before raising power targets.【F:data/vesc_help_group/text_slices/input_part005.txt†L12090-L12130】【F:data/vesc_help_group/text_slices/input_part005.txt†L13970-L14033】
+[^makerbase-cap-fix]: Reviewers noted that bolting additional capacitance onto the 12 V/5 V rails of Flipsky and Makerbase hardware reduced brownouts and restored trustworthy telemetry before any current-limit tuning.【F:knowledge/notes/input_part005_review.md†L494-L520】
+[^regen-sizing]: Community guidance for unknown OEM packs recommends starting regen at −5 A to −10 A and increasing only after confirming BMS charge ratings and wiring health, rather than assuming large Laotie/Zero batteries can absorb high current bursts.【F:data/vesc_help_group/text_slices/input_part005.txt†L8289-L8331】
+[^fw-regen]: Field-weakening and long downhills were shown to spike bus voltage on Spintend builds, so riders log pack voltage/temperature while testing regen to avoid surprise BMS cutoffs or controller faults.【F:data/vesc_help_group/text_slices/input_part005.txt†L24644-L24651】
 
 # WRAP-UP & FINAL NOTES
 
