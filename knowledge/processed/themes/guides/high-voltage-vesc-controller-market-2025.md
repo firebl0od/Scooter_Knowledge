@@ -1,0 +1,46 @@
+# High-Voltage VESC Controller Market (2025 Snapshot)
+
+## TL;DR
+- Spintend’s mature 85 V line still anchors budget 20–22 S builds, but unresolved throttle jitter, capacitor stress on heavy hubs, and a wave of 12-FET failures keep veterans steering high-mass projects toward larger "fat VESC" platforms or FarDriver-class hardware.【F:knowledge/notes/input_part014_review.md†L11-L22】
+- Vedder’s new Maxim 120 V ecosystem (Maxim singles, Duet dual, and the companion smart BMS) finally gives builders an official high-voltage option, yet the ~€530 bundle, STM32F4 control, and limited field data spark debate against cheaper Chinese controllers.【F:knowledge/notes/input_part014_review.md†L24-L27】
+- 3Shul’s CL-series and Tronic X12 controllers occupy the premium tier for riders chasing 23 S+ or 500 A ambitions, but supply volatility, firmware transparency, and pricing nearly double that of Spintend/Ennoid alternatives require group-buy planning and spare telemetry gear for validation.【F:knowledge/notes/input_part014_review.md†L13-L15】【F:knowledge/notes/input_part014_review.md†L27-L27】【F:knowledge/notes/input_part014_review.md†L193-L195】
+
+## Controller Landscape Reference
+| Controller | Nominal Voltage & Phase Envelope | Deployment Notes | Recommended Use Cases |
+| --- | --- | --- | --- |
+| **Spintend Ubox 85/250 (v2)** | ≈20–22 S, ~250 A battery / 360 A phase when cooled; water-cooled builds log 90 A battery / 130 A phase barely 4 °C over ambient | Mixed field record: tariff-driven price creep, persistent throttle spikes, and 12-FET deaths on heavier riders demand meticulous wiring checks and thermal paste refreshes | Cost-sensitive dual-motor scooters under ~300 A per side where space favors compact cases and owners accept active maintenance【F:knowledge/notes/input_part014_review.md†L17-L21】【F:knowledge/notes/input_part014_review.md†L73-L76】 |
+| **Spintend Ubox 85/240 (v2/v3)** | Similar voltage window; compact case with screw-lug terminals for dense decks | Screw lugs ease Ninebot conversions but throttle noise still requires ADC filtering and grounding audits | Lightweight commuters upgrading from stock controllers without relocating harnesses【F:knowledge/notes/input_part014_review.md†L17-L18】 |
+| **Ennoid MK8** | Footprint matches Spintend 85150; stretches toward 26 S / 500 A phase with IPTC017N12NM6 FET swaps | Requires component upgrades and careful assembly discipline championed by Smart Repair | Builders who can solder/pot Toll FETs and want Spintend-sized hardware with higher ceiling【F:knowledge/notes/input_part014_review.md†L11-L13】【F:knowledge/notes/input_part014_review.md†L22-L22】 |
+| **Tronic X12** | ≈24 S capable; heavy-duty shunt sensing stock | Considered a drop-in for high-output builds, but storefront outages and firmware access limit availability | Race scooters needing >400 A phase with proven logs and spare controllers on hand【F:knowledge/notes/input_part014_review.md†L11-L13】【F:knowledge/notes/input_part014_review.md†L110-L112】 |
+| **3Shul CL350** | Comfortably runs 23 S+ with robust capacitor banks; community pegs it above Spintend for power headroom | Manufacturer transparency still thin; price nearly double Spintend, so teams lean on group buys and Voyage Megan dashboards for CAN telemetry | Heavy QS/LY hub builds where budget covers premium controllers and logging accessories【F:knowledge/notes/input_part014_review.md†L15-L16】【F:knowledge/notes/input_part014_review.md†L193-L195】 |
+| **VESC Labs Maxim 120 V** | Official 120 V single controller with exposed capacitor bay and STM32F4 control | First-party option from Vedder; awaiting independent benchmarks from "VESC museum" testers | Builders prioritizing VESC firmware pedigree over raw amps, especially on e-moped conversions【F:knowledge/notes/input_part014_review.md†L24-L27】 |
+| **VESC Labs Duet (Dual)** | 100 V peak, 150 A phase per side | Ships with the Maxim launch; price and MCU headroom questioned versus Chinese duals | Premium commuters needing official support and integrated smart BMS【F:knowledge/notes/input_part014_review.md†L24-L27】 |
+| **Seven 18 Prototype** | Early 18-FET entrant bundled with Express board | Firmware and pin mapping remain incomplete; requires separate Express module today | Early adopters documenting CAN behavior and pushing vendors toward GPL compliance【F:knowledge/notes/input_part014_review.md†L27-L28】【F:knowledge/notes/input_part014_review.md†L176-L181】 |
+
+## Reliability & Warranty Lessons
+- Spintend RMAs still stumble: owners document denials tied to firmware versions (e.g., 6.05), making firmware provenance logs essential before shipping hardware back.【F:knowledge/notes/input_part014_review.md†L14-L14】
+- Heavy riders blowing 12-FET Spintend stages after only a few miles underscores the need to derate compact controllers for rider mass and verify bullet connectors aren’t loosening under vibration.【F:knowledge/notes/input_part014_review.md†L19-L19】
+- Smart Repair traces many controller deaths to workmanship—scratched insulation, loose bullets, unstable observers—so implementing checklist inspections before power-up is as important as choosing a premium ESC.【F:knowledge/notes/input_part014_review.md†L22-L22】
+- Makerbase 84xxx HP controllers appear resilient so long as wiring faults are resolved, showing that some failures pinned on ESCs originate upstream in harness or motor insulation issues.【F:knowledge/notes/input_part014_review.md†L18-L18】
+
+## Field-Weakening & Thermal Guardrails
+- Treat field-weakening amps as additive to battery draw; riders pushing 45 A FW on Ubox 85150s at 105/120 A battery and 150/175 A phase have already cooked MOSFETs—plan FET upgrades or higher-voltage motors instead of stacking FW on stock hardware.【F:knowledge/notes/input_part014_review.md†L21-L21】【F:knowledge/notes/input_part014_review.md†L90-L91】
+- Safe envelopes converge around ≤45 °C controller temps and ≤90–100 °C stator temps; thermal paste between controller bases and plates is mandatory before chasing 300 A bursts.【F:knowledge/notes/input_part014_review.md†L73-L76】
+- Logging both GPS speed and per-motor temperatures helps correlate duty cycles with real thermal load, preventing overconfidence when scaling toward 400 A per motor on dual stacks.【F:knowledge/notes/input_part014_review.md†L76-L76】
+
+## Firmware & Tooling Watchlist
+- VESC Tool 6.06 introduced temporary Bluetooth pairing breakage (fixed in 6.06.4), so teams relying on phone-based tuning should stage rollback paths to 6.05 or USB flashing kits before field tests.【F:knowledge/notes/input_part014_review.md†L29-L29】
+- Precompiled “no hardware limits” binaries exist for Ubox 85250 v2, but the desktop tool already bundles signed firmware—educate newcomers to avoid sketchy third-party downloads.【F:knowledge/notes/input_part014_review.md†L31-L31】
+- Voyage Megan CAN displays are emerging alongside CL350 dual installs, reinforcing the need to validate accessory compatibility when mixing premium controllers with Spintend ADC boards or Express modules.【F:knowledge/notes/input_part014_review.md†L110-L114】【F:knowledge/notes/input_part014_review.md†L208-L210】
+
+## Procurement & Pricing Signals
+- Water-cooled Spintend builds remain attractive but hardware inflation and pending 18-FET alternatives (~€180 targets) warrant monitoring before bulk purchases.【F:knowledge/notes/input_part014_review.md†L20-L20】
+- EU riders secure EVE 50PL cells for €1–1.5 each while US buyers face ~$9, prompting cross-border sourcing, customs planning, and early stockpiling of QS8 connectors before tariffs spike prices toward $35.【F:knowledge/notes/input_part014_review.md†L35-L38】
+- Group buys continue shaping premium hardware access: hardened 160 mm brake discs, Seven 18 controllers, and Voyage Megan dashboards are all moving through curated batches rather than retail shelves—document order windows and spares budgeting alongside controller selections.【F:knowledge/notes/input_part014_review.md†L27-L28】【F:knowledge/notes/input_part014_review.md†L197-L200】
+
+## Action Checklist for 2025 Builds
+1. **Log firmware versions and tuning files** before submitting warranty claims so vendors cannot dismiss failures as “wrong firmware.”【F:knowledge/notes/input_part014_review.md†L14-L14】
+2. **Scope thermal interfaces** on every controller install—remove cases, refresh paste, and confirm plate clamping pressure prior to high-current shakedowns.【F:knowledge/notes/input_part014_review.md†L73-L76】
+3. **Plan CAN telemetry** (Express boards, Voyage Megan displays, smart BMS) alongside controller purchases to benchmark Maxim, Duet, CL350, and X12 units against existing Spintend logs.【F:knowledge/notes/input_part014_review.md†L24-L28】【F:knowledge/notes/input_part014_review.md†L110-L114】【F:knowledge/notes/input_part014_review.md†L176-L181】
+4. **Pre-buy consumables**—QS8 connectors, grade-A 50PL cells, capacitor upgrade kits—before tariff shifts and supply dips force redesigns mid-project.【F:knowledge/notes/input_part014_review.md†L35-L38】【F:knowledge/notes/input_part014_review.md†L197-L200】
+5. **Document field-weakening policies** (amp ceilings, duty start points, observer settings) per vehicle so future tuners avoid repeating the MOSFET failures logged on 20 S Spintend builds.【F:knowledge/notes/input_part014_review.md†L21-L21】【F:knowledge/notes/input_part014_review.md†L90-L91】
