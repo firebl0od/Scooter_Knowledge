@@ -16,6 +16,7 @@ Taming current limits is the difference between a scooter that rips for years an
 2. **Set conservative currents**
    - Start with a 2:1 to 3:1 phase-to-battery ratio (e.g., 40 A battery / 110 A phase on 16 S commuter packs).⁵ ⁷
    - Match current targets across front/rear controllers to avoid free-spinning the lighter wheel.⁸
+   - Treat dual-motor 16 S7 P Samsung 50E packs as roughly 140 A systems: hold each controller near 70 A battery and add ducted airflow up front before nudging limits higher.²³
 3. **Log, ride, iterate**
    - Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
    - Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
@@ -83,3 +84,4 @@ Taming current limits is the difference between a scooter that rips for years an
 [^20]: Phase-lead length and sensorless chatter impacting current delivery.【F:knowledge/notes/input_part009_review.md†L120-L122】
 [^21]: Duty-cycle ceiling observations on modern hardware.【F:knowledge/notes/input_part003_review.md†L451-L452】
 [^22]: ADC noise, throttle shielding, and USB instability troubleshooting.【F:knowledge/notes/input_part001_review.md†L144-L147】【F:knowledge/notes/input_part001_review.md†L489-L489】
+[^23]: Dual 16 S7 P Samsung 50E build logs showing ~140 A pack limits, 70 A per-controller tuning, and the need for supplemental front-mounted airflow.【F:knowledge/notes/input_part001_review.md†L19-L21】
