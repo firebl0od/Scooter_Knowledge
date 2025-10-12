@@ -46,6 +46,7 @@
 - **Pedal assist & aux controls:** PAS harnesses expect a four-wire split (5 V, GND, signal, brake/enable) with cadence routed to ADC1. Confirm servo-pin voltage limits before powering sensors.¹¹
 - **Lighting rails:** Fuse every 12 V accessory lead—shorted aux rails have killed fresh controllers.¹²
 - **Profile switching:** Community ESP32 scripts now debounce CAN messages and validate voltage before toggling 1WD/2WD modes; adopt the revised code to avoid divide-by-zero bugs.¹²
+- **Power switching:** 75100-class boards ship without a low-voltage enable, so owners run XT90S loop keys or external anti-spark hardware; 20 S packs still arc without real pre-charge, making QS8 connectors or dedicated pre-charge adapters mandatory and pushing some builders toward controllers with onboard latching buttons.[^20]
 
 ## When to Reach for Alternatives
 - **Need high uptime or warranty responsiveness?** MakerX singles and Spintend duals handle similar current with fewer early failures and better support pipelines.¹⁸
@@ -72,3 +73,4 @@
 [^17]: Saturation discussions and traction-control cautions at high phase currents.【F:knowledge/notes/input_part011_review.md†L475-L477】
 [^18]: Comparative MakerX reliability vs. Flipsky on similar amperage builds.【F:knowledge/notes/input_part003_review.md†L470-L470】
 [^19]: Spintend 22 S debates and recommendations to step up to C350/Thor-class controllers for higher voltage/current plans.【F:knowledge/notes/input_part011_review.md†L512-L514】
+[^20]: Power-switching workarounds for 75100 hardware, including XT90S loop keys, QS8 pre-charge connectors, and preferences for controllers with onboard latching buttons when running dual units.【F:knowledge/notes/input_part001_review.md†L29-L31】

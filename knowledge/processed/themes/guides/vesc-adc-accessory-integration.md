@@ -20,8 +20,9 @@
 2. **Spin-Y & other multi-button throttles:** Version 1 units need custom JST‑1.0 leads into ADC2/COMM2; version 2 ships with a four-conductor harness that lands cleanly on the adapter board.[^2]
 3. **Spintend adapter v3 harness:** Modern boards arrive with keyed plugs—no more screw terminals—so match the supplied loom instead of hand-crimping tiny JST shells.[^3]
 4. **MakerX footpads & 3.3 V-only sensors:** Confirm both ADC rails output 3.3 V before blaming pads; swapping to 5 V kills the hall board.[^4]
-5. **Fail-safe defaults:** Add a pull-down resistor from throttle signal to ground so any broken wire snaps to zero instead of ghost acceleration.[^19]
-6. **Legacy dash retention:** Leaving throttle through a dash adapter adds perceptible lag; many builders keep the dash for display only and wire throttles directly to the controller instead.[^20]
+5. **Interpret ADC counts, not raw voltage:** VESC Tool reports hall inputs as 0–4095 counts—track the delta between idle and full throw, and if readings compress, repeat the test with a stable 5 V source to rule out noisy 3.3 V regulators before replacing sensors.[^22]
+6. **Fail-safe defaults:** Add a pull-down resistor from throttle signal to ground so any broken wire snaps to zero instead of ghost acceleration.[^19]
+7. **Legacy dash retention:** Leaving throttle through a dash adapter adds perceptible lag; many builders keep the dash for display only and wire throttles directly to the controller instead.[^20]
 
 ### Regen Buttons & Variable Brakes
 - **Momentary button recipe:** Wire the button between ADC2 signal and the 3.3 V rail; avoid series resistors because they created “stuck brake” faults in testing.[^6]
@@ -70,3 +71,4 @@
 [^19]: Pull-down resistors on throttle lines guarantee a zero output if the signal wire opens.[F:knowledge/notes/input_part007_review.md†L223-L223]
 [^20]: Routing throttle through dash adapters adds noticeable lag; direct ADC wiring restores responsiveness.[F:knowledge/notes/input_part007_review.md†L225-L225]
 [^21]: VESC Tool can wipe ADC settings after reconnects unless you explicitly write both motor and app configs.[F:knowledge/notes/input_part005_review.md†L573-L573]
+[^22]: Hall-diagnostics workflow focusing on ADC count deltas and re-testing with a clean 5 V rail when noisy 3.3 V supplies flatten readings.【F:knowledge/notes/input_part001_review.md†L15-L16】
