@@ -6,13 +6,18 @@
 - The latest Leo Apex/Rion production still leans on LY 60 H 22/3 hubs with 4 mm phase leads, keeping verified top speed near 123 km/h on 24 S and limiting safe motor current to roughly 180–200 A despite premium Tronic X12 controllers and >€9 k pricing.[^4]
 - High-KV Rion-spec hubs demand controllers that can really supply ≥250 A phase and thicker-than-stock looms—4 mm² wiring overheats quickly, so Kelly/Sabvoton-class stages and 9.5 AWG leads are now the practical baseline.[^5][^6]
 - RX-series carbon frames were styled for lighter builds; once riders chase 400 A tunes they report noticeable flex and still need to add waterproofing, torque arms, and tyre upgrades before all-season duty.[^2][^7]
+- The carbon chassis ships with minimal weather sealing—expect to add waterproofing and consider dry-weather slicks, because the platform is tuned for peak tarmac performance rather than all-season utility.[^2]
+- Rebranded Leo Apex/Rion batches still ride on LY 60 H 22/3 hubs with 4 mm phase leads, so top speed stalls around 123 km/h on 24 S and phase current needs to stay near 180–200 A despite the Tronic X12 controllers; even at >€9 000 landed, riders still swap out the stock Nutt brakes.[^4][^5]
 - Replacement Rion/Weped FF-spec motors can be sourced around €340 in France, but rising freight often erases the deal for overseas owners; plan group shipments or forwarding to keep landed cost sane.[^3]
+- 24 S conversions with Tronic controllers deliver brutal launches but still overwhelm front-wheel traction near 120 km/h unless phase current and ramping stay conservative.[^4]
+- Leo Apex rebrands keep the LY 60 H 22/3 hubs with 4 mm phase leads, so practical phase ceilings remain about 180–200 A even with Tronic X12 controllers, and pricing now stretches beyond €9 000 while retaining mid-tier brakes.[^5]
 
 ## Platform Snapshot
 | Focus | Stock Insight | Operational Implication |
 | --- | --- | --- |
 | Battery & power | 23 S 6 P pack (~3 kWh) underpins stock builds; limited headroom makes the battery, not controllers, the first limit you will hit.[^2] | Prioritise cell health monitoring and plan future pack upgrades before chasing more aggressive controller tunes. |
-| Chassis | Carbon construction is light but ships with minimal sealing and flexes once 400 A controllers are fitted.[^2][^7] | Budget time for seam sealing, hardware inspections, and reinforcement before relying on the chassis for high-power launches. |
+| Chassis | Carbon construction is lauded for stiffness and weight, but there is virtually no OEM waterproofing.[^2] | Invest early in sealing seams, cable glands, and connector boots if the scooter will ever see wet conditions. |
+| Motor & controller pairing | LY 60 H 22/3 hubs with 4 mm leads cap reliable phase current near 180–200 A and flatten acceleration beyond ~123 km/h even on 24 S Tronic X12 builds.[^4] | Budget for rewinds or higher-spec hubs if you plan to push beyond stock top-speed targets, and monitor lead temperatures during extended pulls. |
 | Cost of entry | Import math shows €7 500 landed cost once VAT/customs/shipping are included.[^1] | Price in protective gear, spares, and a contingency fund—repairs and customs rework can rival the base scooter price. |
 | Motor envelope | Production Leo Apex/Rion builds still ship 60 H 22/3 hubs with 4 mm leads, keeping safe current near 200 A and real-world speed around 123 km/h on 24 S.[^4] | Budget for higher-spec hubs or rewinds if you need more torque or speed, and temper expectations until the battery/controller stack is refreshed. |
 | Drivetrain service | FF-spec motors are available via specialist contacts at ≈€340 each, yet international freight can double that figure.[^3] | Consolidate orders or partner with EU-based buyers to minimise per-motor logistics overhead. |
@@ -26,6 +31,7 @@
 - **Battery truth gap:** Until you have telemetry confirming sustained current delivery, assume marketing numbers overstate real capability.[^1]
 - **Weather exposure:** Stock seals are insufficient; moisture ingress will jeopardise both the carbon structure and high-voltage electronics if left untreated.[^2]
 - **Chassis flex:** RX carbon frames feel “chewing gum” at 400 A—plan dampers, reinforcement plates, and tyre upgrades if you chase high-speed stability.[^7]
+- **Motor bottlenecks:** The LY-manufactured hubs remain the limiting factor—pushing phase current past ≈200 A or ignoring lead temperatures risks overheating long before the controllers run out of headroom.[^4]
 - **Logistics churn:** Replacement motors are attainable but shipping shocks can nullify savings—budget for customs fees or arrange local pickup.[^3]
 
 ## Setup Priorities for New Owners
@@ -35,12 +41,21 @@
 4. **Assess motor and wiring limits** – verify whether your build still runs 4 mm² phase leads; upgrade to 9.5 AWG-class harnesses and controllers capable of ≥250 A phase before targeting the advertised acceleration.[^5][^6]
 5. **Plan parts logistics** – if you need spare motors or carbon panels, coordinate consolidated shipments through EU hubs to blunt freight surcharges.[^3]
 
+## High-Voltage Tuning Guardrails
+- **Traction still fails first:** 24 S packs and Tronic 250R tunes are spinning the front tyre at ~120 km/h launches, so stagger ramping, warm tyres, and prioritise damper setup before chasing higher phase numbers.[^4]
+- **Respect hub lead limits:** Production Rions and the Leo Apex share LY 60 H 22/3 motors with 4 mm phase conductors; riders cap them around 180–200 A continuous despite controller headroom, reserving higher numbers for short dyno pulls only.[^5]
+- **Ease off when faults return:** Over-cranking phase current and heavy field-weakening brought grinding noises and cut-outs back on Jesús’s 24 S tune—dial limits back toward the 200 A region and verify traction-control settings before the next test run.[^4]
+- **Finish diagnostics after repairs:** Swapping MOSFETs alone didn’t save Rosheee’s controller; latent shorts blew the VESC on the next motor detection, so meter the power stage and gate drivers before reconnecting the pack.[^6]
+
 ## Upgrade & Maintenance Roadmap
 - **Battery-first tuning:** Focus on validating cell balance and temperature spread; pursue pack upgrades or parallel modules before increasing controller current limits.[^2]
 - **Motor swaps & spacing:** “Rion 1337” 70 mm magnet hubs ship with ~155–160 mm axles and 9.5 AWG leads—ensure your frame or fork can clear the width (Zero 11X-scale) before ordering and plan for new torque arms.[^6][^8]
 - **Controller pairing:** High-KV hubs routinely cook 75/200-class VESCs; stepping up to Kelly, Sabvoton, or dual Tronic hardware keeps ≥250 A phase targets realistic without sensorless stalls.[^5]
 - **Tyre & brake strategy:** Evaluate slicks or semi-slicks that match the platform’s dry-focus geometry, but keep a wet-weather set and mechanical braking upgrades ready because regen-only setups still falter when BMS charge FETs open.[^2][^9]
 - **Service kit:** Stock carbon-safe cleaners, torque-limited tools, spare hall boards, and corrosion inhibitors to maintain the frame after weather sealing efforts.[^2][^5]
+
+## Market & Procurement Signals
+- Leo Apex pricing now clears €9 000 while still shipping with Nutt brakes; factor in the premium for branding when comparing against custom Rion builds or competing factory frames.[^5]
 
 ## Source Notes
 [^1]: Cost breakdowns and skepticism toward 400 A/136 PS marketing around the RE90 import experience.【F:knowledge/notes/input_part000_review.md†L49-L51】
@@ -52,3 +67,8 @@
 [^7]: Rider feedback calling the RX carbon chassis “chewing gum” under modern power levels and noting stability concerns versus Weped builds.【F:knowledge/notes/input_part001_review.md†L51-L51】【F:knowledge/notes/input_part001_review.md†L800-L801】
 [^8]: Reference measurements placing HM, Blade, and Rion hub resistances plus axle width comparisons for swap planning.【F:knowledge/notes/input_part001_review.md†L314-L314】【F:knowledge/notes/input_part001_review.md†L409-L409】
 [^9]: Regen-only braking limits when charge MOSFETs open and the need for mechanical brakes alongside VESC tuning.【F:knowledge/notes/input_part013_review.md†L5488-L5492】【F:knowledge/notes/input_part013_review.md†L5639-L5653】
+[^4]: Community logs from Jesús’s 24 S Tronic 250R setup highlighting front-wheel spin near 120 km/h and the need to moderate phase current and field-weakening on high-voltage Rions.【F:knowledge/notes/input_part007_review.md†L52-L55】
+[^5]: Discussion of Leo Apex/Rion rebrands retaining LY 60 H 22/3 hubs with 4 mm phase wiring, capping sustainable current near 180–200 A, and still shipping with mid-tier brakes despite >€9 000 pricing.【F:knowledge/notes/input_part010_review.md†L68-L69】
+[^6]: Rosheee’s failed controller repair underscoring the need for full diagnostics after MOSFET replacement on Rion hardware.【F:knowledge/notes/input_part002_review.md†L84-L84】
+[^4]: Rebranded Leo Apex/Rion builds still relying on LY 60 H 22/3 hubs with 4 mm leads and topping out near 123 km/h on 24 S because phase current must stay around 180–200 A to avoid overheating.【F:knowledge/notes/input_part010_review.md†L67-L68】
+[^5]: Production pricing above €9 000 while the platform continues shipping with Nutt brakes despite the premium positioning.【F:knowledge/notes/input_part010_review.md†L68-L69】

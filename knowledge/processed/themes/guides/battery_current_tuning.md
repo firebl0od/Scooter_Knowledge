@@ -44,6 +44,7 @@ Taming current limits is the difference between a scooter that rips for years an
 - Expect only modest top-speed gains (e.g., +8 km/h on 16 S builds) while battery draw jumps from 4 kW to 7 kW. Higher voltage or higher-Kv motors are usually better investments.¹²
 - Sensorless chatter and long phase cables exaggerate FW-induced current spikes; keep leads short and add halls where possible.³ ²⁰
 - Document duty-cycle ceilings—modern hardware tolerates 98–99 % duty, but stay below 100 % to avoid runaway faults.²¹
+- Spintend 85150 hardware has already sacrificed MOSFETs when riders layered 45 A of FW on top of 105/120 A battery and 150/175 A phase at 20 S—budget HY/HSBL swaps or back FW down before chasing higher ERPM. 【F:knowledge/notes/input_part014_review.md†L21-L21】
 
 ## Troubleshooting Cheatsheet
 | Symptom | Likely Cause | Fix |
