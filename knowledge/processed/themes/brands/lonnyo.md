@@ -15,7 +15,7 @@
 | 80H | 33×2 performance | Step between 22×3 and 100H | Arrive with halls/NTCs, cost ≈€736 without rims, and need 155 mm dropouts plus longer pivot hardware.【F:knowledge/notes/input_part011_review.md†L482-L483】【F:knowledge/notes/input_part011_review.md†L531-L536】【F:knowledge/notes/input_part011_review.md†L628-L628】 |
 | 100H | 33×2 race | Extreme builds chasing 600 A phase stacks | Measure ~183 mm across the axle and force bespoke suspension mounts before pairing with 3Shul 400 A or dual Tronic stacks.【F:knowledge/notes/input_part011_review.md†L365-L417】 |
 
-**Procurement watchpoints.** Genuine 65H 22×3 hubs hover near $205 (~€315 landed), but veterans warn that many “90H” listings hide cheaper 80–85H stators and customs fees can erase gray-market savings. Keep receipts, request stator photos, and budget for duties when importing to stricter regions.【F:knowledge/notes/input_part011_review.md†L292-L293】
+**Procurement watchpoints.** Genuine 65H 22×3 hubs hover near $205 (~€315 landed), but veterans warn that many “90H” listings hide cheaper 80–85H stators and customs fees can erase gray-market savings. Keep receipts, request stator photos, and budget for duties when importing to stricter regions.【F:knowledge/notes/input_part011_review.md†L292-L293】 Remember that Longyu manufactures the same cores for Vsett, Huameng, Kaabo, and Lonnyo-badged scooters—plenty of “factory” AliExpress shops are simply resellers—so verify axle widths and wind codes before wiring funds.[^6]
 
 ## Electrical Envelopes & Controller Pairings
 - **Spintend 75/200 & 75/240 (dual):** Treat 22×3 Lonnyos as ~150 A battery / 300 A phase hardware. Race setups trim battery current toward 110 A to keep thermal headroom for field weakening or regen bursts.【F:knowledge/notes/input_part011_review.md†L309-L311】
@@ -46,3 +46,4 @@
 [^3]: Dropout widths, swingarm hardware, and sealing requirements for 70H/80H/100H Lonnyo conversions.【F:knowledge/notes/input_part011_review.md†L365-L417】【F:knowledge/notes/input_part011_review.md†L463-L465】【F:knowledge/notes/input_part011_review.md†L482-L536】【F:knowledge/notes/input_part011_review.md†L628-L736】
 [^4]: Controller pairing plans and budget ranges when escalating to 100H stators with 30 S packs and 400 A-class stages.【F:knowledge/notes/input_part011_review.md†L365-L417】
 [^5]: Customs risk and landed cost expectations for 65H and 80H Lonnyo orders.【F:knowledge/notes/input_part011_review.md†L292-L293】【F:knowledge/notes/input_part011_review.md†L482-L483】
+[^6]: Longyu’s OEM role and the prevalence of rebranded 65H hubs sold under Vsett, Huameng, Kaabo, and Lonnyo labels via reseller storefronts.【F:knowledge/notes/input_part009_review.md†L294-L297】
