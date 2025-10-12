@@ -2,8 +2,8 @@
 
 ## Scope
 - Source: `data/vesc_help_group/text_slices/input_part006.txt`
-- Coverage: 2023-12-11T13:10 through 2024-01-17T00:07 (lines 6700-18699; this pass added 17200-18699)
-- Next starting point: line 18700 (2024-01-18T00:07 and later)
+- Coverage: 2023-12-11T13:10 through 2024-01-27T15:03 (lines 6700-21307; this pass added 21295-21307)
+- Next starting point: line 21308 (awaiting further logs)
 
 ## Key Findings
 
@@ -18,22 +18,29 @@
 - Vedder’s `code_server` library offers a more reliable CAN command path than `can-cmd`, automatically retrying failed frames up to five times, but it requires flipping RX/TX wiring when moving from Flipsky to UBOX controllers and flashing `slave_esc.lisp` on every CAN slave ESC.【F:data/vesc_help_group/text_slices/input_part006.txt†L6739-L6804】
 - Makerbase dashboards that worked on Flipsky often crash on Spintend/UBOX swaps until the BLE and dash harnesses have their RX/TX wires swapped to match the new pinout; once aligned, the legacy 6.0 scripts operate on 6.02/6.2 firmware without ADC inputs.【F:data/vesc_help_group/text_slices/input_part006.txt†L6757-L7216】
 - Persistent Makerbase dash reboots on Vsett conversions are traced to inadequate filtering on the 5 V rail; adding electrolytic bulk capacitance (≈220 µF on the bus plus ~50 µF near the drivers) and correcting misplaced pull-up resistors stabilises the display under high current spikes.【F:data/vesc_help_group/text_slices/input_part006.txt†L7573-L7841】
+- Zero 10X CAN harness experiments reaffirm the need for 120 Ω bus termination—dropping to 100 Ω invites faults—so riders repurpose the OEM ALU-PCB as an antispark/key switch instead of altering resistor values.【F:data/vesc_help_group/text_slices/input_part006.txt†L21088-L21102】
 
 ### Battery Layouts, Materials & Tooling
 - Stock G30 frames can hide 20s6p packs internally, and aggressive layouts (removing the OEM ESC and machining rails) stretch to 20s9p, but veterans warn convoluted busbars worsen amp distribution and structural integrity—simple rectangular stacks remain safest for first-time builders.【F:data/vesc_help_group/text_slices/input_part006.txt†L6972-L7266】
 - Builders insist on pure nickel (or copper) for high-current packs; nickel-plated steel is ~6× more resistive and only acceptable for low-draw storage walls, so sourcing from trusted vendors such as Nkon is advised.【F:data/vesc_help_group/text_slices/input_part006.txt†L7200-L7407】
 - Copper interconnects thicker than 0.1 mm quickly defeat hobby shears; the crew outsources laser/water-jet cutting or invests in Glitter welders rather than attempting car-battery weld hacks, which risk weak joints and blown cells.【F:data/vesc_help_group/text_slices/input_part006.txt†L7243-L7858】
+- Sur-Ron-scale builds are trialling SK 54 Ah pouch cells advertised at roughly 2 mΩ with 300 A continuous and 500 A peak output, but builders caution that the tall modules demand external bags or enlarged housings to clear scooter decks.【F:data/vesc_help_group/text_slices/input_part006.txt†L21083-L21118】
 - Makerbase 75100 ALU boards still benefit from additional DC-link capacitance (≥220 µF plus small 16 V caps on the gate drivers) and correct undervoltage limits to avoid the recurring “MOS die” failures reported on early hardware.【F:data/vesc_help_group/text_slices/input_part006.txt†L7816-L7841】
+- Xiaomi Pro 2 builders have squeezed dual Makerbase 75×100 controllers into the deck by methodically trimming the bay and rerouting harnesses, but they stress using flexible shielded RVVP cable instead of solid Ethernet so throttle conductors cannot snap and pin the controller at full input.【F:data/vesc_help_group/text_slices/input_part006.txt†L20903-L20935】
 
 ### Motor & Controller Tuning
 - Zero 10X 1200 W hub motors fed by 68 V, 59 A batteries saturate around 7–8 kW, but the practical ceiling is ~4 kW unless stator temps stay under 80 °C; dual-motor CAN setups share the load far better than a single hub when chasing top speed.【F:data/vesc_help_group/text_slices/input_part006.txt†L7323-L7334】
 - Mid-drive e-bike swaps that stall at 16 km/h typically have conservative motor-current limits or mismatched ERPM calculations; raising motor current to ~80 A phase/20 A battery, verifying wheel size/gear ratios, and logging duty cycle helps unlock 30–40 km/h while monitoring for BMS cut-outs.【F:data/vesc_help_group/text_slices/input_part006.txt†L7441-L7542】
 - Fitting 11 inch hubs on Zero 10X frames is feasible only after machining the swingarm axle; otherwise clearance and alignment suffer.【F:data/vesc_help_group/text_slices/input_part006.txt†L7246-L7255】
+- Makerbase’s 75×100 “on/off” revision simply adds a resistor pair, and builders confirm the NRF header happily powers aftermarket BLE modules once deck trimming makes room for the boxed controllers.【F:data/vesc_help_group/text_slices/input_part006.txt†L21154-L21180】
 
 ### Charging, Storage & Energy Management
 - G30-class Ninebots accept Segway’s 5 A fast charger via the 8 mm barrel connector, but BMS firmware cuts charging if current exceeds ~8 A; smaller F-series and Xiaomi packs generally top out at 4 A continuous, so adjustable lab supplies must honour those limits.【F:data/vesc_help_group/text_slices/input_part006.txt†L7856-L7874】
 - Riders debate warehouse SOC habits: while some new scooters arrive at 70–100 % charge, logistics rules still require ~30–50 % for compliant long-term storage, making it wise to check packs on arrival and balance them before hard use.【F:data/vesc_help_group/text_slices/input_part006.txt†L6995-L7004】【F:data/vesc_help_group/text_slices/input_part006.txt†L7069-L7084】
 - Winter commuters rely on heated battery bags or external heaters to keep packs above ~10 °C and avoid cold-weather sag, particularly on Molicel-equipped builds.【F:data/vesc_help_group/text_slices/input_part006.txt†L6738-L6773】
+
+### Security & Anti-Tamper Practices
+- To deter opportunistic Bluetooth tampering, riders disguise their scooters as stock models with low-power “brake” profiles, lock CAN access behind MAC-filtered Bluetooth modules, insist on PIN prompts, and back everything with keyed power switches or NFC tags so pranksters cannot rewrite settings while the scooter is parked.【F:data/vesc_help_group/text_slices/input_part006.txt†L20914-L20970】
 
 ### Scooter Model Guidance & Market Notes
 - For North American shoppers, the Xiaomi Pro 2 (12.4 Ah, 300 W front motor) and Segway G30 remain the minimum viable commuter scooters; Segway F-series and many supermarket clones ship with weak frames, sensorless motors, and scarce spare parts.【F:data/vesc_help_group/text_slices/input_part006.txt†L6946-L7011】【F:data/vesc_help_group/text_slices/input_part006.txt†L8003-L8026】
@@ -285,8 +292,134 @@
 - Xiaomi fleet mechanics recommend CST V3 tyres (and avoid soft nylon/Xuan patterns) to stop repeat blowouts, sourcing them cheaply via Alibaba when local stock dries up.【F:data/vesc_help_group/text_slices/input_part006.txt†L17920-L17929】
 - QS12 anti-spark connectors are emerging as the next step for extreme current builds thanks to their larger contact area and reduced heat rise.【F:data/vesc_help_group/text_slices/input_part006.txt†L17948-L17952】
 
+### Additional Findings (Lines 17900-19399)
+
+#### Connectors, Wiring & Interfaces
+- Builders reiterate that high-current scooters still rely on direct lugs or large-frame connectors: QS8 covers most small QS hubs, QS10 suits QS90-class motors, and QS14 targets QS138-sized drivetrains; stock QS8 parts typically stay below 200 A battery draw, so jumping to QS10/12 is about headroom and mounting convenience.【F:data/vesc_help_group/text_slices/input_part006.txt†L17901-L17963】
+- QS12 anti-spark plugs are gaining traction because of their huge contact patch, while riders warn that undersized legacy parts (e.g., XT90 on 10 kW builds) can overheat or melt under sustained load.【F:data/vesc_help_group/text_slices/input_part006.txt†L17920-L17949】
+- When transplanting dashboards or CAN nodes, techs continue to halve observer gain and retune sensorless ERPM after firmware updates to stop hub judder during hall-to-sensorless transitions.【F:data/vesc_help_group/text_slices/input_part006.txt†L17950-L17952】
+- Single-Makerbase 75200 tests with 22×3 70H hubs report clean launches and no rear slip, reinforcing the controller’s suitability for 10 kW-class single-motor scooters—provided cooling and cabling are sized correctly.【F:data/vesc_help_group/text_slices/input_part006.txt†L18182-L18184】
+- Group experience suggests Makerbase’s boxed 75100 remains divisive: some users call the factory shunts “trash” that misreport current, while others claim the aluminium-bodied revision pulls strongly once reworked, prompting ongoing debate about whether to buy Spintend or fix the shunt stack.【F:data/vesc_help_group/text_slices/input_part006.txt†L19287-L19327】
+- Riders swapping voltmeters or TFTs onto Zero frames remind peers to waterproof ancillary electronics—open housings will short in rain even if the scooter’s restomod wiring is tidy.【F:data/vesc_help_group/text_slices/input_part006.txt†L18218-L18225】
+- ESC mounting to aluminium decks works best with thermal paste instead of pads to maximise heat transfer, keeping controller temps down on metal-backed installs.【F:data/vesc_help_group/text_slices/input_part006.txt†L17994-L17996】
+- VESC Tool’s mobile app still exposes RT data and ADC mapping: connect over TCP/Wi-Fi or USB, tap the ADC mapping panel, and watch live throttle/brake voltages without digging into hidden menus.【F:data/vesc_help_group/text_slices/input_part006.txt†L18555-L18556】【F:data/vesc_help_group/text_slices/input_part006.txt†L18617-L18638】【F:data/vesc_help_group/text_slices/input_part006.txt†L18655-L18656】
+
+#### Tires, Frames & Ride Feel
+- Xiaomi and Ninebot fleet mechanics again point buyers toward CST V3 rubber; OEM Xiaomi tyres and soft aftermarket nylon or Xuan patterns continue to pop tubes, so serious commuters import CSTs (often via Alibaba) to keep customer scooters rolling.【F:data/vesc_help_group/text_slices/input_part006.txt†L17915-L17929】
+- Zero 10X and Vsett 10+ hubs are not interchangeable: Zero motors run lower-kV torque windings on 52–60 V packs, whereas the Vsett versions favour higher-kV speed windings—swaps change both acceleration and top speed despite similar axle widths.【F:data/vesc_help_group/text_slices/input_part006.txt†L17990-L17993】
+- Max G2 owners praise the chassis over the G30 and are machining swingarm extensions so the frame accepts larger rear hubs while keeping 20s5p packs tucked inside with only a 2 mm spacer.【F:data/vesc_help_group/text_slices/input_part006.txt†L18150-L18164】
+- Widening G30 forks by grinding out internal webs weakens the structure; veterans advise adding triangulated reinforcement or welded plates if 11″ tyres must fit, otherwise the frame loses stiffness.【F:data/vesc_help_group/text_slices/input_part006.txt†L18553-L18566】
+- Riders chasing dual-controller Laotie builds eventually adopt larger deck boxes that can swallow twin Spintend 85/200s plus oversized batteries, accepting delays for welding and fabrication to keep the package tidy.【F:data/vesc_help_group/text_slices/input_part006.txt†L18630-L18634】
+
+#### Batteries, Cells & Power Management
+- Charge-only ANT 40 A BMS boards let high-output packs bypass discharge FETs; owners still add temperature sensors because bypassed packs can momentarily push 40 A per cell during burnouts.【F:data/vesc_help_group/text_slices/input_part006.txt†L17979-L17984】
+- Single-motor sleeper builds (e.g., 20s5p Samsung 40T packs feeding Rage 3500 W hubs at ~10 kW peak) rely on ferrofluid cooling and prefer spending budget on one stout motor/controller rather than splitting funds into weaker dual setups.【F:data/vesc_help_group/text_slices/input_part006.txt†L18156-L18166】
+- Talaria X owners run 72 V on stock drivetrains, but community logs flag the OEM controller as a weak point—thermal headroom and regen behaviour become suspect without supporting upgrades.【F:data/vesc_help_group/text_slices/input_part006.txt†L18210-L18214】
+- Makers caution against extreme field-weakening on single-motor scooters: suggestions like 70 A FW with 120 A battery limits drew immediate pushback because they risk blowing controllers or saturating stators.【F:data/vesc_help_group/text_slices/input_part006.txt†L18425-L18431】
+- Spot-welding copper/nickel sandwiches still demands proper tongs; receiving only the control PCB without electrodes renders car-battery welding setups unusable until matching probes are sourced.【F:data/vesc_help_group/text_slices/input_part006.txt†L19391-L19399】
+
+#### Fabrication, Hardware & Tooling
+- Stainless hardware generally outlasts black-oxide “hardened” washers; high-tensile bolts (grade 8.8/10.9/12.9/14.9) trade elasticity for strength, so long axles sometimes favour slightly softer grades that flex without cracking.【F:data/vesc_help_group/text_slices/input_part006.txt†L18079-L18103】
+- DIYers revisit textured PEI beds for PETG: keeping the sheet clean (dish soap or IPA) and managing 95 °C bed temps prevents warping while preserving grip, though excessive adhesion still demands careful part removal.【F:data/vesc_help_group/text_slices/input_part006.txt†L18104-L18114】
+- Hobbyists eye PEEK or metal 3D printing for miniature gearboxes, yet mentors note that 130 kg riders dumping 150 A through 10 krpm reducers will punish plastic—chain drives with QS90 hubs remain more practical in cramped frames.【F:data/vesc_help_group/text_slices/input_part006.txt†L18403-L18415】
+- Common tap charts still apply: drill 4.8–5 mm holes for M6×0.8 threads and 3.2 mm for M4, use cutting fluid, and favour quality manual taps over “auto” drill adapters when threading scooter brackets.【F:data/vesc_help_group/text_slices/input_part006.txt†L18653-L18688】
+- Metric tooling can be scarce in U.S. shops; builders often import drill/tap sets from AliExpress or Amazon and keep both SAE and metric kits on hand for mixed fasteners.【F:data/vesc_help_group/text_slices/input_part006.txt†L18695-L18744】
+
+#### Maintenance, Safety & Shop Practice
+- Motor shells may survive deep puddles, but halls and bearings do not—sealing seams with silicone and packing bearings with lithium grease is still the community standard to keep Zero-class hubs from rusting out.【F:data/vesc_help_group/text_slices/input_part006.txt†L18054-L18063】
+- Flux fumes and leaded solder remain carcinogenic; members run activated-carbon extraction, vent rooms, and avoid breathing concentrated smoke during battery or harness work.【F:data/vesc_help_group/text_slices/input_part006.txt†L18433-L18460】
+- Troubleshooting noisy launches on Flipsky 75100 builds starts with firmware updates, verifying hall/phase parameters, and watching real-time telemetry—the issue often disappears once motor constants are re-detected correctly.【F:data/vesc_help_group/text_slices/input_part006.txt†L18502-L18556】
+- Riders who repackage electronics stress waterproofing (potting, conformal coating, silicone end seals) but concede that over-sealing hurts serviceability and heat dissipation, so targeted protection is preferred.【F:data/vesc_help_group/text_slices/input_part006.txt†L18502-L18508】【F:data/vesc_help_group/text_slices/input_part006.txt†L18557-L18574】
+- Community still favours CST V3 tyres for Xiaomi fleets and encourages stocking spares alongside patch kits to keep commuter scooters service-ready.【F:data/vesc_help_group/text_slices/input_part006.txt†L17915-L17929】
+
+#### Components, Accessories & Custom Parts
+- Custom brake rotor projects are resurfacing: machinists propose 203 mm rotors in 2.3–2.5 mm acid-proof steel, but Magura calipers only tolerate ≈2.1 mm, so builders must account for runout and pad clearance before commissioning thicker discs.【F:data/vesc_help_group/text_slices/input_part006.txt†L18604-L18619】
+- Community ESC mod packs now bundle tutorials for Xiaomi/Ninebot controllers (precharge wiring, 3D-printed mounts), making it viable to repurpose cheap M365 boards inside G30 frames without buying premium VESCs immediately.【F:data/vesc_help_group/text_slices/input_part006.txt†L18144-L18147】
+- Low-profile voltmeter installs and quick-charge handlebar ports are spreading across Zero and Xiaomi builds, but riders emphasise strain relief and weatherproof housings to keep accessories alive under vibration and spray.【F:data/vesc_help_group/text_slices/input_part006.txt†L18218-L18236】【F:data/vesc_help_group/text_slices/input_part006.txt†L18323-L18324】
+
+### Additional Findings (Lines 19401-20900)
+
+#### Batteries, Packs & Energy Management
+- Car-battery spot-welding rigs only behave when the electrodes are solid copper—builders hammer thick house wire or copper nails into the leads, sometimes sleeving the joint in a copper tube before heat-shrinking it to curb heating; steel hardware burns up quickly.【F:data/vesc_help_group/text_slices/input_part006.txt†L19407-L19510】
+- Fleet techs peg the SNSC frame at roughly 21s6p internal capacity, noting the real upgrade over the G30 is the tougher chassis while the broader user base and parts ecosystem still favour the G2 platform.【F:data/vesc_help_group/text_slices/input_part006.txt†L19566-L19574】
+- Parking scooters outdoors invites condensation—dew point cycles push moisture into bearings and enclosures—so the crew keeps the chassis under a roof, stashes packs indoors or in insulated boxes, and monitors storage temperatures instead of leaving gear in the yard.【F:data/vesc_help_group/text_slices/input_part006.txt†L19685-L19699】
+- Track officials prohibit external battery bags because 100 km/h crashes can eject and ignite loose packs, so race builds need fully integrated battery compartments.【F:data/vesc_help_group/text_slices/input_part006.txt†L19616-L19627】
+- Builders keep 48 V-rated 800 W Blade hubs near 60 V (≈17 s) rather than 20 s packs to protect the motor and preserve range, only contemplating higher voltage if they can actively log temperatures.【F:data/vesc_help_group/text_slices/input_part006.txt†L20067-L20112】
+- A Chilean Nami Blast Max test mule runs 22×3 70 H motors with ~59 Ah on board (35 Ah in-deck Panasonic packs plus a 24 Ah SunPower bag); the team secures the external module with velcro and foam after earlier loose packs battered their cells.【F:data/vesc_help_group/text_slices/input_part006.txt†L20100-L20116】
+- Riders expect UL-certification crackdowns in New York and elsewhere to raise the price of “legit” packs and push more hobbyists into grey-market battery builds, heightening the need for solid safety practices.【F:data/vesc_help_group/text_slices/input_part006.txt†L20282-L20302】
+- Dual 75100 owners chasing stronger braking report that 40 A battery/80–100 A phase regen feels natural and that brief high-current bursts stay within the 40T cells’ charge limits, delivering meaningful high-speed deceleration.【F:data/vesc_help_group/text_slices/input_part006.txt†L20155-L20166】
+
+#### Frames, Suspension & Brakes
+- Budget fork clones often advertise 70 km/h by falsifying wheel diameter or magnet counts; in reality only one of the four springs is active, so builders call the front end a joke and challenge vendors to race instead of trusting the speedometer.【F:data/vesc_help_group/text_slices/input_part006.txt†L19421-L19428】
+- Veterans warn that grafting long-travel or pocket-bike suspension onto a G30 frame can rip the neck welds under hard landings, underscoring how small scooter frames remain “in their child shoes.”【F:data/vesc_help_group/text_slices/input_part006.txt†L19555-L19561】
+- Monorim fork kits often ship with bolts that are several millimetres too long; trimming the hardware and scheduling periodic arm replacements keeps the parallelogram tight instead of letting the extra length hammer the castings loose.【F:data/vesc_help_group/text_slices/input_part006.txt†L19815-L19819】
+- Monorim wobble issues usually trace back to sloppy bearings and axles with 0.5 mm of play; switching to tighter-tolerance bushings and hardware cures the wander without over-engineered side arms.【F:data/vesc_help_group/text_slices/input_part006.txt†L19780-L19788】
+- Segway GT2 rotors ship in 2.42 mm acid-resistant steel with six-bolt hubs, finally moving beyond the bend-prone 1.8–2.0 mm discs common on commuter scooters.【F:data/vesc_help_group/text_slices/input_part006.txt†L20169-L20176】
+- Riding unsealed Vsett 9s in sustained rain is “risky” unless you tear them down afterwards—the community either pots the electronics or inspects immediately for ingress when forced to ride wet commutes.【F:data/vesc_help_group/text_slices/input_part006.txt†L19585-L19593】
+
+#### Electronics, Controls & Lighting
+- When hard-mounting accessory PCBs, the crew solders jumpers from the rear, locks any trim pots in place, then floods the exposed face with neutral-cure 704 silicone before sliding the board into an antistatic sleeve over foam so component legs do not chafe against the deck.【F:data/vesc_help_group/text_slices/input_part006.txt†L19810-L19810】
+- Spintend VESC owners remind that ADC2 only offers limited current for auxiliaries—horns or headlights that draw more than about an amp should get their own battery-fed switch instead of hanging off the logic rail.【F:data/vesc_help_group/text_slices/input_part006.txt†L19811-L19846】
+- Zero 10X owners are experimenting with adjustable MOSFET shunt modules wired into the Eco/Turbo switch to trigger a “wheelie mode” that feeds maximum current in single-motor operation; documenting thermal limits remains an open task.【F:data/vesc_help_group/text_slices/input_part006.txt†L20264-L20277】
+- One rider blew the MOSFETs in a 12 FET controller at only ~30 A, nudging the group toward VESC upgrades or beefier ESCs when pushing modified Zero-class scooters.【F:data/vesc_help_group/text_slices/input_part006.txt†L19516-L19520】
+- A plug-in CAN adapter now lets LLT/JBD/Jabada smart BMS boards share telemetry with VESCs, simplifying pack monitoring over the existing scooter harness.【F:data/vesc_help_group/text_slices/input_part006.txt†L20559-L20563】
+- For high-current harnesses the crew reaches for XT150 bullets or QS8/QS8-style anti-sparks on the phase/battery leads and reserves shielded Ethernet (Cat6/SFTP) for signal runs up the stem, giving plenty of spare conductors for accessories.【F:data/vesc_help_group/text_slices/input_part006.txt†L20807-L20884】
+- Builders also lean on surplus Ethernet cable for 5 V, hall, and CAN lines because the twisted pairs are pre-shielded and easy to terminate.【F:data/vesc_help_group/text_slices/input_part006.txt†L20849-L20854】
+
+#### Maintenance, Bearings & Weatherproofing
+- Ninebot F2 Pro commuters who ride in heavy rain find the front 6001RS bearings nearly dry from the factory; they repack them with polyurea or marine grease and swap in premium SKF RSH 2RS units instead of smearing silicone over the caps, which would drag on the rotating races.【F:data/vesc_help_group/text_slices/input_part006.txt†L20202-L20225】【F:data/vesc_help_group/text_slices/input_part006.txt†L20584-L20584】
+- Ninebot F-series hub motors still rely on 6203 bearings, so owners stock quality replacements (SKF, Koyo, Nachi, NSK) and treat cheap OEM bearings as disposable wear items.【F:data/vesc_help_group/text_slices/input_part006.txt†L20482-L20484】【F:data/vesc_help_group/text_slices/input_part006.txt†L20326-L20333】
+- Veteran builders automatically replace bearings and add ferrofluid/seals when installing new Chinese hubs—whether Lonnyo, Inokim, or Dualtron—to ward off rust and improve cooling.【F:data/vesc_help_group/text_slices/input_part006.txt†L20334-L20341】
+- Aluminium grinding throws hazardous dust; the shop norm is to wear masks, wash up before eating, and avoid inhaling metal particles that can trigger long-term neurological issues.【F:data/vesc_help_group/text_slices/input_part006.txt†L20575-L20583】
+- Members continue to swap fire stories as a reminder never to leave Li-ion packs charging unattended—several recount beds and floors igniting after using the wrong charger on RC lipos.【F:data/vesc_help_group/text_slices/input_part006.txt†L19749-L19752】
+- Helmets are treated as single-impact consumables; after any hard crash riders bin the shell rather than risk hidden damage on the next spill.【F:data/vesc_help_group/text_slices/input_part006.txt†L20055-L20057】
+
+#### Tools, Fabrication & Shop Practice
+- Budget-friendly soldering setups—TS100/PTS200-style pens, Ryobi 120 W cordless irons, or 80 W bench stations with digital readouts—cover most scooter harness work without investing in €600 lab stations.【F:data/vesc_help_group/text_slices/input_part006.txt†L20193-L20202】
+- When cutting frames, fabricators favour thin dedicated steel or aluminium discs, making multiple shallow passes instead of forcing wide multipurpose blades that stall grinders or drain small batteries.【F:data/vesc_help_group/text_slices/input_part006.txt†L20485-L20547】
+
+#### Scooter Platforms & Market Notes
+- Segway’s upcoming ST line slots above the GT: the ST1 keeps a straight fork for ~40–50 km/h use, while the ST2 jumps to a 72 V architecture targeting roughly 85 km/h, implying factory hydraulics and premium pricing when it launches.【F:data/vesc_help_group/text_slices/input_part006.txt†L20013-L20021】
+
+### Additional Findings (Lines 20901-21307)
+
+#### Connectivity, Security & Harnessing
+- Builders now favour multi-core RVVP signal cable (26–22 AWG) for stems because the fine-strand shielded conductors resist breakage better than solid Ethernet leads that can snap and throw throttles to full output; bulk rolls with 5–10 cores stay affordable online.【F:data/vesc_help_group/text_slices/input_part006.txt†L20904-L20935】
+- When choosing connectors, veterans keep the high-current hardware (XT150/QS8) on phase and battery runs but downsize everything else, routing spare conductors in shielded multi-core cable so future accessories can be added without tearing the stem apart.【F:data/vesc_help_group/text_slices/input_part006.txt†L20822-L20825】【F:data/vesc_help_group/text_slices/input_part006.txt†L20849-L20886】
+- VESC commuters describe prank attempts where strangers connect over Bluetooth in public parks; they suggest obscuring the controller identity, enforcing MAC filtering, demanding PIN entry, and backing the electronics with a physical key switch to stop remote setting changes while parked.【F:data/vesc_help_group/text_slices/input_part006.txt†L20914-L20935】【F:data/vesc_help_group/text_slices/input_part006.txt†L20962-L20970】
+
+#### Lighting & Accessories
+- Builders experimenting with show lighting rely on individually addressable LED strips (WS2812/WS2815), reminding others that the 12 V WS2815 variants tame current draw on runs longer than a metre but still need dedicated drivers like ESP32 boards running WLED plus a regulated supply, or the strips overheat and cannot simply be wired straight to pack voltage.【F:data/vesc_help_group/text_slices/input_part006.txt†L20833-L20880】
+
+#### Battery Packs, Cells & Power Distribution
+- Sur-Ron battery vendors continue to sell nickel-only busbar builds for ~€2 500, prompting veterans to warn shoppers that pure-nickel assemblies cannot honestly support the advertised 12 kW without serious voltage drop or isolation upgrades.【F:data/vesc_help_group/text_slices/input_part006.txt†L21031-L21047】
+- Mirono’s in-house Sur-Ron prototype uses SK-branded 54 Ah pouch cells claimed at ~2 mΩ with 300 A continuous/500 A peak ratings, confirming the pack needs oversized enclosures or external bags to fit scooters.【F:data/vesc_help_group/text_slices/input_part006.txt†L21061-L21087】【F:data/vesc_help_group/text_slices/input_part006.txt†L21116-L21118】
+- Packing 140 cells (20s7p) in Xiaomi-class decks requires ~40 mm extender plates, reinforcing that large parallel counts demand structural add-ons rather than just rearranging the OEM bay.【F:data/vesc_help_group/text_slices/input_part006.txt†L21107-L21113】
+- Alibaba-listed A123 20 Ah LiFePO₄ prismatics tout 200 A charge capability, but the crew treats the specification skeptically and notes that the bulkier format quickly becomes a space-planning challenge for scooters compared with cylindrical cells.【F:data/vesc_help_group/text_slices/input_part006.txt†L21159-L21169】
+
+#### Controllers, Firmware & Market Dynamics
+- The “MTO K2000” controller marketed to Sur-Ron riders appears to be a MakerX G300 inside a €20 aluminium shell—another example of plug-and-play VESC resellers charging large premiums for rebranded hardware.【F:data/vesc_help_group/text_slices/input_part006.txt†L21007-L21024】
+- Zero 10X riders who previously blew MOSFETs report lingering performance loss and are opting to scrap the OEM ESCs in favour of sturdier replacements once the stock boards arc out.【F:data/vesc_help_group/text_slices/input_part006.txt†L21073-L21078】
+- Dual Ubox 80100 stacks earn criticism as inefficient and bulky compared with a single appropriately sized controller, underscoring the value of matching controller count to chassis space and thermal capacity.【F:data/vesc_help_group/text_slices/input_part006.txt†L21126-L21128】
+- Makerbase’s 75×100 documentation now lives on GitHub, and the “on/off” revision differs only by a resistor pair; riders confirm that third-party Bluetooth modules run reliably from the NRF port once wired correctly.【F:data/vesc_help_group/text_slices/input_part006.txt†L21154-L21206】
+- Enthusiasts considering Sur-Ron VESC swaps cite Trampa, EBMX, Torp, Tronic 750, and forthcoming Spintend options while acknowledging that fit-and-finish kits still command high prices despite being largely open-source designs.【F:data/vesc_help_group/text_slices/input_part006.txt†L21135-L21152】【F:data/vesc_help_group/text_slices/input_part006.txt†L21171-L21185】
+- Reverse-engineering Zero CAN boards remains a pain point: builders debate whether 100 Ω terminators are acceptable (they are not—the bus expects 120 Ω) and are mapping traces to repurpose the ALU-PCB as an antispark or keyed switch assembly.【F:data/vesc_help_group/text_slices/input_part006.txt†L21088-L21102】【F:data/vesc_help_group/text_slices/input_part006.txt†L21146-L21157】
+
+#### Frames, Protection & Service
+- Segway F-series welds appear rougher than Ninebot’s, and riders have seen the deck brace crack near the folding joint—another reminder to inspect budget frames and add protective film or reinforcements before hard use.【F:data/vesc_help_group/text_slices/input_part006.txt†L21228-L21237】【F:data/vesc_help_group/text_slices/input_part006.txt†L21109-L21112】
+- When reworking folding joints bonded with epoxy, techs recommend stripping the assembly completely, heating the glue, and only then pressing components apart to avoid cracking the stem casting or leaving hidden voids that compromise alignment.【F:data/vesc_help_group/text_slices/input_part006.txt†L20888-L20893】
+- Bearing techs caution that opening sealed hubs or overfilling them with grease only increases drag; standard-clearance bearings already allow for thermal expansion, so C3 versions and 70 % fill levels are unnecessary for scooters.【F:data/vesc_help_group/text_slices/input_part006.txt†L21207-L21245】
+
+#### Field-Weakening & Motor Theory
+- The group reiterates that field weakening diverts phase current onto the D-axis to counter back-EMF, letting hubs exceed base speed at the cost of torque, efficiency, and heat; excessive FW risks demagnetising motors through thermal or magnetic overload, so riders treat anecdotal “40 % safe” limits with skepticism and monitor winding temperatures closely.【F:data/vesc_help_group/text_slices/input_part006.txt†L21240-L21305】
+- Riders also reject blanket statements that mid-drives like the BBSHD can “only” handle ~3.5 kW at 72 V, pointing out that on-winding thermistors provide the real ceiling and justify pushing higher battery current so long as thermal limits are monitored rather than repeating internet hearsay.【F:data/vesc_help_group/text_slices/input_part006.txt†L21296-L21299】【F:data/vesc_help_group/text_slices/input_part006.txt†L21297-L21297】
+- Confusion remains between battery and phase current limits—100 A battery draw does not equal 100 A phase—and riders note that piling on D-axis amps for field weakening increases audible noise, reinforcing the need to log both currents when tuning.【F:data/vesc_help_group/text_slices/input_part006.txt†L21301-L21303】
+- Lightning Rods kit promoters claim their larger motors tolerate 25 % field weakening (and BBSHDs 40 %), but veterans treat the figures as optimistic marketing until validated with data from the motor designer rather than resellers.【F:data/vesc_help_group/text_slices/input_part006.txt†L21304-L21306】
+- External hub housings lag far behind the actual winding temperature, so crews refuse to rely on shell-mounted probes and insist on embedded sensors when judging field-weakening headroom.【F:data/vesc_help_group/text_slices/input_part006.txt†L21307-L21307】
+
 ## Follow-Up Tasks
 - Document a repeatable wiring guide (with photos) for flipping RX/TX and adding 5 V filtering when migrating Makerbase dashboards between controller families.
+- Write a deck-mounted accessory PCB encapsulation SOP covering rear-soldering, 704 potting, antistatic sleeves, and foam isolation so add-on boards survive vibration.【F:data/vesc_help_group/text_slices/input_part006.txt†L19810-L19810】
 - Capture precise G30 deck measurements and reinforcement plate CAD to support 130 kg riders without cracking the rear cut-outs.
 - Validate Ninebot/Xiaomi BMS charge-current enforcement by logging real-time input current across 2 A–6 A chargers.
 - Compile an aluminium deck reinforcement playbook (bolt patterns vs. TIG welding, required tooling, PPE) for Laotie/G30 aftermarket frames.
@@ -296,6 +429,7 @@
 - Write a tuning note on using `iQ target` and similar torque-boost features without tripping pack BMS protections on commuter packs.
 - Document a Makerbase 75100 constant-RPM configuration for lawn equipment or other on/off applications, including safety interlocks.
 - Publish a Ninebot F2 Pro front-hub service guide covering bearing regreasing, grease selection, and reassembly checks.
+- Draft a field-weakening primer that distinguishes battery versus phase current limits, outlines noise/heat side effects, and recommends instrumented temperature logging.
 - Assemble a city locking and anti-theft checklist for high-value scooters, including physical deterrents and storage practices for Paris-class environments.
 - Draft wiring instructions for integrating Magicshine ME-STVZO 100 lux lights (or similar 6–12 V units) with the VESC 12 V accessory rail and brake signalling.
 - Capture a photo-led rework guide for the Makerbase boxed 75×100 shunt “sandwich,” including resistor removal order and post-mod firmware settings.
@@ -311,3 +445,23 @@
 - Draft a Nucular auxiliary-power retrofit note that shows how to offload ≥60 W lighting loads to isolated supplies without tripping the controller.【F:data/vesc_help_group/text_slices/input_part006.txt†L17234-L17244】
 - Create a Flipsky 75200 Pro diagnostic guide covering observer-gain and sensorless-ERPM tuning when hub motors jitter above 60 A.【F:data/vesc_help_group/text_slices/input_part006.txt†L17619-L17635】【F:data/vesc_help_group/text_slices/input_part006.txt†L17950-L17953】
 - Summarise CST V3 sourcing and upkeep tips for Xiaomi/M365 fleets replacing failure-prone OEM tyres.【F:data/vesc_help_group/text_slices/input_part006.txt†L17920-L17929】
+- Compare QS8/QS10/QS12 connector performance (temperature rise, insertion effort, mounting options) on 150–250 A scooter builds to validate when an upgrade is justified.【F:data/vesc_help_group/text_slices/input_part006.txt†L17901-L17970】
+- Document best practices for sealing Zero/Vsett hub motors (grease types, silicone application points, service intervals) to protect halls and bearings without trapping heat.【F:data/vesc_help_group/text_slices/input_part006.txt†L18054-L18063】
+- Capture a quick-start guide for repurposing Xiaomi/Ninebot ESCs in G30 frames, including the referenced precharge cabling tutorial and compatibility limits.【F:data/vesc_help_group/text_slices/input_part006.txt†L18144-L18147】
+- Evaluate Magura brake caliper tolerances with custom 2.3–2.5 mm rotors to confirm clearance and identify pad options before CNC production.【F:data/vesc_help_group/text_slices/input_part006.txt†L18604-L18619】
+- Produce a workflow for VESC Tool mobile RT-data access over Wi-Fi/TCP so builders can calibrate throttles and brakes without carrying a laptop.【F:data/vesc_help_group/text_slices/input_part006.txt†L18555-L18556】【F:data/vesc_help_group/text_slices/input_part006.txt†L18617-L18638】
+- Study the Zero 10X adjustable shunt “wheelie mode” circuit to chart current gains, MOSFET temperatures, and controller survival rates before recommending the hack more widely.【F:data/vesc_help_group/text_slices/input_part006.txt†L20264-L20277】
+- Publish a scooter storage checklist for sub-zero climates that explains dew-point moisture risks, preferred shelters, and when to bring packs indoors.【F:data/vesc_help_group/text_slices/input_part006.txt†L19685-L19699】
+- Write a quick-start for bridging LLT/JBD CAN adapters into VESC harnesses, covering connector pinouts, supply requirements, and telemetry verification.【F:data/vesc_help_group/text_slices/input_part006.txt†L20559-L20563】
+- Prepare a VESC Bluetooth security hardening guide (obfuscating device names, MAC filtering, PIN entry, and key-switch backups) so park-side pranksters cannot overwrite ride profiles.【F:data/vesc_help_group/text_slices/input_part006.txt†L20914-L20935】【F:data/vesc_help_group/text_slices/input_part006.txt†L20962-L20970】
+- Compare shielded RVVP control cable against solid Ethernet for stem harnesses, highlighting strain relief, conductor counts, and throttle safety implications.【F:data/vesc_help_group/text_slices/input_part006.txt†L20904-L20935】
+- Document dual 75×100 controller packaging for Xiaomi Pro 2 conversions, covering safe deck trimming, harness routing, and preferred RVVP cable gauges to avoid throttle shorts.【F:data/vesc_help_group/text_slices/input_part006.txt†L20903-L20935】
+- Audit Sur-Ron battery resellers for conductor materials and publish a checklist so buyers can spot overpriced nickel-only packs before committing €2 500+.【F:data/vesc_help_group/text_slices/input_part006.txt†L21031-L21047】
+- Document packaging options for SK 54 Ah pouch cells (external bags, deck extensions, mounting hardware) and the realistic amp ratings builders observed.【F:data/vesc_help_group/text_slices/input_part006.txt†L21061-L21087】
+- Capture a Xiaomi/Pro-class extender design note covering 20s7p (140 cell) layouts and the ~40 mm risers needed to clear the deck.【F:data/vesc_help_group/text_slices/input_part006.txt†L21107-L21113】
+- Write a cautionary brief on reusing Zero ALU-PCB boards: correct 120 Ω CAN termination, antispark conversions, and when to abandon damaged traces.【F:data/vesc_help_group/text_slices/input_part006.txt†L21088-L21102】【F:data/vesc_help_group/text_slices/input_part006.txt†L21146-L21157】
+- Produce a Segway F-series weld inspection and reinforcement checklist (stress points, protective films, torque limits) for commuters upgrading budget decks.【F:data/vesc_help_group/text_slices/input_part006.txt†L21228-L21237】
+- Summarise sealed-bearing service best practices—fill percentages, grease types, and when C3 clearance is warranted—to stop riders from opening and overpacking hubs.【F:data/vesc_help_group/text_slices/input_part006.txt†L21207-L21245】
+- Draft a field-weakening tuning memo covering D-axis current budgets, thermal monitoring, and safe percentages for commuter hubs versus drag builds.【F:data/vesc_help_group/text_slices/input_part006.txt†L21240-L21305】
+- Publish an addressable lighting integration guide that covers WS2815 strip selection, ESP32/WLED configuration, and power conditioning so decorative installs do not overload scooter electrical systems.【F:data/vesc_help_group/text_slices/input_part006.txt†L20833-L20880】
+- Write a stem refurbishment note describing how to soften epoxy-bonded folding clamps safely before pressing them apart or re-seating hardware.【F:data/vesc_help_group/text_slices/input_part006.txt†L20888-L20893】
