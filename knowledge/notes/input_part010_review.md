@@ -2,11 +2,138 @@
 
 ## Scope
 - Source: `data/vesc_help_group/text_slices/input_part010.txt`
-- Coverage: 2024-10-27 21:20:42 through 2024-12-17 09:08:46 (lines 6700-20200)
-- Latest addition: lines 18701-20200 (2024-12-09T17:54:05 through 2024-12-17T09:08:46)
-- Next starting point: line 20201 (2024-12-17T09:08:46 and later)
+- Coverage: 2024-10-27 21:20:42 through 2024-12-19 23:24:10 (lines 6700-21269)
+- Latest additions:
+  - lines 6700-8199 (2024-10-27T21:20:42 through 2024-11-01T00:31:27)
+  - lines 8201-9701 (2024-11-01T00:32:51 through 2024-11-04T21:14:10)
+  - lines 9702-11202 (2024-11-04T21:14:23 through 2024-11-13T12:35:55)
+  - lines 13820-15220 (2024-11-21T21:12:40 through 2024-11-27T15:53:43)
+  - lines 20201-21269 (2024-12-17T09:12:06 through 2024-12-19T23:24:10)
+- Next starting point: line 11203 (2024-11-13T12:30:07 and later)
 
 ## Key Findings
+
+### Generic JP & Smart Display Wiring Paths (lines 6700-6971, 8174-8178)
+- Haku confirmed the unlabeled “generic JP” display is the old TF/TS100 style and just needs its button harness colour-matched to the controller, while NetworkDir clarified their current production screen still requires RX, TX, GND, and 5 V but the next hardware spin will speak native CAN, act like a Trampa SmartDisplay, and support ESP32‑C3 VESC Express modules for Wi‑Fi/BLE telemetry tweaks.【F:data/vesc_help_group/text_slices/input_part010.txt†L6700-L6715】【F:data/vesc_help_group/text_slices/input_part010.txt†L6965-L6971】
+- JPPL’s Voyage “Megan” dash provides another CAN-first option; it’s sold directly through Voyage Systems for riders chasing polished lighting integrations without UART drawbacks.【F:data/vesc_help_group/text_slices/input_part010.txt†L8174-L8178】
+
+### Compact Build Planning & Cell Holders (lines 6728-7053, 8120-8139)
+- Finn is targeting dual 50 H motors inside a Xiaomi G30 frame, debating 16 S vs 20‑22 S packs; he’s prototyping PETG cell holders (often at 100 % infill) sized for 21.4 mm P42A vs 21.15 mm 40P cans and reminded builders PETG flexes before cracking if the pack runs warm.【F:data/vesc_help_group/text_slices/input_part010.txt†L6735-L6761】【F:data/vesc_help_group/text_slices/input_part010.txt†L6768-L6803】
+- Pandalgns is designing printable Xiaomi 16 S cases with through-holes for BMS balance taps plus removable covers, and later showcased a 10 S6 P triangular bike pack holder that sandwiches nickel with bolted columns and a dedicated BMS base/mesh protector—useful templates for tight commuter frames.【F:data/vesc_help_group/text_slices/input_part010.txt†L6769-L6807】【F:data/vesc_help_group/text_slices/input_part010.txt†L8120-L8139】
+
+### Thermal Management Experiments (lines 6808-7352, 7456-7495)
+- Haku’s Weeped VESC currently sits on a thin steel plate between controller and battery; the group advised adding pads/paste plus relocating it for airflow before resorting to water cooling, since the existing front wheel shrouds most airflow.【F:data/vesc_help_group/text_slices/input_part010.txt†L6808-L6834】
+- NetworkDir and Noname noted small liquid loops and radiator plates are viable but add weight and leak risk, while passive tweaks like welded side-cover fins only shine if paired with ferrofluid; otherwise the air gap insulates the stator and invites debris when drilling vent holes.【F:data/vesc_help_group/text_slices/input_part010.txt†L6981-L7352】
+- Her0DasH recapped the VESC “hand test” for verifying inputs before riding and stressed that ferrofluid moves heat into the side plates, letting riders cool the wheel by spinning it unloaded instead of driving on overheated copper.【F:data/vesc_help_group/text_slices/input_part010.txt†L7320-L7457】
+
+### Battery Charging & Controller Selection (lines 6901-7135, 8033-8069)
+- PuneDir’s 16 S7 P Molicel M26 pack retrofit into a former 13 S scooter shows the frame can swallow 60 V builds, but the crew warned that trying to charge it with an 84 V/20 S supply relies on the pack dragging voltage down—safer practice is matching chargers to pack voltage so CC/CV stages stay accurate.【F:data/vesc_help_group/text_slices/input_part010.txt†L6901-L6910】【F:data/vesc_help_group/text_slices/input_part010.txt†L7120-L7135】
+- When Luis sought budget dual-motor control for a Xiaomi Pro 2, NetworkDir steered him away from Flipsky/Makerbase 75100s (noting cut-off induced failures) and toward dual Spintend Ubox units as the most reliable VESCs in that price tier.【F:data/vesc_help_group/text_slices/input_part010.txt†L8033-L8069】
+
+### Tire Grip & Pressure Lessons (lines 7136-7150)
+- Cihan’s Ninebot F2 Pro slide at 46/48 psi prompted reminders that lower pressure grows the contact patch yet reduces ground pressure on polished asphalt, so riders may need to drop a few PSI for grip but remain mindful that rain and worn CST stock tyres further cut traction.【F:data/vesc_help_group/text_slices/input_part010.txt†L7136-L7150】
+
+### Controller Setup & Diagnostics (lines 7248-7400)
+- NetworkDir okayed 15 A of field weakening on RicharDON’s dual 75100 Mantis but cautioned against touching the flux linkage fields, while clarifying that SmartESC firmware on Xiaomi controllers only mimics VESC Tool’s UI without running VESC code.【F:data/vesc_help_group/text_slices/input_part010.txt†L7248-L7256】
+- 🇪🇸AYO#74 can re-run hall sensor detection without a fresh motor calibration, and riders should disable the VESC Tool hand-test once finished so throttle/brake inputs re-arm normally.【F:data/vesc_help_group/text_slices/input_part010.txt†L7320-L7400】
+
+### Speedometer Calibration & Instrumentation (lines 7969-8185)
+- Haku corrected an 8‑10 mph speedo error on his 13‑inch Weeped by revising tire circumference (≈330 mm in VESC Tool) and ensuring both CAN-linked controllers share the same wheel metrics, aligning GPS and dash readings.【F:data/vesc_help_group/text_slices/input_part010.txt†L7969-L8028】【F:data/vesc_help_group/text_slices/input_part010.txt†L8185-L8186】
+
+### Hardware Fitment, Cooling & Logistics (lines 7800-8008, 8158-8165)
+- The team sees opportunity in small steel minibike frames for future “Peak G30” builds, but swapping to larger LY/Lonnyo hubs demands torque arms and possibly wider swingarms (Zero 10X stock spacing is ~135 mm, so 11‑inch rims or 65 H stators may need adapter axles).【F:data/vesc_help_group/text_slices/input_part010.txt†L7800-L7998】
+- Shlomozero highlighted that high-end track scooters can only reach Israel when shipped as parts with local battery assembly unless a licensed importer handles the full vehicle, inflating total project costs.【F:data/vesc_help_group/text_slices/input_part010.txt†L8152-L8165】
+
+### Fasteners & Winter Prep (lines 8090-8105)
+- Plastic zip ties on the Peak G30 battery are snapping in colder weather; Noname recommended Harbor Freight’s stainless zip ties, hose clamps, or other metal straps to secure heavier 72 V packs without embrittlement issues.【F:data/vesc_help_group/text_slices/input_part010.txt†L8090-L8105】
+
+### 10P 40T Charging Baselines & Tire Pressure (lines 8205-8232)
+- Vesc Project Paradise treats 20 A (≈1.6 kW) fast-charging as a safe ceiling on his 10 P Samsung 40T pack that’s rated for roughly 60 A, calling 50 A sessions excessive and noting many legacy outlets can’t sustain that draw anyway.【F:data/vesc_help_group/text_slices/input_part010.txt†L8205-L8212】
+- When Haku asked about winter pressure on 50 psi-rated tires, NetworkDir suggested running about 45 psi to seat the bead yet keep grip as temperatures drop.【F:data/vesc_help_group/text_slices/input_part010.txt†L8223-L8232】
+
+### Nami Suspension Stiffening Lessons (lines 8261-8269)
+- Riders chasing firmer Nami setups report that the stock suspension remains the best mix for off-road and comfort; meaningful high-speed stability gains require sourcing the stiffest springs available because most aftermarket air shocks still run too soft and short for the chassis.【F:data/vesc_help_group/text_slices/input_part010.txt†L8261-L8269】
+
+### Ninebot ESX Firmware Resources (line 8412)
+- ‘lekrsu’ pointed newcomers to his SHFW walkthrough as a no-code way to flash and tune Ninebot ES-series controllers, offering a curated firmware baseline for budget commuter rebuilds.【F:data/vesc_help_group/text_slices/input_part010.txt†L8408-L8415】
+
+### Jetson Bolt & Mini-Bike Conversion Constraints (lines 8423-8462, 9553-9558)
+- Noname measured the Jetson Bolt’s dropout at roughly 230 mm and reminded Haku that the heavy 10″ QS hubs exceed the frame’s weight/width limits, while the stock 36 V/6 Ah pack and bean-shaped cavity leave little room for large internal batteries—external test packs or slim scooter hubs are more practical fits.【F:data/vesc_help_group/text_slices/input_part010.txt†L8423-L8438】
+- Community feedback says the OEM hub can tolerate about 30 A at 72 V if temperatures are monitored, and NetworkDir later recommended hunting 12×6 (60 H) hubs for 20 S builds when serious burnout torque is required, noting their higher resistance/lower Kv behaviour.【F:data/vesc_help_group/text_slices/input_part010.txt†L8459-L8463】【F:data/vesc_help_group/text_slices/input_part010.txt†L9553-L9559】
+
+### GT Performance Telemetry (lines 8477-8492)
+- Jerome’s latest Dualtron GT runs Spintend Ubox Lite hardware at about 55–60 A battery per motor (≈120 A pack total), with phase current capped near 160/140 A yet logging only ~100 A peaks—helpful benchmarks for keeping the stock motors alive during sustained highway pulls.【F:data/vesc_help_group/text_slices/input_part010.txt†L8477-L8492】
+
+### Leo Apex Motor Limits & Pricing (lines 8532-8585)
+- Riders critiqued the rebranded Leo Apex/Rion platform for topping out near 123 km/h on 24 S because it still relies on LY 60 H 22/3 hubs with 4 mm phase leads, which insiders cap around 180–200 A to avoid overheating; the compact Tronic X12 controllers shine, but the motors remain the bottleneck.【F:data/vesc_help_group/text_slices/input_part010.txt†L8543-L8566】
+- Face de Pin Sucé pegged the production price above €9 000 while still shipping with Nutt brakes, reinforcing that buyers pay a luxury premium without eliminating the hardware compromises.【F:data/vesc_help_group/text_slices/input_part010.txt†L8582-L8586】
+
+### MP2 Pack Packaging & Field-Weakening Heat (lines 9004-9022)
+- GABE proved an MP2 frame can swallow a 22 S2 P (≈650 Wh) pack entirely in the chassis while keeping the e-brake functional, and estimates 35 km range at 70 km/h on a 250 W high-speed hub; he cautions that field weakening roughly multiplies stator heat by 1.5×, so he’s avoiding FWK on the new build and considering a 24 S extension by stacking six extra 21700s under the ESC.【F:data/vesc_help_group/text_slices/input_part010.txt†L9004-L9023】
+
+### Lighting & Switchgear Options for Custom Builds (lines 9706-10805)
+- 🇪🇸AYO#74 shared budget-friendly lighting picks—an AliExpress motorcycle brake/tail light and IP68 COB neon strips—plus a three-button dimmer that can modulate 12 V accessories without reworking the harness.【F:data/vesc_help_group/text_slices/input_part010.txt†L9706-L9719】
+- Haku’s AliExpress turn signals arrived without flash logic, prompting Noname to confirm some batches need a dedicated flasher relay while others blink internally; plan for an external module if the lamps stay solid on 12 V.【F:data/vesc_help_group/text_slices/input_part010.txt†L10329-L10361】
+- Spintend’s illuminated handlebar pod looks slick but Noname reiterated the VESC ADC module expects simple on/off switches—backlit combo pods feed voltage into the signal lines and won’t work without heavy rewire.【F:data/vesc_help_group/text_slices/input_part010.txt†L10790-L10805】
+
+### Burnout Setup & Brake Layout (lines 9715-9733)
+- Builders chasing burnouts prefer the left lever on the rear caliper, reverse the front hub in VESC, and let the front roll backwards while the rear drives forward—a setup Давно пора says hooks instantly once the front motor is inverted.【F:data/vesc_help_group/text_slices/input_part010.txt†L9715-L9733】
+
+### Jetson & Compact Frame Packaging Constraints (lines 9745-10247)
+- Haku’s 72 V Jetson Bolt conversion leaves no room inside the frame for full-size VESCs, so he’s eyeing mini Spintend hardware and a 40 A BMS to keep the wiring tidy.【F:data/vesc_help_group/text_slices/input_part010.txt†L9745-L9749】
+- Shlomozero’s Wolf 11‑inch conversion shows the caliper barely clears the rim; longer bolts and a full 11″ kit are required to keep the brake bracket from binding.【F:data/vesc_help_group/text_slices/input_part010.txt†L10241-L10247】
+
+### LY/Lonnyo 65 H Motor Procurement & Wiring Upgrades (lines 9736-10119)
+- Jason locked in a Lonnyo 65 H hub with the torquey 16×4 winding for US$399 shipped, noting the latest batch is potted for 180 °C insulation—hotter-rated than Haku’s earlier 120 °C stators.【F:data/vesc_help_group/text_slices/input_part010.txt†L9751-L9763】
+- Finn rewired his Blade motor with 12 AWG, 200 °C leads to match the higher current ceiling, underscoring the need to upgrade cabling alongside the hub.【F:data/vesc_help_group/text_slices/input_part010.txt†L9765-L9765】
+- Shlomozero confirmed the Wolf motor cavity can accept 8 mm phase cabling but will need a proper sensor carrier; 🇪🇸AYO#74 pointed to a 60° 41F hall board that fits the 60 H Kaabo stators.【F:data/vesc_help_group/text_slices/input_part010.txt†L10109-L10119】
+- Face de Pin Sucé ID’d the CAN transceiver on the Voyage SmartDisplay as a TJA1051, helpful when stocking spares for CANbus dash repairs.【F:data/vesc_help_group/text_slices/input_part010.txt†L9736-L9772】
+
+### Spintend Ubox Lite Buying & Integration Tips (lines 9906-10115)
+- The group confirmed Alu Lite singles stay at 150 A battery/phase and the dual 100/100 simply hosts two Lite boards, so buyers can mix singles or a dual depending on packaging; heat spreads better with separated controllers but the dual is cheaper to mount.【F:data/vesc_help_group/text_slices/input_part010.txt†L9906-L9955】【F:data/vesc_help_group/text_slices/input_part010.txt†L10112-L10115】
+- Expect currency conversion spikes when paying from Canada and skip the optional inline fuse—Noname and ‘lekrsu’ advised adding the Bluetooth module instead for diagnostics and setup flexibility.【F:data/vesc_help_group/text_slices/input_part010.txt†L9906-L9955】
+
+### Vsett 10 Dual Lite Conversion Lessons (lines 10062-10076)
+- Yoann’s Vsett 10 runs dual Lite boards with the stock lighting harness by using the ADC’s 5 V rail to drive a relay that wakes a separate 12 V converter; he warns the OEM front suspension and tyres need upgrading once torque is unlocked.【F:data/vesc_help_group/text_slices/input_part010.txt†L10062-L10075】
+- Their 72 V battery mod reused a Nami 80 A BMS that trips near 120 A total, so pack current stays in the 100–120 A window while Lisp code adds phase amps versus ERPM to prevent wheelspin; the thinner Alu Lite baseplate solders easier but may trade away thermal mass.【F:data/vesc_help_group/text_slices/input_part010.txt†L10071-L10076】
+
+### Cell Holders, Sleeper Builds & Display Mounts (lines 10127-10621)
+- Haku’s downloaded Xiaomi cell holders print thin, so he and GABE are iterating sturdier 20 S designs that hide 600 Wh inside a “stock” 250 W commuter while Pandalgns models a beefier 20 S8 P frame for Hyper Daily abuse.【F:data/vesc_help_group/text_slices/input_part010.txt†L10127-L10144】
+- Pandalgns also shared a three-part STL kit that clamps NetworkDir’s CAN display to 30–32 mm bars, plus printable straps to secure the housing for anyone chasing a polished dash install.【F:data/vesc_help_group/text_slices/input_part010.txt†L10609-L10621】
+
+### Frame Failures & Reinforcement Options (lines 10370-10394)
+- Face de Pin Sucé’s Slack Core 920R customer snapped the chassis before it reached his shop, and he’s debating custom reinforcement versus migrating the build onto a Rage frame—fresh proof the Core needs structural scrutiny at high power.【F:data/vesc_help_group/text_slices/input_part010.txt†L10370-L10376】
+- 🇪🇸AYO#74 reminded early Nami owners to swap the original soft axle for the stainless update (about €60 installed) to prevent the stem failures that triggered factory recalls.【F:data/vesc_help_group/text_slices/input_part010.txt†L10386-L10394】
+
+### Ninebot Max & F2 Power Notes (lines 10379-10738)
+- Riders say the Max G2 motor doesn’t shed heat better than the G30, so major power goals still demand larger hubs; even throttle detection needs a full sweep for VESC Tool to register inputs, otherwise hall checks will fail.【F:data/vesc_help_group/text_slices/input_part010.txt†L10379-L10413】【F:data/vesc_help_group/text_slices/input_part010.txt†L10726-L10728】
+- Cihan’s firmware update bumped the Ninebot F2 Pro BMS fast-charge ceiling from 2.4 A to roughly 3.2 A, but the group is wary of pushing 5–6 A without proof the board can dissipate the extra heat.【F:data/vesc_help_group/text_slices/input_part010.txt†L10734-L10738】
+
+### Traction Control & High-Speed Setup (lines 10528-10551)
+- 🇪🇸AYO#74’s 33×2, 70 H build still spins the front above 135 km/h even with ramp time tweaks, so the plan is to revive his steering-cam sensor before re-enabling traction control; Haku and Yamal benchmarked 400 A phase / 200 A battery as the power needed to chase 90 mph once cooling is sorted.【F:data/vesc_help_group/text_slices/input_part010.txt†L10528-L10551】
+
+### Street Legality & Registration Strategies (lines 10739-10759)
+- Noname confirmed NIU frames ship with VINs while Haku’s custom builds do not; instead of stamping your own (a crime), pursue a homemade-vehicle inspection with DOT tyres or register a donor motorcycle frame, since moped plates technically cap at ~30 mph.【F:data/vesc_help_group/text_slices/input_part010.txt†L10739-L10759】
+
+### Single-Motor 65 H Tuning Playbook (lines 10911-10988)
+- Matthew’s 22×3 Lonnyo on 18 S surges past 35 mph then “flutters”; the crew suggested deleting throttle smoothing, checking VESC logs, and trying Ortega’s foc observer if mxlemming struggles, all while recognising his 90 A BMS is the real torque bottleneck.【F:data/vesc_help_group/text_slices/input_part010.txt†L10911-L10988】
+- He plans to raise battery and phase limits toward 150 A once the hardware allows, with the group reiterating that higher‑Kv 22×3 windings trade launch torque for top speed compared to 16×4 options and that premium halls plus Statorade help the hub survive the extra amps.【F:data/vesc_help_group/text_slices/input_part010.txt†L10937-L10948】【F:data/vesc_help_group/text_slices/input_part010.txt†L10969-L10972】
+
+### Hall Sensor Installation & Adhesives (lines 10117-11229)
+- 🇪🇸AYO#74 provided a 60° 41F hall board link for Wolf King GT 60 H motors and keeps spare plates on hand when converting sensorless hubs.【F:data/vesc_help_group/text_slices/input_part010.txt†L10117-L10119】
+- ‘lekrsu’ cautioned against hot glue on hall elements because it softens near 120 °C; use high-temp silicone or epoxy, test each sensor before soldering, and remember some 60 H “1200 W” kits arrive with dead sensors out of the box.【F:data/vesc_help_group/text_slices/input_part010.txt†L11185-L11225】【F:data/vesc_help_group/text_slices/input_part010.txt†L11226-L11229】
+
+### Controller Cooling Considerations (lines 11244-11250)
+- Lieven reminded Haku that even perfect airflow can’t match a radiator’s surface area—if relocation fails, water plates or larger sinks remain the most effective way to keep high-power VESCs under control during 90 mph pulls.【F:data/vesc_help_group/text_slices/input_part010.txt†L11244-L11250】
+
+### Cell Sourcing & Chemistry Trade-offs (lines 9040-9093)
+- Israeli builders lament paying about €47 for a pair of Samsung P42A cells before shipping and struggle to import Samsung 50S stock, prompting ‘lekrsu’ to recommend EVE 40P packs instead—they give up 1 Ah versus 50E-class cells but supply roughly double the discharge headroom at comparable pricing.【F:data/vesc_help_group/text_slices/input_part010.txt†L9039-L9093】
+
+### Dualtron Victor Upgrade Constraints (lines 9568-9593)
+- Local listings show Dualtron Victor builds cresting €9 000 with accessories, yet 🇪🇸AYO#74 reminded Shlomozero that fitting 11″ tires requires swapping to Thunder swingarms; unless the frame already carries those parts, the crew recommends saving for a Thunder or King GT chassis instead.【F:data/vesc_help_group/text_slices/input_part010.txt†L9568-L9594】
+
+### Temperature Sensor Troubleshooting (lines 9579-9586)
+- NetworkDir advised cycling through 10 kΩ NTC, 1 kΩ PTC, or 100 kΩ NTC sensor presets when VESC temperature telemetry reads incorrectly, diagnosing wiring faults before condemning the hardware.【F:data/vesc_help_group/text_slices/input_part010.txt†L9579-L9586】
 
 ### Brake Rotor Sourcing Updates (lines 18701-18712)
 - Yamal and 🇪🇸AYO#74 double down on the solid 3 mm “Wolf” discs from AliExpress, noting they’re non-floating despite the two-piece look, cost about €30 each online versus €80‑100 in shops, and have survived where riveted rotors sheared under braking, so riders buy spares in sets of four.【F:data/vesc_help_group/text_slices/input_part010.txt†L18701-L18712】
@@ -57,6 +184,39 @@
 - Max Rainlogix pegs Flipsky 84100 controllers around 60 A battery continuous (≈100-series) and 84200 units near 150 A before FET reliability nosedives, so chasing more current requires stepping up to Spintend 85-series hardware.【F:data/vesc_help_group/text_slices/input_part010.txt†L17460-L17471】
 - Pandalgns warned that 60 V Laotie/J&P square-wave controllers cap out around 19 S—20 S “go boom”—and suggested Damao-branded 72 V boxes when builders need cheap 20 S support instead of gambling on stock electronics.【F:data/vesc_help_group/text_slices/input_part010.txt†L17410-L17422】
 - 🇪🇸AYO#74’s wheelie attempts show VESC traction control can still lift the front under heavy torque, so tuning slip limits remains essential on high-power builds.【F:data/vesc_help_group/text_slices/input_part010.txt†L17434-L17435】
+
+### Spintend Ubox Updates & Safe Limits (lines 12002-12041, 12335-12364)
+- Ion confirmed the original dual Ubox remains a 75 V-class unit that comfortably drives ~150 A phase, while JPPL highlighted Spintend’s refreshed single Ubox option: an 85 V/240 A chassis with AWG 8 outputs, reversible cable orientation, and a lower price than the outgoing 250 A block.【F:data/vesc_help_group/text_slices/input_part010.txt†L12002-L12015】
+- Haku, Yamal, and roscheee’s tuning notes reiterate that the 12 FET Ubox tolerates 250 A battery and ~350 A phase when cooled properly—roscheee only tripped faults around 450 A phase—and dual setups routinely deliver 500 A combined battery for 22 kW bursts.【F:data/vesc_help_group/text_slices/input_part010.txt†L12335-L12363】
+
+### LY Hub Motor Procurement & Fitment (lines 12043-12141, 12301-12327)
+- Mixing LY magnet stacks is viable as long as the windings match; Noname okayed pairing an 80 H rear with a 70 H front provided both share the same turn count.【F:data/vesc_help_group/text_slices/input_part010.txt†L12043-L12045】
+- Haku documented that older tubed-rim 70 H hubs use the same stator as the current split-rim release, making discounted “non-removable” motors attractive if riders are willing to manage tire changes manually.【F:data/vesc_help_group/text_slices/input_part010.txt†L12111-L12117】
+- JPPL is already running LY split-rim assemblies for easier service and pairs them with mixed controller stacks (G300, 84200, 75200) depending on the build, underscoring their drop-in compatibility across custom frames.【F:data/vesc_help_group/text_slices/input_part010.txt†L12135-L12141】
+- Buyers reported Tao (Taobao) listings for new 80 H hubs near $200 while direct-from-LY orders hover around $317 before shipping; bare 75 H stators without rims can dip to $245 on Alibaba, though rims must then be sourced separately.【F:data/vesc_help_group/text_slices/input_part010.txt†L12301-L12325】
+
+### Traction Control Setup & Side Effects (lines 12579-12588, 12696-12702, 13068-13080, 13420-13436)
+- 🇪🇸AYO#74 confirmed traction control only needs enabling on the “local” controller in a CAN pair, after which his 22 S build could dump 800 A phase without front wheelspin.【F:data/vesc_help_group/text_slices/input_part010.txt†L12579-L12588】【F:data/vesc_help_group/text_slices/input_part010.txt†L12696-L12702】
+- Later testing showed the algorithm suppresses top-speed pulls: he and Yamal lost a few kilowatts until they disabled it post-run, reinforcing that burnout-heavy builds should treat the feature as situational rather than always-on.【F:data/vesc_help_group/text_slices/input_part010.txt†L13068-L13080】【F:data/vesc_help_group/text_slices/input_part010.txt†L13420-L13436】
+
+### Motor Rewiring & Phase Lead Upgrades (lines 12390-12399, 12754-12764)
+- Pandalgns enlarged a Halo T107 axle slot from 8 mm to 10 mm so 12 AWG phase leads and 28 AWG hall extensions could pass without pinching, removing minimal material to preserve axle strength.【F:data/vesc_help_group/text_slices/input_part010.txt†L12390-L12399】
+- After the rewire he confirmed the 60 H, 3 000 W hub (22×3 winding) now has cleaner routing and the option for future temperature sensing, offering a reference for others upgrading Halo Knight drivetrains to 72 V duty.【F:data/vesc_help_group/text_slices/input_part010.txt†L12754-L12764】
+
+### Kukirin G2 Master Upgrade Roadmap (lines 12201-12238, 13010-13019, 13081-13167, 13138-13167)
+- New owners were steered toward dual mini Ubox or similar VESCs plus higher-current packs when chasing acceleration; Max Rainlogix recommended moving from the stock 52 V (14 S) battery to 60 V (16 S) packs built on Samsung 50E/50S or EVE 40PL cells to unlock controller headroom.【F:data/vesc_help_group/text_slices/input_part010.txt†L12201-L12238】【F:data/vesc_help_group/text_slices/input_part010.txt†L13081-L13107】
+- The group cautioned against off-the-shelf “upgraded” batteries: local builders such as @jamessoderstrom or @Mirono_escooters offer vetted packs, and even budget Ubox Lite units still run €100–120 each once shipping is included.【F:data/vesc_help_group/text_slices/input_part010.txt†L13010-L13019】【F:data/vesc_help_group/text_slices/input_part010.txt†L13138-L13145】
+- Veterans warned that pumping 15 kW through the G2 chassis invites wobble even with dampers, so riders eyeing that spend were urged to consider a Ninebot G30 platform with speed forks instead.【F:data/vesc_help_group/text_slices/input_part010.txt†L13139-L13167】
+
+### High-Power Build Benchmarks & Power Math (lines 12556-12575, 12680-12689, 12997-12998)
+- Yamal’s 22 S setup continues to run dual controllers at 130 A battery / 200 A phase each, pegging nominal pack power near 21–22 kW once total battery amps hit 300 A.【F:data/vesc_help_group/text_slices/input_part010.txt†L12556-L12565】【F:data/vesc_help_group/text_slices/input_part010.txt†L12997-L12998】
+- Max Rainlogix shared his Thunder 3 project specs—20 S9 P Samsung 50S pack feeding 70 H hubs via dual VESC 85150s—targeting roughly 22 kW with 16×4 windings for heavy torque, providing a template for similar dual-stem builds.【F:data/vesc_help_group/text_slices/input_part010.txt†L12680-L12689】
+
+### Motor Winding Selection Guidance (lines 12964-12971)
+- NetworkDir summarized that low-KV (e.g., 22×3) windings deliver strong torque and efficiency at modest amps but need higher voltage and field weakening for top speed, while high-KV 33×2 variants excel in freewheel speed yet demand huge phase current and struggle with burnouts—reinforcing the preference for balanced or low-KV hubs unless record runs are the goal.【F:data/vesc_help_group/text_slices/input_part010.txt†L12964-L12971】
+
+### Wolf Warrior X Battery Assessment (lines 13049-L13050, 13417-L13419)
+- Purp reported the stock Wolf Warrior X pack uses decent cells for its price bracket but still favors custom builds when chasing better performance-per-dollar, echoing Cihan’s concern that the 1.2 kWh OEM battery is undersized for sustained 4.4 kW draws and worth replacing on used purchases.【F:data/vesc_help_group/text_slices/input_part010.txt†L13049-L13050】【F:data/vesc_help_group/text_slices/input_part010.txt†L13417-L13419】
 
 ### High-Power Single-Motor Lessons (lines 17480-17538)
 - Jan’s 12 kW single-motor scooter hit ~62 km/h without field weakening but tried to loop out from a standstill, reinforcing that >8 kW rear-wheel builds demand extreme chassis control or a switch to dual motors.【F:data/vesc_help_group/text_slices/input_part010.txt†L17480-L17512】
@@ -121,7 +281,7 @@
 - Pandalgns reported running 12 AWG silicone wire on 60H hubs (and 16 AWG on 1 kW motors) while the group debated switching to metric mm² sizing, capturing common cable choices for 3 kW-class scooters.【F:data/vesc_help_group/text_slices/input_part010.txt†L14745-L14762】
 
 ### Halo T107 Loom Management (lines 14499-14509)
-- Pandalgns drafted a Halo T107 extender that isolates the battery bay from control wiring and adds pass-throughs for phase, hall, brake, dash, and charger leads, effectively giving the frame Dualtron-style service access.【F:data/vesc_help_group/text_slices/input_part010.txt†L14499-L14509】
+- Pandalgns drafted a Halo T107 extender that isolates the battery bay from control wiring, relocates the stock frame lights, and adds pass-throughs for phase, hall, brake, dash, and charger leads, effectively giving the frame Dualtron-style service access.【F:data/vesc_help_group/text_slices/input_part010.txt†L14499-L14509】
 
 ### Diagnostics & Noise Troubleshooting (lines 14507-14573)
 - After Yamal heard scraping from his front motor, 🇪🇸AYO#74 warned that deviating from the Ortega dash can upset the tune, and the group ultimately traced the metallic rattle to a vibrating phone mount—saving an unnecessary teardown.【F:data/vesc_help_group/text_slices/input_part010.txt†L14507-L14573】
@@ -158,6 +318,51 @@
 ### SNSC Packaging & Bearing Refresh (lines 15796-15844)
 - Jason’s SNSC conversion will grind in rails for a mounting plate and shift the motor rearward because the monofork struggles with a 17×4″ front wheel; Rosheee insists on replacing worn bearings to restore stability before more power mods.【F:data/vesc_help_group/text_slices/input_part010.txt†L15796-L15818】
 - GABE reminds builders that SNSC frames weigh roughly 55 kg and do not fold, so transporting the platform requires shipping packs separately or planning alternative logistics.【F:data/vesc_help_group/text_slices/input_part010.txt†L15836-L15844】
+
+### Dualtron X LTD + Tronic X12 Troubleshooting (lines 20208-20524)
+- Ofek’s Dualtron X LTD runs dual Tronic X12s on the stock 23 S/≈120 A battery and trips over-voltage faults around 100 A phase under load, suggesting the pack/BMS cannot absorb regen spikes or supply the requested current; the X12 board uses 12 TOLT FETs on a single PCB and ships without hall/CAN harnesses, so builders add thermal pads and proper adhesives instead of the factory hot glue to avoid shorts and heat issues.【F:data/vesc_help_group/text_slices/input_part010.txt†L20208-L20235】
+- Paolo later reproduced over-current alarms on one motor, noting its unusually high resistance and pointing to the internal solder failures common on HM hubs, implying the drivetrain—not the tune—is behind the cutouts.【F:data/vesc_help_group/text_slices/input_part010.txt†L20521-L20524】
+
+### LY & Nami Motor Winding Identification (lines 20412-20499, 20876-20888)
+- Yamal catalogued Nami and LY hub options: stock 60 H motors are typically 17/4 torque windings, while 22/3 and 33/2 variants trade speed and torque; Paolo confirmed wind counts can be inferred from freewheel speed or by inspecting phase leads.【F:data/vesc_help_group/text_slices/input_part010.txt†L20412-L20450】
+- Paolo clarified the nomenclature as “turns × parallel conductors,” e.g., 17 parallels × 4 turns, helping builders estimate resistance and torque when spec sheets are missing.【F:data/vesc_help_group/text_slices/input_part010.txt†L20876-L20888】
+
+### High-Power ESC Comparisons & Race Planning (lines 20336-20474)
+- Face de Pin Sucé warned that Seven 18 controllers rely on FR4 vias instead of IMS plates, so they overheat much like the G300 and lose appeal versus proven C350 hardware.【F:data/vesc_help_group/text_slices/input_part010.txt†L20336-L20344】
+- Yamal and ✨🇪🇸عمر concluded Spintend’s 100 V/100 A units underperform for racing; seasoned riders prefer Ubox 22S or Spintend’s 240 A upgrades (often with MOSFET swaps) when running 22 S packs, even if that means delaying competition entries until higher-spec controllers are budgeted.【F:data/vesc_help_group/text_slices/input_part010.txt†L20460-L20474】
+
+### Briesc 100/200 Prototype Insights (lines 20641-20699)
+- Simone’s dual Briesc 100/200 controllers—24 FET units positioned between C700 and C1000—have already seen 210 A battery and 420 A phase per side, with lab tests pushing 900 A phase without failure, though they currently target oil-cooled QS273 hubs rather than smaller scooters.【F:data/vesc_help_group/text_slices/input_part010.txt†L20641-L20666】【F:data/vesc_help_group/text_slices/input_part010.txt†L20686-L20704】【F:data/vesc_help_group/text_slices/input_part010.txt†L20695-L20699】
+
+### Connectivity & Firmware Tools (lines 20537-20682)
+- Jerome recommends pairing an ESP32-C3 with a CAN daughterboard running VESC Express to gain Wi-Fi, Bluetooth, logging, and GPS without relying on aging NRF dongles.【F:data/vesc_help_group/text_slices/input_part010.txt†L20537-L20537】
+- Finn salvaged damaged Segway G30 dashboards, flashing them with VESC NRF firmware to serve as low-cost wireless modules for new builds.【F:data/vesc_help_group/text_slices/input_part010.txt†L20562-L20562】
+- Ofek shared a “kick start” VESC script that disables motor output below a configurable threshold (1 m/s by default), giving commuters a push-to-start safety mode when throttle-only launches are undesirable.【F:data/vesc_help_group/text_slices/input_part010.txt†L20681-L20681】
+
+### Voltage Cutoffs & Hall Debugging for 72 V Builds (lines 20905-20960)
+- Noname walked Haku through proper low-voltage settings for a 22 S Jetson conversion—set cutoff start near 72 V and end around 65 V, then verify the per-cell count so VESC Tool stops flagging undervoltage faults.【F:data/vesc_help_group/text_slices/input_part010.txt†L20905-L20943】
+- When motor detection fell back to sensorless mode, the crew advised re-running hall detection and reducing phase amps until the halls read cleanly, otherwise expect rough launches despite having sensors installed.【F:data/vesc_help_group/text_slices/input_part010.txt†L20944-L20960】
+
+### Jetson & Wepoor Project Planning (lines 20980-21007)
+- Haku’s sequencing his late-2024 builds: once the 72 V Jetson is buttoned up, he’ll drop a Powerstage controller into the Weped while the Peak G30V2 mini BMX keeps its dual 100 V v2 ESCs, all fed by Samsung P42S cells arranged in 20 S 4‑5 P to balance range and packaging; he reminds newcomers that controller failures usually follow abusive front-wheel burnouts that lock the rear, not ordinary riding.【F:data/vesc_help_group/text_slices/input_part010.txt†L20980-L21007】
+
+### Dualtron Hardware Fitment & Controller Selection (lines 20852-20889, 21070-21076)
+- Fitting Kaabo/Wolf hubs into Dualtron arms requires alternate washers and sometimes drilling a fresh cable exit because the stock dropout holes favor HM motors; flipping the stator 180° rarely works due to asymmetrical laminations.【F:data/vesc_help_group/text_slices/input_part010.txt†L20852-L20889】
+- For Dualtron Thunder builds with 72 V/36 Ah packs and 60 H Wolf motors, the group discourages Flipsky 75200s despite their price and instead recommends Spintend or similar aluminum-bodied VESCs that survive higher continuous currents.【F:data/vesc_help_group/text_slices/input_part010.txt†L21070-L21078】
+
+### Weped Cooling & OEM Outreach (lines 21088-21108)
+- Yamal urged contacting Weped directly about embracing VESC-based drivetrains, noting the stock controller enclosure needs extra cooling work and deck-space planning, so prospective partners should be ready to rework the housing while pitching higher-performance electronics.【F:data/vesc_help_group/text_slices/input_part010.txt†L21088-L21108】
+
+### Wiring & Connector Safety (lines 21190-21217)
+- AdianV’s plan to route battery leads through screw-terminal blocks drew immediate pushback: those mains connectors melt around 5 A and can torch a controller, so builders either hard-solder heavy-gauge leads or switch to high-current Amass plugs with fresh thermal paste on the ESC baseplate.【F:data/vesc_help_group/text_slices/input_part010.txt†L21190-L21217】
+
+### Customs & Pricing Notes (lines 20579-20585, 21158-21174)
+- Paolo cautioned against under-declaring VESC shipments—customs held his packages for weeks and still applied full duties, angering customers—so he no longer falsifies invoices even when suppliers offer “small value” slips.【F:data/vesc_help_group/text_slices/input_part010.txt†L20579-L20585】
+- Israeli riders report Spintend hardware costs doubling once a local distributor took over (e.g., $575 vs. $269 MSRP), pushing them toward direct imports or alternative controllers such as Tronic X12s despite the added logistics risk.【F:data/vesc_help_group/text_slices/input_part010.txt†L21158-L21174】
+
+### Battery & Motor Project Updates (lines 20624-20722)
+- Simone listed a 22 S 10 P Samsung 40T pack with a JK 200 A BMS and custom copper busbars that has already propelled his hybrid Vsett/Zero build to ~155 km/h on dual Briesc controllers.【F:data/vesc_help_group/text_slices/input_part010.txt†L20624-L20663】【F:data/vesc_help_group/text_slices/input_part010.txt†L20638-L20650】【F:data/vesc_help_group/text_slices/input_part010.txt†L20641-L20666】
+- Matthew’s Lonnyo 22×3 rear hub with Statorade peaks around 85 °C on long runs, while his earlier Ubox failure traced back to the controller rather than the Vsett motors—evidence that the larger Lonnyo stator can stay cool when paired with a healthy ESC.【F:data/vesc_help_group/text_slices/input_part010.txt†L20721-L20722】
 
 ### Vsett 11+ Battery Planning (lines 15849-15881)
 - New member Jean Bilbao is targeting a 60 V 50 Ah pack for a Vsett 11+, and the group stressed logging exact LG cell model numbers and motor windings because stock 2 000 W hubs can already be pushed to ≈10 kW with quality packs.【F:data/vesc_help_group/text_slices/input_part010.txt†L15849-L15880】
@@ -240,8 +445,8 @@
 ### Suspension & Chassis Upgrades
 - The Weepor’s stock rear suspension bottoms out under Haku’s weight; he’s targeting an EXA 150 mm shock as a mandatory upgrade, with peers noting that sourcing quality dampers is challenging yet necessary for heavier riders on high-powered builds.【F:data/vesc_help_group/text_slices/input_part010.txt†L8194-L8199】
 
-### Traction Control & High-Voltage Planning (lines 12701-13820)
-- 🇪🇸AYO#74 confirmed that VESC traction control made his high-power scooter far more manageable but cost some peak speed; later he asked for a way to trim intervention strength (e.g., dialing back from the default 100 %) so both stability and acceleration survive at hyper-scooter power levels.【F:data/vesc_help_group/text_slices/input_part010.txt†L12701-L12703】【F:data/vesc_help_group/text_slices/input_part010.txt†L13818-L13820】
+### Traction Control & High-Voltage Planning (lines 12701-14030)
+- 🇪🇸AYO#74 confirmed that VESC traction control made his high-power scooter far more manageable but cost some peak speed; he is experimenting with softer settings—dropping strength toward 80 % and raising the activation band to ~4 000 ERPM—after learning that running without TC leaves the front wheel spinning past 130 km/h.【F:data/vesc_help_group/text_slices/input_part010.txt†L12701-L12703】【F:data/vesc_help_group/text_slices/input_part010.txt†L13818-L13820】【F:data/vesc_help_group/text_slices/input_part010.txt†L13820-L13861】【F:data/vesc_help_group/text_slices/input_part010.txt†L14026-L14030】
 - Haku, Max Rainlogix, and rosheee discussed running 26S–30S packs on 110 mm-class stators, noting frame volume can accept 30S8P layouts but controller cost (≈US$600 per Seven/VESC) becomes the gating factor for hobbyists eyeing 30 kW builds.【F:data/vesc_help_group/text_slices/input_part010.txt†L12715-L12738】【F:data/vesc_help_group/text_slices/input_part010.txt†L13232-L13240】
 
 ### Motor Lead Upgrades & Temperature Monitoring (lines 12754-12805)
@@ -277,6 +482,21 @@
 ### High-Voltage Commuter Builds (lines 13746-13813)
 - GABE is pushing a 250 W Xiaomi hub at ~72 V with 30 A battery and 70 A phase limits (≈1.7–2.1 kW), planning copper sheets above the pack while warning that stopping with a hot motor can cook it—riders should keep rolling at ~20 km/h for cooling or drill vent holes judiciously.【F:data/vesc_help_group/text_slices/input_part010.txt†L13746-L13798】【F:data/vesc_help_group/text_slices/input_part010.txt†L13803-L13805】
 - Haku championed external controller mounting and proper thermal interfaces after ‘lekrsu’ logged 55 °C with poor pads but <40 °C once upgraded, proving that even 30 A commuter builds need real heatsinking, especially in sealed compartments.【F:data/vesc_help_group/text_slices/input_part010.txt†L14156-L14167】
+
+### Xiaomi Pro 2 22S Conversion Strategy (lines 13840-13889)
+- GABE confirmed a 22S pack can squeeze into the Pro 2 once PETG carriers slide between the rails, yielding ~660 Wh, but he plans to disable or severely limit regen to shield the Mini Ubox and may short-charge to ~21.5S to retain some braking headroom.【F:data/vesc_help_group/text_slices/input_part010.txt†L13840-L13887】
+
+### Controller Weatherproofing & Dirt Protection (lines 13848-13857, 14004-14007)
+- When Noname asked how to keep an exposed controller clean, haku advised copying Peak G30-style cases and sealing ports with silicone rather than relying on plastic wrap, while Yamal’s rainy-day cautionary tale shows Nami chassis need custom watertight boxes under the heatsink if they’ll ever see bad weather.【F:data/vesc_help_group/text_slices/input_part010.txt†L13848-L13857】【F:data/vesc_help_group/text_slices/input_part010.txt†L14004-L14007】
+
+### Thunder Frame 22S Pack Planning (lines 13915-13924)
+- Yamal intends to follow his current 21 kW setup with a Thunder-frame 22S11P build that finally adds a BMS, while haku suggested 22S10P with next-gen 40PL cells as an alternative for riders prioritizing lighter packs.【F:data/vesc_help_group/text_slices/input_part010.txt†L13915-L13924】
+
+### Winding Preferences Without Field Weakening (lines 13931-13952)
+- The crew reiterated that 22/3 windings deliver brutal launch torque but cap GPS speed near 120 km/h without field weakening, whereas 33/2 needs more battery and phase current yet scales better for highway pulls—fueling debate about whether FW is “cheating” versus simply choosing the right winding.【F:data/vesc_help_group/text_slices/input_part010.txt†L13931-L13952】
+
+### Phase Harness & Wheel Fitment Guidance (lines 14395-14423)
+- Shlomozero’s 60H rewires prompted the group to confirm that Wolf 2000 W hubs use ~4 mm phase leads (≈AWG 11–12), 130 A phase is survivable on Mantis motors, and 11-inch tires may clear once the new frame arrives—underscoring the value of measuring cable cross-sections and frame clearances before ordering parts.【F:data/vesc_help_group/text_slices/input_part010.txt†L14395-L14423】
 
 ### Aftermarket Frames & Accessories (lines 14099-14126)
 - Yamal shared Raphael Foujiguara Performance components—reinforced decks, welded battery boxes, mudguards—built around 20S-class scooters with Thunder-style necks, offering boutique chassis upgrades when factories omit essentials like fenders.【F:data/vesc_help_group/text_slices/input_part010.txt†L14099-L14126】
@@ -410,10 +630,48 @@
 - 🇪🇸AYO#74 hit 131 km/h on rear motor alone before running out of room, reinforcing the need for long, obstacle-free straights (or closed courses) when validating 30 kW+ builds.【F:data/vesc_help_group/text_slices/input_part010.txt†L9282-L9293】
 - With scooter dynos still rare, riders lean on CAN logs, GPS runs, and disciplined cooling upgrades to vet performance instead of relying solely on optimistic app readouts.【F:data/vesc_help_group/text_slices/input_part010.txt†L8477-L8495】【F:data/vesc_help_group/text_slices/input_part010.txt†L9033-L9047】
 
+### Cooling Concepts & Motor Protection (lines 7000-7469)
+- Haku is exploring relocation and air-exposed mounting before resorting to watercooling his Weeped, while Noname and Lieven recommend small radiators or plates but warn that leaks can destroy a VESC and the extra coolant mass adds weight to already heavy builds.【F:data/vesc_help_group/text_slices/input_part010.txt†L7000-L7018】
+- Builders revisiting vented hub covers plan to weld aluminum fins and angle drillings to force airflow, yet Noname cautions that street grit will infiltrate open housings and says ferrofluid remains the safer street option despite added drag.【F:data/vesc_help_group/text_slices/input_part010.txt†L7312-L7352】【F:data/vesc_help_group/text_slices/input_part010.txt†L7380-L7393】
+- Her0DasH reminds the group that the VESC Tool “Hand Test” quickly checks throttle, brake, and hall responses before riding but must be turned off manually to avoid lockouts.【F:data/vesc_help_group/text_slices/input_part010.txt†L7320-L7329】
+- Hall sensors can be re-detected independently, so a failed hall trace does not require rerunning full motor detection routines.【F:data/vesc_help_group/text_slices/input_part010.txt†L7398-L7401】
+- Extended heat discussions note that ferrofluid wicks stator heat into the sideplates more effectively when paired with forced airflow, but plastics like PETG can still soften above 80 °C, reinforcing the case for metal cooling hardware on summer builds.【F:data/vesc_help_group/text_slices/input_part010.txt†L7456-L7472】
+
+### Tire Pressure & Ride Comfort (lines 7140-8232)
+- Cihan’s Ninebot F2 Pro crash investigation highlights that lowering pressure increases contact patch yet can reduce ground pressure, so riders should balance pressure for surface conditions and consider upgrading from aging CST stock tires when traction slips at modest torque.【F:data/vesc_help_group/text_slices/input_part010.txt†L7140-L7150】
+- When colder weather arrives, NetworkDir suggests ~45 psi as a practical compromise for 50 psi-rated tires, while Noname notes that maximum sidewall pressure is mainly for bead seating and that thermal base layers can substitute for heavier riding pants in mild winters.【F:data/vesc_help_group/text_slices/input_part010.txt†L8223-L8232】【F:data/vesc_help_group/text_slices/input_part010.txt†L7886-L7896】
+
+### Controller Firmware & Detection Tips (lines 7229-7401)
+- ‘lekrsu’ clarifies that SmartESC firmware running on Xiaomi Pro controllers only mimics VESC Tool’s interface—the ST-based board still isn’t a true VESC—so expectations about open tuning features should stay grounded.【F:data/vesc_help_group/text_slices/input_part010.txt†L7231-L7247】
+- NetworkDir green-lights 15 A of field weakening on dual 75100-equipped Mantis builds, giving riders a speed bump without overstressing hardware when the rest of the tune is healthy.【F:data/vesc_help_group/text_slices/input_part010.txt†L7248-L7250】
+
+### Compact Frame Battery Packaging (lines 7263-7735)
+- GABE confirms Xiaomi Pro 2 frames accept 20S2P (~600 Wh) packs with XESC hardware while keeping the deck stock; 24S requires a spacer, and 16–17S3P remains the easy high-range fit when stealth is the priority.【F:data/vesc_help_group/text_slices/input_part010.txt†L7263-L7284】
+- Running 22S on Spintend’s 100 V/100 A units is feasible but only with conservative regen settings at full charge to stay within FET limits, especially on small 250 W-class hubs.【F:data/vesc_help_group/text_slices/input_part010.txt†L7720-L7735】
+
+### Braking Hardware Cautions (lines 7649-7716)
+- Riders evaluating aftermarket rotors found Sonken 160 mm discs share the inner-ring design flaws that already plagued Brakestuff copies, bending within months on RM-X race scooters; the fix is higher-temp tempering and improved geometry, plus meticulous Hope caliper shimming to stop pad overhang from fracturing discs.【F:data/vesc_help_group/text_slices/input_part010.txt†L7658-L7716】
+
+### Displays, Telemetry & Low-Voltage Power (lines 7658-7870, 8174-8179)
+- Upcoming CAN-based displays from RFP and Voyage Systems are preferred over UART units like Flipsky’s TFT, which can brown out VESC MCUs during acceleration; RAPHAËL notes that VESC displays demand 6.05 firmware plus custom Lisp on every controller, whereas VESC Express kits deliver plug-and-play telemetry via CAN.【F:data/vesc_help_group/text_slices/input_part010.txt†L7658-L7707】【F:data/vesc_help_group/text_slices/input_part010.txt†L7837-L7851】【F:data/vesc_help_group/text_slices/input_part010.txt†L8174-L8179】
+- PuneDir’s bench photo highlights compact 12 V DC-DC converters that pair cleanly with Flipsky ESCs when riders need accessory power without rewiring the main harness.【F:data/vesc_help_group/text_slices/input_part010.txt†L7832-L7836】
+
+### Workshop & Fabrication Notes (lines 8090-8139)
+- Plastic zip ties turn brittle in cold garages; Harbor Freight’s stainless “metal zip ties” offer a slim alternative for securing Peak G30 battery looms without bulky hose clamps.【F:data/vesc_help_group/text_slices/input_part010.txt†L8090-L8104】
+- Pandalgns’ 3D-printed 10S6P bicycle holder sandwiches nickel strips between screw-together plates, adds a removable protective mesh, and incorporates a dedicated BMS mounting base—showing how custom prints can reinforce high-density packs beyond scooter decks.【F:data/vesc_help_group/text_slices/input_part010.txt†L8118-L8136】
+
+### Market & Regulatory Constraints (lines 7791-8166)
+- With single Ubox 85/150s back-ordered, William Tremblay is eyeing Makerbase 75100s for Vsett 10+ swaps but needs an external BMS or contactor for power switching because the board lacks a native on/off stage—useful context for anyone stuck waiting on Spintend restocks.【F:data/vesc_help_group/text_slices/input_part010.txt†L7791-L7791】
+- Import laws in Israel force enthusiasts to bring high-end RM scooters in as parts and source batteries locally unless they hold an importer license, inflating project timelines and costs.【F:data/vesc_help_group/text_slices/input_part010.txt†L8158-L8166】
+
+### Ride Dynamics & Suspension (lines 8194-8460)
+- Haku rates the Weeped’s stock rear suspension at “0/5,” planning to swap in a stiffer 150 mm EXA shock to curb excessive sag on heavier riders.【F:data/vesc_help_group/text_slices/input_part010.txt†L8194-L8200】
+- Vesc Project Paradise is comfortable fast-charging his 10P Molicel 40T pack at 20 A (≈1.6 kW) but balks at 50 A, aligning with Noname’s warning that even robust packs and public outlets struggle beyond ~0.5 C in the field.【F:data/vesc_help_group/text_slices/input_part010.txt†L8200-L8212】
+- Jetson minibike builders report Sabvoton-powered 72 V conversions pulling ~30 A, but sustaining that current still demands vigilant motor temperature monitoring until a cleaner all-internal VESC solution arrives.【F:data/vesc_help_group/text_slices/input_part010.txt†L8450-L8460】
+
 ### Sourcing & Community Logistics (lines 8960-9598)
 - Israeli builders face steep cell prices (≈€47 for two P42A cells) and limited import options; the crew suggests contacting trusted builders like @jamessoderstrom or switching to EVE 40P cells, which trade 1 Ah for double the discharge headroom at similar cost.【F:data/vesc_help_group/text_slices/input_part010.txt†L9073-L9093】
 - Thunder frames remain scarce locally and often cost double international prices, pushing riders toward piecemeal builds or alternative platforms such as the Nami or Teverun Blade despite their weight penalties.【F:data/vesc_help_group/text_slices/input_part010.txt†L8965-L8986】【F:data/vesc_help_group/text_slices/input_part010.txt†L9586-L9598】
-
 ## Open Questions / Follow-ups
 - Identify which VESC traction-control parameters (slip limits, strength, filtering) let 🇪🇸AYO#74 and Yamal soften intervention to reclaim top speed without reviving wheelspin.【F:data/vesc_help_group/text_slices/input_part010.txt†L13818-L13820】
 - Track down the auto-generated cell-holder design tool Haku referenced for streamlined pack CAD workflows.【F:data/vesc_help_group/text_slices/input_part010.txt†L6789-L6790】
@@ -429,3 +687,4 @@
 - Gather real-world data on Spintend’s revised 85 V/240 A single Ubox to confirm how the smaller enclosure handles sustained current compared with the outgoing 250 A model.【F:data/vesc_help_group/text_slices/input_part010.txt†L12009-L12037】
 - Track 🇪🇸AYO#74’s experiment to determine if 72 V Nami controllers operate safely on a 60 V pack after phase rewiring.【F:data/vesc_help_group/text_slices/input_part010.txt†L19994-L20108】
 - Record the final controller placement solution for purp’s hall-less Mantis 10 once the mounting hardware and cooling plan are proven in real-world use.【F:data/vesc_help_group/text_slices/input_part010.txt†L20034-L20062】
+- Capture a repeatable wiring recipe for bringing three-wire PAS sensors and ADC throttles online with Flipsky hardware so newcomers like AdianV don’t have to guess at safe connector choices.【F:data/vesc_help_group/text_slices/input_part010.txt†L21182-L21199】
