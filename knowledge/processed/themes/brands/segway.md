@@ -1,14 +1,14 @@
 # Segway Platform Dossier
 
-## TL;DR
 - Segway's G- and GT-series frames still anchor the community's "minimum viable" commuter and sport builds thanks to stable geometry, roomy decks, and a deep spare-parts ecosystem, but every chassis demands reinforcement checks around stems, braces, and controller mounts before accepting more power.[^1][^2]
 - GT-class scooters ship with a 14 S 12 P Lishen pack, 24‑FET controller, and 2.42 mm rotors—good bones that tolerate 70 km/h stock and 100 km/h+ once packs, bearings, and stem hardware are upgraded, yet stem bearings, axle machining, and deck cooling must be addressed up front.[^3][^4][^5][^6]
 - Segway's seated C80 platform and forthcoming ST line show the brand stretching into moped territory: C80 conversions already hide 9 kWh packs and 6–7 kW charging while ST2 prototypes promise factory 72 V drivetrains, making Segway a rare OEM path from commuter scooters to turn-key high-voltage builds.[^11][^12][^13]
+- For Ninebot Max builds, Denis Yurev's crew now steers riders toward a single 13 S pack on the stock motor paired with Rita/Happy BMS current logging instead of chasing dual hubs—quality pneumatics and Monorim + DNM suspension upgrades keep 50 km/h conversions stable while foam "solid" tires are blamed for magnet failures.[^new-13s][^new-suspension]
 
 ## Platform Map
 | Model | Stock Electrical Architecture | Known Strengths | Critical Watchpoints | First-Line Upgrades |
 | --- | --- | --- | --- | --- |
-| Ninebot/Segway G30 (Max) | 36 V, ~551 Wh pack, single hub | Proven commuter baseline with abundant parts and CAN documentation.[^1] | Frame welds at the folding joint and controller mounts can crack when overloaded; F-series siblings share weaker weld quality.[^14] | Bushing and bearing refresh, deck sealing, and staged voltage/current increases with thermistor logging.[^2] |
+| Ninebot/Segway G30 (Max) | 36 V, ~551 Wh pack, single hub | Proven commuter baseline with abundant parts and CAN documentation; stock hub holds 40–45 km/h once paired with 13 S packs and sane 30–40 A tunes.[^1][^new-13s] | Frame welds at the folding joint and controller mounts can crack when overloaded; F-series siblings share weaker weld quality and foam "solid" tires shake magnets loose.[^14][^new-suspension] | Bushing and bearing refresh, deck sealing, quality 10-inch pneumatics, and staged voltage/current increases with thermistor logging.[^2][^new-suspension] |
 | Segway GT1/GT2 | 14 S 12 P Lishen pack (~60 V), single 24‑FET controller, dual 1 400 W hubs | Stable 1.5 m wheelbase, 2.42 mm rotors, roomy bay for aftermarket controllers; holds 70 km/h to ~10 % SOC stock.[^3][^4][^5] | Fragile upper stem bearing; both axles need machining for larger hubs; deck reinforcement needed above 8–10 kW pulls.[^2][^6] | Repaste controller, add Hope V4/DOT brakes, log pack sag, machine axles for 65–70 H hubs, add thermal plates.[^3][^4][^6] |
 | Segway GT3 / GT3 Pro | 48 V (base) or 72 V (Pro) packs with deeper chassis | Retains GT steering geometry while offering more enclosure depth on the Pro for higher-voltage packs.[^6] | Base GT3 keeps cramped bay and legacy controller; both trims still require dropout/brake mods for high-power hubs.[^6] | Start with dropout widening, axle machining, and brake upgrades before chasing higher voltage.[^6] |
 | Segway C80 seated scooter | 16 S stock pack, drum brake rear hub | 165 mm dropout accepts threaded 10" hubs; interior swallows four 6×10 cell layers and supports 6–7 kW charging with stock 100/100 Lite controller.[^10][^12] | Stock 60 A BMS will trip above 70 A battery; curb weight balloons toward 350 lb with 32 P packs, hurting handling.[^11] | Upgrade BMS before raising battery current, notch shock bracket for cleaner pack fit, add thermal monitoring, plan weight distribution.[^10][^11][^12] |
@@ -17,13 +17,16 @@
 ## Chassis & Handling Insights
 - GT-class stability stems from generous wheelbase and rake, but riders still reinforce the deck and stem interfaces before high-power conversions; controller-mount fractures have occurred on GT and SNSC rental frames when extra weight is added up the stem.[^3][^2]
 - Stem bearings and dropout machining are mandatory on GT2 upgrades: the OEM upper bearing fails early and both axles need lathe work before 65–70 H hubs will seat properly.[^6]
+- Foam-filled "solid" tires vibrate enough to loosen magnets and shake packs apart on high-speed G30 conversions—pair quality 10-inch pneumatics with a Monorim front fork and DNM rear damper, or Sharkset forks if you stay below ~45 km/h.[^new-suspension]
 - F-series and budget Segways exhibit rough welds and cracked deck braces near the folding joint, so inspections, gussets, or protective film are prerequisites for commuter-duty reliability.[^14]
+- Rear-end stability improves when builders bend a 10 mm aluminum rod under the axle nut to brace wide mudguards; swapping in full-width G30 fenders (~11.5 cm) keeps 2.5″ tires from blasting commuters with spray.【F:knowledge/notes/all_part01_review.md†L91065-L91070】【F:knowledge/notes/all_part01_review.md†L91188-L91224】
 
 ## Powertrain & Upgrade Guardrails
 - Stock GT electronics (14 S 12 P pack, single 24‑FET controller, 10 AWG phases) support reliable 70 km/h operation; pushing past 8–10 kW demands deck stiffening, improved dampers, and monitored pack sag to avoid chassis fatigue.[^3][^2]
 - 2.42 mm rotors and Hope V4 calipers are proven upgrades for repeated high-speed stops; the thicker discs avoid the warp-prone 1.8–2.0 mm hardware common on smaller scooters.[^3][^5]
 - Segway GT2 riders log 70 km/h down to ~10 % SOC on the factory setup; pushing beyond that range requires higher-current packs or field-weakening, so plan for thermal headroom if adding torque or speed.[^4]
 - C80 conversions must respect the stock 60 A BMS limit until upgraded—attempting 70 A battery trips protection and heats the motor to ~76 °C, reinforcing the need for a higher-current BMS before raising output.[^11]
+- New firmware paths let Ninebot G2 owners stay on the stock controller—flash XiaoDash, apply the SHFW Gen 4 patch, and keep factory blinkers/buzzers while lifting the speed ceiling instead of grafting in a G30 ESC.[^g2-shfw]
 
 ## Thermal & Controller Packaging
 - Grinding paint to bare metal, adding thermal glue, and clamping controllers to aluminum plates keeps GT decks below ~60 °C; PETG brackets alone trap heat and left some builds idling at ~64 °C.[^7]
@@ -36,11 +39,17 @@
 - C80 owners have demonstrated ~6–7 kW charging through the stock 100/100 Lite controller at mid-pack SOC, keeping compact scooters viable if thermal paths are improved.[^12]
 - Segway-based mopeds with 32 P Samsung 35E packs weigh about 350 lb before the rider yet return ~70 mi, highlighting the trade-off between range and maneuverability; builders now favor lighter 32 S 20 P layouts with higher-power controllers for better torque-to-weight balance.[^11]
 - Field deployments show stock GT rotors and brakes survive repeated high-speed runs once cooling and hydraulic upgrades are in place, but pack reinforcements remain essential to avoid sag-induced cut-outs.[^3][^9]
+- G30 dashboards only expose 5 V logic—run dedicated DC/DC converters for 12 V lighting, stress-relieve converter leads, and avoid pulling accessory power from charge ports to preserve BMS protections.【F:knowledge/notes/denis_all_part02_review.md†L28-L32】【F:knowledge/notes/denis_all_part02_review.md†L31-L32】【F:knowledge/notes/denis_all_part02_review.md†L70-L71】
+- Happy BMS happily manages packs larger than its nominal 32 Ah rating—the display just hits 0 % with ~3 Ah remaining—but its 44 A ceiling is fixed, so AWD ambitions still need Daly/ANT-class boards before targeting 3 kW outputs.【F:knowledge/notes/denis_all_part02_review.md†L15-L17】【F:knowledge/notes/denis_all_part02_review.md†L170-L171】
+- Fleet refurb techs lean on Digikey part numbers WM20246-ND (socket) and WM19542-ND (plug) when rebuilding Ninebot Max charge ports that arrive without hardware.【F:knowledge/notes/all_part01_review.md†L88272-L88278】
+- Upsizing G2 packs to ~38 Ah pushes charge times to ~13 h on the stock 3 A brick and ~7.5 h on vetted 5 A chargers; Denis stopped bundling chargers in 2025, so plan for third-party CC/CV supplies within those limits.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L131278-L131307】
+- When the G30 accessory port shows 5 V with almost no current, trace the wiring to the onboard buck converter before swapping looms—faulty components between the converter and port have caused the same symptom in workshop diagnostics.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L110038-L110041】
 
 ## Maintenance & Reliability Watchlist
 - Inspect GT controller mounts and stem hardware for cracks after hard hits; SNSC rental frames with similar architecture fractured at controller mounts under off-road abuse, reinforcing the need for gussets and to avoid stem-mounted battery weight.[^2]
 - Replace bearings proactively—GT rotors pair well with quality SKF replacements, and C80 builds benefit from upgraded hubs or temp probes to keep long commutes in check.[^5][^8][^10]
 - G-series commuters require bushing and weld inspections; F-series weld porosity has already caused brace cracks, so reinforcements and protective films are recommended before heavy use.[^14]
+- Stress-relieve buck-converter leads with glue or zip ties so vibration does not snap accessory power wires before the scooter ever leaves the bench.【F:knowledge/notes/denis_all_part02_review.md†L31-L32】
 
 ## Accessory & Telemetry Integration
 - Segway CAN dashboards diverge from Xiaomi formats, so confirm message maps before layering SmartDisplay overlays or Express telemetry; VESC Express station mode eases remote access once the scooter joins home Wi‑Fi.[^2][^15]
@@ -50,6 +59,8 @@
 ## Procurement & Roadmap Signals
 - Upcoming ST1/ST2 models are expected to sit above GT pricing with factory hydraulics and 72 V options, making them potential turnkey platforms for riders who want OEM-grade frames before VESC swaps.[^13]
 - Segway’s widespread aftermarket support keeps GT and G-series parts available, but heavier GT builds still require machining (axles, rotors, spacers) and thermal rework, so budget workshop time alongside electronics upgrades.[^4][^10]
+- Mid-tier dual-motor imports (Dualtron, Vsett, Zero) still demand controller overhauls despite high resale pricing; Denis’ crew often steers buyers toward sleeper G30/G2 builds with 13 S/35 A tunes that hold 40–45 km/h while remaining discreet and mechanically robust.[^dual-motor]
+- Denis still cannot export lithium packs outside the EU; overseas owners order Rita and bags separately, then lean on VTA, Scootermode, or local builders for compliant battery packs.【F:knowledge/notes/all_part01_review.md†L92935-L92960】
 
 ## Source Notes
 [^1]: Community consensus on Segway G30 viability and F-series weaknesses for North American commuters.【F:knowledge/notes/input_part006_review.md†L45-L48】
@@ -69,3 +80,7 @@
 [^15]: SmartDisplay CAN overlay and VESC Express station-mode networking guidance for Segway dashboards.【F:knowledge/notes/input_part003_review.md†L304-L308】【F:knowledge/notes/input_part012_review.md†L100-L101】
 [^16]: MakerX footpad and dashboard wiring expectations around 3.3 V logic on Segway conversions.【F:knowledge/notes/input_part012_review.md†L349-L349】
 [^17]: Limits of ADC horn outputs on Makerbase/Spintend harnesses used in Segway conversions.【F:knowledge/notes/input_part012_review.md†L96-L97】
+[^g2-shfw]: 【F:knowledge/notes/denis_all_part02_review.md†L149-L153】
+[^dual-motor]: 【F:knowledge/notes/denis_all_part02_review.md†L191-L193】
+[^new-13s]: Guidance from Denis Yurev and Happy Giraffe to favor a single 13 S Max pack on the stock hub, logging 30–40 A pulls with Rita/Happy BMS rather than chasing dual-motor swaps.【F:knowledge/notes/denis_all_part02_review.md†L10-L12】
+[^new-suspension]: Community consensus against foam “solid” tires and in favor of quality 10-inch pneumatics with Monorim front/DNM rear suspension for 50 km/h Ninebot builds; Sharkset forks remain comfortable but wobble above ~45 km/h.【F:knowledge/notes/denis_all_part02_review.md†L13-L14】
