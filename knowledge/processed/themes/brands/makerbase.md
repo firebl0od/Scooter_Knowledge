@@ -4,6 +4,7 @@
 - Aluminum-PCB 75100 boards remain the go-to budget dual-controller option for 60 V commuters, but they only stay reliable when capped around 70 A battery / 170–180 A phase and kept below ≈22 S; bumping currents higher has popped freshly installed units in a single launch. 【F:knowledge/notes/input_part004_review.md†L201-L205】【F:knowledge/notes/input_part004_review.md†L219-L219】【F:knowledge/notes/input_part004_review.md†L226-L229】
 - Community veterans still warn that Makerbase boxes ship with stray solder, weak DC/DC rails, and inconsistent shunt calibration—treat every unit as a kit: open it, add proper heatsinking, and plan fallbacks to 3Shul or Spintend hardware if you need more than ≈50 A battery per controller. 【F:knowledge/notes/input_part005_review.md†L17-L19】【F:knowledge/notes/input_part005_review.md†L18-L19】
 - The 84100 HP revision adds Bluetooth, thicker leads, and a higher-voltage stack, yet it still expects a normally-closed ignition switch and proves happiest near 60–80 A battery / 150–180 A phase with regen kept under ~84 V; plan the 1 MΩ ignition mod and keep thermal logs if you stretch toward triple-digit speeds. 【F:knowledge/notes/input_part007_review.md†L9410-L9425】【F:knowledge/notes/input_part007_review.md†L19586-L19809】【F:knowledge/notes/input_part007_review.md†L9078-L9082】【F:knowledge/notes/input_part009_review.md†L43-L45】
+- Recent field reports show the 84xxx HP family surviving 22 S testing and sustained high current so long as phase insulation, BMS behavior, and chassis grounding are squared away—most catastrophic failures traced back to shorts, not silicon. 【F:knowledge/notes/input_part014_review.md†L18-L19】
 
 ## Product Line Cheat Sheet
 | Model | Practical Pack Window | Working Envelope & Use Case | Notable Traits & Caveats |
@@ -18,6 +19,7 @@
 - BMS settings are not a safety net—slow-trip Daly boards still let surges vaporize Makerbase gate drivers. Shorten trip delays and log every cutoff instead of assuming rated limits will save a fault. 【F:knowledge/notes/input_part004_review.md†L361-L363】
 - Firmware reports battery current plus field-weakening draw; budget 10 A of FW as additional pack load so commuter cells stay within safe C-rates. 【F:knowledge/notes/input_part004_review.md†L227-L227】【F:knowledge/notes/input_part005_review.md†L208-L208】
 - Treat 23 S marketing with skepticism—community testers still cap Makerbase hardware at ≤20–22 S even on the 84100 because component tolerances and regen spikes remain the primary failure points. 【F:knowledge/notes/input_part009_review.md†L113-L113】【F:knowledge/notes/input_part005_review.md†L106-L106】
+- Verified 22 S survivors all shared meticulous harness audits—phase shorts to the chassis, not voltage itself, killed the lone documented 84200 HP board—so bake insulation checks and BMS regression tests into every high-voltage install. 【F:knowledge/notes/input_part014_review.md†L18-L19】
 
 ## Reliability & Incoming Inspection
 - Open every new board: veterans keep finding loose capacitors, missing thermal paste, and even epoxy jumpers on fresh shipments; reglue caps and retorque hardware before install. 【F:knowledge/notes/input_part004_review.md†L229-L229】【F:knowledge/notes/input_part004_review.md†L434-L434】
@@ -31,6 +33,7 @@
 3. **Log both controllers on CAN.** Always `Read` active configs before writing; mismatched IDs or version drift can silently overwrite both nodes during tuning. 【F:knowledge/notes/input_part009_review.md†L91-L97】
 4. **Stage regen after thermal validation.** Start with mechanical brakes, then add modest battery regen while watching bus voltage—random 12 V rail dropouts usually trace back to aggressive negative current. 【F:knowledge/notes/input_part004_review.md†L367-L367】【F:knowledge/notes/input_part005_review.md†L232-L232】
 5. **Clamp controllers to metal with fresh paste.** Aluminum cases shed heat only when bolted to frames or external plates; cramped decks that rely on air gaps have cooked MOSFETs even at moderate logs. 【F:knowledge/notes/input_part005_review.md†L18-L18】【F:knowledge/notes/input_part007_review.md†L16088-L16105】
+6. **Swap observers if detection misbehaves.** MXUS/Ninebot hybrids that cog on 84100HP hardware smooth out once riders abandon Mxlemming for Ortega (no lambda) and rerun detection before re-tuning PI gains. 【F:knowledge/notes/input_part014_review.md†L125-L125】
 
 ## Wiring & Accessory Integration
 - Power throttles from the 3.3 V rail and use resistor dividers for 5 V hall inputs; direct 5 V feeds have already killed STM32 ADC stages on Makerbase boards. 【F:knowledge/notes/input_part004_review.md†L202-L202】【F:knowledge/notes/input_part004_review.md†L251-L251】
