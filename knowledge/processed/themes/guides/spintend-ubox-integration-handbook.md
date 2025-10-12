@@ -36,6 +36,12 @@
 - **BLE Options:** Official BLE dongles arrive pre-flashed and tax-paid via AliExpress, while DIY NRF boards need extra programming; keep at least one link for live tuning even if you prefer wired sessions.[^26]
 - **Fault Retrieval:** If Bluetooth is absent, the controller retains the last fault until shutdown—connect via USB before cycling power so valuable diagnostics aren’t lost.[^10]
 
+## Known Field Failures & Mitigations
+- **Continuity-check every harness.** A v2 80 V single shipped with its Bluetooth lead reversed and killed the module immediately—probe polarity and confirm JST orientation before first power to avoid sacrificial electronics.[^27]
+- **Diagnose ADC adapters before blaming firmware.** VSETT 11+ owners logged CAN dropouts, stuck brake beeps, and latched brake inputs when ADC V2 boards half-failed after 6.0 updates; reflash, reseat grounds, and isolate the adapter before pursuing RMAs.[^28]
+- **Keep throttles on the 3.3 V rail and mount adapters close.** Routing halls through 5 V accessory pins or long unshielded runs has blown STM32 inputs; park the ADC board beside the controller, use divider networks, and rely on Vedder’s detach timeout to hand control back to hardware cleanly.[^29]
+- **Treat thermal spikes as potential moisture ingress.** Riders seeing 190 °C MOSFET readings traced the fault to condensation inside the case—warm the enclosure, dry the PCB, and reseal gaskets before raising firmware cutoffs.[^30]
+
 ## Logistics & Support Notes
 - **Warranty Responsiveness:** Spintend has replaced fire-damaged units and keeps spare power/logic boards on hand, which contrasts with poorer experiences on competing FlipSky hardware.[^18]
 - **Shipping Choices:** Direct orders sometimes arrive underdeclared (sub-$30) and dodge VAT, but DHL eCommerce frequently delays or loses parcels; veterans now pay for FedEx or AliExpress Standard to avoid customs limbo.[^15][^16]
@@ -68,3 +74,7 @@
 [^24]: CAN wake wiring updates and anti-slip recommendations for multi-controller builds.【F:knowledge/notes/input_part000_review.md†L583-L583】【F:knowledge/notes/input_part000_review.md†L590-L590】
 [^25]: Official firmware packages with 100 A vs. 300 A limits and the need for matching cooling.【F:knowledge/notes/input_part000_review.md†L42-L42】
 [^26]: BLE dongle sourcing and plug-and-play advantages over generic NRF boards.【F:knowledge/notes/input_part001_review.md†L174-L174】
+[^27]: Harness polarity failure that destroyed a Bluetooth module on first power-up.【F:data/vesc_help_group/text_slices/input_part004.txt†L16100-L16130】
+[^28]: ADC adapter V2 fault progression—CAN dropouts, brake beeps, and recovery workflow after firmware 6.0 updates.【F:data/vesc_help_group/text_slices/input_part004.txt†L25146-L25218】
+[^29]: ADC placement, detach-timeout behaviour, and the 3.3 V throttle guidance preventing STM32 input failures.【F:data/vesc_help_group/text_slices/input_part004.txt†L16000-L16009】【F:data/vesc_help_group/text_slices/input_part004.txt†L16959-L16968】【F:data/vesc_help_group/text_slices/input_part004.txt†L15192-L15217】
+[^30]: Moisture-driven MOSFET temperature spikes that vanished after warming and drying the enclosure.【F:data/vesc_help_group/text_slices/input_part008.txt†L17122-L17236】
