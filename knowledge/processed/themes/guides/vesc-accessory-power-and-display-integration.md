@@ -27,6 +27,9 @@ This guide distills field reports on powering lights, horns, and dashboards from
 3. **Preserve regen braking.** Disabling the BMS charge FET weakens regen—confirm the charge path is active before relying solely on motor braking for testing or street riding.【F:knowledge/notes/input_part013_review.md†L505-L505】
 4. **Limit regen totals to pack capability.** When paralleling packs directly, match voltages and budget regen to the sum of both packs’ charge ratings; diode isolators caused throttle cut-outs on mismatched modules.【F:knowledge/notes/input_part013_review.md†L550-L552】
 
+## Lighting Hardware Spotlight
+- **Offbondge projector upgrade.** Riders migrating from 1,300 lm compact beams report Offbondge’s 2,000–2,500 lm projector headlight slots straight into existing 12 V harnesses, spreads light without dazzling traffic, and still benefits from external bucks or fused rails on single-controller builds.【F:knowledge/notes/input_part005_review.md†L404-L404】【F:knowledge/notes/input_part005_review.md†L571-L571】
+
 ## Commissioning Checklist
 - Meter throttle outputs with the controller unpowered and confirm signal stays ≤3.3 V at full travel.【F:knowledge/notes/input_part013_review.md†L503-L505】
 - Before flashing or editing parameters, follow the VESC Tool workflow—**Read → edit → Write**—to ensure current limits and accessory cut-offs persist after reboots.【F:knowledge/notes/input_part013_review.md†L542-L544】
