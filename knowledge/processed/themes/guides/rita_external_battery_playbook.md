@@ -5,6 +5,7 @@
 | --- | --- | --- |
 | Use a common-port BMS on every auxiliary pack | Separate charge ports let the charger overrun cells through the discharge lead. | Swap third-party boards before pairing AliExpress packs with Rita.[^common-port]
 | Inspect harness length and XT30 condition | Rita ships with XT30 pigtails sized for the enclosure; hot-swapping wears them quickly. | Reinforce joints and avoid repeated plugs/unplugs.[^xt30]
+| Vet pack specs and Y-cable build quality | Counterfeit “13.8 Ah” 10S2P packs and unsoldered Y-cables have already shorted bags. | Demand cell-level photos, dispute impossible ratings, and rework joints before mounting.[^ali-audit] |
 | Pre-fit the Wildman 2 L case or equivalent mount | Denis’ 8 Ah/12 S3P modules are sized to the 2 L shell; larger customs need 3 L brackets. | Pad the internal screws and route the lead upward to protect insulation.[^cases]
 | Stage firmware tools (M365 BMS Tool or XiaFlasher) and plan BLE downgrades | Configuration toggles (e.g., permanent emulator, cell count) require legacy BLE versions. | BLE 073/090 restore connectivity when the latest dashboard blocks access.[^ble]
 | Reinforce controllers for ≥12 S or >27 A tunes | Stock traces and MOSFETs overheat above ~1 kW. | Pair firmware changes with soldered copper, thermal paste refresh, and conservative current ramps.[^thermal-prep]
@@ -14,7 +15,7 @@
 ## Installation Workflow
 1. **Top-balance packs**: Bring the external battery slightly above the internal pack (≈0.3–0.5 V) so Rita preferentially latches onto it during setup.[^balance]
 2. **Mount the enclosure**: Seat the pack inside the Wildman case, add foam over the shallow screws, and secure the bag without pinching the deck latch or wiring.[^mount]
-3. **Route and secure leads**: Keep XT30 connectors strain-relieved, add anti-spark switches between Rita and the controller if desired, keep the charge splitter inline, and avoid repeated hot-swaps.[^lead-care][^splitter]
+3. **Route and secure leads**: Keep XT30 connectors strain-relieved, ensure the Y-cable uses two female battery legs feeding a single male controller lead, add anti-spark switches between Rita and the controller if desired, and avoid repeated hot-swaps.[^lead-care][^ali-audit]
 4. **Wire telemetry (if present)**: Retain the Xiaomi dashboard for Bluetooth control; clone scooters need dashboard swaps or serial adapters (CP2102 + pull-up) to access configuration.[^telemetry-setup]
 5. **Flash and configure**: Downgrade BLE, connect the M365 BMS Tool, enable the permanent-emulator mode for analog scooters, and set the correct series count before first ride.[^configure]
 6. **Perform voltage and regen checks**: Verify recuperation-off voltage (≈4.15 V for 12 S), confirm throttle response using conservative intensity-of-current-change values (~300–350 mA), and watch for error 39 beeps that indicate regen or battery current above Rita’s ceiling.[^regen-check][^current-cap]
@@ -45,20 +46,22 @@
 ## Operational Practices
 
 ### Charging & Energy Management
-- Rita charges whichever pack sits lower, continuing to top batteries after the scooter powers down; rely on charger LEDs or the Rita app because the dash may stall near 99 % until balancing finishes.[^charge-flow][^charging-telemetry-guide]
-- Expect Rita’s Schottky drop to leave packs just under 42 V; bypass only if you truly need 100 % charge, since the mild undercharge extends pack life.[^schottky]
+- Rita charges whichever pack sits lower, continuing to top batteries after the scooter powers down; rely on charger LEDs to confirm completion.[^charge-flow]
+- Treat the internal pack as a rider, not a charger—repurposing it to backfeed other batteries without current limiting is a documented fire risk; build dedicated externals with their own BMS instead.[^pack-fire]
 - External packs support direct charging via dedicated harnesses; Denis is developing XT30-to-Xiaomi adapters for easier off-scooter top-ups.[^offboard-charge]
 - Cap shared-port charging around 2 A to protect the OEM BMS; use dedicated high-current chargers when faster turnaround is needed.[^charge-limit]
 - Store packs near 3.7 V per cell in temperate spaces—cold garages accelerate degradation.[^storage]
 
 ### Riding & Thermal Limits
 - Motors and controllers run hotter after voltage upgrades; monitor temperature and raise recuperation-off voltage to 4.15 V to avoid throttle kicks on full batteries.[^thermal-ops]
+- Rita’s 25 A ceiling limits how much hill-climb torque a small booster pack can add—plan dual motors or uprated controllers for sustained grades.[^hill-limit]
 - Voltage-matched packs extend range dramatically (~2.1× on the Pro, ~2.8× on base models) but still demand honest capacity and careful current sharing.[^range-planning]
 - Avoid hammering low state-of-charge packs with high current—overheating drivetrains is more likely than starving quality cells.[^soc-warning]
 - Rita’s 25 A ceiling limits steep hill attempts with tiny boost packs; use controller reinforcements or dual-motor conversions when climbs trigger repeated cutbacks.[^hill-limit]
 
 ### Maintenance & Safety
 - Refresh controller thermal paste and add lithium grease to suspension pivots to handle added load.[^maintenance]
+- Mount the Wildman bag upright and cinch it with heavy clamps or cages—glue fills slow thieves less than they slow legitimate service.[^bag-security]
 - Use quality cells (Samsung 35E or vetted 21700s), fish paper on positive terminals, and proper insulation when gluing dense packs.[^pack-build]
 - Clamp the Wildman bag with pipe clamps or a cage so thieves can’t unzip and steal the pack mid-ride.[^security]
 - Keep documentation handy: Denis’ storefront hosts installation guides and expects ticket submissions with order IDs for manual payment reconciliation.[^support]
@@ -67,6 +70,9 @@
 | Symptom | Likely Cause | Corrective Actions |
 | --- | --- | --- |
 | M365 BMS Tool cannot connect | Dashboard on latest BLE firmware blocks access. | Downgrade BLE to 073/090 and close other Bluetooth apps before retrying.[^ble]
+| Error 14 on dual dashboards | Cross-pack current leakage after Rita install. | Re-check polarity, isolate each controller, and verify Rita blocks inter-pack flow before commuting.[^error14] |
+| Error 18 after controller swap | Damaged hall harness | Replace the hall cable when multiple controllers throw the same fault post-upgrade.[^error18] |
+| Error 24 after wiring changes | Supply voltage out of range | Power-cycle for 10 seconds and inspect the charge splitter plus pack voltages before deeper teardown.[^error24] |
 | Telemetry shows 0 W or flips between packs | Rita reports whichever pack sits ~0.5 V higher; current sensor design hides wattage. | Match voltages, disconnect the higher pack temporarily, or use the pack’s BMS app for readings.[^telemetry-hop]
 | Regen jerks throttle after full charge | Recuperation threshold too low on 12 S/13 S setups. | Raise recuperation-off voltage to ≈4.15 V and retest braking intensity.[^regen-check]
 | Rita fuse blows or pack overheats | Non-common-port BMS or miswired external battery. | Rewire with common-port boards and verify polarity before reconnecting.[^common-port]
@@ -116,3 +122,10 @@
 [^pack-build]: Source: `knowledge/notes/all_part01_review.md`, lines 46, 145, 185, 238, 245.
 [^security]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 44-45.
 [^support]: Source: `knowledge/notes/all_part01_review.md`, lines 17, 150.
+[^ali-audit]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 19-23.
+[^pack-fire]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 45-46.
+[^hill-limit]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 31-33.
+[^bag-security]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 42-45.
+[^error14]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 25-27.
+[^error18]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 151-152.
+[^error24]: Source: `knowledge/notes/denis_all_part02_review.md`, lines 152-153.
