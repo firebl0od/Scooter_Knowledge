@@ -24,6 +24,7 @@
 - Add bulk capacitance to the 12 V (and where accessible, 5 V/3.3 V) rails—the retrofit prevents infamous brownouts when BMSs trip or accessories spike load, especially on resin-potted boards. 【F:knowledge/notes/input_part005_review.md†L448-L451】【F:knowledge/notes/input_part005_review.md†L510-L510】
 - Document MOSFET and driver replacements: hot-plug failures often kill only part of a parallel set, so replace all devices on that leg and confirm 12 V/5 V rails before reassembly. 【F:knowledge/notes/input_part004_review.md†L303-L303】【F:knowledge/notes/input_part004_review.md†L363-L363】
 - Verify shunt calibration with clamp meters or smart-BMS telemetry; many 75100s deliver only half the programmed battery amps until you correct the scaling. 【F:knowledge/notes/input_part005_review.md†L75-L76】
+- Bench-test at both low and full pack voltage before installation—one 75 100 that happily booted on 3 S refused to wake on 13–16 S even after reflashing, pointing to high-voltage hardware faults that warrant an immediate RMA instead of more firmware experiments. 【F:knowledge/notes/input_part004_review.md†L82-L83】
 
 ## Setup & Commissioning Checklist
 1. **Flash matching firmware/tool pairs.** Makerbase boards frequently ship misidentified (e.g., reporting as HW75300); desktop VESC Tool flashing plus phase-filter disable after detection stabilizes idle behavior. 【F:knowledge/notes/input_part004_review.md†L204-L204】【F:knowledge/notes/input_part004_review.md†L159-L159】

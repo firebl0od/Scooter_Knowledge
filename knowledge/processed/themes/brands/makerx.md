@@ -17,6 +17,7 @@
 - Shop owners reported 70 % of incoming duals arriving faulty, with return shipping erasing the budget advantage; keep at least one spare controller on the shelf for every customer deployment.【F:knowledge/notes/input_part003_review.md†L153-L153】
 - Fire incidents on GO-FOC boards—even at 96 V / 80 A battery with added fans—show new batches need staged validation before matching Spintend or 3Shul duty cycles.【F:knowledge/notes/input_part004_review.md†L321-L321】
 - MakerX’s MOSFET choices (e.g., NECP045N85GU) mirror failure-prone Flipsky runs; continuous current should stay conservative unless the build adds serious heatsinking and airflow.【F:knowledge/notes/input_part002_review.md†L166-L168】
+- Resellers are rebadging MakerX hardware at hefty markups—the Sur-Ron focused “MTO K2000” is simply a G300 in a cheap aluminium shell—so budget purchases accordingly and verify firmware provenance before assuming you’re getting unique electronics.【F:knowledge/notes/input_part006_review.md†L401-L401】
 
 ## Setup & QA Checklist
 1. **Disassemble on arrival.** Confirm thermal pads actually contact the shell, inspect solder joints, and restake capacitors before the first power-up—vibration still loosens untouched boards.【F:knowledge/notes/input_part002_review.md†L137-L138】【F:knowledge/notes/input_part004_review.md†L312-L314】
