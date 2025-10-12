@@ -33,6 +33,7 @@
 - Beta batches sold at **300 €** for 15 testers with August assembly runs; production pricing remains under review.[^11]
 - Rage Mechanics currently bundles SmartDisplay with its dual-controller kits (~489 €), and standalone sales are pending cost-down work—plan purchases early if you need just the dash.[^12]
 - Competing IPS dashboards (e.g., Voyage Megan) target 300–400 € but lack SmartDisplay’s lighting bus, telemetry depth, and OTA ecosystem, so many riders still default to SmartDisplay.[^13]
+- Low-volume CNC and SLS case work keeps retail expectations above €300 until injection tooling arrives, and the team is preparing regional distributors plus “panic mode” legal presets alongside wider controller harness support.[^14]
 
 ## Telemetry Interpretation Notes
 - SmartDisplay power numbers trend ~6–7 kW below VESC RT Tool because it calculates from CAN-reported battery amps × voltage without VESC’s instantaneous filtering; align on one source before publishing specs.[^10]
@@ -47,19 +48,21 @@
 - SmartDisplay’s apps push updates in minutes—developers can add a new setting, publish OTA, and have riders flashing within five minutes over Wi‑Fi.[^4]
 - NetworkDir’s next hardware rev will speak native CAN, mimic Trampa’s SmartDisplay device registration, and bundle ESP32‑C3 Wi‑Fi/BLE modules to host VESC Express dashboards without extra dongles.[^1]
 - Rage Mechanics is weaving the display into turnkey race scooters, streaming telemetry to crews and elevating expectations for pro-grade HUDs in the VESC scene.[^12]
+- Firmware planning now includes encrypted OTA packages, Kelly/Sabvoton harness kits, and configurable “panic mode” speed caps so riders can stay compliant during roadside checks.[^14]
 
 ---
 
-[^1]: Upcoming SmartDisplay hardware adds CAN connectivity, VESC Express support, and self-hosted ESP32‑C3 modules beyond the current RX/TX/GND/5 V requirement.【F:data/vesc_help_group/text_slices/input_part010.txt†L6965-L6971】
-[^2]: Light-board OTA chain updating 5 V/12 V accessories and returning controller fault feedback through SmartDisplay.【F:data/vesc_help_group/text_slices/input_part002.txt†L24506-L24519】
-[^3]: USB debugging while connected to a live VESC killed the Ubox 3.3 V rail and STM32—use wireless links instead.【F:data/vesc_help_group/text_slices/input_part000.txt†L11633-L11705】
-[^4]: SmartDisplay exposes nearly all controller settings on-device, supports Kelly/VESC/Minimotors, and pushes OTA firmware via apps within minutes.【F:data/vesc_help_group/text_slices/input_part002.txt†L25099-L25138】
-[^5]: Voyage/SmartDisplay CAN transceiver reference (TJA1051) shared for stocking spares.【F:data/vesc_help_group/text_slices/input_part010.txt†L9736-L9774】
-[^6]: Verification of controller rails and CAN voltage expectations during SmartDisplay bring-up.【F:data/vesc_help_group/text_slices/input_part011.txt†L9258-L9394】
-[^7]: External buttons, OTA flashing screens, and SmartDisplay speed-mode mapping via ADC2 percentage caps.【F:data/vesc_help_group/text_slices/input_part002.txt†L25099-L25148】
-[^8]: SmartDisplay navigation mock-up dimensions (10 cm × 6.5 cm, 3.5 in screen) targeting 100 km/h builds to avoid phone mounts.【F:data/vesc_help_group/text_slices/input_part003.txt†L21249-L21272】
-[^9]: Waze police-alert overlays already prototyped on SmartDisplay dashboards.【F:data/vesc_help_group/text_slices/input_part003.txt†L26364-L26375】
-[^10]: Race telemetry logs comparing SmartDisplay and VESC RT data (power delta, per-motor phase amps, throttle tracing).【F:data/vesc_help_group/text_slices/input_part005.txt†L12522-L12588】
-[^11]: Beta pricing (300 €) and limited 15-unit run with August assembly schedule.【F:data/vesc_help_group/text_slices/input_part002.txt†L25140-L25182】
-[^12]: Rage Mechanics bundling SmartDisplay with dual-controller kits and teasing standalone availability once pricing stabilizes.【F:data/vesc_help_group/text_slices/input_part013.txt†L21517-L21559】
-[^13]: Voyage Megan IPS display positioning at 300–400 € and community comparisons favoring SmartDisplay’s richer feature set.【F:data/vesc_help_group/text_slices/input_part005.txt†L21142-L21180】
+[^1]: Upcoming SmartDisplay hardware adds CAN connectivity, VESC Express support, and self-hosted ESP32‑C3 modules beyond the current RX/TX/GND/5 V requirement.【F:knowledge/notes/input_part010_review.md†L16-L18】
+[^2]: Light-board OTA chain updating 5 V/12 V accessories and returning controller fault feedback through SmartDisplay.【F:knowledge/notes/input_part002_review.md†L843-L845】
+[^3]: USB debugging while connected to a live VESC killed the Ubox 3.3 V rail and STM32—use wireless links instead.【F:knowledge/notes/input_part000_review.md†L262-L265】
+[^4]: SmartDisplay exposes nearly all controller settings on-device, supports Kelly/VESC/Minimotors, and pushes OTA firmware via apps within minutes.【F:knowledge/notes/input_part002_review.md†L844-L845】
+[^5]: Voyage/SmartDisplay CAN transceiver reference (TJA1051) shared for stocking spares.【F:knowledge/notes/input_part010_review.md†L17-L18】
+[^6]: Verification of controller rails and CAN voltage expectations during SmartDisplay bring-up.【F:knowledge/notes/input_part011_review.md†L231-L233】
+[^7]: External buttons, OTA flashing screens, and SmartDisplay speed-mode mapping via ADC2 percentage caps.【F:knowledge/notes/input_part002_review.md†L843-L845】
+[^8]: SmartDisplay navigation mock-up dimensions (10 cm × 6.5 cm, 3.5 in screen) targeting 100 km/h builds to avoid phone mounts.【F:knowledge/notes/input_part003_review.md†L571-L573】
+[^9]: Waze police-alert overlays already prototyped on SmartDisplay dashboards.【F:knowledge/notes/input_part003_review.md†L697-L699】
+[^10]: Race telemetry logs comparing SmartDisplay and VESC RT data (power delta, per-motor phase amps, throttle tracing).【F:knowledge/notes/input_part005_review.md†L179-L183】
+[^11]: Beta pricing (300 €) and limited 15-unit run with August assembly schedule.【F:knowledge/notes/input_part002_review.md†L845-L845】
+[^12]: Rage Mechanics bundling SmartDisplay with dual-controller kits and teasing standalone availability once pricing stabilizes.【F:knowledge/notes/input_part013_review.md†L684-L684】
+[^13]: Voyage Megan IPS display positioning at 300–400 € and community comparisons favoring SmartDisplay’s richer feature set.【F:knowledge/notes/input_part005_review.md†L378-L379】
+[^14]: Encrypted OTA releases, €300+ price expectations, distributor planning, and SmartDisplay “panic mode” presets outlined during beta updates.【F:knowledge/notes/input_part001_review.md†L598-L606】【F:knowledge/notes/input_part001_review.md†L668-L670】【F:knowledge/notes/input_part001_review.md†L858-L859】
