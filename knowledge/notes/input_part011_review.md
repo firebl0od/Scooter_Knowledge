@@ -2,8 +2,8 @@
 
 ## Scope
 - Source: `data/vesc_help_group/text_slices/input_part011.txt`
-- Coverage: 2024-12-19T23:46:45 through 2025-02-24T05:45:56 (lines 1-17600)
-- Next starting point: line 17601 (2025-02-24T05:45:56 and later)
+- Coverage: 2024-12-19T23:46:45 through 2024-12-22T22:20:01 (lines 1-24520)
+- Next starting point: line 24521 (2024-12-22T22:20:35 and later)
 
 ## Key Findings
 
@@ -47,6 +47,20 @@
 - Ric.R.M.’s single Ubox 80 threw an over-voltage error after updating to VESC 6.05; reflashing `no limits` alone didn’t help, but setting the correct battery voltage cured the fault for his 20 S, 28 Ah pack rated 100 A.【F:data/vesc_help_group/text_slices/input_part011.txt†L1729-L1759】
 - Another rider on Flipsky hardware saw cut-outs near 84 V, initially suspecting 21 S voltage; GABE urged staying ≤20 S and using the PC tool to flash no-limit firmware, while a second multimeter reading confirmed the pack was standard 72 V (20 S).【F:data/vesc_help_group/text_slices/input_part011.txt†L2424-L2443】
 - The same rider later regained throttle response by re-running the input wizard after the firmware swap, and is now investigating how to integrate an LCD4 display alongside the VESC app.【F:data/vesc_help_group/text_slices/input_part011.txt†L2453-L2457】
+
+### Regen Cutoffs & Flipsky Production Risks
+- PuneDir confirmed his scooter only dies when regen brake cutoffs trigger, echoing NetworkDir’s warning that selling a $1,500 production build around Flipsky hardware remains a gamble despite the modest 48 V 14 Ah pack spec.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L23020-L23212】
+- Finn reiterated that a single BMS cutoff was enough to kill his 75100, reinforcing the need for clean power delivery and cautious regen settings on these controllers.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L23932-L23970】
+
+### Jetson 20 S Pack Faults & Project Sequencing
+- Haku’s Jetson build still throws a high-voltage error at free-spin even with the max input set to 85 V, and he noted the VESC reads different pack voltage than the BMS until the scooter is ridden under load.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L23383-L23536】
+- The scooter is running a 20 S Samsung 35E pack at only 3 P, so Haku is limiting it to short trips to avoid overheating while he finishes tuning before returning to the Wepoor project.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L23600-L23800】
+- Foujiwara has cautioned him against stretching the controllers to 22 S despite conflicting vendor advice, so he plans to stay within the 20 S envelope until trusted MOSFET data says otherwise.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L23832-L23894】
+
+### Thermal Budgets, Mounting, and Ambient Limits
+- Paolo advised that ~60 °C controller temps are acceptable, but long-term reliability improves when VESCs are kept under ~70–80 °C even though the silicon is rated well above 100 °C; cooler hardware leaves more thermal headroom for power spikes.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L24088-L24515】
+- Matthew is bonding his Ubox 85150 directly to the G30LP deck with thermal epoxy, typically holding ~40 °C in use after a prior mount failure let temps spike toward 80 °C; he suspects a previous BMS cutoff shorted another 85150 and now runs the surviving unit solo.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L24168-L24340】
+- Yamal’s own dual-Ubox setup is cruising below 30 °C in winter, but he’s watching how summer heat and the quoted “300 A continuous with efficient cooling” marketing claims align with real-world limits.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L24292-L24515】
 
 ### MKS “84HP” Controller Expectations & MOSFET Packages
 - Pandalgns unboxed a pair of MKS 84HP controllers (6 AWG leads, sizeable heatsinks) and asked about safe current—manufacturer guidance lists 200 A continuous / 300 A peak, while his Flipsky 84100 experience suggests 350–400 A phase might remain comfortable.【F:data/vesc_help_group/text_slices/input_part011.txt†L2664-L2676】【F:data/vesc_help_group/text_slices/input_part011.txt†L2688-L2691】
@@ -507,52 +521,256 @@
 - Builders are repurposing dead Spintend 75200 baseplates as auxiliary heat spreaders for 85-series controllers; JPPL pairs aluminum spacers, minimal thermal pad thickness, and a custom CNC enclosure while Shlomozero sketches external radiator blocks tied into Dualtron side plates.【F:data/vesc_help_group/text_slices/input_part011.txt†L20180-L20261】
 - JPPL also shared MakerWorld STL files for Tronic MOSFET spacers, noting they required sanding to sit flush before clamping everything metal-to-metal for best conduction.【F:data/vesc_help_group/text_slices/input_part011.txt†L20260-L20261】
 
-### Field Support & Troubleshooting Highlights
-- Roby MacGyver learned that Makerbase controllers expose an ignition pin (A15) behind the ADC/DC-DC menu—wire that through a keyswitch and set the shutdown timer in VESC Tool instead of power-cycling via the BMS.【F:data/vesc_help_group/text_slices/input_part011.txt†L20399-L20454】
+-### Field Support & Troubleshooting Highlights
+- Roby MacGyver learned that Makerbase controllers expose an ignition pin (A15) behind the ADC/DC-DC menu—feed it with a momentary 5 V pulse from the keyswitch, set ADC channel 9 to “control,” and enable the shutdown timer so the VESC latches on/off without back-powering through the BMS.【F:data/vesc_help_group/text_slices/input_part011.txt†L20399-L20454】【F:data/vesc_help_group/text_slices/input_part011.txt†L20652-L20671】
 - Jason advised Hugo to raise the ABS overcurrent ceiling when 60 A battery commands trigger cutouts, while francois reminded him to keep ABS roughly 1.5× the phase limit to avoid recurring faults.【F:data/vesc_help_group/text_slices/input_part011.txt†L20441-L20515】
 
-### Makerbase Control Switch Wiring & Torque Setup
-- JPPL confirmed the Makerbase ignition circuit expects a momentary contact—touch the wires for a second to wake the controller and hold for ~3 seconds to shut it down—so Roby MacGyver must add a spring-return button instead of leaving the leads tied together.【F:data/vesc_help_group/text_slices/input_part011.txt†L20652-L20671】
-- For snappier launches on the 75100, the group pointed Roby to VESC Tool’s app/ADC positive ramp (≈0.1 s), throttle-curve gain, and the motor-config current tab to raise battery and phase amps—reminding him that phase current is what actually sets torque.【F:data/vesc_help_group/text_slices/input_part011.txt†L20778-L20838】
-
-### Tronic X12 Voltage Envelope & Speed Goals
-- JPPL’s 22 S 10 P P45B pack is en route for a Tronic X12 build; he reiterated the hardware ceiling is 24 S with a 600 A absolute firmware cap (650 A only with no-limit firmware) after already seeing 150 km/h on 20 S with 75H/80H motors at ~400 A phase and ~100 A battery per controller.【F:data/vesc_help_group/text_slices/input_part011.txt†L20687-L20723】
-- He’s eager to retest once firmware 6.06’s new overmodulation mode lands, expecting even higher top speed without needing more current.【F:data/vesc_help_group/text_slices/input_part011.txt†L20717-L20723】
+### Sensorless Launch Workarounds for Dual Drives
+- With the front hub running sensorless, Martin Kaktits explored delaying that motor until the rear pushes the scooter off the line; Jason recommended fine-tuning VSS first, while francois highlighted HFI or scripting a PWM disable below a set ERPM if rewiring the halls proves impractical.【F:data/vesc_help_group/text_slices/input_part011.txt†L20380-L20396】
 
 ### Lonnyo 80H Fitment & Brake Clearance Lessons
 - Yamal’s attempt to squeeze Lonnyo 80H hubs into his frame shows the stock swingarm studs are too short for both the motor and brake hardware; he now plans to fabricate longer main bolts so the caliper clears.【F:data/vesc_help_group/text_slices/input_part011.txt†L20643-L20745】
 - JPPL echoed that the suspension pivots are easier to space, but the primary arm hardware must grow to keep the axle square once the larger motors are bolted in.【F:data/vesc_help_group/text_slices/input_part011.txt†L20733-L20745】
 
-### 22 S Pack Packaging & Frame Modifications
-- GABE’s sleeper build can only fit a 22 S 6 P pack internally—there’s no room for the extra 2 S modules he hoped for—so he’s shifting the dual 22×3 70H motors forward, swapping to thinner PMT tires, and watching P42A temps as the target power jumps from ~4.7 kW to ~20 kW.【F:data/vesc_help_group/text_slices/input_part011.txt†L20786-L20822】
-- To make brakes fit he’s redesigning the fork dropouts with four steel reinforcement beams, cutting the original dropout ears, and even planning angle-grinder work on the frame vents; the V1 fork castings give him just enough room compared with V2.【F:data/vesc_help_group/text_slices/input_part011.txt†L20868-L20871】【F:data/vesc_help_group/text_slices/input_part011.txt†L21193-L21206】
-- JPPL warned that sloppy copper busbar work already punched holes in three cells on his in-progress 22 S 10 P pack, so high-power builds need tighter thermal control during soldering plus better weather protection than his rain-damaged 400 A pack.【F:data/vesc_help_group/text_slices/input_part011.txt†L21149-L21158】
-
-### Wepoor Thermal Mods & Spintend Handling
-- Haku’s sixth 12-FET Spintend powerstage shipped without thermal pads, so he’s fabricating custom aluminum fin stacks (possibly CNC’d) to mount the module directly to a heatsink while keeping everything VESC-based for the Wepoor rescue.【F:data/vesc_help_group/text_slices/input_part011.txt†L20840-L20890】
-- He’s already pushed the HY MOSFET version to ~26 kW but suspects ANT BMS cutoff behaviour, and is now sketching new heatsink mounts—including cut-down fins and bent brackets—to keep the replacement stage alive.【F:data/vesc_help_group/text_slices/input_part011.txt†L20890-L20933】【F:data/vesc_help_group/text_slices/input_part011.txt†L21493-L21520】
-
-### Display & Telemetry Progress
-- JPPL finally flashed the community ESP32 “Simple VESC Display” by reinstalling the Arduino IDE, selecting the proper board profile, and wiring it to the spare UART (RX/TX/GND/5 V or 3.3 V); he’s now experimenting with his own graphics and pointed everyone to the VescBLEBridge repo while Smart Repair advocated for a VESC Express variant with SD/GPS logging.【F:data/vesc_help_group/text_slices/input_part011.txt†L21121-L21190】
-
-### Hall & BMS Troubleshooting Threads
-- Arnau’s Makerbase 100 V/100 A controller lost its hall sensors when an 85150 burned, forcing him to limp in sensorless mode; 🇪🇸AYO#74🏁 suggested enabling the VSS virtual sensor and reviewing the detection metrics while Arnau sources new hall hardware.【F:data/vesc_help_group/text_slices/input_part011.txt†L21209-L21280】
-- Tristan’s over-current cut-outs traced back to a JBD-SP17S005 BMS that trips under regen/charge currents—Smart Repair suspects damaged FETs and recommends swapping to sturdier JK/ANT hardware after checking the ADC brake mappings.【F:data/vesc_help_group/text_slices/input_part011.txt†L21237-L21271】
-
-### Controller & Motor Updates
-- 🇪🇸AYO#74🏁 reports the Tronic X12 outperforms his aging 250/250R hardware at 350 A phase (with only 4 mm motor leads), making it his next pick for a Nami if the Schul retrofit falls through.【F:data/vesc_help_group/text_slices/input_part011.txt†L21324-L21353】
-- Basti just sourced a 125 mm-wide 33×2 60H hub with 4 mm banana plugs for €300 delivered in the EU, expanding the list of drop-in high-power motor options.【F:data/vesc_help_group/text_slices/input_part011.txt†L21207-L21208】
-- عمر shared a Kaabo 33/3 motor build powered by a 72 V 50 Ah Samsung 50S pack on a Spintend 85 V/240 A controller, giving real-world context for similar 2WD conversions.【F:data/vesc_help_group/text_slices/input_part011.txt†L21368-L21371】
-
 ### Platform & Ownership Updates
 - Yamal sold his Dualtron Thunder (and the RFP frame) at a slight profit, picked up a Ninebot G2 for legal-friendly riding, and is pausing the Nami until he fabricates longer steel axles for the swingarms.【F:data/vesc_help_group/text_slices/input_part011.txt†L20953-L21010】
 - He’s still logging heavy mileage on the Spintend Nami (≈2,500 km) while planning city moves, highlighting how big-wheel platforms excel on rural routes yet demand ongoing axle upkeep.【F:data/vesc_help_group/text_slices/input_part011.txt†L20996-L21012】
 
-### Auxiliary Power Cautions
-- Shlomozero shorted the Spintend 85240’s 12 V aux rails while tapping power for lights; the controller no longer boots and may need a buck-converter or logic-board swap, so he’s considering pairing a surviving 85150 with a 75200 over CAN until repairs land.【F:data/vesc_help_group/text_slices/input_part011.txt†L21413-L21458】
-- Yamal used the mishap to remind builders to verify wiring before energising fresh hardware—one inattentive test cost the group’s newest 85/240 board.【F:data/vesc_help_group/text_slices/input_part011.txt†L21422-L21433】
+### MP2 Pro 2 Packaging & 85240 Upgrade Plans
+- Patrick is prototyping a custom heatsink so an uncased Spintend 85240 (≈40 mm including capacitors plus an 8 mm fin stack) can squeeze into his MP2 Pro 2 deck; he’ll road-test a 150 A setup on a 17×4 delta motor, then add an external 20 S 2 P booster and order the controller once the printed mockups confirm clearance.【F:data/vesc_help_group/text_slices/input_part011.txt†L20933-L20957】
+
+### High-Current Controller Shopping Notes
+- Mattia is hunting for a VESC that can sustain 200–250 A battery and ~300 A phase, with peers pointing him toward the Spintend 85240 platform pending confirmation that its MOSFET stack tolerates those peaks.【F:data/vesc_help_group/text_slices/input_part011.txt†L20664-L20671】
+
+### Mini Spintend Current Targets & Cooling
+- haku and Yamal agreed to cap the dual mini Spintend stack around 200 A battery per motor (≈300 A phase) and 45 A per P42A cell until better cooling and enclosures are in place, noting that earlier 500 A battery pushes tripped cutoffs despite low controller temps.【F:data/vesc_help_group/text_slices/input_part011.txt†L17615-L17639】
+
+### Voyage Megan Display & Alternatives
+- Arnau’s Voyage Megan display bundles a dedicated firmware plus full Metr integration for trip logging and ride-mode storage, but Smart Repair warned the ~$400 unit still isn’t waterproof out of the box.【F:data/vesc_help_group/text_slices/input_part011.txt†L17721-L17740】
+- Smart Repair showcased a cheaper Raspberry Pi dashboard build (mark99i’s repo) as a configurable alternative when paired with Spintend hardware.【F:data/vesc_help_group/text_slices/input_part011.txt†L17746-L17752】
+
+### 60 V Performance Check-ins
+- Arnau’s latest ride report shows his 60 V build holding 150 A phase / 80 A battery on pure MTPA without field weakening, delivering the response he wanted.【F:data/vesc_help_group/text_slices/input_part011.txt†L17778-L17779】
+
+### Tire Direction & Ninebot GT Platform Notes
+- Running a tyre backwards keeps summer grip acceptable but flings water, debris, and hydroplaning forces straight down the centre, so riders should flip tread direction before wet-season use.【F:data/vesc_help_group/text_slices/input_part011.txt†L17783-L17789】
+- Jan and ‘lekrsu detailed Segway’s new GT platforms: GT2 frames have space and steering geometry advantages but weak stem bearings, whereas the GT3 Pro upgrades to 72 V electronics in a deeper chassis while the base GT3 stays 48 V with a tube frame and shallower bay.【F:data/vesc_help_group/text_slices/input_part011.txt†L17797-L17816】
+
+### Compact 20 S Packs & Range Logs
+- GABE’s 20 S 2 P commuter pack logs roughly 300 Wh per 10 km (about 20 km of aggressive riding from a 600 Wh pack) and still fits 20 S 7 P inside the chassis when waterproofed, confirming the deck volume for future capacity bumps.【F:data/vesc_help_group/text_slices/input_part011.txt†L17990-L18016】
+
+### Rider Safety Incident & Recovery Notes
+- A crosswind tossed GABE into a pole at speed, leaving him temporarily unable to walk and nursing fractures despite protective gear—others urged medical scans and highlighted how quickly urban gusts can overwhelm short-wheelbase builds.【F:data/vesc_help_group/text_slices/input_part011.txt†L18213-L18253】
+
+### Xiaomi G2 80 km/h Upgrade Roadmap
+- Justiinx B’s 70–80 km/h G2 plan now includes budgeting €500–€800 for a 20 S battery (5–6 P 21700 cells), a 65H 17×4 hub, and a quality VESC such as the Ubox 85/150, with the option to add a second controller later once braking and suspension are uprated.【F:data/vesc_help_group/text_slices/input_part011.txt†L18257-L18278】
+- Veterans warned that the G2’s stock monorim hardware bends and strips under power; widening the rear dropout to ~150 mm only needs longer bolts and bushings, but the front suspension should be replaced to avoid failures once larger motors are installed.【F:data/vesc_help_group/text_slices/input_part011.txt†L18430-L18474】
+
+### Hall Debugging & Flipsky QC Signals
+- When Mirono’s Flipsky suddenly lost halls, the crew pointed to VESC Tool’s hall-calibration tab (desktop only) and suspected a dead 5 V rail after sensor detection returned zeros.【F:data/vesc_help_group/text_slices/input_part011.txt†L18580-L18599】
+- Builders again flagged Flipsky’s uneven quality control—many units fail early unless cooling and assembly are perfect—contrasting Jason’s burned stage with Mirono’s long-lived sample.【F:data/vesc_help_group/text_slices/input_part011.txt†L18593-L18613】
+
+### ESP32 Displays & SimpleVescDisplay Tips
+- Mirono’s experiments with the Flipsky CAN display reminded the group that generic ESP32 yellow displays can pipe UART data straight into ADC1 via NetworkDir’s SimpleVescDisplay firmware, giving a budget telemetry option for riders who’ve lost their phones or OEM screens.【F:data/vesc_help_group/text_slices/input_part011.txt†L18617-L18640】
+
+### Spintend 85/250 Capability & Connector Planning
+- Dualtron riders confirmed the Spintend 85/250 firmware caps at 350 A phase but can briefly stretch to 400 A; Yamal emphasised its battery-current headroom rivals premium controllers and is pairing it with 8 mm Amass bullets plus Juliet signal connectors for his 80H build.【F:data/vesc_help_group/text_slices/input_part011.txt†L18849-L18865】
+
+### Profile Switching Scripts & Dual-Drive Options
+- JPPL outlined quick workarounds for single/dual drive—kill one controller with the power button, break CAN with a switch, disable CAN in software, or bolt on Spintend’s ADC board—while Smart Repair floated an Arduino profile sender for finer control.【F:data/vesc_help_group/text_slices/input_part011.txt†L18981-L18984】【F:data/vesc_help_group/text_slices/input_part011.txt†L18971-L18974】
+- francois schempers audited Smart Repair’s AI-generated UART script, advising debounced button handling, cached telemetry, v_in safety checks, and library pin verification before sharing a cleaned version that implements those safeguards for CAN-linked masters/slaves.【F:data/vesc_help_group/text_slices/input_part011.txt†L19080-L19088】
+
+### Dual Spintend Power Sync & Thunder Build Notes
+- Shlomozero’s Thunder 2 wiring confirms Spintend 85-series controllers share a CAN “power on” signal, so a single button can wake both units; he’s starting with an 85/150 front and 85/240 rear on Lishen 21700 packs until he sources dual 85/240s.【F:data/vesc_help_group/text_slices/input_part011.txt†L19014-L19035】
+
+### High-Speed Stability & Deck Styling
+- Yamal reminded Thunder riders that only the “LaFerrari” stays wobble-free above 130 km/h—others must bias weight forward and fine-tune hardware, while JPPL noted his 11X still needs meticulous hand/part calibration despite running smooth at speed.【F:data/vesc_help_group/text_slices/input_part011.txt†L19041-L19055】
+
+### Controller Availability & Thermal Notes
+- JPPL reports the 3Shul G300 still “rocks” if kept cool, while Yamal highlighted Kilian’s continued reliance on the R350, underscoring the split between readily available G300 stock and race-focused Schul hardware in Europe.【F:data/vesc_help_group/text_slices/input_part011.txt†L19070-L19073】
+
+### 72 V E-bike Conversion Cautions
+- Morten Jensen’s idea of pushing a 250 W/36 V commuter bike to 72 V drew warnings that doubling voltage without a better motor will overheat micro hubs—GABE suggested sourcing sturdier Fiido hardware or risk torching budget drivetrains.【F:data/vesc_help_group/text_slices/input_part011.txt†L19093-L19099】
+
+### Xiaomi/M365 Voltage Mods & Motor Survivability
+- GABE cautioned that simply doubling a Xiaomi/Ninebot build from 10 S to 20 S without field-weakening headroom will cook the stock hub—he’s already sacrificed three motors that way—and recommends swapping to a wider Fiido L3 rear hub for the surface area needed to shed heat.【F:data/vesc_help_group/text_slices/input_part011.txt†L19101-L19133】
+
+### Compact Battery Layouts for Xiaomi Decks
+- Yamal and Jason mapped options for reviving a battered M365: any larger 10 S pack helps, 18 S is the “sweet spot” for fit, but 20 S 1–2 P or even a tight 30 S 1 P stack will squeeze in if controllers are relocated (e.g., Ubox 100/100 Lite underneath) and the harness is reworked.【F:data/vesc_help_group/text_slices/input_part011.txt†L19145-L19185】
+
+### High-Discharge Cell Sourcing Constraints
+- Jason noted Samsung 50S cells are already €5.3 locally, while 40T or Eve packs now require business licences or grey-market importing—leaving scavenged Lime MH1 modules as his budget fallback and highlighting the need for EU-to-EU private shipments when premium cells are scarce.【F:data/vesc_help_group/text_slices/input_part011.txt†L19190-L19229】【F:data/vesc_help_group/text_slices/input_part011.txt†L19260-L19279】
+
+### 32 S Charge-Only BMS Prototype
+- Jason’s 32 S VESC-friendly BMS evaluation board mirrors VFBMS32 topology but inverts the MOSFET orientation (drains tied together, sources commoned), prompting diode-drop concerns and a plan to iterate a smaller production PCB once the eval hardware survives lab testing.【F:data/vesc_help_group/text_slices/input_part011.txt†L19404-L19496】
+
+### Inokim OXO Front Brake Upgrades
+- David’s hunt for a four-piston solution on the OXO’s stock front swingarm ended with two options: flip a rear arm to mount the caliper underneath or fabricate a custom adapter plate sized for the OEM fork casting.【F:data/vesc_help_group/text_slices/input_part011.txt†L19400-L19403】
+
+### Arnau’s Nami & G300 Race Prep
+- Arnau’s Valencia plans involve a 22 S 10 P P45B pack feeding twin Ambrosini 75H motors via G300 controllers, plus a 10 mm RTR aluminium heat spreader to offset G300 thermal concerns while he waits on the battery build.【F:data/vesc_help_group/text_slices/input_part011.txt†L19418-L19443】
+
+### Dualtron Achilleus Phase-Ceiling Diagnostics
+- Dualtron Achilleus can’t exceed ~135 A phase despite 220 A targets; francois suspects saturation or battery sag and asked for fresh motor detection logs, while the rider confirmed a 16 S 7 P pack, Lonnyo 75H motors, and 10 AWG phase leads—pointing to either torque limits or observer tuning gaps.【F:data/vesc_help_group/text_slices/input_part011.txt†L19419-L19453】
+
+### P45B Pack Current Guidance
+- skrtt’s proposed 18 S 9 P P45B pack at 350 A battery draw equates to ~40 A per cell—aggressive but sustainable with cooling—so mentors advised staying 18 S if deck space is tight, since jumping to 20 S doesn’t change cell loading and voltage mainly governs top speed.【F:data/vesc_help_group/text_slices/input_part011.txt†L19546-L19568】
+
+### Makerbase Ignition Latching & Launch Tuning
+- JPPL confirmed the Makerbase ignition wires expect a momentary switch—touch the leads for ~1 s to latch on and ~3 s to latch off—so Roby MacGyver’s always-on controller needed a pushbutton instead of a maintained jumper.【F:data/vesc_help_group/text_slices/input_part011.txt†L20650-L20671】
+- For stronger launches, JPPL suggested dropping APP positive ramping to 0.1 s, blending in throttle-curve gain, and then raising battery and phase current limits within the Motor Configuration → Current tab; Roby’s feedback that the scooter still felt soft highlighted the need to locate the phase-current slider hidden in that menu on Makerbase 75100 firmware.【F:data/vesc_help_group/text_slices/input_part011.txt†L20775-L20785】【F:data/vesc_help_group/text_slices/input_part011.txt†L20827-L20839】
+
+### Tronic X12 Voltage Ambitions & Firmware Caps
+- JPPL’s next Tronic X12 build targets a 22 S 10 P Molicel P45 pack (with spare 2 S/4 S blocks ready to experiment at 24 S) and he has already logged 150 km/h on 20 S; the controller’s firmware hard-stops at 600 A absolute unless riders flash a no-limit build, though JPPL feels ~400 A phase per motor with 100 A battery is already livable.【F:data/vesc_help_group/text_slices/input_part011.txt†L20690-L20725】
+- Firmware 6.06 beta introduces an overmodulation option JPPL hopes will add more top speed beyond the field-weakening that delivered his prior 151 km/h run.【F:data/vesc_help_group/text_slices/input_part011.txt†L20717-L20724】
+
+### Lonnyo 80 H & Swingarm Hardware Constraints
+- Yamal’s attempt to fit Lonnyo 80 H motors showed the caliper can’t be mounted until the swingarm pivot bolts are lengthened; JPPL echoed that both the main axis and suspension hardware need longer studs, while he focuses on sourcing 22 S 10 P packs to keep the 80 H fleet fed.【F:data/vesc_help_group/text_slices/input_part011.txt†L20733-L20745】【F:data/vesc_help_group/text_slices/input_part011.txt†L20787-L20819】
+- Yamal ultimately sold his Dualtron Thunder, is dismantling the Nami for steel-axle upgrades, and bought a Ninebot G2 for household duty, signalling a pivot toward lighter platforms while the heavy builds await new hardware.【F:data/vesc_help_group/text_slices/input_part011.txt†L20969-L21010】
+
+### Custom Dropouts & Pack Packaging Experiments
+- GABE’s stretched-frame project now concedes only 2 S 6 P can sit behind the fork, so he’s packaging a 22 S 6 P pack internally, pulling the hub forward ~15 cm to restore geometry, and machining the v1 fork dropouts (v2 lacks clearance) to free space for disc brakes.【F:data/vesc_help_group/text_slices/input_part011.txt†L20745-L20788】【F:data/vesc_help_group/text_slices/input_part011.txt†L21202-L21206】
+- He plans to angle-grind vent ribs, add four steel beams for structure, and repaint the orange fork sections once the motor placement is finalised, underscoring how deep chassis surgery can be for 22 S sleeper builds.【F:data/vesc_help_group/text_slices/input_part011.txt†L21193-L21206】
+
+### ESP32 Simple Display Bring-up & Wiring
+- JPPL’s Simple VESC Display (ESP32) compile errors disappeared after reinstalling the Arduino IDE, selecting the proper board profile, and reflashing; he’s now iterating on custom graphics while confirming the firmware only needs VESC RX/TX plus 5 V (or 3.3 V) and ground, leaving at least one controller COMM port available in dual-drive setups.【F:data/vesc_help_group/text_slices/input_part011.txt†L21121-L21185】【F:data/vesc_help_group/text_slices/input_part011.txt†L21140-L21183】
+- Smart Repair recommended jumping straight to VESC Express builds with SD-card and GPS support once the display is stable, and Jason encouraged porting the Express UI to the low-cost yellow-screen hardware for broader adoption.【F:data/vesc_help_group/text_slices/input_part011.txt†L21185-L21190】
+
+### Battery Damage & Storage Lessons
+- JPPL discovered three punctured cells in his new 22 S pack—likely overheated while copper busbars were soldered—and noted the scooter had been stored half-covered in rain, pushing him toward a full rebuild rather than trusting compromised cells.【F:data/vesc_help_group/text_slices/input_part011.txt†L21149-L21170】
+- Haku’s review of the photos suggested wrapping and enclosure sealing were minimal, reinforcing the need for full insulation and weatherproofing when 400 A packs sit outdoors between rides.【F:data/vesc_help_group/text_slices/input_part011.txt†L21171-L21176】
+
+### Hall Failures & VSS Sensorless Fallbacks
+- Arnau’s hall board died with his old 85150, leaving the replacement 100 V controller stuck in noisy sensorless launches; 🇪🇸AYO#74🏁 walked him through enabling VSS (sensorless zero-start) and checking detection parameter symmetry, while reminding him that equalising the displayed observer values matters more than halls for basic operation.【F:data/vesc_help_group/text_slices/input_part011.txt†L21209-L21235】
+- When the motor still struggled to self-start, Smart Repair advised checking ADC mappings for phantom brake inputs and considering that tight -amp readings look like charge current to some BMSs, explaining Arnau’s lingering cut-outs once the hall sensors failed.【F:data/vesc_help_group/text_slices/input_part011.txt†L21236-L21268】
+
+### BMS Undervoltage & Charge-FET Failures
+- Tristan’s over-current faults on a JBD-SP17S005 pack turned out to be the BMS FETs tripping—voltage sag forced the board to see the event as charge overcurrent—so Smart Repair recommended replacing the BMS entirely when settings look sane yet the cutoff persists.【F:data/vesc_help_group/text_slices/input_part011.txt†L21236-L21261】
+- Even after a swap the problem lingered, strengthening the suspicion that controller-side faults or wiring glitches can mimic BMS undervoltage events if logs show negative current spikes.【F:data/vesc_help_group/text_slices/input_part011.txt†L21293-L21297】
+
+### Rion / Tronic Hardware Sightings
+- 🇪🇸AYO#74🏁 shared photos of a 100 V Rion X12 controller while Basti listed fresh 33×2 60 H motors with 125 mm dropouts and 4 mm banana leads for €300 delivered inside the EU, giving builders new sourcing leads for high-power drivetrains.【F:data/vesc_help_group/text_slices/input_part011.txt†L21207-L21255】
+- Apo’s GT1D gained a second GT1 motor up front and was praised as “an absolute killer,” illustrating how dual-motor upgrades transform otherwise mild OEM platforms.【F:data/vesc_help_group/text_slices/input_part011.txt†L21424-L21428】
+
+### Kaabo GT Build Snapshot
+- ✨🇪🇸عمر’s latest setup pairs a 72 V 50 Ah Samsung 50S pack with a Kaabo 2000 W (33/3) hub and Spintend 85 V 240 A controller, anchoring the baseline before he experiments with external packs or higher current caps.【F:data/vesc_help_group/text_slices/input_part011.txt†L21368-L21371】
+
+### Spintend 85240 Aux-Rail Short Lessons
+- Shlomozero10 shorted the 12 V auxiliary rail to ground on a brand-new Spintend 85240 while powering lights, killing the controller until the buck regulator and (potentially) power stage are replaced—Haku advised escalating to James Soderstrom for component-level repair guidance before mixing 75200 and 85150 controllers over CAN as a stopgap.【F:data/vesc_help_group/text_slices/input_part011.txt†L21413-L21489】
+- The incident reiterates that the aux step-down isn’t fused; tapping it for accessories needs careful insulation or an external buck to avoid destroying the logic board on contact.【F:data/vesc_help_group/text_slices/input_part011.txt†L21441-L21478】
+
+### Custom Heatsink Planning for Spintend Stages
+- Haku is templating aluminium fin stacks for his Wepoor’s Spintend 12-FET stage—mocking up cuts, mounting strips, and potential CNC work—after burning through multiple 85/250s, underscoring the need for purpose-built heatsinks when running high phase amps in enclosed decks.【F:data/vesc_help_group/text_slices/input_part011.txt†L21496-L21519】
+
+### Geared Hub Reverse Rotation Fixes
+- ToBeAsIAm’s Bafang C961 rear hub spins backward because of phase/hall mismatch; the group suggested tracing the intermediate extension harness (often black/white reversed for direction) or switching to a VESC for easier wire remapping and regen tuning.【F:data/vesc_help_group/text_slices/input_part011.txt†L19574-L19580】
+
+### Flipsky FT85KS “Non-VESC” Controller Watch
+- Yamal spotted AliExpress listings for the FT85KS 85 V/250 A controller marketed as “non-VESC”; JPPL confirmed it still runs Flipsky’s tool with auto-detection, but veterans cautioned it’s a divergent design and may lack community firmware support.【F:data/vesc_help_group/text_slices/input_part011.txt†L19696-L19712】
+
+### Throttle-Response Tuning for New VESC Riders
+- francois coached Hugo through eliminating a 5 s power lag by lowering throttle ramp time (~0.1–0.2 s per step) and raising `cc_startup_boost_duty` toward 0.04–0.06 for a snappier launch, warning that overshoot can induce current spikes.【F:data/vesc_help_group/text_slices/input_part011.txt†L19734-L19750】
+
+### Mini Blade Custom Build Speed Limits
+- SchweigePflicht’s single Mini Blade motor sees 120 km/h free-spin yet only 60 km/h loaded because the 20 S system is split into 13 S+7 S packs with just 55 A battery/80 A phase; peers recommended 100–120 A phase, 170–180 A absolute limits, and better pack balancing (more parallel on the 7 S side) to avoid voltage collapse.【F:data/vesc_help_group/text_slices/input_part011.txt†L19751-L19798】
+
+### G300 Thermal Paste & Layout Findings
+- JPPL’s teardown of a new G300 shows an 18-FET stack submerged in excessive thermal compound that conducts into the CNC housing; while messy, it leverages the case as a dual-sided heatsink, so he’s leaving the paste in place for now.【F:data/vesc_help_group/text_slices/input_part011.txt†L19802-L19831】
+
+### JPPL Dual-Controller Harness Kit
+- JPPL previewed a plug-and-play harness that pairs dual Thor300 controllers with a Spintend ADC board, VESC Express telemetry, 12 V lighting, horn, and shared on/off control—targeting 300 A-phase builds up to 20 S for riders who want synchronized dual drive without custom wiring.【F:data/vesc_help_group/text_slices/input_part011.txt†L19928-L19935】
+
+### Spintend 85/150 22 S Upgrade Debate
+- Arnau hopes to push a Spintend 85/150 to 22 S/150 A battery with Tokmas 500 A FETs, but Jason and GABE cautioned the six-FET powerstage and stock capacitors are the real limit—better to upgrade caps, skip e-brake, or move to an MP2/C350 class controller built for 30 S duty.【F:data/vesc_help_group/text_slices/input_part011.txt†L19984-L20003】
+
+### Spintend ADC Adapter & Accessory Control
+- Roby MacGyver learned that adding keyed ignition and lighting to a Makerbase/Spintend setup is easiest with the ADC Adapter V3 (~$30–35 from Spintend); the board exposes accessory power, while VESC Tool lets you clamp speed profiles and map lighting without coding.【F:data/vesc_help_group/text_slices/input_part011.txt†L20105-L20131】
+
+### Shipping & Cooling Logistics for Thunder Builds
+- JPPL and Shlomozero are iterating bolt-on heatsinks for Thunder 2 dual G300 installs—3D-printing radiator mounts from standard filament, polishing aluminium plates, and reusing dead 75200 fins—highlighting the need to verify insulation and share STL files for community reuse.【F:data/vesc_help_group/text_slices/input_part011.txt†L20246-L20261】
+
+### Ninebot G2 Suspension & Fork Swaps
+- ‘lekrsu’ warned that stock Ninebot G2 suspension arms crack quickly, so his build now runs a replacement front fork (with room for a second 65H motor) while he reinforces the chassis—Yamal confirmed the G2’s larger frame makes it a better city platform than the G30 despite extra moving parts.【F:data/vesc_help_group/text_slices/input_part011.txt†L20407-L20430】
+
+### Waterproofing Nami & G300 Electronics
+- Rainy-season riders are boxing in Nami electronics: Jason suggested conformal coating or sealed enclosures with automotive connectors, Lieven repurposes IKEA lunchboxes with silicone grommets, and Arnau noted G300 controllers already arrive with rubber gaskets for splash resistance.【F:data/vesc_help_group/text_slices/input_part011.txt†L20438-L20473】
+
+### Makerbase Ignition & Shutdown Wiring
+- JPPL walked Roby through shifting the Makerbase controller’s DC-DC switch (pin 9) into “control” mode, feeding 5 V to the AD15 enable pin via the key switch, and using VESC Tool’s ADC shutdown timer so the unit truly powers off after a delay instead of staying latched on.【F:data/vesc_help_group/text_slices/input_part011.txt†L20452-L20522】
+
+### Makerbase Control Switch & Torque Tuning
+- Roby confirmed the Makerbase 75100 needs a momentary switch that briefly shorts the ignition leads (≈1 s to latch on, ≈3 s to power back down) instead of a maintained jumper, and JPPL pointed him at Motor Config → Current → phase-amp limits plus App Config ramping (0.1 s) and throttle-curve gain to soften launch while adding low-end torque.【F:data/vesc_help_group/text_slices/input_part011.txt†L20659-L20671】【F:data/vesc_help_group/text_slices/input_part011.txt†L20827-L20838】
+
+### Tronic X12 Speed Chassis Planning
+- JPPL is coating both the logic and power stages for corrosion resistance, then waiting on a 22 S10 P P45B pack; he notes Tronic X12s are firmware-limited to ~600 A phase (650 A only with no-limit firmware), rated for 24 S max, and already pushed his 75/80 H Lonnyo setup to 150 km/h at just 20 S/100 A battery per controller.【F:data/vesc_help_group/text_slices/input_part011.txt†L20678-L20710】
+
+### JPPL Pack Damage & Weatherproofing Lessons
+- The new copper busbar pack arrived with three perforated cells—likely from aggressive solder heat—so JPPL is re-testing the 22 S build, evaluating whether to start over, and stressing that the prior 400 A pack was ruined by rain after being parked outside without full enclosure.【F:data/vesc_help_group/text_slices/input_part011.txt†L21149-L21170】
+
+### ESP32 Simple VESC Display Progress
+- Reinstalling the Android (Arduino) IDE, choosing the right ESP32 board profile, and wiring RX/TX/GND/5 V let JPPL flash the Simple VESC Display; he’s now experimenting with custom graphics while Smart Repair suggests porting VESC Express with SD/GPS logging, and Jason confirms parameter write support is still pending.【F:data/vesc_help_group/text_slices/input_part011.txt†L21121-L21190】【F:data/vesc_help_group/text_slices/input_part011.txt†L21200-L21201】
+
+### GABE’s 22 S Sleeper Geometry Work
+- GABE is shrinking his 22 S commuter frame by pushing the rear assembly ~15 cm forward, adding four internal steel beams, and planning angle-grinder cuts on the v1 forks so disc brakes clear; the revisions leave room for a 22 S6 P internal pack (no external 2 S needed) while he juggles thinner PMT tire options to extend range.【F:data/vesc_help_group/text_slices/input_part011.txt†L20800-L20825】【F:data/vesc_help_group/text_slices/input_part011.txt†L21193-L21206】【F:data/vesc_help_group/text_slices/input_part011.txt†L21355-L21367】
+
+### Drivetrain & BMS Troubleshooting Clinic
+- Arnau’s Makerbase 100 V controller lost its hall sensors when an 85/150 failed, leaving the motor hard-starting; 🇪🇸AYO recommended configuring VSS sensing while Smart Repair had Tristan inspect ADC mappings after a JBD-SP17S005 kept tripping undervoltage via charge overcurrent, prompting a BMS swap and renewed debate over JK vs. Daly hardware for >60 A discharge.【F:data/vesc_help_group/text_slices/input_part011.txt†L21209-L21280】【F:data/vesc_help_group/text_slices/input_part011.txt†L21236-L21266】【F:data/vesc_help_group/text_slices/input_part011.txt†L21245-L21260】
+
+### Parts & Build Notes
+- Basti flagged new 33×2 60 H hubs with 125 mm dropouts and 4 mm banana phases available in the EU for about €300 shipped, giving builders another option for compact dual drives.【F:data/vesc_help_group/text_slices/input_part011.txt†L21207-L21208】
+- عمر shared a Kaabo 33/3 motor build running a 72 V 50 Ah Samsung 50S pack on a Spintend 85/240, underscoring that the controller comfortably supports higher-voltage single-motor setups when paired with stout cells.【F:data/vesc_help_group/text_slices/input_part011.txt†L21368-L21371】
+
+### Spintend 85/240 Aux-Rail Cautionary Tale
+- Shlomozero shorted the 12 V auxiliary leads on a brand-new 85/240, leaving it unresponsive and forcing him to consider a buck-board replacement or fall back to mixing a 75/200 with an 85/150 over CAN; James is expected to advise on sourcing the “12 buck” logic board, and the incident highlights the need for fused lighting taps on the aux rail.【F:data/vesc_help_group/text_slices/input_part011.txt†L21413-L21489】
+
+### Makerbase Ignition & Launch Tuning
+- Roby MacGyver’s Makerbase 75100 stayed powered until JPPL explained that the AD15 lead needs a 5 V feed through a momentary switch—briefly bridging controller 5 V to AD15 toggles the latch, while VESC Tool’s App → ADC shutdown timer can be set to power the controller down after a chosen delay.【F:data/vesc_help_group/text_slices/input_part011.txt†L20502-L20524】【F:data/vesc_help_group/text_slices/input_part011.txt†L20652-L20671】
+- For snappier launches JPPL recommended dropping positive ramping time toward 0.1 s, adding throttle-curve percentage, and confirming higher battery/phase limits in Motor → Current so the 75100 actually delivers the extra torque Roby is chasing.【F:data/vesc_help_group/text_slices/input_part011.txt†L20776-L20785】
+
+### Tronic X12 24 S Plans & Benchmarks
+- JPPL is conformal-coating both logic and power boards on his dual X12 stack to protect against moisture, warning that the sealant will be tedious to remove if warranty service is ever required.【F:data/vesc_help_group/text_slices/input_part011.txt†L20677-L20685】
+- He has a 22 S 10 P P45 pack en route, keeps spare 2 S/4 S modules to stretch the setup to 24 S, and noted the stock firmware clamps absolute current around 600 A (despite 650 A marketing) unless a no-limit build is flashed.【F:data/vesc_help_group/text_slices/input_part011.txt†L20690-L20705】
+- Earlier 20 S runs already hit ~150 km/h with roughly 400 A phase and ~100 A battery per controller, and he expects 24 S plus the new overmodulation option in 6.06 beta to unlock even higher top speed without raising current.【F:data/vesc_help_group/text_slices/input_part011.txt†L20700-L20723】
+
+### Ninebot G2 Pivot & Nami Maintenance
+- Yamal confirmed the Lonnyo 80 H swap on his Nami needs longer swingarm bolts to clear the caliper, so he’s sourcing extended hardware before reassembling the wheelset.【F:data/vesc_help_group/text_slices/input_part011.txt†L20733-L20744】
+- He sold his Dualtron Thunder (and the RFP frame) to focus on a Ninebot G2 that should arrive within days, partly to motivate his wife to ride while he finishes the Nami’s steel-axle and arm-length upgrades.【F:data/vesc_help_group/text_slices/input_part011.txt†L20969-L20997】
+- The outgoing Spintend-powered build has already logged roughly 2,500 km at 200 A battery/phase without failures, underscoring the payoff from meticulous setup even as he contemplates the tamer G2 for daily use.【F:data/vesc_help_group/text_slices/input_part011.txt†L20998-L21013】
+
+### Wepoor Heatsink Fabrication Push
+- Haku is hunting for local machinists to trim large aluminium fins so the Spintend stage can mount flush on the Wepoor without CNC costs, with Yamal suggesting removing one fin to create a bolt strip and both agreeing that direct-to-heatsink mounting will cool better than remote brackets.【F:data/vesc_help_group/text_slices/input_part011.txt†L20866-L20903】【F:data/vesc_help_group/text_slices/input_part011.txt†L21313-L21319】【F:data/vesc_help_group/text_slices/input_part011.txt†L21504-L21518】
+
+### High-Current Usage Anecdotes
+- Yamal has already logged 2,500 km hammering 200 A battery/phase on his Spintend-powered build without failures—contrasting Haku’s repeated stage deaths and reinforcing the value of clean installs and conservative testing before chasing more power.【F:data/vesc_help_group/text_slices/input_part011.txt†L21460-L21485】
+
+### Mini Hub Spacer Fabrication & Thermal Stack
+- GABE is closing the gap on his 250 W commuter hub by sandwiching aluminium plates with thermal paste and having Hackintosh print a 10 mm spacer, aiming to retain acceptable heat transfer despite the thicker adapter.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L21492-L21536】
+
+### Seven VESC Shipments & Review Gap
+- Face de Pin Sucé relayed that early Seven VESC units “perform well,” yet a four-month-old order of six controllers has only yielded two deliveries so far, underscoring supply bottlenecks.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L21556-L21585】
+- Yoann confirmed Roscheeee bought a pair for a client but kept them back for personal validation, while noting the only coverage so far is an image-based video—there are still no substantive field reviews to benchmark against alternatives.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L21620-L21680】
+
+### Flipsky Capacitor Failures & Component Quality Questions
+- David’s Flipsky controller dropped to a 14 V reading on a 20 S pack after a second capacitor explosion, drawing advice that simple cap swaps may not help because subsequent replacements have also failed.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L21296-L21758】
+- ‘lekrsu’ and Haku blamed poor component choices rather than layout, reinforcing ongoing skepticism about Flipsky’s parts bin for high-power duty.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L21745-L21823】
+
+### Yamal’s 25 kW Ambitions & Motor Plans
+- Haku joked that Yamal’s current setup could push 25 kW before conceding the build lacks motor-temperature sensing; Yamal agreed that stepping up to LY hubs with 10 mm phase leads (plus refreshed bearings and steering axle) is on the wish list once his next project settles.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L21860-L21899】
+
+### M365 Sleeper Rebuild & Welder Downtime
+- Stripped threads on the Xiaomi Pro 2 frame forced GABE to migrate the sleeper project into an M365 chassis with intact M3 mounts, where he plans to finish soldering a P42A pack once he buys more solder.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L21901-L21975】
+- A blown board in his spot welder now throws an E02 fault; Haku recognised the failure as a MOSFET issue he once solved with upgraded parts, shared that his replacement board only charges to 5.4 V, and even pointed to a heavier Glitter 811H welder as a potential upgrade if repairs stall.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L22311-L22668】
+
+### Flipsky 75100 Regen Cutoff Anecdotes
+- PuneDir reported his Flipsky 75100 dies only when regen braking triggers a cutoff—normal battery cutoffs don’t recreate the fault—while Mirono countered that his own unit has survived nine months, highlighting inconsistent field reliability and the need to tame regen ramps on fragile units.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L22755-L23007】
 
 ## Follow-ups / Open Questions
+- Confirm that GABE’s 10 mm spacer and aluminium stack keep the 250 W hub cool once Hackintosh’s print is in service, and capture any thermal measurements that justify the workaround.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L21492-L21536】
+- Log the first substantial field reports on the Seven VESC minis and note whether the outstanding four controllers from the early six-pack order finally ship.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L21556-L21680】
+- Track the autopsy on David’s Flipsky failure to see if the repeated capacitor pops reveal a deeper parts-quality issue or prompt a controller swap.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L21296-L21758】
+- Capture whether Yamal upgrades to LY motors with 10 mm phases or adds motor-temp sensing before leaning on 25 kW targets.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L21860-L21899】
+- Follow GABE’s spot-welder repair or replacement (including the E02 MOSFET fault and the Glitter 811H alternative) so his M365 pack work can resume.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L22311-L22668】
+- Document any regen-ramp or firmware tweaks that prevent PuneDir’s Flipsky 75100 from dying on regen brake cutoffs while validating Mirono’s long-term survivability claims.【F:data/raw/telegram_exports/vesc_help_group/input_part011.json†L22755-L23007】
 - Publish a Lonnyo 70H sealing/bearing replacement checklist (tools, seals, torque) so builders can replicate Smart Repair’s preventative maintenance.【F:data/vesc_help_group/text_slices/input_part011.txt†L16325-L16333】
 - Capture Smart Repair’s finished documentation on the GT pack’s copper-bridged busbars and note whether the 22 S rebuild reduces the 12 V sag he currently sees at 500 A phase.【F:data/vesc_help_group/text_slices/input_part011.txt†L16758-L16790】
 - Verify whether KierreKikkeli’s ADC recalibration and hardware-switch check eliminate the Xiaomi brake glitch, and log any additional wiring or filtering tweaks he needed.【F:data/vesc_help_group/text_slices/input_part011.txt†L16193-L16217】
@@ -561,7 +779,7 @@
 - Monitor Yamal’s Thunder 3 homologation steps—registration, insurance, and whether the legal hardware matches the certified 72 V spec once it hits the road.【F:data/vesc_help_group/text_slices/input_part011.txt†L16543-L16558】
 - Determine if anyone confirms the 75100 Pro V2 servo header’s voltage tolerance or publishes an Arduino-based PAS adapter guide for three-wire cadence sensors.【F:data/vesc_help_group/text_slices/input_part011.txt†L16505-L16621】
 - Capture a Makerbase 75100 control-switch quick-start (momentary button wiring plus ramp/torque presets) once Roby MacGyver dials in his settings.【F:data/vesc_help_group/text_slices/input_part011.txt†L20652-L20838】
-- Track JPPL’s rebuild of the 22 S 10 P pack after the copper-induced cell damage and document whatever weatherproofing replaces the rain-soaked 400 A version.【F:data/vesc_help_group/text_slices/input_part011.txt†L21149-L21158】
+- Track JPPL’s rebuild of the 22 S 10 P pack (plus the optional 2 S/4 S extensions for 24 S testing) after the copper-induced cell damage, and document whatever weatherproofing replaces the rain-soaked 400 A version.【F:data/vesc_help_group/text_slices/input_part011.txt†L20690-L20705】【F:data/vesc_help_group/text_slices/input_part011.txt†L21149-L21158】
 - Follow GABE’s 22 S sleeper packaging work (dropout cuts, brake clearance, tire choices) until the final geometry and thermal logs are published.【F:data/vesc_help_group/text_slices/input_part011.txt†L20786-L20822】【F:data/vesc_help_group/text_slices/input_part011.txt†L21193-L21206】
 - Monitor Haku’s custom heatsink solution on the Wepoor Spintend stage and whether the ANT BMS tweaks keep the new powerstage alive.【F:data/vesc_help_group/text_slices/input_part011.txt†L20840-L20933】【F:data/vesc_help_group/text_slices/input_part011.txt†L21493-L21520】
 - Track JPPL’s Simple VESC Display firmware progress and whether the community ports VESC Express with SD/GPS logging onto it.【F:data/vesc_help_group/text_slices/input_part011.txt†L21121-L21190】
@@ -590,6 +808,7 @@
 - Follow Hurriicane’s 75100 V2 repair to confirm the missing 12 V rail fix restores normal boot behavior without further gate-driver damage.
 - Document Pandalgns’s Halo rebuild results after inspecting harnesses and replacing the burned controller/display.
 - Follow Pandalgns’s Lonnyo 100 H mounting plan—custom shock brackets, wheel clearance, and controller pairing once the hardware arrives.【F:data/vesc_help_group/text_slices/input_part011.txt†L15539-L15573】
+- Track GABE’s 22 S sleeper frame work—dropout machining, steel reinforcements, and tire selection—until the 22×3 70 H build is riding.【F:data/vesc_help_group/text_slices/input_part011.txt†L20745-L20822】
 - Gather best practices on QS10/QS8 polarity marking and confirm whether QS10 adoption reduces arcing on >300 A builds.
 - Note GABE’s long-term data running the Xiaomi dash, high-power M365 pack, and disabled BMS safeguards to ensure the commuter remains safe.
 - Monitor GABE’s 250–350 W hub experiments to confirm whether a 35 A phase cap and added temp sensing stop further motor burnouts.
@@ -608,10 +827,15 @@
 - Determine whether Giuseppe’s Makerbase 75100V2 failure is recoverable (firmware, wiring, or hardware defect) and whether Makerbase issues revised guidance for the epoxy-backed boards.
 - Follow up on David’s Inokim OXO brake adapter or swingarm swap to document a repeatable four-piston solution.【F:data/vesc_help_group/text_slices/input_part011.txt†L19400-L19403】
 - Track Arnau’s attempt to harden the Spintend 85/150 for 22 S duty (MOSFET/cap upgrades, absolute current limits) and whether he pivots to the C350 alternative.【F:data/vesc_help_group/text_slices/input_part011.txt†L19970-L20053】【F:data/vesc_help_group/text_slices/input_part011.txt†L20187-L20204】
+- Confirm whether Tristan eliminates the JBD-SP17S005 undervoltage trips after swapping BMS hardware or adjusting controller regen settings.【F:data/vesc_help_group/text_slices/input_part011.txt†L21236-L21297】
 - Monitor JPPL’s dual-controller harness rollout and any published wiring diagrams or component lists once the kit ships.【F:data/vesc_help_group/text_slices/input_part011.txt†L19928-L19935】
+- Capture JPPL’s Simple VESC Display refinements and whether his ESP32 graphics package or wiring notes get published alongside the harness kit.【F:data/vesc_help_group/text_slices/input_part011.txt†L21121-L21190】
 - Check whether Shlomozero finalizes the Thunder 2 cooling stack using 75200 radiators or other bolt-on heat spreaders, and gather temperature data once the build runs.【F:data/vesc_help_group/text_slices/input_part011.txt†L20201-L20261】
+- Log whether Shlomozero revives the shorted Spintend 85240 (buck replacement, powerstage swap, or warranty) before mixing 75200/85150 controllers over CAN.【F:data/vesc_help_group/text_slices/input_part011.txt†L21413-L21489】
 - Verify Roby MacGyver’s Makerbase ignition wiring and shutdown settings resolve his always-on controller issue before sharing a quick-start guide.【F:data/vesc_help_group/text_slices/input_part011.txt†L20399-L20454】
 - Capture Hugo’s final ABS/phase-current settings after raising the overcurrent threshold to eliminate throttle cutouts.【F:data/vesc_help_group/text_slices/input_part011.txt†L20441-L20515】
+- Track ‘lekrsu’s long-term results reinforcing the Ninebot G2 fork and suspension to confirm durability once the second 65H motor is mounted.【F:data/vesc_help_group/text_slices/input_part011.txt†L20407-L20430】
+- Document whichever waterproofing approach (conformal coat vs. sealed enclosure) Nami riders adopt so the electronics stay protected without sacrificing serviceability.【F:data/vesc_help_group/text_slices/input_part011.txt†L20438-L20473】
 - Capture Haku’s final fix for the Wepoor front powerstage failures—whether ramp tweaks, ANT BMS settings, regen changes, or heavier-duty controllers solve the issue.
 - Document Mattia’s ANT BMS setup once the wiring/app configuration stabilizes and note any firmware updates needed beyond the shared APK.
 - Track progress on Jason’s 30 S “JESC” controller and open-source 32 S VESC BMS, including physical fitment in G30 decks and firmware milestones.
