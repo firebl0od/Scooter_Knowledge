@@ -31,6 +31,7 @@
 - **Use the adapter as logic, not power:** The horn output only sources a couple of amps—enough for low-power buzzers but not vintage 35 W halogens—so trigger a relay or MOSFET that pulls from a beefier DC/DC converter.[^9][^10]
 - **85250 & Ubox installs:** Route brake-light logic through the ADC breakout, but feed lamps from a separate converter so you don’t brown out the controller when multiple 12 V loads fire at once.[^11]
 - **TF100 & OEM switch pods:** Reuse factory throttles by landing the red/black hall power and the green signal lead on a 3.3 V ADC input; this preserves dash ergonomics without custom PCBs.[^12]
+- **Skip illuminated combo pods:** Backlit handlebar switches feed accessory voltage into the signal lines and confuse the ADC board unless you gut the lighting—treat them as incompatible without a full rewire.[^22]
 - **Avoid parasitic taps:** Pulling 12 V from internal headlight pins (e.g., X12) drags the logic rail and costs range—draw pack power into a dedicated converter instead.[^15]
 - **Protect logic rails:** Shorting auxiliary leads straight on the controller board has already destroyed logic stages; isolate accessories and fuse every feed.[^16]
 - **Treat buttons as triggers only:** The ADC adapter does not replace a loop key or smart-BMS latch; plan a real kill switch for theft deterrence or maintenance.[^17][^18]
@@ -70,3 +71,4 @@
 [^19]: Pull-down resistors on throttle lines guarantee a zero output if the signal wire opens.[F:knowledge/notes/input_part007_review.md†L223-L223]
 [^20]: Routing throttle through dash adapters adds noticeable lag; direct ADC wiring restores responsiveness.[F:knowledge/notes/input_part007_review.md†L225-L225]
 [^21]: VESC Tool can wipe ADC settings after reconnects unless you explicitly write both motor and app configs.[F:knowledge/notes/input_part005_review.md†L573-L573]
+[^22]: Illuminated AliExpress switch pods leak voltage into ADC signal lines and require major rewiring to behave.[F:knowledge/notes/input_part010_review.md†L74-L77]

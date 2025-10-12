@@ -4,6 +4,7 @@
 - RE90 buyers should budget well above the sticker: VAT, customs, and freight push the $6 800 base toward roughly €7 500 even before spares, which makes Paris pickup runs or hand-carrying attractive to avoid repeat taxes.[^1]
 - Marketing claims of 400 A phase output and 136 PS motors remain unverified; community consensus is that the 23 S 6 P (~3 kWh) battery is the true bottleneck, so treat stock performance promises as aspirational until logs prove otherwise.[^1][^2]
 - The carbon chassis ships with minimal weather sealing—expect to add waterproofing and consider dry-weather slicks, because the platform is tuned for peak tarmac performance rather than all-season utility.[^2]
+- Rebranded Leo Apex/Rion batches still ride on LY 60 H 22/3 hubs with 4 mm phase leads, so top speed stalls around 123 km/h on 24 S and phase current needs to stay near 180–200 A despite the Tronic X12 controllers; even at >€9 000 landed, riders still swap out the stock Nutt brakes.[^4][^5]
 - Replacement Rion/Weped FF-spec motors can be sourced around €340 in France, but rising freight often erases the deal for overseas owners; plan group shipments or forwarding to keep landed cost sane.[^3]
 
 ## Platform Snapshot
@@ -11,6 +12,7 @@
 | --- | --- | --- |
 | Battery & power | 23 S 6 P pack (~3 kWh) underpins stock builds; limited headroom makes the battery, not controllers, the first limit you will hit.[^2] | Prioritise cell health monitoring and plan future pack upgrades before chasing more aggressive controller tunes. |
 | Chassis | Carbon construction is lauded for stiffness and weight, but there is virtually no OEM waterproofing.[^2] | Invest early in sealing seams, cable glands, and connector boots if the scooter will ever see wet conditions. |
+| Motor & controller pairing | LY 60 H 22/3 hubs with 4 mm leads cap reliable phase current near 180–200 A and flatten acceleration beyond ~123 km/h even on 24 S Tronic X12 builds.[^4] | Budget for rewinds or higher-spec hubs if you plan to push beyond stock top-speed targets, and monitor lead temperatures during extended pulls. |
 | Cost of entry | Import math shows €7 500 landed cost once VAT/customs/shipping are included.[^1] | Price in protective gear, spares, and a contingency fund—repairs and customs rework can rival the base scooter price. |
 | Drivetrain service | FF-spec motors are available via specialist contacts at ≈€340 each, yet international freight can double that figure.[^3] | Consolidate orders or partner with EU-based buyers to minimise per-motor logistics overhead. |
 
@@ -21,6 +23,7 @@
 ## Reliability Watchlist
 - **Battery truth gap:** Until you have telemetry confirming sustained current delivery, assume marketing numbers overstate real capability.[^1]
 - **Weather exposure:** Stock seals are insufficient; moisture ingress will jeopardise both the carbon structure and high-voltage electronics if left untreated.[^2]
+- **Motor bottlenecks:** The LY-manufactured hubs remain the limiting factor—pushing phase current past ≈200 A or ignoring lead temperatures risks overheating long before the controllers run out of headroom.[^4]
 - **Logistics churn:** Replacement motors are attainable but shipping shocks can nullify savings—budget for customs fees or arrange local pickup.[^3]
 
 ## Setup Priorities for New Owners
@@ -38,3 +41,5 @@
 [^1]: Cost breakdowns and skepticism toward 400 A/136 PS marketing around the RE90 import experience.【F:knowledge/notes/input_part000_review.md†L49-L51】
 [^2]: Praise for the 23 S 6 P battery and carbon build alongside warnings about limited waterproofing and dry-optimised tyres.【F:knowledge/notes/input_part000_review.md†L51-L53】
 [^3]: Availability and pricing realities for Rion/Weped FF-spec motors sourced within France.【F:knowledge/notes/input_part000_review.md†L698-L698】
+[^4]: Rebranded Leo Apex/Rion builds still relying on LY 60 H 22/3 hubs with 4 mm leads and topping out near 123 km/h on 24 S because phase current must stay around 180–200 A to avoid overheating.【F:knowledge/notes/input_part010_review.md†L67-L68】
+[^5]: Production pricing above €9 000 while the platform continues shipping with Nutt brakes despite the premium positioning.【F:knowledge/notes/input_part010_review.md†L68-L69】
