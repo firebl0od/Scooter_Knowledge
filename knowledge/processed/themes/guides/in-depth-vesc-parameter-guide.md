@@ -787,16 +787,19 @@ Params: foc_fw_current_max, foc_fw_duty_start, etc.
 - Injects negative d-axis current at high speed to exceed base motor speed. Increases top RPM but with caution.
 
 **Deeper Insights**
-- Great for “overdrive” ~10–30% more speed. 
+- Great for “overdrive” ~10–30% more speed.
+- Expect roughly 25 % more electrical loss during heavy FW events; racers log stator heat scaling about 1.5× higher compared with non-FW pulls, so plan cooling accordingly.[^fw-loss][^fw-heat]
 - Watch for overvoltage if throttle is cut at high RPM.
 
 **How / When to Modify**
-- For 5–30A FW as a start, set duty_start ~0.9. 
+- For 5–30A FW as a start, set duty_start ~0.9.
 - Validate logs on actual rides.
+- Stage FW increases alongside traction-control and phase-current reviews—24 S Rion builds found front-wheel spin and recurring faults when FW stacked on already aggressive 200 A tunes.[^fw-rion]
 
 **Potential Side Effects**
 - Excessive FW => bus volt spikes, MOSFET damage, or battery BMS triggers.
 - Motor might overheat if run at high speed heavily.
+- Combining deep FW with maxed phase current can reintroduce grinding noises, traction loss, or ABS faults on high-voltage scooters; back limits down before retesting.[^fw-rion]
 
 
 ### 6.13 Speed Tracker Position Source
@@ -1137,6 +1140,9 @@ Params under bms.*
 [^makerbase-cap-fix]: Reviewers noted that bolting additional capacitance onto the 12 V/5 V rails of Flipsky and Makerbase hardware reduced brownouts and restored trustworthy telemetry before any current-limit tuning.【F:knowledge/notes/input_part005_review.md†L494-L520】
 [^regen-sizing]: Community guidance for unknown OEM packs recommends starting regen at −5 A to −10 A and increasing only after confirming BMS charge ratings and wiring health, rather than assuming large Laotie/Zero batteries can absorb high current bursts.【F:data/vesc_help_group/text_slices/input_part005.txt†L8289-L8331】
 [^fw-regen]: Field-weakening and long downhills were shown to spike bus voltage on Spintend builds, so riders log pack voltage/temperature while testing regen to avoid surprise BMS cutoffs or controller faults.【F:data/vesc_help_group/text_slices/input_part005.txt†L24644-L24651】
+[^fw-loss]: Riders estimate roughly 25 % higher losses when field weakening is active, backing off when logs show efficiency plunging during high-speed pulls.【F:knowledge/notes/input_part002_review.md†L68-L70】
+[^fw-heat]: MP2 builders recorded about 1.5× stator heat rise under field-weakening compared with non-FW runs, motivating them to skip FW until additional cooling is installed.【F:knowledge/notes/input_part010_review.md†L71-L72】
+[^fw-rion]: Jesús’s 24 S Rion experiments showed front-wheel spin near 120 km/h and returning grinding faults whenever phase current and field weakening were maxed simultaneously, prompting a retreat to ~200 A settings before further tests.【F:knowledge/notes/input_part007_review.md†L52-L55】
 
 # WRAP-UP & FINAL NOTES
 
