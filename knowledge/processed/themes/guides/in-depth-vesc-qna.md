@@ -222,9 +222,9 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 **Answer**
 
-- If you have well-functioning halls, it’s recommended to use them in FOC for immediate 0-rpm detection. 
-- Sensorless FOC can still do well but might produce a short delay or torque ripple starting from standstill, especially if the motor inductances are unknown or the load is heavy. 
-- In typical e-scooters, hall + FOC yields a very smooth startup with no stutter.
+- Keep the hall sensors enabled whenever they are healthy—builders running pure sensorless FOC still report needing a push start or deep HFI tuning to stop squealing stalls at launch.[^1]
+- Treat intermittent hall faults as a wiring or PCB issue to fix, not a reason to abandon sensors; repeated “Bad FOC hall detection” threads traced the fault to damaged hall boards that were replaced before smooth starts returned.[^2]
+- If you must run sensorless, confirm the motor has at least ~15 % inductance delta (Ld vs. Lq) so high-frequency injection can lock on quickly and deliver hall-like launch torque.[^3]
 
 </details>
 
@@ -233,9 +233,9 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 **Answer**
 
-- HFI: The ESC injects high-frequency signals into the motor windings at low speed to detect rotor position if you’re sensorless. 
-- It helps motors with enough inductance difference (saliency) to produce a measurable response. 
-- Great if you have no halls or do stealth builds—lets you start from 0 speed with decent torque.
+- HFI injects a calibrated AC probe into the windings so the controller can estimate rotor angle even at 0 eRPM; Vedder’s 45° V0/V7 routine on FW 6.0 finally gave riders repeatable hall-less launches.[^4]
+- Firmware 6.02 and later polish the workflow—wider hall hysteresis, quieter sampling, and better CAN logging make silent HFI viable on phase-shunt ESCs once tuned.[^5]
+- Crews still treat HFI as an expert tool: field tests pair it with saturation compensation and start-current trimming before trusting customer scooters without halls.[^6]
 
 </details>
 
@@ -244,10 +244,9 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 **Answer**
 
-- 45° V0V7 HFI – Injects a rotating test vector ~45° from the d-axis. Often silent if your ESC can sample in both V0 and V7 states at high frequency (≥30 kHz). 
-- Coupled HFI – More robust in some motors with large IPM saliency. It measures cross-coupling of d-axis and q-axis. 
-- VSS (Vedder Sensorless Start) – A simpler “short injection” of HFI just at startup to resolve the 180° ambiguity, then transitions to the normal observer. 
-- They all aim to solve sensorless control at near-zero speed, each with slightly different signal injection approaches.
+- 45° V0/V7 HFI keeps firing the probe while you ride, letting the observer stay locked as long as your ESC can sample both zero vectors at ≥30 kHz.[^4]
+- Coupled HFI watches the cross-axis current response and tends to favour IPM motors with large saliency splits, while the simpler Vedder Sensorless Start (VSS) just injects a burst, resolves the 180° ambiguity, and hands back to the observer.[^7]
+- Builders chasing quiet starts still run VSS or halls on steep launches, then graduate to continuous HFI once they verify temperature inputs and inductance data for the specific motor.[^5]
 
 </details>
 
@@ -257,9 +256,9 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 **Answer**
 
-- MTPA intentionally applies negative d-current to exploit the difference between Ld and Lq in Interior Permanent Magnet (IPM) motors, yielding higher torque for the same amps. 
-- If your motor is a standard surface magnet outrunner (Ld ≈ Lq), MTPA does almost nothing. 
-- If you have IPM (like many larger QS hub motors or e-motorcycle motors) with Ld < Lq, MTPA can significantly boost torque, especially at mid speeds.
+- Enable MTPA only when the motor actually has saliency—IPM and speed-wound hubs respond, but surface-magnet commuter hubs mostly just make extra heat for little gain.[^8]
+- Race builders still see value: Blade-class hubs pick up ~20 km/h of top speed on 15–17 S packs when phase current headroom stays around 250 A, yet they log every run to confirm magnets and stators survive the added negative d-current.[^9]
+- Most community dynos now treat MTPA as optional even on big hubs because voltage upgrades or taller windings usually deliver the same speed boost with less tuning overhead.[^8]
 
 </details>
 
@@ -268,10 +267,9 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 **Answer**
 
-1. Measure Ld-Lq – The difference has to be nonzero. 
-2. Set foc_motor_ld_lq_diff to the measured difference. 
-3. Pick MTPA Mode – “IQ Target” or “IQ Measured.” Start with “IQ Target.” 
-4. Watch for bus voltage spikes – If negative d-current collapses under a fault, the rotor flux can cause a rapid voltage rise. Make sure your hardware has overhead.
+1. Warm the motor and record Ld/Lq manually—builders double-check the wizard because small hubs often report zero saliency.[^3]
+2. Populate `foc_motor_ld_lq_diff` (and, if needed, `foc_mtpa_mode`) with those measured values, then log phase current vs. temperature on short pulls before extending runs.[^8]
+3. Watch the hardware limits: stacking MTPA with field weakening on 20 S Spintend 85150s already blew MOSFETs, so ensure you have headroom in both the controller and BMS before exploring aggressive settings.[^10]
 
 </details>
 
@@ -280,9 +278,9 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 **Answer**
 
-- Field Weakening: Overdrive technique that extends top speed by injecting negative d-axis current once you hit high duty (e.g., 90%). This reduces the motor’s effective back-EMF so you can spin faster. 
-- MTPA focuses on best torque per amp at normal or mid speeds, while FW focuses on surpassing the base RPM limit. 
-- Both require negative d-current, but for different performance goals.
+- Field weakening adds negative d-axis current at high duty to bend the back-EMF line and squeeze extra RPM; MTPA focuses on torque per amp at lower duty.[^11]
+- Community logs show FW delivering only ~8 km/h on dual-motor commuter builds while doubling power draw—voltage or winding changes generally produce cleaner gains.[^11]
+- Keep them separate: many racers run modest MTPA for punch but leave FW off until they confirm the controller, motor, and pack can handle the combined thermal and voltage load.[^8]
 
 </details>
 
@@ -291,11 +289,10 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 **Answer**
 
-- Yes: 
-  1. Voltage Spikes – The motor can generate higher bus voltage if you quickly cut throttle at high RPM. 
-  2. Extra Heating – Negative d-axis current creates more copper/iron losses, so watch motor temps. 
-  3. Battery/BMS Stress – If your BMS is near max voltage, be cautious with sudden throttle changes. 
-- Always keep some margin between battery max voltage and the ESC’s max rating if you rely on strong field weakening.
+- Voltage spikes: Spintend 85150 riders documented MOSFET deaths when stacking 45 A of FW on 20 S packs, prompting a hard stop on “full send” tunes without upgraded silicon.[^10]
+- Thermal load: mid-power scooters running 30 A of FW saw hubs overheat even with traction control, so crews now prioritize airflow, ferrofluid, or larger stators before lifting FW ceilings.[^12]
+- Pack and BMS stress: once duty approaches 100 %, phase and battery current converge—poor regen cutoffs or Daly/ANT BMS limits have tripped and back-fed controllers during aggressive braking.[^13]
+- Plan margin in both controller voltage rating and pack headroom before relying on FW for daily riding.[^10]
 
 </details>
 
@@ -306,9 +303,9 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 **Answer**
 
-- 85°C start and 100°C end are common. You could push to 90/110 if your MOSFETs, driver, and cooling design can handle it. 
-- But if you truly hit 85°C fast, maybe you need a bigger heatsink, fan, or reduce motor/battery current. 
-- Overriding to 110°C end might degrade MOSFET longevity or risk meltdown in a worst-case scenario.
+- Fix the mechanical interface before raising limits: swap thick stock pads for 0.5 mm interfaces or direct paste, clamp the case to real metal, and add airflow so the controller stops rocketing past 80 °C within minutes.[^14]
+- Most crews treat ~70 °C MOSFET case temperature as the everyday ceiling; once logs show 85 °C after a short pull, they cut phase/battery current or move the controller to a better heat sink instead of chasing higher firmware thresholds.[^15]
+- High-power builds still reserve 90/110 °C start/end only for short tests—race teams log case and stator temps continuously and back off once controller or motor temps brush 90–100 °C to avoid demagnetizing hardware.[^16]
 
 </details>
 
@@ -317,9 +314,9 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 **Answer**
 
-- Definitely, if the sensor is accurate. Setting l_temp_motor_start=85°C, l_temp_motor_end=110°C (depending on magnet rating) can protect windings from overheats. 
-- If you see motor constantly climbing beyond 90–100°C, reduce l_current_max or do short bursts. 
-- For IPM motors with high thermal capacity, you might let it run 120°C. Always confirm magnets and insulation rating.
+- Install a reliable probe first—crews glue 2 × 4 mm EPCOS/TDK NTCs to the hall bundle with high-temp epoxy or RTV so VESC Tool sees true stator temperatures instead of case readings.[^17]
+- Route the leads away from phase conductors or shield them; poorly routed sensors have shown signal collapse above 80 A and left riders blind to heating until faults appeared.[^18]
+- Once telemetry is trustworthy, set conservative thresholds (e.g., 80–90 °C start, 105–110 °C end for high-grade magnets) and dial current back if logs show repeated climbs into the 90 °C range.[^16]
 
 </details>
 
@@ -367,9 +364,9 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 **Answer**
 
-1. Set bms.type = VESC BMS so the ESC can read SoC, cell voltages, and temperature. 
-2. Use the “BMS limit mode” for overtemp, SOC, or cell voltage limiting. Then the ESC can softly reduce input current instead of letting the BMS do a hard cutoff. 
-3. Configure Overtemp – bms.t_limit_start/end to gracefully scale back power if battery’s internal temperature goes too high.
+1. Set `bms.type = VESC BMS` (or the matching smart-BMS profile) so the controller can read pack current, per-cell voltages, and temperatures over CAN instead of relying on noisy low-side shunts.[^19]
+2. Enable “BMS limit mode” for temperature, SoC, and cell-voltage ceilings; the ESC will taper current gracefully instead of waiting for the BMS to hard-cut and back-feed the MOSFETs.[^20]
+3. Log the CAN data during shakedowns—builders now record pack and motor telemetry together to verify that firmware limits align with real BMS behaviour before shipping high-power scooters.[^19]
 
 </details>
 
@@ -378,9 +375,9 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 **Answer**
 
-- The VESC might interpret missing data as either zero or stale. That can cause random limiting or fault codes. 
-- Monitor the BMS communication in real-time logs. If it’s glitchy, either fix wiring or revert to none. 
-- It’s safer to set robust local battery limits in the ESC if BMS data isn’t reliable.
+- Expect CAN dropouts to show up as stale or zero readings—when telemetry glitches, the ESC can suddenly clamp current or throw faults even though the pack is fine.[^21]
+- Start troubleshooting with wiring, shielding, and balance-lead routing; Daly and ANT owners have documented trips from harness shorts or regen spikes that looked like controller failures.[^20]
+- Keep conservative local limits in `l_in_current_max/min` so the scooter stays safe even if the BMS feed dies, and recalibrate smart-BMS current sensors when chasing ±500 W accuracy on 30 kW builds.[^21]
 
 </details>
 
@@ -1502,8 +1499,32 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 
 **Answer**
 
-- If they’re drastically different motors or windings, yes, you should do a detection or load a saved config specific to that motor. 
-- If it’s the same motor but just a different wheel diameter, you mainly update si_wheel_diameter for correct speed reading. 
+- If they’re drastically different motors or windings, yes, you should do a detection or load a saved config specific to that motor.
+- If it’s the same motor but just a different wheel diameter, you mainly update si_wheel_diameter for correct speed reading.
 - Always label or store config XML for each motor type so you can quickly switch in VESC Tool.
 
 </details>
+
+## Source Notes
+
+[^1]: Sensorless FOC riders still need a push start or intensive HFI tuning to avoid low-speed stalls on Flipsky/MakerX hardware.【F:knowledge/notes/input_part009_review.md†L80-L87】
+[^2]: “Bad FOC hall detection” investigations traced launch issues to failed hall boards that forced riders toward HFI until the sensors were replaced.【F:knowledge/notes/input_part013_review.md†L113-L135】
+[^3]: Effective sensorless launches hinge on at least ~15 % Ld/Lq separation so HFI can lock reliably.【F:knowledge/notes/input_part000_review.md†L377-L381】
+[^4]: Vedder’s FW 6.0 45° V0/V7 HFI profile delivers repeatable hall-less zero starts when the ESC samples both zero vectors at high frequency.【F:knowledge/notes/input_part003_review.md†L221-L224】
+[^5]: VESC Tool 6.02 widens hall hysteresis, calms sampling noise, and improves CAN logging, making silent HFI practical on phase-shunt controllers.【F:knowledge/notes/input_part004_review.md†L49-L55】
+[^6]: Builders continue to iterate on hall-less tunes by combining HFI, saturation compensation, and trimmed start currents before trusting premium scooters without sensors.【F:knowledge/notes/input_part012_review.md†L229-L232】
+[^7]: Riders differentiate Vedder Sensorless Start from continuous HFI—VSS injects a short burst, requires temperature inputs, and then hands control back to the observer.【F:knowledge/notes/input_part001_review.md†L304-L307】
+[^8]: Hub-motor MTPA trials showed surface-magnet commuters mostly generate heat, whereas saliency-rich motors benefit once settings are logged carefully.【F:knowledge/notes/input_part007_review.md†L235-L239】【F:knowledge/notes/input_part008_review.md†L114-L114】
+[^9]: Blade hub owners log ~6 kW per motor and ~20 km/h extra top speed at 15–17 S when MTPA is dialed with ~250 A phase headroom.【F:knowledge/notes/input_part001_review.md†L228-L229】
+[^10]: Stacking MTPA and heavy field weakening on 20 S Spintend 85150 builds has blown MOSFETs, so veterans now demand upgraded silicon or milder tunes.【F:knowledge/notes/input_part014_review.md†L21-L22】
+[^11]: Dual-motor commuter logs captured only ~8 km/h gain from field weakening while power draw nearly doubled, reinforcing that gearing or voltage changes are more efficient.【F:knowledge/notes/input_part003_review.md†L205-L205】
+[^12]: Racers chasing 30 A+ of FW reported hubs overheating despite traction control, prompting airflow, ferrofluid, or stator upgrades before lifting FW ceilings.【F:knowledge/notes/input_part009_review.md†L178-L179】【F:knowledge/notes/input_part013_review.md†L783-L788】
+[^13]: Daly and ANT BMS boards can hard-cut during regen, back-feeding controllers unless the ESC tapers current first.【F:knowledge/notes/input_part000_review.md†L372-L380】【F:knowledge/notes/input_part014_review.md†L98-L101】
+[^14]: Swapping thick stock pads for thin interfaces or paste and clamping the case to metal keeps Ubox/Makerbase controllers from spiking past 80 °C immediately.【F:knowledge/notes/input_part008_review.md†L547-L548】
+[^15]: Community thermal guidelines keep MOSFET cases under ~70 °C for daily riding and flag sustained 85 °C spikes as a sign to cut current or improve cooling.【F:knowledge/notes/input_part007_review.md†L198-L202】
+[^16]: Race telemetry targets ≤45 °C controller cases and ≤90–100 °C stators to avoid demagnetizing hubs or cooking controllers during long pulls.【F:knowledge/notes/input_part014_review.md†L75-L76】
+[^17]: Installing EPCOS/TDK 2 × 4 mm NTCs at the hall bundle provides accurate 150 °C-capable stator telemetry for VESC cutbacks.【F:knowledge/notes/input_part004_review.md†L69-L70】
+[^18]: Poorly routed sensor leads collapse above 80 A; rerouting and shielding stop thermistor signals from dropping out under load.【F:knowledge/notes/input_part004_review.md†L49-L55】
+[^19]: Paolo and others log CAN-connected smart BMS data to capture true pack power because VESC low-side shunts under-report at high output.【F:knowledge/notes/input_part014_review.md†L80-L82】
+[^20]: Daly/ANT packs have latched off mid-ride from regen spikes, so crews rely on ESC-side limit modes to taper current before the BMS hard-cuts.【F:knowledge/notes/input_part000_review.md†L372-L380】【F:knowledge/notes/input_part014_review.md†L98-L101】
+[^21]: Smart-BMS telemetry can drop frames or drift; builders recalibrate sensors and inspect boards for damage when CAN data suddenly zeros out.【F:knowledge/notes/input_part014_review.md†L82-L83】【F:knowledge/notes/input_part014_review.md†L100-L101】
