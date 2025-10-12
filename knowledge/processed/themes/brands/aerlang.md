@@ -32,6 +32,6 @@
 3. **Upgrade roadmap** – Decide early whether to live within the sealed firmware or scope a controller swap; ordering parts ahead avoids downtime once the structural reinforcements are complete.[^2]
 
 ## Source Notes
-[^1]: Aerlang stock feature breakdown, pricing, and deck failure reports from rider testimony.【F:data/vesc_help_group/text_slices/input_part000.txt†L4120-L4124】
-[^2]: Commentary on encrypted firmware limiting modifications to shunt tweaks and motivating controller swaps.【F:data/vesc_help_group/text_slices/input_part000.txt†L4139-L4141】
-[^3]: Eight-click limiter override procedure enabling quick toggling between legal and full-power modes.【F:data/vesc_help_group/text_slices/input_part000.txt†L4132-L4135】
+[^1]: Aerlang stock feature breakdown, pricing, and deck failure reports captured in the curated review notes.【F:knowledge/notes/input_part000_review.md†L120-L122】
+[^2]: Commentary on encrypted firmware limiting modifications to shunt tweaks and motivating controller swaps.【F:knowledge/notes/input_part000_review.md†L120-L122】
+[^3]: Eight-click limiter override procedure enabling quick toggling between legal and full-power modes.【F:knowledge/notes/input_part000_review.md†L120-L122】
