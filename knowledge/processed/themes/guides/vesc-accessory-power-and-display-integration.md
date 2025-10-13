@@ -25,6 +25,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 - **VESC-Express (ESP32-S3).** The €20 CAN↔BLE/Wi-Fi bridge adds LED or remote control outputs and modernises telemetry without touching fragile UART dongles.【F:knowledge/notes/input_part013_review.md†L418-L418】
 - **VESC Express logging quirks.** Firmware 6.06 currently restarts SD logging every ~3 s and Spintend X12 rails only offer 5 V/150 mA, so power Express boards from a dedicated buck and stick to 6.05 (or plan CAN updates) until patches land.【F:knowledge/notes/input_part014_review.md†L5969-L6037】
 - **Secondary UART headers.** When Voyage displays misbehave, moving telemetry to MakerBase’s TX2/RX2 header stabilised data without firmware changes; ensure extension leads are shielded if the replacements are short.【F:knowledge/notes/input_part013_review.md†L518-L518】
+- **Stealth OEM casings.** Builders zip-tie TFT displays into stock dashboards or relocate them to auxiliary handlebars with 3D-printed mounts when they need legal-looking installs that still expose VESC telemetry.【F:knowledge/notes/input_part000_review.md†L45-L47】【F:knowledge/notes/input_part000_review.md†L57-L58】
 - **Split CAN telemetry.** Dual-controller logs can show ~500 A phase on Voyage/Ambrosini dashboards even when each controller only pulls ~250 A—set per-controller CAN IDs or run dual sessions when you need wheel-specific diagnostics.[^per-controller]
 - **Flipsky Voyage quirks.** G2 owners report the Voyage/Flipsky UART display only shows GPS speed even with correct wiring—plan for custom dash scripts or SmartDisplay integrations if you need richer telemetry.[^voyage]
 
@@ -37,6 +38,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 
 ## Lighting Hardware Spotlight
 - **Offbondge projector upgrade.** Riders migrating from 1,300 lm compact beams report Offbondge’s 2,000–2,500 lm projector headlight slots straight into existing 12 V harnesses, spreads light without dazzling traffic, and still benefits from external bucks or fused rails on single-controller builds.【F:knowledge/notes/input_part005_review.md†L404-L404】【F:knowledge/notes/input_part005_review.md†L571-L571】
+- **USB-C floodlight banks.** Commuters are trialling 3,000–9,000 lm rechargeable headlights that double as power banks and pair them with programmable LED tails or mirror-mounted 12 V lamps for better cutoff control than stock scooter beams.【F:knowledge/notes/input_part000_review.md†L47-L48】
 
 ## Commissioning Checklist
 - Meter throttle outputs with the controller unpowered and confirm signal stays ≤3.3 V at full travel.【F:knowledge/notes/input_part013_review.md†L503-L505】

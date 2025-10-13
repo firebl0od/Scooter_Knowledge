@@ -5,6 +5,12 @@
 - Treat 75100/75200-class units as 300 A absolute-max controllers unless you invest heavily in cooling, QA, and conservative regen ramping.
 - Document every change—firmware, wiring, displays, and aux power mods—to survive support escalations and keep commuter builds reliable.
 
+## Bulk Purchasing Playbook
+- **Group discount coordination.** Organise one-off bulk orders around Flipsky’s 20 % coupon and be ready to email support for a manual reset when the 24-hour window lapses so late buyers can still join the batch.[^group-buy]
+- **Starter kit baseline.** Dual-drive converts typically order two 7550 controllers, the v6 Bluetooth module, CAN harnesses, anti-spark switch for ≥20 S packs, and spare JST looms for halls, throttles, and brakes to cover the first wave of installs.[^starter-kit]
+- **Stock the consumables.** XT60/XT90 connectors, JST assortments, and 4–6 mm motor bullets disappear quickly during conversions—have them on the workbench before controllers arrive.[^wiring-supplies]
+- **Budget expectations.** Two premium controllers plus VAT and shipping land around €940; remind riders to factor insurance or replacement reserves into the upgrade plan.[^budget-plan]
+
 ## Product Line Cheat Sheet
 | Model | Nominal System | Community-Validated Envelope | Notes |
 | --- | --- | --- | --- |
@@ -74,3 +80,7 @@
 [^18]: Comparative MakerX reliability vs. Flipsky on similar amperage builds.【F:knowledge/notes/input_part003_review.md†L470-L470】
 [^19]: Spintend 22 S debates and recommendations to step up to C350/Thor-class controllers for higher voltage/current plans.【F:knowledge/notes/input_part011_review.md†L512-L514】
 [^20]: Power-switching workarounds for 75100 hardware, including XT90S loop keys, QS8 pre-charge connectors, and preferences for controllers with onboard latching buttons when running dual units.【F:knowledge/notes/input_part001_review.md†L29-L31】
+[^group-buy]: Coordinated orders leverage Flipsky’s one-time 20 % discount code, which support can manually reopen if the 24-hour window is missed.【F:knowledge/notes/input_part000_review.md†L30-L32】
+[^starter-kit]: Community starter list pairs twin 7550 controllers with Bluetooth v6, CAN cabling, anti-spark switches for ≥20 S packs, and spare JST leads for halls, throttle, and brake wiring.【F:knowledge/notes/input_part000_review.md†L31-L33】
+[^wiring-supplies]: Builders pre-stock XT60/XT90 plugs, JST assortments, and 4–6 mm motor bullet connectors to keep conversions moving.【F:knowledge/notes/input_part000_review.md†L33-L33】
+[^budget-plan]: Expect roughly €940 including VAT for a dual-controller upgrade and plan insurance or reserve funds accordingly.【F:knowledge/notes/input_part000_review.md†L34-L34】
