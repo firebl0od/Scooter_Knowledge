@@ -46,8 +46,10 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 
 ## 7. Structural Integrity, Performance & Safety
 - Replace cracked Zero/Nami stems with solid aluminum or 15 mm steel units when running wheelie-heavy, 8 kW+ builds; repeated failures cluster at cable cutouts.[^26]
+- Keep head bearings just snug enough to remove play—over-tightening preloads the races, induces wobble, and shortens bearing life even when premium dampers are installed.[^headset]
 - Prioritize mechanical brakes and axle hardware (blue Loctite + lock washers) because electronics can die mid-ride; round-profile tires boost corner grip but require careful bead seating.[^27]
 - High-speed stability starts with positive trail and stiff bearings—bolt-on dampers merely mask poor geometry and can fail under stiff aftermarket springs.[^28]
+- Inspect Laotie-style steering tubes and similar hollow-neck chassis for cracks; reinforcing with chromoly TIG work borrowed from roll-cage fabrication remains the durable fix when the factory welds give way.[^laotie]
 - Theft prevention relies on ≥10 mm hardened chains, welded eyelets, and recessed fasteners; thin aluminum tabs remain easy targets for cordless grinders.[^29]
 
 ## 8. Charging Infrastructure & Power Logistics
@@ -99,4 +101,6 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^39]: Ennoid MK8 reliability chatter, including the need for IPTC017N12NM6 MOSFET swaps to reach 26 S/500 A envelopes.【F:knowledge/notes/input_part014_review.md†L19-L37】
 [^40]: Waterproofed 18-FET G300 controllers delivering ~250 A battery / 500 A phase bursts on 22 S while overheating under sustained regen, signalling sprint-oriented use cases.【F:knowledge/notes/input_part012_review.md†L398-L399】
 [^41]: Spintend discontinued the 85/250 and now ships 85/240 controllers through a New Jersey hub, letting U.S. builders avoid tariffs while planning alternatives for higher-rated boards.【F:knowledge/notes/input_part012_review.md†L110-L111】【F:knowledge/notes/input_part012_review.md†L379-L405】
+[^headset]: Steering-stability guidance emphasising lightly snug head bearings to prevent wobble and premature failure even when using motorcycle-grade dampers.【F:knowledge/notes/input_part014_review.md†L42-L42】
+[^laotie]: Laotie-style steering tube failures and the recommendation to reinforce with chromoly TIG welding borrowed from motorsport roll-cage practices.【F:knowledge/notes/input_part014_review.md†L184-L184】
 [^spintend_toggle]: Smart Repair’s Spintend bridge experiments showed that one-button 1WD/2WD toggles require CAN or power isolation; otherwise the secondary controller stays awake and mirrors the primary’s current draw.【F:knowledge/notes/input_part011_review.md†L317-L317】【F:knowledge/notes/input_part011_review.md†L79-L79】

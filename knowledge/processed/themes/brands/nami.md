@@ -5,6 +5,7 @@
 - The stock 40 Ah module’s eight-way LG M50LT parallel pack is happiest below ~135 A; community pushes toward 200 A/310 A phase quickly overheat hubs and batteries unless the pack is rebuilt and monitored closely.[^2]
 - High-speed composure depends on real suspension and damper hardware: NAMI frames reward elastomer blocks plus quality Bitubo-class dampers, whereas cheap AliExpress units snap under race preload.[^3]
 - Race-prepped 65H motors already touch ~100 km/h without field-weakening, and GT2 owners have proven 26 S compatibility when controllers and logging are squared away—voltage headroom is no longer the bottleneck.[^4]
+- Hotdog builds pairing 100 H rears with 70 H fronts now run 22 S 11 P P45 packs at ≈500 A phase / 550 A absolute, relying on 100 % front FW and aggressive traction control because the rear will lift the front wheel even at 120 km/h despite ~61 °C stator temps.[^hotdog]
 
 ## Platform Snapshot
 | Focus | Stock Insight | Upgrade Levers |
@@ -25,12 +26,14 @@
 - Respect the stock module’s ≈116 A continuous ceiling—AYÓ advises capping peaks near 135 A until the pack is rebuilt or paralleled.[^2]
 - Data logging must sum both controllers; otherwise, power traces plateau near 19 kW even while riders believe they’re pushing 170 A/200 A per side.[^9]
 - Track NAMI builds already touch triple digits on 65H motors without FW; spend effort on tire compound, suspension balance, and braking instead of chasing voltage for speed alone.[^4]
+- Hotdog-class 100 H rears paired with 70 H fronts survive 500 A phase pulls when fed by 22 S 11 P P45 packs, but only with traction control engaged and front-motor FW at 100 % to match wheel speed—expect front-wheel lift at 120 km/h if TC is disabled.[^hotdog]
 
 ## Battery Strategy & Pack Building
 - Documented GT2 rebuilds pair 20 S 9 P LG 40P packs with Daly smart BMS hardware and thick copper busbars—use this as a template when refreshing commuter modules.[^6]
 - Mixed-chemistry packs (LG 40T + LG M50LT) demand conservative discharge ceilings and a robust 150 A smart BMS to keep 4 Ah and 5 Ah sticks in balance; many veterans still discourage blending chemistries at all.[^3]
 - OEM BMS retention is viable: Yoann’s customer conversion kept the NAMI BMS while adding dual Spintend Lite controllers for cleaner throttle response without altering the scooter’s appearance.[^8]
 - When aiming beyond stock output, log pack temperatures alongside controller data—Omar’s 20 S 10 P 50S build overheated both hubs and cells at 200 A battery, 310 A phase, and 380 A ABS.[^2]
+- Yamal’s 22 S 11 P 50PL concept highlights today’s BMS bottleneck—compact smart boards still cap around 500 A continuous, so dual-BMS or pyrofuse plans belong in the design once current heads toward 770 A nominal.[^bms_ceiling]
 
 ## Electronics & Accessory Integration
 - Start with the proven harness baseline—6 mm bullets and XT90 battery plugs—and only upsize once current goals justify the extra packaging work.[^5]
@@ -41,6 +44,12 @@
 - First-generation frames have shown weld cracking; later 72/40 chassis add gussets, giving buyers a visual checklist when sourcing used NAMI decks.[^14]
 - Handmade 22 S hybrids need machine work and inspection of fork clearances, and water sealing should be rechecked whenever machining exposes fresh metal.[^11]
 - High-voltage experiments above stock (26 S or more) demand validated controllers—confirm CAN, throttle, and hall health before blaming firmware for traction loss.[^7]
+- Avoid 12" AliExpress rim swaps without suspension mods—the community expects spring interference and rubbing, so 65 mm front / 80 mm rear LY combinations remain the safe default for wide-hub conversions.[^rim_warning]
+- Tubeless Ambrosini rims can burp air after potholes; reseat by pulling the valve core, blasting the bead with a compressor, and cleaning debris before reinflating.[^burp_fix]
+
+## Tires & Wheel Fitment
+- PMT’s rain tread in 90 mm and 100 mm widths costs about $80 per tire but remains the go-to upgrade when riders need wet grip over cheaper slicks.[^pmt_rain]
+
 
 ## Build Checklist for New NAMI Projects
 1. **Audit the harness** – verify all 6 mm bullets are fully seated, confirm XT90 condition, and plan any XT150/QS8 upgrades before reassembly.[^5]
@@ -64,3 +73,8 @@
 [^12]: Controller horn/aux channels sourcing only a few amps—relay heavy lighting loads instead of direct wiring.【F:knowledge/notes/input_part012_review.md†L96-L99】
 [^13]: Accessory-rail documentation gaps and current-limit questions on Ubox 85240/85250 harnesses.【F:knowledge/notes/input_part013_review.md†L116-L130】
 [^14]: Visual differences between cracked first-gen NAMI frames and reinforced 72/40 chassis.【F:knowledge/notes/input_part012_review.md†L129-L132】
+[^hotdog]: Latest NAMI hotdog builds with 100 H rears and 70 H fronts running 22 S 11 P P45 packs, 500 A phase / 550 A absolute limits, 100 % front FW, and ~61 °C stator temps while traction control prevents front-wheel lift beyond 120 km/h.【F:knowledge/notes/input_part014_review.md†L8930-L8933】【F:knowledge/notes/input_part014_review.md†L10001-L10055】
+[^bms_ceiling]: 22 S 11 P 50PL pack planning noting today’s smart BMS hardware caps ≈500 A continuous, requiring dual-BMS or pyrofuse strategies when targeting ≈770 A nominal current.【F:knowledge/notes/input_part014_review.md†L2965-L2974】【F:knowledge/notes/input_part014_review.md†L3427-L3434】
+[^rim_warning]: Community warning that 12" AliExpress rims interfere with NAMI suspension, so 65 mm front / 80 mm rear LY combos remain the preferred setup.【F:knowledge/notes/input_part014_review.md†L5103-L5113】
+[^burp_fix]: Tubeless Ambrosini rims occasionally burp air after potholes; reseat by pulling the valve core and blasting the bead clean with a compressor.【F:knowledge/notes/input_part014_review.md†L4610-L4619】
+[^pmt_rain]: PMT rain-specific tires in 90 mm and 100 mm widths cost roughly $80 each but deliver the wet grip racers need versus cheaper slicks.【F:knowledge/notes/input_part014_review.md†L5359-L5399】
