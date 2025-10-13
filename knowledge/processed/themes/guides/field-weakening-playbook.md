@@ -34,6 +34,7 @@
 | Halo 60 V stunt hub | 60 V single hub | 350 A phase | 125 A | Airborne testing caused runaway RPM—cap FW drastically when wheels can unload.[^12]
 | Vsett high-speed build | 22 S 22×3 hubs | 80 A FW | 200 A battery split | Needs aggressive cooling; FW masks intermittent cut-outs from mechanical issues.[^12][^16]
 | Commuter Xiaomi/Ninebot hubs | 13–20 S small stators | ≤40 A phase typical | Avoid FW | Stock hubs overheat or fail even with 4 A FW—prioritize motor upgrades instead.[^9][^17]
+| NAMI hotdog (100 H rear / 70 H front) | 22 S 11 P P45 pack | 500 A phase / 550 A absolute | 100 % front FW to sync speeds | Traction control mandatory—rear lifts the front even at 120 km/h while stators stay ~61 °C during 40 kW pulls.[^hotdog_fw]
 
 ## Risk Controls & Telemetry
 - **Thermal Watch:** Riders pushing 16 S commuter packs noted 150 °C stators at only 35 A FW, reinforcing that ferrofluid or temperature probes are mandatory if you insist on FW in enclosed hubs.[^18]
@@ -41,6 +42,7 @@
 - **Fault Masking:** Sudden current drops or pothole-induced cut-outs that disappear when FW is enabled can signal mechanical faults (loose magnets, wiring) rather than firmware bugs; investigate hardware first.[^16]
 - **Noise & Surging:** If throttle jitters appear above 80 % duty after enabling 20 A FW on single-motor builds, roll FW back—operators traced the behavior directly to FW injection.[^20]
 - **Overspeed Discipline:** Avoid free-spinning wheels at high FW. Halo stunt crews saw runaway RPM off-load and controller stress at 125 A FW.[^12]
+- **Front-lift control:** Hotdog 100 H rear builds demand traction control or front FW assistance; otherwise the rear lifts the front well past 120 km/h even while stators only hit ~61 °C, so validate TC before public-road tests.[^hotdog_fw]
 
 ## Decision Guide: Voltage vs. Field Weakening
 - **Choose Higher Voltage / Different Windings When:** You need sustained highway speed, the motor already runs hot without FW, or you’re targeting >120 km/h—builders hitting 118 km/h on 22×3 hubs without FW prove gearing changes scale better than stacking FW amps.[^11][^21]
@@ -77,3 +79,4 @@
 [^21]: 22×3 hub builds freewheeling around 118 km/h without FW after pack upgrades.【F:knowledge/notes/input_part013_review.md†L88-L88】
 [^22]: 20 S single-motor package delivering 85 km/h with ~30 A FW as a short-burst aid.【F:knowledge/notes/input_part013_review.md†L145-L145】
 [^23]: Firmware or wiring faults causing sudden full braking after FW-enabled firmware updates.【F:knowledge/notes/input_part001_review.md†L219-L219】
+[^hotdog_fw]: NAMI 100 H rear / 70 H front builds logging 500 A phase, 550 A absolute, 100 % front FW, and ~61 °C stators while traction control keeps the rear from lifting the front at 120 km/h.【F:knowledge/notes/input_part014_review.md†L8930-L8933】【F:knowledge/notes/input_part014_review.md†L10001-L10055】

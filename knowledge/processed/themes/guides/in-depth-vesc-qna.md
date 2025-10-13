@@ -180,11 +180,22 @@ These steps ensure you have the correct fundamental data for your motor and keep
 
 **Answer**
 
-- Abrupt BMS cut on a high-current regen event can cause a bus voltage spike (the motor is still rotating, generating power). 
-- Often the ESC tries to clamp or keep it safe, but it can exceed MOSFET ratings if the spike is large. 
+- Abrupt BMS cut on a high-current regen event can cause a bus voltage spike (the motor is still rotating, generating power).
+- Often the ESC tries to clamp or keep it safe, but it can exceed MOSFET ratings if the spike is large.
 - Solutions:
   1. Set a more conservative L_in_current_min if your BMS is known to cut at certain voltages.
   2. Configure battery_regen_cut_start/end so the ESC ramps down regen instead of letting the BMS do a hard cutoff.
+
+</details>
+
+<details>
+<summary><strong>Q8a. What do Stage 1 and Stage 2 battery voltage cutoffs actually do?</strong></summary>
+
+**Answer**
+
+- Stage 1 (“Cutoff Start”) simply tapers output—it reduces available torque so you feel the scooter softening while voltage approaches the limit.
+- Stage 2 (“Cutoff End”) stops motor drive but keeps controller logic alive, letting you coast and retain telemetry instead of hard-shutting the ESC.
+- Because the controller stays powered, you can safely set the software cutoff a bit below the BMS threshold—as long as you keep monitoring pack voltage to avoid tripping the discharge FETs.[^cutoff_stages]
 
 </details>
 
@@ -1520,6 +1531,7 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 [^11]: Dual-motor commuter logs captured only ~8 km/h gain from field weakening while power draw nearly doubled, reinforcing that gearing or voltage changes are more efficient.【F:knowledge/notes/input_part003_review.md†L205-L205】
 [^12]: Racers chasing 30 A+ of FW reported hubs overheating despite traction control, prompting airflow, ferrofluid, or stator upgrades before lifting FW ceilings.【F:knowledge/notes/input_part009_review.md†L178-L179】【F:knowledge/notes/input_part013_review.md†L783-L788】
 [^13]: Daly and ANT BMS boards can hard-cut during regen, back-feeding controllers unless the ESC tapers current first.【F:knowledge/notes/input_part000_review.md†L372-L380】【F:knowledge/notes/input_part014_review.md†L98-L101】
+[^cutoff_stages]: Paolo clarified that Stage 1 tapering simply soft-limits output while Stage 2 halts motor drive but leaves the controller powered, letting riders set software cutoffs slightly under BMS limits if they continue monitoring pack voltage.【F:knowledge/notes/input_part014_review.md†L173-L173】
 [^14]: Swapping thick stock pads for thin interfaces or paste and clamping the case to metal keeps Ubox/Makerbase controllers from spiking past 80 °C immediately.【F:knowledge/notes/input_part008_review.md†L547-L548】
 [^15]: Community thermal guidelines keep MOSFET cases under ~70 °C for daily riding and flag sustained 85 °C spikes as a sign to cut current or improve cooling.【F:knowledge/notes/input_part007_review.md†L198-L202】
 [^16]: Race telemetry targets ≤45 °C controller cases and ≤90–100 °C stators to avoid demagnetizing hubs or cooking controllers during long pulls.【F:knowledge/notes/input_part014_review.md†L75-L76】
