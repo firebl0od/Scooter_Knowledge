@@ -22,7 +22,7 @@
 
 ## Reliability & Failure Patterns
 - **Random early deaths remain common.** Multiple riders still see Flipsky stages fail within weeks—even under modest load—so budget time for burn-in and consider stocking spares before customer deployments.⁶
-- **Capacitor banks are a recurring weak link.** Units have dropped to 14 V readings on 20 S packs after repeated capacitor explosions; simple cap swaps rarely hold.⁷
+- **Capacitor banks are a recurring weak link.** Units have dropped to 14 V readings on 20 S packs after repeated capacitor explosions; veterans like ‘lekrsu’ and Haku pin the failures on bargain components rather than layout, so simple cap swaps rarely hold.⁷
 - **Regen cutoffs can brick controllers.** Aggressive negative current spikes triggered logic-board shutdowns on otherwise healthy 75100s; tune regen ramps gently and log results before releasing builds.⁸
 - **Firmware 5.3 introduced a brake-lock scare.** One 75100 flashed to 5.3 locked the wheel at ~45 km/h despite unchanged current limits; double-check UART handbrake scripts, phase insulation, and wiring before road tests after a firmware jump.【F:data/vesc_help_group/text_slices/input_part001.txt†L25875-L25943】
 - **75100 provenance drama.** Community sleuthing ties the 75100 PCB to a student project that Flipsky allegedly cloned without fixing layout flaws; rumours of the original designer reclaiming rights surfaced after official listings disappeared, even though AliExpress resellers still show stock.【F:data/vesc_help_group/text_slices/input_part001.txt†L10395-L10571】
@@ -45,7 +45,8 @@
 ## Tuning Guardrails
 - **Manual detection beats wizard defaults.** Measure Rs/Ls with trusted meters and rerun detection on warmed motors; inaccurate auto-detect values have produced rough starts and ABS faults.¹³
 - **Disable the phase filter and switch observers.** Flipsky 75200 V2 installs stop idling hot once the phase filter is off, the `mxlemming` observer is active, and phase current is trimmed near 80–120 A.²
-- **Cap absolute current at or below 300 A.** Teardown autopsies of 75100 boards that saw 450–500 A absolute ended in toasted MOSFETs—set `ABS Max Current` conservatively and verify logs after every firmware update.¹⁴
+- **Cap absolute current at or below 300 A.** Paolo’s 75100 disintegrated after 450–500 A ABS tests; community consensus keeps absolute current near 250–300 A with cooling mods logged before filing support tickets, and new logs of 75100 deaths above 300 A reinforce the ceiling.【F:data/vesc_help_group/text_slices/input_part003.txt†L11641-L11710】¹⁴
+- **Watch absolute spikes on singles.** A separate 75100 failed after 450–500 A absolute current despite upgrades—keep single-board builds below ~300 A ABS and log heatsink/shunt temps religiously.【F:data/vesc_help_group/text_slices/input_part003.txt†L11641-L11710】
 - **Balance front/rear outputs.** Dual-drive builds stay predictable when battery and phase currents match across controllers; upping the rear ratio alone can free-spin fronts.¹⁵
 - **Respect motor-side limits.** Magic Pie 5 hubs, for example, regained launch torque at ~120 A phase while battery stayed near 25 A—chasing more just overheats the motor.¹⁶
 - **Field-weakening realities.** FW toggles remain locked to 5.2/5.3 firmware, so plan on SWD flashing beta binaries; BLDC mode is missing entirely on the 75100 branch, and attempting to drop in 75300 images still crashes VESC Tool.[^fw-lockout]
@@ -64,10 +65,15 @@
 
 ## Ecosystem & Accessories
 - **Displays:** The yellow ESP32 “Smart Display” clones work once flashed with SimpleVescDisplay firmware; stock apps remain unstable.⁶ ¹¹
+- **Upcoming dashboards:** Rage Mechanics previewed a native SmartDisplay UI in late 2022 alongside a 3.5 in navigation prototype and a Waze overlay proof-of-concept for Spintend CAN feeds—plan firmware support before promising customers integrated maps.²¹
+- **Mobile app regressions:** Flipsky’s Android app briefly dropped GPS logging on FW 5.3—keep trusted APK archives so you can sideload stable builds when updates regress features.【F:knowledge/notes/input_part003_review.md†L227-L227】
 - **Pedal assist & aux controls:** PAS harnesses expect a four-wire split (5 V, GND, signal, brake/enable) with cadence routed to ADC1. Confirm servo-pin voltage limits before powering sensors.¹¹
 - **Lighting rails:** Fuse every 12 V accessory lead—shorted aux rails have killed fresh controllers.¹²
 - **Profile switching:** Community ESP32 scripts now debounce CAN messages and validate voltage before toggling 1WD/2WD modes; adopt the revised code to avoid divide-by-zero bugs.¹²
 - **Power switching:** 75100-class boards ship without a low-voltage enable, so owners run XT90S loop keys or external anti-spark hardware; 20 S packs still arc without real pre-charge, making QS8 connectors or dedicated pre-charge adapters mandatory and pushing some builders toward controllers with onboard latching buttons.[^20]
+
+## Documentation Gaps
+- Riders continue to beg for a Flipsky 75100 regen-braking walkthrough that also covers PAS integration and suspension hardware references—the absence of a vetted guide keeps newcomers hunting paid Lisp scripts to regain basic features.【F:knowledge/notes/input_part013_review.md†L213-L219】
 
 ## When to Reach for Alternatives
 - **Need high uptime or warranty responsiveness?** MakerX singles and Spintend duals handle similar current with fewer early failures and better support pipelines.¹⁸

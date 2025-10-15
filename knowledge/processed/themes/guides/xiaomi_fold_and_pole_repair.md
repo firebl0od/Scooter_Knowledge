@@ -6,6 +6,7 @@
 
 ## Repair Workflow
 - Strip the pole, clean away the failed adhesive, and reset the insert with high-strength epoxy (two-part metal formulas held up best in field repairs). Allow full cure before reinstalling the latch to keep play from returning on the first ride.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L110030-L110036】
+- When dealing with factory epoxy-bonded clamps, warm the joint gently with a heat gun, wick in IPA to soften the bond, and use wooden wedges to separate the halves so you avoid gouging aluminum before pressing hardware back together.【F:knowledge/notes/input_part006_review.md†L512-L512】
 - If you cannot source OEM parts, reinforce the joint with inner and outer collars plus stainless hardware; riders have 3D-printed mockups before handing the design to local metal shops for permanent braces.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L110045-L110099】
 
 ## Accessory Considerations

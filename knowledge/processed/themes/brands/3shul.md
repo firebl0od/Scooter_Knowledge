@@ -32,6 +32,7 @@
 
 ## Diagnostics & Support Reality
 - Raphaël Foujiwara and other specialists now charge roughly €60 / hr to revive failed boards, and some owners have spent €1 700 on repairs that still failed to boot—stocking spares or fallback controllers remains prudent.[^repair_cost]
+- The same crew credits Figiwara with reviving three failed controllers for the race team, cementing his bench as the go-to EU repair channel when premium boards die mid-season.【F:knowledge/notes/input_part012_review.md†L363-L364】
 - Nobrrr and Paolo traced blown hardware to reveal 3Shul’s “custom” MOSFETs are standard ON Semi HSBL009N10T devices (marked N009N10T), so repair benches can source replacements through normal supply chains instead of hunting bespoke silicon.[^mosfet_crossref]
 - Firmware distribution is opaque: the official CL350 V3 sources live in a shared Drive folder, so teams archive binaries locally and keep dual stacks on matching revisions before flashing.[^firmware_repo]
 - Community sentiment still treats 3Shul as the reliable alternative when Makerbase/Tronic stock falters, but buyers accept minimal transparency and shoulder all QC (capacitor staking, harness validation, moisture inspection) themselves.[^community_view]

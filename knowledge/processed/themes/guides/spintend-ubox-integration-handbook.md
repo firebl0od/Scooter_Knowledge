@@ -16,6 +16,8 @@
 4. **Bench Rules:** Wire the entire harness before energising, precharge ≥20 S packs, discharge bus caps after unplugging, keep ADC inputs ≤3.3 V, and eliminate ground loops to avoid repeat STM32 deaths.[^3]
 4. **Initial Power Tests:** Bring the controller up on a fused bench supply with the BMS discharge FET enabled; if regen previously latched undervoltage faults, confirm the pack’s protection MOSFETs are awake before running detection.[^19]
 5. **Detection housekeeping:** Enable the phase-filter checkbox only during motor detection—leaving it on while riding reintroduces noise and ABS overcurrent faults.[^phase-filter]
+6. **Screen current-sense offsets:** Before installing, power each single on the bench and confirm the current-sense op-amps report sane offsets (hundreds of counts, not 30 or 4,000); multiple “new” boards arrived with shorted amplifiers that later blew input capacitors and XT60s under normal reconnects.[^offset-screening]
+7. **Log the hardware revision.** The latest single board swaps to an aluminium PCB with G015N10 MOSFETs—stick with the matching gate network instead of random FET swaps or you’ll destabilise the driver.[^g015n10]
 
 ## Thermal Management & Mounting
 - **Firmware Limits:** Stock firmware starts derating around 75–85 °C and shuts down near 100 °C, so increase cutbacks only after verifying thermistor calibration.[^4]
@@ -23,17 +25,23 @@
 - **Airflow & Deck Prep:** Add 40–90 mm 12 W fans between stacked boards, cut intake/exhaust slots in the deck, sand paint off mounting faces, and clamp copper bars or aluminium spreaders to the case with quality paste when regen pushes single-Ubox stacks past 65–70 °C.[^7]
 - **Expected Benchmarks:** Well-mounted duals have logged ~100 A battery / 130 A phase at ≈45 °C, while poor contact in sealed Weped decks let cases soar to 80 °C during 500 A combined pulls—plan extra cooling above those loads. Square-wave Zero 11X controllers still out-launch under-cooled 60 V Ubox setups until phase limits rise and airflow improves, underscoring the need for fans in cramped decks.[^6][^20][^zero-launch]
 - **Plan hardware for earless cases.** 85/240 housings still ship without mounting ears and rely on tiny M2.5 hardware, so riders print brackets, retap threads, or glue adapters before long-travel suspensions knock under-deck mounts loose.[^31]
+- **Repurpose retired baseplates.** Builders are bolting dead 75/200 heatsinks under live controllers—stacking aluminium shims and thin pads or even radiators tied into Dualtron side plates—to add surface area without redesigning the deck.[^baseplate_spreader]
+- **Use the 85240 passthroughs carefully.** The case exposes top-exit slots for phase leads; reroute wiring through them only after shielding the foam insulation pads so they do not tear or short against the enclosure.[^85240_passthrough]
 
 ## Power Limits, Regen & Current Planning
 - **Current Envelope:** Treat 120–130 A phase per motor (≈160 A ABS max) as the practical ceiling for daily dual setups; sensor stutter above ~85 A usually signals failed MOSFETs or loose leads, not tuneable instability.[^21]
+- **Single 100/100 baselines:** Lonnyo 65 H commuters now hover around 130–135 A phase, 85–90 A battery, and 150–180 A absolute on single Ubox 100/100 stacks, trimming duty to 98 % and kicking in FW around 88 % to eliminate stutter before heat creeps past 40 °C.[^u100_daily]
 - **Regen Discipline:** Bench testing shows that even –5 A battery regen can trip controllers on unloaded wheels; cap regen amps to roughly the pack’s amp-hour rating plus a small overhead so the FETs absorb the excess.[^8]
 - **High-Voltage Safeguards:** Dual owners run ~2×135 A phase / 2×71 A battery within 70 °C so long as regen stays off during full-charge launches and higher-voltage packs (17 S+) are bled a few percent before re-enabling braking.[^22]
+- **22 S experiments demand regen discipline.** Builders chasing 22 S/150 A tunes on 85/150 hardware disable regen or upgrade MOSFETs and capacitor banks; Smart Repair confirmed stock silicon only survives 22 S when braking stays mechanical, and veterans point voltage-hungry riders toward Rage Mechanics’ C350 once 30 S capability is mandatory.[^22s_mod]
 - **Know the Ubox 100/100 envelope.** Smart Repair still caps the single at 22 S with regen disabled on the e-brake input; it ships at 135 A phase / 180 A absolute without ST-Link pads or beefy 12 V rails, so budget external regulation for accessories.[^u100-guardrails]
 - **Current sharing proof point.** Dual builds have logged 180 A phase / 130 A battery on the rear and 150 A/90 A up front while holding FETs near 39 °C when pads are clamped flat—use these as sanity checks that your thermal stack-up is working.[^dual-current]
 - **Duty & Field Weakening:** Keep field-weakening reserved for cooled builds; previous fires stemmed from wizard runs on fresh installs, so validate base detection and duty-cycle ramps before layering FW or traction aids.[^18][^23]
+- **Expect commuter hubs to need more current.** Maike-branded “3000 W” dual hubs stayed near 25 km/h until motor current climbed toward 140 A (≈70 A battery) and the owner improved thermal coupling with frame-mounted pads or fans—stock 16 S packs with dual XT60s still bottleneck upgrades.【F:knowledge/notes/input_part004_review.md†L354-L354】
 
 ## Controls, Accessories & IO
 - **Remote & Cruise:** The bundled 2.4 GHz remote offers cruise, horn, and light controls via the receiver, reducing parallel looms compared with bare PPM throttles.[^11]
+- **Cruise troubleshooting:** If the remote beeps but never holds speed, confirm the PPM switch channel toggles in VESC Tool, match firmware between paired controllers, and ensure the accessory rail stays above 5 V when cruise engages.【F:data/vesc_help_group/text_slices/input_part004.txt†L11970-L12020】
 - **Brake Inputs:** The ADC daughterboard supports normally-open/closed levers and selectable 5 V or 3.3 V rails—set the switches before plugging Magura/Shimano sensors to avoid shorting hall supplies.[^13]
 - **Lighting Power:** Dual controllers expose a ≈1.5 A 12 V rail for lighting relays, but singles lack this output; budget fused DC-DC converters instead of stealing from the fan header.[^12][^14]
 - **Horn channel expectations:** The horn terminal happily drives compact 12 V siren boards (e.g., GREATZT QSI-4840); riders trim the plastic shell to a ≈30 × 20 mm module and mount it behind the dash so the alarm wakes with the scooter instead of relying on battery-powered noisemakers.[^horn-siren]
@@ -45,6 +53,7 @@
 - **Version Discipline:** Stick with Spintend’s vetted firmware packages (e.g., 100 A battery limit files) unless you have cooling to exploit the 300 A hardware bins; mismatched binaries raise noise and reliability issues.[^25]
 - **Unofficial 300 A bins:** Community Micro-USB and USB‑C binaries lift the single’s 100 A factory ceiling to 300 A but void warranty—install only if you have the airflow, copper interfaces, and logs to prove the MOSFETs survive the extra load.【F:data/vesc_help_group/text_slices/input_part000.txt†L20181-L20187】【F:data/vesc_help_group/text_slices/input_part000.txt†L20190-L20299】
 - **BLE Options:** Official BLE dongles arrive pre-flashed and tax-paid via AliExpress, while DIY NRF boards need extra programming; keep at least one link for live tuning even if you prefer wired sessions.[^26]
+- **NRF quick-start:** When the NRF header is the only free UART, flash a generic NRF51 via USB, solder it to the dedicated header, and power-cycle to pair—no need to steal the ADC adapter’s UART pads.【F:data/vesc_help_group/text_slices/input_part004.txt†L8813-L8818】
 - **Fault Retrieval:** If Bluetooth is absent, the controller retains the last fault until shutdown—connect via USB before cycling power so valuable diagnostics aren’t lost.[^10]
 
 ## Known Field Failures & Mitigations
@@ -87,7 +96,12 @@
 [^20]: Thermal extremes logged on poorly mounted duals at ~500 A phase combined.【F:knowledge/notes/input_part000_review.md†L614-L614】
 [^21]: Practical phase-current ceilings and fault symptoms at higher demand.【F:knowledge/notes/input_part000_review.md†L662-L663】
 [^22]: Dual 135 A phase / 71 A battery operating envelope and regen cautions on 17 S packs.【F:knowledge/notes/input_part001_review.md†L840-L840】
+[^22s_mod]: Arnau’s plan to stretch an 85/150 to 22 S/150 A sparked reminders to disable regen or upgrade MOSFETs/caps, with Smart Repair steering voltage-hungry builds toward Rage Mechanics’ C350 when 30 S capability is required.【F:knowledge/notes/input_part011_review.md†L524-L526】
 [^23]: Early fire incidents during detection runs and the caution to validate baseline tuning before advanced features.【F:knowledge/notes/input_part000_review.md†L62-L62】
+[^mini_cap]: haku and Yamal capped dual mini Spintend stacks near 200 A battery (≈300 A phase) per motor after 500 A pushes tripped protections despite cool case temperatures.【F:knowledge/notes/input_part011_review.md†L558-L559】
+[^connector_plan]: Yamal is pairing 8 mm Amass bullets with Juliet signal connectors while wiring his dual-controller builds, giving a tidy shared CAN/power loom for 80 H projects.【F:knowledge/notes/input_part011_review.md†L589-L589】
+[^baseplate_spreader]: JPPL and Shlomozero are reusing dead 75/200 baseplates as auxiliary heatsinks, stacking aluminium spacers and pad layers or bolting radiator blocks into Dualtron side plates for extra surface area.【F:knowledge/notes/input_part011_review.md†L532-L534】
+[^85240_passthrough]: Spintend 85240 cases include passthrough slots that let phase leads exit upward—builders reroute wiring through them only after protecting the foam insulation pads.【F:knowledge/notes/input_part011_review.md†L530-L530】
 [^24]: CAN wake wiring updates and anti-slip recommendations for multi-controller builds.【F:knowledge/notes/input_part000_review.md†L583-L583】【F:knowledge/notes/input_part000_review.md†L590-L590】
 [^25]: Official firmware packages with 100 A vs. 300 A limits and the need for matching cooling.【F:knowledge/notes/input_part000_review.md†L42-L42】
 [^26]: BLE dongle sourcing and plug-and-play advantages over generic NRF boards.【F:knowledge/notes/input_part001_review.md†L174-L174】
@@ -97,6 +111,7 @@
 [^30]: Moisture-driven MOSFET temperature spikes that vanished after warming and drying the enclosure.【F:knowledge/notes/input_part004_review.md†L474-L474】
 [^31]: 85/240 mounting anecdotes covering custom brackets, retapped threads, and thermal pad tweaks to secure earless housings.【F:knowledge/notes/input_part012_review.md†L20537-L20541】【F:knowledge/notes/input_part012_review.md†L20575-L20583】【F:knowledge/notes/input_part012_review.md†L20581-L20587】
 [^32]: Spintend 85/240 shipments now staging through a New Jersey hub for faster, low-tariff deliveries into the United States.【F:knowledge/notes/input_part012_review.md†L17321-L17325】【F:knowledge/notes/input_part012_review.md†L18632-L18638】
+[^g015n10]: New single-board revisions ship on aluminium PCBs with G015N10 MOSFET stacks and tuned gate networks—stick with the factory parts instead of improvising swaps.【F:knowledge/notes/input_part004_review.md†L115-L115】
 [^u100-guardrails]: Smart Repair reiterated that the Ubox 100/100 tops out at 22 S, ships with 135 A phase / 180 A absolute limits, and should keep regen off the e-brake path unless you’re ready to swap FETs; it also omits ST-Link pads and beefy 12 V rails compared with 85xxx units.【F:knowledge/notes/input_part012_review.md†L19186-L19195】
 [^start-button]: The same teardown confirmed the 100/100 refuses to boot from USB-C—wire the latching 16 mm start button or another 5 V trigger instead of depending on the BMS as a master switch.【F:knowledge/notes/input_part012_review.md†L19300-L19318】
 [^zero-launch]: Stock Zero 11X square-wave controllers still beat 60 V Ubox launches until phase limits rise and airflow improves, making active cooling a prerequisite for parity.【F:knowledge/notes/input_part000_review.md†L103-L103】

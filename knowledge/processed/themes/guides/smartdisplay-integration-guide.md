@@ -1,7 +1,9 @@
 # SmartDisplay Integration & Operations Guide
 
 ## TL;DR
+- SmartDisplay now ships with modular harnesses that bridge VESC Tool, Minimotors, Kelly, Zero, and VSETT controllers while logging GPS, RTC, and media controls, so plan UART + CAN runs even if you start with legacy hardware.【F:knowledge/notes/input_part004_review.md†L103-L120】
 - SmartDisplay pairs with VESC and legacy controllers over UART today and will gain native CAN + VESC Express support on the incoming hardware spin, so budget both 5 V logic power and CAN high/low when future-proofing harnesses.[^1]
+- The latest CNC aluminium housing ships with anti-glare glass, RTC, navigation, music controls, and dual buttons that already support single/double-click mapping; encoder knobs are planned for the production wave later this year.[^cnc-case]
 - Treat the display as the hub for lighting, telemetry, and speed-mode governance: its OTA chain flashes every connected accessory board (5 V/12 V light drivers, button pods) alongside the head unit, simplifying updates if the CAN bus is wired correctly.[^2]
 - Never tether SmartDisplay’s USB port to a computer while the controller is live; a single ground loop already blew the 3.3 V rail and STM32 on a Ubox, forcing an RMA.[^3]
 - Enable the “transparent” BLE bridge when controllers lack onboard Bluetooth—the SmartDisplay can proxy VESC Tool traffic like a USB dongle, but veterans still default to wired sessions if nearby trackers or radios inject interference.[^15]
@@ -17,6 +19,7 @@
 
 - Early adopters validated SmartDisplay on dual Kelly, VESC, and Minimotors controllers; firmware exposes ≈95 % of editable parameters on-device and defers long strings (Wi‑Fi SSID) to the mobile apps.[^4]
 - The Voyage/TJA1051 CAN transceiver is the go-to spare for Voyage/SmartDisplay repair benches; stock a few for field swaps.[^5]
+- Rage Mechanics’ latest C350 controller kits now bundle SmartDisplay, thicker IMS plates, and ESP32-based BLE/IMU telemetry with an onboard 12 V 3 A rail—harnesses remain DIY extras for now, so budget fabrication time.【F:knowledge/notes/input_part004_review.md†L339-L339】
 
 ## Companion Boards & OEM Dash Retention
 - **QS-S4 stealth swaps.** Vsett’s QS-S4 display and RFID pod speak UART like Zero dashboards, letting SmartDisplay integrations reuse the factory harness for stealth compliance checks once you dig the loom out of the foam and silicone potting.【F:data/vesc_help_group/text_slices/input_part000.txt†L20364-L20389】
@@ -28,6 +31,7 @@
 2. **Route Lighting Bus.** The companion light board feeds both 5 V and 12 V lighting branches and reports controller faults back through SmartDisplay, so land CAN and the accessory power leads in the same session.[^2]
 3. **Budget CAN power for add-ons.** The SmartRepair harness can back-feed 5 V lighting from the CAN header—drop an inline resistor and remember the servo header’s PWM pads if you want blinkers instead of always-on lamps.[^can-backfeed]
 3. **Program OTA Chain.** Firmware updates publish to a web server; once the display flashes over Wi‑Fi, it cascades the new build to every detected expansion board via CAN.[^2][^7]
+4. **Choose controller roles intentionally.** Race teams sometimes assign the rear controller as the slave so SmartDisplay keeps the features they want (traction control, telemetry overlays) while the front stays the master—validate the pairing before track days.【F:knowledge/notes/input_part006_review.md†L54-L54】
 4. **Map Hotkeys & External Buttons.** Internal buttons can act as hotkeys, but external latching or momentary switches are supported for mode toggles and lighting; riders often park lighting on the auxiliary harness instead of the face buttons.[^7]
 5. **Speed Modes via ADC2.** Tie ADC2 “eco” limits to SmartDisplay’s virtual throttle ceilings when mixing with ADC-based throttles—the display writes percentage caps that VESC enforces as duty/phase ceilings.[^7]
 6. **Log UART throttle packets before rewiring.** SmartDisplay streams CRC-protected commands over UART, so capture the live data to confirm dips originate upstream before blaming harness noise or shielding.[^uart-crc]
@@ -36,13 +40,18 @@
 ## Feature Set & Navigation
 - **Integrated GPS + Nav Prompts.** The 3.5 in unit houses turn-by-turn guidance to keep phones off the bars; builders cite 10 × 6.5 cm packaging as a sweet spot for 100 km/h scooters.[^8]
 - **Waze Overlay.** Beta firmware already overlays Waze police alerts directly on the dashboard, foreshadowing richer third-party integrations once CAN message catalogs stabilize.[^9]
+- **Theme editor & live switching.** Rage Mechanics now ships a web-based theme designer that can push new skins over Wi‑Fi and swap layouts in real time on the scooter, making it easier to brand race fleets or share telemetry presets.【F:knowledge/notes/input_part010_review.md†L312-L314】
 - **Telemetry Dashboards.** Race teams log throttle position, per-motor phase amps, traction-control response, and segment comparisons from SmartDisplay sessions—handy for coaching and driver swaps.[^10]
 - **Fast boot sequence.** Unlike Raspberry Pi-based dashboards that slog through a 45–95 s OS boot, SmartDisplay’s MCU firmware brings up telemetry in about 10 s once CAN current initializes.[^boot]
 - **Lighting + Error Telemetry.** Kelly and VESC users receive controller error feedback (screenshots, codes) on SmartDisplay, easing remote debugging.[^2]
+- **Wearable fallback.** Riders who skip a dash lean on the XMatic VESC Apple Watch app when they want telemetry without mounting extra hardware.【F:data/vesc_help_group/text_slices/input_part004.txt†L15297-L15302】
 
-## Pricing, Bundling & Availability Signals
+- Production retail is targeting **€400–€600** with a €199.99 early-adopter slot for the first ten units; budget above €300 until volume ramps even though beta testers paid €300.【F:knowledge/notes/input_part004_review.md†L129-L131】
+- Rage Mechanics has logged 4,000+ development hours and keeps firmware closed-source while supporting Minimotors, VESC, Zero, VSETT, Kelly, and Kunteng buses—explaining the ~€500 price point despite open-hardware roots.【F:knowledge/notes/input_part004_review.md†L259-L259】
 - Beta batches sold at **300 €** for 15 testers with August assembly runs; production pricing remains under review.[^11]
 - Rage Mechanics currently bundles SmartDisplay with its dual-controller kits (~489 €), and standalone sales are pending cost-down work—plan purchases early if you need just the dash.[^12]
+- Expect retail pricing closer to €500 once the premium feature set (CAN/UART breakout, telemetry, OTA, GPS, lighting control) is factored in—Face de Pin Sucé’s rundown helps set expectations for new buyers.【F:knowledge/notes/input_part010_review.md†L314-L314】
+- Riders chasing budget instrumentation still repurpose RTV VESC-only displays or even spare phones when SmartDisplay pricing overshoots a project’s scope.【F:knowledge/notes/input_part010_review.md†L314-L315】
 - Competing IPS dashboards (e.g., Voyage Megan) target 300–400 € but lack SmartDisplay’s lighting bus, telemetry depth, and OTA ecosystem, so many riders still default to SmartDisplay.[^13]
 - Low-volume CNC and SLS case work keeps retail expectations above €300 until injection tooling arrives; the team is tooling distributors, planning a ~20-unit May build run with new central-mount housings, and baking “panic mode” legal presets alongside wider controller harness support.[^14]
 
@@ -51,6 +60,8 @@
 - Phase-current overlays highlight traction-control activity (e.g., 189 A front vs. 317 A rear mid-corner) and help tune duty-cycle ramps after firmware changes.[^10]
 
 ## Safety, Service & Troubleshooting
+- **Dash-only scripts drop security features.** Rage Mechanics’ “dash-only” SmartDisplay firmware frees wiring but loses start-speed locks, button combos, and motor lockouts when the dashboard powers down—recreate those safeties elsewhere before relying on the stripped harness.【F:knowledge/notes/input_part004_review.md†L193-L195】
+- **Cruise control stays manual.** The team refuses to spoof cruise via Lisp—use the dedicated button on the remote or SmartDisplay’s onboard toggle rather than scripting ADC hacks that can run away.【F:knowledge/notes/input_part004_review.md†L342-L342】
 - **USB Isolation.** Only flash or debug SmartDisplay over Wi‑Fi/BLE when the controller is energized; USB-to-PC tests while the scooter is live can short grounds and nuke 3.3 V logic.[^3]
 - **CAN Health.** Expect ≈3.3 V differential between CANH and CANL on a healthy bus; anomalous readings justify probing harness crimps before blaming firmware.[^6]
 - **Spare Components.** Keep TJA1051 CAN ICs, JST pigtails, and spare ESP32 modules in the pit box to minimize downtime when a dash takes a spill.[^5]
@@ -60,6 +71,7 @@
 - SmartDisplay’s apps push updates in minutes—developers can add a new setting, publish OTA, and have riders flashing within five minutes over Wi‑Fi.[^4]
 - NetworkDir’s next hardware rev will speak native CAN, mimic Trampa’s SmartDisplay device registration, and bundle ESP32‑C3 Wi‑Fi/BLE modules to host VESC Express dashboards without extra dongles.[^1]
 - Rage Mechanics is weaving the display into turnkey race scooters, streaming telemetry to crews and elevating expectations for pro-grade HUDs in the VESC scene.[^12]
+- Public release cadence targets late 2024/early 2025 with broader controller support, pricing between €400 and €600, and bundle options that include light boards and button pods—set customer expectations accordingly.【F:data/vesc_help_group/text_slices/input_part004.txt†L11857-L11916】
 - Firmware planning now includes encrypted OTA packages, Kelly/Sabvoton harness kits, and configurable “panic mode” speed caps so riders can stay compliant during roadside checks.[^14]
 - Upcoming builds expand the existing 25/35/unlimited slots into user-tuned eco/normal/boost profiles that scale phase and battery current (e.g., eco at 0.6×/0.7×) and warn when MOSFET temps approach the boost gate.【F:knowledge/notes/input_part000_review.md†L137-L137】
 - Production now spans dash-mounted screens and minimalist deck modules assembled by Koxx’s team, letting riders hide the BLE bridge in the deck when they prefer to keep phones on the bars for live telemetry.[^18]
@@ -80,7 +92,9 @@
 [^11]: Beta pricing (300 €) and limited 15-unit run with August assembly schedule.【F:knowledge/notes/input_part002_review.md†L845-L845】
 [^12]: Rage Mechanics bundling SmartDisplay with dual-controller kits and teasing standalone availability once pricing stabilizes.【F:knowledge/notes/input_part013_review.md†L684-L684】
 [^13]: Voyage Megan IPS display positioning at 300–400 € and community comparisons favoring SmartDisplay’s richer feature set.【F:knowledge/notes/input_part005_review.md†L378-L379】
+[^megan_alt]: Arnau’s Voyage Megan bundle lacks out-of-box waterproofing and costs ~€400, so Smart Repair points budget builders toward mark99i’s Raspberry Pi dashboard as a configurable alternative.【F:knowledge/notes/input_part011_review.md†L560-L562】
 [^14]: Encrypted OTA releases, €300+ price expectations, distributor planning, and SmartDisplay “panic mode” presets outlined during beta updates.【F:knowledge/notes/input_part001_review.md†L598-L606】【F:knowledge/notes/input_part001_review.md†L668-L670】【F:knowledge/notes/input_part001_review.md†L858-L859】
+[^15]: SmartDisplay assembly photos and UI previews showing temperature alarms, custom icons, and Rage Mechanics’ commercial support prep ahead of mass release.【F:data/vesc_help_group/text_slices/input_part003.txt†L11046-L11048】【F:data/vesc_help_group/text_slices/input_part003.txt†L11852-L11872】
 [^boot]: MCU firmware initializes dashboards in ≈10 s, avoiding the 45–95 s boot delays seen on Raspberry Pi VESC displays.【F:knowledge/notes/input_part004_review.md†L83-L83】
 [^uart-crc]: SmartDisplay throttle traffic includes CRC checks—log the UART stream before chasing shielding fixes for perceived duty dips.【F:knowledge/notes/input_part004_review.md†L214-L215】
 [^can-backfeed]: Smart Repair’s harness can power lights directly from the CAN header, but builders add inline resistors and tap the servo PWM pads when they want flashing indicators instead of constant-on lamps.【F:knowledge/notes/input_part012_review.md†L19323-L19405】

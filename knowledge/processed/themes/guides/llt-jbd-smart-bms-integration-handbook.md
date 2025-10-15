@@ -4,11 +4,13 @@
 - LLT/JBD smart boards remain the community’s compact, configurable baseline: integrated Bluetooth, programmable limits, and a 20 A soft-start pre-charge protect controllers without consuming deck space.[^1]
 - Treat physical packaging as a design constraint—21s 100 A cases still expand to ~27 mm once fasteners and heatsinks are counted, so plan spacers, insulation, and harness routing before cells are welded.[^2][^3]
 - Tune regen and discharge envelopes around the BMS instead of the motor: conservative −5 A/−40 A regen budgets, ≤200 A discharge on 18s7p packs, and verified Xiaoxiang settings prevent the MOSFET blowouts and charge-FET trips riders keep reporting.[^4][^5][^20][^21]
+- Even mid-power 20 S 7 kW commuters default to LLT/JBD when asking for a “good” smart BMS, underscoring how often these boards anchor builds before riders consider pricier JK options.【F:knowledge/notes/input_part006_review.md†L37-L39】
 
 ---
 
 ## Why Pick LLT/JBD Instead of Other Smart BMS Platforms?
 - **Balanced feature set for commuters.** Riders praise the LLT/JBD family for compact housings, configurable temperature and current limits, gentle capacitor pre-charge, and built-in Bluetooth/UART telemetry that drop into cramped decks without rewiring the entire harness.[^1]
+- **Hardware parity with LLT.** Recent teardown notes confirm JBD and LLT units share hardware/software—the choice comes down to label, pricing, and availability rather than features.[^jbd_lltl]
 - **Predictable passive balancing.** Expect roughly 100–160 mA of passive bleed—enough for 6–8 p scooter modules once charge rates are sane—while JK is still the only widely available active balancer.[^6]
 - **Survivable current headroom.** Builders routinely cap 18s7p Sony VTC6A packs near 200 A with JBD hardware on 20 kW projects and note that headline 15 kW “limits” rarely matter in practice.[^20]
 - **Alternatives carry their own baggage.** JK hardware continues to cook balance resistors and leave buyers stranded on warranty, Daly boards bleed at just ~30 mA, and budget smart-BMS listings without real protection expose builders to liability.[^8][^9]
@@ -38,18 +40,22 @@
 
 ## Configuration, UX & Security Notes
 - **Switch phones to English for full menus.** The Xiaoxiang/JBD apps inherit handset language and hide the “Softlock” toggle plus balance thresholds unless you install the admin APK or change locale first.[^18]
+- **Disable the switch port in software, not with jumpers.** If you don’t need the push-button harness, turn the electronic switch off inside Xiaoxiang instead of bridging pads—the board will boot automatically without extra wiring.【F:data/vesc_help_group/text_slices/input_part009.txt†L1485-L1488】
 - **Lower Softlock before fine-balancing.** Disable the 15 mV guard or set the delta deliberately; otherwise the app silently ignores tighter thresholds during top balancing.[^18]
 - **Keep the pack offline when parked.** JBD’s cloud portal can expose your scooter to remote limit changes, so veterans either avoid the online portal altogether or leave default credentials untouched.[^10]
 - **Log everything.** Photograph BMS settings after each session—some builders keep CSV exports—to backtrack when firmware or phone updates scramble parameters.[^10][^18]
+- **Sanity-check system parameters when series counts drift.** A 22 S ANT/JBD install read as 23 S until the owner rewrote the series-voltage and capacity fields from scratch, so treat unexpected telemetry as a configuration error before chasing wiring faults.[^param_sanity]
 
 ## Current, Regen & Thermal Guardrails
 - **Start regen conservatively.** 17 S commuters stay near −5 A battery / −40 A phase until pack temps and JBD logs prove the hardware can absorb more without tripping protection.[^4]
 - **Respect pack-specific discharge caps.** Even 20 kW builds park 18s7p VTC6A packs around 200 A battery to keep cells and BMS FETs in a safe thermal envelope.[^20]
+- **Match controller cutoffs to BMS limits.** Align VESC voltage limits with Daly/JBD trip points (e.g., 2.7 V/cell) to prevent surprise cutouts and reclaim lost power once the thresholds match.【F:knowledge/notes/input_part003_review.md†L130-L130】
 - **Raise BMS regen limits before hard braking tests.** A 75200 rider toasted MOSFETs when the BMS still thought 60–70 A was the ceiling; bump Xiaoxiang charge-current limits (e.g., 100 A) before dialing in VESC brake amps and voltage caps.[^21]
 - **Investigate recurring charge-FET trips.** Persistent JBD-SP17S005 faults even after sane settings usually point to sag or controller spikes—swap the BMS and comb logs before assuming firmware bugs.[^5]
 
 ## Telemetry & Maintenance
 - **Feed BMS data into dashboards.** The plug-in CAN bridge shares pack voltage, current, and alarms over the scooter’s existing harness, making fault correlation far easier in VESC Tool or CAN-based displays.[^25]
+- **Budget for standby draw.** ANT and similar smart BMS boards settle a few tenths of a volt overnight even when Bluetooth is frozen; verify wiring if you see larger drains but expect small drops as normal.【F:knowledge/notes/input_part003_review.md†L129-L129】
 - **Use active balancers sparingly.** External active boards can equalise large packs in about an hour, whereas the onboard JBD bleeders need days; deploy them during rebuilds, then rely on the smart BMS for day-to-day drift.[^19]
 - **Schedule periodic harness checks.** Silicone-isolated output studs and repasted heatsinks should be inspected every service interval to ensure vibration hasn’t crushed insulation.[^16]
 
@@ -66,6 +72,7 @@
 - **Log and share failure data.** Community troubleshooters can only help if you export Xiaoxiang logs, especially when chasing intermittent charge overcurrent or regen spikes.[^5][^18]
 - **Treat charger LEDs as advisory only.** Xiaomi/OEM chargers have stayed green while pushing 42 V into 10 S packs—always confirm pack voltage with a meter before assuming the BMS is finished balancing.[^charger-led]
 - **Load-test suspicious externals.** Bargain 10 S packs that collapse under light draws leave the stock battery carrying the ride; run them solo at low amperage before trusting the BMS telemetry or mixing them in parallel.[^sag_test]
+- **Log extreme short-circuit events.** ANT packs have recorded 690 A bursts that tripped short-circuit protection around 130 km/h—review delay timers and battery caps before repeating high-speed pulls.【F:knowledge/notes/input_part003_review.md†L190-L190】
 
 ## Deployment Checklist
 - [ ] Measure deck cavity height/width and confirm the BMS plus insulation clears cells and harnesses.[^3][^15]
@@ -94,7 +101,7 @@
 [^14]: Misrouting identical white sense leads on a JBD harness produced zero-volt readings until the parallels were retied to the correct terminal—proof that labeling and continuity checks matter.【F:knowledge/notes/input_part009_review.md†L261-L261】
 [^15]: Xiaomi Pro 2 deck measurements around 10.5–11 cm wide left only millimetres for extra electronics, so builders often relocate the BMS into shoulder spacers or bags.【F:knowledge/notes/input_part007_review.md†L185-L185】
 [^16]: Patrick ended up silicone-isolating the oversized JBD output studs and reprinting deck spacers once the real-case thickness became apparent.【F:knowledge/notes/input_part008_review.md†L165-L165】
-[^17]: Wiring logs remind builders to land B− before balance taps and verify each voltage step when assembling 20s8p packs to avoid frying the BMS during first power-up.【F:knowledge/notes/input_part008_review.md†L181-L181】
+[^17]: Wiring logs remind builders to land B− before balance taps and verify each voltage step when assembling 20s8p packs to avoid frying the BMS during first power-up.【F:knowledge/notes/input_part009_review.md†L3834-L3848】【F:knowledge/notes/input_part008_review.md†L181-L181】
 [^18]: JBD’s mobile app mirrors phone language and hides the Softlock toggle plus sub-15 mV balance settings unless you install the admin APK or switch the handset to English.【F:knowledge/notes/input_part009_review.md†L323-L323】【F:knowledge/notes/input_part008_review.md†L170-L170】
 [^19]: External active balancers can equalise large packs in about an hour, whereas relying on JBD’s onboard balancing would take days—handy during rebuilds but unnecessary once the pack is stable.【F:knowledge/notes/input_part009_review.md†L27-L27】
 [^20]: Builders keep LLT/JBD boards on 20 kW projects by capping ≈200 A battery on 18s7p Sony VTC6A packs, noting that the published 15 kW figure is conservative with proper cooling.【F:knowledge/notes/input_part006_review.md†L200-L200】
@@ -107,3 +114,4 @@
 [^adj_supply]: Adjustable 22 S/18 A supplies paired with ANT sleep timers keep 21 S packs topped without drifting when scooters sit for weeks between rides.【F:knowledge/notes/input_part012_review.md†L11401-L11411】
 [^multi_brick]: Switchable 16–24 S/20 A bricks fill in when premium 21 S chargers are unavailable, giving one charger that can service multiple scooter voltages.【F:knowledge/notes/input_part012_review.md†L11792-L11797】
 [^no_fet]: Jason’s 32 S-capable BMS variant deletes discharge FETs entirely, effectively leaving downstream hardware as the only short-circuit protection.【F:knowledge/notes/input_part012_review.md†L19339-L19342】
+[^jbd_lltl]: JBD smart BMS boards mirror LLT hardware and firmware, so purchasing decisions hinge on pricing and supply rather than capabilities.【F:knowledge/notes/input_part003_review.md†L105-L105】

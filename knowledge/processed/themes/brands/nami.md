@@ -3,6 +3,7 @@
 ## TL;DR
 - Dual-motor load sharing keeps Tronic 250-equipped NAMI builds under ~40 °C on steep climbs, while single-drive hill assaults crest ~60 °C—treat high-power setups as two-controller platforms to stay within thermal margins.[^1]
 - The stock 40 Ah module’s eight-way LG M50LT parallel pack is happiest below ~135 A; community pushes toward 200 A/310 A phase quickly overheat hubs and batteries unless the pack is rebuilt and monitored closely.[^2]
+- Factory trims matter: the 28 Ah models still ship 1 000 W hubs while the 32–40 Ah versions step up to 1 500 W motors, and crews are now targeting 35–40 kW combined output for the next wave of VESC swaps.【F:knowledge/notes/input_part010_review.md†L282-L283】
 - High-speed composure depends on real suspension and damper hardware: NAMI frames reward elastomer blocks plus quality Bitubo-class dampers, whereas cheap AliExpress units snap under race preload.[^3]
 - Race-prepped 65H motors already touch ~100 km/h without field-weakening, and GT2 owners have proven 26 S compatibility when controllers and logging are squared away—voltage headroom is no longer the bottleneck.[^4]
 - Hotdog builds pairing 100 H rears with 70 H fronts now run 22 S 11 P P45 packs at ≈500 A phase / 550 A absolute, relying on 100 % front FW and aggressive traction control because the rear will lift the front wheel even at 120 km/h despite ~61 °C stator temps.[^hotdog]
@@ -18,15 +19,20 @@
 ## Chassis & Handling Priorities
 - Keep the platform in its comfort lane: riders still rank Dualtron Thunder geometry for >150 km/h sprints, while NAMI frames shine for long-range and off-road duty when paired with good dampers instead of chasing absolute top speed.[^3]
 - Budget steering dampers snap when preloaded for race pace; invest in motorcycle-grade Bitubo or similar hardware before upping currents and tire width.[^10]
+- Aftermarket shocks rarely match the Viper’s leverage curve—most MTB units feel nearly solid, so owners are still hunting purpose-built dampers instead of relying on drop-in swaps.【F:knowledge/notes/input_part006_review.md†L97-L97】
 - Fabrication escalates quickly—22 S 10 P hybrids inspired by Rion builds required fork machining to clear 70H hubs and 3 mm rotors, so plan machine time before ordering oversized drivetrains.[^11]
+- Kaabo fork swaps remain largely cosmetic: the community confirmed 70 H hubs fit but 75 H is doubtful without extra machining, so most riders stick with stock hardware unless aesthetics trump effort.[^kaabo-swap]
 
 ## Power & Thermal Guardrails
+- Paolo now caps motor phase near 200–250 A unless you rewire with shorter, larger-gauge leads; the stock PTFE insulation looks thin but sheds heat better than silicone, so verify cross-section before tearing harnesses apart.【F:knowledge/notes/input_part009_review.md†L309-L310】
 - Favor dual-drive current splits: the same Tronic 250 hardware that bakes at ~60 °C as a single motor holds near 40 °C when the load is shared across both ends.[^1]
+- Upgrade overheated harnesses with 10 AWG silicone phase leads—the swap let Rob Ver hold 116 A battery and 240 A phase without cooking the loom, provided pack and controller temps stayed logged.[^tronic_harness]
 - Treat 200 A battery / 310 A phase experiments as short-lived: even purpose-built dual Spintend setups report hub and pack overheating at those levels.[^2]
 - Respect the stock module’s ≈116 A continuous ceiling—AYÓ advises capping peaks near 135 A until the pack is rebuilt or paralleled.[^2]
 - Data logging must sum both controllers; otherwise, power traces plateau near 19 kW even while riders believe they’re pushing 170 A/200 A per side.[^9]
 - Track NAMI builds already touch triple digits on 65H motors without FW; spend effort on tire compound, suspension balance, and braking instead of chasing voltage for speed alone.[^4]
 - Hotdog-class 100 H rears paired with 70 H fronts survive 500 A phase pulls when fed by 22 S 11 P P45 packs, but only with traction control engaged and front-motor FW at 100 % to match wheel speed—expect front-wheel lift at 120 km/h if TC is disabled.[^hotdog]
+- 🇪🇸AYO#74 is testing whether stock 72 V controllers stay happy on a homemade 60 V pack by rewiring phase leads—down-voltage behaviour remains unproven, so log carefully before committing a commuter build.【F:knowledge/notes/input_part010_review.md†L185-L186】
 
 ## Battery Strategy & Pack Building
 - Documented GT2 rebuilds pair 20 S 9 P LG 40P packs with Daly smart BMS hardware and thick copper busbars—use this as a template when refreshing commuter modules.[^6]
@@ -37,12 +43,14 @@
 
 ## Electronics & Accessory Integration
 - Start with the proven harness baseline—6 mm bullets and XT90 battery plugs—and only upsize once current goals justify the extra packaging work.[^5]
+- Budget separate DC/DC rails for heavy accessories: Tronic X12 logic supplies only ~150 mA at 5 V, so horns, fans, and dashboards still need dedicated bucks on high-current NAMI builds.[^tronic_logic]
 - Avoid hanging full lighting loads directly off controller accessories: horn outputs only source a few amps, so trigger relays or separate DC/DC rails for halogens and other heavy draws.[^12]
 - Document accessory power paths before splicing dashboards or smart displays; riders are still mapping which 5 V/12 V rails share regulators on Ubox and Makerbase logic stages.[^13]
 
 ## Reliability Watchlist
 - First-generation frames have shown weld cracking; later 72/40 chassis add gussets, giving buyers a visual checklist when sourcing used NAMI decks.[^14]
 - Handmade 22 S hybrids need machine work and inspection of fork clearances, and water sealing should be rechecked whenever machining exposes fresh metal.[^11]
+- Race outfits have started enclosing the C350 controller in custom waterproof housings—Face de Pin’s crew was the only team still lapping Albaida once rain hit and now machines most of their replacement frame parts in-house—reinforcing that sealing electronics and reinforcing hinges is essential before endurance sessions.[^c350-case]
 - High-voltage experiments above stock (26 S or more) demand validated controllers—confirm CAN, throttle, and hall health before blaming firmware for traction loss.[^7]
 - Avoid 12" AliExpress rim swaps without suspension mods—the community expects spring interference and rubbing, so 65 mm front / 80 mm rear LY combinations remain the safe default for wide-hub conversions.[^rim_warning]
 - Tubeless Ambrosini rims can burp air after potholes; reseat by pulling the valve core, blasting the bead with a compressor, and cleaning debris before reinflating.[^burp_fix]
@@ -73,8 +81,12 @@
 [^12]: Controller horn/aux channels sourcing only a few amps—relay heavy lighting loads instead of direct wiring.【F:knowledge/notes/input_part012_review.md†L96-L99】
 [^13]: Accessory-rail documentation gaps and current-limit questions on Ubox 85240/85250 harnesses.【F:knowledge/notes/input_part013_review.md†L116-L130】
 [^14]: Visual differences between cracked first-gen NAMI frames and reinforced 72/40 chassis.【F:knowledge/notes/input_part012_review.md†L129-L132】
+[^kaabo-swap]: NAMI riders debating Kaabo fork swaps concluded the mod is mostly for looks—70 H motors fit, but 75 H clearance is uncertain without extra machining.【F:knowledge/notes/input_part009_review.md†L228-L233】
+[^c350-case]: Face de Pin Sucé’s race team sealed their NAMI’s C350 in a custom waterproof enclosure, kept lapping Albaida in the rain, and now machines most replacement frame parts in-house to shore up Thunder-family hinges.【F:data/vesc_help_group/text_slices/input_part009.txt†L22034-L22072】
 [^hotdog]: Latest NAMI hotdog builds with 100 H rears and 70 H fronts running 22 S 11 P P45 packs, 500 A phase / 550 A absolute limits, 100 % front FW, and ~61 °C stator temps while traction control prevents front-wheel lift beyond 120 km/h.【F:knowledge/notes/input_part014_review.md†L8930-L8933】【F:knowledge/notes/input_part014_review.md†L10001-L10055】
 [^bms_ceiling]: 22 S 11 P 50PL pack planning noting today’s smart BMS hardware caps ≈500 A continuous, requiring dual-BMS or pyrofuse strategies when targeting ≈770 A nominal current.【F:knowledge/notes/input_part014_review.md†L2965-L2974】【F:knowledge/notes/input_part014_review.md†L3427-L3434】
 [^rim_warning]: Community warning that 12" AliExpress rims interfere with NAMI suspension, so 65 mm front / 80 mm rear LY combos remain the preferred setup.【F:knowledge/notes/input_part014_review.md†L5103-L5113】
 [^burp_fix]: Tubeless Ambrosini rims occasionally burp air after potholes; reseat by pulling the valve core and blasting the bead clean with a compressor.【F:knowledge/notes/input_part014_review.md†L4610-L4619】
 [^pmt_rain]: PMT rain-specific tires in 90 mm and 100 mm widths cost roughly $80 each but deliver the wet grip racers need versus cheaper slicks.【F:knowledge/notes/input_part014_review.md†L5359-L5399】
+[^tronic_harness]: Rob Ver’s harness refresh swapped the NAMI loom to 10 AWG phases so dual Tronic X12 controllers could sustain 116 A battery and 240 A phase without overheating.【F:knowledge/notes/input_part013_review.md†L33-L33】
+[^tronic_logic]: Tronic X12 accessory rails only deliver about 5 V at 150 mA, so builders still power horns and lighting from dedicated buck converters.【F:knowledge/notes/input_part013_review.md†L32-L33】

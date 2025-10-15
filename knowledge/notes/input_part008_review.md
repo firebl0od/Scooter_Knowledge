@@ -609,6 +609,13 @@
 - Rotatooor confirmed VESC speed reporting continues even without hall sensors—likely via back-EMF estimation—though geared hubs that freewheel off throttle may still need external sensors or GPS for coasting speed readouts.【F:data/vesc_help_group/text_slices/input_part008.txt†L21580-L21608】
 - Multiple riders coached Alex through a Spiny Y2 throttle that reboots the controller, suggesting firmware reflashes, BMS checks, motor re-detection, and verifying ADC wiring before suspecting hardware faults.【F:data/vesc_help_group/text_slices/input_part008.txt†L21613-L21706】
 
+### Early August Pack Fabrication & FW Debates (Lines 23,661–23,760 & part009 1,301-1,400)
+- Ubox 80/150 owners experimenting with 90–110 A field-weakening under Ortega observers ran into runaway coast when releasing the throttle; peers reiterated that adding series voltage or taller gearing is safer than maxing FW current to chase 86 km/h targets.【F:data/vesc_help_group/text_slices/input_part009.txt†L1309-L1331】
+- GABE confirmed a 10s8p internal pack still fits the Xiaomi Pro 2 deck with only a slim spacer and the OEM heatsink when cells are stacked cleanly, but PuneDir warned to leave the supplemental 3s module on its own BMS instead of wiring both bricks to one controller harness.【F:data/vesc_help_group/text_slices/input_part009.txt†L1312-L1323】
+- Builders resurfaced copper-laminate handling tips—0.15 mm sheet cuts cleanly by keeping scissors near the pivot and finishing edges with a rubber mallet—reinforcing how to prep busbars without specialized shears.【F:data/vesc_help_group/text_slices/input_part009.txt†L1343-L1352】
+- CPU-grade thermal paste remains an acceptable stand-in for controller mounting jobs when boutique compounds are unavailable, provided surfaces are clean before clamping the enclosure.【F:data/vesc_help_group/text_slices/input_part009.txt†L1337-L1338】
+- Honeycomb pack makers are pairing hot glue with fishpaper, Kapton, and silicone spacers to hold air gaps between series groups so insulation, not adhesive blobs, carries the structure—plus tape wraps once the battery is closed up.【F:data/vesc_help_group/text_slices/input_part009.txt†L1355-L1384】
+
 ## Follow-ups
 - Compile a MOSFET selection note comparing Huayi, JJMicro, and Spintend stock devices so racers know which swaps actually survive 200 A+ abuse on 85/150-class controllers.【F:data/vesc_help_group/text_slices/input_part009.txt†L1541-L1554】【F:data/vesc_help_group/text_slices/input_part009.txt†L2491-L2499】
 - Document the JBD mobile app’s language inheritance and “softlock” behavior so builders can reliably change balance thresholds without guessing through mistranslated menus.【F:data/vesc_help_group/text_slices/input_part009.txt†L2115-L2137】

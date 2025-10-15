@@ -1,0 +1,9 @@
+# Extraction Run – 2025-11-08
+
+- **Source file:** `knowledge/notes/input_part004_review.md`
+- **Coverage:** Lines 101–200 (Batch 2) – paused before line 201 for the next increment.
+- **Key additions:**
+  - Folded SmartDisplay’s evolving hardware snapshot, pricing runway, and dash-only safety trade-offs into the integration guide while documenting hall-splitting, NRF-header reservations, and Dragy DRG70 mounting constraints across the accessory playbooks.【F:knowledge/processed/themes/guides/smartdisplay-integration-guide.md†L5-L18】【F:knowledge/processed/themes/guides/vesc-accessory-power-and-display-integration.md†L20-L42】【F:knowledge/processed/themes/guides/scooter_diagnostic_toolkit.md†L9-L15】
+  - Hardened high-power controller guidance with Little FOCer ceilings, Makerbase 22 S failures, Spintend phase-filter discipline, ABS reset workflows, dual-throttle CAN expectations, and traction-control heat impacts, then mirrored the Spintend single G015N10 hardware update inside its dedicated handbook.【F:knowledge/processed/themes/guides/high-power-vesc-scooter-reliability-guide.md†L7-L52】【F:knowledge/processed/themes/guides/spintend-ubox-integration-handbook.md†L24-L58】
+  - Captured hub and pack maintenance lessons—including ferrofluid injection methods, Blade lead upgrades, Magura cooldown habits, IR-meter calibration, and 60 A cell abuse costs—inside the motor cooling and current-tuning guides while flagging iglidur bushing wear for Monorim owners.【F:knowledge/processed/themes/guides/motor_cooling_and_thermal_management.md†L26-L49】【F:knowledge/processed/themes/guides/battery_current_tuning.md†L16-L41】【F:knowledge/processed/themes/guides/monorim_suspension_maintenance.md†L86-L89】
+- **Next step:** Resume at line 201 in `input_part004_review.md`, carrying forward traction-control telemetry comparisons, brake hardware experiments, and remaining late-April firmware updates.

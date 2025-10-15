@@ -4,6 +4,7 @@
 - **Stealth commuter spec:** Base conversion keeps the platform single-motor with a rear Q5 Evo hub, 20S 6P Molicel pack, and Magura MT7 brake with a Shimano Deore lever so the scooter stays nimble, wheelie-friendly, and outside DGT registration triggers while matching high-power peers for acceleration.【F:knowledge/notes/input_part013_review.md†L350-L353】
 - **Road-legal mindset:** Builders are targeting legal-looking frames (e.g., Thunder 3 shells) and single-motor G2 layouts for Spanish compliance efforts, so conversion plans should preserve OEM lighting, horn, and indicator support where possible.【F:knowledge/notes/input_part013_review.md†L491-L492】【F:knowledge/notes/input_part013_review.md†L349-L353】
 - **80 km/h upgrade recipe:** Community checklists push rear spacing to ≈150 mm, grind the separator plate, install a 65 H 22×3 hub, and pair at least a 20 S 5–6 P 21700 pack with a robust VESC (e.g., Ubox 85/150) before chasing sustained highway speeds.【F:knowledge/notes/input_part011_review.md†L447-L448】【F:knowledge/notes/input_part011_review.md†L18290-L18383】
+- **Heavy-rider packaging:** Francois (≈140 kg, 2 m tall) is proving a Rage Mechanics recipe—H60 rear motor, C350 controller, 20 S pack, and SmartDisplay-derived dash—can still fit a Max G2 deck when meticulously routed, making it the current benchmark for oversized riders who want to stay single-motor.【F:knowledge/notes/input_part011_review.md†L788-L796】
 
 ## Core Component Options
 | Subsystem | Recommended Parts | Rationale |
@@ -15,7 +16,7 @@
 | Controller bridge | Smart Repair’s G2↔VESC CAN bridge (field-ready demo) | Enables retention of OEM controls/displays when migrating to dual VESC controllers.【F:knowledge/notes/input_part013_review.md†L144-L144】【F:knowledge/notes/input_part013_review.md†L506-L507】 |
 
 ## Mechanical Preparation
-1. **Swingarm & mudguard:** Reinstall the rear arm with two bolts, metal sleeves, and a 3D-printed mudguard support to restore stiffness after the harness swap.【F:knowledge/notes/input_part013_review.md†L42-L45】
+1. **Swingarm & mudguard:** Reinstall the rear arm with two bolts, metal sleeves, and a 3D-printed mudguard support to restore stiffness after the harness swap, and budget longer swingarm bolts when fitting Lonnyo 80 H hubs so the caliper clears.【F:knowledge/notes/input_part013_review.md†L42-L45】【F:knowledge/notes/input_part011_review.md†L756-L757】
 2. **Dropout widening:** Stock rear spacing (~115 mm) can be stretched to ~150 mm by adding ~10 mm bushings and longer shoulder bolts while retaining OEM screws; choose softer bushing metals (copper/brass) so the frame tabs do not gall.【F:knowledge/notes/input_part013_review.md†L355-L355】
 3. **Cell packaging ceiling:** Expect ≈208 cylindrical cells before extensive deck surgery; plan your enclosure and harness routing before welding to avoid overcrowding the swingarm pivot area.【F:knowledge/notes/input_part013_review.md†L354-L354】
 4. **Underbody protection:** Heavy-duty builds are fabricating CNC adapter plates plus a 10 mm steel skid to house 20S 5P Samsung 40T packs and larger Rage FH60 motors while preserving ground clearance and legal looks.【F:knowledge/notes/input_part013_review.md†L123-L123】
@@ -35,10 +36,12 @@
 - **Reinforcement strategy:** When targeting street-legal yet high-discharge packs, fabricate skid plates and adapter brackets early so the added mass does not overstress the swingarm hardware.【F:knowledge/notes/input_part013_review.md†L123-L123】【F:knowledge/notes/input_part013_review.md†L354-L354】
 - **Thermal checks:** Pair the aluminium heat spreader with high-quality thermal paste and stripped paint surfaces; confirm temps after long pulls to validate the interface before sealing the deck.【F:knowledge/notes/input_part013_review.md†L606-L606】
 - **Stock BMS telemetry envelope:** Expect roughly 33 A continuous discharge and brief ~44 A regen bursts when CAN comms stay intact—use those ceilings when staging VESC limits so field-weakening pulls do not trip the pack.【F:knowledge/notes/input_part005_review.md†L138-L138】【F:knowledge/notes/input_part005_review.md†L369-L369】
+- **Field-weakening guardrails:** Custom firmware running 60 A phase plus 35 A FW lifts top speed to ~35–40 km/h even with 140 kg riders, but stators peaked near 150 °C and ferrofluid overheated magnets—budget temperature probes and cooling before leaning on FW for long pulls.【F:knowledge/notes/input_part005_review.md†L367-L368】
 
 ## Braking, Suspension & Ride Safety
 - **Hybrid braking setups:** Some conversions lean on −90 A motor brake plus a front drum until displays arrive—treat this as temporary and prioritise fitting the Magura MT7 hydraulic system for repeatable stops.【F:knowledge/notes/input_part013_review.md†L163-L163】
 - **Rotor upgrades:** If you pursue 203 mm moto rotors, follow the community spacer blueprint that aligns Sur-Ron discs with Magura calipers to avoid pad taper and caliper rub.【F:knowledge/notes/input_part013_review.md†L160-L160】
+- **Monitor arm fatigue:** Builders are already cracking stock G2 suspension arms under high-power loads; swap to reinforced forks or aftermarket arms if you plan to add a second 65H motor or daily heavy riders.【F:knowledge/notes/input_part011_review.md†L713-L714】
 - **Headset service:** Clean any carbon paste overspill from the steering bearings; the paste can masquerade as a steering damper but eventually seizes the headset.【F:knowledge/notes/input_part013_review.md†L194-L194】
 
 ## Wiring & Regen Considerations

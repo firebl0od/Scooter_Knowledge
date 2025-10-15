@@ -1,7 +1,7 @@
 # Parallel Battery & Regen Integration Manual
 
 ## TL;DR
-- Match pack voltages before paralleling and avoid ideal diodes; real-world tests on 17S/16S stacks caused throttle cut-outs and offered no regen benefits compared with direct, voltage-matched links.【F:knowledge/notes/input_part013_review.md†L153-L156】
+- Match pack voltages before paralleling and avoid ideal diodes; real-world tests on 17 S/16 S stacks caused throttle cut-outs and offered no regen benefits compared with direct, voltage-matched links.【F:knowledge/notes/input_part013_review.md†L153-L156】【F:knowledge/notes/input_part009_review.md†L377-L377】
 - Treat regen as a controller- and battery-limited budget: split braking current across packs, keep the combined limit within both packs’ safe charge rates, and raise BMS regen ceilings (e.g., 100 A on JBD units) so the controller does not dump energy into MOSFETs instead.【F:knowledge/notes/input_part013_review.md†L154-L157】【F:knowledge/notes/input_part013_review.md†L693-L703】
 - Regen only works when the charge path is enabled; disabling the BMS charge MOSFET or relying on regen without hydraulic brakes has already produced weak braking and safety gaps on live builds.【F:knowledge/notes/input_part013_review.md†L157-L163】
 - Test pack health—parallel 13S6P Samsung 35E modules only after confirming internal resistance matches closely, even when cells share BMS models and cycle counts.【F:data/vesc_help_group/text_slices/input_part001.txt†L1582-L1596】
@@ -27,6 +27,7 @@
 - **Match regen to amp-hours.** Artem’s quick math keeps battery regen at or below the pack’s Ah rating (e.g., ≤10 A on a 10 Ah block) and sets controller regen roughly 15 A higher so excess power becomes heat instead of spiking cells or tripping BMS charge FETs.【F:data/vesc_help_group/text_slices/input_part000.txt†L17390-L17416】
 - **Respect controller ceilings.** Regen remains phase-current limited—pushing beyond the controller’s thermal capacity will overheat MOSFETs before healthy packs object. Keep controller telemetry on hand to verify that regen spikes stay inside hardware budgets.【F:knowledge/notes/input_part013_review.md†L156-L156】
 - **Tune VESC voltage caps.** One 75 200 failure traced to regen voltage spikes because the controller’s max input voltage exceeded the pack’s comfort zone while the JBD limit stayed at stock; raising the BMS regen ceiling and tightening VESC’s voltage limit prevented further MOSFET deaths.【F:knowledge/notes/input_part013_review.md†L693-L703】
+- **Raise BMS voltage ceilings when regen cuts out early.** Matthew’s 18 S Spintend 85/150 stopped braking above ~76.6 V until he nudged the BMS cutoff start/end upward; the controller was fine once the BMS limit matched his target regen voltage.【F:knowledge/notes/input_part008_review.md†L611-L614】
 
 ## BMS & Charge-Path Safeguards
 - **Leave charge MOSFETs enabled.** Disabling the BMS charge FET neutered regen braking until riders re-enabled it, proving that “charge off” modes directly cut regen authority.【F:knowledge/notes/input_part013_review.md†L157-L157】
@@ -34,10 +35,12 @@
 - **Log smart-BMS telemetry.** JBD/Xiaoxiang apps expose regen current, pack voltage, and MOSFET temperatures—capture these during first shakedowns to validate that firmware changes (e.g., no-limit builds) stay inside BMS envelopes.【F:knowledge/notes/input_part013_review.md†L693-L703】
 - **Plan Daly resets.** Display-equipped Daly BMS units ignore remote-off commands, latch MOSFETs after sag, and can flip charge FETs during strong regen—budget an external antispark and keep the Bluetooth app handy for resets.【F:knowledge/notes/input_part000_review.md†L315-L316】【F:knowledge/notes/input_part000_review.md†L368-L368】
 - **Bridge data into the VESC bus.** Plug-in CAN adapters let LLT/JBD boards stream pack voltage, current, and alarms directly to controllers and dashboards, making it easier to catch regen spikes before they cook MOSFETs.[^can-bridge]
+- **Expect surge when one pack drops out.** Parallel packs generally balance each other, but if one BMS trips under heavy load the remaining pack sees a sudden current spike that can kill it—coordinate cutoff thresholds and fast fusing.[^bms-surge]
 
 ## Thermal & Mechanical Guardrails
 - **Monitor pack heating under parallel pulls.** Dual MakerBase 100 A stacks pushing ~400 A battery combined already flirt with pack heat soak; adding parallel packs raises sustained power capability but only if you manage airflow and thermal mass.【F:knowledge/notes/input_part013_review.md†L539-L540】
 - **Keep hydraulic brakes in service.** Several Ninebot and Ubox conversions rode with only −90 A motor brake while waiting on parts; others survived emergency stops thanks to cable/hydraulic brakes when regen-only systems failed. Treat regen as supplemental, not primary, stopping power.【F:knowledge/notes/input_part013_review.md†L163-L163】【F:knowledge/notes/input_part013_review.md†L395-L395】
+- **Mind rider stability.** Testers reported −80 A regen nearly pitching them over the bars, so tune Spinny profiles or throttle ramps before trusting regen-only braking on heavy scooters.【F:knowledge/notes/input_part008_review.md†L249-L249】
 - **Document heat thresholds.** Builders noted controller temps climbing before motors when leaning on regen for long descents; watch MOSFET sensors and dial back regen if controller temps spike even when motors feel cool.【F:knowledge/notes/input_part013_review.md†L395-L395】
 - **Check packs after wet rides.** A 30 S parallel group drifted out of balance after moisture seeped into the enclosure—dry and inspect housings before re-paralleling so regen doesn’t push mismatched groups further apart.【F:knowledge/notes/input_part012_review.md†L10491-L10505】
 
@@ -52,3 +55,4 @@
 - Safety guardrails on charge-path enablement, fuse planning, moisture checks, and mechanical brake reliance reflect the same discussions of charge-only BMS risks, wet-pack drift, and high-current harness failures.【F:knowledge/notes/input_part013_review.md†L224-L224】【F:knowledge/notes/input_part013_review.md†L395-L411】【F:knowledge/notes/input_part013_review.md†L539-L540】【F:knowledge/notes/input_part012_review.md†L10491-L10505】
 [^can-bridge]: LLT/JBD smart BMS boards now offer plug-in CAN adapters that share telemetry over the existing harness, simplifying regen verification inside VESC Tool or CAN dashboards.【F:knowledge/notes/input_part006_review.md†L365-L365】
 [^cheap-externals]: Cheap external packs that collapse under minimal load force the main battery to supply all current—test them independently before paralleling or sizing regen budgets.【F:knowledge/notes/denis_all_part02_review.md†L5499-L5526】
+[^bms-surge]: Noname’s triple-pack setup usually balances itself, but when one BMS trips the others suddenly absorb the full demand—without coordinated thresholds and fusing the surviving pack can die from the surge.【F:knowledge/notes/input_part008_review.md†L99-L99】

@@ -118,12 +118,16 @@ Structure for each parameter:
 - Maximum positive (forward) phase current into the motor. Defines peak torque.
 
 **Deeper Insights**
-- Phase current can exceed battery current at partial throttle due to duty cycle step-down. 
+- Phase current can exceed battery current at partial throttle due to duty cycle step-down.
 - Setting too high can overheat the motor or saturate the ESC’s thermal limits.
+- Real-time telemetry over CAN aggregates both controllers, so dual-motor builds will see summed phase amps (e.g., two 300 A stacks display ≈600 A) even though each ESC enforces its own limit.【F:data/vesc_help_group/text_slices/input_part014.txt†L10429-L10498】
+- Dual 85250/100-100 stacks keep the front controller’s ABS Max lower—racers bump it to ≈165 A so the smaller hub stops tripping while the rear holds 300 A, then retune traction once logs confirm balance.【F:data/vesc_help_group/text_slices/input_part014.txt†L10456-L10498】
 
 **How / When to Modify**
-- Check motor’s continuous & peak ratings. 
+- Check motor’s continuous & peak ratings.
 - Watch motor temperature on test rides before going higher.
+- Configure each controller individually rather than trusting the multi-setup wizard when CAN-linking; clone the known-good settings per ESC so you don’t overwrite phase limits on the smaller front unit.【F:data/vesc_help_group/text_slices/input_part014.txt†L10456-L10498】
+- Disable Slow ABS Overcurrent on the weaker controller once current logs look clean; leaving it active kept Matthew’s front motor tripping even after the ABS Max bump.【F:data/vesc_help_group/text_slices/input_part014.txt†L10456-L10532】
 
 **Potential Side Effects**
 - Excessively high = thermal runaway in motor windings or ESC MOSFET burnouts.
@@ -250,6 +254,7 @@ Structure for each parameter:
 
 **Deeper Insights**
 - Typically set higher than normal to avoid nuisance trips from short spikes (150–300A, for instance).
+- Mixed-motor stacks benefit from extra headroom on the smaller front controller (e.g., bumping a 100/100 to ≈165 A ABS max) so the rear 85250 can keep pulling 300 A without the front faulting first.【F:data/vesc_help_group/text_slices/input_part014.txt†L10498-L10532】
 
 **How / When to Modify**
 - If you get random ABS_OVER_CURRENT faults, either raise this or enable slow filtering (l_slow_abs_current).
@@ -410,6 +415,7 @@ Params: l_battery_regen_cut_start, l_battery_regen_cut_end
 **How / When to Modify**
 - If random overcurrent faults appear with no real sustained high current, enable or keep it on.
 - If you truly want immediate fault on any spike, keep it off.
+- Disable the filter on the smaller controller if it’s brushing against its ABS limit—slow ABS masking can still trip repeatedly while the larger rear ESC keeps accelerating.【F:data/vesc_help_group/text_slices/input_part014.txt†L10498-L10532】
 
 **Potential Side Effects**
 - If you rely on the absolute max to protect hardware from short, you might allow small spikes. Usually harmless for typical usage though.
@@ -588,11 +594,13 @@ Params: foc_current_kp, foc_current_ki
 - If KI is too high, drifting or low-frequency hunting can occur.
 
 **How / When to Modify**
-- If detection is stable, no need to tweak. 
+- If detection is stable, no need to tweak.
 - If you see “ABS OverCurrent” or poor torque response, try lowering KP or re-running detection.
+- Don’t be afraid to revisit detected inductance/resistance values: 🇪🇸AYO#74 eliminated mid-speed vibration by trimming inductance from ≈22.5 µH down to 16–17 µH and re-running the VSS sensorless tune—store the mobile app backup first so you can roll back experiments in seconds.【F:knowledge/notes/input_part010_review.md†L254-L255】
 
 **Potential Side Effects**
 - Wrong gains = serious stutter, noise, or slow current loop response.
+- Mobile VESC Tool snapshots preserve your last working tune; rely on them before field-testing big parameter swings so you can restore a vibration-free setup without a laptop.【F:knowledge/notes/input_part010_review.md†L254-L255】
 
 
 ### 6.2 Zero Vector Frequency
@@ -720,7 +728,8 @@ Params: foc_observer_gain, foc_observer_gain_slow
 - Lower slow gain can help at low duty cycles.
 
 **How / When to Modify**
-- If big cogging or losing sync at certain speeds, try halving the main observer_gain. 
+- If big cogging or losing sync at certain speeds, try halving the main observer_gain.
+- When hall boards die, switch to the Ortega observer with the “medium inrunner” detection preset—builders are running sensorless FOC smoothly up to ~6 kW and ≈60 km/h on heavy hubs by capping detection current this way.【F:data/vesc_help_group/text_slices/input_part013.txt†L5858-L5864】【F:data/vesc_help_group/text_slices/input_part013.txt†L5926-L5930】
 - If everything is stable, no changes needed.
 
 **Potential Side Effects**
@@ -1144,7 +1153,7 @@ Params under bms.*
 [^makerbase-current]: Multiple builders found Makerbase 75100 controllers reporting only half to one-third of the programmed battery current, forcing them to validate limits with smart-BMS telemetry or clamp meters before raising power targets.【F:knowledge/notes/input_part005_review.md†L75-L76】【F:knowledge/notes/input_part005_review.md†L106-L106】
 [^makerbase-cap-fix]: Reviewers noted that bolting additional capacitance onto the 12 V/5 V rails of Flipsky and Makerbase hardware reduced brownouts and restored trustworthy telemetry before any current-limit tuning.【F:knowledge/notes/input_part005_review.md†L494-L520】
 [^vesc-power]: SmartDisplay telemetry revealed that VESC Tool real-time power overshoots true pack watts by 10 kW+ unless you add ≥100 ms filtering, so builders verify limits with external meters before trusting GUI peaks.【F:knowledge/notes/input_part014_review.md†L2140-L2154】
-[^spintend-606]: Updating Spintend 100/100 controllers to VESC Tool 6.06 left some builds motionless until they downgraded to 6.05 and capped phase current near 130 A / ABS 180 A, underscoring the need to record firmware alongside current limits.【F:knowledge/notes/input_part012_review.md†L80-L82】
+[^spintend-606]: Updating Spintend 100/100 controllers to VESC Tool 6.06 left some builds motionless until they downgraded to 6.05 and capped phase current near 130 A / ABS 180 A, underscoring the need to record firmware alongside current limits.【F:knowledge/notes/input_part012_review.md†L80-L82】【F:data/vesc_help_group/text_slices/input_part014.txt†L10587-L10605】
 [^spintend-85150-cap]: Matthew’s Spintend 85150 logs plateaued near 150 A battery despite 210–280 A commands, implying firmware ABS caps or BMS intervention before the hardware truly saturates—confirm those clamps before blaming the controller.【F:knowledge/notes/input_part011_review.md†L353-L353】
 [^regen-sizing]: Community guidance for unknown OEM packs recommends starting regen at −5 A to −10 A and increasing only after confirming BMS charge ratings and wiring health, rather than assuming large Laotie/Zero batteries can absorb high current bursts.【F:knowledge/notes/input_part005_review.md†L25-L25】
 [^fw-regen]: Field-weakening and long downhills were shown to spike bus voltage on Spintend builds, so riders log pack voltage/temperature while testing regen to avoid surprise BMS cutoffs or controller faults.【F:knowledge/notes/input_part005_review.md†L259-L259】
@@ -1159,7 +1168,9 @@ Params under bms.*
 - Always Start with Detection: Let the firmware auto-detect motor parameters (R, L, flux, hall table, etc.).
 - Test in Steps: Increase or adjust current limits incrementally, watching temperature logs. 
 - Thermal & Voltage Headroom: Large negative braking or field weakening can produce bus voltage spikes. Ensure safety margins.
-- Hall vs Sensorless vs HFI: 
+- Throttle Ramp Time: App-config ramp times around 10 s make scooters feel dead off the line—builders chasing full torque drop the value near zero so acceleration follows the current limits instead of an artificial delay.【F:data/vesc_help_group/text_slices/input_part010.txt†L11314-L11320】
+- Some dual-motor riders reintroduce a small ramp delay on the front channel (e.g., 20 tenths of a second) after zeroing the rear to mimic traction control; it softens initial spin without dulling the main launch.【F:data/vesc_help_group/text_slices/input_part010.txt†L11321-L11331】
+- Hall vs Sensorless vs HFI:
   - Hall = simpler immediate start,
   - Sensorless/HFI = advanced but can be just as good if tuned well,
   - Keep an eye on noise or offset at high speeds.

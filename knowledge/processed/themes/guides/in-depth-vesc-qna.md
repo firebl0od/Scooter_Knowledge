@@ -998,9 +998,10 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 
 **Answer**
 
-- Sensorless at zero speed is tricky: the ESC initially uses open loop. If the rotor isn’t matched, current can spike before the observer locks. 
-- Fix: Slight ramp or “foc_sl_openloop_time” to avoid big slam. 
-- Or use HFI/halls for immediate lock. 
+- Sensorless at zero speed is tricky: the ESC initially uses open loop. If the rotor isn’t matched, current can spike before the observer locks.
+- On dual drives you can let the sensored wheel push first—tune VSS/HFI so the sensorless motor joins once rolling, or script a PWM disable below a set ERPM if rewiring halls is impractical.【F:knowledge/notes/input_part011_review.md†L540-L542】
+- Fix: Slight ramp or “foc_sl_openloop_time” to avoid big slam.
+- Or use HFI/halls for immediate lock.
 - Lower l_abs_current_max or enable slow_abs_current to reduce false triggers.
 
 </details>
