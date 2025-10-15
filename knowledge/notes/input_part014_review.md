@@ -2,9 +2,9 @@
 
 ## Scope
 - Source: `data/vesc_help_group/text_slices/input_part014.txt`
-- Coverage: 2025-08-18 22:00:42 through 2025-09-24 01:36:36 (lines 1-10 300)
-- Recent pass revisited lines 2800-4300 to deepen notes on ANT smart BMS faults, G30 tuning, and thermal hardware tweaks; extended coverage through lines 4301-5800 with firmware tooling, custom LY/Ambrosini motors, tariff-driven pricing, and logging data; covered lines 5801-7300 around hotdog motor manufacturing constraints, VESC Express logging quirks, battery welding maintenance, DIY cost planning, and fresh chassis/controller comparisons; processed lines 7301-8800 for throttle wiring references, high-voltage controller packaging notes, field-weakening failure case studies, temperature-sensor troubleshooting, and evolving 30 S pack fabrication tactics; and now added lines 8801-10 300 capturing Seven/Tronic supply shifts, 100 H field-weakening benchmarks, pack safety debates, frame durability lessons, and current market pricing/group buys.
-- Next starting point: Continue with lines 10 301+ of this slice or the next export chunk once available.
+- Coverage: 2025-08-18 22:00:42 through 2025-09-24 13:48:50 (lines 1-10 400)
+- Recent pass revisited lines 2800-4300 to deepen notes on ANT smart BMS faults, G30 tuning, and thermal hardware tweaks; extended coverage through lines 4301-5800 with firmware tooling, custom LY/Ambrosini motors, tariff-driven pricing, and logging data; covered lines 5801-7300 around hotdog motor manufacturing constraints, VESC Express logging quirks, battery welding maintenance, DIY cost planning, and fresh chassis/controller comparisons; processed lines 7301-8800 for throttle wiring references, high-voltage controller packaging notes, field-weakening failure case studies, temperature-sensor troubleshooting, and evolving 30 S pack fabrication tactics; added lines 8801-10 300 capturing Seven/Tronic supply shifts, 100 H field-weakening benchmarks, pack safety debates, frame durability lessons, and current market pricing/group buys; and now logged lines 10 301-10 400, focusing on brake rotor sourcing, dual-controller throttle mapping, and fresh confirmation of G300 sprint envelopes.
+- Next starting point: Continue with lines 10 401+ of this slice or the next export chunk once available.
 
 ## Key Findings
 
@@ -147,6 +147,15 @@
 - JPPL’s Seven 18 prototype arrived with 6.06 firmware but no source release; builders are pressing the vendor to publish the .c/.h files as required by the VESC license before broader deployment.【F:data/vesc_help_group/text_slices/input_part014.txt†L7726】【F:data/vesc_help_group/text_slices/input_part014.txt†L7780】
 - Until that stack matures, Seven’s bundled Express board can’t see the controller—JPPL had to hang a separate Express module on CAN to make telemetry work, suggesting firmware or pin-map fixes are still pending.【F:data/vesc_help_group/text_slices/input_part014.txt†L8797-L8800】
 
+## Line 10 301-10 400 Highlights
+- 🇪🇸AYO#74 confirms dual-controller builds keep the throttle tied to the front “local” controller so lever travel and ramp settings stay synchronized across both ESCs, reinforcing why front-side CAN nodes usually own throttle conditioning on fast scooters.【F:data/vesc_help_group/text_slices/input_part014.txt†L10352-L10352】
+- Paolo’s rotor group buy sticks to 2 mm blanks so stock calipers bolt on; AG.racing notes Magura MT5 Pro setups can swallow 2.7 mm rotors and Nutt four-piston calipers clear 3 mm once trimmed, but Paolo warns thicker discs raise costs and require caliper mods many riders skip.【F:data/vesc_help_group/text_slices/input_part014.txt†L10356-L10365】
+- Dualtron Achilleus reiterates that waterproofed G300 controllers are the go-to for ~500 A phase bursts per motor on extreme builds, aligning with earlier sprint-duty reports from the group.【F:data/vesc_help_group/text_slices/input_part014.txt†L10368-L10399】
+
+### Follow-ups
+- Capture Paolo’s price tiers and lead times for the 2 mm versus 3 mm rotor runs once the first batch ships so buyers can budget mod work versus off-the-shelf fitment.
+- Gather throttle wiring diagrams showing how front-controller “local” inputs distribute to rear controllers over CAN so new builders don’t mis-wire dual G300/Spintend stacks.
+
 ### G30 Fabrication, Cooling, and Welding Maintenance
 - Need a fast G30 skid upgrade? Builders order the 3 mm ePowerFun aluminum floor plate, drill five holes, trim the nose for JREV spacers, and treat it as a €25 stopgap until a thicker custom plate is machined.【F:data/vesc_help_group/text_slices/input_part014.txt†L6301-L6325】
 - Glitter 811A welders throwing E01 faults regained 4.4 kA output after owners cleaned corroded bus pins; the group advocates reducing power for 0.1 mm copper, considering nickel “sandwich” layers, and rip-testing joints to avoid burning pristine busbars.【F:data/vesc_help_group/text_slices/input_part014.txt†L6412-L6461】
@@ -209,8 +218,48 @@
 - The Spintend ADC adapter already blinks LED strips for turn indicators, so custom amber side strips mainly need channel routing rather than bespoke firmware when wiring auxiliary lighting.【F:data/vesc_help_group/text_slices/input_part014.txt†L6907-L6913】
 - Spin dial throttles pair cleanly with Spintend hardware via the ADC v3 board or the newer JST harness that plugs straight into ADC3; dual-button pods ship blank so builders can map features like cruise control or single/dual motor switching, and keeping phase cables equal-length remains the safe baseline when trimming looms.【F:data/vesc_help_group/text_slices/input_part014.txt†L7040-L7040】【F:data/vesc_help_group/text_slices/input_part014.txt†L7082-L7118】【F:data/vesc_help_group/text_slices/input_part014.txt†L7064-L7097】
 
+### Wheel, Tire, and Rotor Fitment Debates
+- Builders weighing Spintend’s detachable 110 mm hub rims found that 13×5.00-6.5 AliExpress tires appear to match the 6.5" bead seat, while 7"-wide 7260R patterns still lack compatible shells, complicating plans to pair Hope Tech GR4 calipers with 3 mm rotors for extra brake stiffness.【F:data/vesc_help_group/text_slices/input_part014.txt†L10409-L10448】
+- Community definitions for “stand-up scooter” classes still center on 6.5–7" rims with 11" outer tires; anything larger starts drifting toward moto territory for performance comparisons and race scrutineering.【F:data/vesc_help_group/text_slices/input_part014.txt†L10461-L10492】
+
+### Dual-Motor Configuration Lessons
+- Matthew’s dual 85250/100-100 stack confirmed that VESC Tool real-time data doubles phase current when CAN-linked controllers stream together; the cure is to program each ESC individually (skip the multi-setup wizard), then raise the front ABS max to ≈165 A and disable slow ABS overcurrent so the smaller motor isn’t tripping while the rear keeps its 300 A phase target.【F:data/vesc_help_group/text_slices/input_part014.txt†L10429-L10437】【F:data/vesc_help_group/text_slices/input_part014.txt†L10456-L10490】【F:data/vesc_help_group/text_slices/input_part014.txt†L10498-L10532】
+
+### Power Claims and QC Reality Checks
+- Racing esk8 build claims of 40 kW keep circulating, yet veterans pointed out the tiny inrunner packaging and reminded everyone that Tronic “paper power” numbers still need to be backed by logged pulls; even Dimos’ 70 mph near-cutout traced back to sloppy solder joints inside the controller rather than miraculous output.【F:data/vesc_help_group/text_slices/input_part014.txt†L10507-L10538】
+- Group moderators keep escalating entry benchmarks—10 kW or 60 mph today, 12 kW by 2025, jokingly 15 kW for 2026—and riders chasing 40 kW screenshots admitted their current Ninebot G30 builds only spike ~8.9 kW unless they bypass safety hardware.【F:data/vesc_help_group/text_slices/input_part014.txt†L10539-L10586】
+
+### Controller Selection Debates
+- Deal hunters can source 90 H × 127 mm hubs from Janu for about $380, yet the consensus for dependable controllers stayed with Spintend or better; Makerbase 75100 V2 and Flipsky FT85BD were dismissed as short-lived options, with FT85BD especially maligned for relying on a proprietary firmware fork that blocks VESC Tool support.【F:data/vesc_help_group/text_slices/input_part014.txt†L10555-L10576】
+- Kaabo Wolf Warrior X owners worried about the sealed stock BMS were encouraged to crack the deck and spot-check parallel-group voltages manually until a telemetry-capable replacement or smart-BMS tap is installed.【F:data/vesc_help_group/text_slices/input_part014.txt†L10583-L10591】
+
+### Brake, Tire, and Motor Shopping Notes
+- Brake debates landed on “it depends”: 180 mm discs offer more leverage but flex without premium metallurgy, leaving many to stick with 160 mm rotors unless they invest in higher-grade carbon-ceramic kits.【F:data/vesc_help_group/text_slices/input_part014.txt†L10593-L10621】
+- Lonnyo remains the go-to 11" 84 V hub upgrade for riders wanting stronger launches, and bargain Hope Tech V4 brake bundles continue surfacing with full pad and hose kits for about €457 delivered.【F:data/vesc_help_group/text_slices/input_part014.txt†L10599-L10612】
+- The 40 kW “challenge” pushes builders toward extreme ND962600 experiments on Ninebot G30 frames, but even proponents admit the bursts last mere milliseconds before batteries, motors, or bypassed protections give up.【F:data/vesc_help_group/text_slices/input_part014.txt†L10609-L10618】
+
+### Phase-Current Guardrails
+- Community tuning still caps Spintend 100/100 controllers near 130 A phase to avoid thermal runaway, while stock 85150 stages hover around 220 A phase unless heavily modified; expecting more without upgraded hardware is courting failure.【F:data/vesc_help_group/text_slices/input_part014.txt†L10587-L10605】
+- Over-volting Flipsky hardware remains a party trick rather than a reliable strategy—seasoned tuners simply called it “crazy” and warned it ends in predictable controller carnage.【F:data/vesc_help_group/text_slices/input_part014.txt†L10603-L10606】
+
+### Dual Controller Power-Up Lessons
+- Builders trying to wake both Spintend 100 V/100 A controllers from a single button learned that the main harness already supports it—leave the interconnect cable in place and the shared switch will latch both sides, while unplugging the link isolates power to one ESC.【F:data/vesc_help_group/text_slices/input_part014.txt†L10605-L10633】
+
+### Brake Hardware and Fitment Debates
+- Riders chasing 180 mm discs acknowledged the added leverage but warned the jump in torque can trigger front-wheel skids unless the chassis and brake modulation keep up, which is why Segway’s GT series ships with smaller 140 mm rotors.【F:data/vesc_help_group/text_slices/input_part014.txt†L10613-L10622】
+- Spintend detachable rims still prefer 160 mm, 2.7 mm-thick rotors so owners can keep one spare tire width instead of stockpiling a second set just to clear 180 mm hardware.【F:data/vesc_help_group/text_slices/input_part014.txt†L10616-L10619】
+
+### Secondary Market and Reliability Signals
+- The Slack Core 920R’s 75H Numo motors (complete with 10 k NTC sensors and tubeless rims) sold instantly at €500 for the pair, reinforcing demand for drop-in dual-motor upgrades and the value of pre-installed thermal sensing.【F:data/vesc_help_group/text_slices/input_part014.txt†L10618-L10630】
+- A fresh wave of Spintend 100/100 failures popped up—four dead units within a year, including one that detonated at startup despite 20 S packs limited to 60 A battery and 130 A phase—pushing veterans to recommend switching scooters instead of gambling on replacements.【F:data/vesc_help_group/text_slices/input_part014.txt†L10636-L10663】
+
+### Chassis QC and Hardware Fabrication Notes
+- Wolf Warrior X owners are finding over-tightened steering columns with dry bearings and threadlocked center screws, leaving the front end bound up until the headset is disassembled, regreased, and re-torqued.【F:data/vesc_help_group/text_slices/input_part014.txt†L10663-L10682】
+- Fabricators debating torque-arm upgrades keep circling back to laser-cut, 1 cm-thick steel plates and automotive rotor alloys—cast, not forged—as the realistic material baseline for taming 20 S launches.【F:data/vesc_help_group/text_slices/input_part014.txt†L10682-L10700】
+
 ## Follow-up Actions
 - Capture teardown photos or logs when Maxim 120 V and Duet hardware arrive to validate capacitor arrangements, FET part numbers, and MCU choices versus marketing claims.【F:data/vesc_help_group/text_slices/input_part014.txt†L733-L807】【F:data/vesc_help_group/text_slices/input_part014.txt†L805-L840】
+- Document the dual-power-button harness routing for Spintend dual 100/100 builds so future installers stop unplugging the interconnect and wondering why only one controller wakes up.【F:data/vesc_help_group/text_slices/input_part014.txt†L10605-L10633】
 - Document reliable sourcing channels for 50PL cells (including customs considerations) and compare performance against legacy P45B/P50B in controlled discharge tests.【F:data/vesc_help_group/text_slices/input_part014.txt†L495-L575】【F:data/vesc_help_group/text_slices/input_part014.txt†L1097-L1163】
 - Gather fitment diagrams for Dualtron Storm/Achilleus decks showing how builders package 22 S+ packs and high-phase controllers without sacrificing weather protection.【F:data/vesc_help_group/text_slices/input_part014.txt†L75-L115】【F:data/vesc_help_group/text_slices/input_part014.txt†L1067-L1090】
 - Investigate capacitor upgrade mods for Spintend 85150/85250 when driving heavy QS hubs, noting parts lists and mounting constraints to mitigate the failures described.【F:data/vesc_help_group/text_slices/input_part014.txt†L191-L214】【F:data/vesc_help_group/text_slices/input_part014.txt†L335-L346】
@@ -236,3 +285,7 @@
 - Build a DIY battery cost worksheet that compares £3 50PL cells versus €1.5–2 50E options once BMS, insulation, welding gear, and shipping are factored in for single-pack projects.【F:data/vesc_help_group/text_slices/input_part014.txt†L6601-L6642】
 - Verify which Spintend 85240 hardware revisions (HY MOSFET or otherwise) can safely reach 22 S and what supporting component swaps are required before recommending voltage mods.【F:data/vesc_help_group/text_slices/input_part014.txt†L7071-L7075】
 - Produce wiring diagrams for Spintend ADC accessories that cover turn-signal LED strips, spin dial throttles, and dual-button pods so builders can map features without guessing pinouts.【F:data/vesc_help_group/text_slices/input_part014.txt†L6907-L6913】【F:data/vesc_help_group/text_slices/input_part014.txt†L7040-L7040】【F:data/vesc_help_group/text_slices/input_part014.txt†L7082-L7118】
+- Catalog proven 13" tire options for Spintend’s detachable rims, noting rotor/caliper clearance for 3 mm discs and Hope Tech GR4 setups before recommending the swap.【F:data/vesc_help_group/text_slices/input_part014.txt†L10409-L10433】
+- Draft a CAN-linked dual-motor setup primer that explains real-time data doubling, ABS max coordination, and when to disable slow ABS overcurrent on the smaller controller.【F:data/vesc_help_group/text_slices/input_part014.txt†L10429-L10532】
+- Gather real Tronic power logs plus teardown photos of suspect solder joints to separate marketing hype from safe tuning envelopes before celebrating 40 kW claims.【F:data/vesc_help_group/text_slices/input_part014.txt†L10507-L10538】
+- Build a controller-selection cheat sheet contrasting Makerbase 75100 V2, Flipsky FT85BD, and Spintend options with firmware compatibility, support maturity, and verified current ceilings for dual-motor scooters.【F:data/vesc_help_group/text_slices/input_part014.txt†L10561-L10576】

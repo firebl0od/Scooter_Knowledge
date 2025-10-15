@@ -16,6 +16,7 @@ Taming current limits is the difference between a scooter that rips for years an
 2. **Set conservative currents**
    - Start with a 2:1 to 3:1 phase-to-battery ratio (e.g., 40 A battery / 110 A phase on 16 S commuter packs).⁵ ⁷
    - Match current targets across front/rear controllers to avoid free-spinning the lighter wheel.⁸
+   - Keep the shared throttle anchored to the front “local” controller so both ESCs track the same ramp response before the signal propagates over CAN to the rear unit.⁸⁰
    - Treat dual-motor 16 S7 P Samsung 50E packs as roughly 140 A systems: hold each controller near 70 A battery and add ducted airflow up front before nudging limits higher.²³
    - Keep Artem’s relationship in mind: `I_phase = I_batt × V_batt ÷ V_motor`, so phase torque fades as ERPM climbs—log both currents to confirm your battery caps aren’t starving the tune mid-pull.[^phase_equation]
 3. **Log, ride, iterate**
@@ -93,4 +94,5 @@ Taming current limits is the difference between a scooter that rips for years an
 [^25]: VESC Tool interpolates state-of-charge between 4.2 V and 3.3 V per cell (~66 V empty on 20 S), so riders set cutoffs slightly above their BMS trips to avoid surprise throttling.【F:knowledge/notes/input_part007_review.md†L334-L334】
 [^fw_bms]: Rob Ver’s Spintend 85/240 logged 35 kW peaks and 132 km/h on 22×3 hubs with ~80 A FW, but a 22 S BMS failure during a 320 A launch still destroyed MOSFETs—reinforcing the need for pack protection when stacking FW on high-current pulls.【F:knowledge/notes/input_part012_review.md†L436-L436】
 [^26]: Spintend 85/250 riders holding 22 S builds near 200 A battery / 300 A phase for reliability despite higher firmware ceilings.【F:knowledge/notes/input_part012_review.md†L253-L254】【F:knowledge/notes/input_part012_review.md†L334-L334】
+[^80]: Front-controller “local” throttle wiring keeps lever speed sync’d across dual ESCs before CAN propagation.【F:knowledge/notes/input_part014_review.md†L150-L153】
 [^phase_equation]: Artem formalised the `I_phase = I_batt × V_batt ÷ V_motor` relationship, reminding tuners that battery amps rise toward the configured limit as ERPM climbs and that output power cannot exceed input watts.【F:knowledge/notes/input_part000_review.md†L3770-L3818】
