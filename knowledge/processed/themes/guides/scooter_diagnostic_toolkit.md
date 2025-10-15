@@ -57,10 +57,28 @@
 - **Go sensorless when halls fail.** If a Zero or similar scooter loses hall sensors mid-ride, drop open-loop ERPM to 0, switch to the Mxlemming observer with BEMF decoupling, and limp home on sensorless starts.【F:knowledge/notes/input_part007_review.md†L403-L404】
 - **Recover CAN chains through the survivor.** Change the remaining controller’s VESC ID and reflash the bootloader over the intact CAN link to revive dead peers before opening sealed housings.【F:knowledge/notes/input_part007_review.md†L404-L404】
 
+## Chassis & Suspension Quick Fixes
+- **Rebuild sloppy folding clamps:** Shim ovalized bushings with thin metal or heat-shrink and lock every fastener with threadlocker so the top plate stops wallowing out mid-ride.【F:knowledge/notes/input_part008_review.md†L54-L54】
+- **Tune cheap steering dampers:** Swap generic damper fluid for 10W/60 shock oil or Citroën LHM+ to regain adjustability without chewing seals, especially on freebie take-offs.[^damper-oil]
+- **Favor suspended frames for high-power conversions:** Ninebot Max G2 chassis with suspension outlast rigid G30 decks under vibration, SNSC rental frames survive high-speed crashes with minimal damage, and DNM shock/13"×7" tire combos plus lever-free hub tire removals keep service visits efficient.【F:knowledge/notes/input_part008_review.md†L316-L316】
+
+## Tire & Traction Observations
+- **Balance electronics with mechanics:** Traction control helps rein front-wheel slip up to ~55 mph, but riders still cut front phase amps to keep dual-drive scooters manageable in launches.【F:knowledge/notes/input_part008_review.md†L74-L74】
+- **Match tires to power levels:** Xuancheng 12" slicks stay budget-friendly but spin under hard launches, so high-power builds migrate to CST or PMT rubber; on 6" rims, Tuovt 90/55-6 casings grip better than CST 90/65-6 while oversized 6.5" skins pinch split rims and look sloppy.【F:knowledge/notes/input_part008_review.md†L75-L78】
+- **Pick tires for the surface, not hype:** Riders are steering 10" Zero/Vsett owners toward CST 10×3 or PMT 10×3.5 rubber, calling Xuancheng slicks short-lived above 4 kW without traction control, and leaning on Tuovt 90/55-6 for broken pavement longevity.【F:knowledge/notes/input_part008_review.md†L348-L350】
+- **Address pinch flats proactively:** Vsett 9 owners fighting split-rim pinch flats now double heavy-duty Ulip tubes, dust them with baby powder during install, and experiment with 3D-printed bead covers to protect the tube crease.【F:knowledge/notes/input_part008_review.md†L79-L79】
+
 ## Security Layers & Theft Response
 - Hide GPS trackers along the main harness, combine Rita builds with motion alarms inside the battery bag, and budget a hardened chain for long stops; layered defenses buy recovery time even though determined thieves can still lift a 20 kg scooter.【F:knowledge/notes/all_part01_review.md†L896-L896】
 
 ## Documentation & Support Habits
 - Keep a photo log of connector routing, ST-Link pinouts, and fuse replacements so future technicians can retrace your steps. Denis’ English manual is updated as new edge cases surface—reference it before opening support tickets.【F:knowledge/notes/all_part01_review.md†L209-L210】
 - Archive VESC Tool logs before sealing decks: Android 11+ hides files under `Android/data/vedder.vesctool/files`, so plan to pull them via TCP bridge or file managers like XFolder after each shakedown.【F:data/vesc_help_group/text_slices/input_part001.txt†L3440-L4018】
+
+## Mini-Bike & Fiido L3 Conversions
+- **Respect the stock controller limits:** Fiido L3 controllers float loose without heatsinks and only deliver ~25 A; jumping straight to 20 S test packs without pre-charging popped factory BMS units. Match pack voltages before connecting higher-voltage VESC hardware.【F:knowledge/notes/input_part008_review.md†L381-L381】
+- **Dial conservative currents:** After cutting battery current to ~20 A, setting traction control to 20/20 A, and capping phase around 60 A with FW, builders hit 45 km/h and repeatable wheelies without overheating the compact hub.【F:knowledge/notes/input_part008_review.md†L382-L382】
+- **Plan full teardowns:** Packs are heavily sealed—glued busbars, soldered fasteners, and tripped protection boards left entire parallel groups at 0 V—so refurb projects require full BMS removal rather than capacitor swaps.【F:knowledge/notes/input_part008_review.md†L383-L383】
+
+[^damper-oil]: PuneDir’s free steering damper only behaved after switching to lighter fluids; veterans now recommend 10W/60 shock oil or Citroën LHM+ to preserve seals while restoring adjustability.【F:knowledge/notes/input_part008_review.md†L56-L56】
 

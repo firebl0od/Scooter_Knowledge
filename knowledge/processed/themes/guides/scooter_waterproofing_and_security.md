@@ -7,7 +7,7 @@
 - **Choose the right bearings.** Swap stock 2Z hubs for sealed 2RS units and refresh grease after wet weeks to keep Monorim and Xiaomi front ends from grinding themselves apart.【F:knowledge/notes/all_part01_review.md†L27274-L27275】
 - **Inspect after every soak.** Error 28 beeps and erratic state-of-charge readings usually mean the controller or white battery plug corroded—scrub with contact cleaner, dry thoroughly, and don\'t trust factory IP54 stickers.【F:knowledge/notes/denis_all_part02_review.md†L419-L421】【F:knowledge/notes/denis_all_part02_review.md†L454-L455】
 
-## Layered Theft Deterrence
+## Layered Theft & Compliance Tactics
 - **Build loud, cheap alarms.** Pair gyroscopes with 120 dB buzzers tied to ignition keys or BLE presence so tampering keeps the siren blaring until the scooter rests motionless.【F:knowledge/notes/all_part01_review.md†L88-L88】
 - **Mount motion sensors in the battery bag.** Couriers hide Arduino-driven buzzers inside Wildman cases so cutting the strap or unzipping the bag triggers instant noise without alerting thieves to the electronics location.【F:knowledge/notes/all_part01_review.md†L86-L87】
 - **Carry layered locks.** Quick errands get a compact Master Lock cable that stays smooth with graphite; long stops call for hardened chains plus GPS trackers taped into the loom.【F:knowledge/notes/all_part01_review.md†L167-L167】【F:knowledge/notes/all_part01_review.md†L27392-L27407】

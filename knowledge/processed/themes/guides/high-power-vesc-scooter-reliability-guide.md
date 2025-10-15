@@ -9,6 +9,8 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - **Favor aluminum bases when you can.** Open-air 75100 aluminum plates stayed cool through 30 minute 45 km/h rides at 11 °C while boxed controllers thermal-throttled around 35 A—tie airflow and heatsinking directly into the enclosure choice.【F:knowledge/notes/input_part005_review.md†L413-L417】
 - **Source hubs with the frame in mind.** Lonnyo and NAMI hubs even share factory engravings; racers grab 70 H magnet stacks to stay within 150 mm dropouts and brace Laotie TI30 tubes with fresh welds and CAD references before chasing 11 kW+ launches.【F:knowledge/notes/input_part005_review.md†L419-L424】
 - **Boutique ceilings:** Tronic X12 (24 S), Ubox 240, and Spintend 85250 builds all share MOSFET and shunt limits around 331 A; most racers cap hubs near 150–200 A battery and 310–360 A phase even after swapping to upgraded silicon.[^33]
+- **Mind 22 S on Makerbase 85/250s:** Multiple racers have already popped Ubox 85/250 controllers on 22 S packs even with regen disabled, whereas C350 hardware survives full race weekends so long as regen stays off; CL350s run hotter and now circulate official firmware links community members had to dig up themselves.【F:knowledge/notes/input_part008_review.md†L305-L305】
+- **Respect Spintend 85/150 voltage headroom:** The light 85/150 ships with 100 V-rated components and proven logs only on 20 S packs—stacking high-kV hubs, MTPA, and FW near its ceiling has already popped stages, so plan drop-in HY/Huayi MOSFET swaps or step up to 3Shul/Tronic hardware for sustained spikes.[^spintend-85150]
 - **Marketing vs. reality:** Expect Makerbase boxed 75100 units to deliver only one-half to one-third of the configured current, while Flipsky 75350 shunt math caps phase current near 500 A despite brochure claims.[^4][^5]
 - **Stock gate drivers are fragile:** Makerbase 75100 boards ship with EG Micro EG3112 drivers—carry exact-pinout spares, budget MOSFET replacements such as NCEP023N10 or Infineon IPP023N10N05 from authorised distributors, and recalc gate resistors/snubbers before swapping silicon to avoid another failure.【F:knowledge/notes/input_part005_review.md†L210-L214】
 - **Buffer the logic rails:** Flipsky driver stacks lack solid undervoltage lockout on the 12 V rail; add bulk capacitance or a small buffer pack so BMS hard cuts don’t leave MOSFETs biased and short the rail.【F:knowledge/notes/input_part005_review.md†L214-L214】
@@ -69,6 +71,9 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 
 ## 3. Battery & BMS Strategy
 - **Pack chemistry:** Document any stock packs using LG M50LT or Samsung 29E cells and plan rebuilds when aiming for >120 A discharge; monitor internal resistance deltas and pause parallelization above ~3 mΩ spread.[^11]
+- **Treat BMS trips as emergencies:** MKSESC 84/200 HP units have blown MOSFETs whenever a BMS opened under load, whereas Spintend controllers coast through the same event—oversize protection and design tunes so the BMS never has to intervene mid-ride.[^makervsUbox][^bms-trip]
+- **Match BMS to charging goals:** 20 S6 P Zero 10X builders default to ANT or JBD smart boards when they need 40 A charging with unrestricted discharge; cheaper Dollatek 20 S options hover near 40 A continuous and run marginal for 60 A pack targets.【F:knowledge/notes/input_part008_review.md†L15872-L15884】
+- **Adjust regen ceilings at the BMS first:** Matthew’s 18 S Spintend 85/150 quit regen above ~76.6 V until he raised the BMS cutoff start/end, proving the controller was fine and the BMS voltage limit was the bottleneck.【F:knowledge/notes/input_part008_review.md†L611-L614】
 - **Regen boundaries:** Cap regen between –5 A and –12 A on 60 V 38 Ah commuter packs until BMS specs are confirmed; firmware ERPM caps can still drop braking, so validate on firmware ≥6.05 beta (build 20).[^12][^13]
 - **Parallel pack discipline:** Match pack voltage before plugging in, skip ideal-diode fantasies, and use solid XT90/Y harnesses on common-port BMS designs—mixed 17 S/16 S experiments triggered throttle cut-outs until riders paralleled only voltage-matched packs, trimmed regen to controller limits, left charge MOSFETs enabled, and even let multiple chargers share the load because each supply naturally tapers in CV mode as voltages equalise.【F:data/vesc_help_group/text_slices/input_part001.txt†L20518-L20539】[^36]
 - **Thermal guardrails:** Rental-grade SNSC hubs pushed to 20 S 40 A hit ~160 °C without ferrofluid—daily riders should cap voltage at 13–16 S or add cooling mods.[^14]
@@ -157,7 +162,15 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Daly smart BMS boards reboot straight from the phone app, saving deck teardowns on sealed builds—log the workflow for field techs.【F:data/vesc_help_group/text_slices/input_part003.txt†L17498-L17503】
 - Tronic controllers revived after water damage still need the DC-DC enable pad scraped clean and re-soldered before conformal recoating—hot-air reflow seals the fix.【F:data/vesc_help_group/text_slices/input_part003.txt†L21805-L21824】【F:data/vesc_help_group/text_slices/input_part003.txt†L23563-L23653】
 
-## 7. Structural Integrity, Performance & Safety
+## 7. Chassis Benchmarks & Handling Notes
+- Dualtron Thunder still leads >150 km/h stability thanks to adjustable arm angles and shortened stems, while GT2 and Inmotion RS platforms need CNC work yet reward riders with calmer steering above 90 km/h.【F:knowledge/notes/input_part008_review.md†L228-L228】
+- NAMI frames excel for long-range and off-road duty when paired with quality dampers instead of raw top-speed tuning—a reminder to match geometry to mission.【F:knowledge/notes/input_part008_review.md†L228-L228】
+- Singapore’s clampdown on PEVs pushed locals to disguise VESC builds as e-bikes or commute across the Malaysian border, highlighting legal context as part of reliability planning when choosing frames and accessories.【F:knowledge/notes/input_part008_review.md†L229-L229】
+- **Respect C-fork wobble limits:** Multiple riders have crashed Vsett 10+ and similar C-fork scooters above ~80 km/h; expect fatal wobble risk unless trail numbers improve and dampers plus tire selection are dialed.【F:knowledge/notes/input_part008_review.md†L365-L368】
+- **Traction control preserves tires:** Holding an ~80 000 ERPM differential kept CST 10×3 rubber alive on Zero/Vsett builds, while disabling TC shredded tires within days—log TC settings as part of chassis maintenance.【F:knowledge/notes/input_part008_review.md†L368-L368】
+- Wrap Makerbase logic sections in Kapton or other dielectric barriers during installs; a single static discharge was enough to nearly scrap a 75100 before the insulation fix.[^maker-kapton]
+
+## 8. Structural Integrity, Performance & Safety
 - Replace cracked Zero/Nami stems with solid aluminum or 15 mm steel units when running wheelie-heavy, 8 kW+ builds; repeated failures cluster at cable cutouts.[^26]
 - Inspect VSETT 10 steering columns for thin-wall fractures and retrofit thicker Warrior stems or machined sleeves before chasing high-power builds—the factory pole has split cleanly at the lower weld in real-world photos.[^43]
 - **Audit new motors on arrival.** Supposedly “fresh” VSETT hubs have shown rust, loose magnets, and carbon dust—strip, clean, and re-glue magnets with Loctite AA326 before trusting them.【F:knowledge/notes/input_part004_review.md†L138-L138】
@@ -191,7 +204,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Theft prevention relies on ≥10 mm hardened chains, welded eyelets, and recessed fasteners; thin aluminum tabs remain easy targets for cordless grinders.[^29]
 - Protective gear still matters at commuter speeds—stick with ECE 22.05/22.06 full-face helmets with MIPS-style liners and treat subdued lighting plus “police mode” buttons as tools for avoiding unwanted attention, not excuses to ride unarmoured.[^rider-safety]
 
-## 8. Charging Infrastructure & Power Logistics
+## 9. Charging Infrastructure & Power Logistics
 - Expect charger LEDs to cycle red/green near 100 % SoC on Daly/YXP units—this is normal balancing behavior, not a wiring fault.[^30]
 - GTK 0–102 V adjustable supplies and 120 V lab PSUs offer cheaper wide-voltage charging versus Grin Satiator if you can live with bulkier hardware and lower (≈3 A) defaults.[^31]
 - **Verify isolation before stacking chargers.** Check for earth-referenced outputs with an ohmmeter before wiring supplies in series—bonded returns can trip breakers or energize frames, so long-term builds rely on purpose-built high-voltage chargers instead of improvised pairs.【F:knowledge/notes/input_part004_review.md†L225-L225】
