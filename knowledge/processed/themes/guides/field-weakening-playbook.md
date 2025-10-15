@@ -78,6 +78,7 @@
 [^5]: Firmware 5.3 requirement for exposing FW controls.【F:knowledge/notes/input_part001_review.md†L135-L135】
 [^6]: 60 A FW on dual 84100 builds driving high heat and frame inspection needs.【F:knowledge/notes/input_part009_review.md†L43-L43】
 [^7]: PuneDir’s stable 30 A FW baseline with `mxlemming` observer and 100 km/h GPS results.【F:knowledge/notes/input_part009_review.md†L44-L44】【F:knowledge/notes/input_part009_review.md†L179-L179】
+[^fw-coaching]: Crew feedback urged Shlomozero to roll FW back toward 20 A, raise phase current to ~120 A at 30–35 kHz, and rely on the `mxlemming` observer so mixed 50 H hubs survive highway pulls.【F:knowledge/notes/input_part009_review.md†L389-L390】
 [^8]: FW letting battery current exceed configured limits until detection reruns.【F:knowledge/notes/input_part009_review.md†L117-L117】
 [^9]: Xiaomi hub failure from modest FW and voltage experiments.【F:knowledge/notes/input_part009_review.md†L93-L93】
 [^10]: Segway GT2 dual 85150 telemetry at 30 A FW highlighting pack limits.【F:knowledge/notes/input_part010_review.md†L293-L293】
@@ -91,6 +92,7 @@
 [^18]: Max G2 and similar commuter hubs hitting 150 °C stators with FW.【F:knowledge/notes/input_part005_review.md†L368-L372】
 [^19]: 22 S Ubox/Spintend configurations disabling regen to survive higher voltage.【F:knowledge/notes/input_part010_review.md†L419-L419】
 [^20]: FW-induced throttle jitter on single-controller builds once 20 A is applied.【F:knowledge/notes/input_part013_review.md†L709-L709】
+[^fw-kills]: FW-induced shutdowns have spiked components and “killed everything” on Little Focer/Tronic 250 stacks when riders pushed 37 A of FW without battery headroom.【F:knowledge/notes/input_part009_review.md†L353-L355】
 [^21]: 22×3 hub builds freewheeling around 118 km/h without FW after pack upgrades.【F:knowledge/notes/input_part013_review.md†L88-L88】
 [^22]: 20 S single-motor package delivering 85 km/h with ~30 A FW as a short-burst aid.【F:knowledge/notes/input_part013_review.md†L145-L145】
 [^23]: Firmware or wiring faults causing sudden full braking after FW-enabled firmware updates.【F:knowledge/notes/input_part001_review.md†L219-L219】

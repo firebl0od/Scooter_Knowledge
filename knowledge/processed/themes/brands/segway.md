@@ -49,6 +49,7 @@
 
 ## Battery & Charging Strategy
 - GT packs sag roughly 12 V at 500 A phase; upgrading to copper-bridged busbars and planning 22 S successors keeps voltage headroom for high-power controllers.[^9]
+- Extreme G30 conversions stacking twin MP2s now model 20 S 12 P bricks roughly 14.5 cm tall with the smart BMS standing vertically at the pack’s nose and parallel QS8/8 AWG leads feeding a welded rear controller box so the deck arches stay intact.[^g30-blueprint]
 - C80 owners have demonstrated ~6–7 kW charging through the stock 100/100 Lite controller at mid-pack SOC, keeping compact scooters viable if thermal paths are improved.[^12]
 - Segway-based mopeds with 32 P Samsung 35E packs weigh about 350 lb before the rider yet return ~70 mi, highlighting the trade-off between range and maneuverability; builders now favor lighter 32 S 20 P layouts with higher-power controllers for better torque-to-weight balance.[^11]
 - Field deployments show stock GT rotors and brakes survive repeated high-speed runs once cooling and hydraulic upgrades are in place, but pack reinforcements remain essential to avoid sag-induced cut-outs.[^3][^9]
@@ -88,6 +89,7 @@
 [^7]: Guidance on grinding deck paint, adding thermal glue, and mounting Ubox/MP2 controllers in Segway GT bays.【F:knowledge/notes/input_part012_review.md†L92-L92】
 [^8]: Recommendations for sparing ferrofluid application and temperature-probe installs on Segway hubs.【F:knowledge/notes/input_part012_review.md†L191-L191】
 [^9]: GT pack sag under 500 A phase and copper busbar reinforcement details for future 22 S upgrades.【F:knowledge/notes/input_part011_review.md†L467-L469】
+[^g30-blueprint]: Twin MP2 conversions stack 20 S 12 P bricks to roughly 14.5 cm, stand the smart BMS vertically up front, and split current across parallel QS8/8 AWG harnesses while a welded rear controller box preserves the deck arches.【F:data/vesc_help_group/text_slices/input_part009.txt†L21845-L21939】
 [^10]: Segway C80 battery packaging, dropout dimensions, and retained drum/sprocket hardware for future drivetrain swaps.【F:knowledge/notes/input_part012_review.md†L340-L341】
 [^11]: Weight, BMS limits, and range benchmarks for Segway-based moped builds with 32 P Samsung 35E packs.【F:knowledge/notes/input_part012_review.md†L324-L327】【F:knowledge/notes/input_part012_review.md†L343-L344】
 [^12]: C80 fast-charge validation (≈6–7 kW) on the stock 100/100 Lite controller.【F:knowledge/notes/input_part012_review.md†L266-L266】

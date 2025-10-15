@@ -113,6 +113,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Leverage the ADC adapter without killing CAN—run ADC1/2 through the splitter while leaving UART dashboards online, and diode-isolate lighting feeds so traction control and telemetry stay intact.[^34]
 - Feed auxiliary rails from a clean supply: Ubox Lite lacks a native 12 V rail, so power the ADC adapter from an external DC-DC while keeping grounds common to prevent lighting glitches.[^35]
 - Mind standby behaviour before adding smart switches—the latching Spintend button already isolates the logic rail with minimal drain; external anti-spark solutions are optional unless you need hard battery isolation.[^45]
+- Watch for look-alike FT85BD/Ubox Lite clones: they ship without Minimotors protocol support, so budget a VSETT Lisp bridge and wire its throttle-out lead back into the controller or the dash will brick the clone on first power-up.【F:data/vesc_help_group/text_slices/input_part009.txt†L21880-L21903】
 
 ## Common Issues & Troubleshooting
 

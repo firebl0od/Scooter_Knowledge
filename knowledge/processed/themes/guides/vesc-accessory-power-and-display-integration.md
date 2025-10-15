@@ -96,6 +96,11 @@ This guide distills field reports on powering lights, horns, and dashboards from
 - Mask the controller’s identity, enforce MAC filtering, and require PIN prompts so park-side pranksters cannot overwrite ride profiles while the scooter is unattended.【F:knowledge/notes/input_part006_review.md†L80-L80】【F:knowledge/notes/input_part006_review.md†L428-L429】
 - Back Bluetooth hardening with keyed or NFC-switched power so even successful pairings cannot energise the controller without physical access.【F:knowledge/notes/input_part006_review.md†L80-L80】【F:knowledge/notes/input_part006_review.md†L428-L429】
 
+## Control Hardware Picks
+- **Waterproof thumb throttles.** 🇪🇸AYO#74🏁 favors a three-pin thumb throttle with minimal dead zone and warns that the CNC Spin-Y2 twin-action throttle breaks easily despite regen convenience—budget spares or alternatives when planning builds.【F:knowledge/notes/input_part009_review.md†L393-L395】
+- **Hall-sensor brake levers and sensors.** Builders recommend hall-based brake levers for smaller hands and pair them with waterproof two-pin hydraulic sensors that slot neatly into Magura or Nutt setups.【F:knowledge/notes/input_part009_review.md†L395-L395】
+- **Auxiliary throttle braking caveats.** Repurposing a spare throttle as an auxiliary brake only adds meaningful stopping power when regen is configured high; keep mechanical lever ergonomics dialled for everyday stops.【F:knowledge/notes/input_part009_review.md†L396-L396】
+
 ## Commissioning Checklist
 - Meter throttle outputs with the controller unpowered and confirm signal stays ≤3.3 V at full travel.【F:knowledge/notes/input_part013_review.md†L503-L505】
 - Before flashing or editing parameters, follow the VESC Tool workflow—**Read → edit → Write**—and explicitly hit **Write Motor/App Config** after each wizard so Xiaomi throttles and ADC settings persist across power cycles instead of forcing full detections at the next boot.【F:knowledge/notes/input_part013_review.md†L542-L544】【F:knowledge/notes/input_part005_review.md†L410-L413】

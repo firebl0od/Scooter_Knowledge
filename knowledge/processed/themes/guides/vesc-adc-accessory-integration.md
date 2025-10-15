@@ -25,6 +25,7 @@
 3. **Spintend adapter v3 harness:** Modern boards arrive with keyed plugs—no more screw terminals—so match the supplied loom instead of hand-crimping tiny JST shells.[^3]
 4. **Makerbase accessory headers use GH 1.27 mm.** Izuna confirmed the tiny Makerbase harness lands on GH-series plugs—order JST-GH pigtails instead of trying to force JST-PH shells onto the board.【F:knowledge/notes/input_part004_review.md†L328-L328】
 4. **MakerX footpads & 3.3 V-only sensors:** Confirm both ADC rails output 3.3 V before blaming pads; swapping to 5 V kills the hall board.[^4]
+5. **Trim dual-hall start voltage.** Dual-controller Vsett builds needed manual tweaks to throttle start voltage after calibration so brake and throttle channels stay stable across master/slave VESCs.【F:knowledge/notes/input_part009_review.md†L270-L270】
 5. **Interpret ADC counts, not raw voltage:** VESC Tool reports hall inputs as 0–4095 counts—track the delta between idle and full throw, and if readings compress, repeat the test with a stable 5 V source to rule out noisy 3.3 V regulators before replacing sensors; Spintend’s adapter manual expects ~0.8 V idle, so stop and rewire if a channel sits near 3 V.[^22][^adapter-idle]
 6. **Filter noise in software first:** Builders tamed runaway triggers by compressing throttle activation to ~0.83–1.2 V inside VESC Tool rather than rewiring hardware; chassis grounding tricks have also helped but carry short-to-frame risk if insulation fails.[^adc-noise]
 6. **Fail-safe defaults:** Add a pull-down resistor from throttle signal to ground so any broken wire snaps to zero instead of ghost acceleration.[^19]
@@ -101,7 +102,7 @@
 [^7]: ADC calibration workflow and reminder to let VESC Tool find neutral before assigning functions.【F:knowledge/notes/input_part012_review.md†L93-L94】
 [^8]: Regen mapping best practices from community quick-start guides.【F:knowledge/notes/input_part007_review.md†L239-L240】
 [^9]: Horn output current limit cautions on Makerbase/Spintend harnesses.【F:knowledge/notes/input_part012_review.md†L97-L97】
-[^10]: Spintend ADC aux outputs top out around 12 V / 3 A and need DC/DC help for bigger loads.【F:knowledge/notes/input_part005_review.md†L58-L58】
+[^10]: Spintend ADC aux outputs top out around 12 V / 3 A and need DC/DC help for bigger loads.【F:knowledge/notes/input_part005_review.md†L58-L58】【F:knowledge/notes/input_part009_review.md†L15-L15】
 [^11]: Smart Repair’s 85250 guidance—use the ADC board for logic and a DC/DC converter for lamp current.【F:knowledge/notes/input_part012_review.md†L173-L173】
 [^12]: TF100 throttle wiring recipe using the controller’s 3.3 V hall supply.【F:knowledge/notes/input_part012_review.md†L174-L174】
 [^13]: Enabling ADC control disables manual FWD/REV overrides inside VESC Tool until you switch apps.【F:knowledge/notes/input_part012_review.md†L137-L137】
