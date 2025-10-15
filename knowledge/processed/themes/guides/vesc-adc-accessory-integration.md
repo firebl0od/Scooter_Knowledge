@@ -97,7 +97,7 @@
 [^1]: Routing throttle and brake halls directly into ADC1/ADC2 preserves control without the OEM dash.【F:knowledge/notes/input_part012_review.md†L11-L13】
 [^2]: Spin Y throttle versions and wiring expectations for Spintend/Ubox adapters.【F:knowledge/notes/input_part007_review.md†L47-L47】
 [^3]: Spintend v3 adapter now ships with keyed harness connectors.【F:knowledge/notes/input_part007_review.md†L221-L221】
-[^4]: MakerX S100 footpads require the controller’s 3.3 V rail and fail on 5 V feeds.【F:knowledge/notes/input_part012_review.md†L255-L255】
+[^4]: MakerX S100 footpads require the controller’s 3.3 V rail—missing the regulated feed leaves the sensor dead even when wiring diagrams look correct.【F:knowledge/notes/input_part012_review.md†L357-L359】
 [^6]: Regen button tied directly between ADC2 and 3.3 V without series resistors eliminated false braking faults.【F:knowledge/notes/input_part012_review.md†L13-L13】
 [^7]: ADC calibration workflow and reminder to let VESC Tool find neutral before assigning functions.【F:knowledge/notes/input_part012_review.md†L93-L94】
 [^8]: Regen mapping best practices from community quick-start guides.【F:knowledge/notes/input_part007_review.md†L239-L240】
@@ -108,7 +108,7 @@
 [^13]: Enabling ADC control disables manual FWD/REV overrides inside VESC Tool until you switch apps.【F:knowledge/notes/input_part012_review.md†L137-L137】
 [^14]: CAN-linked controllers should not share 5 V rails; doing so has already killed boards.【F:knowledge/notes/input_part007_review.md†L226-L226】
 [^15]: Drawing accessory power from the X12 headlight feed drags the logic rail and wastes energy.【F:knowledge/notes/input_part012_review.md†L395-L395】
-[^16]: Shorting controller auxiliary leads has destroyed logic boards, proving the need for isolated accessory supplies.【F:knowledge/notes/input_part012_review.md†L248-L248】
+[^16]: Shorting controller auxiliary leads has destroyed logic boards, proving the need for isolated accessory supplies.【F:knowledge/notes/input_part012_review.md†L248-L248】【F:knowledge/notes/input_part012_review.md†L258-L258】
 [^17]: Builders still rely on loop keys, smart-BMS buttons, and Safe Start—ADC boards alone do not provide a true kill switch.【F:knowledge/notes/input_part005_review.md†L348-L350】
 [^18]: Spintend’s ADC adapter v2 only ferries 5 V/12 V accessory power, is rated for ≈60 V pack input, and cannot act as an anti-spark or ignition switch—route kill switches through a smart BMS or loop key instead.【F:knowledge/notes/input_part005_review.md†L451-L452】【F:knowledge/notes/input_part005_review.md†L454-L455】
 [^19]: Pull-down resistors on throttle lines guarantee a zero output if the signal wire opens.【F:knowledge/notes/input_part007_review.md†L223-L223】

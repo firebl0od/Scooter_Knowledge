@@ -1,7 +1,7 @@
 # VESC Accessory Power & Display Integration Checklist
 
 ## Purpose
-This guide distills field reports on powering lights, horns, and dashboards from aftermarket VESC controllers so builders avoid overloading regulator rails or frying logic accessories during swaps.
+This guide distills field reports on powering lights, horns, and dashboards from aftermarket VESC controllers so builders avoid overloading regulator rails or frying logic accessories during swaps. Recent X12 case studies underline how little headroom exists on their 5 V rails and why every accessory deserves its own buck converter.【F:knowledge/notes/input_part012_review.md†L404-L405】
 
 ## Quick Reference Matrix
 | Controller family | Native accessory rails | Verified limits & caveats | Recommended mitigations |

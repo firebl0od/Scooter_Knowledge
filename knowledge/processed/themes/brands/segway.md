@@ -29,6 +29,7 @@
 - Foam-filled "solid" tires vibrate enough to loosen magnets and shake packs apart on high-speed G30 conversions—pair quality 10-inch pneumatics with a Monorim front fork and DNM rear damper, or Sharkset forks if you stay below ~45 km/h.[^new-suspension]
 - Builders chasing GT acceleration are already machining thicker stainless dropouts and custom Monorim plates so Xiaomi-class forks can fit ever-wider hubs without tearing the swingarm.【F:data/vesc_help_group/text_slices/input_part001.txt†L26146-L26158】【F:data/vesc_help_group/text_slices/input_part001.txt†L26395-L26399】
 - F-series and budget Segways exhibit rough welds and cracked deck braces near the folding joint, so inspections, gussets, or protective film are prerequisites for commuter-duty reliability.[^14]
+- C80 riders note the stretched saddle forces a forward hunch; taller bars or switching foot placement onto the passenger pegs straightens posture for long rides.【F:knowledge/notes/input_part012_review.md†L338-L339】
 - Rear-end stability improves when builders bend a 10 mm aluminum rod under the axle nut to brace wide mudguards; swapping in full-width G30 fenders (~11.5 cm) keeps 2.5″ tires from blasting commuters with spray.【F:knowledge/notes/all_part01_review.md†L91065-L91070】【F:knowledge/notes/all_part01_review.md†L91188-L91224】
 
 ## Powertrain & Upgrade Guardrails
@@ -40,6 +41,7 @@
 - Geared hubs like the Navee S65 add torque for heavier riders but introduce noise and mechanical complexity, so set expectations before recommending them over proven direct-drive swaps.[^s65]
 - High-power GT conversions now prove out 22 S8 P P42A trays (~485 × 210 × 86 mm), 400 A ANT BMS installs, QS10/QS8 leads, dual motor NTCs, and 155 mm×3.1 mm rotors with Hope V4 calipers; plan enclosure depth, rotor spacing, and wiring clearances before committing to 20 kW-class builds.[^gt_packaging]
 - C80 conversions must respect the stock 60 A BMS limit until upgraded—attempting 70 A battery trips protection and heats the motor to ~76 °C, reinforcing the need for a higher-current BMS before raising output.[^11]
+- Konyk rear-motor kits ship with replacement axle nuts, smoothing hub swaps when OEM hardware is discontinued or chewed up during teardown.【F:knowledge/notes/input_part012_review.md†L348-L349】
 - New firmware paths let Ninebot G2 owners stay on the stock controller—flash XiaoDash, apply the SHFW Gen 4 patch, and keep factory blinkers/buzzers while lifting the speed ceiling instead of grafting in a G30 ESC.[^g2-shfw]
 
 ## Thermal & Controller Packaging
@@ -52,6 +54,8 @@
 - GT packs sag roughly 12 V at 500 A phase; upgrading to copper-bridged busbars and planning 22 S successors keeps voltage headroom for high-power controllers.[^9]
 - Extreme G30 conversions stacking twin MP2s now model 20 S 12 P bricks roughly 14.5 cm tall with the smart BMS standing vertically at the pack’s nose and parallel QS8/8 AWG leads feeding a welded rear controller box so the deck arches stay intact.[^g30-blueprint]
 - C80 owners have demonstrated ~6–7 kW charging through the stock 100/100 Lite controller at mid-pack SOC, keeping compact scooters viable if thermal paths are improved.[^12]
+- Group rides now haul 6 kW Hyper Chargers and EV adapters, but Jason’s pack still bottlenecked charge rate while the pedestal had headroom—set current at the charger or pack rather than assuming infrastructure is the limit.【F:knowledge/notes/input_part012_review.md†L335-L336】
+- A lightly used Ninebot Max G2 pack with roughly 50–60 indoor-stored cycles provides a baseline for evaluating second-hand batteries before committing to upgrades.【F:knowledge/notes/input_part012_review.md†L443-L443】
 - Segway-based mopeds with 32 P Samsung 35E packs weigh about 350 lb before the rider yet return ~70 mi, highlighting the trade-off between range and maneuverability; builders now favor lighter 32 S 20 P layouts with higher-power controllers for better torque-to-weight balance.[^11]
 - Field deployments show stock GT rotors and brakes survive repeated high-speed runs once cooling and hydraulic upgrades are in place, but pack reinforcements remain essential to avoid sag-induced cut-outs.[^3][^9]
 - G30 dashboards only expose 5 V logic—run dedicated DC/DC converters for 12 V lighting, stress-relieve converter leads, and avoid pulling accessory power from charge ports to preserve BMS protections.【F:knowledge/notes/denis_all_part02_review.md†L28-L32】【F:knowledge/notes/denis_all_part02_review.md†L31-L32】【F:knowledge/notes/denis_all_part02_review.md†L70-L71】
@@ -67,6 +71,7 @@
 - G-series commuters require bushing and weld inspections; F-series weld porosity has already caused brace cracks, so reinforcements and protective films are recommended before heavy use.[^14]
 - Run a dedicated F-series weld checklist before adding power: inspect the deck spine, folding brace, and downtube gussets for porosity, add polyurethane or UHMW film where harnesses rub the welds, and torque the folding bolts with medium-strength threadlocker after reassembly.【F:knowledge/notes/input_part006_review.md†L508-L508】
 - Stress-relieve buck-converter leads with glue or zip ties so vibration does not snap accessory power wires before the scooter ever leaves the bench.【F:knowledge/notes/denis_all_part02_review.md†L31-L32】
+- GT-series rims can be replaced without swapping hubs—AliExpress sells “rim only” shells, but verify the motor is healthy before reusing it on fresh hoops.【F:knowledge/notes/input_part012_review.md†L347-L348】
 
 ## Accessory & Telemetry Integration
 - Segway CAN dashboards diverge from Xiaomi formats, so confirm message maps before layering SmartDisplay overlays or Express telemetry; VESC Express station mode eases remote access once the scooter joins home Wi‑Fi.[^2][^15]
