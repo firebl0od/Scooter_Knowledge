@@ -10,6 +10,12 @@
 - Sand controller bases, clean MOSFET tabs, and reinstall paste before clamping the box—loose wiring under the plate prevents full contact and spikes temperatures on the first ride.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60020-L60025】
 - Keep silicone pads on hand when chasing 48 V/15 S tunes; the crew pairs IRFB4110 MOSFETs with 100 V 1,000 µF and 47 µF capacitors and swaps pads plus paste before closing the case.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60009-L60024】
 
+## Controller Cooling Case Studies
+- Jason resurrected an MP2 after a MOSFET failure and now caps the platform around 100 A battery / 250 A phase, acknowledging a 300 A launch cooked the board while chasing sensor cogging.【F:knowledge/notes/input_part012_review.md†L234-L235】
+- Finn keeps an Ubox Lite below 50 °C while pulling 160 A phase / 90 A battery by swapping in Arctic MX4 paste and bolting through the controller’s M2 bosses into a 3 mm aluminum belly pan.【F:knowledge/notes/input_part012_review.md†L235-L235】【F:knowledge/notes/input_part012_review.md†L251-L251】
+- Matthew’s DIY water loop dropped his VESC enclosure from ~90 °C cutbacks to ~26–28 °C during 45 mph pulls; Noname is planning a moped-sized radiator, pump, and expansion tank to scale the concept.【F:knowledge/notes/input_part012_review.md†L236-L236】
+- Swapping to higher-grade thermal paste still nets ~5 °C improvements, but veterans stress optimizing airflow before escalating to liquid cooling complexity.【F:knowledge/notes/input_part012_review.md†L237-L237】
+
 ## Temperature Guardrails
 - Battery temps around 41 °C were deemed healthy for summer rides, but the group flagged ~60 °C as a ceiling—anything hotter accelerates degradation and calls for gentler tunes.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60004-L60008】
 - Larger packs and long shocks trap heat around the deck; riders re-bend frames, add inner/outer steel plates, and swap to lower-rate springs instead of trimming coils so the chassis and cells stop cooking each other.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L90030-L90136】
@@ -20,3 +26,7 @@
 ## Adhesives & Sensor Retention
 - Hall sensors that walk out of their slots should be glued with heat-tolerant RTV 704 or slow-drying high-temp silicone; super glue works after scuffing the pocket but runs hotter under load.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L131261-L131275】
 - Keep 704 RTV on the bench for accessory wiring too—the same adhesive secures buck-converter leads so vibration cannot snap them before the scooter ever rolls out.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L31-L32】【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L131265-L131275】
+
+## Motor Architecture Considerations
+- Axial-flux motors mount magnets on disks and can stack additional phases (“raxial flux”) for higher power density, but scooter builders highlight the trade-off: radial hubs remain dominant because they are cheaper to produce and leave little internal volume for liquid-cooling hardware inside the hollow stator.【F:data/vesc_help_group/text_slices/input_part012.txt†L135-L155】
+- Marketing clips touting liquid-cooled radial hubs often show only phase leads—no coolant lines—so treat flashy renders skeptically until plumbing and manifolds are clearly documented.【F:data/vesc_help_group/text_slices/input_part012.txt†L149-L155】

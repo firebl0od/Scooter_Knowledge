@@ -11,6 +11,7 @@
 - **Mount motion sensors in the battery bag.** Couriers hide Arduino-driven buzzers inside Wildman cases so cutting the strap or unzipping the bag triggers instant noise without alerting thieves to the electronics location.【F:knowledge/notes/all_part01_review.md†L86-L87】
 - **Carry layered locks.** Quick errands get a compact Master Lock cable that stays smooth with graphite; long stops call for hardened chains plus GPS trackers taped into the loom.【F:knowledge/notes/all_part01_review.md†L167-L167】【F:knowledge/notes/all_part01_review.md†L27392-L27407】
 - **Expect opportunists.** Dense-city riders report scooters disappearing within minutes if left unlatched, so treat even short drop-offs like high-risk events and keep the alarm armed.【F:knowledge/notes/all_part01_review.md†L27392-L27407】
+- **Stack trackers by ecosystem.** Riders now pair Samsung SmartTags with Apple AirTags (≈€50 per scooter) while planning GPS IoT beacons for premium builds; the mix already helped recover a stolen ebike, but they still advise against confronting thieves in person.【F:data/vesc_help_group/text_slices/input_part012.txt†L124-L170】
 
 ## Post-Ride Water Diagnostics
 - **Track regen-related faults.** Error 21 after a panic stop usually points to a cooked data line, not a dead BMS—bench-test packs on a known-good scooter before blaming Happy BMS or Rita.【F:knowledge/notes/denis_all_part02_review.md†L368-L369】

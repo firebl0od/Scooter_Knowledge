@@ -2,8 +2,8 @@
 
 ## Scope
 - Source: `data/vesc_help_group/text_slices/input_part012.txt`
-- Coverage: 2025-04-11T15:10:28 through 2025-06-04T01:48:18 (lines 6,900–21,984)
-- Next starting point: Review complete (file exhausted at line 21,984)
+- Coverage: 2025-03-10T21:50:04 through 2025-06-04T01:48:18 (lines 1–21,984); second-pass extraction now extends through line 200
+- Next starting point: Resume at line 201
 
 ## Key Findings
 
@@ -19,6 +19,7 @@
 - Rage Mechanics’ extended deck runs €410 (black) or €470 (carbon) with 672 mm overall length and ~622 mm usable space once the 25 mm front/rear lips are subtracted.【F:data/vesc_help_group/text_slices/input_part012.txt†L7083-L7104】
 - The same crew warned against FastRide decks for poor tolerances and called Sonken swingarms overbuilt, hard to install, and locked to the stock Dualtron pole geometry—go Rage Mechanics or RFP instead.【F:data/vesc_help_group/text_slices/input_part012.txt†L7107-L7116】
 - French racer Medhi Cantin is hand-building billet 7075 frames around dual Kelly 7230S controllers, underscoring how much fabrication time (≈1 year) goes into competitive stand-up scooters.【F:data/vesc_help_group/text_slices/input_part012.txt†L7340-L7379】
+- Dualtron Thunder wobble chasers pointed to stacked variables—factory tires that dislike lean, running only a front brake, uncertain wheel centering, and taller arm settings—while critics called out weak collar clamps and flawed steering geometry; start by lowering the chassis, balancing brakes, and upgrading to PMT or Xuangxeng clones before blaming dampers.【F:data/vesc_help_group/text_slices/input_part012.txt†L101-L121】
 
 ### Powertrain, Performance, and Battery Planning
 - Spintend’s single Ubox 85 V 240 A unit still pushes an 80H hub to ~95 km/h, making it a viable high-speed commuter controller without going dual-motor.【F:data/vesc_help_group/text_slices/input_part012.txt†L7131-L7136】
@@ -34,10 +35,16 @@
 - Fresh rotors pair well with resurfaced pads—the group jokingly formed a “sanded pad club” to tame bedding squeal and keep performance consistent.【F:data/vesc_help_group/text_slices/input_part012.txt†L8095-L8104】
 - Tire sourcing is still regional: ULIP 90/60‑6 clones are an affordable alternative when PMT Juniors cost ~€130 locally, but riders still favor PMT for outright grip when shipping cooperates.【F:data/vesc_help_group/text_slices/input_part012.txt†L8166-L8187】
 - A punctured front tire forced a 4 km walk; riders now keep multiple spares (e.g., C3 slicks) on hand to avoid rim damage when high-speed casings fail.【F:data/vesc_help_group/text_slices/input_part012.txt†L8150-L8158】
+- Dualtron owners reversing banjo orientation price out Fastride’s kit of stainless 2×M8 banjos (~€40 before shipping) and confirm the bundle includes crush washers/O-rings before buying individual hardware elsewhere.【F:data/vesc_help_group/text_slices/input_part012.txt†L187-L200】
+
+### Motor Architecture and Cooling Concepts
+- Builders revisiting axial versus radial flux designs noted axial units mount magnets on disks for higher power density while multi-phase hybrids (“raxial flux”) chase even more torque; most production scooters still ship radial-flux hubs because they are cheaper and leave little room for liquid cooling hardware inside the hollow stator.【F:data/vesc_help_group/text_slices/input_part012.txt†L130-L155】
+- Promotional videos showing supposedly liquid-cooled radial hubs drew skepticism once veterans spotted only phase leads—no coolant lines—reinforcing that many marketing clips hide passive designs behind flashy renders.【F:data/vesc_help_group/text_slices/input_part012.txt†L149-L155】
 
 ### MP2 Assembly and High-Current Wiring Practices
 - Seasoned builders solder copper busbars first, mount FETs second, and terminate phase wires last; leaded solder flows around 200 °C on a hotplate, but keep electrolytic capacitors off the plate to avoid damage.【F:data/vesc_help_group/text_slices/input_part012.txt†L7723-L7738】【F:data/vesc_help_group/text_slices/input_part012.txt†L7813-L7820】
 - Proven conductor stack: 8 AWG battery leads and three 12 AWG runs per phase (~10 mm²). 6 AWG physically fits only after stripping strands, which risks bridging FET legs and makes rework miserable once the hardware’s ~420 A protection is tripped.【F:data/vesc_help_group/text_slices/input_part012.txt†L7728-L7762】【F:data/vesc_help_group/text_slices/input_part012.txt†L7790-L7914】
+- One rider speculated that extra-long leads might wick heat away from the power stage, but peers immediately challenged the claim—treat the idea as unproven until proper testing surfaces.【F:data/vesc_help_group/text_slices/input_part012.txt†L179-L185】
 
 ### High-Voltage Aux Power and Detection Lessons
 - MP2’s open 12 V DC/DC bricks remain stable on 30 S packs, but their stock transformer footprint is bulky enough that builders are exploring custom windings to shrink the module for tighter scooters.【F:data/vesc_help_group/text_slices/input_part012.txt†L18881-L18888】
@@ -189,6 +196,9 @@
 - Pandalgns’ 60 V logs show ~10–11 kW “air power” at 100 A battery, 350 A phase, and 125 A FW, while Smart Repair reminds that limited torque keeps duty cycle down compared with high-torque stators.【F:data/vesc_help_group/text_slices/input_part012.txt†L12157-L12174】
 - Shlomozero’s dual 90 H setup recorded 58 °C rear / 48 °C front after a 24 km hill session in 25 °C weather, giving a reference point for 75 200/85 150 heat soak on 10 % grades.【F:data/vesc_help_group/text_slices/input_part012.txt†L12839-L12848】
 - Builders planning ferrofluid refreshes on Segway hubs suggested applying it sparingly between magnets while adding a dedicated temp probe so elevated watts don’t go unnoticed.【F:data/vesc_help_group/text_slices/input_part012.txt†L12661-L12665】
+
+### Security, Tracking, and Theft Response
+- Owners now budget roughly €50 per scooter for layered tracking—pairing Samsung SmartTags with Apple AirTags and planning a GPS IoT beacon for higher-value builds kept one stolen ebike recoverable, though riders still warn against confronting thieves directly.【F:data/vesc_help_group/text_slices/input_part012.txt†L124-L170】
 
 ### Additional Findings (Lines 12,880–14,379)
 

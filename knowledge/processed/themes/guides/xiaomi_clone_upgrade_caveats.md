@@ -29,6 +29,7 @@
 - **Emergency backfeeding only.** Using a 13S charger on a 12S stack is a one-time recovery tactic; daily charging demands proper CC/CV hardware matched to the pack.【F:knowledge/notes/denis_all_part02_review.md†L101776-L101787】
 - **Validate pack claims.** Time the OEM charger (≈1.7 Ah per hour) to spot counterfeit "12 Ah" packs that top off too fast.【F:knowledge/notes/denis_all_part02_review.md†L98595-L98598】
 - **Mind tubeless sealants.** PMT/Xuancheng tires seal without slime, but if you insist, pick aluminum-safe formulas to avoid corroding clone rims.【F:knowledge/notes/denis_all_part02_review.md†L101765-L101775】
+- **Don’t overshoot commuter hubs.** A Xiaomi 4 Lite hammered for 50 km left the stock motor smoking—sustained field-weakening pulls demand cooling mods before extending ride length or voltage.【F:knowledge/notes/input_part012_review.md†L71-L71】
 
 ## Risk & Safety Checklist
 1. Voltage-match packs before plugging parallel harnesses together; log voltage after rides to verify they remain in lockstep.【F:knowledge/notes/denis_all_part02_review.md†L93548-L93558】

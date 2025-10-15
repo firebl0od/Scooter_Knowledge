@@ -25,6 +25,7 @@
 - **Capacitor banks are a recurring weak link.** Units have dropped to 14 V readings on 20 S packs after repeated capacitor explosions; simple cap swaps rarely hold.⁷
 - **Regen cutoffs can brick controllers.** Aggressive negative current spikes triggered logic-board shutdowns on otherwise healthy 75100s; tune regen ramps gently and log results before releasing builds.⁸
 - **Hall/5 V rail fragility.** Lost hall detections often trace back to a dead 5 V rail—confirm sensor power after every detection failure.⁹
+- **Ignore the 75300 label on Pro V2.** VESC Tool still reports 75100 Pro V2 hardware as HW75300, just like V1—don’t waste time chasing a nonexistent mismatch.【F:knowledge/notes/input_part012_review.md†L430-L430】
 
 ## Pre-Flight QA Checklist
 1. **Open the enclosure.** Verify 12 V converter solder joints, clean stray shavings, and apply full-coverage thermal pads/paste before the first power-up.¹
