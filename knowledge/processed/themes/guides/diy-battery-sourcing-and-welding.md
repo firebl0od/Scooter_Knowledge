@@ -7,6 +7,8 @@
 
 ## Workshop Pricing & BMS Baselines
 - Denis’ catalog still quotes ~€170 for a 10S4P Samsung 35E pack, €30 for the Wildman bag, and roughly €20 for EU shipping via DPD/UPS; he insists on genuine XT30 hardware and 20 A common-port BMS boards rather than AliExpress knock-offs.[^denis-pricing]
+- The workshop flags “fire emoji” AliExpress packs built from laptop pulls—builders cap Happy BMS builds near 53 V/40 A and lean on refurbished OEM modules plus externals for range instead of forcing Rita past spec.[^ali-pack-warning-diy]
+- Aerdu’s inexpensive 10S packs can deliver honest capacity when properly potted, but missing fish paper between series groups remains a fire risk—veterans still favour reputable cell sellers (e.g., NKON) and add insulation themselves before shipping customs builds.【F:knowledge/notes/denis_all_part02_review.md†L521-L522】
 - External packs stay on common-port BMSes so Rita can police charge flow—Denis refuses to ship his smart separate-port boards in range kits because they can’t stop overcharge through the discharge lead.[^common-port-chat]
 - Production packs come from the m365Krakow workshop; Denis handles support and logistics while the partner assembles cells, so large orders should plan around their combined lead times.[^m365krakow]
 
@@ -18,6 +20,8 @@
 | **US resellers (50PL)** | ~$9 per cell | Same performance as EU stock | Factor in tariffs and shipping; consider freight-forwarding via EU partners.[^2] |
 | **Custom P45B/P50B packs** | €3000–€4500 for 22 S 10 P/11 P assemblies | Continuous ≈495 A, BMS peaks ≈1040 A | Group buys enable supply; document BMS limits (≤500 A continuous today).[^6][^7] |
 | **Commissioned builds (UK/US)** | Varies; premium vs DIY delta covers tooling | Output tied to builder’s QC logs | Trusted builders like jamessoderstrom eliminate tooling spend for one-off packs.[^11] |
+
+- Denis’ crew still treats LG M29 or EVE 33V cells as the baseline for 15 S AWD commuters, with Molicel P42A/40T, Samsung 25R/30Q, and Sony VTC5/VTC6 reserved for higher-discharge layouts—21700 formats remain the preferred starting point for dual-motor projects.【F:knowledge/notes/denis_all_part02_review.md†L76-L77】
 
 ## Welding Equipment Decision Guide
 | Scenario | Recommended Tooling | Why It Wins | Follow-Up Checks |
@@ -49,6 +53,7 @@
 - **Harness strain relief:** Use deck plates or external mounts to keep relocated controllers from stressing phase leads and QS8 connectors during pack swaps.[^8][^9]
 - **Telemetry cross-checks:** Pair CAN smart BMS data with VESC logs to validate current draw and spot calibration drift in shunt-based readings.[^7]
 - **Finish work around positives:** Deburr nickel edges near cell tops and re-seat fishpaper before closing the pack—sharp tabs have already pierced insulation on low-current power-bank builds.【F:knowledge/notes/denis_all_part02_review.md†L122364-L122385】
+- **Pair Kapton with structural insulation:** Builders lean on Kapton for moisture resistance, but it lacks thermal shielding—add fish paper or other barriers on high-discharge packs to stop nickel from rubbing bare cans as seen in recent Dualtron teardowns.【F:knowledge/notes/denis_all_part02_review.md†L357-L359】
 - **Print holders for heat, not looks.** PLA cradles slump once cells warm; switch to PETG or ASA around 230 °C/100 °C bed temps so 21700 honeycombs and Wildman bag sleds stay rigid in summer decks.【F:knowledge/notes/denis_all_part02_review.md†L116230-L116236】【F:knowledge/notes/denis_all_part02_review.md†L89665-L89696】
 - **Document capacity checks.** Time OEM chargers (≈1.7 Ah per hour on Xiaomi bricks) when vetting customer packs; a genuine 12 Ah module needs nearly seven hours from empty.【F:knowledge/notes/denis_all_part02_review.md†L98595-L98598】
 - **Log cell provenance.** Refurb lots from NKON (late-2021 Samsung 35E/50E) arrive graded and safe when treated like fresh stock; track batch codes and keep compression on pouch experiments so swelling doesn’t lift tabs.【F:knowledge/notes/denis_all_part02_review.md†L97241-L97259】
@@ -63,6 +68,7 @@
 - **Plan for encapsulated fleet packs.** Ninebot rental batteries bury their BMS inside silicone potting; expect to chisel sealant or swap a fresh board because resets are impossible while encapsulated.[^15]
 - **Avoid grinders on aluminum shells.** Score the silicone bead with a utility knife, brace the enclosure in a vise, and drive the cell brick out with a wooden drift from the non-BMS end to preserve wiring.[^16]
 - **Treat 0.1 mm nickel stacks like structural parts.** Double layers safely carry ≈20 A BMS currents, but only when bonded with multiple high-energy weld strikes—thin hot glue fails once packs warm.[^17]
+- **Triage refurb packs methodically.** Voltage swings on a 2 A charger signal mismatched cell groups—dismantle, capacity/IR-test each cell, regroup by mileage, and expect degraded cells to keep worsening even after balancing.【F:knowledge/notes/denis_all_part02_review.md†L333-L333】
 - **Invest in training before welding.** Veterans keep Micah Toll’s handbook on the bench so new builders understand failure modes before touching live cells.[^18]
 - **Model builds around stock chemistries.** Xiaomi packs routinely ship with LG M26 or blue EVE 18650 cells; use those discharge curves when calculating performance instead of optimistic MJ1 assumptions.[^19]
 - **Distribute shoulder-bag loads.** Add thin aluminum plates outside fiberglass fire sleeves to spread weight and shield packs from direct flame when slinging externals over a shoulder.[^20]
@@ -98,3 +104,4 @@
 [^denis-pricing]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1510-L1526】
 [^common-port-chat]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1545-L1594】
 [^m365krakow]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1612-L1618】
+[^ali-pack-warning-diy]: 【F:knowledge/notes/denis_all_part02_review.md†L457-L459】
