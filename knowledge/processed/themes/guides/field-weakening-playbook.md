@@ -4,6 +4,8 @@
 - Treat field weakening (FW) as a last-mile speed tool: it trades torque and efficiency for extra ERPM, rapidly heating motors and controllers, so only enable it once the drive system runs cool at target duty cycles.[^1][^2][^3]
 - Stable implementations rely on firmware 5.3-era builds, instrumented temperature and voltage logging, and conservative regen; high-voltage packs or 24S conversions demand extra surge headroom because regen spikes can brick controllers when FW is active.[^4][^5]
 - Start with single-digit or 10–30 A FW setpoints validated by telemetry; riders jumping to 55–60 A routinely saturate hubs within an hour unless they raise phase current carefully, add cooling, and watch logs for current overshoot.[^6][^7]
+- FW is duty-triggered—not speed-triggered—so it can engage at zero eRPM if the controller sees high duty requests; disable it on hill starts unless you have current headroom and instrumentation.[^fw-duty]
+- Bypassed commuter packs still feel FW amps. Keep FW near zero (≤10 A) on 16 S Xiaomi/Ninebot packs until pack-current logs prove the cells and BMS survive the extra draw.[^fw-pack][^fw-commuter]
 
 ## How Field Weakening Works
 - FW injects negative d-axis current to cancel back-EMF so the motor surpasses its natural base speed, which inherently reduces torque-per-amp and wastes power as heat.[^1]
@@ -20,10 +22,12 @@
 ## Configuration Workflow
 1. **Baseline Tune:** Run standard motor detection, confirm smooth sensorless transitions, and road-test without FW to verify the observer and throttle feel.[^7][^10]
 2. **Enable FW Incrementally:** Increase `Field Weakening Current` in 5–10 A steps. Dual 84100 setups typically settle near 15–30 A per controller for 100 km/h GPS runs, while heavier 72 V builds may stretch toward 40–55 A once cooling and battery delivery are proven.[^7][^11][^12]
+   - Stretch the FW release ramp to ~400–600 ms if throttle feels sticky; riders cleared sluggish Raiden 7 decel by lengthening the ramp and trimming duty ceiling to ≈97 %.【F:knowledge/notes/input_part004_review.md†L336-L336】
 3. **Re-verify Current Limits:** After each change, check live logs for battery spikes above set limits and rerun detection if overshoot appears—the VESC Tool wizard reset resolved a 60 A ceiling breach on one build.[^8]
-4. **Test Regen:** Perform controlled braking drills to confirm bus voltage stays within component ratings; Spintend riders retain regen at 80–100 km/h with FW but still watch voltage sag for surprises.[^13]
-5. **Fault Review:** After hard pulls, run the `faults` command and inspect absolute current headroom (200–250 A for 120–130 A phase tunes) to avoid ABS cut-outs at high duty cycle.[^14]
-6. **Duty Cycle Discipline:** Keep maximum duty near firmware defaults (~95 %); stretching toward 99–100 % has produced abrupt cut-outs above 70 km/h on FW-enabled builds.[^15]
+4. **Budget FW current in battery math:** Remember that VESC reports battery draw as base current plus the configured FW current—dropping pack limits by ~10 A before adding 10 A of FW kept 40 A packs within their cell ratings.【F:knowledge/notes/input_part004_review.md†L227-L227】
+5. **Test Regen:** Perform controlled braking drills to confirm bus voltage stays within component ratings; Spintend riders retain regen at 80–100 km/h with FW but still watch voltage sag for surprises.[^13]
+6. **Fault Review:** After hard pulls, run the `faults` command and inspect absolute current headroom (200–250 A for 120–130 A phase tunes) to avoid ABS cut-outs at high duty cycle.[^14]
+7. **Duty Cycle Discipline:** Keep maximum duty near firmware defaults (~95 %); stretching toward 99–100 % has produced abrupt cut-outs above 70 km/h on FW-enabled builds.[^15]
 
 ## Operating Benchmarks
 | Platform | Pack & Motor | Phase / Battery | FW Current | Notes |
@@ -80,3 +84,6 @@
 [^22]: 20 S single-motor package delivering 85 km/h with ~30 A FW as a short-burst aid.【F:knowledge/notes/input_part013_review.md†L145-L145】
 [^23]: Firmware or wiring faults causing sudden full braking after FW-enabled firmware updates.【F:knowledge/notes/input_part001_review.md†L219-L219】
 [^hotdog_fw]: NAMI 100 H rear / 70 H front builds logging 500 A phase, 550 A absolute, 100 % front FW, and ~61 °C stators while traction control keeps the rear from lifting the front at 120 km/h.【F:knowledge/notes/input_part014_review.md†L8930-L8933】【F:knowledge/notes/input_part014_review.md†L10001-L10055】
+[^fw-duty]: Field weakening activates on duty-cycle thresholds, so it can fire even at zero eRPM unless you rein it in.【F:knowledge/notes/input_part004_review.md†L362-L362】
+[^fw-pack]: Flipsky ignores configured battery-current limits once FW is active, hammering bypassed 16 S G30 packs until riders verified real pack current before re-enabling it.【F:knowledge/notes/input_part004_review.md†L315-L315】
+[^fw-commuter]: Кирилл and Ofek now cap commuter FW around 10 A so 20–30 A packs don’t sag below 3.6 V per cell.【F:knowledge/notes/input_part004_review.md†L386-L386】
