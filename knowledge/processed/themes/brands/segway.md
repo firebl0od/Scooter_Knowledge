@@ -14,6 +14,12 @@
 | Segway C80 seated scooter | 16 S stock pack, drum brake rear hub | 165 mm dropout accepts threaded 10" hubs; interior swallows four 6×10 cell layers and supports 6–7 kW charging with stock 100/100 Lite controller.[^10][^12] | Stock 60 A BMS will trip above 70 A battery; curb weight balloons toward 350 lb with 32 P packs, hurting handling.[^11] | Upgrade BMS before raising battery current, notch shock bracket for cleaner pack fit, add thermal monitoring, plan weight distribution.[^10][^11][^12] |
 | Segway ST1/ST2 (announced) | Targeting 60 V (ST1) and 72 V (ST2) systems | Factory hydraulic suspension and higher-voltage electronics promise turnkey 40–85 km/h readiness.[^13] | Pricing and aftermarket support unknown; expect premium cost and limited early spares.[^13] | Monitor launch hardware; plan accessory/BMS support from GT ecosystem where compatible.[^13] |
 
+## Ninebot F2 Pro Specific Notes
+- ScooterHacking Firmware users confirmed that fully sensorless launches are acceptable—the initial "brr" noise is simply the controller switching from hall emulation—and this firmware path unlocks speed ceilings without sacrificing factory indicators and buzzers.[^f2pro-shfw]
+- The F2 Pro's stock over-current protection trips near 30 A even if higher limits are set in the utility app, so riders planning power upgrades must accept this hardware ceiling or plan controller swaps.[^f2pro-ocp]
+- Because the F2's BMS cannot detect externally paralleled packs, riders planning add-on batteries were advised to share current through the auxiliary pack while respecting the native 25–30 A ceiling to avoid tripping the internal protection mid-ride.[^f2pro-limits]
+- Commuter builds should keep current demands below 30 A and leverage sensorless mode for reliable launches rather than chasing dual-motor complexity on this entry-level platform.[^f2pro-shfw][^f2pro-limits]
+
 ## Chassis & Handling Insights
 - GT-class stability stems from generous wheelbase and rake, but riders still reinforce the deck and stem interfaces before high-power conversions; controller-mount fractures have occurred on GT and SNSC rental frames when extra weight is added up the stem.[^3][^2]
 - Stem bearings and dropout machining are mandatory on GT2 upgrades: the OEM upper bearing fails early and both axles need lathe work before 65–70 H hubs will seat properly.[^6]
@@ -96,3 +102,6 @@
 [^dual_pack_fitment]: Dual Ninebot pack packaging with tall spacers and flipped SNSC suspension.【F:knowledge/notes/input_part004_review.md†L47-L47】
 [^ninebot_thermal]: Ninebot hub motor thermal ceiling around 40–45 A battery current.【F:knowledge/notes/input_part004_review.md†L298-L298】
 [^f_stem]: Ninebot F-series stem bending cautions due to factory harness routing holes.【F:knowledge/notes/input_part004_review.md†L346-L346】
+[^f2pro-shfw]: ScooterHacking Firmware confirming sensorless launch reliability on F2 Pro with hall emulation noise during controller switching.【F:knowledge/notes/input_part013_review.md†L146-L148】
+[^f2pro-ocp]: F2 Pro over-current protection tripping near 30 A regardless of utility app settings.【F:knowledge/notes/input_part013_review.md†L146-L148】
+[^f2pro-limits]: F2 Pro external pack current sharing guidance to avoid BMS trips while respecting 25–30 A ceiling.【F:knowledge/notes/input_part013_review.md†L148-L150】

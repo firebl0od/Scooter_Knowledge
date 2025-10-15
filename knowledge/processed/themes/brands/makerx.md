@@ -26,6 +26,26 @@
 3. **Verify thermistor coefficients on VESC 6.0+.** HI100 temperature scaling required swapping firmware profiles to regain accurate readings—log temps during the first rides to confirm.【F:knowledge/notes/input_part003_review.md†L136-L136】
 4. **Ble test harnesses for 3.3 V logic.** Probe footpads, throttles, and ADC rails before closing the case; missing 3.3 V feeds silently disable safety interlocks.【F:knowledge/notes/input_part012_review.md†L255-L256】【F:knowledge/notes/input_part012_review.md†L347-L349】
 
+## G300 Specific Configuration Notes
+
+### ABS Overcurrent Mitigation
+- G300 controllers show ABS overcurrent trips during acceleration even when phase current appears within limits—this often traces to aggressive throttle profiles or insufficient ABS slow ramp settings.[^g300-abs]
+- **Mitigation steps:**
+  1. Enable "ABS Current Limit Slow Absolute" in VESC Tool motor configuration
+  2. Lower ABS current limits by 10–20 A below peak phase targets
+  3. Add positive ramp time (0.3–0.5 s) to throttle response to soften initial torque requests
+  4. Log real-time current during test rides to verify ABS thresholds aren't exceeded during launches[^g300-abs]
+- If trips persist after firmware 6.3 updates, verify motor detection was rerun and observer settings match the motor's inductance—outdated parameters from earlier firmware can trigger false ABS events.[^g300-fw63]
+
+### Firmware 6.3 Throttle Fixes
+- Firmware 6.3 resolved throttle response issues on G300 platforms where inputs felt sluggish or non-linear compared to earlier versions; update both controllers in dual setups to maintain symmetric behavior.[^g300-fw63]
+- After flashing 6.3, clear motor configurations and rerun detection to ensure observer parameters align with the new control algorithms.[^g300-fw63]
+
+### Push-Button Configuration
+- JPPL documented the MakerX push-button workflow: change App → General → Shutdown Method to timed auto-off (typically 5–10 seconds of zero throttle) so a single momentary press toggles power cleanly.[^g300-button]
+- Both harness buttons are wired in parallel—they do not isolate main battery power, only trigger the controller's soft power logic—so plan external contactors or smart-BMS control for true pack isolation.[^g300-button]
+- Red LED fault codes on G300 units indicate various failure modes; consult MakerX documentation for specific blink patterns before assuming hardware failure.[^g300-led]
+
 ## Tuning Guardrails
 - **Singles:** Start around 60 A battery / 180–200 A phase and raise only with frame-mounted heatsinks or machined enclosures; bag-mounted installs run 30–50 °C hotter under the same load.【F:knowledge/notes/input_part003_review.md†L93-L120】
 - **Duals:** Keep G300/D100S stacks near 150 A battery and ≤300 A phase on 20 S unless you have thermal telemetry proving headroom; logs above 320 A phase at 22 S showed rapid saturation and heat soak.【F:knowledge/notes/input_part013_review.md†L416-L417】
@@ -51,3 +71,7 @@
 [^6]: Resin-backed Ubox cooling observations and conservative current targets from field reports.【F:knowledge/notes/input_part011_review.md†L221-L224】
 [^7]: MakerX GO-FOC fire reports under 96 V testing and broader warnings about unvetted high-voltage firmware like the rumoured K900 release.【F:knowledge/notes/input_part004_review.md†L321-L321】【F:knowledge/notes/input_part013_review.md†L462-L462】
 [^8]: Mini FOC voltage headroom discussion confirming it remains a 12 S-class controller and recommending Spintend or other ≥16 S hardware for >50 V packs.【F:knowledge/notes/input_part001_review.md†L11-L11】
+[^g300-abs]: G300 ABS overcurrent mitigation steps including slow ramp enable and positive throttle ramping.【F:knowledge/notes/input_part013_review.md†L514-L514】
+[^g300-fw63]: Firmware 6.3 throttle response fixes and motor detection requirements on G300 platforms.【F:knowledge/notes/input_part013_review.md†L262-L262】
+[^g300-button]: MakerX G300 push-button configuration using timed auto-off shutdown method.【F:knowledge/notes/input_part013_review.md†L302-L302】
+[^g300-led]: G300 red LED fault codes indicating various failure modes requiring diagnostic reference.【F:knowledge/notes/input_part013_review.md†L654-L654】
