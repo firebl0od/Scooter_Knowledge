@@ -19,9 +19,11 @@
 - Keep the platform in its comfort lane: riders still rank Dualtron Thunder geometry for >150 km/h sprints, while NAMI frames shine for long-range and off-road duty when paired with good dampers instead of chasing absolute top speed.[^3]
 - Budget steering dampers snap when preloaded for race pace; invest in motorcycle-grade Bitubo or similar hardware before upping currents and tire width.[^10]
 - Fabrication escalates quickly—22 S 10 P hybrids inspired by Rion builds required fork machining to clear 70H hubs and 3 mm rotors, so plan machine time before ordering oversized drivetrains.[^11]
+- Burn E2 conversions using Kaabo 2 kW hubs needed rotor spacers to clear the caliper, and ZAITUO 100/65-6.5 tires from Amazon proved to fit the chassis cleanly—capture those dimensions for future hub swaps.【F:data/vesc_help_group/text_slices/input_part013.txt†L2282-L2297】
 
 ## Power & Thermal Guardrails
 - Favor dual-drive current splits: the same Tronic 250 hardware that bakes at ~60 °C as a single motor holds near 40 °C when the load is shared across both ends.[^1]
+- Upgrade overheated harnesses with 10 AWG silicone phase leads—the swap let Rob Ver hold 116 A battery and 240 A phase without cooking the loom, provided pack and controller temps stayed logged.[^tronic_harness]
 - Treat 200 A battery / 310 A phase experiments as short-lived: even purpose-built dual Spintend setups report hub and pack overheating at those levels.[^2]
 - Respect the stock module’s ≈116 A continuous ceiling—AYÓ advises capping peaks near 135 A until the pack is rebuilt or paralleled.[^2]
 - Data logging must sum both controllers; otherwise, power traces plateau near 19 kW even while riders believe they’re pushing 170 A/200 A per side.[^9]
@@ -37,6 +39,7 @@
 
 ## Electronics & Accessory Integration
 - Start with the proven harness baseline—6 mm bullets and XT90 battery plugs—and only upsize once current goals justify the extra packaging work.[^5]
+- Budget separate DC/DC rails for heavy accessories: Tronic X12 logic supplies only ~150 mA at 5 V, so horns, fans, and dashboards still need dedicated bucks on high-current NAMI builds.[^tronic_logic]
 - Avoid hanging full lighting loads directly off controller accessories: horn outputs only source a few amps, so trigger relays or separate DC/DC rails for halogens and other heavy draws.[^12]
 - Document accessory power paths before splicing dashboards or smart displays; riders are still mapping which 5 V/12 V rails share regulators on Ubox and Makerbase logic stages.[^13]
 
@@ -78,3 +81,5 @@
 [^rim_warning]: Community warning that 12" AliExpress rims interfere with NAMI suspension, so 65 mm front / 80 mm rear LY combos remain the preferred setup.【F:knowledge/notes/input_part014_review.md†L5103-L5113】
 [^burp_fix]: Tubeless Ambrosini rims occasionally burp air after potholes; reseat by pulling the valve core and blasting the bead clean with a compressor.【F:knowledge/notes/input_part014_review.md†L4610-L4619】
 [^pmt_rain]: PMT rain-specific tires in 90 mm and 100 mm widths cost roughly $80 each but deliver the wet grip racers need versus cheaper slicks.【F:knowledge/notes/input_part014_review.md†L5359-L5399】
+[^tronic_harness]: Rob Ver’s harness refresh swapped the NAMI loom to 10 AWG phases so dual Tronic X12 controllers could sustain 116 A battery and 240 A phase without overheating.【F:knowledge/notes/input_part013_review.md†L33-L33】
+[^tronic_logic]: Tronic X12 accessory rails only deliver about 5 V at 150 mA, so builders still power horns and lighting from dedicated buck converters.【F:knowledge/notes/input_part013_review.md†L32-L33】

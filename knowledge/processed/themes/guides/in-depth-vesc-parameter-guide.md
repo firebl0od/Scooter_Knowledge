@@ -720,7 +720,8 @@ Params: foc_observer_gain, foc_observer_gain_slow
 - Lower slow gain can help at low duty cycles.
 
 **How / When to Modify**
-- If big cogging or losing sync at certain speeds, try halving the main observer_gain. 
+- If big cogging or losing sync at certain speeds, try halving the main observer_gain.
+- When hall boards die, switch to the Ortega observer with the “medium inrunner” detection preset—builders are running sensorless FOC smoothly up to ~6 kW and ≈60 km/h on heavy hubs by capping detection current this way.【F:data/vesc_help_group/text_slices/input_part013.txt†L5858-L5864】【F:data/vesc_help_group/text_slices/input_part013.txt†L5926-L5930】
 - If everything is stable, no changes needed.
 
 **Potential Side Effects**

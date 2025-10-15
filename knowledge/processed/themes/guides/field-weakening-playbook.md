@@ -28,6 +28,7 @@
 ## Operating Benchmarks
 | Platform | Pack & Motor | Phase / Battery | FW Current | Notes |
 | --- | --- | --- | --- | --- |
+| Stone Gasm 20×70 kV single | 20 S single hub | — | 25–35 A | 25 A FW only pushed freewheel speed from 66 → 84 km/h and the 35 A hardware ceiling topped out near 96 km/h, underscoring diminishing returns without deeper tuning.【F:data/vesc_help_group/text_slices/input_part013.txt†L30-L31】
 | Zero 10X dual 84100 | 20 S LY hubs | 120 A phase / 55 A battery each | 30 A | BEMF decoupling + `mxlemming` observer hit 100 km/h without overheating; 60 A FW overheated motors within an hour.[^6][^7]
 | Segway GT2 dual Spintend 85150 | 19 S9 P EVE 50E | 150 A phase / 60 A battery each | 30 A | Cells are bottleneck; plan for stronger pack before raising FW.[^10]
 | Wolf King GT Pro dual Ubox 150 | 72 V pack, 50 A windings | 210 A phase / 50 A battery each | 55 A | Freewheels ≈77 mph, road ≈66 mph; requires reinforced deck and custom firmware.[^11]
@@ -41,6 +42,7 @@
 - **Voltage Monitoring:** Keep oscilloscope or high-speed logging on regen-heavy tests—22 S Spintend builds disable regen entirely when extending pack voltage to avoid BMS-induced surges.[^19]
 - **Fault Masking:** Sudden current drops or pothole-induced cut-outs that disappear when FW is enabled can signal mechanical faults (loose magnets, wiring) rather than firmware bugs; investigate hardware first.[^16]
 - **Noise & Surging:** If throttle jitters appear above 80 % duty after enabling 20 A FW on single-motor builds, roll FW back—operators traced the behavior directly to FW injection.[^20]
+- **Remember phase is the launch lever.** As scooters accelerate and load drops, controllers naturally pull phase current back toward the battery limit—plan staged limits or higher battery amperage if you want strong launches deeper into the run.[^phase_launch]
 - **Overspeed Discipline:** Avoid free-spinning wheels at high FW. Halo stunt crews saw runaway RPM off-load and controller stress at 125 A FW.[^12]
 - **Front-lift control:** Hotdog 100 H rear builds demand traction control or front FW assistance; otherwise the rear lifts the front well past 120 km/h even while stators only hit ~61 °C, so validate TC before public-road tests.[^hotdog_fw]
 
@@ -75,6 +77,7 @@
 [^17]: Haku’s decision to abandon FW after killing commuter hubs at 4 A.【F:knowledge/notes/input_part011_review.md†L301-L301】
 [^18]: Max G2 and similar commuter hubs hitting 150 °C stators with FW.【F:knowledge/notes/input_part005_review.md†L368-L372】
 [^19]: 22 S Ubox/Spintend configurations disabling regen to survive higher voltage.【F:knowledge/notes/input_part010_review.md†L419-L419】
+[^phase_launch]: Pandalgns reminded builders that high launch torque is tied to phase current; as speed rises the controller naturally drifts toward the battery limit, so staged limits or higher battery amps extend the hard-acceleration window.【F:data/vesc_help_group/text_slices/input_part013.txt†L356-L357】
 [^20]: FW-induced throttle jitter on single-controller builds once 20 A is applied.【F:knowledge/notes/input_part013_review.md†L709-L709】
 [^21]: 22×3 hub builds freewheeling around 118 km/h without FW after pack upgrades.【F:knowledge/notes/input_part013_review.md†L88-L88】
 [^22]: 20 S single-motor package delivering 85 km/h with ~30 A FW as a short-burst aid.【F:knowledge/notes/input_part013_review.md†L145-L145】

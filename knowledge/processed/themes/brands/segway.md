@@ -27,9 +27,12 @@
 - Segway GT2 riders log 70 km/h down to ~10 % SOC on the factory setup; pushing beyond that range requires higher-current packs or field-weakening, so plan for thermal headroom if adding torque or speed.[^4]
 - C80 conversions must respect the stock 60 A BMS limit until upgraded—attempting 70 A battery trips protection and heats the motor to ~76 °C, reinforcing the need for a higher-current BMS before raising output.[^11]
 - New firmware paths let Ninebot G2 owners stay on the stock controller—flash XiaoDash, apply the SHFW Gen 4 patch, and keep factory blinkers/buzzers while lifting the speed ceiling instead of grafting in a G30 ESC.[^g2-shfw]
+- Ninebot F2 Pro commuters see ~45 km/h once SHU firmware and field weakening are active, but the low-kV hub sags below 65 % SOC and traction control earns its keep on icy mornings even when summer riders disable it.[^f2pro_fw]
+- SHU firmware riders confirmed the F2 Pro happily launches sensorless—the startup “brr” is normal hall emulation—but the stock over-current trip still fires near 30 A, so parallel add-on packs must share current through the auxiliary harness while staying inside the native 25–30 A envelope to avoid mid-ride shutdowns.【F:knowledge/notes/input_part013_review.md†L441-L442】
 
 ## Thermal & Controller Packaging
 - Grinding paint to bare metal, adding thermal glue, and clamping controllers to aluminum plates keeps GT decks below ~60 °C; PETG brackets alone trap heat and left some builds idling at ~64 °C.[^7]
+- Smart Repair’s Ninebot G2 retrofit keeps controller temps below 50 °C by stripping paint at the mount, buttering both sides with thermal paste, and sandwiching a 50 × 100 × 10 mm aluminum slab between the frame and ESC before torquing it down.【F:knowledge/notes/input_part013_review.md†L616-L618】
 - Ferrofluid refreshes on Segway hubs should be sparing (2.5–3 ml for 10–11" shells) and paired with dedicated temperature probes because shell temperatures lag winding heat when current climbs.[^8]
 - Deck volume fits Ubox Lite, 85/240, or MP2 controllers; a stock GT2 can even mount an 85240 on the rear wall once insulation is removed—plan pass-throughs and strain relief before closing the deck.[^7]
 - Segway GT decks sag under multi-kilowatt pulls, so add aluminum spreaders or belly plates when doubling controller power, mirroring the community’s 3 mm laser-cut solutions.[^2][^9]
@@ -50,6 +53,7 @@
 - Replace bearings proactively—GT rotors pair well with quality SKF replacements, and C80 builds benefit from upgraded hubs or temp probes to keep long commutes in check.[^5][^8][^10]
 - G-series commuters require bushing and weld inspections; F-series weld porosity has already caused brace cracks, so reinforcements and protective films are recommended before heavy use.[^14]
 - Stress-relieve buck-converter leads with glue or zip ties so vibration does not snap accessory power wires before the scooter ever leaves the bench.【F:knowledge/notes/denis_all_part02_review.md†L31-L32】
+- Pair sintered-metal pads with a soft, sacrificial rotor to stop the F2 Pro’s wobble—bite ramps up once warm, noise resembles a retarder, and €2 discs are cheap consumables compared with the stability gains.[^f2pro_brakes]
 
 ## Accessory & Telemetry Integration
 - Segway CAN dashboards diverge from Xiaomi formats, so confirm message maps before layering SmartDisplay overlays or Express telemetry; VESC Express station mode eases remote access once the scooter joins home Wi‑Fi.[^2][^15]
@@ -84,3 +88,5 @@
 [^dual-motor]: 【F:knowledge/notes/denis_all_part02_review.md†L191-L193】
 [^new-13s]: Guidance from Denis Yurev and Happy Giraffe to favor a single 13 S Max pack on the stock hub, logging 30–40 A pulls with Rita/Happy BMS rather than chasing dual-motor swaps.【F:knowledge/notes/denis_all_part02_review.md†L10-L12】
 [^new-suspension]: Community consensus against foam “solid” tires and in favor of quality 10-inch pneumatics with Monorim front/DNM rear suspension for 50 km/h Ninebot builds; Sharkset forks remain comfortable but wobble above ~45 km/h.【F:knowledge/notes/denis_all_part02_review.md†L13-L14】
+[^f2pro_fw]: Cihan’s Ninebot F2 Pro log noting SHU firmware + field weakening delivers ~45 km/h yet saps range as the low-kV hub bogs under 65 % SOC, making traction control invaluable on icy commutes.【F:knowledge/notes/input_part013_review.md†L229-L238】
+[^f2pro_brakes]: Pairing sintered pads with a soft rotor eliminated the F2 Pro’s brake wobble for Cihan, delivering strong bite once warm at the cost of treating €2 discs as consumables.【F:knowledge/notes/input_part013_review.md†L238-L240】

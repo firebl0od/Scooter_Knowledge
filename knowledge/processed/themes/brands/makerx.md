@@ -18,6 +18,7 @@
 - Shop owners reported 70 % of incoming duals arriving faulty, with return shipping erasing the budget advantage; keep at least one spare controller on the shelf for every customer deployment.【F:knowledge/notes/input_part003_review.md†L153-L153】
 - Fire incidents on GO-FOC boards—even at 96 V / 80 A battery with added fans—show new batches need staged validation before matching Spintend or 3Shul duty cycles.【F:knowledge/notes/input_part004_review.md†L321-L321】
 - MakerX’s MOSFET choices (e.g., NECP045N85GU) mirror failure-prone Flipsky runs; continuous current should stay conservative unless the build adds serious heatsinking and airflow.【F:knowledge/notes/input_part002_review.md†L166-L168】
+- JPPL teased a 100 V module advertised at 1 200 A peak, but the crew still treats it as roadmap chatter until hardware ships—plan around today’s G300/C350 envelopes instead of speculative firmware bundles.【F:knowledge/notes/input_part013_review.md†L417-L417】
 - Resellers are rebadging MakerX hardware at hefty markups—the Sur-Ron focused “MTO K2000” is simply a G300 in a cheap aluminium shell—so budget purchases accordingly and verify firmware provenance before assuming you’re getting unique electronics.【F:knowledge/notes/input_part006_review.md†L401-L401】
 
 ## Setup & QA Checklist
@@ -25,6 +26,7 @@
 2. **Rerun motor detection after any mechanical change.** Loose axles and firmware mismatches have corrupted FOC detection until owners reverted to 5.2 binaries and re-tightened hardware.【F:knowledge/notes/input_part003_review.md†L119-L120】
 3. **Verify thermistor coefficients on VESC 6.0+.** HI100 temperature scaling required swapping firmware profiles to regain accurate readings—log temps during the first rides to confirm.【F:knowledge/notes/input_part003_review.md†L136-L136】
 4. **Ble test harnesses for 3.3 V logic.** Probe footpads, throttles, and ADC rails before closing the case; missing 3.3 V feeds silently disable safety interlocks.【F:knowledge/notes/input_part012_review.md†L255-L256】【F:knowledge/notes/input_part012_review.md†L347-L349】
+5. **Update firmware when throttle faults appear.** 🇪🇸AYO#74 cleared a runaway-throttle bug by flashing VESC 6.3 on his G300; the same log confirmed a six-blink red LED flags low voltage and the auto-off timer still fails, so plan a BMS/contactors kill switch until MakerX patches the shutdown routine.【F:knowledge/notes/input_part013_review.md†L326-L329】【F:knowledge/notes/input_part013_review.md†L339-L339】
 
 ## Tuning Guardrails
 - **Singles:** Start around 60 A battery / 180–200 A phase and raise only with frame-mounted heatsinks or machined enclosures; bag-mounted installs run 30–50 °C hotter under the same load.【F:knowledge/notes/input_part003_review.md†L93-L120】
@@ -47,7 +49,7 @@
 [^2]: Mini FOC teardown quality, torque-arm reminders, and MOSFET limit cautions from controller comparison threads.【F:knowledge/notes/input_part002_review.md†L135-L142】【F:knowledge/notes/input_part002_review.md†L166-L168】
 [^3]: Phase-limit failure on MakerX M100 and ongoing QC/resale warnings for MakerX vs. competitors.【F:knowledge/notes/input_part009_review.md†L169-L177】【F:knowledge/notes/input_part004_review.md†L46-L46】
 [^4]: Accessory-voltage expectations across MakerX hardware, including S100 footpads and logic-rail short cautions.【F:knowledge/notes/input_part012_review.md†L248-L249】【F:knowledge/notes/input_part012_review.md†L255-L256】【F:knowledge/notes/input_part012_review.md†L347-L349】
-[^5]: Push-button workflow, ADC daughterboard failures, and high-voltage saturation limits recorded on MakerX G300 platforms.【F:knowledge/notes/input_part013_review.md†L302-L329】【F:knowledge/notes/input_part013_review.md†L407-L409】【F:knowledge/notes/input_part013_review.md†L416-L417】
+[^5]: Push-button workflow, ADC daughterboard failures, and high-voltage saturation limits recorded on MakerX G300 platforms.【F:knowledge/notes/input_part013_review.md†L302-L329】【F:knowledge/notes/input_part013_review.md†L326-L329】【F:knowledge/notes/input_part013_review.md†L407-L409】【F:knowledge/notes/input_part013_review.md†L416-L417】
 [^6]: Resin-backed Ubox cooling observations and conservative current targets from field reports.【F:knowledge/notes/input_part011_review.md†L221-L224】
 [^7]: MakerX GO-FOC fire reports under 96 V testing and broader warnings about unvetted high-voltage firmware like the rumoured K900 release.【F:knowledge/notes/input_part004_review.md†L321-L321】【F:knowledge/notes/input_part013_review.md†L462-L462】
 [^8]: Mini FOC voltage headroom discussion confirming it remains a 12 S-class controller and recommending Spintend or other ≥16 S hardware for >50 V packs.【F:knowledge/notes/input_part001_review.md†L11-L11】

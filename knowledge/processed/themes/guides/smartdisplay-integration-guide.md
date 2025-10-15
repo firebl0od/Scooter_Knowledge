@@ -18,9 +18,10 @@
 
 ## Wiring & Installation Checklist
 1. **Bench-Test Power Rails.** Confirm 5 V and 3.3 V logic rails on the controller before introducing SmartDisplay to avoid misdiagnosing brownouts.[^6]
-2. **Route Lighting Bus.** The companion light board feeds both 5 V and 12 V lighting branches and reports controller faults back through SmartDisplay, so land CAN and the accessory power leads in the same session.[^2]
-3. **Budget CAN power for add-ons.** The SmartRepair harness can back-feed 5 V lighting from the CAN header—drop an inline resistor and remember the servo header’s PWM pads if you want blinkers instead of always-on lamps.[^can-backfeed]
-3. **Program OTA Chain.** Firmware updates publish to a web server; once the display flashes over Wi‑Fi, it cascades the new build to every detected expansion board via CAN.[^2][^7]
+2. **Respect the 12 V → 5 V power sequence.** Builders blew multiple Spintend ADC daughterboards by feeding the SmartDisplay’s 5 V lead before energising the 12 V lighting rail—always power the higher-voltage lead first, then logic, with common ground.【F:data/vesc_help_group/text_slices/input_part013.txt†L2375-L2387】【F:data/vesc_help_group/text_slices/input_part013.txt†L3188-L3193】
+3. **Route Lighting Bus.** The companion light board feeds both 5 V and 12 V lighting branches and reports controller faults back through SmartDisplay, so land CAN and the accessory power leads in the same session.[^2]
+4. **Budget CAN power for add-ons.** The SmartRepair harness can back-feed 5 V lighting from the CAN header—drop an inline resistor and remember the servo header’s PWM pads if you want blinkers instead of always-on lamps.[^can-backfeed]
+5. **Program OTA Chain.** Firmware updates publish to a web server; once the display flashes over Wi‑Fi, it cascades the new build to every detected expansion board via CAN.[^2][^7]
 4. **Map Hotkeys & External Buttons.** Internal buttons can act as hotkeys, but external latching or momentary switches are supported for mode toggles and lighting; riders often park lighting on the auxiliary harness instead of the face buttons.[^7]
 5. **Speed Modes via ADC2.** Tie ADC2 “eco” limits to SmartDisplay’s virtual throttle ceilings when mixing with ADC-based throttles—the display writes percentage caps that VESC enforces as duty/phase ceilings.[^7]
 6. **Log UART throttle packets before rewiring.** SmartDisplay streams CRC-protected commands over UART, so capture the live data to confirm dips originate upstream before blaming harness noise or shielding.[^uart-crc]
@@ -46,6 +47,7 @@
 - **USB Isolation.** Only flash or debug SmartDisplay over Wi‑Fi/BLE when the controller is energized; USB-to-PC tests while the scooter is live can short grounds and nuke 3.3 V logic.[^3]
 - **CAN Health.** Expect ≈3.3 V differential between CANH and CANL on a healthy bus; anomalous readings justify probing harness crimps before blaming firmware.[^6]
 - **Spare Components.** Keep TJA1051 CAN ICs, JST pigtails, and spare ESP32 modules in the pit box to minimize downtime when a dash takes a spill.[^5]
+- **Fallback display option.** When bundled Flipsky screens glitch or brown out, builders flash the open-source ESP32 SimpleVescDisplay and print its bar mount instead of wrestling with flaky telemetry hardware.【F:data/vesc_help_group/text_slices/input_part013.txt†L2901-L2924】【F:data/vesc_help_group/text_slices/input_part013.txt†L2923-L2924】
 
 ## Roadmap & Ecosystem Outlook
 - SmartDisplay’s apps push updates in minutes—developers can add a new setting, publish OTA, and have riders flashing within five minutes over Wi‑Fi.[^4]

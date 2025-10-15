@@ -10,6 +10,8 @@
 ## Mounting & Sealant Tips
 - **Warm and center stubborn casings.** Dust rims and tubes with talc, pre-warm Xuancheng/PMT shells with a heat gun, and cinch the tread with zip ties so beads drop into the rim center before levering the tire home.【F:knowledge/notes/denis_all_part02_review.md†L90621-L90637】【F:knowledge/notes/denis_all_part02_review.md†L90909-L90921】
 - **Use air volume, not pressure spikes.** Hand pumps stall near 105 psi—seat tubeless tires with high-flow foot pumps, station compressors, or ratchet straps that momentarily seal the beads.【F:knowledge/notes/denis_all_part02_review.md†L81739-L81819】
+- **Prep Ulip tubes with talc.** Dust inner tubes with baby powder and avoid burnouts; riders reported only three flats in four years using Ulip tubes, though they still favour true tubeless setups where rims support clean bead seating.【F:knowledge/notes/input_part013_review.md†L51-L51】
+- **Budget powered inflators for stubborn rims.** G30 rims paired with Chaoyang tubeless casings rarely seat with manual pumps, while Bolt hubs on Ulip tires inflate cleanly once connected to a compressor.【F:knowledge/notes/input_part013_review.md†L52-L52】
 - **Pick aluminum-safe sealants.** Yellow tubeless Slime avoids rim corrosion and plays nicely with PMT/Xuancheng setups; mixing CRC Fix foam with standard Slime violently reacts and coats the wheel in expanding goo.【F:knowledge/notes/denis_all_part02_review.md†L85974-L85997】【F:knowledge/notes/denis_all_part02_review.md†L81862-L81882】
 - **Use the valves provided with modern tubeless casings.** PMT/Xuancheng tires now ship with tubeless valves that seal without slime—reserve sealant for aluminum-safe formulas if you still want puncture insurance.【F:knowledge/notes/denis_all_part02_review.md†L101765-L101775】
 
@@ -22,6 +24,7 @@
 ## Brake Packages
 - **Semi-metallic pads:** Gold-toned semi-metallic pads last longer and maintain bite in rain compared with organic pads bundled with XTech calipers; ceramics run hotter and demand rotor monitoring.【F:knowledge/notes/all_part01_review.md†L226-L227】
 - **Rotor sizing:** Community swaps standardize on 135–140 mm rotors for Pro decks and 120 mm for base models when installing X-Tech HB100s or higher-end hydraulics.【F:knowledge/notes/all_part01_review.md†L338-L338】
+- **Document 3.6 mm rotor machining.** Ausias milled Magura MT5 calipers “radially” to clear 3.6 mm discs but supporters warn most bicycle brakes are designed for ≤2.8 mm rotors—capture tolerances, lever choices, and pad spacing before copying the mod.【F:knowledge/notes/input_part013_review.md†L338-L339】
 - **Budget alternatives:** Properly adjusted MTB-style mechanical calipers (“Bike Attitude”) can outperform misaligned semi-hydraulics when combined with 135 mm rotors—center the fixed pad before tightening mounts.【F:knowledge/notes/all_part01_review.md†L226-L227】
 - **Support brake housing runs.** Tie the cable housing to the frame and trim excess length—loose housing eats lever travel and ruins braking force no matter the caliper upgrade.【F:knowledge/notes/denis_all_part02_review.md†L89091-L89096】
 
