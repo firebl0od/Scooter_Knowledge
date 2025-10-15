@@ -56,6 +56,14 @@
 - **Track traction-control headroom.** Max Rainlogix’s Thunder (dual Lonnyo 70/110 hubs, Ubox 85/240) hauled two riders uphill at 320 A battery without overheating by capping phase to 150/200 A rear and 120/140 A front and leaving TC enabled—earlier 200/300 A tests proved viable but wheelie-prone.[^thunder_tc]
 - **Log insulation upgrades.** Latest 65H 16×4 hubs ship potted for ≈180 °C operation, making them attractive commuter swaps so long as torque arms and wider swingarms handle the added stator mass.[^180c_insulation]
 
+## Lonnyo Axle Spacing & Offset Cautions (Batch 13 Additions)
+- Lonnyo spacer and offset specifications are critical for proper fitment—incorrect spacing has caused axle binding, premature bearing failure, and frame alignment issues on Dualtron and custom chassis builds.[^spacing-critical]
+- **Spacer/offset guidance:**
+  - 90H Lonnyo hubs demand torque-arm and deck-clearance planning before installation on Dualtron frames
+  - Arm choices, spacer stacks, and dropout prep must be verified before riders twist axles under load
+  - 145 mm dropout requirement for 11" hubs means many frames need machining or replacement swingarms[^dropout-req]
+- Document proper spacer stack configurations for common chassis (Dualtron, Nami, custom builds) to prevent field failures from improper fitment.[^spacing-guide]
+
 ## Source Notes
 [^1]: Lonnyo wind shorthand, pricing, and traction-limited current goals for 22×3 vs. 33×2 builds.【F:knowledge/notes/input_part011_review.md†L288-L293】【F:knowledge/notes/input_part011_review.md†L328-L329】
 [^2]: Community current envelopes for 22×3 hubs on Spintend hardware plus firmware caps on single Ubox 85150 setups.【F:knowledge/notes/input_part011_review.md†L309-L311】【F:knowledge/notes/input_part011_review.md†L340-L353】
@@ -70,3 +78,6 @@
 [^side_exit]: New-gen Lonnyo 70H/75H hubs route phases through the side cover, freeing room for larger sleeved leads once the silicone jackets are warmed and dropouts are relieved.【F:knowledge/notes/input_part007_review.md†L306-L306】
 [^thunder_tc]: Max Rainlogix’s dual-Lonnyo Thunder log covering 320 A battery climbs with traction control and staged phase limits plus earlier 200/300 A experiments that proved wheelie-prone.【F:knowledge/notes/input_part012_review.md†L362-L363】
 [^180c_insulation]: Latest Lonnyo 65H 16×4 hubs shipping with 180 °C potting for commuter builds, highlighting the insulation upgrade over earlier 120 °C stators.【F:knowledge/notes/input_part010_review.md†L87-L87】
+[^spacing-critical]: Lonnyo spacer and offset specifications being critical for proper fitment to avoid axle binding and bearing failures.【F:knowledge/notes/input_part013_review.md†L267-L267】
+[^dropout-req]: 145 mm dropout requirement for 11" Lonnyo hubs and Paolo's spacing guidance.【F:knowledge/notes/input_part009_review.md†L355-L355】
+[^spacing-guide]: Follow-up action to document Lonnyo axle-spacing guide for common chassis builds.【F:knowledge/notes/input_part013_review.md†L278-L278】

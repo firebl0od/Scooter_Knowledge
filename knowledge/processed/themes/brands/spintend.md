@@ -26,6 +26,8 @@
 5. **Document baseline idle draw.** Expect roughly 20 mA standby current with the latching power button off—any illuminated switch LED signals a wiring fault.[^45]
 6. **Only enable the phase filter during detection.** Spintend confirmed the toggle exists to stabilise the motor wizard; leaving it on while riding injects noise and can resurrect ABS overcurrent faults.[^54]
 7. **Check for copper busbars and debris on arrival.** Early 75 V betas exposed copper bars while some 100 V runs hide higher-Rds(on) MOSFETs under resin and ship with loose solder balls—open every case and confirm the busbar stack before trusting marketing photos.[^u75_vs100]
+7. **Bench-test current-sense offsets before installation.** Three of four UBOX Single 100/100 boards arrived with shorted op-amps reporting nonsensical offsets (30–4,000 counts), and a working unit blew input capacitors during a routine reconnect—validate sensor readings before trusting controllers in builds.[^qc_input004]
+8. **Check Bluetooth harness polarity on fresh Ubox units.** A new 80 V single shipped with its BLE lead reversed, killing the module immediately—verify continuity before power-up.[^bt_polarity]
 
 ## Product Line Cheat Sheet
 | Model | Nominal Pack Window | Field Envelope & Use Case | Distinguishing Notes |
@@ -106,6 +108,22 @@
 - Leverage the ADC adapter without killing CAN—run ADC1/2 through the splitter while leaving UART dashboards online, and diode-isolate lighting feeds so traction control and telemetry stay intact.[^34]
 - Feed auxiliary rails from a clean supply: Ubox Lite lacks a native 12 V rail, so power the ADC adapter from an external DC-DC while keeping grounds common to prevent lighting glitches.[^35]
 - Mind standby behaviour before adding smart switches—the latching Spintend button already isolates the logic rail with minimal drain; external anti-spark solutions are optional unless you need hard battery isolation.[^45]
+
+## Common Issues & Troubleshooting
+
+### Auto-Off Failures on 100/100 Units
+- Some Spintend 100/100 controllers refuse to shut down even when ADC auto-off timers are disabled in VESC Tool, indicating accessory power bleed or stuck logic rails preventing proper shutdown.[^autooff-issue]
+- **Troubleshooting steps:**
+  1. Check for backfeed from auxiliary power sources (displays, lighting, BMS wake circuits) that may be energizing the logic rail.
+  2. Verify ADC adapter wiring and confirm no pull-up resistors or external circuits are holding the enable pin high.
+  3. Test with all accessories disconnected to isolate whether peripheral power is preventing shutdown.
+  4. Consider using smart-BMS discharge control or physical loop keys as backup shutdown methods until root cause is identified.[^autooff-issue]
+- Document firmware version, accessory wiring, and ADC adapter configuration when reporting this issue to identify common patterns.[^autooff-issue]
+
+### Spintend Lite Connector Sourcing
+- Oreo Huzky's Apollo City Pro conversion highlighted that Spintend Alu Lite logic harnesses use keyed multi-pin plugs that builders must reuse or source when extending looms—part numbers remain undocumented in community threads as of late 2025.[^lite-connector]
+- When building or repairing Lite harnesses, photograph factory connectors and measure pin pitch/count before attempting aftermarket substitutes to avoid compatibility issues.[^lite-connector]
+- Consider ordering spare connectors directly from Spintend or trusted resellers when planning custom harness work on Lite platforms.[^lite-connector]
 
 ## Commissioning & Diagnostics Checklist
 1. **Audit firmware limits before tuning.** Confirm the phase ceiling in VESC Tool; early 85/200 units stall at ~300 A until reflashed, and Lite boards mirror duals so mismatched limits skew traction control.[^12][^5]
@@ -208,3 +226,7 @@
 [^54]: The phase-filter toggle should be used only during motor detection; leaving it active while riding reintroduces noise and ABS overcurrent errors.【F:knowledge/notes/input_part004_review.md†L31-L31】
 [^bridge_mirror]: Spintend’s bridge keeps battery current mirrored across controllers—Smart Repair’s GT1 logs showed the front 150 A unit inheriting the rear controller’s battery amps until CAN or power was isolated.[【F:knowledge/notes/input_part011_review.md†L79-L79】【F:knowledge/notes/input_part011_review.md†L317-L317】
 [^baseplate_spreader]: JPPL and Shlomozero are reusing dead 75/200 baseplates as auxiliary heatsinks with aluminum spacers and radiator blocks tied into Dualtron side plates to cool HY-equipped stages.【F:knowledge/notes/input_part011_review.md†L521-L521】
+[^qc_input004]: Quality control failures on UBOX Single 100/100 batch showing shorted current-sense op-amps and blown input capacitors.【F:knowledge/notes/input_part004_review.md†L15-L15】【F:knowledge/notes/input_part004_review.md†L88-L88】
+[^bt_polarity]: Ubox 80 V single shipped with reversed Bluetooth harness, killing the module on power-up.【F:knowledge/notes/input_part004_review.md†L287-L287】
+[^autooff-issue]: Spintend 100/100 refusing to shut down despite disabled ADC auto-off timers, indicating accessory power bleed or stuck logic rails.【F:knowledge/notes/input_part013_review.md†L464-L464】
+[^lite-connector]: Spintend Alu Lite logic harness using undocumented keyed multi-pin connectors that must be reused or sourced for custom wiring.【F:knowledge/notes/input_part013_review.md†L777-L780】

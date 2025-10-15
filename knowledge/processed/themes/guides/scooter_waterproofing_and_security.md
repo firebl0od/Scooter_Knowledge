@@ -3,6 +3,7 @@
 ## Weatherproof the Chassis Before the Storm
 - **Seal every seam.** Run silicone along deck joints, cable pass-throughs, and the charge door, then coat hub interfaces with lithium grease so sustained rain rides don\'t wick water into the pack or motor bay.【F:knowledge/notes/all_part01_review.md†L86-L87】
 - **Add moisture sentries.** Builders embed hydrometers on DC–DC converters that feed Arduinos driving buzzers; when the sensor trips, the alarm screams before corrosion sets in.【F:knowledge/notes/all_part01_review.md†L86-L87】
+- **Pack silica gel inside decks.** Rental-frame conversions stay dry longest when silica packets live beside the battery and automotive engine sealant closes the lid—silicone peels by hand for service yet seals better than chasing custom gaskets.【F:knowledge/notes/input_part000_review.md†L685-L685】
 - **Choose the right bearings.** Swap stock 2Z hubs for sealed 2RS units and refresh grease after wet weeks to keep Monorim and Xiaomi front ends from grinding themselves apart.【F:knowledge/notes/all_part01_review.md†L27274-L27275】
 - **Inspect after every soak.** Error 28 beeps and erratic state-of-charge readings usually mean the controller or white battery plug corroded—scrub with contact cleaner, dry thoroughly, and don\'t trust factory IP54 stickers.【F:knowledge/notes/denis_all_part02_review.md†L419-L421】【F:knowledge/notes/denis_all_part02_review.md†L454-L455】
 

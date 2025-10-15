@@ -4,6 +4,7 @@
 - Treat field weakening (FW) as a last-mile speed tool: it trades torque and efficiency for extra ERPM, rapidly heating motors and controllers, so only enable it once the drive system runs cool at target duty cycles.[^1][^2][^3]
 - Stable implementations rely on firmware 5.3-era builds, instrumented temperature and voltage logging, and conservative regen; high-voltage packs or 24S conversions demand extra surge headroom because regen spikes can brick controllers when FW is active.[^4][^5]
 - Start with single-digit or 10–30 A FW setpoints validated by telemetry; riders jumping to 55–60 A routinely saturate hubs within an hour unless they raise phase current carefully, add cooling, and watch logs for current overshoot.[^6][^7]
+- Most builds arm FW against duty cycle—not throttle position—so expect the controller to inject current around 90 % duty and yank roughly the same extra 20 A from the battery while it fights back-EMF; reserve those bursts for cool motors only.【F:knowledge/notes/input_part000_review.md†L653-L655】
 
 ## How Field Weakening Works
 - FW injects negative d-axis current to cancel back-EMF so the motor surpasses its natural base speed, which inherently reduces torque-per-amp and wastes power as heat.[^1]
@@ -20,10 +21,11 @@
 ## Configuration Workflow
 1. **Baseline Tune:** Run standard motor detection, confirm smooth sensorless transitions, and road-test without FW to verify the observer and throttle feel.[^7][^10]
 2. **Enable FW Incrementally:** Increase `Field Weakening Current` in 5–10 A steps. Dual 84100 setups typically settle near 15–30 A per controller for 100 km/h GPS runs, while heavier 72 V builds may stretch toward 40–55 A once cooling and battery delivery are proven.[^7][^11][^12]
-3. **Re-verify Current Limits:** After each change, check live logs for battery spikes above set limits and rerun detection if overshoot appears—the VESC Tool wizard reset resolved a 60 A ceiling breach on one build.[^8]
-4. **Test Regen:** Perform controlled braking drills to confirm bus voltage stays within component ratings; Spintend riders retain regen at 80–100 km/h with FW but still watch voltage sag for surprises.[^13]
-5. **Fault Review:** After hard pulls, run the `faults` command and inspect absolute current headroom (200–250 A for 120–130 A phase tunes) to avoid ABS cut-outs at high duty cycle.[^14]
-6. **Duty Cycle Discipline:** Keep maximum duty near firmware defaults (~95 %); stretching toward 99–100 % has produced abrupt cut-outs above 70 km/h on FW-enabled builds.[^15]
+3. **Pair with quicker ramps judiciously.** Dropping acceleration ramping to 0.05 s sharpens launches alongside FW, but only apply it if the chassis and rider can tolerate the snappier response without spinning tires.【F:knowledge/notes/input_part000_review.md†L654-L654】
+4. **Re-verify Current Limits:** After each change, check live logs for battery spikes above set limits and rerun detection if overshoot appears—the VESC Tool wizard reset resolved a 60 A ceiling breach on one build.[^8]
+5. **Test Regen:** Perform controlled braking drills to confirm bus voltage stays within component ratings; Spintend riders retain regen at 80–100 km/h with FW but still watch voltage sag for surprises.[^13]
+6. **Fault Review:** After hard pulls, run the `faults` command and inspect absolute current headroom (200–250 A for 120–130 A phase tunes) to avoid ABS cut-outs at high duty cycle.[^14]
+7. **Duty Cycle Discipline:** Keep maximum duty near firmware defaults (~95 %); stretching toward 99–100 % has produced abrupt cut-outs above 70 km/h on FW-enabled builds.[^15]
 
 ## Operating Benchmarks
 | Platform | Pack & Motor | Phase / Battery | FW Current | Notes |
@@ -41,6 +43,7 @@
 - **Voltage Monitoring:** Keep oscilloscope or high-speed logging on regen-heavy tests—22 S Spintend builds disable regen entirely when extending pack voltage to avoid BMS-induced surges.[^19]
 - **Fault Masking:** Sudden current drops or pothole-induced cut-outs that disappear when FW is enabled can signal mechanical faults (loose magnets, wiring) rather than firmware bugs; investigate hardware first.[^16]
 - **Noise & Surging:** If throttle jitters appear above 80 % duty after enabling 20 A FW on single-motor builds, roll FW back—operators traced the behavior directly to FW injection.[^20]
+- **Duty-cycle trigger awareness:** Remember FW starts at the configured duty threshold, so cold-weather commuters who never exceed ≈90 % duty can leave FW configured without seeing it engage, while summer hill pulls will trigger it early and dump heat fast.【F:knowledge/notes/input_part000_review.md†L653-L655】
 - **Overspeed Discipline:** Avoid free-spinning wheels at high FW. Halo stunt crews saw runaway RPM off-load and controller stress at 125 A FW.[^12]
 - **Front-lift control:** Hotdog 100 H rear builds demand traction control or front FW assistance; otherwise the rear lifts the front well past 120 km/h even while stators only hit ~61 °C, so validate TC before public-road tests.[^hotdog_fw]
 
@@ -58,7 +61,7 @@
 ## Source Notes
 [^1]: Field-weakening theory and trade-offs between torque, efficiency, and heat.【F:knowledge/notes/input_part006_review.md†L408-L423】
 [^2]: Hub shell temperature lag and the need for embedded sensing.【F:knowledge/notes/input_part006_review.md†L423-L436】
-[^3]: Bench data showing ~40 % ERPM gains with major heat penalties.【F:knowledge/notes/input_part000_review.md†L726-L726】【F:knowledge/notes/input_part000_review.md†L654-L654】
+[^3]: Bench data showing ~40 % ERPM gains with major heat penalties.【F:knowledge/notes/input_part000_review.md†L727-L727】【F:knowledge/notes/input_part000_review.md†L654-L654】
 [^4]: 24S Flipsky failures tied to regen spikes with FW active.【F:knowledge/notes/input_part001_review.md†L111-L112】
 [^5]: Firmware 5.3 requirement for exposing FW controls.【F:knowledge/notes/input_part001_review.md†L135-L135】
 [^6]: 60 A FW on dual 84100 builds driving high heat and frame inspection needs.【F:knowledge/notes/input_part009_review.md†L43-L43】
@@ -80,3 +83,19 @@
 [^22]: 20 S single-motor package delivering 85 km/h with ~30 A FW as a short-burst aid.【F:knowledge/notes/input_part013_review.md†L145-L145】
 [^23]: Firmware or wiring faults causing sudden full braking after FW-enabled firmware updates.【F:knowledge/notes/input_part001_review.md†L219-L219】
 [^hotdog_fw]: NAMI 100 H rear / 70 H front builds logging 500 A phase, 550 A absolute, 100 % front FW, and ~61 °C stators while traction control keeps the rear from lifting the front at 120 km/h.【F:knowledge/notes/input_part014_review.md†L8930-L8933】【F:knowledge/notes/input_part014_review.md†L10001-L10055】
+
+## Field-Weakening Tuning Details
+- **Tune FW gently with long ramps.** The same hub quit stuttering once sensorless transition was raised from 500 to ~3,000 eRPM, then ran smoothly with 20 A of field weakening, duty capped around 85–89%, and an 800 ms FW ramp to soften current spikes above 55 km/h.[^fw_ramp]
+- **FW ramp tuning for heavy riders.** Zak's Raiden 7 log showed sluggish throttle release until the FW ramp was stretched to 400 ms (others prefer 600 ms) and duty ceiling trimmed to ~97%—practical guardrails for heavier riders chasing extra top speed without runaway torque requests.[^fw_heavy]
+- **Field-weakening amps add to battery current.** Firmware reports battery current plus field-weakening draw; budget 10 A of FW as additional pack load so commuter cells stay within safe C-rates.[^fw_battery_budget]
+- **Flipsky boards ignore battery-current limits once FW engages.** Mentors warned that Flipsky ignores the "battery current max" slider once FW engages, so bypassed 16 S G30 batteries should keep FW at zero (or very low) until riders log real pack current and prove the cells survive the extra draw and heat.[^flipsky_fw_ignore]
+
+## MOSFET Failures Under High FW
+- **Stock 85150 MOSFETs overheat with heavy FW.** Stock Spintend 85150 MOSFETs overheat quickly once you layer 45 A of field weakening on top of 105–120 A battery and 150–175 A phase requests; riders chasing higher ERPMs swap in HY/HSBL Toll packages with hotplate reflow or back FW down to ~50 A at 87% duty.[^fw_mosfet]
+
+## Source Notes (continued)
+[^fw_ramp]: Field-weakening ramp tuning to soften current spikes.【F:knowledge/notes/input_part004_review.md†L20-L20】【F:knowledge/notes/input_part004_review.md†L97-L97】
+[^fw_heavy]: FW ramp settings for heavy riders to prevent runaway torque.【F:knowledge/notes/input_part004_review.md†L336-L336】
+[^fw_battery_budget]: Field-weakening impact on total battery current draw.【F:knowledge/notes/input_part004_review.md†L570-L570】
+[^flipsky_fw_ignore]: Flipsky controllers ignoring battery current limits during field weakening.【F:knowledge/notes/input_part004_review.md†L315-L315】
+[^fw_mosfet]: Spintend 85150 MOSFET failures under high field-weakening loads.【F:knowledge/notes/input_part004_review.md†L20-L20】

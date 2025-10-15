@@ -9,6 +9,7 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 - A 16S5P Samsung 35E pack safely feeds about 50 A; chasing 100 km/h on a single-motor Xiaomi with that chemistry is unrealistic without higher-voltage packs, better brakes, and wider forks to house VSETT-class hubs.【F:data/vesc_help_group/text_slices/input_part001.txt†L6015-L6114】
 - Tool and lawnmower packs bring little to the table—Rita waits for ≈36 V before blending, so five-cell modules barely contribute and run dangerously hot under scooter loads.[^tool-pack]
 - Ignore bargain “48 V 62 Ah” bundles—builders calculated that the advertised capacity requires non-existent 21 Ah cells and the included controllers rarely survive 48 V operation.[^ali48]
+- Delta-wound 10 S builds already touch ~55 km/h and pull 50–100 A spikes; one rider logged 91 km/h on 16 S before the stock controller died, so plan VESC swaps or limit OEM boards to ≈15 S when chasing top speed.【F:knowledge/notes/input_part000_review.md†L229-L230】
 
 ## 2. Hardware Pre-Flight Inspection
 | Checkpoint | Requirement | Notes |
@@ -63,12 +64,14 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 - Keep firmware speed limits near 34 km/h despite extra voltage; hardware limit unlocks raise crash risk even if 38.5 km/h is possible.[^24]
 - Avoid mixing configuration generators or chasing 33 k+ phase amps; veterans have already destroyed MOSFETs with mismatched presets and weak cooling.[^22]
 - Keep intensity-of-current-change sliders near 300–350 mA—raising them toward 800 mA spikes controller heat even on reinforced boards.[^current-step]
+- Delta rewinds demand roughly double the phase current for the same torque—upgrade hub leads and consider star reconnections if you want >70 km/h without melting stock windings.【F:knowledge/notes/input_part000_review.md†L253-L253】
 - Monitor pack temperature after charging—freshly topped 12S4P bricks have hit 50 °C on hard climbs. Let packs rest or dial back firmware before commuting.[^21]
 - Treat ≈60 °C as a practical ceiling for battery cores; the workshop logged 41 °C packs as healthy but warned that sustained climbs past 60 °C shorten cell life quickly.[^pack-temps]
 - High-voltage builds magnify braking and tire demands; run quality CST/Xuancheng casings at 36–50 psi and inspect bearings regularly to keep speed stable.[^25][^26]
 - Treat Rita error 14 as a hard stop when dual dashboards share a pack; re-check polarity and harness routing before riding again so the isolation hardware can still block cross-pack faults.[^27]
 - Stock Xiaomi dashboards speak half-duplex UART and still cannot talk directly to Flipsky 75100 controllers—flash VESC firmware onto the OEM ESC if you want the factory dash to stay on the bus during VESC swaps.【F:knowledge/notes/input_part001_review.md†L528-L529】
 - 60 V experiments remain strictly provisional—monitor Rita’s alarms, confirm firmware, and stage launches before trusting the higher voltage for daily riding.[^rita60v_xiaomi]
+- Export VESC Tool CSV/XLS logs after climbs to quantify sag before raising limits; riders now retune current using data instead of guessing mid-ride.【F:knowledge/notes/input_part000_review.md†L300-L300】
 - Give the motor a running start on steep hills—keeping it near 80 % of top speed prevents 48 V builds from cooking hall sensors during full-throttle climbs.[^hill-technique]
 - Park RC LiPo bricks back on the shelf for commuting—they puff when stored full and gain resistance within days, making them poor daily scooter batteries.[^lipo]
 - Expect winter range to fall sharply (~30 Wh/km vs 18–20 Wh/km in summer); keep packs warm indoors or add gentle heaters before charging below freezing.[^winter]

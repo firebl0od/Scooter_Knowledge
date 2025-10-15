@@ -25,6 +25,10 @@
 ### Market Shifts & Pricing Signals
 - Nickel’s 2022 price surge (+250 %) pushed pack builders toward 0.1–0.15 mm copper strip—it bends easier over cell tops, carries more current, and costs less than the remaining nickel stockpile.【F:knowledge/notes/input_part001_review.md†L686-L687】
 - Sony VTC5D prototypes are landing alongside Samsung 35E/50G/50S, Molicel P28A/P42A, and Samsung 48X cells; Artem is sourcing fresh 40T/48X/50G stock at €4–5 per cell while group buys quote P42A around €4 and 50S near €12.95, setting the 2025 price floor for high-discharge packs.【F:knowledge/notes/input_part001_review.md†L695-L696】
+- **Samsung 50S group buys:** Community orders are landing grade-A 50S cells at €4.71 each with the potential for ~15 % savings when payments avoid eBay/PayPal fees—coordinate escrow and inspection to lock in the deal before public pricing rebounds above €6.50.【F:knowledge/notes/input_part000_review.md†L148-L150】
+- **Price/performance quick look:** Expect Samsung 30T around €2.50, 35E near €3.40, and 50G/50S roughly €4–4.5 when bought in quantity, with discharge logs confirming P42A outpaces 40T at 20–30 A, 50G shines at 7–15 A, and 50S matches P42A only if you can justify the premium.【F:knowledge/notes/input_part000_review.md†L606-L607】【F:knowledge/notes/input_part000_review.md†L694-L695】
+- **21700 energy density vs. recycled 18650s:** Recycled EVE 26V 18650 cells struggle beyond ~5 A per cell, whereas fresh Samsung 35E/48X/50S 21700 options pack more watt-hours into Xiaomi/Ninebot decks and sustain 15–20 A draws—reserve reclaimed cells for low-power builds and spec new 21700s for high-range projects.【F:knowledge/notes/input_part000_review.md†L118-L118】
+- **Honeycomb nickel shortages:** EU builders now pool orders for half-kilo lots because suppliers refuse to ship sub-1 kg batches; expect ~40 € quotes locally or wait on AliExpress consolidation when stocking cell cages.【F:data/vesc_help_group/text_slices/input_part000.txt†L17309-L17312】
 
 ## Welding Equipment Decision Guide
 | Scenario | Recommended Tooling | Why It Wins | Follow-Up Checks |
@@ -71,6 +75,7 @@
 - **Balance lead soldering:** Flow ~0.5 s of 400 °C heat with solder paste so the copper strip soaks the thermal load—short pulses keep cells cool while locking balance wires into the copper bus.【F:data/vesc_help_group/text_slices/input_part001.txt†L8874-L8897】
 - **Telemetry cross-checks:** Pair CAN smart BMS data with VESC logs to validate current draw and spot calibration drift in shunt-based readings.[^7]
 - **Stay in the longevity window:** Artem keeps commuter packs between roughly 20 % and 85 % (≈3.6–4.1 V/cell) and under 40–45 °C; sag beyond ~3 V or repeated 70 °C peaks can cut lifespan to ~400 cycles.【F:knowledge/notes/input_part001_review.md†L698-L699】
+- **Probe cells with Kelvin leads.** Alligator clips and single-sense multimeters can show false 1.9 V dips at 20 A; clamp meters across the battery and use four-wire probes directly at the tabs before condemning P42A-class cells.【F:knowledge/notes/input_part000_review.md†L605-L605】
 - **Finish work around positives:** Deburr nickel edges near cell tops and re-seat fishpaper before closing the pack—sharp tabs have already pierced insulation on low-current power-bank builds.【F:knowledge/notes/denis_all_part02_review.md†L122364-L122385】
 - **Print holders for heat, not looks.** PLA cradles slump once cells warm; switch to PETG or ASA around 230 °C/100 °C bed temps so 21700 honeycombs and Wildman bag sleds stay rigid in summer decks.【F:knowledge/notes/denis_all_part02_review.md†L116230-L116236】【F:knowledge/notes/denis_all_part02_review.md†L89665-L89696】
 - **Document capacity checks.** Time OEM chargers (≈1.7 Ah per hour on Xiaomi bricks) when vetting customer packs; a genuine 12 Ah module needs nearly seven hours from empty.【F:knowledge/notes/denis_all_part02_review.md†L98595-L98598】
@@ -122,3 +127,17 @@
 [^common-port-chat]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1545-L1594】
 [^m365krakow]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1612-L1618】
 [^cnhl-booster]: CNHL and GNB 140 C–180 C LiPo bricks power kWeld launches and scooter booster packs but drain after a single sprint—parallel packs for repeated hits.【F:knowledge/notes/input_part001_review.md†L19-L21】
+
+## Copper Busbar Best Practices
+- **Braze copper busbars with shielding gas.** Builders warned that nickel–copper "sandwich" welds oxidize and fail after a few years; brazing with tin while flooding the joint with argon (as micro-TIG stations do) keeps resistance low, whereas humidity alone can trigger corrosion if the pack isn't sealed.[^busbar_braze]
+- **Use proper insulation layers, not packing tape.** Battery builders reiterated that Kapton, double heat-shrink, fishpaper, and fiberglass tape are the minimum for high-current packs—clear packing tape alone cannot stop rail wear-through, and purpose-made clamps such as the SUNKKO fixture keep parallel groups aligned while you reglue Sicaflex-potted arrays.[^insulation_layers]
+- **20 S 5 P decks demand machining.** Even experienced pack builders said a 20 S 5 P 21700 layout only fits a G30 deck after CNC work; newcomers are steered toward 16–18 S designs or professional builds to avoid compromised clearances and shipping headaches.[^20s5p_fit]
+
+## Cell Internal Resistance Calibration
+- **Calibrate 1 kHz AC internal-resistance meters with ~20 mΩ references.** The crew uses wire shunts or resistor networks to zero handheld testers, then expects fresh P42A cells around 8 mΩ, Samsung 50S ≈10 mΩ, first-generation 50E nearer 22–28 mΩ, and abused cells well above that, reminding each other that absolute values drift between instruments even when the relative spread remains useful.[^ir_calibration]
+
+## Source Notes
+[^busbar_braze]: Copper busbar brazing with shielding gas to prevent oxidation failures.【F:knowledge/notes/input_part004_review.md†L17-L17】
+[^insulation_layers]: Proper battery insulation materials and parallel-group alignment techniques.【F:knowledge/notes/input_part004_review.md†L317-L317】
+[^20s5p_fit]: 20 S 5 P pack fitment challenges in G30 decks.【F:knowledge/notes/input_part004_review.md†L318-L318】
+[^ir_calibration]: Cell internal resistance measurement and calibration procedures.【F:knowledge/notes/input_part004_review.md†L37-L37】

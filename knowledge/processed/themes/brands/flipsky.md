@@ -31,6 +31,10 @@
 - **QA misses extend beyond electronics.** Replacement controllers have arrived missing faceplate screws or hiding solder beads that later short logic boards; customers ended up machining their own hardware and filing PayPal claims when support stalled, underscoring why every unit needs a full tear-down before power-up.【F:data/vesc_help_group/text_slices/input_part001.txt†L1984-L2176】【F:data/vesc_help_group/text_slices/input_part001.txt†L2182-L2231】
 - **7550 capacitor grenades persist.** Fresh hardware has launched capacitors during the very first motor detection even on stock settings—treat “300 A” marketing claims skeptically and bench-burn every controller before field use.【F:data/vesc_help_group/text_slices/input_part001.txt†L9640-L9679】
 - **USB tuning crashes.** Several riders traced VESC Tool lockups under load to poor USB isolation on 75100 boards; if tethered sessions trigger faults, fall back to older PC builds or wireless tuning during road tests.【F:data/vesc_help_group/text_slices/input_part001.txt†L21516-L21532】
+- **Firmware mismatches plague fresh aluminum boards.** Multiple 75100 ALU units shipped with 75_300_R2 firmware, unwritable voltage limits, ABS overcurrent trips, and BLE dropouts until owners reflashed matching bootloader/firmware pairs, raised max-voltage ceilings, and enabled slow ABS limiters.[^fw_mismatch]
+- **CAN failures can be soft.** Some 75200 builds lost CAN comms but regained function after factory defaults and rerunning detection—try simple resets before swapping hardware.[^can_soft]
+- **Loose capacitors fail under vibration.** Repaired 75100s died from unsecured bus caps; stake every capacitor and refuse to power boards outside the 4–20 S window.[^cap_stake]
+- **Parameter persistence bugs.** Wattage and regen limits spontaneously reset to 500–700 W on some units until reflashing; suspect flash wear and document write/readback cycles.[^param_persist]
 
 ## Pre-Flight QA Checklist
 1. **Open the enclosure.** Verify 12 V converter solder joints, clean stray shavings, and apply full-coverage thermal pads/paste before the first power-up.¹
@@ -98,3 +102,7 @@
 [^starter-kit]: Community starter list pairs twin 7550 controllers with Bluetooth v6, CAN cabling, anti-spark switches for ≥20 S packs, and spare JST leads for halls, throttle, and brake wiring.【F:knowledge/notes/input_part000_review.md†L31-L33】
 [^wiring-supplies]: Builders pre-stock XT60/XT90 plugs, JST assortments, and 4–6 mm motor bullet connectors to keep conversions moving.【F:knowledge/notes/input_part000_review.md†L33-L33】
 [^budget-plan]: Expect roughly €940 including VAT for a dual-controller upgrade and plan insurance or reserve funds accordingly.【F:knowledge/notes/input_part000_review.md†L34-L34】
+[^fw_mismatch]: Flipsky 75100 ALU firmware mismatch issues requiring bootloader and firmware pair reflashing.【F:knowledge/notes/input_part004_review.md†L60-L60】【F:knowledge/notes/input_part004_review.md†L327-L327】
+[^can_soft]: Flipsky 75200 CAN communication soft failures resolved with factory defaults.【F:knowledge/notes/input_part004_review.md†L89-L89】
+[^cap_stake]: Loose bus capacitors and low-voltage bench test failures on repaired 75100 units.【F:knowledge/notes/input_part004_review.md†L312-L312】
+[^param_persist]: Parameter persistence issues with wattage/regen limits resetting on 75100 boards.【F:knowledge/notes/input_part004_review.md†L283-L283】
