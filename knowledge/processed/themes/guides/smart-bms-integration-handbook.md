@@ -20,6 +20,7 @@
 1. **Wake the hardware correctly.** JK boards ship asleep—use the €15 display or a 5–7 V bench supply, confirm charge/discharge toggles, and leave the board powered before sealing the pack.[^8]
 2. **Validate sense-lead order before soldering B−.** Step through the harness at 3.5 V increments; reversing the negative pair has already cooked resistors on new ANT installs.[^5]
 3. **Keep both FET banks enabled for regen tests.** Builders traced repeated ESC deaths to disabled charge FETs on JK smart boards—regen had nowhere to dump energy.[^4]
+   *Tip:* ANT’s companion app is live on Apple’s App Store, so iPhone-based teams can configure boards without sideloading tools before sealing the deck.【F:knowledge/notes/input_part010_review.md†L182-L183】
 4. **Stage first rides with logging.** Riders lost Spintend and Makerbase controllers the moment a BMS tripped under load; gather current and voltage traces to verify the protection stays latched through braking and launches.[^6]
 5. **Load-test bargain externals before trusting telemetry.** Denis’ workshop found “13 Ah” packs sagging instantly, leaving the internal battery carrying the ride—bench suspect modules alone before wiring them into a smart-BMS stack.[^cheap-externals]
 5. **Oversize connectors and plan airflow.** High-current boards warm noticeably near their limits—route copper planes into moving air or heatsinks, especially on JK units that reinforce traces with bus rods.[^10]

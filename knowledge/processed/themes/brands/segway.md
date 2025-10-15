@@ -23,6 +23,7 @@
 
 ## Powertrain & Upgrade Guardrails
 - Stock GT electronics (14 S 12 P pack, single 24‑FET controller, 10 AWG phases) support reliable 70 km/h operation; pushing past 8–10 kW demands deck stiffening, improved dampers, and monitored pack sag to avoid chassis fatigue.[^3][^2]
+- Ninebot Max G2 motors shed heat no better than legacy G30 hubs, so serious power targets still rely on larger hub swaps; even throttle detection needs a full sweep in VESC Tool to keep hall checks from failing during setup.【F:knowledge/notes/input_part010_review.md†L110-L111】
 - 2.42 mm rotors and Hope V4 calipers are proven upgrades for repeated high-speed stops; the thicker discs avoid the warp-prone 1.8–2.0 mm hardware common on smaller scooters.[^3][^5]
 - Segway GT2 riders log 70 km/h down to ~10 % SOC on the factory setup; pushing beyond that range requires higher-current packs or field-weakening, so plan for thermal headroom if adding torque or speed.[^4]
 - C80 conversions must respect the stock 60 A BMS limit until upgraded—attempting 70 A battery trips protection and heats the motor to ~76 °C, reinforcing the need for a higher-current BMS before raising output.[^11]
@@ -36,6 +37,7 @@
 
 ## Battery & Charging Strategy
 - GT packs sag roughly 12 V at 500 A phase; upgrading to copper-bridged busbars and planning 22 S successors keeps voltage headroom for high-power controllers.[^9]
+- Ninebot F2 Pro firmware only raised the stock BMS fast-charge ceiling to about 3.2 A—builders still avoid 5–6 A bricks until someone proves the board can shed the extra heat.【F:knowledge/notes/input_part010_review.md†L111-L112】
 - C80 owners have demonstrated ~6–7 kW charging through the stock 100/100 Lite controller at mid-pack SOC, keeping compact scooters viable if thermal paths are improved.[^12]
 - Segway-based mopeds with 32 P Samsung 35E packs weigh about 350 lb before the rider yet return ~70 mi, highlighting the trade-off between range and maneuverability; builders now favor lighter 32 S 20 P layouts with higher-power controllers for better torque-to-weight balance.[^11]
 - Field deployments show stock GT rotors and brakes survive repeated high-speed runs once cooling and hydraulic upgrades are in place, but pack reinforcements remain essential to avoid sag-induced cut-outs.[^3][^9]

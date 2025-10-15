@@ -3,6 +3,7 @@
 ## TL;DR
 - Dual-motor load sharing keeps Tronic 250-equipped NAMI builds under ~40 °C on steep climbs, while single-drive hill assaults crest ~60 °C—treat high-power setups as two-controller platforms to stay within thermal margins.[^1]
 - The stock 40 Ah module’s eight-way LG M50LT parallel pack is happiest below ~135 A; community pushes toward 200 A/310 A phase quickly overheat hubs and batteries unless the pack is rebuilt and monitored closely.[^2]
+- Factory trims matter: the 28 Ah models still ship 1 000 W hubs while the 32–40 Ah versions step up to 1 500 W motors, and crews are now targeting 35–40 kW combined output for the next wave of VESC swaps.【F:knowledge/notes/input_part010_review.md†L282-L283】
 - High-speed composure depends on real suspension and damper hardware: NAMI frames reward elastomer blocks plus quality Bitubo-class dampers, whereas cheap AliExpress units snap under race preload.[^3]
 - Race-prepped 65H motors already touch ~100 km/h without field-weakening, and GT2 owners have proven 26 S compatibility when controllers and logging are squared away—voltage headroom is no longer the bottleneck.[^4]
 - Hotdog builds pairing 100 H rears with 70 H fronts now run 22 S 11 P P45 packs at ≈500 A phase / 550 A absolute, relying on 100 % front FW and aggressive traction control because the rear will lift the front wheel even at 120 km/h despite ~61 °C stator temps.[^hotdog]
@@ -18,6 +19,8 @@
 ## Chassis & Handling Priorities
 - Keep the platform in its comfort lane: riders still rank Dualtron Thunder geometry for >150 km/h sprints, while NAMI frames shine for long-range and off-road duty when paired with good dampers instead of chasing absolute top speed.[^3]
 - Budget steering dampers snap when preloaded for race pace; invest in motorcycle-grade Bitubo or similar hardware before upping currents and tire width.[^10]
+- Riders chasing firmer high-speed setups still rate the stock suspension as the best off-road/comfort blend—meaningful stiffness gains require sourcing the hardest available springs because most aftermarket air shocks remain too soft and short for the chassis.【F:knowledge/notes/input_part010_review.md†L54-L55】
+- Early production stems shipped with a soft axle; budget the €60 stainless replacement kit that NAMI issued during the recall before high-power shakedowns to avoid repeat stem failures.【F:knowledge/notes/input_part010_review.md†L107-L108】
 - Fabrication escalates quickly—22 S 10 P hybrids inspired by Rion builds required fork machining to clear 70H hubs and 3 mm rotors, so plan machine time before ordering oversized drivetrains.[^11]
 
 ## Power & Thermal Guardrails
@@ -27,6 +30,7 @@
 - Data logging must sum both controllers; otherwise, power traces plateau near 19 kW even while riders believe they’re pushing 170 A/200 A per side.[^9]
 - Track NAMI builds already touch triple digits on 65H motors without FW; spend effort on tire compound, suspension balance, and braking instead of chasing voltage for speed alone.[^4]
 - Hotdog-class 100 H rears paired with 70 H fronts survive 500 A phase pulls when fed by 22 S 11 P P45 packs, but only with traction control engaged and front-motor FW at 100 % to match wheel speed—expect front-wheel lift at 120 km/h if TC is disabled.[^hotdog]
+- 🇪🇸AYO#74 is testing whether stock 72 V controllers stay happy on a homemade 60 V pack by rewiring phase leads—down-voltage behaviour remains unproven, so log carefully before committing a commuter build.【F:knowledge/notes/input_part010_review.md†L185-L186】
 
 ## Battery Strategy & Pack Building
 - Documented GT2 rebuilds pair 20 S 9 P LG 40P packs with Daly smart BMS hardware and thick copper busbars—use this as a template when refreshing commuter modules.[^6]

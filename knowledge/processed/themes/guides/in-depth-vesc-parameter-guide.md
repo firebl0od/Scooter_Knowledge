@@ -588,11 +588,13 @@ Params: foc_current_kp, foc_current_ki
 - If KI is too high, drifting or low-frequency hunting can occur.
 
 **How / When to Modify**
-- If detection is stable, no need to tweak. 
+- If detection is stable, no need to tweak.
 - If you see “ABS OverCurrent” or poor torque response, try lowering KP or re-running detection.
+- Don’t be afraid to revisit detected inductance/resistance values: 🇪🇸AYO#74 eliminated mid-speed vibration by trimming inductance from ≈22.5 µH down to 16–17 µH and re-running the VSS sensorless tune—store the mobile app backup first so you can roll back experiments in seconds.【F:knowledge/notes/input_part010_review.md†L254-L255】
 
 **Potential Side Effects**
 - Wrong gains = serious stutter, noise, or slow current loop response.
+- Mobile VESC Tool snapshots preserve your last working tune; rely on them before field-testing big parameter swings so you can restore a vibration-free setup without a laptop.【F:knowledge/notes/input_part010_review.md†L254-L255】
 
 
 ### 6.2 Zero Vector Frequency
@@ -1159,7 +1161,9 @@ Params under bms.*
 - Always Start with Detection: Let the firmware auto-detect motor parameters (R, L, flux, hall table, etc.).
 - Test in Steps: Increase or adjust current limits incrementally, watching temperature logs. 
 - Thermal & Voltage Headroom: Large negative braking or field weakening can produce bus voltage spikes. Ensure safety margins.
-- Hall vs Sensorless vs HFI: 
+- Throttle Ramp Time: App-config ramp times around 10 s make scooters feel dead off the line—builders chasing full torque drop the value near zero so acceleration follows the current limits instead of an artificial delay.【F:data/vesc_help_group/text_slices/input_part010.txt†L11314-L11320】
+- Some dual-motor riders reintroduce a small ramp delay on the front channel (e.g., 20 tenths of a second) after zeroing the rear to mimic traction control; it softens initial spin without dulling the main launch.【F:data/vesc_help_group/text_slices/input_part010.txt†L11321-L11331】
+- Hall vs Sensorless vs HFI:
   - Hall = simpler immediate start,
   - Sensorless/HFI = advanced but can be just as good if tuned well,
   - Keep an eye on noise or offset at high speeds.

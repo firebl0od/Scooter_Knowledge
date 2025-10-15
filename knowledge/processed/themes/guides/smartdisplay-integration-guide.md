@@ -24,10 +24,12 @@
 4. **Map Hotkeys & External Buttons.** Internal buttons can act as hotkeys, but external latching or momentary switches are supported for mode toggles and lighting; riders often park lighting on the auxiliary harness instead of the face buttons.[^7]
 5. **Speed Modes via ADC2.** Tie ADC2 “eco” limits to SmartDisplay’s virtual throttle ceilings when mixing with ADC-based throttles—the display writes percentage caps that VESC enforces as duty/phase ceilings.[^7]
 6. **Log UART throttle packets before rewiring.** SmartDisplay streams CRC-protected commands over UART, so capture the live data to confirm dips originate upstream before blaming harness noise or shielding.[^uart-crc]
+7. **Flash Eye displays with cheap USB-TTL.** Nami LCD screen files circulate privately; a €2 CH340 adapter can reflash Eye 3/Eye 4 units for VESC use without paying workshop PAS-removal fees.【F:knowledge/notes/input_part010_review.md†L192-L193】
 
 ## Feature Set & Navigation
 - **Integrated GPS + Nav Prompts.** The 3.5 in unit houses turn-by-turn guidance to keep phones off the bars; builders cite 10 × 6.5 cm packaging as a sweet spot for 100 km/h scooters.[^8]
 - **Waze Overlay.** Beta firmware already overlays Waze police alerts directly on the dashboard, foreshadowing richer third-party integrations once CAN message catalogs stabilize.[^9]
+- **Theme editor & live switching.** Rage Mechanics now ships a web-based theme designer that can push new skins over Wi‑Fi and swap layouts in real time on the scooter, making it easier to brand race fleets or share telemetry presets.【F:knowledge/notes/input_part010_review.md†L312-L314】
 - **Telemetry Dashboards.** Race teams log throttle position, per-motor phase amps, traction-control response, and segment comparisons from SmartDisplay sessions—handy for coaching and driver swaps.[^10]
 - **Fast boot sequence.** Unlike Raspberry Pi-based dashboards that slog through a 45–95 s OS boot, SmartDisplay’s MCU firmware brings up telemetry in about 10 s once CAN current initializes.[^boot]
 - **Lighting + Error Telemetry.** Kelly and VESC users receive controller error feedback (screenshots, codes) on SmartDisplay, easing remote debugging.[^2]
@@ -35,7 +37,10 @@
 ## Pricing, Bundling & Availability Signals
 - Beta batches sold at **300 €** for 15 testers with August assembly runs; production pricing remains under review.[^11]
 - Rage Mechanics currently bundles SmartDisplay with its dual-controller kits (~489 €), and standalone sales are pending cost-down work—plan purchases early if you need just the dash.[^12]
+- Expect retail pricing closer to €500 once the premium feature set (CAN/UART breakout, telemetry, OTA, GPS, lighting control) is factored in—Face de Pin Sucé’s rundown helps set expectations for new buyers.【F:knowledge/notes/input_part010_review.md†L314-L314】
+- Riders chasing budget instrumentation still repurpose RTV VESC-only displays or even spare phones when SmartDisplay pricing overshoots a project’s scope.【F:knowledge/notes/input_part010_review.md†L314-L315】
 - Competing IPS dashboards (e.g., Voyage Megan) target 300–400 € but lack SmartDisplay’s lighting bus, telemetry depth, and OTA ecosystem, so many riders still default to SmartDisplay.[^13]
+- ExpressLine DDP batches to Germany are arriving in roughly a week, but riders report owing extra import duty even on “duty paid” invoices—budget the surcharge when planning builds.【F:knowledge/notes/input_part010_review.md†L191-L192】
 - Low-volume CNC and SLS case work keeps retail expectations above €300 until injection tooling arrives, and the team is preparing regional distributors plus “panic mode” legal presets alongside wider controller harness support.[^14]
 
 ## Telemetry Interpretation Notes
