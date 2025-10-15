@@ -9,6 +9,9 @@
 - Denis’ catalog still quotes ~€170 for a 10S4P Samsung 35E pack, €30 for the Wildman bag, and roughly €20 for EU shipping via DPD/UPS; he insists on genuine XT30 hardware and 20 A common-port BMS boards rather than AliExpress knock-offs.[^denis-pricing]
 - External packs stay on common-port BMSes so Rita can police charge flow—Denis refuses to ship his smart separate-port boards in range kits because they can’t stop overcharge through the discharge lead.[^common-port-chat]
 - Production packs come from the m365Krakow workshop; Denis handles support and logistics while the partner assembles cells, so large orders should plan around their combined lead times.[^m365krakow]
+- LLT’s 100 A smart boards remain the viable option for 4 S boosters—cheaper BMSes brown out, and pushing Flipsky 75100 boxes to 20 S simply moves failure to the wiring long before the ESC runs out of headroom.【F:knowledge/notes/input_part004_review.md†L216-L216】
+- JK active-balancing boards keep outrunning Daly units on telemetry and balancing strength; builders now reserve Daly for budget builds and spec JK or LLT when 20 S packs need reliable comms and cell maintenance.【F:knowledge/notes/input_part004_review.md†L369-L369】
+- ANT smart BMS packs ship with a “starting current” precharge MOSFET; run it around 5 A for spark-free bring-up and keep it below 20 A or the firmware times out if bus caps never charge.【F:knowledge/notes/input_part004_review.md†L383-L383】
 
 ## Cell Market Benchmarks
 | Source | Typical Price & Availability | Verified Performance | Procurement Notes |
@@ -18,6 +21,7 @@
 | **US resellers (50PL)** | ~$9 per cell | Same performance as EU stock | Factor in tariffs and shipping; consider freight-forwarding via EU partners.[^2] |
 | **Custom P45B/P50B packs** | €3000–€4500 for 22 S 10 P/11 P assemblies | Continuous ≈495 A, BMS peaks ≈1040 A | Group buys enable supply; document BMS limits (≤500 A continuous today).[^6][^7] |
 | **Commissioned builds (UK/US)** | Varies; premium vs DIY delta covers tooling | Output tied to builder’s QC logs | Trusted builders like jamessoderstrom eliminate tooling spend for one-off packs.[^11] |
+| **BAK 2.5 Ah 20 A cells** | Budget-friendly yet capacity-limited options for dual 20 S packs (~17.5 Ah per half) | Continuous output around 40 A per pack; expect steep voltage sag at 100 A draws | Plan parallel 8 AWG-equivalent leads and set range expectations realistically.【F:knowledge/notes/input_part004_review.md†L236-L236】 |
 
 ## Welding Equipment Decision Guide
 | Scenario | Recommended Tooling | Why It Wins | Follow-Up Checks |
@@ -25,6 +29,8 @@
 | First copper pack, limited budget | Rent/borrow K-Weld or Glitter kit | Proven to fuse 0.1 mm copper reliably versus unproven 90 € units | Inspect weld nuggets under magnification; rip-test samples before scaling.[^3] |
 | Daily fabrication shop | Own Glitter 811A or K-Weld with high-current PSU | Handles repeated 4 kA+ hits when contacts are clean | Schedule bus pin cleaning to prevent E01 faults and maintain 4.4 kA output.[^10] |
 | Mixed chemistries (pouch + cylindrical) | Use adjustable pulse welders with copper/nickel sandwiches | Controls heat on dissimilar tabs, minimizes swelling risk | Pair with upgraded ≥230 A BMS and temperature probes on parallel groups.[^6] |
+
+- **Shield brazed copper joints.** When builders skip spot welding and braze copper busbars, they flood the joint with argon while feeding tin so oxidation doesn’t spike resistance; humidity alone can corrode unsealed copper/nickel “sandwich” welds within a few years.[^argon-braze]
 
 ## Pack Architecture Case Studies
 | Platform | Layout & Cells | Controller Pairing | Lessons |
@@ -52,6 +58,13 @@
 - **Print holders for heat, not looks.** PLA cradles slump once cells warm; switch to PETG or ASA around 230 °C/100 °C bed temps so 21700 honeycombs and Wildman bag sleds stay rigid in summer decks.【F:knowledge/notes/denis_all_part02_review.md†L116230-L116236】【F:knowledge/notes/denis_all_part02_review.md†L89665-L89696】
 - **Document capacity checks.** Time OEM chargers (≈1.7 Ah per hour on Xiaomi bricks) when vetting customer packs; a genuine 12 Ah module needs nearly seven hours from empty.【F:knowledge/notes/denis_all_part02_review.md†L98595-L98598】
 - **Log cell provenance.** Refurb lots from NKON (late-2021 Samsung 35E/50E) arrive graded and safe when treated like fresh stock; track batch codes and keep compression on pouch experiments so swelling doesn’t lift tabs.【F:knowledge/notes/denis_all_part02_review.md†L97241-L97259】
+- **Layer real insulation—not packing tape.** High-current packs rely on Kapton, dual heat-shrink, fishpaper, and fiberglass tape; SUNKKO clamps keep Sicaflex-potted arrays aligned while the glue cures.【F:knowledge/notes/input_part004_review.md†L317-L317】
+- **Skip household splice tricks.** WAGO-style blocks and soldering bullets while clamped in heatsinks left brittle joints and scorched insulation; tin leads with ≥40 W irons, keep strip lengths short (~10 mm), and size lighting looms with 16–18 AWG copper instead.【F:knowledge/notes/input_part004_review.md†L341-L341】【F:knowledge/notes/input_part004_review.md†L330-L330】
+- **Translate C-ratings into real amps.** Treat a single 10 AWG lead as a ~100 A conductor and paired 12 AWG wires as roughly 140 A; cross-check cell C-ratings with these limits before promising 20 S Xiaomi builds more current than the harness can carry.【F:data/vesc_help_group/text_slices/input_part004.txt†L11470-L11499】
+- **Retire WAGO phase adapters.** House-wiring clamps have already melted under 150 A hub loads—swap to soldered joints backed by AS150/EC8 connectors and proper heatshrink before buttoning up the deck.【F:knowledge/notes/input_part004_review.md†L366-L366】
+- **Calibrate adjustable chargers.** Trim VR1 for output voltage, VR2 for charge current, and VR3 for cutoff while the pack sits partially discharged so you stop guessing and over-driving AliExpress supplies.【F:knowledge/notes/input_part004_review.md†L360-L360】
+- **Know when BMSs sleep.** Happy BMS packs can latch their discharge MOSFETs off after reconnection; wake them with a brief charger tap before blaming wiring or the controller.【F:knowledge/notes/input_part004_review.md†L301-L302】
+- **Protect LiPo experiments.** A Daly-protected 4 Ah LiPo sank to 0.5 V per cell when left unattended, killing €120 worth of cells—treat LiPo scooters as supervised builds or upgrade the BMS hardware.【F:knowledge/notes/input_part004_review.md†L387-L387】
 
 ### Mounting & Housing Patterns
 - **Armor deck-mounted conduits.** Twin 10S packs strapped along the deck need metal shielding and permanent wiring—open conduit runs are “self-propelled bombs” unless the housing resists impacts and stays wired for continuous duty.【F:knowledge/notes/denis_all_part02_review.md†L230-L234】
@@ -78,6 +91,7 @@
 [^1]: Salvaged Stark Varg 50PL modules pricing and 60 A/15 A validation results.【F:knowledge/notes/input_part014_review.md†L35-L35】
 [^2]: EU vs. US 50PL pricing, customs considerations, and grade-A assurances on rebranded cells.【F:knowledge/notes/input_part014_review.md†L36-L36】
 [^3]: Spot welder cost comparison between 90 € generics and reliable K-Weld/Glitter setups for 0.1 mm copper joints.【F:knowledge/notes/input_part014_review.md†L34-L34】
+[^argon-braze]: Tin-brazed copper busbars stayed low resistance only when shielded with argon; exposed copper/nickel sandwiches have corroded in humid storage within a few years.【F:knowledge/notes/input_part004_review.md†L17-L17】
 [^4]: High-output pack examples (22 S10/11 P P45B, 20 S8 P Molicel) and their controller pairings.【F:knowledge/notes/input_part014_review.md†L37-L37】
 [^5]: Tariff-driven QS8 and cell stockpiling strategies for US builders.【F:knowledge/notes/input_part014_review.md†L38-L38】
 [^6]: Haku’s 20 S10 P Samsung 40T build, busbar thickness, and BMS upgrade warning against mixed chemistries.【F:knowledge/notes/input_part014_review.md†L39-L39】

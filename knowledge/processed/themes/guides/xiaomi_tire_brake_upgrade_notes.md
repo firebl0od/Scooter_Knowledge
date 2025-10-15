@@ -23,7 +23,10 @@
 - **Semi-metallic pads:** Gold-toned semi-metallic pads last longer and maintain bite in rain compared with organic pads bundled with XTech calipers; ceramics run hotter and demand rotor monitoring.【F:knowledge/notes/all_part01_review.md†L226-L227】
 - **Rotor sizing:** Community swaps standardize on 135–140 mm rotors for Pro decks and 120 mm for base models when installing X-Tech HB100s or higher-end hydraulics.【F:knowledge/notes/all_part01_review.md†L338-L338】
 - **Budget alternatives:** Properly adjusted MTB-style mechanical calipers (“Bike Attitude”) can outperform misaligned semi-hydraulics when combined with 135 mm rotors—center the fixed pad before tightening mounts.【F:knowledge/notes/all_part01_review.md†L226-L227】
+- **SNSC drum adapters:** Inverted SNSC setups need a spacer and both mounting points engaged before the drum aligns—plan fabrication time instead of relying on a single bracket.【F:knowledge/notes/input_part004_review.md†L241-L241】
+- **Kotto 3 mm motorcycle calipers:** Expect to machine spacers and bleed them immediately—the bite is excellent but the calipers ship thick and dry compared with scooter hydraulics.【F:knowledge/notes/input_part004_review.md†L221-L221】
 - **Support brake housing runs.** Tie the cable housing to the frame and trim excess length—loose housing eats lever travel and ruins braking force no matter the caliper upgrade.【F:knowledge/notes/denis_all_part02_review.md†L89091-L89096】
+- **Keep mechanical backups.** Regen-only rides overheated controllers within a single outing; keep at least one mechanical brake functional even on high-power builds.【F:knowledge/notes/input_part004_review.md†L222-L222】
 
 ## Suspension, Wheelbase & Handling Tweaks
 - **Rear suspension stretch:** Bolt-on rear suspension kits extend wheelbase roughly 10 cm, noticeably calming Xiaomi chassis at 35–40 km/h once brake adapters are spaced correctly.【F:knowledge/notes/all_part01_review.md†L226-L227】
