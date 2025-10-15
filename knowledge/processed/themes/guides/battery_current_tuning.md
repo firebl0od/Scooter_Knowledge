@@ -20,9 +20,10 @@ Taming current limits is the difference between a scooter that rips for years an
    - Keep Artem’s relationship in mind: `I_phase = I_batt × V_batt ÷ V_motor`, so phase torque fades as ERPM climbs—log both currents to confirm your battery caps aren’t starving the tune mid-pull.[^phase_equation]
 3. **Log, ride, iterate**
    - Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
-   - Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
-   - Cross-check real-time power with an external meter or SmartDisplay—unfiltered VESC telemetry overshoots true watts by 10 kW or more on aggressive pulls.²⁴
-   - Treat VESC Tool’s state-of-charge gauge as a rough helper—it linearly maps 4.2–3.3 V per cell (≈66 V on 20 S), so keep your cutoffs a few volts above the BMS trip to prevent surprise throttling once the display reads “empty.”²⁵
+- Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
+- Cross-check real-time power with an external meter or SmartDisplay—unfiltered VESC telemetry overshoots true watts by 10 kW or more on aggressive pulls.²⁴
+- Treat VESC Tool’s state-of-charge gauge as a rough helper—it linearly maps 4.2–3.3 V per cell (≈66 V on 20 S), so keep your cutoffs a few volts above the BMS trip to prevent surprise throttling once the display reads “empty.”²⁵
+- Use phase-current behaviour as a health check: dual Spintend builds hold 120–130 A phase per motor (≈160 A ABS) happily—if a hub starts stuttering above ~85 A, dig for a blown MOSFET or loose phase lead instead of simply backing off current.【F:knowledge/notes/input_part000_review.md†L663-L664】
 4. **Layer in regen**
    - Add regen after forward currents stabilize. Keep battery regen gentler than your discharge target (−5 A to −10 A is plenty for commuter packs) and ramp up slowly to avoid BMS or controller cutoffs.⁵ ¹¹
 5. **Optional: field weakening & traction control**

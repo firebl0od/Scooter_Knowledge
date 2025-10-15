@@ -8,28 +8,45 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - **Marketing vs. reality:** Expect Makerbase boxed 75100 units to deliver only one-half to one-third of the configured current, while Flipsky 75350 shunt math caps phase current near 500 A despite brochure claims.[^4][^5]
 - **DIY alternatives:** Ennoid MK8 shares the Spintend footprint but still needs Infineon IPTC017N12NM6 or similar MOSFET upgrades before flirting with 26 S / 500 A goals—plan the reflow work if you want to stretch beyond stock specs.[^39]
 - **Spintend supply shift:** The 85/250 run is over—stock spares or pivot to 85/240/Seven-class hardware now that Spintend routes 240 A controllers through New Jersey with minimal tariffs.[^41]
+- **Sizing heuristics:** Artem’s quick-start math keeps launches safe—begin with phase amps around motor wattage ÷ 10, set battery amps to ≈67 % of phase, and trim battery current again whenever you raise phase limits for extra punch.[^artem-sizing]
+- **Compact singles:** Spintend’s upcoming single-channel controller mirrors dual-Ubox silicon but needs active cooling above roughly 30–50 A; budget a fan for ≈100 A service in the XT90-sized case once production lands around $150.[^spintend-single]
 - **G300 sprint controllers:** Waterproofed 18-FET G300 builds are logging ≈250 A battery / 500 A phase bursts on 22 S, but riders still report heat soak if they hammer regen—treat them as sprint hardware rather than hill-climb replacements.[^40]
 - **Open-source options:** MP2/CCC_ESC remains a 30 S-capable DIY path when you can populate through-hole MOSFETs, machine heatsinks, and flash ready firmware sourced from the community.[^6]
 - **Motor/power pairing:** Samsung 29E commuter cells fall flat beyond ~80–90 A even in 11 P, so racers swap to P42A or VTC6A chemistry to keep 130 km/h pulls viable.[^7]
+- **Premium motor envelope:** Rage Mechanics’ 75 mm stator hubs run well over 10 kW per wheel on Weped platforms but cost ~€650 each and demand wide dropouts—budget axle-width checks before planning 120 km/h builds around them.【F:data/vesc_help_group/text_slices/input_part000.txt†L18931-L18955】【F:data/vesc_help_group/text_slices/input_part000.txt†L19204-L19233】
+- **Extreme-speed builds demand heavy hardware:** Face de Pin Sucé’s platform already touched 134 km/h on 15 S with dual Uboxes and is stepping to 20–21 S packs plus 75 mm hubs and 21 S 11 P Molicel bricks to chase 140 km/h goals—plan for multi-kilogram motors (~6.5 kg bare) and oversized harnesses before emulating the setup.【F:knowledge/notes/input_part000_review.md†L720-L737】【F:knowledge/notes/input_part000_review.md†L738-L744】【F:knowledge/notes/input_part000_review.md†L747-L754】
 - **Field-weakening ROI:** Expect diminishing returns—adding 25 A of FW only moved a 20×70 kV setup from 66 km/h to ~84 km/h freewheel, topping out around 96 km/h at the hardware cap.[^34]
 
 ## 2. Harness & Wiring Hardening
 - Replace stock loom jackets with TPU spiral wrap or PET braid once the harness is exposed—both stayed flexible after 18 months outdoors.[^8]
 - Re-terminate budget-controller switch leads with ring lugs, add strain relief on throttle grounds, and minimize inline connectors to prevent runaway events from broken returns.[^9]
 - Favor waterproof signal/phase connectors like Julet, L1019, or HiGo (≤100 A phase); budget extra for hall/thermistor additions that feed VESC telemetry directly.[^10]
+- Treat XT90 as a temporary lead above 150 A phase—dual Spintend logs show 500 A bursts cooking XT90 solder joints, so crews now standardise on XT150 or Amass AS150U anti-spark plugs with 8 AWG pigtails and silicone charge leads to keep smart-BMS shunts honest.【F:knowledge/notes/input_part000_review.md†L610-L612】
+- Sync controller power buttons or add isolation relays—waking one Ubox in a 4WD stack while the other stays off has already blown CAN transceivers via reverse-polarity paths.[^can-sync]
 - Upgrade abrasion points: sleeving PTFE leads before pulling 6 mm² conductors through axles prevents insulation tears, and RX/Nami riders now jump to AWG 11 silicone (AWG 10 rarely fits) to keep hubs cool on summer climbs.[^35]
 
 ## 3. Battery & BMS Strategy
 - **Pack chemistry:** Document any stock packs using LG M50LT or Samsung 29E cells and plan rebuilds when aiming for >120 A discharge; monitor internal resistance deltas and pause parallelization above ~3 mΩ spread.[^11]
 - **Regen boundaries:** Cap regen between –5 A and –12 A on 60 V 38 Ah commuter packs until BMS specs are confirmed; firmware ERPM caps can still drop braking, so validate on firmware ≥6.05 beta (build 20).[^12][^13]
+- **Pack-based regen math:** Artem keeps battery regen at or below the pack’s amp-hour rating (10 Ah pack ⇒ ≤10 A regen) and programs controller regen ≈15 A higher so any overshoot dumps as heat instead of spiking cells or tripping BMS charge FETs.【F:data/vesc_help_group/text_slices/input_part000.txt†L17390-L17416】
+- **Baseline braking:** Dual-motor builders start near −30 A battery/−80 A phase on the rear and −25 A/−55 A on the front for confident stopping without tripping controllers—treat these as ceiling values before tuning higher.[^regen-baseline]
 - **Parallel pack discipline:** Match voltages and skip ideal diodes—mixed 17 S/16 S experiments induced throttle cut-outs until builders simply paralleled packs, budgeted regen against controller limits, and kept charge MOSFETs enabled for braking.[^36]
 - **Thermal guardrails:** Rental-grade SNSC hubs pushed to 20 S 40 A hit ~160 °C without ferrofluid—daily riders should cap voltage at 13–16 S or add cooling mods.[^14]
 - **BMS vetting:** JK smart BMS units continue to outclass ANT variants for connectivity; confirm RS485/CAN and heater-pad support with official distributors before ordering.[^15]
+- **Daly behaviour:** Display models ignore remote shut-off commands, latch MOSFETs open after hard sag, and can flick charge FETs during strong regen—keep antisparks as safety backups and budget time to reset via the Bluetooth app if they trip mid-ride.[^daly-behaviour]
 
 ## 4. Instrumentation & Thermal Management
 - Embed hall sensors and NTC thermistors into hubs for consistent launch torque and accurate thermal telemetry—Bluetooth probes in motor shells lag dangerously.[^16]
 - Remember stators can sit 100 °C hotter than hub shells for minutes; trust embedded sensors over external touch checks when chasing 20–33 kW race pulls.[^17]
+- Bolt controllers flat to aluminium decks with fresh thermal paste—remote radiator boxes or thick spacers added heat and resistance, while Weped-mounted dual Uboxes still brushed 80 °C at ~500 A phase until clamped directly to the chassis.【F:knowledge/notes/input_part000_review.md†L614-L617】
+- Vsett riders swapping out stock square-wave ESCs for dual Uboxes reached the same conclusion—scrape paint, repaste the heatsink blocks, and bolt the controllers straight to the deck even if it means pulling the battery to reach the mounts.【F:knowledge/notes/input_part000_review.md†L701-L704】
+- Vent holes buy only a little time: 75 A battery / 190 A phase tunes crept toward thermal cutback until builders resurfaced the deck interface and reran tests with paste, proving direct deck contact beats airflow tweaks for sustained hill pulls.【F:knowledge/notes/input_part000_review.md†L617-L678】
+- Regen torture tests on 10 S 2 P P42A packs have spiked to 2.55 kW and heated motors plus MOSFETs quickly—log stator temps anytime you raise negative current limits.[^regen-heat]
+- A 750 W Boosted Rev hub on a single Ubox still hit 55 °C controller / 80 °C stator in eight minutes at 120 A phase / 80 A battery, and regen pulses add another ~5 °C—treat thermal logs as mandatory when upsizing current on small motors.[^boosted-logs]
+- Flipsky’s compact single overheated to ~60 °C MOSFET temps within 3 km at 50 A battery / 85 A phase, prompting veterans to increase heatsink pressure, reapply quality paste, and add 40 mm fans before chasing 100–120 A experiments.【F:data/vesc_help_group/text_slices/input_part000.txt†L17166-L17186】
 - Treat SmartDisplay telemetry as complementary: it logs per-motor phase amps and traction events while VESC Tool mobile still requires manual battery-current logging, and Voyage/Ambrosini dashboards help separate per-controller data when CAN aggregation hides which hub is fading.[^18][^37]
+- Export VESC Tool CSV or XLS logs after hill climbs to graph pack sag before retuning current limits; reviewing the traces beats guessing mid-ride.[^sag-logging]
+- Enter the actual magnet count and compressed-on-tire diameter in VESC Tool; GPS traces lag too much for launch analysis compared with controller RPM telemetry.[^magnet-entry]
 
 ## 5. Firmware, Calibration & UX Safeguards
 - Override desktop input wizard center-voltage prompts on one-direction throttles or finish calibration in the mobile app to prevent reversed brake/throttle mapping.[^19]
@@ -37,6 +54,8 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Slow ABS overcurrent can mask poor current tuning yet saves time when observers are unstable—disable only after fixing detection and ramp configuration.[^21]
 - Avoid triggering permanent BLE pairing (“pairing done”) unless you truly need it; clearing the lockout demands a VESC Tool update and manual flag reset.[^22]
 - When scripting 1WD/2WD toggles on Spintend bridges, isolate CAN or power between controllers—otherwise the “sleeping” ESC keeps mirroring the active unit’s battery current and never actually idles.[^spintend_toggle]
+- Sensorless riders are leaning on HFI again: ensure ≥15 % Ld/Lq spread via `measure_ind`, then expect near-hall launch torque with only a faint startup whine once tuned.[^sensorless-hfi]
+- Keep field-weakening on a throttle or speed trigger—firmware 5.3 beta adds ~8 km/h at ~20 A extra draw, but using it below cruise speeds cooks motors fast.[^fw-usage]
 
 ## 6. Fabrication & Assembly Discipline
 - Use molded cell holders or reinforced 3D-printed fixtures plus flexible adhesives (B7000/E8000) so parallel groups stay serviceable after cell failures.[^23]
@@ -48,9 +67,13 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Replace cracked Zero/Nami stems with solid aluminum or 15 mm steel units when running wheelie-heavy, 8 kW+ builds; repeated failures cluster at cable cutouts.[^26]
 - Keep head bearings just snug enough to remove play—over-tightening preloads the races, induces wobble, and shortens bearing life even when premium dampers are installed.[^headset]
 - Prioritize mechanical brakes and axle hardware (blue Loctite + lock washers) because electronics can die mid-ride; round-profile tires boost corner grip but require careful bead seating.[^27]
+- Do not rely on regen-only stopping at 20 S—builders logging 50–65 km/h runs treat hydraulic brakes as mandatory backup and keep them freshly bled before trusting wheel-locking e-brakes.【F:knowledge/notes/input_part000_review.md†L634-L634】
+- Rental Ninebot stems ship with red Loctite on the pole hardware—if you reassemble without fresh threadlocker the pole wobbles, so heat the screws for removal and reapply medium threadlocker plus the factory washers on reassembly.【F:data/vesc_help_group/text_slices/input_part000.txt†L17960-L17982】
 - High-speed stability starts with positive trail and stiff bearings—bolt-on dampers merely mask poor geometry and can fail under stiff aftermarket springs.[^28]
 - Inspect Laotie-style steering tubes and similar hollow-neck chassis for cracks; reinforcing with chromoly TIG work borrowed from roll-cage fabrication remains the durable fix when the factory welds give way.[^laotie]
+- Delta rewinds demand roughly double the phase current for the same torque—upgrade hub leads before flipping to delta to avoid roasting stock windings during high-speed pulls.[^delta-leads]
 - Theft prevention relies on ≥10 mm hardened chains, welded eyelets, and recessed fasteners; thin aluminum tabs remain easy targets for cordless grinders.[^29]
+- Protective gear still matters at commuter speeds—stick with ECE 22.05/22.06 full-face helmets with MIPS-style liners and treat subdued lighting plus “police mode” buttons as tools for avoiding unwanted attention, not excuses to ride unarmoured.[^rider-safety]
 
 ## 8. Charging Infrastructure & Power Logistics
 - Expect charger LEDs to cycle red/green near 100 % SoC on Daly/YXP units—this is normal balancing behavior, not a wiring fault.[^30]
@@ -104,3 +127,18 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^headset]: Steering-stability guidance emphasising lightly snug head bearings to prevent wobble and premature failure even when using motorcycle-grade dampers.【F:knowledge/notes/input_part014_review.md†L42-L42】
 [^laotie]: Laotie-style steering tube failures and the recommendation to reinforce with chromoly TIG welding borrowed from motorsport roll-cage practices.【F:knowledge/notes/input_part014_review.md†L184-L184】
 [^spintend_toggle]: Smart Repair’s Spintend bridge experiments showed that one-button 1WD/2WD toggles require CAN or power isolation; otherwise the secondary controller stays awake and mirrors the primary’s current draw.【F:knowledge/notes/input_part011_review.md†L317-L317】【F:knowledge/notes/input_part011_review.md†L79-L79】
+[^spintend-single]: Spintend’s single-channel preview needs active cooling above ~30–50 A and targets ≈100 A with a fan in an XT90-sized case priced near $150 once anodized enclosures arrive.【F:knowledge/notes/input_part000_review.md†L251-L252】
+[^regen-baseline]: Baseline regen setup notes pegging rear wheels around −30 A battery/−80 A phase and fronts near −25 A/−55 A to avoid controller faults during hard braking.【F:knowledge/notes/input_part000_review.md†L256-L256】
+[^regen-heat]: Regen tests on a 10 S 2 P P42A pack logging 2.55 kW bursts and rapid motor/MOSFET heating, reinforcing stator temperature logging when upping negative current.[^regen-baseline][^sag-logging]
+[^sag-logging]: Riders export VESC Tool CSV/XLS files after hill climbs to graph pack sag before retuning current limits.【F:knowledge/notes/input_part000_review.md†L300-L300】
+[^can-sync]: Rowan’s 4WD build blew a Ubox CAN transceiver when the controllers were powered at different times, pointing to reverse-polarity paths without synchronized wake-ups.[^spintend-single][^can-cite]
+[^delta-leads]: Delta rewinds require double the phase amps for equal torque, so uprated hub leads are mandatory before flipping the termination.[^delta-cite]
+[^can-cite]: Separate power-ups on linked Uboxes can back-feed CAN and kill transceivers—keep switch timing aligned or add isolation relays.【F:knowledge/notes/input_part000_review.md†L234-L234】
+[^delta-cite]: Delta-wound hub experiments hitting 70 km/h+ highlighted the need for heavier leads before swapping from star to delta to avoid cooked windings.【F:knowledge/notes/input_part000_review.md†L253-L253】
+[^artem-sizing]: Artem’s launch heuristic ties phase current to motor wattage ÷ 10 and caps battery current near two-thirds of that value, trimming battery amps whenever phase is raised for harder launches.【F:knowledge/notes/input_part000_review.md†L302-L304】
+[^daly-behaviour]: Daly smart BMS units ignore remote-off commands, latch MOSFETs after deep sag, and can flip charge FETs during regen, forcing resets via the Bluetooth app and reliance on external antisparks.【F:knowledge/notes/input_part000_review.md†L315-L316】【F:knowledge/notes/input_part000_review.md†L366-L369】
+[^boosted-logs]: Small hubs run hot quickly—a 750 W Boosted Rev on a single Ubox climbed to 55 °C controller / 80 °C stator within eight minutes at 120 A phase / 80 A battery, and regen bursts add ~5 °C more to the windings.【F:knowledge/notes/input_part000_review.md†L304-L305】
+[^magnet-entry]: Accurate telemetry depends on entering actual magnet counts and compressed wheel diameter in VESC Tool; GPS traces lag too much for launch analysis.【F:knowledge/notes/input_part000_review.md†L326-L328】
+[^sensorless-hfi]: Sensorless Spintend riders confirm near-hall launches once HFI is tuned with ≥15 % Ld/Lq separation via `measure_ind`, leaving only a faint start-up whine.【F:knowledge/notes/input_part000_review.md†L379-L380】
+[^fw-usage]: Firmware 5.3 beta adds roughly 8 km/h using field weakening at ~20 A extra draw, but crews only enable it above cruising speed to avoid extra heat when packs are sagging.【F:knowledge/notes/input_part000_review.md†L349-L350】
+[^rider-safety]: Helmets with ECE 22.05/22.06 certification and MIPS-style liners remain the minimum; riders keep lighting subtle and reserve “police mode” or field-weakening bursts for brief compliance, not daily cruising.【F:knowledge/notes/input_part000_review.md†L362-L364】
