@@ -1,6 +1,7 @@
 # Smart BMS Integration Handbook
 
 ## TL;DR
+- Oversize protection hardware and choose the right architecture for the pack: JK active-balancing boards bring dual 7 AWG busbars, 1 A or 2 A shuttling variants, and remote toggles, but recent self-burn reports push installers toward JBD/LLT or ANT units when decks are cramped or uptime is critical.【F:data/vesc_help_group/text_slices/input_part001.txt†L10630-L10922】[^1][^2][^3]
 - Oversize protection hardware and choose the right architecture for the pack: JK active-balancing boards bring dual 7 AWG busbars, per-channel charge/discharge/balance toggles, and harness-resistance telemetry while still leaving room for GPS/4G trackers once rewired with silicone pigtails, but recent self-burn reports push installers toward JBD/LLT or ANT units when decks are cramped or uptime is critical.【F:knowledge/notes/input_part000_review.md†L619-L620】【F:knowledge/notes/input_part000_review.md†L690-L690】[^1][^2][^3]
 - Commission every pack like a high-energy experiment—enable both charge and discharge FETs before regen tests, validate balance-lead order, and log first rides because a single BMS cutoff or miswire has already nuked controllers and power stages that survived normal abuse.[^4][^5][^6]
 - Treat balancing and calibration as routine maintenance: Daly boards need full charge/discharge learning and higher voltage to balance, while JK hardware wakes via the accessory display, runs active shuttling above ~0.015 V delta, and benefits from monthly thermal/IR audits.[^7][^8][^9]
@@ -18,7 +19,8 @@
 | **Charge-only + Active Balancer** | Depends on fuse + controller limits | When space is scarce, builders fuse the main lead, rely on VESC undervoltage, and clip JK balancers across the stack to keep cells aligned without discharge FET losses.[^21] | Requires disciplined fusing and logging because discharge faults no longer open automatically; not suitable where regulatory compliance mandates full protection stages.[^21] |
 
 ## Commissioning & Wiring Guardrails
-1. **Wake the hardware correctly.** JK boards ship asleep—use the €15 display or a 5–7 V bench supply, confirm charge/discharge toggles, and leave the board powered before sealing the pack.[^8]
+1. **Wake the hardware correctly.** JK boards ship asleep—use the €15 display or a 5–7 V bench supply, confirm charge/discharge toggles, and leave the board powered before sealing the pack; crack new units open first to pluck stray solder beads before they rattle loose in sealed packs.【F:data/vesc_help_group/text_slices/input_part001.txt†L10630-L10768】[^8]
+   - Expect heavy copper work on 150 A-class JK boards: the dual 7 AWG busbars and thick planes soak heat, so stage ≥140 W irons, broad tips, and patient preheat to avoid delaminating FET pads while you tin leads.【F:knowledge/notes/input_part001_review.md†L568-L569】
 2. **Validate sense-lead order before soldering B−.** Step through the harness at 3.5 V increments; reversing the negative pair has already cooked resistors on new ANT installs.[^5]
 3. **Keep both FET banks enabled for regen tests.** Builders traced repeated ESC deaths to disabled charge FETs on JK smart boards—regen had nowhere to dump energy.[^4]
 4. **Stage first rides with logging.** Riders lost Spintend and Makerbase controllers the moment a BMS tripped under load; gather current and voltage traces to verify the protection stays latched through braking and launches.[^6]
@@ -36,6 +38,8 @@
 
 ## Balancing & Calibration Practices
 - **Map delta thresholds to chemistry.** Experienced builders trigger active balancing around 0.015–0.025 V and cap charge at ~4.15 V when longevity outweighs peak range.[^9]
+- **Align top-of-charge with the chemistry’s lifespan.** Samsung 40T packs fall to ~70 % capacity after roughly 500 full cycles at 4.20 V, while Samsung 48X packs stretch toward 3,000 moderate-current cycles if capped closer to 4.15 V—demonstrating the payoff of conservative voltage ceilings.【F:knowledge/notes/input_part001_review.md†L501-L502】
+- **Expect Daly learning cycles.** Their coulomb-counting SoC meters can show 18 % at 4.07 V per cell until they relearn capacity—run full discharge/charge sessions or manually tag 100 % at top-of-charge so telemetry catches up.[^7]
 - **Exploit active shuttling when available.** Artem’s compact active-balancer keeps cells within roughly 3–7 mV by moving up to 600 mA whenever groups drift more than 0.01 V, and it hard-stops charge above 4.22 V—use those protections if you rely on travel chargers with sloppy CV behaviour.【F:knowledge/notes/input_part000_review.md†L716-L723】
 - **Expect Daly learning cycles.** Their coulomb-counting SoC meters read low for several rides; plan full discharge/charge sessions or manual 100 % resets so telemetry aligns with reality.[^7]
 - **Leverage telemetry displays.** JK screens offer long-range Bluetooth and remote toggles, effectively doubling as pack dashboards on scooters lacking dedicated HUD space.[^10]
@@ -44,13 +48,16 @@
 ## Charging Infrastructure Updates
 - **Programmable supplies cover odd voltages.** Adjustable 22 S/18 A bricks paired with ANT sleep timers keep 21 S packs topped without drifting when scooters sit for weeks.[^adj_supply_smart]
 - **Carry multi-voltage chargers for travel.** Switchable 16–24 S/20 A units fill gaps when premium 21 S chargers are out of stock, letting one brick service multiple scooter voltages.[^multi_brick_smart]
+- **Seek CC/CV bricks with adjustable ceilings.** Riders chasing 95 % state-of-charge targets are standardising on programmable supplies, and one BMS recently caught a CC-only converter stuck at 4.3 A even at full voltage—proof that smart-pack safeguards remain essential.【F:knowledge/notes/input_part001_review.md†L504-L506】
 
 ## Troubleshooting & Service Checklist
 - **Document anti-theft workflows.** JK’s remote discharge disable doubles as a parking lock; confirm the board re-arms before rides to avoid brownouts.[^23]
+- **Install the optional JK display when range demands visibility.** Its long-range Bluetooth, remote charge/discharge toggles, and granular pack telemetry are saving time on high-current builds and becoming standard issue for field diagnostics.【F:knowledge/notes/input_part001_review.md†L558-L560】
 - **Log balance behavior after storage.** JK units can self-immolate while idle and Daly boards stop balancing once “full”—review app history after downtime before sending the pack back into service.[^2][^19]
 - **Teach recovery procedures.** Publish lead-order diagrams and wake-up checklists so drained JK packs (≈57 V on 20 s) or JBD miswires don’t strand riders without telemetry.[^17][^24]
 - **Reseat suspect balance leads.** A single cold joint on Artem’s JK install forced the board into alternating “short circuit” and “low voltage” alarms until the tap was reflowed—inspect and re-solder every lead after high-heat work before blaming firmware.【F:knowledge/notes/input_part000_review.md†L650-L650】【F:knowledge/notes/input_part000_review.md†L690-L690】
 - **Escalate when firmware toggles misbehave.** ANT app glitches that trip discharge FETs or JK UIs that freeze mid-session warrant immediate vendor contact and a fallback BMS plan.[^11][^14]
+- **Replace burnt input stages instead of bypassing.** If a mis-plugged harness leaves only ~7 V at the output despite healthy cell groups, assume the BMS input stage cooked and swap the board—bridging fuses after XT90-saver incidents risks runaway faults.【F:data/vesc_help_group/text_slices/input_part001.txt†L9186-L9191】
 
 ---
 
@@ -61,7 +68,7 @@
 [^4]: JK users traced repeated controller deaths to disabled charge FETs before regen tests, underscoring the need to keep both FET banks active.【F:knowledge/notes/input_part007_review.md†L27-L27】
 [^5]: Miswired negative sense leads on an ANT install cooked components, reinforcing step-by-step voltage validation before soldering B−.【F:knowledge/notes/input_part008_review.md†L135-L135】
 [^6]: BMS cutoffs have killed controllers mid-ride, and the community now caps regen near 120 A while logging early shakedowns to ensure protections stay latched.【F:knowledge/notes/input_part011_review.md†L15-L62】【F:knowledge/notes/input_part011_review.md†L276-L276】【F:knowledge/notes/input_part008_review.md†L688-L705】
-[^7]: Daly smart boards rely on coulomb counting, demand ≥4.18 V to balance, and frequently misreport SoC until relearn cycles complete.【F:knowledge/notes/input_part001_review.md†L177-L705】
+[^7]: Daly smart boards rely on coulomb counting, demand ≥4.18 V to balance, and frequently misreport SoC (e.g., 18 % at 4.07 V) until relearn cycles complete.【F:knowledge/notes/input_part001_review.md†L177-L705】【F:data/vesc_help_group/text_slices/input_part001.txt†L24932-L24966】
 [^8]: JK packs ship in protection mode; installers wake them with a display or bench supply, toggle outputs, and leave the board energized before sealing the enclosure.【F:knowledge/notes/input_part001_review.md†L766-L768】
 [^9]: Active-balancer veterans target 0.015–0.025 V delta triggers and conservative 4.15 V charge ceilings to balance longevity with usable capacity.【F:knowledge/notes/input_part001_review.md†L502-L502】
 [^10]: JK boards reinforce traces with copper rods, run warm near their 60 A comfort zone, and provide remote telemetry screens for high-power scooters.【F:knowledge/notes/input_part001_review.md†L482-L560】【F:knowledge/notes/input_part001_review.md†L732-L733】

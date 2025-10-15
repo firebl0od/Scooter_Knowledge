@@ -21,6 +21,15 @@
 - Embed 100 kΩ NTC probes inside the windings on Vsett-class builds—the shell can feel cool while the coils touch 90 °C, and pairing the sensors with FOC controllers keeps launches smooth while logging real stator temps.【F:knowledge/notes/input_part000_review.md†L658-L660】
 - Overvolting an 800 W Citycoco hub to 26 S/100 A cooked the windings mid-hill, underscoring how quickly small motors die when voltage climbs faster than thermal paths—treat voltage bumps as motor swaps, not just controller tweaks.【F:knowledge/notes/input_part000_review.md†L641-L642】
 
+## Ferrofluid Handling & Hub Maintenance
+- Dose scooter hubs with roughly 3–6 ml of Statorade (60 mm motors stretch to 7–8 ml) only after the stator is seated; plastic syringes keep filings out while the magnets self-level the fluid.【F:knowledge/notes/input_part001_review.md†L613-L615】
+- Reseal side covers with silicone and revisit fills seasonally—vent holes can shave another 5–10 °C on smaller motors but risk weeping ferrofluid and inviting water, so log temps before committing to drilled covers.【F:knowledge/notes/input_part001_review.md†L613-L615】
+- Wolf Warrior hubs that survived ~10,000 km came back with cracked phase insulation and missing hall boards; use refreshes to rewire phases, embed new hall sensors, and add Statorade while the shell is open.【F:knowledge/notes/input_part001_review.md†L626-L627】
+
+## Cooling Accessory Reality Checks
+- 3D-printed “hub fin” shells draw criticism because blocked airflow paths limit their effectiveness—testers prefer spacing the fins with washers or pivoting to ferrofluid/oil cooling when they need real thermal headroom.【F:knowledge/notes/input_part001_review.md†L672-L674】
+- Judge cooling tweaks only with controlled A/B runs on fully cooled motors; hub-shell surface temperature alone says little about magnet health, so embed sensors or log winding temps before declaring success.【F:knowledge/notes/input_part001_review.md†L674-L674】
+
 ## Coil Retention & Harness Dressing
 - Inside hub motors, standard nylon cable ties survive stator temperatures when cinched correctly; some builders still wrap phases with cotton rope for redundancy, so combining both methods keeps windings tight without melting ties.【F:knowledge/notes/input_part014_review.md†L185-L185】
 

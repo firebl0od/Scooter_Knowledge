@@ -6,6 +6,7 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 - External 36 V packs only extend range; meaningful speed gains begin with 12S/13S packs paired with matching chargers and firmware.[^1]
 - A 13S6P pack built from 2,500 mAh cells roughly doubles the energy of a stock Pro battery while remaining within Rita’s 5 A shared charging envelope when chargers are split.[^2]
 - Riders chasing 40 km/h+ targets often graduate to 14S or dual-motor builds—confirm you have the braking, tires, and frame reinforcement to match the higher kinetic energy.[^1][^3]
+- A 16S5P Samsung 35E pack safely feeds about 50 A; chasing 100 km/h on a single-motor Xiaomi with that chemistry is unrealistic without higher-voltage packs, better brakes, and wider forks to house VSETT-class hubs.【F:data/vesc_help_group/text_slices/input_part001.txt†L6015-L6114】
 - Tool and lawnmower packs bring little to the table—Rita waits for ≈36 V before blending, so five-cell modules barely contribute and run dangerously hot under scooter loads.[^tool-pack]
 - Ignore bargain “48 V 62 Ah” bundles—builders calculated that the advertised capacity requires non-existent 21 Ah cells and the included controllers rarely survive 48 V operation.[^ali48]
 - Delta-wound 10 S builds already touch ~55 km/h and pull 50–100 A spikes; one rider logged 91 km/h on 16 S before the stock controller died, so plan VESC swaps or limit OEM boards to ≈15 S when chasing top speed.【F:knowledge/notes/input_part000_review.md†L229-L230】
@@ -37,6 +38,10 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 5. Limit charging to ~7.5 A (≈2 h) to balance pack longevity with turnaround; one-hour fast charges accelerate degradation.[^2][^15]
 6. Smooth throttle maps (quadratic/smart) tame twitchiness on delivery routes once extra voltage is online.[^16]
 
+### 3.3 17S Samsung 40T Trials
+1. Plan for dual XT150 phase connectors, thicker insulation, and brake upgrades before jumping to 17 S6 P—budget Daly replacements if the existing BMS forces 4.18 V/cell to balance and accept ~20 V sag until wiring is upsized.【F:data/vesc_help_group/text_slices/input_part001.txt†L21680-L21840】【F:data/vesc_help_group/text_slices/input_part001.txt†L21780-L21868】
+2. Until a programmable charger arrives, set 16 S supplies around 67 V for partial charges and monitor balance delta closely; Daly hardware often refuses to wake balancing without near-full voltage.【F:data/vesc_help_group/text_slices/input_part001.txt†L21780-L21868】
+
 ## 4. Charger & BMS Planning
 - Modify OEM chargers by replacing the 10 kΩ feedback resistor with a 30 kΩ+27 kΩ stack (~14.3 kΩ) and fine-tuning the trim pot to 50.4 V for 12S packs.[^10]
 - Validate charge completion with a meter—Xiaomi chargers have stayed green while still delivering 42 V, so confirm pack voltage rather than trusting indicator LEDs.[^charger-led]
@@ -64,6 +69,7 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 - Treat ≈60 °C as a practical ceiling for battery cores; the workshop logged 41 °C packs as healthy but warned that sustained climbs past 60 °C shorten cell life quickly.[^pack-temps]
 - High-voltage builds magnify braking and tire demands; run quality CST/Xuancheng casings at 36–50 psi and inspect bearings regularly to keep speed stable.[^25][^26]
 - Treat Rita error 14 as a hard stop when dual dashboards share a pack; re-check polarity and harness routing before riding again so the isolation hardware can still block cross-pack faults.[^27]
+- Stock Xiaomi dashboards speak half-duplex UART and still cannot talk directly to Flipsky 75100 controllers—flash VESC firmware onto the OEM ESC if you want the factory dash to stay on the bus during VESC swaps.【F:knowledge/notes/input_part001_review.md†L528-L529】
 - 60 V experiments remain strictly provisional—monitor Rita’s alarms, confirm firmware, and stage launches before trusting the higher voltage for daily riding.[^rita60v_xiaomi]
 - Export VESC Tool CSV/XLS logs after climbs to quantify sag before raising limits; riders now retune current using data instead of guessing mid-ride.【F:knowledge/notes/input_part000_review.md†L300-L300】
 - Give the motor a running start on steep hills—keeping it near 80 % of top speed prevents 48 V builds from cooking hall sensors during full-throttle climbs.[^hill-technique]

@@ -6,6 +6,8 @@
 - **Firmware lifeline:** ST-Link V2 programmers remain the fastest recovery path for bricked dashboards, ESCs, and Rita-linked BMS boards—clip onto the pads, flash stock firmware, then resume Bluetooth updates once communications return. Modern Ninebot Max dashboards also demand ST-Link access because recent BLE revisions block OTA downgrades.【F:knowledge/notes/all_part01_review.md†L47-L49】【F:knowledge/notes/all_part01_review.md†L166-L166】【F:knowledge/notes/all_part01_review.md†L331-L331】【F:knowledge/notes/denis_all_part02_review.md†L103-L104】
 - **Low-voltage logging:** Keep Bluetooth thermometers or CR2032-powered loggers in the spares bin when validating experimental packs so you can capture temperature spikes before they cook cells.【F:knowledge/notes/all_part01_review.md†L372-L372】
 - **Insulation & adhesive supplies:** Stock RTV silicone, Kapton, and zip ties to strain-relieve DC/DC converters and harnesses; vibration snaps converter leads unless they are glued or tied back to the PCB before the scooter ever rolls.【F:knowledge/notes/denis_all_part02_review.md†L31-L32】
+- **Instant translation:** Plus Messenger’s built-in translator lets techs follow Spanish- and French-language repair chats without copy-paste gymnastics—handy when sourcing parts from multinational groups.【F:data/vesc_help_group/text_slices/input_part001.txt†L1665-L1689】
+- **Dedicated GPS logger:** Relive overstates peak speed by ~7 km/h when GPS drops, so shops now run Speed View GPS Pro for floating dashboards, exportable logs, and reliable range data alongside VESC telemetry.【F:data/vesc_help_group/text_slices/input_part001.txt†L6003-L6013】【F:data/vesc_help_group/text_slices/input_part001.txt†L6414-L6436】
 
 ## Wiring & Harness Checks
 1. **Start at the XT30:** After any crash or curb strike, verify the adapter output voltage before chasing other faults; browned phase pins or half-seated BMS harnesses are the most common culprits when scooters power-cycle on bumps.【F:knowledge/notes/all_part01_review.md†L195-L195】
@@ -32,6 +34,7 @@
 - **Data-line triage after regen faults:** Error 21 that appears immediately after an emergency stop usually points to a cooked controller data line. Bench-test the pack on a known-good scooter or send it in rather than reflashing firmware blindly.【F:knowledge/notes/denis_all_part02_review.md†L368-L369】
 - **Backfeed with care:** A depleted 44 V pack can be nudged awake with a 36 V charger only when its open-circuit voltage sits under ~41 V. Anything higher risks over-voltage damage once the charger’s CV phase kicks in.【F:knowledge/notes/denis_all_part02_review.md†L37-L38】
 - **Log Rita/Happy current spikes:** Error 39 beeps and thermal cutbacks appear when firmware demands exceed Rita’s ~30 A ceiling; capture live amps with m365Tools before dialing tuning back.【F:knowledge/notes/denis_all_part02_review.md†L55-L57】
+- **Calibrate controller voltage sensors.** Spintend Ubox reports have skewed low by ~3 V until owners compared readings against trusted multimeters (e.g., UNI-T UT123C) and adjusted ADC scaling after new installs.【F:knowledge/notes/input_part001_review.md†L541-L542】
 
 ## Performance Logging & Calibration
 - **Acceleration tests:** Use Dragy or Race Timer to record repeated 0–70 km/h pulls, filming the dash at 60 fps and averaging matching-direction runs so GPS lag doesn’t skew results.【F:knowledge/notes/input_part000_review.md†L133-L133】
@@ -50,4 +53,5 @@
 
 ## Documentation & Support Habits
 - Keep a photo log of connector routing, ST-Link pinouts, and fuse replacements so future technicians can retrace your steps. Denis’ English manual is updated as new edge cases surface—reference it before opening support tickets.【F:knowledge/notes/all_part01_review.md†L209-L210】
+- Archive VESC Tool logs before sealing decks: Android 11+ hides files under `Android/data/vedder.vesctool/files`, so plan to pull them via TCP bridge or file managers like XFolder after each shakedown.【F:data/vesc_help_group/text_slices/input_part001.txt†L3440-L4018】
 

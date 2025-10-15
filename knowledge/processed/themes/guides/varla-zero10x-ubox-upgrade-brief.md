@@ -44,6 +44,7 @@ This brief helps Varla Eagle One and Zero 10X owners who have already installed,
 - **Suspension & clearance:** Machined swingarm axles and upgraded pivots are required for 11" hubs; failing to rework clearances twists calipers or fouls springs.²³
 - **Waterproofing:** Resin-coat controller boxes or reroute harnesses—stock enclosures collect water and corrode upgrades quickly.⁴
 - **Earless 85/240 mounting:** New cases still ship without tabs; plan printed brackets, retapped threads, or adhesive adapters before rough roads shake loose under-deck installs.²⁷
+- **Limited edition packaging pitfalls:** The Zero 10X Limited ships dual Sabvoton controllers crammed in the deck with a secondary battery strapped to the stem, starving airflow; expect only 40–50 A before overheating unless you relocate electronics and rewire for higher-current packs.【F:data/vesc_help_group/text_slices/input_part001.txt†L2464-L2520】【F:data/vesc_help_group/text_slices/input_part001.txt†L2489-L2519】
 
 ## Validation & Logging
 1. **Instrumentation:** Pair VESC Tool live data with Dragy/GPS logging while dialing wheel diameter (Zero 10X hubs calibrate near 250 mm).²⁴

@@ -5,6 +5,7 @@
 - Treat the Spintend/MakerX auxiliary board as a low-current signal bridge: its ~12 V/3 A rail can light LEDs or run logic, but headlamps, horns, and pumps still need a dedicated DC/DC or relay-fed supply.[^3][^9][^10][^11]
 - Map and validate every analog input inside VESC Tool before sealing the deck; enabling ADC control blocks bench FWD/REV overrides, so miswired harnesses must be fixed before ride testing.[^7][^8][^13]
 - Protect logic rails by isolating accessory power, adding pull-down failsafes, and avoiding shared 5 V lines between controllers—shorts or ground loops keep blowing MOSFET drivers and display boards.[^14][^16][^17][^19]
+- Ubox V2 boards now carry self-reset fuses on 5 V/12 V/3.3 V rails, yet VESC Tool 3.01 still crashes mid-calibration if 5 V throttles hit the STM32 input—stick to 3.00/5.2 firmware or add voltage dividers before final assembly.【F:data/vesc_help_group/text_slices/input_part001.txt†L8424-L8453】
 
 ## Signal & Power Budget Cheatsheet
 | Channel | Voltage | Continuous Current | Typical Uses | Guardrails |
@@ -24,6 +25,13 @@
 4. **MakerX footpads & 3.3 V-only sensors:** Confirm both ADC rails output 3.3 V before blaming pads; swapping to 5 V kills the hall board.[^4]
 5. **Interpret ADC counts, not raw voltage:** VESC Tool reports hall inputs as 0–4095 counts—track the delta between idle and full throw, and if readings compress, repeat the test with a stable 5 V source to rule out noisy 3.3 V regulators before replacing sensors; Spintend’s adapter manual expects ~0.8 V idle, so stop and rewire if a channel sits near 3 V.[^22][^adapter-idle]
 6. **Filter noise in software first:** Builders tamed runaway triggers by compressing throttle activation to ~0.83–1.2 V inside VESC Tool rather than rewiring hardware; chassis grounding tricks have also helped but carry short-to-frame risk if insulation fails.[^adc-noise]
+6. **Fail-safe defaults:** Add a pull-down resistor from throttle signal to ground so any broken wire snaps to zero instead of ghost acceleration.[^19]
+- **Prototype curve throttles carefully.** Early scroll-wheel “curve throttle” builds dedicate forward travel to acceleration and reverse travel to regen, giving smooth proportional braking once firmware supports dual-action mapping—keep wiring modular so you can fall back to proven hall throttles mid-test.【F:knowledge/notes/input_part001_review.md†L504-L505】
+- **Shield noisy harnesses:** High-phase-current builds needed shielded throttle looms and 5 V→3.3 V adapter boards (e.g., Spintend’s filter) to stop hall noise from overwhelming the ADC rail long-term.【F:data/vesc_help_group/text_slices/input_part001.txt†L3494-L3605】
+- **Pick flexible multi-core looms.** Shared-ground 24–26 AWG cables or slim AliExpress harnesses keep throttle/brake/start wiring tidy through cramped passthroughs; stiff Ethernet looms fatigue quickly on Xiaomi/VSETT decks.【F:data/vesc_help_group/text_slices/input_part001.txt†L6481-L6504】
+7. **Legacy dash retention:** Leaving throttle through a dash adapter adds perceptible lag; many builders keep the dash for display only and wire throttles directly to the controller instead.[^20]
+8. **Refresh mappings after downtime.** Scooters that sat for months have thrown false brake/throttle behaviour until riders reran the ADC wizard and removed stale inversion flags inside VESC Tool.[^storage-cal]
+9. **Monitor brake sensors.** Dead brake halls make some VESC scooters pulse the motor every second or two under throttle, so replace failed sensors before ride testing.【F:knowledge/notes/input_part000_review.md†L39-L39】
 7. **Shield noisy looms.** Running ADC throttles and SmartDisplay UART over shielded cable tied to controller ground cleared 120 A jitter, and separating signal bundles from phase wires kept FOC noise out of high-amp Ubox builds.[^signal-shield]
 8. **Fail-safe defaults:** Add a pull-down resistor from throttle signal to ground so any broken wire snaps to zero instead of ghost acceleration.[^19]
 9. **Legacy dash retention:** Leaving throttle through a dash adapter adds perceptible lag; many builders keep the dash for display only and wire throttles directly to the controller instead.[^20]
@@ -34,6 +42,9 @@
 ### Regen Buttons & Variable Brakes
 - **Momentary button recipe:** Wire the button between ADC2 signal and the 3.3 V rail; avoid series resistors because they created “stuck brake” faults in testing.[^6]
 - **Analog lever mapping:** Run the ADC calibration wizard, keep the window open while sweeping the lever, then assign the channel to “Current (No Reverse)” so regen ramps in with negative motor/battery limits.[^7][^8]
+- **Dedicated regen controls cut heat.** Riders running hall brake levers or second throttles for regen report far lower rotor temperatures and brake fade, provided mechanical brakes stay ready for emergencies and high-voltage packs with limited headroom; most builds still rely on auxiliary halls because proportional regen remains tied to spare throttles instead of the main lever.【F:knowledge/notes/input_part001_review.md†L512-L514】【F:knowledge/notes/input_part001_review.md†L646-L647】
+- **Scroll-wheel demand is back.** Spintend and Rion riders are prototyping dual-spring scroll throttles that split 70 % throttle/30 % regen travel or add pressure sensors under the trigger to recover the Rion Curve feel once production restarts.【F:knowledge/notes/input_part001_review.md†L552-L553】【F:knowledge/notes/input_part001_review.md†L580-L581】
+- **Production curve throttles on the roadmap.** Spintend is evaluating a thumbwheel that mimics Rion’s dual-action throttle ergonomics, signalling that proportional regen hardware may ship as an official accessory instead of a one-off prototype.【F:knowledge/notes/input_part001_review.md†L648-L648】
 - **Hall-based levers:** Pair Xiaomi hall levers or custom SS49E + magnet housings with the SmartDisplay/ADC board to unlock proportional braking—digital on/off microswitches pulse the motor and feel unnatural once regen replaces cable brakes.[^analog-halls]
 - **Hydraulic mix-and-match:** When swapping Ninebot G30 front levers, move the factory hall sensor and magnet into the hydraulic body so proportional regen survives the upgrade.[^ninebot-hall]
 - **Scroll-wheel throttles:** Thumbwheel throttles work well as dedicated regen controls—Mirono’s Ubox build runs ~80 A phase / 15 A battery for a smooth 47 km/h eco mode while still craving BLDC punch at launch.【F:data/vesc_help_group/text_slices/input_part000.txt†L17625-L17654】【F:data/vesc_help_group/text_slices/input_part000.txt†L18388-L18395】
@@ -43,6 +54,7 @@
 ### Lighting, Horns & Aux Loads
 - **Use the adapter as logic, not power:** The horn output only sources a couple of amps—enough for low-power buzzers but not vintage 35 W halogens—so trigger a relay or MOSFET that pulls from a beefier DC/DC converter.[^9][^10]
 - **85250 & Ubox installs:** Route brake-light logic through the ADC breakout, but feed lamps from a separate converter so you don’t brown out the controller when multiple 12 V loads fire at once.[^11]
+- **Treat the Ubox fan header as temperature-only.** The 12 V header driving the stock fan is thermostatic—firmware cannot toggle it—so plan external bucks or constant 12 V rails for lighting if you need manual control.【F:knowledge/notes/input_part001_review.md†L508-L510】
 - **TF100 & OEM switch pods:** Reuse factory throttles by landing the red/black hall power and the green signal lead on a 3.3 V ADC input; this preserves dash ergonomics without custom PCBs.[^12]
 - **Skip illuminated combo pods:** Backlit handlebar switches feed accessory voltage into the signal lines and confuse the ADC board unless you gut the lighting—treat them as incompatible without a full rewire.[^24]
 - **Avoid parasitic taps:** Pulling 12 V from internal headlight pins (e.g., X12) drags the logic rail and costs range—draw pack power into a dedicated converter instead.[^15]
