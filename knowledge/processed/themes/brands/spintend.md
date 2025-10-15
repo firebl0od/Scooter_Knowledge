@@ -80,6 +80,22 @@
 - Feed auxiliary rails from a clean supply: Ubox Lite lacks a native 12 V rail, so power the ADC adapter from an external DC-DC while keeping grounds common to prevent lighting glitches.[^35]
 - Mind standby behaviour before adding smart switches—the latching Spintend button already isolates the logic rail with minimal drain; external anti-spark solutions are optional unless you need hard battery isolation.[^45]
 
+## Common Issues & Troubleshooting
+
+### Auto-Off Failures on 100/100 Units
+- Some Spintend 100/100 controllers refuse to shut down even when ADC auto-off timers are disabled in VESC Tool, indicating accessory power bleed or stuck logic rails preventing proper shutdown.[^autooff-issue]
+- **Troubleshooting steps:**
+  1. Check for backfeed from auxiliary power sources (displays, lighting, BMS wake circuits) that may be energizing the logic rail.
+  2. Verify ADC adapter wiring and confirm no pull-up resistors or external circuits are holding the enable pin high.
+  3. Test with all accessories disconnected to isolate whether peripheral power is preventing shutdown.
+  4. Consider using smart-BMS discharge control or physical loop keys as backup shutdown methods until root cause is identified.[^autooff-issue]
+- Document firmware version, accessory wiring, and ADC adapter configuration when reporting this issue to identify common patterns.[^autooff-issue]
+
+### Spintend Lite Connector Sourcing
+- Oreo Huzky's Apollo City Pro conversion highlighted that Spintend Alu Lite logic harnesses use keyed multi-pin plugs that builders must reuse or source when extending looms—part numbers remain undocumented in community threads as of late 2025.[^lite-connector]
+- When building or repairing Lite harnesses, photograph factory connectors and measure pin pitch/count before attempting aftermarket substitutes to avoid compatibility issues.[^lite-connector]
+- Consider ordering spare connectors directly from Spintend or trusted resellers when planning custom harness work on Lite platforms.[^lite-connector]
+
 ## Commissioning & Diagnostics Checklist
 1. **Audit firmware limits before tuning.** Confirm the phase ceiling in VESC Tool; early 85/200 units stall at ~300 A until reflashed, and Lite boards mirror duals so mismatched limits skew traction control.[^12][^5]
 2. **Flash vendor firmware and let auto-detection pick the hardware profile.** Spintend-supplied BINs and automatic R3 detection remain the safe path; forcing V6 targets or manual overrides has bricked controllers on the bench.[^46]
@@ -170,3 +186,5 @@
 [^baseplate_spreader]: JPPL and Shlomozero are reusing dead 75/200 baseplates as auxiliary heatsinks with aluminum spacers and radiator blocks tied into Dualtron side plates to cool HY-equipped stages.【F:knowledge/notes/input_part011_review.md†L521-L521】
 [^qc_input004]: Quality control failures on UBOX Single 100/100 batch showing shorted current-sense op-amps and blown input capacitors.【F:knowledge/notes/input_part004_review.md†L15-L15】【F:knowledge/notes/input_part004_review.md†L88-L88】
 [^bt_polarity]: Ubox 80 V single shipped with reversed Bluetooth harness, killing the module on power-up.【F:knowledge/notes/input_part004_review.md†L287-L287】
+[^autooff-issue]: Spintend 100/100 refusing to shut down despite disabled ADC auto-off timers, indicating accessory power bleed or stuck logic rails.【F:knowledge/notes/input_part013_review.md†L464-L464】
+[^lite-connector]: Spintend Alu Lite logic harness using undocumented keyed multi-pin connectors that must be reused or sourced for custom wiring.【F:knowledge/notes/input_part013_review.md†L777-L780】
