@@ -38,6 +38,7 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 
 ## 4. Charger & BMS Planning
 - Modify OEM chargers by replacing the 10 kΩ feedback resistor with a 30 kΩ+27 kΩ stack (~14.3 kΩ) and fine-tuning the trim pot to 50.4 V for 12S packs.[^10]
+- Stretching the stock Xiaomi charger to 15 S requires adjusting internal trim pots to ~61.5 V and uprating output capacitors—the unit remains a constant-current supply with no overcharge shutoff beyond the new voltage target.【F:knowledge/notes/input_part003_review.md†L142-L142】
 - Validate charge completion with a meter—Xiaomi chargers have stayed green while still delivering 42 V, so confirm pack voltage rather than trusting indicator LEDs.[^charger-led]
 - Avoid 5 A firmware hacks on legacy M365 BMS boards; they reach ~150 °C under sustained charge. Pro-era boards and Samsung 35E cells handle higher current better, but quality Daly-class BMS hardware is still recommended.[^17][^18]
 - Double-check balance-lead order and wire negatives first—miswired Daly smart boards have popped instantly, forcing full harness rebuilds before the first ride.[^balance-leads-xiaomi]
@@ -61,6 +62,7 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 - Monitor pack temperature after charging—freshly topped 12S4P bricks have hit 50 °C on hard climbs. Let packs rest or dial back firmware before commuting.[^21]
 - Treat ≈60 °C as a practical ceiling for battery cores; the workshop logged 41 °C packs as healthy but warned that sustained climbs past 60 °C shorten cell life quickly.[^pack-temps]
 - High-voltage builds magnify braking and tire demands; run quality CST/Xuancheng casings at 36–50 psi and inspect bearings regularly to keep speed stable.[^25][^26]
+- Treat Xiaomi/Monorim hubs as ~25–30 A battery / 50–70 A phase devices even with ferrofluid—higher currents overheat hall sensors and thin leads, so plan motor swaps or new datasheets before exceeding those guardrails.【F:knowledge/notes/input_part003_review.md†L170-L170】
 - Treat Rita error 14 as a hard stop when dual dashboards share a pack; re-check polarity and harness routing before riding again so the isolation hardware can still block cross-pack faults.[^27]
 - 60 V experiments remain strictly provisional—monitor Rita’s alarms, confirm firmware, and stage launches before trusting the higher voltage for daily riding.[^rita60v_xiaomi]
 - Give the motor a running start on steep hills—keeping it near 80 % of top speed prevents 48 V builds from cooking hall sensors during full-throttle climbs.[^hill-technique]

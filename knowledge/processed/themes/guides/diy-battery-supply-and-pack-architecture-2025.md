@@ -18,22 +18,31 @@
 ## Pack Architecture Patterns
 - **Dualtron Achilleus conversions** – Deck cavity (~485 mm × 181 mm) supports 22 S9 P if controllers move to an external mount; stock decks hold 20 S7–8 P and ~100 A battery before needing relocation or compact ESCs.【F:knowledge/notes/input_part014_review.md†L37-L44】
 - **Nami “hotdog” racers** – 22 S11 P P45 builds pair 100 H rear / 70 H front motors, 500 A phase, 550 A absolute, and 100 % front FW to sync wheel speed, netting 146 km/h GPS with manageable 61 °C stator temps.【F:knowledge/notes/input_part014_review.md†L168-L169】
+- **20 kW hub builds** – 20 S11 P trays with P42A/P45B/40T cells (~300 A battery, 350–550 A phase) emerge as the realistic baseline for 20 kW launches; SmartDisplay telemetry logs ~21.4 kW spikes (≈55 A per parallel) and expose how quickly low-discharge 50G cells overheat, reinforcing per-parallel stress calculations before welding.【F:data/vesc_help_group/text_slices/input_part003.txt†L25501-L25996】
 - **Ninebot G30 MAX** – Builders drill and trim 3 mm ePowerFun skid plates for €25 stopgap protection, swap in custom spacers, and plan 20 S4 P-to-22 S layouts once rails are clear and pack supports printed.【F:knowledge/notes/input_part014_review.md†L151-L151】【F:knowledge/notes/input_part014_review.md†L118-L118】
+- **Max pack layouts** – Compare 20 S6 P vs. 24 S5 P trays carefully; taller 24 S stacks demand slimmer cells and trimmed rails while 20 S6 P clears with cautious spacer design, so log deck height and clearance before welding.【F:data/vesc_help_group/text_slices/input_part003.txt†L10501-L10570】
 - **30 S prototypes (Segway/Nami/G3)** – Ausias is CNC-ing supports for 22 S10 P Nami decks, while Finn’s G3 conversion fits 30 S3 P (15 S6 P) modules after bracket cuts; 30 S4 P remains too wide without welding and enclosure surgery.【F:knowledge/notes/input_part014_review.md†L159-L160】
 
 ## Tooling, Fabrication & Thermal Management
 - Budget welders rated for 0.15 mm copper rarely meet spec; proven setups rely on K-Weld or Glitter 811A plus rip-tests, nickel sandwiching, and calibrated power for 0.1 mm sheet.【F:knowledge/notes/input_part014_review.md†L34-L34】【F:knowledge/notes/input_part014_review.md†L152-L152】
 - Keep skid plates functional: thermal paste is required before 3 mm aluminum plates materially sink heat, and fan kits need ducting rather than flush mounts to avoid recirculating hot air.【F:knowledge/notes/input_part014_review.md†L119-L120】
 - QS8/MT60 panel mounts are mostly custom; teams CAD their own plates to keep phase and battery leads from dangling while preserving access for service loops.【F:knowledge/notes/input_part014_review.md†L188-L188】
+- Type 2 adapters need proper pilot resistors (e.g., 2.74 kΩ), a weather-sealed enable button, and strain-relieved enclosures so riders don’t strand themselves at public chargers while chasing 3 kW bulk sessions.【F:data/vesc_help_group/text_slices/input_part003.txt†L17403-L17413】
 
 ## BMS & Protection Strategy
 - ANT 470 A/1 050 A packs have latched discharge FETs after overnight charges; the community now treats ANT as requiring redundant contactors or manual disconnects and documents UV-inspection resets before declaring hardware dead.【F:knowledge/notes/input_part014_review.md†L99-L101】
 - Balance behavior differs: ANT bleeds every cell simultaneously but with limited current, whereas JK hardware addresses two series groups at once, making JK preferable for large parallels needing faster equalization.【F:knowledge/notes/input_part014_review.md†L174-L174】
+- Daly 400 A frames can be revived with LLT logic boards, but the hybrids need shunt recalibration and hardened auxiliary supplies before they belong on 80‑FET, 400 A continuous experiments—treat them as advanced builds rather than off-the-shelf upgrades.【F:data/vesc_help_group/text_slices/input_part003.txt†L24344-L24355】
+- High-speed racers now log ANT 300 A BMS trips near 690 A phase / 160 A battery peaks above 130 km/h, so extend delay timers or upgrade hardware before chasing similar pulls.【F:data/vesc_help_group/text_slices/input_part003.txt†L25927-L26063】
 - Keep cost spreadsheets realistic: even DIY 20 S packs need €50 BMS units, €50–200 welders, insulation, and shipping cushions—budget builders increasingly hire trusted pack shops when customs make single builds uneconomical.【F:knowledge/notes/input_part014_review.md†L155-L156】
 
 ## Structural & Safety Fundamentals
 - Never rely on hot glue alone; use 3D-printed spacers or structural adhesives so weld strips don’t carry mechanical load during transport or crashes.【F:knowledge/notes/input_part014_review.md†L172-L172】
+- Preheat winter packs intentionally—charging 20 S systems at 35–40 A up to 84 V soaks cells to ~45 °C and keeps voltage sag predictable when the ride starts in freezing conditions.【F:knowledge/notes/input_part003_review.md†L209-L210】
+- Screen “Panasonic” or similar branded packs by weight and weld quality; the group traced range loss and voltage sag to counterfeit cells bundled with 3Shul C700 motors and now treats suspect modules as unsafe for high-speed builds.【F:knowledge/notes/input_part003_review.md†L206-L207】
 - Match chemistries inside parallels: mixing pouch and cylindrical cells accelerates swelling even when copper busbars handle 350 A/450 A bursts, so spec unified cells or larger BMS hardware (≈230 A) before blending formats.【F:knowledge/notes/input_part014_review.md†L39-L39】
+- Don’t trust “20 kg, 150 km range” marketing—community math shows 150 km alone demands ~11 kg of cells plus structure, so vet vendor specs before redesigning decks around unrealistic claims.【F:data/vesc_help_group/text_slices/input_part003.txt†L25568-L25606】
+- Vet “used but tested” Samsung 35E/40T lots for weld scars and elevated IR—community buyers now skip the €2.5–€3 pulls unless sellers document low cycle counts and clean tabs.【F:data/vesc_help_group/text_slices/input_part003.txt†L16250-L16267】
 - Schedule periodic UV/visual inspections for burned traces on smart BMS boards, especially after preload-failure alarms or unexplained current draw.【F:knowledge/notes/input_part014_review.md†L100-L100】
 
 ## Build Checklist

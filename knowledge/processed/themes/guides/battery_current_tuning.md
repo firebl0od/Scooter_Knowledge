@@ -16,18 +16,23 @@ Taming current limits is the difference between a scooter that rips for years an
 2. **Set conservative currents**
    - Start with a 2:1 to 3:1 phase-to-battery ratio (e.g., 40 A battery / 110 A phase on 16 S commuter packs).⁵ ⁷
    - Match current targets across front/rear controllers to avoid free-spinning the lighter wheel.⁸
+   - MakerX vs. Flipsky tuning clinics still steer single-motor riders toward ~60 A battery and 180–200 A phase ceilings until thermal logs prove headroom.【F:knowledge/notes/input_part003_review.md†L97-L97】
+   - Heavy single-motor builds chasing 90 km/h stick near 120 A phase and 80–85 A battery with 16 kHz zero-vector and MTPA enabled; treat those numbers as the practical ceiling without upgraded cooling.【F:knowledge/notes/input_part003_review.md†L100-L100】
    - Treat dual-motor 16 S7 P Samsung 50E packs as roughly 140 A systems: hold each controller near 70 A battery and add ducted airflow up front before nudging limits higher.²³
    - Keep Artem’s relationship in mind: `I_phase = I_batt × V_batt ÷ V_motor`, so phase torque fades as ERPM climbs—log both currents to confirm your battery caps aren’t starving the tune mid-pull.[^phase_equation]
 3. **Log, ride, iterate**
    - Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
+   - Early 135–200 A phase experiments exposed traction-control and observer limits long before motors overheated—log both temperature and slip data when chasing similar pulls.【F:knowledge/notes/input_part003_review.md†L62-L62】
    - Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
    - Cross-check real-time power with an external meter or SmartDisplay—unfiltered VESC telemetry overshoots true watts by 10 kW or more on aggressive pulls.²⁴
+   - SmartDisplay logs from 20 S6 P test rigs already show 332 A / 21.4 kW bursts and ~55 A-per-parallel stress; treat those events as the upper envelope for commuter-grade packs before adding more current.【F:knowledge/notes/input_part003_review.md†L204-L205】
    - Treat VESC Tool’s state-of-charge gauge as a rough helper—it linearly maps 4.2–3.3 V per cell (≈66 V on 20 S), so keep your cutoffs a few volts above the BMS trip to prevent surprise throttling once the display reads “empty.”²⁵
 4. **Layer in regen**
    - Add regen after forward currents stabilize. Keep battery regen gentler than your discharge target (−5 A to −10 A is plenty for commuter packs) and ramp up slowly to avoid BMS or controller cutoffs.⁵ ¹¹
 5. **Optional: field weakening & traction control**
    - Activate FW only once thermals are understood. Expect it to draw nearly the same extra amps you request on both battery and phase channels.¹²
    - On dual drives, enable traction control on the front controller first and monitor for MOSFET surges when grip returns.¹³
+   - September 2022 track work showed traction-control launches heating Ubox singles faster than manual pulls; budget extra heatsinking or relax slip targets during long straights.[^tc_heat_2022]
 
 ## Hardware Guardrail Table
 | Controller | Typical Pack | Battery Current (per controller) | Phase Current | Regen (Battery / Phase) | Notes |
@@ -41,11 +46,13 @@ Taming current limits is the difference between a scooter that rips for years an
 
 ## Regen & Braking Best Practices
 - **Respect BMS limits.** Daly and ANT boards trip around 2.7 V/cell; match VESC cutoff and regen so the BMS stays ahead of controller protection.¹¹ ¹⁷
+- New 60 A Daly hardware now enforces under/over-current trips mid-ride instead of staying latched on—set firmware ceilings below the fresh hardware thresholds before trusting them on high-speed pulls.【F:knowledge/notes/input_part003_review.md†L202-L203】
 - **Stagger braking inputs.** Pair mechanical brakes with modest regen; runaway regen has bricked 75100 logic boards when negative current spikes hit unstable hardware.¹⁸
 - **Throttle & ramp tuning.** Shorten positive ramp to ~0.1 s and sculpt throttle curves once your current caps are dialed—especially on controllers that feel soft off the line.¹⁹
 
 ## Field-Weakening & High-Speed Notes
-- Expect only modest top-speed gains (e.g., +8 km/h on 16 S builds) while battery draw jumps from 4 kW to 7 kW. Higher voltage or higher-Kv motors are usually better investments.¹²
+- Expect only modest top-speed gains (e.g., +8 km/h on 16 S builds) while battery draw jumps from 4 kW to 7 kW—VSETT 10 telemetry showed ~30 A of field weakening per motor only lifting speed from 69 km/h to ~76 km/h while doubling power draw, so higher voltage or higher-Kv motors remain better investments.¹²【F:knowledge/notes/input_part003_review.md†L205-L205】
+- Field tests comparing FW vs. pure gearing runs confirmed the efficiency penalty—riders planned October track sessions to validate the trade-off on 16 S builds before committing to new tunes.【F:knowledge/notes/input_part003_review.md†L75-L75】
 - Sensorless chatter and long phase cables exaggerate FW-induced current spikes; keep leads short and add halls where possible.³ ²⁰
 - Document duty-cycle ceilings—modern hardware tolerates 98–99 % duty, but stay below 100 % to avoid runaway faults.²¹
 - Spintend 85150 hardware has already sacrificed MOSFETs when riders layered 45 A of FW on top of 105/120 A battery and 150/175 A phase at 20 S—budget HY/HSBL swaps or back FW down before chasing higher ERPM. 【F:knowledge/notes/input_part014_review.md†L21-L21】
@@ -55,6 +62,7 @@ Taming current limits is the difference between a scooter that rips for years an
 | Symptom | Likely Cause | Fix |
 | --- | --- | --- |
 | Controller idles hot or chatters at low speed | Phase filter enabled, bad detection values | Disable filter, rerun detection with `mxlemming`, verify Rs/Ls manually.⁵ |
+| Motor cooks during bench tests | Open-loop duty-cycle experiments without load | Use gradual ramps; a 300 A open-loop stunt already destroyed a Rage Mechanics motor and highlighted the risk of duty sweeps on bare wheels.[^open_loop_burnout] |
 | Regen kills power but forward throttle is fine | BMS trip or controller ABS limit too low | Reduce regen, raise ABS max (≤300 A on 75-series), ensure BMS thresholds align.¹⁴ ¹⁸ |
 | Phase amps plateau far below target | Motor saturation, long phase leads, or firmware clamp | Shorten leads, add halls, log saturation, or flash no-limit firmware (with cooling).¹² ²⁰ ¹⁶ |
 | USB disconnects during hard pulls | ADC noise, poor shielding | Use shielded looms, keep 5 V accessories off logic rails, or log over CAN instead.²² |
@@ -94,3 +102,5 @@ Taming current limits is the difference between a scooter that rips for years an
 [^fw_bms]: Rob Ver’s Spintend 85/240 logged 35 kW peaks and 132 km/h on 22×3 hubs with ~80 A FW, but a 22 S BMS failure during a 320 A launch still destroyed MOSFETs—reinforcing the need for pack protection when stacking FW on high-current pulls.【F:knowledge/notes/input_part012_review.md†L436-L436】
 [^26]: Spintend 85/250 riders holding 22 S builds near 200 A battery / 300 A phase for reliability despite higher firmware ceilings.【F:knowledge/notes/input_part012_review.md†L253-L254】【F:knowledge/notes/input_part012_review.md†L334-L334】
 [^phase_equation]: Artem formalised the `I_phase = I_batt × V_batt ÷ V_motor` relationship, reminding tuners that battery amps rise toward the configured limit as ERPM climbs and that output power cannot exceed input watts.【F:knowledge/notes/input_part000_review.md†L3770-L3818】
+[^tc_heat_2022]: Traction-control heat audit on 20 September 2022 showed Ubox singles running hotter under automated slip control than manual launches, prompting plans for better cooling or softer slip targets during long straights.【F:knowledge/notes/input_part003_review.md†L71-L71】
+[^open_loop_burnout]: A 23 September 2022 300 A open-loop burnout destroyed a Rage Mechanics motor, reinforcing the need to ease into duty-cycle sweeps instead of jumping straight to full output without load.【F:knowledge/notes/input_part003_review.md†L72-L72】
