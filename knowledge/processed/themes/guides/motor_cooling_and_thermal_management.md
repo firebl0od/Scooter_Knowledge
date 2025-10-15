@@ -82,6 +82,18 @@
 - Tear down Ninebot F2 Pro hubs after rain commutes—the factory 6001RS bearings arrive nearly dry, so riders repack them with marine or polyurea grease and upgrade to premium SKF RSH 2RS units rather than smearing silicone over the caps.【F:knowledge/notes/input_part006_review.md†L409-L410】
 - When resealing Zero or Vsett hubs, apply silicone at seam joints, refresh lithium grease on the bearings, and avoid overfilling so heat can still escape; the goal is to stop rust and hall failures without trapping moisture against the windings.【F:knowledge/notes/input_part006_review.md†L368-L368】【F:knowledge/notes/input_part006_review.md†L488-L488】
 
+## Field Gauges & Coolant Debates
+- Eduuuuuuuuu’s “ten-second touch test” remains a simple thermal sanity check—if you cannot keep a hand on the motor shell for ten seconds, drop phase amps before heat soaks the windings.【F:knowledge/notes/input_part013_review.md†L232-L233】
+- Shlomozero’s 75 H 22/3 test hit ~80 °C within minutes at 400 A because undersized phase leads bottlenecked cooling; peers now hold the same hardware nearer 200–250 A motor current and treat 300 A uphill bursts as a winding death sentence.【F:data/vesc_help_group/text_slices/input_part013.txt†L9778-L9819】【F:data/vesc_help_group/text_slices/input_part013.txt†L10160-L10169】【F:data/vesc_help_group/text_slices/input_part013.txt†L10549-L10555】
+- Arnau’s single-motor 75 H 22/3 setup stayed below 90 °C at 200 A phase once he swapped the thermistor pull-up to 100 kΩ, pairing a Ubox 240 with a 20 S 6 P P45B pack and ANT 450 A BMS—evidence that accurate sensing plus sane currents keep Daly-equipped commuters alive.【F:data/vesc_help_group/text_slices/input_part013.txt†L10221-L10248】
+- Matthew continues to see ~30 °C drops within minutes when hubs get ≈4 ml of Statorade, but Haku cautions that sealing the air gap can overheat magnets—log magnet temps and weigh long-term wear before filling every race hub.【F:data/vesc_help_group/text_slices/input_part013.txt†L10299-L10309】
+- Yamal’s dual 33/2 windings hold roughly 49–63 °C during hard pulls, proving so-called “speed” winds can still deliver torque when the pack and cooling strategy are dialed.【F:knowledge/notes/input_part013_review.md†L715-L715】
+
+## Rotor & Magnet Integrity
+- 7" LY 90 H hubs run a 127 mm stator with 40-magnet rotors, hitting noticeably harder than 110 mm-class cans but forcing builders onto matching 7" tire inventory and careful chassis clearance checks.【F:knowledge/notes/input_part013_review.md†L445-L445】
+- Double-magnet 80 H stacks have twisted stators after 350–500 A assaults and 133–144 °C cores; Paolo warns lamination glue softens and magnets can demagnetise past ≈120 °C, so log temps and back current down before the damage becomes permanent.【F:knowledge/notes/input_part013_review.md†L446-L447】
+- After pothole strikes at speed, Lonnyo/Shul race hubs that trip current or throw “voltage imbalance” faults should be torn down to inspect magnets, hall boards, and harness strain before the next run.【F:knowledge/notes/input_part013_review.md†L744-L767】
+
 ## Coil Retention & Harness Dressing
 - Inside hub motors, standard nylon cable ties survive stator temperatures when cinched correctly; some builders still wrap phases with cotton rope for redundancy, so combining both methods keeps windings tight without melting ties.【F:knowledge/notes/input_part014_review.md†L185-L185】
 

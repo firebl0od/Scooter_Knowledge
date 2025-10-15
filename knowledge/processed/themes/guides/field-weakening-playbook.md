@@ -91,6 +91,7 @@
 [^17]: Haku’s decision to abandon FW after killing commuter hubs at 4 A.【F:knowledge/notes/input_part011_review.md†L301-L301】
 [^18]: Max G2 and similar commuter hubs hitting 150 °C stators with FW.【F:knowledge/notes/input_part005_review.md†L368-L372】
 [^19]: 22 S Ubox/Spintend configurations disabling regen to survive higher voltage.【F:knowledge/notes/input_part010_review.md†L419-L419】
+[^phase_launch]: Pandalgns reminded builders that high launch torque is tied to phase current; as speed rises the controller naturally drifts toward the battery limit, so staged limits or higher battery amps extend the hard-acceleration window.【F:data/vesc_help_group/text_slices/input_part013.txt†L356-L357】
 [^20]: FW-induced throttle jitter on single-controller builds once 20 A is applied.【F:knowledge/notes/input_part013_review.md†L709-L709】
 [^fw-kills]: FW-induced shutdowns have spiked components and “killed everything” on Little Focer/Tronic 250 stacks when riders pushed 37 A of FW without battery headroom.【F:knowledge/notes/input_part009_review.md†L353-L355】
 [^21]: 22×3 hub builds freewheeling around 118 km/h without FW after pack upgrades.【F:knowledge/notes/input_part013_review.md†L88-L88】

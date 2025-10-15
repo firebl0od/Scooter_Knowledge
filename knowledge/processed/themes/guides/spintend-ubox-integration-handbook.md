@@ -30,6 +30,7 @@
 
 ## Power Limits, Regen & Current Planning
 - **Current Envelope:** Treat 120–130 A phase per motor (≈160 A ABS max) as the practical ceiling for daily dual setups; sensor stutter above ~85 A usually signals failed MOSFETs or loose leads, not tuneable instability.[^21]
+- **Single 100/100 baselines:** Lonnyo 65 H commuters now hover around 130–135 A phase, 85–90 A battery, and 150–180 A absolute on single Ubox 100/100 stacks, trimming duty to 98 % and kicking in FW around 88 % to eliminate stutter before heat creeps past 40 °C.[^u100_daily]
 - **Regen Discipline:** Bench testing shows that even –5 A battery regen can trip controllers on unloaded wheels; cap regen amps to roughly the pack’s amp-hour rating plus a small overhead so the FETs absorb the excess.[^8]
 - **High-Voltage Safeguards:** Dual owners run ~2×135 A phase / 2×71 A battery within 70 °C so long as regen stays off during full-charge launches and higher-voltage packs (17 S+) are bled a few percent before re-enabling braking.[^22]
 - **22 S experiments demand regen discipline.** Builders chasing 22 S/150 A tunes on 85/150 hardware disable regen or upgrade MOSFETs and capacitor banks; Smart Repair confirmed stock silicon only survives 22 S when braking stays mechanical, and veterans point voltage-hungry riders toward Rage Mechanics’ C350 once 30 S capability is mandatory.[^22s_mod]

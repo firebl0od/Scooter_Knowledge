@@ -44,6 +44,7 @@
 - **Lower Softlock before fine-balancing.** Disable the 15 mV guard or set the delta deliberately; otherwise the app silently ignores tighter thresholds during top balancing.[^18]
 - **Keep the pack offline when parked.** JBD’s cloud portal can expose your scooter to remote limit changes, so veterans either avoid the online portal altogether or leave default credentials untouched.[^10]
 - **Log everything.** Photograph BMS settings after each session—some builders keep CSV exports—to backtrack when firmware or phone updates scramble parameters.[^10][^18]
+- **Sanity-check system parameters when series counts drift.** A 22 S ANT/JBD install read as 23 S until the owner rewrote the series-voltage and capacity fields from scratch, so treat unexpected telemetry as a configuration error before chasing wiring faults.[^param_sanity]
 
 ## Current, Regen & Thermal Guardrails
 - **Start regen conservatively.** 17 S commuters stay near −5 A battery / −40 A phase until pack temps and JBD logs prove the hardware can absorb more without tripping protection.[^4]

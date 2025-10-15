@@ -10,6 +10,7 @@
 - AWD newcomers should stage upgrades: 12 S 3 P commuter packs brown out on VESC duals, so run a single motor until a 16 S 5–7 P pack (or paired internal/external strings) is ready, and treat 13 S 5 P builds as 50–75 A battery systems despite the 15 A-rated cells.【F:knowledge/notes/input_part000_review.md†L309-L311】【F:knowledge/notes/input_part000_review.md†L310-L311】
 
 ## Cell & Component Sourcing Reference
+- **Keep the high-power roster current.** Community testers just flagged EVE 40PL/50PL, Molicel P50B, and BAK 45D as the modern reference set for 300 A+ packs—refresh comparison sheets with Mooch’s latest lab data before committing to older chemistries.【F:knowledge/notes/input_part013_review.md†L523-L524】
 | Component | EU Pricing & Availability | North America Reality | Immediate Actions |
 | --- | --- | --- | --- |
 | **EVE 50PL 21700** | Salvaged Stark Varg modules deliver grade-A cells for ~1 € each after labor; retail bulk hovers 1.5 € with logos shaved yet still grade A.【F:knowledge/notes/input_part014_review.md†L35-L36】 | ~$9 per cell retail with looming import duties.【F:knowledge/notes/input_part014_review.md†L36-L38】 | Form cooperative buys, pre-clear customs brokers, and reserve storage for incoming pallets. |
@@ -66,6 +67,7 @@
 
 ## BMS & Protection Strategy
 - ANT 470 A/1 050 A packs have latched discharge FETs after overnight charges; the community now treats ANT as requiring redundant contactors or manual disconnects and documents UV-inspection resets before declaring hardware dead.【F:knowledge/notes/input_part014_review.md†L99-L101】
+- ANT’s published 420 A ceiling leaves Halo-style 22 S 10 P race packs with limited headroom—either parallel two units or accept accelerated wear when chasing 300–350 A discharge goals.【F:knowledge/notes/input_part013_review.md†L403-L405】
 - Balance behavior differs: ANT bleeds every cell simultaneously but with limited current, whereas JK hardware addresses two series groups at once, making JK preferable for large parallels needing faster equalization.【F:knowledge/notes/input_part014_review.md†L174-L174】
 - Daly 400 A frames can be revived with LLT logic boards, but the hybrids need shunt recalibration and hardened auxiliary supplies before they belong on 80‑FET, 400 A continuous experiments—treat them as advanced builds rather than off-the-shelf upgrades.【F:data/vesc_help_group/text_slices/input_part003.txt†L24344-L24355】
 - High-speed racers now log ANT 300 A BMS trips near 690 A phase / 160 A battery peaks above 130 km/h, so extend delay timers or upgrade hardware before chasing similar pulls.【F:data/vesc_help_group/text_slices/input_part003.txt†L25927-L26063】

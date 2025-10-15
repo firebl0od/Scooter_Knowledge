@@ -49,6 +49,7 @@
 - JPPL confirmed the drone factory that built Tronic and Seven controllers now sells them directly, offering immediate stock but no added support.[^5]
 - Seven-branded derivatives keep the FR-4 sandwich with Toll-package MOSFETs, yielding only a modest thermal advantage; racers should budget for external heatsinks just as they do with X12 boards.[^6]
 - Secondary-market sellers are already moving bare X12 boards for about €350, reinforcing that buyers must self-support wiring, enclosures, and documentation.[^13]
+- The official Tronic storefront still flakes out, so riders in Europe lean on Protopulse’s €600 X12 inventory when they need a verified reseller without gambling on the factory shop.[^protopulse]
 
 ## Outstanding Research Backlog
 - Publish verified current limits for the latest Seven 18 / Tronic X12 Toll-FET builds once community tests push past 210 A battery / 310 A phase.[^6][^14]

@@ -13,7 +13,7 @@
 | --- | --- | --- | --- | --- |
 | ADC1 / ADC2 (signal) | 3.3 V reference | ≈1 mA (input) | Throttle, brake, regen slider | Stay on 3.3 V hall outputs or add dividers/pull-downs so open circuits fall to zero.[^1][^4][^19] |
 | Spintend ADC v3 accessory rail | 12 V (buck) | ≈3 A total | Tail lights, brake triggers, small relays | Parallel 18 W lamps already flirt with the limit—push heavier loads through an external converter.[^3][^10] |
-| Controller logic rail | 5 V from onboard DC/DC | <0.5 A budget | Displays, hall sensors, footpads | Never back-feed from other controllers or dashes; a single short can blow the logic board.[^14][^16] |
+| Controller logic rail | 5 V from onboard DC/DC | <0.5 A budget | Displays, hall sensors, footpads | Never back-feed from other controllers or dashes; a single short can blow the logic board and even 5 V throttle feeds have cooked STM32 ADC stages.[^5][^14][^16] |
 | External DC/DC (recommended) | Pack → 12 V/5 V | Sized to load | Headlights, horns, pumps, fans | Use relays or MOSFETs triggered by the ADC board for safe switching.[^9][^11][^15] |
 
 ## Wiring Recipes
@@ -55,6 +55,11 @@
 - **Front-only caution:** Riders running “Shigura” hybrids keep front regen low or disabled; abrupt ramps can lock a lightly loaded front tyre on wet pavement.[^26]
 - **Boosted Rev mapping:** Expect ≈1.6 V full brake, 2.54 V neutral, and 3.3 V wide open on Boosted Rev thumbwheels once mapped to VESC ADC inputs, delivering strong regen with minimal mechanical braking.[^boosted-map]
 
+### Profile & Gear Switching
+- **Document throttle reassignment before adding gear toggles.** Builders shorting ADC1 to ground with a momentary switch—without moving the throttle signal to ADC2—have repeatedly blown MakerX ADC3 daughterboards. Treat profile toggles as signal bridges that need proper wiring diagrams and pull-downs before testing.[^gear-toggle]
+- **Validate community scripts before publishing.** ’lekrsu’s Xiaomi Pro 2 “gear shift” macro maps ADC2 as a mode selector but he cannot run it himself due to noisy analog lines; bench-test the workflow before sharing it beyond early adopters.[^xiaomi-gear-script]
+- **Latching profile toggles:** ADC2 can host a latching switch that feeds a distinct voltage, letting commuters flip between limited and unlimited profiles with the five-press brake logic while leaving ADC1 dedicated to throttle.【F:knowledge/notes/input_part013_review.md†L775-L775】
+
 ### Lighting, Horns & Aux Loads
 - **Use the adapter as logic, not power:** The horn output only sources a couple of amps—enough for low-power buzzers but not vintage 35 W halogens—so trigger a relay or MOSFET that pulls from a beefier DC/DC converter.[^9][^10]
 - **Keep 12 V fans off the board:** Spintend ADC adapters have already died when builders powered shrouds directly from the rail—treat it strictly as a signal bridge and feed cooling gear from standalone bucks.【F:data/vesc_help_group/text_slices/input_part003.txt†L15008-L15017】
@@ -64,6 +69,7 @@
 - **Skip illuminated combo pods:** Backlit handlebar switches feed accessory voltage into the signal lines and confuse the ADC board unless you gut the lighting—treat them as incompatible without a full rewire.[^24]
 - **Avoid parasitic taps:** Pulling 12 V from internal headlight pins (e.g., X12) drags the logic rail and costs range—draw pack power into a dedicated converter instead.[^15]
 - **Protect logic rails:** Shorting auxiliary leads straight on the controller board has already destroyed logic stages; isolate accessories and fuse every feed.[^16]
+- **Check your multimeter mode before probing.** Accidentally measuring resistance on a live harness has shorted throttle rails and fried ADC inputs—double-check the dial before touching controller pins.【F:data/vesc_help_group/text_slices/input_part013.txt†L5805-L5813】
 - **Fuse the adapter output:** One builder shorted the 12 V rail on a brand-new Spintend 85240 while wiring lights and killed the buck stage; add inline fuses or external bucks so a single mistake doesn’t scrap the controller.[^16][^23]
 - **Respect the adapter’s voltage ceiling.** Keep the kill-switch lead under ≈60 V, route high-voltage latches through a smart BMS or loop key, and only parallel momentary buttons that share the adapter’s common ground (e.g., ANT/JK power toggles) so you don’t backfeed pack voltage into the logic board; treat the module as a logic-level relay and let contactors or smart-BMS buttons handle full-pack isolation.【F:knowledge/notes/input_part005_review.md†L603-L603】
 - **Treat buttons as triggers only:** The ADC adapter does not replace a loop key or smart-BMS latch; plan a real kill switch for theft deterrence or maintenance.[^17][^18]

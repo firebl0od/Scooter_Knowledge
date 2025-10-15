@@ -101,6 +101,10 @@ This guide distills field reports on powering lights, horns, and dashboards from
 - **Hall-sensor brake levers and sensors.** Builders recommend hall-based brake levers for smaller hands and pair them with waterproof two-pin hydraulic sensors that slot neatly into Magura or Nutt setups.【F:knowledge/notes/input_part009_review.md†L395-L395】
 - **Auxiliary throttle braking caveats.** Repurposing a spare throttle as an auxiliary brake only adds meaningful stopping power when regen is configured high; keep mechanical lever ergonomics dialled for everyday stops.【F:knowledge/notes/input_part009_review.md†L396-L396】
 
+### Field Lighting Power Patterns
+- Yamal prefers tapping 12 V bars directly from the traction battery through a fused buck so they recharge with the scooter, whereas Noname populates USB hubs on every build for removable lights and accessories.【F:knowledge/notes/input_part013_review.md†L217-L224】
+- Haku routinely feeds inexpensive AliExpress lightbars through the ADC harness, underscoring why guides should spell out current limits and fuse math before riders stack accessories on controller rails.【F:knowledge/notes/input_part013_review.md†L222-L224】
+
 ## Commissioning Checklist
 - Meter throttle outputs with the controller unpowered and confirm signal stays ≤3.3 V at full travel.【F:knowledge/notes/input_part013_review.md†L503-L505】
 - Before flashing or editing parameters, follow the VESC Tool workflow—**Read → edit → Write**—and explicitly hit **Write Motor/App Config** after each wizard so Xiaomi throttles and ADC settings persist across power cycles instead of forcing full detections at the next boot.【F:knowledge/notes/input_part013_review.md†L542-L544】【F:knowledge/notes/input_part005_review.md†L410-L413】

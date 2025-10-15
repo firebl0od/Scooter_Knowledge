@@ -72,6 +72,9 @@
 - **Profile switching:** Community ESP32 scripts now debounce CAN messages and validate voltage before toggling 1WD/2WD modes; adopt the revised code to avoid divide-by-zero bugs.¹²
 - **Power switching:** 75100-class boards ship without a low-voltage enable, so owners run XT90S loop keys or external anti-spark hardware; 20 S packs still arc without real pre-charge, making QS8 connectors or dedicated pre-charge adapters mandatory and pushing some builders toward controllers with onboard latching buttons.[^20]
 
+## Documentation Gaps
+- Riders continue to beg for a Flipsky 75100 regen-braking walkthrough that also covers PAS integration and suspension hardware references—the absence of a vetted guide keeps newcomers hunting paid Lisp scripts to regain basic features.【F:knowledge/notes/input_part013_review.md†L213-L219】
+
 ## When to Reach for Alternatives
 - **Need high uptime or warranty responsiveness?** MakerX singles and Spintend duals handle similar current with fewer early failures and better support pipelines.¹⁸
 - **Planning >20 S packs or 300 A+ phase?** Rage Mechanics C350, Thor 300, or Tronic X12 platforms offer headroom without relying on unofficial firmware or component swaps.¹⁹

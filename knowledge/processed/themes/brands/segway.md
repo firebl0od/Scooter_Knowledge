@@ -43,9 +43,12 @@
 - C80 conversions must respect the stock 60 A BMS limit until upgraded—attempting 70 A battery trips protection and heats the motor to ~76 °C, reinforcing the need for a higher-current BMS before raising output.[^11]
 - Konyk rear-motor kits ship with replacement axle nuts, smoothing hub swaps when OEM hardware is discontinued or chewed up during teardown.【F:knowledge/notes/input_part012_review.md†L348-L349】
 - New firmware paths let Ninebot G2 owners stay on the stock controller—flash XiaoDash, apply the SHFW Gen 4 patch, and keep factory blinkers/buzzers while lifting the speed ceiling instead of grafting in a G30 ESC.[^g2-shfw]
+- Ninebot F2 Pro commuters see ~45 km/h once SHU firmware and field weakening are active, but the low-kV hub sags below 65 % SOC and traction control earns its keep on icy mornings even when summer riders disable it.[^f2pro_fw]
+- SHU firmware riders confirmed the F2 Pro happily launches sensorless—the startup “brr” is normal hall emulation—but the stock over-current trip still fires near 30 A, so parallel add-on packs must share current through the auxiliary harness while staying inside the native 25–30 A envelope to avoid mid-ride shutdowns.【F:knowledge/notes/input_part013_review.md†L441-L442】
 
 ## Thermal & Controller Packaging
 - Grinding paint to bare metal, adding thermal glue, and clamping controllers to aluminum plates keeps GT decks below ~60 °C; PETG brackets alone trap heat and left some builds idling at ~64 °C.[^7]
+- Smart Repair’s Ninebot G2 retrofit keeps controller temps below 50 °C by stripping paint at the mount, buttering both sides with thermal paste, and sandwiching a 50 × 100 × 10 mm aluminum slab between the frame and ESC before torquing it down.【F:knowledge/notes/input_part013_review.md†L616-L618】
 - Ferrofluid refreshes on Segway hubs should be sparing (2.5–3 ml for 10–11" shells) and paired with dedicated temperature probes because shell temperatures lag winding heat when current climbs.[^8]
 - Deck volume fits Ubox Lite, 85/240, or MP2 controllers; a stock GT2 can even mount an 85240 on the rear wall once insulation is removed—plan pass-throughs and strain relief before closing the deck.[^7]
 - Segway GT decks sag under multi-kilowatt pulls, so add aluminum spreaders or belly plates when doubling controller power, mirroring the community’s 3 mm laser-cut solutions.[^2][^9]
