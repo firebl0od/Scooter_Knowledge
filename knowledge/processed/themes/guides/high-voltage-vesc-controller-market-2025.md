@@ -5,6 +5,7 @@
 - Vedder’s new Maxim 120 V ecosystem (Maxim singles, Duet dual, and the companion smart BMS) finally gives builders an official high-voltage option, yet the ~€530 bundle, STM32F4 control, and limited field data spark debate against cheaper Chinese controllers.【F:knowledge/notes/input_part014_review.md†L24-L27】
 - 3Shul’s CL-series and Tronic X12 controllers occupy the premium tier for riders chasing 23 S+ or 500 A ambitions, but supply volatility, firmware transparency, and pricing nearly double that of Spintend/Ennoid alternatives require group-buy planning and spare telemetry gear for validation.【F:knowledge/notes/input_part014_review.md†L15-L16】【F:knowledge/notes/input_part014_review.md†L162-L165】
 - Makerbase’s 84xxx HP hardware has emerged as the dependable mid-budget foil: real-world logs show it surviving 22 S abuse when wiring is clean, while 12-FET Spintend stages continue to brown out under heavier riders despite water-cooling success stories.【F:knowledge/notes/input_part014_review.md†L18-L21】
+- Fardriver controllers keep showing up as the affordable path to 2,600 A-class output while VESC hardware remains the premium—but more fragile—choice at that current level.【F:knowledge/notes/input_part007_review.md†L40-L40】
 
 ## Controller Landscape Reference
 | Controller | Nominal Voltage & Phase Envelope | Deployment Notes | Recommended Use Cases |

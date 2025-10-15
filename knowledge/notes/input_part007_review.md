@@ -39,6 +39,22 @@
 - NetworkDir’s Makerbase shunt swap to a 1.7 mΩ stack halved the reported current until he reflashed 6.02, so anyone copying the mod needs to retune the resistance values and detection or accept bad telemetry.【F:data/vesc_help_group/text_slices/input_part007.txt†L15492-L15506】
 - The crew treats Fardriver controllers as the affordable high-current alternative—models reach 2,600 A and Weped’s Sonic reportedly ships them stock—while VESC remains the premium, more fragile option at those power levels.【F:data/vesc_help_group/text_slices/input_part007.txt†L15924-L15957】
 
+### Motor & Controller Tuning (Lines 101–200 re-pass)
+- Franchesco’s 20 s Makerbase 75200 build is already brushing 117 km/h even before the QS8 connectors and spark-gap antispark are installed; he’s running a Y-split 20s5p harness in 10 AWG while prepping for dual-drive packaging.【F:data/vesc_help_group/text_slices/input_part007.txt†L101-L113】
+- Mixing dissimilar windings (e.g., 22×3 rear with 33×2 front or 75 H vs. 50 H hubs) remains a non-starter—Mirono and Gabe warned that the mismatched kV spawns tuning headaches and reliability issues even if a few riders have tried it.【F:data/vesc_help_group/text_slices/input_part007.txt†L115-L123】
+- Keep MOSFET temps under control: Mirono reiterated 100 °C as the absolute ceiling and 70 °C as a practical limit, Happy Giraffe echoed the 70 °C guideline, and haku’s 100/100 VESC promptly climbed to 70 °C until he re-applied thermal paste.【F:data/vesc_help_group/text_slices/input_part007.txt†L123-L146】
+- Jan continues to champion thick aluminum controller enclosures, noting his “aluboxes” refuse to climb more than ~5 °C over ambient compared with other hardware Izuna has seen.【F:data/vesc_help_group/text_slices/input_part007.txt†L136-L141】
+- QS90 inrunners remain on the radar: Happy Giraffe likes their geared IPM core for lower hub temps and extra torque, while Gabe cautioned that marketing wattage claims still need verification against factory specs.【F:data/vesc_help_group/text_slices/input_part007.txt†L181-L193】
+
+### Tires & Consumables (Lines 101–200 re-pass)
+- Her0DasH reminded the group that yellow-marked casings are tubeless; tube-type carcasses won’t seal without an inner tube even if the tread looks similar.【F:data/vesc_help_group/text_slices/input_part007.txt†L142-L143】
+
+### Displays, Controls & Fabrication (Lines 101–200 re-pass)
+- Eye4 displays still lack a turnkey VESC firmware path—sombre_enfant can source units with Bluetooth, but Mirono confirmed no public firmware exists despite Camilo’s past demo, and Tommy’s rewrite effort needs full UART plus the single-wire wake lead before a VESC-first build is possible.【F:data/vesc_help_group/text_slices/input_part007.txt†L147-L161】
+
+### Battery, Accessories & Security (Lines 101–200 re-pass)
+- Gabe is stretching a Xiaomi Pro 2 to 20 s by pairing an internal 11s8p with an external 9 s module in series, routing balance leads externally, while PuneDir repurposed a 16s6p pack down to 14s6p for a Zero build—reminding everyone to document voltage claims clearly before test rides.【F:data/vesc_help_group/text_slices/input_part007.txt†L186-L198】
+
 ### Motor & Controller Tuning (Lines 19 300–20 799)
 - Yamal and Paolo confirmed that Tronic 250 claims are optimistic—leaving phase current near 230 A caused thermal cutouts, so their race setups now target roughly 200 A rear/180 A front (with moderate field-weakening) and reserve the published 250 A figure as an absolute ceiling.【F:data/vesc_help_group/text_slices/input_part007.txt†L19546-L19567】
 - Yoann’s brand-new 3Shul batch showed −70 °C FET readings on the slave controller, pointing to a missing or failed MOSFET NTC and reminding techs to validate sensor wiring before first ride rather than assuming factory QC caught it.【F:data/vesc_help_group/text_slices/input_part007.txt†L19570-L19576】
@@ -130,6 +146,14 @@
 ### Frame, Suspension & Braking (Raw IDs 221 833–221 897)
 - Jan cautioned that the brake lever he photographed was the worst he has used thanks to plastic threads and screws, so builders should treat that aftermarket option as suspect even if it pairs with Magura MT5(e) calipers.【F:data/raw/telegram_exports/vesc_help_group/input_part007.json†L413465-L413548】
 
+### Tires, Valves & Media (Lines 501–600 re-pass)
+- Blade 800 W owners still end up notching the split rim so a beefier Schrader stem clears the casting; valve extensions help with inflation but Paolo and Awyba consider trimming the rim the only reliable way to seat larger valves on compact wheels.【F:data/vesc_help_group/text_slices/input_part007.txt†L512-L521】
+- The same slice confirmed 10×2.5 tubes balloon inside 10×2.125 tires and feel unsafe—stick with 10×2 tubes for narrow casings and replace mangled tubes rather than stretching oversized ones.【F:data/vesc_help_group/text_slices/input_part007.txt†L494-L515】【F:data/vesc_help_group/text_slices/input_part007.txt†L543-L547】
+- Track crews captured race footage with Insta360 rigs mounted off-scooter (tripod or ground mounts) because full-size gimbal cameras proved too bulky for jumps, nudging riders toward 360° cameras such as the X3 for reliable capture on 10+ series scooters.【F:data/vesc_help_group/text_slices/input_part007.txt†L525-L541】
+- Haku’s hunt for busbar fabrication shortcuts reconfirmed that hobby-grade diode lasers only engrave copper; cutting 0.2 mm sheet still demands industrial CO₂ hardware or manual methods such as drilling pilot holes and following the outline with a coping/“leaf” saw, heavy-duty shears, and patient handwork.【F:data/vesc_help_group/text_slices/input_part007.txt†L542-L590】
+- Laser safety came up again—multi-kilowatt beams blind bystanders instantly, so home builders should budget full enclosures, interlocks, and camera monitoring if they ever graduate to CO₂ machines instead of treating them like desktop toys.【F:data/vesc_help_group/text_slices/input_part007.txt†L561-L584】
+- Gabe is rebuilding his 800 W Blade around a 13s5p LG MH1 block plus a 3s6p stack of repurposed EVE ES2 cells for extra capacity while reserving P42A cells for a dual 22×3 80100 race scooter, underscoring the need to match chemistries to expected current draw when mixing fresh and salvage packs.【F:data/vesc_help_group/text_slices/input_part007.txt†L495-L599】
+
 ### Wiring, Sensors & Diagnostics (Raw IDs 221 833–221 897)
 - Yamal’s latest build photos show QS8 connectors on the high-current leads, reinforcing the shift toward large-format plugs on these multi-controller conversions.【F:data/raw/telegram_exports/vesc_help_group/input_part007.json†L413723-L413809】
 
@@ -162,6 +186,16 @@
 - Yamal is ready to cut the controller plate out of his Nami to bolt on a massive external heatsink and may revert to Kelly controllers because Tronics still overheat during stop/start circuit sessions even with 37 A of field weakening and a new high-discharge pack.【F:data/vesc_help_group/text_slices/input_part007.txt†L16556-L16559】
 - PuneDir still logged 74 °C on a heavily modded Makerbase 75100 after an aggressive ride, underscoring that these cases need genuine airflow or chassis heat sinking even when the baseplate looks “proper.”【F:data/vesc_help_group/text_slices/input_part007.txt†L17274-L17278】
 - Jan argues that slapping fans or steering dampers on a scooter is a band-aid—if a VESC cruises past ~50 °C or a frame tankslaps, fix the heatsink and trail instead of masking the bad engineering.【F:data/vesc_help_group/text_slices/input_part007.txt†L17521-L17541】【F:data/vesc_help_group/text_slices/input_part007.txt†L17548-L17564】
+
+### Battery Architecture & Cells (Lines 201–300 re-pass)
+- Packing 72 cells into a 3 L Wildman-class bag is technically possible but demands folded copper interconnects and abandoning cell holders—PuneDir immediately pushed back, reiterating that holderless bricks are unacceptable for reliability.【F:data/vesc_help_group/text_slices/input_part007.txt†L236-L239】
+- Blade-powered Xiaomi conversions are juggling multiple pack formats: Gabe is reserving a 20 s 8 p module for his “clean” Pro 2, dropping a 20 s 4 p LG MH1 pack into a beater frame, and considering 16 s 5 p or 13 s 6 p layouts to tame MH1 voltage sag when bag space or wiring makes 21700 cells impractical.【F:data/vesc_help_group/text_slices/input_part007.txt†L252-L263】
+- Xiaomi G30 builds already wheelie on a single 10 s Blade motor, and the crew expects dual 10 s stacks with field weakening to hit 72 V equivalents—one more reason to stage higher-voltage packs and matching controllers before going twin motor.【F:data/vesc_help_group/text_slices/input_part007.txt†L241-L247】
+- Cell selection is pivoting toward 21700 formats: Samsung 6A and Lishen LR21700 12 A cells are deemed “plenty” for Blade motors, and Konstantin confirmed the LR2170LA variant survives sustained draws above its 3 C/12 A label.【F:data/vesc_help_group/text_slices/input_part007.txt†L271-L277】
+- Happy Giraffe reminded everyone that chasing 48 A battery current at 72 V is ~3.5 kW already; he’d rather raise voltage and lean on ~100 A phase (good to ~50 % duty) fed by a 72 V 50 A pack than stack more battery amps into MH1 cells.【F:data/vesc_help_group/text_slices/input_part007.txt†L273-L277】
+- Mirono cataloged actual 21700 diameters—Samsung 50E sits ~21.12 mm with wrap, Molicel P42A around 21.34 mm, Lishen LR21700 near 21.4 mm, and LG M58T balloons toward 21.6 mm—underscoring why 3D-printed holders need oversized test cuts to avoid crushing cells.【F:data/vesc_help_group/text_slices/input_part007.txt†L283-L296】【F:data/vesc_help_group/text_slices/input_part007.txt†L290-L290】
+- Face de Pin Sucé and Mirono echoed that, if budgets allow, SmartDisplay dashboards remain the “just buy it” answer versus improvising cheaper data readouts for these higher-power builds.【F:data/vesc_help_group/text_slices/input_part007.txt†L297-L299】
+- Capture the follow-ups: document safe copper-fold alternatives for 3 L bags that preserve mechanical retention, expand the cell-diameter table in the battery-pack playbooks, and price Samsung 6A/Lishen LR21700 supply so Blade conversions stop relying on saggy MH1 bricks.【F:data/vesc_help_group/text_slices/input_part007.txt†L236-L296】
 
 ### Motor & Controller Tuning Updates (Lines 17 800–19 299)
 - PuneDir noted that Makerbase’s 84100 HP ships with a normally closed ignition lead—owners either need an NC key switch or must rewire the input before grafting it into Zero-style harnesses.【F:data/vesc_help_group/text_slices/input_part007.txt†L18489-L18495】

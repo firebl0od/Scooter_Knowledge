@@ -4,14 +4,17 @@
 - Oversize protection hardware and choose the right architecture for the pack: JK active-balancing boards bring dual 7 AWG busbars and remote toggles but recent self-burn reports push installers toward JBD/LLT or ANT units when decks are cramped or uptime is critical.[^1][^2][^3]
 - Commission every pack like a high-energy experiment—enable both charge and discharge FETs before regen tests, validate balance-lead order, and log first rides because a single BMS cutoff or miswire has already nuked controllers and power stages that survived normal abuse.[^4][^5][^6]
 - Treat balancing and calibration as routine maintenance: Daly boards need full charge/discharge learning and higher voltage to balance, while JK hardware wakes via the accessory display, runs active shuttling above ~0.015 V delta, and benefits from monthly thermal/IR audits.[^7][^8][^9]
+- JK’s active stage only shuttles ~600 mA between groups and some silver 8 p boards are burning while idle or freezing the app on the discharge page—stock spare harnesses and plan JBD swaps when uptime matters.【F:knowledge/notes/input_part007_review.md†L305-L307】【F:knowledge/notes/input_part007_review.md†L399-L400】
 
 ---
 
 ## Selection Matrix (2024–2025 Field Data)
 | BMS Family | Typical Continuous / Peak Rating | Strengths Observed in the Field | Known Pitfalls & Mitigations |
 | --- | --- | --- | --- |
-| **JK Smart (active balancer)** | 150 A / 300 A-class packs with dual 7 AWG busbars | Integrated active charge shuttling, remote charge/discharge toggles, long-range Bluetooth displays, antispark-friendly architecture.[^1][^10] | Multiple batches have cooked balance resistors or frozen after opening the discharge page; keep spares, add airflow for the warm copper planes, and prep harnesses for a JBD swap.[^2][^11] |
+| **JK Smart (active balancer)** | 150 A / 300 A-class packs with dual 7 AWG busbars | Integrated active charge shuttling, remote charge/discharge toggles, long-range Bluetooth displays, optional cellular tracker with remote lock support, antispark-friendly architecture.[^1][^10][^jk_tracker] | Multiple batches have cooked balance resistors or frozen after opening the discharge page; the shuttle stage only moves ≈600 mA so weigh the gain over passive boards, keep spares, add airflow for the warm copper planes, and prep harnesses for a JBD swap.【F:knowledge/notes/input_part007_review.md†L305-L307】 |
 | **ANT Smart** | 200 A (70 mm-wide) to 240 A/600 A surge boards | Compact footprint, app-based current ramp controls, simultaneous cell balancing, proven on Weped FS builds and 20 s 7 p side-mounted packs plus the new 10–32 S/220 A SKU for 20 S scooters.[^3][^12][^13][^ant-32s] | Regen kills controllers if charge FETs stay disabled; app pairing quirks persist, discharge toggles can trip Tronic stages, and the larger units stay awake above ~61 V—budget headroom for 20 S packs that dip below 60 V.[^4][^14][^ant-floor] |
+
+- **Field sizing reality:** Builders still pair 200 A JK/ANT boards with everyday 70 A packs to survive regen spikes and hall faults that routinely nuke lesser BMS hardware.【F:knowledge/notes/input_part007_review.md†L441-L441】【F:knowledge/notes/input_part007_review.md†L436-L437】
 | **LLT / JBD (passive)** | 60–100 A continuous in slim 10–17 s shells | Gentle pre-charge that protects controller caps, configurable temp limits, compact housings ideal for tight decks, credible JK alternative when space matters.[^3][^15] | Firmware listings exaggerate series counts; confirm real 21 s ceiling, watch balance current (≈100–160 mA), and document harness pinouts to avoid miswired sense leads.[^15][^16][^17] |
 | **Daly Smart** | 35–80 A commuter packs | Cheap, ubiquitous, workable for light-duty commuters once calibrated; some riders still rely on them when better boards won’t fit.[^7][^18] | Balancing often waits for ≥4.18 V per cell, SoC drifts until full cycles are logged, and users call failure rates a “casino”—derate heavily and monitor cell temps monthly.[^7][^19][^20] |
 | **Charge-only + Active Balancer** | Depends on fuse + controller limits | When space is scarce, builders fuse the main lead, rely on VESC undervoltage, and clip JK balancers across the stack to keep cells aligned without discharge FET losses.[^21] | Requires disciplined fusing and logging because discharge faults no longer open automatically; not suitable where regulatory compliance mandates full protection stages.[^21] |
@@ -20,12 +23,13 @@
 1. **Wake the hardware correctly.** JK boards ship asleep—use the €15 display or a 5–7 V bench supply, confirm charge/discharge toggles, and leave the board powered before sealing the pack.[^8]
 2. **Validate sense-lead order before soldering B−.** Step through the harness at 3.5 V increments; reversing the negative pair has already cooked resistors on new ANT installs.[^5]
 3. **Keep both FET banks enabled for regen tests.** Builders traced repeated ESC deaths to disabled charge FETs on JK smart boards—regen had nowhere to dump energy.[^4]
-4. **Stage first rides with logging.** Riders lost Spintend and Makerbase controllers the moment a BMS tripped under load; gather current and voltage traces to verify the protection stays latched through braking and launches.[^6]
-5. **Load-test bargain externals before trusting telemetry.** Denis’ workshop found “13 Ah” packs sagging instantly, leaving the internal battery carrying the ride—bench suspect modules alone before wiring them into a smart-BMS stack.[^cheap-externals]
-5. **Oversize connectors and plan airflow.** High-current boards warm noticeably near their limits—route copper planes into moving air or heatsinks, especially on JK units that reinforce traces with bus rods.[^10]
-6. **Confirm advertised series support.** JBD listings still misstate 22 s capability; verify firmware revisions before wiring high-voltage packs.[^16]
-7. **Plan controller integration.** VESC Bridge V2 is adding native CAN support for JBD/JK/ANT/Daly boards—map harnesses and firmware early so telemetry stays unified once the hardware ships.[^bridge]
-8. **Treat discharge-less monitor boards cautiously.** Jason’s 32 S-capable design drops discharge FETs entirely; keep downstream fuses/contactors because the BMS will not open on shorts.[^no-fet-smart]
+4. **Add precharge or contactors before first live connect.** Survivors of the latest 84/200 HP failures now wire dedicated precharge loops, tidy discharge harnesses, and cap battery amps until logs prove the BMS stays latched—skipping that prep let inrush and aggressive current targets nuke controllers mid-ride.【F:knowledge/notes/input_part007_review.md†L540-L540】
+5. **Stage first rides with logging.** Riders lost Spintend and Makerbase controllers the moment a BMS tripped under load; gather current and voltage traces to verify the protection stays latched through braking and launches.[^6]
+6. **Load-test bargain externals before trusting telemetry.** Denis’ workshop found “13 Ah” packs sagging instantly, leaving the internal battery carrying the ride—bench suspect modules alone before wiring them into a smart-BMS stack.[^cheap-externals]
+7. **Oversize connectors and plan airflow.** High-current boards warm noticeably near their limits—route copper planes into moving air or heatsinks, especially on JK units that reinforce traces with bus rods.[^10]
+8. **Confirm advertised series support.** JBD listings still misstate 22 s capability and recent “6–22 S” marketing quietly caps at 21 S; verify firmware revisions before wiring high-voltage packs.[^16][^jbd_limit]
+9. **Plan controller integration.** VESC Bridge V2 is adding native CAN support for JBD/JK/ANT/Daly boards—map harnesses and firmware early so telemetry stays unified once the hardware ships.[^bridge]
+10. **Treat discharge-less monitor boards cautiously.** Jason’s 32 S-capable design drops discharge FETs entirely; keep downstream fuses/contactors because the BMS will not open on shorts.[^no-fet-smart]
 
 ## Regen & Current Budgeting
 - **Cap braking currents around the BMS charge envelope.** Community testing now caps regen near 120 A and keeps charge/discharge FETs closed so controllers ride through decel events instead of seeing open-circuit spikes.[^6]
@@ -48,6 +52,8 @@
 - **Log balance behavior after storage.** JK units can self-immolate while idle and Daly boards stop balancing once “full”—review app history after downtime before sending the pack back into service.[^2][^19]
 - **Teach recovery procedures.** Publish lead-order diagrams and wake-up checklists so drained JK packs (≈57 V on 20 s) or JBD miswires don’t strand riders without telemetry.[^17][^24]
 - **Escalate when firmware toggles misbehave.** ANT app glitches that trip discharge FETs or JK UIs that freeze mid-session warrant immediate vendor contact and a fallback BMS plan.[^11][^14]
+- **Reset stubborn JK Wi-Fi modules.** A long press on the board button reboots the pack and restores the Wi-Fi password to `1234`, saving field techs from factory resets after service work.【F:knowledge/notes/input_part007_review.md†L401-L401】
+- **Re-run fundamentals after a scare.** When a pack refuses to wake, meter main-lead voltage, confirm each balance pin steps in 3.5 V increments, and double-check harness polarity before blaming firmware—miswired sense pairs already cooked resistors on new ANT installs.【F:knowledge/notes/input_part007_review.md†L483-L483】
 
 ---
 
@@ -70,6 +76,7 @@
 [^ant-floor]: The same thread notes the larger ANT units stay awake above ≈61.2 V, so 20 S packs that dip below 60 V need extra headroom or a different BMS if they expect deep discharge protection.【F:knowledge/notes/input_part012_review.md†L20185-L20224】
 [^15]: LLT/JBD smart boards earn praise for compact housings, gentle pre-charge, and configurable protections, giving builders a slimmer alternative to JK hardware.【F:knowledge/notes/input_part007_review.md†L192-L262】
 [^16]: Community members caution that JBD firmware listings overstate maximum series counts—verify the real 21 s ceiling before wiring high-voltage packs.【F:knowledge/notes/input_part007_review.md†L64-L141】
+[^jbd_limit]: Jiabaida’s own site dropped offline while a “6–22 S” listing quietly documented only 6–21 S support, reinforcing the need to confirm firmware limits before trusting new-stock boards.【F:knowledge/notes/input_part007_review.md†L64-L64】
 [^17]: Harness diagrams and recovery guides remain in demand because miswired JBD/ANT balance leads are a recurring failure point during repairs.【F:knowledge/notes/input_part009_review.md†L453-L469】
 [^18]: Budget builds continue to rely on Daly smart boards when higher-end options will not fit, accepting the trade-offs for commuter duty.【F:knowledge/notes/input_part001_review.md†L475-L499】
 [^19]: Daly units often stop balancing once “full,” and riders derate them heavily after repeated over-discharge failures, treating the platform as a gamble.【F:knowledge/notes/input_part001_review.md†L475-L705】
@@ -82,5 +89,6 @@
 [^cheap-externals]: Denis’ workshop found cheap “13 Ah” externals sagging immediately, forcing the primary battery to supply all current—test them solo at low load before wiring them into parallel stacks or trusting their telemetry.【F:knowledge/notes/denis_all_part02_review.md†L5499-L5526】
 [^no-fet-smart]: Jason’s 32 S-capable BMS board removes discharge FETs entirely, so downstream fusing/contactors remain the only short-circuit protection.【F:knowledge/notes/input_part012_review.md†L19339-L19342】
 [^jk-trip]: A JK smart BMS tripped at ~60 A on a C80 build when the rider demanded 70 A battery, proving the protection works and prompting a pack redesign instead of bypassing the board.【F:knowledge/notes/input_part012_review.md†L15649-L15756】
+[^jk_tracker]: JK’s optional cellular tracker module adds SIM-powered remote locking, though the module is bulky enough that owners plan for shrink-wrap pockets or inductive charging to avoid tearing packs open.【F:knowledge/notes/input_part007_review.md†L58-L58】
 [^adj_supply_smart]: Adjustable 22 S/18 A supplies paired with ANT sleep timers keep 21 S packs topped without drifting during long parking stretches.【F:knowledge/notes/input_part012_review.md†L11401-L11411】
 [^multi_brick_smart]: Switchable 16–24 S/20 A chargers substitute for premium 21 S bricks when inventory dries up, giving one travel charger for multiple scooter voltages.【F:knowledge/notes/input_part012_review.md†L11792-L11797】

@@ -15,3 +15,6 @@
 - **Document every parcel.** Keep copies of declarations, MSDS sheets, and carrier acknowledgements so you can prove due diligence if an incident occurs; Denis captures these records alongside order IDs during manual payment reconciliation.【F:knowledge/notes/all_part01_review.md†L150-L150】【F:knowledge/notes/denis_all_part02_review.md†L188-L193】
 - **Plan for stock outages.** Charger shortages, bag delays, and hazmat paperwork slowdowns can halt complete-kit sales; maintain communication channels (newsletters, storefront notices) to reset expectations before customers escalate.【F:knowledge/notes/all_part01_review.md†L138-L138】
 
+## Regional Compliance Watch
+- **Spain’s 2024–2027 crackdown.** Cheap Xiaomi clones with flimsy 110 mm rotors and bargain electronics triggered fires and are being banned; by 2027 riders must shift to plated, certified models such as the Xiaomi 4 series to stay legal.【F:knowledge/notes/input_part007_review.md†L410-L410】
+

@@ -5,7 +5,7 @@ Taming current limits is the difference between a scooter that rips for years an
 
 ## Build Prerequisites
 1. **Healthy pack & BMS:** Log internal resistance and balance status before tuning. Parallel packs with mismatched protections can surge into one another when a single BMS trips, so size discharge and regen around the weakest board.¹
-2. **Trustworthy wiring & connectors:** QS8/QS10 or AS150-class connectors and 6 mm²+ phase leads are the expectation above ~250 A phase. Revisit solder joints, pad pressure, and thermal interface materials before chasing higher numbers.²
+2. **Trustworthy wiring & connectors:** QS8/QS10 or AS150-class connectors and 6 mm²+ phase leads are the expectation above ~250 A phase—step pack leads up from 14 AWG to 12 AWG (or double conductors) once continuous draw creeps past 30–40 A so looms stop bottlenecking current.²【F:knowledge/notes/input_part007_review.md†L522-L522】
 3. **Accurate motor data:** Do not rely on auto-detection when values look suspicious (e.g., ERPM flips, inductance jumps). Measure Rs/Ls with external tools or re-run detection on known-good hardware before editing limits.³
 4. **Cooling strategy:** Deck-mounted plates, fresh thermal paste, and airflow matter as much as MOSFET specs. Gutted aluminum cases and machined mounts are the baseline once you exceed 60 A battery.⁴
 
@@ -13,16 +13,20 @@ Taming current limits is the difference between a scooter that rips for years an
 1. **Baseline detection & calibration**
    - Warm the motor and pack, disable the phase filter on Flipsky 75xxx units, and rerun detection with the `mxlemming` observer before touching currents.⁵
    - Validate halls and 5 V rails after detection—many “mystery faults” are just dead sensor power.⁶
+   - On large hubs, cap detection current near 20–30 A so the wheel doesn’t slam during calibration before you raise phase amps for real tuning.【F:knowledge/notes/input_part007_review.md†L393-L395】
 2. **Set conservative currents**
    - Start with a 2:1 to 3:1 phase-to-battery ratio (e.g., 40 A battery / 110 A phase on 16 S commuter packs).⁵ ⁷
+   - Sanity-check power math early: 48 A at 72 V is already ~3.5 kW, so chasing more battery amps on mid-grade cells buys little—Happy Giraffe instead feeds ~100 A phase (good to ~50 % duty) from a 72 V 50 A pack and lets voltage do the heavy lifting.【F:data/vesc_help_group/text_slices/input_part007.txt†L273-L277】
    - Match current targets across front/rear controllers to avoid free-spinning the lighter wheel.⁸
    - Treat dual-motor 16 S7 P Samsung 50E packs as roughly 140 A systems: hold each controller near 70 A battery and add ducted airflow up front before nudging limits higher.²³
    - Keep Artem’s relationship in mind: `I_phase = I_batt × V_batt ÷ V_motor`, so phase torque fades as ERPM climbs—log both currents to confirm your battery caps aren’t starving the tune mid-pull.[^phase_equation]
+   - For daily commuters, finish charges around 90 % if the BMS still balances there—you’ll quadruple pack lifespan versus living at 100 %.【F:knowledge/notes/input_part007_review.md†L307-L307】
 3. **Log, ride, iterate**
    - Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
    - Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
    - Cross-check real-time power with an external meter or SmartDisplay—unfiltered VESC telemetry overshoots true watts by 10 kW or more on aggressive pulls.²⁴
    - Treat VESC Tool’s state-of-charge gauge as a rough helper—it linearly maps 4.2–3.3 V per cell (≈66 V on 20 S), so keep your cutoffs a few volts above the BMS trip to prevent surprise throttling once the display reads “empty.”²⁵
+   - Bake low-voltage and thermal checkpoints into every shakedown; the group now logs pack temperature and trims cutoffs slightly high so BMS trips don’t kill propulsion mid-ride.【F:knowledge/notes/input_part007_review.md†L525-L525】
 4. **Layer in regen**
    - Add regen after forward currents stabilize. Keep battery regen gentler than your discharge target (−5 A to −10 A is plenty for commuter packs) and ramp up slowly to avoid BMS or controller cutoffs.⁵ ¹¹
 5. **Optional: field weakening & traction control**
