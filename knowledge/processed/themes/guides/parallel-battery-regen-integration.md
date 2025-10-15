@@ -8,7 +8,8 @@
 ## Pack Pairing Pre-Flight Checklist
 1. **Equalise voltage first.** Bring both packs to the same resting voltage before making the parallel connection. Builders observed natural balancing currents under ~1 A once voltages matched, versus abrupt faults when voltages differed by a full cell group.【F:knowledge/notes/input_part013_review.md†L154-L156】
 2. **Plan capacity-aware cutoffs.** Mixed packs (e.g., small internal C-rate plus large 2 C external) still share state-of-charge; log per-pack voltage drop during endurance runs (≈13 V over 38 mi in testing) to size cutoffs and avoid deep cycling the smaller module.【F:knowledge/notes/input_part013_review.md†L154-L155】
-3. **Verify BMS readiness.** Confirm that every pack’s charge path is active and any smart-BMS current limits exceed expected regen peaks (≥100 A on 20 S JBD examples) before heading out.【F:knowledge/notes/input_part013_review.md†L157-L157】【F:knowledge/notes/input_part013_review.md†L703-L703】
+-3. **Verify BMS readiness.** Confirm that every pack’s charge path is active and any smart-BMS current limits exceed expected regen peaks (≥100 A on 20 S JBD examples) before heading out.【F:knowledge/notes/input_part013_review.md†L157-L157】【F:knowledge/notes/input_part013_review.md†L703-L703】
+4. **Match BMS capability when stacking OEM + DIY packs.** Builders who paired a stock Ninebot pack with a 4 S extender only restored clean VESC detections after charging both packs separately to the same voltage and verifying each BMS was rated for the combined discharge; the sagging add-on forced them to revert to a regulated 60 V bench supply until the mismatch was fixed.【F:knowledge/notes/input_part004_review.md†L101-L106】
 - **Load-test suspect externals.** Denis’ workshop found bargain 10 S packs sagging immediately, leaving the internal module to carry the ride—bench them alone at low amperage before trusting their specs in a parallel stack.[^cheap-externals]
 
 ## Wiring & Current-Sharing Strategy

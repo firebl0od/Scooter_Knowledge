@@ -7,6 +7,8 @@
 
 ## Base Scooter Preparation
 - Flash the latest ScooterHacking G30 BMS firmware to lift discharge ceilings past 20 A while retaining stock harnesses—essential before pushing VESC phase currents.【F:knowledge/notes/input_part014_review.md†L103-L104】
+- Measure the deck cavity early: builders logged ~120 mm width and 74 mm depth, giving clear constraints before committing to dual controllers or double-stack battery layouts.【F:knowledge/notes/input_part004_review.md†L220-L220】
+- Build a spacer/pack checklist before welding: 20 S 4 P layouts fit with printed or CNC spacers plus minor cable reroutes, while 20 S 5 P bricks demand tray trimming, recessed fasteners, and harness standoffs to preserve deck clearance.【F:knowledge/notes/input_part004_review.md†L247-L248】
 - Strip the frame and inspect deck welds prior to grinding rails for larger packs; documented builds plan rail relief plus 3 mm aluminum skid plates as interim reinforcement.【F:knowledge/notes/input_part014_review.md†L106-L106】【F:knowledge/notes/input_part014_review.md†L118-L119】
 - Choose battery spacers carefully: JREV units add cable room but misalign slightly with the frame, so plan shims or revised prints when targeting 22 S layouts.【F:knowledge/notes/input_part014_review.md†L118-L118】
 
@@ -14,6 +16,7 @@
 | Configuration | Controllers & Limits | Reported Performance | Notes |
 | --- | --- | --- | --- |
 | 16 S commuter | Dual Ubox 100/100, Ortega observers, 50 A FW start at 87 % duty | ≈45 mph top speed, ~59 A peaks, ~1 mile per amp-hour above 20 mph | Prioritize battery capacity and cooling before chasing new motors; FW headroom exists but watch temperature logs.【F:knowledge/notes/input_part014_review.md†L105-L105】 |
+| 16 S Blade 800 W swap | Single VESC now, dual Flipsky 75100 CAN link planned; ≈100 A pack ceiling with light FW | 60–68 km/h on a 16 S 4 P Molicel 40T pack while keeping motor current near 100 A | Document CAN harnessing before adding the second 75100—builders are still requesting wiring diagrams.【F:data/vesc_help_group/text_slices/input_part004.txt†L15986-L15997】 |
 | 20 S stealth upgrade | Planned 20 S4 P 50PL pack with rail grinding and future 50 kW target | In progress—emphasizes fabrication burden (deck grinding, spacer redesign, pack sourcing) | Budget premium cells (50PL/P45B) and labor; expect cost doubling over 30Q baselines.【F:knowledge/notes/input_part014_review.md†L106-L106】 |
 | 22 S race prep | Targeting 22×3 or 33×2 motors, 300 A phase, positive ramp ~0.4 s | Focus on traction control slip windows (11 k–17 k rpm) to avoid wheelspin | Requires spare motors and throttle filtering to mitigate spike-induced controller shutdowns.【F:knowledge/notes/input_part014_review.md†L84-L87】【F:knowledge/notes/input_part014_review.md†L107-L107】 |
 
@@ -22,6 +25,11 @@
 - ANT smart BMS units have latched discharge FETs under Spintend-level currents; plan redundant pack protection (loop keys, fuse boards, or dual BMS) for >300 A goals.【F:knowledge/notes/input_part014_review.md†L98-L101】
 - Calibrate CAN smart BMS logs against VESC telemetry—BMS current remains more trustworthy but may drift; manual calibration preserves ±500 W accuracy on 35 kW builds.【F:knowledge/notes/input_part014_review.md†L79-L82】
 - Jason’s Max project already packaged a 30 S pack around a 65H 17×4 motor and scoped a fully internal 40 S/3 P layout, proving the deck ceiling once partitions are trimmed and harness routing is planned early.【F:knowledge/notes/input_part012_review.md†L7997-L8008】【F:knowledge/notes/input_part012_review.md†L8221-L8222】
+- Recent mock-ups squeezed 20 S 5 P 21700 packs plus dual VESCs under the deck with only a 3 mm spacer, but chasing 30 S requires ≥10 P parallels and upgraded harnessing to keep sag tolerable at 200 A per controller.【F:knowledge/notes/input_part004_review.md†L289-L289】
+- Experienced builders warn that 20 S 5 P 21700 layouts only fit after CNC machining; newcomers should stick to 16–18 S designs or commission professional builds to avoid compromised clearances and shipping headaches.【F:knowledge/notes/input_part004_review.md†L318-L318】
+- **Pack comparison:** 20 S 4 P packs slide in with spacer + harness relief and retain OEM hardware, whereas 20 S 5 P builds require lowered screw heads, HV insulation around the headtube screws, and careful cable layering to avoid rubbing the deck lid.【F:knowledge/notes/input_part004_review.md†L247-L248】
+- MP2/CCC_ESC controllers share the 118 × 100 × 23 mm footprint that fits alongside 20 S bricks when you remote-mount the capacitor harness; plan right-angle phase exits or undertray routing so the shell closes without crushing silicone leads.【F:data/vesc_help_group/text_slices/input_part004.txt†L20174-L20209】
+- When pairing the stock 10 S pack with 4 S extenders, confirm both BMS boards are healthy, charged to matching voltages, and rated for the combined discharge—builders only restored clean VESC detection after abandoning a sagging stack for a regulated 60 V bench pack.[^bms-parity]
 
 ## Control & Traction Tuning
 - Compress throttle ADC ranges (treat ~0.83 V as idle, activate around 1.0–1.2 V) to eliminate noise-triggered surges on Spintend 100/100 installs.【F:knowledge/notes/input_part014_review.md†L84-L85】
@@ -33,6 +41,7 @@
 - Plan for valve-stem service and bead reseating after pothole hits—tubeless split rims can burp air, so keep compressors and soapy water handy during test rides.【F:knowledge/notes/input_part014_review.md†L46-L46】
 - Evaluate braking upgrades alongside power mods; 203 mm rotors add leverage but may be overkill—pair regen tuning with quality hydraulic calipers and DOT 4/5 fluid first.【F:knowledge/notes/input_part014_review.md†L43-L43】
 - Use the €25 ePowerFun 3 mm aluminum floor plate as a quick cooling stopgap—drill five mounting holes, trim the nose to clear JREV spacers, and plan a thicker custom plate once testing confirms heat loads.[^epowerfun]
+- Respect stock hub limits: original Ninebot motors start burning around 40–45 A battery even on 20 S packs, so either cap current or plan upgraded hubs before hammering dual 15 A controllers continuously.【F:knowledge/notes/input_part004_review.md†L298-L298】【F:data/vesc_help_group/text_slices/input_part004.txt†L19128-L19168】
 
 ## Sourcing & Accessory Integration
 - Avoid too-good-to-be-true controller deals: £50 AliExpress listings are often bare logic boards; prioritize complete Spintend 100/100 Lite kits or 84/150 bundles from trusted resellers to get full harnesses.【F:knowledge/notes/input_part014_review.md†L108-L108】
@@ -53,3 +62,4 @@
 - Deck packaging experiments and travel-charging harness specs stem from the spring 2025 Max threads detailing 30–40 S pack prototypes and J1772 adapter wiring for 3 kW public charging runs.【F:knowledge/notes/input_part012_review.md†L7997-L8222】【F:knowledge/notes/input_part012_review.md†L10580-L11129】
 [^epowerfun]: Builders documented drilling and trimming the budget ePowerFun 3 mm floor plate as a temporary heatsink before commissioning thicker custom skid plates.【F:knowledge/notes/input_part014_review.md†L6301-L6325】
 [^express_power]: VESC Express boards on G30 projects need external 5 V feeds (Spintend rails top out at 150 mA) and stable 6.05 firmware—6.06 restarts SD logging every three seconds until patched.【F:knowledge/notes/input_part014_review.md†L5969-L6037】
+[^bms-parity]: Stacking a healthy OEM 10 S pack with a DIY 4 S extender only worked after matching voltages and BMS discharge ratings; a sagging series stack blocked VESC detection until a regulated 60 V source replaced it.【F:knowledge/notes/input_part004_review.md†L13-L19】

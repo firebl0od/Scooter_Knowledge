@@ -5,28 +5,35 @@ Taming current limits is the difference between a scooter that rips for years an
 
 ## Build Prerequisites
 1. **Healthy pack & BMS:** Log internal resistance and balance status before tuning. Parallel packs with mismatched protections can surge into one another when a single BMS trips, so size discharge and regen around the weakest board.¹
-2. **Trustworthy wiring & connectors:** QS8/QS10 or AS150-class connectors and 6 mm²+ phase leads are the expectation above ~250 A phase. Revisit solder joints, pad pressure, and thermal interface materials before chasing higher numbers.²
-3. **Accurate motor data:** Do not rely on auto-detection when values look suspicious (e.g., ERPM flips, inductance jumps). Measure Rs/Ls with external tools or re-run detection on known-good hardware before editing limits.³
-4. **Cooling strategy:** Deck-mounted plates, fresh thermal paste, and airflow matter as much as MOSFET specs. Gutted aluminum cases and machined mounts are the baseline once you exceed 60 A battery.⁴
+2. **Balance capability matters:** Daly smart BMS units only balance at ≈30 mA; fast-charge builds should plan external 4 A balancers and verify you never back-feed the board while it sleeps. JK/LLT hardware remains the go-to when you need stronger balancing, CAN/RS485 logging, or reliable Bluetooth wake-ups.【F:data/vesc_help_group/text_slices/input_part004.txt†L16369-L16419】【F:data/vesc_help_group/text_slices/input_part004.txt†L18865-L18868】
+2. **ESC cutoffs must exceed BMS trips.** If the controller’s battery cutoff sits below the pack’s protection threshold, the BMS will sever power mid-load—raise VESC cutoffs a few volts so the ESC idles before the pack hard-resets.【F:knowledge/notes/input_part004_review.md†L311-L311】
+3. **Trustworthy wiring & connectors:** QS8/QS10 or AS150-class connectors and 6 mm²+ phase leads are the expectation above ~250 A phase. Revisit solder joints, pad pressure, and thermal interface materials before chasing higher numbers.²
+4. **Accurate motor data:** Do not rely on auto-detection when values look suspicious (e.g., ERPM flips, inductance jumps). Measure Rs/Ls with external tools or re-run detection on known-good hardware before editing limits.³
+5. **Cooling strategy:** Deck-mounted plates, fresh thermal paste, and airflow matter as much as MOSFET specs. Gutted aluminum cases and machined mounts are the baseline once you exceed 60 A battery.⁴
 
 ## Step-by-Step Tuning Workflow
 1. **Baseline detection & calibration**
    - Warm the motor and pack, disable the phase filter on Flipsky 75xxx units, and rerun detection with the `mxlemming` observer before touching currents.⁵
    - Validate halls and 5 V rails after detection—many “mystery faults” are just dead sensor power.⁶
+   - Calibrate handheld IR meters with ~20 mΩ shunts or resistor networks before binning cells; expect fresh P42A near 8 mΩ, Samsung 50S around 10 mΩ, and first-gen 50E in the low-20 mΩ range—absolute values drift but spreads stay useful.【F:knowledge/notes/input_part004_review.md†L145-L147】
 2. **Set conservative currents**
    - Start with a 2:1 to 3:1 phase-to-battery ratio (e.g., 40 A battery / 110 A phase on 16 S commuter packs).⁵ ⁷
+   - Budget field-weakening draw in your battery limit—real rides show 65 A-limited 6 P packs sagging instantly when FW amps pile on top of throttle demand.【F:data/vesc_help_group/text_slices/input_part004.txt†L8000-L8056】
    - Match current targets across front/rear controllers to avoid free-spinning the lighter wheel.⁸
    - Treat dual-motor 16 S7 P Samsung 50E packs as roughly 140 A systems: hold each controller near 70 A battery and add ducted airflow up front before nudging limits higher.²³
    - Keep Artem’s relationship in mind: `I_phase = I_batt × V_batt ÷ V_motor`, so phase torque fades as ERPM climbs—log both currents to confirm your battery caps aren’t starving the tune mid-pull.[^phase_equation]
 3. **Log, ride, iterate**
    - Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
-   - Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
+- Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
+- Factor in burst abuse: yanking 110 A from 60 A-rated cells for several seconds is survivable occasionally but accelerates degradation quickly if you repeat it each ride.【F:knowledge/notes/input_part004_review.md†L147-L147】
    - Cross-check real-time power with an external meter or SmartDisplay—unfiltered VESC telemetry overshoots true watts by 10 kW or more on aggressive pulls.²⁴
    - Treat VESC Tool’s state-of-charge gauge as a rough helper—it linearly maps 4.2–3.3 V per cell (≈66 V on 20 S), so keep your cutoffs a few volts above the BMS trip to prevent surprise throttling once the display reads “empty.”²⁵
 4. **Layer in regen**
    - Add regen after forward currents stabilize. Keep battery regen gentler than your discharge target (−5 A to −10 A is plenty for commuter packs) and ramp up slowly to avoid BMS or controller cutoffs.⁵ ¹¹
+   - ≥21 S packs demand extra headroom—keep regen targets under −50 A and leave a few volts of pack margin to avoid the overvoltage spikes documented on 23 S builds.【F:data/vesc_help_group/text_slices/input_part004.txt†L12557-L12583】
 5. **Optional: field weakening & traction control**
    - Activate FW only once thermals are understood. Expect it to draw nearly the same extra amps you request on both battery and phase channels.¹²
+   - Treat the extra FW amps as additive to your battery limit—if you budget 100 A battery and add 25 A FW, logs will still show ≈125 A at the pack.【F:data/vesc_help_group/text_slices/input_part004.txt†L10300-L10305】
    - On dual drives, enable traction control on the front controller first and monitor for MOSFET surges when grip returns.¹³
 
 ## Hardware Guardrail Table
@@ -42,12 +49,28 @@ Taming current limits is the difference between a scooter that rips for years an
 ## Regen & Braking Best Practices
 - **Respect BMS limits.** Daly and ANT boards trip around 2.7 V/cell; match VESC cutoff and regen so the BMS stays ahead of controller protection.¹¹ ¹⁷
 - **Stagger braking inputs.** Pair mechanical brakes with modest regen; runaway regen has bricked 75100 logic boards when negative current spikes hit unstable hardware.¹⁸
+- **Leave regen enabled for lever brakes.** Zeroing battery regen also disables lever-based e-brakes; keep a small negative current target and shape throttle curves inside ADC apps instead.【F:knowledge/notes/input_part004_review.md†L329-L329】
 - **Throttle & ramp tuning.** Shorten positive ramp to ~0.1 s and sculpt throttle curves once your current caps are dialed—especially on controllers that feel soft off the line.¹⁹
+
+## Pack Protection & Monitoring
+- **Running pack-only is risky.** Riders skipping BMS boards to “save space” saw cell drift and failures within months—if you insist on BMS-less packs, log every group, schedule manual balancing, and accept the elevated fire risk.【F:data/vesc_help_group/text_slices/input_part004.txt†L9921-L9939】
+- **Respect ANT precharge limits.** The onboard precharge FET taps out near 20 A; add external resistors or buttons for cold starts instead of raising firmware limits and cooking the device.【F:data/vesc_help_group/text_slices/input_part004.txt†L5880-L5893】【F:data/vesc_help_group/text_slices/input_part004.txt†L5933-L5940】
+- **Wake sleepy BMS boards with a charger.** Happy/Xiaomi protections sometimes latch off after inrush events—tickle the charge port briefly before condemning the controller.【F:knowledge/notes/input_part004_review.md†L301-L302】
+
+## Charging & Charger Vetting
+- **Audit adjustable chargers.** The Celler-branded 20 S bench supply landed on voltage with steady thermals, but log fan duty and case temps during long charges before endorsing it for customers.【F:data/vesc_help_group/text_slices/input_part004.txt†L19666-L19710】
+- **Replace sketchy 22 S supplies.** Refurbished Meanwell stacks have failed under load—source purpose-built 22 S chargers or vetted lab supplies instead of gambling on patched industrial gear.【F:data/vesc_help_group/text_slices/input_part004.txt†L9300-L9374】
+- **Isolation test series chargers.** Before stacking power supplies, meter the earth-to-output resistance; only run them in series once you confirm floating outputs and add fuses on both legs.【F:data/vesc_help_group/text_slices/input_part004.txt†L10020-L10045】
+- **Acceptance test every bench supply.** Check ground continuity, breaker reset behaviour, and voltage accuracy under load before deploying adjustable chargers to customers.【F:data/vesc_help_group/text_slices/input_part004.txt†L12090-L12105】
+- **Label Meanwell-style VR pots.** Adjust VR1 for output voltage, VR2 for current, and VR3 for cutoff while the charger powers a partially discharged pack—always tune under load to avoid overshoot.【F:data/vesc_help_group/text_slices/input_part004.txt†L17519-L17544】
 
 ## Field-Weakening & High-Speed Notes
 - Expect only modest top-speed gains (e.g., +8 km/h on 16 S builds) while battery draw jumps from 4 kW to 7 kW. Higher voltage or higher-Kv motors are usually better investments.¹²
 - Sensorless chatter and long phase cables exaggerate FW-induced current spikes; keep leads short and add halls where possible.³ ²⁰
 - Document duty-cycle ceilings—modern hardware tolerates 98–99 % duty, but stay below 100 % to avoid runaway faults.²¹
+- FW engages on duty cycle, not speed, so it can fire at zero eRPM on hill starts—disable it on commuter packs unless you have current headroom and instrumentation.【F:knowledge/notes/input_part004_review.md†L362-L362】
+- Bypassed 16 S commuter packs still feel FW amps; keep FW near zero (≤10 A) until pack-current logs prove the cells can absorb the extra draw without sagging below 3.6 V per cell.【F:knowledge/notes/input_part004_review.md†L315-L315】【F:knowledge/notes/input_part004_review.md†L386-L386】
+- Riders chasing speed-triggered FW are waiting on firmware hooks—the community wants duty-based FW that delays engagement until the wheel is rolling to prevent hill-start overheating.【F:data/vesc_help_group/text_slices/input_part004.txt†L17680-L17718】
 - Spintend 85150 hardware has already sacrificed MOSFETs when riders layered 45 A of FW on top of 105/120 A battery and 150/175 A phase at 20 S—budget HY/HSBL swaps or back FW down before chasing higher ERPM. 【F:knowledge/notes/input_part014_review.md†L21-L21】
 - Rob Ver’s 85/240 build touched 35 kW and 132 km/h on 22×3 hubs with ~80 A of FW, yet a 22 S BMS failure during a 320 A launch still blew MOSFETs—treat high-FW pulls as consumable unless pack protection is rock-solid.[^fw_bms]
 

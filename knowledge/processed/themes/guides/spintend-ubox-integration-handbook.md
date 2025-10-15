@@ -11,14 +11,19 @@
 1. **Full Disassembly:** Crack the enclosure to inspect for solder balls, missing hardware, or flux residue before the first power-on—multiple riders received “sealed” units with conductive debris or missing faceplate screws.[^1][^2]
 2. **Document Everything:** Photograph the internals and keep serials handy; Spintend has honoured RMAs after fires and board failures when owners supplied teardown evidence.[^18]
 3. **Bench Rules:** Wire the entire harness before energising, precharge ≥20 S packs, discharge bus caps after unplugging, keep ADC inputs ≤3.3 V, and eliminate ground loops to avoid repeat STM32 deaths.[^3]
+4. **Continuity sweep the accessory leads:** Confirm Bluetooth, fan, and ADC harness polarity with a meter before first power—reversed BT leads have smoked modules instantly and left new controllers dead on arrival.【F:knowledge/notes/input_part004_review.md†L287-L287】
 4. **Initial Power Tests:** Bring the controller up on a fused bench supply with the BMS discharge FET enabled; if regen previously latched undervoltage faults, confirm the pack’s protection MOSFETs are awake before running detection.[^19]
 5. **Detection housekeeping:** Enable the phase-filter checkbox only during motor detection—leaving it on while riding reintroduces noise and ABS overcurrent faults.[^phase-filter]
+6. **Screen current-sense offsets:** Before installing, power each single on the bench and confirm the current-sense op-amps report sane offsets (hundreds of counts, not 30 or 4,000); multiple “new” boards arrived with shorted amplifiers that later blew input capacitors and XT60s under normal reconnects.[^offset-screening]
+7. **Log the hardware revision.** The latest single board swaps to an aluminium PCB with G015N10 MOSFETs—stick with the matching gate network instead of random FET swaps or you’ll destabilise the driver.[^g015n10]
 
 ## Thermal Management & Mounting
 - **Firmware Limits:** Stock firmware starts derating around 75–85 °C and shuts down near 100 °C, so increase cutbacks only after verifying thermistor calibration.[^4]
 - **Interface Upgrades:** Replacing spongy pads with copper shims or thicker (≈1 mm) thermal sheets plus quality paste dropped MOSFET temps 15–20 °C during 100–140 A runs when the case was clamped directly to the deck.[^5][^6]
 - **Airflow & Deck Prep:** Add 40–90 mm fans between stacked boards, machine paint off mounting faces, and bolt the enclosure to aluminium spreaders if regen pushes single-Ubox stacks past 65–70 °C.[^7]
 - **Expected Benchmarks:** Well-mounted duals have logged ~100 A battery / 130 A phase at ≈45 °C, while poor contact in sealed Weped decks let cases soar to 80 °C during 500 A combined pulls—plan extra cooling above those loads.[^6][^20]
+- **Water cooling isn’t a silver bullet.** Riders experimenting with coolant plates only saw marginal gains over airflow and zero-vector tweaks; keep controller temps below ~70 °C with airflow before plumbing glycol loops.【F:data/vesc_help_group/text_slices/input_part004.txt†L11220-L11288】
+- **Mxlemming observer wins.** Firmware 6.0 paired with the `mxlemming` observer delivered stable torque and accurate voltage reporting on Segway GT2 hubs (≈21–22 mΩ) once detection finished—capture the config before experimenting with alternative observers.【F:knowledge/notes/input_part004_review.md†L116-L116】
 - **Plan hardware for earless cases.** 85/240 housings still ship without mounting ears and rely on tiny M2.5 hardware, so riders print brackets, retap threads, or glue adapters before long-travel suspensions knock under-deck mounts loose.[^31]
 
 ## Power Limits, Regen & Current Planning
@@ -27,17 +32,22 @@
 - **High-Voltage Safeguards:** Dual owners run ~2×135 A phase / 2×71 A battery within 70 °C so long as regen stays off during full-charge launches and higher-voltage packs (17 S+) are bled a few percent before re-enabling braking.[^22]
 - **Know the Ubox 100/100 envelope.** Smart Repair still caps the single at 22 S with regen disabled on the e-brake input; it ships at 135 A phase / 180 A absolute without ST-Link pads or beefy 12 V rails, so budget external regulation for accessories.[^u100-guardrails]
 - **Duty & Field Weakening:** Keep field-weakening reserved for cooled builds; previous fires stemmed from wizard runs on fresh installs, so validate base detection and duty-cycle ramps before layering FW or traction aids.[^18][^23]
+- **Expect commuter hubs to need more current.** Maike-branded “3000 W” dual hubs stayed near 25 km/h until motor current climbed toward 140 A (≈70 A battery) and the owner improved thermal coupling with frame-mounted pads or fans—stock 16 S packs with dual XT60s still bottleneck upgrades.【F:knowledge/notes/input_part004_review.md†L354-L354】
 
 ## Controls, Accessories & IO
 - **Remote & Cruise:** The bundled 2.4 GHz remote offers cruise, horn, and light controls via the receiver, reducing parallel looms compared with bare PPM throttles.[^11]
+- **Cruise troubleshooting:** If the remote beeps but never holds speed, confirm the PPM switch channel toggles in VESC Tool, match firmware between paired controllers, and ensure the accessory rail stays above 5 V when cruise engages.【F:data/vesc_help_group/text_slices/input_part004.txt†L11970-L12020】
 - **Brake Inputs:** The ADC daughterboard supports normally-open/closed levers and selectable 5 V or 3.3 V rails—set the switches before plugging Magura/Shimano sensors to avoid shorting hall supplies.[^13]
 - **Lighting Power:** Dual controllers expose a ≈1.5 A 12 V rail for lighting relays, but singles lack this output; budget fused DC-DC converters instead of stealing from the fan header.[^12][^14]
+- **Key-switch retrofits:** To add a keyed ignition on Ubox V1, splice the key in series with the red power-button lead and power dash voltmeters straight from the pack (ideally through their own fuse) while accepting the display stays live until the key opens.【F:knowledge/notes/input_part004_review.md†L203-L203】
+- **Ignore the USB port for loads.** The onboard USB sits behind reverse-current diodes and cannot reliably power accessories; even bypassed, the ESC rails aren’t designed for GPS trackers, RGB strips, or fans above ~1 A.【F:data/vesc_help_group/text_slices/input_part004.txt†L15489-L15502】
 - **CAN & Anti-Slip:** Updated harnesses let one single wake another over CAN, yet anti-slip belongs on dual configurations—leaving it active on a solo motor causes low-speed cut-outs with red/green blink codes.[^10][^24]
 - **Bench-start requirements:** Ubox 100/100 controllers refuse to boot from USB-C alone—wire the latching 16 mm start button or a proper low-voltage switch instead of relying on the BMS as a master disconnect.[^start-button]
 
 ## Firmware, Logging & Fault Recovery
 - **Version Discipline:** Stick with Spintend’s vetted firmware packages (e.g., 100 A battery limit files) unless you have cooling to exploit the 300 A hardware bins; mismatched binaries raise noise and reliability issues.[^25]
 - **BLE Options:** Official BLE dongles arrive pre-flashed and tax-paid via AliExpress, while DIY NRF boards need extra programming; keep at least one link for live tuning even if you prefer wired sessions.[^26]
+- **NRF quick-start:** When the NRF header is the only free UART, flash a generic NRF51 via USB, solder it to the dedicated header, and power-cycle to pair—no need to steal the ADC adapter’s UART pads.【F:data/vesc_help_group/text_slices/input_part004.txt†L8813-L8818】
 - **Fault Retrieval:** If Bluetooth is absent, the controller retains the last fault until shutdown—connect via USB before cycling power so valuable diagnostics aren’t lost.[^10]
 
 ## Known Field Failures & Mitigations
@@ -45,12 +55,15 @@
 - **Diagnose ADC adapters before blaming firmware.** VSETT 11+ owners logged CAN dropouts, stuck brake beeps, and latched brake inputs when ADC V2 boards half-failed after 6.0 updates; reflash, reseat grounds, and isolate the adapter before pursuing RMAs.[^28]
 - **Keep throttles on the 3.3 V rail and mount adapters close.** Routing halls through 5 V accessory pins or long unshielded runs has blown STM32 inputs; park the ADC board beside the controller, use divider networks, and rely on Vedder’s detach timeout to hand control back to hardware cleanly.[^29]
 - **Treat thermal spikes as potential moisture ingress.** Riders seeing 190 °C MOSFET readings traced the fault to condensation inside the case—warm the enclosure, dry the PCB, and reseal gaskets before raising firmware cutoffs.[^30]
+- **Watch for waterlogged temp sensors.** 1 kΩ PTC harnesses that saw water ingress pegged motor temps near 95 °C; dry or replace the harness before lifting firmware cutoffs to avoid ignoring a real fault.【F:knowledge/notes/input_part004_review.md†L355-L355】
+- **Log current-sense failures.** A batch of singles blew their current-sense capacitors and op-amps—submit serials and photos to Spintend while the team evaluates whether a formal RMA or hardware revision is required.【F:data/vesc_help_group/text_slices/input_part004.txt†L184-L194】【F:data/vesc_help_group/text_slices/input_part004.txt†L915-L923】
 
 ## Logistics & Support Notes
 - **Warranty Responsiveness:** Spintend has replaced fire-damaged units and keeps spare power/logic boards on hand, which contrasts with poorer experiences on competing FlipSky hardware.[^18]
 - **Shipping Choices:** Direct orders sometimes arrive underdeclared (sub-$30) and dodge VAT, but DHL eCommerce frequently delays or loses parcels; veterans now pay for FedEx or AliExpress Standard to avoid customs limbo.[^15][^16]
 - **EU VAT Planning:** Accessories shipped without prepaid VAT trigger €30 fees on €20 parts—push for IOSS channels or budget the surcharge when ordering spares.[^17]
 - **US distribution hub.** Recent 85/240 batches now ship from a New Jersey warehouse, and sub-$1,000 orders have cleared without added tariffs, cutting replacement lead times for North American riders.[^32]
+- **FedEx deliveries land quickly.** Recent controllers reached riders in 4–7 days via FedEx, letting installers schedule deck tear-downs within a week instead of waiting on slow eCommerce couriers.【F:knowledge/notes/input_part004_review.md†L353-L353】
 
 ## Source Notes
 [^1]: Controllers routinely arrive with debris; open and inspect before powering up.【F:knowledge/notes/input_part000_review.md†L359-L359】
@@ -85,6 +98,8 @@
 [^30]: Moisture-driven MOSFET temperature spikes that vanished after warming and drying the enclosure.【F:knowledge/notes/input_part004_review.md†L474-L474】
 [^31]: 85/240 mounting anecdotes covering custom brackets, retapped threads, and thermal pad tweaks to secure earless housings.【F:knowledge/notes/input_part012_review.md†L20537-L20541】【F:knowledge/notes/input_part012_review.md†L20575-L20583】【F:knowledge/notes/input_part012_review.md†L20581-L20587】
 [^32]: Spintend 85/240 shipments now staging through a New Jersey hub for faster, low-tariff deliveries into the United States.【F:knowledge/notes/input_part012_review.md†L17321-L17325】【F:knowledge/notes/input_part012_review.md†L18632-L18638】
+[^g015n10]: New single-board revisions ship on aluminium PCBs with G015N10 MOSFET stacks and tuned gate networks—stick with the factory parts instead of improvising swaps.【F:knowledge/notes/input_part004_review.md†L115-L115】
 [^u100-guardrails]: Smart Repair reiterated that the Ubox 100/100 tops out at 22 S, ships with 135 A phase / 180 A absolute limits, and should keep regen off the e-brake path unless you’re ready to swap FETs; it also omits ST-Link pads and beefy 12 V rails compared with 85xxx units.【F:knowledge/notes/input_part012_review.md†L19186-L19195】
 [^start-button]: The same teardown confirmed the 100/100 refuses to boot from USB-C—wire the latching 16 mm start button or another 5 V trigger instead of depending on the BMS as a master switch.【F:knowledge/notes/input_part012_review.md†L19300-L19318】
 [^phase-filter]: Motor-wizard phase filters should be disabled after detection to avoid noise and ABS overcurrent faults on Spintend controllers.【F:knowledge/notes/input_part004_review.md†L31-L31】
+[^offset-screening]: Bench-testing revealed multiple single 100/100 boards shipping with shorted current-sense op-amps (offsets as low as 30 counts) that later blew input capacitors and XT60s during routine reconnects.【F:knowledge/notes/input_part004_review.md†L15-L15】
