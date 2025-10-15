@@ -104,3 +104,17 @@
 [^denis-pricing]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1510-L1526】
 [^common-port-chat]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1545-L1594】
 [^m365krakow]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1612-L1618】
+
+## Copper Busbar Best Practices
+- **Braze copper busbars with shielding gas.** Builders warned that nickel–copper "sandwich" welds oxidize and fail after a few years; brazing with tin while flooding the joint with argon (as micro-TIG stations do) keeps resistance low, whereas humidity alone can trigger corrosion if the pack isn't sealed.[^busbar_braze]
+- **Use proper insulation layers, not packing tape.** Battery builders reiterated that Kapton, double heat-shrink, fishpaper, and fiberglass tape are the minimum for high-current packs—clear packing tape alone cannot stop rail wear-through, and purpose-made clamps such as the SUNKKO fixture keep parallel groups aligned while you reglue Sicaflex-potted arrays.[^insulation_layers]
+- **20 S 5 P decks demand machining.** Even experienced pack builders said a 20 S 5 P 21700 layout only fits a G30 deck after CNC work; newcomers are steered toward 16–18 S designs or professional builds to avoid compromised clearances and shipping headaches.[^20s5p_fit]
+
+## Cell Internal Resistance Calibration
+- **Calibrate 1 kHz AC internal-resistance meters with ~20 mΩ references.** The crew uses wire shunts or resistor networks to zero handheld testers, then expects fresh P42A cells around 8 mΩ, Samsung 50S ≈10 mΩ, first-generation 50E nearer 22–28 mΩ, and abused cells well above that, reminding each other that absolute values drift between instruments even when the relative spread remains useful.[^ir_calibration]
+
+## Source Notes
+[^busbar_braze]: Copper busbar brazing with shielding gas to prevent oxidation failures.【F:knowledge/notes/input_part004_review.md†L17-L17】
+[^insulation_layers]: Proper battery insulation materials and parallel-group alignment techniques.【F:knowledge/notes/input_part004_review.md†L317-L317】
+[^20s5p_fit]: 20 S 5 P pack fitment challenges in G30 decks.【F:knowledge/notes/input_part004_review.md†L318-L318】
+[^ir_calibration]: Cell internal resistance measurement and calibration procedures.【F:knowledge/notes/input_part004_review.md†L37-L37】

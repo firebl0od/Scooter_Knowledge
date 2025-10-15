@@ -119,6 +119,7 @@
 
 ### Aerlang & Legal Modes (Batch 4)
 - The Aerlang 500 W scooter pairs a feature-rich 48 V/25 A controller, integrated lighting, NFC alarm, and 17.5 Ah pack for ~€400, but the flat deck plate fatigues and cracks at the neck or rear suspension mounts without reinforcement—making structural upgrades mandatory before exploiting its 45 km/h potential.【F:data/vesc_help_group/text_slices/input_part000.txt†L4120-L4124】
+- Its firmware is read/write encrypted, leaving shunt tweaks as the only viable stock-controller mod and steering tinkerers toward full controller swaps when they need custom logic.【F:data/vesc_help_group/text_slices/input_part000.txt†L4140-L4144】
 - Its speed limiter toggles via an eight-click sequence, supporting stealth “police mode” profiles that riders aim to replicate on VESC builds to avoid attention while staying within ~35 km/h when necessary.【F:data/vesc_help_group/text_slices/input_part000.txt†L4130-L4178】
 
 ### Capacitor Noise Mitigation & Parallel Pack Wiring (Batch 5)
