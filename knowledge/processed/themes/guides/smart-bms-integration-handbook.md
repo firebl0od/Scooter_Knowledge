@@ -5,6 +5,8 @@
 - Oversize protection hardware and choose the right architecture for the pack: JK active-balancing boards bring dual 7 AWG busbars, per-channel charge/discharge/balance toggles, and harness-resistance telemetry while still leaving room for GPS/4G trackers once rewired with silicone pigtails, but recent self-burn reports push installers toward JBD/LLT or ANT units when decks are cramped or uptime is critical.【F:knowledge/notes/input_part000_review.md†L619-L620】【F:knowledge/notes/input_part000_review.md†L690-L690】[^1][^2][^3]
 - Commission every pack like a high-energy experiment—enable both charge and discharge FETs before regen tests, validate balance-lead order, and log first rides because a single BMS cutoff or miswire has already nuked controllers and power stages that survived normal abuse.[^4][^5][^6]
 - Treat balancing and calibration as routine maintenance: Daly boards need full charge/discharge learning and higher voltage to balance, while JK hardware wakes via the accessory display, runs active shuttling above ~0.015 V delta, and benefits from monthly thermal/IR audits.[^7][^8][^9]
+- ANT owners still note 0.5–0.8 V pack settling after charge; pair those boards with latching throttles or breakers so VESC standby draw doesn’t drain winter storage scooters.【F:data/vesc_help_group/text_slices/input_part003.txt†L16080-L16102】
+- Pack size influences BMS choice: high-capacity 53 Ah+ builds stick with JK’s active shuttling for fast charging, smaller commuter packs tolerate ANT’s lighter balancing current, and JBD hardware remains feature-parity with LLT once sensors and harnesses are sized correctly.【F:data/vesc_help_group/text_slices/input_part003.txt†L10726-L10767】【F:data/vesc_help_group/text_slices/input_part003.txt†L11610-L11612】
 
 ---
 
@@ -29,6 +31,7 @@
 6. **Confirm advertised series support.** JBD listings still misstate 22 s capability; verify firmware revisions before wiring high-voltage packs.[^16]
 7. **Plan controller integration.** VESC Bridge V2 is adding native CAN support for JBD/JK/ANT/Daly boards—map harnesses and firmware early so telemetry stays unified once the hardware ships.[^bridge]
 8. **Treat discharge-less monitor boards cautiously.** Jason’s 32 S-capable design drops discharge FETs entirely; keep downstream fuses/contactors because the BMS will not open on shorts.[^no-fet-smart]
+9. **Document Daly 400 A logic swaps.** Konstantin’s retrofit pairs a Daly shunt frame with an LLT control board to support four KLS7218 controllers—photograph wiring and note the ≈0.05 mΩ shunt stack before replicating.【F:data/vesc_help_group/text_slices/input_part003.txt†L17062-L17078】
 
 ## Regen & Current Budgeting
 - **Cap braking currents around the BMS charge envelope.** Community testing now caps regen near 120 A and keeps charge/discharge FETs closed so controllers ride through decel events instead of seeing open-circuit spikes.[^6]
@@ -44,6 +47,9 @@
 - **Expect Daly learning cycles.** Their coulomb-counting SoC meters read low for several rides; plan full discharge/charge sessions or manual 100 % resets so telemetry aligns with reality.[^7]
 - **Leverage telemetry displays.** JK screens offer long-range Bluetooth and remote toggles, effectively doubling as pack dashboards on scooters lacking dedicated HUD space.[^10]
 - **Schedule thermal/IR checks.** JK smart boards run warm near 60 A; monthly infrared sweeps and rest torque checks catch rising resistance before it snowballs.[^10]
+
+## Storage & Standby Planning
+- **Align controller cutoffs with BMS limits.** Keep VESC input-voltage ceilings ~5 V above pack max so Daly and ANT cutoff events do not nuke controller MOSFETs, and pair ANT boards with latching throttles or breakers to curb 0.5–0.8 V post-charge drift during winter storage.【F:data/vesc_help_group/text_slices/input_part003.txt†L16080-L16113】【F:data/vesc_help_group/text_slices/input_part003.txt†L21224-L21247】
 
 ## Charging Infrastructure Updates
 - **Programmable supplies cover odd voltages.** Adjustable 22 S/18 A bricks paired with ANT sleep timers keep 21 S packs topped without drifting when scooters sit for weeks.[^adj_supply_smart]

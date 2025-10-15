@@ -17,15 +17,20 @@
 
 ## Reliability & Support Signals
 - Shop owners reported 70 % of incoming duals arriving faulty, with return shipping erasing the budget advantage; keep at least one spare controller on the shelf for every customer deployment.【F:knowledge/notes/input_part003_review.md†L153-L153】
+- Bench launches are still killing fresh duals—Face de Pin Sucé lost three MOSFETs on the first acceleration and now keeps spare power boards on hand for direct-FET designs.【F:data/vesc_help_group/text_slices/input_part003.txt†L19980-L20090】
+- MakerX’s MOSFET choices (e.g., NECP045N85GU) mirror failure-prone Flipsky runs; continuous current should stay conservative unless the build adds serious heatsinking and airflow.【F:knowledge/notes/input_part002_review.md†L166-L168】【F:knowledge/notes/input_part003_review.md†L120-L120】
 - Fire incidents on GO-FOC boards—even at 96 V / 80 A battery with added fans—show new batches need staged validation before matching Spintend or 3Shul duty cycles.【F:knowledge/notes/input_part004_review.md†L321-L321】
-- MakerX’s MOSFET choices (e.g., NECP045N85GU) mirror failure-prone Flipsky runs; continuous current should stay conservative unless the build adds serious heatsinking and airflow.【F:knowledge/notes/input_part002_review.md†L166-L168】
+- MakerX’s MOSFET choices (e.g., NECP045N85GU) mirror failure-prone Flipsky runs; continuous current should stay conservative unless the build adds serious heatsinking and airflow.【F:knowledge/notes/input_part002_review.md†L166-L168】【F:knowledge/notes/input_part003_review.md†L120-L120】
+- Blade 10 and Nucular controllers share the same 2.8 mΩ Magnachip devices, so upgrade expectations should be tempered—MakerX singles still survive only ~70–100 A battery / 150 A phase without aggressive cooling. 【F:knowledge/notes/input_part003_review.md†L120-L121】
 - Resellers are rebadging MakerX hardware at hefty markups—the Sur-Ron focused “MTO K2000” is simply a G300 in a cheap aluminium shell—so budget purchases accordingly and verify firmware provenance before assuming you’re getting unique electronics.【F:knowledge/notes/input_part006_review.md†L401-L401】
 
 ## Setup & QA Checklist
 1. **Disassemble on arrival.** Confirm thermal pads actually contact the shell, inspect solder joints, and restake capacitors before the first power-up—vibration still loosens untouched boards.【F:knowledge/notes/input_part002_review.md†L137-L138】【F:knowledge/notes/input_part004_review.md†L312-L314】
-2. **Rerun motor detection after any mechanical change.** Loose axles and firmware mismatches have corrupted FOC detection until owners reverted to 5.2 binaries and re-tightened hardware.【F:knowledge/notes/input_part003_review.md†L119-L120】
-3. **Verify thermistor coefficients on VESC 6.0+.** HI100 temperature scaling required swapping firmware profiles to regain accurate readings—log temps during the first rides to confirm.【F:knowledge/notes/input_part003_review.md†L136-L136】
-4. **Ble test harnesses for 3.3 V logic.** Probe footpads, throttles, and ADC rails before closing the case; missing 3.3 V feeds silently disable safety interlocks.【F:knowledge/notes/input_part012_review.md†L255-L256】【F:knowledge/notes/input_part012_review.md†L347-L349】
+2. **Rerun motor detection after any mechanical change.** Loose axles and firmware mismatches have corrupted FOC detection until owners reverted to 5.2 binaries and re-tightened hardware; one GO-FOC HI100 only recovered after the axle clamp was re-torqued, VESC Tool 5.2 reflashed, and MakerX firmware reapplied.【F:knowledge/notes/input_part003_review.md†L119-L120】【F:data/vesc_help_group/text_slices/input_part003.txt†L13725-L13790】
+   *Bonus:* A machined enclosure dropped HI100 case temps to ≈23 °C at 60 A battery / 200 A phase in 7 °C ambient versus 60–80 °C inside a Wildman bag—hard-mount controllers whenever possible.【F:knowledge/notes/input_part003_review.md†L119-L119】
+3. **Verify thermistor coefficients on VESC 6.0+.** HI100 temperature scaling required swapping firmware profiles to regain accurate readings, and the latest MakerX firmware bundles expose separate coefficient tables for 75300 versus HI100 builds—double-check the dropdown before saving so reported temps match real probes.【F:knowledge/notes/input_part003_review.md†L136-L136】【F:data/vesc_help_group/text_slices/input_part003.txt†L17564-L17610】
+4. **Power BLE from the comm header.** Water-damaged boards recovered once techs reflashed firmware, fed BLE modules from the 5 V comm header, and borrowed UART2 lines instead of overloading the 3.3 V rail.【F:data/vesc_help_group/text_slices/input_part003.txt†L19798-L19926】
+5. **Ble test harnesses for 3.3 V logic.** Probe footpads, throttles, and ADC rails before closing the case; missing 3.3 V feeds silently disable safety interlocks.【F:knowledge/notes/input_part012_review.md†L255-L256】【F:knowledge/notes/input_part012_review.md†L347-L349】
 
 ## G300 Specific Configuration Notes
 

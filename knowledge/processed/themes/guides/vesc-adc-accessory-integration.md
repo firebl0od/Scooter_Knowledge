@@ -31,6 +31,7 @@
 - **Pick flexible multi-core looms.** Shared-ground 24–26 AWG cables or slim AliExpress harnesses keep throttle/brake/start wiring tidy through cramped passthroughs; stiff Ethernet looms fatigue quickly on Xiaomi/VSETT decks.【F:data/vesc_help_group/text_slices/input_part001.txt†L6481-L6504】
 7. **Legacy dash retention:** Leaving throttle through a dash adapter adds perceptible lag; many builders keep the dash for display only and wire throttles directly to the controller instead.[^20]
 8. **Refresh mappings after downtime.** Scooters that sat for months have thrown false brake/throttle behaviour until riders reran the ADC wizard and removed stale inversion flags inside VESC Tool.[^storage-cal]
+9. **Plan for short harnesses and three-speed toggles.** Early Spin-Y batches shipped with limited cable length and optional ADC v2 three-speed leads; document extension routing and ensure cruise-control wiring lands on the correct pins before sealing the deck.[^spin_wiring]
 9. **Monitor brake sensors.** Dead brake halls make some VESC scooters pulse the motor every second or two under throttle, so replace failed sensors before ride testing.【F:knowledge/notes/input_part000_review.md†L39-L39】
 7. **Shield noisy looms.** Running ADC throttles and SmartDisplay UART over shielded cable tied to controller ground cleared 120 A jitter, and separating signal bundles from phase wires kept FOC noise out of high-amp Ubox builds.[^signal-shield]
 8. **Fail-safe defaults:** Add a pull-down resistor from throttle signal to ground so any broken wire snaps to zero instead of ghost acceleration.[^19]
@@ -53,6 +54,7 @@
 
 ### Lighting, Horns & Aux Loads
 - **Use the adapter as logic, not power:** The horn output only sources a couple of amps—enough for low-power buzzers but not vintage 35 W halogens—so trigger a relay or MOSFET that pulls from a beefier DC/DC converter.[^9][^10]
+- **Keep 12 V fans off the board:** Spintend ADC adapters have already died when builders powered shrouds directly from the rail—treat it strictly as a signal bridge and feed cooling gear from standalone bucks.【F:data/vesc_help_group/text_slices/input_part003.txt†L15008-L15017】
 - **85250 & Ubox installs:** Route brake-light logic through the ADC breakout, but feed lamps from a separate converter so you don’t brown out the controller when multiple 12 V loads fire at once.[^11]
 - **Treat the Ubox fan header as temperature-only.** The 12 V header driving the stock fan is thermostatic—firmware cannot toggle it—so plan external bucks or constant 12 V rails for lighting if you need manual control.【F:knowledge/notes/input_part001_review.md†L508-L510】
 - **TF100 & OEM switch pods:** Reuse factory throttles by landing the red/black hall power and the green signal lead on a 3.3 V ADC input; this preserves dash ergonomics without custom PCBs.[^12]
@@ -69,7 +71,8 @@
 3. **Assign app functions:** Map ADC1 to throttle, ADC2 to “Current No Reverse” for regen, and ensure throttle curves or safe-start options suit the rider.[^8]
 4. **Understand bench limitations:** Once ADC control is enabled, the manual FWD/REV buttons in VESC Tool stop working—switch the app to UART or disable ADC temporarily for bench spins.[^13]
 5. **Write configs explicitly:** Mobile reconnects and desktop wizards can wipe ADC settings unless you press “Write Motor Config” and “Write App Config” after every change.[^21]
-6. **Log shakedowns:** Capture CAN or USB logs on the first rides to confirm commanded vs. actual current and verify regen ramps without triggering BMS cutoffs.[^11]
+6. **Document firmware overrides.** If you merge ADC channels in `app_adc.c` (e.g., mirroring ADC2 to ADC1 as an emergency throttle), capture the patch and share it with the owner so future firmware updates preserve the fail-safe—and publish the wiring/code diff so torque-sensor bikes can add redundant throttles without guesswork.【F:knowledge/notes/input_part003_review.md†L248-L248】【F:data/vesc_help_group/text_slices/input_part003.txt†L21692-L21726】
+7. **Log shakedowns:** Capture CAN or USB logs on the first rides to confirm commanded vs. actual current and verify regen ramps without triggering BMS cutoffs.[^11]
 
 ## Safety & Troubleshooting Checklist
 - **Separate controller rails:** Do not tie CAN-connected controllers’ 5 V rails together unless they share the same ignition path; mismatched power buttons have already killed hardware.[^14]

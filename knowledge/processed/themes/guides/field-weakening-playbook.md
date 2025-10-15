@@ -32,9 +32,9 @@
 | --- | --- | --- | --- | --- |
 | Zero 10X dual 84100 | 20 S LY hubs | 120 A phase / 55 A battery each | 30 A | BEMF decoupling + `mxlemming` observer hit 100 km/h without overheating; 60 A FW overheated motors within an hour.[^6][^7]
 | Segway GT2 dual Spintend 85150 | 19 S9 P EVE 50E | 150 A phase / 60 A battery each | 30 A | Cells are bottleneck; plan for stronger pack before raising FW.[^10]
-| Wolf King GT Pro dual Ubox 150 | 72 V pack, 50 A windings | 210 A phase / 50 A battery each | 55 A | Freewheels ≈77 mph, road ≈66 mph; requires reinforced deck and custom firmware.[^11]
+| Wolf King GT Pro dual Ubox 150 | 72 V pack, 50 A windings | 210 A phase / 50 A battery each | 55 A | Freewheels ≈77 mph, road ≈66 mph; Rosheee gained ~20 km/h at 50–55 A FW but warned 16 S builds taper once phase amps roll off near top speed—reinforce the deck before chasing the gains.[^11][^wolf_fw_return]
 | Halo 60 V stunt hub | 60 V single hub | 350 A phase | 125 A | Airborne testing caused runaway RPM—cap FW drastically when wheels can unload.[^12]
-| Vsett high-speed build | 22 S 22×3 hubs | 80 A FW | 200 A battery split | Needs aggressive cooling; FW masks intermittent cut-outs from mechanical issues.[^12][^16]
+| Vsett high-speed build | 22 S 22×3 hubs | 80 A FW | 200 A battery split | Needs aggressive cooling; FW masks intermittent cut-outs from mechanical issues—16 S Monorim/Vsett commuters cap duty near 96–99 % with FW limited to ≈30 A per motor to keep ABS happy while still chasing 100 km/h.【F:data/vesc_help_group/text_slices/input_part003.txt†L7443-L7500】[^12][^16]
 | Commuter Xiaomi/Ninebot hubs | 13–20 S small stators | ≤40 A phase typical | Avoid FW | Stock hubs overheat or fail even with 4 A FW—prioritize motor upgrades instead.[^9][^17]
 | NAMI hotdog (100 H rear / 70 H front) | 22 S 11 P P45 pack | 500 A phase / 550 A absolute | 100 % front FW to sync speeds | Traction control mandatory—rear lifts the front even at 120 km/h while stators stay ~61 °C during 40 kW pulls.[^hotdog_fw]
 
@@ -46,6 +46,10 @@
 - **Duty-cycle trigger awareness:** Remember FW starts at the configured duty threshold, so cold-weather commuters who never exceed ≈90 % duty can leave FW configured without seeing it engage, while summer hill pulls will trigger it early and dump heat fast.【F:knowledge/notes/input_part000_review.md†L653-L655】
 - **Overspeed Discipline:** Avoid free-spinning wheels at high FW. Halo stunt crews saw runaway RPM off-load and controller stress at 125 A FW.[^12]
 - **Front-lift control:** Hotdog 100 H rear builds demand traction control or front FW assistance; otherwise the rear lifts the front well past 120 km/h even while stators only hit ~61 °C, so validate TC before public-road tests.[^hotdog_fw]
+- **PWM frequency trade-offs:** Dropping zero-vector PWM toward 16–20 kHz cools the controller but pushes heat into the motor, while 30–40 kHz relieves motor temps at the cost of hotter FETs—log both motor and controller temperatures during experiments.【F:data/vesc_help_group/text_slices/input_part003.txt†L10215-L10280】【F:data/vesc_help_group/text_slices/input_part003.txt†L10383-L10407】
+- **Duty-cycle guardrails:** Modern hardware survives 98–99 % duty for a small top-speed bump (~4 %), but riders still treat 100 % as off-limits to avoid runaway faults—treat FW tuning and duty increases as paired changes.【F:data/vesc_help_group/text_slices/input_part003.txt†L11586-L11610】
+- **Track-day planning:** Paris-bound teams compared FW-enabled 16 S builds against base 16 S setups that free-spin near 80 km/h—treat FW as the fallback after exploring higher-voltage packs or rewound hubs for sustained 100 km/h targets.【F:data/vesc_help_group/text_slices/input_part003.txt†L7472-L7500】
+- **Traction heuristics:** Dual-drive riders accept 2–3 kERPM slip thresholds but often prefer reshaping power-per-ERPM curves instead of leaning on FW-backed traction control; front-only TC remains the safest option after rear controllers tripped at >300 A during FW pulls.【F:data/vesc_help_group/text_slices/input_part003.txt†L9688-L9748】【F:data/vesc_help_group/text_slices/input_part003.txt†L19680-L19699】
 
 ## Decision Guide: Voltage vs. Field Weakening
 - **Choose Higher Voltage / Different Windings When:** You need sustained highway speed, the motor already runs hot without FW, or you’re targeting >120 km/h—builders hitting 118 km/h on 22×3 hubs without FW prove gearing changes scale better than stacking FW amps.[^11][^21]
@@ -73,7 +77,7 @@
 [^12]: Halo runaway RPM and general caution for unloaded FW testing.【F:knowledge/notes/input_part012_review.md†L28-L28】
 [^13]: High-speed regen viability with FW and the need to log bus voltage.【F:knowledge/notes/input_part005_review.md†L475-L475】
 [^14]: Using the `faults` command and absolute current headroom to manage FW-induced spikes.【F:knowledge/notes/input_part001_review.md†L139-L139】
-[^15]: Duty-cycle ceiling warnings for FW-enabled builds.【F:knowledge/notes/input_part001_review.md†L160-L160】
+[^15]: Duty-cycle ceiling warnings for FW-enabled builds.【F:knowledge/notes/input_part001_review.md†L160-L160】【F:knowledge/notes/input_part003_review.md†L104-L104】【F:data/vesc_help_group/text_slices/input_part003.txt†L11586-L11610】
 [^16]: FW masking mechanical faults in high-speed Vsett builds and needing inspections.【F:knowledge/notes/input_part013_review.md†L741-L741】
 [^17]: Haku’s decision to abandon FW after killing commuter hubs at 4 A.【F:knowledge/notes/input_part011_review.md†L301-L301】
 [^18]: Max G2 and similar commuter hubs hitting 150 °C stators with FW.【F:knowledge/notes/input_part005_review.md†L368-L372】

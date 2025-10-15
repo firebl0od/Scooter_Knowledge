@@ -23,6 +23,8 @@
 
 ## Battery & BMS Planning
 - Budget packs starting with 20 S Samsung 30Q quotes for commuters, but expect premium 21700 builds (50PL, P45B/P50B) to double total cost once welding, insulation, and shipping are included.【F:knowledge/notes/input_part014_review.md†L106-L106】
+- P45B cells win on energy density, yet 30T’s ~5 mΩ resistance still suits riders chasing peak discharge bursts—log goals before picking chemistry for Max deck rebuilds.【F:data/vesc_help_group/text_slices/input_part003.txt†L10501-L10570】
+- Pair motor choices with those packs: Monorim/Xiaomi hub variants range from commuter 28 kV cores that prefer ≤80 A phase to speed-wound 32 kV units that tolerate 110–120 A when hall sensors stay healthy—retire cracked magnets or failing halls before adding voltage.【F:data/vesc_help_group/text_slices/input_part003.txt†L21420-L21432】【F:data/vesc_help_group/text_slices/input_part003.txt†L22104-L22190】
 - ANT smart BMS units have latched discharge FETs under Spintend-level currents; plan redundant pack protection (loop keys, fuse boards, or dual BMS) for >300 A goals.【F:knowledge/notes/input_part014_review.md†L98-L101】
 - Calibrate CAN smart BMS logs against VESC telemetry—BMS current remains more trustworthy but may drift; manual calibration preserves ±500 W accuracy on 35 kW builds.【F:knowledge/notes/input_part014_review.md†L79-L82】
 - Ninebot Max decks can house 50 Ah 10 S bricks or even 15 S 4 P 21700 arrays once controllers move outboard, giving tour-focused builds room for 260-cell packs before adding externals.【F:knowledge/notes/input_part000_review.md†L160-L160】
@@ -30,6 +32,10 @@
 - Mirono’s rental-frame build squeezed a Daly smart BMS and 13 S 5 P NCR21700A pack inside after grinding internal ribs, with copper “sandwich” busbars on standby if field weakening needs lower resistance.【F:knowledge/notes/input_part000_review.md†L268-L269】
 - Expect AWG10 mains (or dual AWG12 runs) once battery current targets hit 90 A—crews even drop 3–3.5 mm solid copper between pack negatives and BMS plates to keep voltage drop in check.【F:knowledge/notes/input_part000_review.md†L371-L372】
 - Jason’s Max project already packaged a 30 S pack around a 65H 17×4 motor and scoped a fully internal 40 S/3 P layout, proving the deck ceiling once partitions are trimmed and harness routing is planned early.【F:knowledge/notes/input_part012_review.md†L7997-L8008】【F:knowledge/notes/input_part012_review.md†L8221-L8222】
+- Treat the Ninebot P100 pack as a reminder that chassis upgrades can outpace energy storage—its 52 V 23 Ah battery only returns about 25 mi at 30 mph until firmware efficiency improves, so budget range upgrades alongside structural swaps.【F:knowledge/notes/input_part003_review.md†L701-L748】
+- Long-range G30 builds still fight motor heat even when they boast “endless power”—plan ferrofluid, spare motors for regen-only duty, or newer hub generations if you promise high-speed touring.【F:data/vesc_help_group/text_slices/input_part003.txt†L9536-L9561】
+- Vsett 9 frames can internalize 52 V 30 Ah packs—and even standing 20 S8 P stacks with spacers—providing inspiration for auxiliary battery pods or cross-frame transplants on Max conversions.【F:data/vesc_help_group/text_slices/input_part003.txt†L10118-L10132】
+- A 21 S Zero 11X pack with ~0.002 V delta showcased proper busbars and heavy-gauge cabling for big-wheel race builds—borrow its harness and reinforcement ideas when scaling Max packs beyond commuter duty.【F:data/vesc_help_group/text_slices/input_part003.txt†L10411-L10415】
 
 ## Control & Traction Tuning
 - Compress throttle ADC ranges (treat ~0.83 V as idle, activate around 1.0–1.2 V) to eliminate noise-triggered surges on Spintend 100/100 installs.【F:knowledge/notes/input_part014_review.md†L84-L85】
@@ -63,6 +69,9 @@
 2. **Harness Inspection** – Verify bullet crimps, insulation, and ADC board grounds after every teardown; many “mystery” controller deaths trace back to workmanship lapses.【F:knowledge/notes/input_part014_review.md†L22-L22】【F:knowledge/notes/input_part014_review.md†L84-L86】
 3. **Telemetry Logging** – Capture CAN BMS current, controller temperatures, and GPS speed on each shakedown to validate power estimates and traction-control tuning.【F:knowledge/notes/input_part014_review.md†L79-L82】【F:knowledge/notes/input_part014_review.md†L76-L76】
 4. **Spare Components Ready** – Keep extra motors, throttle pods, and valve stems in the pit kit; wheelspin experiments and bead burps remain common during high-power tuning.【F:knowledge/notes/input_part014_review.md†L46-L46】【F:knowledge/notes/input_part014_review.md†L107-L107】
+
+## Compliance & Field Interaction
+- Prepare polite proof-of-compliance for roadside checks. Rosheee’s 16 S scooter was seized until officers confirmed it held 22 km/h in eco mode despite 1.5 kW logs; homologation stickers and slow-mode profiles diffused the situation.【F:knowledge/notes/input_part003_review.md†L705-L707】
 
 ## Source Notes
 - G30 conversion strategy, firmware prep, and traction-control tuning synthesize the late-2025 review of controller behaviour, positive ramp targets, and BMS firmware requirements logged by Smart Repair, Yamal, and fellow builders.【F:knowledge/notes/input_part014_review.md†L79-L119】【F:knowledge/notes/input_part014_review.md†L84-L108】

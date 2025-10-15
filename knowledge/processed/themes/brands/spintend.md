@@ -39,6 +39,8 @@
 | Dual 75/100 (early rev.) | 16–20 S | Needs external filtering for the noisiest installs | First batches omitted phase filters; retrofit boards or external filters tame switching noise on sensitive builds.[^8] |
 | Single-board prototype | 16–22 S (target) | Paolo estimates ≈150 A battery on flat roads once firmware stabilises | Current revision is ~60 mm wide without the case, adds capacitance versus a Nucular 12F, and still needs external sealing before living in wet decks.[^single-proto] |
 
+Spintend now colour-codes dual Ubox trims—red prioritises current for commuter tunes, purple adds TVS protection for safer 18 S work, and black pairs with 22 S builds so long as e-brake regen is capped under ~80 V—so log the shell colour before assuming voltage headroom.【F:knowledge/notes/input_part003_review.md†L223-L223】
+
 ## Operating Guardrails
 ### Battery & Phase Current Targets
 - Stock firmware keeps 85‑250 hardware near 150 A battery / 200 A phase continuous, with seasoned tuners only flashing no-limit binaries once motors and cooling can stomach 400 A phase spikes.[^9]
@@ -49,6 +51,7 @@
 - Heavy riders continue blowing 12‑FET stages even with modest throttle inputs; treat 20 S commuter builds as derated compared with lightweight race scooters and reserve “fat VESC” footprints when riders plus cargo exceed ~120 kg.[^18]
 - Start with conservative dual-drive baselines: 17 S builds have settled near 2×120 A phase / 2×90 A battery / 2×180 A absolute, while 16 S commuters ride closer to 2×100 A phase / 2×60 A battery until thermal logs show headroom.[^30]
 - Remember the Spintend bridge mirrors battery current to both controllers—profile toggles or 1WD/2WD switches must isolate CAN or power, otherwise the smaller front ESC still sees the rear controller’s amps.[^bridge_mirror]
+- Respect the published 17 S ceiling on 75 V duals (16 S with heavy regen) unless you move to the 100 V “black” chassis; red/purple shells run different FET stacks and leave less margin for 20 S experiments.[^voltage_ceiling]
 
 ### Voltage & Regen Discipline
 - Riders stepping into 22 S still back off charge voltage or disable heavy regen to avoid 100 V spike failures that plague 75xxx competitors; Ubox-class controllers tolerate the packs but demand measured braking ramps.[^11]
@@ -77,10 +80,12 @@
 - Heavy riders continue blowing 85/250 units even with gentle ramps, so dual-motor “fat VESC” upgrades or derated current ceilings remain the conservative path for >20 S commuters.[^18]
 
 ## Thermal & Packaging Playbook
+- **Track the 2022 copper-single experiments.** Early feedback from the 75/100 single community showed copper sandwich plates and resin potting still cooked past 80 °C once riders pushed 130 A phase, so reviewers started trialing graphite pads and waiting on the promised aluminum-core revision before ordering more copper hardware.[^graphite_triage]
 - Mount each ESC against aluminum with thermal compound on both faces; copper spacers are discouraged because corrosion outweighs the modest conductivity gain once you already have aluminum-to-aluminum contact.[^2]
 - Retain or improve OEM pad compression—Ubox V2 temperature deltas often trace back to NTC placement and clamp pressure more than exotic pad swaps.[^25]
 - Bolt controllers directly to bare metal structure: sand paint, polish deck plates, and clamp the Ubox to aluminum or copper spreaders to hold MOSFETs near 55 °C at 50 A battery / 120 A phase.[^26]
 - Maintain pad thickness discipline; thicker thermal replacements have pushed case temps toward 70 °C when compression was lost.[^27]
+- Mirko’s 15 mm aluminum baseplate plus open-deck airflow kept dual 190 A phase / 70 A battery pulls near 52 °C, underscoring how enclosure design matters as much as MOSFET choice when evaluating upcoming aluminum-core revisions.【F:data/vesc_help_group/text_slices/input_part003.txt†L12443-L12494】
 - Mount 6‑FET minis on 3–5 mm aluminum plates with paste on both faces—copper sandwiches corrode faster than they help once you already couple to aluminum.[^28]
 - Share load across dual drives when possible: single-controller hill climbs hit ~60 °C while dual-drive equivalents stay below 40 °C, underscoring the headroom gained by splitting torque.[^29]
 - A single 25 × 15 cm heatsink can host two 12‑FET bodies without fin trimming, giving dual builds a repeatable footprint for under-deck cooling plates.[^2]
@@ -151,6 +156,20 @@
 - Budget for QA misses: multiple 85/250s arrived DOA or died within weeks at 200 A battery / 170 A motor settings, pushing riders toward Seven or 3Shul spares while they wait on replacements.[^doa250]
 - Diagnose ADC rail failures before reflashing—throttle noise can short the 3.3 V rail to ground and kill STM32 ADC inputs, so check resistance between 5 V/3.3 V and ground, then attempt MCU swaps only if you own hot-air gear and magnification.[^adc_short]
 
+## Roadmap Signals & Known Pain Points (Aug–Oct 2022)
+- **Production cadence:** Artem’s August 2022 status update confirmed 500 Spin-Y throttles were moving through hand-soldering while copper-backed singles entered onboarding—expect staggered deliveries and keep install guides handy for first-time buyers.[^2022_prod_update]
+- **Traction-control heat spikes:** September test logs showed traction-control pulls heating Ubox singles faster than manual throttle launches; Artem said the next single would ship in 80 V and 100 V MOSFET flavours until the integrator board is ready, so plan cooling plates before flashing aggressive slip control.[^tc_heat]
+
+## Late-2022 Iteration Highlights
+- **Spin-Y Gen2 throttle polish.** Artem’s November updates locked in a 65° forward / 35° regen sweep, longer cabling, batch‑1 retrofit discounts, and a 1 mm magnet spacer that recovers two-thirds of the dead zone. Follow-on prototypes trialled wider diamond-cut wheels with glove-friendly textures, plus a single-magnet Spin-Y2 profile that flattens the output curve while Spintend recruits more QA coverage for the ramp-up.[^spin_y_gen2]
+- **Control cluster & accessory planning.** The same push yielded a five-position thumb switch for blinkers, horn, and lighting along with reminders that Spintend’s light cluster *sources* 12 V—drive external relays instead of hanging accessories directly on the harness.[^spin_y_controls]
+- **Aluminum-core Ubox roadmap.** Artem confirmed 6- and 12-FET aluminum singles are in flight with thicker copper, SH8/6 AWG support, and firmware-locked tiers that hold phase near 200–300 A and battery near 150 A until cooling is proven.[^aluminum_roadmap]
+- **Single Ubox tuning guardrails.** Community clinics continue to steer 75 V singles toward ~130 A phase / 50–60 A battery, motor NTC retrofits, and bare-metal deck contact (scrape the paint) before chasing S/M/L tier upgrades or 200–350 A 6‑FET targets.[^single_tuning]
+- **QC watchlist.** Fresh singles still arrive with missing screws or solder balls; pair the teardown with an ANT standby-draw check (a few tenths of a volt overnight is normal when the latching key is wired correctly) and document any power-board swaps before warranty claims.[^spintend_qc_nov]
+- **Traction-control caution.** Rosheee’s rear Tronic fire after a traction-control slip renewed guidance to dial phase/battery limits and prefer front-only slip control when experimenting on Spintend duals.[^tc_failure]
+- **ADC accessory budget.** Builders toasted the ADC adapter by adding 12 V fans to the board; treat it as a signal bridge and keep heavier loads on dedicated converters.[^adc_overload]
+- **Diagnostics & rescue.** Mirono mapped the single’s unpopulated SWD pads to STM32 pins 46/49 and reminded rescuers to clean flux before micro-soldering, while SmartDisplay testers layered Waze alerts over Spintend CAN data for richer nav dashboards.[^stlink_waze]
+
 ## Source Notes
 [^1]: Makerbase/Flipsky QC issues versus Spintend reliability, plus reports that Ubox controllers coast through BMS trips instead of locking wheels.【F:knowledge/notes/input_part005_review.md†L17-L20】【F:knowledge/notes/input_part008_review.md†L31-L36】
 [^2]: Community thermal practices for Spintend hardware, including aluminum plate mounting guidance and dual-controller heatsink sizing.【F:knowledge/notes/input_part008_review.md†L25-L30】【F:knowledge/notes/input_part010_review.md†L531-L531】
@@ -203,6 +222,11 @@
 [^logistics_update]: Spintend discontinuing the 85/250 while routing 85/240 shipments through a New Jersey hub so U.S. buyers see faster delivery and minimal tariffs, leaving the higher-rated board scarce.[【F:knowledge/notes/input_part012_review.md†L111-L135】【F:knowledge/notes/input_part012_review.md†L379-L405】]
 [^u100_baseline]: Smart Repair’s teardown of the Ubox 100/100 highlights its 22 S limit, ≈135 A phase / 180 A absolute defaults, lack of ST-Link pads, and the need to tame regen unless you’re ready for MOSFET swaps.【F:knowledge/notes/input_part012_review.md†L48-L48】
 [^u85240_speed]: Single 85/240 builds have already pushed Lonnyo 80 H hubs to ~95 km/h on 22 S, underscoring that the compact case still needs race-grade cooling before chasing dual-drive numbers.【F:knowledge/notes/input_part012_review.md†L24-L24】
+[^copper_backlog]: Copper single backlog update covering ~100 pre-orders, seven-wire harnesses, and onboarding video plans for the 100 V single plus Spin-Y throttles.【F:knowledge/notes/input_part003_review.md†L358-L359】
+[^roadmap_dims]: Packaging roadmap calling for ~25 × 52 × 85 mm housings with vertical FETs and modular auxiliary boards so dual builds stay compact.【F:knowledge/notes/input_part003_review.md†L359-L360】
+[^aux_debate]: Riders demanded a retained 3 A 12 V rail while Spintend pushed a removable “integrator” accessory module as a compromise.【F:knowledge/notes/input_part003_review.md†L360-L360】
+[^packaging_feedback]: Early copper-single photos triggered calls for slimmer housings, aluminum options, vertical FET layouts, deck-bolt mounting, and sub-$119 pricing.【F:knowledge/notes/input_part003_review.md†L361-L361】
+[^thermal_rethink]: Copper-base thermal debates—galvanic risk, resin bottlenecks, 130–150 A runs at 80 °C, and experiments with graphite pads, potting gaps, and an aluminum PCB revision.【F:knowledge/notes/input_part003_review.md†L362-L362】
 [^seq_led]: Sequential LED strips overrun the ADC turn-signal line without helper logic, so riders rewire lighting looms or add controllers when they want chase effects.【F:knowledge/notes/input_part012_review.md†L481-L481】
 [^mounting_threads]: Riders printing adapter plates, adding 0.5 mm pads, or retapping the tiny M2.5 bosses because 85/240/Lite housings ship without sturdy mounting ears or hardware.[【F:knowledge/notes/input_part012_review.md†L419-L420】【F:knowledge/notes/input_part012_review.md†L465-L466】
 [^doa250]: Reports of 85/250 controllers arriving DOA or failing quickly at 200 A battery / 170 A motor, prompting owners to migrate toward Seven or 3Shul alternatives.[【F:knowledge/notes/input_part012_review.md†L110-L111】【F:knowledge/notes/input_part012_review.md†L135-L136】
