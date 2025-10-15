@@ -38,6 +38,7 @@
 
 ## Configuration, UX & Security Notes
 - **Switch phones to English for full menus.** The Xiaoxiang/JBD apps inherit handset language and hide the “Softlock” toggle plus balance thresholds unless you install the admin APK or change locale first.[^18]
+- **Disable the switch port in software, not with jumpers.** If you don’t need the push-button harness, turn the electronic switch off inside Xiaoxiang instead of bridging pads—the board will boot automatically without extra wiring.【F:data/vesc_help_group/text_slices/input_part009.txt†L1485-L1488】
 - **Lower Softlock before fine-balancing.** Disable the 15 mV guard or set the delta deliberately; otherwise the app silently ignores tighter thresholds during top balancing.[^18]
 - **Keep the pack offline when parked.** JBD’s cloud portal can expose your scooter to remote limit changes, so veterans either avoid the online portal altogether or leave default credentials untouched.[^10]
 - **Log everything.** Photograph BMS settings after each session—some builders keep CSV exports—to backtrack when firmware or phone updates scramble parameters.[^10][^18]
@@ -94,7 +95,7 @@
 [^14]: Misrouting identical white sense leads on a JBD harness produced zero-volt readings until the parallels were retied to the correct terminal—proof that labeling and continuity checks matter.【F:knowledge/notes/input_part009_review.md†L261-L261】
 [^15]: Xiaomi Pro 2 deck measurements around 10.5–11 cm wide left only millimetres for extra electronics, so builders often relocate the BMS into shoulder spacers or bags.【F:knowledge/notes/input_part007_review.md†L185-L185】
 [^16]: Patrick ended up silicone-isolating the oversized JBD output studs and reprinting deck spacers once the real-case thickness became apparent.【F:knowledge/notes/input_part008_review.md†L165-L165】
-[^17]: Wiring logs remind builders to land B− before balance taps and verify each voltage step when assembling 20s8p packs to avoid frying the BMS during first power-up.【F:knowledge/notes/input_part008_review.md†L181-L181】
+[^17]: Wiring logs remind builders to land B− before balance taps and verify each voltage step when assembling 20s8p packs to avoid frying the BMS during first power-up.【F:knowledge/notes/input_part009_review.md†L3834-L3848】【F:knowledge/notes/input_part008_review.md†L181-L181】
 [^18]: JBD’s mobile app mirrors phone language and hides the Softlock toggle plus sub-15 mV balance settings unless you install the admin APK or switch the handset to English.【F:knowledge/notes/input_part009_review.md†L323-L323】【F:knowledge/notes/input_part008_review.md†L170-L170】
 [^19]: External active balancers can equalise large packs in about an hour, whereas relying on JBD’s onboard balancing would take days—handy during rebuilds but unnecessary once the pack is stable.【F:knowledge/notes/input_part009_review.md†L27-L27】
 [^20]: Builders keep LLT/JBD boards on 20 kW projects by capping ≈200 A battery on 18s7p Sony VTC6A packs, noting that the published 15 kW figure is conservative with proper cooling.【F:knowledge/notes/input_part006_review.md†L200-L200】

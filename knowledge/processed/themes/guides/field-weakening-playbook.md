@@ -19,7 +19,7 @@
 
 ## Configuration Workflow
 1. **Baseline Tune:** Run standard motor detection, confirm smooth sensorless transitions, and road-test without FW to verify the observer and throttle feel.[^7][^10]
-2. **Enable FW Incrementally:** Increase `Field Weakening Current` in 5–10 A steps. Dual 84100 setups typically settle near 15–30 A per controller for 100 km/h GPS runs, while heavier 72 V builds may stretch toward 40–55 A once cooling and battery delivery are proven.[^7][^11][^12]
+2. **Enable FW Incrementally:** Increase `Field Weakening Current` in 5–10 A steps. Dual 84100 setups typically settle near 15–30 A per controller for 100 km/h GPS runs, while heavier 72 V builds may stretch toward 40–55 A once cooling and battery delivery are proven.[^7][^11][^12] If FW introduces post-throttle oscillations and robs 4–6 km/h, bump phase current first (for example, 120 A→160 A) so the motor has torque headroom before increasing FW again.【F:knowledge/notes/input_part008_review.md†L604-L608】
 3. **Re-verify Current Limits:** After each change, check live logs for battery spikes above set limits and rerun detection if overshoot appears—the VESC Tool wizard reset resolved a 60 A ceiling breach on one build.[^8]
 4. **Test Regen:** Perform controlled braking drills to confirm bus voltage stays within component ratings; Spintend riders retain regen at 80–100 km/h with FW but still watch voltage sag for surprises.[^13]
 5. **Fault Review:** After hard pulls, run the `faults` command and inspect absolute current headroom (200–250 A for 120–130 A phase tunes) to avoid ABS cut-outs at high duty cycle.[^14]
@@ -28,21 +28,24 @@
 ## Operating Benchmarks
 | Platform | Pack & Motor | Phase / Battery | FW Current | Notes |
 | --- | --- | --- | --- | --- |
-| Zero 10X dual 84100 | 20 S LY hubs | 120 A phase / 55 A battery each | 30 A | BEMF decoupling + `mxlemming` observer hit 100 km/h without overheating; 60 A FW overheated motors within an hour.[^6][^7]
+| Zero 10X dual 84100 | 20 S LY hubs | 120 A phase / 55 A battery each | 30 A | BEMF decoupling + `mxlemming` observer hit 100 km/h without overheating; pushing to 60 A battery and 40 A FW dropped 0–50 km/h to ~2.8 s but risked cooking 50 H hubs in summer heat.[^6][^7][^zero-fw]
 | Segway GT2 dual Spintend 85150 | 19 S9 P EVE 50E | 150 A phase / 60 A battery each | 30 A | Cells are bottleneck; plan for stronger pack before raising FW.[^10]
 | Wolf King GT Pro dual Ubox 150 | 72 V pack, 50 A windings | 210 A phase / 50 A battery each | 55 A | Freewheels ≈77 mph, road ≈66 mph; requires reinforced deck and custom firmware.[^11]
 | Halo 60 V stunt hub | 60 V single hub | 350 A phase | 125 A | Airborne testing caused runaway RPM—cap FW drastically when wheels can unload.[^12]
 | Vsett high-speed build | 22 S 22×3 hubs | 80 A FW | 200 A battery split | Needs aggressive cooling; FW masks intermittent cut-outs from mechanical issues.[^12][^16]
+| Dual Ubox 16 S test rig (Rosheee) | 16 S6 P pack | — | +40 A | Back-to-back logs compared pure current, MTPA, and +40 A FW at ~90 % duty to map how the pack responds as FW comes online.【F:knowledge/notes/input_part008_review.md†L327-L327】
 | Commuter Xiaomi/Ninebot hubs | 13–20 S small stators | ≤40 A phase typical | Avoid FW | Stock hubs overheat or fail even with 4 A FW—prioritize motor upgrades instead.[^9][^17]
 | NAMI hotdog (100 H rear / 70 H front) | 22 S 11 P P45 pack | 500 A phase / 550 A absolute | 100 % front FW to sync speeds | Traction control mandatory—rear lifts the front even at 120 km/h while stators stay ~61 °C during 40 kW pulls.[^hotdog_fw]
 
 ## Risk Controls & Telemetry
 - **Thermal Watch:** Riders pushing 16 S commuter packs noted 150 °C stators at only 35 A FW, reinforcing that ferrofluid or temperature probes are mandatory if you insist on FW in enclosed hubs.[^18]
+- **Plan AWD for single-drive heat saturation:** 3.6 kW single-motor builds backed off FW after hot-weather pulls saturated hubs and triggered plans for AWD conversions to spread load.【F:knowledge/notes/input_part008_review.md†L16099-L16129】
 - **Voltage Monitoring:** Keep oscilloscope or high-speed logging on regen-heavy tests—22 S Spintend builds disable regen entirely when extending pack voltage to avoid BMS-induced surges.[^19]
 - **Fault Masking:** Sudden current drops or pothole-induced cut-outs that disappear when FW is enabled can signal mechanical faults (loose magnets, wiring) rather than firmware bugs; investigate hardware first.[^16]
 - **Noise & Surging:** If throttle jitters appear above 80 % duty after enabling 20 A FW on single-motor builds, roll FW back—operators traced the behavior directly to FW injection.[^20]
 - **Overspeed Discipline:** Avoid free-spinning wheels at high FW. Halo stunt crews saw runaway RPM off-load and controller stress at 125 A FW.[^12]
 - **Front-lift control:** Hotdog 100 H rear builds demand traction control or front FW assistance; otherwise the rear lifts the front well past 120 km/h even while stators only hit ~61 °C, so validate TC before public-road tests.[^hotdog_fw]
+- **Match regen to pack capability.** 20 S6 P Samsung 32E packs stay reliable around −40 A motor / −8 A battery (stretching to −15 A only after confirming BMS limits); the −65 A firmware default is unnecessarily aggressive.[^32e-regen]
 
 ## Decision Guide: Voltage vs. Field Weakening
 - **Choose Higher Voltage / Different Windings When:** You need sustained highway speed, the motor already runs hot without FW, or you’re targeting >120 km/h—builders hitting 118 km/h on 22×3 hubs without FW prove gearing changes scale better than stacking FW amps.[^11][^21]
@@ -53,6 +56,7 @@
 - **Battery Current Overshoot:** Rerun detection/wizard, verify sensor calibration, and ensure battery limits exceed expected FW-induced draw.[^8]
 - **ABS Overcurrent Trips:** Increase absolute current headroom, inspect phase connectors, and confirm observer stability before adding more FW.[^14]
 - **Uncommanded Brake or Cut-Outs:** Review handbrake/UART mappings and wiring; FW magnifies regen spikes that can trip miswired systems.[^4][^23]
+- **Runaway spin after throttle close:** One 75100 kept spinning with FW enabled even after releasing the throttle—log firmware versions and report anomalies so regressions can be reproduced and patched, and be ready to dial FW back or raise pack voltage instead of chasing 90–110 A FW currents on Ortega observers just to gain top speed.【F:knowledge/notes/input_part008_review.md†L311-L311】【F:data/vesc_help_group/text_slices/input_part009.txt†L1309-L1331】
 - **Persistent Motor Heating:** Back FW down 5–10 A, improve heat sinking (direct-to-deck mounts, fresh thermal paste), or reduce phase amps before the stator saturates.[^6][^11][^18]
 
 ## Source Notes
@@ -80,3 +84,5 @@
 [^22]: 20 S single-motor package delivering 85 km/h with ~30 A FW as a short-burst aid.【F:knowledge/notes/input_part013_review.md†L145-L145】
 [^23]: Firmware or wiring faults causing sudden full braking after FW-enabled firmware updates.【F:knowledge/notes/input_part001_review.md†L219-L219】
 [^hotdog_fw]: NAMI 100 H rear / 70 H front builds logging 500 A phase, 550 A absolute, 100 % front FW, and ~61 °C stators while traction control keeps the rear from lifting the front at 120 km/h.【F:knowledge/notes/input_part014_review.md†L8930-L8933】【F:knowledge/notes/input_part014_review.md†L10001-L10055】
+[^32e-regen]: Builders capped regen on 20 S6 P Samsung 32E packs around −40 A motor / −8 A battery (stretching toward −15 A only with proven BMS headroom) instead of the −65 A defaults.【F:knowledge/notes/input_part008_review.md†L219-L220】
+[^zero-fw]: Zero 10X owners chasing 0–50 km/h in ~2.8 s ran 60 A battery and 40 A FW per motor but flagged the thermal risk for 50 H hubs in summer heat.【F:knowledge/notes/input_part008_review.md†L15941-L15975】【F:knowledge/notes/input_part008_review.md†L16115-L16137】

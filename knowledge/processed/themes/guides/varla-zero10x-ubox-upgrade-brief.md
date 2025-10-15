@@ -23,9 +23,10 @@ This brief helps Varla Eagle One and Zero 10X owners who have already installed,
    - **Samsung 50S / Molicel P45B:** High-discharge cells that comfortably support 10 A+ continuous per cell, critical for dual-drive launches.¹ ⁰
    - **LG M26 / rewrapped Xiaomi cells:** Only acceptable for budget builds; expect ~40 A per half-pack and plan for future upgrades.¹¹
 4. **Mechanical layout:** Holderless “W” layouts, thin epoxy isolators, and 45 mm deck extenders make 20S7P possible inside Zero 10X decks, but only with meticulous insulation and strain relief.¹² ¹³
+5. **Auxiliary capacity:** PuneDir’s build stacks a 20 S6 P external pack alongside the internal 20 S7 P brick and saddlebag storage to chase endurance targets without gutting the deck, reinforcing the need for modular harnessing.【F:knowledge/notes/input_part008_review.md†L15121-L15135】【F:knowledge/notes/input_part008_review.md†L21617-L21664】
 
 ## BMS, Harness, and Safety Requirements
-- **BMS headroom:** Size discharge and regen thresholds to stay ahead of controller cutoffs; Daly-style boards trip around 2.7 V/cell, so program the Ubox battery cutoffs accordingly.⁷
+- **BMS headroom:** Size discharge and regen thresholds to stay ahead of controller cutoffs; Daly-style boards trip around 2.7 V/cell, so program the Ubox battery cutoffs accordingly and favor ANT or JBD smart boards when you need 40 A charging plus unrestricted discharge on 20 S6 P layouts.【F:knowledge/notes/input_part008_review.md†L15872-L15884】
 - **Harness insulation:** Triple heat-shrink, fish paper between nickel layers, and plexiglass or epoxy shields over balance leads prevent chafing in wet decks.¹³ ¹⁴
 - **Connector upgrades:** Budget 20 S builds still need 8 AWG equivalents; dual 20 S packs assembled from repurposed modules only produce ~17.5 Ah per half, so expect to parallel leads or upsize wiring immediately.¹¹ ¹⁵
 - **Charging gear:** Adjustable 0–120 V lab chargers must be verified internally and wired wall-first to avoid arc flashes across XT plugs.¹⁶
@@ -41,6 +42,10 @@ This brief helps Varla Eagle One and Zero 10X owners who have already installed,
 
 ## Mechanical & Handling Considerations
 - **Stem & chassis stress:** Stock stems crack at cable ports, and legacy twin-stem frames wobble above 60 km/h without dampers, reinforced handlebars, and balanced phase currents.²¹ ²²
+- **Traction control still caps real-world speed:** Even 10 kW, 72 V Ubox builds that disable traction control for tire noise stay near 60 km/h for stability, underscoring the handling ceiling of twin-stem Zero frames.【F:knowledge/notes/input_part008_review.md†L315-L315】
+- **Damper hardware upgrades:** Print PuneDir’s steering-damper mount (Cults3D ZIP) or budget billet brackets—the add-on calms high-speed shimmy without bespoke machining.【F:knowledge/notes/input_part008_review.md†L14914-L14918】
+- **Spring for weight and terrain:** Track riders like 165 mm/1,500 lb rear and 135–150 mm/1,500 lb front shocks, while 70 kg commuters still prefer stiff springs for asphalt stability; heavier racers (≈78 kg) stretch to 1,800 lb combos on rougher surfaces.【F:knowledge/notes/input_part008_review.md†L482-L488】
+- **Respect FW heat limits:** Dual-motor tunes running 60 A battery per side with 40 A FW hit ~2.8 s 0–50 km/h, but riders warn 50 H hubs overheat quickly in summer—prioritise phase current and monitoring over more FW.【F:knowledge/notes/input_part008_review.md†L15941-L15975】【F:knowledge/notes/input_part008_review.md†L16115-L16137】
 - **Suspension & clearance:** Machined swingarm axles and upgraded pivots are required for 11" hubs; failing to rework clearances twists calipers or fouls springs.²³
 - **Waterproofing:** Resin-coat controller boxes or reroute harnesses—stock enclosures collect water and corrode upgrades quickly.⁴
 - **Earless 85/240 mounting:** New cases still ship without tabs; plan printed brackets, retapped threads, or adhesive adapters before rough roads shake loose under-deck installs.²⁷

@@ -8,6 +8,7 @@
 ## Base Scooter Preparation
 - Flash the latest ScooterHacking G30 BMS firmware to lift discharge ceilings past 20 A while retaining stock harnesses—essential before pushing VESC phase currents.【F:knowledge/notes/input_part014_review.md†L103-L104】
 - Strip the frame and inspect deck welds prior to grinding rails for larger packs; documented builds plan rail relief plus 3 mm aluminum skid plates as interim reinforcement.【F:knowledge/notes/input_part014_review.md†L106-L106】【F:knowledge/notes/input_part014_review.md†L118-L119】
+- Jan measured ~119 mm between the deck rails—expect to grind ~0.5 mm per side and mount the BMS vertically when chasing 22–24 S packs without external rails.【F:knowledge/notes/input_part008_review.md†L18616-L18654】
 - Choose battery spacers carefully: JREV units add cable room but misalign slightly with the frame, so plan shims or revised prints when targeting 22 S layouts.【F:knowledge/notes/input_part014_review.md†L118-L118】
 
 ## Powertrain Reference Builds
@@ -15,6 +16,7 @@
 | --- | --- | --- | --- |
 | 16 S commuter | Dual Ubox 100/100, Ortega observers, 50 A FW start at 87 % duty | ≈45 mph top speed, ~59 A peaks, ~1 mile per amp-hour above 20 mph | Prioritize battery capacity and cooling before chasing new motors; FW headroom exists but watch temperature logs.【F:knowledge/notes/input_part014_review.md†L105-L105】 |
 | 20 S stealth upgrade | Planned 20 S4 P 50PL pack with rail grinding and future 50 kW target | In progress—emphasizes fabrication burden (deck grinding, spacer redesign, pack sourcing) | Budget premium cells (50PL/P45B) and labor; expect cost doubling over 30Q baselines.【F:knowledge/notes/input_part014_review.md†L106-L106】 |
+| 11" speed project | Gabe’s 11" mock-up with extended dropouts | Highlighted leverage changes that demand welded U-channel reinforcement or reverting to 10" PMTs for stability above 120 km/h | Reinforce axle carriers before drilling new holes; unbraced extensions compromise geometry.【F:knowledge/notes/input_part008_review.md†L15146-L15210】 |
 | 22 S race prep | Targeting 22×3 or 33×2 motors, 300 A phase, positive ramp ~0.4 s | Focus on traction control slip windows (11 k–17 k rpm) to avoid wheelspin | Requires spare motors and throttle filtering to mitigate spike-induced controller shutdowns.【F:knowledge/notes/input_part014_review.md†L84-L87】【F:knowledge/notes/input_part014_review.md†L107-L107】 |
 
 ## Battery & BMS Planning
@@ -28,6 +30,12 @@
 - Grounding the chassis cured runaway acceleration for some riders, but document the wiring and verify insulation to avoid frame shorts before adopting the fix broadly.【F:knowledge/notes/input_part014_review.md†L86-L86】
 - Log traction control adjustments during every shakedown; slip thresholds between 11 k and 17 k rpm and positive throttle ramps (~0.4 s) kept lightweight builds controllable at 300 A phase.【F:knowledge/notes/input_part014_review.md†L107-L107】
 
+## Dash Scripting & Secret-Mode Management
+- Unlock “secret mode” by holding both brake and throttle while double-tapping the dash button; remember to exit walk mode first or the scooter stays capped near 20 km/h.【F:knowledge/notes/input_part008_review.md†L215-L215】
+- Firmware 6.05’s ADC branch introduces `secret-sport-fw` and `secret-sport-watts` parameters plus a lower ≈470 Ω throttle resistor target—add RC filtering across the hall supply if the headlight drags the brake line low.【F:knowledge/notes/input_part008_review.md†L216-L216】
+- Removing the dash entirely—or at least desoldering its Bluetooth radio—cuts the parked idle draw on alarmed builds so overnight battery drain no longer eats reserve capacity.【F:knowledge/notes/input_part008_review.md†L615-L617】
+- Remove dash scripts only after unlocking; deleting them mid-lock freezes the limit, and random mid-ride power cuts are still reported—treat the display as instrumentation once configuration is complete.【F:knowledge/notes/input_part008_review.md†L217-L217】
+
 ## Thermal & Mechanical Safeguards
 - Monitor per-motor temperatures; aim for ≤45 °C controller temps and ≤90–100 °C stator temps by refreshing thermal paste and clamping controllers to thick skid plates.【F:knowledge/notes/input_part014_review.md†L73-L76】【F:knowledge/notes/input_part014_review.md†L119-L119】
 - Plan for valve-stem service and bead reseating after pothole hits—tubeless split rims can burp air, so keep compressors and soapy water handy during test rides.【F:knowledge/notes/input_part014_review.md†L46-L46】
@@ -37,6 +45,7 @@
 ## Sourcing & Accessory Integration
 - Avoid too-good-to-be-true controller deals: £50 AliExpress listings are often bare logic boards; prioritize complete Spintend 100/100 Lite kits or 84/150 bundles from trusted resellers to get full harnesses.【F:knowledge/notes/input_part014_review.md†L108-L108】
 - Panel-mount QS8 connectors remain custom-only; draft plates early or leverage community prints to keep high-current leads tidy once deck space tightens.【F:knowledge/notes/input_part014_review.md†L8506-L8506】
+- Zero-to-Vsett conversions go smoother with the Zero 10X rear bracket/arm kit than custom plates when fitting Vsett 10+ hubs to a G30 with a Monorim rear end—budget for the swap before cutting metal.【F:knowledge/notes/input_part008_review.md†L20808-L20831】
 - Consider Voyage Megan or other CAN dashboards for consolidated telemetry once controllers are upgraded; validate compatibility when mixing CL350 or Express accessories with Ubox hardware.【F:knowledge/notes/input_part014_review.md†L110-L114】【F:knowledge/notes/input_part014_review.md†L208-L210】
 - Budget a dedicated buck converter if you add VESC Express boards—the modules only accept 5 V at ~150 mA and currently reset logging every few seconds on 6.06 firmware, so plan CAN updates or stay on 6.05 for stable telemetry.[^express_power]
 - Document J1772 travel adapters as part of the charging kit: a proven harness uses 12 AWG silicone leads plus 2.5 mm² wiring with 2.74 kΩ/1.3 kΩ pilot resistors so public stations handshake cleanly at 3 kW.【F:knowledge/notes/input_part012_review.md†L10580-L10588】【F:knowledge/notes/input_part012_review.md†L11100-L11129】
