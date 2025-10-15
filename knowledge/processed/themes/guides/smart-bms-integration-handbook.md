@@ -26,12 +26,14 @@
 6. **Confirm advertised series support.** JBD listings still misstate 22 s capability; verify firmware revisions before wiring high-voltage packs.[^16]
 7. **Plan controller integration.** VESC Bridge V2 is adding native CAN support for JBD/JK/ANT/Daly boards—map harnesses and firmware early so telemetry stays unified once the hardware ships.[^bridge]
 8. **Treat discharge-less monitor boards cautiously.** Jason’s 32 S-capable design drops discharge FETs entirely; keep downstream fuses/contactors because the BMS will not open on shorts.[^no-fet-smart]
+9. **Set ANT 30 S packs up manually.** Rogerio’s install misreported 23 S until he rewrote the series-count and Ah fields in the System Parameters menu—enter cell count and capacity before trusting telemetry.【F:knowledge/notes/input_part013_review.md†L333-L340】
 
 ## Regen & Current Budgeting
 - **Cap braking currents around the BMS charge envelope.** Community testing now caps regen near 120 A and keeps charge/discharge FETs closed so controllers ride through decel events instead of seeing open-circuit spikes.[^6]
 - **Treat BMS trips as design failures.** Flipsky 75100s and Wepoor power stages died instantly when the pack opened; prioritize parallel groups, pack cooling, and conservative regen so the BMS never has to intervene.[^6]
 - **Log trips before bypassing hardware.** One JK board saved a 20 s conversion by tripping at 60 A when the rider pushed 70 A battery; he’s redesigning the pack instead of defeating the protection.[^jk-trip]
 - **Oversize protection for big packs.** Large scooters are already paralleling multiple BMS boards or choosing 200 A-class ANT/JK units even for 70 A packs, proving that headroom beats marketing limits when chasing reliability.[^3][^22]
+- **Avoid charge-only stopgaps on daily riders.** Yamal’s 20 S commuter pack still leans on a 40 A charge-side ANT board—peers warned that a discharge short would roast the ESC, so treat charge-only layouts as temporary and document mitigation (fuses, inspections) if you must ride them.【F:knowledge/notes/input_part013_review.md†L341-L348】
 
 ## Balancing & Calibration Practices
 - **Map delta thresholds to chemistry.** Experienced builders trigger active balancing around 0.015–0.025 V and cap charge at ~4.15 V when longevity outweighs peak range.[^9]
@@ -48,6 +50,7 @@
 - **Log balance behavior after storage.** JK units can self-immolate while idle and Daly boards stop balancing once “full”—review app history after downtime before sending the pack back into service.[^2][^19]
 - **Teach recovery procedures.** Publish lead-order diagrams and wake-up checklists so drained JK packs (≈57 V on 20 s) or JBD miswires don’t strand riders without telemetry.[^17][^24]
 - **Escalate when firmware toggles misbehave.** ANT app glitches that trip discharge FETs or JK UIs that freeze mid-session warrant immediate vendor contact and a fallback BMS plan.[^11][^14]
+- **Check harness seating before condemning packs.** Noname revived a “dead” Vsett 11+ battery by unplugging and reseating the multipin BMS connector—add that step to diagnostics before declaring a module failed.【F:knowledge/notes/input_part013_review.md†L219-L224】
 
 ---
 

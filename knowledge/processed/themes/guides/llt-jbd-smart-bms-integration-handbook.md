@@ -41,6 +41,7 @@
 - **Lower Softlock before fine-balancing.** Disable the 15 mV guard or set the delta deliberately; otherwise the app silently ignores tighter thresholds during top balancing.[^18]
 - **Keep the pack offline when parked.** JBD’s cloud portal can expose your scooter to remote limit changes, so veterans either avoid the online portal altogether or leave default credentials untouched.[^10]
 - **Log everything.** Photograph BMS settings after each session—some builders keep CSV exports—to backtrack when firmware or phone updates scramble parameters.[^10][^18]
+- **Sanity-check system parameters when series counts drift.** A 22 S ANT/JBD install read as 23 S until the owner rewrote the series-voltage and capacity fields from scratch, so treat unexpected telemetry as a configuration error before chasing wiring faults.[^param_sanity]
 
 ## Current, Regen & Thermal Guardrails
 - **Start regen conservatively.** 17 S commuters stay near −5 A battery / −40 A phase until pack temps and JBD logs prove the hardware can absorb more without tripping protection.[^4]
@@ -107,3 +108,4 @@
 [^adj_supply]: Adjustable 22 S/18 A supplies paired with ANT sleep timers keep 21 S packs topped without drifting when scooters sit for weeks between rides.【F:knowledge/notes/input_part012_review.md†L11401-L11411】
 [^multi_brick]: Switchable 16–24 S/20 A bricks fill in when premium 21 S chargers are unavailable, giving one charger that can service multiple scooter voltages.【F:knowledge/notes/input_part012_review.md†L11792-L11797】
 [^no_fet]: Jason’s 32 S-capable BMS variant deletes discharge FETs entirely, effectively leaving downstream hardware as the only short-circuit protection.【F:knowledge/notes/input_part012_review.md†L19339-L19342】
+[^param_sanity]: Rewriting the series-count and amp-hour fields cleared a JBD pack that suddenly reported 23 S on a 22 S build, highlighting how mis-set parameters skew telemetry before any wiring fault is found.【F:knowledge/notes/input_part013_review.md†L304-L304】
