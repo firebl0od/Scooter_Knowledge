@@ -4,6 +4,7 @@
 - SmartDisplay pairs with VESC and legacy controllers over UART today and will gain native CAN + VESC Express support on the incoming hardware spin, so budget both 5 V logic power and CAN high/low when future-proofing harnesses.[^1]
 - Treat the display as the hub for lighting, telemetry, and speed-mode governance: its OTA chain flashes every connected accessory board (5 V/12 V light drivers, button pods) alongside the head unit, simplifying updates if the CAN bus is wired correctly.[^2]
 - Never tether SmartDisplay’s USB port to a computer while the controller is live; a single ground loop already blew the 3.3 V rail and STM32 on a Ubox, forcing an RMA.[^3]
+- Enable the “transparent” BLE bridge when controllers lack onboard Bluetooth—the SmartDisplay can proxy VESC Tool traffic like a USB dongle, but veterans still default to wired sessions if nearby trackers or radios inject interference.[^15]
 
 ---
 
@@ -12,9 +13,15 @@
 | --- | --- | --- | --- |
 | 2022–mid 2024 batches | UART (RX/TX/GND/5 V) | 4-wire JST or soldered pigtail | External button harness, optional light board |
 | Upcoming hardware (2024Q4 roadmap) | CAN + UART bridge | CANH/CANL, 12 V lighting feed, 5 V aux | Native VESC Express slot, ESP32‑C3 module, CAN daisy-chain[^1] |
+| Maker batches (2024) | UART + BLE pass-through | 4-wire JST, optional USB-C | Dash or deck module, transparent BLE bridge, SmartController companion board[^15][^18] |
 
 - Early adopters validated SmartDisplay on dual Kelly, VESC, and Minimotors controllers; firmware exposes ≈95 % of editable parameters on-device and defers long strings (Wi‑Fi SSID) to the mobile apps.[^4]
 - The Voyage/TJA1051 CAN transceiver is the go-to spare for Voyage/SmartDisplay repair benches; stock a few for field swaps.[^5]
+
+## Companion Boards & OEM Dash Retention
+- **QS-S4 stealth swaps.** Vsett’s QS-S4 display and RFID pod speak UART like Zero dashboards, letting SmartDisplay integrations reuse the factory harness for stealth compliance checks once you dig the loom out of the foam and silicone potting.【F:data/vesc_help_group/text_slices/input_part000.txt†L20364-L20389】
+- **SmartController dev board.** Koxx’s €60 SmartController motherboard + shield keeps the OEM display for riders comfortable with coding and SMD work; the open-source build currently drives a single VESC with dual-motor support reserved for the paid “pro” release.【F:data/vesc_help_group/text_slices/input_part000.txt†L22102-L22133】
+- **Button and harness expectations.** The SmartController expects momentary buttons and custom cabling, so builders plan to reuse dual-button pods while letting the board orchestrate speed-mode UART commands across both controllers to keep rear hubs from overheating.【F:data/vesc_help_group/text_slices/input_part000.txt†L22115-L22144】
 
 ## Wiring & Installation Checklist
 1. **Bench-Test Power Rails.** Confirm 5 V and 3.3 V logic rails on the controller before introducing SmartDisplay to avoid misdiagnosing brownouts.[^6]
@@ -24,6 +31,7 @@
 4. **Map Hotkeys & External Buttons.** Internal buttons can act as hotkeys, but external latching or momentary switches are supported for mode toggles and lighting; riders often park lighting on the auxiliary harness instead of the face buttons.[^7]
 5. **Speed Modes via ADC2.** Tie ADC2 “eco” limits to SmartDisplay’s virtual throttle ceilings when mixing with ADC-based throttles—the display writes percentage caps that VESC enforces as duty/phase ceilings.[^7]
 6. **Log UART throttle packets before rewiring.** SmartDisplay streams CRC-protected commands over UART, so capture the live data to confirm dips originate upstream before blaming harness noise or shielding.[^uart-crc]
+7. **Finish the enclosure.** The shared 3.5 in STL pack suits SLS/SLA printing, and builders now sand, paint, or resin-coat the housing to prevent translucent shells from yellowing under UV before bolting stem-cap mounts in place.[^16]
 
 ## Feature Set & Navigation
 - **Integrated GPS + Nav Prompts.** The 3.5 in unit houses turn-by-turn guidance to keep phones off the bars; builders cite 10 × 6.5 cm packaging as a sweet spot for 100 km/h scooters.[^8]
@@ -46,12 +54,15 @@
 - **USB Isolation.** Only flash or debug SmartDisplay over Wi‑Fi/BLE when the controller is energized; USB-to-PC tests while the scooter is live can short grounds and nuke 3.3 V logic.[^3]
 - **CAN Health.** Expect ≈3.3 V differential between CANH and CANL on a healthy bus; anomalous readings justify probing harness crimps before blaming firmware.[^6]
 - **Spare Components.** Keep TJA1051 CAN ICs, JST pigtails, and spare ESP32 modules in the pit box to minimize downtime when a dash takes a spill.[^5]
+- **Dual-motor presets.** Early “police mode” experiments target CAN-synced loadouts that mute the front motor while leaving rear torque, so expect firmware drops that combine preset buttons with the BLE bridge once the prototypes stabilize.[^17]
 
 ## Roadmap & Ecosystem Outlook
 - SmartDisplay’s apps push updates in minutes—developers can add a new setting, publish OTA, and have riders flashing within five minutes over Wi‑Fi.[^4]
 - NetworkDir’s next hardware rev will speak native CAN, mimic Trampa’s SmartDisplay device registration, and bundle ESP32‑C3 Wi‑Fi/BLE modules to host VESC Express dashboards without extra dongles.[^1]
 - Rage Mechanics is weaving the display into turnkey race scooters, streaming telemetry to crews and elevating expectations for pro-grade HUDs in the VESC scene.[^12]
 - Firmware planning now includes encrypted OTA packages, Kelly/Sabvoton harness kits, and configurable “panic mode” speed caps so riders can stay compliant during roadside checks.[^14]
+- Upcoming builds expand the existing 25/35/unlimited slots into user-tuned eco/normal/boost profiles that scale phase and battery current (e.g., eco at 0.6×/0.7×) and warn when MOSFET temps approach the boost gate.【F:knowledge/notes/input_part000_review.md†L137-L137】
+- Production now spans dash-mounted screens and minimalist deck modules assembled by Koxx’s team, letting riders hide the BLE bridge in the deck when they prefer to keep phones on the bars for live telemetry.[^18]
 
 ---
 
@@ -73,6 +84,11 @@
 [^boot]: MCU firmware initializes dashboards in ≈10 s, avoiding the 45–95 s boot delays seen on Raspberry Pi VESC displays.【F:knowledge/notes/input_part004_review.md†L83-L83】
 [^uart-crc]: SmartDisplay throttle traffic includes CRC checks—log the UART stream before chasing shielding fixes for perceived duty dips.【F:knowledge/notes/input_part004_review.md†L214-L215】
 [^can-backfeed]: Smart Repair’s harness can power lights directly from the CAN header, but builders add inline resistors and tap the servo PWM pads when they want flashing indicators instead of constant-on lamps.【F:knowledge/notes/input_part012_review.md†L19323-L19405】
+[^15]: SmartDisplay’s transparent BLE bridge lets Android VESC Tool sessions piggyback through the dash like a USB dongle, though the team still leans on wired hookups when local trackers cause interference.【F:knowledge/notes/input_part000_review.md†L201-L201】
+[^16]: Community STL packs and resin-print finishing steps keep the 3.5 in enclosure centred on the stem while preventing UV yellowing.[^15][^smartdisplay-stl]
+[^17]: CAN-linked presets such as “police mode” are being prototyped to mute the front motor while retaining rear torque for roadside compliance checks.【F:knowledge/notes/input_part000_review.md†L203-L203】
+[^18]: Koxx now hand-assembles SmartDisplay and SmartController batches, selling both the dash-mounted unit and a display-less deck module for riders who prefer phone dashboards over BLE.【F:knowledge/notes/input_part000_review.md†L264-L264】
+[^smartdisplay-stl]: Shared 3.5 in SmartDisplay STL kits support SLA/SLS printing and stem-cap mounts; builders finish prints with opaque paint to avoid UV yellowing.【F:knowledge/notes/input_part000_review.md†L202-L202】【F:knowledge/notes/input_part000_review.md†L293-L293】
 
 ## Production Timeline & Pricing Updates
 - **SmartDisplay nearing production with premium pricing.** Rage Mechanics' SmartDisplay now lives in a CNC aluminium, anti-glare housing with VESC Tool bridging, navigation, RTC timekeeping, and music controls; two buttons support single/double-click mapping today, with knob controls planned once production launches—early adopters expect €199.99 launch slots before the €400–600 retail range.[^smart_production]

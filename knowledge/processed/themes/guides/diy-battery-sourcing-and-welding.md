@@ -19,6 +19,11 @@
 | **Custom P45B/P50B packs** | €3000–€4500 for 22 S 10 P/11 P assemblies | Continuous ≈495 A, BMS peaks ≈1040 A | Group buys enable supply; document BMS limits (≤500 A continuous today).[^6][^7] |
 | **Commissioned builds (UK/US)** | Varies; premium vs DIY delta covers tooling | Output tied to builder’s QC logs | Trusted builders like jamessoderstrom eliminate tooling spend for one-off packs.[^11] |
 
+- **Samsung 50S group buys:** Community orders are landing grade-A 50S cells at €4.71 each with the potential for ~15 % savings when payments avoid eBay/PayPal fees—coordinate escrow and inspection to lock in the deal before public pricing rebounds above €6.50.【F:knowledge/notes/input_part000_review.md†L148-L150】
+- **Price/performance quick look:** Expect Samsung 30T around €2.50, 35E near €3.40, and 50G/50S roughly €4–4.5 when bought in quantity, with discharge logs confirming P42A outpaces 40T at 20–30 A, 50G shines at 7–15 A, and 50S matches P42A only if you can justify the premium.【F:knowledge/notes/input_part000_review.md†L606-L607】【F:knowledge/notes/input_part000_review.md†L694-L695】
+- **21700 energy density vs. recycled 18650s:** Recycled EVE 26V 18650 cells struggle beyond ~5 A per cell, whereas fresh Samsung 35E/48X/50S 21700 options pack more watt-hours into Xiaomi/Ninebot decks and sustain 15–20 A draws—reserve reclaimed cells for low-power builds and spec new 21700s for high-range projects.【F:knowledge/notes/input_part000_review.md†L118-L118】
+- **Honeycomb nickel shortages:** EU builders now pool orders for half-kilo lots because suppliers refuse to ship sub-1 kg batches; expect ~40 € quotes locally or wait on AliExpress consolidation when stocking cell cages.【F:data/vesc_help_group/text_slices/input_part000.txt†L17309-L17312】
+
 ## Welding Equipment Decision Guide
 | Scenario | Recommended Tooling | Why It Wins | Follow-Up Checks |
 | --- | --- | --- | --- |
@@ -48,6 +53,7 @@
 - **Weld verification:** Rip-test sample strips each session, especially after cleaning Glitter bus pins, to confirm energy settings haven’t drifted.[^10]
 - **Harness strain relief:** Use deck plates or external mounts to keep relocated controllers from stressing phase leads and QS8 connectors during pack swaps.[^8][^9]
 - **Telemetry cross-checks:** Pair CAN smart BMS data with VESC logs to validate current draw and spot calibration drift in shunt-based readings.[^7]
+- **Probe cells with Kelvin leads.** Alligator clips and single-sense multimeters can show false 1.9 V dips at 20 A; clamp meters across the battery and use four-wire probes directly at the tabs before condemning P42A-class cells.【F:knowledge/notes/input_part000_review.md†L605-L605】
 - **Finish work around positives:** Deburr nickel edges near cell tops and re-seat fishpaper before closing the pack—sharp tabs have already pierced insulation on low-current power-bank builds.【F:knowledge/notes/denis_all_part02_review.md†L122364-L122385】
 - **Print holders for heat, not looks.** PLA cradles slump once cells warm; switch to PETG or ASA around 230 °C/100 °C bed temps so 21700 honeycombs and Wildman bag sleds stay rigid in summer decks.【F:knowledge/notes/denis_all_part02_review.md†L116230-L116236】【F:knowledge/notes/denis_all_part02_review.md†L89665-L89696】
 - **Document capacity checks.** Time OEM chargers (≈1.7 Ah per hour on Xiaomi bricks) when vetting customer packs; a genuine 12 Ah module needs nearly seven hours from empty.【F:knowledge/notes/denis_all_part02_review.md†L98595-L98598】

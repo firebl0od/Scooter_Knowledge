@@ -19,7 +19,7 @@
   - Batch 14: 2021-09-20 14:32:25 through 2021-10-03 17:05:35 (lines 18401-19900)
   - Batch 15: 2021-10-03 17:06:12 through 2021-10-21 10:55:08 (lines 19901-21400)
   - Batch 16: 2021-10-21 10:55:20 through 2021-10-30 20:39:35 (lines 21401-22900)
-  - Batch 17: 2021-10-30 14:12:00 through 2021-11-10 12:40:52 (lines 22901-24400)
+  - Batch 17: 2021-10-30 14:12:00 through 2021-11-10 12:40:52 (lines 22901-24400; this pass revisited lines 22901-23000 and will continue forward)
   - Batch 18: 2021-11-10 12:42:59 through 2021-11-19 20:49:20 (lines 24401-25900)
   - Batch 19: 2021-11-19 20:50:13 through 2021-12-09 15:08:50 (lines 25901-27400)
   - Batch 20: 2021-12-09 15:08:59 through 2021-12-19 16:01:42 (lines 27401-28024)
@@ -518,12 +518,13 @@
 - Tudor’s VSETT-sourced 1200 W hubs with 50 H magnets will pair with 17 S 40T packs, but he and Mirono warn about inflated AliExpress freight unless parts are forwarded or negotiated ahead of time.【F:data/vesc_help_group/text_slices/input_part000.txt†L9077-L9112】
 
 ### Rotor Spacers & Brake Alignment (Batch 17)
-- Tall brake adapters should use a one-piece ring spacer instead of stacked washers so axial loads don’t rock the disc bolts; 5 mm steel rings have proven stable on custom Blade hubs where 1.7 mm shim stacks wandered.【F:data/vesc_help_group/text_slices/input_part000.txt†L22903-L22941】【F:data/vesc_help_group/text_slices/input_part000.txt†L23098-L23112】
-- Reversed Monorim forks with double spacers on the lower axle clear Blade 1200 W hubs without bending the legs, but the wider stance highlights how DIY mounts still need precision machining to keep calipers square.【F:data/vesc_help_group/text_slices/input_part000.txt†L23100-L23112】
+- Tall brake adapters should use a one-piece ring spacer instead of stacked washers so axial loads don’t rock the disc bolts; 5 mm steel rings have proven stable on custom Blade hubs, whereas some riders are still relying on 1.7 mm washer stacks under the rotor as a temporary fix.【F:data/vesc_help_group/text_slices/input_part000.txt†L22903-L22941】【F:data/vesc_help_group/text_slices/input_part000.txt†L23098-L23100】
 - Builders are budgeting CNC time for rotor shims after discovering that 6-hole aftermarket rims rarely align with Xiaomi 5-hole spacers, reinforcing the need for bespoke hardware when mixing OEM and custom hubs.【F:data/vesc_help_group/text_slices/input_part000.txt†L22935-L22942】
 
-### Acoustic Alerts & Control Pods (Batch 17)
-- Compact 12 V sirens such as the GREATZT QSI-4840 module (≈€2.76) deliver 120–125 dB and shrink to roughly 30 × 20 mm once the case is trimmed, letting riders tuck alarms behind OEM screens or inside side panels via the Ubox horn output.【F:data/vesc_help_group/text_slices/input_part000.txt†L22999-L23098】
+### Hub Motor Retainers & QC (Batch 17)
+- Forgetting the axle circlip after waterproofing a hub lets the stator slide on the shaft despite magnetic drag; riders now reopen freshly sealed motors to reinstall the ring before selling or riding so the rotor can’t walk and chew bearings.【F:data/vesc_help_group/text_slices/input_part000.txt†L22955-L22991】
+
+- Compact 12 V sirens such as the GREATZT QSI-4840 module (≈€2.76) deliver 120–125 dB and shrink to roughly 30 × 20 mm once the case is trimmed, letting riders tuck alarms behind OEM screens or inside side panels via the Ubox horn output.【F:data/vesc_help_group/text_slices/input_part000.txt†L23001-L23039】
 - Cycling horns with detachable PCBs measure about 35 × 30 × 20 mm and offer friendlier 110 dB tones for pedestrian use, so scooter builds now pair a “gentle” bar button with the siren-grade channel for traffic conflicts.【F:data/vesc_help_group/text_slices/input_part000.txt†L23080-L23097】
 - Riders seeking CAN-enabled button pods are requesting integrated transceivers so only a four-wire trunk (power, ground, CAN_H, CAN_L) runs through the stem, simplifying installs versus discrete analog harnesses for each light, horn, and turn signal.【F:data/vesc_help_group/text_slices/input_part000.txt†L23705-L23731】
 
