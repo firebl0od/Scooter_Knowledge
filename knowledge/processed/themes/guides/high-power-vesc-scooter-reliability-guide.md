@@ -6,6 +6,9 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - **Controller tiers:** Treat Makerbase/Flipsky aluminum-PCB boxes as interim ≤15 S 50 A solutions; high-power riders standardize on 3Shul C350/CL350, Ubox duals, or BRIESC units for thermal headroom and QC maturity.[^1][^2][^3]
 - **Boutique ceilings:** Tronic X12 (24 S), Ubox 240, and Spintend 85250 builds all share MOSFET and shunt limits around 331 A; most racers cap hubs near 150–200 A battery and 310–360 A phase even after swapping to upgraded silicon.[^33]
 - **Marketing vs. reality:** Expect Makerbase boxed 75100 units to deliver only one-half to one-third of the configured current, while Flipsky 75350 shunt math caps phase current near 500 A despite brochure claims.[^4][^5]
+- **84100 guardrails:** Community logs keep Flipsky 84100s happiest near 60–80 A battery and ≈135 A phase, and Makerbase 84100HP owners rarely exceed 85–100 A battery without rewiring stock looms that choke around 60 A.[^hp-84100-guardrails]
+- **Voltage headroom:** Builders are stepping up to 100 V-rated controllers for 20 S packs; running 21 S or heavy regen on 85 V hardware still risks over-voltage even with braking boosts disabled.[^hp-voltage-headroom]
+- **Budget upgrade path:** Spintend’s 12 FET remains the proven budget commuter controller, with Ubox Lite or full Ubox 85/250 as the next rung when customs or budget block Tronic replacements.[^hp-budget-path]
 - **DIY alternatives:** Ennoid MK8 shares the Spintend footprint but still needs Infineon IPTC017N12NM6 or similar MOSFET upgrades before flirting with 26 S / 500 A goals—plan the reflow work if you want to stretch beyond stock specs.[^39]
 - **Spintend supply shift:** The 85/250 run is over—stock spares or pivot to 85/240/Seven-class hardware now that Spintend routes 240 A controllers through New Jersey with minimal tariffs.[^41]
 - **G300 sprint controllers:** Waterproofed 18-FET G300 builds are logging ≈250 A battery / 500 A phase bursts on 22 S, but riders still report heat soak if they hammer regen—treat them as sprint hardware rather than hill-climb replacements.[^40]
@@ -17,10 +20,12 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Replace stock loom jackets with TPU spiral wrap or PET braid once the harness is exposed—both stayed flexible after 18 months outdoors.[^8]
 - Re-terminate budget-controller switch leads with ring lugs, add strain relief on throttle grounds, and minimize inline connectors to prevent runaway events from broken returns.[^9]
 - Favor waterproof signal/phase connectors like Julet, L1019, or HiGo (≤100 A phase); budget extra for hall/thermistor additions that feed VESC telemetry directly.[^10]
+- Upsize cabling deliberately: riders are doubling phase cross-section (≈2.5× stock) to curb voltage drop, keeping silicone 12 AWG on G30 phases, and monitoring 4 mm² (~AWG 11) leads that can overheat near 250 A—extend “silver” looms with quality copper because they’re just tinned conductors underneath.[^hp-cabling]
 - Upgrade abrasion points: sleeving PTFE leads before pulling 6 mm² conductors through axles prevents insulation tears, and RX/Nami riders now jump to AWG 11 silicone (AWG 10 rarely fits) to keep hubs cool on summer climbs.[^35]
 
 ## 3. Battery & BMS Strategy
 - **Pack chemistry:** Document any stock packs using LG M50LT or Samsung 29E cells and plan rebuilds when aiming for >120 A discharge; monitor internal resistance deltas and pause parallelization above ~3 mΩ spread.[^11]
+- **Mind mid-tier cells:** Samsung 32E cans only deliver ~6.5 A each (≈39 A for 6 P), so stacking extra nickel over the joints brings little benefit on mid-power builds—budget higher-current chemistry before chasing more strip layers.[^hp-32e-limit]
 - **Regen boundaries:** Cap regen between –5 A and –12 A on 60 V 38 Ah commuter packs until BMS specs are confirmed; firmware ERPM caps can still drop braking, so validate on firmware ≥6.05 beta (build 20).[^12][^13]
 - **Parallel pack discipline:** Match voltages and skip ideal diodes—mixed 17 S/16 S experiments induced throttle cut-outs until builders simply paralleled packs, budgeted regen against controller limits, and kept charge MOSFETs enabled for braking.[^36]
 - **Thermal guardrails:** Rental-grade SNSC hubs pushed to 20 S 40 A hit ~160 °C without ferrofluid—daily riders should cap voltage at 13–16 S or add cooling mods.[^14]
@@ -37,6 +42,8 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Slow ABS overcurrent can mask poor current tuning yet saves time when observers are unstable—disable only after fixing detection and ramp configuration.[^21]
 - Avoid triggering permanent BLE pairing (“pairing done”) unless you truly need it; clearing the lockout demands a VESC Tool update and manual flag reset.[^22]
 - When scripting 1WD/2WD toggles on Spintend bridges, isolate CAN or power between controllers—otherwise the “sleeping” ESC keeps mirroring the active unit’s battery current and never actually idles.[^spintend_toggle]
+- Treat field-weakening shutdowns as catastrophic events—builders have watched FW cutoffs spike components and “kill everything,” so keep FW conservative and confirm the battery has headroom before highway pulls.[^hp-fw-failure]
+- Don’t trust auto-detection blindly: Makerbase/Flipsky routines are still misreporting inductance/resistance by triple-digit percentages, so confirm motor parameters with trusted gear before riding.[^hp-detection]
 
 ## 6. Fabrication & Assembly Discipline
 - Use molded cell holders or reinforced 3D-printed fixtures plus flexible adhesives (B7000/E8000) so parallel groups stay serviceable after cell failures.[^23]
@@ -56,6 +63,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Expect charger LEDs to cycle red/green near 100 % SoC on Daly/YXP units—this is normal balancing behavior, not a wiring fault.[^30]
 - GTK 0–102 V adjustable supplies and 120 V lab PSUs offer cheaper wide-voltage charging versus Grin Satiator if you can live with bulkier hardware and lower (≈3 A) defaults.[^31]
 - Stock Laotie packs can sag from 58 V to 50 V under load; log real-time voltage drop and adjust low-voltage cutoffs or plan pack upgrades before increasing current limits.[^32]
+- Three-phase residential feeds in Europe average ~16 A per leg (~11 kW total), so plan wiring and charging expectations around those limits instead of chasing fantasy 40 C home-charging setups.[^hp-residential-power]
 
 ---
 
@@ -65,12 +73,17 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^3]: BRIESC controllers target 200 A battery/400 A phase capability in a compact footprint, proven on 22 S builds chasing 154 km/h runs.【F:knowledge/notes/input_part005_review.md†L164-L169】
 [^4]: Makerbase 75100 boxes deliver roughly half to one-third of programmed current, motivating upgrades to Ubox 80100-class controllers.【F:knowledge/notes/input_part005_review.md†L166-L167】
 [^5]: Flipsky 75350 shunt sizing realistically caps usable phase current near 500 A despite marketing claims.【F:knowledge/notes/input_part005_review.md†L164-L165】
+[^hp-84100-guardrails]: Real-world logs cap Flipsky 84100s at roughly 60–80 A battery and ~135 A phase, while Makerbase 84100HP riders rarely exceed 85–100 A battery without upgrading the stock looms that struggle past 60 A.【F:knowledge/notes/input_part009_review.md†L345-L347】
+[^hp-voltage-headroom]: Builders stepping to 20 S packs still recommend 100 V controllers—running 21 S or strong regen on 85 V hardware remains risky even with braking boosts disabled.【F:knowledge/notes/input_part009_review.md†L348-L348】
+[^hp-budget-path]: Spintend’s 12 FET remains the proven budget commuter choice, with Ubox Lite or 85/250 as reliable upgrades when Tronic-class controllers are unavailable.【F:knowledge/notes/input_part009_review.md†L357-L358】
 [^6]: MP2/CCC_ESC is a 30 S-capable DIY design requiring through-hole assembly, heatsink machining, and firmware flashing, shared via community GitHub links.【F:knowledge/notes/input_part005_review.md†L155-L157】
 [^7]: Samsung 29E packs sag heavily; racers rebuild with high-discharge P42A or VTC6A cells to maintain 130 km/h pulls.【F:knowledge/notes/input_part005_review.md†L23-L24】
 [^8]: TPU spiral wrap and PET braided sleeving have survived 18 months outdoors, making them preferred harness upgrades.【F:knowledge/notes/input_part005_review.md†L11-L14】
 [^9]: Poor stock harness construction and throttle-ground failures drove the community to re-terminate connectors, add strain relief, and minimize inline joints.【F:knowledge/notes/input_part005_review.md†L12-L13】【F:knowledge/notes/input_part005_review.md†L37-L37】
 [^10]: Waterproof Julet/L1019/HiGo connectors work well but L1019 peaks around 100 A phase; hall/thermistor additions feed reliable telemetry.【F:knowledge/notes/input_part005_review.md†L35-L36】
+[^hp-cabling]: Riders are doubling phase cross-section to tame voltage drop, keeping silicone 12 AWG on G30 phases, monitoring 4 mm² (~AWG 11) leads near 250 A, and extending “silver” looms with real copper because the shiny conductors are only tinned.【F:knowledge/notes/input_part009_review.md†L350-L376】
 [^11]: Stock packs using LG M50LT/Samsung 29E cells are limited around 120 A discharge; builders monitor IR spread before parallelizing groups.【F:knowledge/notes/input_part005_review.md†L29-L33】
+[^hp-32e-limit]: Samsung 32E cells plateau around 6.5 A each (~39 A for 6 P), so extra nickel over the joints adds little for mid-power scooters.【F:knowledge/notes/input_part009_review.md†L368-L368】
 [^12]: Riders cap regen between –5 A and –12 A on 60 V 38 Ah packs until BMS specs are confirmed.【F:knowledge/notes/input_part005_review.md†L25-L25】
 [^13]: ERPM speed limits caused intermittent regen dropouts that firmware 6.05 beta (build 20) resolves, preventing over-voltage incidents on high-S setups.【F:knowledge/notes/input_part005_review.md†L150-L153】
 [^14]: SNSC/Ninebot rental hubs reach ~160 °C when pushed to 20 S 30–40 A without cooling; veterans recommend 13–16 S for daily use.【F:knowledge/notes/input_part005_review.md†L31-L31】
@@ -82,6 +95,8 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^20]: Traction-control or ramp changes can erase throttle calibration on CL350 hardware, forcing repeated setup runs.【F:knowledge/notes/input_part005_review.md†L47-L47】
 [^21]: Slow ABS overcurrent sparks debate—it can hide poor current tuning yet saves time when observers are hard to dial on high-power builds.【F:knowledge/notes/input_part005_review.md†L50-L50】
 [^22]: Hitting “pairing done” on mobile locks administrators out until they update VESC Tool and clear the flag manually.【F:knowledge/notes/input_part005_review.md†L48-L48】
+[^hp-fw-failure]: FW-induced cutoffs have spiked components and “killed everything” when riders pushed 37 A of FW into Little Focer/Tronic 250 stacks—treat FW as a last resort with ample battery headroom.【F:knowledge/notes/input_part009_review.md†L353-L355】
+[^hp-detection]: Makerbase/Flipsky auto-detection still misreports inductance and resistance by triple-digit percentages, so veterans measure with trusted instruments before riding.【F:knowledge/notes/input_part009_review.md†L358-L360】
 [^23]: Builders combine molded cell holders, 3D-printed guides, and flexible glues to keep parallel groups serviceable.【F:knowledge/notes/input_part005_review.md†L13-L14】
 [^24]: Copper busbars under nickel require ≥1 kA welders; suppliers like Peng Chen ship 0.5 mm combs for neat 20 S 10 P layouts.【F:knowledge/notes/input_part005_review.md†L145-L147】
 [^25]: DIY spot welders and KWeld kits need quality LiPo/capacitor packs to avoid overheated leads; Malectrics + LiPo setups succeed on copper builds.【F:knowledge/notes/input_part005_review.md†L189-L191】
@@ -92,10 +107,11 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^30]: Daly/YXP charger LEDs alternating red/green near full charge indicate normal balancing—no rewiring needed.【F:knowledge/notes/input_part005_review.md†L26-L26】
 [^31]: GTK 0–102 V adjustable supplies and 120 V bench PSUs offer cheaper wide-voltage charging alternatives at ≈3 A defaults.【F:knowledge/notes/input_part005_review.md†L143-L143】
 [^32]: Laotie packs sag 8 V under load and can overheat even with 60 A Daly BMS units, so monitor voltage drop and plan upgrades before raising limits.【F:knowledge/notes/input_part005_review.md†L185-L187】
+[^hp-residential-power]: European residential three-phase feeds typically deliver ~16 A per leg (~11 kW total), so home charging must respect those limits despite online 40 C fantasies.【F:knowledge/notes/input_part009_review.md†L349-L349】
 [^33]: Tronic X12, Ubox 240, and Spintend 85250 tuning envelopes, including 331 A MOSFET limits and typical 150–200 A battery / 310–360 A phase guardrails.【F:knowledge/notes/input_part013_review.md†L364-L369】【F:knowledge/notes/input_part013_review.md†L799-L804】
 [^34]: Field-weakening gains plateauing on 20×70 kV builds after adding 25 A of FW current.【F:knowledge/notes/input_part013_review.md†L29-L31】
 [^35]: PTFE sleeving tips for 6 mm² leads plus AWG 11 silicone upgrades to keep hubs cool on Sevillian climbs.【F:knowledge/notes/input_part013_review.md†L48-L48】【F:knowledge/notes/input_part013_review.md†L190-L191】
-[^36]: Parallel-pack lessons covering voltage matching, regen budgeting, and the need to leave charge MOSFETs enabled for braking performance.【F:knowledge/notes/input_part013_review.md†L154-L157】
+[^36]: Parallel-pack lessons covering voltage matching, regen budgeting, and the need to leave charge MOSFETs enabled for braking performance.【F:knowledge/notes/input_part013_review.md†L154-L157】【F:knowledge/notes/input_part009_review.md†L377-L377】
 [^37]: CAN telemetry aggregation behaviour and the value of Voyage/Ambrosini dashboards for per-controller diagnostics.【F:knowledge/notes/input_part013_review.md†L186-L186】
 [^38]: Risks of powder-coating hub shells at ≈204 °C cure temperatures and the preference for high-temp paint or ceramic coatings.【F:knowledge/notes/input_part013_review.md†L147-L147】
 [^39]: Ennoid MK8 reliability chatter, including the need for IPTC017N12NM6 MOSFET swaps to reach 26 S/500 A envelopes.【F:knowledge/notes/input_part014_review.md†L19-L37】

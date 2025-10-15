@@ -19,6 +19,7 @@
 - **Dualtron Achilleus conversions** – Deck cavity (~485 mm × 181 mm) supports 22 S9 P if controllers move to an external mount; stock decks hold 20 S7–8 P and ~100 A battery before needing relocation or compact ESCs.【F:knowledge/notes/input_part014_review.md†L37-L44】
 - **Nami “hotdog” racers** – 22 S11 P P45 builds pair 100 H rear / 70 H front motors, 500 A phase, 550 A absolute, and 100 % front FW to sync wheel speed, netting 146 km/h GPS with manageable 61 °C stator temps.【F:knowledge/notes/input_part014_review.md†L168-L169】
 - **Ninebot G30 MAX** – Builders drill and trim 3 mm ePowerFun skid plates for €25 stopgap protection, swap in custom spacers, and plan 20 S4 P-to-22 S layouts once rails are clear and pack supports printed.【F:knowledge/notes/input_part014_review.md†L151-L151】【F:knowledge/notes/input_part014_review.md†L118-L118】
+  - Recent twin-MP2 conversions stack the 20 S brick to roughly 14.5 cm, park the smart BMS vertically at the pack’s nose, and split current across parallel QS8s with multiple 8 AWG leads while welding a rear controller box to keep the structural arches intact.【F:data/vesc_help_group/text_slices/input_part009.txt†L21845-L21929】
 - **30 S prototypes (Segway/Nami/G3)** – Ausias is CNC-ing supports for 22 S10 P Nami decks, while Finn’s G3 conversion fits 30 S3 P (15 S6 P) modules after bracket cuts; 30 S4 P remains too wide without welding and enclosure surgery.【F:knowledge/notes/input_part014_review.md†L159-L160】
 
 ## Tooling, Fabrication & Thermal Management

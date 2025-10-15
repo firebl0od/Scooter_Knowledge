@@ -20,12 +20,15 @@
 2. **Spin-Y & other multi-button throttles:** Version 1 units need custom JST‑1.0 leads into ADC2/COMM2; version 2 ships with a four-conductor harness that lands cleanly on the adapter board.[^2]
 3. **Spintend adapter v3 harness:** Modern boards arrive with keyed plugs—no more screw terminals—so match the supplied loom instead of hand-crimping tiny JST shells.[^3]
 4. **MakerX footpads & 3.3 V-only sensors:** Confirm both ADC rails output 3.3 V before blaming pads; swapping to 5 V kills the hall board.[^4]
+5. **Trim dual-hall start voltage.** Dual-controller Vsett builds needed manual tweaks to throttle start voltage after calibration so brake and throttle channels stay stable across master/slave VESCs.【F:knowledge/notes/input_part009_review.md†L270-L270】
 5. **Interpret ADC counts, not raw voltage:** VESC Tool reports hall inputs as 0–4095 counts—track the delta between idle and full throw, and if readings compress, repeat the test with a stable 5 V source to rule out noisy 3.3 V regulators before replacing sensors; Spintend’s adapter manual expects ~0.8 V idle, so stop and rewire if a channel sits near 3 V.[^22][^adapter-idle]
 6. **Filter noise in software first:** Builders tamed runaway triggers by compressing throttle activation to ~0.83–1.2 V inside VESC Tool rather than rewiring hardware; chassis grounding tricks have also helped but carry short-to-frame risk if insulation fails.[^adc-noise]
 6. **Fail-safe defaults:** Add a pull-down resistor from throttle signal to ground so any broken wire snaps to zero instead of ghost acceleration.[^19]
 7. **Legacy dash retention:** Leaving throttle through a dash adapter adds perceptible lag; many builders keep the dash for display only and wire throttles directly to the controller instead.[^20]
 8. **Refresh mappings after downtime.** Scooters that sat for months have thrown false brake/throttle behaviour until riders reran the ADC wizard and removed stale inversion flags inside VESC Tool.[^storage-cal]
 9. **Monitor brake sensors.** Dead brake halls make some VESC scooters pulse the motor every second or two under throttle, so replace failed sensors before ride testing.【F:knowledge/notes/input_part000_review.md†L39-L39】
+10. **Retrofit hydraulic levers with inline sensors.** Hope Tech 3 V4 riders and others without cutoff switches are using waterproof 2-pin hydraulic sensors from AliExpress; wire them into the brake input and set the magnet gap per the vendor instructions before sealing the deck.【F:data/vesc_help_group/text_slices/input_part009.txt†L101-L108】
+11. **Long harnesses stay calm.** Quality silicone 2 m throttle extensions have stayed noise-free in testing, so shielding is optional on most scooters.【F:knowledge/notes/input_part009_review.md†L274-L275】
 
 ### Regen Buttons & Variable Brakes
 - **Momentary button recipe:** Wire the button between ADC2 signal and the 3.3 V rail; avoid series resistors because they created “stuck brake” faults in testing.[^6]
@@ -33,13 +36,20 @@
 
 ### Lighting, Horns & Aux Loads
 - **Use the adapter as logic, not power:** The horn output only sources a couple of amps—enough for low-power buzzers but not vintage 35 W halogens—so trigger a relay or MOSFET that pulls from a beefier DC/DC converter.[^9][^10]
+- **Remember the Tronic 250 aux rail is always hot:** Its 5 V pad keeps a 0.6 W tail light illuminated even when the controller sleeps; move the lamp to the switched connector beside the CAN header or add a self-latching handlebar switch to cut it.[^tronic-aux]
+- **Respect the harness’s high-side switching:** Brake, reverse, and headlight pins source pack-positive while sharing a common ground; combine functions with diodes or resistors so parallel lamps don’t backfeed the rail.[^adc-high-side]
 - **85250 & Ubox installs:** Route brake-light logic through the ADC breakout, but feed lamps from a separate converter so you don’t brown out the controller when multiple 12 V loads fire at once.[^11]
+- **Trigger big converters with relays.** One Vsett 10+ conversion uses the controller’s 5 V line to flip an Arduino relay, energising a battery-fed 12 V converter so lights stay off the fragile Ignite fuse.【F:knowledge/notes/input_part009_review.md†L269-L270】
+- **Keep OEM dashboards on UART when adding ADC boards:** Wire throttles and brake halls to ADC1/ADC2 while leaving the stock dash on RX/TX so cruise-control experiments stay intact without extra switches.[^adc-dash-coexist]
 - **TF100 & OEM switch pods:** Reuse factory throttles by landing the red/black hall power and the green signal lead on a 3.3 V ADC input; this preserves dash ergonomics without custom PCBs.[^12]
 - **Skip illuminated combo pods:** Backlit handlebar switches feed accessory voltage into the signal lines and confuse the ADC board unless you gut the lighting—treat them as incompatible without a full rewire.[^24]
 - **Avoid parasitic taps:** Pulling 12 V from internal headlight pins (e.g., X12) drags the logic rail and costs range—draw pack power into a dedicated converter instead.[^15]
 - **Protect logic rails:** Shorting auxiliary leads straight on the controller board has already destroyed logic stages; isolate accessories and fuse every feed.[^16]
 - **Fuse the adapter output:** One builder shorted the 12 V rail on a brand-new Spintend 85240 while wiring lights and killed the buck stage; add inline fuses or external bucks so a single mistake doesn’t scrap the controller.[^16][^23]
 - **Treat buttons as triggers only:** The ADC adapter does not replace a loop key or smart-BMS latch; plan a real kill switch for theft deterrence or maintenance.[^17][^18]
+- **Parallel silicone leads when space is tight.** Doubling 12 AWG battery runs carried roughly 80 A without noise issues, giving compact builds a workable compromise when routing space is scarce.【F:knowledge/notes/input_part009_review.md†L273-L274】
+- **Budget connectors smartly.** LCSC stocks genuine Amass XT60 panel mounts for about $0.35 plus €15 logistics, offering a vetted alternative to sketchy marketplace listings when refreshing harness hardware.【F:knowledge/notes/input_part009_review.md†L278-L278】
+- **Plan dedicated brake-light drivers.** Most VESCs (including Makerbase 75/200 variants) lack a native brake-light trigger, so reserve an ADC output or external relay to drive 12 V lamps when regen throttles shoulder braking duty.【F:knowledge/notes/input_part009_review.md†L280-L282】
 
 ## Configuration & Validation Workflow
 1. **Bench prep:** Wire controls with the pack off, confirm continuity, and verify 3.3 V and 5 V rails before powering up.
@@ -64,7 +74,7 @@
 [^7]: ADC calibration workflow and reminder to let VESC Tool find neutral before assigning functions.【F:knowledge/notes/input_part012_review.md†L93-L94】
 [^8]: Regen mapping best practices from community quick-start guides.【F:knowledge/notes/input_part007_review.md†L239-L240】
 [^9]: Horn output current limit cautions on Makerbase/Spintend harnesses.【F:knowledge/notes/input_part012_review.md†L97-L97】
-[^10]: Spintend ADC aux outputs top out around 12 V / 3 A and need DC/DC help for bigger loads.【F:knowledge/notes/input_part005_review.md†L58-L58】
+[^10]: Spintend ADC aux outputs top out around 12 V / 3 A and need DC/DC help for bigger loads.【F:knowledge/notes/input_part005_review.md†L58-L58】【F:knowledge/notes/input_part009_review.md†L15-L15】
 [^11]: Smart Repair’s 85250 guidance—use the ADC board for logic and a DC/DC converter for lamp current.【F:knowledge/notes/input_part012_review.md†L173-L173】
 [^12]: TF100 throttle wiring recipe using the controller’s 3.3 V hall supply.【F:knowledge/notes/input_part012_review.md†L174-L174】
 [^13]: Enabling ADC control disables manual FWD/REV overrides inside VESC Tool until you switch apps.【F:knowledge/notes/input_part012_review.md†L137-L137】
@@ -79,6 +89,10 @@
 [^22]: Hall-diagnostics workflow focusing on ADC count deltas and re-testing with a clean 5 V rail when noisy 3.3 V supplies flatten readings.【F:knowledge/notes/input_part001_review.md†L15-L16】
 [^23]: Shorting the Spintend 85240 aux rail to ground killed the unfused buck regulator, reinforcing the need for inline fuses or external converters when powering lighting from the adapter.【F:knowledge/notes/input_part011_review.md†L659-L660】
 [^24]: Illuminated AliExpress switch pods leak voltage into ADC signal lines and require major rewiring to behave.【F:knowledge/notes/input_part010_review.md†L74-L77】
+[^hope-sensor]: Hope Tech 3 V4 owners retrofit waterproof 2-pin hydraulic brake sensors from AliExpress to add cutoff signals on builds that shipped without halls.【F:data/vesc_help_group/text_slices/input_part009.txt†L101-L108】
 [^adc-noise]: Compressing throttle activation windows to ~0.83–1.2 V cleared ADC-trigger noise on Spintend builds; some riders grounded the chassis for extra stability but warn the practice risks shorts if insulation fails.【F:knowledge/notes/input_part014_review.md†L85-L86】
 [^adapter-idle]: Spintend’s adapter manual targets ~0.8 V idle readings—seeing ~3 V idle means the channel is wired wrong and will act like a stuck brake.【F:knowledge/notes/input_part008_review.md†L21846-L21848】
 [^storage-cal]: Re-running the ADC wizard and clearing stale inversion flags resolved Xiaomi brake/throttle glitches after long storage.【F:knowledge/notes/input_part011_review.md†L16211-L16217】
+[^tronic-aux]: Tronic 250 owners report the 5 V auxiliary pad keeps low-power tail lights illuminated unless the load is moved to the switched CAN-side connector or controlled with a self-latching switch.【F:knowledge/notes/input_part009_review.md†L12-L15】
+[^adc-high-side]: Updated wiring diagrams confirm the ADC harness switches battery positive on each lighting pin and shares the ground through the headlight lead, so combined functions need diodes/resistors to stop backfeed.【F:knowledge/notes/input_part009_review.md†L13-L13】
+[^adc-dash-coexist]: Xiaomi/Ninebot riders kept the stock dashboard for cruise control by wiring the ADC expander to ADC1/ADC2 while leaving the dash on UART RX/TX.【F:knowledge/notes/input_part009_review.md†L14-L14】

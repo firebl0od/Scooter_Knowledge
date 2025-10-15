@@ -1,7 +1,7 @@
 # Parallel Battery & Regen Integration Manual
 
 ## TL;DR
-- Match pack voltages before paralleling and avoid ideal diodes; real-world tests on 17S/16S stacks caused throttle cut-outs and offered no regen benefits compared with direct, voltage-matched links.【F:knowledge/notes/input_part013_review.md†L153-L156】
+- Match pack voltages before paralleling and avoid ideal diodes; real-world tests on 17 S/16 S stacks caused throttle cut-outs and offered no regen benefits compared with direct, voltage-matched links.【F:knowledge/notes/input_part013_review.md†L153-L156】【F:knowledge/notes/input_part009_review.md†L377-L377】
 - Treat regen as a controller- and battery-limited budget: split braking current across packs, keep the combined limit within both packs’ safe charge rates, and raise BMS regen ceilings (e.g., 100 A on JBD units) so the controller does not dump energy into MOSFETs instead.【F:knowledge/notes/input_part013_review.md†L154-L157】【F:knowledge/notes/input_part013_review.md†L693-L703】
 - Regen only works when the charge path is enabled; disabling the BMS charge MOSFET or relying on regen without hydraulic brakes has already produced weak braking and safety gaps on live builds.【F:knowledge/notes/input_part013_review.md†L157-L163】
 
