@@ -30,9 +30,12 @@
 - Treat Tronic 250 auxiliary rails as logic-only: the 5 V accessory feed keeps a 0.6 W taillight energized even when the scooter is “off,” so add latching switches or move lighting to a CAN-adjacent connector.[^10]
 
 ## Reliability & Failure Modes
-- Traction-control surges have torched MOSFETs despite firmware limits; document slip thresholds or disable TC on rear controllers until ERPM and current ramps are validated.[^4]
+- Traction-control surges have torched MOSFETs despite firmware limits; Rosheee’s rear Tronic ignited when TC caught a slide at 250 A phase / 300 A firmware, reinforcing front-only experiments and tighter slip budgets.[^4]
 - The DC-DC enable pad lifts easily during IPA cleaning—technicians now scrape back copper, resolder, and reflow the regulator leg before conformal coating reassembled boards.[^4]
-- Moisture exposure can revive otherwise dead boards temporarily, signaling trapped contamination; full cleaning plus conformal coating is the lasting fix.[^4]
+- Moisture exposure can revive otherwise dead boards temporarily, signaling trapped contamination; full cleaning plus conformal coating is the lasting fix—and waterlogged Rion front controllers only recovered after IPA baths, DC-DC pad rework, and conformal coating.[^4]
+- A 117 km/h front-ESC fire showed that paste voids, suspect MOSFET bins, and marginal connectors still torch Tronic X-series hardware when traction-control or regen events spike current.[^15]
+- Rion race teams now pre-flight every controller before reinstalling—lifting MOSFET clamps, scraping and repasting the baseplate, reseating shunts, and soldering a jumper across the fragile DC-DC enable pad—because the latest teardown found all three defects waiting to trigger another 117 km/h inferno if left untouched.【F:data/vesc_help_group/text_slices/input_part003.txt†L23300-L23653】
+- Recent QC autopsies uncovered cracked MOSFET cans, uneven paste, and a fragile DC-DC enable pad that only re-latched after IPA baths—plan solder rework and connector upgrades before sending Tronic boards back into service.【F:data/vesc_help_group/text_slices/input_part003.txt†L23300-L23538】【F:data/vesc_help_group/text_slices/input_part003.txt†L23563-L23653】
 - Sudden ABS over-current or regen spikes often track back to mismatched shunts or instrumentation blind spots—log actual phase and battery currents rather than trusting on-screen values.[^2][^11]
 
 ## Integration & Accessory Notes
@@ -47,12 +50,13 @@
 ## Outstanding Research Backlog
 - Publish verified current limits for the latest Seven 18 / Tronic X12 Toll-FET builds once community tests push past 210 A battery / 310 A phase.[^6][^14]
 - Capture teardown photos and torque specs for reinforcing the DC-DC section and connector terminations before the next round of high-speed validations.[^4]
+- Log the pending warm-weather bench campaign for Tronic 250 v2, 250R, and Little FOCer v3.1 controllers once ambient temps rise above the -6 °C winter testing ceiling so reliability claims reflect real riding conditions.[^winter_tests]
 
 ## Source Notes
 [^1]: Guardrails for Tronic 250 current limits and race usage on 24 S packs.【F:knowledge/notes/input_part007_review.md†L43-L55】
 [^2]: Field-weakening failures and practical phase ceilings for Tronic 250-class hardware.【F:knowledge/notes/input_part009_review.md†L340-L341】
 [^3]: X12 power targets, logic-rail limits, and wiring upgrades from Smart Repair and Rob Ver.【F:knowledge/notes/input_part013_review.md†L359-L362】
-[^4]: Tronic traction-control surges, DC-DC enable pad repairs, and moisture mitigation lessons.【F:knowledge/notes/input_part003_review.md†L473-L490】【F:knowledge/notes/input_part003_review.md†L589-L590】
+[^4]: Tronic traction-control surges, DC-DC enable pad repairs, and moisture mitigation lessons across rear and front-controller failures.【F:knowledge/notes/input_part003_review.md†L116-L124】【F:knowledge/notes/input_part003_review.md†L167-L179】
 [^5]: Contract-manufacturer sourcing now handling Tronic/Seven sales directly.【F:knowledge/notes/input_part013_review.md†L790-L793】
 [^6]: Seven-branded cooling architecture and Toll-package MOSFET notes.【F:knowledge/notes/input_part014_review.md†L163-L165】
 [^7]: X12 failure after toggling ANT discharge and the need for manual harness/thermal prep on Dualtron installs.【F:knowledge/notes/input_part010_review.md†L315-L324】
@@ -63,3 +67,5 @@
 [^12]: Accessory power sequencing guidance to avoid frying ADC/Spinny boards.【F:knowledge/notes/input_part013_review.md†L795-L796】
 [^13]: Secondary-market pricing and support expectations for bare X12 boards.【F:knowledge/notes/input_part013_review.md†L822-L823】
 [^14]: Community request to log verified limits for Toll-FET Seven/Tronic builds as testing expands.【F:knowledge/notes/input_part014_review.md†L212-L218】
+[^15]: 117 km/h Rion front-controller fire and ensuing DC-DC diagnostics highlighting paste quality and connector choices.【F:knowledge/notes/input_part003_review.md†L178-L179】
+[^winter_tests]: Rosheee’s plan to re-bench Tronic 250 v2, 250R, and Little FOCer v3.1 hardware once temperatures climb above -6 °C so winter pack limits stop masking controller reliability.【F:knowledge/notes/input_part003_review.md†L716-L718】
