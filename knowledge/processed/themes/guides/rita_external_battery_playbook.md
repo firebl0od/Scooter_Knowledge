@@ -58,6 +58,7 @@
 - Rita charges whichever pack sits lower, continuing to top batteries after the scooter powers down; rely on charger LEDs to confirm completion.[^charge-flow]
 - Charging through Rita tops the internal pack first; unplug externals and use a dedicated XT30 harness when you need to fast-charge auxiliary batteries.[^fast-charge]
 - Expect the internal pack to rest a few tenths below full charge—Rita deliberately leaves headroom for regen and will beep error 39 if sustained pulls exceed its 25 A ceiling.[^undercharge]
+- Respect BMS charge ceilings: G30-class Ninebots accept Segway’s 5 A fast charger via the 8 mm barrel, while F-series and Xiaomi packs cap around 4 A continuous—dial adjustable supplies accordingly.【F:knowledge/notes/input_part006_review.md†L38-L38】
 - Rita draws a small standby current even while the scooter sleeps; recharge storage packs every few weeks or disconnect externals for long layoffs so BMS protection never hits zero.【F:knowledge/notes/denis_all_part02_review.md†L97264-L97268】
 - During discharge, Rita always favors the higher-voltage pack first; equal-voltage 10S+10S builds share current once voltages converge, so avoid tricks to “force” external-first draining.[^voltage-favor]
 - Regen is blocked on a full auxiliary pack—bleed a few percent off the top and confirm Rita’s cell-count setting before expecting e-brake recovery again.[^regen-block]
@@ -67,6 +68,8 @@
 - Treat the internal pack as a rider, not a charger—repurposing it to backfeed other batteries without current limiting is a documented fire risk; build dedicated externals with their own BMS instead.[^pack-fire]
 - External packs support direct charging via dedicated harnesses; Denis is developing XT30-to-Xiaomi adapters for easier off-scooter top-ups.[^offboard-charge]
 - Cap shared-port charging around 2 A to protect the OEM BMS; use dedicated high-current chargers when faster turnaround is needed.[^charge-limit]
+- Check pack SOC when shipments arrive—warehouses often target 30–50 % for long-term compliance even if some scooters ship near full, so balance packs before hard use.【F:knowledge/notes/input_part006_review.md†L39-L39】
+- Keep packs above ~10 °C in winter with heated bags or external warmers to stop Molicel-equipped builds from sagging on cold commutes.【F:knowledge/notes/input_part006_review.md†L40-L40】
 - Store packs near 3.7 V per cell in temperate spaces—cold garages accelerate degradation.[^storage]
 - For oversized Ninebot packs, divide capacity by charger current to plan turnaround times—38 Ah modules take roughly 13 hours on the stock 3 A brick and about 7.5 hours on a vetted 5 A “speed cable,” which the group confirmed sits within Happy/Ninebot limits.[^g2-charge]
 - If Rita “ghosts” an external pack (voltage present but no data), blip the throttle for a second to force re-detection and consult Denis’ living manual for additional recovery steps.[^ghost-pack]

@@ -4,6 +4,7 @@
 - LLT/JBD smart boards remain the community’s compact, configurable baseline: integrated Bluetooth, programmable limits, and a 20 A soft-start pre-charge protect controllers without consuming deck space.[^1]
 - Treat physical packaging as a design constraint—21s 100 A cases still expand to ~27 mm once fasteners and heatsinks are counted, so plan spacers, insulation, and harness routing before cells are welded.[^2][^3]
 - Tune regen and discharge envelopes around the BMS instead of the motor: conservative −5 A/−40 A regen budgets, ≤200 A discharge on 18s7p packs, and verified Xiaoxiang settings prevent the MOSFET blowouts and charge-FET trips riders keep reporting.[^4][^5][^20][^21]
+- Even mid-power 20 S 7 kW commuters default to LLT/JBD when asking for a “good” smart BMS, underscoring how often these boards anchor builds before riders consider pricier JK options.【F:knowledge/notes/input_part006_review.md†L37-L39】
 
 ---
 

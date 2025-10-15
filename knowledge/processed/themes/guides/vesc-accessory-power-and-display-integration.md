@@ -83,6 +83,15 @@ This guide distills field reports on powering lights, horns, and dashboards from
 - **Avoid house-style clamps above 150 A.** WAGO and screw-terminal blocks overheat on 150 A+ scooter feeds—solder joints backed by AS150/EC8 connectors remain the reliable path for controller and lighting trunks.【F:data/vesc_help_group/text_slices/input_part004.txt†L17752-L17764】
 - **Stagger and heatshrink splices.** When upsizing harnesses for lighting looms or dash power, stagger solder joints and double-wall heatshrink them to prevent shorts once the deck compresses wiring.【F:knowledge/notes/input_part004_review.md†L248-L248】
 
+## Addressable Lighting Integration
+- Choose 12 V-friendly WS2815 or similar pixel strips so a single buck can feed both controller logic and the lighting rail without brownouts; mount strips in aluminum or polycarbonate channels to shed heat and protect silicone jackets from tire spray.【F:knowledge/notes/input_part006_review.md†L511-L511】
+- Flash ESP32/WLED controllers with per-mode current caps, set boot presets that default to dim commuter profiles, and isolate the data line with a logic-level shifter when the strip sits far from the controller harness.【F:knowledge/notes/input_part006_review.md†L511-L511】
+- Budget fusing and surge suppression—inline 3–5 A fuses plus TVS diodes on the buck output prevent decorative installs from collapsing the accessory rail when pixels short or moisture enters connectors.【F:knowledge/notes/input_part006_review.md†L511-L511】
+
+## Wireless Security Hardening
+- Mask the controller’s identity, enforce MAC filtering, and require PIN prompts so park-side pranksters cannot overwrite ride profiles while the scooter is unattended.【F:knowledge/notes/input_part006_review.md†L80-L80】【F:knowledge/notes/input_part006_review.md†L428-L429】
+- Back Bluetooth hardening with keyed or NFC-switched power so even successful pairings cannot energise the controller without physical access.【F:knowledge/notes/input_part006_review.md†L80-L80】【F:knowledge/notes/input_part006_review.md†L428-L429】
+
 ## Commissioning Checklist
 - Meter throttle outputs with the controller unpowered and confirm signal stays ≤3.3 V at full travel.【F:knowledge/notes/input_part013_review.md†L503-L505】
 - Before flashing or editing parameters, follow the VESC Tool workflow—**Read → edit → Write**—and explicitly hit **Write Motor/App Config** after each wizard so Xiaomi throttles and ADC settings persist across power cycles instead of forcing full detections at the next boot.【F:knowledge/notes/input_part013_review.md†L542-L544】【F:knowledge/notes/input_part005_review.md†L410-L413】

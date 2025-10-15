@@ -63,6 +63,7 @@
 - Ninebot winter fender STLs keep salty slush off controllers—print with PETG/ASA, add stainless fasteners, and inspect after storms for cracks before the next commute.【F:data/vesc_help_group/text_slices/input_part003.txt†L14258-L14270】
 - Replace bearings proactively—GT rotors pair well with quality SKF replacements, and C80 builds benefit from upgraded hubs or temp probes to keep long commutes in check.[^5][^8][^10]
 - G-series commuters require bushing and weld inspections; F-series weld porosity has already caused brace cracks, so reinforcements and protective films are recommended before heavy use.[^14]
+- Run a dedicated F-series weld checklist before adding power: inspect the deck spine, folding brace, and downtube gussets for porosity, add polyurethane or UHMW film where harnesses rub the welds, and torque the folding bolts with medium-strength threadlocker after reassembly.【F:knowledge/notes/input_part006_review.md†L508-L508】
 - Stress-relieve buck-converter leads with glue or zip ties so vibration does not snap accessory power wires before the scooter ever leaves the bench.【F:knowledge/notes/denis_all_part02_review.md†L31-L32】
 
 ## Accessory & Telemetry Integration

@@ -10,6 +10,7 @@
 - FW injects negative d-axis current to cancel back-EMF so the motor surpasses its natural base speed, which inherently reduces torque-per-amp and wastes power as heat.[^1]
 - Because hub shells lag far behind winding temperature, rely on embedded thermistors or data-derived proxies rather than external probes when judging FW headroom.[^2]
 - Bench experiments show ~40 % ERPM gains demanded 100 A phase for only 20 A battery, yet the setup ran hot and inefficient—highlighting why FW is reserved for brief top-speed pulls rather than everyday cruising.[^3]
+- Third-party firmware like XESC’s can quietly add extra battery amps when you request FW, but stock VESC obeys the configured current limits and simply shifts the stator angle—don’t expect the same “free” boost unless you raise the limits yourself.[^xesc_fw]
 
 ## Prerequisites & Safeguards
 1. **Firmware:** Confirm VESC Tool firmware 5.3 (or newer) on every controller; earlier releases hide FW parameters entirely or crash during detection.[^5]
@@ -50,6 +51,10 @@
 - **Duty-cycle guardrails:** Modern hardware survives 98–99 % duty for a small top-speed bump (~4 %), but riders still treat 100 % as off-limits to avoid runaway faults—treat FW tuning and duty increases as paired changes.【F:data/vesc_help_group/text_slices/input_part003.txt†L11586-L11610】
 - **Track-day planning:** Paris-bound teams compared FW-enabled 16 S builds against base 16 S setups that free-spin near 80 km/h—treat FW as the fallback after exploring higher-voltage packs or rewound hubs for sustained 100 km/h targets.【F:data/vesc_help_group/text_slices/input_part003.txt†L7472-L7500】
 - **Traction heuristics:** Dual-drive riders accept 2–3 kERPM slip thresholds but often prefer reshaping power-per-ERPM curves instead of leaning on FW-backed traction control; front-only TC remains the safest option after rear controllers tripped at >300 A during FW pulls.【F:data/vesc_help_group/text_slices/input_part003.txt†L9688-L9748】【F:data/vesc_help_group/text_slices/input_part003.txt†L19680-L19699】
+
+## D-Axis Budgeting & Thermal Monitoring
+- Keep FW d-axis current near 10–15 % of rated phase amps on commuter hubs and review logs after each ride; drag builds stretching toward 40 % demand redundant thermal sensors and immediate cooldown laps.【F:knowledge/notes/input_part006_review.md†L510-L510】
+- Tie FW experiments to real-time stator and MOSFET telemetry so rising temperatures trigger manual rollback before firmware limits intervene; log both currents to confirm FW isn’t masking battery or ESR bottlenecks.【F:knowledge/notes/input_part006_review.md†L510-L510】
 
 ## Decision Guide: Voltage vs. Field Weakening
 - **Choose Higher Voltage / Different Windings When:** You need sustained highway speed, the motor already runs hot without FW, or you’re targeting >120 km/h—builders hitting 118 km/h on 22×3 hubs without FW prove gearing changes scale better than stacking FW amps.[^11][^21]

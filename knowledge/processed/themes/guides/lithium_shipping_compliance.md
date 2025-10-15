@@ -3,6 +3,7 @@
 ## Why It Matters
 - Undeclared lithium consignments expose shippers to severe liability: Denis’ crew reminds builders that EU ADR/IATA rules still require full declaration, certification, and often a contracted safety advisor—UPS will carry the freight, but a fire on an undeclared parcel can result in six-figure damages charged back to the sender.【F:knowledge/notes/denis_all_part02_review.md†L188-L193】
 - Ground carriers remain the practical option for most workshop-scale packs. Denis routinely leans on DPD/UPS/TNT for EU routes because DHL and other air carriers refuse untreated lithium freight, and even DPD limits batteries to intra-EU deliveries (blocking Norway, for example).【F:knowledge/notes/all_part01_review.md†L33-L33】【F:knowledge/notes/all_part01_review.md†L138-L138】
+- European resellers increasingly demand UL-certified battery packs and expect pending regulation to mirror U.S. safety pushes, so document compliance artifacts before exporting DIY assemblies.【F:knowledge/notes/input_part006_review.md†L58-L58】
 
 ## Compliance Checklist
 1. **Classify the shipment correctly.** Determine UN3480 vs. UN3481 status, complete the corresponding ADR/IATA paperwork, and include MSDS plus test summaries with every parcel.【F:knowledge/notes/denis_all_part02_review.md†L188-L193】

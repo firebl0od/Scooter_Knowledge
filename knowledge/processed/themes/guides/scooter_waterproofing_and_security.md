@@ -27,6 +27,8 @@
 ## Travel & Storage Tips
 - **Drain packs safely for flights.** Commuters running 24 Ah externals discharge with incandescent lamps for hours to hit airline targets, proving how long large packs need to reach “safe” storage levels.【F:knowledge/notes/denis_all_part02_review.md†L414-L415】
 - **Recharge before hibernation.** Rita draws a small standby current even when the scooter is off, so top packs to storage voltage if the build will sit for weeks rather than leaving it connected indefinitely.【F:knowledge/notes/denis_all_part02_review.md†L97264-L97268】
+- **Know the local rules.** Dutch riders remind visitors that stand-up scooters remain illegal without seats; expect enforcement even if locals still spot Xiaomi commuters around Venlo.【F:knowledge/notes/input_part006_review.md†L59-L59】
+- **Check accessory ergonomics.** Bolt-on saddles push weight rearward and complicate unloading speed bumps, and 2.5 L frame bags are shorter but wider than 3 L options—mock up foot room before committing.【F:knowledge/notes/input_part006_review.md†L94-L94】
 
 ## Field Checklist
 1. Seal the deck and hub seams before rainy season commutes.【F:knowledge/notes/all_part01_review.md†L86-L87】

@@ -91,3 +91,4 @@
 [^1]: Battery cost, cell sourcing, and spot-welder economics from late-2025 VESC Help Group logs.【F:knowledge/notes/input_part014_review.md†L34-L39】【F:knowledge/notes/input_part014_review.md†L155-L156】
 [^2]: Pack layout, chassis fitment, and race-build current benchmarks documented in the same log slice.【F:knowledge/notes/input_part014_review.md†L37-L45】【F:knowledge/notes/input_part014_review.md†L151-L169】
 [^3]: Smart BMS fault reports, balance behavior comparisons, and safety guidance against hot-glue-only assemblies.【F:knowledge/notes/input_part014_review.md†L99-L101】【F:knowledge/notes/input_part014_review.md†L172-L174】
+[^4]: Additional Ninebot/N65 packaging lessons, nickel sourcing, copper fabrication requirements, and stock-pack limitations gathered from the input_part006 review.【F:knowledge/notes/input_part006_review.md†L24-L26】【F:knowledge/notes/input_part006_review.md†L48-L48】【F:knowledge/notes/input_part006_review.md†L62-L63】
