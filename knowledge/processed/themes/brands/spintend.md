@@ -13,10 +13,12 @@
 ## Inbound QC & Power-Up Protocol
 1. **Full teardown and dry clean before first power.** Crack the enclosure, remove conformal covers, vacuum or IPA-wipe solder balls, and inspect gate-driver rails prior to energising the board.[^41]
 2. **Torque and upgrade the high-current connectors.** Swap factory XT90 jumpers for QS8/AS150-class hardware or busbars with proper lugs, and route control wiring through shielded CAT6A pairs to avoid melted solder-only links.[^42]
-3. **Hunt for stray conductive debris.** Rental-fleet autopsies found solder beads bridging phase outputs on dual installs—confirm nothing rattles inside before closing the case.[^43]
-4. **Respect symmetric power loops.** When disconnecting packs, pull both battery leads or open the main contactor before touching CAN; popping one lead while the bus is live has blown Ubox Lite ESD protection.[^44]
-5. **Document baseline idle draw.** Expect roughly 20 mA standby current with the latching power button off—any illuminated switch LED signals a wiring fault.[^45]
-6. **Only enable the phase filter during detection.** Spintend confirmed the toggle exists to stabilise the motor wizard; leaving it on while riding injects noise and can resurrect ABS overcurrent faults.[^54]
+3. **Upgrade accessory connectors.** Recent aluminum-housed controllers ship with tiny accessory plugs and dual 10 AWG outputs crimped into a single 8 mm bullet—use quality crimpers, heavy soldering, or larger bullets so the joint doesn’t overheat under load.【F:knowledge/notes/input_part006_review.md†L68-L68】
+4. **Hunt for stray conductive debris.** Rental-fleet autopsies found solder beads bridging phase outputs on dual installs—confirm nothing rattles inside before closing the case.[^43]
+5. **Respect symmetric power loops.** When disconnecting packs, pull both battery leads or open the main contactor before touching CAN; popping one lead while the bus is live has blown Ubox Lite ESD protection.[^44]
+6. **Document baseline idle draw.** Expect roughly 20 mA standby current with the latching power button off—any illuminated switch LED signals a wiring fault.[^45]
+7. **Only enable the phase filter during detection.** Spintend confirmed the toggle exists to stabilise the motor wizard; leaving it on while riding injects noise and can resurrect ABS overcurrent faults.[^54]
+8. **Meter the 12 V rail before blaming accessories.** Ubox V2 fault hunts frequently end at weak auxiliary wiring rather than the controller—confirm the regulator holds voltage before chasing loads.【F:knowledge/notes/input_part006_review.md†L69-L69】
 
 ## Product Line Cheat Sheet
 | Model | Nominal Pack Window | Field Envelope & Use Case | Distinguishing Notes |

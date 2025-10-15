@@ -27,6 +27,7 @@
 ## Thermal & Packaging Playbook
 - Replace stock phase looms with 10 AWG silicone leads and clamp controllers to machined heat spreaders; riders solved repeated overheating once they upgraded both wiring and mounting interfaces.[^3]
 - X12 installers scrape off factory hot glue, apply thermal pads, and mechanically secure the board to avoid shorts—a must because the PCB ships bare.[^7]
+- Infineon’s TOLT package lets builders skip IMS substrates and still shed heat effectively, but paralleling 48–54 devices pushes gate drivers and bus inductance hard—budget PCB space for tight gate traces, copious vias, and staged turn-on if you chase 150 V/400 A builds.[^tolt_layout]
 - Treat Tronic 250 auxiliary rails as logic-only: the 5 V accessory feed keeps a 0.6 W taillight energized even when the scooter is “off,” so add latching switches or move lighting to a CAN-adjacent connector.[^10]
 
 ## Reliability & Failure Modes
@@ -63,3 +64,4 @@
 [^12]: Accessory power sequencing guidance to avoid frying ADC/Spinny boards.【F:knowledge/notes/input_part013_review.md†L795-L796】
 [^13]: Secondary-market pricing and support expectations for bare X12 boards.【F:knowledge/notes/input_part013_review.md†L822-L823】
 [^14]: Community request to log verified limits for Toll-FET Seven/Tronic builds as testing expands.【F:knowledge/notes/input_part014_review.md†L212-L218】
+[^tolt_layout]: Builders praising Infineon’s TOLT thermals while warning that 48–54 parallel devices stretch gate-drive and bus-inductance design margins.【F:knowledge/notes/input_part006_review.md†L41-L42】

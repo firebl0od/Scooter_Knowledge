@@ -18,13 +18,19 @@
 ## Pack Architecture Patterns
 - **Dualtron Achilleus conversions** – Deck cavity (~485 mm × 181 mm) supports 22 S9 P if controllers move to an external mount; stock decks hold 20 S7–8 P and ~100 A battery before needing relocation or compact ESCs.【F:knowledge/notes/input_part014_review.md†L37-L44】
 - **Nami “hotdog” racers** – 22 S11 P P45 builds pair 100 H rear / 70 H front motors, 500 A phase, 550 A absolute, and 100 % front FW to sync wheel speed, netting 146 km/h GPS with manageable 61 °C stator temps.【F:knowledge/notes/input_part014_review.md†L168-L169】
-- **Ninebot G30 MAX** – Builders drill and trim 3 mm ePowerFun skid plates for €25 stopgap protection, swap in custom spacers, and plan 20 S4 P-to-22 S layouts once rails are clear and pack supports printed.【F:knowledge/notes/input_part014_review.md†L151-L151】【F:knowledge/notes/input_part014_review.md†L118-L118】
+- **Ninebot G30 MAX** – Stock frames hide 20 S6 P packs internally, and aggressive layouts stretch toward 20 S9 P after removing the OEM ESC and machining the deck rails; builders still drill/trim 3 mm ePowerFun skid plates as interim heatsinks while they print spacers and plan 22 S layouts—keep busbars simple so current shares evenly instead of chasing convoluted shapes that crack welds.【F:knowledge/notes/input_part006_review.md†L24-L24】【F:knowledge/notes/input_part014_review.md†L151-L151】【F:knowledge/notes/input_part014_review.md†L118-L118】
 - **30 S prototypes (Segway/Nami/G3)** – Ausias is CNC-ing supports for 22 S10 P Nami decks, while Finn’s G3 conversion fits 30 S3 P (15 S6 P) modules after bracket cuts; 30 S4 P remains too wide without welding and enclosure surgery.【F:knowledge/notes/input_part014_review.md†L159-L160】
+- **N65/S65 commuters** – Dual VESC installs plus roughly 100 × 21700 cells fit once modest spacers are added; squeezing 120 × 18650 cells and a 150 A JK BMS demands aggressive packaging and careful harness routing.【F:knowledge/notes/input_part006_review.md†L48-L48】
+- **Sur-Ron-scale pouches** – SK 54 Ah modules advertise ≈2 mΩ internal resistance with 300 A continuous / 500 A peak capability, but the tall bricks need external bags or enlarged housings to clear scooter decks.【F:knowledge/notes/input_part006_review.md†L27-L27】
 
 ## Tooling, Fabrication & Thermal Management
 - Budget welders rated for 0.15 mm copper rarely meet spec; proven setups rely on K-Weld or Glitter 811A plus rip-tests, nickel sandwiching, and calibrated power for 0.1 mm sheet.【F:knowledge/notes/input_part014_review.md†L34-L34】【F:knowledge/notes/input_part014_review.md†L152-L152】
 - Keep skid plates functional: thermal paste is required before 3 mm aluminum plates materially sink heat, and fan kits need ducting rather than flush mounts to avoid recirculating hot air.【F:knowledge/notes/input_part014_review.md†L119-L120】
 - QS8/MT60 panel mounts are mostly custom; teams CAD their own plates to keep phase and battery leads from dangling while preserving access for service loops.【F:knowledge/notes/input_part014_review.md†L188-L188】
+- Stick with pure nickel (or copper) on high-current packs—nickel-plated steel runs ~6× higher resistance and only suits low-draw storage walls; trusted vendors such as NKON remain the go-to source.【F:knowledge/notes/input_part006_review.md†L25-L25】
+- Outsource or tool up for thicker copper interconnects; strips >0.1 mm overwhelm hobby shears, so veterans lean on laser/water-jet services or Glitter welders instead of car-battery hacks that weaken cells.【F:knowledge/notes/input_part006_review.md†L26-L26】
+- Folding builds lean on silicone-insulated, fine-strand copper looms—PVC jackets stiffen, chafe X-lock hinges, and lack the heat tolerance needed around controllers.【F:knowledge/notes/input_part006_review.md†L52-L52】
+- LiFePO₄ packs earn praise for their flat discharge curve but require extra enclosure clearance and abrasion guards because their sleeves are thicker than PVC and tear easily.【F:knowledge/notes/input_part006_review.md†L56-L56】
 
 ## BMS & Protection Strategy
 - ANT 470 A/1 050 A packs have latched discharge FETs after overnight charges; the community now treats ANT as requiring redundant contactors or manual disconnects and documents UV-inspection resets before declaring hardware dead.【F:knowledge/notes/input_part014_review.md†L99-L101】
@@ -35,6 +41,8 @@
 - Never rely on hot glue alone; use 3D-printed spacers or structural adhesives so weld strips don’t carry mechanical load during transport or crashes.【F:knowledge/notes/input_part014_review.md†L172-L172】
 - Match chemistries inside parallels: mixing pouch and cylindrical cells accelerates swelling even when copper busbars handle 350 A/450 A bursts, so spec unified cells or larger BMS hardware (≈230 A) before blending formats.【F:knowledge/notes/input_part014_review.md†L39-L39】
 - Schedule periodic UV/visual inspections for burned traces on smart BMS boards, especially after preload-failure alarms or unexplained current draw.【F:knowledge/notes/input_part014_review.md†L100-L100】
+- Budget high-discharge cells early—stock Vsett 9+/10+ and Kugoo G4 packs sag badly because the factory pairs controllers and batteries right at their current ceiling.【F:knowledge/notes/input_part006_review.md†L62-L62】
+- Premium scooters rarely ship with true high-rate cells; veterans still upgrade to 20 S sleeper packs (e.g., 20 S3 P Molicel) when chasing consistent 5 kW output.【F:knowledge/notes/input_part006_review.md†L63-L63】
 
 ## Build Checklist
 1. **Lock in cell supply** – confirm volume, customs path, and aging tests for each batch of 50PL/50E/P45B cells before welding.【F:knowledge/notes/input_part014_review.md†L35-L37】【F:knowledge/notes/input_part014_review.md†L155-L156】
@@ -47,3 +55,4 @@
 [^1]: Battery cost, cell sourcing, and spot-welder economics from late-2025 VESC Help Group logs.【F:knowledge/notes/input_part014_review.md†L34-L39】【F:knowledge/notes/input_part014_review.md†L155-L156】
 [^2]: Pack layout, chassis fitment, and race-build current benchmarks documented in the same log slice.【F:knowledge/notes/input_part014_review.md†L37-L45】【F:knowledge/notes/input_part014_review.md†L151-L169】
 [^3]: Smart BMS fault reports, balance behavior comparisons, and safety guidance against hot-glue-only assemblies.【F:knowledge/notes/input_part014_review.md†L99-L101】【F:knowledge/notes/input_part014_review.md†L172-L174】
+[^4]: Additional Ninebot/N65 packaging lessons, nickel sourcing, copper fabrication requirements, and stock-pack limitations gathered from the input_part006 review.【F:knowledge/notes/input_part006_review.md†L24-L26】【F:knowledge/notes/input_part006_review.md†L48-L48】【F:knowledge/notes/input_part006_review.md†L62-L63】
