@@ -9,7 +9,9 @@
   - lines 9702-11202 (2024-11-04T21:14:23 through 2024-11-13T12:35:55)
   - lines 13820-15220 (2024-11-21T21:12:40 through 2024-11-27T15:53:43)
   - lines 20201-21269 (2024-12-17T09:12:06 through 2024-12-19T23:24:10)
-- Next starting point: line 11203 (2024-11-13T12:30:07 and later)
+  - lines 11403-11502 (2024-11-14T01:48:26 through 2024-11-14T04:26:43)
+  - lines 11503-11602 (2024-11-14T04:27:58 through 2024-11-14T19:57:18)
+- Next starting point: line 11603 (2024-11-14T19:57:19 and later)
 
 ## Key Findings
 
@@ -118,6 +120,17 @@
 ### Single-Motor 65 H Tuning Playbook (lines 10911-10988)
 - Matthew’s 22×3 Lonnyo on 18 S surges past 35 mph then “flutters”; the crew suggested deleting throttle smoothing, checking VESC logs, and trying Ortega’s foc observer if mxlemming struggles, all while recognising his 90 A BMS is the real torque bottleneck.【F:data/vesc_help_group/text_slices/input_part010.txt†L10911-L10988】
 - He plans to raise battery and phase limits toward 150 A once the hardware allows, with the group reiterating that higher‑Kv 22×3 windings trade launch torque for top speed compared to 16×4 options and that premium halls plus Statorade help the hub survive the extra amps.【F:data/vesc_help_group/text_slices/input_part010.txt†L10937-L10948】【F:data/vesc_help_group/text_slices/input_part010.txt†L10969-L10972】
+
+### Front Burnout Failure & VESC Repair Reality Check (lines 11403-11502)
+- Haku’s one-second front-wheel burnout on a 33×2 high-kV setup stalled the motor against the brake, spiked current, and shorted two MOSFETs in the rear slave VESC—confirming that front burnouts on locked wheels can instantly kill aluminum-PCB controllers even when the motor itself keeps spinning freely.【F:data/vesc_help_group/text_slices/input_part010.txt†L11403-L11434】【F:data/vesc_help_group/text_slices/input_part010.txt†L11436-L11448】
+- NetworkDir’s triage sequence was to meter the QS8 battery connector for continuity, sweep each phase to ground, and only proceed if the buzzer stayed silent; a beep on either test signals shorted FETs that need replacement before reconnecting power.【F:data/vesc_help_group/text_slices/input_part010.txt†L11412-L11419】
+- Replacement demands matched MOSFET sets and proper reflow gear—veterans warned you cannot mix spare silicon across boards, hot-air work on aluminum substrates is one of the hardest repairs in the hobby, and regen-only braking is reckless because hardware faults leave you without stopping power.【F:data/vesc_help_group/text_slices/input_part010.txt†L11438-L11459】
+
+### Controller Sourcing & Tire Patch Notes (lines 11503-11602)
+- Haku confirmed Vsett OEM hubs ship with 40 H stators, so salvaged motors share Lonnyo-class thermal limits when transplanted into custom frames.【F:data/vesc_help_group/text_slices/input_part010.txt†L11518-L11518】
+- When routing dual 10 AWG phase leads, he defaults to 10 mm bullet connectors; forcing them into 8 mm shells requires soldering and shaving the joint, so plan connector sizing before committing to doubled conductors.【F:data/vesc_help_group/text_slices/input_part010.txt†L11527-L11529】
+- Noname advises swapping persistent flat-prone builds to Vsett 10 inner tubes—Haku already runs the larger tube on a G30 conversion by stretching it into place to avoid thin-tube blowouts.【F:data/vesc_help_group/text_slices/input_part010.txt†L11580-L11582】
+- Haku remains wary of bargain Fardriver 450 A controllers, fearing their current ceiling will cook standard scooter hubs; treat that hardware as experimental unless the motor’s thermal headroom is proven.【F:data/vesc_help_group/text_slices/input_part010.txt†L11561-L11602】
 
 ### Hall Sensor Installation & Adhesives (lines 10117-11229)
 - 🇪🇸AYO#74 provided a 60° 41F hall board link for Wolf King GT 60 H motors and keeps spare plates on hand when converting sensorless hubs.【F:data/vesc_help_group/text_slices/input_part010.txt†L10117-L10119】
@@ -688,3 +701,6 @@
 - Track 🇪🇸AYO#74’s experiment to determine if 72 V Nami controllers operate safely on a 60 V pack after phase rewiring.【F:data/vesc_help_group/text_slices/input_part010.txt†L19994-L20108】
 - Record the final controller placement solution for purp’s hall-less Mantis 10 once the mounting hardware and cooling plan are proven in real-world use.【F:data/vesc_help_group/text_slices/input_part010.txt†L20034-L20062】
 - Capture a repeatable wiring recipe for bringing three-wire PAS sensors and ADC throttles online with Flipsky hardware so newcomers like AdianV don’t have to guess at safe connector choices.【F:data/vesc_help_group/text_slices/input_part010.txt†L21182-L21199】
+- Compare Amass-branded 8 mm bullets against generic shells when doubling 10 AWG phase leads so builders know when upsizing to 10 mm hardware is mandatory.【F:data/vesc_help_group/text_slices/input_part010.txt†L11527-L11529】
+- Track how Vsett 10 inner tubes hold up long term on G30-class rims versus bespoke heavy-duty tubes for chronic flat cases.【F:data/vesc_help_group/text_slices/input_part010.txt†L11580-L11582】
+- Benchmark Fardriver 450 A installs on scooter hubs to confirm safe current ceilings before recommending the budget controller path.【F:data/vesc_help_group/text_slices/input_part010.txt†L11561-L11602】

@@ -33,6 +33,7 @@
 
 ## Powertrain & Upgrade Guardrails
 - Stock GT electronics (14 S 12 P pack, single 24‑FET controller, 10 AWG phases) support reliable 70 km/h operation; pushing past 8–10 kW demands deck stiffening, improved dampers, and monitored pack sag to avoid chassis fatigue.[^3][^2]
+- Ninebot Max G2 motors shed heat no better than legacy G30 hubs, so serious power targets still rely on larger hub swaps; even throttle detection needs a full sweep in VESC Tool to keep hall checks from failing during setup.【F:knowledge/notes/input_part010_review.md†L110-L111】
 - 2.42 mm rotors and Hope V4 calipers are proven upgrades for repeated high-speed stops; the thicker discs avoid the warp-prone 1.8–2.0 mm hardware common on smaller scooters.[^3][^5]
 - Segway GT2 riders log 70 km/h down to ~10 % SOC on the factory setup; pushing beyond that range requires higher-current packs or field-weakening, so plan for thermal headroom if adding torque or speed.[^4]
 - Advertised 6 kW GT2 figures stem from brief inverter-side peaks and field-weakening—expect ~65–70 km/h stability stock and treat triple-digit ambitions as field-weakening experiments until higher-voltage packs or rewound hubs are fitted.【F:data/vesc_help_group/text_slices/input_part003.txt†L1325-L1533】【F:data/vesc_help_group/text_slices/input_part003.txt†L1499-L1700】

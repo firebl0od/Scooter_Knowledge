@@ -40,6 +40,7 @@
 ## Feature Set & Navigation
 - **Integrated GPS + Nav Prompts.** The 3.5 in unit houses turn-by-turn guidance to keep phones off the bars; builders cite 10 × 6.5 cm packaging as a sweet spot for 100 km/h scooters.[^8]
 - **Waze Overlay.** Beta firmware already overlays Waze police alerts directly on the dashboard, foreshadowing richer third-party integrations once CAN message catalogs stabilize.[^9]
+- **Theme editor & live switching.** Rage Mechanics now ships a web-based theme designer that can push new skins over Wi‑Fi and swap layouts in real time on the scooter, making it easier to brand race fleets or share telemetry presets.【F:knowledge/notes/input_part010_review.md†L312-L314】
 - **Telemetry Dashboards.** Race teams log throttle position, per-motor phase amps, traction-control response, and segment comparisons from SmartDisplay sessions—handy for coaching and driver swaps.[^10]
 - **Fast boot sequence.** Unlike Raspberry Pi-based dashboards that slog through a 45–95 s OS boot, SmartDisplay’s MCU firmware brings up telemetry in about 10 s once CAN current initializes.[^boot]
 - **Lighting + Error Telemetry.** Kelly and VESC users receive controller error feedback (screenshots, codes) on SmartDisplay, easing remote debugging.[^2]
@@ -49,6 +50,8 @@
 - Rage Mechanics has logged 4,000+ development hours and keeps firmware closed-source while supporting Minimotors, VESC, Zero, VSETT, Kelly, and Kunteng buses—explaining the ~€500 price point despite open-hardware roots.【F:knowledge/notes/input_part004_review.md†L259-L259】
 - Beta batches sold at **300 €** for 15 testers with August assembly runs; production pricing remains under review.[^11]
 - Rage Mechanics currently bundles SmartDisplay with its dual-controller kits (~489 €), and standalone sales are pending cost-down work—plan purchases early if you need just the dash.[^12]
+- Expect retail pricing closer to €500 once the premium feature set (CAN/UART breakout, telemetry, OTA, GPS, lighting control) is factored in—Face de Pin Sucé’s rundown helps set expectations for new buyers.【F:knowledge/notes/input_part010_review.md†L314-L314】
+- Riders chasing budget instrumentation still repurpose RTV VESC-only displays or even spare phones when SmartDisplay pricing overshoots a project’s scope.【F:knowledge/notes/input_part010_review.md†L314-L315】
 - Competing IPS dashboards (e.g., Voyage Megan) target 300–400 € but lack SmartDisplay’s lighting bus, telemetry depth, and OTA ecosystem, so many riders still default to SmartDisplay.[^13]
 - Low-volume CNC and SLS case work keeps retail expectations above €300 until injection tooling arrives; the team is tooling distributors, planning a ~20-unit May build run with new central-mount housings, and baking “panic mode” legal presets alongside wider controller harness support.[^14]
 

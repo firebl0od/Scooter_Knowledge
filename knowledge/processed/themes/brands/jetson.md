@@ -3,11 +3,13 @@
 ## Platform Snapshot
 - Stock Jetson Bolt frames provide roughly 230 mm of dropout width, ship with a 36 V/6 Ah pack, and retain mounting points for a second motor, but the narrow “bean” battery cavity limits on-board electronics volume without printed enclosures or spacers.[^1]
 - Successful community builds now target 72 V (20 S) packs while keeping battery current conservative—typically 30–50 A phase on the stock hub—to avoid overwhelming the small stator and dropouts.[^2]
+- Field measurements peg the dropout closer to 230 mm and confirm the OEM hub tolerates ≈30 A at 72 V with active temperature monitoring; serious burnout torque calls for 12×6 (60 H) hubs that fit wider builds better than heavy 10" QS units.[^13]
 - Haku’s reference commuter build runs a 20 S 3 P Samsung 35E pack, hydraulic discs, and a Spintend 85/150 controller, demonstrating ~50 mile real-world range when power is capped near 1.6 kW to control heat.[^3]
 
 ## Packaging & Mechanical Fitment
 - The OEM bay can swallow folded 20 S packs if cells are arranged with custom PETG/ABS carriers; shared STL sets extend the compartment and add removable covers for balance-lead routing and BMS mounting.[^4]
 - Full-size VESCs rarely fit internally; builders lean on Mini Ubox/Lite-class controllers or external mounts, and test-fit any 10" QS hub alternatives because the stock swingarm cannot accept their width or mass without reinforcement.[^5]
+- NetworkDir recommends 12×6 (60 H) Lonnyo hubs for 20 S burnout builds since their higher resistance/lower Kv characteristics suit the frame once torque arms and reinforcement are in place.[^13]
 - Before structural mods, spin the hub on a current-limited bench supply, discharge capacitors, and confirm the direct-drive core (no plastic reduction gears) so shunt mods or dual-motor brackets don’t mask mechanical drag.[^6]
 
 ### Quick Fitment Checklist
@@ -19,6 +21,7 @@
 
 ## Electrical Guardrails
 - Keep battery current moderate (≈30 A per motor, ≤50 A phase) on the stock hub; Sabvoton and Spintend users alike report thermal saturation or outright motor burnout when sustained current exceeds this envelope.[^2]
+- Monitor 72 V shakedowns closely—community feedback caps the OEM hub at ~30 A battery until upgraded motors arrive, even though voltage experiments continue.[^10]
 - Configure VESC low-voltage cutoffs around 72 V start / 65 V end for 20–22 S experimentation, double-checking the cell count so undervoltage faults do not appear mid-ride.[^7]
 - Stay within 20 S on unmodified HY/Spintend stages; repeated high-voltage faults persisted even after setting an 85 V cap, and vendor guidance warns 21–22 S requires hardware-level filtering.[^3]
 - Protect controllers from BMS cut-outs—Flipsky 75xxx units have died after a single regen-triggered trip—by matching regen to BMS thresholds and avoiding sudden pack disconnects.[^8]
@@ -58,3 +61,4 @@
 [^10]: Community reminder to power suspect hardware on a 30–50 mA current-limited bench supply before connecting full packs.【F:knowledge/notes/input_part011_review.md†L186-L187】
 [^11]: Advice to power Jetson lighting from dedicated DC-DC converters because ADC expanders are space-constrained in this chassis.【F:knowledge/notes/input_part011_review.md†L142-L142】
 [^12]: Delivery-range planning discussions weighing higher-capacity cells versus packaging limits for commuter duty.【F:knowledge/notes/input_part011_review.md†L145-L147】
+[^13]: OEM Jetson hub current tolerance (~30 A at 72 V), dropout measurement, and 12×6 (60 H) hub recommendations for higher-torque 20 S builds.【F:knowledge/notes/input_part010_review.md†L60-L62】

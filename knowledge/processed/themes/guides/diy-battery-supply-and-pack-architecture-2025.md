@@ -76,6 +76,11 @@
 - Heavy fast-chargers who push 15–25 A into dual GX16 ports accept accelerated wear and check connector temps mid-charge, whereas commuters favour 0.2–0.3 C overnight balancing for pack longevity.【F:data/vesc_help_group/text_slices/input_part000.txt†L21810-L21849】
 - Budget 5 A “travel” chargers that never leave constant-current mode have held 4.3–4.4 A into full packs with no CV taper—treat them as emergency bricks only and invest in adjustable YZPower-style supplies for daily use.【F:knowledge/notes/input_part000_review.md†L716-L724】【F:knowledge/notes/input_part000_review.md†L724-L731】
 
+## Charging & Maintenance Heuristics
+- Cap fast-charging on 10 P Samsung 40T commuter packs around 20 A (~1.6 kW); experienced builders call 50 A sessions abusive for both the cells and typical household circuits despite the 60 A discharge rating.【F:knowledge/notes/input_part010_review.md†L50-L52】
+- 95 A EV charger demos look impressive, but a 20 S6 P pack already draws ~6.3 kW at that rate—treat 1 C as the ceiling and watch cell temps if you experiment beyond it.【F:knowledge/notes/input_part010_review.md†L245-L246】
+- Telecom-derived chargers (Huawei 60 A bricks around US$340 or touchscreen 50 A models near US$260) remain repackaged rectifiers—verify cooling, isolation, and safety claims instead of trusting the marketing gloss.【F:knowledge/notes/input_part010_review.md†L247-L247】
+
 ## Structural & Safety Fundamentals
 - Never rely on hot glue alone; use 3D-printed spacers or structural adhesives so weld strips don’t carry mechanical load during transport or crashes.【F:knowledge/notes/input_part014_review.md†L172-L172】
 - Preheat winter packs intentionally—charging 20 S systems at 35–40 A up to 84 V soaks cells to ~45 °C and keeps voltage sag predictable when the ride starts in freezing conditions.【F:knowledge/notes/input_part003_review.md†L209-L210】
