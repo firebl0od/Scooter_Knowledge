@@ -80,3 +80,19 @@
 [^22]: 20 S single-motor package delivering 85 km/h with ~30 A FW as a short-burst aid.【F:knowledge/notes/input_part013_review.md†L145-L145】
 [^23]: Firmware or wiring faults causing sudden full braking after FW-enabled firmware updates.【F:knowledge/notes/input_part001_review.md†L219-L219】
 [^hotdog_fw]: NAMI 100 H rear / 70 H front builds logging 500 A phase, 550 A absolute, 100 % front FW, and ~61 °C stators while traction control keeps the rear from lifting the front at 120 km/h.【F:knowledge/notes/input_part014_review.md†L8930-L8933】【F:knowledge/notes/input_part014_review.md†L10001-L10055】
+
+## Field-Weakening Tuning Details
+- **Tune FW gently with long ramps.** The same hub quit stuttering once sensorless transition was raised from 500 to ~3,000 eRPM, then ran smoothly with 20 A of field weakening, duty capped around 85–89%, and an 800 ms FW ramp to soften current spikes above 55 km/h.[^fw_ramp]
+- **FW ramp tuning for heavy riders.** Zak's Raiden 7 log showed sluggish throttle release until the FW ramp was stretched to 400 ms (others prefer 600 ms) and duty ceiling trimmed to ~97%—practical guardrails for heavier riders chasing extra top speed without runaway torque requests.[^fw_heavy]
+- **Field-weakening amps add to battery current.** Firmware reports battery current plus field-weakening draw; budget 10 A of FW as additional pack load so commuter cells stay within safe C-rates.[^fw_battery_budget]
+- **Flipsky boards ignore battery-current limits once FW engages.** Mentors warned that Flipsky ignores the "battery current max" slider once FW engages, so bypassed 16 S G30 batteries should keep FW at zero (or very low) until riders log real pack current and prove the cells survive the extra draw and heat.[^flipsky_fw_ignore]
+
+## MOSFET Failures Under High FW
+- **Stock 85150 MOSFETs overheat with heavy FW.** Stock Spintend 85150 MOSFETs overheat quickly once you layer 45 A of field weakening on top of 105–120 A battery and 150–175 A phase requests; riders chasing higher ERPMs swap in HY/HSBL Toll packages with hotplate reflow or back FW down to ~50 A at 87% duty.[^fw_mosfet]
+
+## Source Notes (continued)
+[^fw_ramp]: Field-weakening ramp tuning to soften current spikes.【F:knowledge/notes/input_part004_review.md†L20-L20】【F:knowledge/notes/input_part004_review.md†L97-L97】
+[^fw_heavy]: FW ramp settings for heavy riders to prevent runaway torque.【F:knowledge/notes/input_part004_review.md†L336-L336】
+[^fw_battery_budget]: Field-weakening impact on total battery current draw.【F:knowledge/notes/input_part004_review.md†L570-L570】
+[^flipsky_fw_ignore]: Flipsky controllers ignoring battery current limits during field weakening.【F:knowledge/notes/input_part004_review.md†L315-L315】
+[^fw_mosfet]: Spintend 85150 MOSFET failures under high field-weakening loads.【F:knowledge/notes/input_part004_review.md†L20-L20】
