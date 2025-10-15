@@ -30,9 +30,6 @@
 - Bench-test at both low and full pack voltage before installation—one 75 100 that happily booted on 3 S refused to wake on 13–16 S even after reflashing, pointing to high-voltage hardware faults that warrant an immediate RMA instead of more firmware experiments. 【F:knowledge/notes/input_part004_review.md†L82-L83】
 - Skip hard potting unless you accept throwaway repairs—silicone (e.g., 705 RTV) still lets you service ADC pins, add capacitors, or reflash firmware, whereas epoxy-sealed 75100s trap the MCU and driver rails under resin and make ignition or capacitor fixes nearly impossible. 【F:knowledge/notes/input_part005_review.md†L429-L429】【F:knowledge/notes/input_part005_review.md†L582-L584】
 - Builders chasing splash protection now CAD PLA+/PETG housings and jet-duct side pods for Xiaomi deck installs, sealing seams with silicone or dielectric epoxy so aluminum-PCB 75100s survive rain without suffocating their heatsinks.[^printed_housings]
-- **Diagnose dead 5 V rails promptly.** One 75100 Alu board ran on 3.3 V throttle power but measured only 0.3 V on the sensor rail, losing hall detection—classic evidence of a blown DC/DC stage requiring repair before reconnecting sensors.[^dead_5v]
-- **Reflow sloppy MCU solder joints.** Intermittent-boot 75 100 Alu boards were revived by reflowing the GD32 MCU after inspection revealed joints ranging from starved pads to heavy blobs, stabilizing CAN, ABS limits, and USB connectivity.[^mcu_reflow]
-- **Replace cracked MOSFETs with hotplate technique.** Aluminum-PCB repairs require heating the entire sink, checking diode drops as it cools, and verifying gate drivers before reassembly—hot air alone cannot remove devices cleanly.[^mosfet_hotplate]
 
 ## Setup & Commissioning Checklist
 1. **Flash matching firmware/tool pairs.** Makerbase boards frequently ship misidentified (e.g., reporting as HW75300); desktop VESC Tool flashing plus phase-filter disable after detection stabilizes idle behavior. 【F:knowledge/notes/input_part004_review.md†L204-L204】【F:knowledge/notes/input_part004_review.md†L159-L159】
@@ -69,6 +66,3 @@
 [^alt_consumable]: Veterans treating Makerbase 84xxx controllers as consumables while they chase 300 A logs or wait for higher-rated hardware, steering commuters to Spintend, Tronic, or Seven alternatives instead.【F:knowledge/notes/input_part012_review.md†L374-L378】【F:knowledge/notes/input_part012_review.md†L397-L398】
 [^kapton_static]: Kapton isolation preventing static discharge from killing a Makerbase 75100’s 3.3 V rail after the Bluetooth module touched the case.【F:knowledge/notes/input_part008_review.md†L45-L45】
 [^binary_accessory]: Makerbase 75×100 owners bridging throttle shunt leads or adding ADC pulldowns to drive binary accessories with clean 0/100 % duty behaviour.【F:knowledge/notes/input_part006_review.md†L197-L197】
-[^dead_5v]: Makerbase 75100 Alu board with dead 5 V rail losing hall detection until DC/DC stage repair.【F:knowledge/notes/input_part004_review.md†L325-L325】
-[^mcu_reflow]: GD32 MCU reflow fixing intermittent boot on 75 100 Alu boards with poor factory solder joints.【F:knowledge/notes/input_part004_review.md†L294-L294】
-[^mosfet_hotplate]: Hotplate technique for replacing cracked G015N10 MOSFETs on aluminum-PCB Makerbase boards.【F:knowledge/notes/input_part004_review.md†L282-L282】

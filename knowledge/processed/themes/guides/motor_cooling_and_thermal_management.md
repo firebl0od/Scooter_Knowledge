@@ -20,3 +20,21 @@
 ## Adhesives & Sensor Retention
 - Hall sensors that walk out of their slots should be glued with heat-tolerant RTV 704 or slow-drying high-temp silicone; super glue works after scuffing the pocket but runs hotter under load.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L131261-L131275】
 - Keep 704 RTV on the bench for accessory wiring too—the same adhesive secures buck-converter leads so vibration cannot snap them before the scooter ever rolls out.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L31-L32】【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L131265-L131275】
+
+## VSETT Hub Thermal Rebuild Procedure
+- **Overheated VSETT hubs need methodical repair.** Single-motor riders pushing 190 A phase / 90 A battery overheated new VSETT hubs within kilometres; the fix is to cap phase current near 140–160 A, strip and resolder discoloured phase joints with a high-watt iron after burning off enamel, clean stray solder, and add temperature sensing before retrying.[^vsett_rebuild]
+- **Raise sensorless handoff when heat-related stutter appears.** The same hub quit stuttering once sensorless transition was raised from 500 to ~3,000 eRPM, then ran smoothly with 20 A of field weakening, duty capped around 85–89%, and an 800 ms FW ramp to soften current spikes above 55 km/h.[^sensorless_handoff]
+
+## Motor Temperature Instrumentation
+- **Install proper NTC sensors for accurate readings.** Installing EPCOS/TDK B57861S0502F040 2×4 mm NTCs against the hall/phase bundle, secured with thermal epoxy rated to 150 °C, delivered accurate phase readings in minutes and enables reliable over-temp cutbacks.[^ntc_install]
+- **Route temp leads away from phase bundles.** Gordan's Ubox V2 logs showed thermistor signals collapsing above 80 A until he chased the ground loop, underscoring the need to reroute sensor wiring or add shielding when phase currents spike.[^temp_routing]
+
+## 60H Hub Specific Notes
+- **60H builds prefer 50 A battery / 100 A phase with ferrofluid.** Riders reported smooth launches after sealing leads, adding ferrofluid, and pairing the tune with ~10 A field-weakening that engages around 91.5% duty while holding full duty near 95%; still install temperature sensors before chasing 16 S, 60 km/h targets on long hill routes.[^60h_baseline]
+
+## Source Notes
+[^vsett_rebuild]: VSETT hub overheating and methodical repair procedure.【F:knowledge/notes/input_part004_review.md†L19-L19】【F:knowledge/notes/input_part004_review.md†L94-L94】
+[^sensorless_handoff]: Sensorless handoff tuning to cure heat-related stutter.【F:knowledge/notes/input_part004_review.md†L20-L20】【F:knowledge/notes/input_part004_review.md†L96-L97】
+[^ntc_install]: Motor temperature sensor installation using EPCOS B57861S0502F040 NTCs.【F:knowledge/notes/input_part004_review.md†L44-L44】【F:knowledge/notes/input_part004_review.md†L69-L69】
+[^temp_routing]: Temperature sensor wiring away from phase bundles to avoid ground loops.【F:knowledge/notes/input_part004_review.md†L49-L49】
+[^60h_baseline]: 60H hub baseline tuning with ferrofluid and field-weakening.【F:knowledge/notes/input_part004_review.md†L36-L36】
