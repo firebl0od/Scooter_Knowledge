@@ -23,10 +23,12 @@
 
 ## Power Limits, Regen & Current Planning
 - **Current Envelope:** Treat 120–130 A phase per motor (≈160 A ABS max) as the practical ceiling for daily dual setups; sensor stutter above ~85 A usually signals failed MOSFETs or loose leads, not tuneable instability.[^21]
+- **Dual vs. single guardrails:** Community logs put cooled 85250 stacks around 250 A battery / 360 A phase before diminishing returns, while dual Ubox Lite builds stay near 200 A battery (per controller voltage) and ≈130 A phase to keep case temperatures in check.[^85250_ceilings]
 - **Regen Discipline:** Bench testing shows that even –5 A battery regen can trip controllers on unloaded wheels; cap regen amps to roughly the pack’s amp-hour rating plus a small overhead so the FETs absorb the excess.[^8]
 - **High-Voltage Safeguards:** Dual owners run ~2×135 A phase / 2×71 A battery within 70 °C so long as regen stays off during full-charge launches and higher-voltage packs (17 S+) are bled a few percent before re-enabling braking.[^22]
 - **Know the Ubox 100/100 envelope.** Smart Repair still caps the single at 22 S with regen disabled on the e-brake input; it ships at 135 A phase / 180 A absolute without ST-Link pads or beefy 12 V rails, so budget external regulation for accessories.[^u100-guardrails]
 - **Duty & Field Weakening:** Keep field-weakening reserved for cooled builds; previous fires stemmed from wizard runs on fresh installs, so validate base detection and duty-cycle ramps before layering FW or traction aids.[^18][^23]
+- **Treat 85240 voltage mods with caution:** HY MOSFET revisions tolerated 21 S during experiments, but veterans still cap daily use at 20 S unless every supporting component (caps, buck, sensors) is verified for 22 S service.[^85240_voltage]
 
 ## Controls, Accessories & IO
 - **Remote & Cruise:** The bundled 2.4 GHz remote offers cruise, horn, and light controls via the receiver, reducing parallel looms compared with bare PPM throttles.[^11]
@@ -34,9 +36,12 @@
 - **Lighting Power:** Dual controllers expose a ≈1.5 A 12 V rail for lighting relays, but singles lack this output; budget fused DC-DC converters instead of stealing from the fan header.[^12][^14]
 - **CAN & Anti-Slip:** Updated harnesses let one single wake another over CAN, yet anti-slip belongs on dual configurations—leaving it active on a solo motor causes low-speed cut-outs with red/green blink codes.[^10][^24]
 - **Bench-start requirements:** Ubox 100/100 controllers refuse to boot from USB-C alone—wire the latching 16 mm start button or a proper low-voltage switch instead of relying on the BMS as a master disconnect.[^start-button]
+- **Dual-start harness:** Dual 100/100 stacks already share the latch line—keep the interconnect jumper seated so one button energises both controllers, unplug it only when you need to isolate a single ESC for service.[^dual-start]
+- **ADC accessories cover lighting and controls:** The adapter already sequences LED turn strips, accepts spin dial throttles through the JST plug on ADC3, and ships dual-button pods that you can map to cruise or 1WD/2WD once phase leads stay equal length after trimming.[^adc_led][^spin_dial]
 
 ## Firmware, Logging & Fault Recovery
 - **Version Discipline:** Stick with Spintend’s vetted firmware packages (e.g., 100 A battery limit files) unless you have cooling to exploit the 300 A hardware bins; mismatched binaries raise noise and reliability issues.[^25]
+- **Lean on official bundles before third-party uploads.** Dxniel’s shared `VESC_default_no_hw_limits` build for Ubox 85250 v2 on 6.06 was compiled straight from VESC Tool—every hardware target already ships with the desktop app, so skip random downloads and pull binaries from the installer if you need a fresh flash.[^no_hw_bin]
 - **BLE Options:** Official BLE dongles arrive pre-flashed and tax-paid via AliExpress, while DIY NRF boards need extra programming; keep at least one link for live tuning even if you prefer wired sessions.[^26]
 - **Fault Retrieval:** If Bluetooth is absent, the controller retains the last fault until shutdown—connect via USB before cycling power so valuable diagnostics aren’t lost.[^10]
 
@@ -88,3 +93,9 @@
 [^u100-guardrails]: Smart Repair reiterated that the Ubox 100/100 tops out at 22 S, ships with 135 A phase / 180 A absolute limits, and should keep regen off the e-brake path unless you’re ready to swap FETs; it also omits ST-Link pads and beefy 12 V rails compared with 85xxx units.【F:knowledge/notes/input_part012_review.md†L19186-L19195】
 [^start-button]: The same teardown confirmed the 100/100 refuses to boot from USB-C—wire the latching 16 mm start button or another 5 V trigger instead of depending on the BMS as a master switch.【F:knowledge/notes/input_part012_review.md†L19300-L19318】
 [^phase-filter]: Motor-wizard phase filters should be disabled after detection to avoid noise and ABS overcurrent faults on Spintend controllers.【F:knowledge/notes/input_part004_review.md†L31-L31】
+[^no_hw_bin]: Dxniel’s 6.06 `VESC_default_no_hw_limits` binary for Ubox 85250 v2 was built from the official toolset; every target firmware already ships with VESC Tool, so source updates directly from the installer instead of third-party mirrors.【F:knowledge/notes/input_part014_review.md†L30-L31】
+[^dual-start]: Shared-latch wiring confirmed a single button can power both dual 100/100 controllers so long as the interconnect remains plugged in.【F:knowledge/notes/input_part014_review.md†L245-L247】
+[^85250_ceilings]: Community guardrails peg cooled 85250 stacks around 250 A battery / 360 A phase, while dual Ubox Lite builds stay closer to 200 A battery and ≈130 A phase per controller to avoid runaway temperatures.【F:knowledge/notes/input_part014_review.md†L201-L204】
+[^85240_voltage]: HY-marked 85240 boards survived 21 S tests, yet builders still cap daily use at 20 S unless capacitors, regulators, and sensors are proven for a 22 S upgrade path.【F:knowledge/notes/input_part014_review.md†L211-L215】
+[^adc_led]: The Spintend ADC board already handles LED turn-strip blinking, so custom amber lighting just needs channel routing rather than firmware mods.【F:knowledge/notes/input_part014_review.md†L217-L218】
+[^spin_dial]: Spin dial throttles plug straight into the ADC3 JST harness, the blank dual-button pod can map cruise or 1WD/2WD, and installers keep phase leads equal length after trimming to avoid imbalance.【F:knowledge/notes/input_part014_review.md†L218-L219】
