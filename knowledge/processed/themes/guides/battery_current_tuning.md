@@ -26,6 +26,7 @@ Taming current limits is the difference between a scooter that rips for years an
    - Calculate pack ESR—including the cells, BMS FETs, harness runs, and nickel busbars—before setting current ceilings; nominal voltage × amps ignores the sag you’ll see under load, and LiFePO₄’s flat curve makes coulomb counters more trustworthy than voltage-based gauges.【F:knowledge/notes/input_part006_review.md†L503-L503】
    - Pair coulomb counters or BMS-integrated amp-hour logs with ride notes so LiFePO₄ commuters see true consumption; the flatter discharge curve hides low-voltage cutoffs until it is too late, whereas coulomb math catches when ESR or wiring losses erode usable capacity.【F:knowledge/notes/input_part006_review.md†L503-L503】
    - Keep Artem’s relationship in mind: `I_phase = I_batt × V_batt ÷ V_motor`, so phase torque fades as ERPM climbs—log both currents to confirm your battery caps aren’t starving the tune mid-pull.[^phase_equation]
+   - For daily commuters, finish charges around 90 % if the BMS still balances there—you’ll quadruple pack lifespan versus living at 100 %.【F:knowledge/notes/input_part007_review.md†L307-L307】
 3. **Log, ride, iterate**
    - Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
 - Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰

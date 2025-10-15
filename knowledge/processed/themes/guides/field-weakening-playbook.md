@@ -2,6 +2,7 @@
 
 ## TL;DR
 - Treat field weakening (FW) as a last-mile speed tool: it trades torque and efficiency for extra ERPM, rapidly heating motors and controllers, so only enable it once the drive system runs cool at target duty cycles.[^1][^2][^3]
+- New tuners are better off raising voltage or revisiting gearing—Telegram veterans keep hammering that hub-motor limits make FW a bad shortcut when you can solve speed with hardware instead of dumping more heat into the drivetrain.【F:knowledge/notes/input_part007_review.md†L502-L502】
 - Stable implementations rely on firmware 5.3-era builds, instrumented temperature and voltage logging, and conservative regen; high-voltage packs or 24S conversions demand extra surge headroom because regen spikes can brick controllers when FW is active.[^4][^5]
 - Start with single-digit or 10–30 A FW setpoints validated by telemetry; riders jumping to 55–60 A routinely saturate hubs within an hour unless they raise phase current carefully, add cooling, and watch logs for current overshoot.[^6][^7]
 - Most builds arm FW against duty cycle—not throttle position—so expect the controller to inject current around 90 % duty and yank roughly the same extra 20 A from the battery while it fights back-EMF; reserve those bursts for cool motors only.【F:knowledge/notes/input_part000_review.md†L653-L655】

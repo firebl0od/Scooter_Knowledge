@@ -6,6 +6,13 @@
 - Veterans recommended ferrofluid or oil-fill experiments (with leak safeguards) if you need real winding-to-shell transfer—simply drilling covers or gluing “windmills” to the hub only cools the outer case.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L456-L520】
 - Community case studies still favour passive conduction upgrades over active plumbing: Mirko’s 15 mm aluminum deck plate plus open vents held dual 190 A phase / 70 A battery runs near 52 °C, while heat-pipe experiments outperformed vibration-prone water loops on cramped decks.【F:knowledge/notes/input_part003_review.md†L115-L115】【F:knowledge/notes/input_part003_review.md†L240-L240】
 
+## Ferrofluid Selection & Handling
+- The VESC Help crew continues to vouch for ferrofluid/Statorade when the goal is winding-to-shell transfer, but they emphasise reading datasheets—some mixes flash at low temperature and budget hubs can demagnetise above ~80 °C—before flooding a motor.【F:knowledge/notes/input_part007_review.md†L48-L48】
+- Ferrotec APG1110 remains the benchmark for hub fillings, while Supermagnete’s 10 mL bottles offer reliable sourcing for EU riders upgrading Xiaomi and G30 hubs without importing large lots.【F:knowledge/notes/input_part007_review.md†L60-L60】
+
+## Hub Current Guardrails
+- Single Monorim 500 W hubs stay happy around 80 A phase—ideally with ferrofluid—while the crew’s Xiaomi-class builds overheat quickly once they push 65–73 A without battery temperature sensing or keep more than roughly 30–35 A combined draw from paired 12 S packs.【F:knowledge/notes/input_part007_review.md†L18-L19】
+
 ## Controller Interface Refresh Checklist
 - When raising voltage, replace Kapton tape with 0.5 mm thermal pads so MOSFETs stay isolated yet shed heat; stacking pads on top of Kapton just adds resistance.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L202-L223】
 - Sand controller bases, clean MOSFET tabs, and reinstall paste before clamping the box—loose wiring under the plate prevents full contact and spikes temperatures on the first ride.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60020-L60025】
@@ -24,8 +31,16 @@
 - Epoxy putty doubles as a heat spreader around controller cases while builders embed thermistors through the existing hall harness and pot them with epoxy or silicone for direct winding contact.【F:knowledge/notes/input_part005_review.md†L115-L124】
 - Resin-potted water-cooled Flipsky builds now ship with INA181 phase sensors and denser heatsinks, but veterans still expect MOSFET-to-heatsink contact to be the bottleneck until independent testing confirms the claimed improvements.【F:knowledge/notes/input_part005_review.md†L486-L488】
 
+## Controller Mounting & Airflow Discipline
+- Track-focused builders now strip paint, drill fresh bolt holes, clamp controllers with washers and threadlocker, add thermal paste, and route heat into the chassis or external sinks; relying on foam or internal fans in sealed bays just cooks the controllers.【F:knowledge/notes/input_part007_review.md†L26-L26】【F:knowledge/notes/input_part007_review.md†L28-L28】
+- External fins need real airflow—drop the heatsink through the deck, drill and tap anchors, and bolt the controller straight to the frame with paste; leaving fins flush inside the deck traps hot air.【F:knowledge/notes/input_part007_review.md†L83-L83】
+- Skip brazing aluminum frames for heatsink bonding unless you have specialty tooling; even experienced metalworkers called it a last resort compared with mechanical fasteners.【F:knowledge/notes/input_part007_review.md†L78-L78】
+- When clamping copper blocks to aluminum frames, isolate them with silicone sheets or plating; bare copper-on-aluminum mounts trigger galvanic corrosion that quietly eats the chassis.【F:knowledge/notes/input_part007_review.md†L321-L322】
+- Dial in airflow paths after rework—builders now notch decks, tap fins, and bridge controllers to fresh-cut ducts so heat actually leaves the bay instead of recirculating behind sealed covers.【F:knowledge/notes/input_part007_review.md†L537-L537】
+
 ## Temperature Guardrails
 - Battery temps around 41 °C were deemed healthy for summer rides, but the group flagged ~60 °C as a ceiling—anything hotter accelerates degradation and calls for gentler tunes.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60004-L60008】
+- Makerbase 100/100-class controllers start current limiting once MOSFETs touch ~70 °C if the base plate lacks fresh thermal paste; the crew now treats 70 °C as the everyday limit and 100 °C as the hard ceiling for VESC MOSFETs to preserve lifespan.【F:data/vesc_help_group/text_slices/input_part007.txt†L123-L146】
 - Larger packs and long shocks trap heat around the deck; riders re-bend frames, add inner/outer steel plates, and swap to lower-rate springs instead of trimming coils so the chassis and cells stop cooking each other.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L90030-L90136】
 - Abuse tests that pumped 84 V/2 000 W into stock 250 W hubs demagnetised rotors once magnets crossed ~80 °C, permanently reducing speed—log stator temps on recycled hardware before chasing high-voltage experiments.【F:knowledge/notes/input_part000_review.md†L117-L117】
 - Weped-mounted dual Uboxes still brushed ~80 °C delivering ~500 A phase until riders resurfaced the deck and clamped the controller directly with fresh thermal paste—remote radiator boxes and thick spacers only added heat soak.【F:knowledge/notes/input_part000_review.md†L614-L617】

@@ -22,6 +22,8 @@
 6. **Secure accessory power taps.** Dashboards only expose 5 V logic—drive headlights and horns from a dedicated DC/DC converter, tie the output wires to the board with RTV, and route the harness away from moving stems so the leads do not fatigue.【F:knowledge/notes/denis_all_part02_review.md†L28-L32】【F:knowledge/notes/denis_all_part02_review.md†L31-L32】
 7. **Reflow noisy balance taps.** JK smart boards throw alternating “short circuit” and “low voltage” alarms when a single balance lead lifts—re-solder any suspect tap before blaming firmware or swapping the BMS.【F:knowledge/notes/input_part000_review.md†L650-L650】【F:knowledge/notes/input_part000_review.md†L690-L690】
 7. **Trace weak 5 V accessory ports back to the buck converter.** A Max G30 plug that still shows 5 V but no current usually means a failed converter stage—follow the trace with a multimeter until you reach the DC/DC module and verify components between it and the port before ordering a replacement board.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L110038-L110041】
+8. **Refinish soldered connectors, don’t patch corroded XT60s.** R3VOLT’s refresh reminded the crew to swap oxidised housings entirely, heat the bullet—not the wire—so solder flows, and slide the molded cover back over the last few millimetres before heat-shrinking insulation to prevent shorts.【F:knowledge/notes/input_part007_review.md†L84-L84】
+9. **Use drilling jigs when precision holes matter.** Off-the-shelf square-hole guides keep controller and bracket installs tidy for builders who struggle to drill straight freehand.【F:knowledge/notes/input_part007_review.md†L97-L97】
 
 ## Controller & Motor Tests
 - **Continuity sweep before power-up:** With the battery unplugged, probe between B+ / B− and each motor phase. Any reading below ~50 Ω signals a shorted MOSFET that must be replaced before reconnecting cells.【F:knowledge/notes/denis_all_part02_review.md†L37-L38】
@@ -52,6 +54,8 @@
 - **Reconnect stubborn externals:** If Rita “ghosts” an auxiliary pack, blip the throttle for a second to force rediscovery before tearing down wiring.【F:knowledge/notes/all_part01_review.md†L209-L210】
 - **Time full charges when vetting replacements:** Stock Xiaomi bricks add ≈1.7 Ah per hour; a legitimate 12 Ah Pro 2 pack should need nearly seven hours from empty, so a “full” light in 90 minutes signals a counterfeit pack.【F:knowledge/notes/denis_all_part02_review.md†L230-L231】
 - **Probe every series group on dead packs:** When a fresh build refuses to wake, crack the wrap and meter each group—bypassing the BMS is for testing only because running without it is a fire risk.【F:knowledge/notes/denis_all_part02_review.md†L121801-L121804】
+- **Go sensorless when halls fail.** If a Zero or similar scooter loses hall sensors mid-ride, drop open-loop ERPM to 0, switch to the Mxlemming observer with BEMF decoupling, and limp home on sensorless starts.【F:knowledge/notes/input_part007_review.md†L403-L404】
+- **Recover CAN chains through the survivor.** Change the remaining controller’s VESC ID and reflash the bootloader over the intact CAN link to revive dead peers before opening sealed housings.【F:knowledge/notes/input_part007_review.md†L404-L404】
 
 ## Security Layers & Theft Response
 - Hide GPS trackers along the main harness, combine Rita builds with motion alarms inside the battery bag, and budget a hardened chain for long stops; layered defenses buy recovery time even though determined thieves can still lift a 20 kg scooter.【F:knowledge/notes/all_part01_review.md†L896-L896】

@@ -45,12 +45,17 @@
 ## Safety & Upgrade Guardrails
 - **Pack selection:** Skip unbelievable “13S4P 60 Ah” or €60 “48 V 62 Ah” packs—the chemistry doesn’t exist and bargain controllers rarely survive 48 V; invest in reputable 12–13 S builds instead.【F:knowledge/notes/all_part01_review.md†L39-L40】【F:knowledge/notes/denis_all_part02_review.md†L146-L147】
 - **Cell choices:** Refurbished Samsung 35E/50E lots from vetted sellers such as NKON remain viable midlife upgrades—document provenance and avoid mixing them with tired cells from the original pack.【F:knowledge/notes/denis_all_part02_review.md†L224-L225】
+- **Respect chemistry pairings:** Gabe’s 800 W Blade plan combines a fresh 13s5p LG MH1 block with a 3s6p stack of retired EVE ES2 cells to stretch range; treat that as a low-amp experiment, log temps, and expect sag differences compared with the P42A packs he reserves for dual 22×3 80100 race builds.【F:data/vesc_help_group/text_slices/input_part007.txt†L495-L599】
+- **Know platform limits.** Xiaomi Mi 3/Mi 4 scooters ship with locked firmware, top-entry decks, and warranty-sensitive hardware, so most modders stick with the older Pro series when they need deep battery or controller swaps.【F:knowledge/notes/input_part007_review.md†L513-L513】
 - **Brake planning:** 12 S conversions hit ~40 km/h on flat ground—upgrade mechanical brakes and keep regen under ~20 A so Rita and controller FETs stay alive.【F:knowledge/notes/all_part01_review.md†L44-L44】【F:knowledge/notes/all_part01_review.md†L79-L80】
 - **Controller heat path:** Torque down stock controllers flush to the chassis with fresh thermal paste; loose mounting or cable stacks overheat MOSFETs on the first long ride.【F:knowledge/notes/denis_all_part02_review.md†L140-L141】
 - **Parallel etiquette:** Only parallel packs with matched voltages and common-port BMS boards—Rita and Happy both block or fault when faced with mismatched hardware.【F:knowledge/notes/all_part01_review.md†L102-L113】【F:knowledge/notes/denis_all_part02_review.md†L64-L65】【F:knowledge/notes/denis_all_part02_review.md†L532-L532】
 - **LiPo discipline:** RC LiPo bricks puff when stored at full charge and develop high internal resistance within days—treat them as short-term boosters, not daily commuter batteries.【F:knowledge/notes/denis_all_part02_review.md†L158-L159】
 - **Respect BMS ceilings.** Even 80 A-capable cells sag and trip protection if the pack still uses a 40 A BMS—raise ratings alongside parallel count to avoid false cut-outs.【F:knowledge/notes/all_part01_review.md†L93571-L93578】
 - **Environmental prep:** Seal deck seams, cable ports, and hub joints with silicone plus lithium grease; add humidity sensors or alarms if you commute in heavy rain.【F:knowledge/notes/all_part01_review.md†L41-L41】【F:knowledge/notes/all_part01_review.md†L86-L88】
+
+### Sleeper Packaging Templates
+- **Xiaomi Pro 2 20 S sleeper layout.** Gabe splits the 20 S 8 P pack between the deck and an external bag, prints 35–36 mm spacers, reroutes phase cables, and trims foam so dual controllers coexist without killing ground clearance—document the weight distribution before copying the build.【F:knowledge/notes/input_part007_review.md†L514-L514】
 
 ## Commissioning Checklist
 1. **Balance & inspect cells** before closing the pack, replacing entire groups rather than mixing fresh with aged cells.【F:knowledge/notes/all_part01_review.md†L10-L11】【F:knowledge/notes/denis_all_part02_review.md†L67-L68】
