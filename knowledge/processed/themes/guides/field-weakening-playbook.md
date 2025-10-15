@@ -75,7 +75,7 @@
 [^10]: Segway GT2 dual 85150 telemetry at 30 A FW highlighting pack limits.【F:knowledge/notes/input_part010_review.md†L293-L293】
 [^11]: Wolf King GT Pro and similar high-power builds using 55 A FW for ~66 mph road speeds.【F:knowledge/notes/input_part013_review.md†L65-L65】【F:knowledge/notes/input_part013_review.md†L599-L599】
 [^12]: Halo runaway RPM and general caution for unloaded FW testing.【F:knowledge/notes/input_part012_review.md†L28-L28】
-[^13]: High-speed regen viability with FW and the need to log bus voltage.【F:knowledge/notes/input_part005_review.md†L475-L475】
+[^13]: High-speed regen viability with FW and the need to log bus voltage.【F:knowledge/notes/input_part005_review.md†L463-L465】
 [^14]: Using the `faults` command and absolute current headroom to manage FW-induced spikes.【F:knowledge/notes/input_part001_review.md†L139-L139】
 [^15]: Duty-cycle ceiling warnings for FW-enabled builds.【F:knowledge/notes/input_part001_review.md†L160-L160】【F:knowledge/notes/input_part003_review.md†L104-L104】【F:data/vesc_help_group/text_slices/input_part003.txt†L11586-L11610】
 [^16]: FW masking mechanical faults in high-speed Vsett builds and needing inspections.【F:knowledge/notes/input_part013_review.md†L741-L741】
@@ -86,6 +86,7 @@
 [^21]: 22×3 hub builds freewheeling around 118 km/h without FW after pack upgrades.【F:knowledge/notes/input_part013_review.md†L88-L88】
 [^22]: 20 S single-motor package delivering 85 km/h with ~30 A FW as a short-burst aid.【F:knowledge/notes/input_part013_review.md†L145-L145】
 [^23]: Firmware or wiring faults causing sudden full braking after FW-enabled firmware updates.【F:knowledge/notes/input_part001_review.md†L219-L219】
+[^24]: Riders now log high-speed (80–100 km/h) FW regen drills to confirm bus voltage stays under Spintend limits before trusting the setup on public roads.【F:knowledge/notes/input_part005_review.md†L608-L608】
 [^hotdog_fw]: NAMI 100 H rear / 70 H front builds logging 500 A phase, 550 A absolute, 100 % front FW, and ~61 °C stators while traction control keeps the rear from lifting the front at 120 km/h.【F:knowledge/notes/input_part014_review.md†L8930-L8933】【F:knowledge/notes/input_part014_review.md†L10001-L10055】
 
 ## Field-Weakening Tuning Details

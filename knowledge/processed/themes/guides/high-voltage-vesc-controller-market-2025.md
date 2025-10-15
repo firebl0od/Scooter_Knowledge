@@ -54,6 +54,7 @@
 - Treat field-weakening amps as additive to battery draw; riders pushing 45 A FW on Ubox 85150s at 105/120 A battery and 150/175 A phase have already cooked MOSFETs—plan FET upgrades or higher-voltage motors instead of stacking FW on stock hardware.【F:knowledge/notes/input_part014_review.md†L21-L22】【F:knowledge/notes/input_part014_review.md†L166-L169】
 - Safe envelopes converge around ≤45 °C controller temps and ≤90–100 °C stator temps; thermal paste between controller bases and plates is mandatory before chasing 300 A bursts.【F:knowledge/notes/input_part014_review.md†L73-L76】
 - Logging both GPS speed and per-motor temperatures helps correlate duty cycles with real thermal load, preventing overconfidence when scaling toward 400 A per motor on dual stacks.【F:knowledge/notes/input_part014_review.md†L168-L169】
+- Real-world benchmarks peg 72 V dual-motor builds around 80–110 km/h when each controller sustains ~100 A battery; pushing a single motor toward 16.8 kW still overheats hardware even with field weakening, so plan dual drives or higher-voltage motors for sustained speed runs.【F:knowledge/notes/input_part005_review.md†L371-L373】
 - 100 H/70 H Nami race builds prove that 500 A phase and 550 A absolute limits are workable when traction control reins in front-wheel lift at 120 km/h+, but only with disciplined temperature monitoring (~61 °C stator during 40 kW pulls).【F:knowledge/notes/input_part014_review.md†L168-L170】
 
 ## Firmware & Tooling Watchlist

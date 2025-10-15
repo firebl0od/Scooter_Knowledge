@@ -2,8 +2,10 @@
 
 ## TL;DR
 - The G30 Max remains the friendliest chassis for VESC swaps thanks to abundant deck space, aftermarket spacers, and new BMS firmware that unlocks >20 A discharge without extra comms harnesses.【F:knowledge/notes/input_part014_review.md†L94-L104】
+- Expect roughly 140 loose 18650s to fit without grinding the rails—builders are running 20 S 4 P packs inside the deck plus 20 S 4 P shoulder-bag boosters (or 20 S 9 P externals when stealth is optional) while still leaving room for dual controllers.【F:knowledge/notes/input_part005_review.md†L464-L468】
 - Real-world 16 S builds with Ubox 100/100 controllers and 65 H 17×4 motors hit ~45 mph on 50 A field weakening yet still average roughly 1 mile per amp-hour, proving battery upgrades deliver the biggest gains before motor swaps.【F:knowledge/notes/input_part014_review.md†L105-L105】
 - Traction control, throttle filtering, and thermal management are mandatory as phase limits climb toward 300 A; positive ramp times (~0.4 s) and careful ADC tuning tame wheelspin and runaway spikes on lightweight decks.【F:knowledge/notes/input_part014_review.md†L84-L87】【F:knowledge/notes/input_part014_review.md†L107-L107】
+- SNSC 2.3 donor frames are drying up as fleets migrate to Okai hardware—lock in a chassis or negotiate with operators before planning large VESC conversions around rental leftovers.【F:knowledge/notes/input_part005_review.md†L610-L610】
 
 ## Base Scooter Preparation
 - Flash the latest ScooterHacking G30 BMS firmware to lift discharge ceilings past 20 A while retaining stock harnesses—essential before pushing VESC phase currents.【F:knowledge/notes/input_part014_review.md†L103-L104】
@@ -40,15 +42,25 @@
 - Vsett 9 frames can internalize 52 V 30 Ah packs—and even standing 20 S8 P stacks with spacers—providing inspiration for auxiliary battery pods or cross-frame transplants on Max conversions.【F:data/vesc_help_group/text_slices/input_part003.txt†L10118-L10132】
 - A 21 S Zero 11X pack with ~0.002 V delta showcased proper busbars and heavy-gauge cabling for big-wheel race builds—borrow its harness and reinforcement ideas when scaling Max packs beyond commuter duty.【F:data/vesc_help_group/text_slices/input_part003.txt†L10411-L10415】
 
+## Packaging & Layout Patterns
+- **Map deck configurations early.** Builders split 20 S packs between the deck and shoulder bags, slide 20 S4 P externals under the stem, or relocate controllers outside the deck to free space for 9 P cores—document wiring paths before cutting rails.【F:knowledge/notes/input_part005_review.md†L606-L606】
+- **Plan SNSC fork swaps with CNC fixtures.** The community now machines custom stems that capture SNSC forks while accommodating star nuts and cable routing; print drill guides before sending aluminum to the mill to guarantee headset alignment.【F:knowledge/notes/input_part005_review.md†L606-L606】
+- **Front disc conversions can reuse Pro 2 hubs.** Repurposing a Ninebot Pro 2 front motor keeps geometry intact, then you only need custom spacers and a caliper bracket to add a disc without Monorim suspension bulk.【F:knowledge/notes/input_part005_review.md†L607-L607】
+
 ## Control & Traction Tuning
+- Update Xiaomi/Ninebot dashboards to firmware 6.05 before pairing dual controllers—the community Lisp build on 6.02 only forwards CAN for a single ESC, so flash Xiaomi firmware or the 6.05 beta images before wiring two VESCs to the dash.【F:knowledge/notes/input_part005_review.md†L206-L207】
+- Set motor detection parameters for the G30’s 30-pole hubs and remove any lingering phase filters after repairs—misdiagnosed gate drivers kept blowing MOSFETs until riders retested hardware with the correct pole count.【F:knowledge/notes/input_part005_review.md†L512-L512】
 - Compress throttle ADC ranges (treat ~0.83 V as idle, activate around 1.0–1.2 V) to eliminate noise-triggered surges on Spintend 100/100 installs.【F:knowledge/notes/input_part014_review.md†L84-L85】
 - Grounding the chassis cured runaway acceleration for some riders, but document the wiring and verify insulation to avoid frame shorts before adopting the fix broadly.【F:knowledge/notes/input_part014_review.md†L86-L86】
 - Log traction control adjustments during every shakedown; slip thresholds between 11 k and 17 k rpm and positive throttle ramps (~0.4 s) kept lightweight builds controllable at 300 A phase.【F:knowledge/notes/input_part014_review.md†L107-L107】
 - When upgrading to hydraulic fronts, transplant the stock hall sensor and magnet into the new lever so proportional regen survives the swap and rear mechanical brakes can stay untouched.【F:knowledge/notes/input_part000_review.md†L296-L296】
 
 ## Thermal & Mechanical Safeguards
+- Cap field-weakening around 20 A on stock 6×TO-220 Makerbase 75100 boards—extended 35 A pulls at 130 A phase have already burned MOSFETs, so step up to the aluminum-PCB/vented variants if you need sustained high-speed duty.【F:knowledge/notes/input_part005_review.md†L206-L208】
+- Pune’s single-motor log showed a Makerbase 75100 holding ~4.2 kW peaks at ~44 °C when clamped inside the stock controller can—treat the OEM enclosure as part of the heatsink if airflow is limited.【F:knowledge/notes/input_part005_review.md†L248-L248】
 - Monitor per-motor temperatures; aim for ≤45 °C controller temps and ≤90–100 °C stator temps by refreshing thermal paste and clamping controllers to thick skid plates.【F:knowledge/notes/input_part014_review.md†L73-L76】【F:knowledge/notes/input_part014_review.md†L119-L119】
 - Plan for valve-stem service and bead reseating after pothole hits—tubeless split rims can burp air, so keep compressors and soapy water handy during test rides.【F:knowledge/notes/input_part014_review.md†L46-L46】
+- Track tire availability: true 12″ tubeless slicks remain limited to rare Touvt 12×4.5‑6.5 listings, so expect lead times or plan alternate wheelsets when chasing maximum footprint on VESC builds.【F:knowledge/notes/input_part005_review.md†L502-L502】
 - Evaluate braking upgrades alongside power mods; 203 mm rotors add leverage but may be overkill—pair regen tuning with quality hydraulic calipers and DOT 4/5 fluid first.【F:knowledge/notes/input_part014_review.md†L43-L43】
 - Use the €25 ePowerFun 3 mm aluminum floor plate as a quick cooling stopgap—drill five mounting holes, trim the nose to clear JREV spacers, and plan a thicker custom plate once testing confirms heat loads.[^epowerfun]
 - Transparent plexiglass lids look great but need threadlocker, silicone seals, and stronger epoxy/two-part adhesive for LED strips—6 mm sheets crack without extra support, especially around temperature swings.【F:knowledge/notes/input_part000_review.md†L373-L374】

@@ -64,6 +64,7 @@
 - **Avoid parasitic taps:** Pulling 12 V from internal headlight pins (e.g., X12) drags the logic rail and costs range—draw pack power into a dedicated converter instead.[^15]
 - **Protect logic rails:** Shorting auxiliary leads straight on the controller board has already destroyed logic stages; isolate accessories and fuse every feed.[^16]
 - **Fuse the adapter output:** One builder shorted the 12 V rail on a brand-new Spintend 85240 while wiring lights and killed the buck stage; add inline fuses or external bucks so a single mistake doesn’t scrap the controller.[^16][^23]
+- **Respect the adapter’s voltage ceiling.** Keep the kill-switch lead under ≈60 V, route high-voltage latches through a smart BMS or loop key, and only parallel momentary buttons that share the adapter’s common ground (e.g., ANT/JK power toggles) so you don’t backfeed pack voltage into the logic board; treat the module as a logic-level relay and let contactors or smart-BMS buttons handle full-pack isolation.【F:knowledge/notes/input_part005_review.md†L603-L603】
 - **Treat buttons as triggers only:** The ADC adapter does not replace a loop key or smart-BMS latch; plan a real kill switch for theft deterrence or maintenance.[^17][^18]
 - **Leverage DAC outputs.** Spintend 75/300 firmware can repurpose the PPM pin into a DAC brake-light feed, but expect to lean on community firmware drops until official docs land.[^31]
 
@@ -71,6 +72,7 @@
 1. **Bench prep:** Wire controls with the pack off, confirm continuity, and verify 3.3 V and 5 V rails before powering up.
 2. **Calibrate ADC inputs:** In VESC Tool, run the ADC mapping wizard for each channel, noting min/max values and checking that neutral centers correctly.[^7]
 3. **Assign app functions:** Map ADC1 to throttle, ADC2 to “Current No Reverse” for regen, and ensure throttle curves or safe-start options suit the rider.[^8]
+   - Even with the new NRF headers on recent VESC hardware, firmware still blocks simultaneous ADC, UART display, PAS, and cruise-control inputs—plan one control path per profile until Vedder lifts the limit.【F:knowledge/notes/input_part005_review.md†L434-L436】
 4. **Understand bench limitations:** Once ADC control is enabled, the manual FWD/REV buttons in VESC Tool stop working—switch the app to UART or disable ADC temporarily for bench spins.[^13]
 5. **Write configs explicitly:** Mobile reconnects and desktop wizards can wipe ADC settings unless you press “Write Motor Config” and “Write App Config” after every change.[^21]
 6. **Document firmware overrides.** If you merge ADC channels in `app_adc.c` (e.g., mirroring ADC2 to ADC1 as an emergency throttle), capture the patch and share it with the owner so future firmware updates preserve the fail-safe—and publish the wiring/code diff so torque-sensor bikes can add redundant throttles without guesswork.【F:knowledge/notes/input_part003_review.md†L248-L248】【F:data/vesc_help_group/text_slices/input_part003.txt†L21692-L21726】
@@ -83,6 +85,7 @@
 - **Seat the adapter switches before testing.** If the Spintend board reads erratically, confirm the 5 V/3.3 V selector and NO/NC toggles are firmly latched, then bypass the board with the controller’s 3.3 V rail only for short diagnostic sweeps—full travel on 5 V sensors while direct-wired has already killed modules.【F:knowledge/notes/input_part000_review.md†L707-L715】【F:knowledge/notes/input_part000_review.md†L748-L748】
 - **Keep kill-switch redundancy:** Combine Safe Start, loop keys, and/or smart-BMS latches so thieves or techs can de-energise the scooter without relying on ADC buttons alone.[^17]
 - **Watch for brownouts:** Builds that still depend on Makerbase/Flipsky rails should budget extra capacitance or buffer packs—the same rail that feeds ADC accessories is the one that dies during BMS trips.[^10]
+- **Cold-weather cutouts aren’t wiring faults.** 20 S BMS boards can open at roughly 15 % state of charge when cells are near freezing—verify pack temperature and discharge curves before blaming the throttle wiring.【F:knowledge/notes/input_part005_review.md†L432-L434】
 - **If a channel dies:** Check for 3.3 V on the sensor, rerun ADC mapping, inspect JST orientation, and confirm the pull-down still measures the expected resistance.[^7][^19]
 - **Bypass the adapter when debugging.** When the external ADC module starts spitting nonsense, feed 3.3 V, signal, and ground straight from the controller to the throttle/brake to prove the harness—just never slam 5 V accessories onto the STM32’s 3.3 V rail during the test.【F:knowledge/notes/input_part000_review.md†L648-L648】
 - **Clamp high-voltage throttles.** MiniMotors EYE triggers swing ≈0.8–4.1 V from a 5 V rail—drop a resistor divider or use the ADC adapter before landing them on STM32 pins.[^28]
@@ -106,10 +109,10 @@
 [^15]: Drawing accessory power from the X12 headlight feed drags the logic rail and wastes energy.【F:knowledge/notes/input_part012_review.md†L395-L395】
 [^16]: Shorting controller auxiliary leads has destroyed logic boards, proving the need for isolated accessory supplies.【F:knowledge/notes/input_part012_review.md†L248-L248】
 [^17]: Builders still rely on loop keys, smart-BMS buttons, and Safe Start—ADC boards alone do not provide a true kill switch.【F:knowledge/notes/input_part005_review.md†L348-L350】
-[^18]: Spintend’s ADC adapter v2 only ferries 5 V/12 V accessory power and cannot act as an anti-spark or ignition switch.【F:knowledge/notes/input_part005_review.md†L254-L254】
+[^18]: Spintend’s ADC adapter v2 only ferries 5 V/12 V accessory power, is rated for ≈60 V pack input, and cannot act as an anti-spark or ignition switch—route kill switches through a smart BMS or loop key instead.【F:knowledge/notes/input_part005_review.md†L451-L452】【F:knowledge/notes/input_part005_review.md†L454-L455】
 [^19]: Pull-down resistors on throttle lines guarantee a zero output if the signal wire opens.【F:knowledge/notes/input_part007_review.md†L223-L223】
 [^20]: Routing throttle through dash adapters adds noticeable lag; direct ADC wiring restores responsiveness.【F:knowledge/notes/input_part007_review.md†L225-L225】
-[^21]: VESC Tool can wipe ADC settings after reconnects unless you explicitly write both motor and app configs.【F:knowledge/notes/input_part005_review.md†L573-L573】
+[^21]: VESC Tool can wipe ADC settings after reconnects unless you explicitly write both motor and app configs.【F:knowledge/notes/input_part005_review.md†L410-L413】
 [^22]: Hall-diagnostics workflow focusing on ADC count deltas and re-testing with a clean 5 V rail when noisy 3.3 V supplies flatten readings.【F:knowledge/notes/input_part001_review.md†L15-L16】
 [^23]: Shorting the Spintend 85240 aux rail to ground killed the unfused buck regulator, reinforcing the need for inline fuses or external converters when powering lighting from the adapter.【F:knowledge/notes/input_part011_review.md†L659-L660】
 [^24]: Illuminated AliExpress switch pods leak voltage into ADC signal lines and require major rewiring to behave.【F:knowledge/notes/input_part010_review.md†L74-L77】

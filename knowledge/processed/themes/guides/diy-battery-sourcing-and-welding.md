@@ -34,6 +34,14 @@
 - **21700 energy density vs. recycled 18650s:** Recycled EVE 26V 18650 cells struggle beyond ~5 A per cell, whereas fresh Samsung 35E/48X/50S 21700 options pack more watt-hours into Xiaomi/Ninebot decks and sustain 15–20 A draws—reserve reclaimed cells for low-power builds and spec new 21700s for high-range projects.【F:knowledge/notes/input_part000_review.md†L118-L118】
 - **Honeycomb nickel shortages:** EU builders now pool orders for half-kilo lots because suppliers refuse to ship sub-1 kg batches; expect ~40 € quotes locally or wait on AliExpress consolidation when stocking cell cages.【F:data/vesc_help_group/text_slices/input_part000.txt†L17309-L17312】
 
+Regional sourcing realities still shape chemistry choices: Turkish builders blocked from NKON settle for Samsung 29E/50E lots despite higher sag, while racers keep paying for Molicel P45B as the only 21700 that resists brutal voltage droop at high current.【F:knowledge/notes/input_part005_review.md†L513-L513】 AliExpress flash sales still advertise fantasy pricing—message sellers for real quotes, expect shipping to erase the $6-per-cell clickbait, and stick with the one vetted vendor the community trusts when you cannot buy direct.【F:knowledge/notes/input_part005_review.md†L579-L579】
+
+### 8–9 P Chemistry Trade-offs
+- **P45B for brute force.** Choose Molicel P45B when the build needs 400 A+ bursts and minimal voltage sag; the premium pricing beats rebuilding packs that rely on mid-grade cells and cook under race duty.【F:knowledge/notes/input_part005_review.md†L605-L605】
+- **P42A as the value pick.** P42A arrays still deliver stout 300–350 A performance for commuters and canyon riders, especially when paired with faster charging rather than upsizing parallel count.【F:knowledge/notes/input_part005_review.md†L605-L605】
+- **Samsung 50S for range.** 50S and LG 50LT cells stretch 8–9 P packs for touring but expect more sag—pair them with conservative current limits or dual-pack fast-charging plans instead of chasing peak amps.【F:knowledge/notes/input_part005_review.md†L605-L605】
+- **Budget chemistries need charge discipline.** Builders chasing LG M58 or Samsung 50E endurance budgets lean on higher-current chargers instead of premium cells; model turnaround times so clients understand the compromise.【F:knowledge/notes/input_part005_review.md†L605-L605】
+
 ## Welding Equipment Decision Guide
 | Scenario | Recommended Tooling | Why It Wins | Follow-Up Checks |
 | --- | --- | --- | --- |
@@ -50,6 +58,13 @@
 
 - **Shield brazed copper joints.** When builders skip spot welding and braze copper busbars, they flood the joint with argon while feeding tin so oxidation doesn’t spike resistance; humidity alone can corrode unsealed copper/nickel “sandwich” welds within a few years.[^argon-braze]
 
+Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 mm copper sandwiches, but early adopters still tear them down to resolder loose capacitors and confirm the shop has 110 V/220 V service before committing.【F:knowledge/notes/input_part005_review.md†L352-L354】
+
+### Copper Busbars & Sandwich Welding Notes
+- Laser-cut 0.5 mm copper combs (e.g., from Peng Chen) spot-weld cleanly when clamped under nickel-plated steel overlays, delivering neat 20 S 10 P layouts without bulky braided jumpers.【F:knowledge/notes/input_part005_review.md†L145-L147】
+- Plan on ≥1 kA pulse capacity—KWeld or 1,600 A Malectrics rigs—to bond 0.2 mm copper reliably; hobby welders under the 1 kA mark struggle and drive builders back to nickel overlays.【F:knowledge/notes/input_part005_review.md†L147-L151】
+- Practice on dead cells before committing copper-nickel sandwiches to live packs; slotted nickel forces current through the can and punishes misaligned welds.【F:knowledge/notes/input_part005_review.md†L488-L490】
+
 ## Pack Architecture Case Studies
 | Platform | Layout & Cells | Controller Pairing | Lessons |
 | --- | --- | --- | --- |
@@ -60,6 +75,7 @@
 | Nami commuter upgrade | 22 S10 P layout in development | Awaiting high-current controllers | CNC + 3D-printed supports required; treat as modular sled to service 50PL packs.[^12] |
 | G3 30 S conversion | 30 S3 P modules (15 S6 P split) | High-voltage VESC | Requires grinding factory brackets; 30 S4 P too wide without chassis surgery and new BMS routing.[^13] |
 | 20 S10 P Samsung 40T | Dual Ubox 85250 | 0.2 mm copper busbars deliver ~350 A continuous / 450 A burst; avoid mixing pouch cells in parallel due to swelling | Reserve space for ≥230 A BMS and monitor temps during 40 kW pulls.[^6] |
+| MH1 commuter rebuild | 20 S4 P aging pack → planned 20 S6 P 21700 swap | Makerbase 75100 single | Stock MH1 cells sagged from 80 % to 35 % under load; rebuilders are upsizing parallel count and logging rest voltage before landing the replacement BMS.【F:knowledge/notes/input_part005_review.md†L420-L422】 |
 
 ## Cost Planning Worksheet
 1. **Cell procurement** – price the primary chemistry plus 10 % spares for grading losses and future replacements.[^2][^11]
@@ -95,9 +111,12 @@
 - **Protect LiPo experiments.** A Daly-protected 4 Ah LiPo sank to 0.5 V per cell when left unattended, killing €120 worth of cells—treat LiPo scooters as supervised builds or upgrade the BMS hardware.【F:knowledge/notes/input_part004_review.md†L387-L387】
 
 ### Mounting & Housing Patterns
+- **Prototype harness guides cheaply.** Builders mock up deck layouts with cardboard brackets before printing TPU/PETG fixtures, weighing Bambu P1P versus Ender 3 SE ownership while outsourcing large ASA/PEEK parts to avoid €1,500 machines.【F:knowledge/notes/input_part005_review.md†L11-L14】
+- **Print in-place frames for strength, not speed.** Print-in-place battery sleds need 100 % infill PETG (or stronger) plus fiberglass skins—low-infill PLA softens in the sun and won’t protect the pack in a crash.【F:knowledge/notes/input_part005_review.md†L221-L222】
 - **Armor deck-mounted conduits.** Twin 10S packs strapped along the deck need metal shielding and permanent wiring—open conduit runs are “self-propelled bombs” unless the housing resists impacts and stays wired for continuous duty.【F:knowledge/notes/denis_all_part02_review.md†L230-L234】
 - **Overbuild bag brackets.** Wildman bag packs now use eight screw/wide-washer mounts, fiberglass sleeving, and interior foam so cells can’t chafe on hardware or eject during pothole hits.【F:knowledge/notes/denis_all_part02_review.md†L361-L362】
 - **Expect tight tolerances.** A 13S5P/16S3P 21700 stack just fits a 3 L Wildman when you skip holders, while 13S4P assemblies barely squeeze into 2–3 L shells—plan for custom spacers, cardboard liners, and printed cages before drilling the pack.【F:knowledge/notes/denis_all_part02_review.md†L362-L363】【F:knowledge/notes/denis_all_part02_review.md†L165-L165】
+- **Account for honeycomb growth.** Printed honeycomb holders add roughly 3 cm to a 20 S stick thanks to 1.5 mm walls—verify deck clearance and inspect any shipped pack with crushed heat-shrink or stray metal before trusting it on a ride.【F:knowledge/notes/input_part005_review.md†L501-L501】
 - **Retire fatigued brackets.** Heavy 13S packs crack 3D-printed rear supports near the rear bolt; inspect and replace printed mounts routinely or swap to metal before pushing high-speed builds.【F:knowledge/notes/denis_all_part02_review.md†L352-L352】
 
 ### Salvage & Pack Handling Lessons

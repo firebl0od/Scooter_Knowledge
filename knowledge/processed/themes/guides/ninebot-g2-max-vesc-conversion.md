@@ -35,6 +35,7 @@
 - **Reinforcement strategy:** When targeting street-legal yet high-discharge packs, fabricate skid plates and adapter brackets early so the added mass does not overstress the swingarm hardware.【F:knowledge/notes/input_part013_review.md†L123-L123】【F:knowledge/notes/input_part013_review.md†L354-L354】
 - **Thermal checks:** Pair the aluminium heat spreader with high-quality thermal paste and stripped paint surfaces; confirm temps after long pulls to validate the interface before sealing the deck.【F:knowledge/notes/input_part013_review.md†L606-L606】
 - **Stock BMS telemetry envelope:** Expect roughly 33 A continuous discharge and brief ~44 A regen bursts when CAN comms stay intact—use those ceilings when staging VESC limits so field-weakening pulls do not trip the pack.【F:knowledge/notes/input_part005_review.md†L138-L138】【F:knowledge/notes/input_part005_review.md†L369-L369】
+- **Field-weakening guardrails:** Custom firmware running 60 A phase plus 35 A FW lifts top speed to ~35–40 km/h even with 140 kg riders, but stators peaked near 150 °C and ferrofluid overheated magnets—budget temperature probes and cooling before leaning on FW for long pulls.【F:knowledge/notes/input_part005_review.md†L367-L368】
 
 ## Braking, Suspension & Ride Safety
 - **Hybrid braking setups:** Some conversions lean on −90 A motor brake plus a front drum until displays arrive—treat this as temporary and prioritise fitting the Magura MT7 hydraulic system for repeatable stops.【F:knowledge/notes/input_part013_review.md†L163-L163】
