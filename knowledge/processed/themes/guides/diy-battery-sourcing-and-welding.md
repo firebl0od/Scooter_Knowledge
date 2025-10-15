@@ -74,6 +74,12 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 
 - Budget builders are experimenting with €25 purple PCB welders powered by 72 Ah car batteries—they handle 0.2 mm nickel but lack the transistor count for 0.15 mm copper, so reserve thick copper stacks for Glitter/KWeld-class rigs.【F:knowledge/notes/input_part009_review.md†L364-L365】
 
+### Consumable Sourcing Alerts
+- Leaded solder is getting scarce inside the EU; builders are already scrambling for compliant suppliers before pack repairs stall under regional restrictions.【F:data/vesc_help_group/text_slices/input_part011.txt†L19293-L19294】
+- Jerome (St0fzuiger) pointed the crew to EleShop’s 60/40 premium solder, which ships across Europe and carries enough flux to wet thick busbars—GABE is restocking there for his MP2 repairs until a broader supply chain emerges.【F:data/vesc_help_group/text_slices/input_part011.txt†L19382-L19393】
+- Peer-to-peer trades now fill the gap—PaoloWu is literally mailing GABE leaded solder so his pack repairs resume, highlighting how community swaps keep benches running when stores dry up.【F:knowledge/notes/input_part011_review.md†L801-L805】
+- GABE’s spot welder just lost a MOSFET (E02 fault); Haku’s replacement board only charges to 5.4 V and he pointed to the heavier Glitter 811H as the backup plan if repairs stall, so shops should budget downtime or a spare welder for 22 S builds.【F:knowledge/notes/input_part011_review.md†L783-L787】
+
 ## Pack Architecture Case Studies
 | Platform | Layout & Cells | Controller Pairing | Lessons |
 | --- | --- | --- | --- |

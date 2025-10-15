@@ -2,6 +2,8 @@
 
 ## TL;DR
 - Community veterans now default to Spintend when budget Makerbase/Flipsky boards melt down—the Ubox lineup shrugs off BMS trips and keeps scooters rolling where 75xxx-class ESCs lock wheels or self-destruct under the same abuse.[^1]
+- Riders note that even when undersized hubs fail catastrophically, Spintend’s 100 V Lite shrugged off the shorts—GABE killed three commuter motors in two days without harming the controller, underscoring the brand’s resilience to motor-side faults.[^motor-survival]
+- Yamal has already logged roughly 2,500 km hammering 200 A battery/phase on a Spintend build without failures, highlighting how meticulous wiring and conservative validation keep the hardware alive even for heavy daily use.【F:knowledge/notes/input_part011_review.md†L759-L765】
 - Even with the shared “no limits” firmware, single Ubox installs treat ~80 A battery and 130 A phase as the sensible ceiling—the hardware clamp near 300 A still applies, so cooling and telemetry matter more than chasing the unlocked config file.[^40]
 - Early 85250 V1 controllers used current-transformer sensing that saturates near 100 A and complicates auto-detection, so Smart Repair now nudges heavy builds toward shunt-based MK8/X12 footprints (or waits for the teased 18-FET refresh) unless the board has been reworked with proven Toll MOSFETs.[^ct_limit]
 - Thermal success hinges on treating every Spintend as a passively cooled module: clamp the aluminum base to a 3–5 mm plate with paste or pads and reserve generous deck space for 25 × 15 cm heatsinks so dual stacks stay below ~70 °C.[^2]
@@ -46,6 +48,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Stock firmware keeps 85‑250 hardware near 150 A battery / 200 A phase continuous, with seasoned tuners only flashing no-limit binaries once motors and cooling can stomach 400 A phase spikes.[^9]
 - Real-world logs show dual Lite builds requesting 160/140 A phase yet barely topping 100 A peaks, underscoring the need to capture data from both controllers before chasing higher numbers.[^10]
 - Solo commuters copying the shared 300 A hardware-limit BIN still hold tunes near 80 A battery / 130 A phase until they validate heatsinking and airflow; the file only removes software clamps—it does not grant extra headroom.[^40]
+- Dual mini stacks are staying around 200 A battery (≈300 A phase) per controller until upgraded housings and airflow arrive; earlier 500 A battery pushes tripped protection even with case temperatures in check.【F:knowledge/notes/input_part011_review.md†L558-L559】
 - Firmware bundles ship in 100 A and 300 A flavours; Smart Repair urges riders to stay on the 100 A pack for warranty support because the higher bin both voids coverage and still bottlenecks battery input near 60 A even when phase currents spike around 147 A.[^firmware-bins]
 - Even the new 85/240 single pushes 80 H hubs toward 95 km/h on 22 S, so the smaller shell still demands proper cooling and current discipline before chasing dual-motor-class speeds.[^u85240_speed]
 - Heavy riders continue blowing 12‑FET stages even with modest throttle inputs; treat 20 S commuter builds as derated compared with lightweight race scooters and reserve “fat VESC” footprints when riders plus cargo exceed ~120 kg.[^18]
@@ -55,6 +58,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 
 ### Voltage & Regen Discipline
 - Riders stepping into 22 S still back off charge voltage or disable heavy regen to avoid 100 V spike failures that plague 75xxx competitors; Ubox-class controllers tolerate the packs but demand measured braking ramps.[^11]
+- Arnau’s attempt to run an 85/150 at 22 S/150 A with MOSFET swaps reignited warnings that stock silicon only survives if regen stays off—veterans now suggest jumping to Rage Mechanics’ C350 when 30 S headroom is truly required.【F:knowledge/notes/input_part011_review.md†L524-L526】
 - Ubox 100/100 revisions still cap regen safely below full pack voltage; Smart Repair warns the stage ships without ST-Link pads or beefy 12 V rails and arrives set around 135 A phase / 180 A absolute until you validate cooling.[^u100_baseline]
 - Firmware caps near 300 A phase on early 85/200 units until owners compile the unofficial “no limits” branch—use sparingly because support teams treat it as a warranty break.[^12]
 - Watch for BMS thermal trips even on Spintend hardware—dual Ubox owners running 2×135 A phase / 2×71 A battery still logged pack over-temp around 90 A spikes; monitor pack sag and internal resistance monthly.[^31]
@@ -82,7 +86,9 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 ## Thermal & Packaging Playbook
 - **Track the 2022 copper-single experiments.** Early feedback from the 75/100 single community showed copper sandwich plates and resin potting still cooked past 80 °C once riders pushed 130 A phase, so reviewers started trialing graphite pads and waiting on the promised aluminum-core revision before ordering more copper hardware.[^graphite_triage]
 - Mount each ESC against aluminum with thermal compound on both faces; copper spacers are discouraged because corrosion outweighs the modest conductivity gain once you already have aluminum-to-aluminum contact.[^2]
+- Builders tackling enclosed decks such as the Wepoor are now templating custom fin stacks and machining bolt strips so 12‑FET stages clamp directly to aluminum, rather than hanging remote heatsinks that leave MOSFETs to cook.【F:knowledge/notes/input_part011_review.md†L683-L685】
 - Retain or improve OEM pad compression—Ubox V2 temperature deltas often trace back to NTC placement and clamp pressure more than exotic pad swaps.[^25]
+- Yamal is pairing 8 mm Amass bullets for battery feeds with Juliet signal connectors on his 80 H builds so dual-controller looms stay serviceable without dangling CAN leads.【F:knowledge/notes/input_part011_review.md†L589-L589】
 - Bolt controllers directly to bare metal structure: sand paint, polish deck plates, and clamp the Ubox to aluminum or copper spreaders to hold MOSFETs near 55 °C at 50 A battery / 120 A phase.[^26]
 - Maintain pad thickness discipline; thicker thermal replacements have pushed case temps toward 70 °C when compression was lost.[^27]
 - Mirko’s 15 mm aluminum baseplate plus open-deck airflow kept dual 190 A phase / 70 A battery pulls near 52 °C, underscoring how enclosure design matters as much as MOSFET choice when evaluating upcoming aluminum-core revisions.【F:data/vesc_help_group/text_slices/input_part003.txt†L12443-L12494】
@@ -186,6 +192,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^12]: Firmware-imposed ~300 A phase ceiling on early 85/200 controllers and the risks of flashing unofficial builds.【F:knowledge/notes/input_part007_review.md†L236-L236】
 [^13]: Documented throttle pinout and NRF/Bluetooth layout for Spintend controllers.【F:knowledge/notes/input_part010_review.md†L526-L526】
 [^14]: Shipping timelines, regional price hikes, and customs under-valuation practices affecting Spintend buyers.【F:knowledge/notes/input_part010_review.md†L179-L179】【F:knowledge/notes/input_part010_review.md†L361-L361】【F:knowledge/notes/input_part005_review.md†L100-L100】
+[^motor-survival]: GABE killed three commuter-grade hubs in two days while his Spintend 100 V Lite kept running, highlighting the controller’s tolerance of motor-side faults.【F:data/vesc_help_group/text_slices/input_part011.txt†L19136-L19173】
 [^16]: Heavy QS hub loads overheating undersized Spintend capacitor banks and the push toward heavier-duty controllers.【F:knowledge/notes/input_part014_review.md†L16-L16】
 [^firmware-bins]: Official Spintend firmware offers 100 A and 300 A battery-limit variants; the hotter bin voids warranty and still shows ≈60 A battery ceilings with ~147 A phase bursts in field logs.【F:knowledge/notes/input_part000_review.md†L42-L42】
 [^ct_limit]: Early 85250 V1 current-transformer sensing saturating near 100 A and Smart Repair’s recommendation to pivot to shunt-based MK8/X12 footprints (with IPTC017N12NM6 swaps for Ennoid builds) until the 18-FET revision ships.【F:knowledge/notes/input_part014_review.md†L12-L13】

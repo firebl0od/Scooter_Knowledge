@@ -92,6 +92,7 @@
 [^11]: Beta pricing (300 €) and limited 15-unit run with August assembly schedule.【F:knowledge/notes/input_part002_review.md†L845-L845】
 [^12]: Rage Mechanics bundling SmartDisplay with dual-controller kits and teasing standalone availability once pricing stabilizes.【F:knowledge/notes/input_part013_review.md†L684-L684】
 [^13]: Voyage Megan IPS display positioning at 300–400 € and community comparisons favoring SmartDisplay’s richer feature set.【F:knowledge/notes/input_part005_review.md†L378-L379】
+[^megan_alt]: Arnau’s Voyage Megan bundle lacks out-of-box waterproofing and costs ~€400, so Smart Repair points budget builders toward mark99i’s Raspberry Pi dashboard as a configurable alternative.【F:knowledge/notes/input_part011_review.md†L560-L562】
 [^14]: Encrypted OTA releases, €300+ price expectations, distributor planning, and SmartDisplay “panic mode” presets outlined during beta updates.【F:knowledge/notes/input_part001_review.md†L598-L606】【F:knowledge/notes/input_part001_review.md†L668-L670】【F:knowledge/notes/input_part001_review.md†L858-L859】
 [^15]: SmartDisplay assembly photos and UI previews showing temperature alarms, custom icons, and Rage Mechanics’ commercial support prep ahead of mass release.【F:data/vesc_help_group/text_slices/input_part003.txt†L11046-L11048】【F:data/vesc_help_group/text_slices/input_part003.txt†L11852-L11872】
 [^boot]: MCU firmware initializes dashboards in ≈10 s, avoiding the 45–95 s boot delays seen on Raspberry Pi VESC displays.【F:knowledge/notes/input_part004_review.md†L83-L83】

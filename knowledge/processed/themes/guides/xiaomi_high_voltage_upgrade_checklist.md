@@ -4,6 +4,7 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 
 ## 1. Decide Whether More Voltage Is Worth It
 - External 36 V packs only extend range; meaningful speed gains begin with 12S/13S packs paired with matching chargers and firmware.[^1]
+- Doubling pack voltage roughly doubles no-load speed, but veterans report stock Xiaomi/Ninebot hubs overheat or fail quickly if you jump straight from 10 S to 20 S without major cooling or motor upgrades—treat 18 S as the practical ceiling unless you swap in a beefier hub.[^20s-burn]
 - A 13S6P pack built from 2,500 mAh cells roughly doubles the energy of a stock Pro battery while remaining within Rita’s 5 A shared charging envelope when chargers are split.[^2]
 - Riders chasing 40 km/h+ targets often graduate to 14S or dual-motor builds—confirm you have the braking, tires, and frame reinforcement to match the higher kinetic energy.[^1][^3]
 - A 16S5P Samsung 35E pack safely feeds about 50 A; chasing 100 km/h on a single-motor Xiaomi with that chemistry is unrealistic without higher-voltage packs, better brakes, and wider forks to house VSETT-class hubs.【F:data/vesc_help_group/text_slices/input_part001.txt†L6015-L6114】
@@ -64,6 +65,7 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 
 ## 6. Operating Guardrails
 - Keep firmware speed limits near 34 km/h despite extra voltage; hardware limit unlocks raise crash risk even if 38.5 km/h is possible.[^24]
+- Expect significant packaging work above 18 S—the crew squeezed 20 S 1–2 P and even 30 S 1 P bricks into M365 decks only by relocating controllers (e.g., Ubox Lite under the floor) and reworking harness routing, effectively turning the scooter into a mini G30LP.[^deck-layout]
 - Avoid mixing configuration generators or chasing 33 k+ phase amps; veterans have already destroyed MOSFETs with mismatched presets and weak cooling.[^22]
 - Keep intensity-of-current-change sliders near 300–350 mA—raising them toward 800 mA spikes controller heat even on reinforced boards.[^current-step]
 - Delta rewinds demand roughly double the phase current for the same torque—upgrade hub leads and consider star reconnections if you want >70 km/h without melting stock windings.【F:knowledge/notes/input_part000_review.md†L253-L253】
@@ -130,4 +132,7 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 [^hill-technique]: 【F:knowledge/notes/denis_all_part02_review.md†L102538-L102548】
 [^parts-kit]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60004-L60024】【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60151-L60159】
 [^pack-temps]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60004-L60008】
+[^20s-burn]: Doubling a 10 S Xiaomi/Ninebot build to 20 S roughly doubles unloaded speed but repeatedly burned stock hubs in community testing, so veterans treat 18 S as the upper limit without major motor swaps.【F:data/vesc_help_group/text_slices/input_part011.txt†L19101-L19145】
+[^fiido-l3]: Riders suggested the Fiido L3 rear hub for 20 S conversions because its wider stator and unobstructed casing dump heat better than Xiaomi-class motors, surviving abuse that killed smaller hubs within days.【F:data/vesc_help_group/text_slices/input_part011.txt†L19136-L19173】
+[^deck-layout]: Packing 20 S 1–2 P or even 30 S 1 P bricks into M365 decks demanded relocating controllers (e.g., mounting a Ubox Lite underneath) and aggressive harness rerouting, effectively recreating a compact G30LP layout.【F:data/vesc_help_group/text_slices/input_part011.txt†L19145-L19185】
 [^tap-imbalance]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60151-L60159】

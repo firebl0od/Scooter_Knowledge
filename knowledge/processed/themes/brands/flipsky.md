@@ -22,7 +22,7 @@
 
 ## Reliability & Failure Patterns
 - **Random early deaths remain common.** Multiple riders still see Flipsky stages fail within weeks—even under modest load—so budget time for burn-in and consider stocking spares before customer deployments.⁶
-- **Capacitor banks are a recurring weak link.** Units have dropped to 14 V readings on 20 S packs after repeated capacitor explosions; simple cap swaps rarely hold.⁷
+- **Capacitor banks are a recurring weak link.** Units have dropped to 14 V readings on 20 S packs after repeated capacitor explosions; veterans like ‘lekrsu’ and Haku pin the failures on bargain components rather than layout, so simple cap swaps rarely hold.⁷
 - **Regen cutoffs can brick controllers.** Aggressive negative current spikes triggered logic-board shutdowns on otherwise healthy 75100s; tune regen ramps gently and log results before releasing builds.⁸
 - **Firmware 5.3 introduced a brake-lock scare.** One 75100 flashed to 5.3 locked the wheel at ~45 km/h despite unchanged current limits; double-check UART handbrake scripts, phase insulation, and wiring before road tests after a firmware jump.【F:data/vesc_help_group/text_slices/input_part001.txt†L25875-L25943】
 - **75100 provenance drama.** Community sleuthing ties the 75100 PCB to a student project that Flipsky allegedly cloned without fixing layout flaws; rumours of the original designer reclaiming rights surfaced after official listings disappeared, even though AliExpress resellers still show stock.【F:data/vesc_help_group/text_slices/input_part001.txt†L10395-L10571】

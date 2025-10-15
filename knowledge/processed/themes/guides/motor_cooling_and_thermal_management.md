@@ -13,6 +13,11 @@
 ## Hub Current Guardrails
 - Single Monorim 500 W hubs stay happy around 80 A phase—ideally with ferrofluid—while the crew’s Xiaomi-class builds overheat quickly once they push 65–73 A without battery temperature sensing or keep more than roughly 30–35 A combined draw from paired 12 S packs.【F:knowledge/notes/input_part007_review.md†L18-L19】
 
+## Micro-Hub Voltage Stress Signals
+- Doubling a Xiaomi/Ninebot commuter from 10 S to 20 S roughly doubles the free-spin speed but repeatedly burns the stock hub from heat saturation, so builders now treat 18 S as the limit unless they add serious cooling or swap motors.【F:data/vesc_help_group/text_slices/input_part011.txt†L19101-L19145】
+- Fiido L3 rear hubs emerged as the go-to drop-in upgrade for 20 S experiments because their wider stator and exposed shell shed heat far better than Xiaomi-class cans—veterans report killing three narrow hubs in two days while the Fiido survived on a Spintend 100 V Lite.【F:data/vesc_help_group/text_slices/input_part011.txt†L19136-L19173】
+- GABE is also sandwiching aluminium plates with thermal paste around a 10 mm 3D-printed spacer to keep his 250 W commuter hub cool after widening the dropout, showing how thin filler plates can restore conduction when packaging changes add air gaps.【F:knowledge/notes/input_part011_review.md†L768-L769】
+
 ## Controller Interface Refresh Checklist
 - When raising voltage, replace Kapton tape with 0.5 mm thermal pads so MOSFETs stay isolated yet shed heat; stacking pads on top of Kapton just adds resistance.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L202-L223】
 - Sand controller bases, clean MOSFET tabs, and reinstall paste before clamping the box—loose wiring under the plate prevents full contact and spikes temperatures on the first ride.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60020-L60025】

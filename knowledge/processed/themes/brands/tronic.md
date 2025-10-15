@@ -3,6 +3,7 @@
 ## TL;DR
 - Race tuners now treat the six-FET Tronic 250 family as ~200 A hardware—pushing toward the marketing 250 A claims triggers thermal cutouts or outright failures, especially once heavy field weakening is layered on top.[^1][^2]
 - The Tronic X12 remains the flagship, delivering just under 30 kW on 24 S packs, but its onboard 5 V rail only sources about 150 mA and the stock looms melt without 10 AWG upgrades, so accessories still need dedicated bucks.[^3]
+- JPPL now conformal-coats both the logic and power boards before assembly and reminds builders that stock firmware clamps absolute current near 600 A—reaching the marketed 650 A still demands the no-limit build plus proven cooling, even though 20 S/100 A-per-controller tunes already logged ~150 km/h on his Lonnyo setup.【F:knowledge/notes/input_part011_review.md†L720-L738】
 - Reliability work focuses on preventing traction-control current spikes and reinforcing the fragile DC-DC enable pad; moisture or incomplete post-cleaning rework continues to brick boards until those hot spots are addressed.[^4]
 - Tronic hardware now ships directly from the contract manufacturer that previously white-labeled the brand, so pricing is steady but support and cooling expectations mirror the bare FR-4 chassis buyers are receiving.[^5][^6]
 
@@ -23,6 +24,7 @@
 ### Voltage & Field-Weakening Discipline
 - Field-weakening above ~30–40 A on Tronic 250s has already destroyed boards after 20 kW pulls; cap FW draw or step up to 12‑FET hardware before chasing highway speeds.[^2]
 - Enabling ANT BMS discharge mid-commissioning immediately blew an X12, illustrating how toggling pack-side FETs under load can brick the power stage.[^7]
+- JPPL is staging a 22 S 10 P Molicel pack (with spare 2 S/4 S blocks ready for 24 S experiments) and waiting on VESC Tool 6.06’s overmodulation option to squeeze more top speed—yet he reminds builders the stock firmware still hard-stops around 600 A absolute unless you flash the no-limit build.【F:knowledge/notes/input_part011_review.md†L645-L646】
 
 ## Thermal & Packaging Playbook
 - Replace stock phase looms with 10 AWG silicone leads and clamp controllers to machined heat spreaders; riders solved repeated overheating once they upgraded both wiring and mounting interfaces.[^3]
