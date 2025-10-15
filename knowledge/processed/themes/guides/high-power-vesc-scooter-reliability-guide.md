@@ -9,6 +9,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - **DIY alternatives:** Ennoid MK8 shares the Spintend footprint but still needs Infineon IPTC017N12NM6 or similar MOSFET upgrades before flirting with 26 S / 500 A goals—plan the reflow work if you want to stretch beyond stock specs.[^39]
 - **Spintend supply shift:** The 85/250 run is over—stock spares or pivot to 85/240/Seven-class hardware now that Spintend routes 240 A controllers through New Jersey with minimal tariffs.[^41]
 - **G300 sprint controllers:** Waterproofed 18-FET G300 builds are logging ≈250 A battery / 500 A phase bursts on 22 S, but riders still report heat soak if they hammer regen—treat them as sprint hardware rather than hill-climb replacements.[^40]
+- **Controller availability split:** JPPL still finds 3Shul G300 stock workable while Yamal leans on R350 units, underscoring how Europe’s mainstream supply favours sprint-focused hardware while boutique Schul boards serve the race crowd.【F:knowledge/notes/input_part011_review.md†L601-L603】
 - **Open-source options:** MP2/CCC_ESC remains a 30 S-capable DIY path when you can populate through-hole MOSFETs, machine heatsinks, and flash ready firmware sourced from the community.[^6]
 - **Motor/power pairing:** Samsung 29E commuter cells fall flat beyond ~80–90 A even in 11 P, so racers swap to P42A or VTC6A chemistry to keep 130 km/h pulls viable.[^7]
 - **Field-weakening ROI:** Expect diminishing returns—adding 25 A of FW only moved a 20×70 kV setup from 66 km/h to ~84 km/h freewheel, topping out around 96 km/h at the hardware cap.[^34]
@@ -35,6 +36,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Override desktop input wizard center-voltage prompts on one-direction throttles or finish calibration in the mobile app to prevent reversed brake/throttle mapping.[^19]
 - Re-run input + motor detection after changing traction control or ramp settings on CL350 hardware; writes occasionally drop, erasing throttle calibration.[^20]
 - Slow ABS overcurrent can mask poor current tuning yet saves time when observers are unstable—disable only after fixing detection and ramp configuration.[^21]
+- Keep the absolute-current limit roughly 1.5× your phase ceiling once you raise battery amps; JPPL’s fix for Hugo’s throttle cutouts was simply lifting ABS to ~240 A so 100 A battery / 180 A phase tunes stop faulting.【F:knowledge/notes/input_part011_review.md†L538-L538】
 - Avoid triggering permanent BLE pairing (“pairing done”) unless you truly need it; clearing the lockout demands a VESC Tool update and manual flag reset.[^22]
 - When scripting 1WD/2WD toggles on Spintend bridges, isolate CAN or power between controllers—otherwise the “sleeping” ESC keeps mirroring the active unit’s battery current and never actually idles.[^spintend_toggle]
 
@@ -48,7 +50,10 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Replace cracked Zero/Nami stems with solid aluminum or 15 mm steel units when running wheelie-heavy, 8 kW+ builds; repeated failures cluster at cable cutouts.[^26]
 - Keep head bearings just snug enough to remove play—over-tightening preloads the races, induces wobble, and shortens bearing life even when premium dampers are installed.[^headset]
 - Prioritize mechanical brakes and axle hardware (blue Loctite + lock washers) because electronics can die mid-ride; round-profile tires boost corner grip but require careful bead seating.[^27]
+- Inokim OXO owners chasing four-piston fronts either flip a rear swingarm to mount the caliper underneath or machine a dedicated adapter plate—the stock front arm lacks bosses for premium calipers.【F:data/vesc_help_group/text_slices/input_part011.txt†L19400-L19406】
 - High-speed stability starts with positive trail and stiff bearings—bolt-on dampers merely mask poor geometry and can fail under stiff aftermarket springs.[^28]
+- Thunder-class builds still need careful weight bias and hand calibration: Yamal says only the LaFerrari stays stable above 130 km/h, while JPPL keeps his 11X composed through meticulous setup even with high-speed decks.【F:knowledge/notes/input_part011_review.md†L598-L599】
+- JREV Speedfork conversions keep Xiaomi/Ninebot frames composed around 70 km/h, while riders refuse to trust the stock steering at those speeds—treat the fork swap as mandatory before chasing high-speed runs.【F:data/vesc_help_group/text_slices/input_part011.txt†L19211-L19221】
 - Inspect Laotie-style steering tubes and similar hollow-neck chassis for cracks; reinforcing with chromoly TIG work borrowed from roll-cage fabrication remains the durable fix when the factory welds give way.[^laotie]
 - Theft prevention relies on ≥10 mm hardened chains, welded eyelets, and recessed fasteners; thin aluminum tabs remain easy targets for cordless grinders.[^29]
 

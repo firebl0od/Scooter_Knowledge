@@ -22,6 +22,7 @@
 - **Data-line triage after regen faults:** Error 21 that appears immediately after an emergency stop usually points to a cooked controller data line. Bench-test the pack on a known-good scooter or send it in rather than reflashing firmware blindly.【F:knowledge/notes/denis_all_part02_review.md†L368-L369】
 - **Backfeed with care:** A depleted 44 V pack can be nudged awake with a 36 V charger only when its open-circuit voltage sits under ~41 V. Anything higher risks over-voltage damage once the charger’s CV phase kicks in.【F:knowledge/notes/denis_all_part02_review.md†L37-L38】
 - **Log Rita/Happy current spikes:** Error 39 beeps and thermal cutbacks appear when firmware demands exceed Rita’s ~30 A ceiling; capture live amps with m365Tools before dialing tuning back.【F:knowledge/notes/denis_all_part02_review.md†L55-L57】
+- **Reverse-spinning geared hubs:** If a Bafang rear hub spins backward after rewiring, trace any extension harness that may swap the black/white hall leads or migrate to a VESC where you can remap phase/hall pairs and add regen tuning without guesswork.【F:knowledge/notes/input_part011_review.md†L686-L687】
 
 ## Field Recovery Tricks
 - **Wake sleeping packs:** Happy BMS batteries ship dormant—tap them with a charger to enable the discharge MOSFETs before chasing wiring faults.【F:knowledge/notes/denis_all_part02_review.md†L376-L376】

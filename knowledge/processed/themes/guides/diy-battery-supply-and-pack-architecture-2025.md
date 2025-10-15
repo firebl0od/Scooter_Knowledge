@@ -16,6 +16,8 @@
 | **Spot welders (K-Weld, Glitter 811A)** | Proven 0.1 mm copper welds at ≈300 € including PSU; Glitter 811A needs periodic pin cleaning to restore 4.4 kA output.【F:knowledge/notes/input_part014_review.md†L34-L34】【F:knowledge/notes/input_part014_review.md†L152-L152】 | Cheaper 90 € claims lack field proof on copper; shipping heavy welders across the Atlantic adds cost.【F:knowledge/notes/input_part014_review.md†L34-L34】 | Allocate budget for pro-grade welders or coordinate shared tooling with nearby builders. |
 
 ## Pack Architecture Patterns
+- **32 S3 P vs. 16 S6 P geometry** – Jan reminded builders that a 32 S 3 P stack fits the same 17×4 cell footprint as a 16 S 6 P module, so high-voltage prototypes can reuse proven deck layouts as long as insulation and enclosure clearances scale with the extra series count.【F:data/vesc_help_group/text_slices/input_part011.txt†L19303-L19306】
+- **18 S 9 P P45B commuter packs** – Pulling 350 A from nine parallels lands near 40 A per cell; mentors advised logging sag and delivered phase amps before redesigning the layout, then focusing on cooling and packaging rather than jumping to 20 S because higher voltage won’t ease per-cell stress and mainly raises top speed.【F:knowledge/notes/input_part011_review.md†L521-L522】
 - **Dualtron Achilleus conversions** – Deck cavity (~485 mm × 181 mm) supports 22 S9 P if controllers move to an external mount; stock decks hold 20 S7–8 P and ~100 A battery before needing relocation or compact ESCs.【F:knowledge/notes/input_part014_review.md†L37-L44】
 - **Nami “hotdog” racers** – 22 S11 P P45 builds pair 100 H rear / 70 H front motors, 500 A phase, 550 A absolute, and 100 % front FW to sync wheel speed, netting 146 km/h GPS with manageable 61 °C stator temps.【F:knowledge/notes/input_part014_review.md†L168-L169】
 - **Ninebot G30 MAX** – Builders drill and trim 3 mm ePowerFun skid plates for €25 stopgap protection, swap in custom spacers, and plan 20 S4 P-to-22 S layouts once rails are clear and pack supports printed.【F:knowledge/notes/input_part014_review.md†L151-L151】【F:knowledge/notes/input_part014_review.md†L118-L118】
@@ -23,6 +25,7 @@
 
 ## Tooling, Fabrication & Thermal Management
 - Budget welders rated for 0.15 mm copper rarely meet spec; proven setups rely on K-Weld or Glitter 811A plus rip-tests, nickel sandwiching, and calibrated power for 0.1 mm sheet.【F:knowledge/notes/input_part014_review.md†L34-L34】【F:knowledge/notes/input_part014_review.md†L152-L152】
+- RTR’s 10 mm aluminium heat spreader gives G300 race builds a stopgap thermal path while 22 S 10 P P45B packs are assembled—expect to keep the plate once the battery arrives because the community still questions G300 heat rejection at race currents.【F:data/vesc_help_group/text_slices/input_part011.txt†L19418-L19443】
 - Keep skid plates functional: thermal paste is required before 3 mm aluminum plates materially sink heat, and fan kits need ducting rather than flush mounts to avoid recirculating hot air.【F:knowledge/notes/input_part014_review.md†L119-L120】
 - QS8/MT60 panel mounts are mostly custom; teams CAD their own plates to keep phase and battery leads from dangling while preserving access for service loops.【F:knowledge/notes/input_part014_review.md†L188-L188】
 

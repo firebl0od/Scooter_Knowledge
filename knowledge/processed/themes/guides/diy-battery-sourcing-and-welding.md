@@ -26,6 +26,12 @@
 | Daily fabrication shop | Own Glitter 811A or K-Weld with high-current PSU | Handles repeated 4 kA+ hits when contacts are clean | Schedule bus pin cleaning to prevent E01 faults and maintain 4.4 kA output.[^10] |
 | Mixed chemistries (pouch + cylindrical) | Use adjustable pulse welders with copper/nickel sandwiches | Controls heat on dissimilar tabs, minimizes swelling risk | Pair with upgraded ≥230 A BMS and temperature probes on parallel groups.[^6] |
 
+### Consumable Sourcing Alerts
+- Leaded solder is getting scarce inside the EU; builders are already scrambling for compliant suppliers before pack repairs stall under regional restrictions.【F:data/vesc_help_group/text_slices/input_part011.txt†L19293-L19294】
+- Jerome (St0fzuiger) pointed the crew to EleShop’s 60/40 premium solder, which ships across Europe and carries enough flux to wet thick busbars—GABE is restocking there for his MP2 repairs until a broader supply chain emerges.【F:data/vesc_help_group/text_slices/input_part011.txt†L19382-L19393】
+- Peer-to-peer trades now fill the gap—PaoloWu is literally mailing GABE leaded solder so his pack repairs resume, highlighting how community swaps keep benches running when stores dry up.【F:knowledge/notes/input_part011_review.md†L801-L805】
+- GABE’s spot welder just lost a MOSFET (E02 fault); Haku’s replacement board only charges to 5.4 V and he pointed to the heavier Glitter 811H as the backup plan if repairs stall, so shops should budget downtime or a spare welder for 22 S builds.【F:knowledge/notes/input_part011_review.md†L783-L787】
+
 ## Pack Architecture Case Studies
 | Platform | Layout & Cells | Controller Pairing | Lessons |
 | --- | --- | --- | --- |

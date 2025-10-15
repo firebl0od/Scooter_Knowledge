@@ -16,6 +16,9 @@
 | **Daly Smart** | 35–80 A commuter packs | Cheap, ubiquitous, workable for light-duty commuters once calibrated; some riders still rely on them when better boards won’t fit.[^7][^18] | Balancing often waits for ≥4.18 V per cell, SoC drifts until full cycles are logged, and users call failure rates a “casino”—derate heavily and monitor cell temps monthly.[^7][^19][^20] |
 | **Charge-only + Active Balancer** | Depends on fuse + controller limits | When space is scarce, builders fuse the main lead, rely on VESC undervoltage, and clip JK balancers across the stack to keep cells aligned without discharge FET losses.[^21] | Requires disciplined fusing and logging because discharge faults no longer open automatically; not suitable where regulatory compliance mandates full protection stages.[^21] |
 
+- Halo-class builders finishing 20 S 10 P Molicel P45B packs are gravitating toward ANT’s 250/500 A boards (or larger) after peers warned smaller units could choke 400 A launch targets—lock in headroom before welding wraps.【F:data/vesc_help_group/text_slices/input_part011.txt†L19297-L19299】
+- Development watch: Jason’s Spintend-compatible BMS evaluation board currently costs roughly “1.5 boards worth” in parts with ~$2.60 control ICs, so he’s validating the large prototype before shrinking a production PCB—budget that NRE if you plan to follow his charge-only path.【F:knowledge/notes/input_part011_review.md†L804-L809】
+
 ## Commissioning & Wiring Guardrails
 1. **Wake the hardware correctly.** JK boards ship asleep—use the €15 display or a 5–7 V bench supply, confirm charge/discharge toggles, and leave the board powered before sealing the pack.[^8]
 2. **Validate sense-lead order before soldering B−.** Step through the harness at 3.5 V increments; reversing the negative pair has already cooked resistors on new ANT installs.[^5]
@@ -25,7 +28,8 @@
 5. **Oversize connectors and plan airflow.** High-current boards warm noticeably near their limits—route copper planes into moving air or heatsinks, especially on JK units that reinforce traces with bus rods.[^10]
 6. **Confirm advertised series support.** JBD listings still misstate 22 s capability; verify firmware revisions before wiring high-voltage packs.[^16]
 7. **Plan controller integration.** VESC Bridge V2 is adding native CAN support for JBD/JK/ANT/Daly boards—map harnesses and firmware early so telemetry stays unified once the hardware ships.[^bridge]
-8. **Treat discharge-less monitor boards cautiously.** Jason’s 32 S-capable design drops discharge FETs entirely; keep downstream fuses/contactors because the BMS will not open on shorts.[^no-fet-smart]
+8. **Treat discharge-less monitor boards cautiously.** Jason’s 32 S-capable design drops discharge FETs entirely; keep downstream fuses/contactors because the BMS will not open on shorts, and delay live testing until those safeties are installed to avoid runaway arcs if a controller dies mid-run.【F:data/vesc_help_group/text_slices/input_part011.txt†L19302-L19308】【F:data/vesc_help_group/text_slices/input_part011.txt†L19373-L19378】[^no-fet-smart]
+9. **Plan for high-side diode drop on charge-only layouts.** The VFBMS32-style eval board ties MOSFET drains to pack positive, leaving sources commoned; Jason already saw diode-drop losses on similar JBD hardware, so builders should budget the voltage drop (and resulting heat) or rework the topology before committing to production boards.【F:data/vesc_help_group/text_slices/input_part011.txt†L19404-L19470】
 
 ## Regen & Current Budgeting
 - **Cap braking currents around the BMS charge envelope.** Community testing now caps regen near 120 A and keeps charge/discharge FETs closed so controllers ride through decel events instead of seeing open-circuit spikes.[^6]
