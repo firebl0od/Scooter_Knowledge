@@ -17,17 +17,20 @@ Taming current limits is the difference between a scooter that rips for years an
    - Start with a 2:1 to 3:1 phase-to-battery ratio (e.g., 40 A battery / 110 A phase on 16 S commuter packs).⁵ ⁷
    - Match current targets across front/rear controllers to avoid free-spinning the lighter wheel.⁸
    - Treat dual-motor 16 S7 P Samsung 50E packs as roughly 140 A systems: hold each controller near 70 A battery and add ducted airflow up front before nudging limits higher.²³
+   - Calculate pack ESR—including the cells, BMS FETs, harness runs, and nickel busbars—before setting current ceilings; nominal voltage × amps ignores the sag you’ll see under load, and LiFePO₄’s flat curve makes coulomb counters more trustworthy than voltage-based gauges.【F:knowledge/notes/input_part006_review.md†L503-L503】
+   - Pair coulomb counters or BMS-integrated amp-hour logs with ride notes so LiFePO₄ commuters see true consumption; the flatter discharge curve hides low-voltage cutoffs until it is too late, whereas coulomb math catches when ESR or wiring losses erode usable capacity.【F:knowledge/notes/input_part006_review.md†L503-L503】
    - Keep Artem’s relationship in mind: `I_phase = I_batt × V_batt ÷ V_motor`, so phase torque fades as ERPM climbs—log both currents to confirm your battery caps aren’t starving the tune mid-pull.[^phase_equation]
 3. **Log, ride, iterate**
    - Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
    - Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
    - Cross-check real-time power with an external meter or SmartDisplay—unfiltered VESC telemetry overshoots true watts by 10 kW or more on aggressive pulls.²⁴
    - Treat VESC Tool’s state-of-charge gauge as a rough helper—it linearly maps 4.2–3.3 V per cell (≈66 V on 20 S), so keep your cutoffs a few volts above the BMS trip to prevent surprise throttling once the display reads “empty.”²⁵
+   - If increasing `iQ target` causes the BMS to drop pack voltage to zero, the battery simply cannot deliver the requested current—dial limits back or upgrade the pack before trying again.【F:knowledge/notes/input_part006_review.md†L108-L108】
 4. **Layer in regen**
    - Add regen after forward currents stabilize. Keep battery regen gentler than your discharge target (−5 A to −10 A is plenty for commuter packs) and ramp up slowly to avoid BMS or controller cutoffs.⁵ ¹¹
 5. **Optional: field weakening & traction control**
    - Activate FW only once thermals are understood. Expect it to draw nearly the same extra amps you request on both battery and phase channels.¹²
-   - On dual drives, enable traction control on the front controller first and monitor for MOSFET surges when grip returns.¹³
+   - On dual drives, enable traction control on the front controller first and monitor for MOSFET surges when grip returns—recent Teverun logs show the feature trimming power mid-slide while riders still countersteer.¹³ 【F:knowledge/notes/input_part006_review.md†L65-L65】
 
 ## Hardware Guardrail Table
 | Controller | Typical Pack | Battery Current (per controller) | Phase Current | Regen (Battery / Phase) | Notes |
@@ -57,6 +60,7 @@ Taming current limits is the difference between a scooter that rips for years an
 | Controller idles hot or chatters at low speed | Phase filter enabled, bad detection values | Disable filter, rerun detection with `mxlemming`, verify Rs/Ls manually.⁵ |
 | Regen kills power but forward throttle is fine | BMS trip or controller ABS limit too low | Reduce regen, raise ABS max (≤300 A on 75-series), ensure BMS thresholds align.¹⁴ ¹⁸ |
 | Phase amps plateau far below target | Motor saturation, long phase leads, or firmware clamp | Shorten leads, add halls, log saturation, or flash no-limit firmware (with cooling).¹² ²⁰ ¹⁶ |
+| Mid-drive e-bike stalls around 16 km/h | Conservative motor-current limits or mismatched ERPM settings | Raise motor current toward ~80 A phase / 20 A battery, verify wheel size/gear ratios, and log duty cycle while watching for BMS cut-outs.【F:knowledge/notes/input_part006_review.md†L33-L33】 |
 | USB disconnects during hard pulls | ADC noise, poor shielding | Use shielded looms, keep 5 V accessories off logic rails, or log over CAN instead.²² |
 | Random controller death after BMS cutoff | Fragile logic rails on Flipsky hardware | Keep cutoff ≥5 V above pack max, avoid sudden pack disconnects, add soft-start contactors.¹⁸ |
 
@@ -78,7 +82,7 @@ Taming current limits is the difference between a scooter that rips for years an
 [^10]: Battery sag benchmarks on high-power packs.【F:knowledge/notes/input_part003_review.md†L506-L507】
 [^11]: BMS cutoff coordination and regen guardrails for commuter packs.【F:knowledge/notes/input_part003_review.md†L517-L519】【F:knowledge/notes/input_part008_review.md†L103-L105】
 [^12]: Field-weakening trade-offs on 16–20 S builds.【F:knowledge/notes/input_part003_review.md†L447-L448】【F:knowledge/notes/input_part003_review.md†L184-L184】
-[^13]: Traction-control cautions to prevent MOSFET surges.【F:knowledge/notes/input_part003_review.md†L505-L506】【F:knowledge/notes/input_part011_review.md†L475-L477】
+[^13]: Traction-control cautions to prevent MOSFET surges.【F:knowledge/notes/input_part003_review.md†L505-L506】【F:knowledge/notes/input_part011_review.md†L475-L477】【F:knowledge/notes/input_part006_review.md†L65-L65】
 [^14]: 75100 absolute-current failure case (450–500 A) reinforcing ≤300 A limits.【F:knowledge/notes/input_part003_review.md†L474-L474】
 [^15]: Spintend 85/250 firmware clamps and CAN power behavior.【F:knowledge/notes/input_part011_review.md†L456-L458】
 [^16]: Tronic X12 firmware limits and overmodulation plans.【F:knowledge/notes/input_part011_review.md†L730-L733】

@@ -33,6 +33,9 @@
 - Plan for valve-stem service and bead reseating after pothole hits—tubeless split rims can burp air, so keep compressors and soapy water handy during test rides.【F:knowledge/notes/input_part014_review.md†L46-L46】
 - Evaluate braking upgrades alongside power mods; 203 mm rotors add leverage but may be overkill—pair regen tuning with quality hydraulic calipers and DOT 4/5 fluid first.【F:knowledge/notes/input_part014_review.md†L43-L43】
 - Use the €25 ePowerFun 3 mm aluminum floor plate as a quick cooling stopgap—drill five mounting holes, trim the nose to clear JREV spacers, and plan a thicker custom plate once testing confirms heat loads.[^epowerfun]
+- Inspect swingarms for fatigue before raising power—stock arms have cracked at the deck cut-outs under ~130 kg loads, so add gusset plates that spread torque around the rear fork bracket and verify axle hardware after bearing swaps.【F:knowledge/notes/input_part006_review.md†L13-L15】
+- Machine the swingarm axle if you plan to run 11 inch hubs; forcing wider hubs into stock arms ruins alignment and clearance.【F:knowledge/notes/input_part006_review.md†L34-L34】
+- Clean corroded hubs mechanically with drill-mounted wire brushes instead of chemical baths to avoid residue in reusable motors.【F:knowledge/notes/input_part006_review.md†L77-L77】
 
 ## Sourcing & Accessory Integration
 - Avoid too-good-to-be-true controller deals: £50 AliExpress listings are often bare logic boards; prioritize complete Spintend 100/100 Lite kits or 84/150 bundles from trusted resellers to get full harnesses.【F:knowledge/notes/input_part014_review.md†L108-L108】
@@ -40,12 +43,20 @@
 - Consider Voyage Megan or other CAN dashboards for consolidated telemetry once controllers are upgraded; validate compatibility when mixing CL350 or Express accessories with Ubox hardware.【F:knowledge/notes/input_part014_review.md†L110-L114】【F:knowledge/notes/input_part014_review.md†L208-L210】
 - Budget a dedicated buck converter if you add VESC Express boards—the modules only accept 5 V at ~150 mA and currently reset logging every few seconds on 6.06 firmware, so plan CAN updates or stay on 6.05 for stable telemetry.[^express_power]
 - Document J1772 travel adapters as part of the charging kit: a proven harness uses 12 AWG silicone leads plus 2.5 mm² wiring with 2.74 kΩ/1.3 kΩ pilot resistors so public stations handshake cleanly at 3 kW.【F:knowledge/notes/input_part012_review.md†L10580-L10588】【F:knowledge/notes/input_part012_review.md†L11100-L11129】
+- Repurpose spare Xiaomi/Ninebot ESCs as interim controllers when budgets are tight—the community bundles precharge cabling and 3D-printed mounts so M365 boards can live inside G30 frames until dual VESC packages are ready.【F:knowledge/notes/input_part006_review.md†L489-L489】
 
 ## Pre-Ride Checklist
 1. **Firmware Audit** – Confirm VESC Tool version, traction-control settings, and BMS firmware before road tests to avoid regressions from recent 6.06 pairing issues.【F:knowledge/notes/input_part014_review.md†L29-L29】【F:knowledge/notes/input_part014_review.md†L103-L104】
 2. **Harness Inspection** – Verify bullet crimps, insulation, and ADC board grounds after every teardown; many “mystery” controller deaths trace back to workmanship lapses.【F:knowledge/notes/input_part014_review.md†L22-L22】【F:knowledge/notes/input_part014_review.md†L84-L86】
 3. **Telemetry Logging** – Capture CAN BMS current, controller temperatures, and GPS speed on each shakedown to validate power estimates and traction-control tuning.【F:knowledge/notes/input_part014_review.md†L79-L82】【F:knowledge/notes/input_part014_review.md†L76-L76】
 4. **Spare Components Ready** – Keep extra motors, throttle pods, and valve stems in the pit kit; wheelspin experiments and bead burps remain common during high-power tuning.【F:knowledge/notes/input_part014_review.md†L46-L46】【F:knowledge/notes/input_part014_review.md†L107-L107】
+
+## Motor & Performance Notes
+- Stock G30 hubs can manage ≈80 km/h solo or ~98 km/h in dual-motor setups, but one motor hauling a 90 kg rider plus 75 kg passenger up hills at 40 A cooked its insulation—respect thermal limits when loading scooters for tandem rides.【F:knowledge/notes/input_part006_review.md†L112-L114】
+- Lonnyo 70H hubs use 6003 rotor-side and 6008 stator-side bearings; torque-focused 22×3 winds respond well to ~400 A phase yet even 400 A won’t guarantee burnouts on grippy 11″ PMTs without mid-drive help.【F:knowledge/notes/input_part006_review.md†L114-L114】
+- Dual 70 mm hubs still plateau near 150 km/h at sea level regardless of 22 S vs. 30 S pack voltage because phase-current ceilings, not voltage, cap acceleration.【F:knowledge/notes/input_part006_review.md†L115-L115】
+- Holding 158 km/h on streamlined builds draws roughly 26–28 kW, and doubling speed from 100 km/h demands ~52–64 kW due to cubic aero losses—plan gearing alongside power headroom.【F:knowledge/notes/input_part006_review.md†L116-L116】
+- Despite marketing claims, 3Shul CL controllers only run safely around 29–30 S without regen; the 135 V FET stack leaves little spike headroom and the onboard 12 V DC/DC sags below 1 A, so budget external supplies for high-voltage experiments.【F:knowledge/notes/input_part006_review.md†L117-L117】
 
 ## Source Notes
 - G30 conversion strategy, firmware prep, and traction-control tuning synthesize the late-2025 review of controller behaviour, positive ramp targets, and BMS firmware requirements logged by Smart Repair, Yamal, and fellow builders.【F:knowledge/notes/input_part014_review.md†L79-L119】【F:knowledge/notes/input_part014_review.md†L84-L108】

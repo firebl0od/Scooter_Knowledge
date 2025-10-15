@@ -14,6 +14,18 @@
 - Battery temps around 41 °C were deemed healthy for summer rides, but the group flagged ~60 °C as a ceiling—anything hotter accelerates degradation and calls for gentler tunes.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60004-L60008】
 - Larger packs and long shocks trap heat around the deck; riders re-bend frames, add inner/outer steel plates, and swap to lower-rate springs instead of trimming coils so the chassis and cells stop cooking each other.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L90030-L90136】
 
+## Overload Warning Signs
+- Pushing a stock 350 W Ninebot MAX hub to ~5 kW on 72 V/35 A tunes cooks magnets and windings—the rotor feels “full of honey” when spun by hand, signalling demagnetisation or shorts that no amount of firmware tweaking will fix.【F:knowledge/notes/input_part006_review.md†L42-L42】
+
+## Sealed Bearing Service Cheatsheet
+- Pack sealed bearings to roughly 30 % of the cavity with high-temperature grease (Mobil XHP 222 or similar); overfilling to 100 % just churns heat and purges grease past the seals on the first ride.【F:knowledge/notes/input_part006_review.md†L509-L509】
+- Choose C3 clearance bearings when hubs see high heat or prolonged highway runs—the extra internal play prevents bind-up once the races expand.【F:knowledge/notes/input_part006_review.md†L509-L509】
+- Document every bearing change with mileage and grease type so follow-up inspections can flag premature wear before shells overheat or magnets rub.【F:knowledge/notes/input_part006_review.md†L509-L509】
+
+## Weatherproofing Hub Cavities
+- Tear down Ninebot F2 Pro hubs after rain commutes—the factory 6001RS bearings arrive nearly dry, so riders repack them with marine or polyurea grease and upgrade to premium SKF RSH 2RS units rather than smearing silicone over the caps.【F:knowledge/notes/input_part006_review.md†L409-L410】
+- When resealing Zero or Vsett hubs, apply silicone at seam joints, refresh lithium grease on the bearings, and avoid overfilling so heat can still escape; the goal is to stop rust and hall failures without trapping moisture against the windings.【F:knowledge/notes/input_part006_review.md†L368-L368】【F:knowledge/notes/input_part006_review.md†L488-L488】
+
 ## Coil Retention & Harness Dressing
 - Inside hub motors, standard nylon cable ties survive stator temperatures when cinched correctly; some builders still wrap phases with cotton rope for redundancy, so combining both methods keeps windings tight without melting ties.【F:knowledge/notes/input_part014_review.md†L185-L185】
 

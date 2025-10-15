@@ -11,6 +11,7 @@
 - **Mount motion sensors in the battery bag.** Couriers hide Arduino-driven buzzers inside Wildman cases so cutting the strap or unzipping the bag triggers instant noise without alerting thieves to the electronics location.【F:knowledge/notes/all_part01_review.md†L86-L87】
 - **Carry layered locks.** Quick errands get a compact Master Lock cable that stays smooth with graphite; long stops call for hardened chains plus GPS trackers taped into the loom.【F:knowledge/notes/all_part01_review.md†L167-L167】【F:knowledge/notes/all_part01_review.md†L27392-L27407】
 - **Expect opportunists.** Dense-city riders report scooters disappearing within minutes if left unlatched, so treat even short drop-offs like high-risk events and keep the alarm armed.【F:knowledge/notes/all_part01_review.md†L27392-L27407】
+- **Hide the tuning.** Keep VESC builds looking stock with low-power brake profiles, gate Bluetooth behind MAC filters and PINs, and back everything with keyed or NFC-switched power so pranksters cannot rewrite settings while the scooter is parked.【F:knowledge/notes/input_part006_review.md†L43-L43】
 
 ## Post-Ride Water Diagnostics
 - **Track regen-related faults.** Error 21 after a panic stop usually points to a cooked data line, not a dead BMS—bench-test packs on a known-good scooter before blaming Happy BMS or Rita.【F:knowledge/notes/denis_all_part02_review.md†L368-L369】
@@ -20,6 +21,8 @@
 ## Travel & Storage Tips
 - **Drain packs safely for flights.** Commuters running 24 Ah externals discharge with incandescent lamps for hours to hit airline targets, proving how long large packs need to reach “safe” storage levels.【F:knowledge/notes/denis_all_part02_review.md†L414-L415】
 - **Recharge before hibernation.** Rita draws a small standby current even when the scooter is off, so top packs to storage voltage if the build will sit for weeks rather than leaving it connected indefinitely.【F:knowledge/notes/denis_all_part02_review.md†L97264-L97268】
+- **Know the local rules.** Dutch riders remind visitors that stand-up scooters remain illegal without seats; expect enforcement even if locals still spot Xiaomi commuters around Venlo.【F:knowledge/notes/input_part006_review.md†L59-L59】
+- **Check accessory ergonomics.** Bolt-on saddles push weight rearward and complicate unloading speed bumps, and 2.5 L frame bags are shorter but wider than 3 L options—mock up foot room before committing.【F:knowledge/notes/input_part006_review.md†L94-L94】
 
 ## Field Checklist
 1. Seal the deck and hub seams before rainy season commutes.【F:knowledge/notes/all_part01_review.md†L86-L87】

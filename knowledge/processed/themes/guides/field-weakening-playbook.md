@@ -9,6 +9,7 @@
 - FW injects negative d-axis current to cancel back-EMF so the motor surpasses its natural base speed, which inherently reduces torque-per-amp and wastes power as heat.[^1]
 - Because hub shells lag far behind winding temperature, rely on embedded thermistors or data-derived proxies rather than external probes when judging FW headroom.[^2]
 - Bench experiments show ~40 % ERPM gains demanded 100 A phase for only 20 A battery, yet the setup ran hot and inefficient—highlighting why FW is reserved for brief top-speed pulls rather than everyday cruising.[^3]
+- Third-party firmware like XESC’s can quietly add extra battery amps when you request FW, but stock VESC obeys the configured current limits and simply shifts the stator angle—don’t expect the same “free” boost unless you raise the limits yourself.[^xesc_fw]
 
 ## Prerequisites & Safeguards
 1. **Firmware:** Confirm VESC Tool firmware 5.3 (or newer) on every controller; earlier releases hide FW parameters entirely or crash during detection.[^5]
@@ -43,6 +44,10 @@
 - **Noise & Surging:** If throttle jitters appear above 80 % duty after enabling 20 A FW on single-motor builds, roll FW back—operators traced the behavior directly to FW injection.[^20]
 - **Overspeed Discipline:** Avoid free-spinning wheels at high FW. Halo stunt crews saw runaway RPM off-load and controller stress at 125 A FW.[^12]
 - **Front-lift control:** Hotdog 100 H rear builds demand traction control or front FW assistance; otherwise the rear lifts the front well past 120 km/h even while stators only hit ~61 °C, so validate TC before public-road tests.[^hotdog_fw]
+
+## D-Axis Budgeting & Thermal Monitoring
+- Keep FW d-axis current near 10–15 % of rated phase amps on commuter hubs and review logs after each ride; drag builds stretching toward 40 % demand redundant thermal sensors and immediate cooldown laps.【F:knowledge/notes/input_part006_review.md†L510-L510】
+- Tie FW experiments to real-time stator and MOSFET telemetry so rising temperatures trigger manual rollback before firmware limits intervene; log both currents to confirm FW isn’t masking battery or ESR bottlenecks.【F:knowledge/notes/input_part006_review.md†L510-L510】
 
 ## Decision Guide: Voltage vs. Field Weakening
 - **Choose Higher Voltage / Different Windings When:** You need sustained highway speed, the motor already runs hot without FW, or you’re targeting >120 km/h—builders hitting 118 km/h on 22×3 hubs without FW prove gearing changes scale better than stacking FW amps.[^11][^21]
@@ -80,3 +85,4 @@
 [^22]: 20 S single-motor package delivering 85 km/h with ~30 A FW as a short-burst aid.【F:knowledge/notes/input_part013_review.md†L145-L145】
 [^23]: Firmware or wiring faults causing sudden full braking after FW-enabled firmware updates.【F:knowledge/notes/input_part001_review.md†L219-L219】
 [^hotdog_fw]: NAMI 100 H rear / 70 H front builds logging 500 A phase, 550 A absolute, 100 % front FW, and ~61 °C stators while traction control keeps the rear from lifting the front at 120 km/h.【F:knowledge/notes/input_part014_review.md†L8930-L8933】【F:knowledge/notes/input_part014_review.md†L10001-L10055】
+[^xesc_fw]: XESC’s custom firmware compensates for FW losses by adding battery amps in the background, whereas VESC holds to user limits and only shifts phase angle, so builders see less extra thrust without bumping current ceilings.【F:knowledge/notes/input_part006_review.md†L35-L35】
