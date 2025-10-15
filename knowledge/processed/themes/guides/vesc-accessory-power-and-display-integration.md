@@ -20,8 +20,15 @@ This guide distills field reports on powering lights, horns, and dashboards from
 5. **Leverage CAN power sync sparingly.** Spintend 85-series controllers share a CAN power line, so a single button can wake both units once linked; treat it as a logic trigger and avoid stacking accessory loads on the shared feed.【F:knowledge/notes/input_part011_review.md†L19016-L19035】
 6. **Use CAN headers for logic, not lighting.** Smart Repair’s harness can back-feed 5 V lights through the CAN plug, but riders add inline resistors and rely on the servo PWM pads when they need flashing indicators instead of constant-on lamps.【F:knowledge/notes/input_part012_review.md†L19323-L19405】
 
+## Kaabo Hub Harness Notes
+- Kaabo’s hub junction expects pack voltage on the orange lead and returns a regulated 12 V for blinkers; when bypassing the stock display, jumper battery positive into the hub PCB, reuse the handlebar switch loom, and meter the orange/brown pair before powering new lights.【F:knowledge/notes/input_part002_review.md†L114-L116】
+- Label colour alone is unreliable—builders now probe the orange/brown pair with a multimeter because unpowered switch loops made scooters look “dead” until polarity was confirmed.【F:knowledge/notes/input_part002_review.md†L490-L490】
+- Mixed-voltage harnesses remain in play: the PCB feeds both 84 V headlight rails and a 12 V branch for blinkers/brake lights, so every retrofit needs proper isolation or dual-supply bucks to avoid frying OEM lamps.【F:knowledge/notes/input_part002_review.md†L491-L491】
+
 ## Display & Telemetry Options
 - **SimpleVescDisplay (ESP32).** Smart Repair recommends flashing the open-source SimpleVescDisplay and 3D-printing its mount as a reliable alternative when Flipsky Voyage units glitch.【F:knowledge/notes/input_part013_review.md†L367-L367】
+- **ANT smart display.** Riders are mounting ANT’s external screen as an interim VESC dash to stream live pack voltage and current when Voyage or SmartDisplay units are out of stock or overpriced.【F:knowledge/notes/input_part002_review.md†L321-L322】
+- **Legacy NRF51 modules.** Vedder still hosts the official `nrf51_vesc_ble_16k_16m_rx11_tx9_led3.bin` firmware and pinout docs—flash these via ST-Link when resurrecting old BLE daughterboards instead of hunting random hex dumps.【F:data/vesc_help_group/text_slices/input_part002.txt†L8383-L8389】
 - **VESC-Express (ESP32-S3).** The €20 CAN↔BLE/Wi-Fi bridge adds LED or remote control outputs and modernises telemetry without touching fragile UART dongles.【F:knowledge/notes/input_part013_review.md†L418-L418】
 - **VESC Express logging quirks.** Firmware 6.06 currently restarts SD logging every ~3 s and Spintend X12 rails only offer 5 V/150 mA, so power Express boards from a dedicated buck and stick to 6.05 (or plan CAN updates) until patches land.【F:knowledge/notes/input_part014_review.md†L5969-L6037】
 - **Secondary UART headers.** When Voyage displays misbehave, moving telemetry to MakerBase’s TX2/RX2 header stabilised data without firmware changes; ensure extension leads are shielded if the replacements are short.【F:knowledge/notes/input_part013_review.md†L518-L518】
@@ -38,7 +45,13 @@ This guide distills field reports on powering lights, horns, and dashboards from
 
 ## Lighting Hardware Spotlight
 - **Offbondge projector upgrade.** Riders migrating from 1,300 lm compact beams report Offbondge’s 2,000–2,500 lm projector headlight slots straight into existing 12 V harnesses, spreads light without dazzling traffic, and still benefits from external bucks or fused rails on single-controller builds.【F:knowledge/notes/input_part005_review.md†L404-L404】【F:knowledge/notes/input_part005_review.md†L571-L571】
+- **Dual-colour “owl” pods.** Bench tests show the advertised 25 W lamps actually draw ≈19.5 W at 11.8 V (≈1.65 A per emitter); tying white and yellow channels together spikes toward 40 W, so verify your 12 V rail can supply the surge and capture real ride footage before declaring them a night-ride upgrade.【F:knowledge/notes/input_part002_review.md†L86-L89】
+- **Parallel buck workflow.** Mirono’s auxiliary lighting plan exceeded 3 A at 12 V, so he paralleled two buck converters while peers still argue an external battery is the cleanest path—budget whichever approach keeps the controller rail cool.【F:knowledge/notes/input_part002_review.md†L374-L376】
 - **USB-C floodlight banks.** Commuters are trialling 3,000–9,000 lm rechargeable headlights that double as power banks and pair them with programmable LED tails or mirror-mounted 12 V lamps for better cutoff control than stock scooter beams.【F:knowledge/notes/input_part000_review.md†L47-L48】
+
+## Horn & Alarm Options
+- USB‑C rechargeable horns that double as motion alarms are becoming the go-to drop-in for VESC conversions; they ship with internal batteries so you only need to wake them with a low-current trigger and can recharge off the scooter when needed.【F:knowledge/notes/input_part002_review.md†L613-L614】
+- Ignore 328 dB marketing claims—airborne sound tops out around 194 dB, so treat the units as loud personal-safety devices, not physics-defying sirens.【F:knowledge/notes/input_part002_review.md†L613-L614】
 
 ## Commissioning Checklist
 - Meter throttle outputs with the controller unpowered and confirm signal stays ≤3.3 V at full travel.【F:knowledge/notes/input_part013_review.md†L503-L505】

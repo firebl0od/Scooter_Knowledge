@@ -34,6 +34,7 @@
 - **Motor bottlenecks:** The LY-manufactured hubs remain the limiting factor—pushing phase current past ≈200 A or ignoring lead temperatures risks overheating long before the controllers run out of headroom.[^4]
 - **Logistics churn:** Replacement motors are attainable but shipping shocks can nullify savings—budget for customs fees or arrange local pickup.[^3]
 - **Legacy chassis cracks:** Tear down older Rion frames—Face de Pin Sucé uncovered cracked steering heads, flexing plates, underspec’d Kelly controllers, and fan ducts that just slam into carbon walls until you rework airflow.[^steering_crack][^legacy_fans]
+- **Controller support gaps:** Tronic support still demands full returns after MOSFET failures and will not share part numbers; recent autopsies traced the devices to preorder-only NCE NCEP01T30T packages, so plan spares or third-party repair partners before something blows.【F:data/vesc_help_group/text_slices/input_part002.txt†L15160-L15357】【F:data/vesc_help_group/text_slices/input_part002.txt†L15274-L15294】【F:data/vesc_help_group/text_slices/input_part002.txt†L15320-L15331】
 
 ## Setup Priorities for New Owners
 1. **Audit import paperwork** – confirm VAT/customs payments and document serial numbers before first ride; this simplifies future warranty or resale interactions.[^1]
@@ -41,6 +42,10 @@
 3. **Baseline telemetry** – log pack voltage, current, and controller temps on stock firmware to understand real limits ahead of performance tuning.[^1][^2]
 4. **Assess motor and wiring limits** – verify whether your build still runs 4 mm² phase leads; upgrade to 9.5 AWG-class harnesses and controllers capable of ≥250 A phase before targeting the advertised acceleration.[^5][^6]
 5. **Plan parts logistics** – if you need spare motors or carbon panels, coordinate consolidated shipments through EU hubs to blunt freight surcharges.[^3]
+
+## Track & Event Lessons
+- Kart circuits such as Angerville expose the chassis’ weak points—brake fade, frame flex, and high centres of gravity make Rions sketchy without dual throttles, external controller mounts, ferrofluid-cooled hubs, and serious Magura brake setups.【F:data/vesc_help_group/text_slices/input_part002.txt†L8720-L8783】
+- Expect organised track days in France to run €25–35, while Swiss riders still negotiate access—budget compliant “street” modes alongside race profiles so police crackdowns don’t sideline your build between events.【F:data/vesc_help_group/text_slices/input_part002.txt†L9165-L9186】【F:data/vesc_help_group/text_slices/input_part002.txt†L9471-L9510】
 
 ## High-Voltage Tuning Guardrails
 - **Traction still fails first:** 24 S packs and Tronic 250R tunes are spinning the front tyre at ~120 km/h launches, so stagger ramping, warm tyres, and prioritise damper setup before chasing higher phase numbers.[^4]
@@ -54,6 +59,7 @@
 - **Motor swaps & spacing:** “Rion 1337” 70 mm magnet hubs ship with ~155–160 mm axles and 9.5 AWG leads—ensure your frame or fork can clear the width (Zero 11X-scale) before ordering and plan for new torque arms.[^6][^8]
 - **Controller pairing:** High-KV hubs routinely cook 75/200-class VESCs; stepping up to Kelly, Sabvoton, or dual Tronic hardware keeps ≥250 A phase targets realistic without sensorless stalls.[^5]
 - **Controller mix:** BAC 4000 twins only appeared on the Thrust prototype; production scooters stayed on Tronic stacks with the BACs simply sharing a throttle signal, so plan wiring and expectations accordingly if you chase non-Tronic swaps.[^bac_pairing]
+- **Document mixed-controller harnesses.** Rosheee now feeds dual Rion controllers from a Spintend Ubox harness with twin 20 S 7 P packs—balance precharge leads, connector gauges, and wiring so shared packs don’t backfeed dormant controllers mid-ride.【F:knowledge/notes/input_part002_review.md†L338-L338】
 - **Throttle ergonomics:** The pricey CNC thumbwheel is still a basic hall sensor—builders cloning it with Spintend Spinny or Davega hardware report similar feel once wiring is sorted, and Spintend is now prototyping a “curve” thumbwheel to mirror the dual-action control without the premium casing.[^throttle_clone][^curve_thumb]
 - **Tyre & brake strategy:** Evaluate slicks or semi-slicks that match the platform’s dry-focus geometry, but keep a wet-weather set and mechanical braking upgrades ready because regen-only setups still falter when BMS charge FETs open.[^2][^9]
 - **Plan future controller swaps:** Some owners are holding firmware experiments until they pair 3Shul 700/1400 controllers with Lonnyo 100 H hubs and 50PL packs, underscoring how major driveline overhauls reshape the Rion upgrade path.[^future_swap]

@@ -19,6 +19,7 @@
 
 ## Battery & BMS Planning
 - Budget packs starting with 20 S Samsung 30Q quotes for commuters, but expect premium 21700 builds (50PL, P45B/P50B) to double total cost once welding, insulation, and shipping are included.【F:knowledge/notes/input_part014_review.md†L106-L106】
+- Rosheee is holding his 16 S5 P pack until a 20 S6 P replacement arrives and confirmed the community 17 S holder STL came from Tudor—plan ahead if you need the same print for staged upgrades.【F:knowledge/notes/input_part002_review.md†L629-L630】
 - ANT smart BMS units have latched discharge FETs under Spintend-level currents; plan redundant pack protection (loop keys, fuse boards, or dual BMS) for >300 A goals.【F:knowledge/notes/input_part014_review.md†L98-L101】
 - Calibrate CAN smart BMS logs against VESC telemetry—BMS current remains more trustworthy but may drift; manual calibration preserves ±500 W accuracy on 35 kW builds.【F:knowledge/notes/input_part014_review.md†L79-L82】
 - Jason’s Max project already packaged a 30 S pack around a 65H 17×4 motor and scoped a fully internal 40 S/3 P layout, proving the deck ceiling once partitions are trimmed and harness routing is planned early.【F:knowledge/notes/input_part012_review.md†L7997-L8008】【F:knowledge/notes/input_part012_review.md†L8221-L8222】
@@ -32,12 +33,17 @@
 - Monitor per-motor temperatures; aim for ≤45 °C controller temps and ≤90–100 °C stator temps by refreshing thermal paste and clamping controllers to thick skid plates.【F:knowledge/notes/input_part014_review.md†L73-L76】【F:knowledge/notes/input_part014_review.md†L119-L119】
 - Plan for valve-stem service and bead reseating after pothole hits—tubeless split rims can burp air, so keep compressors and soapy water handy during test rides.【F:knowledge/notes/input_part014_review.md†L46-L46】
 - Evaluate braking upgrades alongside power mods; 203 mm rotors add leverage but may be overkill—pair regen tuning with quality hydraulic calipers and DOT 4/5 fluid first.【F:knowledge/notes/input_part014_review.md†L43-L43】
+- Retire 3D-printed rear brake adapters once power climbs—community testing showed PLA mounts with aluminium rings flex under repeated 60 km/h stops; CNC aluminium brackets or OEM-calibre parts survive Ninebot G30 conversions better.【F:knowledge/notes/input_part002_review.md†L404-L405】
+- Keep packs clamped—sliding 13 S 5 P modules shredded fish paper, Kapton, and heat-shrink even with triple insulation. Add rigid spacers or craftplex plates before closing the deck so Ninebot rails cannot saw into the battery under hard launches.【F:data/vesc_help_group/text_slices/input_part002.txt†L9071-L9245】
+- Expect 10 × 3 in tyre upgrades to need rear-fender trimming and tidy, internal brake-hose routing; inverted Magura hose flips introduced wobble until builders re-routed the line inside the frame.【F:knowledge/notes/input_part002_review.md†L405-L405】
+- Match suspension hardware to rider mass—Mirko’s 95 kg setup settled on 250 lb EXA 291R shocks plus a steering damper torqued into the vertical hinge, and heavier riders now tweak preload before ordering stiffer springs.【F:knowledge/notes/input_part002_review.md†L481-L482】
 - Use the €25 ePowerFun 3 mm aluminum floor plate as a quick cooling stopgap—drill five mounting holes, trim the nose to clear JREV spacers, and plan a thicker custom plate once testing confirms heat loads.[^epowerfun]
 
 ## Sourcing & Accessory Integration
 - Avoid too-good-to-be-true controller deals: £50 AliExpress listings are often bare logic boards; prioritize complete Spintend 100/100 Lite kits or 84/150 bundles from trusted resellers to get full harnesses.【F:knowledge/notes/input_part014_review.md†L108-L108】
 - Panel-mount QS8 connectors remain custom-only; draft plates early or leverage community prints to keep high-current leads tidy once deck space tightens.【F:knowledge/notes/input_part014_review.md†L8506-L8506】
 - Consider Voyage Megan or other CAN dashboards for consolidated telemetry once controllers are upgraded; validate compatibility when mixing CL350 or Express accessories with Ubox hardware.【F:knowledge/notes/input_part014_review.md†L110-L114】【F:knowledge/notes/input_part014_review.md†L208-L210】
+- Share frame-brace files with the community—the latest STL/3MF set (middle plus front/left/right/rear pieces) stiffens ground decks after repeated grinds and simplifies future high-power conversions.【F:data/vesc_help_group/text_slices/input_part002.txt†L9494-L9499】
 - Budget a dedicated buck converter if you add VESC Express boards—the modules only accept 5 V at ~150 mA and currently reset logging every few seconds on 6.06 firmware, so plan CAN updates or stay on 6.05 for stable telemetry.[^express_power]
 - Document J1772 travel adapters as part of the charging kit: a proven harness uses 12 AWG silicone leads plus 2.5 mm² wiring with 2.74 kΩ/1.3 kΩ pilot resistors so public stations handshake cleanly at 3 kW.【F:knowledge/notes/input_part012_review.md†L10580-L10588】【F:knowledge/notes/input_part012_review.md†L11100-L11129】
 

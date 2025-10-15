@@ -18,18 +18,24 @@
 ### Throttles & Brakes
 1. **Direct hall wiring:** Route throttle and brake halls straight to ADC1/ADC2 signal, 3.3 V, and ground to keep control even when the OEM dash is removed.[^1] Keep the sensors on the controller’s 3.3 V rail—feeding 5 V halls directly into STM32 ADCs has already killed logic stages.【F:knowledge/notes/input_part000_review.md†L82-L84】
 2. **Spin-Y & other multi-button throttles:** Version 1 units need custom JST‑1.0 leads into ADC2/COMM2; version 2 ships with a four-conductor harness that lands cleanly on the adapter board.[^2]
-3. **Spintend adapter v3 harness:** Modern boards arrive with keyed plugs—no more screw terminals—so match the supplied loom instead of hand-crimping tiny JST shells.[^3]
-4. **MakerX footpads & 3.3 V-only sensors:** Confirm both ADC rails output 3.3 V before blaming pads; swapping to 5 V kills the hall board.[^4]
-5. **Interpret ADC counts, not raw voltage:** VESC Tool reports hall inputs as 0–4095 counts—track the delta between idle and full throw, and if readings compress, repeat the test with a stable 5 V source to rule out noisy 3.3 V regulators before replacing sensors; Spintend’s adapter manual expects ~0.8 V idle, so stop and rewire if a channel sits near 3 V.[^22][^adapter-idle]
+3. **Artem’s combined brake/throttle pod:** The finalized Spin-Y throttle now bundles bidirectional 3.3 V output for VESCs, a separate 5 V single-ended channel, a discrete e-brake loop, onboard cruise button, and an optional dual 12 mm button module on the same six-core harness—budget €45–€55 and leave slack for modular caps.[^artem-throttle]
+4. **Prototype manufacturing realities:** Artem priced SLS production at ~$1 900 for 20 display shells—more than CNC aluminium—so expect iterative 3D prints for ergonomics (index-finger reach, quick-release, accidental-press avoidance) before tooling up; consider CAN-integrated builds like Foujiwara’s combo throttles/displays if you need turnkey alternatives.[^proto-sls]
+5. **Spintend adapter v3 harness:** Modern boards arrive with keyed plugs—no more screw terminals—so match the supplied loom instead of hand-crimping tiny JST shells.[^3]
+6. **MakerX footpads & 3.3 V-only sensors:** Confirm both ADC rails output 3.3 V before blaming pads; swapping to 5 V kills the hall board.[^4]
+7. **Interpret ADC counts, not raw voltage:** VESC Tool reports hall inputs as 0–4095 counts—track the delta between idle and full throw, and if readings compress, repeat the test with a stable 5 V source to rule out noisy 3.3 V regulators before replacing sensors; Spintend’s adapter manual expects ~0.8 V idle, so stop and rewire if a channel sits near 3 V.[^22][^adapter-idle]
+8. **Xiaomi thumb-throttle tweaks:** Many Xiaomi-style throttles only need a pull-down resistor rather than the full Spintend adapter—reserve the adapter for smart display integrations and keep simple solder-in fixes on hand for quick conversions.[^xiaomi-resistor]
 6. **Filter noise in software first:** Builders tamed runaway triggers by compressing throttle activation to ~0.83–1.2 V inside VESC Tool rather than rewiring hardware; chassis grounding tricks have also helped but carry short-to-frame risk if insulation fails.[^adc-noise]
 6. **Fail-safe defaults:** Add a pull-down resistor from throttle signal to ground so any broken wire snaps to zero instead of ghost acceleration.[^19]
 7. **Legacy dash retention:** Leaving throttle through a dash adapter adds perceptible lag; many builders keep the dash for display only and wire throttles directly to the controller instead.[^20]
 8. **Refresh mappings after downtime.** Scooters that sat for months have thrown false brake/throttle behaviour until riders reran the ADC wizard and removed stale inversion flags inside VESC Tool.[^storage-cal]
 9. **Monitor brake sensors.** Dead brake halls make some VESC scooters pulse the motor every second or two under throttle, so replace failed sensors before ride testing.【F:knowledge/notes/input_part000_review.md†L39-L39】
+10. **Retrofit hall sensors when mechanical levers lack outputs.** Glue magnets to brake levers and pair them with A1324LUA sensors for proportional regen; keep reed kits as simple on/off spares.【F:knowledge/notes/input_part002_review.md†L352-L352】
+11. **Prep torque sensors with EMI bonding.** Upcoming torque-assist installs may need the bicycle frame bonded to ground through a fused ≈100 mA strap to keep EMI from feeding back into the ADC harness—plan the bond before chasing ghost signals.【F:knowledge/notes/input_part002_review.md†L626-L627】
 
 ### Regen Buttons & Variable Brakes
 - **Momentary button recipe:** Wire the button between ADC2 signal and the 3.3 V rail; avoid series resistors because they created “stuck brake” faults in testing.[^6]
 - **Analog lever mapping:** Run the ADC calibration wizard, keep the window open while sweeping the lever, then assign the channel to “Current (No Reverse)” so regen ramps in with negative motor/battery limits.[^7][^8]
+- **Dedicated regen throttles:** Many riders now park regen on a left-hand throttle or auxiliary lever capped near 10 A for panic stops while the right hand stays on drive duty—document the mapping so guests know which control does what.【F:knowledge/notes/input_part002_review.md†L353-L353】
 
 ### Lighting, Horns & Aux Loads
 - **Use the adapter as logic, not power:** The horn output only sources a couple of amps—enough for low-power buzzers but not vintage 35 W halogens—so trigger a relay or MOSFET that pulls from a beefier DC/DC converter.[^9][^10]
@@ -40,20 +46,24 @@
 - **Protect logic rails:** Shorting auxiliary leads straight on the controller board has already destroyed logic stages; isolate accessories and fuse every feed.[^16]
 - **Fuse the adapter output:** One builder shorted the 12 V rail on a brand-new Spintend 85240 while wiring lights and killed the buck stage; add inline fuses or external bucks so a single mistake doesn’t scrap the controller.[^16][^23]
 - **Treat buttons as triggers only:** The ADC adapter does not replace a loop key or smart-BMS latch; plan a real kill switch for theft deterrence or maintenance.[^17][^18]
+- **Scale lighting rails honestly.** Mirono’s auxiliary plan needed more than 3 A at 12 V, so he paralleled two buck converters while others still prefer external batteries for heavy light bars—pick the option that keeps the controller rail cool.【F:knowledge/notes/input_part002_review.md†L374-L376】
+- **Pair polite bells with serious horns.** Keep the stock Xiaomi bell for gentle alerts but wire 120 dB electronic horns or square-wave buzzers through controller outputs when traffic needs louder warnings.【F:knowledge/notes/input_part002_review.md†L376-L376】
 
 ## Configuration & Validation Workflow
 1. **Bench prep:** Wire controls with the pack off, confirm continuity, and verify 3.3 V and 5 V rails before powering up.
-2. **Calibrate ADC inputs:** In VESC Tool, run the ADC mapping wizard for each channel, noting min/max values and checking that neutral centers correctly.[^7]
-3. **Assign app functions:** Map ADC1 to throttle, ADC2 to “Current No Reverse” for regen, and ensure throttle curves or safe-start options suit the rider.[^8]
-4. **Understand bench limitations:** Once ADC control is enabled, the manual FWD/REV buttons in VESC Tool stop working—switch the app to UART or disable ADC temporarily for bench spins.[^13]
-5. **Write configs explicitly:** Mobile reconnects and desktop wizards can wipe ADC settings unless you press “Write Motor Config” and “Write App Config” after every change.[^21]
-6. **Log shakedowns:** Capture CAN or USB logs on the first rides to confirm commanded vs. actual current and verify regen ramps without triggering BMS cutoffs.[^11]
+2. **Confirm the app input mode.** Fresh Spintend adapters default to PPM—switch VESC Tool’s App to “ADC” and match the board’s 5 V/3.3 V toggle before blaming wiring when throttles appear dead.【F:knowledge/notes/input_part002_review.md†L438-L438】
+3. **Calibrate ADC inputs:** In VESC Tool, run the ADC mapping wizard for each channel, noting min/max values and checking that neutral centers correctly.[^7]
+4. **Assign app functions:** Map ADC1 to throttle, ADC2 to “Current No Reverse” for regen, and ensure throttle curves or safe-start options suit the rider.[^8]
+5. **Understand bench limitations:** Once ADC control is enabled, the manual FWD/REV buttons in VESC Tool stop working—switch the app to UART or disable ADC temporarily for bench spins.[^13]
+6. **Write configs explicitly:** Mobile reconnects and desktop wizards can wipe ADC settings unless you press “Write Motor Config” and “Write App Config” after every change.[^21]
+7. **Log shakedowns:** Capture CAN or USB logs on the first rides to confirm commanded vs. actual current and verify regen ramps without triggering BMS cutoffs.[^11]
 
 ## Safety & Troubleshooting Checklist
 - **Separate controller rails:** Do not tie CAN-connected controllers’ 5 V rails together unless they share the same ignition path; mismatched power buttons have already killed hardware.[^14]
 - **Keep kill-switch redundancy:** Combine Safe Start, loop keys, and/or smart-BMS latches so thieves or techs can de-energise the scooter without relying on ADC buttons alone.[^17]
 - **Watch for brownouts:** Builds that still depend on Makerbase/Flipsky rails should budget extra capacitance or buffer packs—the same rail that feeds ADC accessories is the one that dies during BMS trips.[^10]
 - **If a channel dies:** Check for 3.3 V on the sensor, rerun ADC mapping, inspect JST orientation, and confirm the pull-down still measures the expected resistance.[^7][^19]
+- **Shield noisy harnesses:** Beta testers running Spintend’s CNC throttle found 3.3 V lines picked up >100 A phase noise unless they added shielded cabling—budget the upgrade when routing long bar-to-deck looms.[^cnc-throttle]
 
 ## Source Notes
 [^1]: Routing throttle and brake halls directly into ADC1/ADC2 preserves control without the OEM dash.【F:knowledge/notes/input_part012_review.md†L11-L13】
@@ -82,3 +92,7 @@
 [^adc-noise]: Compressing throttle activation windows to ~0.83–1.2 V cleared ADC-trigger noise on Spintend builds; some riders grounded the chassis for extra stability but warn the practice risks shorts if insulation fails.【F:knowledge/notes/input_part014_review.md†L85-L86】
 [^adapter-idle]: Spintend’s adapter manual targets ~0.8 V idle readings—seeing ~3 V idle means the channel is wired wrong and will act like a stuck brake.【F:knowledge/notes/input_part008_review.md†L21846-L21848】
 [^storage-cal]: Re-running the ADC wizard and clearing stale inversion flags resolved Xiaomi brake/throttle glitches after long storage.【F:knowledge/notes/input_part011_review.md†L16211-L16217】
+[^artem-throttle]: Artem’s integrated brake/throttle housing now ships with bidirectional 3.3 V plus 5 V outputs, discrete e-brake loop, cruise button, and optional modular button caps while targeting a €45–€55 price point and 0.2 mm enclosure tolerances.【F:knowledge/notes/input_part002_review.md†L369-L372】
+[^proto-sls]: Community prototyping notes put SLS runs at ~$1 900 for 20 display shells, forcing Artem to iterate with 3D-printed samples to solve reach/ergonomics while CAN-based throttles/displays from Foujiwara fill the gap.【F:knowledge/notes/input_part002_review.md†L107-L112】
+[^xiaomi-resistor]: Veterans recommend a simple pull-down resistor for Xiaomi thumb throttles unless you’re integrating a smart display; the adapter is overkill otherwise.【F:knowledge/notes/input_part002_review.md†L112-L112】
+[^cnc-throttle]: Spintend’s CNC throttle beta feedback highlights the need for shielded 3.3 V lines on ≥100 A phase builds to prevent regen-induced noise while retaining the modular top-button add-on.【F:knowledge/notes/input_part002_review.md†L196-L200】

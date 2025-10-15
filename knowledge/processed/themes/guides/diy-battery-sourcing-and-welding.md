@@ -19,6 +19,9 @@
 | **Custom P45B/P50B packs** | €3000–€4500 for 22 S 10 P/11 P assemblies | Continuous ≈495 A, BMS peaks ≈1040 A | Group buys enable supply; document BMS limits (≤500 A continuous today).[^6][^7] |
 | **Commissioned builds (UK/US)** | Varies; premium vs DIY delta covers tooling | Output tied to builder’s QC logs | Trusted builders like jamessoderstrom eliminate tooling spend for one-off packs.[^11] |
 
+- **Pack economics remain chemistry-dependent.** Artem still favours P42A-class cells for 25 A-per-cell projects, considers Samsung 48X only a slight upgrade over 50G, and flags M50LT Gen 2 for 0–15 A commuters while crews chase scarce 50E/Molicel stock across Europe.【F:knowledge/notes/input_part002_review.md†L692-L693】
+- **Budget whole-pack pricing.** A 20 S9 P Samsung 48X build lands around $5.75 per cell delivered from Canada (~$1,035 total), supports 150 A bursts (~17.2 A/cell), and returns 40–80 mile range depending on riding style—use it as a baseline when comparing long-range quotes.【F:knowledge/notes/input_part002_review.md†L694-L694】
+
 ## Welding Equipment Decision Guide
 | Scenario | Recommended Tooling | Why It Wins | Follow-Up Checks |
 | --- | --- | --- | --- |
@@ -48,16 +51,30 @@
 - **Weld verification:** Rip-test sample strips each session, especially after cleaning Glitter bus pins, to confirm energy settings haven’t drifted.[^10]
 - **Harness strain relief:** Use deck plates or external mounts to keep relocated controllers from stressing phase leads and QS8 connectors during pack swaps.[^8][^9]
 - **Telemetry cross-checks:** Pair CAN smart BMS data with VESC logs to validate current draw and spot calibration drift in shunt-based readings.[^7]
+- **Bridge long packs with multiple jumpers.** 16 S 8 P layouts that only bridge two series cells choke current and cook the interconnect—double back with extra jumpers or a second copper layer so each parallel group shares the load evenly.【F:knowledge/notes/input_part002_review.md†L606-L608】
+- **Tin and fold copper busbars before welding.** Solder the main leads to copper strip, fold it for a double-thick bus, and insulate with Kapton or fish paper before closing the pack so K-weld adopters avoid hot spots and exposed edges.【F:knowledge/notes/input_part002_review.md†L606-L608】
+- **Trim welder leads:** KWeld’s stock 8 AWG harness can waste kilowatts at the lugs—shorten cables, refresh soldered ends, or parallel LiPo packs so weld energy stays consistent during copper “sandwich” builds.【F:data/vesc_help_group/text_slices/input_part002.txt†L11188-L11209】
+- **Treat copper-nickel sandwiches cautiously:** Exposed stacks crack over time when dissimilar metals oxidise—seal the assembly or fall back to pure nickel if your welder struggles with copper.【F:knowledge/notes/input_part002_review.md†L401-L401】
+- **0.15 mm nickel-plated copper sits around 15 A per cell.** Builders like the 8 mm strip for commuter packs, but once group currents top 25 A they still stack full copper plates or sandwich sheets to keep resistance low.【F:data/vesc_help_group/text_slices/input_part002.txt†L12622-L12654】
+- **Direct copper spot welds remain risky.** Without inert gas the joint oxidises, 0.2 mm copper sticks to probes, and the extra heat endangers cells—most crews stick with copper plate plus nickel/steel caps unless they can TIG busbars safely.【F:data/vesc_help_group/text_slices/input_part002.txt†L13624-L13640】
 - **Finish work around positives:** Deburr nickel edges near cell tops and re-seat fishpaper before closing the pack—sharp tabs have already pierced insulation on low-current power-bank builds.【F:knowledge/notes/denis_all_part02_review.md†L122364-L122385】
+- **Let smart BMS boards police shorts.** Builders reminded newcomers that quality smart BMS hardware trips far faster than external fuses while still handling balancing duty—treat fuses as supplements, not replacements.【F:knowledge/notes/input_part002_review.md†L418-L418】
 - **Print holders for heat, not looks.** PLA cradles slump once cells warm; switch to PETG or ASA around 230 °C/100 °C bed temps so 21700 honeycombs and Wildman bag sleds stay rigid in summer decks.【F:knowledge/notes/denis_all_part02_review.md†L116230-L116236】【F:knowledge/notes/denis_all_part02_review.md†L89665-L89696】
 - **Document capacity checks.** Time OEM chargers (≈1.7 Ah per hour on Xiaomi bricks) when vetting customer packs; a genuine 12 Ah module needs nearly seven hours from empty.【F:knowledge/notes/denis_all_part02_review.md†L98595-L98598】
 - **Log cell provenance.** Refurb lots from NKON (late-2021 Samsung 35E/50E) arrive graded and safe when treated like fresh stock; track batch codes and keep compression on pouch experiments so swelling doesn’t lift tabs.【F:knowledge/notes/denis_all_part02_review.md†L97241-L97259】
+- **Reinforce shrink wrap for shipping.** Double-layer lighter “Albert” sleeves with thicker “Denis” stock, add padding over balance leads, and heat the wrap with a gun (not just a dryer) so decks don’t abrade the pack in transit.【F:knowledge/notes/input_part002_review.md†L671-L673】
+- **Stop pack shuffle before blaming wrap.** If shrink is wearing through, fix clamp pressure or enclosure padding—the workshop called loose packs the root cause, not the plastic itself.【F:knowledge/notes/input_part002_review.md†L671-L673】
 
 ### Mounting & Housing Patterns
 - **Armor deck-mounted conduits.** Twin 10S packs strapped along the deck need metal shielding and permanent wiring—open conduit runs are “self-propelled bombs” unless the housing resists impacts and stays wired for continuous duty.【F:knowledge/notes/denis_all_part02_review.md†L230-L234】
 - **Overbuild bag brackets.** Wildman bag packs now use eight screw/wide-washer mounts, fiberglass sleeving, and interior foam so cells can’t chafe on hardware or eject during pothole hits.【F:knowledge/notes/denis_all_part02_review.md†L361-L362】
 - **Expect tight tolerances.** A 13S5P/16S3P 21700 stack just fits a 3 L Wildman when you skip holders, while 13S4P assemblies barely squeeze into 2–3 L shells—plan for custom spacers, cardboard liners, and printed cages before drilling the pack.【F:knowledge/notes/denis_all_part02_review.md†L362-L363】【F:knowledge/notes/denis_all_part02_review.md†L165-L165】
 - **Retire fatigued brackets.** Heavy 13S packs crack 3D-printed rear supports near the rear bolt; inspect and replace printed mounts routinely or swap to metal before pushing high-speed builds.【F:knowledge/notes/denis_all_part02_review.md†L352-L352】
+- **Question oversized deck spacers.** Plastic trays that promise room for four Xiaomi packs rely on sparse M3 fasteners and flex under a 30 kg battery—plan metal reinforcement or decline the mod altogether.【F:knowledge/notes/input_part002_review.md†L407-L409】
+
+### Layout Modeling Tips
+- **Use planners as estimates, not gospel.** RePackr and e4bike.ru visualisers help brainstorm cell counts, but Artem still defaults to CAD or cardboard mockups for tight triangle packs and vertical stacking tricks.【F:knowledge/notes/input_part002_review.md†L415-L417】
+- **Finish copper busbars properly.** Spray Kontakt 60, wear gloves, and seal stacks with Kapton, fish paper, and heat-shrink so copper “sandwich” joints do not corrode before the scooter ever rolls.【F:knowledge/notes/input_part002_review.md†L417-L417】
 
 ### Salvage & Pack Handling Lessons
 - **Plan for encapsulated fleet packs.** Ninebot rental batteries bury their BMS inside silicone potting; expect to chisel sealant or swap a fresh board because resets are impossible while encapsulated.[^15]

@@ -103,6 +103,7 @@ Structure for each parameter:
 **How / When to Modify**
 - For a BLDC build with hall sensors, Hybrid is recommended for smooth takeoff.
 - If no hall sensors exist, sensorless is your only option.
+- When hall detection keeps failing, swap to sensorless detection for the motor wizard and remove temporary high-resistance leads—long bench extensions have flipped spin direction and confused the tool more than true hardware faults.【F:knowledge/notes/input_part002_review.md†L37-L40】
 
 **Potential Side Effects**
 - Sensorless can cause rough startup on heavy loads.
@@ -588,8 +589,9 @@ Params: foc_current_kp, foc_current_ki
 - If KI is too high, drifting or low-frequency hunting can occur.
 
 **How / When to Modify**
-- If detection is stable, no need to tweak. 
+- If detection is stable, no need to tweak.
 - If you see “ABS OverCurrent” or poor torque response, try lowering KP or re-running detection.
+- If FOC detection spits out obviously wrong numbers and ABS OverCurrent faults appear immediately, rerun the wizard (FOC → Measure R L λ) before assuming hardware damage—the auto-measurement is often at fault.【F:knowledge/notes/input_part002_review.md†L64-L65】
 
 **Potential Side Effects**
 - Wrong gains = serious stutter, noise, or slow current loop response.
@@ -753,6 +755,7 @@ Params: foc_start_curr_dec, foc_openloop_rpm, etc.
 
 **Deeper Insights**
 - If your motor saturates easily at 0 rpm, a big current can ruin observer tracking.
+- Upcoming firmware builds promise smoother HFI-assisted launches so heavy scooters can start sensorless with only a light push-off, but veterans still recommend halls on high-torque hubs to prevent saturation and spin-direction flips once current ramps up.[^sensorless-push]
 
 **How / When to Modify**
 - If stalling or big jerk at zero speed, set a start_curr_dec < 1 or add some openloop ramp time.
@@ -779,8 +782,9 @@ Params: foc_start_curr_dec, foc_openloop_rpm, etc.
 - If you have a known IPM motor (like many QS hub motors), enable MTPA. 
 - Try IQ Target first, or IQ Measured if transitions feel off.
 **Potential Side Effects**
-- Negative d-current can raise motor’s back-EMF at sudden fault events => high bus voltage risk. 
+- Negative d-current can raise motor’s back-EMF at sudden fault events => high bus voltage risk.
 - If Ld = Lq, MTPA is pointless.
+- Surface-magnet scooter hubs have repeatedly lost low-end punch or overheated when tuners forced negative Id current—leave MTPA disabled on those motors unless you have IPM construction data proving otherwise.[^hub-mtpa]
 
 
 ### 6.12 Field Weakening
@@ -1135,11 +1139,20 @@ Params under bms.*
 - If your BMS is standalone or simple, these do nothing.
 
 **Potential Side Effects**
-- If BMS data is invalid or missing, the ESC might clamp power incorrectly. 
+- If BMS data is invalid or missing, the ESC might clamp power incorrectly.
 - Misconfigured voltage or SOC limits can hamper performance or cause weird cutouts.
 
 
+### Field Troubleshooting Addenda
+- "Missing module" Bluetooth faults after firmware updates are usually wiring or app issues—swap TX/RX on the UART harness or re-enable Bluetooth from VESC Tool desktop, then save configs so the adapter reappears.【F:data/vesc_help_group/text_slices/input_part002.txt†L26222-L26279】【F:data/vesc_help_group/text_slices/input_part002.txt†L27334-L27368】
+- Verify throttle channel assignments: some adapters land halls on `ADC2/VAL2`, so confirm the expected channel in VESC Tool before rewiring hardware unnecessarily.【F:data/vesc_help_group/text_slices/input_part002.txt†L26222-L27368】
+- Vedder’s VESC firmware 6.0 beta introduces noticeable behaviour changes versus 5.3—read the Git changelog, and note that new binaries can exceed Ubox single-MCU flash limits unless you pair them with the matching VESC Tool build or rebuild locally.【F:data/vesc_help_group/text_slices/input_part002.txt†L1841-L2127】
+
+
 ## Footnotes
+
+[^sensorless-push]: Upcoming firmware promises better HFI launches so scooters can start with only a shove, yet Paolo still insists halls are essential for high-torque builds to avoid observer saturation and direction flips as current rises.【F:knowledge/notes/input_part002_review.md†L174-L176】
+[^hub-mtpa]: Hub-motor riders revisiting MTPA found the negative Id current softened launches and raised heat, leading the community to disable the feature on surface-magnet hubs and reserve it for true interior permanent-magnet motors.【F:knowledge/notes/input_part002_review.md†L104-L106】
 
 [^makerbase-current]: Multiple builders found Makerbase 75100 controllers reporting only half to one-third of the programmed battery current, forcing them to validate limits with smart-BMS telemetry or clamp meters before raising power targets.【F:knowledge/notes/input_part005_review.md†L75-L76】【F:knowledge/notes/input_part005_review.md†L106-L106】
 [^makerbase-cap-fix]: Reviewers noted that bolting additional capacitance onto the 12 V/5 V rails of Flipsky and Makerbase hardware reduced brownouts and restored trustworthy telemetry before any current-limit tuning.【F:knowledge/notes/input_part005_review.md†L494-L520】

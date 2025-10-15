@@ -15,12 +15,26 @@ Taming current limits is the difference between a scooter that rips for years an
    - Validate halls and 5 V rails after detection—many “mystery faults” are just dead sensor power.⁶
 2. **Set conservative currents**
    - Start with a 2:1 to 3:1 phase-to-battery ratio (e.g., 40 A battery / 110 A phase on 16 S commuter packs).⁵ ⁷
+   - Remember phase amps spike at launch for torque, but battery current is what punishes the BMS—running 150 A phase with 10 A battery feels punchy for a moment yet still respects battery watts, so log both sides of the bridge before chasing headline numbers.【F:knowledge/notes/input_part002_review.md†L675-L676】
    - Match current targets across front/rear controllers to avoid free-spinning the lighter wheel.⁸
    - Treat dual-motor 16 S7 P Samsung 50E packs as roughly 140 A systems: hold each controller near 70 A battery and add ducted airflow up front before nudging limits higher.²³
+   - Stock Vsett 10+ packs with 25.6 Ah LG MH1/MJ1 cells still sag hard past ~60 A; repeated 70–80 A sport-mode pulls trigger BMS cut-outs and shorten range even when logs briefly show 78 A success—plan upgrades or derate expectations before cranking limits.【F:knowledge/notes/input_part002_review.md†L67-L68】
+   - Artem guides Vsett 10+ owners on 16 S5 P Samsung 35E packs to stay near 40 A battery with 140–150 A phase (170 A absolute) and cap regen around −17 A; the higher current mainly sharpens mid-speed thrust once halls report clean speed data.【F:data/vesc_help_group/text_slices/input_part002.txt†L2195-L2344】
+- NKON builders considering 16 S5 P packs are still weighing Samsung 40T against LG M50LT—plan to lab-test M50LT cells around 15 A and keep a high-power discharger handy before trusting the cheaper option.【F:knowledge/notes/input_part002_review.md†L310-L313】
+- LG M50T cells continue to disappoint at real-world 10 A limits while the promised 15 A M50LT remains scarce—most Wolf owners now spec P42A/P45B parallels despite the price bump to hold sustained power.【F:data/vesc_help_group/text_slices/input_part002.txt†L8830-L8853】【F:data/vesc_help_group/text_slices/input_part002.txt†L9011-L9016】
+- Budget ebike builds still rely on €1.70 LG MH1 cells for lightweight packs, with plans to migrate to 21700 formats once wallets recover—size current limits accordingly.【F:knowledge/notes/input_part002_review.md†L310-L313】
+   - Kaabo Wolf owners sketching 20S7P decks (≈160 × 470 × 75 mm) debate JK’s JK-B1A24S-15P active-balancing BMS versus charge-only rigs paired with detachable JK balancers; many settle on a main fuse plus VESC undervoltage cutoffs when discharge FETs will not fit.【F:knowledge/notes/input_part002_review.md†L312-L312】
+   - Stock Kaabo 35 S Wolf GT packs shipped with LG M50LT cells that sag like Samsung 50G, pushing riders toward silicone seams, extra wrap layers, and water ingress checks before raising current targets.【F:knowledge/notes/input_part002_review.md†L311-L311】
+   - Stock Kaabo 16S5P LG M50T-class packs still yank 150–155 A even when controllers are capped at 60 A each, dropping pack voltage by ~15 V—budget higher-discharge cells or a pack rebuild before chasing more current. 【F:knowledge/notes/input_part002_review.md†L269-L269】
+   - Lishen 48X parallels hold roughly 6–7 V sag at 130–150 A (≈14 A per cell) while Samsung 50S stays stable closer to 23 A per cell but costs nearly triple—plan chemistry swaps or parallel counts around the desired current rather than assuming 5 Ah cells can do it all.【F:knowledge/notes/input_part002_review.md†L463-L465】
+   - Molicel P42A/P45B parallels stay cooler at 20–25 A than Samsung 50S, but the 50S commands 2–3× the price; plan the chemistry upgrade alongside current goals instead of assuming stock cells will hold. 【F:knowledge/notes/input_part002_review.md†L270-L270】
+   - Mooch’s test data pegs Molicel P45B at 4.5 Ah with 50 A burst/35 A continuous capability—expect ~$8 pricing once supply stabilises and remember even 4p Xiaomi packs can flirt with 200 A battery current if deck cooling is improved.【F:knowledge/notes/input_part002_review.md†L313-L313】
+   - Frame power as battery volts × amps; phase current only shapes launch torque and will clamp once phase watts exceed what the pack can deliver.【F:knowledge/notes/input_part002_review.md†L69-L69】
    - Keep Artem’s relationship in mind: `I_phase = I_batt × V_batt ÷ V_motor`, so phase torque fades as ERPM climbs—log both currents to confirm your battery caps aren’t starving the tune mid-pull.[^phase_equation]
 3. **Log, ride, iterate**
    - Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
    - Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
+   - Use paired GPS and VESC logs—dual Nucular Vsett 10+ runs confirmed 0–60 km/h in 4.75 s, 0–80 km/h in 7.5 s, and ~10.7 kW draw (78 A rear / 70 A front battery, 200 A/130 A phase), giving you a real benchmark for consistent pulls.【F:knowledge/notes/input_part002_review.md†L96-L98】
    - Cross-check real-time power with an external meter or SmartDisplay—unfiltered VESC telemetry overshoots true watts by 10 kW or more on aggressive pulls.²⁴
    - Treat VESC Tool’s state-of-charge gauge as a rough helper—it linearly maps 4.2–3.3 V per cell (≈66 V on 20 S), so keep your cutoffs a few volts above the BMS trip to prevent surprise throttling once the display reads “empty.”²⁵
 4. **Layer in regen**
@@ -41,6 +55,8 @@ Taming current limits is the difference between a scooter that rips for years an
 
 ## Regen & Braking Best Practices
 - **Respect BMS limits.** Daly and ANT boards trip around 2.7 V/cell; match VESC cutoff and regen so the BMS stays ahead of controller protection.¹¹ ¹⁷
+- **Treat commuter cells gently.** Samsung 35E parallels cope with roughly 1 C regen bursts but degrade quickly under faster charging—keep routine charging near 0.5 C whenever schedules allow.【F:data/vesc_help_group/text_slices/input_part002.txt†L2339-L2344】
+- **Spot pack abuse early.** Hammering 16 S5 P Samsung 50G packs to 120 A+ (≈24 A per cell) has melted shrink wrap, tripped BMSes, and spiked controller temps to 70 °C; pivot to higher-discharge cells like P42A/P45B, monitor core temps, and keep charge rates near 1 C to preserve longevity.【F:knowledge/notes/input_part002_review.md†L91-L94】
 - **Stagger braking inputs.** Pair mechanical brakes with modest regen; runaway regen has bricked 75100 logic boards when negative current spikes hit unstable hardware.¹⁸
 - **Throttle & ramp tuning.** Shorten positive ramp to ~0.1 s and sculpt throttle curves once your current caps are dialed—especially on controllers that feel soft off the line.¹⁹
 
@@ -49,6 +65,9 @@ Taming current limits is the difference between a scooter that rips for years an
 - Sensorless chatter and long phase cables exaggerate FW-induced current spikes; keep leads short and add halls where possible.³ ²⁰
 - Document duty-cycle ceilings—modern hardware tolerates 98–99 % duty, but stay below 100 % to avoid runaway faults.²¹
 - Spintend 85150 hardware has already sacrificed MOSFETs when riders layered 45 A of FW on top of 105/120 A battery and 150/175 A phase at 20 S—budget HY/HSBL swaps or back FW down before chasing higher ERPM. 【F:knowledge/notes/input_part014_review.md†L21-L21】
+- Expect roughly 25 % higher losses once field weakening kicks in and be ready for large current spikes during high-speed pulls.【F:knowledge/notes/input_part002_review.md†L70-L70】
+- Traction control still needs tuning—enable it on both controllers over CAN, but log case temperature because the current algorithm has doubled controller temps and cut peak power from ~18 kW to ~13 kW on heavy scooters even as it protects front tyres.【F:knowledge/notes/input_part002_review.md†L50-L52】
+- PWM experiments dropping zero-vector frequency to 16–20 kHz can feel punchier, yet some riders saw hotter FETs; start around 16–18 kHz and audit DRV temps before chasing high-kV hub gains.【F:knowledge/notes/input_part002_review.md†L72-L74】
 - Rob Ver’s 85/240 build touched 35 kW and 132 km/h on 22×3 hubs with ~80 A of FW, yet a 22 S BMS failure during a 320 A launch still blew MOSFETs—treat high-FW pulls as consumable unless pack protection is rock-solid.[^fw_bms]
 
 ## Troubleshooting Cheatsheet

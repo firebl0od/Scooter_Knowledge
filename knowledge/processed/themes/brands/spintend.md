@@ -6,9 +6,12 @@
 - Early 85250 V1 controllers used current-transformer sensing that saturates near 100 A and complicates auto-detection, so Smart Repair now nudges heavy builds toward shunt-based MK8/X12 footprints (or waits for the teased 18-FET refresh) unless the board has been reworked with proven Toll MOSFETs.[^ct_limit]
 - Thermal success hinges on treating every Spintend as a passively cooled module: clamp the aluminum base to a 3–5 mm plate with paste or pads and reserve generous deck space for 25 × 15 cm heatsinks so dual stacks stay below ~70 °C.[^2]
 - Treat the ADC lighting bridge as an accessory tap, not a main switch—its ~12 V / 3 A rail and updated harnesses simplify pods and brake throttles, but real kill circuits still require relays, smart-BMS buttons, or loop keys.[^3]
+- Firmware 6.0 mainstreamed Spintend hardware—official VESC releases now include both the legacy micro-USB dual boards and the newer USB‑C revisions, so the old 5.3 fork is finally optional.【F:knowledge/notes/input_part002_review.md†L616-L617】
 - Stock MOSFETs still fail when builders push >40 A of field weakening on 20 S packs; plan on HY- or HSBL-class swaps before chasing high-ERPM targets on 85150/85250 hardware.[^20]
 - Random throttle surges continue to surface on 85 V/240 A, 100 V/100 A, and even v2 85 V/250 A units, so budget time for filtering, shielded cabling, and harness inspections when diagnosing jitter complaints.[^17]
 - Spintend sunset the 85/250 and now routes the 85/240 through a New Jersey hub for U.S. buyers—stock spares if you rely on the higher-rated board because the replacement is easier to source but capped a touch lower.[^logistics_update]
+- The single-Ubox 100 V refresh is paused while Spintend swaps the flawed brass spreader for copper and finalises bare-aluminium casing options, and the $59 CNC throttle has cleared tolerance checks with shielded-cable guidance for ≥100 A builds.[^single_refresh]
+- V2 duals quietly swapped 4 A Infineon gate drivers for 1.5 A generics and the single-Ubox still mounts MOSFETs in the lid, so plan serious heatsinking before demanding sustained 100 A-per-motor duty.[^gate-driver]
 
 ## Inbound QC & Power-Up Protocol
 1. **Full teardown and dry clean before first power.** Crack the enclosure, remove conformal covers, vacuum or IPA-wipe solder balls, and inspect gate-driver rails prior to energising the board.[^41]
@@ -37,12 +40,15 @@
 - Heavy riders continue blowing 12‑FET stages even with modest throttle inputs; treat 20 S commuter builds as derated compared with lightweight race scooters and reserve “fat VESC” footprints when riders plus cargo exceed ~120 kg.[^18]
 - Start with conservative dual-drive baselines: 17 S builds have settled near 2×120 A phase / 2×90 A battery / 2×180 A absolute, while 16 S commuters ride closer to 2×100 A phase / 2×60 A battery until thermal logs show headroom.[^30]
 - Remember the Spintend bridge mirrors battery current to both controllers—profile toggles or 1WD/2WD switches must isolate CAN or power, otherwise the smaller front ESC still sees the rear controller’s amps.[^bridge_mirror]
+- Spintend support reiterated that 17 S with regen disabled is the practical voltage ceiling—18 S experiments keep burning traces once regen spikes, and even copper-block/fan mods still see 220–250 A bursts cook dual boards, so daily tunes hover near 200 A per side until airflow and mounting are upgraded.【F:knowledge/notes/input_part002_review.md†L335-L338】
+- When piggybacking Rion controllers or other ESCs on the Ubox harness, balance precharge leads, connector gauges, and wiring runs so shared packs don’t backfeed the auxiliary hardware mid-ride.【F:knowledge/notes/input_part002_review.md†L338-L338】
 
 ### Voltage & Regen Discipline
 - Riders stepping into 22 S still back off charge voltage or disable heavy regen to avoid 100 V spike failures that plague 75xxx competitors; Ubox-class controllers tolerate the packs but demand measured braking ramps.[^11]
 - Ubox 100/100 revisions still cap regen safely below full pack voltage; Smart Repair warns the stage ships without ST-Link pads or beefy 12 V rails and arrives set around 135 A phase / 180 A absolute until you validate cooling.[^u100_baseline]
 - Firmware caps near 300 A phase on early 85/200 units until owners compile the unofficial “no limits” branch—use sparingly because support teams treat it as a warranty break.[^12]
 - Watch for BMS thermal trips even on Spintend hardware—dual Ubox owners running 2×135 A phase / 2×71 A battery still logged pack over-temp around 90 A spikes; monitor pack sag and internal resistance monthly.[^31]
+- Red USB-C Uboxes misread pack voltage on FW 5.3 until flashed with Spintend’s corrected BIN—patch before chasing hardware faults.[^typec-voltage]
 - Size battery groups for the torque you plan: 65 H motors needed roughly 150–200 A battery per side, and undersized parallel packs tripped companion BMSes when regen slammed add-on modules.[^32]
 - Treat BMS cutoffs as glide events, not anchors—Spintend hardware coasts when a pack trips, but trim regen near full charge (≈76.6 V on 20 S) to avoid repeated over-voltage faults.[^1][^33]
 - Replacement HY power stages sourced through Raphaël Foujiwara are still capped at ≤20 S (~400 A phase) unless you add his HF filter and cooling mods; even experienced builders with the new boards are holding off on 22 S experiments until thermal issues are solved.【F:knowledge/notes/input_part011_review.md†L31-L31】【F:knowledge/notes/input_part011_review.md†L169-L169】
@@ -58,6 +64,8 @@
 - Bolt controllers directly to bare metal structure: sand paint, polish deck plates, and clamp the Ubox to aluminum or copper spreaders to hold MOSFETs near 55 °C at 50 A battery / 120 A phase.[^26]
 - Maintain pad thickness discipline; thicker thermal replacements have pushed case temps toward 70 °C when compression was lost.[^27]
 - Mount 6‑FET minis on 3–5 mm aluminum plates with paste on both faces—copper sandwiches corrode faster than they help once you already couple to aluminum.[^28]
+- Treat copper blocks, drilled lids, and desk fans as temporary stopgaps—sanding paint, clamping 3 mm copper, or even relocating the controller outside the deck buys testing time but still needs a derated daily tune.【F:knowledge/notes/input_part002_review.md†L335-L337】
+- Potting compound, deck-mounted clamps, and heat pipes into thick aluminum plates have shown ≈20 °C gains, yet 220–250 A surges still blow traces—airflow and external mounting remain mandatory on extreme builds.【F:knowledge/notes/input_part002_review.md†L357-L358】
 - Share load across dual drives when possible: single-controller hill climbs hit ~60 °C while dual-drive equivalents stay below 40 °C, underscoring the headroom gained by splitting torque.[^29]
 - A single 25 × 15 cm heatsink can host two 12‑FET bodies without fin trimming, giving dual builds a repeatable footprint for under-deck cooling plates.[^2]
 - Plan airflow and strain relief so BMS cutoffs do not shock the controllers—Spintend hardware coasts through pack trips, but keeping harnesses tidy prevents the upstream faults that still kill rivals.[^1]
@@ -101,6 +109,8 @@
 - Vet MOSFET swaps before chasing 200 A+: bargain JJmicro devices underperform while Huayi parts have held 20 kW loads below 40 °C, so confirm datasheets before reflowing silicon.[^37]
 - Log every ride by exporting VESC Tool CSVs or bridging Android sessions to desktop so you can correlate current spikes, duty limits, and temps before relaxing guardrails.[^38]
 - Inspect for contamination after heavy service—moisture ingress and solder splatter have spoofed temperature telemetry and shorted controllers even after repairs, so schedule post-ride inspections after rain or workshop work.[^39]
+- Firmware 5.3 demands configuration tweaks: enable the ABS routine and lower the current filter constant before testing pulls or the controller can throw false over-current faults at high ERPM and cut throttle.【F:data/vesc_help_group/text_slices/input_part002.txt†L13921-L13928】
+- If the BLE module refuses to advertise after updates, reconnect over USB, flash the firmware plus bootloader from Spintend’s archive, and toggle UART/BLE enable flags in VESC Tool before rebooting—the module stays silent until that sequence is completed.【F:data/vesc_help_group/text_slices/input_part002.txt†L13177-L13277】
 - Budget for QA misses: multiple 85/250s arrived DOA or died within weeks at 200 A battery / 170 A motor settings, pushing riders toward Seven or 3Shul spares while they wait on replacements.[^doa250]
 
 ## Source Notes
@@ -166,3 +176,8 @@
 [^54]: The phase-filter toggle should be used only during motor detection; leaving it active while riding reintroduces noise and ABS overcurrent errors.【F:knowledge/notes/input_part004_review.md†L31-L31】
 [^bridge_mirror]: Spintend’s bridge keeps battery current mirrored across controllers—Smart Repair’s GT1 logs showed the front 150 A unit inheriting the rear controller’s battery amps until CAN or power was isolated.[【F:knowledge/notes/input_part011_review.md†L79-L79】【F:knowledge/notes/input_part011_review.md†L317-L317】
 [^baseplate_spreader]: JPPL and Shlomozero are reusing dead 75/200 baseplates as auxiliary heatsinks with aluminum spacers and radiator blocks tied into Dualtron side plates to cool HY-equipped stages.【F:knowledge/notes/input_part011_review.md†L521-L521】
+[^gate-driver]: V2 duals quietly replaced 4 A Infineon gate drivers with 1.5 A generics, and the single-Ubox still hangs MOSFETs from the lid—heatsinking and airflow are mandatory before targeting 100 A-per-motor duty.【F:knowledge/notes/input_part002_review.md†L297-L299】【F:knowledge/notes/input_part002_review.md†L131-L134】
+[^typec-voltage]: FW 5.3 on red USB-C Uboxes misreported pack voltage until riders flashed Spintend’s corrected BIN before reconnecting VESC Tool, clearing the phantom low-voltage alarms.【F:knowledge/notes/input_part002_review.md†L288-L291】【F:knowledge/notes/input_part002_review.md†L122-L124】
+[^single_refresh]: Spintend delayed the single-Ubox 100 V launch to replace a brass heat spreader with copper, evaluate naked aluminium casings, and finish CNC throttle QC—beta feedback notes the $59 lever (plus optional $17 button pod) benefits from shielded cabling above ~100 A phase to keep 3.3 V ADC lines quiet.【F:knowledge/notes/input_part002_review.md†L226-L233】【F:knowledge/notes/input_part002_review.md†L196-L200】
+[^abs_fix]: Spintend’s firmware 5.3 ABS mitigation requires enabling the feature and lowering the current filter constant; otherwise 5.3 trips high-ERPM over-current faults even on healthy installs.【F:data/vesc_help_group/text_slices/input_part002.txt†L13921-L13928】
+[^ble_reflash]: USB reflashing plus UART/BLE toggle resets restored uBox Bluetooth pairing after 5.3 updates when the module refused to advertise until the sequence was completed.【F:data/vesc_help_group/text_slices/input_part002.txt†L13177-L13277】
