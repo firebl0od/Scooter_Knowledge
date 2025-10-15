@@ -80,6 +80,7 @@
 
 ## Sourcing & Accessory Integration
 - Avoid too-good-to-be-true controller deals: £50 AliExpress listings are often bare logic boards; prioritize complete Spintend 100/100 Lite kits or 84/150 bundles from trusted resellers to get full harnesses.【F:knowledge/notes/input_part014_review.md†L108-L108】
+- Source ready-made harnesses when possible: Finn’s €50 Ninebot G30 VESC adapter ships within Germany and mates with Ubox 100/100 and 85150 controllers, saving hours of hand-crimping for future conversions.【F:knowledge/notes/input_part014_review.md†L206-L210】
 - Panel-mount QS8 connectors remain custom-only; draft plates early or leverage community prints to keep high-current leads tidy once deck space tightens.【F:knowledge/notes/input_part014_review.md†L8506-L8506】
 - Zero-to-Vsett conversions go smoother with the Zero 10X rear bracket/arm kit than custom plates when fitting Vsett 10+ hubs to a G30 with a Monorim rear end—budget for the swap before cutting metal.【F:knowledge/notes/input_part008_review.md†L20808-L20831】
 - Consider Voyage Megan or other CAN dashboards for consolidated telemetry once controllers are upgraded; validate compatibility when mixing CL350 or Express accessories with Ubox hardware.【F:knowledge/notes/input_part014_review.md†L110-L114】【F:knowledge/notes/input_part014_review.md†L208-L210】
