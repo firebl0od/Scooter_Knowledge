@@ -18,6 +18,7 @@
 - GT-class stability stems from generous wheelbase and rake, but riders still reinforce the deck and stem interfaces before high-power conversions; controller-mount fractures have occurred on GT and SNSC rental frames when extra weight is added up the stem.[^3][^2]
 - Stem bearings and dropout machining are mandatory on GT2 upgrades: the OEM upper bearing fails early and both axles need lathe work before 65–70 H hubs will seat properly.[^6]
 - Foam-filled "solid" tires vibrate enough to loosen magnets and shake packs apart on high-speed G30 conversions—pair quality 10-inch pneumatics with a Monorim front fork and DNM rear damper, or Sharkset forks if you stay below ~45 km/h.[^new-suspension]
+- Builders chasing GT acceleration are already machining thicker stainless dropouts and custom Monorim plates so Xiaomi-class forks can fit ever-wider hubs without tearing the swingarm.【F:data/vesc_help_group/text_slices/input_part001.txt†L26146-L26158】【F:data/vesc_help_group/text_slices/input_part001.txt†L26395-L26399】
 - F-series and budget Segways exhibit rough welds and cracked deck braces near the folding joint, so inspections, gussets, or protective film are prerequisites for commuter-duty reliability.[^14]
 - Rear-end stability improves when builders bend a 10 mm aluminum rod under the axle nut to brace wide mudguards; swapping in full-width G30 fenders (~11.5 cm) keeps 2.5″ tires from blasting commuters with spray.【F:knowledge/notes/all_part01_review.md†L91065-L91070】【F:knowledge/notes/all_part01_review.md†L91188-L91224】
 

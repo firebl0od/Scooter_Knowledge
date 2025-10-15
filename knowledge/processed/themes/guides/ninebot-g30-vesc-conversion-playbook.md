@@ -9,6 +9,7 @@
 - Flash the latest ScooterHacking G30 BMS firmware to lift discharge ceilings past 20 A while retaining stock harnesses—essential before pushing VESC phase currents.【F:knowledge/notes/input_part014_review.md†L103-L104】
 - Strip the frame and inspect deck welds prior to grinding rails for larger packs; documented builds plan rail relief plus 3 mm aluminum skid plates as interim reinforcement.【F:knowledge/notes/input_part014_review.md†L106-L106】【F:knowledge/notes/input_part014_review.md†L118-L119】
 - Choose battery spacers carefully: JREV units add cable room but misalign slightly with the frame, so plan shims or revised prints when targeting 22 S layouts.【F:knowledge/notes/input_part014_review.md†L118-L118】
+- Expect the stock ESC to refuse third-party 1 kW hubs—the controller looks for Ninebot’s protocol, so non-OEM motors demand a custom FOC flash or a full VESC swap, and the housings need steel adapters just to clear the fork.【F:knowledge/notes/input_part001_review.md†L617-L618】
 
 ## Powertrain Reference Builds
 | Configuration | Controllers & Limits | Reported Performance | Notes |

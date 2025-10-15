@@ -37,6 +37,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 5. **Plan for 5 V-only controllers.** X12-class builds need a dedicated buck for anything beyond sensors—budget space for the converter alongside the ADC board and document wiring so the accessory rail stays within its ~150 mA ceiling.【F:knowledge/notes/input_part014_review.md†L140-L144】
 
 ## Lighting Hardware Spotlight
+- **Spintend accessory board prototype.** Recent beta boards bundle addressable LED outputs (likely WS2812/WS2815) and an integrated buzzer alongside throttle inputs, hinting that future harnesses could ship with native lighting control instead of add-on strips.【F:knowledge/notes/input_part001_review.md†L629-L630】
 - **Offbondge projector upgrade.** Riders migrating from 1,300 lm compact beams report Offbondge’s 2,000–2,500 lm projector headlight slots straight into existing 12 V harnesses, spreads light without dazzling traffic, and still benefits from external bucks or fused rails on single-controller builds.【F:knowledge/notes/input_part005_review.md†L404-L404】【F:knowledge/notes/input_part005_review.md†L571-L571】
 - **USB-C floodlight banks.** Commuters are trialling 3,000–9,000 lm rechargeable headlights that double as power banks and pair them with programmable LED tails or mirror-mounted 12 V lamps for better cutoff control than stock scooter beams.【F:knowledge/notes/input_part000_review.md†L47-L48】
 

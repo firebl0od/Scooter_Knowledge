@@ -24,6 +24,8 @@
 - **Rotor sizing:** Community swaps standardize on 135–140 mm rotors for Pro decks and 120 mm for base models when installing X-Tech HB100s or higher-end hydraulics.【F:knowledge/notes/all_part01_review.md†L338-L338】
 - **Budget alternatives:** Properly adjusted MTB-style mechanical calipers (“Bike Attitude”) can outperform misaligned semi-hydraulics when combined with 135 mm rotors—center the fixed pad before tightening mounts.【F:knowledge/notes/all_part01_review.md†L226-L227】
 - **Support brake housing runs.** Tie the cable housing to the frame and trim excess length—loose housing eats lever travel and ruins braking force no matter the caliper upgrade.【F:knowledge/notes/denis_all_part02_review.md†L89091-L89096】
+- **Watch Magura clearance.** MT7/MT8 calipers squeezed onto Xiaomi G30 and VSETT frames can lose their <5 mm tire gap as the casing flexes—check clearance regularly, keep spare banjos/hardware, and reconsider external hose reroutes that rub 10×3 tires after flats.【F:knowledge/notes/input_part001_review.md†L642-L644】
+- **Torque lever bleeds properly.** Magura lever bleed screws only want 0.5 Nm; overtightening strips the threads and dumps pressure mid-ride.【F:knowledge/notes/input_part001_review.md†L683-L684】
 
 ## Suspension, Wheelbase & Handling Tweaks
 - **Rear suspension stretch:** Bolt-on rear suspension kits extend wheelbase roughly 10 cm, noticeably calming Xiaomi chassis at 35–40 km/h once brake adapters are spaced correctly.【F:knowledge/notes/all_part01_review.md†L226-L227】

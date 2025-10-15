@@ -31,6 +31,7 @@
 - **Battery truth gap:** Until you have telemetry confirming sustained current delivery, assume marketing numbers overstate real capability.[^1]
 - **Weather exposure:** Stock seals are insufficient; moisture ingress will jeopardise both the carbon structure and high-voltage electronics if left untreated.[^2]
 - **Chassis flex:** RX carbon frames feel “chewing gum” at 400 A—plan dampers, reinforcement plates, and tyre upgrades if you chase high-speed stability.[^7]
+- **Handling opinions diverge:** Paolo praises RX2000 stability without a damper near 100 km/h, but Face de Pin Sucé still calls the chassis twitchy versus Weped builds—log your own high-speed telemetry before trimming safety margins.【F:knowledge/notes/input_part001_review.md†L50-L51】
 - **Motor bottlenecks:** The LY-manufactured hubs remain the limiting factor—pushing phase current past ≈200 A or ignoring lead temperatures risks overheating long before the controllers run out of headroom.[^4]
 - **Logistics churn:** Replacement motors are attainable but shipping shocks can nullify savings—budget for customs fees or arrange local pickup.[^3]
 - **Legacy chassis cracks:** Tear down older Rion frames—Face de Pin Sucé uncovered cracked steering heads, flexing plates, underspec’d Kelly controllers, and fan ducts that just slam into carbon walls until you rework airflow.[^steering_crack][^legacy_fans]
@@ -51,7 +52,7 @@
 
 ## Upgrade & Maintenance Roadmap
 - **Battery-first tuning:** Focus on validating cell balance and temperature spread; pursue pack upgrades or parallel modules before increasing controller current limits.[^2]
-- **Motor swaps & spacing:** “Rion 1337” 70 mm magnet hubs ship with ~155–160 mm axles and 9.5 AWG leads—ensure your frame or fork can clear the width (Zero 11X-scale) before ordering and plan for new torque arms.[^6][^8]
+- **Motor swaps & spacing:** “Rion 1337” 70 mm magnet hubs ship with ~155–160 mm axles, 33 Kv windings, and ~9.5 AWG phase leads—too wide for Monorim or VSETT forks without custom plates, but they drop into Zero 11X-scale swingarms once you budget torque arms and ferrofluid cooling.【F:data/vesc_help_group/text_slices/input_part001.txt†L11338-L11433】[^6][^8]
 - **Controller pairing:** High-KV hubs routinely cook 75/200-class VESCs; stepping up to Kelly, Sabvoton, or dual Tronic hardware keeps ≥250 A phase targets realistic without sensorless stalls.[^5]
 - **Controller mix:** BAC 4000 twins only appeared on the Thrust prototype; production scooters stayed on Tronic stacks with the BACs simply sharing a throttle signal, so plan wiring and expectations accordingly if you chase non-Tronic swaps.[^bac_pairing]
 - **Throttle ergonomics:** The pricey CNC thumbwheel is still a basic hall sensor—builders cloning it with Spintend Spinny or Davega hardware report similar feel once wiring is sorted, and Spintend is now prototyping a “curve” thumbwheel to mirror the dual-action control without the premium casing.[^throttle_clone][^curve_thumb]

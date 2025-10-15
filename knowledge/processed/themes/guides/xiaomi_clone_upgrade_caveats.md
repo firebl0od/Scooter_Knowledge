@@ -5,6 +5,7 @@
 - **Plan to transplant the entire Xiaomi electronics stack.** Builders replacing clone controllers routinely add genuine Xiaomi BMS, controller, and dashboard bundles (~€100) because Rita and Xiaomi firmware expect matching data lines.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60092-L60113】
 - **Equalise voltages before parallel connections.** Builders keep packs tied together once matched to avoid constant inrush surges; disconnecting after every ride accelerates balancing wear and exposes weak connectors.【F:knowledge/notes/denis_all_part02_review.md†L93340-L93386】
 - **Budget time for wiring and firmware work.** Purple-case dashboards, GD32 controllers, and clone BMS layouts all require ST-Link access, custom harnesses, and patient configuration before any performance firmware will stick.【F:knowledge/notes/denis_all_part02_review.md†L93680-L93705】【F:knowledge/notes/denis_all_part02_review.md†L95680-L95780】
+- **Rental-grade stems trade weight for durability.** Fleet-spec Xiaomi frames add roughly 10 kg with thicker stems, oversized fork hardware, and enlarged battery bays—portable no longer, but dual brakes and dense metal keep abuse-friendly builds alive.【F:knowledge/notes/input_part001_review.md†L64-L64】
 
 ## Battery Expansion Options
 | Scenario | Recommended Action | Watchpoints |

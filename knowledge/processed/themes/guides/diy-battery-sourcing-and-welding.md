@@ -19,18 +19,34 @@
 | **Custom P45B/P50B packs** | €3000–€4500 for 22 S 10 P/11 P assemblies | Continuous ≈495 A, BMS peaks ≈1040 A | Group buys enable supply; document BMS limits (≤500 A continuous today).[^6][^7] |
 | **Commissioned builds (UK/US)** | Varies; premium vs DIY delta covers tooling | Output tied to builder’s QC logs | Trusted builders like jamessoderstrom eliminate tooling spend for one-off packs.[^11] |
 
+### Chemistry Trade-Off Snapshots
+- **Sony VTC6A vs. Molicel P42A vs. Samsung 30T:** VTC6A delivers the lowest sag and coolest temps but runs roughly double the cost of P42A unless you buy ~10 k cells per month; 30T still hits hardest but sacrifices capacity, so reserve it for burst-focused builds.【F:data/vesc_help_group/text_slices/input_part001.txt†L1603-L1655】
+
+### Market Shifts & Pricing Signals
+- Nickel’s 2022 price surge (+250 %) pushed pack builders toward 0.1–0.15 mm copper strip—it bends easier over cell tops, carries more current, and costs less than the remaining nickel stockpile.【F:knowledge/notes/input_part001_review.md†L686-L687】
+- Sony VTC5D prototypes are landing alongside Samsung 35E/50G/50S, Molicel P28A/P42A, and Samsung 48X cells; Artem is sourcing fresh 40T/48X/50G stock at €4–5 per cell while group buys quote P42A around €4 and 50S near €12.95, setting the 2025 price floor for high-discharge packs.【F:knowledge/notes/input_part001_review.md†L695-L696】
+
 ## Welding Equipment Decision Guide
 | Scenario | Recommended Tooling | Why It Wins | Follow-Up Checks |
 | --- | --- | --- | --- |
 | First copper pack, limited budget | Rent/borrow K-Weld or Glitter kit | Proven to fuse 0.1 mm copper reliably versus unproven 90 € units | Inspect weld nuggets under magnification; rip-test samples before scaling.[^3] |
 | Daily fabrication shop | Own Glitter 811A or K-Weld with high-current PSU | Handles repeated 4 kA+ hits when contacts are clean | Schedule bus pin cleaning to prevent E01 faults and maintain 4.4 kA output.[^10] |
 | Mixed chemistries (pouch + cylindrical) | Use adjustable pulse welders with copper/nickel sandwiches | Controls heat on dissimilar tabs, minimizes swelling risk | Pair with upgraded ≥230 A BMS and temperature probes on parallel groups.[^6] |
+| Tight copper layouts | Stack 0.1 mm copper under nickel and cap each strike near 50–60 J | Dual-strip “infinite slot” technique pushes current into the can without cracking copper | Validate that 10 mm-wide copper already supports ~15–20 A per cell (≈200 A on 9 P) before oversizing plates.【F:data/vesc_help_group/text_slices/input_part001.txt†L25425-L25518】【F:data/vesc_help_group/text_slices/input_part001.txt†L25469-L25490】 |
+
+- Malectrics V4 welders now ship with parallel MOSFET daughterboards and run happily from triple 3 S LiPos; some builders still drop to 2 S packs to tame FET heating because the welder regulates to ~5–6 V at the electrodes.【F:knowledge/notes/input_part001_review.md†L604-L605】
+- Artem’s 0.1 mm copper-under-nickel stacks respond best to heavy compression and careful hot-glue alignment—done right they only sag ~3.5 V at 60 A on 60 V Samsung 35E packs versus the 7–20 V drop seen on looser busbars.【F:knowledge/notes/input_part001_review.md†L607-L608】
+
+### Booster & Launch Packs
+- **High-C LiPo reservoirs.** CNHL and GNB 140 C–180 C packs keep kWeld/Glitter rigs and launch boosters punching above 2 kA, but they empty within a sprint—parallel two or more bricks if you need repeat hits instead of single holeshots.[^cnhl-booster]
 
 ## Pack Architecture Case Studies
 | Platform | Layout & Cells | Controller Pairing | Lessons |
 | --- | --- | --- | --- |
 | Dual 70H race scooter | 22 S10/11 P P45B modules | MakerX G300 duals | Logs justify nearly 500 A continuous; plan dual-BMS or fuse strategy until 700 A-class boards exist.[^4][^7] |
 | Dualtron Achilleus | 20 S8 P Molicel / 22 S9 P custom | Spintend 85250 relocated outside deck | Deck measures ≈48.5 cm × 18.1 cm—external controller mounting frees volume for ≥100 A batteries.[^4][^8] |
+| VSETT 10+ 20 S9 P | Copper-clad “W” pack with pre-welded tabs, QS8 connectors, copper bus reinforcements (~$170 shipped) | Controllers relocated outside deck | 168 mm-wide pack slides into the 171 mm cavity once controllers move; 19 mm PVC + 5 mm acrylic risers raise the lid for a top-mounted BMS.【F:data/vesc_help_group/text_slices/input_part001.txt†L8851-L8913】 |
+| Blade-compatible prototype | 20 S8 P Sony/Murata VTC5D (35 A cells) | In validation; targeting Blade hub swaps | Builder is logging 30 A sag data, comparing against Samsung 35E/50G/P42A alternatives, and pricing VTC5D vs. group-buy chemistries before committing to production.【F:knowledge/notes/input_part001_review.md†L689-L696】 |
 | Nami commuter upgrade | 22 S10 P layout in development | Awaiting high-current controllers | CNC + 3D-printed supports required; treat as modular sled to service 50PL packs.[^12] |
 | G3 30 S conversion | 30 S3 P modules (15 S6 P split) | High-voltage VESC | Requires grinding factory brackets; 30 S4 P too wide without chassis surgery and new BMS routing.[^13] |
 | 20 S10 P Samsung 40T | Dual Ubox 85250 | 0.2 mm copper busbars deliver ~350 A continuous / 450 A burst; avoid mixing pouch cells in parallel due to swelling | Reserve space for ≥230 A BMS and monitor temps during 40 kW pulls.[^6] |
@@ -43,11 +59,18 @@
 5. **Enclosure & structural supports** – CNC plates, 3D spacers, and adhesives trump hot glue for 22 S builds; treat mechanical retention as part of the electrical budget.[^8][^14]
 6. **Labor or outsourcing** – weigh the tooling investment against commissioning vetted builders when customs, shipping, or learning curves threaten schedules.[^11]
 
+### Supplier Dispute Playbook
+- **Document substitutions before filing claims.** Accepting a downgraded charger (e.g., 350 W XT90 delivered instead of a 500 W/100 V unit) still leaves room for partial refunds—log the shortfall with photos and voltage checks before escalating with the seller.【F:knowledge/notes/input_part001_review.md†L94-L95】
+- **Vet “premium” rebuilders.** Nordbot packs have arrived with rewrapped cells, exposed busbars, and flimsy insulation—treat the vendor as suspect and demand teardown photos before wiring them into high-power scooters.【F:data/vesc_help_group/text_slices/input_part001.txt†L9376-L9399】
+
 ## QA & Maintenance Protocols
 - **Thermal interface audits:** Log controller and stator temperatures on first shakedown runs; resurface heatsink plates and refresh thermal paste before chasing 400 A+ per motor.[^9]
 - **Weld verification:** Rip-test sample strips each session, especially after cleaning Glitter bus pins, to confirm energy settings haven’t drifted.[^10]
 - **Harness strain relief:** Use deck plates or external mounts to keep relocated controllers from stressing phase leads and QS8 connectors during pack swaps.[^8][^9]
+- **Wrap and isolate cells:** Heat-shrink each 21700, add Kapton plus wax/fish-paper between parallels, sheath the finished pack in epoxy board and giant heat-shrink, and add a cradle strap so it slides in/out without scuffing the deck.【F:data/vesc_help_group/text_slices/input_part001.txt†L8927-L8933】
+- **Balance lead soldering:** Flow ~0.5 s of 400 °C heat with solder paste so the copper strip soaks the thermal load—short pulses keep cells cool while locking balance wires into the copper bus.【F:data/vesc_help_group/text_slices/input_part001.txt†L8874-L8897】
 - **Telemetry cross-checks:** Pair CAN smart BMS data with VESC logs to validate current draw and spot calibration drift in shunt-based readings.[^7]
+- **Stay in the longevity window:** Artem keeps commuter packs between roughly 20 % and 85 % (≈3.6–4.1 V/cell) and under 40–45 °C; sag beyond ~3 V or repeated 70 °C peaks can cut lifespan to ~400 cycles.【F:knowledge/notes/input_part001_review.md†L698-L699】
 - **Finish work around positives:** Deburr nickel edges near cell tops and re-seat fishpaper before closing the pack—sharp tabs have already pierced insulation on low-current power-bank builds.【F:knowledge/notes/denis_all_part02_review.md†L122364-L122385】
 - **Print holders for heat, not looks.** PLA cradles slump once cells warm; switch to PETG or ASA around 230 °C/100 °C bed temps so 21700 honeycombs and Wildman bag sleds stay rigid in summer decks.【F:knowledge/notes/denis_all_part02_review.md†L116230-L116236】【F:knowledge/notes/denis_all_part02_review.md†L89665-L89696】
 - **Document capacity checks.** Time OEM chargers (≈1.7 Ah per hour on Xiaomi bricks) when vetting customer packs; a genuine 12 Ah module needs nearly seven hours from empty.【F:knowledge/notes/denis_all_part02_review.md†L98595-L98598】
@@ -98,3 +121,4 @@
 [^denis-pricing]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1510-L1526】
 [^common-port-chat]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1545-L1594】
 [^m365krakow]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1612-L1618】
+[^cnhl-booster]: CNHL and GNB 140 C–180 C LiPo bricks power kWeld launches and scooter booster packs but drain after a single sprint—parallel packs for repeated hits.【F:knowledge/notes/input_part001_review.md†L19-L21】
