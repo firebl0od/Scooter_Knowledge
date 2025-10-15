@@ -10,7 +10,10 @@
 ## Mounting & Sealant Tips
 - **Warm and center stubborn casings.** Dust rims and tubes with talc, pre-warm Xuancheng/PMT shells with a heat gun, and cinch the tread with zip ties so beads drop into the rim center before levering the tire home.【F:knowledge/notes/denis_all_part02_review.md†L90621-L90637】【F:knowledge/notes/denis_all_part02_review.md†L90909-L90921】
 - **Use air volume, not pressure spikes.** Hand pumps stall near 105 psi—seat tubeless tires with high-flow foot pumps, station compressors, or ratchet straps that momentarily seal the beads.【F:knowledge/notes/denis_all_part02_review.md†L81739-L81819】
+- **Blast stubborn tubeless beads.** For 11 in conversions, remove the valve core, flood the bead with soapy water, cinch the tread, and dump ~150 psi from a bead bazooka or large compressor—portable inflators lack the airflow. Immediately bleed pressure back toward 50 psi for riding once the bead pops.【F:knowledge/notes/input_part005_review.md†L202-L204】
+- **Skip improvised “air cannons.”** Ratchet straps and steady 5.5 bar airflow work; pulsed compressors and homemade blasts have flung hoses, damaged hearing, and convinced riders to buy shop-grade 8 bar compressors instead.【F:knowledge/notes/input_part005_review.md†L357-L358】
 - **Pick aluminum-safe sealants.** Yellow tubeless Slime avoids rim corrosion and plays nicely with PMT/Xuancheng setups; mixing CRC Fix foam with standard Slime violently reacts and coats the wheel in expanding goo.【F:knowledge/notes/denis_all_part02_review.md†L85974-L85997】【F:knowledge/notes/denis_all_part02_review.md†L81862-L81882】
+- **Rinse tube sealant after seating.** Tube-specific Slime must be flushed from tubeless G30 rims once the bead seals to prevent long-term corrosion and mess inside the wheel.【F:knowledge/notes/input_part005_review.md†L356-L357】
 - **Use the valves provided with modern tubeless casings.** PMT/Xuancheng tires now ship with tubeless valves that seal without slime—reserve sealant for aluminum-safe formulas if you still want puncture insurance.【F:knowledge/notes/denis_all_part02_review.md†L101765-L101775】
 
 ## Conversion & Fitment Steps

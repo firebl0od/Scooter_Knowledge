@@ -4,6 +4,7 @@
 - Oversize protection hardware and choose the right architecture for the pack: JK active-balancing boards bring dual 7 AWG busbars and remote toggles but recent self-burn reports push installers toward JBD/LLT or ANT units when decks are cramped or uptime is critical.[^1][^2][^3]
 - Commission every pack like a high-energy experiment—enable both charge and discharge FETs before regen tests, validate balance-lead order, and log first rides because a single BMS cutoff or miswire has already nuked controllers and power stages that survived normal abuse.[^4][^5][^6]
 - Treat balancing and calibration as routine maintenance: Daly boards need full charge/discharge learning and higher voltage to balance, while JK hardware wakes via the accessory display, runs active shuttling above ~0.015 V delta, and benefits from monthly thermal/IR audits.[^7][^8][^9]
+- VESC Tool’s internal BMS emulator can still surface state-of-charge estimates on “dumb” dual-BMS packs once nominal voltage and capacity are entered, buying time when CAN-ready hardware is unavailable—just remember it does not close contactors or police charge currents.[^vesc-emulator]
 
 ---
 
@@ -11,14 +12,19 @@
 | BMS Family | Typical Continuous / Peak Rating | Strengths Observed in the Field | Known Pitfalls & Mitigations |
 | --- | --- | --- | --- |
 | **JK Smart (active balancer)** | 150 A / 300 A-class packs with dual 7 AWG busbars | Integrated active charge shuttling, remote charge/discharge toggles, long-range Bluetooth displays, antispark-friendly architecture.[^1][^10] | Multiple batches have cooked balance resistors or frozen after opening the discharge page; keep spares, add airflow for the warm copper planes, and prep harnesses for a JBD swap.[^2][^11] |
-| **ANT Smart** | 200 A (70 mm-wide) to 240 A/600 A surge boards | Compact footprint, app-based current ramp controls, simultaneous cell balancing, proven on Weped FS builds and 20 s 7 p side-mounted packs plus the new 10–32 S/220 A SKU for 20 S scooters.[^3][^12][^13][^ant-32s] | Regen kills controllers if charge FETs stay disabled; app pairing quirks persist, discharge toggles can trip Tronic stages, and the larger units stay awake above ~61 V—budget headroom for 20 S packs that dip below 60 V.[^4][^14][^ant-floor] |
+| **ANT Smart** | 200 A (70 mm-wide) to 240 A/600 A surge boards | Compact footprint, app-based current ramp controls, simultaneous cell balancing, proven on Weped FS builds and 20 s 7 p side-mounted packs plus the new 10–32 S/220 A SKU for 20 S scooters; official-store promos have dropped 20–22 S units to €35–80 shipped when stock rotates.【F:knowledge/notes/input_part005_review.md†L321-L323】【F:knowledge/notes/input_part005_review.md†L385-L386】 | Regen kills controllers if charge FETs stay disabled; app pairing quirks persist, discharge toggles can trip Tronic stages, larger units stay awake above ~61 V—and new batches arrive with connector and serial changes, so verify authenticity before dispute windows close.[^4][^14][^ant-floor][^ant-proof] |
 | **LLT / JBD (passive)** | 60–100 A continuous in slim 10–17 s shells | Gentle pre-charge that protects controller caps, configurable temp limits, compact housings ideal for tight decks, credible JK alternative when space matters.[^3][^15] | Firmware listings exaggerate series counts; confirm real 21 s ceiling, watch balance current (≈100–160 mA), and document harness pinouts to avoid miswired sense leads.[^15][^16][^17] |
 | **Daly Smart** | 35–80 A commuter packs | Cheap, ubiquitous, workable for light-duty commuters once calibrated; some riders still rely on them when better boards won’t fit.[^7][^18] | Balancing often waits for ≥4.18 V per cell, SoC drifts until full cycles are logged, and users call failure rates a “casino”—derate heavily and monitor cell temps monthly.[^7][^19][^20] |
 | **Charge-only + Active Balancer** | Depends on fuse + controller limits | When space is scarce, builders fuse the main lead, rely on VESC undervoltage, and clip JK balancers across the stack to keep cells aligned without discharge FET losses.[^21] | Requires disciplined fusing and logging because discharge faults no longer open automatically; not suitable where regulatory compliance mandates full protection stages.[^21] |
 
+### VESC Tool Integration Status
+- **ANT gap today.** ANT smart BMS lines still lack native VESC Tool support, so telemetry lives in the vendor app until Vedder’s Bridge firmware adds CAN bindings—plan fallbacks for logging and regen validation on ANT-equipped packs.[^ant-gap]
+- **Emulator limits.** VESC Tool’s internal SoC emulator is a stopgap for dumb dual-BMS packs; it reads pack voltage and coulomb counts but cannot trip contactors or enforce charge ceilings, so treat it as supplemental telemetry, not protection.[^vesc-emulator]
+
 ## Commissioning & Wiring Guardrails
 1. **Wake the hardware correctly.** JK boards ship asleep—use the €15 display or a 5–7 V bench supply, confirm charge/discharge toggles, and leave the board powered before sealing the pack.[^8]
 2. **Validate sense-lead order before soldering B−.** Step through the harness at 3.5 V increments; reversing the negative pair has already cooked resistors on new ANT installs.[^5]
+   - When rebuilding tired MH1 packs, log per-parallel rest voltage before landing the harness so the new BMS isn’t blamed for sag that predates the swap.【F:knowledge/notes/input_part005_review.md†L420-L422】
 3. **Keep both FET banks enabled for regen tests.** Builders traced repeated ESC deaths to disabled charge FETs on JK smart boards—regen had nowhere to dump energy.[^4]
 4. **Stage first rides with logging.** Riders lost Spintend and Makerbase controllers the moment a BMS tripped under load; gather current and voltage traces to verify the protection stays latched through braking and launches.[^6]
 5. **Load-test bargain externals before trusting telemetry.** Denis’ workshop found “13 Ah” packs sagging instantly, leaving the internal battery carrying the ride—bench suspect modules alone before wiring them into a smart-BMS stack.[^cheap-externals]
@@ -32,12 +38,16 @@
 - **Treat BMS trips as design failures.** Flipsky 75100s and Wepoor power stages died instantly when the pack opened; prioritize parallel groups, pack cooling, and conservative regen so the BMS never has to intervene.[^6]
 - **Log trips before bypassing hardware.** One JK board saved a 20 s conversion by tripping at 60 A when the rider pushed 70 A battery; he’s redesigning the pack instead of defeating the protection.[^jk-trip]
 - **Oversize protection for big packs.** Large scooters are already paralleling multiple BMS boards or choosing 200 A-class ANT/JK units even for 70 A packs, proving that headroom beats marketing limits when chasing reliability.[^3][^22]
+- **Track sag alongside regen.** Laotie “38 Ah” packs sagged ~10 V under load and tripped riders despite 20 % indicated SoC; log live voltage, adjust cutoffs toward 55 V, and avoid raising current ceilings until the pack is rebuilt.[^laotie-sag]
 
 ## Balancing & Calibration Practices
 - **Map delta thresholds to chemistry.** Experienced builders trigger active balancing around 0.015–0.025 V and cap charge at ~4.15 V when longevity outweighs peak range.[^9]
 - **Expect Daly learning cycles.** Their coulomb-counting SoC meters read low for several rides; plan full discharge/charge sessions or manual 100 % resets so telemetry aligns with reality.[^7]
 - **Leverage telemetry displays.** JK screens offer long-range Bluetooth and remote toggles, effectively doubling as pack dashboards on scooters lacking dedicated HUD space.[^10]
 - **Schedule thermal/IR checks.** JK smart boards run warm near 60 A; monthly infrared sweeps and rest torque checks catch rising resistance before it snowballs.[^10]
+- **Document platform quirks.** Ninebot Max G2 packs balance reliably with passive bleeders (~5 mV delta), while Navee N65 packs can drift 0.7 V because their protection-only BMS rarely equalises—budget JK/ANT retrofits when swapping between the two platforms.【F:knowledge/notes/input_part005_review.md†L375-L377】
+- **Recalibrate VESC SoC after deck work.** Grinding or drilling inside the deck rains conductive dust onto harnesses; vacuum the bay, flush boards with IPA, and then reset coulomb counters or retune voltage curves (or switch to SmartDisplay dashboards) so the refreshed telemetry matches the cleaned pack.【F:knowledge/notes/input_part005_review.md†L602-L602】
+- **Evaluate Bribms drop-ins for rentals.** Paolo’s “Bribms” replacement keeps the Ninebot footprint while adding 15 S support, 50–60 A discharge, 100 mA balancing, and Bluetooth telemetry—handy when upgrading shared-fleet frames without redesigning the deck.【F:knowledge/notes/input_part005_review.md†L609-L609】
 
 ## Charging Infrastructure Updates
 - **Programmable supplies cover odd voltages.** Adjustable 22 S/18 A bricks paired with ANT sleep timers keep 21 S packs topped without drifting when scooters sit for weeks.[^adj_supply_smart]
@@ -48,6 +58,8 @@
 - **Log balance behavior after storage.** JK units can self-immolate while idle and Daly boards stop balancing once “full”—review app history after downtime before sending the pack back into service.[^2][^19]
 - **Teach recovery procedures.** Publish lead-order diagrams and wake-up checklists so drained JK packs (≈57 V on 20 s) or JBD miswires don’t strand riders without telemetry.[^17][^24]
 - **Escalate when firmware toggles misbehave.** ANT app glitches that trip discharge FETs or JK UIs that freeze mid-session warrant immediate vendor contact and a fallback BMS plan.[^11][^14]
+- **Inspect new ANT batches on arrival.** Recent €35–80 promos shipped boards with altered connectors, temp probes, or missing serial logos—open the case, photograph internals, and validate wiring before the dispute clock expires.【F:knowledge/notes/input_part005_review.md†L385-L386】
+- **Clean contamination before trusting telemetry.** Metal shavings in a ubox shorted the pack, killed the BMS, and left VESC showing 13 % SoC after the cleanup—recalibrate discharge curves and verify pack voltage whenever telemetry drifts without a smart BMS in the loop.【F:knowledge/notes/input_part005_review.md†L457-L460】
 
 ---
 
@@ -68,6 +80,7 @@
 [^14]: ANT discharge toggles and firmware glitches have bricked controllers during commissioning, so riders double-check app states after updates and stage regen conservatively.【F:knowledge/notes/input_part010_review.md†L315-L315】
 [^ant-32s]: Smart Repair flagged ANT’s new 10–32 S/220 A smart BMS as a viable option when 7–20 S models sell out, giving 20 S scooters fresh inventory to pull from.【F:knowledge/notes/input_part012_review.md†L20178-L20234】
 [^ant-floor]: The same thread notes the larger ANT units stay awake above ≈61.2 V, so 20 S packs that dip below 60 V need extra headroom or a different BMS if they expect deep discharge protection.【F:knowledge/notes/input_part012_review.md†L20185-L20224】
+[^ant-proof]: Official ANT store promos now ship 20–22 S boards as low as €35–80 but with revised connectors, temp probes, or missing serial logos, so open the case for photos and verification before dispute windows close.【F:knowledge/notes/input_part005_review.md†L385-L386】
 [^15]: LLT/JBD smart boards earn praise for compact housings, gentle pre-charge, and configurable protections, giving builders a slimmer alternative to JK hardware.【F:knowledge/notes/input_part007_review.md†L192-L262】
 [^16]: Community members caution that JBD firmware listings overstate maximum series counts—verify the real 21 s ceiling before wiring high-voltage packs.【F:knowledge/notes/input_part007_review.md†L64-L141】
 [^17]: Harness diagrams and recovery guides remain in demand because miswired JBD/ANT balance leads are a recurring failure point during repairs.【F:knowledge/notes/input_part009_review.md†L453-L469】
@@ -76,6 +89,9 @@
 [^20]: Monthly IR checks and conservative charge currents help detect rising resistance after Daly-class thermal trips.【F:knowledge/notes/input_part001_review.md†L662-L705】
 [^21]: Kaabo Wolf builders documented charge-only BMS layouts fused at the main lead while clipping JK active balancers across the stack when discharge FET space was unavailable.【F:knowledge/notes/input_part002_review.md†L148-L312】
 [^22]: Large motorcycle-class scooters now parallel multiple BMS boards so 20 s 24 p packs can share hundreds of amps safely.【F:knowledge/notes/input_part008_review.md†L15-L15】
+[^ant-gap]: ANT smart BMS owners still rely on the vendor app because VESC Tool has no native integration yet, leaving CAN telemetry on the roadmap for Bridge/firmware updates.【F:knowledge/notes/input_part005_review.md†L101-L106】
+[^vesc-emulator]: Riders lean on VESC Tool’s internal BMS emulator to estimate state of charge on dumb dual-BMS packs after entering nominal voltage/capacity, but it cannot close contactors or enforce charge limits.【F:knowledge/notes/input_part005_review.md†L104-L108】
+[^laotie-sag]: Laotie “38 Ah” packs logged ~10 V sag under load and stranded riders at 52 V despite 20 % indicated SoC; they now log real voltage, raise cutoffs toward 55 V, or plan pack rebuilds before upping current.【F:knowledge/notes/input_part005_review.md†L108-L114】
 [^23]: JK’s app-controlled discharge disable doubles as an anti-theft toggle once the pack is charged, a workflow riders now bake into parking habits.【F:knowledge/notes/input_part009_review.md†L35-L36】
 [^24]: Recovery checklists cover JK low-voltage wake-ups around 57 V on 20 s packs and balance-lead troubleshooting so riders don’t lose telemetry after servicing.【F:knowledge/notes/input_part009_review.md†L29-L35】【F:knowledge/notes/input_part009_review.md†L467-L469】
 [^bridge]: VESC Bridge V2 documentation promises plug-and-play harnesses plus future JK/JBD/ANT/Daly support, making it easier to integrate smart BMS telemetry with controller dashboards once released.【F:knowledge/notes/input_part011_review.md†L252-L252】

@@ -19,6 +19,7 @@
 - **Interface Upgrades:** Replacing spongy pads with copper shims or thicker (≈1 mm) thermal sheets plus quality paste dropped MOSFET temps 15–20 °C during 100–140 A runs when the case was clamped directly to the deck.[^5][^6]
 - **Airflow & Deck Prep:** Add 40–90 mm fans between stacked boards, machine paint off mounting faces, and bolt the enclosure to aluminium spreaders if regen pushes single-Ubox stacks past 65–70 °C.[^7]
 - **Expected Benchmarks:** Well-mounted duals have logged ~100 A battery / 130 A phase at ≈45 °C, while poor contact in sealed Weped decks let cases soar to 80 °C during 500 A combined pulls—plan extra cooling above those loads.[^6][^20]
+- **Single-Ubox baseline:** The aluminum single 85/200 held 100 A battery, 200 A phase, and 60–70 A FW on a 20 S MXUS build without thermal rise when clamped to a 20 mm aluminum baseplate—treat it as a compact alternative to boxed duals if you can replicate the mounting.【F:knowledge/notes/input_part005_review.md†L216-L218】
 - **Plan hardware for earless cases.** 85/240 housings still ship without mounting ears and rely on tiny M2.5 hardware, so riders print brackets, retap threads, or glue adapters before long-travel suspensions knock under-deck mounts loose.[^31]
 
 ## Power Limits, Regen & Current Planning
@@ -27,9 +28,11 @@
 - **High-Voltage Safeguards:** Dual owners run ~2×135 A phase / 2×71 A battery within 70 °C so long as regen stays off during full-charge launches and higher-voltage packs (17 S+) are bled a few percent before re-enabling braking.[^22]
 - **Know the Ubox 100/100 envelope.** Smart Repair still caps the single at 22 S with regen disabled on the e-brake input; it ships at 135 A phase / 180 A absolute without ST-Link pads or beefy 12 V rails, so budget external regulation for accessories.[^u100-guardrails]
 - **Duty & Field Weakening:** Keep field-weakening reserved for cooled builds; previous fires stemmed from wizard runs on fresh installs, so validate base detection and duty-cycle ramps before layering FW or traction aids.[^18][^23]
+- **App-config watchdog:** Mobile VESC Tool exposes an inactivity shutdown in App Config → General; disable it for long bench sessions and raise Absolute Max current slightly if 200 A overcurrent faults persist after tuning.【F:knowledge/notes/input_part005_review.md†L315-L316】
 
 ## Controls, Accessories & IO
 - **Remote & Cruise:** The bundled 2.4 GHz remote offers cruise, horn, and light controls via the receiver, reducing parallel looms compared with bare PPM throttles.[^11]
+- **Harness connector update:** Recent adapter looms ship with GH1.25 signal plugs—stock pre-crimped jumpers instead of fighting loose hand crimps, label each lead, and route them carefully through the frame.【F:knowledge/notes/input_part005_review.md†L315-L316】
 - **Brake Inputs:** The ADC daughterboard supports normally-open/closed levers and selectable 5 V or 3.3 V rails—set the switches before plugging Magura/Shimano sensors to avoid shorting hall supplies.[^13]
 - **Lighting Power:** Dual controllers expose a ≈1.5 A 12 V rail for lighting relays, but singles lack this output; budget fused DC-DC converters instead of stealing from the fan header.[^12][^14]
 - **CAN & Anti-Slip:** Updated harnesses let one single wake another over CAN, yet anti-slip belongs on dual configurations—leaving it active on a solo motor causes low-speed cut-outs with red/green blink codes.[^10][^24]
@@ -38,6 +41,7 @@
 ## Firmware, Logging & Fault Recovery
 - **Version Discipline:** Stick with Spintend’s vetted firmware packages (e.g., 100 A battery limit files) unless you have cooling to exploit the 300 A hardware bins; mismatched binaries raise noise and reliability issues.[^25]
 - **BLE Options:** Official BLE dongles arrive pre-flashed and tax-paid via AliExpress, while DIY NRF boards need extra programming; keep at least one link for live tuning even if you prefer wired sessions.[^26]
+- **Bluetooth range reality:** The onboard Bluetooth radio in the aluminum single routinely maintains ~50 m line-of-sight links once QC cleaning is done—enough to keep pits connected without auxiliary antennas.【F:knowledge/notes/input_part005_review.md†L217-L218】
 - **Fault Retrieval:** If Bluetooth is absent, the controller retains the last fault until shutdown—connect via USB before cycling power so valuable diagnostics aren’t lost.[^10]
 
 ## Known Field Failures & Mitigations
