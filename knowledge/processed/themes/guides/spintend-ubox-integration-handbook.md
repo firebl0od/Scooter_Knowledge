@@ -16,6 +16,8 @@
 4. **Bench Rules:** Wire the entire harness before energising, precharge ≥20 S packs, discharge bus caps after unplugging, keep ADC inputs ≤3.3 V, and eliminate ground loops to avoid repeat STM32 deaths.[^3]
 4. **Initial Power Tests:** Bring the controller up on a fused bench supply with the BMS discharge FET enabled; if regen previously latched undervoltage faults, confirm the pack’s protection MOSFETs are awake before running detection.[^19]
 5. **Detection housekeeping:** Enable the phase-filter checkbox only during motor detection—leaving it on while riding reintroduces noise and ABS overcurrent faults.[^phase-filter]
+6. **Screen current-sense offsets:** Before installing, power each single on the bench and confirm the current-sense op-amps report sane offsets (hundreds of counts, not 30 or 4,000); multiple “new” boards arrived with shorted amplifiers that later blew input capacitors and XT60s under normal reconnects.[^offset-screening]
+7. **Log the hardware revision.** The latest single board swaps to an aluminium PCB with G015N10 MOSFETs—stick with the matching gate network instead of random FET swaps or you’ll destabilise the driver.[^g015n10]
 
 ## Thermal Management & Mounting
 - **Firmware Limits:** Stock firmware starts derating around 75–85 °C and shuts down near 100 °C, so increase cutbacks only after verifying thermistor calibration.[^4]
@@ -31,9 +33,11 @@
 - **Know the Ubox 100/100 envelope.** Smart Repair still caps the single at 22 S with regen disabled on the e-brake input; it ships at 135 A phase / 180 A absolute without ST-Link pads or beefy 12 V rails, so budget external regulation for accessories.[^u100-guardrails]
 - **Current sharing proof point.** Dual builds have logged 180 A phase / 130 A battery on the rear and 150 A/90 A up front while holding FETs near 39 °C when pads are clamped flat—use these as sanity checks that your thermal stack-up is working.[^dual-current]
 - **Duty & Field Weakening:** Keep field-weakening reserved for cooled builds; previous fires stemmed from wizard runs on fresh installs, so validate base detection and duty-cycle ramps before layering FW or traction aids.[^18][^23]
+- **Expect commuter hubs to need more current.** Maike-branded “3000 W” dual hubs stayed near 25 km/h until motor current climbed toward 140 A (≈70 A battery) and the owner improved thermal coupling with frame-mounted pads or fans—stock 16 S packs with dual XT60s still bottleneck upgrades.【F:knowledge/notes/input_part004_review.md†L354-L354】
 
 ## Controls, Accessories & IO
 - **Remote & Cruise:** The bundled 2.4 GHz remote offers cruise, horn, and light controls via the receiver, reducing parallel looms compared with bare PPM throttles.[^11]
+- **Cruise troubleshooting:** If the remote beeps but never holds speed, confirm the PPM switch channel toggles in VESC Tool, match firmware between paired controllers, and ensure the accessory rail stays above 5 V when cruise engages.【F:data/vesc_help_group/text_slices/input_part004.txt†L11970-L12020】
 - **Brake Inputs:** The ADC daughterboard supports normally-open/closed levers and selectable 5 V or 3.3 V rails—set the switches before plugging Magura/Shimano sensors to avoid shorting hall supplies.[^13]
 - **Lighting Power:** Dual controllers expose a ≈1.5 A 12 V rail for lighting relays, but singles lack this output; budget fused DC-DC converters instead of stealing from the fan header.[^12][^14]
 - **Horn channel expectations:** The horn terminal happily drives compact 12 V siren boards (e.g., GREATZT QSI-4840); riders trim the plastic shell to a ≈30 × 20 mm module and mount it behind the dash so the alarm wakes with the scooter instead of relying on battery-powered noisemakers.[^horn-siren]
@@ -45,6 +49,7 @@
 - **Version Discipline:** Stick with Spintend’s vetted firmware packages (e.g., 100 A battery limit files) unless you have cooling to exploit the 300 A hardware bins; mismatched binaries raise noise and reliability issues.[^25]
 - **Unofficial 300 A bins:** Community Micro-USB and USB‑C binaries lift the single’s 100 A factory ceiling to 300 A but void warranty—install only if you have the airflow, copper interfaces, and logs to prove the MOSFETs survive the extra load.【F:data/vesc_help_group/text_slices/input_part000.txt†L20181-L20187】【F:data/vesc_help_group/text_slices/input_part000.txt†L20190-L20299】
 - **BLE Options:** Official BLE dongles arrive pre-flashed and tax-paid via AliExpress, while DIY NRF boards need extra programming; keep at least one link for live tuning even if you prefer wired sessions.[^26]
+- **NRF quick-start:** When the NRF header is the only free UART, flash a generic NRF51 via USB, solder it to the dedicated header, and power-cycle to pair—no need to steal the ADC adapter’s UART pads.【F:data/vesc_help_group/text_slices/input_part004.txt†L8813-L8818】
 - **Fault Retrieval:** If Bluetooth is absent, the controller retains the last fault until shutdown—connect via USB before cycling power so valuable diagnostics aren’t lost.[^10]
 
 ## Known Field Failures & Mitigations
@@ -97,6 +102,7 @@
 [^30]: Moisture-driven MOSFET temperature spikes that vanished after warming and drying the enclosure.【F:knowledge/notes/input_part004_review.md†L474-L474】
 [^31]: 85/240 mounting anecdotes covering custom brackets, retapped threads, and thermal pad tweaks to secure earless housings.【F:knowledge/notes/input_part012_review.md†L20537-L20541】【F:knowledge/notes/input_part012_review.md†L20575-L20583】【F:knowledge/notes/input_part012_review.md†L20581-L20587】
 [^32]: Spintend 85/240 shipments now staging through a New Jersey hub for faster, low-tariff deliveries into the United States.【F:knowledge/notes/input_part012_review.md†L17321-L17325】【F:knowledge/notes/input_part012_review.md†L18632-L18638】
+[^g015n10]: New single-board revisions ship on aluminium PCBs with G015N10 MOSFET stacks and tuned gate networks—stick with the factory parts instead of improvising swaps.【F:knowledge/notes/input_part004_review.md†L115-L115】
 [^u100-guardrails]: Smart Repair reiterated that the Ubox 100/100 tops out at 22 S, ships with 135 A phase / 180 A absolute limits, and should keep regen off the e-brake path unless you’re ready to swap FETs; it also omits ST-Link pads and beefy 12 V rails compared with 85xxx units.【F:knowledge/notes/input_part012_review.md†L19186-L19195】
 [^start-button]: The same teardown confirmed the 100/100 refuses to boot from USB-C—wire the latching 16 mm start button or another 5 V trigger instead of depending on the BMS as a master switch.【F:knowledge/notes/input_part012_review.md†L19300-L19318】
 [^zero-launch]: Stock Zero 11X square-wave controllers still beat 60 V Ubox launches until phase limits rise and airflow improves, making active cooling a prerequisite for parity.【F:knowledge/notes/input_part000_review.md†L103-L103】
