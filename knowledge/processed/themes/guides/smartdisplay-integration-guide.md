@@ -73,3 +73,13 @@
 [^boot]: MCU firmware initializes dashboards in ≈10 s, avoiding the 45–95 s boot delays seen on Raspberry Pi VESC displays.【F:knowledge/notes/input_part004_review.md†L83-L83】
 [^uart-crc]: SmartDisplay throttle traffic includes CRC checks—log the UART stream before chasing shielding fixes for perceived duty dips.【F:knowledge/notes/input_part004_review.md†L214-L215】
 [^can-backfeed]: Smart Repair’s harness can power lights directly from the CAN header, but builders add inline resistors and tap the servo PWM pads when they want flashing indicators instead of constant-on lamps.【F:knowledge/notes/input_part012_review.md†L19323-L19405】
+
+## Production Timeline & Pricing Updates
+- **SmartDisplay nearing production with premium pricing.** Rage Mechanics' SmartDisplay now lives in a CNC aluminium, anti-glare housing with VESC Tool bridging, navigation, RTC timekeeping, and music controls; two buttons support single/double-click mapping today, with knob controls planned once production launches—early adopters expect €199.99 launch slots before the €400–600 retail range.[^smart_production]
+- **Harnesses are modular and interchangeable.** Production units ship with interchangeable harnesses for VESC, Minimotors, Kelly, Zero, and Vsett pins, and the project is no longer open source despite earlier forks.[^smart_harness]
+
+## Source Notes (continued)
+[^smart_production]: SmartDisplay production timeline, hardware features, and pricing expectations.【F:knowledge/notes/input_part004_review.md†L21-L21】【F:knowledge/notes/input_part004_review.md†L52-L52】
+[^smart_harness]: SmartDisplay modular harness system for various controller brands.【F:knowledge/notes/input_part004_review.md†L52-L52】【F:knowledge/notes/input_part004_review.md†L339-L339】
+[^boot]: SmartDisplay boot time comparison vs. Raspberry Pi dashboards.【F:knowledge/notes/input_part004_review.md†L83-L83】
+[^uart-crc]: SmartDisplay UART throttle troubleshooting and CRC-protected command stream.【F:knowledge/notes/input_part004_review.md†L608-L608】

@@ -84,3 +84,15 @@
 [^dual-motor]: 【F:knowledge/notes/denis_all_part02_review.md†L191-L193】
 [^new-13s]: Guidance from Denis Yurev and Happy Giraffe to favor a single 13 S Max pack on the stock hub, logging 30–40 A pulls with Rita/Happy BMS rather than chasing dual-motor swaps.【F:knowledge/notes/denis_all_part02_review.md†L10-L12】
 [^new-suspension]: Community consensus against foam “solid” tires and in favor of quality 10-inch pneumatics with Monorim front/DNM rear suspension for 50 km/h Ninebot builds; Sharkset forks remain comfortable but wobble above ~45 km/h.【F:knowledge/notes/denis_all_part02_review.md†L13-L14】
+- **Stack external packs only with BMS parity.** Pairing a stock 10 S G30 pack with a DIY 4 S extender demands healthy BMS boards charged to similar voltages; the stock pack still clamps around 20 A, and VESC detection fails until proper voltage support restores power.[^pack_stack]
+- **Expect 45–48 km/h from dual-motor G30s at 48 V.** Riders warned that voltage headroom is generous (enamel withstands kilovolt spikes), but phase amps cook motors—75100 builds stay around 70 A battery / 150 A phase to avoid smoking stators.[^dual_g30_speed]
+- **Set 20 S G30 cutoffs near 56.5 V (~2.85 V/cell) to ride through sag.** This value keeps dual stock packs alive under load while bypassed BMS boards stay clear of 2.5 V absolute limits.[^g30_cutoff]
+- **Dual-stock Ninebot packs fit with tall spacers and flipped SNSC suspension.** Builds using 80 mm hardware, 3D-printed deck risers, and inverted SNSC brackets net ~6 cm ground clearance so two OEM packs plus externals ride without scraping.[^dual_pack_fitment]
+- **Ninebot hub thermal ceiling is ~40–45 A battery.** Paolo confirmed OG Ninebot motors burn above this threshold even on 20 S—cap phase/battery settings and resist feeding dual 15 A controllers continuous load without upgraded hubs.[^ninebot_thermal]
+- **F-series stems bend under load.** The elongated aluminum steering tube will bend where factory drilling weakened it for harness routing—inspect for flex before hard riding and treat as weaker than Xiaomi's 45° pipe assembly.[^f_stem]
+[^pack_stack]: Stacking Ninebot G30 packs with DIY extenders requires BMS parity and matched voltages.【F:knowledge/notes/input_part004_review.md†L14-L14】
+[^dual_g30_speed]: Dual-motor G30 speed expectations at 48 V with thermal management warnings.【F:knowledge/notes/input_part004_review.md†L74-L74】
+[^g30_cutoff]: Recommended VESC battery cutoff voltage for 20 S stacked Ninebot packs.【F:knowledge/notes/input_part004_review.md†L48-L48】【F:knowledge/notes/input_part004_review.md†L70-L70】
+[^dual_pack_fitment]: Dual Ninebot pack packaging with tall spacers and flipped SNSC suspension.【F:knowledge/notes/input_part004_review.md†L47-L47】
+[^ninebot_thermal]: Ninebot hub motor thermal ceiling around 40–45 A battery current.【F:knowledge/notes/input_part004_review.md†L298-L298】
+[^f_stem]: Ninebot F-series stem bending cautions due to factory harness routing holes.【F:knowledge/notes/input_part004_review.md†L346-L346】

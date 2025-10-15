@@ -82,3 +82,21 @@
 [^adc-noise]: Compressing throttle activation windows to ~0.83–1.2 V cleared ADC-trigger noise on Spintend builds; some riders grounded the chassis for extra stability but warn the practice risks shorts if insulation fails.【F:knowledge/notes/input_part014_review.md†L85-L86】
 [^adapter-idle]: Spintend’s adapter manual targets ~0.8 V idle readings—seeing ~3 V idle means the channel is wired wrong and will act like a stuck brake.【F:knowledge/notes/input_part008_review.md†L21846-L21848】
 [^storage-cal]: Re-running the ADC wizard and clearing stale inversion flags resolved Xiaomi brake/throttle glitches after long storage.【F:knowledge/notes/input_part011_review.md†L16211-L16217】
+
+## Little FOCer & Compact Controller Specifics
+- **Little FOCer throttles belong on 3.3 V.** Feeding ADC1 from 5 V left a Little FOCer scooter stuck at WOT; veterans reiterated that idle should sit around 0.6–0.9 V and WOT near 2.5–3.3 V, with halls staying on 5 V while the throttle uses the 3.3 V rail to protect the STM32 input.[^little_focer_3v3]
+
+## VESC Latch & Key Switch Integration
+- **Understand VESC latch quirks before wiring key switches.** The logic rail is live whenever the pack is connected, and tying the 5 V switch pin to ground turns the controller off—unlike Flipsky aluminums, which still need external contactors or BMS gating to avoid MOSFET stress.[^vesc_latch]
+
+## ADC App Timeout Safeguards
+- **ADC adapter placement and firmware safeguards.** Long throttle runs stayed quiet when riders mounted Spintend's ADC adapter beside the controller (or used shielded cable) and fed 5 V halls through resistor dividers; Vedder's mid-June patch now timeouts ADC-detach scripts so Xiaomi dash integrations can safely hand inputs back to hardware control.[^adc_timeout]
+
+## Brake Light Wiring
+- **Understand brake light output behavior.** One rider's 12 V tail lamp powered up via the ADC V2 adapter (ground/12 V/brake leads) but never entered brake mode, underscoring the need to clarify how the board sinks brake current and which firmware settings drive the output.[^brake_light_wiring]
+
+## Source Notes (continued)
+[^little_focer_3v3]: Little FOCer throttle voltage requirements and WOT prevention.【F:knowledge/notes/input_part004_review.md†L18-L18】【F:knowledge/notes/input_part004_review.md†L90-L90】
+[^vesc_latch]: VESC latch behavior and key switch wiring considerations.【F:knowledge/notes/input_part004_review.md†L56-L56】
+[^adc_timeout]: ADC adapter placement, shielding, and firmware timeout safeguards.【F:knowledge/notes/input_part004_review.md†L286-L286】
+[^brake_light_wiring]: Brake light wiring confusion on ADC V2 adapter.【F:knowledge/notes/input_part004_review.md†L352-L352】
