@@ -7,6 +7,7 @@ A structured checklist for planning, installing, and operating Denis Yurev's Rit
 - Factory harnesses ship with XT30 connectors sized for the deck cavity; XT60 shells do not fit without rework, and the adapter's protections assume XT30 current levels.[^2]
 - Power handling peaks around 25–30 A continuous (≈1.5 kW on 13S); Rita v4 now reports up to 15S packs but still enforces that battery-current ceiling, so serious hill-climb torque demands uprated controllers or dual motors.[^3][^4]
 - Newer hardware revisions add charger and regen over-voltage protection, yet legacy boards rely entirely on pack BMS behavior. Keep the three-way charge splitter inline when relocating the port; otherwise the adapter cannot sense charger events, and anything above 42 V remains advanced use with conservative ~95 % state-of-charge targets.[^5]
+- Expect a floating +5 V on whichever battery input is idle; Rita energises the sense rail even with one pack disconnected, which Denis calls normal during bench diagnostics.[^5a]
 
 ## Pre-Installation Readiness Checklist
 | Item | Why it matters | How to verify |
@@ -37,11 +38,15 @@ A structured checklist for planning, installing, and operating Denis Yurev's Rit
 
 ## Charging & Power Management
 - Rita directs charge current to whichever pack sits at lower voltage, then shares once they equalize; expect scooter-dash percentages to stall around 99 % until the external finishes balancing.[^19][^22]
+- Denis caps 12 S externals around 49.2 V (~4.1 V/cell) so regen retains headroom—raising the ceiling gains roughly 1 km of range while risking e-brake loss on long descents.[^49v-headroom]
 - Shared XT30 leads mean off-scooter charging demands an adapter harness once the pack leaves the Rita loom.[^9]
 - Range + Speed kits can charge both packs from a 50.4 V supply, but splitting them across chargers shortens downtime and keeps BMS thermals in check.[^23]
 - Higher-voltage builds either modify the OEM charger with a ~14.3 kΩ feedback stack or adopt quality CC/CV supplies (e.g., Mean Well ELG-240-48A) to hit 50.4–54.6 V targets.[^24][^25]
 - Without Rita, parallel Y-cables bypass BMS protections; leaving the adapter in circuit keeps dual inputs diode-isolated and enforces current sharing.[^18]
 - Expect the internal pack to rest around 41 V at 100 %—Rita deliberately undercharges a few tenths to preserve regen headroom, so chase error 39 by reducing current or staggering pack voltages rather than forcing a full top-off.[^undercharge]
+- External-pack telemetry disappears while a charger is connected—Rita hides the auxiliary voltage on Gen 1–Gen 5 boards, so blank readings during top-offs are normal.[^charge-ui]
+- Analog clone scooters still benefit: Rita behaves like paired smart diodes that prioritise whichever pack sits higher in voltage, but riders lose the fine-grained cutoff control provided by Xiaomi dashboards and must manage pack voltage manually.[^analog-clone]
+- Happy BMS coulomb counters peg at 0 % once roughly 32 Ah flows through a 35 A external; expect about 10 % energy remaining and plan range manually even though Rita keeps current inside spec.[^happy-35a-rita]
 
 ## Firmware & Telemetry Configuration
 1. Downgrade BLE to 072/090 if the dashboard runs newer firmware that blocks Rita app pairing.[^26]
@@ -53,13 +58,17 @@ A structured checklist for planning, installing, and operating Denis Yurev's Rit
 ## Operating Guardrails
 | Risk | Symptom | Mitigation |
 | --- | --- | --- |
+| External pack not configured | Rita throws error 39 and may beep after long pulls; charging pauses near 40 °C pack temperature. | Set series count/capacity in the app before paralleling packs and let them cool to ≈35 °C before resuming charge current.【F:knowledge/notes/denis_all_part02_review.md†L315-L316】 |
+| Internal pack refuses to share charge | Rita fills the external while the OEM pack stays low; Happy app may show missing temperature data. | Disconnect Rita, verify both OEM temperature sensors, and replace the failed probe before blaming the adapter.【F:knowledge/notes/denis_all_part02_review.md†L505-L505】 |
 | Current spikes >30 A | Rita logs surges, controllers overheat, or ABS trips. | Reinforce controller traces, upgrade MOSFET cooling, or step up to dual-motor conversions for hill climbs.[^3][^27][^28]
 | Miswired AWD harness | BMS error 21 or dashboards reboot. | Tie both controller grounds, forward only the white data lead to the slave dash, and keep Rita as the master BMS.[^29]
 | Regen/charger over-voltage | Error 39 with −10 °C spoof, or charger LED never goes green. | Validate charger voltage, keep splitter in place, and monitor via Rita app during top-offs.[^15][^30]
 | Counterfeit auxiliary packs | Capacity sag, overheated wiring, or exaggerated Ah ratings. | Source from vetted builders (Samsung 35E/22PM cells), inspect weld quality, dispute “13.8 Ah” 10S2P claims, and secure the bag with clamps or cages.[^31][^32][^38]
 | Charge splitter removed | Charger LED dark, Rita protections inactive. | Keep the OEM/Rita three-way splitter inline whenever relocating the charge port so the adapter still senses charging mode.[^5][^39] |
 | Thermal throttling after upgrade | Repeated cutbacks every few minutes. | Replace dried thermal paste, ensure fans or heat sinks make full contact, and verify tire pressures to reduce load.[^12][^27][^33]
+| Dual-motor conversion plans | Each motor sees ~15 A even with dual Ritas, limiting gains. | Budget for stronger single rear motors or uprated controllers before chasing AWD builds around Rita’s current ceiling.【F:knowledge/notes/denis_all_part02_review.md†L385-L387】 |
 | 60 V experimentation | Adapter alarms or noisy motors during bench tests. | Stage launches gradually, confirm BLE firmware, and monitor Rita temperature warnings before leaning on 60 V packs.[^rita60v]
+| Emulator shows 0 % with voltage remaining | Emulator “empty” warnings appear around 3.4 V per cell even with lower cutoffs configured. | Keep manual voltage checks or a conservative range buffer when riding on BMS emulation instead of a Xiaomi board.[^emulator-34v-rita] |
 
 ## Troubleshooting Quick Reference
 | Code/Symptom | Likely cause | First checks |
@@ -87,6 +96,7 @@ A structured checklist for planning, installing, and operating Denis Yurev's Rit
 [^3]: 【F:knowledge/notes/all_part01_review.md†L20-L21】【F:knowledge/notes/all_part01_review.md†L123-L124】
 [^4]: 【F:knowledge/notes/denis_all_part02_review.md†L22-L23】【F:knowledge/notes/denis_all_part02_review.md†L153-L154】
 [^5]: 【F:knowledge/notes/denis_all_part02_review.md†L29-L30】
+[^5a]: 【F:knowledge/notes/all_part01_review.md†L23-L24】
 [^6]: 【F:knowledge/notes/all_part01_review.md†L118-L124】
 [^7]: 【F:knowledge/notes/denis_all_part02_review.md†L19-L23】【F:knowledge/notes/denis_all_part02_review.md†L31】
 [^8]: 【F:knowledge/notes/denis_all_part02_review.md†L23】【F:knowledge/notes/denis_all_part02_review.md†L33】
@@ -98,16 +108,18 @@ A structured checklist for planning, installing, and operating Denis Yurev's Rit
 [^15]: 【F:knowledge/notes/denis_all_part02_review.md†L30】【F:knowledge/notes/denis_all_part02_review.md†L29-L30】
 [^16]: 【F:knowledge/notes/all_part01_review.md†L20】【F:knowledge/notes/all_part01_review.md†L55】
 [^rewire]: 【F:knowledge/notes/denis_all_part02_review.md†L6979-L6986】
-[^17]: 【F:knowledge/notes/all_part01_review.md†L112-L114】
+[^17]: 【F:knowledge/notes/all_part01_review.md†L112-L114】【F:knowledge/notes/denis_all_part02_review.md†L473-L474】
 [^18]: 【F:knowledge/notes/all_part01_review.md†L16-L18】【F:knowledge/notes/all_part01_review.md†L64】
 [^19]: 【F:knowledge/notes/all_part01_review.md†L54-L63】
 [^20]: 【F:knowledge/notes/all_part01_review.md†L20-L25】【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L46】
+[^analog-clone]: 【F:knowledge/notes/all_part01_review.md†L19-L25】
 [^21]: 【F:knowledge/notes/all_part01_review.md†L63-L65】【F:knowledge/notes/all_part01_review.md†L118-L124】
 [^22]: 【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L46】
 [^23]: 【F:knowledge/notes/denis_all_part02_review.md†L46】【F:knowledge/notes/denis_all_part02_review.md†L23】
 [^24]: 【F:knowledge/notes/all_part01_review.md†L57-L58】【F:knowledge/notes/all_part01_review.md†L95-L98】
 [^25]: 【F:knowledge/notes/all_part01_review.md†L57-L58】【F:knowledge/notes/all_part01_review.md†L74-L75】
 [^26]: 【F:knowledge/notes/all_part01_review.md†L70-L72】
+[^49v-headroom]: Rita charge discussions noting 12 S externals plateau around 49.2 V (~4.1 V/cell) to preserve regen headroom.【F:knowledge/notes/denis_all_part02_review.md†L503-L504】
 [^27]: 【F:knowledge/notes/denis_all_part02_review.md†L31-L32】【F:knowledge/notes/denis_all_part02_review.md†L191-L193】
 [^28]: 【F:knowledge/notes/denis_all_part02_review.md†L35-L38】
 [^29]: 【F:knowledge/notes/denis_all_part02_review.md†L28】【F:knowledge/notes/denis_all_part02_review.md†L197】
@@ -130,3 +142,6 @@ A structured checklist for planning, installing, and operating Denis Yurev's Rit
 [^surge_loop]: Rita Gen 4’s gray loop beside the LED acts as a surge jumper—leave it intact for 10–12 S packs and cut it only when moving to 13–15 S layouts so the inrush limiter and current monitor stay calibrated.【F:knowledge/notes/denis_all_part02_review.md†L7567-L7589】
 [^undercharge]: New hardware revisions intentionally rest the internal pack near 41 V so regen headroom remains; if error 39 hits during >25 A pulls, drop current or stagger pack voltages before the next ride.【F:knowledge/notes/denis_all_part02_review.md†L7744-L7751】【F:knowledge/notes/denis_all_part02_review.md†L8327-L8338】
 [^rita60v]: Riders dabbling with 60 V packs were told to stage launches, confirm BLE firmware, and watch Rita’s temperature alarms before leaning on the higher voltage—adapter limits still apply even when the scooter spins freely.【F:knowledge/notes/denis_all_part02_review.md†L9495-L9520】
+[^charge-ui]: 【F:knowledge/notes/denis_all_part02_review.md†L408-L409】
+[^happy-35a-rita]: 【F:knowledge/notes/denis_all_part02_review.md†L401-L401】
+[^emulator-34v-rita]: 【F:knowledge/notes/denis_all_part02_review.md†L402-L402】
