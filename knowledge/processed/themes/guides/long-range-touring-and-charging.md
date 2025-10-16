@@ -15,6 +15,7 @@
 ## Public Charging Strategies
 
 ### Level 2 EV Infrastructure
+- AC EV posts only supply mains voltage, so scooters still need onboard or portable chargers—carry your own brick even when tapping Tesla or Type 2 sockets.【F:knowledge/notes/input_part005_review.md†L142-L142】
 - J1772 adapters allow scooter packs to draw from public Level 2 pedestals, supporting charge rates from as low as 2 A (for emergency trickle charging) up to the pack's BMS limit when paired with appropriate cables and adapters.[^j1772]
 - App-controlled charging stations (ChargePoint, Blink, etc.) typically release only one charging handle per session, so riders planning group tours must coordinate with EV drivers or use multiple stations to charge simultaneously.[^app-locks]
 - Tesla destination chargers and Superchargers require protocol triggers such as FoCcci boards to initiate handshake sequences; without these adapters, the plug will not energize even with a physical J1772 adapter installed.[^tesla-protocol]
@@ -27,8 +28,12 @@
 
 ### Adapter & Hardware Recommendations
 - **J1772 to scooter pack adapter:** Verify pin compatibility, voltage range (most scooters charge at 48–100 V), and current rating before purchasing or fabricating custom adapters.
+- **GTK 0–102 V adjustable supply:** A cheaper wide-voltage bench charger alternative to the Grin Satiator, provided you accept bulkier hardware and ~3 A default current.【F:knowledge/notes/input_part005_review.md†L143-L143】
 - **FoCcci or equivalent Tesla protocol board:** Required for Tesla plug compatibility; confirm firmware version supports your charging voltage before field deployment.
 - **Portable multimeter and voltage monitor:** Essential for verifying station output voltage and diagnosing adapter issues before connecting expensive battery packs.
+- **Plan ahead for 20 S chargers.** 84 V chargers remain scarce outside China, so touring riders stock adjustable lab supplies, series-stack smaller bricks, or wait on AliExpress shipments rather than overvolting 67.2 V units; upgrade thin Xiaomi charge ports to XT60 leads when pushing beyond ~3 A.【F:knowledge/notes/input_part005_review.md†L331-L338】
+- **Stick with proven CC‑CV bricks.** The group keeps defaulting to Wate or YZPower chargers because bargain adjustables wander off voltage set-points and cook packs unless you meter every session; CC-only supplies still leave passive-balancing BMSs short of a full charge.【F:data/vesc_help_group/text_slices/input_part005.txt†L24033-L24075】
+- **Treat series-stacked chargers as a stopgap.** Builders will stack dual 10 S bricks only while waiting for proper 20 S units and even then monitor them closely—dedicated charge ports and sealed enclosures remain the commuter-friendly solution for high-voltage packs.【F:data/vesc_help_group/text_slices/input_part005.txt†L23075-L23093】【F:data/vesc_help_group/text_slices/input_part005.txt†L23941-L23953】
 
 ## Generator-Assisted Touring (Experimental)
 - A 1 kW portable generator paired with a 5+ kWh pack has been theorized for coast-to-coast scooter attempts, potentially providing 8–10 hours of riding per fuel tank when charging on-the-go at low rates.[^generator]

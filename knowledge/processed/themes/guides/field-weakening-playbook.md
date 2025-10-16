@@ -31,6 +31,9 @@
 6. **Fault Review:** After hard pulls, run the `faults` command and inspect absolute current headroom (200–250 A for 120–130 A phase tunes) to avoid ABS cut-outs at high duty cycle.[^fw-faults]
 7. **Duty Cycle Discipline:** Keep maximum duty near firmware defaults (~95 %); stretching toward 99–100 % has produced abrupt cut-outs above 70 km/h on FW-enabled builds.[^fw-duty]
 8. **Duty-trigger experiments:** Genuine FW sliders stay locked behind firmware 5.3, so early adopters sideload 300 A bins and set duty-cycle triggers around 70 % to push past the 95–98 % plateau—treat those settings as advanced-only until thermals and voltage headroom are proven.【F:data/vesc_help_group/text_slices/input_part001.txt†L7166-L7194】
+5. **Test Regen:** Perform controlled braking drills to confirm bus voltage stays within component ratings; Spintend riders retain regen at 80–100 km/h with FW but still watch bus voltage for surprises.[^13]
+6. **Fault Review:** After hard pulls, run the `faults` command and inspect absolute current headroom (200–250 A for 120–130 A phase tunes) to avoid ABS cut-outs at high duty cycle.[^14]
+7. **Duty Cycle Discipline:** Keep maximum duty near firmware defaults (~95 %); stretching toward 99–100 % has produced abrupt cut-outs above 70 km/h on FW-enabled builds.[^15]
 
 ## Operating Benchmarks
 | Platform | Pack & Motor | Phase / Battery | FW Current | Notes |
@@ -45,7 +48,9 @@
 
 ## Risk Controls & Telemetry
 - **Thermal Watch:** Riders pushing 16 S commuter packs noted 150 °C stators at only 35 A FW, reinforcing that ferrofluid or temperature probes are mandatory if you insist on FW in enclosed hubs.[^18]
+- Makerbase 75100 aluminum boards are frying MOSFETs when riders hold 35 A FW on top of 130 A phase and 35 A battery during long 95–100 km/h pulls—cap FW around 20 A on air-cooled builds or switch to the aluminum-PCB/vented variants.【F:knowledge/notes/input_part005_review.md†L197-L197】
 - **Plan AWD for single-drive heat saturation:** 3.6 kW single-motor builds backed off FW after hot-weather pulls saturated hubs and triggered plans for AWD conversions to spread load.【F:knowledge/notes/input_part008_review.md†L16099-L16129】
+- **Expect softer launches than Kelly even with aggressive FW.** Pumping 250 A+ phase into IPM hubs still delivers weaker 0 km/h torque than Kelly controllers, so chase hall tuning and ramp tweaks before blaming firmware.【F:knowledge/notes/input_part005_review.md†L38-L38】
 - **Voltage Monitoring:** Keep oscilloscope or high-speed logging on regen-heavy tests—22 S Spintend builds disable regen entirely when extending pack voltage to avoid BMS-induced surges.[^19]
 - **Validate gains before chasing higher FW.** Happy Giraffe’s single-Ubox tests saw only ~3 km/h gains going from 10 A to 40 A FW while battery draw stayed near 45 A; peers reminded Gigolo Joe that more phase or pack voltage beats stacking FW when motors have not yet hit duty-cycle limits.[^fw-plateau]
 - **Fault Masking:** Sudden current drops or pothole-induced cut-outs that disappear when FW is enabled can signal mechanical faults (loose magnets, wiring) rather than firmware bugs; investigate hardware first.[^16]
@@ -95,6 +100,9 @@
 [^fw-faults]: Using the `faults` command and raising absolute current headroom (≈200–250 A for 120–130 A phase tunes) to prevent ABS overcurrent trips during FW pulls.【F:data/vesc_help_group/text_slices/input_part001.txt†L2840-L2872】【F:data/vesc_help_group/text_slices/input_part001.txt†L3796-L3808】
 [^fw-duty]: Duty-cycle ceiling warnings for FW-enabled builds—stretching toward 99–100 % caused abrupt cut-outs above 70 km/h.【F:data/vesc_help_group/text_slices/input_part001.txt†L4944-L4953】【F:knowledge/notes/input_part003_review.md†L104-L104】【F:data/vesc_help_group/text_slices/input_part003.txt†L11586-L11610】
 [^fw-plateau]: Field-weakening tests that delivered only ~3 km/h gains from 10 A to 40 A FW until motors hit duty-cycle limits, reinforcing the need for more phase current or voltage instead of piling on FW amps.【F:data/vesc_help_group/text_slices/input_part001.txt†L4053-L4148】
+[^13]: High-speed regen remains viable at 80–100 km/h under heavy FW because the load collapses back EMF quickly, but riders still log bus voltage to confirm headroom.【F:data/vesc_help_group/text_slices/input_part005.txt†L24644-L24651】
+[^14]: Using the `faults` command and absolute current headroom to manage FW-induced spikes.【F:knowledge/notes/input_part001_review.md†L139-L139】
+[^15]: Duty-cycle ceiling warnings for FW-enabled builds.【F:knowledge/notes/input_part001_review.md†L160-L160】【F:knowledge/notes/input_part003_review.md†L104-L104】【F:data/vesc_help_group/text_slices/input_part003.txt†L11586-L11610】
 [^16]: FW masking mechanical faults in high-speed Vsett builds and needing inspections.【F:knowledge/notes/input_part013_review.md†L741-L741】
 [^17]: Haku’s decision to abandon FW after killing commuter hubs at 4 A.【F:knowledge/notes/input_part011_review.md†L301-L301】
 [^18]: Max G2 and similar commuter hubs hitting 150 °C stators with FW.【F:knowledge/notes/input_part005_review.md†L368-L372】

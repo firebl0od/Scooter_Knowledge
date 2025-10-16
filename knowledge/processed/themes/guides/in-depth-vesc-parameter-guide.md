@@ -343,6 +343,8 @@ Structure for each parameter:
 - If you do reversing, be sure you set safe speeds for direction changes.
 
 **Potential Side Effects**
+- Firmware 6.05 build 20 restores consistent e-brake behaviour when ERPM speed limits are enabled and also clears a mobile calibration glitch that could peg throttles wide open—update if braking vanishes at low speed.【F:knowledge/notes/input_part005_review.md†L151-L151】
+- Commit `2a783d6e` introduced an ADC regression on 6.05; riders are holding firmware at Beta 15 or rolling back to 6.02 until the fix lands and pulling matching Lisp scripts (`main` for 6.02, `6_05_adc` for 6.05) to avoid malformed-token errors during dash installs.【F:knowledge/notes/input_part005_review.md†L366-L373】【F:knowledge/notes/input_part005_review.md†L374-L376】
 - Setting them too high can let you attempt direction reversals at dangerous speeds in BLDC.
 
 

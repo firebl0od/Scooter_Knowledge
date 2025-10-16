@@ -2,7 +2,7 @@
 
 ## TL;DR
 - The G30 Max remains the friendliest chassis for VESC swaps thanks to abundant deck space, aftermarket spacers, and new BMS firmware that unlocks >20 A discharge without extra comms harnesses.【F:knowledge/notes/input_part014_review.md†L94-L104】
-- Expect roughly 140 loose 18650s to fit without grinding the rails—builders are running 20 S 4 P packs inside the deck plus 20 S 4 P shoulder-bag boosters (or 20 S 9 P externals when stealth is optional) while still leaving room for dual controllers.【F:knowledge/notes/input_part005_review.md†L464-L468】
+- Expect roughly 140 loose 18650s to fit without grinding the rails—builders are running 20 S 4 P packs inside the deck plus 20 S 4 P shoulder-bag boosters (or 20 S 9 P externals when stealth is optional) while still leaving room for dual controllers.【F:data/vesc_help_group/text_slices/input_part005.txt†L24505-L24536】【F:data/vesc_help_group/text_slices/input_part005.txt†L24521-L24524】
 - Real-world 16 S builds with Ubox 100/100 controllers and 65 H 17×4 motors hit ~45 mph on 50 A field weakening yet still average roughly 1 mile per amp-hour, proving battery upgrades deliver the biggest gains before motor swaps.【F:knowledge/notes/input_part014_review.md†L105-L105】
 - Traction control, throttle filtering, and thermal management are mandatory as phase limits climb toward 300 A; positive ramp times (~0.4 s) and careful ADC tuning tame wheelspin and runaway spikes on lightweight decks.【F:knowledge/notes/input_part014_review.md†L84-L87】【F:knowledge/notes/input_part014_review.md†L107-L107】
 - SNSC 2.3 donor frames are drying up as fleets migrate to Okai hardware—lock in a chassis or negotiate with operators before planning large VESC conversions around rental leftovers.【F:knowledge/notes/input_part005_review.md†L610-L610】
@@ -50,7 +50,8 @@
 - A 21 S Zero 11X pack with ~0.002 V delta showcased proper busbars and heavy-gauge cabling for big-wheel race builds—borrow its harness and reinforcement ideas when scaling Max packs beyond commuter duty.【F:data/vesc_help_group/text_slices/input_part003.txt†L10411-L10415】
 
 ## Packaging & Layout Patterns
-- **Map deck configurations early.** Builders split 20 S packs between the deck and shoulder bags, slide 20 S4 P externals under the stem, or relocate controllers outside the deck to free space for 9 P cores—document wiring paths before cutting rails.【F:knowledge/notes/input_part005_review.md†L606-L606】
+- **Map deck configurations early.** Builders split 20 S packs between the deck and shoulder bags, slide 20 S4 P externals under the stem, or relocate controllers outside the deck to free space for 9 P cores—document wiring paths before cutting rails.【F:data/vesc_help_group/text_slices/input_part005.txt†L22957-L23024】
+- **Plan stem swaps with proper hardware.** Custom CNC stems let SNSC forks drop in without cutting suspension, but remember to hammer star nuts into the new tube so the folding joint stays tight once the swap is complete.【F:data/vesc_help_group/text_slices/input_part005.txt†L24652-L24661】
 - **Plan SNSC fork swaps with CNC fixtures.** The community now machines custom stems that capture SNSC forks while accommodating star nuts and cable routing; print drill guides before sending aluminum to the mill to guarantee headset alignment.【F:knowledge/notes/input_part005_review.md†L606-L606】
 - **Front disc conversions can reuse Pro 2 hubs.** Repurposing a Ninebot Pro 2 front motor keeps geometry intact, then you only need custom spacers and a caliper bracket to add a disc without Monorim suspension bulk.【F:knowledge/notes/input_part005_review.md†L607-L607】
 

@@ -27,9 +27,11 @@
 - **Stay discreet around police.** Choose understated frames, keep lighting subdued, and reserve police-mode or field-weakening bursts for brief escapes while cruising near rental speeds the rest of the time.【F:knowledge/notes/input_part000_review.md†L365-L365】
 
 ## Regional Compliance Pressure
+- Ireland and UK riders report €1,500 fines and confiscations for overpowered scooters, so stealth builds and restrained riding remain the safest path in strict EU jurisdictions.【F:knowledge/notes/input_part005_review.md†L124-L124】
 - **Plan for roadside inspections.** Finnish police are confiscating scooters that exceed 25 km/h without registration and even checking bulb part numbers, while southern EU riders dodge €8–9 k fines by programming low-power “police modes” and swapping to halogen BA9S lamps to satisfy moped rules.【F:knowledge/notes/input_part005_review.md†L225-L227】
 - **Swiss crackdowns escalate.** Authorities recently seized a 133 km/h Wolf Warrior outright, reinforcing the need to keep legal commuter profiles alongside race setups.【F:data/vesc_help_group/text_slices/input_part002.txt†L9471-L9489】
 - **Pre-stage a legal profile.** Belgian riders have seen 50 km/h scooters confiscated and cases escalated to lawyers; their workaround is to flash a 25–30 km/h VESC profile for roadside checks while keeping a high-speed mode for private property, paired with calm riding to avoid attracting attention.【F:data/vesc_help_group/text_slices/input_part002.txt†L9502-L9510】
+- **Match frame choice to insurance rules.** Converting 50 cc mopeds to QS hubs can void payouts because paperwork still lists ICE drivetrains, and Israeli riders report dual-motor scooters are outright illegal—keep Zero 10X builds single-motor despite upgrades.【F:knowledge/notes/input_part005_review.md†L358-L365】
 
 ## Post-Ride Water Diagnostics
 - **Run the emergency dry-out drill immediately.** Kill power, open the deck, and disconnect the battery as soon as water reaches board level; forced air, alcohol rinses, and fresh desiccant beat passive “rice bag” drying before you reseal seams with silicone.【F:data/vesc_help_group/text_slices/input_part003.txt†L337-L345】【F:data/vesc_help_group/text_slices/input_part003.txt†L345-L346】
