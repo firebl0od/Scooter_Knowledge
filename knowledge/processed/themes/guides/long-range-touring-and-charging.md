@@ -42,6 +42,7 @@
 2. **Carry backup charging bricks and cables.** Hotel outlets and standard 120 V receptacles remain the most reliable fallback when public infrastructure is unavailable or malfunctioning.[^backup]
 3. **Log ride telemetry and charging sessions.** Track Wh consumed per mile, charge times, and thermal peaks to refine future tour plans and identify pack degradation early.[^telemetry]
 4. **Plan routes with charging station density in mind.** Use PlugShare or ChargePoint maps to identify backup stations within 20–30 miles of primary stops in case of equipment failure or station downtime.[^route-planning]
+- **Carry a vetted charger.** Budget 0–90 V/5 A AliExpress bricks (~€76 shipped) keep arriving late or DOA—Mirono lines up disputes in advance—while others swallow the cost of a Grin Satiator to avoid repeated support fights on tour.【F:data/vesc_help_group/text_slices/input_part002.txt†L22438-L22450】
 
 ## Follow-Up Actions Needed
 - Draft EV-charger etiquette notes covering time limits, single-handle session restrictions, and communication protocols for mixed scooter/EV charging scenarios.[^follow-etiquette]
