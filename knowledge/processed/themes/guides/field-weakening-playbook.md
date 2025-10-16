@@ -62,6 +62,7 @@
 - **Choose Higher Voltage / Different Windings When:** You need sustained highway speed, the motor already runs hot without FW, or you’re targeting >120 km/h—builders hitting 118 km/h on 22×3 hubs without FW prove gearing changes scale better than stacking FW amps.[^11][^21]
 - **Use Field Weakening When:** The pack and controller have proven thermal headroom, the chassis can handle added speed, and you only need short bursts to overtake or extend top speed marginally (≈5–15 km/h gains). Riders logging 85 km/h on 20 S singles with 30 A FW treat it as a momentary boost, not a permanent setting.[^11][^22]
 - **Never Use FW When:** Working on small commuter hubs or unfinished builds lacking thermistor feedback—multiple riders fried stock motors at single-digit FW currents and now avoid the feature entirely.[^9][^17]
+- **Expect hard limits when hardware caps phase current.** Stone Gasm’s 20×70 kV build only gained ≈19 km/h of freewheel speed with 25 A FW (66 → 84 km/h) and plateaued around 96 km/h even with the 35 A ceiling, underscoring that gearing or voltage changes—not more FW—unlock the next tier of speed.【F:knowledge/notes/input_part013_review.md†L30-L30】
 
 ## Troubleshooting Checklist
 - **Battery Current Overshoot:** Rerun detection/wizard, verify sensor calibration, and ensure battery limits exceed expected FW-induced draw.[^8]
