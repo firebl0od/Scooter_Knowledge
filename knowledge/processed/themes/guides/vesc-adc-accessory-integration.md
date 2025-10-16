@@ -5,6 +5,7 @@
 - Xiaomi-style throttles and hall brakes stay healthy when powered from the controller’s 3.3 V rail with matched resistor dividers; feeding 5 V without clamps has already over-volted STM32 inputs.【F:knowledge/notes/input_part004_review.md†L202-L202】
 - Treat the Spintend/MakerX auxiliary board as a low-current signal bridge: its ~12 V/3 A rail can light LEDs or run logic, but headlamps, horns, and pumps still need a dedicated DC/DC or relay-fed supply.[^3][^9][^10][^11]
 - Map and validate every analog input inside VESC Tool before sealing the deck; enabling ADC control blocks bench FWD/REV overrides, so miswired harnesses must be fixed before ride testing.[^7][^8][^13]
+- Most VESC peripherals expect 3.3 V logic—confirm accessory requirements before reusing 5 V sensors or you’ll chase detection issues later.【F:knowledge/notes/input_part012_review.md†L101-L101】
 - Protect logic rails by isolating accessory power, adding pull-down failsafes, and avoiding shared 5 V lines between controllers—shorts or ground loops keep blowing MOSFET drivers and display boards.[^14][^16][^17][^19]
 - Ubox V2 boards now carry self-reset fuses on 5 V/12 V/3.3 V rails, yet VESC Tool 3.01 still crashes mid-calibration if 5 V throttles hit the STM32 input—stick to 3.00/5.2 firmware or add voltage dividers before final assembly.【F:data/vesc_help_group/text_slices/input_part001.txt†L8424-L8453】
 
@@ -25,6 +26,7 @@
 3. **Spintend adapter v3 harness:** Modern boards arrive with keyed plugs—no more screw terminals—so match the supplied loom instead of hand-crimping tiny JST shells.[^3]
 4. **Makerbase accessory headers use GH 1.27 mm.** Izuna confirmed the tiny Makerbase harness lands on GH-series plugs—order JST-GH pigtails instead of trying to force JST-PH shells onto the board.【F:knowledge/notes/input_part004_review.md†L328-L328】
 4. **MakerX footpads & 3.3 V-only sensors:** Confirm both ADC rails output 3.3 V before blaming pads; swapping to 5 V kills the hall board.[^4]
+5. **Publish a MakerX S100 footpad checklist.** The latest review segment asks for explicit pinout and 3.3 V verification steps—bundle regulator checks, connector orientation, and ADC routing in your wiring docs so teams stop misdiagnosing dead sensors.【F:knowledge/notes/input_part012_review.md†L312-L312】【F:knowledge/notes/input_part012_review.md†L329-L329】
 5. **Trim dual-hall start voltage.** Dual-controller Vsett builds needed manual tweaks to throttle start voltage after calibration so brake and throttle channels stay stable across master/slave VESCs.【F:knowledge/notes/input_part009_review.md†L270-L270】
 5. **Interpret ADC counts, not raw voltage:** VESC Tool reports hall inputs as 0–4095 counts—track the delta between idle and full throw, and if readings compress, repeat the test with a stable 5 V source to rule out noisy 3.3 V regulators before replacing sensors; Spintend’s adapter manual expects ~0.8 V idle, so stop and rewire if a channel sits near 3 V.[^22][^adapter-idle]
 6. **Filter noise in software first:** Builders tamed runaway triggers by compressing throttle activation to ~0.83–1.2 V inside VESC Tool rather than rewiring hardware; chassis grounding tricks have also helped but carry short-to-frame risk if insulation fails.[^adc-noise]
@@ -107,10 +109,10 @@
 [^6]: Regen button tied directly between ADC2 and 3.3 V without series resistors eliminated false braking faults.【F:knowledge/notes/input_part012_review.md†L13-L13】
 [^7]: ADC calibration workflow and reminder to let VESC Tool find neutral before assigning functions.【F:knowledge/notes/input_part012_review.md†L93-L94】
 [^8]: Regen mapping best practices from community quick-start guides.【F:knowledge/notes/input_part007_review.md†L239-L240】
-[^9]: Horn output current limit cautions on Makerbase/Spintend harnesses.【F:knowledge/notes/input_part012_review.md†L97-L97】
+[^9]: Horn output current limit cautions on Makerbase/Spintend harnesses.【F:knowledge/notes/input_part012_review.md†L104-L104】
 [^10]: Spintend ADC aux outputs top out around 12 V / 3 A and need DC/DC help for bigger loads.【F:knowledge/notes/input_part005_review.md†L58-L58】【F:knowledge/notes/input_part009_review.md†L15-L15】
 [^11]: Smart Repair’s 85250 guidance—use the ADC board for logic and a DC/DC converter for lamp current.【F:knowledge/notes/input_part012_review.md†L173-L173】
-[^12]: TF100 throttle wiring recipe using the controller’s 3.3 V hall supply.【F:knowledge/notes/input_part012_review.md†L174-L174】
+[^12]: TF100 throttle wiring recipe using the controller’s 3.3 V hall supply.【F:knowledge/notes/input_part012_review.md†L181-L181】
 [^13]: Enabling ADC control disables manual FWD/REV overrides inside VESC Tool until you switch apps.【F:knowledge/notes/input_part012_review.md†L137-L137】
 [^14]: CAN-linked controllers should not share 5 V rails; doing so has already killed boards.【F:knowledge/notes/input_part007_review.md†L226-L226】
 [^15]: Drawing accessory power from the X12 headlight feed drags the logic rail and wastes energy.【F:knowledge/notes/input_part012_review.md†L395-L395】

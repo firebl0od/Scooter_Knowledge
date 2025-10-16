@@ -5,6 +5,7 @@
 - Well-cooled MakerX singles routinely handle ~60 A battery and 180–200 A phase, but recurring DOA duals and MOSFET blowouts mean every install needs bench burn-in and spares on hand.【F:knowledge/notes/input_part003_review.md†L93-L120】【F:knowledge/notes/input_part003_review.md†L151-L153】
 - Treat every 3.3 V accessory rail as sacred: footpads, throttles, and ADC gear all expect logic-level supplies, and miswiring to 5 V has already killed sensors and daughterboards.【F:knowledge/notes/input_part012_review.md†L255-L256】【F:knowledge/notes/input_part012_review.md†L347-L349】【F:knowledge/notes/input_part013_review.md†L407-L409】
 - G300-class stacks plateau around 22 S / 320 A phase today, while rumoured K900/KG00 firmwares remain unproven—plan upgrades around documented limits or step to C350/3Shul hardware for higher-voltage racing.【F:knowledge/notes/input_part013_review.md†L416-L417】【F:knowledge/notes/input_part013_review.md†L462-L462】
+- European racers confirmed Ambrosini RS500, Rage Robers, and MakerX G300 controllers share the same hardware—pricing reflects branding, not silicon, so focus on firmware provenance and support rather than rebadges.【F:knowledge/notes/input_part012_review.md†L387-L387】
 - Discounted “MakerX” dual controllers claiming 16 S, 100 A continuous, and 200 A peak appear to be 75 300-derived boards packaged like Nucular 24F clones—validate specs before buying the rebrand.【F:data/vesc_help_group/text_slices/input_part001.txt†L25282-L25299】
 
 ## Product Line Cheat Sheet

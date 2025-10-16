@@ -8,6 +8,8 @@
 ## Long-Range Riding Benchmarks
 - Noname logged an 18-hour Appalachian ride covering roughly 150 miles at 50 mph bursts, noting the VESC stayed cool and demonstrating that high-capacity packs (likely 10+ kWh class given the distance) enable extended touring when thermal management is dialed in.[^appalachian]
 - Pack sizing for 150+ mile rides typically requires 7–10 kWh or more depending on terrain, speed, and rider weight; builders planning tours should log Wh/mi consumption during shorter test rides to estimate realistic range before committing to long routes.[^pack-sizing]
+- Jason’s alpine shakedown pushed a 30 S 6 P pack to ≈3 V per cell on steep climbs before regen only recovered a few percent on the descent—proof that mountain routes drain small packs rapidly and require pre-planned mid-ride charging stops.【F:knowledge/notes/input_part012_review.md†L208-L213】
+- Yamal carries a fast charger into cafés on 100 km+ itineraries; his 20 S 10 P pack returns roughly 100 km of range in mild weather when he tops up partway through the day.【F:knowledge/notes/input_part012_review.md†L209-L213】
 
 ## Public Charging Strategies
 
@@ -21,11 +23,18 @@
 2. **Communicate charge rate expectations.** Inform station operators or fellow users when drawing only 2–3 A for safety testing versus full-rate charging to avoid confusion about bay availability.[^charge-rate]
 3. **Plan for single-handle sessions.** Budget extra time when touring in groups, as most app-based systems won't release multiple handles simultaneously from the same account.[^app-locks]
 4. **Monitor thermal margins.** Long charging sessions at high rates (≥6 A per pack) can heat cells and BMS hardware, so log temperatures and adjust charge current if ambient temps exceed 30 °C or packs show elevated thermal readings.[^thermal-charging]
+5. **Top to 80–85 % when weather windows open.** Riders wait for rain to clear before tapping public chargers or EV adapters, then stop around 80 % state of charge to preserve pack longevity and resume touring without wasting time on slow CV phases.【F:knowledge/notes/input_part012_review.md†L209-L213】
 
 ### Adapter & Hardware Recommendations
-- **J1772 to scooter pack adapter:** Verify pin compatibility, voltage range (most scooters charge at 48–100 V), and current rating before purchasing or fabricating custom adapters.
+- **J1772 to scooter pack adapter:** Verify pin compatibility, voltage range (most scooters charge at 48–100 V), and current rating before purchasing or fabricating custom adapters. The latest build notes call for logging pilot-resistor values, conductor gauges, and enclosure choices so future 3 kW tour adapters are reproducible rather than ad-hoc harnesses.【F:knowledge/notes/input_part012_review.md†L303-L303】
 - **FoCcci or equivalent Tesla protocol board:** Required for Tesla plug compatibility; confirm firmware version supports your charging voltage before field deployment.
 - **Portable multimeter and voltage monitor:** Essential for verifying station output voltage and diagnosing adapter issues before connecting expensive battery packs.
+- **3.2 kW “2900 W” chargers:** Jason’s brick already exceeds its nameplate 26 A output when pushing tour builds—validate cord and connector temperatures before sustaining similar rates.【F:knowledge/notes/input_part012_review.md†L211-L212】
+
+### High-Power Charger Deployments
+- **6 kW hyper-charger kits are spreading.** Fast-tour riders now draw up to 6 kW from EV posts; the €400-class hardware is often paired with another ~$2 k in adapters and cabling, and real-world current is capped either by the battery (e.g., Jason’s pack) or the pedestal (Noname’s logs). Document hardware cost, pedestal limits, and pack ceilings together so teammates can copy a proven recipe instead of overloading tour builds.【F:knowledge/notes/input_part012_review.md†L274-L279】【F:knowledge/notes/input_part012_review.md†L310-L310】
+- **Plan pack limits before cranking current.** Even copper “sandwich” busbars need cross-section math—Jason is double-checking that his 150 A junctions have enough copper to survive repeated lunch-break charges before final assembly.【F:knowledge/notes/input_part012_review.md†L286-L288】
+- **Log real ride endurance.** Noname just finished a 148-mile NIU day that mixed pavement, dirt, and even 12" water crossings—capture similar logs to set expectations for seated VESC rigs.【F:knowledge/notes/input_part012_review.md†L414-L414】
 
 ## Generator-Assisted Touring (Experimental)
 - A 1 kW portable generator paired with a 5+ kWh pack has been theorized for coast-to-coast scooter attempts, potentially providing 8–10 hours of riding per fuel tank when charging on-the-go at low rates.[^generator]
@@ -36,12 +45,19 @@
 - **Over-provision capacity:** Plan for 20–30 % reserve capacity to account for voltage sag, cold weather, headwinds, and unexpected detours; aggressive riders logging 2 Wh/mi at 30 mph should budget ≥3 Wh/mi for tour planning.[^capacity-buffer]
 - **BMS thermal limits:** High-capacity packs (≥7 kWh) under sustained discharge can heat BMS MOSFETs or balance boards; log temps during test rides and add active cooling if boards exceed 50 °C under load.[^bms-thermal]
 - **Charge rate planning:** If fast-charging via Level 2 infrastructure, ensure BMS charge current limits (typically 10–30 A for scooter-class hardware) match adapter capabilities and won't trip thermal or over-current protections.[^charge-limits]
+- **Document pack mass and expectations.** Noname’s 20 S 32 P Samsung 35E pack stores ≈112 Ah (≈9.4 kWh) and delivers ~70 mi while leaving the scooter near 350 lb; he’d now favour a lighter 32 S 20 P layout for better torque-to-weight on long tours.【F:knowledge/notes/input_part012_review.md†L312-L316】
+- **Respect BMS trip stories.** A JK BMS saved a C80 conversion by tripping at 60 A when the rider pulled 70 A battery—use the incident as a reminder to size packs around controller demand rather than bypassing protection.【F:knowledge/notes/input_part012_review.md†L280-L285】
 
 ## Safety & Reliability Tips
 1. **Test all charging adapters at home before departure.** Verify voltage, current draw, and thermal behavior with a multimeter and infrared thermometer during bench charging sessions.[^pre-test]
 2. **Carry backup charging bricks and cables.** Hotel outlets and standard 120 V receptacles remain the most reliable fallback when public infrastructure is unavailable or malfunctioning.[^backup]
 3. **Log ride telemetry and charging sessions.** Track Wh consumed per mile, charge times, and thermal peaks to refine future tour plans and identify pack degradation early.[^telemetry]
 4. **Plan routes with charging station density in mind.** Use PlugShare or ChargePoint maps to identify backup stations within 20–30 miles of primary stops in case of equipment failure or station downtime.[^route-planning]
+
+### Tour Readiness Checklist (Latest Review Actions)
+- **Pack an adapter kit that covers public pedestals and cafes.** The crew now keeps J1772 adapters, travel bricks, and café-friendly extension cords grouped so mid-route stops don’t sag small packs below ≈3 V per cell on mountain grades.【F:knowledge/notes/input_part012_review.md†L307-L307】
+- **Brush up on fast-charging etiquette.** Revisit how you’ll brief café staff, share bays, and shuffle scooters before rain rolls in; the latest review explicitly called for folding etiquette reminders into the touring checklist rather than leaving them scattered across chat threads.【F:knowledge/notes/input_part012_review.md†L307-L308】
+- **Note ferrofluid and hub-prep chores.** A fresh maintenance list now ties Segway-class hub service (ferrofluid fills, temp probes) to tour prep so high-mileage weeks don’t start with neglected drivetrains.【F:knowledge/notes/input_part012_review.md†L306-L306】【F:knowledge/notes/input_part012_review.md†L309-L309】
 
 ## Follow-Up Actions Needed
 - Draft EV-charger etiquette notes covering time limits, single-handle session restrictions, and communication protocols for mixed scooter/EV charging scenarios.[^follow-etiquette]

@@ -19,6 +19,7 @@
 ### Battery & Phase Current Targets
 - Veteran tuners keep dual Tronic 250 builds near 200 A rear / 180 A front phase current, reserving the published 250 A rating as an absolute ceiling.[^1]
 - X12 owners pair roughly 200 A battery with 310 A phase to stay inside the MOSFET envelope, matching Smart Repair’s 24 S playbook.[^3]
+- Smart Repair finally held 250 A rear / 140 A front settings on a GT1-based build after re-detecting both motors, though the smaller front hub still limits traction until dual 70 H hardware lands.【F:knowledge/notes/input_part012_review.md†L79-L79】
 - Community baselines for Tronic and Spintend 85‑250 class controllers hover around 150 A battery / 200 A phase continuous on 20 S packs, with higher peaks only after confirming thermal headroom.[^9]
 
 ### Voltage & Field-Weakening Discipline

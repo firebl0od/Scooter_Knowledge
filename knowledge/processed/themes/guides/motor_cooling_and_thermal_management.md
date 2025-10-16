@@ -6,9 +6,16 @@
 - Veterans recommended ferrofluid or oil-fill experiments (with leak safeguards) if you need real winding-to-shell transfer—simply drilling covers or gluing “windmills” to the hub only cools the outer case.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L456-L520】
 - Community case studies still favour passive conduction upgrades over active plumbing: Mirko’s 15 mm aluminum deck plate plus open vents held dual 190 A phase / 70 A battery runs near 52 °C, while heat-pipe experiments outperformed vibration-prone water loops on cramped decks.【F:knowledge/notes/input_part003_review.md†L115-L115】【F:knowledge/notes/input_part003_review.md†L240-L240】
 
+## Motor Architecture Context
+- Axial-flux scooter prototypes mount magnets on facing disks for high power density, while hybrid “raxial” concepts add more phases for torque; production hubs still favour radial flux because the hollow stator leaves little room for liquid cooling hardware and costs stay lower.【F:knowledge/notes/input_part012_review.md†L41-L41】
+- Treat flashy “liquid-cooled radial hub” marketing videos skeptically—veterans spotted builds with only phase leads and no coolant plumbing, confirming many are passive designs dressed up for promotion.【F:knowledge/notes/input_part012_review.md†L42-L42】
+
 ## Ferrofluid Selection & Handling
 - The VESC Help crew continues to vouch for ferrofluid/Statorade when the goal is winding-to-shell transfer, but they emphasise reading datasheets—some mixes flash at low temperature and budget hubs can demagnetise above ~80 °C—before flooding a motor.【F:knowledge/notes/input_part007_review.md†L48-L48】
 - Ferrotec APG1110 remains the benchmark for hub fillings, while Supermagnete’s 10 mL bottles offer reliable sourcing for EU riders upgrading Xiaomi and G30 hubs without importing large lots.【F:knowledge/notes/input_part007_review.md†L60-L60】
+- Ferrofluid refreshes should be sparing—apply a thin bead between magnets and add a dedicated temperature probe so rising wattage doesn’t go unnoticed after the fill.【F:knowledge/notes/input_part012_review.md†L198-L198】
+- Segway-class hub service days now pair ferrofluid top-ups with temperature-probe checks; bake those steps into maintenance lists before long tours so commuter fleets don’t head into rain weeks with dry stators.【F:knowledge/notes/input_part012_review.md†L306-L306】
+- Before drilling breather ports, builders mark bit depth, stop once the cover breaks through, and reseal with clear RTV after filling; adding a temp sensor during the same service keeps long-term monitoring simple.【F:knowledge/notes/input_part012_review.md†L217-L219】
 
 ## Hub Current Guardrails
 - Single Monorim 500 W hubs stay happy around 80 A phase—ideally with ferrofluid—while the crew’s Xiaomi-class builds overheat quickly once they push 65–73 A without battery temperature sensing or keep more than roughly 30–35 A combined draw from paired 12 S packs.【F:knowledge/notes/input_part007_review.md†L18-L19】
@@ -48,8 +55,11 @@
 - Finn keeps an Ubox Lite below 50 °C while pulling 160 A phase / 90 A battery by swapping in Arctic MX4 paste and bolting through the controller’s M2 bosses into a 3 mm aluminum belly pan.【F:knowledge/notes/input_part012_review.md†L235-L235】【F:knowledge/notes/input_part012_review.md†L251-L251】
 - Matthew’s DIY water loop dropped his VESC enclosure from ~90 °C cutbacks to ~26–28 °C during 45 mph pulls; Noname is planning a moped-sized radiator, pump, and expansion tank to scale the concept.【F:knowledge/notes/input_part012_review.md†L236-L236】
 - Swapping to higher-grade thermal paste still nets ~5 °C improvements, but veterans stress optimizing airflow before escalating to liquid cooling complexity.【F:knowledge/notes/input_part012_review.md†L237-L237】
+- Fold these Lite and MP2 mitigation case studies into controller SOP binders—document Arctic MX4 swaps, belly-plate mounting, and air-vs.-liquid trade-offs so future tear-downs start with proven recipes instead of trial-and-error.【F:knowledge/notes/input_part012_review.md†L320-L320】
 
 ## Temperature Guardrails
+- Misconfigured thermistors triggered limp mode within 15 minutes on a modest 48 V 800 W hub; confirm the sensor type (NTC 100 k vs. alternatives) with a meter or disable the probe until the value matches reality.【F:knowledge/notes/input_part012_review.md†L195-L195】
+- Dual 90 H builds logged ~58 °C rear / 48 °C front after a 24 km, 10 % grade climb in 25 °C ambient—use those numbers as a sanity check for 75 200/85 150 setups before raising current further.【F:knowledge/notes/input_part012_review.md†L197-L197】
 - Battery temps around 41 °C were deemed healthy for summer rides, but the group flagged ~60 °C as a ceiling—anything hotter accelerates degradation and calls for gentler tunes.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60004-L60008】
 - Makerbase 100/100-class controllers start current limiting once MOSFETs touch ~70 °C if the base plate lacks fresh thermal paste; the crew now treats 70 °C as the everyday limit and 100 °C as the hard ceiling for VESC MOSFETs to preserve lifespan.【F:data/vesc_help_group/text_slices/input_part007.txt†L123-L146】
 - Larger packs and long shocks trap heat around the deck; riders re-bend frames, add inner/outer steel plates, and swap to lower-rate springs instead of trimming coils so the chassis and cells stop cooking each other.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L90030-L90136】

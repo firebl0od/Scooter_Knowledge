@@ -26,6 +26,12 @@
   3. Close bleed screw and verify no leaks
   4. Install new pads and bed them properly on first rides[^seal-damage]
 
+### Pad Conditioning & Bedding
+- Riders formed a “sanded pad club,” resurfacing pads before bedding to tame squeal and keep braking consistent after swapping to thicker rotors.【F:knowledge/notes/input_part012_review.md†L35-L35】
+
+### Lever Durability Notes
+- Magura composite lever hardware can snap with hand force—many owners preemptively swap to Shimano Saint or other metal bodies before trusting 3 mm rotors and high-torque braking setups.【F:knowledge/notes/input_part012_review.md†L34-L34】
+
 ## Brake Upgrades & Sizing
 
 ### Four-Piston Caliper Benefits
@@ -35,6 +41,8 @@
 ### Rotor Sizing Considerations
 - Brake discussions suggest upsizing rotors from 180 mm to 203 mm mainly boosts thermal mass and leverage but may be excessive for scooters; larger rotors require frame clearance checks and stronger mounting tabs to handle increased braking forces.[^rotor-sizing]
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
+- 3 mm × 170 mm rotors dramatically stiffen braking response but require retracting pistons fully for clearance and a quick true after the first bedding stops.【F:knowledge/notes/input_part012_review.md†L33-L33】
+- A commuter who bent a Vsett rotor mid-ride now keeps spares on hand and leans on e-brakes when mechanical hardware warps unexpectedly—plan redundancy for traffic incidents.【F:knowledge/notes/input_part012_review.md†L186-L186】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -74,6 +82,10 @@
   - 2+ CFM flow rate to seat beads quickly before air leaks past unseated tire
   - Use bead seater tools or ratchet straps around tire circumference to help initial seating
   - Remove valve core temporarily during seating to maximize airflow, reinstall once beads are set[^tire-inflation]
+- Stock extra casings and tubes—one PMT puncture forced a 4 km walk, highlighting how quickly high-speed tires destroy rims when no spare is available.【F:knowledge/notes/input_part012_review.md†L37-L37】
+
+## Hose & Banjo Hardware
+- Dualtron owners flipping banjo orientation often choose Fastride’s stainless dual-M8 kit (~€40) because it includes crush washers and O-rings, avoiding piecemeal sourcing for hose reroutes.【F:knowledge/notes/input_part012_review.md†L38-L38】
 
 ## Brake Fluid & Compatibility
 - Xtech hydraulic conversions rely on mineral oil (not DOT fluid) for Magura-compatible systems; Mirono bled his calipers with dual syringes and quickly abandoned the idea of using water after seeing trapped bubbles compromise lever feel.[^mineral-oil]

@@ -340,8 +340,9 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 1. FOC detection – Double-check the measured R, L, flux. If it’s inaccurate, re-run detection with a different “Max power loss” or “Motor current” detection parameter. 
 2. Observer Gain – You might lower foc_observer_gain if it’s overshooting angle at near-zero speed. 
-3. Startup Current – If it saturates, reduce the startup current or use openloop_rpm/time to ramp more gently. 
+3. Startup Current – If it saturates, reduce the startup current or use openloop_rpm/time to ramp more gently.
 4. Add HFI or use hall sensors if physically possible.
+5. Expect compromises on heavy hubs today – even with HFI/VSS, riders still cap launch torque or give a light push because zero-speed starts tend to chatter on sensorless-only scooters.【F:knowledge/notes/input_part012_review.md†L14-L14】
 
 </details>
 
