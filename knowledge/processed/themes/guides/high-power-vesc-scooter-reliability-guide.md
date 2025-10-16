@@ -5,6 +5,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 ## 1. Build Planning & Component Selection
 
 - **Controller tiers:** Treat Makerbase/Flipsky aluminum-PCB boxes as interim ≤15 S 50 A solutions; high-power riders standardize on 3Shul C350/CL350, Ubox duals, or BRIESC units for thermal headroom and QC maturity.[^1][^2][^3]
+- **Spintend for Vsett 10+ swaps.** Crew consensus still leans on Spintend’s 12-fet controllers when Vsett 10+ owners want Bluetooth profile switching; the chassis’ larger deck, custom suspension, and improved stem/clamp make packaging bigger batteries easier than on Zero 10X frames.[^spintend-vsett]
 - **Torque hardware before shakedowns.** Ebike conversions running VESCs have thrown axles within metres when relying on washers; file torque-arm slots for an interference fit, add pinch bolts so 10 mm steel clamps carry axle load, and tighten with short-handled sockets in small increments to avoid crushing thin dropouts.[^1][^2]
 - **Trust alloy handlebars over bargain carbon.** Track telemetry showed cheap carbon bars flexing heavily at speed and failing without warning; stick with quality alloy cockpits even if they add grams.[^3]
 - **Match shunt mods to motor capability.** PuneDir’s shunt-heavy square-wave ESC already saturates a 1 kW motor.
@@ -1610,6 +1611,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^604]: Source: data/vesc_help_group/text_slices/input_part001.txt†L3820-L3856
 [^605]: Source: data/vesc_help_group/text_slices/input_part001.txt†L25184-L25233
 [^606]: Source: knowledge/notes/input_part000_review.md†L251-L252
+[^spintend-vsett]: Source: knowledge/notes/input_part007_review.md†L404-L404
 [^607]: Source: knowledge/notes/input_part000_review.md†L256-L256
 [^608]: Source: knowledge/notes/input_part000_review.md†L300-L300
 [^609]: Source: knowledge/notes/input_part000_review.md†L234-L234
