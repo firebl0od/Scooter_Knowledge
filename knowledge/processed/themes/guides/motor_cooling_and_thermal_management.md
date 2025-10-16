@@ -40,8 +40,10 @@
 - Riders comparing ferrofluid against oil cooling still favour ferrofluid because it clings to magnets, wipes clean, and avoids the leaks and constant top-offs that plague oil-filled hubs unless covers are perfectly sealed and paint-free.[^ip001-ferro-vs-oil]
 - Even ferrofluid needs periodic checks; high-RPM builds see the fluid migrate deeper into magnet gaps over time, so owners now schedule top-off inspections after hard seasons.[^ip001-ff-check]
 - Jan reminded experimenters that ferrofluid is still the cheapest first step and that serious drilling or ebike-block cooling projects should start on sacrificial motors until machining budgets and failure tolerance exist.[^ferrofluid-first]
+- Builders confirmed you can inject ferrofluid with the wheel assembled—the magnets wick the fluid into the gap—and upcoming torque-sensor retrofits may need a fused (~100 mA) frame-to-ground strap to stop EMI from corrupting readings.[^ff_inject]
 - Ferrotec APG1110 remains the benchmark for hub fillings, while Supermagnete’s 10 mL bottles offer reliable sourcing for EU riders upgrading Xiaomi and G30 hubs without importing large lots.[^14]
 - HeroDasH demonstrated clean application with magnetic bottles that pull fluid straight into magnet gaps and warned against overfilling because excess drag hurts efficiency; peers now lean on ebikes.ca’s simulator to visualize how kv and resistance tweaks shift the efficiency curve before sealing hubs.[^15]
+- Fresh top-ups that leave covers noticeably warmer after short shakedowns confirm improved heat transfer, but veterans still cap scooter hubs near 5 mL and reseal with silicone so excess ferrofluid doesn’t leak out and cook bearings.[^ff_dose]
 - Grin’s Statorade has logged roughly 30 % winding-temperature drops with 6 ml doses and no noticeable drag, whereas bargain ferrofluids risk conductivity, residue, and magnet damage once they bake inside the hub.[^16][^17]
 - Budget “educational” ferrofluids coming from lab suppliers carry lower flash points and unknown additives.
   - stick with Statorade/Grin blends even on 60 mm hubs, which still respond well to roughly 5–6 ml fills when you need winding-to-shell transfer.[^18][^19]
@@ -55,6 +57,7 @@
 - Builders chasing sustained 70–75 km/h add bolt-on hubsinks with thermal paste to move heat into airflow, noting that balanced e-bike rings avoid vibration if machined precisely.[^23]
 - Custom controller enclosures now include 56 mm-tall rear mounts with bi-directional fins and skived 250 × 150 × 30 mm heat sinks that often need trimming to clear decks—DIY proof that packaging drives cooling choices.[^andrei-heatsink]
 - Custom deck spacers and ducted lighting housings are being hand-cut from PVC/acrylic to route airflow past motors while freeing deck space for taller battery packs.[^24]
+- Riders are weighing €100 Turbinators hubsinks against custom CNC fins inspired by Ghost_911’s Inokim OX work before paying for new motors, underscoring how accessory cooling only pays off when it clears tyre and caliper tolerances.[^hub_sink_debate]
 - Riders toying with automatic transmission fluid (ATF) were warned it will leak through cable glands and bearings.
   - stick with ferrofluid for controllable rotor-gap transfer unless you have data proving a hybrid fill can stay sealed.[^atf-leak]
 - Mirono’s wrap-and-fluid test showed thermal tape fins plus ferrofluid kept a bag-mounted VESC near ambient (≈42 °C heatsink in 34 °C weather) while the hub shell matched coil temps, confirming the stator finally dumps heat into the case efficiently.[^25][^26]
@@ -151,6 +154,7 @@
   - riders logging ~180 A phase on 84100-class ESCs report case temperatures climbing fast unless the units are bolted to large external heatsinks with fresh paste, reinforcing that even “cooler” Spintend hardware only halves the dissipation of Tronic boxes when airflow and interface pressure are maximised.[^76]
 - Hard-mounting works better than bags: bolting a MakerX case to an aluminium cradle dropped sprint temps to ~23 °C where the same controller hit 60–80 °C inside a soft pack, and logs reminded builders to cross-check VESC telemetry against BMS readings when validating those gains.[^hard_mount]
 - Rosheee’s full-copper deck plates and housings for Ubox controllers remain experimental; early feedback says thin AliExpress spacers deform and that simply bolting the case to bare chassis metal with solid airflow is still the most reliable cooling upgrade.[^ip001-copper-deck]
+- A carbon-fibre specialist sketched Kaabo fenders with heat pipes, yet Paolo reminded the crew that without direct MOSFET-to-baseplate contact, exotic coolers barely outperform the stock resin-bound layout—focus on clamping pressure before chasing composites.[^carbon_heatpipe]
 - Nucular 12-FET controllers happily sustain roughly 210 A battery current while holding ~48 °C when they are clamped firmly to deck aluminium, underscoring the payoff from rigid mounting pressure on MOSFET plates.[^77]
 - Lightweight shrouds still help: a 12 V/0.6 A fan with mesh filters kept a Vsett single near 50 °C during 6.2 kW, 8 °C rain rides and doubled as a reminder to add motor NTCs before lifting current limits.[^vsett_fan]
 - Refresh thermal interfaces on a schedule: the community now treats ESC paste like desktop-PC maintenance.
@@ -166,6 +170,9 @@
 - Flush-mounted fan kits inside sealed decks simply recirculate warm air; racers relocate fans externally or add ducts so airflow actually sweeps across the heatsink before trusting the upgrade.[^86]
 - Bond compact Spintend cases to the frame with thermal adhesive and log front/rear motor temps; mismatched readings often trace to wiring or observer faults before the controller itself overheats.[^87]
 - Skip brazing aluminum frames for heatsink bonding unless you have specialty tooling; even experienced metalworkers called it a last resort compared with mechanical fasteners.[^88]
+- Happy Giraffe confirmed only the upper shell on a single uBox actually touches the MOSFETs—flip the case and use quality thermal paste before adding extra blocks, because added mass without contact contributes little cooling.[^ubox_contact]
+- Builders stacking 500 g aluminium slabs, vapor chambers, and external radiators onto Uboxes and Tronics are chasing 400 A bursts, but even they admit hand-soldered construction limits reliability once the thermal path leaves the MOSFET plates.[^thermal_mass]
+- Happy Giraffe also cautions that surface probes on a uBox only reflect heatsink skin temperature; log VESC telemetry and treat the battery tray as part of the thermal system instead of trusting plate readings alone.[^controller_probe_caution]
 - When clamping copper blocks to aluminum frames, isolate them with silicone sheets or plating; bare copper-on-aluminum mounts trigger galvanic corrosion that quietly eats the chassis.[^89]
 - Dial in airflow paths after rework.
   - builders now notch decks, tap fins, and bridge controllers to fresh-cut ducts so heat actually leaves the bay instead of recirculating behind sealed covers.[^90]
@@ -181,10 +188,15 @@
 
 ## Controller Cooling Case Studies
 
+- Mount uBox v2 hardware to real aluminium, not the stock steel footrests: Mirko logged roughly a 10 °C rise when the controller stayed on the steel plate, while swapping to 5 mm 6061 aluminium with thermal paste and a deck-spanning clamp kept Rosheee’s builds happy even during 199 A battery spikes.[^ubox_plate][^ubox_clamp]
+- Stainless “inox” slabs proved a dead end after riders shattered drill bits in 2 kg plates that still ran hot; the crew reverted to aluminium spreaders and warned that exposed copper blocks oxidise too quickly for scooter-duty mounting.[^inox_dead_end]
+- Dropping the zero-vector frequency from 30 kHz to 20 kHz on an Inokim OX lopped roughly 30 °C off VESC MOSFET temps while sustaining 72 V/250–300 A pulls—PWM tweaks can be as potent as hardware swaps for thermal headroom.[^zero_vector]
+- Paolo still pairs “hole-drilled” hub covers with ferrofluid but warns vented lids must be completely dry before reapplication; otherwise the fluid hardens and wrecks the stator.[^hole_drilled]
 - Jason resurrected an MP2 after a MOSFET failure and now caps the platform around 100 A battery / 250 A phase, acknowledging a 300 A launch cooked the board while chasing sensor cogging.[^97]
 - Finn keeps an Ubox Lite below 50 °C while pulling 160 A phase / 90 A battery by swapping in Arctic MX4 paste and bolting through the controller’s M2 bosses into a 3 mm aluminum belly pan.[^98][^99]
 - Matthew’s DIY water loop dropped his VESC enclosure from ~90 °C cutbacks to ~26–28 °C during 45 mph pulls; Noname is planning a moped-sized radiator, pump, and expansion tank to scale the concept.[^100]
 - Swapping to higher-grade thermal paste still nets ~5 °C improvements, but veterans stress optimizing airflow before escalating to liquid cooling complexity.[^101]
+- Rosheee’s latest Ninebot Max rebuild sandwiches the Ubox under springs, thermal pads, a vapor chamber, and long heatpipes; the duct keeps MOSFETs chilly yet dumps heat into the battery plate, so the crew is stress-testing whether budget heatpipes or fatigued solder joints will rupture and undo the gains.[^g30_heatpipe_trial][^g30_heatpipe_followup]
 - SNSC rental frames that arrived with warped mounting faces now get controllers preloaded against thick pads (or graphene sheets) and may even receive thermal glue to flatten hot spots before endurance sessions, showing how enclosure alignment affects long-pull temps.[^102]
 - Fold these Lite and MP2 mitigation case studies into controller SOP binders.
   - document Arctic MX4 swaps, belly-plate mounting, and air-vs.-liquid trade-offs so future tear-downs start with proven recipes instead of trial-and-error.[^103]
@@ -218,21 +230,31 @@
   - phase clipping kicked in around 25–30 km/h and each hard brake pulse lifted the stator roughly 5 °C, so log braking currents whenever you raise negative amps.[^119]
 - Field-weakening remains a high-speed tool only; riders toggle it above cruise speed after seeing 20–40 km/h gains at the cost of huge current draw and extra heat when left on below the duty sweet spot.[^120][^121]
 - Embed 100 kΩ NTC probes inside the windings on Vsett-class builds.
+  - tie one lead to hall ground, land the other on the VESC temp input, and plan on swapping to a Higo L1019 harness with three 11 AWG phases and eight signal pins so the extra wire fits through the axle.[^122][^ntc_harness]
   - the shell can feel cool while the coils touch 90 °C, and pairing the sensors with FOC controllers keeps launches smooth while logging real stator temps.[^122]
 - Overvolting an 800 W Citycoco hub to 26 S/100 A cooked the windings mid-hill, underscoring how quickly small motors die when voltage climbs faster than thermal paths.
   - treat voltage bumps as motor swaps, not just controller tweaks.[^123]
 
+## Thermal Imaging & Diagnostics
+
+- Calibrate emissivity on FLIR phone cameras before logging temps: black anodised aluminium reads accurately around ε ≈ 0.9, while polished copper needs values near 0.04 or the footage will lie about hotspot severity.[^flir_emissivity]
+
 ## Ferrofluid Handling & Hub Maintenance
 
 - Dose scooter hubs with roughly 3–6 ml of Statorade (60 mm motors stretch to 7–8 ml) only after the stator is seated; plastic syringes keep filings out while the magnets self-level the fluid.[^124]
+- Fresh 10–12 ml top-ups make side covers noticeably warmer within minutes, confirming better transfer, but veterans cap scooter hubs around 5 ml and reseal with silicone to prevent leaks.[^ferrofluid_warmup]
+- After every ferrofluid service, run a thin bead of RTV around both side-cover seams, axle exits, and exposed screw heads—the sealant stops statorade from weeping back through threads during hot rides.[^rtv_reseal]
+- 6.1" × 50 mm hubs settle around 5–7 ml of ferrofluid—3 ml underfills the gap and 10 ml adds drag that heats controllers.[^ferrofluid_sweet_spot]
 - Reseal side covers with silicone and revisit fills seasonally.
   - vent holes can shave another 5–10 °C on smaller motors but risk weeping ferrofluid and inviting water, so log temps before committing to drilled covers.[^124]
 - Wolf Warrior hubs that survived ~10,000 km came back with cracked phase insulation and missing hall boards; use refreshes to rewire phases, embed new hall sensors, and add Statorade while the shell is open.[^125]
+- Artem’s service recipe streaks 5–6 ml between each magnet pair on 10" hubs with 50 mm magnets; more than ~7 ml drags on spin-down and can push uBox temps past 70 °C within minutes.[^ferrofluid_recipe]
 
 ## Cooling Accessory Reality Checks
 
 - 3D-printed “hub fin” shells draw criticism because blocked airflow paths limit their effectiveness.
   - testers prefer spacing the fins with washers or pivoting to ferrofluid/oil cooling when they need real thermal headroom.[^126]
+- Stick-on heatsinks and leftover thermal pads on hub shells have proven ineffective—tyres shield the fins, so only clamped hubsinks with paste move heat reliably.[^hubstick_fail]
 - Judge cooling tweaks only with controlled A/B runs on fully cooled motors; hub-shell surface temperature alone says little about magnet health, so embed sensors or log winding temps before declaring success.[^127]
 - Longitudinal skid plates need real thermal interfaces: a 3 mm aluminum plate ran 54 °C without paste even with decent airflow, so builders now add high-quality compound, consider 25 mm fins or thicker stock, and clamp controllers hard against the plate before trusting it for sustained pulls.[^128]
 - Deck-mounted fan kits struggle when they blow straight into enclosure walls; tuners wedge spacers or relocate fans externally so airflow actually crosses heat sinks instead of recirculating warm air inside sealed decks.[^129]
@@ -305,6 +327,7 @@
  - **Match the probe to the controller.** VESC hardware accepts either 10 k or 100 k NTC sensors wired between TEMP and GND, letting factories choose whichever curve matches their dashboards without extra interface boards.[^vesc_ntc]
 - Cheap 10 kΩ B3950 probes work when landed between hall ground and the thermistor lead; polarity is irrelevant because the sensor is just a resistor.[^hall_ntc]
 - **Embed 100 k probes under the windings.** Builders settled on epoxy-coated 100 k B3950 NTC sensors with one-metre leads, gluing them beneath the windings with silicone before routing a single temp wire through the axle alongside phase and hall conductors to keep telemetry stable at high current.[^155]
+- Higo’s L1019 harness with three 11 AWG phase cores and eight signal pins gives enough room to snake that extra temperature lead through the axle without mangling the stock loom.[^higo_l1019]
 - **Route temp leads away from phase bundles.** Gordan's Ubox V2 logs showed thermistor signals collapsing above 80 A until he chased the ground loop, underscoring the need to reroute sensor wiring or add shielding when phase currents spike.[^temp_routing]
 - **Relocate sensors toward the magnet gap when possible.** Artem is experimenting with moving hub thermistors into the air gap so readings reflect magnet temperature instead of coil hotspots.
   - a better proxy for demag risk on ventilated rims.[^156]
@@ -581,3 +604,25 @@
 [^epoxy-removal]: Source: knowledge/notes/input_part013_review.md†L785-L785
 [^dual-70h-limit]: Source: knowledge/notes/input_part013_review.md†L786-L786
 [^50h-telemetry]: Source: knowledge/notes/input_part013_review.md†L787-L787
+[^ff_inject]: Source: knowledge/notes/input_part002_review.md†L626-L627
+[^ff_dose]: Source: knowledge/notes/input_part002_review.md†L668-L669
+[^hub_sink_debate]: Source: knowledge/notes/input_part002_review.md†L17693-L17712
+[^ntc_harness]: Source: knowledge/notes/input_part002_review.md†L17487-L17501
+[^ferrofluid_warmup]: Source: knowledge/notes/input_part002_review.md†L17545-L17562
+[^ferrofluid_sweet_spot]: Source: knowledge/notes/input_part002_review.md†L18993-L19004
+[^ferrofluid_recipe]: Source: knowledge/notes/input_part002_review.md†L20094-L20116
+[^hubstick_fail]: Source: knowledge/notes/input_part002_review.md†L18600-L18635
+[^higo_l1019]: Source: knowledge/notes/input_part002_review.md†L663-L665
+[^controller_probe_caution]: Source: knowledge/notes/input_part002_review.md†L707-L707
+[^g30_heatpipe_trial]: Source: knowledge/notes/input_part002_review.md†L642-L643
+[^g30_heatpipe_followup]: Source: knowledge/notes/input_part002_review.md†L643-L643
+[^carbon_heatpipe]: Source: knowledge/notes/input_part002_review.md†L533-L533
+[^ubox_contact]: Source: knowledge/notes/input_part002_review.md†L590-L590
+[^thermal_mass]: Source: knowledge/notes/input_part002_review.md†L591-L591
+[^zero_vector]: Source: knowledge/notes/input_part002_review.md†L558-L559
+[^hole_drilled]: Source: knowledge/notes/input_part002_review.md†L560-L560
+[^ubox_plate]: Source: data/vesc_help_group/text_slices/input_part002.txt†L20212-L20235; data/vesc_help_group/text_slices/input_part002.txt†L20520-L20542
+[^ubox_clamp]: Source: data/vesc_help_group/text_slices/input_part002.txt†L20680-L20689
+[^inox_dead_end]: Source: data/vesc_help_group/text_slices/input_part002.txt†L20620-L20655; data/vesc_help_group/text_slices/input_part002.txt†L20959-L20965
+[^rtv_reseal]: Source: data/vesc_help_group/text_slices/input_part002.txt†L20262-L20328
+[^flir_emissivity]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25844-L25858

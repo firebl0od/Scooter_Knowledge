@@ -14,12 +14,14 @@
 - Samsung 48X packs shine in 8 P commuters pulling ≤60 A total—they hold similar sag to P42A at 10 A per cell while adding ~20 % usable energy, but builders still pick 40T/P42A when each cell must deliver ≥15 A.[^ip001-48x]
 - LG M50LT curves now rival Samsung 48X at 10 A and stay strong at 15 A with ~4.2 Ah down to 3.0 V; just meter internal resistance because Tesla surplus lots on AliExpress arrive as lower-grade bins.[^ip001-m50lt]
 - Riders eyeing 14 S3 P or 22 S11 P layouts praise Molicel P50B’s 50 A capability but note limited supply (~€7.95 per cell via NKON plus ≈US$80 shipping), making Samsung 50S or Bak 45D the pragmatic alternatives.[^p50b-market]
+- Artem still leans on P42A-class cells for ~25 A-per-cell builds, calls Samsung 48X only a modest upgrade over 50G, and highlights Samsung M50LT Gen 2 for 0–15 A commuter packs while the crew chases scarce 50E/Molicel stock around Europe.[^cell_availability]
 
 ## Capacity Planning & Chemistry Guardrails
 
 - Mirono’s 13 S 5 P NCR21700A pack starts at 50 A battery current and caps around 75 A so the ≈15 A-per-cell string stays inside spec.
   - use the same discipline whenever you squeeze high-capacity cells into 5 P commuters.[^4]
 - Thunder-frame conversions are now targeting 22 S 11 P packs with full BMS integration; lighter riders can drop to 22 S 10 P on next-gen 40PL cells if they prioritise weight savings over maximum range.[^thunder-22s]
+- A 20 S9 P Samsung 48X pack lands around $5.75 per cell delivered from Canada, supports ≈150 A bursts (~17 A per cell), and yields roughly 40–80 mile range depending on riding style.[^pack_48x]
 - AWD conversions should run a single motor until a 16 S 5–7 P (or internal/external hybrid) battery is ready; 12 S 3 P packs sag or overheat on VESC hardware even when the controller can deliver the amps.[^5]
 - Mixed MJ1/MH1 parallels sag 10–12 V at ≈9 A per cell; veterans cap both chemistries near 7 A and pivot to Samsung 50G, Molicel P42A, or Murata VTC6 for higher-current builds instead of chasing firmware fixes.[^6]
 - Repeated BMS thermal trips permanently raise cell resistance—schedule monthly IR checks and dial charge current back when Daly-class boards run near their limit.[^ip001-bmsheat]
@@ -33,6 +35,8 @@
 - Long-range planners are sketching 60–70 Ah “legal chassis” scooters with ruggedised enclosures and fast-charge capability so mixed dirt/pavement tours stay compliant—evidence that endurance-focused VESC pack guides need as much attention as sprint builds.[^legal-chassis]
 - Builders debating 50 PL tabless upgrades versus cheaper 50E/50S strings report WePoor decks max near 20 S 12 P unless you mill the top rail, setting realistic capacity ceilings for those frames.[^50pl-vs-50e]
 - High-current race packs now treat ~40 A per P45B as acceptable when cooling is dialled: skrtt’s 18 S 9 P plan for 350 A drew green lights so long as logging confirmed sag and phase limits—not pack voltage—were the real bottleneck.[^p45b_current]
+- Lipoly pouch packs promise huge C-rates but force builders to break series links for charging because hobby chargers top out around 6–7 S; even with a BMS, puncture risk keeps 20 kg RC packs a niche pick compared with cylindrical Li-ion or LiFePO₄ bricks.[^lipoly_tradeoffs]
+- LiFePO₄ remains attractive for crash resilience on motorcycle-scale builds, yet riders still weigh Wh/L penalties against Samsung 48X-class Li-ion cells before committing to the chemistry.[^lifepo_tradeoffs]
 
 ## Layout and Interconnects
 
@@ -40,6 +44,7 @@
 - PuneDir’s 16 S 7 P Molicel M26 retrofit proved 13 S commuter frames can swallow 60 V packs when you match chargers to pack voltage instead of forcing higher-voltage supplies to sag.[^punedir-16s]
 - Community connector tables drive upgrades from stock 10–12 AWG leads to heavier wiring and lower-resistance plugs (XT60/90/150, EC5) on Ubox builds.[^pack_connectors]
 - MP2-based 22S2P (~650 Wh) cores drop straight into compact frames, and builders are stacking six more cells under the ESC to reach 24S while preserving regen space inside the deck.[^mp2-22s]
+- Packing experts now double-layer shrink (mixing lighter “Albert” sleeves with thicker “Denis” stock) and add intermediate padding so balance leads don’t chafe in transit; shrink damage usually signals loose clamping rather than weak material.[^double_shrink][^pack_clamp]
 - Ninebot Max and Xiaomi Pro deck extensions can accommodate up to 16 S 5 P 21700 modules with ~27 mm spacers, though installers often trim or rotate controller housings to keep packaging tidy.[^deck_extension]
 - Stock G30 frames already hide 20 S 6 P packs internally, but stretching to 20 S 9 P by machining deck rails and deleting the OEM ESC introduces convoluted busbars and structural compromises—seasoned builders steer first-timers toward simple rectangular stacks instead of chasing every last cell.[^g30-20s9p]
 - Backpack commuters still squeeze folded 20 S4 P modules into stripped 5 L packs, but aluminium quick-release racks need reinforcement before they can safely haul the extra mass.[^backpack-20s]
@@ -63,6 +68,9 @@
 - Hobby spot welders handle pure copper busbars up to roughly 0.15 mm consistently; 0.2 mm strips already push their limits, so plan industrial tooling if you want thicker copper laminates.[^copper-weld-limit]
 - LiquorHole’s Yisuntrek R8 runs a 100 Ah CATL prismatic pack (~25 kW) inside a 26 × 14 in deck; after a frame failure the electronics survived, highlighting that the chassis becomes the consumable on heavyweight commuters.[^yisuntrek-pack]
 - Stock Nami Burn-E packs remain 20 S 10 P bricks that tightly fill the plastic enclosure with straight rows, leaving little slack for retrofits.[^burne-pack]
+- Artem squeezed a 60 V 30 Ah 21700 pack into a Vsett 9 by interlocking dual 5 mm aluminium rods and tuning PETG prints to ±0.05 mm on circular features so the mass stays centred.[^vsett9_pack]
+- Smooth PEI beds grip PETG too aggressively; bump the Z offset by ≈0.1 mm or print on glass, textured PEI, FR4, or glue-stick layers to save the coating when turning out enclosure parts.[^petg_bed]
+- Vsett deck rails must come out entirely to fit longer replacement packs—trimming cells to nestle in the stock channels is off the table.[^vsett_rails]
 
 ## Testing & Service Notes
 
@@ -91,6 +99,7 @@
 [^ant-upgrade]: Source: knowledge/notes/input_part013_review.md†L865-L865
 [^pack_cells]: Source: knowledge/notes/input_part000_review.md, line 63.
 [^cell_refresh]: Source: knowledge/notes/input_part000_review.md, line 117.
+[^pack_48x]: Source: knowledge/notes/input_part002_review.md†L694-L694
 [^pack_layout]: Source: knowledge/notes/input_part000_review.md, line 64.
 [^pack_connectors]: Source: knowledge/notes/input_part000_review.md, line 65.
 [^deck_extension]: Source: knowledge/notes/input_part000_review.md, line 75.
@@ -123,10 +132,18 @@
 [^3]: Source: knowledge/notes/input_part000_review.md†L609-L617
 [^ip001-48x]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19280-L19316
 [^ip001-m50lt]: Source: data/vesc_help_group/text_slices/input_part001.txt†L22760-L22932
+[^cell_availability]: Source: knowledge/notes/input_part002_review.md†L692-L693
 [^4]: Source: knowledge/notes/input_part000_review.md†L311-L311
 [^5]: Source: knowledge/notes/input_part000_review.md†L312-L312
 [^6]: Source: knowledge/notes/input_part000_review.md†L313-L313
 [^7]: Source: knowledge/notes/input_part000_review.md†L318-L318
+[^lipoly_tradeoffs]: Source: knowledge/notes/input_part002_review.md†L18407-L18421
+[^lifepo_tradeoffs]: Source: knowledge/notes/input_part002_review.md†L18405-L18421
+[^double_shrink]: Source: knowledge/notes/input_part002_review.md†L17563-L17589
+[^pack_clamp]: Source: knowledge/notes/input_part002_review.md†L17603-L17609
+[^vsett9_pack]: Source: knowledge/notes/input_part002_review.md†L18687-L18696
+[^petg_bed]: Source: knowledge/notes/input_part002_review.md†L19661-L19664
+[^vsett_rails]: Source: knowledge/notes/input_part002_review.md†L19667-L19682
 [^8]: Source: knowledge/notes/input_part000_review.md†L315-L315
 [^9]: Source: knowledge/notes/input_part000_review.md†L314-L314
 [^10]: Source: knowledge/notes/input_part000_review.md†L446-L450

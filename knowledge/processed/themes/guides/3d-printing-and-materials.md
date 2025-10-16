@@ -7,10 +7,12 @@
   - builders even turn the parts on lathes, whereas filler-only filaments offer little benefit beyond marketing.[^2]
 - Keep epoxy, cyanoacrylate, or specialty plastic adhesives on hand when reinforcing PETG/PLA accessories.
   - these glues bond without melting the print and keep commuter hardware intact.[^3]
+- Smooth PEI sheets grip PETG aggressively—bump Z offset ~0.1 mm or switch to glass, textured PEI, FR4, or a glue-stick barrier before ripping the coating during enclosure runs.[^smooth_pei_offset]
 
 ## Production Discipline
 
 - PETG battery holders crack when printed wet or too fast; veterans dry filament, slow to 80–120 mm/s with 0.6 mm nozzles, run 240–260 °C hotends, and tune retraction/fan settings before trusting cages to hold 21700 cells.[^4]
+- Artem finally tamed PETG stringing by running 0.3 mm layers at 0.4 mm width around 140 mm/s (~14 mm³/s) and cycling rolls within two days so the filament never needs drying on current tooling.[^petg_fast]
 - Printing transparent PETG carriers demands ~13 mm/s speeds, minimal cooling, and post-polish to avoid haze.
   - stock Bambu profiles run too hot and cloud the parts immediately.[^5]
 - Shops chasing quick turnaround on fixtures keep praising the Bambu P1S because its enclosed chamber and turnkey slicer profil
@@ -28,6 +30,9 @@ etween test rides.[^bambu_p1s]
 - Xiaomi-class PETG carriers still relax with heat; Finn sizes the cups for 21.4 mm P42A vs. tighter 21.15 mm 40P cans and runs high infill so the pack flexes before cracking when warm.[^petg-holders]
 - Pandalgns’ modular battery cases add BMS service holes and screw-linked columns with mesh caps for triangular 10 S6 P bike packs, keeping nickel clamped while leaving room for a dedicated BMS plate.[^pandalgns-triangle]
 - Builders are still hunting thin thrust washers to sit between hub shafts and end caps—call out the sourcing gap when assembling maintenance kits alongside spare controller boards.[^thrust-washers]
+## Shared Print Assets
+
+- Community brace kits for Ninebot G30 decks now circulate as `middle.stl` plus `front/left/right/rear.3mf` files so builders can reinforce ground decks after heavy grinding without redrawing the geometry from scratch.[^g30_brace]
 
 
 ## References
@@ -45,3 +50,6 @@ etween test rides.[^bambu_p1s]
 [^petg-holders]: Source: knowledge/notes/input_part010_review.md†L432-L433
 [^pandalgns-triangle]: Source: knowledge/notes/input_part010_review.md†L438-L438
 [^thrust-washers]: Source: knowledge/notes/input_part010_review.md†L411-L412
+[^petg_fast]: Source: knowledge/notes/input_part002_review.md†L645-L646
+[^g30_brace]: Source: knowledge/notes/input_part002_review.md†L526-L526
+[^smooth_pei_offset]: Source: knowledge/notes/input_part002_review.md†L19661-L19664

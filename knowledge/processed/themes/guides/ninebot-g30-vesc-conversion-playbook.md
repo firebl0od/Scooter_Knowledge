@@ -41,6 +41,13 @@
 - Rental G30 chassis earn premium status: fixed stems, dual brakes, oil suspension, and thicker tubing swallow 13 S 5 P 21700 packs plus 1.2 kW hubs without the flex or wobble of stock Xiaomi frames.
   - expect ~10 kg more steel but far less frame twist under launch torque.[^24]
 
+## Dual-Drive & Power Planning
+
+- Mirko’s dual-motor roadmap pairs a 16 S 6 P VTC6A pack with twin Uboxes at ~70 A rear / 55 A front battery and 135 A phase per side, warning that 90 A battery overheats a single Ubox and that shell IR readings under-report stator heat even with ferrofluid.[^g30_dual_plan]
+- Existing Vsett 10+ logs show 80 A battery / 225 A phase on the rear holding below ~185 °F when 6–7 ml of ferrofluid is present, giving Ninebot builders a sanity check for phase limits on similar hubs.[^vsett_ferrofluid]
+- The crew stocks 100 ml ferrofluid bottles (often from Nexun’s EU supply) and feeds fluid through magnet gaps instead of drilling ports, resealing covers with silicone to avoid leaks.[^ferrofluid_stock]
+- Sleeper Ninebot builds targeting ~40 km/h stay on 13 S packs with low-Kv Gen6 or FLJ rear motors, skipping suspension swaps unless comfort demands it.[^g30_sleeper]
+
 ## Powertrain Reference Builds
 
 | Configuration | Controllers & Limits | Reported Performance | Notes |
@@ -60,6 +67,7 @@
 ## Battery & BMS Planning
 
 - Budget packs starting with 20 S Samsung 30Q quotes for commuters, but expect premium 21700 builds (50PL, P45B/P50B) to double total cost once welding, insulation, and shipping are included.[^16]
+- Rosheee is keeping his 16 S5 P pack in service until a 20 S6 P replacement lands and confirmed the 17 S holder STL came from Tudor—line up the print ahead of time if you plan the same upgrade.[^g30_holder]
 - Expect diminishing returns beyond 18 S on stock Xiaomi/Ninebot hubs.
   - doubling pack voltage roughly doubles free-spin speed, but the commuter-class motors cook themselves at 20 S unless you add serious cooling or swap to beefier hubs like Fiido’s wider L3 stator.[^29]
 - Packaging 20 S bricks inside the Xiaomi/M365 deck is a “brain-f***” even for veterans; most builders call 18 S the practical sweet spot unless you are ready to redesign the layout into a G30LP-style chassis with intricate wiring clearances.[^30]
@@ -213,6 +221,7 @@
 [^epowerfun]: Builders documented drilling and trimming the budget ePowerFun 3 mm floor plate as a temporary heatsink before commissioning thicker custom skid plates.[^105]
 [^express_power]: VESC Express boards on G30 projects need external 5 V feeds (Spintend rails top out at 150 mA) and stable 6.05 firmware.
   - 6.06 restarts SD logging every three seconds until patched.[^106]
+[^g30_holder]: Source: knowledge/notes/input_part002_review.md†L629-L630
 [^g30-pulldown]: G30 dash retrofits on Makerbase 75100s hinge on adding the pull-down resistor from pin 3; firmware 6.2 currently caps all modes around 60 % current so most builders stay on older releases.[^107]
 [^bms-parity]: Stacking a healthy OEM 10 S pack with a DIY 4 S extender only worked after matching voltages and BMS discharge ratings; a sagging series stack blocked VESC detection until a regulated 60 V source replaced it.[^108]
 [^g30-error10]: Makerbase 75100 V2 swaps trigger a “10 error” on the stock dash until you introduce the display to VESC Tool and program the controller.[^109]
@@ -337,3 +346,7 @@
 [^g30_layouts]: Deck-layout and SNSC stem workflow reminder covering internal/external 20 S pack combos plus CNC stem/star-nut steps for fork swaps. Source: data/vesc_help_group/text_slices/input_part005.txt†L24505-L24536; L24652-L24661.
 [^g30_front_disc]: Guidance on using a Ninebot Pro 2 front motor and custom spacers to add a front disc without a Monorim fork swap. Source: data/vesc_help_group/text_slices/input_part005.txt†L24468-L24477.
 [^sns_prints]: SNSC sourcing and Bambu P1S accessory printing cues for rental-frame conversions. Source: data/vesc_help_group/text_slices/input_part005.txt†L24537-L24568; L24552-L24565.
+[^g30_dual_plan]: Source: knowledge/notes/input_part002_review.md†L18811-L18929
+[^vsett_ferrofluid]: Source: knowledge/notes/input_part002_review.md†L18872-L18882
+[^ferrofluid_stock]: Source: knowledge/notes/input_part002_review.md†L18993-L19004
+[^g30_sleeper]: Source: knowledge/notes/input_part002_review.md†L19756-L19771

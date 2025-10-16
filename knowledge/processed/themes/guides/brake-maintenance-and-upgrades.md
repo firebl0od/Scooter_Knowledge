@@ -26,6 +26,7 @@
   7. Top off reservoir, close ports, reinstall pads and test lever firmness[^magura-bleed]
 
 - 🇪🇸AYO#74 also swapped to a higher-flow bleed needle to tighten Shimano/Magura lever feel, noting the larger bore purged dead-zone bubbles faster than stock fittings.[^3]
+- When calipers keep rubbing after a textbook bleed, remove the block, push each piston out halfway with a syringe full of clean mineral oil, lubricate the seals, and centre the caliper before the first lever pull—spreading the pistons evenly stops the asymmetric bite that causes rotor rub.[^magura_pistons]
 
 ### Preventing Seal Damage During Pad Changes
 
@@ -40,6 +41,15 @@
 
 - Riders formed a “sanded pad club,” resurfacing pads before bedding to tame squeal and keep braking consistent after swapping to thicker rotors.[^4]
 - Kool-Stop sintered pads stretch VSETT pad life beyond 800 km provided riders bed them with 30–60 hard 50→0 km/h stops, but they run louder and chew roughly 1 mm off rotors every ~1000 km—plan spare discs for long trips.[^ip001-sintered]
+
+### Pad Selection & Wet-Weather Behavior
+
+- Heavy scooters routinely chew through stock Magura pads in under 500 km; the crew now defaults to full-metallic Kool Stop D170S sets to keep MT5/MT7 systems consistent in gritty, high-power service.[^kool_stop]
+- MT5/MT7 riders pairing Kool Stop sintered pads with Magura MDR-C 2 mm rotors and MT7 HC3 bite-point knobs report fierce bite and on-trail adjustability without reaching for hex tools.[^magura_field]
+- Hope/Jagwire banjo kits cover every washer except the required M6 × 20 mm banjo bolt; after boiling Shimano rotors toward an estimated 350–450 °C, track riders now reinforce hoses with steel-braided “fuckeria” lines before the next session.[^magura_banjo]
+- Magura’s stock Royal Blood boils around 120 °C, so aggressive downhill crews keep Shimano or Brembo mineral oil on hand for repeated 100 → 0 km/h stops and log rotor temps that push past 110 °C even on flat routes.[^royal_blood]
+- Xiaomi Xtech calipers grab harder once the rotor is wet, so riders plan fresh bleeds and bedding cycles after rain to restore predictable modulation.[^xtech_wet]
+- Logan four-piston calipers on NAMI scooters already deliver Magura-level stopping, so owners only switch brands if they prefer MT-series lever feel or pad options.[^logan_caliper]
 
 ### Lever Durability Notes
 
@@ -76,6 +86,7 @@
   - fresh pads or 3 mm aftermarket discs often rub unless you machine custom spacers
   - so many riders stick with stock Zoom calipers or thinner discs when chasing upgrades.[^11]
 - A Brakestuff rotor cracked after just a few races, sparking debate over its twin-ring design and whether added venting is needed to stop flipping/warping under race heat.[^brakestuff_rotor_debate]
+- Magura Storm HC rotors measure about 1.9 mm new and get replaced near 1.8 mm; setting reach adjusters fully out, bleeding with piston blocks, and holding the caliper above the lever while closing ports prevents rubbing when fitting thicker MDR-C or MDR-P rotors with Kool Stop pads.[^storm_hc]
 - Repeated 80–90 km/h stops roasted 120 mm rotors and overheated Magura MT8s; the crew now defaults to dual front brakes or 203 mm discs on heavy scooters to regain thermal margin.[^12]
 - When rotors need a millimetre of offset, riders cut thin shim plates (nickel strip or torque-arm washers) instead of stacking round washers that flex loose under repeated braking loads.[^13]
 - Premium rotors from Shimano, Magura, or Galfer stay on the shopping list while AliExpress specials are avoided for 70 km/h builds despite the price gap.[^14]
@@ -98,6 +109,8 @@
 
 ### External Hose Routing & Quick-Disconnect Hardware
 
+- Magura MT5 single-pad kits ship without pad screws, so riders trim M4×25 mm bolts to fit, and the Jagwire Hyflow + Hope quick-connect set relocates the banjo outward with sealed M6/M5 washers—essential for tight decks like the Ninebot G30.[^magura_hardware]
+- Track builds follow that kit with steel-braided “fuckeria” hoses after boiling Shimano rotors and seeing fade around 350–450 °C.[^magura_track]
 - Rerouting Magura hoses outside the fork demands the correct short banjo bolts and bleed screws; mixing long/short clamp screws has already shorted controller phases, so standardise hardware before final assembly.[^20]
 - The Elvedes Hydro Parts Kit supplies dual M8 banjos for clean fork exits, while Jagwire’s quick-disconnect system costs roughly $120–$125 for enough hose and couplers to outfit dual-motor scooters and requires committing to Jagwire hose diameters.[^21][^22]
 - Hope’s HFA701 kit bundles the correct M6 banjos and bleed screws; if you piece together individual fittings from Venhill, Trickstuff, or AliExpress, match barb dimensions to hose ID or you will fight leaks during the first bleed.[^23]
@@ -105,11 +118,15 @@
   - inspect clearance after every wheel service and carry spare banjos plus hoses for roadside replacements.[^24]
 - Jagwire-style external reroutes can kink MT7 hoses and kill braking until the line is replaced; inspect for damage after any flat and confirm at least 5 mm clearance to 10×3 rubber even when deflated.[^ip001-jagwire]
 - Xiaomi and VSETT frames that run MT7/MT8 calipers close to the tire should stock spare banjos/bolts—sidewall flex can close sub-5 mm gaps mid-ride, so schedule clearance checks alongside pad inspections.[^ip001-clearance]
+- Magura MT5e and MT7 calipers share castings, but the MT7 lever adds bite-point adjustment and four individual pads; most commuters still chase the aluminium one-finger HC lever upgrade for harder stops without the flex of plastic blades.[^mt7_lever]
+- Rosheee’s €90 “Stahlflex” steel-braided hoses keep lever feel consistent under heat, yet fittings must match each brand’s banjo outlets to avoid leaks when mixing Magura, Shimano, or Hope hardware.[^stahlflex]
+- When stock compounds glaze during track sessions, the group swaps to EBC sintered pads as the reliable fallback.[^ebc_pads]
 
 ### Semi-Hydraulic Caliper Limitations
 
 - XTech-style semi-hydraulic calipers carry minimal oil volume, rely on rattly auto-centering hardware, and have warped rotors on scooters above 60 km/h.
   - upgrade to sturdier discs, avoid flimsy quad calipers, and inspect the whole brake stack after flats or heavy emergency stops.[^25]
+- For mechanical builds, the TRP Spyke dual-piston caliper remains the dependable upgrade and even pairs with Xiaomi-style brake levers that include e-brake switches for simple commuter maintenance.[^trp_spyke]
 - Track abuse already pushed Magura calipers past the Curie point (>700 °C), wiping magnetism and underscoring the need for engine braking or larger rotors on race builds before mechanical fade sets in.[^26]
 - 100 km/h track logs keep comparing Trickstuff, Kool-Stop, Shimano, and XLC rotors.
   - prep extra thermal mass, ventilation, and pad choices before sprint sessions so glowing hardware doesn’t demagnetise calipers or chew pads mid-run.[^27]
@@ -445,3 +462,17 @@
 [^shimano-metal]: Source: knowledge/notes/input_part006_review.md†L15-L15
 [^mt7-boil]: Source: knowledge/notes/input_part006_review.md†L12-L12
 [^oxo-front]: Source: knowledge/notes/input_part011_review.md†L513-L513
+[^magura_field]: Source: knowledge/notes/input_part002_review.md†L17154-L17243
+[^magura_banjo]: Source: knowledge/notes/input_part002_review.md†L17178-L17275
+[^magura_pistons]: Source: data/vesc_help_group/text_slices/input_part002.txt†L20741-L20809
+[^royal_blood]: Source: data/vesc_help_group/text_slices/input_part002.txt†L20728-L20753
+[^storm_hc]: Source: knowledge/notes/input_part002_review.md†L19214-L19505
+[^logan_caliper]: Source: knowledge/notes/input_part002_review.md†L19882-L19887
+[^magura_hardware]: Source: knowledge/notes/input_part002_review.md†L638-L639
+[^magura_track]: Source: knowledge/notes/input_part002_review.md†L657-L657
+[^kool_stop]: Source: knowledge/notes/input_part002_review.md†L547-L548
+[^xtech_wet]: Source: knowledge/notes/input_part002_review.md†L549-L549
+[^mt7_lever]: Source: knowledge/notes/input_part002_review.md†L569-L570
+[^stahlflex]: Source: knowledge/notes/input_part002_review.md†L571-L571
+[^ebc_pads]: Source: knowledge/notes/input_part002_review.md†L572-L572
+[^trp_spyke]: Source: knowledge/notes/input_part002_review.md†L600-L600

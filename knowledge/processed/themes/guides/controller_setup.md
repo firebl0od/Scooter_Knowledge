@@ -38,6 +38,30 @@
 - Dual Spintend crews treat 120–130 A phase per motor (≈160 A ABS max) as the realistic ceiling; if a hub “stutters” above ~85 A, assume a blown MOSFET or loose phase and inspect wiring or rerun sensorless detection before simply lowering limits.[^5]
 - When ABS faults trip at modest battery current, raise the absolute-current ceiling to roughly 1.5× the phase limit so regen spikes and launch surges stop tripping protections while keeping the controller inside its thermal window.[^abs_ratio]
 
+## Sensor Modes & Launch Tuning
+
+- Lower the hall-to-sensorless handoff when hubs cog: Mirono cut the switchover from 2 000 to ≈1 200 ERPM so Vsett hubs stay synced at crawl speeds, and the tweak aligns with the community reminder that halls usually drop out around 2 500 ERPM.[^hall_switchover]
+- Vedder’s recent HFI refinements now deliver hall-less launches on Xiaomi-class ESC ports, and Spintend’s uBox shows up inside VESC Tool’s hardware directory after the Onside Ring submission—proof that official firmware recognises the hardware and that hall-free starts are improving.[^hfi_update]
+- Full sensorless starts on 20 S hardware still need a kick; riders keep adding hall looms to legacy hubs and watch VESC logs for “brbrbr” oscillations that point to bad flux or inductance autodetect values.[^sensorless_caveats]
+
+## Firmware Recovery & Diagnostics
+
+- When the Spintend uBox BLE module refuses to pair, builders still connect over USB, flash both bootloader and firmware from the shared Google Drive, and only then retry Bluetooth pairing; VESC Tool desktop first, then Android, with a controller reboot between steps keeps the module advertising.[^ubox_ble]
+- If Spintend firmware 5.3 throws false ABS over-current trips at high ERPM, enable the ABS feature in VESC Tool and lower the current-filter constant to calm the protection logic before chasing hardware fixes.[^spintend_abs]
+- Mirono cured mid-load surging by reordering hall wires back to the standard 1-2-3 sequence and lowering the sensorless handover from 2 000 ERPM to 1 200 ERPM, proving that VESC auto-detect can pass with mis-sequenced halls yet still misfire on-road.[^hall_reorder]
+
+## Harness Preparation & CAN Safety
+
+- JST-SM three-pin leads from AliExpress match the uBox V2 harness, but set the Spintend ADC adapter to 5 V mode, route every signal before you apply pack voltage, and back motor autodetect amps down if the defaults seem aggressive.[^jst_adapter]
+- Factory Flipsky 75100 mains often arrive as cold joints; trim insulation so the wire bottoms out, flood the bullet with solder, and flatten the strands onto the PCB pad with ceramic tweezers before shrinking the insulation.[^flipsky_rework]
+- Dual-controller scooters that limp on a single ESC should disconnect the slave’s CAN and battery leads (phases and halls can stay, though full isolation is safer) to avoid back-feeding the dead controller.[^dual_can_isolation]
+
+## Display & Control Integrations
+
+- Artem published an open-source TTGO T-Display dashboard for ESP32/RP2040 variants that reads VESC telemetry over BLE and gives scooters a configurable wireless cluster.[^ttgo_display]
+- Xiaomi’s BLE dash maintains stock-style modes, telemetry, and VESC Tool access when paired with a separate Bluetooth module, making it a stealth drop-in for commuter builds.[^xiaomi_ble]
+- Spintend’s ADC adapter offers switchable 5 V/3.3 V outputs with onboard filtering, and the crew notes Spintend’s LCD throttle can bypass the board entirely when space is tight.[^spintend_adc]
+
 ## Thermal Management & Regen Safety
 
 - Flipsky’s compact single begins brushing 60 °C on the MOSFETs within 3 km at 50 A battery / 85 A phase, pushing owners to improve heatsink pressure, refresh thermal paste, and add 40 mm fans before experimenting with 100–120 A tunes.[^6]
@@ -62,6 +86,11 @@
 
 - 3Shul CL350 owners hunting firmware can pull the official V3 sources from the Drive share community members unearthed to build 6.2-capable binaries even when the vendor site is silent.[^cl350_drive_share]
 
+## Firmware Notes & Controller Limits
+
+- Artem continues to warn that uBox hardware can burn on firmware 5.3 due to a current-sensing regression; either hold on 5.2 or lower amp limits until Spintend publishes a fix.[^ubox_fw53]
+- Gigolo Joe’s Flipsky 75100 V2 proved stable on 20 S (≈77 V) with firmware 5.03 at 160 A phase / 110 A battery, but the controller reads pack voltage a few volts low—budget extra headroom near max voltage.[^75100_20s]
+
 ## Example Tuning Profiles
 
 - A Zero 10X dialled to 100 A rear / 60 A front phase with 80 A/50 A battery caps provides smooth launches and strong mid-speed pull without overheating.[^zero10x]
@@ -71,6 +100,7 @@
 - The build reuses a Nami 80 A BMS that trips near 120 A total, so Yoann caps pack current around 100–120 A while custom Lisp code scales phase amps versus ERPM to prevent wheelspin; note the thinner Alu Lite baseplate solders easier but trades some thermal mass.[^vsett-dual-lite]
 - Kelly KLS scooter controllers often refuse USB connections.
   - plan on the BLE module or legacy Windows XP drivers when you need to flash or configure those platforms.[^11]
+- Track crews mapped Kelly KLS power output by matching phase and battery percentages: a 7212S labelled for 50 A battery actually delivered ~120 A, while 7218S builds logged 240 A at 115 km/h until cooling became the bottleneck—size cabling accordingly.[^kelly_mapping]
 
 ## Sensorless Setup Considerations
 
@@ -134,6 +164,21 @@
 [^vesc_tc_torque]: Source: knowledge/notes/input_part011_review.md†L502-L502.
 [^abs_ratio]: Source: knowledge/notes/input_part011_review.md†L538-L538.
 [^sensorless_launch]: Source: knowledge/notes/input_part011_review.md†L540-L541.
+[^ubox_ble]: Source: knowledge/notes/input_part002_review.md†L551-L553
+[^spintend_abs]: Source: knowledge/notes/input_part002_review.md†L567-L567
+[^hall_reorder]: Source: knowledge/notes/input_part002_review.md†L576-L576
+[^ttgo_display]: Source: knowledge/notes/input_part002_review.md†L18713-L18727
+[^xiaomi_ble]: Source: knowledge/notes/input_part002_review.md†L19188-L19193
+[^spintend_adc]: Source: knowledge/notes/input_part002_review.md†L19972-L19990
+[^ubox_fw53]: Source: knowledge/notes/input_part002_review.md†L578-L578
+[^75100_20s]: Source: knowledge/notes/input_part002_review.md†L580-L580
+[^kelly_mapping]: Source: knowledge/notes/input_part002_review.md†L562-L563
+[^hall_switchover]: Source: data/vesc_help_group/text_slices/input_part002.txt†L21201-L21224; data/vesc_help_group/text_slices/input_part002.txt†L21233-L21257
+[^hfi_update]: Source: data/vesc_help_group/text_slices/input_part002.txt†L21212-L21411
+[^sensorless_caveats]: Source: data/vesc_help_group/text_slices/input_part002.txt†L21195-L21211; data/vesc_help_group/text_slices/input_part002.txt†L21257-L21310
+[^jst_adapter]: Source: data/vesc_help_group/text_slices/input_part002.txt†L20810-L20832
+[^flipsky_rework]: Source: data/vesc_help_group/text_slices/input_part002.txt†L21055-L21084
+[^dual_can_isolation]: Source: data/vesc_help_group/text_slices/input_part002.txt†L21442-L21487
 
 
 ## References

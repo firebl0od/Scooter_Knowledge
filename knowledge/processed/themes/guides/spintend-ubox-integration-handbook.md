@@ -3,6 +3,7 @@
 ## TL;DR
 
 - Treat every unit as a kit: tear it down before energising, photograph QC issues for support, and follow VESC-safe power-up rituals (precharge, discharge caps, avoid hot-plugging) to prevent latent shorts or MCU damage.[^1][^2][^3]
+- Spintend says the red 75 V dual still uses its best FETs and is teasing a 66 × 83 × 29 mm single-100 V controller to bridge current supply gaps while resale units circulate; brass baseplate concepts were shelved in favour of aluminium or copper spreaders.[^single_proto][^brass_swap]
 - Clamp the case hard to a heat sink and budget active airflow if phase current will exceed ~120 A per channel; pad thickness and surface prep matter more than exotic materials.[^4][^5][^6][^7]
 - Treat the Lite boards as ~150 A-per-motor hardware even in dual housings; `lekrsu`’s reminders keep traction upgrades realistic until you step up to full-size Spintend or 3Shul stages.[^lite-phase-cap]
 - Keep regen conservative.
@@ -312,6 +313,8 @@
 [^1]: Source: data/vesc_help_group/text_slices/input_part001.txt†L20826-L20905
 [^2]: Source: data/vesc_help_group/text_slices/input_part001.txt†L20906-L20947
 [^3]: Source: data/vesc_help_group/text_slices/input_part001.txt†L25713-L25761
+[^single_proto]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25558-L25571
+[^brass_swap]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25573-L25595
 [^4]: Source: data/vesc_help_group/text_slices/input_part002.txt†L26880-L26918
 [^5]: Source: data/vesc_help_group/text_slices/input_part002.txt†L26994-L27020
 [^6]: Source: knowledge/notes/input_part004_review.md†L30-L30

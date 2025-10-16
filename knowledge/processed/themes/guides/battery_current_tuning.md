@@ -33,6 +33,9 @@ Taming current limits is the difference between a scooter that rips for years an
 2. **Set conservative currents**
 
 - Start with a 2:1 to 3:1 phase-to-battery ratio (e.g., 40 A battery / 110 A phase on 16 S commuter packs).⁵ ⁷
+- Remember that phase amps spike at low speed for torque while BMS stress follows battery current—150 A phase on 10 A battery feels dramatic but still burns more watt-hours from the pack once controller losses are counted.[^phase_low_speed]
+- Vsett 10 riders chasing 20 S performance hold roughly 75/195 A rear and 70/125 A front (battery/phase) while logging ~175 °F windings; lighter 16 S G30 builds still stay under 80 °C at 9–11 kW thanks to a 20 kg weight advantage.[^vsett_dualtron]
+- Traction hinges on tyre pressure—~40 psi PMT E-Fire vs. softer slick settings—and field-weakening plus temp sensors are mandatory before exploring 14 kW pulls or dual 90 A battery limits on 20 S tunes.[^traction_checks]
 - 16 S 5 P Samsung 35E packs stay healthy around 40 A continuous (50 A bursts) with 110–125 A phase and ABS caps near 180 A; keep regen gentle (~7 A battery / 15 A motor) so commuter cells don’t overheat.[^16s35e]
 - Cold-weather logs showed 16 S 6 P LG MJ1 parallels sagging roughly 12 % at 10 A per cell while Samsung 35E strings tolerated the same load with less drop, so riders pick chemistries with winter headroom before raising limits.[^mj1_sag]
 - Budget field-weakening draw in your battery limit.
@@ -55,6 +58,7 @@ Taming current limits is the difference between a scooter that rips for years an
 - Molicel P45B still anchors the premium high-current slot, yet plenty of builders stick with cheaper Samsung/LG long-range cells unless they truly need 35–40 A per cell or aggressive fast-charging workflows—proof that chemistry budgets should track the actual current profile, not hype.[^p45b_trade]
 - Keep Artem’s relationship in mind: `I_phase = I_batt × V_batt ÷ V_motor`, so phase torque fades as ERPM climbs.
   - log both currents to confirm your battery caps aren’t starving the tune mid-pull.[^phase_equation]
+- Rosheee’s 16 S 5 P Samsung 50G experiment already logged ~199 A battery through a 60 A Daly BMS, underscoring how aggressively the crew is pushing 10–12 A-rated cells before migrating to a 20 S 6 P pack.[^50g_abuse]
 - Field-weakening still trades efficiency for speed.
   - expect roughly 25 % higher losses and noticeable current spikes once it kicks in, which is why top-speed pulls suddenly heat controllers and packs.[^fw-losses]
 - Treat 45 A-per-cell marketing cautiously.
@@ -144,6 +148,7 @@ Taming current limits is the difference between a scooter that rips for years an
 ## Charging & Charger Vetting
 
 - Match charger voltage to the pack instead of counting on the battery to drag a higher-voltage supply down; PuneDir’s 16 S build highlighted the CC/CV mismatch risk when trying to charge with an 84 V brick clamped by the BMS.[^charger-mismatch]
+- **Adopt gentle charge rates for longevity.** Commuters sip 43.2 Ah packs at ~3 A (≈0.008 C), keep 6 P Molicel bricks under ≈8 A, and focus on limiting cell heat even when math says 0.2 C should be safe.[^slow_charge]
 - **Audit adjustable chargers.** The Celler-branded 20 S bench supply landed on voltage with steady thermals, but log fan duty and case temps during long charges before endorsing it for customers.[^33]
 - **Replace sketchy 22 S supplies.** Refurbished Meanwell stacks have failed under load.
   - source purpose-built 22 S chargers or vetted lab supplies instead of gambling on patched industrial gear.[^34]
@@ -358,6 +363,11 @@ Taming current limits is the difference between a scooter that rips for years an
 [^92]: Source: knowledge/notes/input_part003_review.md†L71-L71
 [^93]: Source: knowledge/notes/input_part003_review.md†L72-L72
 [^94]: Source: knowledge/notes/input_part002_review.md†L67-L68
+[^phase_low_speed]: Source: knowledge/notes/input_part002_review.md†L17616-L17630
+[^vsett_dualtron]: Source: knowledge/notes/input_part002_review.md†L17303-L17405
+[^traction_checks]: Source: knowledge/notes/input_part002_review.md†L17413-L17475
+[^50g_abuse]: Source: knowledge/notes/input_part002_review.md†L20685-L20700
+[^slow_charge]: Source: knowledge/notes/input_part002_review.md†L20002-L20021
 [^95]: Source: data/vesc_help_group/text_slices/input_part002.txt†L2195-L2344
 [^96]: Source: knowledge/notes/input_part002_review.md†L69-L70
 [^charger-mismatch]: Source: knowledge/notes/input_part010_review.md†L445-L446

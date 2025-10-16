@@ -55,6 +55,7 @@
 - Давно пора’s Xiaomi wiring recipe lands red/black on the controller’s 3.3 V/GND rails and sends the blue (or green) signal lead straight to ADC2, skipping BLE dash pucks during conversions.[^xiaomi-wiring]
 - If a fresh motor knocks only at light throttle, retest hall sensors—bad halls manifest at low ERPM before full-throttle smooths out.[^hall-knock]
 - Spintend throttle looms land red on the 3.3 V rail, black on ground, and route the signal into ADC1 while the NRF header carries the Bluetooth module; confirm the pinout before repinning harnesses for traction-control experiments.[^spintend-adc]
+- Artem signed off on the CNC Spin-Y throttle samples, plans first-week-of-August shipping, and already smoothed the return spring with heavy lubricant; buyers favoured black housings with raw aluminium accents but renders now cover black, silver, red, and orange combos for local anodising.[^spin_y_ship][^spin_y_palette]
 
 ## Regen Safety Guidelines
 
@@ -121,6 +122,8 @@
 [^ip001-xiaomi-cal]: Source: data/vesc_help_group/text_slices/input_part001.txt†L18296-L18656
 [^ip001-domino]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24290-L24311
 [^regen_phase_ratio]: Source: knowledge/notes/input_part008_review.md†L447-L448
+[^spin_y_ship]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25207-L25271
+[^spin_y_palette]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25744-L25799
 
 
 ## References

@@ -36,6 +36,8 @@
 - QS8 main leads that regularly see ~350 A peaks now step up to 6 AWG when a single connector carries the pack current; dual-QS8 layouts can stay on paired 8 AWG runs, but the crew keeps warning newcomers not to trust “100 A” house wire marketing on cheap silicone leads.
   - budget the thicker copper before finalising harness lengths.[^qs8_awg]
 - Jason still specs XT150 bullets on motor phases while leaving XT90s on the battery feed, and `lekrsu` reminds builders that MT60 plugs bundle three XT60-style bullets for tidy triple-phase hookups.[^xt150-guidance]
+- Dualtron riders trying 150 A battery per uBox v2 watched 10 AWG leads, XT150 connectors, and the controllers themselves overheat or current-limit, so the crew now caps daily setups around 70–90 A per ESC even on stout 20 S packs.[^ubox_battery_limits]
+- Oversized phase wires can chafe against axle exits; stick with 11 AWG Higo looms proven to survive 80/225 A tunes without nicking insulation.[^phase_wire_clearance]
 - Treat solder as mechanical filler, not the conductor: twist or fold AWG12 leads to double their contact area before wetting bullets, because even silver-bearing solder conducts two to five times worse than copper.[^6]
 - A melted MT60 phase plug that shorted a Kelly controller at ~200 A convinced the crew to retire drone-class connectors above 72 V; step up to XT150/AS150 bullets or lugs once battery demand enters the 150–200 A bracket.[^ip001-mt60-failure]
 - Builders graduating dual VESC setups beyond 150 A phase are standardising on Amass AS150U anti-spark pairs with 8 AWG tails and XT150/AS150 mains once burst logs show 500 A phase.
@@ -49,6 +51,8 @@
 - Kelly 7230 harnesses cram doubled 4 AWG phase leads into 8 mm bullets; seasoned racers instead rewire with slimmer conductors or 10 mm hardware rather than forcing oversized plugs that compromise safety.[^kelly_bullet_debate]
 - Wolf-class hubs ship with roughly 4 mm (≈AWG 11–12) phase leads that tolerate about 130 A once properly cooled; measure the copper cross-section and frame clearance before ordering 11-inch wheel kits or drilling axles for thicker wiring.[^wolf-phase]
 - Genuine Amass 8 mm bullets clamp dual 10 AWG phases far tighter than generic 8 mm copies; expect to hand-fit or even shave 10 mm bullets if you mix brands on high-current leads, and budget space for 10 mm hardware when controllers ship with doubled 10 AWG phase tails.[^amass-fit]
+- QS8 mains remain the right call for triple-digit amp peaks, but riders chasing slimmer harnesses are flattening HXT 8 mm bullets directly onto conductors so copper, not solder, carries 120 A-class loads while XT90s are demoted to ≈45 A continuous service.[^qs8_hxt]
+- Vsett 9 owners stepping up from stock banana leads now favour XT150 housings because their 6 mm bullets stay cool around 35–40 A battery and 95 A phase without sacrificing ease of service.[^xt150_vsett9]
 
 [^long_leads]: Source: knowledge/notes/input_part000_review.md, line 84.
 [^emi_routing]: Source: knowledge/notes/input_part000_review.md, line 85.
@@ -82,3 +86,7 @@
 [^wolf-phase]: Source: knowledge/notes/input_part010_review.md†L511-L512
 [^amass-fit]: Source: knowledge/notes/input_part010_review.md†L531-L532,†L704-L704
 [^lighting_quickref]: Source: knowledge/notes/input_part000_review.md†L809-L809
+[^qs8_hxt]: Source: knowledge/notes/input_part002_review.md†L523-L527
+[^xt150_vsett9]: Source: knowledge/notes/input_part002_review.md†L525-L526
+[^ubox_battery_limits]: Source: data/vesc_help_group/text_slices/input_part002.txt†L24622-L24692
+[^phase_wire_clearance]: Source: data/vesc_help_group/text_slices/input_part002.txt†L24711-L24715

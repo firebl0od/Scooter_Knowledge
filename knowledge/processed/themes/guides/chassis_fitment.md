@@ -7,6 +7,11 @@
 - Xiaomi frames can host 2.5–3.0 inch tires, but builders watch for clearance limits to avoid rubbing after the wider fitment.[^tire_clearance]
 - Scooter bearing techs warn against cracking open sealed hubs or stuffing them with 70 % grease fills; standard-clearance cartridges already tolerate thermal expansion, so riders stick with OEM-style fills instead of chasing C3 replacements that only add drag.[^sealed_bearing_fill]
 - LY will ship 11‑inch wheels on 130 mm axles, yet riders still stack spacers and washers carefully when slotting 70–75 H Lonnyo stators into minibike frames to preserve dropout alignment and keep brake rotors centred.[^ly-11in-fit]
+- Blade split rims that refuse to separate often need the cover holes chased or the 110–112 mm axle stack reset with fresh 12 mm washers/nuts before committing to a full motor tear-down.[^blade_split]
+- Stuck hub bearings warrant a proper puller; cutting shoulders risks permanent axle damage when rusted races won’t slide off by hand.[^bearing_puller]
+- High-speed hub refreshes now favor 2RS seals as the balance between drag and protection, keep ZZ for minimal resistance, and skip RSH unless you accept extra drag—Vsett bearings cooked after ~17 000 km without timely swaps.[^bearing_seals]
+- Updated Vsett 10+ service lists now call for SKF 6202/6004 2RSH wheel bearings, 20 × 28 × 6 and 15 × 25 × 5 simmering seals, 16287 2RS swingarm bearings, and 30 × 41 × 6.5 36°×45° headset bearings to replace the rust-prone stock hardware.[^vsett10_bearings]
+- SKF clarified that C3-clearance 2Z bearings leave extra race spacing for thermal growth, making them suitable for racing hubs despite the limited sealing compared with 2RS options.[^c3_clearance]
 
 ## Frame Stiffness Checks
 
@@ -20,6 +25,14 @@
 ## Front-End Stability Upgrades
 
 - JREV Speedfork assemblies have earned rider trust up to ~70 km/h, while the crew flatly rejects pushing Xiaomi/Ninebot stock steering to those speeds—budget commuters need fork and headset upgrades before high-speed tuning.[^speedfork]
+- Slack Core prototypes may need reinforcement: the forged-aluminium neck geometry wins praise, but builders plan to beef up the thin lower joint before putting 100 kg riders on production frames.[^slack_core]
+
+## Hardware Compatibility & Troubleshooting
+
+- Blade 10/11 axles show up in both M12×1.25 and M14×1.5 threads depending on the batch; lock the hinge solid on donor frames and inventory hardware before chasing replacements.[^blade_threads]
+- Retail techs note that Achilleus frames sit larger than Thunder chassis yet still wobble unless the hinge is overtightened, and Speedtrott’s smaller 40 mm motors remain the weak link even when the hinge survives.[^achilleus_feedback]
+- A 203 mm rotor adapter that sits high usually means the axle isn’t fully seated; custom torque arms that sit flush on the dropout solved repeat pop-outs once the frame was tilted.[^torque_arm_flush]
+- Monorim AWD conversions require flipping the suspension sides or spacing/bending the arms to clear Blade 10" hubs, plus at least 6 P of 50E/50G-class cells (or stronger) per wheel so 40 A battery feeds don’t cook marginal packs.[^monorim_swap]
 
 ## Deck Fabrication & Accessories
 
@@ -103,6 +116,10 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 
 - Deep sleeper builds can demand literal chassis surgery: GABE’s stretched frame now pulls the hub forward ~15 cm, machines legacy fork dropouts for disc clearance, adds steel reinforcement beams, and repackages the battery as a 22 S 6 P stack to maintain geometry.[^dropout_mods]
 
+## Tyre Selection & Pricing
+
+- PMT shoppers report €53–58 Stradale pricing in Italy versus €48 plus €19 shipping from Fastride, and Paolo nudges commuters toward the slightly softer Junior compound for grip without major range penalties.[^pmt_pricing]
+
 [^bearing_sizes]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^tire_clearance]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^sealed_bearing_fill]: Source: knowledge/notes/input_part006_review.md†L450-L451
@@ -138,6 +155,16 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 [^eu_33x2_hub]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21207 to L21208
 [^dualtron_spider]: Source: knowledge/notes/input_part000_review.md, line 187.
 [^speedfork]: Source: knowledge/notes/input_part011_review.md†L616-L617.
+[^blade_split]: Source: knowledge/notes/input_part002_review.md†L623-L624
+[^bearing_puller]: Source: knowledge/notes/input_part002_review.md†L664-L665
+[^bearing_seals]: Source: knowledge/notes/input_part002_review.md†L18111-L18234
+[^slack_core]: Source: knowledge/notes/input_part002_review.md†L685-L686
+[^blade_threads]: Source: knowledge/notes/input_part002_review.md†L651-L652
+[^achilleus_feedback]: Source: knowledge/notes/input_part002_review.md†L652-L653
+[^torque_arm_flush]: Source: knowledge/notes/input_part002_review.md†L678-L679
+[^monorim_swap]: Source: knowledge/notes/input_part002_review.md†L688-L690
+[^c3_clearance]: Source: knowledge/notes/input_part002_review.md†L19835-L19839
+[^vsett10_bearings]: Source: data/vesc_help_group/text_slices/input_part002.txt†L20580-L20591
 
 
 ## References
@@ -170,3 +197,4 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 [^zero10x_spring_rates]: Source: knowledge/notes/input_part008_review.md†L443-L444
 [^folding_clamp_fix]: Source: knowledge/notes/input_part008_review.md†L457-L458
 [^dropout_mods]: Source: data/vesc_help_group/text_slices/input_part011.txt, L20800 to L20825; L21193 to L21206; L21355 to L21367
+[^pmt_pricing]: Source: knowledge/notes/input_part002_review.md†L19775-L19804
