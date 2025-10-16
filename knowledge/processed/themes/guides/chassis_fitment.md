@@ -5,6 +5,7 @@
 - Monorim 500 W hub motors accept 6001 rear bearings and 16003 stainless fronts when refreshing the rolling hardware, supporting wider tire conversions.[^bearing_sizes]
 - Xiaomi frames can host 2.5–3.0 inch tires, but builders watch for clearance limits to avoid rubbing after the wider fitment.[^tire_clearance]
 - Scooter bearing techs warn against cracking open sealed hubs or stuffing them with 70 % grease fills; standard-clearance cartridges already tolerate thermal expansion, so riders stick with OEM-style fills instead of chasing C3 replacements that only add drag.[^sealed_bearing_fill]
+- LY will ship 11‑inch wheels on 130 mm axles, yet riders still stack spacers and washers carefully when slotting 70–75 H Lonnyo stators into minibike frames to preserve dropout alignment and keep brake rotors centred.[^ly-11in-fit]
 
 ## Frame Stiffness Checks
 
@@ -13,10 +14,12 @@
 - Zero 10X conversions that jump to 11-inch wheels also need upgraded brake kits for rotor clearance before the new wheelset is rideable.[^zero10x_11in]
 - Slack Core 920R frames have snapped before upgrade work even began; inspect boutique chassis for hidden damage before pouring money into power mods.[^slack_core_fail]
 - Dualtron race builds still require heavy frame, fork, and motor rework despite the platform’s popularity, because Minimotors outsources much of the hardware.[^dualtron_outsource]
+- Raising the rear ride height without a quality damper has triggered wobble on Dualtrons; balanced geometry can still reach 150 km/h damper-free, but the Spanish crew noted stricter policing as another reason to keep setups stable and discreet.[^dualtron-geometry]
 
 ## Deck Fabrication & Accessories
 
 - Builders experimenting with transparent deck plates pair 6 mm acrylic lids with foam bedding or CNC 12 mm plexiglass spacers to hide LED strips; plan for eventual cracking and reinforce mounts before sealing the deck.[^1]
+- Face de Pin Sucé’s carbon extension for Dualtron Victor/Luxury/Compact adds ~605 mm of mounting length (≈434 mm usable with a Ubox) and fits a 21 S 6–7 P pack plus an 85 V 240 A controller, giving Spanish builders a bolt-on path to longer batteries without welding.[^dualtron-extension]
 - Rental G30 frames accept printed battery extenders, but high BMS harnesses can foul vertical cells.
   - rewire harness exits or add 2 mm spacers so deck lids close without pinching leads.[^2]
 - Vsett headlight retrofits need stiffer stem brackets to keep elevated lamps from shaking and to shorten the dark “dead zone”; CAD the mount before drilling to preserve the OEM look.[^3]
@@ -87,6 +90,10 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 - Scarcity and steep local pricing are pushing some builders away from Thunder frames entirely, opting for heavier Nami or Teverun Blade platforms despite the weight hit.[^thunder_scarcity]
 - Raphael Foujiguara Performance now offers reinforced decks, welded battery boxes, and mudguards tailored to 20 S-class scooters with Thunder-style necks—handy when OEM frames skip critical accessories.[^rfp_accessories]
 
+## Suspension & Fork Notes
+
+- Kaabo storm-style frames diverge: the GTR carries a 135 mm shock while cheaper variants rely on twin 40 mm springs stacked with bushings, echoing “pogo” complaints about block-sprung forks and guiding upgrade planning.[^kaabo-suspension]
+
 [^bearing_sizes]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^tire_clearance]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^sealed_bearing_fill]: Source: knowledge/notes/input_part006_review.md†L450-L451
@@ -115,6 +122,10 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 [^thunder_pack]: Source: knowledge/notes/input_part010_review.md†L505-L506
 [^thunder_scarcity]: Source: knowledge/notes/input_part010_review.md†L687-L687
 [^rfp_accessories]: Source: knowledge/notes/input_part010_review.md†L514-L515
+[^ly-11in-fit]: Source: knowledge/notes/input_part013_review.md†L729-L729
+[^dualtron-extension]: Source: knowledge/notes/input_part013_review.md†L730-L730
+[^dualtron-geometry]: Source: knowledge/notes/input_part013_review.md†L857-L857
+[^kaabo-suspension]: Source: knowledge/notes/input_part013_review.md†L826-L826
 
 
 ## References

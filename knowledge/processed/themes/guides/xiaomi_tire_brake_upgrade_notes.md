@@ -10,6 +10,9 @@
 - **CST tubeless quirks:** CST 10×3 tubeless casings stay popular for cost and availability but bulge into an egg shape on narrow VSETT rims even though ride comfort remains acceptable.[^6]
 - **Avoid counterfeit slicks:** Riders continue binning fake PMT casings and cheap Wanda/Deli knock-offs because the clones arrive misshapen, tear at the inner bead, and flatten within weeks even when they technically fit Xiaomi rims.
   - budget for Ulip, CST, or genuine PMT rubber instead of gambling on clones.[^7]
+- **Budget slick experiments:** Haku’s $19 slicks sit flush on Peak G30 rims, run quietly, and throw heavy burnout smoke, but he only expects a couple hot-weather weeks of life before swapping to harder-compound PMTs.[^haku-slicks]
+- **Regional Sava slick sourcing:** Yamal found 90 mm Sava slicks through local motorcycle shops; they’re beefier than Ulip tyres yet still trail PMT T41/Juniors for outright grip and remain scarce on AliExpress.[^sava-slick]
+- **Stradale Junior vs. regular:** Noname and skrtt logged that PMT Stradale Juniors grip harder yet flatten quickly under straight-line riding, so they’re waiting on new rims to keep daily-driver profiles round.[^pmt-stradale]
 - **Solid vs. pneumatic:** Riders report roughly 20 % higher energy use, harsher ride quality, and accelerated fatigue on battery tabs when solid tires replace pneumatics.
   - reserve solids for short-range emergency duty.[^8]
 - **10" pneumatic upgrades:** CST 10×2.25, Wanda 10×2, and Xuancheng casings deliver the best grip once inflated toward 3.5–4.2 bar; heavier riders specifically favour CST V3 and Wanda shells with thicker tubes, while running them near 36 psi dulls the expected 12 S speed gains and risks fender rub until clearances are checked.[^1][^9][^2][^3]
@@ -178,6 +181,9 @@
 [^5]: Source: knowledge/notes/input_part001_review.md†L56-L56
 [^6]: Source: knowledge/notes/input_part001_review.md†L57-L57
 [^7]: Source: knowledge/notes/input_part006_review.md†L10-L13
+[^haku-slicks]: Source: knowledge/notes/input_part013_review.md†L758-L758
+[^sava-slick]: Source: knowledge/notes/input_part013_review.md†L856-L856
+[^pmt-stradale]: Source: knowledge/notes/input_part013_review.md†L759-L759
 [^8]: Source: knowledge/notes/all_part01_review.md†L336-L337
 [^9]: Source: knowledge/notes/all_part01_review.md†L337-L338
 [^10]: Source: knowledge/notes/all_part01_review.md†L185-L185

@@ -40,6 +40,8 @@
 - Smart Repair keeps a spare 70H motor on hand but says the conversion isn’t worth the effort compared with jumping straight to an 80H hub fed by multiple ESCs when chasing big rear-wheel torque.[^smart_70h]
 - Matthew is eyeing Lonnyo 80H 33/2 rear hubs for a Yume Y11+ conversion, confirming the frame can house higher-output drivetrains if you stay ahead of thermal load and phase-current demand.[^lonnyo_y11]
 - Pandalgns opened a 3 kW hub’s axle from 8 mm to 10 mm to feed 12 AWG phase leads and 28 AWG hall wiring, reporting only light material removal was needed to preserve shaft strength for 72 V conversions chasing higher phase current.[^axle-drill]
+- Dualtron Achilleus comparisons show the 40×2, 25 kV 90 H stator (~10.5 kg) tolerates 340–400 A phase on 21 S but still needs heavy field weakening to break 110 km/h, while 90 H 33×2 speed cans stay nearer 30 kV with less launch torque—log gearing trade-offs before picking 22×3 builds.[^achilleus-90h]
+- Massimo’s 20 S 4 P commuter tapped out its stock 500 W Monorim motor at 57 km/h (MKSESC 75100 capped around 50 A battery / 90 A phase) and is already ordering a Lonnyo 60 H hub plus custom fork to unlock the controller and pack headroom.[^massimo-upgrade]
 - Marketing wattage is meaningless on Vsett 10+ motors.
   - inspect winding fill and magnet stack height to judge headroom before pushing phase amps or buying donor wheels for AWD swaps.[^11]
 - Happy Giraffe logged key Blade hub dimensions (130 mm inner axle, ≈160 mm fork span, M12 threads with 10 mm flats, 12 mm rotor offset, 4 mm hex hardware) and confirmed the shell is tubeless-ready, giving Xiaomi builders a reference checklist before ordering forks and spacers.[^12]
@@ -82,6 +84,8 @@
 [^9]: Source: knowledge/notes/input_part000_review.md†L388-L388
 [^10]: Source: knowledge/notes/input_part000_review.md†L434-L440
 [^70h_vs_80h]: Source: knowledge/notes/input_part008_review.md†L422-L423
+[^achilleus-90h]: Source: knowledge/notes/input_part013_review.md†L818-L818
+[^massimo-upgrade]: Source: knowledge/notes/input_part013_review.md†L811-L811
 [^11]: Source: knowledge/notes/input_part000_review.md†L440-L443
 [^12]: Source: knowledge/notes/input_part000_review.md†L502-L505
 [^13]: Source: knowledge/notes/input_part000_review.md†L494-L498

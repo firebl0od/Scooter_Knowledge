@@ -39,6 +39,8 @@
 - Keep regen voltage below ~84 V on 80100/84100 hardware when running high-voltage packs—above that the hardware becomes fragile even if throttle operation is fine.[^regen-threshold]
 - On Ubox builds, set absolute current only 10–20 % above motor current; explore observer options, reduce observer gain by half, tweak inductance by ~20 %, experiment with PWM frequency, and avoid slow-ABS to stop over-current oscillations without neutering torque.[^abs-oc]
 - Expect motor current targets around 2.5× battery current; log GPS speed while adjusting wheel diameter—Zero 10X builders settle near 250 mm because the “10 inch” tire squats under rider load.[^motor-batt-ratio]
+- Remember that sine-wave controllers still enforce phase-current ceilings: swapping from 40 A square-wave ESCs to VESC feels softer unless you add hall sensors or `mxlemming` observers and raise phase targets toward ~200 A per controller.[^sine-phase]
+- Dualtron Achilleus riders on both MakerX G300 and Spintend 85 250 stacks have to double commanded phase current to reach the expected output, signalling shunt calibration or duty-cycle caps on VESC Tool 6.05 that need logging whenever real amps plateau at half the target.[^achilleus-cal]
 - Phase amps, not motor Kv, create launch torque: Deadword's 75100/Ninebot G30 regained punch only after raising motor current beyond 35 A (within safe hardware limits).[^phase-amps]
 - Rochee's testing on Jesús's Rion confirmed that extreme phase amps and field-weakening reintroduce grinding noises and cutouts; backing phase current down keeps 24 s builds reliable.[^phase-ceiling]
 - Zero 10X 1 200 W hubs fed by 68 V/59 A packs hit magnetic saturation around 7–8 kW; riders cap real output near 4 kW unless stator temps stay under ≈80 °C and favour dual-motor CAN setups to share the load at higher speeds.[^zero10x-saturate]
@@ -121,6 +123,8 @@
 - Regen throttles mapped to “current no reverse” on ADC2 should be calibrated with 30 pole pairs and GPS cross-checks so dash speed stays honest while tuning braking torque.[^regen-dash]
 - Centered-throttle KERS setups go smoother when you calibrate ADCs with the wheel in the air, leave the config page open while sweeping the lever, and then stage negative battery/motor currents so regen ramps in without overloading the pack.[^kers-setup]
 - VESC Tool’s state-of-charge gauge simply interpolates between 4.2 V and 3.3 V per cell (≈66 V on 20 S), so raise controller cutoffs a touch above the BMS limit to avoid surprise throttling when the dash calls the pack “empty.”[^7]
+- Tighten PPM launch behaviour once the fundamentals are stable: chopping positive ramp time from the 0.4 s default to ~0.2 s restored strong sub‑20 km/h launches on 75××× builds.[^ppm-ramp]
+- Audit live logs after flashing no-limit firmware—Matthew still sees phase current overshoot by ~23 A above a 260 A target while another rider tops out near 220 A on 300 A commands, proving calibration and observer tuning matter even after lifting firmware caps.[^phase-overshoot]
 
 ## Safety & Fault Recovery
 
@@ -176,6 +180,7 @@
 [^race-voltage]: knowledge/notes/input_part007_review.md lines 36-36.
 [^regen-threshold]: knowledge/notes/input_part007_review.md lines 14-14.
 [^abs-oc]: knowledge/notes/input_part007_review.md lines 19-19.
+[^sine-phase]: Source: knowledge/notes/input_part013_review.md†L708-L708
 [^phase-amps]: knowledge/notes/input_part007_review.md lines 70-70.
 [^phase-ceiling]: knowledge/notes/input_part007_review.md lines 71-71.
 [^zero10x-saturate]: Source: knowledge/notes/input_part006_review.md†L37-L37
@@ -248,6 +253,9 @@
 [^negative-ramp]: knowledge/notes/input_part007_review.md line 264.
 [^regen-dash]: knowledge/notes/input_part007_review.md line 273.
 [^kers-setup]: knowledge/notes/input_part007_review.md line 274.
+[^ppm-ramp]: Source: knowledge/notes/input_part013_review.md†L707-L707
+[^achilleus-cal]: Source: knowledge/notes/input_part013_review.md†L840-L840
+[^phase-overshoot]: Source: knowledge/notes/input_part013_review.md†L737-L737
 [^monofork]: knowledge/notes/input_part007_review.md lines 116-116.
 [^light-pack]: knowledge/notes/input_part007_review.md lines 161-161.
 [^chain-drive]: knowledge/notes/input_part007_review.md lines 168-168.

@@ -25,8 +25,13 @@
 - Repeated BMS thermal trips permanently raise cell resistance—schedule monthly IR checks and dial charge current back when Daly-class boards run near their limit.[^ip001-bmsheat]
 - A single overcharge to ~4.61 V/cell slashed a 13 S pack’s life to roughly 250 cycles; treat 100 % cutoffs as a hard ceiling and meter chargers after firmware updates.[^ip001-overcharge]
 - Kukirin G2 Master owners are stepping up to 16 S packs built from Samsung 50S/E or EVE 40PL cells before swapping controllers, confirming that high-discharge cells and a moderate voltage bump deliver tangible speed gains without overstressing the chassis.[^kukirin-16s]
+- Yamal is dailying Samsung 40T cells in a 20 S 10 P layout (≈35 A nominal per cell) and reminded builders that LR2170LA “45 A” Lishens only hold that rating briefly—cross-check real discharge tests before promising 300 A builds.[^yamal-40t]
+- Ausias plans to sell his 20 S 10 P P45B Nami pack to step into a 22 S 11 P layout, while peers debate stacking extra parallels above the battery box—log packaging constraints before you commit to 450 A-capable packs inside the deck.[^ausias-22s]
 - Budget Liitokala LiFePO₄ cells arrive unbalanced, sag heavily above ≈12 A, and often ship slowly by boat.
   - reserve them for stationary projects unless you can package much larger scooter enclosures.[^7]
+- Paolo’s turnkey 20 S 6 P P45B pack (full-copper busbars, 425 A ANT BMS, dual QS8s, 7 AWG leads) lands near €650, providing a price-to-spec baseline when weighing DIY versus boutique high-current batteries.[^p45b-benchmark]
+- Long-range planners are sketching 60–70 Ah “legal chassis” scooters with ruggedised enclosures and fast-charge capability so mixed dirt/pavement tours stay compliant—evidence that endurance-focused VESC pack guides need as much attention as sprint builds.[^legal-chassis]
+- Builders debating 50 PL tabless upgrades versus cheaper 50E/50S strings report WePoor decks max near 20 S 12 P unless you mill the top rail, setting realistic capacity ceilings for those frames.[^50pl-vs-50e]
 
 ## Layout and Interconnects
 
@@ -52,6 +57,10 @@
 - Rental G30 conversions swallow "thick" 13 S 5 P 21700 packs once the spacer grows the cavity to ≈155 mm × 400 mm, but EU builders struggle to source 220 mm shrink locally.
   - plan packaging and consumables early for long-range decks.[^14]
 - Down-populating a 30 S ANT smart BMS to a 22 S harness without revising the pinout causes the board to misreport cell voltages, so map sense leads carefully before trimming balance looms.[^ant_downpop]
+- Ninebot G30 6 P conversions need deck-rail trimming, custom assembly jigs, and capable soldering gear before you outgrow the stock pack—budget the tooling overhead before promising larger parallels.[^g30-rail]
+- Hobby spot welders handle pure copper busbars up to roughly 0.15 mm consistently; 0.2 mm strips already push their limits, so plan industrial tooling if you want thicker copper laminates.[^copper-weld-limit]
+- LiquorHole’s Yisuntrek R8 runs a 100 Ah CATL prismatic pack (~25 kW) inside a 26 × 14 in deck; after a frame failure the electronics survived, highlighting that the chassis becomes the consumable on heavyweight commuters.[^yisuntrek-pack]
+- Stock Nami Burn-E packs remain 20 S 10 P bricks that tightly fill the plastic enclosure with straight rows, leaving little slack for retrofits.[^burne-pack]
 
 ## Testing & Service Notes
 
@@ -62,10 +71,20 @@
 - Inmotion LF8 rental packs expose B+/B− pads under silicone-potted BMS boards.
   - bypassers now solder straight to the nickel busbars but stress that unsupervised discharge or secondary-BMS deletes are a fire risk.[^18]
 - Face de Pin Sucé’s 16 S 10 P P42A pack tolerated 47 A fast charging once paired with an external power stage and active cooling, setting a benchmark for pit-charge workflows on high-capacity builds.[^19]
+- Mattia’s booster pack refused to wake after two idle weeks until AG.racing found a broken balance lead—add balance-wire inspections to your diagnostic checklist before condemning the BMS.[^booster-balance]
 - Artem’s latest 14 S pack stacks dual 3 mm copper busbars, layered insulation, and remote BMS wiring that demands a 5 V pre-charge before plugging in the balance loom.
   - document that activation sequence before shipping SIM-enabled boards to customers.[^20]
 - Range logs from 12 S 4 P P42A packs show 15–20 km of aggressive riding consuming ~40 % capacity with 40 A battery / 80 A phase peaks, underscoring how lower-voltage Wheelway hubs heat quickly without thermistors or active cooling.[^21]
+- LiquorHole is upsizing the ANT BMS on that 100 Ah pack from 325 A to 425 A after logging 270 A, 20 S bursts and now runs 20 A fast charging through XT60 leads (25 A max), trimming full cycles to ~5 h—use similar upgrades when prismatic packs outgrow their charge hardware.[^ant-upgrade]
 
+[^p45b-benchmark]: Source: knowledge/notes/input_part013_review.md†L832-L832
+[^legal-chassis]: Source: knowledge/notes/input_part013_review.md†L835-L835
+[^50pl-vs-50e]: Source: knowledge/notes/input_part013_review.md†L864-L864
+[^g30-rail]: Source: knowledge/notes/input_part013_review.md†L833-L833
+[^copper-weld-limit]: Source: knowledge/notes/input_part013_review.md†L834-L834
+[^yisuntrek-pack]: Source: knowledge/notes/input_part013_review.md†L836-L836
+[^burne-pack]: Source: knowledge/notes/input_part013_review.md†L861-L861
+[^ant-upgrade]: Source: knowledge/notes/input_part013_review.md†L865-L865
 [^pack_cells]: Source: knowledge/notes/input_part000_review.md, line 63.
 [^cell_refresh]: Source: knowledge/notes/input_part000_review.md, line 117.
 [^pack_layout]: Source: knowledge/notes/input_part000_review.md, line 64.
@@ -84,6 +103,9 @@
 [^punedir-16s]: Source: knowledge/notes/input_part010_review.md†L435-L446
 [^gabe-20s]: Source: knowledge/notes/input_part010_review.md†L488-L489
 [^mp2-22s]: Source: knowledge/notes/input_part010_review.md†L635-L635
+[^yamal-40t]: Source: knowledge/notes/input_part013_review.md†L750-L750
+[^ausias-22s]: Source: knowledge/notes/input_part013_review.md†L751-L752
+[^booster-balance]: Source: knowledge/notes/input_part013_review.md†L753-L753
 
 
 ## References

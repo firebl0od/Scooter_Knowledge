@@ -4,6 +4,7 @@
 
 - Faulty or missing brake sensors can cause rhythmic surging every one to two seconds under throttle, so maintaining functional brake inputs is critical before road testing.[^brake_surge]
 - Two-wire reed assemblies (Nutt, generic) still need a 5–10 kΩ pull-up to your logic rail when feeding VESC ADC inputs; treat them as dry contacts, not hall sensors, and plan external 12 V feeds if the controller’s accessory rail is weak.[^brake_wiring_basics]
+- Two-wire sensors like AG.racing’s switch behave as simple on/off inputs; the group is still chasing a VESC configuration that cuts throttle without enabling regen, so document the exact app settings once confirmed.[^agracing-switch]
 
 ## Proportional Braking Hardware
 
@@ -82,6 +83,7 @@
 
 
 [^brake_surge]: Source: knowledge/notes/input_part000_review.md, line 39.
+[^agracing-switch]: Source: knowledge/notes/input_part013_review.md†L763-L763
 [^analog_braking]: Source: knowledge/notes/input_part000_review.md, line 114.
 [^magura_options]: Source: knowledge/notes/input_part000_review.md, line 173.
 [^lever_power]: Source: knowledge/notes/input_part000_review.md, line 174.

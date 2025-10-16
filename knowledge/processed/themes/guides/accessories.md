@@ -33,6 +33,10 @@
 
 - High-speed commuters treat full-face helmets and winter balaclavas as consumables—budget at least $120 for a quality lid and keep it on indoors when shuttling between shops to deter theft and stay warm in −15 °C conditions.[^winter-helmets]
 
+## Security & Immobilisers
+
+- Spintend owners are actively hunting NFC-based locks so they can ditch physical keys on premium builds—document plug-and-play immobiliser options as soon as vetted hardware appears.[^nfc-lock]
+
 [^dashboard_gap]: Source: knowledge/notes/input_part000_review.md, line 38.
 [^tft_mounts]: Source: knowledge/notes/input_part000_review.md, line 46.
 [^display_comparison]: Source: knowledge/notes/input_part000_review.md, line 57.
@@ -48,3 +52,4 @@
 [^emark_signals]: Source: knowledge/notes/input_part010_review.md†L585-L585
 [^ayo_lighting]: Source: knowledge/notes/input_part010_review.md†L587-L590
 [^insta360]: Source: knowledge/notes/input_part010_review.md†L629-L630
+[^nfc-lock]: Source: knowledge/notes/input_part013_review.md†L723-L723

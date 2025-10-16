@@ -27,6 +27,7 @@
 - Rage Mechanics’ latest C350 controller kits now bundle SmartDisplay, thicker IMS plates, and ESP32-based BLE/IMU telemetry with an onboard 12 V 3 A rail.
   - harnesses remain DIY extras for now, so budget fabrication time.[^3]
 - Builders priced a €17 ESP32 touch display that ships with ready-to-flash Arduino code, letting teams print a housing and add Wi‑Fi/Bluetooth telemetry without buying premium dashboards; community members even offer remote flashing help and printable cases for the €20 Turkish variant if you need a turnkey budget dash.[^4][^5][^6][^7]
+- Jason is also flashing community firmware onto inexpensive CYD smart-display boards as a SimpleVescDisplay-class fallback, framing the commodity screen as cheap and the custom code as the real investment.[^cyd-prototype]
 
 ## Companion Boards & OEM Dash Retention
 
@@ -157,6 +158,7 @@
 [^uart-crc]: SmartDisplay throttle traffic includes CRC checks—log the UART stream before chasing shielding fixes for perceived duty dips.[^53]
 [^can-backfeed]: Smart Repair’s harness can power lights directly from the CAN header, but builders add inline resistors and tap the servo PWM pads when they want flashing indicators instead of constant-on lamps.[^54]
 [^15]: SmartDisplay’s transparent BLE bridge lets Android VESC Tool sessions piggyback through the dash like a USB dongle, though the team still leans on wired hookups when local trackers cause interference.[^55]
+[^cyd-prototype]: Jason’s budget dash experiment flashing community firmware onto CYD smart-display boards; he emphasised the low hardware cost versus the heavy custom firmware lift. Source: knowledge/notes/input_part013_review.md†L848-L848
 [^16]: Community STL packs and resin-print finishing steps keep the 3.5 in enclosure centred on the stem while preventing UV yellowing.[^15][^smartdisplay-stl]
 [^17]: CAN-linked presets such as “police mode” are being prototyped to mute the front motor while retaining rear torque for roadside compliance checks.[^56]
 [^18]: Koxx now hand-assembles SmartDisplay and SmartController batches, selling both the dash-mounted unit and a display-less deck module for riders who prefer phone dashboards over BLE.[^57]

@@ -22,6 +22,7 @@
 | --- | --- | --- | --- |
 | 75100 (Alu PCB) | 48–84 V (≤22 S with regen trimmed) | ≈60–70 A battery, 160–180 A phase once clamped to metal; budget dual-motor CAN builds for G30/Vsett frames | Requires CAN linking for duals, disable regen above ~22 S, inspect firmware headers (often mislabeled as HW75300), and expect duty ripple if firmware/tool versions drift. [^1][^19] |
 | 75200 V2 | 16–22 S (marketing up to 24 S) | ≈90–110 A battery combined in dual installs when cooled; suits mid-power scooters needing native key input | Roughly 130 × 68 × 28 mm with onboard shutdown lead; still needs heatsink trimming in tight decks and thorough thermal paste refresh. [^20][^21] |
+- Expect sustained fade once you push around 250 A phase / 150 A battery—Shlomozero’s 75200 started tapering there even with MOSFET telemetry near 100–110 °C, so treat those figures as the practical ceiling without major cooling changes.[^75200-fade]
 | 60100 HP | ≤15 S commuters | ≤50 A battery on single-motor city builds; reliable regen on Navee N65/Ninebot conversions once the dash is bypassed | Retains OEM dashboards with rewiring, but voltage headroom and 60 V component ratings limit regen spikes—experiments suggest INA241 current-sense swaps could unlock 14–20 S if Makerbase keeps the line alive.[^22][^23] |
 | 84100 HP | 60–84 V (≤20 S recommended) | ≈60–80 A battery, 150–180 A phase for Zero/Nami dual builds; higher only with extensive cooling and telemetry | Ships with NC ignition logic, integrated Bluetooth, sacrificial 0 Ω links, and benefits from the 1 MΩ pull-down mod plus active thermal management before chasing 100 km/h logs. [^12][^24][^25][^11] |
 
@@ -177,6 +178,7 @@
 [^19]: Source: knowledge/notes/input_part004_review.md, L219 to L229
 [^20]: Source: knowledge/notes/input_part005_review.md, L399 to L400
 [^21]: Source: knowledge/notes/input_part007_review.md, L25 to L25
+[^75200-fade]: Source: knowledge/notes/input_part013_review.md†L706-L706
 [^22]: Source: knowledge/notes/input_part005_review.md, L19 to L19
 [^23]: Source: knowledge/notes/input_part005_review.md, L194 to L197
 [^24]: Source: knowledge/notes/input_part007_review.md, L168 to L168
@@ -218,7 +220,7 @@
 [^dc-link-recap]: Source: knowledge/notes/input_part006_review.md†L31-L31
 [^onoff-ble]: Source: knowledge/notes/input_part006_review.md†L40-L40
 [^60]: Source: knowledge/notes/input_part006_review.md, L45 to L45
-[^61]: Source: knowledge/notes/input_part013_review.md, L611 to L615
+[^61]: Source: knowledge/notes/input_part013_review.md†L605-L605
 [^62]: Source: knowledge/notes/input_part013_review.md, L60 to L60
 [^63]: Source: knowledge/notes/input_part013_review.md, L383 to L385
 [^64]: Source: knowledge/notes/input_part013_review.md, L503 to L505

@@ -32,6 +32,7 @@
   - the crew now keeps a rollback archive specifically for field recoveries.[^23]
 - **Use the mobile app for live ADC checks.** VESC Tool’s smartphone build still exposes RT data and ADC mapping panels.
   - connect over TCP, Wi-Fi, or USB to watch throttle and brake voltages without digging through hidden menus.[^24]
+- **Stage burner logins for vendor apps.** FarDriver’s smartphone app continues to overheat phones and crash until you create a fresh account; keep disposable logins handy before field testing.[^fardriver-app]
 - **Insulation & adhesive supplies:** Stock RTV silicone, Kapton, and zip ties to strain-relieve DC/DC converters and harnesses; vibration snaps converter leads unless they are glued or tied back to the PCB before the scooter ever rolls.[^25]
 - **Instant translation:** Plus Messenger’s built-in translator lets techs follow Spanish- and French-language repair chats without copy-paste gymnastics.
   - handy when sourcing parts from multinational groups.[^26]
@@ -47,7 +48,8 @@
 
 1. **Start at the XT30:** After any crash or curb strike, verify the adapter output voltage before chasing other faults; browned phase pins or half-seated BMS harnesses are the most common culprits when scooters power-cycle on bumps.[^33]
 2. **Inspect pack protection:** Cheap “25 A” eBay BMS boards routinely trip around 18 A despite balanced cell groups.
-  - swap in reputable 20–30 A hardware before blaming Rita or the controller for brownouts.[^34]
+   - swap in reputable 20–30 A hardware before blaming Rita or the controller for brownouts.[^34]
+3. **Bench-test fresh controller builds for shorts.** William’s new MP2 sparked, shorted two phases, and left the MCU scorching—double-check layout and continuity before first power.[^mp2-short]
 3. **Match radio gear:** Immobiliser and alarm kits ship in multiple frequencies; confirm your remote (315 MHz vs. 415 MHz) before hard-wiring to the scooter’s 5 V accessory tap so the system actually arms.[^35]
 - **Trace 5 V shorts methodically.** Face de Pin Sucé coaches techs to disconnect accessories and chase each lead until the short clears, then Lekrsu reminds riders to recalibrate throttle min/max even if the signal flickers once the fault is fixed.[^five_volt_short_workflow]
 4. **Treat locks as consumables:** Light cable locks such as compact Master Lock loops work for coffee stops only if they stay lubricated with graphite.
@@ -61,6 +63,7 @@
   - re-solder any suspect tap before blaming firmware or swapping the BMS.[^40][^41]
 7. **Trace weak 5 V accessory ports back to the buck converter.** A Max G30 plug that still shows 5 V but no current usually means a failed converter stage.
   - follow the trace with a multimeter until you reach the DC/DC module and verify components between it and the port before ordering a replacement board.[^42]
+8. **Wire 10 kΩ NTC probes to TEMP and GND.** Oreo Huzky’s conversion confirmed the dedicated pins on VESC controllers—document the pinout in quick-start guides so sensors land on the right header.[^ntc-temp]
 8. **Refinish soldered connectors, don’t patch corroded XT60s.** R3VOLT’s refresh reminded the crew to swap oxidised housings entirely, heat the bullet.
   - not the wire
   - so solder flows, and slide the molded cover back over the last few millimetres before heat-shrinking insulation to prevent shorts.[^43]
@@ -69,6 +72,7 @@
 - **Step drills for control hardware.** Enlarging round switch holes stays cleanest with step bits, while rectangular cut-outs still need files or nibblers; finish with a hand ratchet on axle nuts to feel clamp load instead of hammering them with an impact.[^45]
 - **Throttle extensions hold up.** Two-metre throttle runs on quality silicone cable have stayed noise-free, so shielded loom is optional for most scooters.[^46]
 - **Parallel smaller leads when space is tight.** Doubling up 12 AWG silicone wire handled ~80 A battery current on GABE’s compact pack, making parallel runs a workable compromise when harness routing is constrained.[^47]
+- **Reflow noisy bullet connectors.** Yamal chased front-hub grinding back to oxidised bullets—reflow or replace the joints whenever a motor squeals before blaming windings.[^bullet-reflow]
 - **Inspect anti-spark connectors periodically.** Noname spotted the precharge strip inside an XT90S-style plug browning after repeated use.
   - retire housings that show discoloration or heat damage before they melt during high-current launches.[^48]
 10. **Prefer controlled hand crimpers for JST signal pins.** Manual “non-ratcheting” tools let you feel the conductor and insulation wings seat properly.
@@ -97,6 +101,7 @@
   - re-solder any suspect tap before blaming firmware or swapping the BMS.[^40][^41]
 9. **Trace weak 5 V accessory ports back to the buck converter.** A Max G30 plug that still shows 5 V but no current usually means a failed converter stage.
   - follow the trace with a multimeter until you reach the DC/DC module and verify components between it and the port before ordering a replacement board.[^42]
+- **Add post-impact tear-downs to the checklist.** Pothole hits that trip current or flag “voltage imbalance” faults (Fry the Guy’s Shul front hub is the latest example) demand magnet, hall-board, and harness inspections before you blame the controller.[^pothole-check]
 10. **Refinish soldered connectors, don’t patch corroded XT60s.** R3VOLT’s refresh reminded the crew to swap oxidised housings entirely, heat the bullet.
   - not the wire
   - so solder flows, and slide the molded cover back over the last few millimetres before heat-shrinking insulation to prevent shorts.[^43]
@@ -377,6 +382,7 @@
 [^22]: Source: knowledge/notes/denis_all_part02_review.md†L318-L320
 [^23]: Source: data/vesc_help_group/text_slices/input_part004.txt†L12073-L12089
 [^24]: Source: knowledge/notes/input_part006_review.md†L344-L344
+[^fardriver-app]: Source: knowledge/notes/input_part013_review.md†L842-L842
 [^25]: Source: knowledge/notes/denis_all_part02_review.md†L31-L32
 [^26]: Source: data/vesc_help_group/text_slices/input_part001.txt†L1665-L1689
 [^27]: Source: data/vesc_help_group/text_slices/input_part001.txt†L6003-L6013
@@ -395,11 +401,15 @@
 [^40]: Source: knowledge/notes/input_part000_review.md†L650-L650
 [^41]: Source: knowledge/notes/input_part000_review.md†L690-L690
 [^42]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L110038-L110041
+[^ntc-temp]: Source: knowledge/notes/input_part013_review.md†L839-L839
 [^43]: Source: knowledge/notes/input_part007_review.md†L84-L84
+[^mp2-short]: Source: knowledge/notes/input_part013_review.md†L805-L805
+[^pothole-check]: Source: knowledge/notes/input_part013_review.md†L744-L744
 [^44]: Source: knowledge/notes/input_part007_review.md†L97-L97
 [^45]: Source: data/vesc_help_group/text_slices/input_part009.txt†L19023-L19038
 [^46]: Source: data/vesc_help_group/text_slices/input_part009.txt†L7164-L7185
 [^47]: Source: data/vesc_help_group/text_slices/input_part009.txt†L6581-L6584
+[^bullet-reflow]: Source: knowledge/notes/input_part013_review.md†L842-L842
 [^48]: Source: data/vesc_help_group/text_slices/input_part009.txt†L20442-L20448
 [^49]: Source: knowledge/notes/input_part012_review.md†L83-L83
 [^50]: Source: knowledge/notes/input_part012_review.md†L84-L84

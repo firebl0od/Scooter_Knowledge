@@ -3,6 +3,7 @@
 ## Baseline Build Profiles
 
 - Dual 1 000 W motors paired with a 15 S 8 P battery and 40 A BMS deliver a proven commuting setup, with some builders planning 13 S packs initially and leaving room to scale back up to 15 S.[^build_example]
+- Newcomers pairing MKSESC 75100 controllers with sub‑1 kW commuter hubs still ask for step-by-step guidance beyond YouTube walkthroughs—capture a starter-friendly configuration checklist so they can get rolling without expert hand-holding.[^mksesc-onboarding]
 
 ## Control Modes and Current Limits
 
@@ -94,6 +95,7 @@
   - capture start-up behaviour, temperature swing, and any firmware guardrails before recommending the retrofit.[^nami-72v-on-60v]
 
 [^build_example]: Source: knowledge/notes/input_part000_review.md, line 37.
+[^mksesc-onboarding]: Source: knowledge/notes/input_part013_review.md†L776-L776
 [^foc_advantages]: Source: knowledge/notes/input_part000_review.md, line 68.
 [^bms_cutout]: Source: knowledge/notes/input_part000_review.md, line 70.
 [^voltage_swap]: Source: knowledge/notes/input_part000_review.md, line 71.
