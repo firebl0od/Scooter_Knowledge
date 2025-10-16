@@ -97,6 +97,10 @@
 - A commuter who bent a Vsett rotor mid-ride now keeps spares on hand and leans on e-brakes when mechanical hardware warps unexpectedly—plan redundancy for traffic incidents.【F:knowledge/notes/input_part012_review.md†L186-L186】
 - Skrtt’s 2.3 mm rotor experiments required shaving calipers while 🇪🇸AYO#74 stressed using “elevator” spacers to clear thicker discs—document allowable rotor thickness per caliper so riders stop guessing on machining limits.【F:knowledge/notes/input_part013_review.md†L161-L161】
 - Ausias is milling Magura MT5 calipers “radially” to clear 3.6 mm rotors; peers warned most bicycle brakes expect ≤2.8 mm discs, so publish machining tolerances, lever upgrades, and testing steps before anyone copies the mod.【F:knowledge/notes/input_part013_review.md†L376-L378】
+- Hope Tech Evo calipers routinely sell for €260–€300 (≈$300) per end; racers have found 3 mm rotors clear the four-piston bodies when regen remains primary braking, reinforcing that premium stopping power demands both budget planning and rotor-thickness checks.[^hope-pricing]
+- Paolo’s rotor group buy keeps blanks at 2 mm so stock calipers bolt up; builders confirm Magura MT5 Pro units can swallow 2.7 mm rotors and trimmed Nutt four-piston calipers clear 3 mm, but thicker discs raise costs and require caliper mods many riders skip.[^rotor-thickness]
+- Jan’s hardened 420C 160 mm rotors landed at 45 € plus shipping; prototypes survived light bicycle testing but still need scooter-load validation—log bedding, braking torque, and temperature before committing to fleet orders.【F:data/vesc_help_group/text_slices/input_part014.txt†L10221-L10228】
+- Spintend detachable rims still favour 160 mm, ≈2.7 mm rotors so riders can stock one spare width; jumping to 180 mm adds leverage but risks front-wheel skids unless chassis geometry and modulation keep up.【F:data/vesc_help_group/text_slices/input_part014.txt†L10613-L10622】【F:data/vesc_help_group/text_slices/input_part014.txt†L10616-L10619】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -195,6 +199,7 @@
 [^mt5e-pricing]: Magura MT5e front/rear kits hovering around $200 shipped via Jenson USA/DHL impressed riders expecting higher prices.【F:knowledge/notes/input_part007_review.md†L109-L130】
 [^mt5e-sensors]: Riders testing MT5e swaps left e-brake sensors unplugged, stripped non-essential loads, and double-checked caliper clearance while waiting on any missing hardware.【F:knowledge/notes/input_part007_review.md†L130-L130】
 [^bad-lever]: Jan called out a Magura-compatible lever with plastic threads/screws as the worst he has used—treat cheap bundles as suspect.【F:knowledge/notes/input_part007_review.md†L147-L147】
+[^hope-pricing]: Hope Tech Evo pricing and 3 mm rotor clearance observations from group buys.【F:knowledge/notes/input_part014_review.md†L3124-L3163】
 [^hope-service]: Hope Tech/Tesch 3 caliper service covering piston re-greasing and pad compatibility.【F:knowledge/notes/input_part013_review.md†L677-L678】
 [^f2-upgrade]: Ninebot F2 Pro brake upgrade using sintered pads and compatible rotors.【F:data/vesc_help_group/text_slices/input_part013.txt†L8828-L8831】
 [^centering-kits]: Wheel-centering kits and dual-caliper setups for wobble elimination on 80/100H racing builds.【F:knowledge/notes/input_part013_review.md†L645-L647】
@@ -215,3 +220,4 @@
 [^resin-rotor]: Shimano “resin only” 160 mm rotors failing on 72 V scooters and the recommendation to run 2 mm metallic-ready discs with hydraulic calipers instead.【F:knowledge/notes/input_part006_review.md†L15-L15】
 [^post-heat-service]: Premium MT7/MT8 builds scheduling pad and rotor inspections after every downhill session once high-temp fluid flashes exposed weak hardware.【F:knowledge/notes/input_part006_review.md†L12-L13】
 [^shimano-mt]: Shimano MT-series kits still need hoses re-threaded through stems, a fresh bleed, and either the €15 EZ-MTB kit or improvised tools; Total LHM Plus or baby oil has stood in for mineral fluid in a pinch.【F:knowledge/notes/input_part007_review.md†L238-L238】
+[^rotor-thickness]: Paolo’s rotor group buy sticking with 2 mm blanks and caliper clearance notes for 2.7–3 mm discs.【F:knowledge/notes/input_part014_review.md†L10356-L10365】
