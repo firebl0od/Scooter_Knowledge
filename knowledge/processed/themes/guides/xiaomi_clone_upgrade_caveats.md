@@ -1,6 +1,19 @@
 # Xiaomi Clone Upgrade & Expansion Caveats
 
-## TL;DR
+## Overview
+
+Xiaomi-style clone scooters (ESA, Doc Green, KCQ, and others) look similar to genuine M365/Pro models but lack the data communication protocols and quality components that enable easy upgrades. This guide covers the challenges and workarounds for upgrading clone scooters, including battery expansion, controller swaps, and mechanical modifications. Understanding these limitations upfront will save time and avoid expensive mistakes.
+
+## What You Need to Know
+
+- **No smart adapters**: Rita and other smart battery managers don't work without Xiaomi data lines
+- **Electronics transplant often needed**: Many upgrades require genuine Xiaomi controller/BMS/dashboard (~€100)
+- **Voltage matching critical**: Parallel packs must be matched carefully without smart management
+- **Variable quality**: Clone components range from adequate to dangerous
+- **Wiring discipline required**: Poor connectors and thin wires are common failure points
+- **Mechanical inconsistencies**: Suspension and tire fitment varies widely between batches
+
+## Key Principles
 
 - **Treat clone scooters as bare frames.** Without Xiaomi dashboards or data lines, Rita cannot be configured.
   - range upgrades rely on voltage-matched Y-cables, careful wiring, and conservative charging rather than smart adapters.[^1]

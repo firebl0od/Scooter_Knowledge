@@ -1,5 +1,18 @@
 # Varla / Zero 10X Battery Upgrade Brief
 
+## Overview
+
+The Varla Eagle One and Zero 10X are popular dual-motor scooters that benefit significantly from battery and controller upgrades. This guide focuses on upgrading from the stock 52V battery system to a high-performance 20S setup when paired with Spintend Ubox V2 dual controllers. The stock 14S6P pack limits speed to 60-70 km/h due to current restrictions; upgrading to a 20S6P or larger pack with high-discharge cells unlocks sustained highway speeds while maintaining reliability.
+
+## What You'll Learn
+
+- Why the stock 52V battery limits performance
+- Recommended battery upgrade specifications (20S6P minimum)
+- Cell selection criteria for high-discharge applications  
+- BMS and wiring requirements for dual-controller setups
+- Controller integration and tuning considerations
+- Mechanical packaging and safety requirements
+
 ## Purpose & Scope
 
 This brief helps Varla Eagle One and Zero 10X owners who have already installed, or plan to install, a Spintend Ubox V2 dual controller. It focuses on upgrading the stock 52 V battery system so the scooter can sustain 60–70 km/h cruise speeds without tripping the battery management system (BMS) or starving the controllers.
