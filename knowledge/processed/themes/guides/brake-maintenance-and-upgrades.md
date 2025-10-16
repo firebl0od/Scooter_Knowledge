@@ -65,6 +65,11 @@
 - Custom rotor projects now target 203 mm discs cut from 2.3–2.5 mm acid-proof steel, but Magura calipers only clear ≈2.1 mm—budget runout checks and pad clearance before ordering thicker hardware.【F:knowledge/notes/input_part006_review.md†L375-L375】
 - Magura and TRP four-piston setups expect 2.0–2.3 mm rotors, and AliExpress Brembo clones often ship in left/right-specific pairs—verify orientation when ordering for right-hand-drive scooters to avoid fitment surprises.【F:knowledge/notes/input_part006_review.md†L123-L123】
 
+### Magura MT5e Kits & Setup
+- Community carts keep landing full MT5e front/rear kits around $200, and Jenson USA ships globally via DHL—several riders noted the pricing is better than expected for four-piston hydraulics.[^mt5e-pricing]
+- Burnout-focused builders sometimes leave the MT5e e-brake sensors unplugged or repurpose a single caliper while waiting on replacements; strip non-essential electrical loads when testing to confirm the new hydraulics clear the fork and wiring bundles.[^mt5e-sensors]
+- Inspect bundled levers before trusting them—Jan flagged one aftermarket lever as “the worst” thanks to plastic threads and screws despite pairing with Magura calipers, so budget for higher-quality levers if the kit feels flimsy.[^bad-lever]
+
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
 - **Hope caliper maintenance tips:**
@@ -79,6 +84,7 @@
 - 3D-printed rear brake adapters with thin aluminium reinforcement rings drew skepticism about PLA strength at 60 km/h; riders recommend CNC or full-metal conversions before trusting repeated hard stops.【F:data/vesc_help_group/text_slices/input_part002.txt†L3214-L3249】
 - Fitting 10×3 in tyres demands trimming the rear fender and routing the brake hose internally instead of relying on inverted Magura mods to keep wobble away.【F:data/vesc_help_group/text_slices/input_part002.txt†L3536-L3551】
 - cihan's wobble fix involved swapping to sintered pads and sourcing compatible rotors for the F2 Pro platform, demonstrating that budget commuter platforms benefit from modest brake improvements without requiring full hydraulic conversions.[^f2-upgrade]
+- Expect odd hardware: the F2 Pro uses a 51 mm post mount and five-bolt rotor pattern, so riders stack sturdier post-to-post adapters (avoiding soft Monorim brackets) and often jump to 140 mm rotors to keep pad contact when stacking spacers.【F:knowledge/notes/input_part007_review.md†L348-L352】
 - **F2 Pro brake upgrade recipe:**
   - Install sintered pads for better bite and longevity compared to organic pads
   - Source 120 mm rotors compatible with F2 Pro mounting pattern
@@ -119,6 +125,7 @@
   - **Hope, Hayes, Avid:** DOT 4 or DOT 5.1 (never DOT 5 silicone-based)
   - **Never mix fluids:** Contamination causes seal swelling and brake failure
   - Store mineral oil in sealed containers away from light to prevent oxidation[^fluid-compat]
+- Shimano MT-series kits ship pre-bled but still need hoses re-threaded through stems, a follow-up bleed, and either the €15 EZ-MTB service kit or clever improvisation; riders have finished jobs with Total LHM Plus or even baby oil when OEM fluid ran out.[^shimano-mt]
 
 ## Hydraulic Sensor Retrofits
 - Builders add hall sensors or reed switches to existing hydraulic levers when they need proportional regen or kill-switch behaviour, freeing them from the limited OEM sensored lever catalog.[^hall-retrofit]
@@ -144,6 +151,9 @@
 [^rotor-sizing]: Rotor sizing from 180 mm to 203 mm for thermal mass and leverage, with frame clearance warnings.【F:knowledge/notes/input_part014_review.md†L43-L43】
 [^gt2-rotors]: Segway GT2 2.42 mm rotors providing warp resistance for repeated high-speed stops.【F:knowledge/notes/input_part006_review.md†L357-L357】
 [^m6-brackets]: Oversized hydraulic setups demand M6/M8 hardware and tight-tolerance adapters; M5 bolts quickly elongate mounts under MT7 braking loads.【F:data/vesc_help_group/text_slices/input_part001.txt†L4671-L4707】
+[^mt5e-pricing]: Magura MT5e front/rear kits hovering around $200 shipped via Jenson USA/DHL impressed riders expecting higher prices.【F:knowledge/notes/input_part007_review.md†L109-L130】
+[^mt5e-sensors]: Riders testing MT5e swaps left e-brake sensors unplugged, stripped non-essential loads, and double-checked caliper clearance while waiting on any missing hardware.【F:knowledge/notes/input_part007_review.md†L130-L130】
+[^bad-lever]: Jan called out a Magura-compatible lever with plastic threads/screws as the worst he has used—treat cheap bundles as suspect.【F:knowledge/notes/input_part007_review.md†L147-L147】
 [^hope-service]: Hope Tech/Tesch 3 caliper service covering piston re-greasing and pad compatibility.【F:knowledge/notes/input_part013_review.md†L677-L678】
 [^f2-upgrade]: Ninebot F2 Pro brake upgrade using sintered pads and compatible rotors.【F:knowledge/notes/input_part013_review.md†L653-L653】
 [^centering-kits]: Wheel-centering kits and dual-caliper setups for wobble elimination on 80/100H racing builds.【F:knowledge/notes/input_part013_review.md†L645-L647】
@@ -163,3 +173,4 @@
 [^front-priority]: Riders reiterating that strong front hydraulics plus dual electronic braking provide real stopping power; rear-only braking just slides.【F:knowledge/notes/input_part006_review.md†L14-L14】
 [^resin-rotor]: Shimano “resin only” 160 mm rotors failing on 72 V scooters and the recommendation to run 2 mm metallic-ready discs with hydraulic calipers instead.【F:knowledge/notes/input_part006_review.md†L15-L15】
 [^post-heat-service]: Premium MT7/MT8 builds scheduling pad and rotor inspections after every downhill session once high-temp fluid flashes exposed weak hardware.【F:knowledge/notes/input_part006_review.md†L12-L13】
+[^shimano-mt]: Shimano MT-series kits still need hoses re-threaded through stems, a fresh bleed, and either the €15 EZ-MTB kit or improvised tools; Total LHM Plus or baby oil has stood in for mineral fluid in a pinch.【F:knowledge/notes/input_part007_review.md†L238-L238】

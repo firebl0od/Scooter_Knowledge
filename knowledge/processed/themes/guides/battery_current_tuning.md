@@ -11,6 +11,11 @@ Taming current limits is the difference between a scooter that rips for years an
 5. **Avoid mismatched parallels:** Keep battery mains single and appropriately sized; short AWG14 leads tolerate ~40 A bursts, but paralleling thin wires or leaving cold solder joints invites uneven current sharing and hotspots. QS8 terminations also demand heavy tips, generous flux, and clean shrink to avoid vibration fatigue.【F:knowledge/notes/input_part005_review.md†L263-L266】【F:knowledge/notes/input_part005_review.md†L267-L271】
 6. **Accurate motor data:** Do not rely on auto-detection when values look suspicious (e.g., ERPM flips, inductance jumps). Measure Rs/Ls with external tools or re-run detection on known-good hardware before editing limits.³
 7. **Cooling strategy:** Deck-mounted plates, fresh thermal paste, and airflow matter as much as MOSFET specs. Gutted aluminum cases and machined mounts are the baseline once you exceed 60 A battery.⁴
+2. **Balance capability matters:** Daly smart BMS units only balance at ≈30 mA; fast-charge builds should plan external 4 A balancers and verify you never back-feed the board while it sleeps. JK/LLT hardware remains the go-to when you need stronger balancing, CAN/RS485 logging, or reliable Bluetooth wake-ups, and JK owners now tighten delta triggers to ≈0.01 V with ~0.2 A active shuttling so 7 p bricks stay aligned without cooking resistors.[^jk-delta]
+2. **ESC cutoffs must exceed BMS trips.** If the controller’s battery cutoff sits below the pack’s protection threshold, the BMS will sever power mid-load—raise VESC cutoffs a few volts so the ESC idles before the pack hard-resets.【F:knowledge/notes/input_part004_review.md†L311-L311】
+3. **Trustworthy wiring & connectors:** QS8/QS10 or AS150-class connectors and 6 mm²+ phase leads are the expectation above ~250 A phase. Revisit solder joints, pad pressure, and thermal interface materials before chasing higher numbers.²
+4. **Accurate motor data:** Do not rely on auto-detection when values look suspicious (e.g., ERPM flips, inductance jumps). Measure Rs/Ls with external tools or re-run detection on known-good hardware before editing limits.³
+5. **Cooling strategy:** Deck-mounted plates, fresh thermal paste, and airflow matter as much as MOSFET specs. Gutted aluminum cases and machined mounts are the baseline once you exceed 60 A battery.⁴
 
 ## Step-by-Step Tuning Workflow
 1. **Baseline detection & calibration**
@@ -38,12 +43,16 @@ Taming current limits is the difference between a scooter that rips for years an
 - Treat 45 A-per-cell marketing cautiously—P42A/P45B packs live closer to 30–38 A per cell in the real world, and builders rely on temperature probes and potting because scooters rarely sustain full load outside brief 100 km/h pulls.【F:knowledge/notes/input_part006_review.md†L308-L308】
    - For daily commuters, finish charges around 90 % if the BMS still balances there—you’ll quadruple pack lifespan versus living at 100 %.【F:knowledge/notes/input_part007_review.md†L307-L307】
 3. **Log, ride, iterate**
-   - Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
+- Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
+- Screen-record smart-BMS or XMatic telemetry while you test—Yamal and Yoann log ~286–290 A battery peaks so the crew can vet discharge ceilings without guessing from feel alone.[^xmatic-logging]
 - Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
 - Cranking `iQ target` for harder launches can still trip pack protection—logs show some BMS boards dropping output to zero when the requested torque outpaces battery capability, so treat that setting as additive load on the cells.【F:knowledge/notes/input_part006_review.md†L147-L147】
+- Expect extra sag in winter—Mirono logs an additional 3–4 V drop near 1 °C and eases battery current to save range and pack temperature.[^cold-sag]
+- NetworkDir’s 72 V race brick still lives at 100–120 A despite 8–10 V droop, proving you can run droopy packs if the BMS thresholds stay clear and logs confirm temps remain under control.[^race-droop]
 - Cross-check real-time power with an external meter or SmartDisplay—unfiltered VESC telemetry overshoots true watts by 10 kW or more on aggressive pulls.²⁴
 - Remember that phase current alone doesn’t define power; veterans called out logs boasting huge phase amps while battery current stayed flat—energy still comes from pack voltage × battery amps, and PWM waveforms muddy simple √3 conversions, so log both channels before chasing bragging rights.【F:data/vesc_help_group/text_slices/input_part005.txt†L23317-L23373】
 - Treat VESC Tool’s state-of-charge gauge as a rough helper—it linearly maps 4.2–3.3 V per cell (≈66 V on 20 S), so keep your cutoffs a few volts above the BMS trip to prevent surprise throttling once the display reads “empty.”²⁵
+- Stage controller low-voltage cutoffs above the BMS limit so power tapers before the protection opens; pair that with temp logging on marginal packs so sag-induced heating doesn’t sneak up mid-ride.[^cutoff-margin]
 - Use phase-current behaviour as a health check: dual Spintend builds hold 120–130 A phase per motor (≈160 A ABS) happily—if a hub starts stuttering above ~85 A, dig for a blown MOSFET or loose phase lead instead of simply backing off current.【F:knowledge/notes/input_part000_review.md†L663-L664】
 4. **Layer in regen**
    - Add regen after forward currents stabilize. Keep battery regen gentler than your discharge target (−5 A to −10 A is plenty for commuter packs) and ramp up slowly to avoid BMS or controller cutoffs.⁵ ¹¹
@@ -79,6 +88,7 @@ Taming current limits is the difference between a scooter that rips for years an
 - **Charge-only boards aren’t immunity.** Charge-only ANT 40 A stacks still let cells spike toward 40 A each during burnouts, so add temperature sensors and plan manual monitoring before bypassing discharge FETs.【F:knowledge/notes/input_part006_review.md†L311-L311】
 - **Respect ANT precharge limits.** The onboard precharge FET taps out near 20 A; add external resistors or buttons for cold starts instead of raising firmware limits and cooking the device.【F:data/vesc_help_group/text_slices/input_part004.txt†L5880-L5893】【F:data/vesc_help_group/text_slices/input_part004.txt†L5933-L5940】
 - **Wake sleepy BMS boards with a charger.** Happy/Xiaomi protections sometimes latch off after inrush events—tickle the charge port briefly before condemning the controller.【F:knowledge/notes/input_part004_review.md†L301-L302】
+- **Audit bargain packs before trusting them.** One Amazon 20 S brick stalled at 81.8 V with mixed 4.1/3.8 V groups—proof that low-cost assemblies and bargain chargers can ship wildly unbalanced.[^amazon-pack]
 
 ## Charging & Charger Vetting
 - **Audit adjustable chargers.** The Celler-branded 20 S bench supply landed on voltage with steady thermals, but log fan duty and case temps during long charges before endorsing it for customers.【F:data/vesc_help_group/text_slices/input_part004.txt†L19666-L19710】
@@ -86,6 +96,7 @@ Taming current limits is the difference between a scooter that rips for years an
 - **Isolation test series chargers.** Before stacking power supplies, meter the earth-to-output resistance; only run them in series once you confirm floating outputs and add fuses on both legs.【F:data/vesc_help_group/text_slices/input_part004.txt†L10020-L10045】
 - **Acceptance test every bench supply.** Check ground continuity, breaker reset behaviour, and voltage accuracy under load before deploying adjustable chargers to customers.【F:data/vesc_help_group/text_slices/input_part004.txt†L12090-L12105】
 - **Label Meanwell-style VR pots.** Adjust VR1 for output voltage, VR2 for current, and VR3 for cutoff while the charger powers a partially discharged pack—always tune under load to avoid overshoot.【F:data/vesc_help_group/text_slices/input_part004.txt†L17519-L17544】
+- **Budget time for slow stock chargers.** A 1.75–2 A Zero 10X brick legitimately needs ≈11 hours to refill an 18.2 Ah pack from ~50 V to 54 V—long sessions aren’t automatically a failure sign.[^slow-brick]
 
 ## Field-Weakening & High-Speed Notes
 - Expect only modest top-speed gains (e.g., +8 km/h on 16 S builds) while battery draw jumps from 4 kW to 7 kW—VSETT 10 telemetry showed ~30 A of field weakening per motor only lifting speed from 69 km/h to ~76 km/h while doubling power draw, so higher voltage or higher-Kv motors remain better investments.¹²【F:knowledge/notes/input_part003_review.md†L205-L205】
@@ -115,6 +126,13 @@ Taming current limits is the difference between a scooter that rips for years an
 - Share postmortems—photos, temperature logs, scope captures—with the community to keep the guardrail table honest.
 
 ## Source Notes
+[^xmatic-logging]: Screen-recording XMatic/smart-BMS telemetry captured ~286–290 A battery peaks for Yoann and Yamal while chasing discharge limits.【F:knowledge/notes/input_part007_review.md†L108-L108】
+[^jk-delta]: JK smart BMS owners now leave active balancing enabled, tighten delta thresholds to roughly 0.01 V, and cap shuttle current around 0.2 A so even 7 p packs stay aligned without cooking resistors.【F:knowledge/notes/input_part007_review.md†L205-L205】
+[^cold-sag]: Winter test logs showed 3–4 V of extra sag at 1 °C, so Mirono trims battery amps in the cold to preserve range and pack temperature.【F:knowledge/notes/input_part007_review.md†L211-L211】
+[^race-droop]: NetworkDir’s 72 V 29.8 Ah race pack still survives 100–120 A pulls despite 8–10 V sag as long as the BMS threshold stays clear and temps remain logged.【F:knowledge/notes/input_part007_review.md†L212-L212】
+[^cutoff-margin]: Happy Giraffe keeps controller cutoffs above the BMS threshold and logs motor temps so sag-triggered heating doesn’t surprise riders mid-run.【F:knowledge/notes/input_part007_review.md†L228-L228】
+[^amazon-pack]: Amazon bargain 20 S pack arrived at 81.8 V with mixed 4.1 V/3.8 V groups, proving low-cost assemblies can ship badly unbalanced when chargers/BMSs are cheap.【F:knowledge/notes/input_part007_review.md†L206-L206】
+[^slow-brick]: Zero 10X owners clock ~11 hours for a 1.75–2 A stock charger to refill an 18.2 Ah pack from ~50 V to 54 V—long charge times alone aren’t proof of pack failure.【F:knowledge/notes/input_part007_review.md†L225-L225】
 [^1]: Parallel-pack surge warnings when mixed BMS boards trip under load.【F:knowledge/notes/input_part008_review.md†L98-L104】
 [^2]: Connector and heatsink best practices for high-current builds.【F:knowledge/notes/input_part003_review.md†L512-L513】【F:knowledge/notes/input_part003_review.md†L496-L497】
 [^3]: Manual detection workflow and bad auto-tune case studies.【F:knowledge/notes/input_part009_review.md†L111-L129】
