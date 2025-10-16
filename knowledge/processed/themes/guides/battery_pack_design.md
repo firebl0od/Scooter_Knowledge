@@ -25,6 +25,7 @@
 - Community connector tables drive upgrades from stock 10–12 AWG leads to heavier wiring and lower-resistance plugs (XT60/90/150, EC5) on Ubox builds.[^pack_connectors]
 - Ninebot Max and Xiaomi Pro deck extensions can accommodate up to 16 S 5 P 21700 modules with ~27 mm spacers, though installers often trim or rotate controller housings to keep packaging tidy.[^deck_extension]
 - Tudor’s PETG honeycomb holders and interlocking connectors let Xiaomi and G30 packs dry-fit without glue, while other builders laser-cut 3–6 mm kraftplex skeletons, wrap them in thin PETG jackets, and still tape the stack with fish paper because sealed decks trap heat regardless of insulation choices.[^petg_honeycomb]
+- Document hot-glue beads, silicone ribs, and honeycomb spacers against 80 °C ovens and vibration rigs so retention guides can name which combinations actually survive dense commuter packs without letting cells drift.[^retention_testing]
 - Recycling pledges are nudging EU pack shops toward kraftplex or other recyclable wraps, yet fish-paper rolls are scarce enough that crews are prototyping 0.8 mm kraftplex jackets while still insisting on series separators to prevent can-to-can shorts.[^8]
 - Koxx’s 14 S 6 P build uses RePackr-balanced groups, glued cells, and glass-fibre spacers between layers to equalise resistance across parallels inside cramped decks.
   - mirror the approach when you need uniform discharge in tight enclosures.[^9]
@@ -56,6 +57,7 @@
 [^pack_connectors]: Source: knowledge/notes/input_part000_review.md, line 65.
 [^deck_extension]: Source: knowledge/notes/input_part000_review.md, line 75.
 [^petg_honeycomb]: Source: knowledge/notes/input_part000_review.md, line 216.
+[^retention_testing]: Source: knowledge/notes/input_part000_review.md, line 803.
 [^copper_sandwich]: Source: knowledge/notes/input_part000_review.md, lines 240 and 314.
 
 

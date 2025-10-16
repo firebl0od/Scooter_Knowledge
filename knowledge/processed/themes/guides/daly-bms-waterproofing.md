@@ -23,6 +23,10 @@
 3. **Purge moisture:** Use controlled hot air to dry balance leads and PCB surfaces, following with an isopropyl alcohol rinse to displace residual water inside the mostly potted enclosure.[^1]
 4. **Rest the pack:** Allow the assembly to air out overnight after heat cycles; confirm no condensation is present before moving on.[^3]
 
+## Shutdown Trip & Back-EMF Recovery
+
+- Publish a shutdown/back-EMF SOP: inspect for lingering moisture, clear solder balls around the controller bay, and document fault codes before re-arming a Daly that tripped mid-ride so the companion VESC doesn’t repeat the failure.[^daly_shutdown_sop]
+
 ## Rebuild & Waterproofing Stack
 
 - Wrap every series group in fish paper before reinstalling the BMS.[^2]
@@ -48,6 +52,7 @@
 [^2]: Recommended insulation stack and silica-gel usage after a moisture incident.[^3]
 [^3]: Guidance to dry the assembly with repeated hair-dryer cycles and overnight airing before resealing.[^4]
 [^4]: Daly smart BMS discharge/charge MOSFET control via the Bluetooth app (password 123456) required after trips.[^5]
+[^daly_shutdown_sop]: Source: knowledge/notes/input_part000_review.md†L808-L808
 
 
 ## References

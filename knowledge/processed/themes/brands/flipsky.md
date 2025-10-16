@@ -26,6 +26,7 @@
 ## Reliability & Failure Patterns
 
 - **Random early deaths remain common.** Multiple riders still see Flipsky stages fail within weeks—even under modest load—so budget time for burn-in and consider stocking spares before customer deployments.⁶
+- **75/200 heat ceiling remains unresolved.** The latest batches still mirror the old A200S design, so veterans are waiting on logs that prove Flipsky solved the historic thermal throttling before trusting those singles at high battery current.[^fs_75200_clone]
 - **4.2 hardware taps out early.** Pushing phase current to 150 A on 4.2 boards triggered repeated `fault_code_drv` errors and left BLDC mode as the only fallback, underscoring how quietly MOSFETs degrade when you exceed the published envelope.[^1]
 - **New enclosures still need help.** Upcoming GT100 and revised 75100 enclosures ship with higher-spec Magnachip FETs and tidier cases, yet riders warn performance still hinges on clamping the housing directly to the frame or stripping covers for tighter thermal contact.[^2]
 - **Capacitor banks are a recurring weak link.** Units have dropped to 14 V readings on 20 S packs after repeated capacitor explosions; simple cap swaps rarely hold.⁷
@@ -136,6 +137,7 @@
 [^18]: Comparative MakerX reliability vs. Flipsky on similar amperage builds. Source: knowledge/notes/input_part003_review.md, L470 to L470
 [^19]: Spintend 22 S debates and recommendations to step up to C350/Thor-class controllers for higher voltage/current plans. Source: knowledge/notes/input_part011_review.md, L512 to L514
 [^fw_profiles]: Official 100 A firmware keeps warranty support and still outputs ~147 A phase, whereas the 300 A package voids warranty coverage. Source: knowledge/notes/input_part000_review.md, L42 to L42
+[^fs_75200_clone]: Source: knowledge/notes/input_part000_review.md†L721-L722
 [^20]: Power-switching workarounds for 75100 hardware, including XT90S loop keys, QS8 pre-charge connectors, and preferences for controllers with onboard latching buttons when running dual units. Source: knowledge/notes/input_part001_review.md, L29 to L31
 [^mirono-hall]: Mirono’s shorted hall harness against a brake rotor killed the 5 V rail on a Flipsky 4.2 and confirmed the boards lack inline protection, reinforcing routing discipline and the need for spares. Source: knowledge/notes/input_part002_review.md, L421 to L421
 [^hardware-audit]: Tear-down photos continue to show undersized housings, unsecured capacitors, and single-shunt sensing on 75100 boards—clean solder balls, restake caps with silicone, and plan shunt upgrades before exceeding 120 A. Source: knowledge/notes/input_part001_review.md, L37 to L39

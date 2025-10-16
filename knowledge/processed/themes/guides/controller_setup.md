@@ -31,7 +31,9 @@
 - Manual hall detection on warm motors at ≈70 A finally cleared Mirono’s off-the-line clonk; rerun both motor wizards on a full battery and road-test immediately after detection so sensor faults surface before a commute.[^8]
 - When sensorless detection misbehaves, unplug the hall loom and rerun the test.
   - Wheelway and Spintend owners found that leaving halls connected during “sensorless” detection corrupted profiles until they re-detected with the harness removed.[^9]
-- If Spintend’s external ADC module feeds nonsense values, temporarily bypass it by wiring 3.3 V, signal, and ground straight from the VESC to the throttle or brake; just avoid slamming 5 V accessories onto the 3.3 V rail to protect the board.[^10]
+- Use the phase-current graph inside VESC Tool as a MOSFET health check—failed DRV legs show noisy hall traces, force BLDC-only operation beyond ≈10 % throttle, and shut the controller down until the stage is repaired.[^fault_trace]
+- If Spintend’s external ADC module feeds nonsense values, double-check the 5 V/3.3 V selector before temporarily bypassing it with the controller’s 3.3 V rail; keep throttle sweeps short while testing direct-to-VESC wiring and never hot-plug 5 V sensors onto the 3.3 V pins to avoid killing the adapter.[^10]
+- Bench tests with 90 % duty field weakening pulled ~100 A phase (≈20 A battery) to jump hubs from 38 kERPM to 53 kERPM at roughly 1.2 kW, confirming the ~40 % speed gain comes with heavy heat and poor efficiency.[^fw_jump]
 
 ## Example Tuning Profiles
 
@@ -71,6 +73,8 @@
 [^6]: Source: knowledge/notes/input_part000_review.md†L456-L458
 [^7]: Source: knowledge/notes/input_part000_review.md†L458-L461
 [^8]: Source: knowledge/notes/input_part000_review.md†L514-L518
-[^9]: Source: knowledge/notes/input_part000_review.md†L720-L725
-[^10]: Source: knowledge/notes/input_part000_review.md†L734-L739
+[^9]: Source: knowledge/notes/input_part000_review.md†L726-L727
+[^10]: Source: knowledge/notes/input_part000_review.md†L705-L707
 [^11]: Source: knowledge/notes/input_part000_review.md†L688-L690
+[^fault_trace]: Source: knowledge/notes/input_part000_review.md†L726-L727
+[^fw_jump]: Source: knowledge/notes/input_part000_review.md†L728-L728

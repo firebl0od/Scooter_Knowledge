@@ -4,6 +4,7 @@
 
 - Wire throttles, brakes, and regen controls straight into the controller’s ADC pins and keep everything on 3.3 V logic.
   - dash adapters and 5 V accessories routinely add lag or kill channels when they fail, and even hall throttles that creep toward 3.5 V need resistor tweaks before they clip the MCU’s ADC ceiling.[^1][^1][^2][^4]
+- Publish explicit resistor-divider and adapter wiring diagrams for any 5 V hall throttles or brakes headed toward STM32 inputs so installers stop improvising values that over-voltage ADC pins.[^divider_docs]
 - Xiaomi-style throttles and hall brakes stay healthy when powered from the controller’s 3.3 V rail with matched resistor dividers; feeding 5 V without clamps has already over-volted STM32 inputs, and ’lekrsu’ is still warning newcomers that direct 5 V on ADC1/ADC2 will cook the STM32 even if the throttle “works” initially.[^2][^3]
 - Treat the Spintend/MakerX auxiliary board as a low-current signal bridge: its ~12 V/3 A rail can light LEDs or run logic, but headlamps, horns, and pumps still need a dedicated DC/DC or relay-fed supply.[^3][^9][^10][^11]
 - Profile toggles still need proper routing.
@@ -243,6 +244,7 @@
 [^31]: Spintend 75/300 firmware can remap the PPM pin into a DAC-driven brake light even though official documentation is still pending.[^117]
 [^32]: Xiaomi hall levers coexist on 5 V/GND rails, but pairing them directly with normally-open Magura hydraulics leaves floating signals until a hall puck is added.[^signal-clamp]
 [^voltage-divider]: Xiaomi-style throttles and levers output ≈0.8–4.1 V from a 5 V rail, so builders add 1 kΩ/2 kΩ dividers or the ADC adapter to clamp signals under 3.3 V before landing on STM32 pins.[^118]
+[^divider_docs]: Capture and publish divider/adapter schematics for 5 V hall inputs so builders stop over-volting STM32 ADC channels during installs.[^knowledge802]
 [^hall-split]: Hall brake handles float at different voltages when paralleled.
   - dedicate one ADC channel per lever and leave the spare brake mechanical if you run out of inputs.[^40]
 [^signal-shield]: Running shielded control looms tied to controller ground and routed away from phase wires removed 120 A jitter on Spintend Ubox installs.[^119]
@@ -295,6 +297,7 @@
 [^8]: Source: knowledge/notes/input_part002_review.md†L437-L439
 [^9]: Source: knowledge/notes/input_part012_review.md†L101-L101
 [^10]: Source: knowledge/notes/input_part000_review.md†L461-L464
+[^knowledge802]: Source: knowledge/notes/input_part000_review.md†L802-L802
 [^11]: Source: knowledge/notes/input_part011_review.md†L333-L341
 [^12]: Source: data/vesc_help_group/text_slices/input_part011.txt†L8001-L8012
 [^13]: Source: data/vesc_help_group/text_slices/input_part001.txt†L8424-L8453
