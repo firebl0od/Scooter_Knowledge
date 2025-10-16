@@ -88,12 +88,18 @@ The example command above generates a 500-line excerpt in `knowledge/processed/v
 
 ## Document formatting standards
 
-All processed knowledge documents follow these formatting conventions:
+All processed knowledge documents follow wiki-style formatting conventions:
 
+- **Overview sections**: Every document starts with context explaining what it covers and who it's for
+- **Structured hierarchy**: Clear section organization with descriptive headers
+- **Visual callouts**: Safety warnings (⚠️), pro tips (💡), and definitions (📝) highlighted
 - **Footnote citations**: Technical claims link to source material using footnote references (`[^1]`, `[^2]`, etc.) with a References section at the end
-- **Visual hierarchy**: Proper spacing around headers and sections
-- **Structured content**: Tables, bullet lists, and sub-bullets for easy scanning
+- **Accessible language**: Technical terms defined on first use, context provided for specifications
+- **Decision aids**: Tables, checklists, and comparison sections help readers make choices
+- **Cross-references**: Related guides linked for deeper exploration
 - **Preserved accuracy**: All technical content is maintained from the original sources
+
+See [WIKI_TRANSFORMATION_GUIDE.md](WIKI_TRANSFORMATION_GUIDE.md) for detailed transformation principles and examples.
 
 ## Project Status
 
