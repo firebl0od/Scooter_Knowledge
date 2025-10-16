@@ -3,6 +3,7 @@
 ## Bearing and Wheel Upgrades
 
 - Monorim 500 W hub motors accept 6001 rear bearings and 16003 stainless fronts when refreshing the rolling hardware, supporting wider tire conversions.[^bearing_sizes]
+- EU suppliers now list 33×2 60 H hubs with 125 mm dropouts and 4 mm banana phases for roughly €300 shipped, giving builders a compact dual-drive option without custom axles.[^eu_33x2_hub]
 - Xiaomi frames can host 2.5–3.0 inch tires, but builders watch for clearance limits to avoid rubbing after the wider fitment.[^tire_clearance]
 - Scooter bearing techs warn against cracking open sealed hubs or stuffing them with 70 % grease fills; standard-clearance cartridges already tolerate thermal expansion, so riders stick with OEM-style fills instead of chasing C3 replacements that only add drag.[^sealed_bearing_fill]
 - LY will ship 11‑inch wheels on 130 mm axles, yet riders still stack spacers and washers carefully when slotting 70–75 H Lonnyo stators into minibike frames to preserve dropout alignment and keep brake rotors centred.[^ly-11in-fit]
@@ -15,6 +16,10 @@
 - Slack Core 920R frames have snapped before upgrade work even began; inspect boutique chassis for hidden damage before pouring money into power mods.[^slack_core_fail]
 - Dualtron race builds still require heavy frame, fork, and motor rework despite the platform’s popularity, because Minimotors outsources much of the hardware.[^dualtron_outsource]
 - Raising the rear ride height without a quality damper has triggered wobble on Dualtrons; balanced geometry can still reach 150 km/h damper-free, but the Spanish crew noted stricter policing as another reason to keep setups stable and discreet.[^dualtron-geometry]
+
+## Front-End Stability Upgrades
+
+- JREV Speedfork assemblies have earned rider trust up to ~70 km/h, while the crew flatly rejects pushing Xiaomi/Ninebot stock steering to those speeds—budget commuters need fork and headset upgrades before high-speed tuning.[^speedfork]
 
 ## Deck Fabrication & Accessories
 
@@ -94,6 +99,10 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 
 - Kaabo storm-style frames diverge: the GTR carries a 135 mm shock while cheaper variants rely on twin 40 mm springs stacked with bushings, echoing “pogo” complaints about block-sprung forks and guiding upgrade planning.[^kaabo-suspension]
 
+## Custom Dropouts & Frame Surgery
+
+- Deep sleeper builds can demand literal chassis surgery: GABE’s stretched frame now pulls the hub forward ~15 cm, machines legacy fork dropouts for disc clearance, adds steel reinforcement beams, and repackages the battery as a 22 S 6 P stack to maintain geometry.[^dropout_mods]
+
 [^bearing_sizes]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^tire_clearance]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^sealed_bearing_fill]: Source: knowledge/notes/input_part006_review.md†L450-L451
@@ -126,6 +135,9 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 [^dualtron-extension]: Source: knowledge/notes/input_part013_review.md†L730-L730
 [^dualtron-geometry]: Source: knowledge/notes/input_part013_review.md†L857-L857
 [^kaabo-suspension]: Source: knowledge/notes/input_part013_review.md†L826-L826
+[^eu_33x2_hub]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21207 to L21208
+[^dualtron_spider]: Source: knowledge/notes/input_part000_review.md, line 187.
+[^speedfork]: Source: knowledge/notes/input_part011_review.md†L616-L617.
 
 
 ## References
@@ -157,3 +169,4 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 [^zero10x_belly_volume]: Source: knowledge/notes/input_part008_review.md†L468-L468
 [^zero10x_spring_rates]: Source: knowledge/notes/input_part008_review.md†L443-L444
 [^folding_clamp_fix]: Source: knowledge/notes/input_part008_review.md†L457-L458
+[^dropout_mods]: Source: data/vesc_help_group/text_slices/input_part011.txt, L20800 to L20825; L21193 to L21206; L21355 to L21367

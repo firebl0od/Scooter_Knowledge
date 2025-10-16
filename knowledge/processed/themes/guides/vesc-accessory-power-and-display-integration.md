@@ -106,6 +106,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 ## Dual-Controller Wiring Patterns
 
 - **Dual 75100 harness essentials.** Keep Makerbase twins on CAN-only links, share a single momentary power button, and bypass the G30 dash UART bridge whenever loops appear; the community wiring sketch routes each controller to its own CAN tail while the OEM dash lives on a dedicated UART breakout.[^52]
+- **Quick single/dual-drive toggles.** JPPL’s field hacks kill one controller with the power button, break CAN with a switch, disable CAN in software, or bolt on Spintend’s ADC board; Smart Repair’s cleaned-up Arduino sender now debounces buttons, caches telemetry, and checks `v_in` before broadcasting profile changes across master/slave pairs.[^profile_toggle]
 - **Keep the G30 dash powered.** Deadword proved the open-source dash lets a Makerbase 75100 route throttle and brake through the stock harness so long as the display remains powered from the VESC rail.[^53]
 - **Respect CAN termination.** Mixed-controller buses pop transceivers.
   - document whether 60 Ω or 120 Ω ends are fitted, list the SN65/TJA part numbers, and isolate FlipSky units rather than trusting mismatched resistors on shared harnesses; Zero 10X experiments confirmed 120 Ω termination is mandatory and dropping to 100 Ω invites bus faults, so leave the OEM ALU-PCB to act as an antispark/key switch instead of swapping resistor values.[^54][^zero10x-120ohm]
@@ -124,6 +125,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 - Oreo huzky’s CarPlay retrofit mirrors VESC telemetry onto a jailbroken iPhone or custom Android script, offering a high-visibility dash option when you’d rather leave the main phone stowed.[^carplay_dash_demo]
 - **SimpleVescDisplay (ESP32).** Smart Repair recommends flashing the open-source SimpleVescDisplay and 3D-printing its mount as a reliable alternative when Flipsky Voyage units glitch.[^58]
 - **Profile templates worth copying.** Yamal maintains a 23 km/h compliance mode, a 14 kW “Seven Routes” touring preset, and a “Hot Summer” throttle clamp to keep dual Uboxes cool in 40 °C commutes—log similar modes for riders balancing legality and thermals.[^yamal-profiles]
+- **SimpleVescDisplay (ESP32).** Smart Repair recommends flashing the open-source SimpleVescDisplay and 3D-printing its mount as a reliable alternative when Flipsky Voyage units glitch, and NetworkDir just proved the generic yellow ESP32 panels can feed UART straight into ADC1 once the firmware is loaded—handy when phones or OEM screens go missing.[^58][^esp32_adc]
 - **Tiny NRF boards have no range.** Flashing Vedder’s `nrf51_vesc` firmware onto ultra-small BLE boards left riders with unusable range, so they still buy the €2 full-size modules for dependable VESC Tool links.[^59]
 - **Vedder’s `code_server` is still the stable CAN bridge.** It automatically retries failed frames five times, but you must flip RX/TX leads when moving a Makerbase/Flipsky dash loom onto Spintend/UBOX controllers and flash `slave_esc.lisp` onto every CAN slave before the dash comes alive.[^code-server]
 - **SimpleVescDisplay odometer logging.** NetworkDir’s latest firmware now buffers odometer data locally on the ESP32 so riders keep mileage even if CAN frames drop, giving budget builds a telemetry path that still respects VESC Tool logs.[^60]
@@ -345,6 +347,8 @@ This guide distills field reports on powering lights, horns, and dashboards from
   - Thierry still compiles it manually and patches header typos because VESC Tool omits the binary and 6.02 throws build errors while 6.05 beta remains the safe fallback.[^99]
 4. Confirm whether the twin 12 V outputs on Ubox 85240 controllers share a single buck regulator before riders parallel them for higher current loads, and publish continuity test steps once validated.[^184]
 5. Track the community Nextion/Pico dash builds and the promised €120 integrator display so we can ship pinout diagrams the moment production units land.[^182][^183]
+6. Document Smart Repair’s hunt for hall-enabled hydraulic brake levers that play nicely with Spintend ADC boards and clarify the profile-toggle wiring once guidance lands.[^adc-hall-lever]
+7. Follow NetworkDir’s Dualtron Lisp port and confirm whether luffydnoob keeps the stock throttle after the scripts land so migration guidance stays accurate.[^dualtron-lisp]
 
 ## Source Notes
 
@@ -371,6 +375,8 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^jp-generic]: TF/TS100-style colour order confirmation for the unlabeled “generic JP” display plus upcoming CAN/SmartDisplay hardware that keeps RX, TX, GND, and 5 V today and adds ESP32-C3 Express telemetry next revision.[^202]
 [^voyage-megan]: Voyage “Megan” dash sold direct to riders chasing CAN-first lighting integrations without UART compromises.[^203]
 [^spintend-pod]: Spintend’s illuminated handlebar pod feeds voltage back into ADC signal lines instead of acting as isolated switches, so it requires rewiring for VESC compatibility.[^33]
+[^adc-hall-lever]: Open item to confirm hall-enabled hydraulic lever options and ADC profile-toggle guidance for Spintend controllers. Source: knowledge/notes/input_part011_review.md†L901-L901
+[^dualtron-lisp]: Outstanding Dualtron display Lisp scripting status and throttle decisions after the port. Source: knowledge/notes/input_part011_review.md†L909-L909
 
 
 ## References
@@ -598,3 +604,5 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^zero10x-120ohm]: Source: knowledge/notes/input_part006_review.md†L24-L24
 [^can-display-roadmap]: Source: knowledge/notes/input_part010_review.md†L668-L668
 [^compact-dcdc]: Source: knowledge/notes/input_part010_review.md†L670-L670
+[^profile_toggle]: Source: knowledge/notes/input_part011_review.md†L592-L593
+[^esp32_adc]: Source: knowledge/notes/input_part011_review.md†L585-L586

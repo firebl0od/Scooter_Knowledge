@@ -7,6 +7,8 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 - External 36 V packs only extend range; meaningful speed gains begin with 12S/13S packs paired with matching chargers and firmware.[^1]
 - Doubling pack voltage roughly doubles no-load speed, but veterans report stock Xiaomi/Ninebot hubs overheat or fail quickly if you jump straight from 10 S to 20 S without major cooling or motor upgrades.
   - treat 18 S as the practical ceiling unless you swap in a beefier hub.[^20s-burn]
+- Recent deck mockups confirm you can cram 20 S 1–2 P (or even tight 30 S 1 P) layouts once the ESC and BMS move under the footplate, but the crew still calls 18 S the “sweet spot” for reliability and packaging sanity.[^deck-relocate]
+- Stem-mounted boosters and skinny OEM forks won’t survive 20 S abuse—budget larger ESx/G30-class hubs and stronger front ends before chasing sleeper builds at those voltages.[^sleeper-hardware]
 - Swapping from 36 V to 48 V at the same amp-hour rating still increases watt-hours and torque, helping heavier riders keep pace even when scooters start from identical hardware.[^1]
 - A 13S6P pack built from 2,500 mAh cells roughly doubles the energy of a stock Pro battery while remaining within Rita’s 5 A shared charging envelope when chargers are split.[^2]
 - Riders chasing 40 km/h+ targets often graduate to 14S or dual-motor builds—confirm you have the braking, tires, and frame reinforcement to match the higher kinetic energy.[^1][^3]
@@ -32,7 +34,8 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 | Motor upgrade budget | Rage Mechanics’ Blade kits, VSETT drop-ins, and Monorim options span roughly €300–€500 per motor before hall-board swaps; confirm quality and lead time before promising Pro 2 customers higher torque builds.[^9] | Set expectations around cost and QC when pitching full Pro 2 conversions. |
 | Controller mounting | Bolt controllers flat with fresh thermal paste and clear wiring; lifted plates overheat on the first long ride and can pinch the brake line.[^mounting]
 | Deck packaging | Splitting a 20 S pack 11 S internal/9 S external kept Gabe’s Pro 2 sleeper build within the deck.
-  - twin 6 AWG feeds, a 50 mm controller spacer, and relocating the BMS into the stem free the cavity for cells.[^10] | Keep electronics outside the main battery bay when chasing 20 S layouts. |
+  - twin 6 AWG feeds, a 50 mm controller spacer, and relocating the BMS into the stem free the cavity for cells.[^10]
+  - Alternative layouts squeeze 20 S 1–2 P or even 30 S 1 P into the tray once the controller lives under the deck (Ubox 100/100 Lite or similar) and the harness is reworked.[^deck-relocate] | Keep electronics outside the main battery bay when chasing 20 S layouts. |
 | Controller mounting | Bolt controllers flat with fresh thermal paste, lap the ESC baseplate and deck for full contact, and clear wiring; lifted plates overheat on the first long ride and can pinch the brake line.[^mounting][^lap-base]
 | Aftermarket ESC installs | Grind standoffs or add thick plates so VESC-class controllers clamp like heat sinks; thin adapter plates let 75100 boards spike within seconds.[^vesc-plate]
 | STM32 ADC protection debate | Denis trusts the factory 10 MΩ divider on 13–16 S builds, but other techs still swap ≈160 kΩ resistors to avoid error 24 or protect STM inputs when emulating a Xiaomi BMS.
@@ -315,3 +318,5 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 [^104]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19136-L19173
 [^105]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19145-L19185
 [^gabe-22s]: Source: knowledge/notes/input_part010_review.md†L499-L500
+[^deck-relocate]: Source: knowledge/notes/input_part011_review.md†L509-L511 and L610-L611
+[^sleeper-hardware]: Source: knowledge/notes/input_part011_review.md†L510-L510

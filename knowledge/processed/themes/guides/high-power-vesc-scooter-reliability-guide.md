@@ -777,6 +777,12 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Properly potted controllers (à la Nucular) pass bucket-immersion tests, wick heat into the housing, and add vibration damping.
   - just discharge capacitors and use non-conductive, low-expansion compounds so the cure cycle doesn’t crack boards.[^430]
 
+## Outstanding Compliance & Diagnostic Follow-Ups
+
+- Watch EU regulatory changes for high-power scooters and confirm whether private insurance remains viable for Halo-class builds so compliance advice stays current.[^eu-halo]
+- Capture Luis’ root-cause analysis of the MKS 84 HP 48 V shutdown—including any pre-charge, shunt, or firmware faults plus logs—before closing out the failure mode section.[^mks-shutdown]
+- Revisit Nawfal’s MKS 84 HP speed cap to document whichever firmware, pole-count, or hardware tweaks restore the expected 80 km/h ceiling.[^mks-speedcap]
+
 ---
 
 ## Source Notes
@@ -802,6 +808,9 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^10]: Waterproof Julet/L1019/HiGo connectors work well but L1019 peaks around 100 A phase; hall/thermistor additions feed reliable telemetry.[^447]
 [^hp-cabling]: Riders are doubling phase cross-section to tame voltage drop, keeping silicone 12 AWG on G30 phases, monitoring 4 mm² (~AWG 11) leads near 250 A, and extending “silver” looms with real copper because the shiny conductors are only tinned.[^448]
 [^11]: Stock packs using LG M50LT/Samsung 29E cells are limited around 120 A discharge; builders monitor IR spread before parallelizing groups.[^449]
+[^eu-halo]: Pending EU legal updates for high-power scooters and insurance viability for Halo-class builds. Source: knowledge/notes/input_part011_review.md†L905-L905
+[^mks-shutdown]: Awaiting Luis’ diagnosis of the MKS 84 HP 48 V shutdown and associated fault logs. Source: knowledge/notes/input_part011_review.md†L906-L906
+[^mks-speedcap]: Outstanding investigation into Nawfal’s capped MKS 84 HP top speed and whatever fixes restore 80 km/h. Source: knowledge/notes/input_part011_review.md†L910-L910
 [^hp-32e-limit]: Samsung 32E cells plateau around 6.5 A each (~39 A for 6 P), so extra nickel over the joints adds little for mid-power scooters.[^450]
 [^12]: Riders cap regen between –5 A and –12 A on 60 V 38 Ah packs until BMS specs are confirmed.[^451]
 [^13]: ERPM speed limits caused intermittent regen dropouts that firmware 6.05 beta (build 20) resolves, preventing over-voltage incidents on high-S setups.[^452]

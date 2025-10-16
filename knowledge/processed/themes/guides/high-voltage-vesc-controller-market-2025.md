@@ -58,6 +58,11 @@
   - watch for production pricing and enclosure machining timelines | Builders planning premium duals who want Seven’s ecosystem once hardware ships[^43] |
 | **MP2 Open-Source ESC** | Community-targeted 100 V/300 A stack (F405 + modular busbars) | Group buys revived EU production; expect DIY soldering, heat-beds for busbars, and a bring-your-own firmware workflow | Makers who prefer open hardware, need 300 A envelopes, and can validate their own cooling/heatsink designs.[^40][^41] |
 
+## Emerging Hardware Watchlist
+
+- Track Jason’s 30 S MP2 pack build, the 18-FET Toll-stage debug, and any validated 600 A phase experiments so the MP2 row reflects proven limits instead of wishlist targets.[^watch-mp2]
+- Capture specs, FET counts, build quality, and regional availability once the Trumoto “Noisy Cricket” controller is verified so the market snapshot doesn’t rely on rumour.[^watch-noisy]
+
 ## Reliability & Warranty Lessons
 
 - Spintend RMAs still stumble: owners document denials tied to firmware versions (e.g., 6.05), making firmware provenance logs essential before shipping hardware back.[^44]
@@ -268,6 +273,8 @@
 [^63]: Source: data/vesc_help_group/text_slices/input_part004.txt†L15623-L15690
 [^64]: Source: knowledge/notes/input_part004_review.md†L233-L233
 [^65]: Source: knowledge/notes/input_part014_review.md†L20-L21
+[^watch-mp2]: Jason’s MP2 roadmap covering the 30 S pack, 18 FET Toll-stage debug, and planned 600 A phase experiments awaiting validation. Source: knowledge/notes/input_part011_review.md†L903-L903
+[^watch-noisy]: Pending confirmation of the Trumoto “Noisy Cricket” controller’s specifications and availability. Source: knowledge/notes/input_part011_review.md†L917-L917
 [^66]: Source: knowledge/notes/input_part004_review.md†L370-L370
 [^67]: Source: knowledge/notes/input_part014_review.md†L21-L22
 [^68]: Source: knowledge/notes/input_part008_review.md†L429-L437

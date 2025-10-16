@@ -26,7 +26,9 @@
 - The compact V100 revision leans on higher-Rdson MOSFETs plus revised copper tracing to shed heat, yet riders still beg for smaller cases, front-facing connectors, integrated Bluetooth, and direct MOSFET-to-heatsink clamps with copper bars.[^11]
 - Stock MOSFETs still fail when builders push >40 A of field weakening on 20 S packs; plan on HY- or HSBL-class swaps before chasing high-ERPM targets on 85150/85250 hardware.[^20]
 - Field weakening isn’t the only danger—Rogerio and ’lekrsu’ just labeled 22 S MakerBase experiments “suicide” and warned that Spintend 85150s will pop on 20 S if you stack MTPA and high voltage without MOSFET upgrades.[^mtpa-pop]
+- Firmware still clamps the 85/250 around 350 A phase (with brief 400 A peaks); Yamal’s 80H build pairs the controller with 8 mm Amass bullets and Juliet signal connectors to keep battery-current headroom in line with premium hardware.[^spintend_85250_cap]
 - A fresh wave of 100/100 failures—four units within a year despite 20 S packs capped near 60 A battery and 130 A phase—has veterans advising swaps to alternative controllers instead of gambling on replacements.[^12]
+- 22 S experiments on 85-series boards remain touchy: when Arnau floated a Tokmas-swapped 85/150 at 22 S/150 A battery, Jason and GABE reminded him the six-FET powerstage and stock capacitors are the real limits—disable regen/e-brake, upgrade the cap bank, or step up to MP2/C350-class hardware built for 30 S instead of gambling on the Lite chassis.[^spintend-22s][^tokmas_warning]
 - Random throttle surges continue to surface on 85 V/240 A, 100 V/100 A, and even v2 85 V/250 A units, so budget time for filtering, shielded cabling, and harness inspections when diagnosing jitter complaints.[^17]
 - The latest single-board revision lands on an aluminium PCB with G015N10 MOSFETs—stick with the matching gate network instead of improvising swaps or you’ll destabilise the driver stage.[^13]
 - Singles without the integrated BLE module reserve the NRF header for Bluetooth because the lone RX/TX pair is often claimed by dashboards or ADC adapters—plan harnesses accordingly.[^14]
@@ -183,8 +185,11 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Flipsky’s NRF51822 Bluetooth dongle works on the Ubox as a stopgap telemetry link until Spintend restocks its own modules, albeit without the pre-flashed convenience.[^fs_nrf]
 - Spare harnesses arrive faster via Instagram DMs than email—second-hand Ubox owners routinely chase Bluetooth and power-button looms separately, so plan spares when buying used hardware.[^ip001-ig-support]
 - Spintend’s BLE module remains compatible with both 75100 and Ubox controllers and shows up on AliExpress around €30 with VAT included, while Paolo sells NRF-based dongles for roughly €20 plus shipping; standby draw is about 2 µA, so leaving them plugged in won’t drain packs provided the throttle stays protected.[^ip001-ble-price][^ip001-ble-supply]
+- JPPL is productising a plug-and-play loom that marries dual Thor300 controllers to a Spintend ADC board, VESC Express telemetry, 12 V lighting, and keyed on/off control so 20 S dual-drive builds can skip bespoke wiring.[^jppl_harness]
+- Builders mixing Makerbase or Spintend hardware lean on the ADC Adapter V3 for keyed ignition and lighting because VESC Tool lets them clamp speed profiles and map accessory channels without custom code.[^adc_v3_control]
 - Budget the ADC rail for light loads only: dual 18 W lamps already stress the ~12 V / 3 A output, so horns, halogens, or RGB kits belong on dedicated DC/DC converters triggered by the adapter or a relay.[^3]
 - Budget the ADC rail for light loads only: dual 18 W lamps already stress the ~12 V / 3 A output, so horns, halogens, or RGB kits belong on dedicated DC/DC converters triggered by the adapter or a relay—and Dualtron riders now reserve the rail for brake lights after burning controllers by running both headlight and taillight sets directly.[^64][^3]
+- Remember the auxiliary buck isn’t fused—one rider shorted the 12 V rail on a brand-new 85240 while wiring lights, killing the regulator (and potentially the power stage) before even riding; escalate repairs to Spintend support and insulate accessory leads or use an external buck, especially if you plan to mix 75/200 and 85-series controllers over CAN as a stopgap.[^aux_short]
 - **Hang heavy accessories on an external buck.** A dedicated 12 V/20 A converter powering horns, pumps, fans, and lights only sips ~4–6 A from a 60 V pack, and trimming controller battery amps preserves BMS headroom during horn spikes.[^accessory_buck]
 - **Treat ADC2 as logic-only.** Builders are seeing barely an amp of safe headroom on the secondary ADC rail, so horns and 12 V headlights now run off battery-fed relays instead of that logic supply.[^adc2_limit]
 - Single Ubox headers still expose enough pins for CAN; riders run Bluetooth, CAN, and USB simultaneously without issue and often add inline throttle kill switches after accidental bumps launched scooters in storage.[^ip001-single-can]
@@ -250,6 +255,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Recent FedEx fulfilment on direct orders landed within four to seven days, letting installers schedule deck tear-downs a week after purchase instead of waiting on slow postal legs.[^spintend-fedex]
 - Regional mark-ups can double MSRP—Israeli riders now see ~$575 street pricing, pushing them toward direct factory orders or alternative brands when budgets are tight.[^14]
 - Sellers occasionally under-declare controller value (e.g., listing €160 modules at €55); while it trims duties, buyers carry the audit risk if customs spot the mismatch.[^14]
+- Jason is prototyping a Spintend-compatible BMS evaluation board that currently costs about “1.5 boards” in components (~$2.60 per key IC); he plans to validate the full-size layout before shrinking production PCBs.[^spintend_bms_proto]
 - Treat the €140 “Spintend” AliExpress storefront as a likely scam—new account, no replies, and a bill of materials that already costs more than the asking price.[^73]
 - Single-channel boards still ship without Bluetooth; riders bolt on external modules (shared over CAN) or email Spintend for a forgotten dongle, and the CAN harness ships with paired singles so accessories live on the master controller.[^74]
 - Spintend’s 500 W water pump supplier stalled during lockdowns; 350 W replacements run hot and sparked bait-and-switch complaints, so builders now chase alternative pumps or budget for active cooling redesigns.[^75]
@@ -431,7 +437,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^1]: Source: knowledge/notes/input_part000_review.md, L502 to L504
 [^2]: Source: knowledge/notes/input_part006_review.md, L107 to L107
 [^3]: Source: knowledge/notes/input_part010_review.md, L32 to L33
-[^4]: Source: knowledge/notes/input_part011_review.md, L759 to L765
+[^4]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21460 to L21485
 [^5]: Source: knowledge/notes/input_part000_review.md, L504 to L504
 [^6]: Source: knowledge/notes/input_part001_review.md, L549 to L550
 [^7]: Source: knowledge/notes/input_part001_review.md, L565 to L566
@@ -535,3 +541,10 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^ip001-copper-plate]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24459-L24505
 [^ip001-17s-thermal]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17690-L17875
 [^ip001-single-can]: Source: data/vesc_help_group/text_slices/input_part001.txt†L27625-L27652
+[^aux_short]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21413 to L21489
+[^tokmas_warning]: Source: data/vesc_help_group/text_slices/input_part011.txt, L19984 to L20003
+[^jppl_harness]: Source: data/vesc_help_group/text_slices/input_part011.txt, L19928 to L19935
+[^adc_v3_control]: Source: data/vesc_help_group/text_slices/input_part011.txt, L20105 to L20131
+[^spintend_bms_proto]: Source: data/vesc_help_group/text_slices/input_part011.txt, L19571 to L19592
+[^spintend-22s]: Source: knowledge/notes/input_part011_review.md, L525 to L526
+[^spintend_85250_cap]: Source: knowledge/notes/input_part011_review.md, L589 to L589

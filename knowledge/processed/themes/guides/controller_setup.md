@@ -12,7 +12,9 @@
 - Sabvoton’s phone app still lacks live current readouts and its heavy case worries single-stem builders; Kelly deployments continue to work but demand staged programming, BLE adapters, and careful wiring to avoid red-light detection faults on high-KV hubs.[^sabvoton_kelly]
 - When updating Spintend firmware, stick with the vendor-supplied FW 5.3 BIN and let VESC Tool auto-detect the R3 hardware; forcing V6 targets or manual overrides has already bricked FlipSky units.[^ip001-spintendfw]
 - Paolo’s unlocked FW 5.3 binary lifts thermal/current ceilings on Flipsky 75100 controllers, but there is no equivalent for the Spintend Ubox V2 yet because the vendor firmware needed to port the hack is unavailable; plan on staying within stock limits on Ubox hardware.[^ip001-flipsky-unlock]
+- Traction control keeps dual builds tidy but still trims torque—JPPL reminds newcomers that VESC’s algorithm is “ok” yet sacrifices punch to rein in wheelspin, so treat it as a stability aid rather than a free performance boost.[^vesc_tc_torque]
 - Sustained cut-outs under load may point to BMS current limits: scooters that pass bench tests but trip under rider weight likely need higher-capacity packs or relaxed protection thresholds.[^bms_cutout]
+- If one motor must run sensorless, tune VSS carefully and be ready to gate the front controller—HFI or scripting a PWM disable below a chosen ERPM keeps dual-drive launches smooth until you can rewire hall sensors.[^sensorless_launch]
 - Logs from 12 S setups show ~45 km/h at 32.5 A; raising voltage to 15 S and reducing current is recommended for better efficiency and lower heat.[^voltage_swap]
 
 ## Current Relationships & Cruise Options
@@ -34,6 +36,7 @@
 - Back-to-back pulls comparing pure current control, MTPA, and +40 A field-weakening on dual Ubox hardware showed how 16 S 6 P test packs respond when FW engages near 90 % duty—use staged tests to document the trade-offs before shipping aggressive tunes.[^rosheee_fw]
 - Izuna’s MP2 v0.5 cleared repeated ABS overcurrent faults only after trimming battery current and switching to hall sensors, highlighting how firmware sample modes interact with current limits on high-speed runs.[^izuna_abs]
 - Dual Spintend crews treat 120–130 A phase per motor (≈160 A ABS max) as the realistic ceiling; if a hub “stutters” above ~85 A, assume a blown MOSFET or loose phase and inspect wiring or rerun sensorless detection before simply lowering limits.[^5]
+- When ABS faults trip at modest battery current, raise the absolute-current ceiling to roughly 1.5× the phase limit so regen spikes and launch surges stop tripping protections while keeping the controller inside its thermal window.[^abs_ratio]
 
 ## Thermal Management & Regen Safety
 
@@ -128,6 +131,9 @@
 [^manual_inductance_override]: Source: knowledge/notes/input_part008_review.md†L450-L451
 [^kukirin-g2]: Source: knowledge/notes/input_part010_review.md†L469-L471
 [^nami-72v-on-60v]: Source: knowledge/notes/input_part010_review.md†L701-L703
+[^vesc_tc_torque]: Source: knowledge/notes/input_part011_review.md†L502-L502.
+[^abs_ratio]: Source: knowledge/notes/input_part011_review.md†L538-L538.
+[^sensorless_launch]: Source: knowledge/notes/input_part011_review.md†L540-L541.
 
 
 ## References

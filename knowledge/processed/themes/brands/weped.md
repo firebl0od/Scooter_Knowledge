@@ -42,6 +42,7 @@ Rage Mechanics’ 75 mm stator hubs remain the go-to race upgrade, pushing wel
 ## Thermal Management & Mechanical Prep
 
 Sealed decks leave almost no thermal margin: dual Spintend installs logged ~500 A phase and 80 °C controller temps until owners sanded paint from the deck, applied quality thermal paste, and bolted the housings directly to the frame.[^10] Even the OEM layout assumes aggressive airflow—paired 30 Ah 40T packs feed opposing side fans at roughly 145 km/h to keep electronics alive, so any stealth conversion must preserve or improve that ducting.[^5] Plan for external heatsinks, repaste jobs, and fan redundancy before lifting current limits.
+- Wepoor owners are now hunting machinists to shave aftermarket fin stacks so Spintend stages can mount flush; removing a fin creates a bolt strip, and direct-to-heatsink installs cool better than remote brackets once insulation checks pass.[^wepoor_fins_trim]
 
 ## Handling & Rider Feedback
 
@@ -77,6 +78,7 @@ Community audits describe new Wepeds as expensive kits: owners routinely replace
 [^8]: Premium pricing contrasted with bargain-spec cockpit hardware on shipped units. Source: knowledge/notes/input_part001_review.md, L787 to L787
 [^9]: Guidance to approach Weped about VESC integration with revised cooling plans. Source: knowledge/notes/input_part010_review.md, L354 to L354
 [^10]: Repeated controller failures on a Weped Wepoor linked to suspected ANT BMS/regen events. Source: knowledge/notes/input_part011_review.md, L227 to L229
+[^wepoor_fins_trim]: Source: data/vesc_help_group/text_slices/input_part011.txt, L20866 to L20903; L21313 to L21319; L21504 to L21518
 [^11]: Rage Mechanics and FF-spec motor sourcing costs for Weped platforms. Source: knowledge/notes/input_part000_review.md, L449 to L449. Source: knowledge/notes/input_part000_review.md, L698 to L698
 
 ## References

@@ -172,6 +172,8 @@
 - Document field-tested J1772 adapter builds (wiring, fusing, voltage range) to provide builders with reproducible charging solutions.[^follow-adapter]
 - Validate generator-assisted touring feasibility with real-world weight, noise, and reliability data before promoting as a viable long-distance strategy.[^follow-generator]
 - Capture thermal management strategies for multi-hour charging sessions at public stations, including active cooling thresholds and BMS temperature monitoring.[^follow-thermal]
+- Record outcomes from Давно пора’s regenerative-charging experiment (and any DC-DC courier-swap alternatives) so touring guidance reflects proven workflows rather than theory.[^follow-dc-regen]
+- Gather long-haul feedback on the 4 kW Huawei/Guli telecom chargers—thermal behaviour, CAN/app quirks, and DC-input support—before recommending them for travel kits.[^follow-huawei]
 
 ## Source Notes
 
@@ -188,6 +190,8 @@
 [^ip001-whkm-loop]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19187-L19265
 [^ip001-whkm-mass]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19206-L19227
 [^ip001-regen-eff]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17551-L17690
+[^follow-dc-regen]: Monitoring Давно пора’s regenerative charging experiment and any DC-DC swaps for courier use. Source: knowledge/notes/input_part011_review.md†L902-L902
+[^follow-huawei]: Pending extended-use feedback on 4 kW Huawei/Guli telecom chargers (thermals, CAN/app, DC input). Source: knowledge/notes/input_part011_review.md†L912-L912
 [^appalachian]: Noname's 150-mile ride log demonstrating thermal management and extended touring feasibility.[^50]
 [^nami-65kw]: Source: knowledge/notes/input_part013_review.md†L810-L810
 [^noname-96mi]: Noname’s 20 S 35 P commuter pack recorded 96 miles of riding while burning roughly half its 10.2 kWh capacity.[^52]

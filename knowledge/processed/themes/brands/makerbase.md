@@ -92,6 +92,7 @@
 - Builders chasing splash protection now CAD PLA+/PETG housings and jet-duct side pods for Xiaomi deck installs, sealing seams with silicone or dielectric epoxy so aluminum-PCB 75100s survive rain without suffocating their heatsinks.[^printed_housings]
 - Log intermittent ignition latch pop-open events; they sometimes self-resolve, hinting at marginal wiring or moisture, but still deserve a ticket before they strand the rider.[^84]
 - **Diagnose dead 5 V rails promptly.** One 75100 Alu board ran on 3.3 V throttle power but measured only 0.3 V on the sensor rail, losing hall detection—classic evidence of a blown DC/DC stage requiring repair before reconnecting sensors.[^dead_5v]
+- Makerbase 100 V riders who lose hall sensors after a controller failure are leaning on VSS detection as a stopgap while rechecking ADC mappings; JPPL also swapped a nuisance-tripping JBD-SP17S005 after it kept flagging charge overcurrent and pulling the pack into undervoltage, reigniting the JK vs. Daly debate for >60 A discharge builds.[^makerbase_vss_bms]
 - **Reflow sloppy MCU solder joints.** Intermittent-boot 75 100 Alu boards were revived by reflowing the GD32 MCU after inspection revealed joints ranging from starved pads to heavy blobs, stabilizing CAN, ABS limits, and USB connectivity.[^mcu_reflow]
 - **Replace cracked MOSFETs with hotplate technique.** Aluminum-PCB repairs require heating the entire sink, checking diode drops as it cools, and verifying gate drivers before reassembly—hot air alone cannot remove devices cleanly.[^mosfet_hotplate]
 
@@ -121,7 +122,9 @@
 - Keep horn/lighting loads small on the ADC harness—the Makerbase/Spintend “horn” pin sources only a couple of amps, so 35 W halogens belong on a dedicated DC/DC rail with the controller output simply driving a relay.[^adc_load]
 - Publish a wiring card for every build: power BLE modules from the controller’s regulated 5 V, daisy-chain UART between dual controllers without cross-wiring TX/RX, and pin the throttle’s hall wires correctly before first power-up—recent field failures all traced back to inverted reference leads or shared 5 V rails that yanked controllers into limited mode.[^113][^114]
 - For binary accessories or mower-style implements, bridge the throttle shunt’s red/white leads with ~10 kΩ or configure the ADC app with a pulldown so a normally-open switch maps cleanly between 0 % and 100 % duty.[^binary_accessory]
-- The ADC Adapter V3 breakout keeps ignition, lighting, and accessory rails tidy—feed the board from the Makerbase controller, map ADC channel 9 to “control,” and let the adapter provide fused taps instead of back-powering through the BMS.[^adc_adapter]
+- The ADC Adapter V3 breakout keeps ignition, lighting, and accessory rails tidy—flip the controller’s DC/DC switch (pin 9) into control mode, feed 5 V through the key into AD15, map ADC channel 9 to “control,” and let the adapter provide fused taps instead of back-powering through the BMS.[^adc_adapter]
+- AD15 expects a momentary bridge: a ~1 s press latches the controller on, ~3 s holds power it down, and builders trim launch aggression by pairing 0.1 s positive ramping with throttle-curve gain while raising Motor → Current limits to actually deliver the requested torque.[^ad15_momentary]
+  - Inside VESC Tool, that workflow hinges on the ADC/DC-DC page: pulse A15 with 5 V from the key switch, assign ADC 9 to `control`, and enable the shutdown timer so the controller latches cleanly without relying on backfeed from the BMS rail.[^a15_latch]
 - For NC ignition builds on the 84100HP, document the 1 MΩ pull-down and confirm the switch actually opens the STM32 input—builders have destroyed keys by wiring normally-open hardware without the mod. [^89][^115]
 - 75100 V2 signal looms use JST-PH and XHB families—log the exact housings before ordering spares so replacement throttle and hall leads seat correctly. [^116]
 - Rewire suspect throttles to the 3.3 V rail; Paolo’s Wolf revival only came back after ditching a 5 V feed that had crept into the harness. [^117]
@@ -139,7 +142,9 @@
 [^printed_housings]: Community CAD drops document PLA+/PETG housings and jet-duct side pods that add splash protection for Makerbase 75100 decks while keeping airflow over the aluminum PCB. Source: knowledge/notes/input_part005_review.md, L72 to L72
 [^can_first]: Makerbase dual-drive owners advising to wire CAN high/low between controllers before pairing BLE modules so both nodes stay in sync. Source: knowledge/notes/input_part012_review.md, L359 to L360
 [^adc_load]: Makerbase/Spintend horn outputs sourcing only a couple of amps—insufficient for 35 W halogens—so riders trigger relays and power lights from dedicated converters. Source: knowledge/notes/input_part012_review.md, L97 to L98
-[^adc_adapter]: Roby MacGyver’s ADC Adapter V3 workflow for keyed ignition, fused lighting, and profile control on Makerbase hardware without back-powering the BMS. Source: knowledge/notes/input_part011_review.md, L687 to L687
+[^adc_adapter]: Roby MacGyver’s ADC Adapter V3 workflow for keyed ignition, fused lighting, and profile control on Makerbase hardware without back-powering the BMS. Source: data/vesc_help_group/text_slices/input_part011.txt, L20452 to L20522
+[^ad15_momentary]: Makerbase 75100 latch behaviour, ramp tuning, and torque calibration guidance. Source: data/vesc_help_group/text_slices/input_part011.txt, L20502 to L20524; L20652 to L20671; L20776 to L20785
+[^makerbase_vss_bms]: Makerbase hall-loss recovery via VSS sensing and JBD-SP17S005 charge-overcurrent troubleshooting that pushed a swap to alternative BMS hardware. Source: data/vesc_help_group/text_slices/input_part011.txt, L21209 to L21280; L21236 to L21266; L21245 to L21260
 [^alt_consumable]: Veterans treating Makerbase 84xxx controllers as consumables while they chase 300 A logs or wait for higher-rated hardware, steering commuters to Spintend, Tronic, or Seven alternatives instead. Source: knowledge/notes/input_part012_review.md, L374 to L378. Source: knowledge/notes/input_part012_review.md, L397 to L398
 [^kapton_static]: Kapton isolation preventing static discharge from killing a Makerbase 75100’s 3.3 V rail after the Bluetooth module touched the case. Source: knowledge/notes/input_part008_review.md, L45 to L45
 [^binary_accessory]: Makerbase 75×100 owners bridging throttle shunt leads or adding ADC pulldowns to drive binary accessories with clean 0/100 % duty behaviour. Source: knowledge/notes/input_part006_review.md, L197 to L197
@@ -283,3 +288,4 @@
 [^121]: Source: knowledge/notes/input_part011_review.md, L699 to L728
 [^122]: Source: knowledge/notes/input_part007_review.md, L45 to L168
 [^123]: Source: knowledge/notes/input_part005_review.md, L17 to L584
+[^a15_latch]: Source: knowledge/notes/input_part011_review.md†L536-L538

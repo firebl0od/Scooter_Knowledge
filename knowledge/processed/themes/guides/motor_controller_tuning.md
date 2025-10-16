@@ -83,6 +83,7 @@
 - Wheelway 1 000 W hubs that chatter above ~70 A phase usually clear up after rerunning detection with higher phase-current limits, raising the power-loss estimate toward 1 kW, shortening phase leads, or ultimately stepping to LY 60H 22/3 motors for more torque headroom.[^wheelway-fix]
 - Before re-energizing suspect controllers, beep-test between pack leads and every phase to catch shorts, confirm 5 V accessory output, isolate hall supplies with dual 1N4148 diodes if needed, and inspect resettable fuses guarding the Ubox's 12 V/5 V/3.3 V rails.[^prepower-checks]
 - Cold-soldered phase leads can melt and short, killing FETs; test each MOSFET drain-to-source, inspect both sides of the board, and verify Bluetooth plus the 5 V rail before reconnecting.[^phase-meltdown]
+- Geared hubs that suddenly spin backward usually trace to reversed phase/hall wiring inside extension harnesses—budget looms often flip the black/white pair—so trace the intermediate adapter or move to a VESC where you can remap phases and regen polarity cleanly.[^geared_reverse]
 - Zero owners mounting paired VESCs should enlarge bolt holes gradually, strip paint to use the chassis as a heat bridge, clamp with hardware and threadlocker, refresh thermal pads with paste, and avoid insulating foam stuffing.[^zero-mounting]
 - Fitting 11 in hubs on Zero 10X frames demands machining the swingarm axle for clearance; skipping the cut leaves the wheel misaligned and binding under load.[^zero10x-axle]
 - Mixing Makerbase 75100s with FlipSky 75100s on a shared CAN bus pops transceivers thanks to mismatched termination.
@@ -204,6 +205,7 @@
 [^smartesc-warning]: knowledge/notes/input_part010_review.md†L658-L659
 [^prepower-checks]: knowledge/notes/input_part007_review.md lines 32-32.
 [^phase-meltdown]: knowledge/notes/input_part007_review.md lines 31-31.
+[^geared_reverse]: knowledge/notes/input_part011_review.md†L686-L687; data/vesc_help_group/text_slices/input_part011.txt†L19627-L19661.
 [^zero-mounting]: knowledge/notes/input_part007_review.md lines 28-28.
 [^zero10x-axle]: Source: knowledge/notes/input_part006_review.md†L39-L39
 [^brazing]: knowledge/notes/input_part007_review.md lines 94-94.

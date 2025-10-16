@@ -22,6 +22,8 @@
 - **R-spec Surron hub preview:** The upcoming Rage Mechanics 30 kW motor handles ≈45 Ah 80 V packs, survives burst launches, and still delivers ~150 km of range at <45 km/h cruising—plan premium stators and thermal management when chasing dirt-bike power on scooters.[^3]
 - The RM-Light race scooter pairs a Dualtron Compact frame with a 22 S 4 P tabless pack, C350 RM-X motor, Beringer brakes, and a titanium pole to hit roughly 140 km/h at just 37 kg, underscoring that the platform targets short sprint sessions rather than street duty.[^4]
 - Rage’s latest customer build packages dual XHS75 hubs, paired CL350 controllers, and a 20 S 10 P P45B pack inside twin waterproof cases with a steel steering pole, SmartDisplay dash, and Hope Tech 4 V4 brakes—ready for 0–100 km/h testing once weather cooperates.[^5]
+- Rage Mechanics hardware is now anchoring heavy-rider conversions too: a 140 kg, 2 m customer is fitting an H60 rear motor, C350 controller, 20 S battery, and SmartDisplay-derived dash into a Ninebot Max G2 to create a daily scooter without resorting to dual-motor frames.[^g2_heavy_rider]
+- Yamal notes the VESC G300 controller drops cleanly into Dualtron X control bays alongside 96 V packs, reinforcing the packaging case for Rage Mechanics components on heavyweight builds.[^g300_dualtron]
 
 ## Motor Portfolio
 
@@ -47,6 +49,8 @@
 [^cl350-bundle]: Source: knowledge/notes/input_part013_review.md†L755-L755
 [^fork_machining]: Mirko’s deck install required machining the Dualtron rear forks before the hardware would seat correctly. Source: knowledge/notes/input_part012_review.md, L18 to L18
 [^victor_transplant]: Skrtt paid ≈€200 for a used Thunder battery box that bolts straight to the Victor’s 7.5 cm mounts and planned Thunder swingarms plus shorter phase leads for incoming 70 H/11" hardware. Source: knowledge/notes/input_part012_review.md, L215 to L219
+[^g2_heavy_rider]: Source: data/vesc_help_group/text_slices/input_part011.txt, L19521 to L19586
+[^g300_dualtron]: Source: data/vesc_help_group/text_slices/input_part011.txt, L19523 to L19543
 
 ## References
 

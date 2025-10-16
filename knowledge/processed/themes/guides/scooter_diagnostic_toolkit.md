@@ -55,6 +55,7 @@
 4. **Treat locks as consumables:** Light cable locks such as compact Master Lock loops work for coffee stops only if they stay lubricated with graphite.
   - dry mechanisms jam quickly after rain or grit exposure.[^36]
 5. **Identify controller silicon before flashing.** New Xiaomi ESCs use GD32 MCUs; flashing STM firmware bricks them, so zoom in on chip markings and grab the GD image set before running ST-Link recoveries.[^37]
+- **Reverse-spinning geared hubs usually trace to hall wiring.** Before replacing controllers, swap the black/white hall pair in the extension harness—Bafang guest-bike projects have recovered normal rotation immediately—and consider a VESC drop-in if you want cleaner harness routing and diagnostics afterward.[^bafang_reverse]
 6. **Secure accessory power taps.** Dashboards only expose 5 V logic.
   - drive headlights and horns from a dedicated DC/DC converter, tie the output wires to the board with RTV, and route the harness away from moving stems so the leads do not fatigue.[^38][^25]
 6. **Respect Spintend accessory rails.** The built-in 12 V/3 A rail is fine for a brake light, but running both Dualtron head and tail lights from it has already tripped installs.
@@ -183,6 +184,7 @@
   - one loose phase on a Wheelway build created identical symptoms until the harness was reseated.[^103]
 - **Kelly KLS quirks.** Expect USB drivers to fail on modern Windows; plan on the BLE module or legacy Windows XP tools when configuring scooters running KLS hardware.[^104]
 - **Phase-current ceilings as diagnostics.** Dual Spintend riders treat 120–130 A phase per motor (≈160 A ABS) as normal; stuttering above ~85 A points to blown MOSFETs or loose phase leads, so log traces and rerun hall/sensorless tests before simply dropping current limits.[^105]
+- **Chase “stuck at 135 A” complaints with logs.** When a Dualtron Achilleus plateaued around 135 A despite a 220 A target, the crew pulled fresh motor detections and overlaid battery voltage/current to confirm whether pack sag or magnetic saturation was the real bottleneck before touching firmware.[^achilleus_diag]
 - **3Shul ABS fixes need manual detection.** CL350 V4 owners cleared ABS overcurrent faults by rerunning detection with a 500 µs timing step, switching from `mxlemming` to the Ortega observer, and dialing the tune in manually per Vedder’s demos.[^106]
 - **Data-line triage after regen faults:** Error 21 that appears immediately after an emergency stop usually points to a cooked controller data line. Bench-test the pack on a known-good scooter or send it in rather than reflashing firmware blindly.[^107]
 - **Backfeed with care:** A depleted 44 V pack can be nudged awake with a 36 V charger only when its open-circuit voltage sits under ~41 V. Anything higher risks over-voltage damage once the charger’s CV phase kicks in.[^54]
@@ -352,6 +354,7 @@
 
 [^damper-oil]: PuneDir’s free steering damper only behaved after switching to lighter fluids; veterans now recommend 10W/60 shock oil or Citroën LHM+ to preserve seals while restoring adjustability.[^199]
 [^ldo_probe]: Source: knowledge/notes/input_part000_review.md, line 141.
+[^bafang_reverse]: Source: data/vesc_help_group/text_slices/input_part011.txt, L19627 to L19661
 
 
 
@@ -468,6 +471,7 @@
 [^103]: Source: knowledge/notes/input_part000_review.md†L649-L649
 [^104]: Source: knowledge/notes/input_part000_review.md†L635-L635
 [^105]: Source: knowledge/notes/input_part000_review.md†L663-L664
+[^achilleus_diag]: Source: knowledge/notes/input_part011_review.md†L517-L518
 [^106]: Source: data/vesc_help_group/text_slices/input_part009.txt†L17692-L17699
 [^107]: Source: knowledge/notes/denis_all_part02_review.md†L368-L369
 [^108]: Source: knowledge/notes/denis_all_part02_review.md†L55-L57

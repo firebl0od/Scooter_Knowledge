@@ -14,6 +14,7 @@
 - Wolf decks only fit one large controller without risers; dual-controller conversions rely on 3D-printed spacers, staggered mounting, and careful cable routing to keep 22 S harnesses from chafing or overheating.[^2]
 - Stock pack options span 16 S10 P 18650 (Warrior), 16 S7 P 21700 (Warrior GT), 20 S8 P 18650 (Wolf King), and 20 S7 P 21700 (Wolf King GT), but the cramped deck (≈172 × 70 × 430 mm internal volume, ~68 mm usable height once wiring is routed) still forces controllers outside and leaves little upgrade room—budget wiring changes before promising higher-current packs.[^ip001-wolf-pack]
 - Remanufacturers now order custom 3 mm rotors and 10 mm² phase looms for Wolf/VSETT builds targeting >300 A launches—have CAD ready for rotor suppliers and budget thicker cabling to stop voltage drop on high-current pulls.[^3]
+- Recent field logs show a Kaabo GT running a 72 V 50 Ah Samsung 50S pack into a 2000 W (33/3) hub with a Spintend 85 V 240 A controller, providing a baseline before experimenting with parallel packs or higher current limits.[^gt_50s_build]
 
 ## Blade & GT-Series Chassis Care
 
@@ -70,6 +71,7 @@
 [^8]: Source: data/vesc_help_group/text_slices/input_part003.txt, L24802 to L25463
 [^9]: Source: data/vesc_help_group/text_slices/input_part003.txt, L2201 to L2206
 [^10]: Source: data/vesc_help_group/text_slices/input_part003.txt, L9804 to L9808
+[^gt_50s_build]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21368 to L21371
 [^11]: Source: knowledge/notes/input_part014_review.md, L218 to L222
 [^12]: Source: knowledge/notes/input_part014_review.md, L230 to L231
 [^13]: Source: knowledge/notes/input_part014_review.md, L268 to L271

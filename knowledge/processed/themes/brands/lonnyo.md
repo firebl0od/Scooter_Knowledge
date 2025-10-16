@@ -137,7 +137,7 @@
 [^4]: Source: knowledge/notes/input_part011_review.md, L340 to L353
 [^5]: Source: knowledge/notes/input_part011_review.md, L365 to L417
 [^6]: Source: knowledge/notes/input_part011_review.md, L482 to L483
-[^7]: Source: knowledge/notes/input_part011_review.md, L531 to L536
+[^7]: Source: knowledge/notes/input_part011_review.md, L531 to L536. Source: knowledge/notes/input_part011_review.md, L544 to L545
 [^8]: Source: knowledge/notes/input_part011_review.md, L463 to L465
 [^9]: Source: knowledge/notes/input_part006_review.md, L315 to L315
 [^10]: Source: data/vesc_help_group/text_slices/input_part014.txt, L10599 to L10612

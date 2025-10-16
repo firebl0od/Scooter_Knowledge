@@ -170,6 +170,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 - Budget welders rated for 0.15 mm copper rarely meet spec; proven setups rely on K-Weld or Glitter 811A plus rip-tests, nickel sandwiching, and calibrated power for 0.1 mm sheet.[^55][^56]
 - Turkey-based builders validated the €25 “purple PCB” 12 V welder board when fed by a 72 Ah car battery.
   - it handles 0.2 mm nickel but still lacks the current to weld 0.15 mm copper, so plan on capacitor rigs if customs block pro welders.[^127]
+- GABE’s workhorse welder now throws an E02 fault from a blown board; Haku traced the issue to MOSFET failures, mentioned his own replacement only charges to 5.4 V, and pointed at the heavier Glitter 811H as an upgrade path if repairs stall.[^welder_e02]
 - TIG-welded copper busbars remain the standard for high-current packs.
   - Paolo’s 20 S6 P P45B build is another reminder that nickel alone adds too much resistance at 300 A targets.[^8]
 - 0.3 mm copper laminates waste weight and money because the weldable layer is still nickel.
@@ -208,6 +209,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
   - either parallel two units or accept accelerated wear when chasing 300–350 A discharge goals.[^148]
 - ANT’s published 420 A ceiling leaves Halo-style 22 S 10 P race packs with limited headroom.
   - either parallel two units or accept accelerated wear when chasing 300–350 A discharge goals, because each P45B cell is still spec’d at 45 A continuous despite community attempts to pull 300 A+ through a single BMS.[^149]
+- Jason is prototyping a 32 S charge-only BMS that mirrors VFBMS32 topology but inverts the MOSFET orientation; he’s validating high-side charge paths and diode-drop losses before shrinking the PCB for production.[^vfbms32_eval]
 - Riding big packs on charge-only protection is risky.
   - Yamal’s 20 S 10 P commuter runs an ANT board only on the charge side, and peers warned a short could torch the ESC, so document inspection intervals, discharge-side fusing, and escalation plans until a full BMS lands.[^150][^151]
 - Balance behavior differs: ANT bleeds every cell simultaneously but with limited current, whereas JK hardware addresses two series groups at once, making JK preferable for large parallels needing faster equalization.[^54]
@@ -315,6 +317,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 - Mixing LG 40T and LG M50LT strings in parallel demands conservative current draw and a smart 150 A BMS so the weaker chemistry doesn’t overheat or drift out of balance.[^212]
 - Treat glossy spec sheets skeptically: Dualtron 7260R “60 Ah” packs tear down to SK-made 57 Ah pouches rated ≈300 A continuous per cell, and owners warn the labeling gymnastics complicate warranty claims.
   - log actual capacity before mirroring the architecture or promising the marketing numbers.[^213]
+- EU supply is tightening: Samsung 50S already sits around €5.30 per cell locally, 40T and Eve parallels increasingly demand business licences or grey imports, and Jason now leans on scavenged Lime MH1 modules as the budget fallback for commuter packs.[^eu_cell_sourcing]
 - Don’t trust “20 kg, 150 km range” marketing.
   - community math shows 150 km alone demands ~11 kg of cells plus structure, so vet vendor specs before redesigning decks around unrealistic claims.[^214]
 - Vet “used but tested” Samsung 35E/40T lots for weld scars and elevated IR.
@@ -349,6 +352,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
   - plan mechanical reinforcement alongside electrical upgrades so high-current harnesses survive daily swaps.[^230][^231]
 - QS8 anti-spark plugs are replacing AS150 on 100 A+ scooters thanks to their 110 A continuous rating and the new 6 AWG solder cups, which pair cleanly with 6 mm² phase looms when dual controllers climb past 60 A battery per side.
   - even if EU pricing still hovers around CHF 21.50 per pair.[^232]
+- Builders are already struggling to source leaded solder inside the EU, so document vetted suppliers or compliant alloys before bans derail pack production workflows.[^eu_solder]
 - When paralleling extender packs, match voltages before connecting, use XT90/Y harnesses on common-port BMS designs, and let multiple chargers share the constant-voltage stage so each supply tapers naturally as the packs equalise.[^233]
 - QS8 connectors handle roughly 70 A continuous but take valuable deck space; many riders now substitute 8 mm bullets for compact high-current runs while keeping XT90S on sub-45 A projects.[^234]
 
@@ -507,6 +511,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 [^125]: Source: data/vesc_help_group/text_slices/input_part001.txt†L21239-L21247
 [^126]: Source: data/vesc_help_group/text_slices/input_part001.txt†L20423-L20488
 [^127]: Source: knowledge/notes/input_part008_review.md†L140-L140
+[^welder_e02]: Source: data/raw/telegram_exports/vesc_help_group/input_part011.json, L21901 to L21975; L22311 to L22668
 [^128]: Source: knowledge/notes/input_part008_review.md†L20898-L20916
 [^129]: Source: knowledge/notes/input_part008_review.md†L20943-L20951
 [^130]: Source: knowledge/notes/input_part014_review.md†L119-L120
@@ -639,3 +644,6 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 [^maxg2_baseline]: Source: knowledge/notes/input_part012_review.md, line 443.
 [^begode_q3_pack]: Source: knowledge/notes/input_part012_review.md, line 466.
 [^forol_walkthrough]: Source: knowledge/notes/input_part012_review.md, line 476.
+[^eu_cell_sourcing]: Source: knowledge/notes/input_part011_review.md†L614-L615
+[^vfbms32_eval]: Source: knowledge/notes/input_part011_review.md†L625-L626
+[^eu_solder]: Source: knowledge/notes/input_part011_review.md†L620-L620
