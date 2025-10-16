@@ -1,6 +1,7 @@
 # Denis Yurev Workshop (Rita Ecosystem)
 
 ## Quick Facts
+
 | Topic | Details |
 | --- | --- |
 | Flagship products | Rita smart battery adapter, common-port external packs, repair BMS line |
@@ -11,6 +12,7 @@
 ## Product Portfolio
 
 ### Rita Smart Adapter
+
 - Designed for Xiaomi-style data-line traffic and parallel battery expansions; supports Bluetooth configuration or serial tooling when the stock dashboard is absent.[^rita-capabilities]
 - Offers a “permanent BMS emulator” mode for scooters that lack data lines yet still orchestrates current like paired smart diodes, routing charger input automatically between packs.[^rita-emulator]
 - Caps sustained output near 25–30 A, now beeping and throwing error 39 on newer boards if regen or drivetrain demand pushes past the limit; stay within the published ceiling even when firmware sliders allow higher numbers.[^rita-current-limit]
@@ -30,54 +32,58 @@
 - Relocating the Xiaomi charge port outside the bag is acceptable if a three-way splitter remains so Rita can detect chargers and enforce safeguards.[^rita-v4]
 - Wireless anti-theft relays should interrupt the BLE/dashboard’s 5 V feed instead of the high-current battery line: route the controller’s red/black pair into the relay “in” and send the “out” pair back to the dash.[^rita-relay]
 - Leave Rita’s BMS emulation enabled even on analog packs unless you can manually watch voltage in real time; disabling it strips the adapter’s mixed-pack safeguards.[^rita-analog-safeguard]
-- Rita firmware still throws a cosmetic dash jump from ~25 % to ~60–70 % state of charge during heavy regen; the fix is queued, so treat the spike as a known quirk for now.【F:knowledge/notes/all_part01_review.md†L175-L175】
+- Rita firmware still throws a cosmetic dash jump from ~25 % to ~60–70 % state of charge during heavy regen; the fix is queued, so treat the spike as a known quirk for now.[^1]
 
 ### Repair BMS Program
+
 - Current production supports 10S4P batteries with ongoing development toward 12S models; units are configurable over simple USB-UART adapters for clone scooters.[^bms-roadmap]
 - Default charge ceiling is 4.15 V per cell (≈4.14 V after diode drop) but can be tuned higher or lower for longevity or range.[^bms-ceiling]
 - Field tests logged 37 A discharge headroom when paralleled with another 10S pack, while the 3 A charge limit pushes owners toward patience or dual chargers.[^bms-headroom]
 
 ### External Battery Kits
+
 - Wildman 2 L hard cases remain the standard enclosure, cleanly fitting 8 Ah-class 10S or 12S packs; 3 L variants are reserved for future 5P customs once supply stabilizes.[^battery-enclosures]
 - Wildman E2 (≈180 × 105 × 83 mm) shells comfortably fit Denis’ 8 Ah-class bricks, while the 1 L case only houses compact 36 V hoverboard packs and the 3 L shell needs printed brackets to tame the extra bulk.[^wildman-e2]
 - Builds lean on Samsung 35E or equivalent 21700 cells, quality 12 AWG wiring, and Daly 25 A common-port BMS boards; XT30 connectors are intended for semi-permanent joints rather than frequent hot-swaps.[^battery-bom]
 - Turnkey 10S4P range kits land around €170 plus roughly €30 for the Wildman 2 L bag and €20 shipping, built from Samsung 35E cells on 20 A common-port BMS boards with genuine XT30 connectors sized to the Xiaomi inlet.[^price-10s]
 - Auxiliary packs keep their BMS inline but present a single XT30 common-port lead so Rita can top the internal and external batteries in parallel; unplug Rita and use a dedicated harness whenever the auxiliary pack charges off the scooter.[^common-port]
-- Dimitrij still warns that bypassing external BMS hardware or paralleling packs at mismatched voltages without Rita can end in catastrophic failure—keep every auxiliary pack’s protection board in circuit and lean on Rita’s permanent-emulator mode for analog scooters.【F:knowledge/notes/all_part01_review.md†L113-L113】
-- Range+Speed bundles hinge on a 50.4 V charger; Denis paused full kits when supplies dried up, steering builders toward resistor-modded OEM bricks or Mean Well ELG-240-48A-class chargers while keeping the 10 S range pack as a plug-and-play option.【F:knowledge/notes/all_part01_review.md†L106-L107】【F:knowledge/notes/all_part01_review.md†L114-L114】
-- Quality connectors matter—Denis’ harness length coils inside the Wildman bag, but if you relocate plugs stick with genuine Amass XT30 hardware and practice soldering on scrap to avoid melting shells.【F:knowledge/notes/all_part01_review.md†L182-L182】
-- Current 12S3P packs use Samsung 35E cells (≈10.35 Ah) and retail near €260 with bag, while standalone 12S4P builds sit around €230; chasing 3 L bag experiments escalates cost quickly as parallels increase.【F:knowledge/notes/all_part01_review.md†L115-L116】
-- 12S4P 21700 bricks roughly match 12S6P 18650 capacity but press against Wildman dimensions; Denis’ 13S4P modules barely fit the 2 L case and stacking two forms a 13S8P tower to tame sag for dual 500 W scooters, with Samsung 35E holding voltage better than LG MJ1 under the same load.【F:knowledge/notes/all_part01_review.md†L117-L117】【F:knowledge/notes/all_part01_review.md†L171-L171】
-- Rear mounting brackets are printed by 3Dway Kraków under a commercial license, so customers request custom current limits while Denis keeps the STL private.【F:knowledge/notes/all_part01_review.md†L133-L133】
-- Wildman 2 L shells remain the default enclosure because larger 3 L cases complicate cable clearance even though they exist for oversized builds.【F:knowledge/notes/all_part01_review.md†L132-L132】
-- Ultra-long-range experiments include 60 V 40 Ah externals that promise ~130 km at ≈11 kg, underscoring the weight/range trade-offs once riders leave Xiaomi’s 36 V ecosystem.【F:knowledge/notes/all_part01_review.md†L134-L134】
+- Dimitrij still warns that bypassing external BMS hardware or paralleling packs at mismatched voltages without Rita can end in catastrophic failure—keep every auxiliary pack’s protection board in circuit and lean on Rita’s permanent-emulator mode for analog scooters.[^2]
+- Range+Speed bundles hinge on a 50.4 V charger; Denis paused full kits when supplies dried up, steering builders toward resistor-modded OEM bricks or Mean Well ELG-240-48A-class chargers while keeping the 10 S range pack as a plug-and-play option.[^3][^4]
+- Quality connectors matter—Denis’ harness length coils inside the Wildman bag, but if you relocate plugs stick with genuine Amass XT30 hardware and practice soldering on scrap to avoid melting shells.[^5]
+- Current 12S3P packs use Samsung 35E cells (≈10.35 Ah) and retail near €260 with bag, while standalone 12S4P builds sit around €230; chasing 3 L bag experiments escalates cost quickly as parallels increase.[^6]
+- 12S4P 21700 bricks roughly match 12S6P 18650 capacity but press against Wildman dimensions; Denis’ 13S4P modules barely fit the 2 L case and stacking two forms a 13S8P tower to tame sag for dual 500 W scooters, with Samsung 35E holding voltage better than LG MJ1 under the same load.[^7][^8]
+- Rear mounting brackets are printed by 3Dway Kraków under a commercial license, so customers request custom current limits while Denis keeps the STL private.[^9]
+- Wildman 2 L shells remain the default enclosure because larger 3 L cases complicate cable clearance even though they exist for oversized builds.[^10]
+- Ultra-long-range experiments include 60 V 40 Ah externals that promise ~130 km at ≈11 kg, underscoring the weight/range trade-offs once riders leave Xiaomi’s 36 V ecosystem.[^11]
 
 ### Research & Testing Backlog
-- Dual-motor builders still want dyno-style efficiency testing—community logs cannot answer whether km-per-mAh or watts-per-kilometre best capture AWD gains, so Denis notes the need for controlled bench work when time allows.【F:knowledge/notes/all_part01_review.md†L201-L201】
+
+- Dual-motor builders still want dyno-style efficiency testing—community logs cannot answer whether km-per-mAh or watts-per-kilometre best capture AWD gains, so Denis notes the need for controlled bench work when time allows.[^12]
 
 ### Fulfillment & Logistics (mid-2020 snapshot)
-- UK orders led demand in July 2020, with reseller Dimitrij coordinating Rita distribution and staging July 13 dispatches for preorders.【F:knowledge/notes/all_part01_review.md†L137-L137】
-- Charger shortages forced Denis to pause complete Range+Speed kits even while he debated emergency Wildman bag buys from Polish resellers; lithium shipping stayed ground-only via DPD/UPS/TNT because DHL air refused battery freight.【F:knowledge/notes/all_part01_review.md†L138-L138】
-- Payment-gateway outages later that month blocked battery and charger sales; Rita adapters, BMS boards, and bags remained available while Denis navigated Russian-to-Polish bank transfers and warned that Revolut workarounds were awkward stopgaps.【F:knowledge/notes/all_part01_review.md†L139-L140】
+
+- UK orders led demand in July 2020, with reseller Dimitrij coordinating Rita distribution and staging July 13 dispatches for preorders.[^13]
+- Charger shortages forced Denis to pause complete Range+Speed kits even while he debated emergency Wildman bag buys from Polish resellers; lithium shipping stayed ground-only via DPD/UPS/TNT because DHL air refused battery freight.[^14]
+- Payment-gateway outages later that month blocked battery and charger sales; Rita adapters, BMS boards, and bags remained available while Denis navigated Russian-to-Polish bank transfers and warned that Revolut workarounds were awkward stopgaps.[^15]
 - Range Boost bundles double an M365 Pro’s capacity by matching OEM pack size, while Range+Speed kits demand firmware tweaks whenever the auxiliary pack is removed.[^range-kits]
 - AliExpress packs with separate charge ports require BMS swaps before pairing with Rita to avoid uncontrolled overcharge through the discharge leads.[^separate-charge]
 - Community buyers now dispute “13.8 Ah” 10S2P listings and inspect harnesses closely after shorts traced back to unsoldered Y-cable joints inside Wildman bags—treat unbelievable capacity claims as fire risks.[^counterfeit]
 - Denis resells his battery catalog at cost and asks the community to surface vetted Chinese suppliers while independently verifying capacity claims before ordering elsewhere.[^resell-cost]
-- Cylindrical cells typically fail open when abused, while pouch cells demand compression and vent violently—Denis favors vetted Samsung 35E/50E refurb lots for midlife rebuilds over mystery pouch modules.【F:knowledge/notes/denis_all_part02_review.md†L224-L225】
-- Refurbished Samsung 35E/50E lots from NKON’s late-2021 inventory remain Denis’ go-to when new stock dries up—he logs batch codes so midlife rebuilds stay traceable.【F:knowledge/notes/denis_all_part02_review.md†L97241-L97259】
+- Cylindrical cells typically fail open when abused, while pouch cells demand compression and vent violently—Denis favors vetted Samsung 35E/50E refurb lots for midlife rebuilds over mystery pouch modules.[^16]
+- Refurbished Samsung 35E/50E lots from NKON’s late-2021 inventory remain Denis’ go-to when new stock dries up—he logs batch codes so midlife rebuilds stay traceable.[^17]
 - Secure the Wildman case upright with clamps or cages instead of glue fills so thieves cannot unzip the pack in seconds and technicians can still service the battery.[^bag-security]
-- New mounting hardware bolts packs to Wildman bags with eight screw/wide-washer mounts, fiberglass sleeving, and foam padding so cells cannot rattle or chafe during pothole hits.【F:knowledge/notes/denis_all_part02_review.md†L361-L362】
+- New mounting hardware bolts packs to Wildman bags with eight screw/wide-washer mounts, fiberglass sleeving, and foam padding so cells cannot rattle or chafe during pothole hits.[^18]
 - Keep builds under roughly 20 cm pack length—the shallow Wildman shell will not swallow 25×7×7 cm bricks without stressing the zipper or wiring.[^bag-length]
 - Pad the two shallow Wildman screws that face the pack and mount XT30 leads upward so vibration does not scuff the harness insulation.[^wildman-screws]
 - Repurposing tool batteries like Makita BL1850B modules rarely works—the 5 S packs sit too low for Rita to blend in, so Denis advises selling them and investing in 10–12 S scooter packs with Daly common-port BMS boards instead; bargain 4 Ah lawnmower bricks built for ~180 W peaks can overheat or ignite when pushed toward Rita’s 25 A ceiling.[^tool-packs][^lawn-pack]
 - Cheap “13 Ah” externals often sag early enough that Rita falls back to the OEM battery—test suspect packs alone at low load and expect legitimate Daly-based builds to cost far more than €160 listings.[^cheap-packs]
-- Monorim’s off-the-shelf 48 V suspension pack arrives without brake or BMS harnesses, so Denis usually steers riders away unless they are ready to fabricate the missing wiring.【F:knowledge/notes/denis_all_part02_review.md†L119-L121】
-- Rear-suspension rack mounts sacrifice folding and need full silicone sealing to keep exposed externals weatherproof on commuter builds.【F:knowledge/notes/denis_all_part02_review.md†L122-L123】
-- Citylion range-kit owners should skip the extra Y-harness and follow the manual—the stock charger should read ~42 V with both 10 S packs full, and a fast green LED simply means the shipped pack arrived topped off.【F:knowledge/notes/denis_all_part02_review.md†L242-L243】
-- Mirono’s 13 S3 P (≈48 V/15 Ah) deck pack built from LG M50T or Samsung 50E cells fits Denis’ extender with BMS emulation to dodge Happy BMS costs, but Denis notes his Happy-equipped equivalent sells for €290 once labour is included.【F:knowledge/notes/denis_all_part02_review.md†L252-L254】
-- Spot-welding quality remains the gating tool—Sunkko bench welders (~€300) still anchor Denis’ production because clean nickel seams and sealed housings are what customers pay for.【F:knowledge/notes/denis_all_part02_review.md†L252-L254】
-- Monorim’s canned external pack hides a series diode on the charge lead; it prevents reverse-polarity mishaps on common-port BMS boards but costs voltage headroom, so experienced builders bypass it once wiring is verified.【F:knowledge/notes/denis_all_part02_review.md†L215-L216】
-- Deck-mounted dual-pack conduits must be armored and wired for permanent duty; exposed runs strapped along the floor are “self-propelled bombs” unless they receive proper housings and fasteners.【F:knowledge/notes/denis_all_part02_review.md†L233-L234】
+- Monorim’s off-the-shelf 48 V suspension pack arrives without brake or BMS harnesses, so Denis usually steers riders away unless they are ready to fabricate the missing wiring.[^19]
+- Rear-suspension rack mounts sacrifice folding and need full silicone sealing to keep exposed externals weatherproof on commuter builds.[^20]
+- Citylion range-kit owners should skip the extra Y-harness and follow the manual—the stock charger should read ~42 V with both 10 S packs full, and a fast green LED simply means the shipped pack arrived topped off.[^21]
+- Mirono’s 13 S3 P (≈48 V/15 Ah) deck pack built from LG M50T or Samsung 50E cells fits Denis’ extender with BMS emulation to dodge Happy BMS costs, but Denis notes his Happy-equipped equivalent sells for €290 once labour is included.[^22]
+- Spot-welding quality remains the gating tool—Sunkko bench welders (~€300) still anchor Denis’ production because clean nickel seams and sealed housings are what customers pay for.[^22]
+- Monorim’s canned external pack hides a series diode on the charge lead; it prevents reverse-polarity mishaps on common-port BMS boards but costs voltage headroom, so experienced builders bypass it once wiring is verified.[^23]
+- Deck-mounted dual-pack conduits must be armored and wired for permanent duty; exposed runs strapped along the floor are “self-propelled bombs” unless they receive proper housings and fasteners.[^24]
 - Stock Xiaomi packs squeeze into 120 mm heat-shrink, but Denis prefers 170 mm sleeves for Wildman bag builds and caps controller settings around 55 A phase/30 A battery to stay within thermal limits.[^pack-wrap]
 - Secondhand cell bundles that swing voltage wildly on a 2 A charger get torn down: he IR-tests every cell, regroups by mileage, and warns that imbalance keeps worsening even after balancing sessions.[^refurb-triage]
 - External-pack capacity checks happen with a constant-current load while the internal pack stays connected; reconnect packs only when their voltages sit within ≈1 V to avoid hammering the weaker BMS.[^parallel-test]
@@ -85,6 +91,7 @@
 - Denis published updated Wildman 2 L/3 L mount STLs plus bolt-and-sleeve hardware so externals stay fixed instead of floating on foam blocks.[^wildman-stl]
 
 ### Workshop Hardware Notes
+
 - Cold-to-warm transitions deflate 10″ tubeless tires; top pressures off before leaving heated garages so thermal contraction doesn’t mimic a puncture on the first winter ride.[^thermal-expansion]
 - Base-model scooters can regain telemetry by swapping in Xiaomi dashboards—simple three-wire harness swaps or aftermarket boards such as m365dash.com restore data-line access even when Rita isn’t present.[^dash-retrofit]
 - Boyueda 2800 W/60 H hubs run on Kelly controllers at 200 + A for torque but need temperature monitoring and robust cooling before chasing long hill pulls.[^boyueda-torque]
@@ -92,12 +99,13 @@
 - PMT 10×3 casings need roughly 2 mm removed from Xiaomi rim sidewalls (or Dualtron-class wheels) to seat correctly, while PMT 10×2.125 rubber slips onto 6.1″ rims without machining.[^pmt-fitment]
 - Essential kickstand spacers park level around 6.5 cm; taller stacks overstress the bracket, so riders buy longer M6/M8 fasteners (≈80 mm) or tap fresh threads rather than piling washers.[^kickstand-height]
 - Tubeless conversions can reuse stock casings with automotive sealant, but rims seep unless sealant is refreshed and aluminum-safe blends such as yellow Slime prevent corrosion.[^tubeless-sealant]
-- Worn Monorim star nuts get replaced with paired bicycle star nuts driven on a sacrificial bolt, and longer stem bolts keep the stack aligned after repeated rebuilds.【F:knowledge/notes/denis_all_part02_review.md†L318-L319】
-- Clone BLE boards fight DIY NeatDash replicas—follow the 120–150 Ω resistor and diode orientation notes, but expect to migrate to Mirono and nvram’s ESP32/OLED design once released.【F:knowledge/notes/denis_all_part02_review.md†L320-L320】
-- Secure brake-housing runs to the frame and trim excess length so lever travel isn’t wasted flexing the cable before it bites.【F:knowledge/notes/denis_all_part02_review.md†L348-L349】
-- Inspect 3D-printed rear pack supports regularly; heavy 13 S bricks crack mounts near the rear bolt and immediately skew group voltages if left unchecked.【F:knowledge/notes/denis_all_part02_review.md†L351-L352】
+- Worn Monorim star nuts get replaced with paired bicycle star nuts driven on a sacrificial bolt, and longer stem bolts keep the stack aligned after repeated rebuilds.[^25]
+- Clone BLE boards fight DIY NeatDash replicas—follow the 120–150 Ω resistor and diode orientation notes, but expect to migrate to Mirono and nvram’s ESP32/OLED design once released.[^26]
+- Secure brake-housing runs to the frame and trim excess length so lever travel isn’t wasted flexing the cable before it bites.[^27]
+- Inspect 3D-printed rear pack supports regularly; heavy 13 S bricks crack mounts near the rear bolt and immediately skew group voltages if left unchecked.[^28]
 
 ### Late-Season Service Notes (Lines 501-600)
+
 - Controller-voltage debates continue: Denis trusts the stock 10 MΩ ADC divider up through 16 S builds, while peers still swap in ~160 kΩ resistors to dodge error 24 when emulating BMS behaviour—XiaoDash now handles the firmware side without legacy RX/TX jumpers.[^adc-16s]
 - Rita-charged 12 S externals intentionally stop around 49.2 V (~4.1 V/cell); chasing higher targets nets barely a kilometre of extra range and can cost regenerative braking on long descents.[^rita-49v]
 - Chronic split charging usually traces back to failed OEM temperature sensors that lock the internal BMS—disconnect Rita and verify both probes before blaming the adapter.[^temp-sensors]
@@ -118,21 +126,24 @@
 - Charger modders restack TL431 feedback resistors (two 33 kΩ plus 100 kΩ with a single 16 kΩ 0805) and swap 63 V caps for 100 V parts before testing at 57.5 V, while remembering the transformer’s ≈1.7–2 A ceiling; Android 12 riders sideload Rita/BMS v0.0.12 APKs, and quality YZPOWER 13 S chargers beat anonymous “48 V” bricks as long as connector swaps are soldered and heat-shrunk.[^charger-chain]
 
 ### Internal Voltage Upgrades
+
 - Denis began shipping a production-ready custom internal pack for Xiaomi Pro/Pro 2 scooters, hand-braiding the heavy-gauge charge/discharge harness in-house to mirror the robustness of his 36 V kits.[^pro2-internal-pack]
-- Pro 2 buyers chasing 48 V internals still order the standard 44 V kit and add a checkout note—Denis ships the higher-voltage variant even though generic AliExpress bricks technically fit but waste deck volume.【F:knowledge/notes/denis_all_part02_review.md†L116-L118】
-- Gen 1 Xiaomi controllers remain torque-focused—field weakening only lifts them to roughly 32 km/h, so Denis frames voltage upgrades as a way to sustain climbing power rather than chase high top speed on stock electronics.【F:knowledge/notes/denis_all_part02_review.md†L301-L301】
-- XiaoDash must be set to 13 cells and 20 Ah before riding the 48 V pack; leaving stock sliders in place keeps the scooter locked to 36 V behaviour.【F:knowledge/notes/denis_all_part02_review.md†L149-L150】
-- Ninebot G2 owners can now retain the factory controller by flashing XiaoDash on the stock ESC, adding the dashboard harness, and applying the SHFW Gen 4 patch to unlock higher speed while preserving blinkers and buzzer support.【F:knowledge/notes/denis_all_part02_review.md†L152-L153】
-- Matching-capacity 48 V upgrades add watt-hours and noticeably more pull versus 36 V twins, helping heavier riders keep pace without changing the rest of the build.【F:knowledge/notes/denis_all_part02_review.md†L173-L174】
-- Daily 20 S builds and experimental 30 S stacks really belong on 11-inch frames; Denis warns 84 V/25 A tunes only approach 70 km/h safely when regen stays disabled because stock Xiaomi controllers eventually blow from the spike.【F:knowledge/notes/denis_all_part02_review.md†L248-L250】
-- Riders targeting 70–130 km/h convert to 50–60 mm Blade/VSETT-class hubs, 15–22 S batteries, and 300 A VESCs with custom waterproof mounting—Denis keeps 20 S as the practical ceiling for daily use before thermal runaway and packaging headaches dominate.【F:knowledge/notes/denis_all_part02_review.md†L355-L355】
+- Pro 2 buyers chasing 48 V internals still order the standard 44 V kit and add a checkout note—Denis ships the higher-voltage variant even though generic AliExpress bricks technically fit but waste deck volume.[^29]
+- Gen 1 Xiaomi controllers remain torque-focused—field weakening only lifts them to roughly 32 km/h, so Denis frames voltage upgrades as a way to sustain climbing power rather than chase high top speed on stock electronics.[^30]
+- XiaoDash must be set to 13 cells and 20 Ah before riding the 48 V pack; leaving stock sliders in place keeps the scooter locked to 36 V behaviour.[^31]
+- Ninebot G2 owners can now retain the factory controller by flashing XiaoDash on the stock ESC, adding the dashboard harness, and applying the SHFW Gen 4 patch to unlock higher speed while preserving blinkers and buzzer support.[^32]
+- Matching-capacity 48 V upgrades add watt-hours and noticeably more pull versus 36 V twins, helping heavier riders keep pace without changing the rest of the build.[^33]
+- Daily 20 S builds and experimental 30 S stacks really belong on 11-inch frames; Denis warns 84 V/25 A tunes only approach 70 km/h safely when regen stays disabled because stock Xiaomi controllers eventually blow from the spike.[^34]
+- Riders targeting 70–130 km/h convert to 50–60 mm Blade/VSETT-class hubs, 15–22 S batteries, and 300 A VESCs with custom waterproof mounting—Denis keeps 20 S as the practical ceiling for daily use before thermal runaway and packaging headaches dominate.[^35]
 
 ### Firmware & Unlock Workflow
+
 - Late-model Pro 2 dashboards on BLE 1.55+ still require ST-Link downgrades; clone controllers may spoof serials yet reject OTA flashes, and flashing the latest Xiaomi BMS firmware can permanently brick the board.[^stlink-ble]
 - XiaoDash performance profiles occasionally corrupt activation data; reflash stock firmware, power-cycle the scooter, then reapply tweaks if the dash gets stuck “on.”[^xiaodash-reset]
 - The newest Pro 2 dashboards unlock only after an ST-Link flash or a temporary swap to an older dash—warranty stickers aren’t a concern because the head unit simply unscrews for the procedure.[^dash-swap]
 
 ## Controller, Firmware & Motor Planning
+
 - Current-step tuning on stock controllers balances heat and response—around 350 mA keeps housings cool for conservative riders, while 400 mA “intensity of current change” presets overstress traces even on reinforced boards.[^current-step][^current-step2]
 - Sustained 60–65 A pushes have melted OEM motor-to-ESC connector caps; reinforce harnesses or stay near 50–55 A, which testers found sustainable at ~31 °C in mild weather.[^connector-melt]
 - Rita may ignore an auxiliary pack after boot; blipping the throttle re-triggers detection, and zero amp/watt telemetry on Xiaomi dashboards is expected because Rita owns the data line while emulating the BMS.[^rita-detection]
@@ -167,21 +178,22 @@
 - Hitting 70–80 km/h realistically demands 17 S or higher, upgraded controllers, full suspension, and large 6–10 P packs that cost €500–700 in cells alone—well beyond what the stock deck can house without external bags.[^17s-requirements]
 
 ### Firmware & Diagnostic Updates
+
 - Flash BLE 073/DRV 1.5.5 with standard DownG before loading Xiaogen’s modded bundle; Pro 2 dashboards resent aggressive downgrades, so keep a USB ST-Link ready in case a BLE write leaves only a blinking tail light.[^downg-workflow][^pro2-downgrade]
-- ST-Link with stock DRV 1.5.5 firmware revives controllers when mismatched images (e.g., BLE 126 on Denis’ BMS) trip error 21; follow the community recovery videos after failed DownG attempts.【F:knowledge/notes/all_part01_review.md†L121-L121】
-- Xiaomi drivetrains stay happiest near 27 A (≈800 W) sustained—higher battery or phase currents only deliver brief surges before heat climbs and packs sag, even with 350 W aftermarket hubs.【F:knowledge/notes/all_part01_review.md†L122-L122】
-- Modding Xiaomi’s charger with Vishay 14.3 kΩ feedback stacks demands flux, short checks, and careful soldering before trusting the new 50.4 V output.【F:knowledge/notes/all_part01_review.md†L123-L123】
-- Workshop cheat sheets map ESC error codes (e.g., 28 for HS FET faults) to likely root causes so post-mod anomalies are easier to triage.【F:knowledge/notes/all_part01_review.md†L124-L124】
+- ST-Link with stock DRV 1.5.5 firmware revives controllers when mismatched images (e.g., BLE 126 on Denis’ BMS) trip error 21; follow the community recovery videos after failed DownG attempts.[^36]
+- Xiaomi drivetrains stay happiest near 27 A (≈800 W) sustained—higher battery or phase currents only deliver brief surges before heat climbs and packs sag, even with 350 W aftermarket hubs.[^37]
+- Modding Xiaomi’s charger with Vishay 14.3 kΩ feedback stacks demands flux, short checks, and careful soldering before trusting the new 50.4 V output.[^38]
+- Workshop cheat sheets map ESC error codes (e.g., 28 for HS FET faults) to likely root causes so post-mod anomalies are easier to triage.[^39]
 - Apple still blocks scooterhacking sideloads, leaving iOS riders dependent on an Android device (or emulator) for Xiaomi firmware tools unless they fall back to ST-Link reflashes.[^ios-android]
 - Target BLE 074 for stability on Pro dashboards, and remember VTA controllers shipping with ESC 1.5.5 cannot safely drop to BLE 0.90—stay on modern BLE builds and double-flash Xiaogen if the first pass misbehaves.[^ble074-stable][^vta-esc]
-- Pro 2 dashboards on firmware newer than DRV 2.2.3 clamp custom builds; stay on DRV 2.2.3 or temporarily downgrade to DRV 155 to configure Rita before returning to the latest release.【F:knowledge/notes/all_part01_review.md†L176-L176】
-- Denis’ Android Rita app still lacks native Pro 2 BLE support, so riders toggle permanent-emulator mode via desktop tools or flash XiaoGen 2.0.5 with m365Downgrade XG Mod 21 and keep an ST-Link handy for recovery.【F:knowledge/notes/all_part01_review.md†L177-L178】
-- Match Drive-mode current to pack voltage—32 A on 12 S pulls roughly 1.3 kW, so dial back if you want a ~900 W ceiling.【F:knowledge/notes/all_part01_review.md†L179-L179】
-- Lap (wet-sand) the ESC baseplate and deck mating surfaces before final assembly so thermal paste spreads evenly and MOSFETs survive 40 A peaks.【F:knowledge/notes/all_part01_review.md†L180-L180】
-- Dashboards misreport speed after 10" swaps unless you adjust the wheel constant (≈8.1 % in Xiaogen) and confirm against GPS; “Russian” throttle mode keeps lever travel mapped directly to torque for aggressive builds.【F:knowledge/notes/all_part01_review.md†L181-L181】
-- Inspect XT30/XT60 connectors first when scooters power-cycle after curb strikes—lifted phase pins or loose harnesses cause most symptoms before electronics fail.【F:knowledge/notes/all_part01_review.md†L195-L195】
-- Rain-damaged packs underscore waterproofing charge ports and dashboards; Denis quotes roughly eight hours to recharge his 13.8 Ah range kit with the stock brick once the scooter dries out.【F:knowledge/notes/all_part01_review.md†L196-L196】
-- Pro 2 riders chasing 12 S speed gains must reconfigure Rita’s pack parameters via M365 BMS Tool and often soften KERS (≈18 A) to keep the ESC alive during hard braking.【F:knowledge/notes/all_part01_review.md†L197-L197】
+- Pro 2 dashboards on firmware newer than DRV 2.2.3 clamp custom builds; stay on DRV 2.2.3 or temporarily downgrade to DRV 155 to configure Rita before returning to the latest release.[^40]
+- Denis’ Android Rita app still lacks native Pro 2 BLE support, so riders toggle permanent-emulator mode via desktop tools or flash XiaoGen 2.0.5 with m365Downgrade XG Mod 21 and keep an ST-Link handy for recovery.[^41]
+- Match Drive-mode current to pack voltage—32 A on 12 S pulls roughly 1.3 kW, so dial back if you want a ~900 W ceiling.[^42]
+- Lap (wet-sand) the ESC baseplate and deck mating surfaces before final assembly so thermal paste spreads evenly and MOSFETs survive 40 A peaks.[^43]
+- Dashboards misreport speed after 10" swaps unless you adjust the wheel constant (≈8.1 % in Xiaogen) and confirm against GPS; “Russian” throttle mode keeps lever travel mapped directly to torque for aggressive builds.[^44]
+- Inspect XT30/XT60 connectors first when scooters power-cycle after curb strikes—lifted phase pins or loose harnesses cause most symptoms before electronics fail.[^45]
+- Rain-damaged packs underscore waterproofing charge ports and dashboards; Denis quotes roughly eight hours to recharge his 13.8 Ah range kit with the stock brick once the scooter dries out.[^46]
+- Pro 2 riders chasing 12 S speed gains must reconfigure Rita’s pack parameters via M365 BMS Tool and often soften KERS (≈18 A) to keep the ESC alive during hard braking.[^47]
 - If a scooter stays dark after installing Rita, disconnect the dashboard, short the diagnostic pins to confirm the ESC still boots, inspect the controller underside for blown traces, and escalate to ST-Link probing to verify the 5 V rail.[^rita-dark]
 - Camilo’s BLE 074 v7 firmware adds throttle filtering and a slow mode but can trigger sluggish launches or random slow-mode engagement on Xiaogen tunes; riders disable cruise or roll back to earlier BLE revisions while waiting for fixes.[^ble074-v7]
 - Series-boosting a 10 S pack with an extra 3 S module can brown out on hills as sag or firmware limits trip—monitor current in M365 Dashboard, rein in custom firmware amp draws, and only re-enable boosters once voltages stay stable.[^series-booster-sag]
@@ -198,19 +210,20 @@
 - Custom pack counts such as 11 S require dropping the regen ceiling toward 47 V, matching Rita’s cell count, and charging with a dedicated 11 S supply because Xiaomi’s 10 S brick stops around 41.7 V and leaves the extra cell under-filled.[^11s-firmware]
 
 ## Tire, Brake & Chassis Upgrades
+
 - Plan mechanical brake upgrades alongside 12 S Rita builds—the combo touches ~40 km/h on flat ground when fully charged, so stronger stoppers keep the extra speed manageable.[^brake-upgrade]
 - Organic pads fade under repeated high-speed stops, so faster riders shift to sintered or ceramic compounds despite faster rotor wear; dual-disc conversions split a single lever’s cable to keep both calipers synchronised.[^sintered-pads]
 - Classic cable-disc brakes tighten via the lever’s barrel adjuster for fine tweaks and the caliper’s hex bolt for coarse moves; if levers start bottoming out, inspect pad thickness before chasing cable stretch.[^cable-disc-tuning]
 - Confirm Pro 2 hub bolt patterns before ordering 6-bolt MTB rotors, and note Tudor is gauging demand for a Monorim 500 W brake adapter once about 20 riders commit so machining costs pencil out.[^rotor-pattern][^monorim-adapter]
-- Ten-inch conversions vary by casing: CST 10×2.25 tyres often need rim sanding, Kenda-branded 152 mm carcasses mount tight, and Wanda 10×2 options stay grippy at ~4.2 bar while outlasting ultra-soft red compounds.【F:knowledge/notes/all_part01_review.md†L185-L185】
-- SKF-style 2RS bearings seal better for wet riding than 2Z shields, keeping grit out during rainy commutes.【F:knowledge/notes/all_part01_review.md†L186-L186】
-- Semi-metallic (gold) pads hold up in rain better than the organic sets bundled with Xtech calipers, whereas ceramic pads run hot and demand close rotor monitoring.【F:knowledge/notes/all_part01_review.md†L187-L187】
-- Rear-suspension kits stretch the wheelbase roughly 10 cm and noticeably stabilise Xiaomi frames for higher-speed builds.【F:knowledge/notes/all_part01_review.md†L188-L188】
+- Ten-inch conversions vary by casing: CST 10×2.25 tyres often need rim sanding, Kenda-branded 152 mm carcasses mount tight, and Wanda 10×2 options stay grippy at ~4.2 bar while outlasting ultra-soft red compounds.[^48]
+- SKF-style 2RS bearings seal better for wet riding than 2Z shields, keeping grit out during rainy commutes.[^49]
+- Semi-metallic (gold) pads hold up in rain better than the organic sets bundled with Xtech calipers, whereas ceramic pads run hot and demand close rotor monitoring.[^50]
+- Rear-suspension kits stretch the wheelbase roughly 10 cm and noticeably stabilise Xiaomi frames for higher-speed builds.[^51]
 - Pull the side plate so the hub and tire slide off together, and match 10" solid rubber by inner diameter and width before trimming any metal.[^solid-removal]
 - Fitting Deli 10×2" tires on 1S/Pro 2 frames often means relocating or shaving the rear-light connector, extending wiring, and resealing the reroute with hot glue or deck grommets.[^deli-routing]
 - Mountain-bike cockpit swaps need oval-to-round stem adapters and relocating the BLE/display harness; expect to dig Xiaomi’s foam-packed frames clear before fishing fresh cabling or motor leads.[^stem-adapter][^frame-foam]
 - Monorim 500 W hubs that start vibrating after 45 km/h emergency stops usually implicate controller damage or clamping issues—inspect Rita braking current, MOSFET mounting pressure, and thermal paste coverage before blaming the bearings.[^monorim-vibration]
-- Solid tires remain a last resort: expect ~20 % more energy use, harsher rides, and the risk of fatiguing battery tabs; most riders revert to 10" CST or Wanda pneumatics with reinforced tubes and fair labour pricing.【F:knowledge/notes/all_part01_review.md†L159-L159】
+- Solid tires remain a last resort: expect ~20 % more energy use, harsher rides, and the risk of fatiguing battery tabs; most riders revert to 10" CST or Wanda pneumatics with reinforced tubes and fair labour pricing.[^52]
 - Builders now coat controller fasteners with medium-strength thread locker, replace kapton under MOSFETs with high-conductivity pads, and even fill sealed hubs with mineral oil to beat external fin kits.[^controller-fasteners][^oil-cooling]
 - CST 10×2.25 tires sized for 152 mm rims refuse to seat on Xiaomi’s 155 mm wheels and can foul the frame even if forced—swap to scooter-specific casings instead of trimming hardware.[^cst-152mm]
 - Monorim 500 W tire options remain finicky: riders have reverted to 8" rubber or alternate casings after wobble-induced crashes because the motor bay leaves little clearance for standard pneumatics.[^monorim-tires]
@@ -229,16 +242,17 @@
 - Killing Monorim stem play starts with loosening the side bolts, tightening the central hinge screw just enough to remove wobble, then re-locking the pinch bolts—over-clamping snaps the fastener and causes crashes.[^stem-play-fix]
 - Monorim handlebar adapters raise the folded deck slightly; rotate or shim the bell hook so it still latches the rear fender.[^bell-hook]
 - Tire reliability improves with best practices: run Xuancheng 10" rubber at 4.0–4.2 bar, dust tubes with talc so they do not stick, and use slime or careful lever work to avoid pinch flats during swaps.[^tire-maintenance]
-- 500 W hub swaps paired with 12 S packs hold 45–48 km/h on flats without the sag toward ~44 km/h seen on 300 W motors once voltage droops.【F:knowledge/notes/all_part01_review.md†L200-L200】
+- 500 W hub swaps paired with 12 S packs hold 45–48 km/h on flats without the sag toward ~44 km/h seen on 300 W motors once voltage droops.[^53]
 
 ## Battery Sourcing, Safety & Maintenance
-- Cheap eBay “25 A” BMS boards have tripped around 18 A and dropped externals offline despite balanced cells; swap to trusted 20–30 A units before pairing packs with Rita.【F:knowledge/notes/all_part01_review.md†L172-L172】
-- Firmware hacks that push Xiaomi charge current to 5 A cook legacy M365 BMS boards near 150 °C—stick with Samsung 35E cells and quality 20 A common-port modules when building auxiliaries.【F:knowledge/notes/all_part01_review.md†L151-L151】
-- 13 S and even 15 S are electrically possible on newer scooters, but older hardware needs resistor swaps and broader component upgrades before surviving the voltage jump.【F:knowledge/notes/all_part01_review.md†L152-L152】
-- Water-damaged M365 packs often revive after cleaning the BMS with isopropyl alcohol; Denis keeps compatible replacements on hand when telemetry refuses to recover.【F:knowledge/notes/all_part01_review.md†L155-L155】
-- External LED strips need proper step-down converters because most consumer strips are rated ≤24 V—tapping the 36 V bus directly is unsafe.【F:knowledge/notes/all_part01_review.md†L156-L156】
-- A regen-heavy stop without Rita protection scorched both BMS and controller on one customer build; disconnect immediately, recharge sub-2 V cells individually, and tidy any loose sensor wiring before blaming the board.【F:knowledge/notes/all_part01_review.md†L157-L157】
-- Dashboard brownouts triggered by headlight toggles usually signal BMS faults—swap in a known-good pack, inspect each parallel group, and replace fuses before chasing controller issues.【F:knowledge/notes/all_part01_review.md†L158-L158】
+
+- Cheap eBay “25 A” BMS boards have tripped around 18 A and dropped externals offline despite balanced cells; swap to trusted 20–30 A units before pairing packs with Rita.[^54]
+- Firmware hacks that push Xiaomi charge current to 5 A cook legacy M365 BMS boards near 150 °C—stick with Samsung 35E cells and quality 20 A common-port modules when building auxiliaries.[^55]
+- 13 S and even 15 S are electrically possible on newer scooters, but older hardware needs resistor swaps and broader component upgrades before surviving the voltage jump.[^56]
+- Water-damaged M365 packs often revive after cleaning the BMS with isopropyl alcohol; Denis keeps compatible replacements on hand when telemetry refuses to recover.[^57]
+- External LED strips need proper step-down converters because most consumer strips are rated ≤24 V—tapping the 36 V bus directly is unsafe.[^58]
+- A regen-heavy stop without Rita protection scorched both BMS and controller on one customer build; disconnect immediately, recharge sub-2 V cells individually, and tidy any loose sensor wiring before blaming the board.[^59]
+- Dashboard brownouts triggered by headlight toggles usually signal BMS faults—swap in a known-good pack, inspect each parallel group, and replace fuses before chasing controller issues.[^60]
 - Community teardowns flagged “36 V 20 Ah” AliExpress packs stuffed with only 12 genuine cells; honest 20 Ah builds cost ~€350 and ship as 10S6P, so >42 V “36 V” packs are red flags.[^fake-pack]
 - Tudor/VTA common-port externals wire Rita’s XT30 to C-/B- while leaving P- unused so charge and discharge share the same port safely.[^common-port-routing]
 - Store packs near 3.7 V (≈50 % SOC), replace water-damaged groups, favor warm indoor storage over cold garages, and keep large assemblies in LiPo-safe bags with extinguishers on hand to curb thermal runaway risk.[^storage]
@@ -271,12 +285,14 @@
 - Match your BMS to the intended series count—12 S packs need purpose-built 12 S boards rated near Rita’s 30 A ceiling rather than repurposed 10 S modules.[^bms-match]
 
 ### Security & Accessory Notes
-- Some immobilisers expect 415 MHz remotes; riders running 315 MHz keyfobs need matching radio modules before tapping the controller’s 5 V feed.【F:knowledge/notes/all_part01_review.md†L167-L167】
-- Compact Master Lock cables suffice for quick stops if you keep the mechanism lubricated with graphite, but couriers warn that leaving scooters unlocked in dense cities invites theft within minutes.【F:knowledge/notes/all_part01_review.md†L191-L192】
+
+- Some immobilisers expect 415 MHz remotes; riders running 315 MHz keyfobs need matching radio modules before tapping the controller’s 5 V feed.[^61]
+- Compact Master Lock cables suffice for quick stops if you keep the mechanism lubricated with graphite, but couriers warn that leaving scooters unlocked in dense cities invites theft within minutes.[^62]
 - Expect reputable 10 S materials to cost at least €100 before labor or taxes; suspiciously cheap packs usually hide weak cells and bargain BMS hardware.[^pack-cost]
 - Denis’ go-to cell shortlist still spotlights LG MJ1, Samsung 35E, and Sanyo options vetted with lygte-info’s 18650 comparator before landing in Wildman builds.[^cell-shortlist]
 
 ### Pack Planning & Configuration
+
 - Rita always favors the battery sitting a few tenths higher—keep auxiliary packs slightly above the internal if you want them to shoulder discharge first and monitor state-of-charge inside the app rather than assuming the external drains alone once voltages equalize.[^rita-priority][^rita-app-monitor]
 - Voltage adds speed, amps add torque, and a 13 S4 P Samsung 35E pack (~672 Wh) more than doubles a stock M365’s 280 Wh capacity; keep throttle current intensity near 100 mA for controllable launches.[^voltage-amps]
 - Swapping between 12 S and 14 S externals demands retuning Rita each time and charging higher-voltage packs off-scooter so the 10 S internal BMS never sees over-voltage.[^12s-14s-swap]
@@ -298,6 +314,7 @@
 - Large-format experiments underline trade-offs—12 S 9 P 21700 builds still sag like smaller 13 S 3 P arrays, Wildman 3 L bags can host dense sideways PCB layouts, and upgraded Essential scooters at 100 kg realistically see only 8–10 km at 30 km/h.[^large-format-tradeoff]
 
 ### Charging, Diagnostics & Instrumentation
+
 - Rita can top external packs that lack common-port BMS hardware, but protection and balancing aren’t enforced—charge those builds directly through their own port instead.[^rita-charge-warning]
 - The adapter emulates −10 °C after charging and defaults to a 29 Ah capacity estimate, so dashboard gauge jumps and “missing” watt data in M365 Tools remain normal under Rita.[^rita-emulation]
 - Investigate drifting parallel groups early: confirm cell authenticity and verify voltages with a multimeter before they erode usable range.[^bms-drift]
@@ -313,6 +330,7 @@
 - M365dash beta firmware 2.0.9 improves 13 S reporting for Rita builds, though riders must flash the BIN via Wi-Fi and reboot the scooter to expose all 12 cell groups.[^m365dash-beta]
 
 ## Tires, Brakes & Handling
+
 - Budget MTB-style calipers such as Bike Attitude can outperform XTECH when paired with 135 mm rotors and carefully aligned stationary pads; seasoned riders still prefer 10" pneumatic rubber for grip even if solid tires are easier to install when pre-heated.[^brake-upgrades2]
 - 10" swaps need firm pressures (~3.5 bar) to reclaim 12 S speed gains; running ~36 psi saps top speed, so check fender and frame clearance after inflating.[^tire-pressure]
 - Stem and handlebar experiments often require custom clamps or welded risers; relocating dashboards into bags and powering auxiliary lighting from separate packs keeps cockpit mods tidy.[^stem-mods]
@@ -329,6 +347,7 @@
 - HB100 conversions typically ship with 140 mm rotors for M365 Pro and 120 mm for the base scooter, plus spacers that centre the pads.[^xtech-rotors]
 
 ## Charging, Connectivity & Instrumentation
+
 - Plug chargers into the scooter before the wall to reduce inrush sparks, and remember Rita automatically shares the stock charge port across both packs.[^charging-etiquette]
 - External packs tolerate up to ~10 A when charged directly, but keep the scooter inlet around 2 A to avoid stressing the OEM BMS; buy a dedicated high-current brick for faster off-scooter top-ups.[^charge-current]
 - Denis is prototyping an XT30-to-Xiaomi charger adapter so externals can charge independently while Rita still tops the internal pack first through the scooter port.[^xt30-adapter]
@@ -345,6 +364,7 @@
 - Fresh 12 S installs typically show ~51 V at full charge and zero-watt readings in M365 Tools—Rita’s shunt design makes the idle wattage normal even when everything works.[^zero-watt-telemetry]
 
 ## High-Voltage Upgrade Playbook
+
 - Moving from 10S to 12S (~44 V) means flashing higher-voltage firmware, reinforcing controller power traces, and sourcing a 50.4 V charger; expect ~36 km/h, ~800 W, and ~50 km range with an auxiliary pack afterward.[^twelve-s-steps]
 - Unlocking the hardware speed limit for 12 S adds danger—keep firmware-limited speeds near 34 km/h even though riders report 38.5 km/h on stock frames.[^speed-limit]
 - Rita ships with XT30 harnesses (XT60 shells do not fit), caps current near 30 A (~1.5 kW at 13 S), and still expects users to align pack voltages before running dual externals or bumping to 13 S builds.[^rita-harness]
@@ -356,12 +376,14 @@
 - Xiaomi’s 1S Range Boost kit remains plug-and-play at 10 S, whereas the 12 S Range+Speed bundle needs a paid XiaoFlasher unlock and only reports accurate SOC when both packs share the same series count; expect ≈51 V full-charge readings, zero-watt telemetry, and remember motors overheat before quality batteries do if you hammer low packs with extra current.[^range-kit-compat]
 
 ## Ride Planning & Etiquette
+
 - A Rita-equipped M365 roughly multiplies range 2.8× on base models and 2.1× on the Pro, letting 130 kg riders cover 24 km commutes when they plan higher-capacity packs and voltage matching before paralleling.[^range-multiplier]
 - Ride defensively at 30–40 km/h—use wide bike lanes, signal predictably, and watch driveways; the crew argues behavior matters more than hard 20 km/h limits once scooters mix with cars and cyclists.[^defensive-habits]
 - Cold autumn temperatures immediately induce extra voltage sag even if you depart with a warm pack, so expect reduced punch as ambient temps fall.[^cold-sag]
 - UK riders still face penalties (points, fines, impounds, higher insurance) for private scooters on public roads, so keep upgrades discreet and riding behavior compliant.[^uk-legal]
 
 ## Logistics & Community Updates
+
 - Shipping lithium packs to markets like the UK and Australia remains tough; Tudor fills some UK demand with local fabrication while others push legalization petitions to ease import barriers.[^shipping-uk2]
 - Germany still enforces 20 km/h caps and insurance requirements, and French police continue catching up on scooter laws—builders hide modifications and ride conservatively to avoid fines.[^legal-de-fr]
 - Import math often favors regional resellers: direct China orders rack up ~$40 shipping plus ~€20 customs per motor with multi-week waits, and shipping two 1200 W hubs privately can cost $300–350 before duties.[^import-math]
@@ -374,6 +396,7 @@
 - Community members trade STL files for 20 mm deck extenders, warn against nordbot.xyz packs, and leverage planning tools like repackr and e4bike before welding custom layouts.[^stl-sharing]
 
 ## Accessories, Fabrication & Safety
+
 - Stick-on hub “coolers” are cosmetic—real gains come from better thermal conduction and controller reinforcement once riders chase ~850 W or more.[^hub-coolers]
 - Riders secure Xiaomi stems with plastic shims or aftermarket locks such as Foldster Xlock/Phoenix kits; align Denis’ battery-bag brackets carefully to avoid deck scratches or lever punctures.[^stem-locks]
 - Scale printable spacers per axis before printing—one rider shrank a 23 mm extender to 10 mm—while sealing LED strips, RGB diffusers, and ESP32/8266 controllers inside housings for weatherproof lighting.[^prints-lighting]
@@ -394,18 +417,21 @@
 - Bluetooth temperature loggers powered by CR2032 cells give cheap live data when stress-testing packs and controllers.[^bt-logger]
 
 ## Logistics & Warranty Updates
+
 - Denis’ new workshop has limited mains capacity, so he is exploring DC welders or backup generators to avoid tripping breakers during production.[^workshop-power2]
 - BMS warranties remain strict after a missed balance strip incident—Rita units stay covered because they are harder to miswire, but BMS buyers must prove installer innocence.[^bms-warranty2]
 - Shipping reopened to Serbia via Polish Post with card payments, Denis scheduled early-September dispatches on the 8th and 14th around a short holiday, and London riders can source hardware via @Kvarkas for roughly €207 delivered on 12 S packs.[^shipping-updates]
 - Stepping up to 21700 or 26650 formats fits 12 S4 P energy in a 2 L bag but crowds wiring; riders treat bag volume—not cell chemistry—as the limiter for ultra-long-range experiments.[^large-format]
 
 ## Pricing & Bundles
+
 - Complete Rita + bag + battery kits price in the €250–€280 band plus roughly €20 shipping depending on charger inclusion, reflecting low-volume assembly with branded components.[^pricing]
 - Denis’ standalone 10S4P pack runs about €170 with Wildman bags around €30 and shipping near €20, pricing driven by Samsung 35E cells, 20 A BMS boards, and genuine XT30 hardware sized for the Xiaomi inlet.[^pack-pricing]
 - Late-summer 2020 quotes landed near £290 delivered for 12S kits to the UK and about €325 to Finland, with no additional VAT within the EU customs zone.[^regional-pricing]
 - The Range + Speed bundle ships with a 50.4 V brick that tops both batteries sequentially; splitting the packs across chargers finishes faster while keeping BMS thermals comfortable.[^range-speed-charging]
 
 ## Fulfillment & Lead Times
+
 - Adapters ship worldwide, but lithium packs stay EU-only because Denis relies on ground carriers; US buyers must self-source packs, Israeli riders are routed to partner builders, and he experiments with UPS options for markets like Kuwait while offering electronics-only deliveries to regions such as Norway or Turkey.[^shipping-scope]
 - Production runs ship in weekly batches (e.g., 30 adapters, 15 bags, nine batteries), with typical EU door-to-door timelines around 10 days and three-day deliveries from Poland once regional stock depots are replenished.[^batching]
 - Battery assembly lead times fluctuate around two to three weeks when charger inventory tightens; 12S chargers resumed after supplier holidays, and by mid-August he quoted three business days to build a pack.[^lead-times]
@@ -418,6 +444,7 @@
 - Battery production paused 1–10 August while his pack builder vacationed and chargers caught up; orders placed in that window resumed shipping around mid-month.[^aug-pause]
 
 ## Support & Documentation
+
 - Denis maintains installation guides for Rita, external batteries, and repair BMS builds on his storefront to avoid marketplace fees and centralize support.[^docs]
 - Community members loan ST-Link programmers around the workshop chats and remind newcomers the tools are cheap locally, so keep one on hand for 1S/Pro 2 dashboard recoveries instead of waiting on mail-order replacements.[^stlink-loaner]
 - He keeps sales off eBay/PayPal to dodge the ~20 % marketplace fee and associated chargeback exposure, steering buyers to m365.embedden.com where those guides live alongside the order form.[^storefront]
@@ -428,6 +455,7 @@
 - Miswired externals that pop Rita’s fuses are treated as owner error—verify common-port wiring before shipping hardware back, and remember the M365 BMS Tool still expects BLE 072/090 with telemetry flipping to whichever pack leads by ~0.5 V.[^support-boundary]
 
 ## Integration & Maintenance Highlights
+
 - Happy BMS coulomb counters peg at 0 % once ~32 Ah flows; a 35 A external still leaves roughly 10 % energy, so plan range manually even though Rita keeps current inside its limit.[^happy-35a]
 - Rita-compatible emulators still call packs “empty” around 3.4 V per cell despite lower cutoff settings—maintain manual voltage checks or leave a buffer when riding on emulation alone.[^emulator-34v]
 - Cutting deck vents for PC fans adds water-ingress risk without real cooling; the crew leaves the chassis sealed and relies on thick thermal pads or full VESC swaps for sustained 80 km/h builds.[^fan-mod-risk]
@@ -440,7 +468,7 @@
 - Deck space and cooling make bolt-on dual-motor helpers impractical; serious AWD conversions need matched motors, dual controllers, and proper heat sinking rather than ad-hoc add-ons.[^dual-motor-plan]
 - Opening Xiaomi packs requires slicing both lower seams, warming the adhesive, drifting the brick out, and testing CF-series capacitors for infinite resistance during imbalance diagnostics.[^pack-teardown]
 - Running externals without Rita still needs a Xiaomi BMS or XiaoDash emulation—simple smart-BMS boards lack the data line and trigger error 21.[^no-rita-emulation]
-- Burned hubs that screech after steep 33 A climbs typically have cooked slot insulation—swap in hall-sensored Blade 10 or Vsett 10+ motors instead of forcing sensorless Vsett 11+ units on Xiaomi controllers.【F:knowledge/notes/denis_all_part02_review.md†L218-L219】
+- Burned hubs that screech after steep 33 A climbs typically have cooked slot insulation—swap in hall-sensored Blade 10 or Vsett 10+ motors instead of forcing sensorless Vsett 11+ units on Xiaomi controllers.[^63]
 - Xiaomi V3 controllers tolerate 13S packs without hardware swaps, but Denis’ crew replaces Kapton strips with 0.5 mm thermal pads and direct-solders phase leads to keep MOSFETs cool on higher-current tunes.[^controller-thermals]
 - Keep sport-mode peaks near 25–26 A and favor linear throttle curves with 100–200 mA steps—the Xiaogen 0.005 s/300 mA coefficient shows 800 mA steps only add stress and heat without real launch gains.[^throttle-steps]
 - Let external packs climb to ~50–51 V before rides, lift recuperation-disable thresholds to ~4.150 V, and raise power-constant values toward 33 000–40 000 to cool controllers; low constants hit harder but overheat 12 S builds.[^power-constant]
@@ -450,7 +478,7 @@
 - XiaoFlasher’s 13 S BMS emulator can add throttle lag, whereas Rita’s emulation keeps instant response when blending large internal packs with the stock dashboard.[^xiaoflasher]
 - Recurrent thermal shutdowns after a Rita upgrade usually trace to dried controller paste; replace compound (not pads) and monitor logs before pushing harder firmware—quality paste between the deck and controller can add 4–5 km/h at the same amps while keeping temps under ~45 °C.[^thermal-paste] If temps spike immediately after the install, dial back Sport-mode amps and watch motor heat until the tune settles.[^heat-spike]
 - Use non-conductive thermal compound between MOSFETs and controller housings to boost heat transfer without risking shorts on the power stage.[^nonconductive-paste]
-- Tally charge time when evaluating third-party packs: the stock 1.7 A Xiaomi brick adds roughly 1.7 Ah per hour, so a genuine 12 Ah module should take close to seven hours from empty.【F:knowledge/notes/denis_all_part02_review.md†L98595-L98598】
+- Tally charge time when evaluating third-party packs: the stock 1.7 A Xiaomi brick adds roughly 1.7 Ah per hour, so a genuine 12 Ah module should take close to seven hours from empty.[^64]
 - Refresh high-load builds regularly: even reinforced controllers run warm at 24–29 A when hauling ~150 kg, so keep thermal paste fresh and monitor temps on extended climbs.[^heavy-load-heat]
 - Break stuck front-hub bolts loose with a long, rigid wrench plus penetrating lube while bracing the scooter—replace any rounded hardware with higher-grade fasteners.[^front-bolts]
 - Monorim steering that binds after install usually needs the centre stem bolt backed off a quarter turn and the side clamps loosened before reinserting the suspension pump.[^monorim-bind]
@@ -467,7 +495,7 @@
 - Rita’s Schottky charge diode drops roughly 0.6 V, so stock packs plateau around 97 % unless you bypass the adapter during off-scooter charging; Denis prefers the mild undercharge for longevity and regen headroom.[^rita-schottky]
 - Mixed 10S/12S stacks still charge through the scooter inlet with Rita prioritising the lower-voltage pack first; pushing 54.6 V directly into the internal battery leaves only its BMS as over-voltage protection, so reserve high-voltage bricks for Rita-managed sessions.[^sequential-charging]
 - High-voltage experiments around 60 V still demand staged launches, BLE firmware checks, and careful thermal monitoring since Rita enforces its own limits even when the drivetrain can pull harder.[^rita-60v]
-- Expect Rita to draw a small standby current—packs left connected for months drift toward empty, so recharge to storage voltage every few weeks instead of leaving the adapter plugged in indefinitely.【F:knowledge/notes/denis_all_part02_review.md†L221-L222】
+- Expect Rita to draw a small standby current—packs left connected for months drift toward empty, so recharge to storage voltage every few weeks instead of leaving the adapter plugged in indefinitely.[^65]
 - A small Gen 4 batch under-reported output above ~20 A; cross-check logs against stock wiring and lean on Rita’s redundant current sensing if you suspect phantom throttling.[^rita-underreport]
 - Dashboard state-of-charge becomes unreliable once Rita blends packs—Denis tells riders to treat ~50 % on the display as the cue to head home and verify voltage inside the app instead.[^rita-soc]
 - Gen 4 harness staging matters: route Rita’s potted balance leads along the controller side, keep the three-way charge splitter inline even if the port relocates, and only cut the gray surge jumper when stepping beyond 12 S packs.[^harness_staging]
@@ -478,6 +506,7 @@
 - Never cut both XT30 leads simultaneously when soldering harnesses, and keep spare connectors ready for full-pack rebuilds to avoid shorts mid-repair.[^xt30-safety]
 
 ### Battery Care & Firmware Fundamentals
+
 - Top-balance severely unbalanced Xiaomi packs with TP4056 modules and crocodile clips without disconnecting the BMS, working group by group until voltage spreads close.[^tp4056]
 - Downgrade Xiaomi dashboards to BLE 073 when the M365 BMS Tool stops responding; the version still supports custom firmware after configuration.[^ble073]
 - Repair BMS units ship today as 10S4P with a 12S variant targeted for August 2020, and Denis still quoted one-to-two-week deliveries to Belgium despite pandemic slowdowns.[^bms-roadmap][^bms-belgium]
@@ -491,6 +520,7 @@
 - Leave Face LTD throttle-step settings near the 600 mA default on stock controllers; pushing 800 mA on unreinforced boards overheats traces, so cap virtual battery current near 25 A.[^face-ltd]
 
 ## Risks & Watchlist
+
 - Jumping to 13S requires cutting Rita’s sense jumper, reinforcing controllers, and following the manual via the M365 BMS Tool; reverting without restoring the jumper is unsafe.[^thirteen-steps]
 - High-power firmware tunes above ~1 kW or aggressive regen profiles can overheat motors and burn MOSFETs unless paired with controller trace reinforcement and mechanical brake upgrades.[^power-risks]
 - Avoid heavy CWF W-style regen presets on unreinforced controllers—emergency stops at those levels can burn traces within a few pulls.[^regen-limit]
@@ -504,409 +534,489 @@
 - LiFePO₄ BMS boards cannot safeguard li-ion packs; return the part or build a dedicated chemistry match instead of forcing it into 12 S scooter builds.[^lifepo4]
 - Pairing 12 S externals still demands keeping firmware nominal voltage around 51 V so Rita’s limits align—forgetting the setting after a pack swap risks overcharging or limp modes.[^twelve-s-config]
 - Series booster packs (2–3 S) must be charged separately to match the internal battery exactly; any imbalance forces uncontrolled cross-charging and is a strong argument for buying another Rita instead.[^series-boosters]
-- “Powercube” 3S boosters push Xiaomi 1S packs beyond 56 V; without reinforced controllers and disabled KERS, regen spikes cook the MOSFETs—Denis steers riders toward proper 13 S upgrades instead.【F:knowledge/notes/denis_all_part02_review.md†L97446-L97459】
-- Treat 84 V ambitions cautiously—disable regen and migrate to 11-inch frames before chasing ~70 km/h on Xiaomi decks, otherwise the stock controller eventually blows from voltage spikes.【F:knowledge/notes/denis_all_part02_review.md†L248-L250】
-- Skip fan-and-hole cooling mods on Xiaomi decks; cutting vents adds water ingress without meaningful heat reduction unless thick thermal pads tie MOSFETs to the chassis.【F:knowledge/notes/denis_all_part02_review.md†L86203-L86239】
-- Stacking 2 S boosters on stock 10 S batteries spikes voltage toward 54.6 V and regularly blows Xiaomi ESCs unless the frame, controller, and wiring are heavily reinforced—stick with properly configured Rita builds instead of “shitty cell” add-ons.【F:knowledge/notes/denis_all_part02_review.md†L302-L302】
-- Water intrusion that triggers error 28 usually means a shorted MOSFET bridge; corroded controllers get replaced rather than debugged, and the white battery plug needs thorough cleaning before the scooter returns to wet service.【F:knowledge/notes/denis_all_part02_review.md†L308-L309】
-- Extreme Monorim spacer stacks (40–55 mm shocks) punch decks and twist geometry unless stainless plates or repurposed arms spread the load—inspect suspension hardware frequently on tall builds.【F:knowledge/notes/denis_all_part02_review.md†L311-L312】
+- “Powercube” 3S boosters push Xiaomi 1S packs beyond 56 V; without reinforced controllers and disabled KERS, regen spikes cook the MOSFETs—Denis steers riders toward proper 13 S upgrades instead.[^66]
+- Treat 84 V ambitions cautiously—disable regen and migrate to 11-inch frames before chasing ~70 km/h on Xiaomi decks, otherwise the stock controller eventually blows from voltage spikes.[^34]
+- Skip fan-and-hole cooling mods on Xiaomi decks; cutting vents adds water ingress without meaningful heat reduction unless thick thermal pads tie MOSFETs to the chassis.[^67]
+- Stacking 2 S boosters on stock 10 S batteries spikes voltage toward 54.6 V and regularly blows Xiaomi ESCs unless the frame, controller, and wiring are heavily reinforced—stick with properly configured Rita builds instead of “shitty cell” add-ons.[^68]
+- Water intrusion that triggers error 28 usually means a shorted MOSFET bridge; corroded controllers get replaced rather than debugged, and the white battery plug needs thorough cleaning before the scooter returns to wet service.[^69]
+- Extreme Monorim spacer stacks (40–55 mm shocks) punch decks and twist geometry unless stainless plates or repurposed arms spread the load—inspect suspension hardware frequently on tall builds.[^70]
 - Happy BMS sustains about 44 A and pops fuses near 60 A, so there’s no hidden headroom for 50–60 A experiments without redundant protections.[^happy-fuse]
-- 9.5-inch solid tires stay on the shelf: veterans report harsh, unsafe handling and upgrade to PMT or Wanda tubeless casings with proper sealant instead.【F:knowledge/notes/denis_all_part02_review.md†L326-L327】
-- Waterlogged motors need stripping, resoldered phase joints, and neutral-cure RTV insulation before reuse—otherwise the next puddle cooks the replacement controller.【F:knowledge/notes/denis_all_part02_review.md†L338-L339】
-- There’s no cheap path to a reliable 60–70 km/h scooter; Denis points speed chasers toward reinforced Vsett 10+/GT2-class builds after seeing Dualtron sealing and suspension failures stack up.【F:knowledge/notes/denis_all_part02_review.md†L341-L342】
-- Kapton tape shrugs off moisture but lacks thermal shielding—high-discharge packs still need fish paper or other insulation, especially after seeing 2020 Dualtron Ultras shipped with bare nickel rubbing cell cans.【F:knowledge/notes/denis_all_part02_review.md†L357-L359】
-- Serial “speed” boosters backfeed low-voltage externals through the negative pole and cook cells; commission a proper 13 S internal upgrade instead of mixing mismatched packs.【F:knowledge/notes/denis_all_part02_review.md†L393-L394】
-- A scorched Xiaomi charge jack often traces to tired 24 AWG leads—refresh the short harness whenever plastic softens before assuming the port failed.【F:knowledge/notes/denis_all_part02_review.md†L399-L400】
+- 9.5-inch solid tires stay on the shelf: veterans report harsh, unsafe handling and upgrade to PMT or Wanda tubeless casings with proper sealant instead.[^71]
+- Waterlogged motors need stripping, resoldered phase joints, and neutral-cure RTV insulation before reuse—otherwise the next puddle cooks the replacement controller.[^72]
+- There’s no cheap path to a reliable 60–70 km/h scooter; Denis points speed chasers toward reinforced Vsett 10+/GT2-class builds after seeing Dualtron sealing and suspension failures stack up.[^73]
+- Kapton tape shrugs off moisture but lacks thermal shielding—high-discharge packs still need fish paper or other insulation, especially after seeing 2020 Dualtron Ultras shipped with bare nickel rubbing cell cans.[^74]
+- Serial “speed” boosters backfeed low-voltage externals through the negative pole and cook cells; commission a proper 13 S internal upgrade instead of mixing mismatched packs.[^75]
+- A scorched Xiaomi charge jack often traces to tired 24 AWG leads—refresh the short harness whenever plastic softens before assuming the port failed.[^76]
 
 ---
 
 ## Source Notes
-[^rita-12s6p]: 【F:knowledge/notes/all_part01_review.md†L608-L608】
-[^rita-fuse]: 【F:knowledge/notes/all_part01_review.md†L619-L619】
-[^rita-cold-warning]: 【F:knowledge/notes/all_part01_review.md†L640-L640】
-[^rita-bms-tool]: 【F:knowledge/notes/all_part01_review.md†L639-L639】
-[^rita-charge-lead]: 【F:knowledge/notes/all_part01_review.md†L641-L641】
-[^rita-relay]: 【F:knowledge/notes/all_part01_review.md†L642-L642】
-[^rita-analog-safeguard]: 【F:knowledge/notes/all_part01_review.md†L643-L643】
-[^awd-roll]: 【F:knowledge/notes/all_part01_review.md†L688-L688】
-[^xiaoflasher-priority]: 【F:knowledge/notes/all_part01_review.md†L601-L603】
-[^vta-sn]: 【F:knowledge/notes/all_part01_review.md†L637-L637】
-[^1s-12s]: 【F:knowledge/notes/all_part01_review.md†L638-L638】
-[^xiaogen-migrate]: 【F:knowledge/notes/all_part01_review.md†L668-L668】
-[^lite-12s]: 【F:knowledge/notes/all_part01_review.md†L669-L669】
-[^rita-v5-v6]: 【F:knowledge/notes/all_part01_review.md†L670-L670】
-[^11s-firmware]: 【F:knowledge/notes/all_part01_review.md†L671-L671】
-[^13s-controller]: 【F:knowledge/notes/all_part01_review.md†L605-L605】
-[^vta-wiring]: 【F:knowledge/notes/all_part01_review.md†L617-L617】
-[^monorim-awd]: 【F:knowledge/notes/all_part01_review.md†L618-L618】
-[^stock-12s]: 【F:knowledge/notes/all_part01_review.md†L620-L620】
-[^controller-heat-65c]: 【F:knowledge/notes/all_part01_review.md†L621-L621】
-[^16s-risks]: 【F:knowledge/notes/all_part01_review.md†L654-L654】
-[^xiaogen-target]: 【F:knowledge/notes/all_part01_review.md†L655-L655】
-[^monorim-1000w]: 【F:knowledge/notes/all_part01_review.md†L652-L652】
-[^tudor-13s-cap]: 【F:knowledge/notes/all_part01_review.md†L684-L684】
-[^voltage-vs-sag]: 【F:knowledge/notes/all_part01_review.md†L685-L685】
-[^magnet-fatigue]: 【F:knowledge/notes/all_part01_review.md†L686-L686】
-[^star-delta-risk]: 【F:knowledge/notes/all_part01_review.md†L687-L687】
-[^monorim-48v-rating]: 【F:knowledge/notes/all_part01_review.md†L689-L689】
-[^17s-requirements]: 【F:knowledge/notes/all_part01_review.md†L676-L676】
-[^cable-disc-tuning]: 【F:knowledge/notes/all_part01_review.md†L602-L602】
-[^xuancheng-10in]: 【F:knowledge/notes/all_part01_review.md†L624-L624】
-[^frame-clearance]: 【F:knowledge/notes/all_part01_review.md†L625-L625】
-[^monorim-solid-heat]: 【F:knowledge/notes/all_part01_review.md†L626-L626】
-[^mudguard-clearance]: 【F:knowledge/notes/all_part01_review.md†L627-L627】
-[^brake-hydraulic]: 【F:knowledge/notes/all_part01_review.md†L628-L628】
-[^monorim-air]: 【F:knowledge/notes/all_part01_review.md†L658-L658】
-[^konyk-suspension]: 【F:knowledge/notes/all_part01_review.md†L659-L659】
-[^tire-10x3]: 【F:knowledge/notes/all_part01_review.md†L692-L692】
-[^monorim-valve]: 【F:knowledge/notes/all_part01_review.md†L693-L693】
-[^stem-play-fix]: 【F:knowledge/notes/all_part01_review.md†L694-L694】
-[^bell-hook]: 【F:knowledge/notes/all_part01_review.md†L695-L695】
-[^tire-maintenance]: 【F:knowledge/notes/all_part01_review.md†L696-L696】
-[^cold-charge]: 【F:knowledge/notes/all_part01_review.md†L606-L606】
-[^heater-selfheat]: 【F:knowledge/notes/all_part01_review.md†L607-L607】
-[^15s-sourcing]: 【F:knowledge/notes/all_part01_review.md†L609-L609】
-[^liitokala-warning]: 【F:knowledge/notes/all_part01_review.md†L610-L610】
-[^blue-led-reset]: 【F:knowledge/notes/all_part01_review.md†L611-L611】
-[^thermal-harness]: 【F:knowledge/notes/all_part01_review.md†L612-L612】
-[^pcb-varnish-tip]: 【F:knowledge/notes/all_part01_review.md†L613-L613】
-[^thermal-consumables2]: 【F:knowledge/notes/all_part01_review.md†L614-L614】
-[^50e-35e]: 【F:knowledge/notes/all_part01_review.md†L677-L677】
-[^pack-burnout]: 【F:knowledge/notes/all_part01_review.md†L649-L649】
-[^laptop-cells]: 【F:knowledge/notes/all_part01_review.md†L678-L678】
-[^lipo-bms]: 【F:knowledge/notes/all_part01_review.md†L679-L679】
-[^rita-app-monitor]: 【F:knowledge/notes/all_part01_review.md†L672-L672】
-[^chamrider-pack]: 【F:knowledge/notes/all_part01_review.md†L646-L646】
-[^rita-mix-range]: 【F:knowledge/notes/all_part01_review.md†L647-L647】
-[^dual-12s-speed]: 【F:knowledge/notes/all_part01_review.md†L648-L648】
-[^stacked-boosters]: 【F:knowledge/notes/all_part01_review.md†L675-L675】
-[^range-report]: 【F:knowledge/notes/all_part01_review.md†L680-L680】
-[^large-format-tradeoff]: 【F:knowledge/notes/all_part01_review.md†L681-L681】
-[^shipping-uk2]: 【F:knowledge/notes/all_part01_review.md†L631-L631】
-[^legal-de-fr]: 【F:knowledge/notes/all_part01_review.md†L632-L632】
-[^import-math]: 【F:knowledge/notes/all_part01_review.md†L662-L662】
-[^safety-recall]: 【F:knowledge/notes/all_part01_review.md†L663-L663】
-[^uk-pause]: 【F:knowledge/notes/all_part01_review.md†L699-L699】
-[^bag-mount]: 【F:knowledge/notes/all_part01_review.md†L700-L700】
 
-[^sintered-pads]: 【F:knowledge/notes/all_part01_review.md†L501-L501】
-[^rotor-pattern]: 【F:knowledge/notes/all_part01_review.md†L502-L502】
-[^monorim-adapter]: 【F:knowledge/notes/all_part01_review.md†L503-L503】
-[^solid-removal]: 【F:knowledge/notes/all_part01_review.md†L504-L504】
-[^deli-routing]: 【F:knowledge/notes/all_part01_review.md†L505-L505】
-[^stem-adapter]: 【F:knowledge/notes/all_part01_review.md†L506-L506】
-[^frame-foam]: 【F:knowledge/notes/all_part01_review.md†L507-L507】
-[^monorim-vibration]: 【F:knowledge/notes/all_part01_review.md†L508-L508】
-[^controller-fasteners]: 【F:knowledge/notes/all_part01_review.md†L509-L509】
-[^oil-cooling]: 【F:knowledge/notes/all_part01_review.md†L510-L510】【F:knowledge/notes/all_part01_review.md†L586-L586】
-[^rita-priority]: 【F:knowledge/notes/all_part01_review.md†L513-L513】
-[^voltage-amps]: 【F:knowledge/notes/all_part01_review.md†L514-L514】
-[^12s-14s-swap]: 【F:knowledge/notes/all_part01_review.md†L515-L515】
-[^xt30-highvoltage]: 【F:knowledge/notes/all_part01_review.md†L516-L516】
-[^wildman-capacity]: 【F:knowledge/notes/all_part01_review.md†L517-L517】
-[^mixed-series]: 【F:knowledge/notes/all_part01_review.md†L518-L518】
-[^500w-current]: 【F:knowledge/notes/all_part01_review.md†L519-L519】
-[^downg-workflow]: 【F:knowledge/notes/all_part01_review.md†L522-L522】
-[^pro2-downgrade]: 【F:knowledge/notes/all_part01_review.md†L523-L523】
-[^ios-android]: 【F:knowledge/notes/all_part01_review.md†L524-L524】
-[^ble074-stable]: 【F:knowledge/notes/all_part01_review.md†L525-L525】
-[^vta-esc]: 【F:knowledge/notes/all_part01_review.md†L526-L526】【F:knowledge/notes/all_part01_review.md†L533-L533】
-[^tudor-express]: 【F:knowledge/notes/all_part01_review.md†L527-L527】
-[^wattmeter]: 【F:knowledge/notes/all_part01_review.md†L528-L528】
-[^rita-dark]: 【F:knowledge/notes/all_part01_review.md†L534-L534】
-[^ble074-v7]: 【F:knowledge/notes/all_part01_review.md†L535-L535】
-[^series-booster-sag]: 【F:knowledge/notes/all_part01_review.md†L536-L536】
-[^rita-overvoltage-match]: 【F:knowledge/notes/all_part01_review.md†L537-L537】
-[^bms128]: 【F:knowledge/notes/all_part01_review.md†L540-L540】
-[^350w-heat]: 【F:knowledge/notes/all_part01_review.md†L541-L541】
-[^deck-pack-sizing]: 【F:knowledge/notes/all_part01_review.md†L542-L542】
-[^hybrid-range]: 【F:knowledge/notes/all_part01_review.md†L543-L543】
-[^rita-charge-warning]: 【F:knowledge/notes/all_part01_review.md†L544-L544】
-[^rita-emulation]: 【F:knowledge/notes/all_part01_review.md†L545-L545】
-[^bms-drift]: 【F:knowledge/notes/all_part01_review.md†L546-L546】
-[^cst-152mm]: 【F:knowledge/notes/all_part01_review.md†L554-L554】
-[^monorim-tires]: 【F:knowledge/notes/all_part01_review.md†L555-L555】
-[^cst-10x25]: 【F:knowledge/notes/all_part01_review.md†L556-L556】
-[^xtech-rotor-sweep]: 【F:knowledge/notes/all_part01_review.md†L557-L557】
-[^uk-delay]: 【F:knowledge/notes/all_part01_review.md†L560-L560】
-[^m365tools-release]: 【F:knowledge/notes/all_part01_review.md†L561-L561】
-[^pack-sag-diagnosis]: 【F:knowledge/notes/all_part01_review.md†L566-L566】
-[^spot-weld]: 【F:knowledge/notes/all_part01_review.md†L567-L567】
-[^common-port-rita]: 【F:knowledge/notes/all_part01_review.md†L568-L568】
-[^trusted-packs]: 【F:knowledge/notes/all_part01_review.md†L570-L570】
-[^rita-fw-upgrade]: 【F:knowledge/notes/all_part01_review.md†L573-L573】
-[^series-swap]: 【F:knowledge/notes/all_part01_review.md†L574-L574】
-[^dash-block]: 【F:knowledge/notes/all_part01_review.md†L575-L575】
-[^m365dash-beta]: 【F:knowledge/notes/all_part01_review.md†L576-L576】
-[^tudor-internal]: 【F:knowledge/notes/all_part01_review.md†L579-L579】
-[^highcurrent-bms]: 【F:knowledge/notes/all_part01_review.md†L580-L580】
-[^max-shipping]: 【F:knowledge/notes/all_part01_review.md†L581-L581】
-[^monorim-speed]: 【F:knowledge/notes/all_part01_review.md†L582-L582】
-[^rotor-benchmark]: 【F:knowledge/notes/all_part01_review.md†L585-L585】
-[^monorim-drilling]: 【F:knowledge/notes/all_part01_review.md†L586-L586】
-[^xtech-pads]: 【F:knowledge/notes/all_part01_review.md†L587-L587】
-[^ups-us]: 【F:knowledge/notes/all_part01_review.md†L590-L590】
-[^range-etiquette]: 【F:knowledge/notes/all_part01_review.md†L591-L591】
-[^stl-sharing]: 【F:knowledge/notes/all_part01_review.md†L592-L592】
-[^error27]: 【F:knowledge/notes/all_part01_review.md†L597-L597】
-[^permanent-emulator]: 【F:knowledge/notes/all_part01_review.md†L598-L598】
-[^bms126flash]: 【F:knowledge/notes/all_part01_review.md†L599-L599】
-[^mosfet-diagnose]: 【F:knowledge/notes/all_part01_review.md†L600-L600】
+[^rita-12s6p]: Source: knowledge/notes/all_part01_review.md, L608 to L608
+[^rita-fuse]: Source: knowledge/notes/all_part01_review.md, L619 to L619
+[^rita-cold-warning]: Source: knowledge/notes/all_part01_review.md, L640 to L640
+[^rita-bms-tool]: Source: knowledge/notes/all_part01_review.md, L639 to L639
+[^rita-charge-lead]: Source: knowledge/notes/all_part01_review.md, L641 to L641
+[^rita-relay]: Source: knowledge/notes/all_part01_review.md, L642 to L642
+[^rita-analog-safeguard]: Source: knowledge/notes/all_part01_review.md, L643 to L643
+[^awd-roll]: Source: knowledge/notes/all_part01_review.md, L688 to L688
+[^xiaoflasher-priority]: Source: knowledge/notes/all_part01_review.md, L601 to L603
+[^vta-sn]: Source: knowledge/notes/all_part01_review.md, L637 to L637
+[^1s-12s]: Source: knowledge/notes/all_part01_review.md, L638 to L638
+[^xiaogen-migrate]: Source: knowledge/notes/all_part01_review.md, L668 to L668
+[^lite-12s]: Source: knowledge/notes/all_part01_review.md, L669 to L669
+[^rita-v5-v6]: Source: knowledge/notes/all_part01_review.md, L670 to L670
+[^11s-firmware]: Source: knowledge/notes/all_part01_review.md, L671 to L671
+[^13s-controller]: Source: knowledge/notes/all_part01_review.md, L605 to L605
+[^vta-wiring]: Source: knowledge/notes/all_part01_review.md, L617 to L617
+[^monorim-awd]: Source: knowledge/notes/all_part01_review.md, L618 to L618
+[^stock-12s]: Source: knowledge/notes/all_part01_review.md, L620 to L620
+[^controller-heat-65c]: Source: knowledge/notes/all_part01_review.md, L621 to L621
+[^16s-risks]: Source: knowledge/notes/all_part01_review.md, L654 to L654
+[^xiaogen-target]: Source: knowledge/notes/all_part01_review.md, L655 to L655
+[^monorim-1000w]: Source: knowledge/notes/all_part01_review.md, L652 to L652
+[^tudor-13s-cap]: Source: knowledge/notes/all_part01_review.md, L684 to L684
+[^voltage-vs-sag]: Source: knowledge/notes/all_part01_review.md, L685 to L685
+[^magnet-fatigue]: Source: knowledge/notes/all_part01_review.md, L686 to L686
+[^star-delta-risk]: Source: knowledge/notes/all_part01_review.md, L687 to L687
+[^monorim-48v-rating]: Source: knowledge/notes/all_part01_review.md, L689 to L689
+[^17s-requirements]: Source: knowledge/notes/all_part01_review.md, L676 to L676
+[^cable-disc-tuning]: Source: knowledge/notes/all_part01_review.md, L602 to L602
+[^xuancheng-10in]: Source: knowledge/notes/all_part01_review.md, L624 to L624
+[^frame-clearance]: Source: knowledge/notes/all_part01_review.md, L625 to L625
+[^monorim-solid-heat]: Source: knowledge/notes/all_part01_review.md, L626 to L626
+[^mudguard-clearance]: Source: knowledge/notes/all_part01_review.md, L627 to L627
+[^brake-hydraulic]: Source: knowledge/notes/all_part01_review.md, L628 to L628
+[^monorim-air]: Source: knowledge/notes/all_part01_review.md, L658 to L658
+[^konyk-suspension]: Source: knowledge/notes/all_part01_review.md, L659 to L659
+[^tire-10x3]: Source: knowledge/notes/all_part01_review.md, L692 to L692
+[^monorim-valve]: Source: knowledge/notes/all_part01_review.md, L693 to L693
+[^stem-play-fix]: Source: knowledge/notes/all_part01_review.md, L694 to L694
+[^bell-hook]: Source: knowledge/notes/all_part01_review.md, L695 to L695
+[^tire-maintenance]: Source: knowledge/notes/all_part01_review.md, L696 to L696
+[^cold-charge]: Source: knowledge/notes/all_part01_review.md, L606 to L606
+[^heater-selfheat]: Source: knowledge/notes/all_part01_review.md, L607 to L607
+[^15s-sourcing]: Source: knowledge/notes/all_part01_review.md, L609 to L609
+[^liitokala-warning]: Source: knowledge/notes/all_part01_review.md, L610 to L610
+[^blue-led-reset]: Source: knowledge/notes/all_part01_review.md, L611 to L611
+[^thermal-harness]: Source: knowledge/notes/all_part01_review.md, L612 to L612
+[^pcb-varnish-tip]: Source: knowledge/notes/all_part01_review.md, L613 to L613
+[^thermal-consumables2]: Source: knowledge/notes/all_part01_review.md, L614 to L614
+[^50e-35e]: Source: knowledge/notes/all_part01_review.md, L677 to L677
+[^pack-burnout]: Source: knowledge/notes/all_part01_review.md, L649 to L649
+[^laptop-cells]: Source: knowledge/notes/all_part01_review.md, L678 to L678
+[^lipo-bms]: Source: knowledge/notes/all_part01_review.md, L679 to L679
+[^rita-app-monitor]: Source: knowledge/notes/all_part01_review.md, L672 to L672
+[^chamrider-pack]: Source: knowledge/notes/all_part01_review.md, L646 to L646
+[^rita-mix-range]: Source: knowledge/notes/all_part01_review.md, L647 to L647
+[^dual-12s-speed]: Source: knowledge/notes/all_part01_review.md, L648 to L648
+[^stacked-boosters]: Source: knowledge/notes/all_part01_review.md, L675 to L675
+[^range-report]: Source: knowledge/notes/all_part01_review.md, L680 to L680
+[^large-format-tradeoff]: Source: knowledge/notes/all_part01_review.md, L681 to L681
+[^shipping-uk2]: Source: knowledge/notes/all_part01_review.md, L631 to L631
+[^legal-de-fr]: Source: knowledge/notes/all_part01_review.md, L632 to L632
+[^import-math]: Source: knowledge/notes/all_part01_review.md, L662 to L662
+[^safety-recall]: Source: knowledge/notes/all_part01_review.md, L663 to L663
+[^uk-pause]: Source: knowledge/notes/all_part01_review.md, L699 to L699
+[^bag-mount]: Source: knowledge/notes/all_part01_review.md, L700 to L700
 
-[^current-step]: 【F:knowledge/notes/all_part01_review.md†L206-L206】
-[^connector-melt]: 【F:knowledge/notes/all_part01_review.md†L207-L207】
-[^rita-detection]: 【F:knowledge/notes/all_part01_review.md†L210-L211】
-[^recuperation]: 【F:knowledge/notes/all_part01_review.md†L212-L212】
-[^ios-companion]: 【F:knowledge/notes/all_part01_review.md†L213-L213】
-[^kv-match]: 【F:knowledge/notes/all_part01_review.md†L222-L222】
-[^hub-upgrades]: 【F:knowledge/notes/all_part01_review.md†L223-L224】
-[^fake-pack]: 【F:knowledge/notes/all_part01_review.md†L216-L216】
-[^common-port-routing]: 【F:knowledge/notes/all_part01_review.md†L217-L217】
-[^storage]: 【F:knowledge/notes/all_part01_review.md†L218-L219】【F:knowledge/notes/all_part01_review.md†L430-L430】
-[^twelve-s-chargers]: 【F:knowledge/notes/all_part01_review.md†L232-L232】
-[^shipping-charge]: 【F:knowledge/notes/all_part01_review.md†L233-L233】
-[^pack-topology]: 【F:knowledge/notes/all_part01_review.md†L234-L234】
-[^separate-charge-risk]: 【F:knowledge/notes/all_part01_review.md†L252-L253】
-[^battery-sales]: 【F:knowledge/notes/all_part01_review.md†L254-L255】
-[^bms-balance]: 【F:knowledge/notes/all_part01_review.md†L256-L256】
-[^21700]: 【F:knowledge/notes/all_part01_review.md†L257-L257】
-[^voltage-priority]: 【F:knowledge/notes/all_part01_review.md†L258-L258】
-[^bms-sizing]: 【F:knowledge/notes/all_part01_review.md†L259-L259】
-[^pack-expansion]: 【F:knowledge/notes/all_part01_review.md†L260-L260】
-[^cell-choice]: 【F:knowledge/notes/all_part01_review.md†L270-L270】
-[^brake-upgrades2]: 【F:knowledge/notes/all_part01_review.md†L226-L227】
-[^tire-pressure]: 【F:knowledge/notes/all_part01_review.md†L228-L228】
-[^stem-mods]: 【F:knowledge/notes/all_part01_review.md†L229-L229】
-[^brake-mix]: 【F:knowledge/notes/all_part01_review.md†L268-L268】
-[^range-boost]: 【F:knowledge/notes/all_part01_review.md†L283-L283】
-[^tire-choice]: 【F:knowledge/notes/all_part01_review.md†L293-L293】
-[^brake-alignment]: 【F:knowledge/notes/all_part01_review.md†L294-L295】
-[^charging-etiquette]: 【F:knowledge/notes/all_part01_review.md†L269-L269】
-[^ble-troubleshooting]: 【F:knowledge/notes/all_part01_review.md†L262-L263】
-[^primary-bms]: 【F:knowledge/notes/all_part01_review.md†L264-L264】
-[^serial-pinout]: 【F:knowledge/notes/all_part01_review.md†L238-L238】
-[^clone-behavior]: 【F:knowledge/notes/all_part01_review.md†L239-L239】
-[^repair-bms]: 【F:knowledge/notes/all_part01_review.md†L242-L242】
-[^non-telemetry]: 【F:knowledge/notes/all_part01_review.md†L243-L243】
-[^twelve-s-steps]: 【F:knowledge/notes/all_part01_review.md†L245-L246】
-[^speed-limit]: 【F:knowledge/notes/all_part01_review.md†L247-L247】
-[^rita-harness]: 【F:knowledge/notes/all_part01_review.md†L248-L248】
-[^pink-lead]: 【F:knowledge/notes/all_part01_review.md†L249-L249】
-[^ten-s-cells]: 【F:knowledge/notes/all_part01_review.md†L250-L250】
-[^hub-coolers]: 【F:knowledge/notes/all_part01_review.md†L267-L267】
-[^stem-locks]: 【F:knowledge/notes/all_part01_review.md†L272-L274】
-[^prints-lighting]: 【F:knowledge/notes/all_part01_review.md†L275-L276】
-[^lipo-warning]: 【F:knowledge/notes/all_part01_review.md†L279-L279】【F:knowledge/notes/all_part01_review.md†L415-L415】
-[^pack-rec]: 【F:knowledge/notes/all_part01_review.md†L280-L283】【F:knowledge/notes/all_part01_review.md†L416-L416】
-[^uart-kit]: 【F:knowledge/notes/all_part01_review.md†L282-L282】
-[^thermal-fuse]: 【F:knowledge/notes/all_part01_review.md†L284-L284】【F:knowledge/notes/all_part01_review.md†L424-L424】
-[^charge-current]: 【F:knowledge/notes/all_part01_review.md†L285-L285】【F:knowledge/notes/all_part01_review.md†L428-L428】
-[^xt30-adapter]: 【F:knowledge/notes/all_part01_review.md†L429-L429】
-[^pack-inspection]: 【F:knowledge/notes/all_part01_review.md†L288-L290】【F:knowledge/notes/all_part01_review.md†L423-L423】
-[^workshop-power2]: 【F:knowledge/notes/all_part01_review.md†L298-L298】
-[^bms-warranty2]: 【F:knowledge/notes/all_part01_review.md†L299-L299】
-[^shipping-updates]: 【F:knowledge/notes/all_part01_review.md†L300-L300】【F:knowledge/notes/all_part01_review.md†L452-L454】
-[^rita-low-pack]: 【F:knowledge/notes/all_part01_review.md†L304-L304】
-[^rita-charge-order]: 【F:knowledge/notes/all_part01_review.md†L305-L305】
-[^smart-bms]: 【F:knowledge/notes/all_part01_review.md†L306-L306】
-[^zero-watt]: 【F:knowledge/notes/all_part01_review.md†L310-L310】
-[^xiao1s]: 【F:knowledge/notes/all_part01_review.md†L311-L311】
-[^storage-telemetry]: 【F:knowledge/notes/all_part01_review.md†L312-L312】
-[^custom-dash]: 【F:knowledge/notes/all_part01_review.md†L313-L313】
-[^bms-match]: 【F:knowledge/notes/all_part01_review.md†L316-L316】
-[^cell-shortlist]: 【F:knowledge/notes/all_part01_review.md†L319-L319】
-[^g30-bag]: 【F:knowledge/notes/all_part01_review.md†L322-L322】
-[^config-mismatch]: 【F:knowledge/notes/all_part01_review.md†L333-L333】
-[^g30-delta]: 【F:knowledge/notes/all_part01_review.md†L334-L334】
-[^pro2-config]: 【F:knowledge/notes/all_part01_review.md†L344-L344】
-[^recup-throttle]: 【F:knowledge/notes/all_part01_review.md†L347-L347】
-[^current-step2]: 【F:knowledge/notes/all_part01_review.md†L348-L348】
-[^regen-limit]: 【F:knowledge/notes/all_part01_review.md†L349-L349】
-[^rita-finish]: 【F:knowledge/notes/all_part01_review.md†L350-L350】
-[^logistics-20a]: 【F:knowledge/notes/all_part01_review.md†L353-L353】
-[^nonconductive-paste]: 【F:knowledge/notes/all_part01_review.md†L366-L366】
-[^front-bolts]: 【F:knowledge/notes/all_part01_review.md†L367-L367】
-[^monorim-bind]: 【F:knowledge/notes/all_part01_review.md†L368-L368】
-[^rear-wiring]: 【F:knowledge/notes/all_part01_review.md†L369-L369】【F:knowledge/notes/all_part01_review.md†L412-L412】
-[^deck-rib]: 【F:knowledge/notes/all_part01_review.md†L370-L370】
-[^charge-port-relocate]: 【F:knowledge/notes/all_part01_review.md†L371-L371】
-[^bt-logger]: 【F:knowledge/notes/all_part01_review.md†L372-L372】
-[^high-mount-signal]: 【F:knowledge/notes/all_part01_review.md†L375-L375】
-[^rear-tape]: 【F:knowledge/notes/all_part01_review.md†L376-L376】
-[^dual-pack-range]: 【F:knowledge/notes/all_part01_review.md†L377-L377】
-[^foldster-clearance]: 【F:knowledge/notes/all_part01_review.md†L378-L378】【F:knowledge/notes/all_part01_review.md†L401-L401】【F:knowledge/notes/all_part01_review.md†L411-L411】
-[^lighting-diy]: 【F:knowledge/notes/all_part01_review.md†L404-L404】
-[^uart485]: 【F:knowledge/notes/all_part01_review.md†L419-L419】
-[^laudation]: 【F:knowledge/notes/all_part01_review.md†L420-L420】
-[^pack-layout]: 【F:knowledge/notes/all_part01_review.md†L425-L425】
-[^bms-disassembly]: 【F:knowledge/notes/all_part01_review.md†L457-L457】
-[^monorim-grease]: 【F:knowledge/notes/all_part01_review.md†L444-L444】
-[^monorim-500w]: 【F:knowledge/notes/all_part01_review.md†L468-L468】
-[^fork-lift]: 【F:knowledge/notes/all_part01_review.md†L486-L486】
-[^solid-fit]: 【F:knowledge/notes/all_part01_review.md†L487-L487】
-[^max-motor]: 【F:knowledge/notes/all_part01_review.md†L449-L449】
-[^suspension-bearings]: 【F:knowledge/notes/all_part01_review.md†L489-L489】
-[^monorim-sourcing]: 【F:knowledge/notes/all_part01_review.md†L379-L380】
-[^doc-green]: 【F:knowledge/notes/all_part01_review.md†L384-L384】
-[^kcq]: 【F:knowledge/notes/all_part01_review.md†L385-L385】
-[^esa-bms]: 【F:knowledge/notes/all_part01_review.md†L386-L386】
-[^buck-hv]: 【F:knowledge/notes/all_part01_review.md†L390-L390】
-[^12s4p-temp]: 【F:knowledge/notes/all_part01_review.md†L391-L391】
-[^charger-trim]: 【F:knowledge/notes/all_part01_review.md†L392-L392】
-[^support-boundary]: 【F:knowledge/notes/all_part01_review.md†L396-L397】
-[^bag-length]: 【F:knowledge/notes/all_part01_review.md†L328-L328】
-[^wildman-screws]: 【F:knowledge/notes/all_part01_review.md†L399-L400】
-[^pack-cost]: 【F:knowledge/notes/all_part01_review.md†L359-L359】
-[^cst-v3]: 【F:knowledge/notes/all_part01_review.md†L337-L337】
-[^xtech-rotors]: 【F:knowledge/notes/all_part01_review.md†L338-L338】
-[^rub-only]: 【F:knowledge/notes/all_part01_review.md†L325-L325】
-[^aug-pause]: 【F:knowledge/notes/all_part01_review.md†L327-L327】
-[^throttle-steps]: 【F:knowledge/notes/all_part01_review.md†L466-L467】
-[^power-constant]: 【F:knowledge/notes/all_part01_review.md†L443-L443】
-[^heat-spike]: 【F:knowledge/notes/all_part01_review.md†L445-L445】
-[^heavy-load-heat]: 【F:knowledge/notes/all_part01_review.md†L469-L469】
-[^water-diagnostics]: 【F:knowledge/notes/all_part01_review.md†L481-L481】
-[^deck-threads]: 【F:knowledge/notes/all_part01_review.md†L490-L490】
-[^rita-reconfig]: 【F:knowledge/notes/all_part01_review.md†L472-L472】
-[^mixed-pack-range]: 【F:knowledge/notes/all_part01_review.md†L473-L473】
-[^bms-tool-v5]: 【F:knowledge/notes/all_part01_review.md†L474-L474】
-[^dash-100]: 【F:knowledge/notes/all_part01_review.md†L476-L476】
-[^xt30-safety]: 【F:knowledge/notes/all_part01_review.md†L482-L482】
-[^rita-data-line]: 【F:knowledge/notes/all_part01_review.md†L433-L435】
-[^zero-watt-telemetry]: 【F:knowledge/notes/all_part01_review.md†L439-L439】
-[^range-kit-compat]: 【F:knowledge/notes/all_part01_review.md†L438-L440】
-[^voltage-vs-torque]: 【F:knowledge/notes/all_part01_review.md†L464-L464】
-[^star-delta]: 【F:knowledge/notes/all_part01_review.md†L483-L483】
-[^vta-13s]: 【F:knowledge/notes/all_part01_review.md†L494-L494】
-[^range-multiplier]: 【F:knowledge/notes/all_part01_review.md†L407-L407】
-[^defensive-habits]: 【F:knowledge/notes/all_part01_review.md†L408-L408】
-[^cold-sag]: 【F:knowledge/notes/all_part01_review.md†L465-L465】
-[^uk-legal]: 【F:knowledge/notes/all_part01_review.md†L495-L495】
-[^series-boosters]: 【F:knowledge/notes/all_part01_review.md†L493-L493】
-[^rita-brake-limit]: 【F:knowledge/notes/all_part01_review.md†L500-L500】
+[^sintered-pads]: Source: knowledge/notes/all_part01_review.md, L501 to L501
+[^rotor-pattern]: Source: knowledge/notes/all_part01_review.md, L502 to L502
+[^monorim-adapter]: Source: knowledge/notes/all_part01_review.md, L503 to L503
+[^solid-removal]: Source: knowledge/notes/all_part01_review.md, L504 to L504
+[^deli-routing]: Source: knowledge/notes/all_part01_review.md, L505 to L505
+[^stem-adapter]: Source: knowledge/notes/all_part01_review.md, L506 to L506
+[^frame-foam]: Source: knowledge/notes/all_part01_review.md, L507 to L507
+[^monorim-vibration]: Source: knowledge/notes/all_part01_review.md, L508 to L508
+[^controller-fasteners]: Source: knowledge/notes/all_part01_review.md, L509 to L509
+[^oil-cooling]: Source: knowledge/notes/all_part01_review.md, L510 to L510. Source: knowledge/notes/all_part01_review.md, L586 to L586
+[^rita-priority]: Source: knowledge/notes/all_part01_review.md, L513 to L513
+[^voltage-amps]: Source: knowledge/notes/all_part01_review.md, L514 to L514
+[^12s-14s-swap]: Source: knowledge/notes/all_part01_review.md, L515 to L515
+[^xt30-highvoltage]: Source: knowledge/notes/all_part01_review.md, L516 to L516
+[^wildman-capacity]: Source: knowledge/notes/all_part01_review.md, L517 to L517
+[^mixed-series]: Source: knowledge/notes/all_part01_review.md, L518 to L518
+[^500w-current]: Source: knowledge/notes/all_part01_review.md, L519 to L519
+[^downg-workflow]: Source: knowledge/notes/all_part01_review.md, L522 to L522
+[^pro2-downgrade]: Source: knowledge/notes/all_part01_review.md, L523 to L523
+[^ios-android]: Source: knowledge/notes/all_part01_review.md, L524 to L524
+[^ble074-stable]: Source: knowledge/notes/all_part01_review.md, L525 to L525
+[^vta-esc]: Source: knowledge/notes/all_part01_review.md, L526 to L526. Source: knowledge/notes/all_part01_review.md, L533 to L533
+[^tudor-express]: Source: knowledge/notes/all_part01_review.md, L527 to L527
+[^wattmeter]: Source: knowledge/notes/all_part01_review.md, L528 to L528
+[^rita-dark]: Source: knowledge/notes/all_part01_review.md, L534 to L534
+[^ble074-v7]: Source: knowledge/notes/all_part01_review.md, L535 to L535
+[^series-booster-sag]: Source: knowledge/notes/all_part01_review.md, L536 to L536
+[^rita-overvoltage-match]: Source: knowledge/notes/all_part01_review.md, L537 to L537
+[^bms128]: Source: knowledge/notes/all_part01_review.md, L540 to L540
+[^350w-heat]: Source: knowledge/notes/all_part01_review.md, L541 to L541
+[^deck-pack-sizing]: Source: knowledge/notes/all_part01_review.md, L542 to L542
+[^hybrid-range]: Source: knowledge/notes/all_part01_review.md, L543 to L543
+[^rita-charge-warning]: Source: knowledge/notes/all_part01_review.md, L544 to L544
+[^rita-emulation]: Source: knowledge/notes/all_part01_review.md, L545 to L545
+[^bms-drift]: Source: knowledge/notes/all_part01_review.md, L546 to L546
+[^cst-152mm]: Source: knowledge/notes/all_part01_review.md, L554 to L554
+[^monorim-tires]: Source: knowledge/notes/all_part01_review.md, L555 to L555
+[^cst-10x25]: Source: knowledge/notes/all_part01_review.md, L556 to L556
+[^xtech-rotor-sweep]: Source: knowledge/notes/all_part01_review.md, L557 to L557
+[^uk-delay]: Source: knowledge/notes/all_part01_review.md, L560 to L560
+[^m365tools-release]: Source: knowledge/notes/all_part01_review.md, L561 to L561
+[^pack-sag-diagnosis]: Source: knowledge/notes/all_part01_review.md, L566 to L566
+[^spot-weld]: Source: knowledge/notes/all_part01_review.md, L567 to L567
+[^common-port-rita]: Source: knowledge/notes/all_part01_review.md, L568 to L568
+[^trusted-packs]: Source: knowledge/notes/all_part01_review.md, L570 to L570
+[^rita-fw-upgrade]: Source: knowledge/notes/all_part01_review.md, L573 to L573
+[^series-swap]: Source: knowledge/notes/all_part01_review.md, L574 to L574
+[^dash-block]: Source: knowledge/notes/all_part01_review.md, L575 to L575
+[^m365dash-beta]: Source: knowledge/notes/all_part01_review.md, L576 to L576
+[^tudor-internal]: Source: knowledge/notes/all_part01_review.md, L579 to L579
+[^highcurrent-bms]: Source: knowledge/notes/all_part01_review.md, L580 to L580
+[^max-shipping]: Source: knowledge/notes/all_part01_review.md, L581 to L581
+[^monorim-speed]: Source: knowledge/notes/all_part01_review.md, L582 to L582
+[^rotor-benchmark]: Source: knowledge/notes/all_part01_review.md, L585 to L585
+[^monorim-drilling]: Source: knowledge/notes/all_part01_review.md, L586 to L586
+[^xtech-pads]: Source: knowledge/notes/all_part01_review.md, L587 to L587
+[^ups-us]: Source: knowledge/notes/all_part01_review.md, L590 to L590
+[^range-etiquette]: Source: knowledge/notes/all_part01_review.md, L591 to L591
+[^stl-sharing]: Source: knowledge/notes/all_part01_review.md, L592 to L592
+[^error27]: Source: knowledge/notes/all_part01_review.md, L597 to L597
+[^permanent-emulator]: Source: knowledge/notes/all_part01_review.md, L598 to L598
+[^bms126flash]: Source: knowledge/notes/all_part01_review.md, L599 to L599
+[^mosfet-diagnose]: Source: knowledge/notes/all_part01_review.md, L600 to L600
 
-[^rita-capabilities]: 【F:knowledge/notes/all_part01_review.md†L16-L18】【F:knowledge/notes/all_part01_review.md†L23】
-[^rita-emulator]: 【F:knowledge/notes/all_part01_review.md†L19】【F:knowledge/notes/all_part01_review.md†L114】
-[^rita-current-limit]: 【F:knowledge/notes/all_part01_review.md†L20-L24】【F:knowledge/notes/denis_all_part02_review.md†L22】【F:knowledge/notes/denis_all_part02_review.md†L31-L33】【F:knowledge/notes/denis_all_part02_review.md†L153】
-[^rita-soh]: 【F:knowledge/notes/all_part01_review.md†L21】【F:knowledge/notes/all_part01_review.md†L133】
-[^rita-overvoltage]: 【F:knowledge/notes/denis_all_part02_review.md†L29-L33】
-[^rita-telemetry]: 【F:knowledge/notes/all_part01_review.md†L25】【F:knowledge/notes/all_part01_review.md†L139】【F:knowledge/notes/all_part01_review.md†L219】【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L100】
-[^rita-config]: 【F:knowledge/notes/denis_all_part02_review.md†L315-L316】
-[^rita-awd]: 【F:knowledge/notes/denis_all_part02_review.md†L26-L28】【F:knowledge/notes/denis_all_part02_review.md†L197】
-[^rita-dual]: 【F:knowledge/notes/denis_all_part02_review.md†L385-L387】
-[^rita-charge-ui]: 【F:knowledge/notes/denis_all_part02_review.md†L408-L409】
-[^bms-roadmap]: 【F:knowledge/notes/all_part01_review.md†L13】【F:knowledge/notes/all_part01_review.md†L117】
-[^bms-ceiling]: 【F:knowledge/notes/all_part01_review.md†L182】
-[^bms-headroom]: 【F:knowledge/notes/all_part01_review.md†L184】
-[^battery-enclosures]: 【F:knowledge/notes/all_part01_review.md†L45】【F:knowledge/notes/all_part01_review.md†L48】
-[^wildman-e2]: 【F:knowledge/notes/all_part01_review.md†L94-L97】
-[^battery-bom]: 【F:knowledge/notes/all_part01_review.md†L46】【F:knowledge/notes/all_part01_review.md†L61】【F:knowledge/notes/all_part01_review.md†L66】【F:knowledge/notes/all_part01_review.md†L102】【F:knowledge/notes/all_part01_review.md†L145】【F:knowledge/notes/all_part01_review.md†L238】
-[^common-port]: 【F:knowledge/notes/all_part01_review.md†L101-L105】
-[^range-kits]: 【F:knowledge/notes/all_part01_review.md†L18】【F:knowledge/notes/all_part01_review.md†L260】
-[^separate-charge]: 【F:knowledge/notes/all_part01_review.md†L180】
-[^pack-wrap]: 【F:knowledge/notes/denis_all_part02_review.md†L329-L330】
-[^refurb-triage]: 【F:knowledge/notes/denis_all_part02_review.md†L333-L333】
-[^parallel-test]: 【F:knowledge/notes/denis_all_part02_review.md†L335-L336】
-[^happy-13s]: 【F:knowledge/notes/denis_all_part02_review.md†L345-L345】
-[^wildman-stl]: 【F:knowledge/notes/denis_all_part02_review.md†L345-L346】
-[^adc-16s]: Controller voltage debates around 13–16 S builds, including resistor swaps and XiaoDash firmware handling without legacy jumpers.【F:knowledge/notes/denis_all_part02_review.md†L501-L504】
-[^rita-49v]: Rita charge discussions noting 12 S externals plateau around 49.2 V (~4.1 V/cell) to preserve regen headroom.【F:knowledge/notes/denis_all_part02_review.md†L503-L504】
-[^temp-sensors]: Split-charging diagnostics pointing to failed OEM temperature sensors that lock the internal BMS until replaced.【F:knowledge/notes/denis_all_part02_review.md†L505-L505】
-[^winter-tyres]: Winter tire recommendations covering 10×2 tubeless off-road casings, Amalibay 9.2″ treads, and studding cautions plus cold-weather range loss.【F:knowledge/notes/denis_all_part02_review.md†L513-L514】
-[^monorim-hardware]: Monorim hardware upkeep reminders to upgrade to 12.9-grade bolts, trim excess, and check for play.【F:knowledge/notes/denis_all_part02_review.md†L515-L515】
-[^xtech]: Reports of Xtech hybrid brake corrosion/leaks pushing shops toward Magura hydraulics or premium mechanical calipers.【F:knowledge/notes/denis_all_part02_review.md†L517-L518】
-[^paolo-hubs]: Paolo’s 1.2 kW+ hub sourcing notes and fork clearance requirements for 10″ tires.【F:knowledge/notes/denis_all_part02_review.md†L523-L525】
-[^pu50]: Preference for PU50 marine urethane over Sikaflex for deck sealing plus neutral silicone guidance.【F:knowledge/notes/denis_all_part02_review.md†L527-L528】
-[^50e2]: Shenzhen front-pack anecdote using Samsung 50E2 cells while reiterating Rita/BMS safety requirements.【F:knowledge/notes/denis_all_part02_review.md†L531-L533】
-[^happy-stepup]: Happy BMS red-blink troubleshooting and DC step-up charger setup (start below pack voltage, ease toward ≈1 A).【F:knowledge/notes/denis_all_part02_review.md†L535-L537】
-[^parallel-jst]: JST charge-lead Y-splitting guidance, current limits, and XT60 recommendations for ≥40 A discharge runs.【F:knowledge/notes/denis_all_part02_review.md†L539-L541】
-[^happy-fw]: Scootermode 14 S error 24 recovery via 10 S flashing and Mi Electric 3 BLE/UUID checks before ST-Link work.【F:knowledge/notes/denis_all_part02_review.md†L543-L545】
-[^highspeed-brakes]: High-speed brake/tire lessons covering Roscheeee adapters, 160–180 mm rotors, brake fluid boiling, and PMT/CST tire overheating above 80 km/h.【F:knowledge/notes/denis_all_part02_review.md†L547-L549】
-[^winter-range]: Winter energy planning with 600 W caps, 80 % throttle, ferrofluid fills, and comprehensive waterproofing.【F:knowledge/notes/denis_all_part02_review.md†L551-L553】
-[^40t-bms]: 48 V pack planning (Samsung 40T 13S5P, 60 A BMS, XT60 upgrades) plus Happy BMS 32 Ah register limit and Pro 2 firmware 126 guidance.【F:knowledge/notes/denis_all_part02_review.md†L555-L559】
-[^harness-slime]: Harness upgrades to AWG12, cautions against thin motor leads, and slime dosing for 10″ tires.【F:knowledge/notes/denis_all_part02_review.md†L558-L558】【F:knowledge/notes/denis_all_part02_review.md†L578-L578】
-[^vendor]: Voltride shipping praise and steering buyers toward Scootermode/Paolo controllers over MaxMods.【F:knowledge/notes/denis_all_part02_review.md†L581-L582】
-[^charger-chain]: TL431 charger mod resistor values, capacitor swaps, transformer limits, Android 12 sideload workaround, and YZPOWER vs. anonymous charger recommendations with soldered connector swaps.【F:knowledge/notes/denis_all_part02_review.md†L585-L600】
-[^happy-fuse]: 【F:knowledge/notes/denis_all_part02_review.md†L322-L323】
-[^stlink-ble]: 【F:knowledge/notes/denis_all_part02_review.md†L304-L305】
-[^xiaodash-reset]: 【F:knowledge/notes/denis_all_part02_review.md†L408-L408】
-[^dash-swap]: 【F:knowledge/notes/denis_all_part02_review.md†L410-L410】
-[^pro2-internal-pack]: 【F:knowledge/notes/denis_all_part02_review.md†L404-L405】
-[^thermal-expansion]: 【F:knowledge/notes/denis_all_part02_review.md†L413-L413】
-[^boyueda-torque]: 【F:knowledge/notes/denis_all_part02_review.md†L414-L414】
-[^monorim-motor]: 【F:knowledge/notes/denis_all_part02_review.md†L416-L416】
-[^pmt-fitment]: 【F:knowledge/notes/denis_all_part02_review.md†L424-L425】
-[^kickstand-height]: 【F:knowledge/notes/denis_all_part02_review.md†L439-L441】
-[^tubeless-sealant]: 【F:knowledge/notes/denis_all_part02_review.md†L448-L450】
-[^happy-35a]: 【F:knowledge/notes/denis_all_part02_review.md†L401-L401】
-[^emulator-34v]: 【F:knowledge/notes/denis_all_part02_review.md†L402-L402】
-[^fan-mod-risk]: 【F:knowledge/notes/denis_all_part02_review.md†L417-L421】
-[^ali-pack-warning]: 【F:knowledge/notes/denis_all_part02_review.md†L457-L459】
-[^hydraulic-upgrade]: 【F:knowledge/notes/denis_all_part02_review.md†L428-L428】【F:knowledge/notes/denis_all_part02_review.md†L461-L462】
-[^serial-reset]: 【F:knowledge/notes/denis_all_part02_review.md†L430-L431】【F:knowledge/notes/denis_all_part02_review.md†L464-L465】
-[^suspension-extender]: 【F:knowledge/notes/denis_all_part02_review.md†L433-L435】【F:knowledge/notes/denis_all_part02_review.md†L467-L468】
-[^accessory-dash]: 【F:knowledge/notes/denis_all_part02_review.md†L486-L487】
-[^tcs-hazard]: 【F:knowledge/notes/denis_all_part02_review.md†L489-L490】
-[^dual-motor-plan]: 【F:knowledge/notes/denis_all_part02_review.md†L492-L494】
-[^pack-teardown]: 【F:knowledge/notes/denis_all_part02_review.md†L496-L497】
-[^no-rita-emulation]: 【F:knowledge/notes/denis_all_part02_review.md†L500-L500】
-[^pricing]: 【F:knowledge/notes/all_part01_review.md†L30】【F:knowledge/notes/all_part01_review.md†L61】
-[^pack-pricing]: 【F:knowledge/notes/all_part01_review.md†L110-L111】
-[^regional-pricing]: 【F:knowledge/notes/all_part01_review.md†L176】【F:knowledge/notes/all_part01_review.md†L274】
-[^range-speed-charging]: 【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L46】
-[^shipping-scope]: 【F:knowledge/notes/all_part01_review.md†L27】【F:knowledge/notes/all_part01_review.md†L177】【F:knowledge/notes/all_part01_review.md†L275】【F:knowledge/notes/all_part01_review.md†L453-L453】
-[^batching]: 【F:knowledge/notes/all_part01_review.md†L29】【F:knowledge/notes/all_part01_review.md†L33】【F:knowledge/notes/all_part01_review.md†L174】
-[^lead-times]: 【F:knowledge/notes/all_part01_review.md†L32】【F:knowledge/notes/all_part01_review.md†L34】【F:knowledge/notes/all_part01_review.md†L35】【F:knowledge/notes/all_part01_review.md†L212】
-[^charging-telemetry]: 【F:knowledge/notes/all_part01_review.md†L172-L173】【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L46】
-[^docs]: 【F:knowledge/notes/all_part01_review.md†L17】
-[^stlink-loaner]: 【F:knowledge/notes/all_part01_review.md†L458-L458】
-[^storefront]: 【F:knowledge/notes/all_part01_review.md†L17-L18】
-[^support-ops]: 【F:knowledge/notes/all_part01_review.md†L150】
-[^rita-max]: 【F:knowledge/notes/denis_all_part02_review.md†L195-L196】
-[^serbia]: 【F:knowledge/notes/all_part01_review.md†L300-L300】【F:knowledge/notes/all_part01_review.md†L452-L454】
-[^workshop-power]: 【F:knowledge/notes/all_part01_review.md†L298-L298】
-[^bms-warranty]: 【F:knowledge/notes/all_part01_review.md†L299-L301】
-[^thirteen-steps]: 【F:knowledge/notes/all_part01_review.md†L162-L166】【F:knowledge/notes/all_part01_review.md†L217】
-[^tp4056]: 【F:knowledge/notes/all_part01_review.md†L10-L11】
-[^ble073]: 【F:knowledge/notes/all_part01_review.md†L12-L12】
-[^bms-belgium]: 【F:knowledge/notes/all_part01_review.md†L13-L13】
-[^anti-spark]: 【F:knowledge/notes/all_part01_review.md†L20-L20】【F:knowledge/notes/all_part01_review.md†L104-L104】
-[^rita-12s-config]: 【F:knowledge/notes/all_part01_review.md†L42-L43】
-[^charger-upgrade]: 【F:knowledge/notes/all_part01_review.md†L106-L107】【F:knowledge/notes/all_part01_review.md†L123-L123】
-[^brake-upgrade]: 【F:knowledge/notes/all_part01_review.md†L44-L44】
-[^fake-60ah]: 【F:knowledge/notes/all_part01_review.md†L40-L40】
-[^rain-proof]: 【F:knowledge/notes/all_part01_review.md†L41-L41】
-[^stlink]: 【F:knowledge/notes/all_part01_review.md†L47-L49】
-[^dash-update]: 【F:knowledge/notes/all_part01_review.md†L48-L48】
-[^dash-retrofit]: 【F:knowledge/notes/all_part01_review.md†L93-L93】
-[^face-ltd]: 【F:knowledge/notes/all_part01_review.md†L50-L50】
-[^power-risks]: 【F:knowledge/notes/all_part01_review.md†L22】【F:knowledge/notes/all_part01_review.md†L155】【F:knowledge/notes/all_part01_review.md†L170-L171】
-[^legacy-boards]: 【F:knowledge/notes/denis_all_part02_review.md†L29-L33】【F:knowledge/notes/denis_all_part02_review.md†L153】
-[^rita-v4]: 【F:knowledge/notes/denis_all_part02_review.md†L22-L33】
-[^controller-thermals]: 【F:knowledge/notes/denis_all_part02_review.md†L10-L13】
-[^rita-hill]: 【F:knowledge/notes/denis_all_part02_review.md†L31-L33】
-[^awd]: 【F:knowledge/notes/denis_all_part02_review.md†L25-L28】
-[^error14]: 【F:knowledge/notes/denis_all_part02_review.md†L26-L31】【F:knowledge/notes/denis_all_part02_review.md†L6433-L6456】
-[^thermal-paste]: 【F:knowledge/notes/denis_all_part02_review.md†L32-L33】
-[^counterfeit]: 【F:knowledge/notes/denis_all_part02_review.md†L19-L23】
-[^resell-cost]: 【F:knowledge/notes/all_part01_review.md†L91-L92】
-[^price-10s]: 【F:knowledge/notes/all_part01_review.md†L110-L110】
-[^bag-security]: 【F:knowledge/notes/denis_all_part02_review.md†L42-L45】
-[^pack-charger]: 【F:knowledge/notes/denis_all_part02_review.md†L45-L46】
-[^tool-packs]: 【F:knowledge/notes/denis_all_part02_review.md†L235-L235】
-[^lawn-pack]: 【F:knowledge/notes/denis_all_part02_review.md†L6610-L6635】
-[^balance-leads]: 【F:knowledge/notes/denis_all_part02_review.md†L7028-L7068】
-[^parallel-risk]: 【F:knowledge/notes/all_part01_review.md†L113-L113】【F:knowledge/notes/all_part01_review.md†L569-L569】
-[^lifepo4]: 【F:knowledge/notes/denis_all_part02_review.md†L7080-L7089】
-[^rita-schottky]: Rita’s Schottky drop leaving internal packs near 97 % unless bypassed during off-scooter charging, which Denis still recommends for pack longevity.【F:knowledge/notes/denis_all_part02_review.md†L103-L103】【F:knowledge/notes/denis_all_part02_review.md†L108-L108】
-[^sequential-charging]: 【F:knowledge/notes/all_part01_review.md†L103-L113】
-[^rita-underreport]: Small Rita Gen 4 batch that under-reported current above ~20 A while redundant sensing still tripped overcurrent protection on Ninebot Max validation builds.【F:knowledge/notes/denis_all_part02_review.md†L198-L198】
-[^rita-soc]: Dashboard state of charge drifting after Rita installs, prompting Denis to treat 50 % on the display as the return threshold while using the app for actual voltage.【F:knowledge/notes/denis_all_part02_review.md†L127-L127】
-[^rita-undercharge]: 【F:knowledge/notes/denis_all_part02_review.md†L220-L229】
-[^rita-60v]: 【F:knowledge/notes/denis_all_part02_review.md†L256-L257】
-[^harness_staging]: 【F:knowledge/notes/denis_all_part02_review.md†L7534-L7589】【F:knowledge/notes/denis_all_part02_review.md†L7567-L7589】【F:knowledge/notes/denis_all_part02_review.md†L11671-L11676】
-[^cheap-packs]: 【F:knowledge/notes/denis_all_part02_review.md†L5499-L5526】
-[^large-format]: 【F:knowledge/notes/all_part01_review.md†L116-L117】
-[^xiaoflasher]: 【F:knowledge/notes/denis_all_part02_review.md†L2467-L2470】
-[^twelve-s-config]: 【F:knowledge/notes/denis_all_part02_review.md†L10541-L10552】
-[^hazmat]: 【F:knowledge/notes/denis_all_part02_review.md†L188-L193】
+[^current-step]: Source: knowledge/notes/all_part01_review.md, L206 to L206
+[^connector-melt]: Source: knowledge/notes/all_part01_review.md, L207 to L207
+[^rita-detection]: Source: knowledge/notes/all_part01_review.md, L210 to L211
+[^recuperation]: Source: knowledge/notes/all_part01_review.md, L212 to L212
+[^ios-companion]: Source: knowledge/notes/all_part01_review.md, L213 to L213
+[^kv-match]: Source: knowledge/notes/all_part01_review.md, L222 to L222
+[^hub-upgrades]: Source: knowledge/notes/all_part01_review.md, L223 to L224
+[^fake-pack]: Source: knowledge/notes/all_part01_review.md, L216 to L216
+[^common-port-routing]: Source: knowledge/notes/all_part01_review.md, L217 to L217
+[^storage]: Source: knowledge/notes/all_part01_review.md, L218 to L219. Source: knowledge/notes/all_part01_review.md, L430 to L430
+[^twelve-s-chargers]: Source: knowledge/notes/all_part01_review.md, L232 to L232
+[^shipping-charge]: Source: knowledge/notes/all_part01_review.md, L233 to L233
+[^pack-topology]: Source: knowledge/notes/all_part01_review.md, L234 to L234
+[^separate-charge-risk]: Source: knowledge/notes/all_part01_review.md, L252 to L253
+[^battery-sales]: Source: knowledge/notes/all_part01_review.md, L254 to L255
+[^bms-balance]: Source: knowledge/notes/all_part01_review.md, L256 to L256
+[^21700]: Source: knowledge/notes/all_part01_review.md, L257 to L257
+[^voltage-priority]: Source: knowledge/notes/all_part01_review.md, L258 to L258
+[^bms-sizing]: Source: knowledge/notes/all_part01_review.md, L259 to L259
+[^pack-expansion]: Source: knowledge/notes/all_part01_review.md, L260 to L260
+[^cell-choice]: Source: knowledge/notes/all_part01_review.md, L270 to L270
+[^brake-upgrades2]: Source: knowledge/notes/all_part01_review.md, L226 to L227
+[^tire-pressure]: Source: knowledge/notes/all_part01_review.md, L228 to L228
+[^stem-mods]: Source: knowledge/notes/all_part01_review.md, L229 to L229
+[^brake-mix]: Source: knowledge/notes/all_part01_review.md, L268 to L268
+[^range-boost]: Source: knowledge/notes/all_part01_review.md, L283 to L283
+[^tire-choice]: Source: knowledge/notes/all_part01_review.md, L293 to L293
+[^brake-alignment]: Source: knowledge/notes/all_part01_review.md, L294 to L295
+[^charging-etiquette]: Source: knowledge/notes/all_part01_review.md, L269 to L269
+[^ble-troubleshooting]: Source: knowledge/notes/all_part01_review.md, L262 to L263
+[^primary-bms]: Source: knowledge/notes/all_part01_review.md, L264 to L264
+[^serial-pinout]: Source: knowledge/notes/all_part01_review.md, L238 to L238
+[^clone-behavior]: Source: knowledge/notes/all_part01_review.md, L239 to L239
+[^repair-bms]: Source: knowledge/notes/all_part01_review.md, L242 to L242
+[^non-telemetry]: Source: knowledge/notes/all_part01_review.md, L243 to L243
+[^twelve-s-steps]: Source: knowledge/notes/all_part01_review.md, L245 to L246
+[^speed-limit]: Source: knowledge/notes/all_part01_review.md, L247 to L247
+[^rita-harness]: Source: knowledge/notes/all_part01_review.md, L248 to L248
+[^pink-lead]: Source: knowledge/notes/all_part01_review.md, L249 to L249
+[^ten-s-cells]: Source: knowledge/notes/all_part01_review.md, L250 to L250
+[^hub-coolers]: Source: knowledge/notes/all_part01_review.md, L267 to L267
+[^stem-locks]: Source: knowledge/notes/all_part01_review.md, L272 to L274
+[^prints-lighting]: Source: knowledge/notes/all_part01_review.md, L275 to L276
+[^lipo-warning]: Source: knowledge/notes/all_part01_review.md, L279 to L279. Source: knowledge/notes/all_part01_review.md, L415 to L415
+[^pack-rec]: Source: knowledge/notes/all_part01_review.md, L280 to L283. Source: knowledge/notes/all_part01_review.md, L416 to L416
+[^uart-kit]: Source: knowledge/notes/all_part01_review.md, L282 to L282
+[^thermal-fuse]: Source: knowledge/notes/all_part01_review.md, L284 to L284. Source: knowledge/notes/all_part01_review.md, L424 to L424
+[^charge-current]: Source: knowledge/notes/all_part01_review.md, L285 to L285. Source: knowledge/notes/all_part01_review.md, L428 to L428
+[^xt30-adapter]: Source: knowledge/notes/all_part01_review.md, L429 to L429
+[^pack-inspection]: Source: knowledge/notes/all_part01_review.md, L288 to L290. Source: knowledge/notes/all_part01_review.md, L423 to L423
+[^workshop-power2]: Source: knowledge/notes/all_part01_review.md, L298 to L298
+[^bms-warranty2]: Source: knowledge/notes/all_part01_review.md, L299 to L299
+[^shipping-updates]: Source: knowledge/notes/all_part01_review.md, L300 to L300. Source: knowledge/notes/all_part01_review.md, L452 to L454
+[^rita-low-pack]: Source: knowledge/notes/all_part01_review.md, L304 to L304
+[^rita-charge-order]: Source: knowledge/notes/all_part01_review.md, L305 to L305
+[^smart-bms]: Source: knowledge/notes/all_part01_review.md, L306 to L306
+[^zero-watt]: Source: knowledge/notes/all_part01_review.md, L310 to L310
+[^xiao1s]: Source: knowledge/notes/all_part01_review.md, L311 to L311
+[^storage-telemetry]: Source: knowledge/notes/all_part01_review.md, L312 to L312
+[^custom-dash]: Source: knowledge/notes/all_part01_review.md, L313 to L313
+[^bms-match]: Source: knowledge/notes/all_part01_review.md, L316 to L316
+[^cell-shortlist]: Source: knowledge/notes/all_part01_review.md, L319 to L319
+[^g30-bag]: Source: knowledge/notes/all_part01_review.md, L322 to L322
+[^config-mismatch]: Source: knowledge/notes/all_part01_review.md, L333 to L333
+[^g30-delta]: Source: knowledge/notes/all_part01_review.md, L334 to L334
+[^pro2-config]: Source: knowledge/notes/all_part01_review.md, L344 to L344
+[^recup-throttle]: Source: knowledge/notes/all_part01_review.md, L347 to L347
+[^current-step2]: Source: knowledge/notes/all_part01_review.md, L348 to L348
+[^regen-limit]: Source: knowledge/notes/all_part01_review.md, L349 to L349
+[^rita-finish]: Source: knowledge/notes/all_part01_review.md, L350 to L350
+[^logistics-20a]: Source: knowledge/notes/all_part01_review.md, L353 to L353
+[^nonconductive-paste]: Source: knowledge/notes/all_part01_review.md, L366 to L366
+[^front-bolts]: Source: knowledge/notes/all_part01_review.md, L367 to L367
+[^monorim-bind]: Source: knowledge/notes/all_part01_review.md, L368 to L368
+[^rear-wiring]: Source: knowledge/notes/all_part01_review.md, L369 to L369. Source: knowledge/notes/all_part01_review.md, L412 to L412
+[^deck-rib]: Source: knowledge/notes/all_part01_review.md, L370 to L370
+[^charge-port-relocate]: Source: knowledge/notes/all_part01_review.md, L371 to L371
+[^bt-logger]: Source: knowledge/notes/all_part01_review.md, L372 to L372
+[^high-mount-signal]: Source: knowledge/notes/all_part01_review.md, L375 to L375
+[^rear-tape]: Source: knowledge/notes/all_part01_review.md, L376 to L376
+[^dual-pack-range]: Source: knowledge/notes/all_part01_review.md, L377 to L377
+[^foldster-clearance]: Source: knowledge/notes/all_part01_review.md, L378 to L378. Source: knowledge/notes/all_part01_review.md, L401 to L401. Source: knowledge/notes/all_part01_review.md, L411 to L411
+[^lighting-diy]: Source: knowledge/notes/all_part01_review.md, L404 to L404
+[^uart485]: Source: knowledge/notes/all_part01_review.md, L419 to L419
+[^laudation]: Source: knowledge/notes/all_part01_review.md, L420 to L420
+[^pack-layout]: Source: knowledge/notes/all_part01_review.md, L425 to L425
+[^bms-disassembly]: Source: knowledge/notes/all_part01_review.md, L457 to L457
+[^monorim-grease]: Source: knowledge/notes/all_part01_review.md, L444 to L444
+[^monorim-500w]: Source: knowledge/notes/all_part01_review.md, L468 to L468
+[^fork-lift]: Source: knowledge/notes/all_part01_review.md, L486 to L486
+[^solid-fit]: Source: knowledge/notes/all_part01_review.md, L487 to L487
+[^max-motor]: Source: knowledge/notes/all_part01_review.md, L449 to L449
+[^suspension-bearings]: Source: knowledge/notes/all_part01_review.md, L489 to L489
+[^monorim-sourcing]: Source: knowledge/notes/all_part01_review.md, L379 to L380
+[^doc-green]: Source: knowledge/notes/all_part01_review.md, L384 to L384
+[^kcq]: Source: knowledge/notes/all_part01_review.md, L385 to L385
+[^esa-bms]: Source: knowledge/notes/all_part01_review.md, L386 to L386
+[^buck-hv]: Source: knowledge/notes/all_part01_review.md, L390 to L390
+[^12s4p-temp]: Source: knowledge/notes/all_part01_review.md, L391 to L391
+[^charger-trim]: Source: knowledge/notes/all_part01_review.md, L392 to L392
+[^support-boundary]: Source: knowledge/notes/all_part01_review.md, L396 to L397
+[^bag-length]: Source: knowledge/notes/all_part01_review.md, L328 to L328
+[^wildman-screws]: Source: knowledge/notes/all_part01_review.md, L399 to L400
+[^pack-cost]: Source: knowledge/notes/all_part01_review.md, L359 to L359
+[^cst-v3]: Source: knowledge/notes/all_part01_review.md, L337 to L337
+[^xtech-rotors]: Source: knowledge/notes/all_part01_review.md, L338 to L338
+[^rub-only]: Source: knowledge/notes/all_part01_review.md, L325 to L325
+[^aug-pause]: Source: knowledge/notes/all_part01_review.md, L327 to L327
+[^throttle-steps]: Source: knowledge/notes/all_part01_review.md, L466 to L467
+[^power-constant]: Source: knowledge/notes/all_part01_review.md, L443 to L443
+[^heat-spike]: Source: knowledge/notes/all_part01_review.md, L445 to L445
+[^heavy-load-heat]: Source: knowledge/notes/all_part01_review.md, L469 to L469
+[^water-diagnostics]: Source: knowledge/notes/all_part01_review.md, L481 to L481
+[^deck-threads]: Source: knowledge/notes/all_part01_review.md, L490 to L490
+[^rita-reconfig]: Source: knowledge/notes/all_part01_review.md, L472 to L472
+[^mixed-pack-range]: Source: knowledge/notes/all_part01_review.md, L473 to L473
+[^bms-tool-v5]: Source: knowledge/notes/all_part01_review.md, L474 to L474
+[^dash-100]: Source: knowledge/notes/all_part01_review.md, L476 to L476
+[^xt30-safety]: Source: knowledge/notes/all_part01_review.md, L482 to L482
+[^rita-data-line]: Source: knowledge/notes/all_part01_review.md, L433 to L435
+[^zero-watt-telemetry]: Source: knowledge/notes/all_part01_review.md, L439 to L439
+[^range-kit-compat]: Source: knowledge/notes/all_part01_review.md, L438 to L440
+[^voltage-vs-torque]: Source: knowledge/notes/all_part01_review.md, L464 to L464
+[^star-delta]: Source: knowledge/notes/all_part01_review.md, L483 to L483
+[^vta-13s]: Source: knowledge/notes/all_part01_review.md, L494 to L494
+[^range-multiplier]: Source: knowledge/notes/all_part01_review.md, L407 to L407
+[^defensive-habits]: Source: knowledge/notes/all_part01_review.md, L408 to L408
+[^cold-sag]: Source: knowledge/notes/all_part01_review.md, L465 to L465
+[^uk-legal]: Source: knowledge/notes/all_part01_review.md, L495 to L495
+[^series-boosters]: Source: knowledge/notes/all_part01_review.md, L493 to L493
+[^rita-brake-limit]: Source: knowledge/notes/all_part01_review.md, L500 to L500
+
+[^rita-capabilities]: Source: knowledge/notes/all_part01_review.md, L16 to L18. Source: knowledge/notes/all_part01_review.md, L23
+[^rita-emulator]: Source: knowledge/notes/all_part01_review.md, L19. Source: knowledge/notes/all_part01_review.md, L114
+[^rita-current-limit]: Source: knowledge/notes/all_part01_review.md, L20 to L24. Source: knowledge/notes/denis_all_part02_review.md, L22. Source: knowledge/notes/denis_all_part02_review.md, L31 to L33. Source: knowledge/notes/denis_all_part02_review.md, L153
+[^rita-soh]: Source: knowledge/notes/all_part01_review.md, L21. Source: knowledge/notes/all_part01_review.md, L133
+[^rita-overvoltage]: Source: knowledge/notes/denis_all_part02_review.md, L29 to L33
+[^rita-telemetry]: Source: knowledge/notes/all_part01_review.md, L25. Source: knowledge/notes/all_part01_review.md, L139. Source: knowledge/notes/all_part01_review.md, L219. Source: knowledge/notes/denis_all_part02_review.md, L33. Source: knowledge/notes/denis_all_part02_review.md, L100
+[^rita-config]: Source: knowledge/notes/denis_all_part02_review.md, L315 to L316
+[^rita-awd]: Source: knowledge/notes/denis_all_part02_review.md, L26 to L28. Source: knowledge/notes/denis_all_part02_review.md, L197
+[^rita-dual]: Source: knowledge/notes/denis_all_part02_review.md, L385 to L387
+[^rita-charge-ui]: Source: knowledge/notes/denis_all_part02_review.md, L408 to L409
+[^bms-roadmap]: Source: knowledge/notes/all_part01_review.md, L13. Source: knowledge/notes/all_part01_review.md, L117
+[^bms-ceiling]: Source: knowledge/notes/all_part01_review.md, L182
+[^bms-headroom]: Source: knowledge/notes/all_part01_review.md, L184
+[^battery-enclosures]: Source: knowledge/notes/all_part01_review.md, L45. Source: knowledge/notes/all_part01_review.md, L48
+[^wildman-e2]: Source: knowledge/notes/all_part01_review.md, L94 to L97
+[^battery-bom]: Source: knowledge/notes/all_part01_review.md, L46. Source: knowledge/notes/all_part01_review.md, L61. Source: knowledge/notes/all_part01_review.md, L66. Source: knowledge/notes/all_part01_review.md, L102. Source: knowledge/notes/all_part01_review.md, L145. Source: knowledge/notes/all_part01_review.md, L238
+[^common-port]: Source: knowledge/notes/all_part01_review.md, L101 to L105
+[^range-kits]: Source: knowledge/notes/all_part01_review.md, L18. Source: knowledge/notes/all_part01_review.md, L260
+[^separate-charge]: Source: knowledge/notes/all_part01_review.md, L180
+[^pack-wrap]: Source: knowledge/notes/denis_all_part02_review.md, L329 to L330
+[^refurb-triage]: Source: knowledge/notes/denis_all_part02_review.md, L333 to L333
+[^parallel-test]: Source: knowledge/notes/denis_all_part02_review.md, L335 to L336
+[^happy-13s]: Source: knowledge/notes/denis_all_part02_review.md, L345 to L345
+[^wildman-stl]: Source: knowledge/notes/denis_all_part02_review.md, L345 to L346
+[^adc-16s]: Controller voltage debates around 13–16 S builds, including resistor swaps and XiaoDash firmware handling without legacy jumpers. Source: knowledge/notes/denis_all_part02_review.md, L501 to L504
+[^rita-49v]: Rita charge discussions noting 12 S externals plateau around 49.2 V (~4.1 V/cell) to preserve regen headroom. Source: knowledge/notes/denis_all_part02_review.md, L503 to L504
+[^temp-sensors]: Split-charging diagnostics pointing to failed OEM temperature sensors that lock the internal BMS until replaced. Source: knowledge/notes/denis_all_part02_review.md, L505 to L505
+[^winter-tyres]: Winter tire recommendations covering 10×2 tubeless off-road casings, Amalibay 9.2″ treads, and studding cautions plus cold-weather range loss. Source: knowledge/notes/denis_all_part02_review.md, L513 to L514
+[^monorim-hardware]: Monorim hardware upkeep reminders to upgrade to 12.9-grade bolts, trim excess, and check for play. Source: knowledge/notes/denis_all_part02_review.md, L515 to L515
+[^xtech]: Reports of Xtech hybrid brake corrosion/leaks pushing shops toward Magura hydraulics or premium mechanical calipers. Source: knowledge/notes/denis_all_part02_review.md, L517 to L518
+[^paolo-hubs]: Paolo’s 1.2 kW+ hub sourcing notes and fork clearance requirements for 10″ tires. Source: knowledge/notes/denis_all_part02_review.md, L523 to L525
+[^pu50]: Preference for PU50 marine urethane over Sikaflex for deck sealing plus neutral silicone guidance. Source: knowledge/notes/denis_all_part02_review.md, L527 to L528
+[^50e2]: Shenzhen front-pack anecdote using Samsung 50E2 cells while reiterating Rita/BMS safety requirements. Source: knowledge/notes/denis_all_part02_review.md, L531 to L533
+[^happy-stepup]: Happy BMS red-blink troubleshooting and DC step-up charger setup (start below pack voltage, ease toward ≈1 A).Source: knowledge/notes/denis_all_part02_review.md, L535 to L537
+[^parallel-jst]: JST charge-lead Y-splitting guidance, current limits, and XT60 recommendations for ≥40 A discharge runs. Source: knowledge/notes/denis_all_part02_review.md, L539 to L541
+[^happy-fw]: Scootermode 14 S error 24 recovery via 10 S flashing and Mi Electric 3 BLE/UUID checks before ST-Link work. Source: knowledge/notes/denis_all_part02_review.md, L543 to L545
+[^highspeed-brakes]: High-speed brake/tire lessons covering Roscheeee adapters, 160–180 mm rotors, brake fluid boiling, and PMT/CST tire overheating above 80 km/h. Source: knowledge/notes/denis_all_part02_review.md, L547 to L549
+[^winter-range]: Winter energy planning with 600 W caps, 80 % throttle, ferrofluid fills, and comprehensive waterproofing. Source: knowledge/notes/denis_all_part02_review.md, L551 to L553
+[^40t-bms]: 48 V pack planning (Samsung 40T 13S5P, 60 A BMS, XT60 upgrades) plus Happy BMS 32 Ah register limit and Pro 2 firmware 126 guidance. Source: knowledge/notes/denis_all_part02_review.md, L555 to L559
+[^harness-slime]: Harness upgrades to AWG12, cautions against thin motor leads, and slime dosing for 10″ tires. Source: knowledge/notes/denis_all_part02_review.md, L558 to L558. Source: knowledge/notes/denis_all_part02_review.md, L578 to L578
+[^vendor]: Voltride shipping praise and steering buyers toward Scootermode/Paolo controllers over MaxMods. Source: knowledge/notes/denis_all_part02_review.md, L581 to L582
+[^charger-chain]: TL431 charger mod resistor values, capacitor swaps, transformer limits, Android 12 sideload workaround, and YZPOWER vs. anonymous charger recommendations with soldered connector swaps. Source: knowledge/notes/denis_all_part02_review.md, L585 to L600
+[^happy-fuse]: Source: knowledge/notes/denis_all_part02_review.md, L322 to L323
+[^stlink-ble]: Source: knowledge/notes/denis_all_part02_review.md, L304 to L305
+[^xiaodash-reset]: Source: knowledge/notes/denis_all_part02_review.md, L408 to L408
+[^dash-swap]: Source: knowledge/notes/denis_all_part02_review.md, L410 to L410
+[^pro2-internal-pack]: Source: knowledge/notes/denis_all_part02_review.md, L404 to L405
+[^thermal-expansion]: Source: knowledge/notes/denis_all_part02_review.md, L413 to L413
+[^boyueda-torque]: Source: knowledge/notes/denis_all_part02_review.md, L414 to L414
+[^monorim-motor]: Source: knowledge/notes/denis_all_part02_review.md, L416 to L416
+[^pmt-fitment]: Source: knowledge/notes/denis_all_part02_review.md, L424 to L425
+[^kickstand-height]: Source: knowledge/notes/denis_all_part02_review.md, L439 to L441
+[^tubeless-sealant]: Source: knowledge/notes/denis_all_part02_review.md, L448 to L450
+[^happy-35a]: Source: knowledge/notes/denis_all_part02_review.md, L401 to L401
+[^emulator-34v]: Source: knowledge/notes/denis_all_part02_review.md, L402 to L402
+[^fan-mod-risk]: Source: knowledge/notes/denis_all_part02_review.md, L417 to L421
+[^ali-pack-warning]: Source: knowledge/notes/denis_all_part02_review.md, L457 to L459
+[^hydraulic-upgrade]: Source: knowledge/notes/denis_all_part02_review.md, L428 to L428. Source: knowledge/notes/denis_all_part02_review.md, L461 to L462
+[^serial-reset]: Source: knowledge/notes/denis_all_part02_review.md, L430 to L431. Source: knowledge/notes/denis_all_part02_review.md, L464 to L465
+[^suspension-extender]: Source: knowledge/notes/denis_all_part02_review.md, L433 to L435. Source: knowledge/notes/denis_all_part02_review.md, L467 to L468
+[^accessory-dash]: Source: knowledge/notes/denis_all_part02_review.md, L486 to L487
+[^tcs-hazard]: Source: knowledge/notes/denis_all_part02_review.md, L489 to L490
+[^dual-motor-plan]: Source: knowledge/notes/denis_all_part02_review.md, L492 to L494
+[^pack-teardown]: Source: knowledge/notes/denis_all_part02_review.md, L496 to L497
+[^no-rita-emulation]: Source: knowledge/notes/denis_all_part02_review.md, L500 to L500
+[^pricing]: Source: knowledge/notes/all_part01_review.md, L30. Source: knowledge/notes/all_part01_review.md, L61
+[^pack-pricing]: Source: knowledge/notes/all_part01_review.md, L110 to L111
+[^regional-pricing]: Source: knowledge/notes/all_part01_review.md, L176. Source: knowledge/notes/all_part01_review.md, L274
+[^range-speed-charging]: Source: knowledge/notes/denis_all_part02_review.md, L33. Source: knowledge/notes/denis_all_part02_review.md, L46
+[^shipping-scope]: Source: knowledge/notes/all_part01_review.md, L27. Source: knowledge/notes/all_part01_review.md, L177. Source: knowledge/notes/all_part01_review.md, L275. Source: knowledge/notes/all_part01_review.md, L453 to L453
+[^batching]: Source: knowledge/notes/all_part01_review.md, L29. Source: knowledge/notes/all_part01_review.md, L33. Source: knowledge/notes/all_part01_review.md, L174
+[^lead-times]: Source: knowledge/notes/all_part01_review.md, L32. Source: knowledge/notes/all_part01_review.md, L34. Source: knowledge/notes/all_part01_review.md, L35. Source: knowledge/notes/all_part01_review.md, L212
+[^charging-telemetry]: Source: knowledge/notes/all_part01_review.md, L172 to L173. Source: knowledge/notes/denis_all_part02_review.md, L33. Source: knowledge/notes/denis_all_part02_review.md, L46
+[^docs]: Source: knowledge/notes/all_part01_review.md, L17
+[^stlink-loaner]: Source: knowledge/notes/all_part01_review.md, L458 to L458
+[^storefront]: Source: knowledge/notes/all_part01_review.md, L17 to L18
+[^support-ops]: Source: knowledge/notes/all_part01_review.md, L150
+[^rita-max]: Source: knowledge/notes/denis_all_part02_review.md, L195 to L196
+[^serbia]: Source: knowledge/notes/all_part01_review.md, L300 to L300. Source: knowledge/notes/all_part01_review.md, L452 to L454
+[^workshop-power]: Source: knowledge/notes/all_part01_review.md, L298 to L298
+[^bms-warranty]: Source: knowledge/notes/all_part01_review.md, L299 to L301
+[^thirteen-steps]: Source: knowledge/notes/all_part01_review.md, L162 to L166. Source: knowledge/notes/all_part01_review.md, L217
+[^tp4056]: Source: knowledge/notes/all_part01_review.md, L10 to L11
+[^ble073]: Source: knowledge/notes/all_part01_review.md, L12 to L12
+[^bms-belgium]: Source: knowledge/notes/all_part01_review.md, L13 to L13
+[^anti-spark]: Source: knowledge/notes/all_part01_review.md, L20 to L20. Source: knowledge/notes/all_part01_review.md, L104 to L104
+[^rita-12s-config]: Source: knowledge/notes/all_part01_review.md, L42 to L43
+[^charger-upgrade]: Source: knowledge/notes/all_part01_review.md, L106 to L107. Source: knowledge/notes/all_part01_review.md, L123 to L123
+[^brake-upgrade]: Source: knowledge/notes/all_part01_review.md, L44 to L44
+[^fake-60ah]: Source: knowledge/notes/all_part01_review.md, L40 to L40
+[^rain-proof]: Source: knowledge/notes/all_part01_review.md, L41 to L41
+[^stlink]: Source: knowledge/notes/all_part01_review.md, L47 to L49
+[^dash-update]: Source: knowledge/notes/all_part01_review.md, L48 to L48
+[^dash-retrofit]: Source: knowledge/notes/all_part01_review.md, L93 to L93
+[^face-ltd]: Source: knowledge/notes/all_part01_review.md, L50 to L50
+[^power-risks]: Source: knowledge/notes/all_part01_review.md, L22. Source: knowledge/notes/all_part01_review.md, L155. Source: knowledge/notes/all_part01_review.md, L170 to L171
+[^legacy-boards]: Source: knowledge/notes/denis_all_part02_review.md, L29 to L33. Source: knowledge/notes/denis_all_part02_review.md, L153
+[^rita-v4]: Source: knowledge/notes/denis_all_part02_review.md, L22 to L33
+[^controller-thermals]: Source: knowledge/notes/denis_all_part02_review.md, L10 to L13
+[^rita-hill]: Source: knowledge/notes/denis_all_part02_review.md, L31 to L33
+[^awd]: Source: knowledge/notes/denis_all_part02_review.md, L25 to L28
+[^error14]: Source: knowledge/notes/denis_all_part02_review.md, L26 to L31. Source: knowledge/notes/denis_all_part02_review.md, L6433 to L6456
+[^thermal-paste]: Source: knowledge/notes/denis_all_part02_review.md, L32 to L33
+[^counterfeit]: Source: knowledge/notes/denis_all_part02_review.md, L19 to L23
+[^resell-cost]: Source: knowledge/notes/all_part01_review.md, L91 to L92
+[^price-10s]: Source: knowledge/notes/all_part01_review.md, L110 to L110
+[^bag-security]: Source: knowledge/notes/denis_all_part02_review.md, L42 to L45
+[^pack-charger]: Source: knowledge/notes/denis_all_part02_review.md, L45 to L46
+[^tool-packs]: Source: knowledge/notes/denis_all_part02_review.md, L235 to L235
+[^lawn-pack]: Source: knowledge/notes/denis_all_part02_review.md, L6610 to L6635
+[^balance-leads]: Source: knowledge/notes/denis_all_part02_review.md, L7028 to L7068
+[^parallel-risk]: Source: knowledge/notes/all_part01_review.md, L113 to L113. Source: knowledge/notes/all_part01_review.md, L569 to L569
+[^lifepo4]: Source: knowledge/notes/denis_all_part02_review.md, L7080 to L7089
+[^rita-schottky]: Rita’s Schottky drop leaving internal packs near 97 % unless bypassed during off-scooter charging, which Denis still recommends for pack longevity. Source: knowledge/notes/denis_all_part02_review.md, L103 to L103. Source: knowledge/notes/denis_all_part02_review.md, L108 to L108
+[^sequential-charging]: Source: knowledge/notes/all_part01_review.md, L103 to L113
+[^rita-underreport]: Small Rita Gen 4 batch that under-reported current above ~20 A while redundant sensing still tripped overcurrent protection on Ninebot Max validation builds. Source: knowledge/notes/denis_all_part02_review.md, L198 to L198
+[^rita-soc]: Dashboard state of charge drifting after Rita installs, prompting Denis to treat 50 % on the display as the return threshold while using the app for actual voltage. Source: knowledge/notes/denis_all_part02_review.md, L127 to L127
+[^rita-undercharge]: Source: knowledge/notes/denis_all_part02_review.md, L220 to L229
+[^rita-60v]: Source: knowledge/notes/denis_all_part02_review.md, L256 to L257
+[^harness_staging]: Source: knowledge/notes/denis_all_part02_review.md, L7534 to L7589. Source: knowledge/notes/denis_all_part02_review.md, L7567 to L7589. Source: knowledge/notes/denis_all_part02_review.md, L11671 to L11676
+[^cheap-packs]: Source: knowledge/notes/denis_all_part02_review.md, L5499 to L5526
+[^large-format]: Source: knowledge/notes/all_part01_review.md, L116 to L117
+[^xiaoflasher]: Source: knowledge/notes/denis_all_part02_review.md, L2467 to L2470
+[^twelve-s-config]: Source: knowledge/notes/denis_all_part02_review.md, L10541 to L10552
+[^hazmat]: Source: knowledge/notes/denis_all_part02_review.md, L188 to L193
+
+## References
+
+[^1]: Source: knowledge/notes/all_part01_review.md, L175 to L175
+[^2]: Source: knowledge/notes/all_part01_review.md, L113 to L113
+[^3]: Source: knowledge/notes/all_part01_review.md, L106 to L107
+[^4]: Source: knowledge/notes/all_part01_review.md, L114 to L114
+[^5]: Source: knowledge/notes/all_part01_review.md, L182 to L182
+[^6]: Source: knowledge/notes/all_part01_review.md, L115 to L116
+[^7]: Source: knowledge/notes/all_part01_review.md, L117 to L117
+[^8]: Source: knowledge/notes/all_part01_review.md, L171 to L171
+[^9]: Source: knowledge/notes/all_part01_review.md, L133 to L133
+[^10]: Source: knowledge/notes/all_part01_review.md, L132 to L132
+[^11]: Source: knowledge/notes/all_part01_review.md, L134 to L134
+[^12]: Source: knowledge/notes/all_part01_review.md, L201 to L201
+[^13]: Source: knowledge/notes/all_part01_review.md, L137 to L137
+[^14]: Source: knowledge/notes/all_part01_review.md, L138 to L138
+[^15]: Source: knowledge/notes/all_part01_review.md, L139 to L140
+[^16]: Source: knowledge/notes/denis_all_part02_review.md, L224 to L225
+[^17]: Source: knowledge/notes/denis_all_part02_review.md, L97241 to L97259
+[^18]: Source: knowledge/notes/denis_all_part02_review.md, L361 to L362
+[^19]: Source: knowledge/notes/denis_all_part02_review.md, L119 to L121
+[^20]: Source: knowledge/notes/denis_all_part02_review.md, L122 to L123
+[^21]: Source: knowledge/notes/denis_all_part02_review.md, L242 to L243
+[^22]: Source: knowledge/notes/denis_all_part02_review.md, L252 to L254
+[^23]: Source: knowledge/notes/denis_all_part02_review.md, L215 to L216
+[^24]: Source: knowledge/notes/denis_all_part02_review.md, L233 to L234
+[^25]: Source: knowledge/notes/denis_all_part02_review.md, L318 to L319
+[^26]: Source: knowledge/notes/denis_all_part02_review.md, L320 to L320
+[^27]: Source: knowledge/notes/denis_all_part02_review.md, L348 to L349
+[^28]: Source: knowledge/notes/denis_all_part02_review.md, L351 to L352
+[^29]: Source: knowledge/notes/denis_all_part02_review.md, L116 to L118
+[^30]: Source: knowledge/notes/denis_all_part02_review.md, L301 to L301
+[^31]: Source: knowledge/notes/denis_all_part02_review.md, L149 to L150
+[^32]: Source: knowledge/notes/denis_all_part02_review.md, L152 to L153
+[^33]: Source: knowledge/notes/denis_all_part02_review.md, L173 to L174
+[^34]: Source: knowledge/notes/denis_all_part02_review.md, L248 to L250
+[^35]: Source: knowledge/notes/denis_all_part02_review.md, L355 to L355
+[^36]: Source: knowledge/notes/all_part01_review.md, L121 to L121
+[^37]: Source: knowledge/notes/all_part01_review.md, L122 to L122
+[^38]: Source: knowledge/notes/all_part01_review.md, L123 to L123
+[^39]: Source: knowledge/notes/all_part01_review.md, L124 to L124
+[^40]: Source: knowledge/notes/all_part01_review.md, L176 to L176
+[^41]: Source: knowledge/notes/all_part01_review.md, L177 to L178
+[^42]: Source: knowledge/notes/all_part01_review.md, L179 to L179
+[^43]: Source: knowledge/notes/all_part01_review.md, L180 to L180
+[^44]: Source: knowledge/notes/all_part01_review.md, L181 to L181
+[^45]: Source: knowledge/notes/all_part01_review.md, L195 to L195
+[^46]: Source: knowledge/notes/all_part01_review.md, L196 to L196
+[^47]: Source: knowledge/notes/all_part01_review.md, L197 to L197
+[^48]: Source: knowledge/notes/all_part01_review.md, L185 to L185
+[^49]: Source: knowledge/notes/all_part01_review.md, L186 to L186
+[^50]: Source: knowledge/notes/all_part01_review.md, L187 to L187
+[^51]: Source: knowledge/notes/all_part01_review.md, L188 to L188
+[^52]: Source: knowledge/notes/all_part01_review.md, L159 to L159
+[^53]: Source: knowledge/notes/all_part01_review.md, L200 to L200
+[^54]: Source: knowledge/notes/all_part01_review.md, L172 to L172
+[^55]: Source: knowledge/notes/all_part01_review.md, L151 to L151
+[^56]: Source: knowledge/notes/all_part01_review.md, L152 to L152
+[^57]: Source: knowledge/notes/all_part01_review.md, L155 to L155
+[^58]: Source: knowledge/notes/all_part01_review.md, L156 to L156
+[^59]: Source: knowledge/notes/all_part01_review.md, L157 to L157
+[^60]: Source: knowledge/notes/all_part01_review.md, L158 to L158
+[^61]: Source: knowledge/notes/all_part01_review.md, L167 to L167
+[^62]: Source: knowledge/notes/all_part01_review.md, L191 to L192
+[^63]: Source: knowledge/notes/denis_all_part02_review.md, L218 to L219
+[^64]: Source: knowledge/notes/denis_all_part02_review.md, L98595 to L98598
+[^65]: Source: knowledge/notes/denis_all_part02_review.md, L221 to L222
+[^66]: Source: knowledge/notes/denis_all_part02_review.md, L97446 to L97459
+[^67]: Source: knowledge/notes/denis_all_part02_review.md, L86203 to L86239
+[^68]: Source: knowledge/notes/denis_all_part02_review.md, L302 to L302
+[^69]: Source: knowledge/notes/denis_all_part02_review.md, L308 to L309
+[^70]: Source: knowledge/notes/denis_all_part02_review.md, L311 to L312
+[^71]: Source: knowledge/notes/denis_all_part02_review.md, L326 to L327
+[^72]: Source: knowledge/notes/denis_all_part02_review.md, L338 to L339
+[^73]: Source: knowledge/notes/denis_all_part02_review.md, L341 to L342
+[^74]: Source: knowledge/notes/denis_all_part02_review.md, L357 to L359
+[^75]: Source: knowledge/notes/denis_all_part02_review.md, L393 to L394
+[^76]: Source: knowledge/notes/denis_all_part02_review.md, L399 to L400

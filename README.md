@@ -16,9 +16,32 @@ This repository collects and organizes information about electric scooter setup,
 ├── knowledge/
 │   ├── notes/                              # In-progress findings and research notes
 │   └── processed/                          # Curated articles, guides, and structured outputs
+│       └── themes/
+│           ├── brands/                     # Brand-specific dossiers (28 files)
+│           └── guides/                     # How-to guides and tutorials (44 files)
 ├── tools/                                  # Utility scripts for processing raw exports
 └── README.md
 ```
+
+## What's in the processed knowledge base?
+
+The `knowledge/processed/themes/` directory contains **72 professionally formatted documents** covering:
+
+- **28 brand dossiers** covering controllers, motors, and BMS systems from manufacturers like Spintend, Flipsky, Makerbase, 3Shul, and more
+- **44 comprehensive guides** including:
+  - VESC tuning and parameter optimization
+  - Battery pack design and BMS integration
+  - Motor cooling and thermal management
+  - Conversion guides for popular scooter models (Ninebot, Xiaomi, etc.)
+  - Brake upgrades and maintenance
+  - Field weakening and high-voltage setups
+  - Diagnostic tools and troubleshooting
+
+All documents use a consistent, readable format with:
+- Clean footnote citations linking back to source material
+- Well-organized sections with proper headings
+- Tables and checklists for quick reference
+- Preserved technical accuracy from the original discussions
 
 ## Workflow overview
 
@@ -37,7 +60,7 @@ This repository collects and organizes information about electric scooter setup,
 
 The Telegram export is split into 10 MB `input_partXXX.json` slices that are not valid JSON individually. Use `tools/telegram_to_text.py` to stitch the pieces together and emit a readable transcript:
 
-```
+```bash
 python tools/telegram_to_text.py \
     --input data/raw/telegram_exports/vesc_help_group \
     --include-service \
@@ -53,14 +76,24 @@ The example command above generates a 500-line excerpt in `knowledge/processed/v
 
 ### Working with the pre-extracted transcripts
 
-- When you only need a quick look at the chat without stitching JSON parts yourself, open the plain-text slices stored in `data/vesc_help_group/text_slices/input_partXXX.txt`. Each file mirrors the corresponding Telegram export part and keeps timestamps, senders, and message bodies for fast skimming.【F:data/vesc_help_group/text_slices/input_part000.txt†L1-L27】
-- Use these text files as lightweight references while taking structured notes. They pair well with the extraction log in `knowledge/notes/extraction_log.md`, letting you cross-reference notable findings without leaving the repository.【F:knowledge/notes/extraction_log.md†L1-L18】
+- When you only need a quick look at the chat without stitching JSON parts yourself, open the plain-text slices stored in `data/vesc_help_group/text_slices/input_partXXX.txt`. Each file mirrors the corresponding Telegram export part and keeps timestamps, senders, and message bodies for fast skimming.
+- Use these text files as lightweight references while taking structured notes. They pair well with the extraction log in `knowledge/notes/extraction_log.md`, letting you cross-reference notable findings without leaving the repository.
 
 ## Contributing guidelines
 
 - Keep raw data untouched. Perform any cleaning or transformation in new files so the original context remains available.
 - When adding new knowledge documents, include metadata such as the source message link, date, author, and any assumptions or hardware configurations.
 - Structure processed documents for readability. Use headings, bullet lists, tables, and diagrams where appropriate.
+- All processed documents should use footnote citations (e.g., `[^1]`) rather than inline citations to maintain readability.
+
+## Document formatting standards
+
+All processed knowledge documents follow these formatting conventions:
+
+- **Footnote citations**: Technical claims link to source material using footnote references (`[^1]`, `[^2]`, etc.) with a References section at the end
+- **Visual hierarchy**: Proper spacing around headers and sections
+- **Structured content**: Tables, bullet lists, and sub-bullets for easy scanning
+- **Preserved accuracy**: All technical content is maintained from the original sources
 
 ## Future improvements
 
@@ -69,3 +102,4 @@ The example command above generates a 500-line excerpt in `knowledge/processed/v
 - Add tagging or cross-referencing between notes and processed documents for easier navigation.
 
 Happy knowledge mining!
+

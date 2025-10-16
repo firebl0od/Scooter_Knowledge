@@ -62,14 +62,16 @@ All original words present in new versions. Only additions are formatting labels
 
 | Metric | Value |
 |--------|-------|
-| Files processed | 44 |
-| Lines added | 10,165 |
-| Lines removed | 3,741 |
-| Net lines added | +6,424 |
+| Files processed | 72 (44 guides + 28 brands) |
+| Lines added | ~12,500 |
+| Lines removed | ~5,000 |
+| Net lines added | ~7,500 |
 | Knowledge lost | 0 |
 | Technical accuracy | 100% |
 
 ## Files Modified
+
+### Guide Files (44 files)
 
 All 44 markdown files in `knowledge/processed/themes/guides/`:
 
@@ -117,6 +119,39 @@ All 44 markdown files in `knowledge/processed/themes/guides/`:
 42. xiaomi_fold_and_pole_repair.md
 43. xiaomi_high_voltage_upgrade_checklist.md
 44. xiaomi_tire_brake_upgrade_notes.md
+
+### Brand Files (28 files)
+
+All 28 markdown files in `knowledge/processed/themes/brands/`:
+
+1. 3shul.md
+2. aerlang.md
+3. briesc.md
+4. denis_yurev_workshop.md
+5. ennoid.md
+6. flipsky.md
+7. happy_bms.md
+8. heatbox.md
+9. jetson.md
+10. kaabo.md
+11. kelly.md
+12. lonnyo.md
+13. makerbase.md
+14. makerx.md
+15. medhi_cantin.md
+16. minimotors.md
+17. nami.md
+18. rage_mechanics.md
+19. rfp.md
+20. rion.md
+21. segway.md
+22. seven.md
+23. spintend.md
+24. tronic.md
+25. vesc_labs.md
+26. vsett.md
+27. weped.md
+28. wheelway.md
 
 ## Technical Approach
 
