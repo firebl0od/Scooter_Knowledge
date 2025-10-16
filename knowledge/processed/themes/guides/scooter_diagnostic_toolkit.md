@@ -13,6 +13,7 @@
 - **Insulation & adhesive supplies:** Stock RTV silicone, Kapton, and zip ties to strain-relieve DC/DC converters and harnesses; vibration snaps converter leads unless they are glued or tied back to the PCB before the scooter ever rolls.【F:knowledge/notes/denis_all_part02_review.md†L31-L32】
 - **Instant translation:** Plus Messenger’s built-in translator lets techs follow Spanish- and French-language repair chats without copy-paste gymnastics—handy when sourcing parts from multinational groups.【F:data/vesc_help_group/text_slices/input_part001.txt†L1665-L1689】
 - **Dedicated GPS logger:** Relive overstates peak speed by ~7 km/h when GPS drops, so shops now run Speed View GPS Pro for floating dashboards, exportable logs, and reliable range data alongside VESC telemetry.【F:data/vesc_help_group/text_slices/input_part001.txt†L6003-L6013】【F:data/vesc_help_group/text_slices/input_part001.txt†L6414-L6436】
+- **Retire sketchy refurbished chargers.** A “Meanwell” fast charger with loose add-on circuitry and cold solder joints tripped RCDs and died outright—budget for genuine 22 S-capable supplies even if they cost €200+ rather than gambling on rebuilds.【F:data/vesc_help_group/text_slices/input_part004.txt†L9300-L9374】
 
 ## Wiring & Harness Checks
 1. **Start at the XT30:** After any crash or curb strike, verify the adapter output voltage before chasing other faults; browned phase pins or half-seated BMS harnesses are the most common culprits when scooters power-cycle on bumps.【F:knowledge/notes/all_part01_review.md†L195-L195】

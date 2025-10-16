@@ -88,9 +88,11 @@
 - Arnau’s single-motor 75 H 22/3 setup stayed below 90 °C at 200 A phase once he swapped the thermistor pull-up to 100 kΩ, pairing a Ubox 240 with a 20 S 6 P P45B pack and ANT 450 A BMS—evidence that accurate sensing plus sane currents keep Daly-equipped commuters alive.【F:data/vesc_help_group/text_slices/input_part013.txt†L10221-L10248】
 - Matthew continues to see ~30 °C drops within minutes when hubs get ≈4 ml of Statorade, but Haku cautions that sealing the air gap can overheat magnets—log magnet temps and weigh long-term wear before filling every race hub.【F:data/vesc_help_group/text_slices/input_part013.txt†L10299-L10309】
 - Yamal’s dual 33/2 windings hold roughly 49–63 °C during hard pulls, proving so-called “speed” winds can still deliver torque when the pack and cooling strategy are dialed.【F:knowledge/notes/input_part013_review.md†L715-L715】
+- Heavy scooter harnesses show their limits quickly: even 8 AWG looms start heating around 150 A, and Paolo logged sub-50 % efficiency once bursts climbed toward 330 A without forced-air cooling and vented covers to keep the stator in check.【F:data/vesc_help_group/text_slices/input_part004.txt†L9418-L9434】
 
 ## Rotor & Magnet Integrity
 - 7" LY 90 H hubs run a 127 mm stator with 40-magnet rotors, hitting noticeably harder than 110 mm-class cans but forcing builders onto matching 7" tire inventory and careful chassis clearance checks.【F:knowledge/notes/input_part013_review.md†L445-L445】
+- Strip corrosion and reglue loose magnets on “new” hubs before riding—VSETT assemblies have arrived rusty with magnets shifting, and veterans clean the rotor then bond magnets back with Loctite AA326 before reassembly.【F:data/vesc_help_group/text_slices/input_part004.txt†L2133-L2152】
 - Double-magnet 80 H stacks have twisted stators after 350–500 A assaults and 133–144 °C cores; Paolo warns lamination glue softens and magnets can demagnetise past ≈120 °C, so log temps and back current down before the damage becomes permanent.【F:knowledge/notes/input_part013_review.md†L446-L447】
 - After pothole strikes at speed, Lonnyo/Shul race hubs that trip current or throw “voltage imbalance” faults should be torn down to inspect magnets, hall boards, and harness strain before the next run.【F:knowledge/notes/input_part013_review.md†L744-L767】
 
@@ -111,9 +113,12 @@
 ## Motor Temperature Instrumentation
 - **Install proper NTC sensors for accurate readings.** Installing EPCOS/TDK B57861S0502F040 2×4 mm NTCs against the hall/phase bundle, secured with thermal epoxy rated to 150 °C, delivered accurate phase readings in minutes and enables reliable over-temp cutbacks.[^ntc_install]
 - **Route temp leads away from phase bundles.** Gordan's Ubox V2 logs showed thermistor signals collapsing above 80 A until he chased the ground loop, underscoring the need to reroute sensor wiring or add shielding when phase currents spike.[^temp_routing]
+- **Inject ferrofluid from the open cover.** Rather than drilling hubs, veterans crack the side cover and syringe Statorade along the stator slots to avoid misaligned holes and keep debris out of the rotor.【F:data/vesc_help_group/text_slices/input_part004.txt†L8825-L8851】
 
 ## 60H Hub Specific Notes
 - **60H builds prefer 50 A battery / 100 A phase with ferrofluid.** Riders reported smooth launches after sealing leads, adding ferrofluid, and pairing the tune with ~10 A field-weakening that engages around 91.5% duty while holding full duty near 95%; still install temperature sensors before chasing 16 S, 60 km/h targets on long hill routes.[^60h_baseline]
+- **Inject ferrofluid through the cable grommet, not with spray grease.** Veterans loosen RTV-sealed glands, push ≈4.5 ml of Statorade in with a syringe, and avoid aerosol greases that contaminate bearings—airflow mods still matter once the stator saturates.【F:knowledge/notes/input_part004_review.md†L205-L205】【F:knowledge/notes/input_part004_review.md†L217-L217】
+- **Expect efficiency to crash past 330 A battery unless you add airflow.** Track logs showed <50 % motor efficiency, 133–162 Wh/km consumption, and low tire pressures to maintain grip when sealed hubs were over-driven—proof that cooling upgrades are mandatory before chasing higher phase current.【F:knowledge/notes/input_part004_review.md†L208-L208】
 
 ## High-Torque Motor Stress & Thermal Limits
 - **80H 22×3 motors twisted stators after sustained high-current abuse.** Multiple builds failed after 350–500 A phase assaults at 133–144 °C core temps; prolonged heat softens lamination glue, and rotors demagnetize above ≈120 °C, especially on LY's double-magnet stack designs.[^80h-stress]

@@ -11,6 +11,7 @@
 
 ## Cell & Component Sourcing Reference
 - **Keep the high-power roster current.** Community testers just flagged EVE 40PL/50PL, Molicel P50B, and BAK 45D as the modern reference set for 300 A+ packs—refresh comparison sheets with Mooch’s latest lab data before committing to older chemistries.【F:knowledge/notes/input_part013_review.md†L523-L524】
+- **Budget Xiaomi rebuilds still bottleneck at ~40 A per half-pack.** Dual 20 S stacks built from repacked Xiaomi cells only yield ~17.5 Ah and 40 A per section, so Zero 10X upgrades need parallel 8 AWG-equivalent harnesses at 100 A draws to avoid voltage sag.【F:knowledge/notes/input_part004_review.md†L236-L236】
 | Component | EU Pricing & Availability | North America Reality | Immediate Actions |
 | --- | --- | --- | --- |
 | **EVE 50PL 21700** | Salvaged Stark Varg modules deliver grade-A cells for ~1 € each after labor; retail bulk hovers 1.5 € with logos shaved yet still grade A.【F:knowledge/notes/input_part014_review.md†L35-L36】 | ~$9 per cell retail with looming import duties.【F:knowledge/notes/input_part014_review.md†L36-L38】 | Form cooperative buys, pre-clear customs brokers, and reserve storage for incoming pallets. |

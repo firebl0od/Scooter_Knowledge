@@ -4,6 +4,7 @@
 - Hydraulic brake systems demand proper bleeding technique (level levers, flick hoses to vent micro-bubbles, patient lever cycling) and proactive seal maintenance to avoid spongy feel or sudden failures during high-speed stops.[^bleed-technique]
 - Four-piston calipers provide superior thermal mass and stopping power for high-performance builds but require careful rotor sizing (180–203 mm) and clearance checks to avoid frame interference.[^four-piston]
 - Wheel-centering kits and dual-caliper setups eliminate rotor wobble and improve braking consistency on racing builds, but add complexity and weight that commuter riders may not need.[^centering-kits]
+- Keep at least one mechanical brake active even on regen-heavy builds—logs show regen-only riding overheats controllers quickly, and dual-motor setups still rely on mechanical rotors to stop safely when electronics fault.【F:knowledge/notes/input_part004_review.md†L222-L222】【F:knowledge/notes/input_part004_review.md†L230-L230】
 
 ## Bleeding Techniques
 
@@ -32,9 +33,13 @@
 - Artem's freshly delivered Shimano M7120 four-piston set (≈€155 for the pair without rotors) brings stiffer one-finger levers and extra thermal mass that he plans to migrate from his trial bike to the scooter if he decides four pistons are overkill off-road.[^four-piston-cost]
 - Four-piston systems improve heat dissipation during repeated high-speed stops but may be excessive for commuter builds under 60 km/h where two-piston Magura MT5 or similar calipers provide adequate stopping power.[^four-piston-vs-two]
 
+### Motorcycle-Caliper Imports (Kotto Example)
+- Kotto’s 3 mm motorcycle kits deliver fierce bite out of the box but ship dry and oversized—expect to bleed them immediately and clearance thick rotors or caliper mounts so the hardware sits square on scooter forks.【F:knowledge/notes/input_part004_review.md†L221-L221】
+
 ### Rotor Sizing Considerations
 - Brake discussions suggest upsizing rotors from 180 mm to 203 mm mainly boosts thermal mass and leverage but may be excessive for scooters; larger rotors require frame clearance checks and stronger mounting tabs to handle increased braking forces.[^rotor-sizing]
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
+- Brakestuff 3 mm rotors reward precise setup—Magura Saints squeal if runout isn’t near perfect, but Hope Tech 4 V4 calipers on the same discs delivered the strongest stops the testers have measured so far.【F:data/vesc_help_group/text_slices/input_part004.txt†L7401-L7405】【F:data/vesc_help_group/text_slices/input_part004.txt†L7469-L7472】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -105,3 +110,4 @@
 [^fluid-compat]: Brake fluid compatibility chart for common hydraulic brake systems.
 [^follow-centering]: Follow-up action to create wheel-centering and dual-caliper setup guide.【F:knowledge/notes/input_part013_review.md†L645-L647】
 [^follow-dual-disc]: Follow-up action to document dual-disc vs. dual-caliper decision matrix.【F:knowledge/notes/input_part013_review.md†L635-L637】
+- **Cool overheated brakes while rolling.** Riders who stop immediately after smoking a Magura caliper trap heat, boil fluid, and face a full re-bleed—keep the scooter moving to shed heat before coming to rest after heavy stops.【F:data/vesc_help_group/text_slices/input_part004.txt†L4146-L4156】

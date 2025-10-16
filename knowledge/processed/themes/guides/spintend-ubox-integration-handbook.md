@@ -16,8 +16,9 @@
 4. **Bench Rules:** Wire the entire harness before energising, precharge ≥20 S packs, discharge bus caps after unplugging, keep ADC inputs ≤3.3 V, and eliminate ground loops to avoid repeat STM32 deaths.[^3]
 4. **Initial Power Tests:** Bring the controller up on a fused bench supply with the BMS discharge FET enabled; if regen previously latched undervoltage faults, confirm the pack’s protection MOSFETs are awake before running detection.[^19]
 5. **Detection housekeeping:** Enable the phase-filter checkbox only during motor detection—leaving it on while riding reintroduces noise and ABS overcurrent faults.[^phase-filter]
-6. **Screen current-sense offsets:** Before installing, power each single on the bench and confirm the current-sense op-amps report sane offsets (hundreds of counts, not 30 or 4,000); multiple “new” boards arrived with shorted amplifiers that later blew input capacitors and XT60s under normal reconnects.[^offset-screening]
-7. **Log the hardware revision.** The latest single board swaps to an aluminium PCB with G015N10 MOSFETs—stick with the matching gate network instead of random FET swaps or you’ll destabilise the driver.[^g015n10]
+6. **Reset hall handoff targets if launches shudder.** Lower hall interpolation toward ~300 eRPM, force sensorless to ~400 eRPM, recalibrate PID offsets, and try the “natural” throttle map before re-running geared drivetrains that stumble off the line.【F:knowledge/notes/input_part004_review.md†L30-L30】
+7. **Screen current-sense offsets:** Before installing, power each single on the bench and confirm the current-sense op-amps report sane offsets (hundreds of counts, not 30 or 4,000); multiple “new” boards arrived with shorted amplifiers that later blew input capacitors and XT60s under normal reconnects.[^offset-screening]
+8. **Log the hardware revision.** The latest single board swaps to an aluminium PCB with G015N10 MOSFETs—stick with the matching gate network instead of random FET swaps or you’ll destabilise the driver.[^g015n10]
 
 ## Thermal Management & Mounting
 - **Firmware Limits:** Stock firmware starts derating around 75–85 °C and shuts down near 100 °C, so increase cutbacks only after verifying thermistor calibration.[^4]
@@ -51,6 +52,7 @@
 
 ## Firmware, Logging & Fault Recovery
 - **Version Discipline:** Stick with Spintend’s vetted firmware packages (e.g., 100 A battery limit files) unless you have cooling to exploit the 300 A hardware bins; mismatched binaries raise noise and reliability issues.[^25]
+- **Mxlemming observer wins on GT2 hubs.** Ubox V2 running firmware 6.0 held steady torque and near-lab voltage readings on Segway GT2 hubs after the detection wizard auto-switched to the Mxlemming observer with lambda compensation—log the before/after traces whenever you swap observers.【F:data/vesc_help_group/text_slices/input_part004.txt†L4282-L4290】
 - **Unofficial 300 A bins:** Community Micro-USB and USB‑C binaries lift the single’s 100 A factory ceiling to 300 A but void warranty—install only if you have the airflow, copper interfaces, and logs to prove the MOSFETs survive the extra load.【F:data/vesc_help_group/text_slices/input_part000.txt†L20181-L20187】【F:data/vesc_help_group/text_slices/input_part000.txt†L20190-L20299】
 - **BLE Options:** Official BLE dongles arrive pre-flashed and tax-paid via AliExpress, while DIY NRF boards need extra programming; keep at least one link for live tuning even if you prefer wired sessions.[^26]
 - **NRF quick-start:** When the NRF header is the only free UART, flash a generic NRF51 via USB, solder it to the dedicated header, and power-cycle to pair—no need to steal the ADC adapter’s UART pads.【F:data/vesc_help_group/text_slices/input_part004.txt†L8813-L8818】

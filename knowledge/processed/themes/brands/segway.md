@@ -121,12 +121,14 @@
 - **Dual-stock Ninebot packs fit with tall spacers and flipped SNSC suspension.** Builds using 80 mm hardware, 3D-printed deck risers, and inverted SNSC brackets net ~6 cm ground clearance so two OEM packs plus externals ride without scraping.[^dual_pack_fitment]
 - **Ninebot hub thermal ceiling is ~40–45 A battery.** Paolo confirmed OG Ninebot motors burn above this threshold even on 20 S—cap phase/battery settings and resist feeding dual 15 A controllers continuous load without upgraded hubs.[^ninebot_thermal]
 - **F-series stems bend under load.** The elongated aluminum steering tube will bend where factory drilling weakened it for harness routing—inspect for flex before hard riding and treat as weaker than Xiaomi's 45° pipe assembly.[^f_stem]
+- **ARS suspension stretches the wheelbase.** Italian-made front and rear kits push the G30 chassis outward, accept 125 mm hubs, and pair cleanly with 160 mm rotors; the rear kit is shipping while the zero-play front assembly is still in beta.[^ars_suspension]
 [^pack_stack]: Stacking Ninebot G30 packs with DIY extenders requires BMS parity and matched voltages.【F:knowledge/notes/input_part004_review.md†L14-L14】
 [^dual_g30_speed]: Dual-motor G30 speed expectations at 48 V with thermal management warnings.【F:knowledge/notes/input_part004_review.md†L74-L74】
 [^g30_cutoff]: Recommended VESC battery cutoff voltage for 20 S stacked Ninebot packs.【F:knowledge/notes/input_part004_review.md†L48-L48】【F:knowledge/notes/input_part004_review.md†L70-L70】
 [^dual_pack_fitment]: Dual Ninebot pack packaging with tall spacers and flipped SNSC suspension.【F:knowledge/notes/input_part004_review.md†L47-L47】
 [^ninebot_thermal]: Ninebot hub motor thermal ceiling around 40–45 A battery current.【F:knowledge/notes/input_part004_review.md†L298-L298】
 [^f_stem]: Ninebot F-series stem bending cautions due to factory harness routing holes.【F:knowledge/notes/input_part004_review.md†L346-L346】
+[^ars_suspension]: ARS front/rear suspension kits extend the G30 wheelbase, fit 125 mm hubs, and support 160 mm rotors with zero-play linkages once the front beta ships.【F:knowledge/notes/input_part004_review.md†L26-L26】
 [^f2pro-shfw]: ScooterHacking Firmware confirming sensorless launch reliability on F2 Pro with hall emulation noise during controller switching.【F:knowledge/notes/input_part013_review.md†L146-L148】
 [^f2pro-ocp]: F2 Pro over-current protection tripping near 30 A regardless of utility app settings.【F:knowledge/notes/input_part013_review.md†L146-L148】
 [^f2pro-limits]: F2 Pro external pack current sharing guidance to avoid BMS trips while respecting 25–30 A ceiling.【F:knowledge/notes/input_part013_review.md†L148-L150】

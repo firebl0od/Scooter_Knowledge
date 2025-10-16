@@ -62,6 +62,7 @@
 ## Charging Infrastructure Updates
 - **Adjustable supplies cover odd pack voltages.** Builders chasing 21 S charging have adopted programmable 22 S/18 A supplies paired with ANT sleep timers so dormant packs don’t drift while waiting for the next ride.[^adj_supply]
 - **Multi-voltage bricks plug stock gaps.** When premium 21 S chargers disappear, the community leans on 16–24 S/20 A switchable supplies—worth flagging for travel kits that need one brick for multiple scooters.[^multi_brick]
+- **4 S booster packs still need LLT’s 100 A boards.** Riders speccing 4 S 4 P auxiliaries lean on LLT/LLTBMS hardware and warn that jumping to 20 S simply pushes stock wiring to failure before the controller runs out of headroom—budget harness upgrades alongside the BMS.【F:knowledge/notes/input_part004_review.md†L216-L216】
 - **Mind discharge-less BMS designs.** Jason’s new 32 S-capable board omits discharge FETs entirely, effectively passing unlimited current; treat it as a monitoring tap and keep downstream fusing intact.[^no_fet]
 
 ## Troubleshooting & Field Failures

@@ -3,6 +3,7 @@
 ## TL;DR
 - Multi-hundred-mile scooter tours are feasible with proper pack sizing (≥5 kWh), thermal management, and access to Level 2 EV charging infrastructure, but riders must plan charging etiquette, adapter compatibility, and backup power strategies before leaving home base.[^tour-viable][^ev-infra]
 - Public charging demands J1772 adapters, protocol triggers for Tesla plugs (FoCcci boards or equivalent), and awareness that app-locked stations typically release only one handle per session—coordinate with EV drivers and respect charging bay time limits.[^j1772][^tesla-protocol]
+- Treat improvised series-charging stacks as last-resort hacks—verify isolation with an ohmmeter before tying chargers together or you risk energising scooter frames and tripping breakers; purpose-built high-voltage supplies remain the safe touring option.【F:knowledge/notes/input_part004_review.md†L225-L225】
 - Generator-assisted touring remains experimental; a 1 kW portable generator paired with a 5+ kWh pack could theoretically support coast-to-coast attempts, but weight, noise, and reliability trade-offs need field validation before serious planning.[^generator]
 
 ## Long-Range Riding Benchmarks

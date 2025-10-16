@@ -40,6 +40,7 @@
 - Rion race teams now pre-flight every controller before reinstalling—lifting MOSFET clamps, scraping and repasting the baseplate, reseating shunts, and soldering a jumper across the fragile DC-DC enable pad—because the latest teardown found all three defects waiting to trigger another 117 km/h inferno if left untouched.【F:data/vesc_help_group/text_slices/input_part003.txt†L23300-L23653】
 - Recent QC autopsies uncovered cracked MOSFET cans, uneven paste, and a fragile DC-DC enable pad that only re-latched after IPA baths—plan solder rework and connector upgrades before sending Tronic boards back into service.【F:data/vesc_help_group/text_slices/input_part003.txt†L23300-L23538】【F:data/vesc_help_group/text_slices/input_part003.txt†L23563-L23653】
 - Sudden ABS over-current or regen spikes often track back to mismatched shunts or instrumentation blind spots—log actual phase and battery currents rather than trusting on-screen values.[^2][^11]
+- High-duty ABS cutouts have resurfaced above ~130 km/h on MP2/Tronic boards when front/rear shunt mods drift more than 30 %; riders are capping duty around 95 % or reverting firmware until matched sensing solves the fault.【F:knowledge/notes/input_part004_review.md†L232-L232】【F:knowledge/notes/input_part004_review.md†L240-L240】
 
 ## Integration & Accessory Notes
 - The X12’s 5 V rail maxes out around 150 mA, so horn, lighting, and telemetry accessories still need external buck converters even though the controller advertises auxiliary power.[^3]

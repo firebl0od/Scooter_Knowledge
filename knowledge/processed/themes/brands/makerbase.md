@@ -28,6 +28,7 @@
 - Veteran tuners now label 22 S experiments “suicide” unless you derate current, skip MTPA/field weakening, or upgrade the MOSFETs—stock hardware keeps popping when riders apply full 22 S output without significant rework. 【F:knowledge/notes/input_part013_review.md†L781-L781】
 - Verified 22 S survivors all shared meticulous harness audits—phase shorts to the chassis, not voltage itself, killed the lone documented 84200 HP board—so bake insulation checks and BMS regression tests into every high-voltage install. 【F:knowledge/notes/input_part014_review.md†L18-L19】
 - Cap absolute current near 250–300 A even on aluminum-PCB 75100s—ABS abuse around 450–500 A shredded one board, and clones with weaker MOSFET bins start overheating past ≈110 A battery anyway. 【F:knowledge/notes/input_part003_review.md†L106-L114】
+- Treat higher pack voltage as a hardware change: one aluminum 75100 that behaved on 16 S instantly shorted both motors at the first throttle input on 22 S, reinforcing that regen spikes and MOSFET limits demand full component audits before raising voltage.【F:data/vesc_help_group/text_slices/input_part004.txt†L6459-L6464】
 - Leave ≥5 V of headroom between pack max and BMS high-voltage cutoff; Paolo’s rear 75100 accelerated uncontrollably before an over-voltage trip killed the logic board when the cutoff sat at the ESC limit. 【F:knowledge/notes/input_part003_review.md†L161-L161】
 
 ## Reliability & Incoming Inspection

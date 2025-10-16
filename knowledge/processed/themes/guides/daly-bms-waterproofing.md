@@ -5,6 +5,7 @@
 - Reassembly should include layered insulation (fish paper, multiple waterproof tape wraps, outer shrink) plus silicone-sealed seams and desiccant packs to prevent repeat condensation failures.[^2]
 - After drying sessions, leave the pack open overnight with low heat (hair dryer or warm air) before resealing; rushing the process risks latch-off FETs and lingering moisture.[^3]
 - Keep the Daly Bluetooth app handy (default password 123456) to re-enable charge/discharge MOSFETs after moisture-induced trips once the hardware is verified.[^4]
+- Daly smart boards only balance at ~30 mA and struggle during 25 A charges—pair them with monitored 4 A active balancers and watch for reverse-current experiments that can fry the helper board.【F:knowledge/notes/input_part004_review.md†L290-L290】
 
 ## Failure Signals to Watch
 - Random 5 V cell-group reports or sudden discharge lockouts despite balanced cells.[^1]

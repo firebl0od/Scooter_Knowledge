@@ -22,6 +22,7 @@
 
 ## Reliability & Failure Patterns
 - **Random early deaths remain common.** Multiple riders still see Flipsky stages fail within weeks—even under modest load—so budget time for burn-in and consider stocking spares before customer deployments.⁶
+- **Rectangular-case 75100s arrive half-finished.** Shops keep finding floating bus capacitors, dry thermal interfaces, and misreported firmware IDs (HW75300) on the new aluminium enclosures—open every unit, re-torque hardware, add paste, and verify IDs before loading customer profiles.【F:knowledge/notes/input_part004_review.md†L229-L229】
 - **Capacitor banks are a recurring weak link.** Units have dropped to 14 V readings on 20 S packs after repeated capacitor explosions; veterans like ‘lekrsu’ and Haku pin the failures on bargain components rather than layout, so simple cap swaps rarely hold.⁷
 - **Regen cutoffs can brick controllers.** Aggressive negative current spikes triggered logic-board shutdowns on otherwise healthy 75100s; tune regen ramps gently and log results before releasing builds.⁸
 - **Firmware 5.3 introduced a brake-lock scare.** One 75100 flashed to 5.3 locked the wheel at ~45 km/h despite unchanged current limits; double-check UART handbrake scripts, phase insulation, and wiring before road tests after a firmware jump.【F:data/vesc_help_group/text_slices/input_part001.txt†L25875-L25943】
@@ -32,6 +33,7 @@
 - **7550 capacitor grenades persist.** Fresh hardware has launched capacitors during the very first motor detection even on stock settings—treat “300 A” marketing claims skeptically and bench-burn every controller before field use.【F:data/vesc_help_group/text_slices/input_part001.txt†L9640-L9679】
 - **USB tuning crashes.** Several riders traced VESC Tool lockups under load to poor USB isolation on 75100 boards; if tethered sessions trigger faults, fall back to older PC builds or wireless tuning during road tests.【F:data/vesc_help_group/text_slices/input_part001.txt†L21516-L21532】
 - **Firmware mismatches plague fresh aluminum boards.** Multiple 75100 ALU units shipped with 75_300_R2 firmware, unwritable voltage limits, ABS overcurrent trips, and BLE dropouts until owners reflashed matching bootloader/firmware pairs, raised max-voltage ceilings, and enabled slow ABS limiters.[^fw_mismatch]
+- **Know the MOSFET package.** Flipsky and Makerbase 75200 repairs now confirm Infineon N015N10 TOLL devices on the power stage; hot-air plus preheat (or even an iron) is needed to lift them without tearing pads when replacing cracked parts.【F:data/vesc_help_group/text_slices/input_part004.txt†L7866-L7889】
 - **CAN failures can be soft.** Some 75200 builds lost CAN comms but regained function after factory defaults and rerunning detection—try simple resets before swapping hardware.[^can_soft]
 - **Loose capacitors fail under vibration.** Repaired 75100s died from unsecured bus caps; stake every capacitor and refuse to power boards outside the 4–20 S window.[^cap_stake]
 - **Parameter persistence bugs.** Wattage and regen limits spontaneously reset to 500–700 W on some units until reflashing; suspect flash wear and document write/readback cycles.[^param_persist]
