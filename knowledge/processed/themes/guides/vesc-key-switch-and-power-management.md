@@ -17,6 +17,8 @@
 ### Makerbase Ignition Logic
 - **75100 units expect momentary latch.** Bridge 5 V to the AD15 enable pin for roughly a second to turn on (three seconds to shut down), and set the ADC shutdown timer so the controller actually unlatches.[^makerbase_latch]
 - **84100HP needs normally-closed switches or pull-down mod.** 84100HP controllers need a normally-closed switch or the documented 1 MΩ pull-down to mimic Ubox-style keys.[^makerbase_84100]
+- **Archive the 84100HP key conversion.** @fungus93’s Makerbase 84100HP ignition hack is already easier than the older 75100 conversion—document the pin swap and harness photos before the thread disappears.[^84100hp-key]
+- **Trace-cut resets are an emergency-only hack.** Tommy and Mirono have used a 5 V step-down trace cut plus a gated 12 V chip to force a shutdown, but the regulator is fragile—treat it as a last resort, not a daily power workflow.[^trace-cut]
 
 ## Anti-Spark & Key Switch Failures
 
@@ -28,6 +30,7 @@
 - **Size switches for actual current.** If hanging switches on ignition lines, verify they're rated for the actual current path—most "anti-spark" switches are only rated for signal-level currents.
 - **Use DC/DC enable or BMS control.** The safest approach is to switch the DC/DC enable pin or use smart-BMS control rather than trying to interrupt main battery power with undersized switches.
 - **External contactors for true power-off.** For genuine power isolation, use loop keys (XT90S), smart-BMS latching, or external contactors rated for the pack voltage and current.
+- **Smart-BMS toggles are not antisparks.** JK Bluetooth toggles can wake packs, but 100 A bursts still demand a dedicated antispark or contactor—do not rely on the toggle as the main power disconnect.[^jk-toggle]
 
 ## ANT BMS Precharge Considerations
 
@@ -63,3 +66,6 @@
 [^happy_wake]: Happy BMS latch-off recovery requiring charger wake signal after inrush protection trip.【F:knowledge/notes/input_part004_review.md†L302-L302】
 [^makerbase_latch]: Makerbase 75100 momentary latch implementation with AD15 enable pin timing.【F:knowledge/notes/input_part004_review.md†L36 (in source notes section of Makerbase file)】
 [^makerbase_84100]: Makerbase 84100HP normally-closed ignition logic or 1MΩ pull-down mod requirement.【F:knowledge/notes/input_part004_review.md†L36 (in source notes section of Makerbase file)】
+[^84100hp-key]: Makerbase 84100HP key-mod thread shared by @fungus93 that riders want archived for its cleaner wiring approach.【F:knowledge/notes/input_part007_review.md†L112-L112】
+[^trace-cut]: Makerbase owners cut the 5 V step-down trace and gate the 12 V chip to force a shutdown only for emergency resets—the regulator is fragile and not a daily-use solution.【F:knowledge/notes/input_part007_review.md†L208-L208】
+[^jk-toggle]: JK smart BMS Bluetooth toggles can act as enables, but 100 A bursts still require a proper antispark or contactor instead of overrated relays.【F:knowledge/notes/input_part007_review.md†L227-L227】

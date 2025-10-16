@@ -52,11 +52,13 @@
 
 ## Control & Traction Tuning
 - Update Xiaomi/Ninebot dashboards to firmware 6.05 before pairing dual controllers—the community Lisp build on 6.02 only forwards CAN for a single ESC, so flash Xiaomi firmware or the 6.05 beta images before wiring two VESCs to the dash.【F:knowledge/notes/input_part005_review.md†L206-L207】
+- Makerbase 75100 retrofits still need the pull-down resistor on dash pin 3; riders leave the suggested capacitor optional but warn that 6.2 firmware locks all modes at ~60 % current until a fix ships, so most stay on older releases.[^g30-pulldown]
 - Set motor detection parameters for the G30’s 30-pole hubs and remove any lingering phase filters after repairs—misdiagnosed gate drivers kept blowing MOSFETs until riders retested hardware with the correct pole count.【F:knowledge/notes/input_part005_review.md†L512-L512】
 - Compress throttle ADC ranges (treat ~0.83 V as idle, activate around 1.0–1.2 V) to eliminate noise-triggered surges on Spintend 100/100 installs.【F:knowledge/notes/input_part014_review.md†L84-L85】
 - Grounding the chassis cured runaway acceleration for some riders, but document the wiring and verify insulation to avoid frame shorts before adopting the fix broadly.【F:knowledge/notes/input_part014_review.md†L86-L86】
 - Log traction control adjustments during every shakedown; slip thresholds between 11 k and 17 k rpm and positive throttle ramps (~0.4 s) kept lightweight builds controllable at 300 A phase.【F:knowledge/notes/input_part014_review.md†L107-L107】
 - When upgrading to hydraulic fronts, transplant the stock hall sensor and magnet into the new lever so proportional regen survives the swap and rear mechanical brakes can stay untouched.【F:knowledge/notes/input_part000_review.md†L296-L296】
+- Expect a “10 error” on the stock display after dropping in a Makerbase 75100 V2 until you connect the dash to VESC Tool—plan a programming session right after the swap.[^g30-error10]
 
 ## Dash Scripting & Secret-Mode Management
 - Unlock “secret mode” by holding both brake and throttle while double-tapping the dash button; remember to exit walk mode first or the scooter stays capped near 20 km/h.【F:knowledge/notes/input_part008_review.md†L215-L215】
@@ -105,4 +107,6 @@
 - Deck packaging experiments and travel-charging harness specs stem from the spring 2025 Max threads detailing 30–40 S pack prototypes and J1772 adapter wiring for 3 kW public charging runs.【F:knowledge/notes/input_part012_review.md†L7997-L8222】【F:knowledge/notes/input_part012_review.md†L10580-L11129】
 [^epowerfun]: Builders documented drilling and trimming the budget ePowerFun 3 mm floor plate as a temporary heatsink before commissioning thicker custom skid plates.【F:knowledge/notes/input_part014_review.md†L6301-L6325】
 [^express_power]: VESC Express boards on G30 projects need external 5 V feeds (Spintend rails top out at 150 mA) and stable 6.05 firmware—6.06 restarts SD logging every three seconds until patched.【F:knowledge/notes/input_part014_review.md†L5969-L6037】
+[^g30-pulldown]: G30 dash retrofits on Makerbase 75100s hinge on adding the pull-down resistor from pin 3; firmware 6.2 currently caps all modes around 60 % current so most builders stay on older releases.【F:knowledge/notes/input_part007_review.md†L262-L262】
 [^bms-parity]: Stacking a healthy OEM 10 S pack with a DIY 4 S extender only worked after matching voltages and BMS discharge ratings; a sagging series stack blocked VESC detection until a regulated 60 V source replaced it.【F:knowledge/notes/input_part004_review.md†L13-L19】
+[^g30-error10]: Makerbase 75100 V2 swaps trigger a “10 error” on the stock dash until you introduce the display to VESC Tool and program the controller.【F:data/raw/telegram_exports/vesc_help_group/input_part007.json†L410572-L410744】
