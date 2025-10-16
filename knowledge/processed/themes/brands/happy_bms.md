@@ -1,55 +1,223 @@
-# Happy BMS Platform Dossier
+# Happy BMS
 
-## Quick Facts
+## Overview
 
-| Topic | Details |
-| --- | --- |
-| Supported chemistries | 9–15 S lithium-ion packs with embedded coulomb counting | 
-| Continuous discharge ceiling | 44 A (internal fuses pop ≈60 A) |
-| Charging envelope | Defaults to 3 A, configurable to 5.5 A via Embedden tools |
-| Form factor | Compact Xiaomi-compatible PCB with XT30/XT60 harness options |
-| Channel & price | Sold direct by Denis Yurev around €69 plus shipping |
+Happy BMS is a smart battery management system developed by Denis Yurev and Happy Giraffe as an alternative to Daly BMS clones. Designed specifically for Xiaomi-compatible electric scooters, it supports 9-15S lithium-ion packs with embedded coulomb counting and telemetry integration.
 
-## Product Overview
+**Price**: ~€69 plus shipping (sold direct by Denis Yurev)
 
-- Developed as Denis and Happy Giraffe’s smart BMS alternative to Daly clones, the board supports 9–15 S packs, speaks Xiaomi telemetry, and ships with a red status LED plus USB/UART tooling for app access.[^1][^2]
-- Happy BMS happily powers oversized packs beyond its nominal 32 Ah rating—the state-of-charge display simply bottoms out early while ~3 Ah remain, so riders plan range using voltage once the counter saturates.[^3][^4]
-- Current handling is fixed: the board trips a second after crossing ~44 A and its fuses blow near 60 A, making it unsuitable for 3 kW (50–60 A) ambitions without external contactors or a different BMS.[^5][^6]
-- Charging defaults to a conservative 3 A limit to protect Xiaomi charge leads; the Embedden BMS Tool raises that cap to 5.5 A when thicker harnesses are installed.[^7]
-- Packs remain asleep until a charger is connected and balancing can occur at any state of charge; expect ≈0.6 %/day self-discharge on stored batteries and wake them with a quick top-up before rides.[^8][^9]
+## Quick Specifications
 
-## Integration Guidance
+| Feature | Specification |
+|---------|--------------|
+| **Chemistry Support** | 9-15S lithium-ion packs |
+| **Discharge Current** | 44A continuous (fuses blow ~60A) |
+| **Charge Current** | 3A default, 5.5A max (via Embedden tools) |
+| **Form Factor** | Compact Xiaomi-compatible PCB |
+| **Connectors** | XT30/XT60 harness options |
+| **Features** | Coulomb counting, Xiaomi telemetry, USB/UART app access |
 
-- Pair Happy BMS with Rita or XiaoDash by downgrading BLE firmware and logging live current—Rita still enforces ~30 A while Happy monitors pack temperature (charging pauses near 40 °C and resumes once it cools to ≈35 °C).[^10][^11][^12]
-- Charging through the XT30 discharge lead bypasses over-voltage protection and should only happen under direct supervision with a voltmeter on the pack.[^13]
-- Happy BMS tolerates 54.6 V chargers on 14 S packs—it simply stops early until the proper charger arrives—so range is reduced but cells remain safe.[^14]
-- Use common-port wiring for external packs and keep external protection inline—Happy BMS will still block output if shorts are detected, but it cannot replace fuses or Rita’s diode isolation on its own.[^15][^16]
-- Follow the official wiring diagram when regrouping cells—builders who doubled balance wires or misordered leads instantly popped Daly boards and would have done the same on Happy without the documentation.[^17]
-- Expect the display to hit 0 % before the pack is empty on large builds; rely on voltage logs or XiaoDash telemetry for accurate range planning.[^3][^4]
+## Key Features
 
-## Troubleshooting & Commissioning
+### Coulomb Counting
+
+**Smart Capacity Tracking**:[^1][^2]
+- Embedded state-of-charge calculation
+- Red status LED for visual feedback
+- USB/UART tooling for app access
+- Xiaomi telemetry integration
+
+### Oversized Pack Support
+
+**Capacity Handling**:[^3][^4]
+- Officially rated for 32Ah
+- Works with larger packs beyond rating
+- **Caveat**: Display bottoms out early on large packs
+- ~3Ah remains when counter shows 0%
+- **Solution**: Plan range using voltage once counter saturates
+
+> **💡 Pro Tip**: On large packs, rely on voltage monitoring rather than the percentage display for accurate range planning.
+
+## Current Limitations
+
+### Fixed Current Handling
+
+**Hard Limits**:[^5][^6]
+- **Trips after ~44A** for more than 1 second
+- **Fuses blow near 60A**
+- **Not suitable for 3kW builds** (50-60A continuous)
+- **Workarounds**: External contactors or different BMS for high power
+
+### Charge Current Management
+
+**Default Conservative Setting**:[^7]
+- Ships with 3A charge limit
+- Protects Xiaomi charge leads
+- **Upgrade**: Use Embedden BMS Tool
+- Can raise to 5.5A with thicker harnesses
+
+> **⚠️ Important**: Only increase charge current after upgrading to thicker wiring. Stock Xiaomi leads are not rated for 5.5A.
+
+## Sleep Mode & Wake-Up
+
+### Operational Behavior
+
+**Sleep Characteristics**:[^8][^9]
+- Packs sleep until charger connected
+- Balancing can occur at any state of charge
+- **Self-discharge**: ~0.6% per day when stored
+- **Wake-up**: Quick top-up before riding
+
+**Common Issue**: Pack shows voltage but no output
+- **Cause**: Board ships asleep
+- **Solution**: Connect charger briefly to wake discharge MOSFETs
+
+## Integration with Scooter Systems
+
+### Rita & XiaoDash Compatibility
+
+**Setup Requirements**:[^10][^11][^12]
+- Downgrade BLE firmware for compatibility
+- Enable live current logging
+- Rita enforces ~30A limit
+- Happy BMS monitors pack temperature
+  - Charging pauses near 40°C
+  - Resumes when cooled to ~35°C
+
+### Charging Safety
+
+**Critical Warning**:[^13]
+- **Never charge through XT30 discharge lead**
+- Bypasses over-voltage protection
+- Only do under direct supervision with voltmeter
+
+**Charger Compatibility**:[^14]
+- Tolerates wrong voltage chargers (e.g., 54.6V on 14S)
+- Stops charging early
+- Cells remain safe but range reduced
+- Get proper charger for full capacity
+
+### External Pack Wiring
+
+**Best Practices**:[^15][^16]
+- Use common-port wiring
+- Keep external protection inline
+- Happy BMS blocks output on shorts
+- Cannot replace fuses or Rita's diode isolation alone
+
+## Installation & Wiring
+
+### Critical Wiring Procedure
+
+**Follow Official Diagram**:[^17]
+- Builders who doubled balance wires bricked Daly boards
+- Misordered leads cause instant failure
+- Documentation prevents these mistakes
+
+**Wiring Order**:
+1. Connect negative first
+2. Confirm each voltage step with meter
+3. Never stack two wires on one pad
+4. Double-check before powering on
+
+### Display Calibration
+
+**For Large Packs**:[^3][^4]
+- Display hits 0% before pack empty
+- Use voltage logs for accuracy
+- Or XiaoDash telemetry
+- Plan range based on voltage, not percentage
+
+## Troubleshooting Guide
 
 | Symptom | Likely Cause | Resolution |
-| --- | --- | --- |
-| Pack shows voltage but no output | Board ships asleep until first charge pulse | Connect a charger briefly to wake the discharge MOSFETs.[^8] |
-| Output stays latched off after reconnecting the pack | Protection tripped on inrush when the controller was reattached | Blip the charger to reset the MOSFETs before riding; some Xiaomi-oriented boards require this wake pulse every time they shut down.[^happy-latch] |
-| Charging stalls below pack voltage | Input supply under 47 V on 48 V builds | Use a true 48 V CC/CV charger; Xiaomi bricks at 42 V leave the BMS idle.[^18] |
-| Error 24 or BLE faults after flashing | Firmware flashed without a 10 S reference pack | Flash with a lower-voltage pack connected, then reconfigure cell count in the Embedden app.[^19] |
-| Repeated fuse trips above 44 A | Overcurrent beyond design envelope | Reinforce wiring and step up to Daly/ANT-class boards for ≥50 A builds.[^5] |
-| Coulomb counter misreads LiFePO₄ packs | Firmware assumes 4.1 V lithium-ion chemistry | Charge cells above 3.5 V to recalibrate or monitor via the included web/USB tools.[^20] |
-| Daly/clone died after balance wiring mistake | Misordered or doubled sense wires during install | Rewire per Happy documentation—negative first, confirm each voltage step with a meter, and avoid stacking two wires on one pad.[^17] |
+|---------|--------------|------------|
+| **No output despite voltage** | Board asleep until first charge | Connect charger briefly to wake MOSFETs[^8] |
+| **Output latched off after reconnect** | Inrush protection tripped | Blip charger to reset MOSFETs[^happy-latch] |
+| **Charging stalls below pack voltage** | Supply under 47V on 48V builds | Use true 48V CC/CV charger[^18] |
+| **Error 24 or BLE faults after flash** | Flashed without 10S reference pack | Flash with lower voltage pack, reconfigure in app[^19] |
+| **Repeated fuse trips above 44A** | Exceeding design envelope | Upgrade wiring, consider Daly/ANT for ≥50A[^5] |
+| **Coulomb counter misreads LiFePO₄** | Firmware assumes 4.1V chemistry | Charge above 3.5V to recalibrate[^20] |
+| **Daly died after wiring mistake** | Misordered/doubled sense wires | Rewire per Happy documentation carefully[^17] |
 
-## Logistics & Availability
+## Regional Availability
 
-- Happy BMS cannot currently ship to Indonesia or Vietnam; riders use freight forwarders or substitute JBD smart boards paired with ScooterHacking Utility when local customs block deliveries.[^21]
-- Denis quotes roughly €290 for a turnkey 13S3P pack with Happy BMS compared with DIY NKON builds, highlighting the labor and QA premium when outsourcing packs.[^22]
-- Field deployments confirm reliable operation in 10S7P Ninebot Max G2 packs and 48 V Pro/Pro 2 conversions once XiaoDash sliders are set to 13 cells and 20 Ah.[^23][^24]
+### Shipping Restrictions
 
-## Safety Notes
+**Cannot Currently Ship To**:[^21]
+- Indonesia
+- Vietnam
 
-- Respect the 44 A ceiling and keep regen below ~30 A—Denis and Happy repeatedly warn that exceeding those limits trips error 39, overheats packs, or explodes Rita on higher-voltage builds.[^25]
-- Never rely on charge-port power for accessories; build DC/DC harnesses off the discharge rails to preserve Happy BMS protections.[^26]
-- Maintain waterproofing: seal deck seams, grease bearings, and inspect harnesses after heavy rain to avoid latent shorts that Happy BMS will flag as persistent faults.[^27][^28]
+**Workarounds**:
+- Use freight forwarders
+- Substitute JBD smart boards
+- Pair with ScooterHacking Utility
+
+### Pricing Context
+
+**Turnkey vs. DIY**:[^22]
+- Denis quotes ~€290 for complete 13S3P pack with Happy BMS
+- Includes labor and QA
+- Compare to DIY NKON builds
+- Consider time vs. money trade-off
+
+## Field Deployments
+
+**Proven Applications**:[^23][^24]
+- 10S7P Ninebot Max G2 packs
+- 48V Pro/Pro 2 conversions
+- XiaoDash configured for 13 cells, 20Ah
+- Reliable operation reported
+
+## Safety Guidelines
+
+### Current Limits
+
+**Strict Adherence Required**:[^25]
+- Respect 44A discharge ceiling
+- Keep regen below ~30A
+- Exceeding limits causes:
+  - Error 39 trips
+  - Pack overheating
+  - Can explode Rita on higher voltages
+
+### Accessory Power
+
+**Never Use Charge Port**:[^26]
+- Don't power accessories from charge port
+- Build DC/DC harnesses off discharge rails
+- Preserves Happy BMS protections
+
+### Waterproofing
+
+**Maintenance Requirements**:[^27][^28]
+- Seal deck seams
+- Grease bearings regularly
+- Inspect harnesses after rain
+- Prevents latent shorts
+- Happy BMS will flag persistent faults
+
+## When to Choose Happy BMS
+
+**Good Fit If**:
+- Building Xiaomi-compatible scooter
+- Need up to 44A continuous
+- Want coulomb counting
+- Value Denis Yurev's support
+- Can work with capacity display quirks
+
+**Consider Alternatives If**:
+- Need >44A continuous current
+- Building 3kW+ system
+- Shipping to restricted regions
+- Require LiFePO₄ support
+- Need larger charge current capability
+
+## Related Guides
+
+- [Daly BMS Waterproofing](../guides/daly-bms-waterproofing.md)
+- [Smart BMS Integration Handbook](../guides/smart-bms-integration-handbook.md)
+- [Battery Pack Design](../guides/battery_pack_design.md)
 
 ## References
 
