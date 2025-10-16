@@ -13,6 +13,7 @@
 ## High-Current Harness Upgrades
 
 - External battery riders are graduating to 4 mm gold bullets, AS120 mains, and even direct-soldered phase leads after discovering stock 2 mm conductors and MR60 plugs overheat above ~80–100 A; backpack packs stay cool once the heavier hardware is in place.[^1]
+- XT90S anti-sparks remain handy for light builds, but repeated hot-plugs cook their in-line resistors; high-power crews step up to AS150 bullets or QS8/QS10 connectors that comfortably ride out 300–600 A bursts once the crimps and strain relief are done properly.[^antispark_tradeoff]
 - For 90 A packs, default to AWG10 main leads (or dual AWG12 runs) and consider 3–3.5 mm solid-core copper between pack negatives and BMS plates for roughly 40 % more ampacity.
   - as long as the runs stay short.[^2]
 - 12 AWG phase leads remain comfortable around 100 A continuous, yet light riders have logged 150 A bursts on 13 S hubs with post-ride temps near 45 °C.
@@ -30,6 +31,7 @@
 [^emi_routing]: Source: knowledge/notes/input_part000_review.md, line 85.
 [^ceramic_scavenge]: Source: knowledge/notes/input_part000_review.md, line 126.
 [^parallel_rules]: Source: knowledge/notes/input_part000_review.md, line 127.
+[^antispark_tradeoff]: Source: knowledge/notes/input_part003_review.md†L511-L515
 
 
 ## References

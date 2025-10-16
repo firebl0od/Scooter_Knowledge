@@ -6,6 +6,7 @@
   - dash adapters and 5 V accessories routinely add lag or kill channels when they fail, and even hall throttles that creep toward 3.5 V need resistor tweaks before they clip the MCU’s ADC ceiling.[^1][^1][^2][^4]
 - Xiaomi-style throttles and hall brakes stay healthy when powered from the controller’s 3.3 V rail with matched resistor dividers; feeding 5 V without clamps has already over-volted STM32 inputs, and ’lekrsu’ is still warning newcomers that direct 5 V on ADC1/ADC2 will cook the STM32 even if the throttle “works” initially.[^2][^3]
 - Treat the Spintend/MakerX auxiliary board as a low-current signal bridge: its ~12 V/3 A rail can light LEDs or run logic, but headlamps, horns, and pumps still need a dedicated DC/DC or relay-fed supply.[^3][^9][^10][^11]
+- Insulate the adapter, strain-relieve looms, and bench-test polarity before energising accessories; a shorted 12 V fan lead already cooked a Spintend ADC board and combo switch pods have back-fed horn voltage into signal lines until riders swapped to full-pin motorcycle pods.[^adc_inspection]
 - Profile toggles still need proper routing.
   - shorting ADC1 to ground with a momentary switch only works after moving the throttle to ADC2 and wiring the three-position “gear” toggle correctly, otherwise builders keep burning MakerX ADC daughterboards.[^4][^5][^6][^7]
 - Map and validate every analog input inside VESC Tool before sealing the deck; enabling ADC control blocks bench FWD/REV overrides, so miswired harnesses must be fixed before ride testing.[^7][^8][^13]
@@ -41,6 +42,7 @@
 
 1. **Direct hall wiring:** Route throttle and brake halls straight to ADC1/ADC2 signal, 3.3 V, and ground to keep control even when the OEM dash is removed.[^1] Keep the sensors on the controller’s 3.3 V rail.
   - feeding 5 V halls directly into STM32 ADCs has already killed logic stages.[^16]
+1. **Verify MakerBase harness pinouts before rewiring.** Some 75100 looms shipped with cut or mislabelled conductors; Paolo only recovered throttle on his Wolf GT after tracing 3.3 V, ground, and ADC1 correctly before rerunning calibration.[^makerbase_pinout]
 1. **Roll back firmware if ADC channels vanish.** Xiaomi throttles that lost response on beta firmware came back after downgrading to VESC 6.02, rerunning the motor/ADC wizards, and explicitly writing both app and motor configs before power-cycling.[^17][^18]
 1. **Document the colour map in every quick-start.** Spell out which conductors carry 5 V, ground, and signal, list the negative motor/battery current limits riders must set for regen, and call out the CAN IDs/master roles when a single throttle feeds dual VESCs so newcomers avoid phantom faults.[^19]
 2. **Clamp 5 V inputs.** Xiaomi/Boosted-style throttles swing ≈0.8–4.1 V from a 5 V rail; drop them through a 1 kΩ/2 kΩ divider or use the ADC adapter so the STM32 never sees more than 3.3 V.[^voltage-divider]
@@ -138,6 +140,7 @@
 - **Use the adapter as logic, not power:** The horn output only sources a couple of amps.
   - enough for low-power buzzers but not vintage 35 W halogens
   - so trigger a relay or MOSFET that pulls from a beefier DC/DC converter.[^9][^10]
+- **Remember the Spintend switch cluster sources 12 V on every lead.** Plan NO/NC relays or alternative switchgear when you need ground-referenced signals, otherwise horn and light circuits back-feed the controller inputs.[^spintend_cluster]
 - **Keep 12 V fans off the board:** Spintend ADC adapters have already died when builders powered shrouds directly from the rail.
   - treat it strictly as a signal bridge and feed cooling gear from standalone bucks.[^58]
 - **85250 & Ubox installs:** Route brake-light logic through the ADC breakout, but feed lamps from a separate converter so you don’t brown out the controller when multiple 12 V loads fire at once.[^11]
@@ -161,6 +164,7 @@
 ## Configuration & Validation Workflow
 
 1. **Bench prep:** Wire controls with the pack off, confirm continuity, and verify 3.3 V and 5 V rails before powering up.
+   - Disconnect secondary controllers during Spintend throttle calibration to keep the CAN bus quiet, then confirm 60 Ω across the pair before plugging the slave back in.[^can_calibration]
 2. **Calibrate ADC inputs:** In VESC Tool, run the ADC mapping wizard for each channel, noting min/max values and checking that neutral centers correctly.[^7]
 3. **Assign app functions:** Map ADC1 to throttle, ADC2 to “Current No Reverse” for regen, and ensure throttle curves or safe-start options suit the rider.[^8]
 
@@ -175,6 +179,7 @@
 ## Safety & Troubleshooting Checklist
 
 - **Mount adapters beside the controller.** Parking the ADC board near the ESC and running shielded cables kept long throttle runs quiet; Vedder’s mid-June firmware now times out detach scripts (~3 s) so Xiaomi dash integrations hand inputs back automatically once the ADC board is unplugged.[^66][^67][^68]
+- **Power MakerX BLE modules from the communication header.** Pull 5 V and ground from the comm port and borrow UART2 TX/RX so Jaykup firmware stops browning out the module without overloading the 3.3 V rail.[^makerx_ble]
 - **Chase “missing module” faults at the harness first.** After firmware updates, swap the UART TX/RX pair or re-enable Bluetooth in VESC Tool before assuming hardware failure; several Spintend adapters came back online immediately, and their throttles landed on VAL2 until the app mapping was refreshed.[^69][^70]
 - **Separate controller rails:** Do not tie CAN-connected controllers’ 5 V rails together unless they share the same ignition path; mismatched power buttons have already killed hardware.[^14]
 - **Disconnect before rewiring.** Builders keep blowing ADC daughterboards by hot-plugging throttles and accessories.
@@ -231,6 +236,8 @@
 [^adapter-idle]: Spintend’s adapter manual targets ~0.8 V idle readings.
   - seeing ~3 V idle means the channel is wired wrong and will act like a stuck brake.[^111]
 [^spintend_led]: Spintend’s ADC adapter already drives LED strips for turn indicators, so builders can route custom amber lighting through existing outputs and keep heavier loads on a dedicated converter.[^112]
+[^adc_inspection]: Spintend ADC survival log documenting a shorted 12 V fan lead, the need to insulate adapters, and the move to full-pin motorcycle pods after combo switches back-fed horn voltage.[^72]
+[^spintend_cluster]: Spintend switch-cluster teardown noting each output sources 12 V, so logic-level controller inputs require relays or alternate switchgear.[^72]
 [^storage-cal]: Re-running the ADC wizard and clearing stale inversion flags resolved Xiaomi brake/throttle glitches after long storage.[^113]
 [^analog-halls]: Hall-based brake levers (Xiaomi or custom SS49E builds) let SmartDisplay/ADC boards blend braking force; digital microswitch levers pulse the motor instead of delivering progressive regen.[^114]
 [^regen-halls]: Builders glue magnets to levers and pair them with A1324LUA sensors for proportional regen retrofits on any brake.[^115]
@@ -243,6 +250,9 @@
 [^31]: Spintend 75/300 firmware can remap the PPM pin into a DAC-driven brake light even though official documentation is still pending.[^117]
 [^32]: Xiaomi hall levers coexist on 5 V/GND rails, but pairing them directly with normally-open Magura hydraulics leaves floating signals until a hall puck is added.[^signal-clamp]
 [^voltage-divider]: Xiaomi-style throttles and levers output ≈0.8–4.1 V from a 5 V rail, so builders add 1 kΩ/2 kΩ dividers or the ADC adapter to clamp signals under 3.3 V before landing on STM32 pins.[^118]
+[^makerbase_pinout]: Paolo’s Wolf GT rebuild documented cut/mislabelled MakerBase 75100 conductors and confirmed throttle recovery only after mapping 3.3 V, ground, and ADC1 before rerunning calibration.[^73]
+[^can_calibration]: Spintend adapter manual guidance to unplug the slave controller and confirm 60 Ω CAN impedance before throttle calibration prevents error floods.[^74]
+[^makerx_ble]: MakerX Jaykup firmware users now power BLE modules from the communication header (5 V/ground + UART2 TX/RX) to avoid browning out the 3.3 V rail.[^75]
 [^hall-split]: Hall brake handles float at different voltages when paralleled.
   - dedicate one ADC channel per lever and leave the spare brake mechanical if you run out of inputs.[^40]
 [^signal-shield]: Running shielded control looms tied to controller ground and routed away from phase wires removed 120 A jitter on Spintend Ubox installs.[^119]
@@ -328,6 +338,10 @@
 [^41]: Source: knowledge/notes/input_part011_review.md†L22-L23
 [^42]: Source: knowledge/notes/input_part011_review.md†L23-L24
 [^43]: Source: knowledge/notes/input_part011_review.md†L496-L498
+[^72]: Source: knowledge/notes/input_part003_review.md†L513-L515
+[^73]: Source: knowledge/notes/input_part003_review.md†L554-L554
+[^74]: Source: knowledge/notes/input_part003_review.md†L553-L553
+[^75]: Source: knowledge/notes/input_part003_review.md†L552-L553
 [^44]: Source: knowledge/notes/input_part001_review.md†L512-L514
 [^45]: Source: knowledge/notes/input_part001_review.md†L646-L647
 [^46]: Source: knowledge/notes/input_part013_review.md†L206-L206

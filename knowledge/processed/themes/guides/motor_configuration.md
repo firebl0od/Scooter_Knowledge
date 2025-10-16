@@ -30,6 +30,7 @@
 - Wheelway “1 000 W” hubs hide modest 36 mm magnet stacks versus 60 mm on the 1 200 W variant; treat nameplate wattage as marketing and compare stator width, magnet depth, and real amp tolerance instead.[^6]
 - G30 rental motors include a brown lead for the embedded 10 k/100 k NTC.
   - tie it into VESC temp rollback because hub covers stay cool even while windings approach 80 °C.[^7]
+- Vsett stators pair best with 10 k Ω, 3950 K rice-sized NTCs; the default VESC tables read accurately once the probes are seated on the windings.[^vsett_ntc]
 - Artem catalogued the Vsett 9/9+ hub (92 mm stator, 30 magnets, 9/7 wind with 0.5 mm strands, RUWH 6003RS bearings) and logged the 10+ wheel around 62 km/h on 48 V at 35 A despite 60 V marketing claims, so plan gearing or voltage upgrades if you need more top speed.[^8]
 - HM’s 60 V 1.6–3.5 kW hubs ship for ≈€160 from Spain but arrive with conservative 25/37 A current recommendations.
   - builders intend to validate phase-amp headroom before trusting the spec sheet.[^9]
@@ -67,6 +68,7 @@
 [^5]: Source: knowledge/notes/input_part000_review.md†L382-L382
 [^6]: Source: knowledge/notes/input_part000_review.md†L385-L385
 [^7]: Source: knowledge/notes/input_part000_review.md†L386-L386
+[^vsett_ntc]: Source: knowledge/notes/input_part003_review.md†L532-L532
 [^8]: Source: knowledge/notes/input_part000_review.md†L387-L387
 [^9]: Source: knowledge/notes/input_part000_review.md†L388-L388
 [^10]: Source: knowledge/notes/input_part000_review.md†L434-L440

@@ -42,6 +42,7 @@
 - J1772 adapters allow scooter packs to draw from public Level 2 pedestals, supporting charge rates from as low as 2 A (for emergency trickle charging) up to the pack's BMS limit when paired with appropriate cables and adapters.[^j1772]
 - App-controlled charging stations (ChargePoint, Blink, etc.) typically release only one charging handle per session, so riders planning group tours must coordinate with EV drivers or use multiple stations to charge simultaneously.[^app-locks]
 - Tesla destination chargers and Superchargers require protocol triggers such as FoCcci boards to initiate handshake sequences; without these adapters, the plug will not energize even with a physical J1772 adapter installed.[^tesla-protocol]
+- Verify EVSE pilot wiring when building adapters; one Type 2 unit only came online after swapping the pilot resistor to 880 Ω and adding a manual status button so public chargers recognized the scooter pack.[^type2_pilot]
 
 ### Telecom & Lab-Supply Chargers
 
@@ -53,6 +54,7 @@
 ### Charging Etiquette & Best Practices
 
 1. **Respect charging bay time limits.** Move scooters promptly once charged to free stations for EV drivers who often have fewer alternatives than scooter riders with portable packs.[^etiquette]
+2. **Treat live charge-port work as a solo job.** A Vsett shorted the moment a friend helped swap the inlet; even qualified assistants need a repeatable double-check ritual before touching energized leads.[^charge_port_discipline]
 2. **Communicate charge rate expectations.** Inform station operators or fellow users when drawing only 2–3 A for safety testing versus full-rate charging to avoid confusion about bay availability.[^charge-rate]
 3. **Plan for single-handle sessions.** Budget extra time when touring in groups, as most app-based systems won't release multiple handles simultaneously from the same account.[^app-locks]
 4. **Monitor thermal margins.** Long charging sessions at high rates (≥6 A per pack) can heat cells and BMS hardware, so log temperatures and adjust charge current if ambient temps exceed 30 °C or packs show elevated thermal readings.[^thermal-charging]
@@ -157,6 +159,8 @@
 [^j1772]: J1772 adapter compatibility allowing 2 A trickle charging up to BMS-limited rates from Level 2 pedestals.[^51]
 [^app-locks]: App-controlled charging stations releasing only one handle per session, requiring coordination for group tours.[^51]
 [^tesla-protocol]: Tesla plug requirement for protocol triggers (FoCcci boards) to initiate charging handshake sequences.[^51]
+[^charge_port_discipline]: Source: knowledge/notes/input_part003_review.md†L525-L525
+[^type2_pilot]: Source: knowledge/notes/input_part003_review.md†L527-L527
 [^generator]: Theoretical 1 kW generator + 5 kWh pack configuration for coast-to-coast touring attempts.[^50]
 [^appalachian]: Noname's 150-mile ride log demonstrating thermal management and extended touring feasibility.[^50]
 [^noname-96mi]: Noname’s 20 S 35 P commuter pack recorded 96 miles of riding while burning roughly half its 10.2 kWh capacity.[^52]

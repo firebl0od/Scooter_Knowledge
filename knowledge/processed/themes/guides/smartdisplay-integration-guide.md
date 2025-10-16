@@ -69,6 +69,7 @@
 - **Waze Overlay.** Beta firmware already overlays Waze police alerts directly on the dashboard, foreshadowing richer third-party integrations once CAN message catalogs stabilize.[^9]
 - **Active dev logs map the roadmap.** Weekly SmartDisplay diaries document layout experiments, overlay prototypes, and the Waze alert workflow so installers can reproduce CAN dashboards without waiting on formal docs.[^16][^17]
 - **Production gearing up.** Koxx shared assembly photos and UI previews while Rage Mechanics prepared commercial support, signalling that plug-in TFT units with temperature alarms and custom icon packs are nearly ready for wider release.[^18][^19]
+- **Demand is pent up.** Vsett owners unable to reuse OEM TFTs say they’ll buy SmartDisplay as soon as factory negotiations finish, preferring a turnkey dash over juggling phones at 100 km/h.[^smartdisplay_demand]
 - **Theme editor & live switching.** Rage Mechanics now ships a web-based theme designer that can push new skins over Wi‑Fi and swap layouts in real time on the scooter, making it easier to brand race fleets or share telemetry presets.[^20]
 - **Telemetry Dashboards.** Race teams log throttle position, per-motor phase amps, traction-control response, and segment comparisons from SmartDisplay sessions.
   - handy for coaching and driver swaps.[^10]
@@ -193,6 +194,7 @@
 [^17]: Source: data/vesc_help_group/text_slices/input_part003.txt†L26600-L26606
 [^18]: Source: data/vesc_help_group/text_slices/input_part003.txt†L11046-L11048
 [^19]: Source: data/vesc_help_group/text_slices/input_part003.txt†L11852-L11872
+[^smartdisplay_demand]: Source: knowledge/notes/input_part003_review.md†L571-L574
 [^20]: Source: knowledge/notes/input_part010_review.md†L312-L314
 [^21]: Source: data/vesc_help_group/text_slices/input_part009.txt†L12929-L12947
 [^22]: Source: data/vesc_help_group/text_slices/input_part009.txt†L13089-L13092

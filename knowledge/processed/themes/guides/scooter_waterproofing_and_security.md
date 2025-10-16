@@ -8,6 +8,7 @@
 - **Weatherproof external packs thoroughly.** Riders strapping batteries to rear suspensions silicone every seam to keep exposed packs dry on long commutes.
   - expect to lose folding ability but gain reliable sealing.[^3]
 - **Add moisture sentries.** Builders embed hydrometers on DC–DC converters that feed Arduinos driving buzzers; when the sensor trips, the alarm screams before corrosion sets in.[^1]
+- **Prep for snow and spray.** Ninebot Max riders trade winter fender STLs and revisit NAMI trailing-arm suspension tuning to balance curb compliance against braking dive when roads turn sloppy.[^snow_hardware]
 - **Pack silica gel inside decks.** Rental-frame conversions stay dry longest when silica packets live beside the battery and automotive engine sealant closes the lid.
   - silicone peels by hand for service yet seals better than chasing custom gaskets.[^4]
 - **Audit Kaabo decks for pooling.** Wolf inspections uncovered water trapped under 20 S packs that soaked LG M50LT modules despite shrink wrap.
@@ -125,6 +126,7 @@
 [^21]: Source: knowledge/notes/denis_all_part02_review.md†L307-L309
 [^22]: Source: knowledge/notes/denis_all_part02_review.md†L433-L436
 [^23]: Source: knowledge/notes/denis_all_part02_review.md†L440-L441
+[^^snow_hardware]: Source: knowledge/notes/input_part003_review.md†L507-L507
 [^24]: Source: knowledge/notes/all_part01_review.md†L88-L88
 [^25]: Source: knowledge/notes/all_part01_review.md†L167-L167
 [^26]: Source: knowledge/notes/all_part01_review.md†L27392-L27407

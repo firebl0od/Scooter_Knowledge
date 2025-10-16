@@ -39,6 +39,7 @@
 
 1. **Baseline Tune:** Run standard motor detection, confirm smooth sensorless transitions, and road-test without FW to verify the observer and throttle feel.[^7][^10]
 2. **Enable FW Incrementally:** Increase `Field Weakening Current` in 5–10 A steps. Dual 84100 setups typically settle near 15–30 A per controller for 100 km/h GPS runs, while heavier 72 V builds may stretch toward 40–55 A once cooling and battery delivery are proven.[^7][^11][^12]
+   - Rosheee staggers activation—rear FW at 87.5–89.5 % duty, front at 93 % with a 97 % max—and adds ~25 % to the ADC throttle curve so both controllers avoid simultaneous current spikes.[^rosheee_fw]
 3. **Pair with quicker ramps judiciously.** Dropping acceleration ramping to 0.05 s sharpens launches alongside FW, but only apply it if the chassis and rider can tolerate the snappier response without spinning tires.[^6]
 4. **Re-verify Current Limits:** After each change, check live logs for battery spikes above set limits and rerun detection if overshoot appears.
   - the VESC Tool wizard reset resolved a 60 A ceiling breach on one build.[^8]
@@ -69,6 +70,7 @@
 ## Risk Controls & Telemetry
 
 - **Thermal Watch:** Riders pushing 16 S commuter packs noted 150 °C stators at only 35 A FW, reinforcing that ferrofluid or temperature probes are mandatory if you insist on FW in enclosed hubs.[^18]
+- **Budget battery amps alongside FW.** Once a hub reaches its KV ceiling, FW draws roughly the same extra current on both the battery and phase sides, so packs and cooling need the same headroom you would budget for hard launches.[^fw_amp_pair]
 - Makerbase 75100 aluminum boards are frying MOSFETs when riders hold 35 A FW on top of 130 A phase and 35 A battery during long 95–100 km/h pulls.
   - cap FW around 20 A on air-cooled builds or switch to the aluminum-PCB/vented variants.[^9]
 - **Disable FW before steep descents.** VESC hub riders have locked wheels by lightly tapping brakes around 50 km/h while FW held them at the non-FW speed ceiling.
@@ -102,7 +104,7 @@
   - treat FW tuning and duty increases as paired changes.[^24]
 - **Track-day planning:** Paris-bound teams compared FW-enabled 16 S builds against base 16 S setups that free-spin near 80 km/h.
   - treat FW as the fallback after exploring higher-voltage packs or rewound hubs for sustained 100 km/h targets.[^25]
-- **Traction heuristics:** Dual-drive riders accept 2–3 kERPM slip thresholds but often prefer reshaping power-per-ERPM curves instead of leaning on FW-backed traction control; front-only TC remains the safest option after rear controllers tripped at >300 A during FW pulls.[^26][^27]
+- **Traction heuristics:** Dual-drive riders accept 2–3 kERPM slip thresholds but often prefer reshaping power-per-ERPM curves instead of leaning on FW-backed traction control; front-only TC remains the safest option after rear controllers tripped at >300 A during FW pulls and crews now enable traction control on the front controller first to avoid fresh MOSFET surges.[^26][^27][^front_tc]
 - **Treat FW cut-outs as catastrophic events.** Little Focer/Tronic 250 stacks that repeated 37 A FW pulls around 20 kW eventually “killed everything,” so pair conservative FW settings with ample battery headroom and stop testing the moment faults appear.[^fw-kills]
 - **3Shul TC behaviour:** On 22 S dual LY 33×2 builds, 3Shul’s traction control shunted torque rearward.
   - testers disabled it temporarily to explore the ~126 km/h ceiling with 70 % FW before re-enabling TC for sane traction limits.[^28]
@@ -158,6 +160,9 @@
 [^13]: High-speed regen viability with FW and the need to log bus voltage.[^56]
 [^fw-faults]: Using the `faults` command and raising absolute current headroom (≈200–250 A for 120–130 A phase tunes) to prevent ABS overcurrent trips during FW pulls.[^57][^58]
 [^fw-duty]: Duty-cycle ceiling warnings for FW-enabled builds.
+[^front_tc]: Traction-control guidance to set front-only TC first so rear controllers avoid fresh MOSFET surges.[^134]
+[^rosheee_fw]: Rosheee’s dual-motor FW stagger (rear 87.5–89.5 % duty, front 93 % with 97 % max) plus +25 % throttle scaling.[^135]
+[^fw_amp_pair]: Field-weakening current draw mirroring on battery and phase sides once a hub reaches its KV ceiling.[^136]
   - stretching toward 99–100 % caused abrupt cut-outs above 70 km/h.[^59][^60][^24]
 [^fw-plateau]: Field-weakening tests that delivered only ~3 km/h gains from 10 A to 40 A FW until motors hit duty-cycle limits, reinforcing the need for more phase current or voltage instead of piling on FW amps.[^61]
 [^13]: High-speed regen remains viable at 80–100 km/h under heavy FW because the load collapses back EMF quickly, but riders still log bus voltage to confirm headroom.[^62]
@@ -283,3 +288,6 @@
 [^81]: Source: knowledge/notes/input_part004_review.md†L336-L336
 [^82]: Source: knowledge/notes/input_part004_review.md†L570-L570
 [^83]: Source: knowledge/notes/input_part004_review.md†L315-L315
+[^134]: Source: knowledge/notes/input_part003_review.md†L505-L505
+[^135]: Source: knowledge/notes/input_part003_review.md†L599-L599
+[^136]: Source: knowledge/notes/input_part003_review.md†L600-L600

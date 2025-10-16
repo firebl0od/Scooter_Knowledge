@@ -10,6 +10,7 @@
 - **Recreate the factory hardware stack.** Reinstall the short upper screw, small top ring, and fresh bearings during stem assemblies.
   - missing parts are the leading cause of Monorim wobble.[^6]
 - **Upgrade fasteners immediately.** Swap the kit’s soft bolts for grade 12.9 hardware, trim overly long screws, and add washers/Loctite so pivots stop loosening and knocking after a few rides.[^7][^8]
+- **Spec proper shoulder hardware for fork swaps.** Grade 12.9 shoulder bolts or custom stainless axles hold alignment far better than the inconsistent AliExpress kits, and missing inner washers or soft brackets twist calipers until custom steel plates replace the stock hardware.[^monorim_axle][^monorim_bracket]
 - **Match spring hardware to rider weight.** EXA 291 coils (150–350 lb springs) stay supple for ~90 kg riders, while RockShox or Fox air shocks add adjustability.
   - just confirm leverage ratios and clearance before swapping hardware.[^9]
 - **Lightweight rider coils:** ≈55 kg riders report the best compliance with 150–250 lb EXA/DNM coils around 90–95 mm length sourced from AliExpress for ~€20; stock 650 lb Monorim springs prove too harsh once speeds climb.[^10]
@@ -48,6 +49,7 @@
   - cheap 500 W hubs ship with fragile sensors that fail quickly at 48 V.[^36][^37][^38]
 - **Blade/Vsett hub swaps need swingarm work.** Reverse the Monorim swingarm, cut fresh axle slots, and trim dropout edges so the security washers seat properly.
   - bent retainers or thin sliders can’t hold the 135 mm hubs at 60 V.[^39]
+- **Xiaomi rear conversions need wider rotors.** Pinkflozd logged 120 mm dropout spacing and 180 mm rotors to clear Magura MT4 calipers when fitting 40 mm PaoloWu motors under Konyk or Monorim suspension kits.[^xiaomi_spacing]
 - **Kuugo M4 hub conversions demand extra hardware.** Plan on 180 mm shafts, longer fasteners, and even trimming frame pockets to clear wider tires; community shared AliExpress sourcing for 500 W assemblies to simplify the swap.[^40]
 - **Bulk-buy caveats:** Alibaba runs on enticing €80 offers for Monorim 500 W hubs, but 11.11 sales slow fulfillment and factory harnesses often omit the connectors bundled with retail kits.
   - budget extra parts and time when importing direct.[^41]
@@ -161,3 +163,6 @@
 [^64]: Source: knowledge/notes/denis_all_part02_review.md†L1290-L1291
 [^65]: Source: knowledge/notes/denis_all_part02_review.md†L87046-L87066
 [^66]: Source: knowledge/notes/denis_all_part02_review.md†L618-L618
+[^monorim_axle]: Source: knowledge/notes/input_part003_review.md†L536-L537
+[^monorim_bracket]: Source: knowledge/notes/input_part003_review.md†L537-L538
+[^xiaomi_spacing]: Source: knowledge/notes/input_part003_review.md†L563-L563
