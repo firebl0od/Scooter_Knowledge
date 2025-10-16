@@ -202,6 +202,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 - Leaded solder is getting scarce inside the EU; builders are already scrambling for compliant suppliers before pack repairs stall under regional restrictions.[^87]
 - Jerome (St0fzuiger) pointed the crew to EleShop’s 60/40 premium solder, which ships across Europe and carries enough flux to wet thick busbars.
   - GABE is restocking there for his MP2 repairs until a broader supply chain emerges.[^88]
+  - Pending: Monitor EleShop stock levels and log GABE’s long-term feedback on the solder once those MP2 repairs wrap so the sourcing guide reflects real durability.[^eleshop-follow]
 - Peer-to-peer trades now fill the gap.
   - PaoloWu is literally mailing GABE leaded solder so his pack repairs resume, highlighting how community swaps keep benches running when stores dry up.[^89]
 - GABE’s spot welder just lost a MOSFET (E02 fault); Haku’s replacement board only charges to 5.4 V and he pointed to the heavier Glitter 811H as the backup plan if repairs stall, so shops should budget downtime or a spare welder for 22 S builds.[^90]
@@ -701,6 +702,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^86]: Source: knowledge/notes/input_part006_review.md†L382-L382
 [^87]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19293-L19294
 [^88]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19382-L19393
+[^eleshop-follow]: Pending EleShop availability checks and post-repair feedback from GABE once the MP2 work wraps. Source: knowledge/notes/input_part011_review.md†L913-L913
 [^89]: Source: knowledge/notes/input_part011_review.md†L801-L805
 [^90]: Source: knowledge/notes/input_part011_review.md†L783-L787
 [^91]: Source: data/vesc_help_group/text_slices/input_part001.txt†L8851-L8913

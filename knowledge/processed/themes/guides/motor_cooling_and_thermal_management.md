@@ -64,6 +64,7 @@
 ## Micro-Hub Voltage Stress Signals
 
 - Doubling a Xiaomi/Ninebot commuter from 10 S to 20 S roughly doubles the free-spin speed but repeatedly burns the stock hub from heat saturation, so builders now treat 18 S as the limit unless they add serious cooling or swap motors.[^44]
+- Fresh field logs reiterate the point: even though 20 S packs push sleepy Xiaomi/Ninebot hubs to ~55 km/h, GABE keeps blowing the narrow stators unless he upgrades to wider Fiido L3-class hardware and budgets matching controllers and packs instead of relying on stock commuter parts.[^microhub-fiido]
 - Fiido L3 rear hubs emerged as the go-to drop-in upgrade for 20 S experiments because their wider stator and exposed shell shed heat far better than Xiaomi-class cans.
   - veterans report killing three narrow hubs in two days while the Fiido survived on a Spintend 100 V Lite.[^45]
 - Kugoo M4 hubs stall near 50 km/h even with 25 A of field weakening on 14 S builds, hinting that the motor design.
@@ -72,6 +73,7 @@
 - GABE is also sandwiching aluminium plates with thermal paste around a 10 mm 3D-printed spacer to keep his 250 W commuter hub cool after widening the dropout, showing how thin filler plates can restore conduction when packaging changes add air gaps.[^47]
 - Stock Ninebot G30 hubs top out around 80 km/h solo and ~98 km/h in dual-motor builds, but a single motor hauling two riders at 40 A cooked its insulation.
   - treat heavy two-up duty as a thermal red line without upgraded cooling.[^48]
+- The same warning applies to bicycle conversions: jumping a 250 W/36 V commuter bike straight to 72 V just cooks the micro hub unless you swap in sturdier Fiido-class motors and refresh the drivetrain alongside the voltage bump.[^ebike-72v]
 
 ## Controller Interface Refresh Checklist
 
@@ -372,7 +374,7 @@
 [^44]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19101-L19145
 [^45]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19136-L19173
 [^46]: Source: knowledge/notes/input_part011_review.md†L377-L383
-[^47]: Source: knowledge/notes/input_part011_review.md†L768-L769
+[^47]: Source: data/raw/telegram_exports/vesc_help_group/input_part011.json, L21492 to L21536
 [^48]: Source: knowledge/notes/input_part006_review.md†L152-L152
 [^49]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L202-L223
 [^50]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60020-L60025
@@ -449,6 +451,8 @@
 [^121]: Source: knowledge/notes/input_part000_review.md†L349-L350
 [^122]: Source: knowledge/notes/input_part000_review.md†L658-L660
 [^123]: Source: knowledge/notes/input_part000_review.md†L641-L642
+[^microhub-fiido]: Source: knowledge/notes/input_part011_review.md†L505-L506
+[^ebike-72v]: Source: knowledge/notes/input_part011_review.md†L604-L605
 [^124]: Source: knowledge/notes/input_part001_review.md†L613-L615
 [^125]: Source: knowledge/notes/input_part001_review.md†L626-L627
 [^126]: Source: knowledge/notes/input_part001_review.md†L672-L674

@@ -18,6 +18,7 @@
 - Mixed MJ1/MH1 parallels sag 10–12 V at ≈9 A per cell; veterans cap both chemistries near 7 A and pivot to Samsung 50G, Molicel P42A, or Murata VTC6 for higher-current builds instead of chasing firmware fixes.[^6]
 - Budget Liitokala LiFePO₄ cells arrive unbalanced, sag heavily above ≈12 A, and often ship slowly by boat.
   - reserve them for stationary projects unless you can package much larger scooter enclosures.[^7]
+- High-current race packs now treat ~40 A per P45B as acceptable when cooling is dialled: skrtt’s 18 S 9 P plan for 350 A drew green lights so long as logging confirmed sag and phase limits—not pack voltage—were the real bottleneck.[^p45b_current]
 
 ## Layout and Interconnects
 
@@ -45,6 +46,8 @@
 - Xiaomi’s stock GX16-3 inlet is happiest around 3 A because the internal JST pigtail overheats; parallel pins on a GX16-4 for 6–8 A service or swap to XT30 leads with 16–18 AWG silicone wire to keep resistance and heat under control.[^17]
 - Inmotion LF8 rental packs expose B+/B− pads under silicone-potted BMS boards.
   - bypassers now solder straight to the nickel busbars but stress that unsupervised discharge or secondary-BMS deletes are a fire risk.[^18]
+- Treat punctured or weather-soaked cells as total losses: JPPL discovered three damaged P45B cans after soldering copper busbars on a rain-exposed scooter, and peers pushed for a full rebuild with fresh insulation and sealing before trusting 400 A packs outdoors.[^punctured_cells]
+- EU pack shops increasingly rely on peer networks to secure leaded solder when retailers run dry—PaoloWu’s spare spool kept GABE’s builds moving—so budget community trades or stockpile consumables ahead of deadlines.[^eu_solder]
 - Face de Pin Sucé’s 16 S 10 P P42A pack tolerated 47 A fast charging once paired with an external power stage and active cooling, setting a benchmark for pit-charge workflows on high-capacity builds.[^19]
 - Artem’s latest 14 S pack stacks dual 3 mm copper busbars, layered insulation, and remote BMS wiring that demands a 5 V pre-charge before plugging in the balance loom.
   - document that activation sequence before shipping SIM-enabled boards to customers.[^20]
@@ -56,7 +59,9 @@
 [^pack_connectors]: Source: knowledge/notes/input_part000_review.md, line 65.
 [^deck_extension]: Source: knowledge/notes/input_part000_review.md, line 75.
 [^petg_honeycomb]: Source: knowledge/notes/input_part000_review.md, line 216.
+[^p45b_current]: Source: data/vesc_help_group/text_slices/input_part011.txt, L19595 to L19625
 [^copper_sandwich]: Source: knowledge/notes/input_part000_review.md, lines 240 and 314.
+[^eu_solder]: Source: data/vesc_help_group/text_slices/input_part011.txt, L19552 to L19556
 
 
 ## References
@@ -79,6 +84,7 @@
 [^16]: Source: knowledge/notes/input_part000_review.md†L397-L397
 [^17]: Source: knowledge/notes/input_part000_review.md†L547-L552
 [^18]: Source: knowledge/notes/input_part000_review.md†L551-L552
+[^punctured_cells]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21149 to L21170
 [^19]: Source: knowledge/notes/input_part000_review.md†L553-L554
 [^20]: Source: knowledge/notes/input_part000_review.md†L512-L516
 [^21]: Source: knowledge/notes/input_part000_review.md†L520-L524

@@ -62,6 +62,7 @@
 - Investigate hall sensor "absent" errors by checking the thin hall leads and verifying continuity with a multimeter's beep mode before rerunning setup.[^hall-diagnostics]
 - Before re-energizing suspect controllers, beep-test between pack leads and every phase to catch shorts, confirm 5 V accessory output, isolate hall supplies with dual 1N4148 diodes if needed, and inspect resettable fuses guarding the Ubox's 12 V/5 V/3.3 V rails.[^prepower-checks]
 - Cold-soldered phase leads can melt and short, killing FETs; test each MOSFET drain-to-source, inspect both sides of the board, and verify Bluetooth plus the 5 V rail before reconnecting.[^phase-meltdown]
+- Geared hubs that suddenly spin backward usually trace to reversed phase/hall wiring inside extension harnesses—budget looms often flip the black/white pair—so trace the intermediate adapter or move to a VESC where you can remap phases and regen polarity cleanly.[^geared_reverse]
 - Zero owners mounting paired VESCs should enlarge bolt holes gradually, strip paint to use the chassis as a heat bridge, clamp with hardware and threadlocker, refresh thermal pads with paste, and avoid insulating foam stuffing.[^zero-mounting]
 - Mixing Makerbase 75100s with FlipSky 75100s on a shared CAN bus pops transceivers thanks to mismatched termination.
   - stick to homogeneous pairs or rework resistor networks before linking them.[^6]
@@ -141,6 +142,7 @@
 [^hall-diagnostics]: knowledge/notes/input_part007_review.md lines 20-20.
 [^prepower-checks]: knowledge/notes/input_part007_review.md lines 32-32.
 [^phase-meltdown]: knowledge/notes/input_part007_review.md lines 31-31.
+[^geared_reverse]: knowledge/notes/input_part011_review.md†L686-L687; data/vesc_help_group/text_slices/input_part011.txt†L19627-L19661.
 [^zero-mounting]: knowledge/notes/input_part007_review.md lines 28-28.
 [^brazing]: knowledge/notes/input_part007_review.md lines 94-94.
 [^external-heatsink]: knowledge/notes/input_part007_review.md lines 99-99.

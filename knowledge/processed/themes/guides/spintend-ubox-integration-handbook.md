@@ -69,6 +69,9 @@
   - treat it as the baseline for compact frames.[^13]
 - **Water-cooling option:** Matthew’s custom water-cooled base plate on a 100/100 drops FET temps from ~54 °C back to ~40 °C within a minute during 35 °C ambient pulls at 130 A phase.
   - proof that external radiators can rescue commuters stuck with minimal deck airflow.[^14]
+- **Mock up MP2 decks before ordering parts.** Patrick is printing a custom heatsink so an uncased 85/240 (≈40 mm tall plus an 8 mm fin stack) fits inside an MP2 Pro 2; he’ll road-test a 150 A layout with a 17×4 delta motor before adding an external 20 S 2 P booster once clearances check out.[^mp2_pro2]
+- **Thunder 2 dual-G300 cooling.** JPPL and Shlomozero are 3D-printing radiator mounts, polishing aluminium plates, and reusing dead 75200 fins to bolt heatsinks onto Thunder 2 dual-controller installs—share STL files and insulation checks so others can replicate the cooling stack safely.[^thunder_heatsink]
+- **Template custom fins before cutting metal.** After burning multiple 85/250 controllers on his Wepoor, Haku is mocking up aluminium fin stacks, mounting strips, and potential CNC runs so the 12‑FET stage finally has dedicated airflow and mechanical reinforcement inside the deck.[^wepoor_fins]
 - **Expected Benchmarks:** Well-mounted duals have logged ~100 A battery / 130 A phase at ≈45 °C, while poor contact in sealed Weped decks let cases soar to 80 °C during 500 A combined pulls.
   - plan extra cooling above those loads. Square-wave Zero 11X controllers still out-launch under-cooled 60 V Ubox setups until phase limits rise and airflow improves, underscoring the need for fans in cramped decks.[^6][^20][^zero-launch]
 - **Strip paint before mounting enclosures.** GT-series decks that mount Ubox Lite/MP2 controllers against painted steel trap heat.
@@ -116,6 +119,7 @@
 
 ## Controls, Accessories & IO
 
+- **Harness staging:** JPPL is finishing a “medium” plug-and-play loom that feeds dual Thor 300 controllers with shared 12 V accessories, VESC Express telemetry, lighting, horn, and Spintend power buttons—built for ≤300 A phase 20 S setups so dual-drive owners can wire once and focus on tuning.[^thor_harness]
 - **Remote & Cruise:** The bundled 2.4 GHz remote offers cruise, horn, and light controls via the receiver, reducing parallel looms compared with bare PPM throttles.[^11]
 - **CNC throttle status:** Early production CNC throttles cleared tolerance checks and will ship once the final countersunk hardware arrives, with anodised and black batches staged after QC approves the mounting kit.[^31]
 - **Cruise troubleshooting:** If the remote beeps but never holds speed, confirm the PPM switch channel toggles in VESC Tool, match firmware between paired controllers, and ensure the accessory rail stays above 5 V when cruise engages.[^32]
@@ -140,6 +144,11 @@
   - wire the latching 16 mm start button or a proper low-voltage switch instead of relying on the BMS as a master disconnect.[^start-button]
 - **Secure the ADC switches.** Warranty cleanups now include removing stray solder balls, upgrading to 1 mm pads before reassembly, and gluing the ADC adapter’s slide switch in the 5 V position to stop intermittent throttle brownouts.[^adc-service]
 - **SmartDisplay ecosystem:** NFC-enabled Zero-style throttles with UART RFID drop into VSETT looms and pair cleanly with SmartDisplay pass-through; CAN “police mode” presets remain in test, aiming to mute the front motor while leaving rear torque for roadside compliance.[^nfc-throttle][^police-mode]
+
+## Pending Field Reports
+
+- Verify whether Arnau’s warranty replacement survives 20 S with regen enabled and note any differences Franchesco reports between the legacy and compact 85/250 housings before updating the reliability guidance.[^arnau-warranty]
+- Gather Finn’s long-term data on the 85/150 beta boards—cooling with 3 mm baseplates, external heatsinks, and safe current ceilings—before recommending those revisions for production builds.[^finn-beta]
 
 ## Firmware, Logging & Fault Recovery
 
@@ -229,13 +238,17 @@
 [^20]: Thermal extremes logged on poorly mounted duals at ~500 A phase combined.[^86]
 [^21]: Practical phase-current ceilings and fault symptoms at higher demand.[^87]
 [^22]: Dual 135 A phase / 71 A battery operating envelope and regen cautions on 17 S packs.[^88]
-[^22s_mod]: Arnau’s plan to stretch an 85/150 to 22 S/150 A sparked reminders to disable regen or upgrade MOSFETs/caps, with Smart Repair steering voltage-hungry builds toward Rage Mechanics’ C350 when 30 S capability is required.[^89]
+[^22s_mod]: Source: knowledge/notes/input_part011_review.md†L525-L526
 [^23]: Early fire incidents during detection runs and the caution to validate baseline tuning before advanced features.[^83]
 [^mini_cap]: haku and Yamal capped dual mini Spintend stacks near 200 A battery (≈300 A phase) per motor after 500 A pushes tripped protections despite cool case temperatures.[^90]
 [^connector_plan]: Yamal is pairing 8 mm Amass bullets with Juliet signal connectors while wiring his dual-controller builds, giving a tidy shared CAN/power loom for 80 H projects.[^91]
 [^baseplate_spreader]: JPPL and Shlomozero are reusing dead 75/200 baseplates as auxiliary heatsinks, stacking aluminium spacers and pad layers or bolting radiator blocks into Dualtron side plates for extra surface area.[^92]
-[^85240_passthrough]: Spintend 85240 cases include passthrough slots that let phase leads exit upward.
+[^85240_passthrough]: Source: knowledge/notes/input_part011_review.md†L530-L530
   - builders reroute wiring through them only after protecting the foam insulation pads.[^93]
+[^thor_harness]: Source: knowledge/notes/input_part011_review.md†L529-L529
+[^mp2_pro2]: Source: knowledge/notes/input_part011_review.md†L551-L552
+[^wepoor_fins]: Source: knowledge/notes/input_part011_review.md†L683-L684
+[^thunder_heatsink]: Source: data/vesc_help_group/text_slices/input_part011.txt, L20246 to L20261
 [^24]: CAN wake wiring updates and anti-slip recommendations for multi-controller builds.[^62][^94]
 [^25]: Official firmware packages with 100 A vs. 300 A limits and the need for matching cooling.[^95]
 [^fw53_support]: Spintend support is still advising riders to hold on firmware 5.2 until its customised 5.3 binaries complete soak testing, so only flash the betas if you can recover from detection failures.[^96]
@@ -258,6 +271,8 @@
 [^zero-launch]: Stock Zero 11X square-wave controllers still beat 60 V Ubox launches until phase limits rise and airflow improves, making active cooling a prerequisite for parity.[^115]
 [^single-rev]: Production single-channel Uboxes now include extra silicone pads and cleaner layouts compared with beta boards, but builders still verify harness pinouts before reuse to avoid damaging refreshed logic stages.[^116]
 [^phase-filter]: Motor-wizard phase filters should be disabled after detection to avoid noise and ABS overcurrent faults on Spintend controllers.[^117]
+[^arnau-warranty]: Pending confirmation that Arnau’s warranty replacement tolerates 20 S with regen and any differences between legacy versus compact 85/250 housings. Source: knowledge/notes/input_part011_review.md†L904-L904
+[^finn-beta]: Awaiting Finn’s long-term 85/150 beta data on cooling mods and safe current ceilings before broad deployment. Source: knowledge/notes/input_part011_review.md†L908-L908
 [^nfc-throttle]: NFC-enabled Zero-style throttles with UART RFID modules plug into VSETT harnesses and align with SmartDisplay pass-through plans.[^118]
 [^police-mode]: CAN “police mode” presets are being prototyped so SmartDisplay buttons can disable the front motor while leaving rear torque for roadside checks.[^119]
 [^ioss-update]: AliExpress’ IOSS rollout adds 21–24 % VAT upfront but removes the €10–€24 postal handling fees across much of the EU.[^120]

@@ -196,6 +196,7 @@
 
 - Capture Paolo’s pricing tiers and lead times for the 2 mm versus 3 mm rotor batches so riders can budget machining versus bolt-on fitment before committing to the group buy.[^97]
 - Gather wiring diagrams showing how the front “local” controller shares throttle input over CAN so dual G300/Spintend stacks stay synchronised during future installs.[^98]
+- Log Jason’s first ride data once the 32 S charge-only BMS is fused, contactors are installed, and the G30 bench tests wrap so range/thermal baselines are documented.[^jason-32s]
 
 ## Source Notes
 
@@ -310,6 +311,7 @@
 [^96]: Source: knowledge/notes/input_part003_review.md†L705-L707
 [^97]: Source: knowledge/notes/input_part014_review.md†L10356-L10365
 [^98]: Source: knowledge/notes/input_part014_review.md†L10352-L10352
+[^jason-32s]: Pending Jason’s first-ride logs after fusing the 32 S charge-only BMS, adding contactors, and completing G30 bench tests. Source: knowledge/notes/input_part011_review.md†L915-L915
 [^99]: Source: knowledge/notes/input_part014_review.md†L79-L119
 [^100]: Source: knowledge/notes/input_part014_review.md†L84-L108
 [^101]: Source: knowledge/notes/input_part014_review.md†L27-L114

@@ -26,6 +26,7 @@
 - Rage Mechanics’ latest C350 controller kits now bundle SmartDisplay, thicker IMS plates, and ESP32-based BLE/IMU telemetry with an onboard 12 V 3 A rail.
   - harnesses remain DIY extras for now, so budget fabrication time.[^3]
 - Builders priced a €17 ESP32 touch display that ships with ready-to-flash Arduino code, letting teams print a housing and add Wi‑Fi/Bluetooth telemetry without buying premium dashboards; community members even offer remote flashing help and printable cases for the €20 Turkish variant if you need a turnkey budget dash.[^4][^5][^6][^7]
+- JPPL’s Simple VESC Display fork stopped throwing compile errors after he reinstalled the Arduino IDE, selected the correct ESP32 board profile, and reflashed; the firmware only needs VESC RX/TX plus 5 V (or 3.3 V) and ground, leaving another COMM port free for accessories while the team eyes a VESC Express port for the low-cost yellow-screen hardware.[^simple_esp32]
 
 ## Companion Boards & OEM Dash Retention
 
@@ -188,6 +189,7 @@
 [^12]: Source: knowledge/notes/input_part006_review.md†L86-L86
 [^13]: Source: knowledge/notes/input_part006_review.md†L148-L148
 [^14]: Source: knowledge/notes/input_part006_review.md†L54-L54
+[^simple_esp32]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21121 to L21190; L21200 to L21201
 [^15]: Source: data/vesc_help_group/text_slices/input_part010.txt†L10609-L10621
 [^16]: Source: data/vesc_help_group/text_slices/input_part003.txt†L11850-L11955
 [^17]: Source: data/vesc_help_group/text_slices/input_part003.txt†L26600-L26606

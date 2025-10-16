@@ -3,11 +3,16 @@
 ## Bearing and Wheel Upgrades
 
 - Monorim 500 W hub motors accept 6001 rear bearings and 16003 stainless fronts when refreshing the rolling hardware, supporting wider tire conversions.[^bearing_sizes]
+- EU suppliers now list 33×2 60 H hubs with 125 mm dropouts and 4 mm banana phases for roughly €300 shipped, giving builders a compact dual-drive option without custom axles.[^eu_33x2_hub]
 - Xiaomi frames can host 2.5–3.0 inch tires, but builders watch for clearance limits to avoid rubbing after the wider fitment.[^tire_clearance]
 
 ## Frame Stiffness Checks
 
 - Removing the deck from a Dualtron Spider leaves the frame too flexy to stand on; riders are adding reinforcement and planning higher-power motor swaps only after hall wiring and 10 AWG phase leads are sorted to keep the chassis stable.[^dualtron_spider]
+
+## Front-End Stability Upgrades
+
+- JREV Speedfork assemblies have earned rider trust up to ~70 km/h, while the crew flatly rejects pushing Xiaomi/Ninebot stock steering to those speeds—budget commuters need fork and headset upgrades before high-speed tuning.[^speedfork]
 
 ## Deck Fabrication & Accessories
 
@@ -23,9 +28,15 @@
   - complete with 60 V packs and heavy-duty motors
   - illustrating how friendships and group buys keep premium frames affordable.[^7]
 
+## Custom Dropouts & Frame Surgery
+
+- Deep sleeper builds can demand literal chassis surgery: GABE’s stretched frame now pulls the hub forward ~15 cm, machines legacy fork dropouts for disc clearance, adds steel reinforcement beams, and repackages the battery as a 22 S 6 P stack to maintain geometry.[^dropout_mods]
+
 [^bearing_sizes]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^tire_clearance]: Source: knowledge/notes/input_part000_review.md, line 74.
+[^eu_33x2_hub]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21207 to L21208
 [^dualtron_spider]: Source: knowledge/notes/input_part000_review.md, line 187.
+[^speedfork]: Source: knowledge/notes/input_part011_review.md†L616-L617.
 
 
 ## References
@@ -37,3 +48,4 @@
 [^5]: Source: knowledge/notes/input_part000_review.md†L517-L517
 [^6]: Source: knowledge/notes/input_part000_review.md†L706-L710
 [^7]: Source: knowledge/notes/input_part000_review.md†L710-L714
+[^dropout_mods]: Source: data/vesc_help_group/text_slices/input_part011.txt, L20800 to L20825; L21193 to L21206; L21355 to L21367

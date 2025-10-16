@@ -5,6 +5,7 @@
 - Oversize protection hardware and choose the right architecture for the pack: JK active-balancing boards bring dual 7 AWG busbars, 1 A or 2 A shuttling variants, and remote toggles, but recent self-burn reports push installers toward JBD/LLT or ANT units when decks are cramped or uptime is critical.[^1][^1][^2][^3]
 - Oversize protection hardware and choose the right architecture for the pack: JK active-balancing boards bring dual 7 AWG busbars, per-channel charge/discharge/balance toggles, and harness-resistance telemetry while still leaving room for GPS/4G trackers once rewired with silicone pigtails, but recent self-burn reports push installers toward JBD/LLT or ANT units when decks are cramped or uptime is critical.[^2][^3][^1][^2][^3]
 - Field failures now include JK dashboards freezing the moment the discharge page opens; builders document the fault, prep JBD harness swaps, and treat JK hardware as a risk unless the pack truly needs its active balancing.[^4]
+- Charge-overcurrent trips on JBD-SP17S005 boards can masquerade as undervoltage faults—one crew only solved repeated shutdowns after swapping the BMS and remapping ADC inputs when a controller failure wiped hall sensors.[^jbd_charge_trip]
 - JK and ANT families remain the consensus picks for high-current scooters, while Daly stays the “worst in the industry” fallback even if it remains widely available.
   - budget headroom accordingly before committing to bargain hardware.[^5]
 - Commission every pack like a high-energy experiment.
@@ -15,6 +16,7 @@
 - ANT owners still note 0.5–0.8 V pack settling after charge; pair those boards with latching throttles or breakers so VESC standby draw doesn’t drain winter storage scooters.[^7]
 - ANT units sip microamps with Bluetooth awake while Daly and LLT boards offer configurable sleep timers; trim status LEDs or use LLT’s hardware switch when parking packs for weeks to stop parasitic drain.[^8]
 - Pack size influences BMS choice: high-capacity 53 Ah+ builds stick with JK’s active shuttling for fast charging, smaller commuter packs tolerate ANT’s lighter balancing current, and JBD hardware remains feature-parity with LLT once sensors and harnesses are sized correctly.[^9][^10]
+- Pending: Capture which ANT class (250/500 A vs. 600 A surge) Pandalgns blesses for the 20 S 10 P Halo pack after welding and shakedowns so the recommendation section reflects proven loads.[^pandalgns-ant]
 - Even 20 S ~7 kW builders asking for smart-BMS ideas keep getting steered back to LLT/JBD units, underscoring how often those boards anchor mid-power packs.[^11]
 
 ---
@@ -93,6 +95,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 7. **Log new delta settings.** Finn’s crews now cap JK shuttle current around 0.2 A and tighten balance delta to roughly 0.01 V so 7 p decks stay aligned without roasting resistors.[^jk-delta-smart]
 6. **Confirm advertised series support.** JBD listings still misstate 22 s capability; verify firmware revisions before wiring high-voltage packs.[^16]
 7. **Plan controller integration.** VESC Bridge V2 is adding native CAN support for JBD/JK/ANT/Daly boards—map harnesses and firmware early so telemetry stays unified once the hardware ships.[^bridge]
+  - Jerome has already opened pre-registration for the next VESC Bridge batch so he can scale the parts order; get on the list if your build schedule depends on those harnesses landing soon.[^bridge-prereg]
 8. **Treat discharge-less monitor boards cautiously.** Jason’s 32 S-capable design drops discharge FETs entirely; keep downstream fuses/contactors because the BMS will not open on shorts, and he refuses to bench the ~32 S 3 P prototype (same footprint as a 16 S 6 P stack ≈17 × 4 cells) on a G30 until those protections are installed to avoid catastrophic arcs if a controller fails live.[^35][^no-fet-smart]
 9. **Document Daly 400 A logic swaps.** Konstantin’s retrofit pairs a Daly shunt frame with an LLT control board to support four KLS7218 controllers.
   - photograph wiring and note the ≈0.05 mΩ shunt stack before replicating.[^36]
@@ -249,6 +252,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 [^ant-32s]: Smart Repair flagged ANT’s new 10–32 S/220 A smart BMS as a viable option when 7–20 S models sell out, giving 20 S scooters fresh inventory to pull from.[^106]
 [^ant-floor]: The same thread notes the larger ANT units stay awake above ≈61.2 V, so 20 S packs that dip below 60 V need extra headroom or a different BMS if they expect deep discharge protection.[^107]
 [^ant-proof]: Official ANT store promos now ship 20–22 S boards as low as €35–80 but with revised connectors, temp probes, or missing serial logos, so open the case for photos and verification before dispute windows close.[^108]
+[^pandalgns-ant]: Pending confirmation of which ANT class Pandalgns approves for the 20 S 10 P Halo pack once welding and shakedown testing finish. Source: knowledge/notes/input_part011_review.md†L914-L914
 [^15]: LLT/JBD smart boards earn praise for compact housings, gentle pre-charge, and configurable protections, giving builders a slimmer alternative to JK hardware.[^109]
 [^16]: Community members caution that JBD firmware listings overstate maximum series counts.
   - verify the real 21 s ceiling before wiring high-voltage packs.[^110]
@@ -275,6 +279,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 [^connector_trip]: Source: knowledge/notes/input_part000_review.md, line 312.
 [^jk-trip]: A JK smart BMS tripped at ~60 A on a C80 build when the rider demanded 70 A battery, proving the protection works and prompting a pack redesign instead of bypassing the board.[^129]
 [^jk_tracker]: JK’s optional cellular tracker module adds SIM-powered remote locking, though the module is bulky enough that owners plan for shrink-wrap pockets or inductive charging to avoid tearing packs open.[^130]
+[^jbd_charge_trip]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21209 to L21280; L21236 to L21266; L21245 to L21260
 [^jk17s]: Source: knowledge/notes/input_part000_review.md, line 319.
 [^adj_supply_smart]: Adjustable 22 S/18 A supplies paired with ANT sleep timers keep 21 S packs topped without drifting during long parking stretches.[^131]
 [^multi_brick_smart]: Switchable 16–24 S/20 A chargers substitute for premium 21 S bricks when inventory dries up, giving one travel charger for multiple scooter voltages.[^132]
@@ -410,6 +415,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 [^124]: Source: knowledge/notes/input_part009_review.md†L29-L35
 [^125]: Source: knowledge/notes/input_part009_review.md†L467-L469
 [^126]: Source: knowledge/notes/input_part011_review.md†L252-L252
+[^bridge-prereg]: Source: knowledge/notes/input_part011_review.md†L501-L501
 [^127]: Source: knowledge/notes/denis_all_part02_review.md†L5499-L5526
 [^128]: Source: knowledge/notes/input_part012_review.md†L19339-L19342
 [^129]: Source: knowledge/notes/input_part012_review.md†L15649-L15756

@@ -149,6 +149,8 @@
 - Document field-tested J1772 adapter builds (wiring, fusing, voltage range) to provide builders with reproducible charging solutions.[^follow-adapter]
 - Validate generator-assisted touring feasibility with real-world weight, noise, and reliability data before promoting as a viable long-distance strategy.[^follow-generator]
 - Capture thermal management strategies for multi-hour charging sessions at public stations, including active cooling thresholds and BMS temperature monitoring.[^follow-thermal]
+- Record outcomes from Давно пора’s regenerative-charging experiment (and any DC-DC courier-swap alternatives) so touring guidance reflects proven workflows rather than theory.[^follow-dc-regen]
+- Gather long-haul feedback on the 4 kW Huawei/Guli telecom chargers—thermal behaviour, CAN/app quirks, and DC-input support—before recommending them for travel kits.[^follow-huawei]
 
 ## Source Notes
 
@@ -158,6 +160,8 @@
 [^app-locks]: App-controlled charging stations releasing only one handle per session, requiring coordination for group tours.[^51]
 [^tesla-protocol]: Tesla plug requirement for protocol triggers (FoCcci boards) to initiate charging handshake sequences.[^51]
 [^generator]: Theoretical 1 kW generator + 5 kWh pack configuration for coast-to-coast touring attempts.[^50]
+[^follow-dc-regen]: Monitoring Давно пора’s regenerative charging experiment and any DC-DC swaps for courier use. Source: knowledge/notes/input_part011_review.md†L902-L902
+[^follow-huawei]: Pending extended-use feedback on 4 kW Huawei/Guli telecom chargers (thermals, CAN/app, DC input). Source: knowledge/notes/input_part011_review.md†L912-L912
 [^appalachian]: Noname's 150-mile ride log demonstrating thermal management and extended touring feasibility.[^50]
 [^noname-96mi]: Noname’s 20 S 35 P commuter pack recorded 96 miles of riding while burning roughly half its 10.2 kWh capacity.[^52]
 [^pack-sizing]: General guidance for 7–10 kWh pack sizing for 150+ mile tours based on consumption testing.

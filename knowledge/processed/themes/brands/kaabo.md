@@ -12,6 +12,7 @@
 - Stock Daly packs sag and trip near 160 A combined battery draw once 22 S controllers are installed, so rebuild the busbars and upgrade to BMS hardware that tolerates higher burst currents before raising limits.[^1]
 - Wolf decks only fit one large controller without risers; dual-controller conversions rely on 3D-printed spacers, staggered mounting, and careful cable routing to keep 22 S harnesses from chafing or overheating.[^2]
 - Remanufacturers now order custom 3 mm rotors and 10 mm² phase looms for Wolf/VSETT builds targeting >300 A launches—have CAD ready for rotor suppliers and budget thicker cabling to stop voltage drop on high-current pulls.[^3]
+- Recent field logs show a Kaabo GT running a 72 V 50 Ah Samsung 50S pack into a 2000 W (33/3) hub with a Spintend 85 V 240 A controller, providing a baseline before experimenting with parallel packs or higher current limits.[^gt_50s_build]
 
 ## Blade & GT-Series Chassis Care
 
@@ -62,6 +63,7 @@
 [^8]: Source: data/vesc_help_group/text_slices/input_part003.txt, L24802 to L25463
 [^9]: Source: data/vesc_help_group/text_slices/input_part003.txt, L2201 to L2206
 [^10]: Source: data/vesc_help_group/text_slices/input_part003.txt, L9804 to L9808
+[^gt_50s_build]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21368 to L21371
 [^11]: Source: knowledge/notes/input_part014_review.md, L218 to L222
 [^12]: Source: knowledge/notes/input_part014_review.md, L230 to L231
 [^13]: Source: knowledge/notes/input_part014_review.md, L268 to L271

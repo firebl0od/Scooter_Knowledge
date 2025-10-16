@@ -28,7 +28,7 @@
 ## Supply Chain & Support Reality
 
 - Treat Alibaba listings as direct-from-factory clearances. Pricing matches historical Seven/Tronic numbers but arrives without brand backing, so stock spares, log calibrations, and plan local repair options before deployment.[^supply]
-- Early adopters are still waiting on partial shipments—one six-pack order only delivered two controllers after four months—so factor unpredictable lead times and missing units into project schedules.[^1]
+- Early adopters are still waiting on partial shipments—one six-pack order only delivered two controllers after four months—and the community still lacks substantive field reviews beyond promotional photos, so budget long lead times and validation gaps.[^1]
 - Catalog serial numbers, MOSFET batches, and thermal-interface steps for every install—the community “VESC museum” is already queuing comparison runs against Maxim, Tronic, and MakerX controllers, and shared telemetry will accelerate validation once source drops catch up.[^lineup][^tracking]
 
 ## Action Items
@@ -50,4 +50,4 @@
 
 ## References
 
-[^1]: Source: knowledge/notes/input_part011_review.md, L770 to L772
+[^1]: Source: data/raw/telegram_exports/vesc_help_group/input_part011.json, L21556 to L21680

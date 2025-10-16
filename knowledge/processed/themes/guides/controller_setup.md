@@ -8,7 +8,9 @@
 
 - Riders switching from sine-wave controllers to full field-oriented control report higher top speeds and cooler motors on the same battery settings, noting that Xiaomi M365 conversions only held 90 A after reinforcing their hardware.[^foc_advantages]
 - Square-wave aftermarket controller kits remain tempting at ~€80 for a dual pack with dash, but they hammer 150–200 A phase at launch, ride harsher for new users, and run noisier than VESC-based FOC setups despite the simple wiring.[^1]
+- Traction control keeps dual builds tidy but still trims torque—JPPL reminds newcomers that VESC’s algorithm is “ok” yet sacrifices punch to rein in wheelspin, so treat it as a stability aid rather than a free performance boost.[^vesc_tc_torque]
 - Sustained cut-outs under load may point to BMS current limits: scooters that pass bench tests but trip under rider weight likely need higher-capacity packs or relaxed protection thresholds.[^bms_cutout]
+- If one motor must run sensorless, tune VSS carefully and be ready to gate the front controller—HFI or scripting a PWM disable below a chosen ERPM keeps dual-drive launches smooth until you can rewire hall sensors.[^sensorless_launch]
 - Logs from 12 S setups show ~45 km/h at 32.5 A; raising voltage to 15 S and reducing current is recommended for better efficiency and lower heat.[^voltage_swap]
 
 ## Current Relationships & Cruise Options
@@ -23,6 +25,7 @@
   - Koxx’s logs showed phase current clipping once battery limits were reached around 25–30 km/h and that hard regen pulses add ≈5 °C to the stator, highlighting why current math and temperature logging must be reviewed together after every tune change.[^3]
 - Treat field-weakening as a high-speed tool only; riders are still seeing 20–40 km/h gains but warn that the extra current draw demands tight temperature monitoring and duty-cycle triggers so launch torque and controller temps stay manageable.[^4]
 - Dual Spintend crews treat 120–130 A phase per motor (≈160 A ABS max) as the realistic ceiling; if a hub “stutters” above ~85 A, assume a blown MOSFET or loose phase and inspect wiring or rerun sensorless detection before simply lowering limits.[^5]
+- When ABS faults trip at modest battery current, raise the absolute-current ceiling to roughly 1.5× the phase limit so regen spikes and launch surges stop tripping protections while keeping the controller inside its thermal window.[^abs_ratio]
 
 ## Thermal Management & Regen Safety
 
@@ -59,6 +62,9 @@
 [^accel_logging]: Source: knowledge/notes/input_part000_review.md, line 133.
 [^speed_alignment]: Source: knowledge/notes/input_part000_review.md, line 135.
 [^phase_baseline]: Source: knowledge/notes/input_part000_review.md, line 198.
+[^vesc_tc_torque]: Source: knowledge/notes/input_part011_review.md†L502-L502.
+[^abs_ratio]: Source: knowledge/notes/input_part011_review.md†L538-L538.
+[^sensorless_launch]: Source: knowledge/notes/input_part011_review.md†L540-L541.
 
 
 ## References

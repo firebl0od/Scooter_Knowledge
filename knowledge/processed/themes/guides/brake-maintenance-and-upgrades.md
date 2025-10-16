@@ -51,6 +51,7 @@
 - Four-piston systems improve heat dissipation during repeated high-speed stops but may be excessive for commuter builds under 60 km/h where two-piston Magura MT5 or similar calipers provide adequate stopping power.[^four-piston-vs-two]
 - Zoom-branded hydraulics continue to underperform at speed.
   - riders are standardising on Nutt, Magura MT5e, Shimano Saint, or Hope calipers paired with 3 mm reinforced 160 mm rotors to survive repeated 120→0 km/h stops, noting that Magura reservoirs can crack under extreme loads.[^6]
+- Inokim OXO owners hunting for a four-piston front upgrade either flip a rear swingarm to mount the caliper underneath or machine a dedicated adapter for the stock arm—there’s no bolt-on solution yet.[^oxo-front]
 
 ### Motorcycle-Caliper Imports (Kotto Example)
 
@@ -416,3 +417,4 @@
 [^94]: Source: knowledge/notes/input_part007_review.md†L238-L238
 [^95]: Source: knowledge/notes/input_part014_review.md†L10356-L10365
 [^96]: Source: knowledge/notes/denis_all_part02_review.md†L348-L349
+[^oxo-front]: Source: knowledge/notes/input_part011_review.md†L513-L513
