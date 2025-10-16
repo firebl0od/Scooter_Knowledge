@@ -133,6 +133,7 @@ Taming current limits is the difference between a scooter that rips for years an
 
 ## Charging & Charger Vetting
 
+- Match charger voltage to the pack instead of counting on the battery to drag a higher-voltage supply down; PuneDir’s 16 S build highlighted the CC/CV mismatch risk when trying to charge with an 84 V brick clamped by the BMS.[^charger-mismatch]
 - **Audit adjustable chargers.** The Celler-branded 20 S bench supply landed on voltage with steady thermals, but log fan duty and case temps during long charges before endorsing it for customers.[^33]
 - **Replace sketchy 22 S supplies.** Refurbished Meanwell stacks have failed under load.
   - source purpose-built 22 S chargers or vetted lab supplies instead of gambling on patched industrial gear.[^34]
@@ -333,3 +334,4 @@ Taming current limits is the difference between a scooter that rips for years an
 [^94]: Source: knowledge/notes/input_part002_review.md†L67-L68
 [^95]: Source: data/vesc_help_group/text_slices/input_part002.txt†L2195-L2344
 [^96]: Source: knowledge/notes/input_part002_review.md†L69-L70
+[^charger-mismatch]: Source: knowledge/notes/input_part010_review.md†L445-L446

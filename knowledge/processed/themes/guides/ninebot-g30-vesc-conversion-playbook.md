@@ -105,6 +105,7 @@
 - Mini-BMX conversions for “Peak G30 v2” projects should confirm dropout width and tire clearance before buying rubber.
   - 10×3.0-6.5 tires shrink the contact patch, but Haku still needed another 10–15 mm of dropout width or a switch to dual 10″ LY 65H motors with 125 mm axles.[^53]
 - 10×3.0-6.5 tubeless tires measure about 3 inches wide on 73 mm (≈2.84″) rims and sit safer than stretched 70/65-6.5 casings; use the imperial size math (first number = width, second = aspect) to convert between listings confidently.[^54]
+- Vsett 10 inner tubes stretch into G30-class rims better than the stock small tubes and have already outlasted repeated flats on Peak G30 builds—expect a tight fit but far fewer pinch punctures once seated.[^vsett10-tube]
 
 ## Control & Traction Tuning
 
@@ -266,6 +267,7 @@
 [^52]: Source: data/vesc_help_group/text_slices/input_part009.txt†L21900-L21939
 [^53]: Source: knowledge/notes/input_part010_review.md†L285-L288
 [^54]: Source: knowledge/notes/input_part010_review.md†L384-L386
+[^vsett10-tube]: Source: knowledge/notes/input_part010_review.md†L705-L705
 [^55]: Source: knowledge/notes/input_part005_review.md†L206-L207
 [^56]: Source: knowledge/notes/input_part005_review.md†L512-L512
 [^57]: Source: knowledge/notes/input_part014_review.md†L84-L85

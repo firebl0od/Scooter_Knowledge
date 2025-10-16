@@ -6,6 +6,8 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 
 - **Controller tiers:** Treat Makerbase/Flipsky aluminum-PCB boxes as interim ≤15 S 50 A solutions; high-power riders standardize on 3Shul C350/CL350, Ubox duals, or BRIESC units for thermal headroom and QC maturity.[^1][^2][^3]
 - **Torque hardware before shakedowns.** Ebike conversions running VESCs have thrown axles within metres when relying on washers; file torque-arm slots for an interference fit, add pinch bolts so 10 mm steel clamps carry axle load, and tighten with short-handled sockets in small increments to avoid crushing thin dropouts.[^1][^2]
+- **Plan closed-course validation for high-speed pulls.** 🇪🇸AYO#74’s 131 km/h rear-motor run ran out of runway, reinforcing that 30 kW scooters need long, obstacle-free straights or track time for testing.[^ayo-131]
+- **Log every shakedown.** With dynos rare, riders lean on CAN traces, GPS runs, and disciplined cooling upgrades instead of optimistic app readouts when validating power claims.[^log-every-run]
 - **Trust alloy handlebars over bargain carbon.** Track telemetry showed cheap carbon bars flexing heavily at speed and failing without warning; stick with quality alloy cockpits even if they add grams.[^3]
 - **Match shunt mods to motor capability.** PuneDir’s shunt-heavy square-wave ESC already saturates a 1 kW motor.
   - traces and FETs have blown before
@@ -583,6 +585,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Tronic controllers revived after water damage still need the DC-DC enable pad scraped clean and re-soldered before conformal recoating.
   - hot-air reflow seals the fix.[^337][^338]
 - Purp’s hall-less Mantis 10 conversion planning shows single Ubox/Spintend modules (~58 mm wide) can be stood on edge along the frame or split between floor and lid; Noname suggests foam or 3D-printed dummies to test fit and warns screw mounting becomes the bottleneck inside cramped controller bays.[^339]
+  - Log the final mounting and cooling layout once Purp finishes street testing so future hall-less swaps know which orientation holds temperature and vibration in check.[^mantis-controller-proof]
 
 ## 7. Chassis Benchmarks & Handling Notes
 
@@ -1325,6 +1328,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^337]: Source: data/vesc_help_group/text_slices/input_part003.txt†L21805-L21824
 [^338]: Source: data/vesc_help_group/text_slices/input_part003.txt†L23563-L23653
 [^339]: Source: data/vesc_help_group/text_slices/input_part010.txt†L20034-L20062
+[^mantis-controller-proof]: Source: knowledge/notes/input_part010_review.md†L702-L703
 [^340]: Source: knowledge/notes/input_part008_review.md†L228-L228
 [^341]: Source: knowledge/notes/input_part012_review.md†L22-L22
 [^342]: Source: knowledge/notes/input_part012_review.md†L26-L26
@@ -1607,3 +1611,6 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^619]: Source: knowledge/notes/input_part002_review.md†L214-L215
 [^620]: Source: knowledge/notes/input_part000_review.md†L362-L364
 [^621]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L102569-L102598
+
+[^ayo-131]: Source: knowledge/notes/input_part010_review.md†L643-L643
+[^log-every-run]: knowledge/notes/input_part010_review.md†L644-L644

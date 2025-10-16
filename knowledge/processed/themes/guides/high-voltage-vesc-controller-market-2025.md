@@ -9,6 +9,8 @@
 - Vedder also teased a palm-sized “VESC Express Micro” controller for 36–48 V scooters: it promises 50 A continuous / 100 A dual-channel output with onboard logging and Express integration, providing a compact option for youth builds despite offering roughly half the battery current of a Ubox 100/100.[^4]
 - 3Shul’s CL-series and Tronic X12 controllers occupy the premium tier for riders chasing 23 S+ or 500 A ambitions, but supply volatility, firmware transparency, and pricing nearly double that of Spintend/Ennoid alternatives require group-buy planning and spare telemetry gear for validation.[^5][^6]
 - Makerbase’s 84xxx HP hardware has emerged as the dependable mid-budget foil: real-world logs show it surviving 22 S abuse when wiring is clean, while 12-FET Spintend stages continue to brown out under heavier riders despite water-cooling success stories.[^7]
+- With Spintend 85/150 singles back-ordered, Vsett 10+ owners are pivoting to Makerbase 75100s but must add external BMS/contactors because the board still lacks a native on/off stage.[^makerbase-fallback]
+- Rage Mechanics’ C350 remains the community’s answer when riders ask for native VESCs that hold ≈28 S, ~200 A battery, and ~700 A phase—still ranked above Kelly/Votol yet below FarDriver for extreme scooters.[^c350-go-to]
 - Raphaël Foujiwara’s dual-VESC prototype targets 100 V packs with 12 TO‑247 MOSFETs per motor, 400 A phase / 300 A battery goals, and a 110 × 110 mm footprint, but the €200 MOSFET bill and twin STM32s already push projected pricing beyond €1 000 unless assembly is automated.
   - highlighting the cost pressure on boutique duals.[^raphael-proto]
 - Riders are still begging for accessible 100 V/80–100 A-per-channel controllers.
@@ -141,6 +143,7 @@
   - update packaging CAD and wiring plans accordingly.[^92]
 - Raphaël reiterates that CL controllers only make sense once voltage climbs above ≈80 V; 60–72 V commuters should stay on C-series hardware to avoid needless size, cost, and regen loss.[^93]
 - EU riders secure EVE 50PL cells for €1–1.5 each while US buyers face ~$9, prompting cross-border sourcing, customs planning, and early stockpiling of QS8 connectors before tariffs spike prices toward $35.[^94]
+- Amy’s factory still repairs $160 450 A FarDrivers for free, giving experimenters a service safety net even if they distrust the platform’s software.[^fardriver-repair]
 - Watch controller sourcing lists: overpriced “dual 75100” enclosures, revised Flipsky 75200s missing bulk caps, and Vsett 10 packs lacking fast over-current protection are all on the community’s QC radar.[^95]
 - Group buys continue shaping premium hardware access: hardened 160 mm brake discs, Seven 18 controllers, and Voyage Megan dashboards are all moving through curated batches rather than retail shelves.
   - document order windows and spares budgeting alongside controller selections.[^96][^87]
@@ -195,6 +198,7 @@
 [^5]: Source: knowledge/notes/input_part014_review.md†L15-L16
 [^6]: Source: knowledge/notes/input_part014_review.md†L162-L165
 [^7]: Source: knowledge/notes/input_part014_review.md†L18-L21
+[^makerbase-fallback]: Source: knowledge/notes/input_part010_review.md†L677-L677
 [^8]: Source: knowledge/notes/input_part002_review.md†L11-L13
 [^9]: Source: knowledge/notes/input_part000_review.md†L210-L212
 [^10]: Source: knowledge/notes/input_part000_review.md†L251-L252
@@ -202,6 +206,7 @@
 [^12]: Source: data/vesc_help_group/text_slices/input_part002.txt†L8620-L8690
 [^13]: Source: knowledge/notes/input_part000_review.md†L732-L733
 [^14]: Source: data/vesc_help_group/text_slices/input_part002.txt†L2629-L2692
+[^c350-go-to]: Source: knowledge/notes/input_part010_review.md†L415-L416
 [^15]: Source: knowledge/notes/input_part014_review.md†L17-L21
 [^16]: Source: knowledge/notes/input_part014_review.md†L73-L76
 [^17]: Source: knowledge/notes/input_part014_review.md†L17-L18
@@ -283,6 +288,7 @@
 [^93]: Source: data/vesc_help_group/text_slices/input_part004.txt†L18919-L18927
 [^94]: Source: knowledge/notes/input_part014_review.md†L35-L38
 [^95]: Source: knowledge/notes/input_part004_review.md†L278-L278
+[^fardriver-repair]: Source: knowledge/notes/input_part010_review.md†L533-L533
 [^96]: Source: knowledge/notes/input_part014_review.md†L27-L28
 [^97]: Source: knowledge/notes/input_part014_review.md†L8981-L8991
 [^98]: Source: knowledge/notes/input_part014_review.md†L7726-L7758

@@ -19,6 +19,12 @@
 - Skip exotic PEEK or metal prints for high-load gearboxes.
   - builders remind 130 kg riders pushing 150 A at 10 krpm that plastic reducers fail fast, while chain drives with QS90 hubs survive cramped frames far better.[^8]
 
+## Battery Fixtures & Hardware
+
+- Xiaomi-class PETG carriers still relax with heat; Finn sizes the cups for 21.4 mm P42A vs. tighter 21.15 mm 40P cans and runs high infill so the pack flexes before cracking when warm.[^petg-holders]
+- Pandalgns’ modular battery cases add BMS service holes and screw-linked columns with mesh caps for triangular 10 S6 P bike packs, keeping nickel clamped while leaving room for a dedicated BMS plate.[^pandalgns-triangle]
+- Builders are still hunting thin thrust washers to sit between hub shafts and end caps—call out the sourcing gap when assembling maintenance kits alongside spare controller boards.[^thrust-washers]
+
 
 ## References
 
@@ -30,3 +36,6 @@
 [^6]: Source: knowledge/notes/input_part006_review.md†L194-L194
 [^7]: Source: knowledge/notes/input_part006_review.md†L362-L362
 [^8]: Source: knowledge/notes/input_part006_review.md†L363-L363
+[^petg-holders]: Source: knowledge/notes/input_part010_review.md†L432-L433
+[^pandalgns-triangle]: Source: knowledge/notes/input_part010_review.md†L438-L438
+[^thrust-washers]: Source: knowledge/notes/input_part010_review.md†L411-L412

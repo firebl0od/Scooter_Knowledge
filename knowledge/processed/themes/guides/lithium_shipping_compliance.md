@@ -19,6 +19,7 @@
 ## Risk Mitigation
 
 - **Separate batteries from accessories.** When regulations block lithium exports to a region (e.g., Kuwait or Norway), ship electronics-only kits and leave customers to source packs locally to avoid customs seizures.[^9]
+- **Expect shipping limits to shape hardware choices.** Builders in Europe are skipping remote Dualtron GT2 purchases because lithium restrictions add cost and delay; some are fabricating custom swingarms and stems locally to keep 80 H motor projects alive.[^dualtron-ship]
 - **Leverage trusted intermediaries for personal-use imports.** Riders struggling with formal customs (e.g., Jason sourcing Samsung 40T/50S packs into South Korea) now lean on EU partners like Yamal who can forward cells as personal parcels via established transport networks, but they still plan for paperwork and potential scrutiny at the border.[^10]
 - **Document every parcel.** Keep copies of declarations, MSDS sheets, and carrier acknowledgements so you can prove due diligence if an incident occurs; Denis captures these records alongside order IDs during manual payment reconciliation.[^11][^5]
 - **Plan for stock outages.** Charger shortages, bag delays, and hazmat paperwork slowdowns can halt complete-kit sales; maintain communication channels (newsletters, storefront notices) to reset expectations before customers escalate.[^3]
@@ -33,6 +34,7 @@
 ## Regional Compliance Watch
 
 - **Spain’s 2024–2027 crackdown.** Cheap Xiaomi clones with flimsy 110 mm rotors and bargain electronics triggered fires and are being banned; by 2027 riders must shift to plated, certified models such as the Xiaomi 4 series to stay legal.[^15]
+- **Israel’s importer-license rule.** Enthusiasts have to bring RM-class scooters in as parts and source batteries locally unless they hold an importer permit, stretching timelines and budgets.[^israel-import]
 
 
 
@@ -47,9 +49,11 @@
 [^7]: Source: knowledge/notes/all_part01_review.md†L29-L33
 [^8]: Source: knowledge/notes/input_part000_review.md†L212-L212
 [^9]: Source: knowledge/notes/all_part01_review.md†L27-L27
+[^dualtron-ship]: Source: knowledge/notes/input_part010_review.md†L607-L608
 [^10]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19334-L19379
 [^11]: Source: knowledge/notes/all_part01_review.md†L150-L150
 [^12]: Source: knowledge/notes/input_part000_review.md†L399-L399
 [^13]: Source: knowledge/notes/input_part000_review.md†L401-L404
 [^14]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L90969-L91040
 [^15]: Source: knowledge/notes/input_part007_review.md†L410-L410
+[^israel-import]: Source: knowledge/notes/input_part010_review.md†L678-L678

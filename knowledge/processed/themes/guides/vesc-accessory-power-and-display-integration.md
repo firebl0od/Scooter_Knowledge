@@ -19,6 +19,12 @@ This guide distills field reports on powering lights, horns, and dashboards from
 | MakerBase 75×/85×/X12 bridge | 3.3 V ADC, 5 V UART/Comm | Hall throttles must stay near 3.3 V; 5 V injection into ADCs burns STM32 inputs, and older Xiaomi 5 V throttles still need resistor ladders whereas the 3.3 V variants can wire straight in.[^7][^8][^12] | Measure throttle min/max before connection; insert resistor ladders or shunt regulators if the lever exceeds 3.3 V.[^7] |
 | Any high-load build | External 12 V/20 A buck | Horns and compressors spike current; expect ≈4–6 A draw from a 60 V pack when heavily accessorised.[^13] | Adjust controller battery limits to preserve BMS overhead; isolate horns on separate fuses or relays.[^13] |
 
+## Dash Replacement Notes
+
+- Unbranded “generic JP” TFTs follow TF/TS100 button colour order; wire RX/TX/GND/5 V today and keep loom slack because NetworkDir’s next hardware spin will speak native CAN and host an ESP32‑C3 VESC Express module.[^jp-generic]
+- Voyage’s “Megan” CAN dash remains the premium plug-and-play option when you need polished lighting integration without UART compromises.[^voyage-megan]
+- RFP and Voyage are also fielding CAN-first displays that require firmware 6.05 plus custom Lisp on every controller; builders leaning Express kits get similar telemetry without rewiring UART looms.[^can-display-roadmap]
+
 ## Telemetry Accuracy & Power Auditing
 
 - **Filter VESC Tool data.** Real-time power readouts are instantaneous duty×current estimates; without ≥100–300 ms filtering they overshoot logged pack power by 10 kW or more, so treat RT numbers as qualitative and lean on logged data for marketing claims.[^14]
@@ -36,6 +42,8 @@ This guide distills field reports on powering lights, horns, and dashboards from
 3. **Map every connector before power-up.** MakerBase looms expose 3.3 V/GND/ADC1 at the “comm” header and reroute Bluetooth through the NRF pins; miswired TX/RX leads cause telemetry dropouts or back-power logic rails.[^22]
 4. **Favor multi-core RVVP over solid Ethernet in stems.** Fine-strand shielded RVVP survives stem flex better than solid-core Cat6, still carries halls, CAN, and spare conductors, and keeps throttles from snapping wide open when wires fracture.[^23]
 5. **Reserve shielded Ethernet for signal runs only.** Builders keep XT150/QS8 on the power leads and repurpose Ethernet or RVVP pairs for 5 V, hall, and CAN wiring so accessories can be added later without tearing the stem apart.[^24][^25]
+- **Pull the always-on accessory module if you don’t need it.** Some VESC kits ship with a piggyback board that keeps the controller awake indefinitely—removing it frees deck space and restores true shutdown behaviour.[^accessory-sleep]
+- Compact stand-alone 12 V DC-DC converters tuck beside Flipsky ESCs when you need accessory power without opening the stock loom.[^compact-dcdc]
 4. **Secure hall boards and sensor looms.** Hall PCBs that peel free can short against the rotor housing and mimic logic-rail failures; inspect adhesive and strain relief during reassembly.[^26]
 5. **Exploit the ADC harness features.** Spintend’s ADC v3 board already supports spin dial throttles, dual-button pods, and turn-signal LED strips.
   - plan channel assignments before closing the deck and keep phase leads equal length when trimming looms.[^27]
@@ -192,6 +200,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 
 - **Koxx CAN lighting daughterboard.** Provides brake/turn LED outputs plus a programming header and extra button inputs but expects an external 5 V/12 V feed.
   - budget a buck converter or tap the Ubox rail when adding addressable strips or steering-column buttons.[^121]
+- **C350 accessory rail refresh.** The latest C350 controllers now expose a ~1.2 A 12 V output for running lights, so older revisions still need an external reducer while new batches can power low-draw lamps directly.[^c350-rail]
 - **Premium throttle triggers.** Polish-made e-bikestuff triggers deliver a 0.96–4.31 V sweep with zero deadband, letting riders set endpoints cleanly in VESC Tool for smoother launches if they can justify the shipping cost.[^122]
 - **Lock-ring button pods.** Clamp-on grip modules add tactile turn buttons and mimic Vsett switchgear at budget prices, trading a bit of mass for ergonomic access to indicators and lighting.[^123]
 
@@ -476,6 +485,8 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^119]: Source: data/vesc_help_group/text_slices/input_part003.txt†L8798-L8799
 [^120]: Source: knowledge/notes/input_part000_review.md†L734-L741
 [^121]: Source: knowledge/notes/input_part000_review.md†L624-L624
+[^accessory-sleep]: Source: knowledge/notes/input_part010_review.md†L543-L543
+[^c350-rail]: Source: knowledge/notes/input_part010_review.md†L584-L584
 [^122]: Source: knowledge/notes/input_part000_review.md†L625-L625
 [^123]: Source: knowledge/notes/input_part000_review.md†L626-L626
 [^124]: Source: data/vesc_help_group/text_slices/input_part000.txt†L17986-L18013
@@ -558,3 +569,5 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^201]: Source: knowledge/notes/input_part014_review.md†L189-L189
 [^202]: Source: knowledge/notes/input_part010_review.md†L16-L18
 [^203]: Source: knowledge/notes/input_part010_review.md†L18-L18
+[^can-display-roadmap]: Source: knowledge/notes/input_part010_review.md†L668-L668
+[^compact-dcdc]: Source: knowledge/notes/input_part010_review.md†L670-L670

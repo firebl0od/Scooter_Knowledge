@@ -9,21 +9,27 @@
   - thin alligator clips dropped a healthy P42A to a false 1.9 V at 20 A until the team clamped directly to the tabs
   - so upgrade leads and meters before condemning cells.[^2]
 - EU comparison logs now peg P42A as the 20–30 A workhorse, LG/Samsung 50G as the 7–10 A efficiency pick, and Samsung 50S/Vapcell T50 matching P42A output only if you can justify roughly double the price; community bulk buys land 30T/35E/50G cells near €2.5–€4 each.[^3]
+- Riders eyeing 14 S3 P or 22 S11 P layouts praise Molicel P50B’s 50 A capability but note limited supply (~€7.95 per cell via NKON plus ≈US$80 shipping), making Samsung 50S or Bak 45D the pragmatic alternatives.[^p50b-market]
 
 ## Capacity Planning & Chemistry Guardrails
 
 - Mirono’s 13 S 5 P NCR21700A pack starts at 50 A battery current and caps around 75 A so the ≈15 A-per-cell string stays inside spec.
   - use the same discipline whenever you squeeze high-capacity cells into 5 P commuters.[^4]
+- Thunder-frame conversions are now targeting 22 S 11 P packs with full BMS integration; lighter riders can drop to 22 S 10 P on next-gen 40PL cells if they prioritise weight savings over maximum range.[^thunder-22s]
 - AWD conversions should run a single motor until a 16 S 5–7 P (or internal/external hybrid) battery is ready; 12 S 3 P packs sag or overheat on VESC hardware even when the controller can deliver the amps.[^5]
 - Mixed MJ1/MH1 parallels sag 10–12 V at ≈9 A per cell; veterans cap both chemistries near 7 A and pivot to Samsung 50G, Molicel P42A, or Murata VTC6 for higher-current builds instead of chasing firmware fixes.[^6]
+- Kukirin G2 Master owners are stepping up to 16 S packs built from Samsung 50S/E or EVE 40PL cells before swapping controllers, confirming that high-discharge cells and a moderate voltage bump deliver tangible speed gains without overstressing the chassis.[^kukirin-16s]
 - Budget Liitokala LiFePO₄ cells arrive unbalanced, sag heavily above ≈12 A, and often ship slowly by boat.
   - reserve them for stationary projects unless you can package much larger scooter enclosures.[^7]
 
 ## Layout and Interconnects
 
 - Proposed geometries include 16 S 7 P and 12 S 9 P assemblies that rely on wider nickel strips and copper busbar "sandwich" welds to sustain 70–80 A continuous discharge without overheating.[^pack_layout]
+- PuneDir’s 16 S 7 P Molicel M26 retrofit proved 13 S commuter frames can swallow 60 V packs when you match chargers to pack voltage instead of forcing higher-voltage supplies to sag.[^punedir-16s]
 - Community connector tables drive upgrades from stock 10–12 AWG leads to heavier wiring and lower-resistance plugs (XT60/90/150, EC5) on Ubox builds.[^pack_connectors]
+- MP2-based 22S2P (~650 Wh) cores drop straight into compact frames, and builders are stacking six more cells under the ESC to reach 24S while preserving regen space inside the deck.[^mp2-22s]
 - Ninebot Max and Xiaomi Pro deck extensions can accommodate up to 16 S 5 P 21700 modules with ~27 mm spacers, though installers often trim or rotate controller housings to keep packaging tidy.[^deck_extension]
+- Backpack commuters still squeeze folded 20 S4 P modules into stripped 5 L packs, but aluminium quick-release racks need reinforcement before they can safely haul the extra mass.[^backpack-20s]
 - Tudor’s PETG honeycomb holders and interlocking connectors let Xiaomi and G30 packs dry-fit without glue, while other builders laser-cut 3–6 mm kraftplex skeletons, wrap them in thin PETG jackets, and still tape the stack with fish paper because sealed decks trap heat regardless of insulation choices.[^petg_honeycomb]
 - Recycling pledges are nudging EU pack shops toward kraftplex or other recyclable wraps, yet fish-paper rolls are scarce enough that crews are prototyping 0.8 mm kraftplex jackets while still insisting on series separators to prevent can-to-can shorts.[^8]
 - Koxx’s 14 S 6 P build uses RePackr-balanced groups, glued cells, and glass-fibre spacers between layers to equalise resistance across parallels inside cramped decks.
@@ -34,6 +40,7 @@
 - Copper “sandwich” busbars (0.1 mm copper capped with nickel) paired with 0.1 mm pure copper links now anchor 120 A BMS builds, proving the laminate holds up when riders document weld energy and clamp pressure.[^copper_sandwich]
 - Honeycomb layouts that funnel a whole 5 P group through a single 8 mm nickel strip have already bottlenecked current.
   - rebuild with sheet bussing or at least five 7–8 mm straps in parallel (0.25–0.30 mm thick) so each bridge carries ≥35–40 A without hot spots before scaling voltage or series count.[^13]
+- Xiaomi Pro 2 conversions max out around 20 S 2 P (40 cells) once spacer thickness and rail clearance are counted unless you sand PETG carriers or plan external enclosures.[^gabe-20s]
 - Rental G30 conversions swallow "thick" 13 S 5 P 21700 packs once the spacer grows the cavity to ≈155 mm × 400 mm, but EU builders struggle to source 220 mm shrink locally.
   - plan packaging and consumables early for long-range decks.[^14]
 
@@ -57,6 +64,13 @@
 [^deck_extension]: Source: knowledge/notes/input_part000_review.md, line 75.
 [^petg_honeycomb]: Source: knowledge/notes/input_part000_review.md, line 216.
 [^copper_sandwich]: Source: knowledge/notes/input_part000_review.md, lines 240 and 314.
+[^p50b-market]: Source: knowledge/notes/input_part010_review.md†L485-L486
+[^thunder-22s]: Source: knowledge/notes/input_part010_review.md†L505-L506
+[^kukirin-16s]: Source: knowledge/notes/input_part010_review.md†L553-L553
+[^backpack-20s]: Source: knowledge/notes/input_part010_review.md†L545-L545
+[^punedir-16s]: Source: knowledge/notes/input_part010_review.md†L435-L446
+[^gabe-20s]: Source: knowledge/notes/input_part010_review.md†L488-L489
+[^mp2-22s]: Source: knowledge/notes/input_part010_review.md†L635-L635
 
 
 ## References

@@ -5,6 +5,8 @@
 - Grade-A 50PL and P45B cells now define the performance ceiling, but prices swing from €1–1.5 in the EU to ~$9 in the US, so teams must align sourcing tactics with customs realities before scoping pack power levels.[^1][^2]
 - Copper spot welding remains the gating competency: bargain 90 € welders rarely prove 0.15 mm claims, while K-Weld or Glitter rigs with proper maintenance reliably join 0.1 mm copper for 22 S packs.[^3][^10]
 - Mirono steers newcomers toward Docreate’s ~€100 capacitor welder and copper-under-nickel sandwiches (≈40 J for nickel, 60–70 J for copper) because LSUC-branded caps underdeliver and bare copper strips fail pull tests without a nickel cap.[^1]
+- Before committing to copper busbars, Pandalgns is test-firing a €100–€120 welder at ≈0.1 s pulses to confirm it can join copper reliably—proof that bench tests should precede full 20 S10 P builds.[^welder-trials]
+- Pack shops now expect reinforced printed holders and pro-grade tooling; Pandalgns is redesigning 20S8P cages after flimsy STLs failed, and Noname is pricing a $17 k laser welder to keep precision builds moving.[^stiff-holders]
 - Size busbars with real cross-sectional math instead of stacking nickel.
   - triple 0.30 mm stacks still run resistive at 70 A, so teams now flip to copper once welders are dialled.[^2][^3]
 - Xiaomi Pro 2 and Navee conversions prove 20 S packs fit only when BMS and controllers move.
@@ -902,3 +904,5 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^287]: Source: knowledge/notes/input_part013_review.md†L322-L324
 [^288]: Source: knowledge/notes/input_part004_review.md†L318-L318
 [^289]: Source: knowledge/notes/input_part004_review.md†L37-L37
+[^welder-trials]: Source: knowledge/notes/input_part010_review.md†L492-L493
+[^stiff-holders]: Source: knowledge/notes/input_part010_review.md†L611-L612
