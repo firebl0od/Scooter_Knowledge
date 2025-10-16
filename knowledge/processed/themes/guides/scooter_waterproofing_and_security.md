@@ -4,6 +4,7 @@
 - **Seal every seam.** Run silicone along deck joints, cable pass-throughs, and the charge door, then coat hub interfaces with lithium grease so sustained rain rides don\'t wick water into the pack or motor bay.【F:knowledge/notes/all_part01_review.md†L86-L87】
 - **Add moisture sentries.** Builders embed hydrometers on DC–DC converters that feed Arduinos driving buzzers; when the sensor trips, the alarm screams before corrosion sets in.【F:knowledge/notes/all_part01_review.md†L86-L87】
 - **Pack silica gel inside decks.** Rental-frame conversions stay dry longest when silica packets live beside the battery and automotive engine sealant closes the lid—silicone peels by hand for service yet seals better than chasing custom gaskets.【F:knowledge/notes/input_part000_review.md†L685-L685】
+- **Audit Kaabo decks for pooling.** Wolf inspections uncovered water trapped under 20 S packs that soaked LG M50LT modules despite shrink wrap—add drain checks, dielectric grease, and redundant silicone/Kapton layers around series bridges and BMS leads before chasing 20 S8 P upgrades.【F:knowledge/notes/input_part002_review.md†L159-L161】
 - **Choose the right bearings.** Swap stock 2Z hubs for sealed 2RS units and refresh grease after wet weeks to keep Monorim and Xiaomi front ends from grinding themselves apart.【F:knowledge/notes/all_part01_review.md†L27274-L27275】
 - **Inspect after every soak.** Error 28 beeps and erratic state-of-charge readings usually mean the controller or white battery plug corroded—scrub with contact cleaner, dry thoroughly, and don\'t trust factory IP54 stickers.【F:knowledge/notes/denis_all_part02_review.md†L419-L421】【F:knowledge/notes/denis_all_part02_review.md†L454-L455】
 - **Reseal deck mods.** Grinding Xiaomi/Ninebot ribs to fit BMS hardware opens new leak paths; reseal the deck lid and servo-lock cavity with silicone rather than leaving raw metal to rust.【F:knowledge/notes/input_part000_review.md†L292-L293】
@@ -27,6 +28,8 @@
 
 ## Regional Compliance Pressure
 - **Plan for roadside inspections.** Finnish police are confiscating scooters that exceed 25 km/h without registration and even checking bulb part numbers, while southern EU riders dodge €8–9 k fines by programming low-power “police modes” and swapping to halogen BA9S lamps to satisfy moped rules.【F:knowledge/notes/input_part005_review.md†L225-L227】
+- **Swiss crackdowns escalate.** Authorities recently seized a 133 km/h Wolf Warrior outright, reinforcing the need to keep legal commuter profiles alongside race setups.【F:data/vesc_help_group/text_slices/input_part002.txt†L9471-L9489】
+- **Pre-stage a legal profile.** Belgian riders have seen 50 km/h scooters confiscated and cases escalated to lawyers; their workaround is to flash a 25–30 km/h VESC profile for roadside checks while keeping a high-speed mode for private property, paired with calm riding to avoid attracting attention.【F:data/vesc_help_group/text_slices/input_part002.txt†L9502-L9510】
 
 ## Post-Ride Water Diagnostics
 - **Track regen-related faults.** Error 21 after a panic stop usually points to a cooked data line, not a dead BMS—bench-test packs on a known-good scooter before blaming Happy BMS or Rita.【F:knowledge/notes/denis_all_part02_review.md†L368-L369】

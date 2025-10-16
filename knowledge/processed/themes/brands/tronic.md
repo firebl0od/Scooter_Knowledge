@@ -53,6 +53,7 @@
 
 ## Outstanding Research Backlog
 - Publish verified current limits for the latest Seven 18 / Tronic X12 Toll-FET builds once community tests push past 210 A battery / 310 A phase.[^6][^14]
+- Log Little FOCer V3.1 field data—Rosheee just received dual 290 A phase / 190 A battery units for his G30/Rion hybrid while waiting on Rion’s 450 A controller shipment, confirming boutique 100 V hardware is shipping again in small batches.[^lfocer-v31]
 - Capture teardown photos and torque specs for reinforcing the DC-DC section and connector terminations before the next round of high-speed validations.[^4]
 - Log the pending warm-weather bench campaign for Tronic 250 v2, 250R, and Little FOCer v3.1 controllers once ambient temps rise above the -6 °C winter testing ceiling so reliability claims reflect real riding conditions.[^winter_tests]
 
@@ -73,3 +74,4 @@
 [^14]: Community request to log verified limits for Toll-FET Seven/Tronic builds as testing expands.【F:knowledge/notes/input_part014_review.md†L212-L218】
 [^15]: 117 km/h Rion front-controller fire and ensuing DC-DC diagnostics highlighting paste quality and connector choices.【F:knowledge/notes/input_part003_review.md†L178-L179】
 [^winter_tests]: Rosheee’s plan to re-bench Tronic 250 v2, 250R, and Little FOCer v3.1 hardware once temperatures climb above -6 °C so winter pack limits stop masking controller reliability.【F:knowledge/notes/input_part003_review.md†L716-L718】
+[^lfocer-v31]: Rosheee secured Little FOCer V3.1 controllers rated around 290 A phase / 190 A battery for his G30/Rion hybrid while waiting on a 450 A Rion shipment, signalling boutique 100 V stock is moving again albeit in limited batches.【F:knowledge/notes/input_part002_review.md†L163-L164】

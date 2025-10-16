@@ -11,6 +11,8 @@
 - Treat the ADC lighting bridge as an accessory tap, not a main switch—its ~12 V / 3 A rail and updated harnesses simplify pods and brake throttles, but real kill circuits still require relays, smart-BMS buttons, or loop keys.[^3]
 - Single-channel Uboxes still omit the 12 V/3 A accessory rail, so plan fused buck converters for headlights and horns instead of hijacking fan headers or the ADC board.【F:knowledge/notes/input_part000_review.md†L496-L498】
 - Built-in alarms scream if the remote fails to handshake at power-up while still letting the motors drive, so wire brake interlocks or auxiliary sirens if you rely on the feature for theft deterrence.【F:knowledge/notes/input_part000_review.md†L308-L308】
+- The cost-reduced Ubox V2 quietly swapped 4 A Infineon gate drivers for 1.5 A generics and dropped the BLE board, so sustained high-duty tunes need extra cooling and independent telemetry.[^v2_downgrade]
+- Single Ubox lids still mount MOSFETs on the removable cover—treat them as ~30 A continuous hardware unless you add external heatsinks or step up to dual-channel cases for 100 A peaks.[^single_lid_limit]
 - The compact V100 revision leans on higher-Rdson MOSFETs plus revised copper tracing to shed heat, yet riders still beg for smaller cases, front-facing connectors, integrated Bluetooth, and direct MOSFET-to-heatsink clamps with copper bars.【F:knowledge/notes/input_part001_review.md†L592-L593】
 - Stock MOSFETs still fail when builders push >40 A of field weakening on 20 S packs; plan on HY- or HSBL-class swaps before chasing high-ERPM targets on 85150/85250 hardware.[^20]
 - Random throttle surges continue to surface on 85 V/240 A, 100 V/100 A, and even v2 85 V/250 A units, so budget time for filtering, shielded cabling, and harness inspections when diagnosing jitter complaints.[^17]
@@ -162,6 +164,7 @@
 - Sellers occasionally under-declare controller value (e.g., listing €160 modules at €55); while it trims duties, buyers carry the audit risk if customs spot the mismatch.[^14]
 - Treat the €140 “Spintend” AliExpress storefront as a likely scam—new account, no replies, and a bill of materials that already costs more than the asking price.【F:knowledge/notes/input_part000_review.md†L348-L348】
 - Single-channel boards still ship without Bluetooth; riders bolt on external modules (shared over CAN) or email Spintend for a forgotten dongle, and the CAN harness ships with paired singles so accessories live on the master controller.【F:knowledge/notes/input_part000_review.md†L333-L334】
+- Spintend’s 500 W water pump supplier stalled during lockdowns; 350 W replacements run hot and sparked bait-and-switch complaints, so builders now chase alternative pumps or budget for active cooling redesigns.【F:data/vesc_help_group/text_slices/input_part002.txt†L2691-L2716】
 - Expect warranty friction on unexplained failures—retailers are already pointing at firmware versions (e.g., 6.05) to deny coverage—so document software builds, logs, and install photos before submitting RMAs.[^19]
 - Spintend’s capacitor bank remains thin for oversized QS hubs; heavy builders increasingly migrate to shunt-sensed platforms (Ennoid MK8, Tronic X12) when repeated gate-driver deaths surface.[^16]
 
@@ -188,6 +191,8 @@
 [^6]: Field logs showing 12‑FET Ubox battery and phase limits when cooled.【F:knowledge/notes/input_part010_review.md†L190-L190】
 [^7]: Details on the revised 85 V/240 A single Ubox with 8 AWG leads and reversible exits.【F:knowledge/notes/input_part010_review.md†L535-L536】
 [^8]: Early dual 75/100 revisions shipping without populated phase filters.【F:knowledge/notes/input_part005_review.md†L167-L167】
+[^v2_downgrade]: Raphaël confirmed Spintend swapped 4 A Infineon gate drivers for 1.5 A generics and removed the BLE daughterboard on cost-reduced V2 hardware, explaining weaker high-duty performance.【F:knowledge/notes/input_part002_review.md†L129-L132】
+[^single_lid_limit]: The single Ubox enclosure still bolts MOSFETs to the lid, leaving roughly half the thermal mass of the dual case—fans now remind riders it was designed for ~30 A continuous one-wheel builds, not 100 A dual-motor pulls.【F:data/vesc_help_group/text_slices/input_part002.txt†L9689-L9697】
 [^9]: Recommended continuous versus peak targets for 85-250 hardware and firmware-imposed voltage/current caps.【F:knowledge/notes/input_part010_review.md†L567-L567】
 [^10]: Dual-controller log evidence showing commanded versus actual current disparities on Lite builds.【F:knowledge/notes/input_part010_review.md†L564-L564】
 [^11]: Regen strategies and voltage precautions for 21–22 S packs to avoid over-voltage failures.【F:knowledge/notes/input_part005_review.md†L152-L153】

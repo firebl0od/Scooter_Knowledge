@@ -4,6 +4,7 @@
 - VESC controllers keep the logic rail live whenever the pack is connected—true power-off requires BMS latching, loop keys, or external contactors, not just VESC's 5 V enable pin.[^vesc_latch]
 - Keyed switches hung on the K-line ignition leads have exploded because they're rated for milliamps, not battery-level current—size switches properly or move them to DC/DC enable lines instead of main power.[^antispark_fail]
 - Spintend singles lack a true latch rail—the MOSFET stack acts as the "switch," so riders need proper upstream contactors rather than relay hacks on low-voltage wiring.[^spintend_latch]
+- Even refreshed Flipsky 75100s sip ≈5 mA at standby, so riders without antispark switches physically disconnect XT90S loop keys between rides to avoid weeks-long vampire drain.[^75100-standby]
 
 ## Power Architecture Understanding
 
@@ -13,6 +14,7 @@
 
 ### Spintend-Specific Architecture
 - **Singles rely on MOSFET stack switching.** Rage Mechanics reiterated that the single-board UBOX relies on its MOSFET stack as a "big switch"; there's no dedicated latch rail to intercept with a key, and cutting traces ahead of the regulator is risky micro-surgery—scooters need proper upstream contactors instead of relay hacks.[^spintend_latch]
+- **Latching button polarity is inverted.** Spintend’s illuminated latching button ships wired opposite Rosheee’s automotive switch, so expect to swap LED and +/− leads or the controller will stay latched on; confirm logic before final assembly.[^spintend_button]
 
 ### Makerbase Ignition Logic
 - **75100 units expect momentary latch.** Bridge 5 V to the AD15 enable pin for roughly a second to turn on (three seconds to shut down), and set the ADC shutdown timer so the controller actually unlatches.[^makerbase_latch]
@@ -28,6 +30,7 @@
 - **Size switches for actual current.** If hanging switches on ignition lines, verify they're rated for the actual current path—most "anti-spark" switches are only rated for signal-level currents.
 - **Use DC/DC enable or BMS control.** The safest approach is to switch the DC/DC enable pin or use smart-BMS control rather than trying to interrupt main battery power with undersized switches.
 - **External contactors for true power-off.** For genuine power isolation, use loop keys (XT90S), smart-BMS latching, or external contactors rated for the pack voltage and current.
+- **Right-size precharge resistors.** 1 kΩ precharge buttons stayed hot and delayed startup on high-capacitance controllers; builders now favor lower-value resistors or purpose-built anti-spark circuits to avoid cooking the switch and to charge capacitors promptly.[^precharge_value]
 
 ## ANT BMS Precharge Considerations
 
@@ -57,9 +60,12 @@
 [^vesc_latch]: VESC latch behavior and key switch wiring considerations showing logic rail stays live and 5V pin controls enable.【F:knowledge/notes/input_part004_review.md†L56-L56】
 [^antispark_fail]: Anti-spark and key-switch explosions from hanging generic buttons on K-line ignition leads.【F:knowledge/notes/input_part004_review.md†L269-L269】【F:knowledge/notes/input_part004_review.md†L595-L595】
 [^spintend_latch]: Spintend singles lacking true latch rail and relying on MOSFET stack as switch.【F:knowledge/notes/input_part004_review.md†L24-L24】
+[^spintend_button]: Spintend latching button polarity mismatch requiring rewired LED and supply leads before the controller would shut off cleanly.【F:data/vesc_help_group/text_slices/input_part002.txt†L12159-L12179】
 [^key_adc_danger]: Key switch relay on ADC line causing full-throttle runaway and proper DC/DC enable switching approach.【F:knowledge/notes/input_part004_review.md†L300-L300】
 [^ant_precharge]: ANT BMS precharge current limits and MOSFET failure when exceeding 20A starting current.【F:knowledge/notes/input_part004_review.md†L57-L57】【F:knowledge/notes/input_part004_review.md†L80-L80】
 [^ant_cold]: ANT BMS precharge adjustment for cold weather and warnings about exceeding 20A blowing FETs.【F:knowledge/notes/input_part004_review.md†L80-L80】
 [^happy_wake]: Happy BMS latch-off recovery requiring charger wake signal after inrush protection trip.【F:knowledge/notes/input_part004_review.md†L302-L302】
 [^makerbase_latch]: Makerbase 75100 momentary latch implementation with AD15 enable pin timing.【F:knowledge/notes/input_part004_review.md†L36 (in source notes section of Makerbase file)】
 [^makerbase_84100]: Makerbase 84100HP normally-closed ignition logic or 1MΩ pull-down mod requirement.【F:knowledge/notes/input_part004_review.md†L36 (in source notes section of Makerbase file)】
+[^75100-standby]: Flipsky 75100 owners without antispark switches unplug XT90S loop keys between rides because the controller idles around 5 mA, enough to drain packs during long storage.【F:knowledge/notes/input_part002_review.md†L210-L210】
+[^precharge_value]: 1 kΩ precharge resistor proved too slow and too hot for large controllers, pushing builders toward lower-value resistors or full anti-spark circuits.【F:data/vesc_help_group/text_slices/input_part002.txt†L12457-L12463】

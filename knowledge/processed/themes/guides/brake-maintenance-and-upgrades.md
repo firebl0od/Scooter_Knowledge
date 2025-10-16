@@ -35,6 +35,10 @@
 
 ### Rotor Sizing Considerations
 - Brake discussions suggest upsizing rotors from 180 mm to 203 mm mainly boosts thermal mass and leverage but may be excessive for scooters; larger rotors require frame clearance checks and stronger mounting tabs to handle increased braking forces.[^rotor-sizing]
+- Magura MT7/MT5 calipers barely clear 2.9 mm Kaabo rotors—fresh pads or 3 mm aftermarket discs often rub unless you machine custom spacers—so many riders stick with stock Zoom calipers or thinner discs when chasing upgrades.【F:knowledge/notes/input_part002_review.md†L141-L142】
+- Repeated 80–90 km/h stops roasted 120 mm rotors and overheated Magura MT8s; the crew now defaults to dual front brakes or 203 mm discs on heavy scooters to regain thermal margin.【F:data/vesc_help_group/text_slices/input_part002.txt†L11088-L11137】
+- When rotors need a millimetre of offset, riders cut thin shim plates (nickel strip or torque-arm washers) instead of stacking round washers that flex loose under repeated braking loads.【F:data/vesc_help_group/text_slices/input_part002.txt†L11406-L11455】
+- Premium rotors from Shimano, Magura, or Galfer stay on the shopping list while AliExpress specials are avoided for 70 km/h builds despite the price gap.【F:data/vesc_help_group/text_slices/input_part002.txt†L12102-L12151】
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
 - Tall brake adapters should use a single ring spacer instead of stacked washers so axial loads do not rock the disc bolts—5 mm steel rings have proven stable on custom Blade hubs, while 1.7 mm washer stacks remain a stopgap only.【F:knowledge/notes/input_part000_review.md†L520-L522】
 - Expect to budget CNC time for bespoke rotor shims because six-hole aftermarket rims rarely align with Xiaomi five-hole spacers when mixing OEM and custom hubs.【F:knowledge/notes/input_part000_review.md†L521-L522】
@@ -59,6 +63,10 @@
   - Bed new pads gradually with 10–15 moderate stops from 30 km/h before attempting hard braking[^hope-service]
 
 ## Ninebot F2 Pro Brake Upgrades
+
+## Ninebot G30 Brake Retrofits
+- 3D-printed rear brake adapters with thin aluminium reinforcement rings drew skepticism about PLA strength at 60 km/h; riders recommend CNC or full-metal conversions before trusting repeated hard stops.【F:data/vesc_help_group/text_slices/input_part002.txt†L3214-L3249】
+- Fitting 10×3 in tyres demands trimming the rear fender and routing the brake hose internally instead of relying on inverted Magura mods to keep wobble away.【F:data/vesc_help_group/text_slices/input_part002.txt†L3536-L3551】
 - cihan's wobble fix involved swapping to sintered pads and sourcing compatible rotors for the F2 Pro platform, demonstrating that budget commuter platforms benefit from modest brake improvements without requiring full hydraulic conversions.[^f2-upgrade]
 - **F2 Pro brake upgrade recipe:**
   - Install sintered pads for better bite and longevity compared to organic pads
@@ -92,11 +100,19 @@
 
 ## Brake Fluid & Compatibility
 - Xtech hydraulic conversions rely on mineral oil (not DOT fluid) for Magura-compatible systems; Mirono bled his calipers with dual syringes and quickly abandoned the idea of using water after seeing trapped bubbles compromise lever feel.[^mineral-oil]
+- DOT 5/5.1 silicone formulas eat the seals in Magura and Shimano systems—stick with mineral oil and consider Trickstuff Bionol for downhill scooters because its 300–420 °C boiling range survives the heat that cooks stock fluids.[^dot5-warning]
 - **Fluid compatibility chart:**
   - **Magura, Shimano, Tektro:** Mineral oil only (DOT fluid damages seals)
   - **Hope, Hayes, Avid:** DOT 4 or DOT 5.1 (never DOT 5 silicone-based)
   - **Never mix fluids:** Contamination causes seal swelling and brake failure
   - Store mineral oil in sealed containers away from light to prevent oxidation[^fluid-compat]
+
+## Hydraulic Sensor Retrofits
+- Builders add hall sensors or reed switches to existing hydraulic levers when they need proportional regen or kill-switch behaviour, freeing them from the limited OEM sensored lever catalog.[^hall-retrofit]
+- When extending short Magura bicycle hoses, reuse the correct olives and barbs at each end—aftermarket lines such as Jagwire Pro handle higher pressure but still leak if the hardware mismatch leaves gaps at the caliper or lever.[^jagwire-hardware]
+
+## Post-Flood Brake Recovery
+- Flood-soaked calipers should be stripped, scrubbed with dedicated brake cleaner, and dried before touching WD-40 or silicone sprays—those products swell seals and leave corrosion that will seize pistons again.[^flood-recovery]
 
 ## Follow-Up Actions Needed
 - Write up an 80/100 H wheel-centering and dual-caliper setup guide (kit sourcing, torque, clearance checks) so track-focused Nami/Dualtron builds can copy the wobble fix.[^follow-centering]
@@ -118,6 +134,10 @@
 [^regen-braking]: Matthew's regen-assisted braking demonstration showing mechanical brakes as backup.【F:knowledge/notes/input_part013_review.md†L635-L637】
 [^tire-inflation]: Compressor requirements for seating 21×3 and larger tires with ratchet strap assistance.【F:knowledge/notes/input_part013_review.md†L761-L762】
 [^mineral-oil]: Mineral oil requirement for Magura hydraulic systems and water bleeding failure.【F:knowledge/notes/input_part000_review.md†L567-L567】
+[^dot5-warning]: DOT 5/5.1 destroys Magura/Shimano seals; Trickstuff Bionol offers a mineral-oil alternative rated to ~420 °C for heat-soaked scooters.【F:knowledge/notes/input_part002_review.md†L24-L26】
 [^fluid-compat]: Brake fluid compatibility chart for common hydraulic brake systems.
+[^hall-retrofit]: Adding hall or reed sensors to any hydraulic lever unlocks proportional regen or kill-switch control without hunting rare OEM sensored levers.【F:knowledge/notes/input_part002_review.md†L26-L27】
+[^jagwire-hardware]: Jagwire Pro hoses outperform stock Magura lines, but the correct olives/barbs are mandatory at each end to prevent leaks after re-termination.【F:knowledge/notes/input_part002_review.md†L26-L27】
+[^flood-recovery]: Post-flood brakes revive when stripped, cleaned with brake cleaner, and finished with PTFE lube once dry—WD-40 or silicone swell seals and leave rust behind.【F:knowledge/notes/input_part002_review.md†L29-L30】
 [^follow-centering]: Follow-up action to create wheel-centering and dual-caliper setup guide.【F:knowledge/notes/input_part013_review.md†L645-L647】
 [^follow-dual-disc]: Follow-up action to document dual-disc vs. dual-caliper decision matrix.【F:knowledge/notes/input_part013_review.md†L635-L637】

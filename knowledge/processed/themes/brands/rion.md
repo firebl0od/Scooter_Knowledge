@@ -32,6 +32,7 @@
 - **Weather exposure:** Stock seals are insufficient; moisture ingress will jeopardise both the carbon structure and high-voltage electronics if left untreated.[^2]
 - **Chassis flex:** RX carbon frames feel “chewing gum” at 400 A—plan dampers, reinforcement plates, and tyre upgrades if you chase high-speed stability.[^7]
 - **Handling opinions diverge:** Paolo praises RX2000 stability without a damper near 100 km/h, but Face de Pin Sucé still calls the chassis twitchy versus Weped builds—log your own high-speed telemetry before trimming safety margins.【F:knowledge/notes/input_part001_review.md†L50-L51】
+- **Track-day feedback is harsh:** Angerville kart racers cited brake fade, frame flex, and high centres of gravity that made Rions sketchy on tight circuits; their workaround mixes dual throttles, external controller mounts, ferrofluid-cooled Vsett motors, and upgraded Magura brakes.【F:data/vesc_help_group/text_slices/input_part002.txt†L8720-L8783】
 - **Motor bottlenecks:** The LY-manufactured hubs remain the limiting factor—pushing phase current past ≈200 A or ignoring lead temperatures risks overheating long before the controllers run out of headroom.[^4]
 - **Logistics churn:** Replacement motors are attainable but shipping shocks can nullify savings—budget for customs fees or arrange local pickup.[^3]
 - **Legacy chassis cracks:** Tear down older Rion frames—Face de Pin Sucé uncovered cracked steering heads, flexing plates, underspec’d Kelly controllers, and fan ducts that just slam into carbon walls until you rework airflow.[^steering_crack][^legacy_fans]
@@ -62,6 +63,7 @@
 
 ## Market & Procurement Signals
 - Leo Apex pricing now clears €9 000 while still shipping with Nutt brakes; factor in the premium for branding when comparing against custom Rion builds or competing factory frames.[^5]
+- French kart tracks host regular scooter days for roughly €25–35, while Swiss riders are still negotiating local access—context for planning shakedown trips or track testing.【F:data/vesc_help_group/text_slices/input_part002.txt†L9165-L9186】
 - Fresh inventory sightings include 100 V Tronic X12 controllers and 33×2 60 H motors with 125 mm dropouts and 4 mm banana leads around €300 delivered inside the EU, giving owners a benchmark for sourcing spares without paying Rion’s full markup.[^10]
 
 ## Source Notes
