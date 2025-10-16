@@ -57,6 +57,7 @@
 - Grounding the chassis cured runaway acceleration for some riders, but document the wiring and verify insulation to avoid frame shorts before adopting the fix broadly.【F:knowledge/notes/input_part014_review.md†L86-L86】
 - Log traction control adjustments during every shakedown; slip thresholds between 11 k and 17 k rpm and positive throttle ramps (~0.4 s) kept lightweight builds controllable at 300 A phase.【F:knowledge/notes/input_part014_review.md†L107-L107】
 - When upgrading to hydraulic fronts, transplant the stock hall sensor and magnet into the new lever so proportional regen survives the swap and rear mechanical brakes can stay untouched.【F:knowledge/notes/input_part000_review.md†L296-L296】
+- Mirono routes the motor cable around the G30 brake-adapter screw to clear the rotor—zip-tying the lead directly to the fork let it rub the disc at speed, so verify steering clearance before buttoning up the front end.【F:knowledge/notes/input_part001_review.md†L100-L100】
 
 ## Dash Scripting & Secret-Mode Management
 - Unlock “secret mode” by holding both brake and throttle while double-tapping the dash button; remember to exit walk mode first or the scooter stays capped near 20 km/h.【F:knowledge/notes/input_part008_review.md†L215-L215】

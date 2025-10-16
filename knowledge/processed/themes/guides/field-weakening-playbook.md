@@ -15,7 +15,7 @@
 - Third-party firmware like XESC’s can quietly add extra battery amps when you request FW, but stock VESC obeys the configured current limits and simply shifts the stator angle—don’t expect the same “free” boost unless you raise the limits yourself.[^xesc_fw]
 
 ## Prerequisites & Safeguards
-1. **Firmware:** Confirm VESC Tool firmware 5.3 (or newer) on every controller; earlier releases hide FW parameters entirely or crash during detection.[^5]
+1. **Firmware:** Confirm VESC Tool firmware 5.3 (or newer) on every controller; VESC Tool 3.01 only exposes FW sliders once controllers run 5.03, and Spintend is still steering riders toward 5.2 binaries until its customised 5.3 builds soak.[^fw-503]
 2. **Voltage Headroom:** Disable regen or add external suppression when testing 24S packs on hardware like the FlipSky 75100—regen spikes plus FW have already killed controllers during BMS cutoffs.[^4]
 3. **Instrumentation:** Log motor temps, phase/battery currents, and duty cycle. Shell temps or single shunts under-report FW stress, and FW can even lift battery draw above configured limits until you rerun detection.[^2][^8]
 4. **Mechanical Readiness:** Inspect frames, bearings, and tires before extending top speed. Dual 84100 Zero 10X builds at 60 A FW need ongoing frame checks to catch stem or hub fatigue.[^6]
@@ -27,8 +27,9 @@
 3. **Pair with quicker ramps judiciously.** Dropping acceleration ramping to 0.05 s sharpens launches alongside FW, but only apply it if the chassis and rider can tolerate the snappier response without spinning tires.【F:knowledge/notes/input_part000_review.md†L654-L654】
 4. **Re-verify Current Limits:** After each change, check live logs for battery spikes above set limits and rerun detection if overshoot appears—the VESC Tool wizard reset resolved a 60 A ceiling breach on one build.[^8]
 5. **Test Regen:** Perform controlled braking drills to confirm bus voltage stays within component ratings; Spintend riders retain regen at 80–100 km/h with FW but still watch voltage sag for surprises.[^13]
-6. **Fault Review:** After hard pulls, run the `faults` command and inspect absolute current headroom (200–250 A for 120–130 A phase tunes) to avoid ABS cut-outs at high duty cycle.[^14]
-7. **Duty Cycle Discipline:** Keep maximum duty near firmware defaults (~95 %); stretching toward 99–100 % has produced abrupt cut-outs above 70 km/h on FW-enabled builds.[^15]
+6. **Fault Review:** After hard pulls, run the `faults` command and inspect absolute current headroom (200–250 A for 120–130 A phase tunes) to avoid ABS cut-outs at high duty cycle.[^fw-faults]
+7. **Duty Cycle Discipline:** Keep maximum duty near firmware defaults (~95 %); stretching toward 99–100 % has produced abrupt cut-outs above 70 km/h on FW-enabled builds.[^fw-duty]
+8. **Duty-trigger experiments:** Genuine FW sliders stay locked behind firmware 5.3, so early adopters sideload 300 A bins and set duty-cycle triggers around 70 % to push past the 95–98 % plateau—treat those settings as advanced-only until thermals and voltage headroom are proven.【F:data/vesc_help_group/text_slices/input_part001.txt†L7166-L7194】
 
 ## Operating Benchmarks
 | Platform | Pack & Motor | Phase / Battery | FW Current | Notes |
@@ -45,8 +46,10 @@
 - **Thermal Watch:** Riders pushing 16 S commuter packs noted 150 °C stators at only 35 A FW, reinforcing that ferrofluid or temperature probes are mandatory if you insist on FW in enclosed hubs.[^18]
 - **Plan AWD for single-drive heat saturation:** 3.6 kW single-motor builds backed off FW after hot-weather pulls saturated hubs and triggered plans for AWD conversions to spread load.【F:knowledge/notes/input_part008_review.md†L16099-L16129】
 - **Voltage Monitoring:** Keep oscilloscope or high-speed logging on regen-heavy tests—22 S Spintend builds disable regen entirely when extending pack voltage to avoid BMS-induced surges.[^19]
+- **Validate gains before chasing higher FW.** Happy Giraffe’s single-Ubox tests saw only ~3 km/h gains going from 10 A to 40 A FW while battery draw stayed near 45 A; peers reminded Gigolo Joe that more phase or pack voltage beats stacking FW when motors have not yet hit duty-cycle limits.[^fw-plateau]
 - **Fault Masking:** Sudden current drops or pothole-induced cut-outs that disappear when FW is enabled can signal mechanical faults (loose magnets, wiring) rather than firmware bugs; investigate hardware first.[^16]
 - **Noise & Surging:** If throttle jitters appear above 80 % duty after enabling 20 A FW on single-motor builds, roll FW back—operators traced the behavior directly to FW injection.[^20]
+- **Air resistance wins past ~50 A battery.** Street builds running more than ~50 A battery during FW saw limited top-speed gains because aero drag dominates once the ERPM ceiling is reached—log results at multiple current levels before tolerating extra heat.【F:data/vesc_help_group/text_slices/input_part001.txt†L10537-L10629】
 - **Duty-cycle trigger awareness:** Remember FW starts at the configured duty threshold, so cold-weather commuters who never exceed ≈90 % duty can leave FW configured without seeing it engage, while summer hill pulls will trigger it early and dump heat fast.【F:knowledge/notes/input_part000_review.md†L653-L655】
 - **5.3 beta isn’t a free lunch.** Firmware 5.3 beta adds roughly +8 km/h when riders request about 20 A of FW, but they still only toggle it above a set speed to preserve launch torque and keep controller temperatures in check on small hubs.【F:knowledge/notes/input_part000_review.md†L351-L351】
 - **Overspeed Discipline:** Avoid free-spinning wheels at high FW. Halo stunt crews saw runaway RPM off-load and controller stress at 125 A FW.[^12]
@@ -77,7 +80,7 @@
 [^2]: Hub shell temperature lag and the need for embedded sensing.【F:knowledge/notes/input_part006_review.md†L423-L436】
 [^3]: Bench data showing ~40 % ERPM gains with major heat penalties.【F:knowledge/notes/input_part000_review.md†L727-L727】【F:knowledge/notes/input_part000_review.md†L654-L654】
 [^4]: 24S Flipsky failures tied to regen spikes with FW active.【F:knowledge/notes/input_part001_review.md†L111-L112】
-[^5]: Firmware 5.3 requirement for exposing FW controls.【F:knowledge/notes/input_part001_review.md†L135-L135】
+[^fw-503]: VESC Tool 3.01 only exposes FW controls on firmware 5.03, and Spintend asked riders to remain on 5.2 until its customised 5.3 builds complete soak testing.【F:data/vesc_help_group/text_slices/input_part001.txt†L2706-L2975】【F:data/vesc_help_group/text_slices/input_part001.txt†L4000-L4052】
 [^6]: 60 A FW on dual 84100 builds driving high heat and frame inspection needs.【F:knowledge/notes/input_part009_review.md†L43-L43】
 [^7]: PuneDir’s stable 30 A FW baseline with `mxlemming` observer and 100 km/h GPS results.【F:knowledge/notes/input_part009_review.md†L44-L44】【F:knowledge/notes/input_part009_review.md†L179-L179】
 [^fw-coaching]: Crew feedback urged Shlomozero to roll FW back toward 20 A, raise phase current to ~120 A at 30–35 kHz, and rely on the `mxlemming` observer so mixed 50 H hubs survive highway pulls.【F:knowledge/notes/input_part009_review.md†L389-L390】
@@ -87,8 +90,9 @@
 [^11]: Wolf King GT Pro and similar high-power builds using 55 A FW for ~66 mph road speeds.【F:knowledge/notes/input_part013_review.md†L65-L65】【F:knowledge/notes/input_part013_review.md†L599-L599】
 [^12]: Halo runaway RPM and general caution for unloaded FW testing.【F:knowledge/notes/input_part012_review.md†L28-L28】
 [^13]: High-speed regen viability with FW and the need to log bus voltage.【F:knowledge/notes/input_part005_review.md†L463-L465】
-[^14]: Using the `faults` command and absolute current headroom to manage FW-induced spikes.【F:knowledge/notes/input_part001_review.md†L139-L139】
-[^15]: Duty-cycle ceiling warnings for FW-enabled builds.【F:knowledge/notes/input_part001_review.md†L160-L160】【F:knowledge/notes/input_part003_review.md†L104-L104】【F:data/vesc_help_group/text_slices/input_part003.txt†L11586-L11610】
+[^fw-faults]: Using the `faults` command and raising absolute current headroom (≈200–250 A for 120–130 A phase tunes) to prevent ABS overcurrent trips during FW pulls.【F:data/vesc_help_group/text_slices/input_part001.txt†L2840-L2872】【F:data/vesc_help_group/text_slices/input_part001.txt†L3796-L3808】
+[^fw-duty]: Duty-cycle ceiling warnings for FW-enabled builds—stretching toward 99–100 % caused abrupt cut-outs above 70 km/h.【F:data/vesc_help_group/text_slices/input_part001.txt†L4944-L4953】【F:knowledge/notes/input_part003_review.md†L104-L104】【F:data/vesc_help_group/text_slices/input_part003.txt†L11586-L11610】
+[^fw-plateau]: Field-weakening tests that delivered only ~3 km/h gains from 10 A to 40 A FW until motors hit duty-cycle limits, reinforcing the need for more phase current or voltage instead of piling on FW amps.【F:data/vesc_help_group/text_slices/input_part001.txt†L4053-L4148】
 [^16]: FW masking mechanical faults in high-speed Vsett builds and needing inspections.【F:knowledge/notes/input_part013_review.md†L741-L741】
 [^17]: Haku’s decision to abandon FW after killing commuter hubs at 4 A.【F:knowledge/notes/input_part011_review.md†L301-L301】
 [^18]: Max G2 and similar commuter hubs hitting 150 °C stators with FW.【F:knowledge/notes/input_part005_review.md†L368-L372】

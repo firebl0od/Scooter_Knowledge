@@ -10,6 +10,13 @@
 - The VESC Help crew continues to vouch for ferrofluid/Statorade when the goal is winding-to-shell transfer, but they emphasise reading datasheets—some mixes flash at low temperature and budget hubs can demagnetise above ~80 °C—before flooding a motor.【F:knowledge/notes/input_part007_review.md†L48-L48】
 - Ferrotec APG1110 remains the benchmark for hub fillings, while Supermagnete’s 10 mL bottles offer reliable sourcing for EU riders upgrading Xiaomi and G30 hubs without importing large lots.【F:knowledge/notes/input_part007_review.md†L60-L60】
 - HeroDasH demonstrated clean application with magnetic bottles that pull fluid straight into magnet gaps and warned against overfilling because excess drag hurts efficiency; peers now lean on ebikes.ca’s simulator to visualize how kv and resistance tweaks shift the efficiency curve before sealing hubs.【F:knowledge/notes/input_part000_review.md†L597-L599】
+- Grin’s Statorade has logged roughly 30 % winding-temperature drops with 6 ml doses and no noticeable drag, whereas bargain ferrofluids risk conductivity, residue, and magnet damage once they bake inside the hub.【F:data/vesc_help_group/text_slices/input_part001.txt†L7901-L8089】【F:data/vesc_help_group/text_slices/input_part001.txt†L8079-L8109】
+- Budget “educational” ferrofluids coming from lab suppliers carry lower flash points and unknown additives—stick with Statorade/Grin blends even on 60 mm hubs, which still respond well to roughly 5–6 ml fills when you need winding-to-shell transfer.【F:data/vesc_help_group/text_slices/input_part001.txt†L10364-L10463】【F:data/vesc_help_group/text_slices/input_part001.txt†L11119-L11187】
+- Dosing dual 1.4 kW VSETT hubs with roughly 6 ml of Statorade dropped peak winding temperature from ~145 °F (63 °C) to ~104 °F (40 °C) on identical 16 S rides; veterans still log magnet temps because the heat migrates into the rotor during long climbs.【F:data/vesc_help_group/text_slices/input_part001.txt†L6340-L6362】【F:data/vesc_help_group/text_slices/input_part001.txt†L6800-L6821】
+- Follow-up tests note magnets running slightly warmer but transferring heat to the case faster, and sealing the covers with automotive silicone keeps the fluid contained even on off-road builds.【F:data/vesc_help_group/text_slices/input_part001.txt†L8038-L8098】
+## Hub Heatsinks & External Cooling
+- Builders chasing sustained 70–75 km/h add bolt-on hubsinks with thermal paste to move heat into airflow, noting that balanced e-bike rings avoid vibration if machined precisely.【F:data/vesc_help_group/text_slices/input_part001.txt†L8601-L8607】
+- Custom deck spacers and ducted lighting housings are being hand-cut from PVC/acrylic to route airflow past motors while freeing deck space for taller battery packs.【F:data/vesc_help_group/text_slices/input_part001.txt†L8772-L8786】
 
 ## Hub Current Guardrails
 - Single Monorim 500 W hubs stay happy around 80 A phase—ideally with ferrofluid—while the crew’s Xiaomi-class builds overheat quickly once they push 65–73 A without battery temperature sensing or keep more than roughly 30–35 A combined draw from paired 12 S packs.【F:knowledge/notes/input_part007_review.md†L18-L19】
@@ -116,12 +123,17 @@
 
 ## Motor Temperature Instrumentation
 - **Install proper NTC sensors for accurate readings.** Installing EPCOS/TDK B57861S0502F040 2×4 mm NTCs against the hall/phase bundle, secured with thermal epoxy rated to 150 °C, delivered accurate phase readings in minutes and enables reliable over-temp cutbacks.[^ntc_install]
+- **Embed 100 k probes under the windings.** Builders settled on epoxy-coated 100 k B3950 NTC sensors with one-metre leads, gluing them beneath the windings with silicone before routing a single temp wire through the axle alongside phase and hall conductors to keep telemetry stable at high current.【F:data/vesc_help_group/text_slices/input_part001.txt†L11104-L11181】
 - **Route temp leads away from phase bundles.** Gordan's Ubox V2 logs showed thermistor signals collapsing above 80 A until he chased the ground loop, underscoring the need to reroute sensor wiring or add shielding when phase currents spike.[^temp_routing]
 - **Relocate sensors toward the magnet gap when possible.** Artem is experimenting with moving hub thermistors into the air gap so readings reflect magnet temperature instead of coil hotspots—a better proxy for demag risk on ventilated rims.【F:knowledge/notes/input_part000_review.md†L533-L533】
 - **Trust embedded sensors over hand checks.** Artem’s Vsett logs showed hub shells barely warm while windings hit ~90 °C, proving that hand tests lag true winding temperature and that 100 kΩ NTC probes inside the hub are essential on high-power conversions.【F:knowledge/notes/input_part000_review.md†L676-L678】
-
 ## Efficiency Planning
 - Artem pegs real-world BLDC outrunners around 86 % efficient in block commutation and higher under FOC; holding the motor near its rpm sweet spot pays off more than brute-force phase amps on small scooter hubs.【F:knowledge/notes/input_part000_review.md†L598-L598】
+- **Inject ferrofluid without disturbing sensors.** Dose hubs through existing cover screws or dedicated ports, then reseal both side covers so fluid stays put during high-speed runs—no need to pull hall boards if you plan ahead.【F:data/vesc_help_group/text_slices/input_part001.txt†L11140-L11216】
+- **Verify sensor curves before trusting logs.** Builders embedding 10 k B3950 or 100 k probes inside VSETT hubs warn that generic PC temperature sensors rarely match VESC lookup tables, so capture beta values and confirm readings before relying on them for cutoffs.【F:data/vesc_help_group/text_slices/input_part001.txt†L8521-L8546】
+## Phase Resistance Diagnostics
+- Sloppy XT150 soldering and long leads have returned 53 mΩ readings that masquerade as “bad motors”; reflow strands tight to the connector walls and shorten runs before blaming the hub.【F:data/vesc_help_group/text_slices/input_part001.txt†L7532-L7599】
+- Reference healthy baselines: HM 1600 W hubs sit near 132 mΩ, Blade motors around 85 mΩ, and Rion-spec hubs roughly 50 mΩ—use these numbers when chasing unexplained heat.【F:data/vesc_help_group/text_slices/input_part001.txt†L7595-L7600】
 
 ## 60H Hub Specific Notes
 - **60H builds prefer 50 A battery / 100 A phase with ferrofluid.** Riders reported smooth launches after sealing leads, adding ferrofluid, and pairing the tune with ~10 A field-weakening that engages around 91.5% duty while holding full duty near 95%; still install temperature sensors before chasing 16 S, 60 km/h targets on long hill routes.[^60h_baseline]

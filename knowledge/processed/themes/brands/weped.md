@@ -34,6 +34,9 @@ Rage Mechanics’ 75 mm stator hubs remain the go-to race upgrade, pushing wel
 ## Thermal Management & Mechanical Prep
 Sealed decks leave almost no thermal margin: dual Spintend installs logged ~500 A phase and 80 °C controller temps until owners sanded paint from the deck, applied quality thermal paste, and bolted the housings directly to the frame.【F:knowledge/notes/input_part000_review.md†L610-L615】 Even the OEM layout assumes aggressive airflow—paired 30 Ah 40T packs feed opposing side fans at roughly 145 km/h to keep electronics alive, so any stealth conversion must preserve or improve that ducting.【F:knowledge/notes/input_part007_review.md†L26-L26】 Plan for external heatsinks, repaste jobs, and fan redundancy before lifting current limits.
 
+## Handling & Rider Feedback
+- Paolo still praises the Rion RX2000 for running stable near 100 km/h without a damper, whereas Face de Pin Sucé finds the chassis twitchy compared with Weped builds and argues the oversized Weped columns pay off once paired with PMT tires for corner grip—factor rider preference into cockpit upgrades rather than chasing a single “best” setup.【F:knowledge/notes/input_part001_review.md†L51-L52】
+
 ## Quality, Support & Delivery Reality
 Community audits describe new Wepeds as expensive kits: owners routinely replace bargain switches, Zoom brakes, and flimsy stems despite €3–4 k invoices, treating the chassis as the only real value-add.【F:knowledge/notes/input_part001_review.md†L787-L787】 Customer service isn’t much better—Paolo notes Weped’s support remains inconsistent even as prices climb, while racers consider the Fold 3 the lone chassis that arrives close to track-ready without reinforcement.【F:knowledge/notes/input_part009_review.md†L75-L76】 Expect to document every correction for clients, including fork bearing work, steering column alignment, and fastener swaps.
 
