@@ -70,6 +70,7 @@
 
 - Stuffing 72 cells into a 3 L Wildman bag technically works only if you fold copper interconnects and skip cell holders.
   - veterans still call holderless bricks unacceptable for long-term reliability.[^wildman-72]
+- External 20 S 10 P packs hung from scooter frames now rely on tailor-added straps, rigid panels, or cavity fillers; letting a soft battery bag sag mid-ride already stressed frame mounts on Haku’s twin-pack minibike, so reinforce externals before commuting.[^external_bag_reinforcement]
 - Blade conversions juggle multiple pack shapes: one builder is parking a 20 s 8 p module for a “clean” Pro 2, a 20 s 4 p MH1 pack for a beater, and scouting 16 s 5 p or 13 s 6 p layouts to tame MH1 sag when 21700s will not fit.[^blade-layouts]
 - A single 10 s Blade motor already lifts the front wheel—dual-motor plans demand staged controller and pack upgrades toward 72 V before doubling hardware.[^blade-voltage]
 - Happy Giraffe’s reminder still stands: 48 A at 72 V is ~3.5 kW, so raise voltage and lean on 100 A phase rather than piling more battery amps into MH1 cells.[^72v-3p5kw]
@@ -178,6 +179,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 
 ### Copper Busbars & Sandwich Welding Notes
 
+- Springy copper sheet can be pre-tensioned by gently drawing it over a table edge before welding; the reverse bend helps 0.25 mm strip stay flat until the first welds lock it down.[^copper_pretension]
 - Copper bus TIG welds work when you keep pulses around 20–30 A with argon shielding; most still prefer capacitor welders, but the field notes prove TIG can salvage thick bus work if you mind heat input.[^65]
 - Laser-cut 0.5 mm copper combs (e.g., from Peng Chen) spot-weld cleanly when clamped under nickel-plated steel overlays, delivering neat 20 S 10 P layouts without bulky braided jumpers.[^78]
 - Plan on ≥1 kA pulse capacity.
@@ -905,3 +907,5 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^287]: Source: knowledge/notes/input_part013_review.md†L322-L324
 [^288]: Source: knowledge/notes/input_part004_review.md†L318-L318
 [^289]: Source: knowledge/notes/input_part004_review.md†L37-L37
+[^external_bag_reinforcement]: Source: knowledge/notes/input_part009_review.md†L420-L420
+[^copper_pretension]: Source: knowledge/notes/input_part009_review.md†L401-L401

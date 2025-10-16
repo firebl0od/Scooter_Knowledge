@@ -39,6 +39,7 @@
   - rebuild with sheet bussing or at least five 7–8 mm straps in parallel (0.25–0.30 mm thick) so each bridge carries ≥35–40 A without hot spots before scaling voltage or series count.[^13]
 - Rental G30 conversions swallow "thick" 13 S 5 P 21700 packs once the spacer grows the cavity to ≈155 mm × 400 mm, but EU builders struggle to source 220 mm shrink locally.
   - plan packaging and consumables early for long-range decks.[^14]
+- Down-populating a 30 S ANT smart BMS to a 22 S harness without revising the pinout causes the board to misreport cell voltages, so map sense leads carefully before trimming balance looms.[^ant_downpop]
 
 ## Testing & Service Notes
 
@@ -88,3 +89,4 @@
 [^21]: Source: knowledge/notes/input_part000_review.md†L520-L524
 [^cell_vigilance]: Source: knowledge/notes/input_part003_review.md†L521-L521
 [^50e_protection]: Source: knowledge/notes/input_part003_review.md†L559-L559
+[^ant_downpop]: Source: knowledge/notes/input_part009_review.md†L403-L403

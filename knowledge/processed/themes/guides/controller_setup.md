@@ -16,6 +16,10 @@
 - Artem’s relationship `I_phase = I_batt × V_batt ÷ V_motor` explains why phase torque fades as ERPM rises; expect battery current to climb from ~16 A at launch toward the configured limit as motor voltage increases, and keep phase current above battery current for predictable torque.[^phase_relationship]
 - VESC Tool still lacks native cruise control, but Spintend’s handheld remote consolidates throttle, brake, horn, and light lines while offering button-activated cruise and reducing deck wiring; open-source SmartDisplay firmware may add a speed-lock profile later.[^spintend_cruise]
 
+## Firmware Notes
+
+- VESC Tool 6.05 ships with a Lisp demo that converts MP3 files into motor audio, but builders reported severe frame resonance and poor fidelity—treat it as a novelty rather than a production feature.[^vesc_audio_demo]
+
 ## Practical Current Heuristics
 
 - Start hub tunes with Artem’s sizing math: phase amps roughly equal to motor wattage ÷ 10 and battery amps ≈ phase × 0.67; if you raise phase current for stronger launches, trim battery current by the same proportion so small stators stay inside their thermal envelope.[^2]
@@ -41,6 +45,10 @@
 - Kelly KLS scooter controllers often refuse USB connections.
   - plan on the BLE module or legacy Windows XP drivers when you need to flash or configure those platforms.[^11]
 
+## Sensorless Setup Considerations
+
+- 🇪🇸AYO#74 is already riding a 22 S 11 P Molicel P45B pack without hall or cam sensors and is asking for configuration help, underscoring the need for a robust high-voltage sensorless checklist before first rides.[^sensorless_22s]
+
 ## Acceleration Logging & Telemetry
 
 - Benchmark 0–70 km/h runs with Dragy or Race Timer, filming calibrated dashboards at 60 fps and averaging matched-direction passes to cancel GPS lag; Drag Racer remains convenient but needs clear skies to hold lock.[^accel_logging]
@@ -54,11 +62,13 @@
 [^voltage_swap]: Source: knowledge/notes/input_part000_review.md, line 71.
 [^phase_relationship]: Source: knowledge/notes/input_part000_review.md, line 106.
 [^spintend_cruise]: Source: knowledge/notes/input_part000_review.md, line 110.
+[^vesc_audio_demo]: Source: knowledge/notes/input_part009_review.md†L414-L414.
 [^zero10x]: Source: knowledge/notes/input_part000_review.md, line 92.
 [^vsett_taper]: Source: knowledge/notes/input_part000_review.md, line 93.
 [^accel_logging]: Source: knowledge/notes/input_part000_review.md, line 133.
 [^speed_alignment]: Source: knowledge/notes/input_part000_review.md, line 135.
 [^phase_baseline]: Source: knowledge/notes/input_part000_review.md, line 198.
+[^sensorless_22s]: Source: knowledge/notes/input_part009_review.md†L422-L422.
 
 
 ## References
