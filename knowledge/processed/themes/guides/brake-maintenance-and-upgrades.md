@@ -34,10 +34,16 @@
 
 ### Rotor Sizing Considerations
 - Brake discussions suggest upsizing rotors from 180 mm to 203 mm mainly boosts thermal mass and leverage but may be excessive for scooters; larger rotors require frame clearance checks and stronger mounting tabs to handle increased braking forces.[^rotor-sizing]
+- Kaabo Wolf owners now swap to 3 mm Kaabo discs after stock rotors warped—confirm caliper spacing and expect longer life once the thicker rotors are paired with Wolf motors.【F:knowledge/notes/input_part011_review.md†L346-L351】
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
+
+### Superbikes & Heat Management
+- Racers weighing €1.2 k Trickstuff Maxima kits against Magura MT5/MT7 setups note that motorcycle Brembos rarely clear scooter forks; 150 km/h stopping demands bigger rotors and higher-volume masters no matter which premium caliper you choose.【F:knowledge/notes/input_part011_review.md†L368-L374】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
+- Kaabo Wolf riders source rear Magura adapters from Javamba after discovering flipped front hubs could not accommodate left-side calipers—keep vendor links handy before tearing down the rear motor.【F:knowledge/notes/input_part011_review.md†L406-L408】
+- AliExpress shim kits (2–5 mm rotors spacers plus washers) keep oversized calipers from fouling hub flanges, giving Dualtron and Kaabo owners a cheap path to widen rotor stance without machining custom spacers.【F:knowledge/notes/input_part011_review.md†L304-L308】
 - **Hope caliper maintenance tips:**
   - Disassemble calipers and clean pistons with isopropyl alcohol
   - Apply fresh brake-specific grease to piston seals (avoid petroleum-based products)

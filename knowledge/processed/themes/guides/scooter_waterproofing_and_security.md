@@ -11,6 +11,7 @@
 - **Build loud, cheap alarms.** Pair gyroscopes with 120 dB buzzers tied to ignition keys or BLE presence so tampering keeps the siren blaring until the scooter rests motionless.【F:knowledge/notes/all_part01_review.md†L88-L88】
 - **Mount motion sensors in the battery bag.** Couriers hide Arduino-driven buzzers inside Wildman cases so cutting the strap or unzipping the bag triggers instant noise without alerting thieves to the electronics location.【F:knowledge/notes/all_part01_review.md†L86-L87】
 - **Carry layered locks.** Quick errands get a compact Master Lock cable that stays smooth with graphite; long stops call for hardened chains plus GPS trackers taped into the loom.【F:knowledge/notes/all_part01_review.md†L167-L167】【F:knowledge/notes/all_part01_review.md†L27392-L27407】
+- **Gig riders budget time for serious locks.** European couriers report food-delivery pay dipping from ≈€20/h toward “slavery” wages post-acquisitions, so they now stage 2–3 heavy chains and padlocks at regular stops to keep scooters secured between orders.【F:knowledge/notes/input_part011_review.md†L330-L337】
 - **Pick proven trackers.** Invoxia GPS units remain the €100 gold standard because Bluetooth tags lose coverage away from crowds, while DIY LTE trackers powered off the scooter pack can log to self-hosted dashboards and fall back to roaming SIM batteries when unplugged.【F:knowledge/notes/input_part013_review.md†L794-L796】
 - **Expect opportunists.** Dense-city riders report scooters disappearing within minutes if left unlatched, so treat even short drop-offs like high-risk events and keep the alarm armed.【F:knowledge/notes/all_part01_review.md†L27392-L27407】
 - **Upgrade hardpoints.** Builds pushing 8 kW+ torque now weld steel eyelets, use ≥10 mm hardened chains, and recess security bolts because factory aluminum tabs vanish under cordless grinders.【F:knowledge/notes/input_part005_review.md†L195-L200】
@@ -19,6 +20,8 @@
 
 ## Regional Compliance Pressure
 - **Plan for roadside inspections.** Finnish police are confiscating scooters that exceed 25 km/h without registration and even checking bulb part numbers, while southern EU riders dodge €8–9 k fines by programming low-power “police modes” and swapping to halogen BA9S lamps to satisfy moped rules.【F:knowledge/notes/input_part005_review.md†L225-L227】
+- **Expect highway patrol scrutiny.** A U.S. park ranger fined a rider $130 and classed his 65 mph Wepoor as a motorcycle, highlighting how mislabeling high-speed builds as “scooters” risks confiscation—know local registration and plate rules before using highways.【F:knowledge/notes/input_part011_review.md†L149-L154】
+- **Track looming EU certification changes.** Spanish riders expect new power limits and registration requirements by January 2027; some are purchasing private insurance now to stay legal while enjoying a two-year grace window.【F:knowledge/notes/input_part011_review.md†L386-L393】
 
 ## Post-Ride Water Diagnostics
 - **Track regen-related faults.** Error 21 after a panic stop usually points to a cooked data line, not a dead BMS—bench-test packs on a known-good scooter before blaming Happy BMS or Rita.【F:knowledge/notes/denis_all_part02_review.md†L368-L369】

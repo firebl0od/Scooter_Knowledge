@@ -8,6 +8,7 @@
 ## Long-Range Riding Benchmarks
 - Noname logged an 18-hour Appalachian ride covering roughly 150 miles at 50 mph bursts, noting the VESC stayed cool and demonstrating that high-capacity packs (likely 10+ kWh class given the distance) enable extended touring when thermal management is dialed in.[^appalachian]
 - Pack sizing for 150+ mile rides typically requires 7–10 kWh or more depending on terrain, speed, and rider weight; builders planning tours should log Wh/mi consumption during shorter test rides to estimate realistic range before committing to long routes.[^pack-sizing]
+- Real-world comparisons between Wepoor and dual Lonnyo 22×3 builds highlight how gearing, tire size, and pack capacity shape usable range: a 12 P Wepoor returns roughly 50 miles at 35–50 mph but drains quickly past 65 mph, while a 10 P 22×3 setup stretches to ~100 km per charge at similar cruising speeds.【F:knowledge/notes/input_part011_review.md†L301-L305】
 
 ## Public Charging Strategies
 
@@ -27,6 +28,12 @@
 - **FoCcci or equivalent Tesla protocol board:** Required for Tesla plug compatibility; confirm firmware version supports your charging voltage before field deployment.
 - **Portable multimeter and voltage monitor:** Essential for verifying station output voltage and diagnosing adapter issues before connecting expensive battery packs.
 
+### Programmable Telecom Supplies & Bench Chargers
+- **AliExpress adjustable bricks struggle above 84 V.** Community testing on adjustable 20 S/24 S chargers shows budget units browning out or failing outright once riders push past ≈84 V, so bring spares or derate them when touring with 96 V packs.【F:knowledge/notes/input_part011_review.md†L101-L106】
+- **WANPTEK benchtops are voltage-flexible but current-limited.** Their compact supplies work as emergency travel chargers thanks to programmable setpoints, yet the 3 A ceiling makes them impractical for fast top-ups—plan overnight charges only.【F:knowledge/notes/input_part011_review.md†L101-L106】
+- **Huawei telecom rectifiers remain the reliable high-power option.** Riders still prize these 4 kW-class bricks for 20 S+ builds because they hold voltage under load and integrate with app-based control, though the size, cost, and fan noise make them best suited to support vans or home base charging hubs rather than café stops.【F:knowledge/notes/input_part011_review.md†L101-L106】【F:knowledge/notes/input_part011_review.md†L209-L212】
+- **Compact 2 kW adjustable chargers are resurfacing.** AliExpress listings now advertise 66–93 V @ 23 A and 72–101 V @ 16 A bricks; stock remains sparse, so treat them as opportunistic pickups rather than dependable tour gear.【F:knowledge/notes/input_part011_review.md†L460-L463】
+
 ## Generator-Assisted Touring (Experimental)
 - A 1 kW portable generator paired with a 5+ kWh pack has been theorized for coast-to-coast scooter attempts, potentially providing 8–10 hours of riding per fuel tank when charging on-the-go at low rates.[^generator]
 - Weight penalties (generator, fuel, mounting hardware) and noise considerations make this strategy impractical for urban routes or stealth camping scenarios; field testing is needed before committing to this approach for serious tours.[^generator-limits]
@@ -34,6 +41,7 @@
 
 ## Pack & BMS Considerations for Touring
 - **Over-provision capacity:** Plan for 20–30 % reserve capacity to account for voltage sag, cold weather, headwinds, and unexpected detours; aggressive riders logging 2 Wh/mi at 30 mph should budget ≥3 Wh/mi for tour planning.[^capacity-buffer]
+- **Quantify delivery duty cycles before rebuilding packs.** Swapping from P42A to 5 Ah-class cells only nets ≈0.8 kWh extra on typical delivery scooters; interview couriers about shift length and swap packs before committing to a full rebuild.【F:knowledge/notes/input_part011_review.md†L332-L339】
 - **BMS thermal limits:** High-capacity packs (≥7 kWh) under sustained discharge can heat BMS MOSFETs or balance boards; log temps during test rides and add active cooling if boards exceed 50 °C under load.[^bms-thermal]
 - **Charge rate planning:** If fast-charging via Level 2 infrastructure, ensure BMS charge current limits (typically 10–30 A for scooter-class hardware) match adapter capabilities and won't trip thermal or over-current protections.[^charge-limits]
 

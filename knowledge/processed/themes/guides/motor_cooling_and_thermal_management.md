@@ -5,6 +5,7 @@
 - Riders debating CPU-style blowers learned that evaporation-driven skin cooling does not apply to dry aluminum shells; without a wet surface the only lever is temperature delta, so focus on conductive paths instead of add-on spinners.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L424-L441】
 - Veterans recommended ferrofluid or oil-fill experiments (with leak safeguards) if you need real winding-to-shell transfer—simply drilling covers or gluing “windmills” to the hub only cools the outer case.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L456-L520】
 - Community case studies still favour passive conduction upgrades over active plumbing: Mirko’s 15 mm aluminum deck plate plus open vents held dual 190 A phase / 70 A battery runs near 52 °C, while heat-pipe experiments outperformed vibration-prone water loops on cramped decks.【F:knowledge/notes/input_part003_review.md†L115-L115】【F:knowledge/notes/input_part003_review.md†L240-L240】
+- When water cooling is unavoidable, Smart Repair’s X12 loop blueprint calls for a 40 × 80 mm block on the MOSFET bank, a PWM-controlled ~800 L/h pump, small radiator, and roughly 1 kg total system mass (≈300 g coolant, 300 g pump, 500 g hardware) with conformal coating and Kapton to harden the controller after prior water damage.【F:knowledge/notes/input_part011_review.md†L431-L433】
 
 ## Ferrofluid Selection & Handling
 - The VESC Help crew continues to vouch for ferrofluid/Statorade when the goal is winding-to-shell transfer, but they emphasise reading datasheets—some mixes flash at low temperature and budget hubs can demagnetise above ~80 °C—before flooding a motor.【F:knowledge/notes/input_part007_review.md†L48-L48】
@@ -16,6 +17,7 @@
 ## Micro-Hub Voltage Stress Signals
 - Doubling a Xiaomi/Ninebot commuter from 10 S to 20 S roughly doubles the free-spin speed but repeatedly burns the stock hub from heat saturation, so builders now treat 18 S as the limit unless they add serious cooling or swap motors.【F:data/vesc_help_group/text_slices/input_part011.txt†L19101-L19145】
 - Fiido L3 rear hubs emerged as the go-to drop-in upgrade for 20 S experiments because their wider stator and exposed shell shed heat far better than Xiaomi-class cans—veterans report killing three narrow hubs in two days while the Fiido survived on a Spintend 100 V Lite.【F:data/vesc_help_group/text_slices/input_part011.txt†L19136-L19173】
+- Kugoo M4 hubs stall near 50 km/h even with 25 A of field weakening on 14 S builds, hinting that the motor design—not just voltage—caps speed; missing thermistor wiring leaves VESC logs stuck at −66 °C, so add sensors before chasing more current.【F:knowledge/notes/input_part011_review.md†L377-L383】
 - GABE is also sandwiching aluminium plates with thermal paste around a 10 mm 3D-printed spacer to keep his 250 W commuter hub cool after widening the dropout, showing how thin filler plates can restore conduction when packaging changes add air gaps.【F:knowledge/notes/input_part011_review.md†L768-L769】
 
 ## Controller Interface Refresh Checklist
@@ -119,6 +121,7 @@
 - **80H 22×3 motors twisted stators after sustained high-current abuse.** Multiple builds failed after 350–500 A phase assaults at 133–144 °C core temps; prolonged heat softens lamination glue, and rotors demagnetize above ≈120 °C, especially on LY's double-magnet stack designs.[^80h-stress]
 - **Magnet demagnetization occurs above 100–120 °C stator temps.** Paolo warned that magnets lose strength once core temps breach this threshold, and LY 70/75/80 H units have twisted under 400 A, prompting race teams to wind custom stators and mandate traction control even on 0–100 km/h builds that complete sprints in ~3.7 s.[^demagnetization]
 - **Single 60H hubs survive 500 A launches at 107 km/h without field-weakening.** Leon's data demonstrates both torque potential and heat-management challenges when running smaller rotors at extreme phase current, underscoring the need for active cooling or conservative duty cycles on high-stress builds.[^60h-extreme]
+- **Tiny 250–300 W hubs vaporise quickly at 72 V.** Feeding budget commuter motors 55–70 A phase on 20 S packs cooked two units back-to-back; without a temp probe the crew capped the last spare at ~35 A until a 350 W replacement arrives, reinforcing how little thermal headroom small cans have at high voltage.【F:knowledge/notes/input_part011_review.md†L373-L374】
 - **7" LY 90H hub delivers harder launches than 110mm-class cans.** The 127 mm stator and 40-magnet rotor configuration hits harder than 75/80/90 H alternatives but demands matching 7" tire availability, limiting platform adoption compared to standard 6.5" wheel ecosystems.[^90h-torque]
 
 ## Magnet Inspection & Shipping Logistics

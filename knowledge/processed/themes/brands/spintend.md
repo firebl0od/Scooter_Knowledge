@@ -22,6 +22,7 @@
 1. **Full teardown and dry clean before first power.** Crack the enclosure, remove conformal covers, vacuum or IPA-wipe solder balls, and inspect gate-driver rails prior to energising the board.[^41]
    - Second-hand single-case uBox controllers have turned up with stray solder balls, uneven MOSFET pad contact, and phase leads chafing through silicone grommets—strip the shell, clean, and add insulation before trusting a resale unit.【F:data/vesc_help_group/text_slices/input_part001.txt†L20826-L20905】
    - Newer housings now fasten with four screws and side-facing ports, but riders still open fresh units to clear stray solder before the first ride.【F:knowledge/notes/input_part001_review.md†L509-L510】
+   - Early Ubox 85150 batches shipped with 100 V/100 A silkscreens on the powerstage despite the 85 V/150 A marketing copy; replacement boards reportedly need two new holes drilled because only two of six screws align with the legacy case.【F:knowledge/notes/input_part011_review.md†L321-L327】
 2. **Torque and upgrade the high-current connectors.** Swap factory XT90 jumpers for QS8/AS150-class hardware or busbars with proper lugs, and route control wiring through shielded CAT6A pairs to avoid melted solder-only links.[^42]
 3. **Hunt for stray conductive debris.** Rental-fleet autopsies found solder beads bridging phase outputs on dual installs—confirm nothing rattles inside before closing the case.[^43]
 4. **Respect symmetric power loops.** When disconnecting packs, pull both battery leads or open the main contactor before touching CAN; popping one lead while the bus is live has blown Ubox Lite ESD protection.[^44]
@@ -49,6 +50,10 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Smart Repair’s track-tested window keeps refreshed 85 250/240 stacks reliable around 380 A phase, 480 A absolute, and ~200 A battery once you strip paint, add thermal paste, and clamp the base to added aluminum mass.[^smartrepair_85250]
 - The revised 85250 V2 may handle 22 S, but early adopters are still collecting long-term data before trusting race builds at ≈92 V—treat the voltage headroom as experimental until logs prove otherwise.【F:knowledge/notes/input_part013_review.md†L709-L710】
 - Daily riders now treat 85150s as ~150 A battery / 250 A phase hardware even after flashing the no-limits BIN; pushing harder cooked stock-firmware units within days when regen stayed disabled.[^safe_envelope]
+- Tokmas/JMSh1001ATLQ MOSFET swaps let modders pull roughly 160–180 A battery and ~240 A phase from Ubox 85/150 boards, but the higher RDS(on) parts run hotter and the six-FET stage still soft-caps practical phase current around 230–250 A.[^tokmas_swap]
+- Front-wheel Thunder builds hold 85150s near 150 A battery / 230 A phase with heavy thermal prep—fresh paste, external heatsinks, optional fans, and temperature limits that taper output before the case nears 96 °C on 120–130 km/h pulls.[^thunder_front85150]
+- Firmware on 85/250 hardware still clamps phase around 350 A with only momentary spikes to ~400 A; seasoned tuners keep practical use near 300 A phase to avoid the thermal and reliability penalties.【F:knowledge/notes/input_part011_review.md†L468-L469】
+- Matthew’s latest logs confirm firmware clamps 85150 phase current around 150 A even when commands call for 180 A with 90 A battery, signalling that ABS limits still need manual tuning if you want more torque headroom.【F:knowledge/notes/input_part011_review.md†L436-L441】
 - **Single Ubox 100/100 daily safe zone:** Lonnyo 65 H commuters are holding tunes near 130–135 A phase with 85–90 A battery and 150–180 A absolute, trimming duty to ~98 % and starting FW around 88 % to clear residual stutter without climbing past 40 °C case temps.[^u100_daily]
 - With upgraded MOT1111T silicon and external cooling, riders have logged ~480 A phase bursts per controller on 85250 stacks—proof the hardware has headroom when thermals are engineered properly.[^hackintosh_burst]
 - Field logs from daily 18 S commuters show 85150 hardware getting unhappy above ~240 A phase; trimming tunes to roughly 220 A phase, 90 A battery, and ≈60 A of field weakening kept case temps stable without neutering performance.【F:data/vesc_help_group/text_slices/input_part013.txt†L3769-L3770】【F:data/vesc_help_group/text_slices/input_part013.txt†L4184-L4184】
@@ -67,6 +72,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Arnau’s attempt to run an 85/150 at 22 S/150 A with MOSFET swaps reignited warnings that stock silicon only survives if regen stays off—veterans now suggest jumping to Rage Mechanics’ C350 when 30 S headroom is truly required.【F:knowledge/notes/input_part011_review.md†L524-L526】
 - Ubox 100/100 revisions still cap regen safely below full pack voltage; Smart Repair warns the stage ships without ST-Link pads or beefy 12 V rails and arrives set around 135 A phase / 180 A absolute until you validate cooling.[^u100_baseline]
 - Firmware caps near 300 A phase on early 85/200 units until owners compile the unofficial “no limits” branch—use sparingly because support teams treat it as a warranty break.[^12]
+- Early “85/150” beta boards still rely on 100 V components; clamp them to ≥3 mm aluminum baseplates and add sheet-metal spreaders or active airflow if you want ~180 A phase without cooking the stage.【F:knowledge/notes/input_part011_review.md†L397-L398】
 - Watch for BMS thermal trips even on Spintend hardware—dual Ubox owners running 2×135 A phase / 2×71 A battery still logged pack over-temp around 90 A spikes; monitor pack sag and internal resistance monthly.[^31]
 - Size battery groups for the torque you plan: 65 H motors needed roughly 150–200 A battery per side, and undersized parallel packs tripped companion BMSes when regen slammed add-on modules.[^32]
 - Treat BMS cutoffs as glide events, not anchors—Spintend hardware coasts when a pack trips, but trim regen near full charge (≈76.6 V on 20 S) to avoid repeated over-voltage faults.[^1][^33]
@@ -135,6 +141,8 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 
 ## Common Issues & Troubleshooting
 
+- Voyage dashes can mask low ABS limits—Arnau’s new Voyage-equipped 85 V/150 A controller threw ABS OCP faults immediately until Jason advised connecting with VESC Tool and raising the absolute current ceiling instead of relying on the dash alone.【F:knowledge/notes/input_part011_review.md†L471-L479】
+
 ### Auto-Off Failures on 100/100 Units
 - Some Spintend 100/100 controllers refuse to shut down even when ADC auto-off timers are disabled in VESC Tool, indicating accessory power bleed or stuck logic rails preventing proper shutdown.[^autooff-issue]
 - **Troubleshooting steps:**
@@ -159,6 +167,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 7. **Stage regen carefully on 22 S builds.** Drop charge voltage a few volts or cap braking current until you validate pack and controller headroom with logs.[^11]
 8. **Inspect phase filters on older duals.** Populate missing components or add external LC filters if noise, thermal, or EMI issues surface on early 75/100 hardware.[^8]
 9. **Verify accessory wiring.** Keep lighting loads within the ADC bridge limits and route any kill-switch expectations through smart-BMS logic or physical loop keys.[^3]
+10. **Leverage the CAN wake line deliberately.** 85-series controllers share power-on logic over CAN, so a single latching button can wake master and slave; isolate supplies first if you plan to power-cycle one controller independently.[^can_power_sync]
 
 ## Procurement & Support Signals
 - ExpressLine DDP shipments are clearing customs in about a week for EU buyers, yet import offices still assess duties despite the “duty paid” label.[^14]
@@ -167,11 +176,17 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Expect warranty friction on unexplained failures—retailers are already pointing at firmware versions (e.g., 6.05) to deny coverage—so document software builds, logs, and install photos before submitting RMAs.[^19]
 - Spintend’s capacitor bank remains thin for oversized QS hubs; heavy builders increasingly migrate to shunt-sensed platforms (Ennoid MK8, Tronic X12) when repeated gate-driver deaths surface.[^16]
 
+## Displays & Telemetry
+- Voyage’s “Megan” bundle (≈$400) piggybacks on the Metr app to expose full VESC parameters, trip logging, and multi-mode storage for Spintend builds, but riders still treat the enclosure as rain-only hardware until someone waterproofs the housing.[^voyage_megan]
+
 ## Failure Watchlist & Logging Habits
 - Track voltage ambitions on the 85/150 carefully—units have failed at 20 S when stacked with high-Kv hubs, MTPA, and aggressive field weakening, so treat 22 S as experimental until more telemetry lands.[^36]
 - Vet MOSFET swaps before chasing 200 A+: bargain JJmicro devices underperform while Huayi parts have held 20 kW loads below 40 °C, so confirm datasheets before reflowing silicon.[^37]
 - Log every ride by exporting VESC Tool CSVs or bridging Android sessions to desktop so you can correlate current spikes, duty limits, and temps before relaxing guardrails.[^38]
 - Inspect for contamination after heavy service—moisture ingress and solder splatter have spoofed temperature telemetry and shorted controllers even after repairs, so schedule post-ride inspections after rain or workshop work.[^39]
+- Stock firmware on single 80/85-series boards still caps phase near 150 A/ABS 210 A; flash the no-limit build and raise ABS toward 240 A with solid cooling before commanding 100 A battery / 180 A phase, and remember that smaller hubs saturate near 100 A regardless.【F:knowledge/notes/input_part011_review.md†L487-L489】
+- Treat AI-generated traction-control scripts as experimental—recent CAN/UART toggler code needed debouncing, cached telemetry, voltage checks, and divide-by-zero fixes before it was safe to run on live hardware.【F:knowledge/notes/input_part011_review.md†L472-L473】
+- Franchesco’s brand-new 85/250 flashed internally within a few metres on a 20 S 42 Ah build tuned for 150 A battery / 250 A phase (350 A absolute); peers are urging photo documentation and a warranty claim while warning others not to re-energise smoked hardware.【F:knowledge/notes/input_part011_review.md†L463-L471】
 - Budget for QA misses: multiple 85/250s arrived DOA or died within weeks at 200 A battery / 170 A motor settings, pushing riders toward Seven or 3Shul spares while they wait on replacements.[^doa250]
 - Diagnose ADC rail failures before reflashing—throttle noise can short the 3.3 V rail to ground and kill STM32 ADC inputs, so check resistance between 5 V/3.3 V and ground, then attempt MCU swaps only if you own hot-air gear and magnification.[^adc_short]
 
@@ -226,6 +241,10 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^32]: Battery group sizing lessons from high-Kv hubs requiring ≥150 A battery per side and companion pack BMS trips during regen.【F:knowledge/notes/input_part008_review.md†L291-L291】【F:knowledge/notes/input_part008_review.md†L275-L276】
 [^33]: Regen adjustments needed to clear BMS over-voltage faults around 76.6 V on 20 S packs.【F:knowledge/notes/input_part008_review.md†L607-L607】
 [^34]: ADC adapter wiring with diode isolation while keeping UART dashboards online.【F:knowledge/notes/input_part009_review.md†L84-L86】
+[^tokmas_swap]: Hackintoshhhh’s Tokmas/JMSh1001ATLQ MOSFET swap logs showing 160–180 A battery and ~240 A phase capability alongside hotter case temps, plus Patrick’s reminder that the six-FET stage still caps practical output near 230–250 A.【F:knowledge/notes/input_part011_review.md†L411-L413】
+[^thunder_front85150]: Thunder 2 front-motor plan targeting 150 A battery / 230 A phase with repaste, exposed heatsinks, optional fans, and temperature ceilings that taper output before ~96 °C during 120–130 km/h runs.【F:knowledge/notes/input_part011_review.md†L415-L417】
+[^can_power_sync]: Dual Thunder builds confirmed the 85-series CAN power line wakes both controllers from a single button; isolate supplies if you need independent power-cycling.【F:knowledge/notes/input_part011_review.md†L468-L470】
+[^voyage_megan]: Voyage “Megan” displays bundle Metr integration, trip logging, and mode storage for roughly $400, but riders still avoid rain because the housing is not sealed.【F:knowledge/notes/input_part011_review.md†L447-L449】
 [^35]: Feeding Spintend’s ADC adapter from an external DC-DC on Ubox Lite builds.【F:knowledge/notes/input_part008_review.md†L606-L606】
 [^hackintosh_burst]: Hackintoshhhh’s MOT1111T-equipped 85250 build tolerated ~480 A phase bursts per controller once the upgraded silicon and cooling were dialed in.【F:knowledge/notes/input_part013_review.md†L34-L34】
 [^arnau_dropout]: Arnau Martinez Casals’ Ubox 250 stayed powered yet blocked Bluetooth pairing after a 60 V/120 A trip—evidence of failing regulators or CAN protection parts rather than a pure software fault.【F:knowledge/notes/input_part013_review.md†L61-L62】

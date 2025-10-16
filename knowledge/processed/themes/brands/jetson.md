@@ -34,6 +34,7 @@
 
 ## Thermal & Performance Management
 - Expect the hub to overheat once the stator is heat-soaked; practical street duty keeps output around 1.6 kW and avoids field weakening, which has fried stock motors at only 4 A in testing.[^3]
+- Haku still refuses to run field weakening after killing multiple stock hubs at ~4 A—he limits the Jetson to 20 S commuter duty with hydraulic brakes and monitors stator temps closely on long errands.【F:knowledge/notes/input_part011_review.md†L322-L332】
 - Monitor voltage discrepancies between VESC Tool and the JBD BMS—the readings often converge only under load, making it easy to misdiagnose faults during bench tests.[^3]
 - Avoid field-weakening experiments until cooling upgrades (ferrofluid, heatsinks, forced airflow) are proven; modest FW increments still spike both battery and phase current on this platform.[^3]
 
@@ -41,6 +42,9 @@
 - Budget-friendly hydraulic conversions and DOT brake fluid dramatically improve stopping power; riders report reliable modulation even after controller swaps so long as the hub remains direct drive.[^6]
 - Space constraints favor external or printed light mounts—consider USB-rechargeable bars or flashlight setups, and isolate their power supplies to prevent noise on the control harness.[^11]
 - For delivery or commuter duty, plan for swappable battery modules or higher-capacity cells only after validating shift length; 5 Ah-class cells add ~0.8 kWh versus P42A baselines but may demand enclosure redesigns.[^12]
+
+## Ownership & Resale Outlook
+- Custom Jetson builds with 20 S 3 P packs, JBD BMS, Spintend 85/150 controllers, and hydraulic discs are fetching offers around $400, but owners weigh family hand-me-down plans and evolving regulations before selling.【F:knowledge/notes/input_part011_review.md†L327-L332】
 
 ## Build Readiness Checklist
 1. **Document pack layout and connector choices** before sealing the battery bay so future service can trace balance leads.[^4]

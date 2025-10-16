@@ -6,6 +6,9 @@
 - Treat the Spintend/MakerX auxiliary board as a low-current signal bridge: its ~12 V/3 A rail can light LEDs or run logic, but headlamps, horns, and pumps still need a dedicated DC/DC or relay-fed supply.[^3][^9][^10][^11]
 - Map and validate every analog input inside VESC Tool before sealing the deck; enabling ADC control blocks bench FWD/REV overrides, so miswired harnesses must be fixed before ride testing.[^7][^8][^13]
 - Protect logic rails by isolating accessory power, adding pull-down failsafes, and avoiding shared 5 V lines between controllers—shorts or ground loops keep blowing MOSFET drivers and display boards.[^14][^16][^17][^19]
+- Spintend’s ADC expander can script one-touch 1WD/2WD toggles, but you must isolate CAN or power between controllers or the “sleeping” unit keeps mirroring battery current.[^spintend_toggle]
+- Xiaomi dashes stay stable on VESC firmware 6.05 when you add a 1 kΩ resistor inline with the UART lead; leave the stock harness otherwise and expect the dash to coexist with direct-hall throttles.【F:knowledge/notes/input_part011_review.md†L333-L341】
+- Dualtron riders trying to keep the OEM dash on VESC must script the CAN/UART protocol (often by adapting the open VSETT Lisp), and veterans steer those projects toward Spintend Ubox hardware instead of Flipsky/Makerbase so the investment lands on a robust controller platform.【F:data/vesc_help_group/text_slices/input_part011.txt†L8001-L8012】
 - Ubox V2 boards now carry self-reset fuses on 5 V/12 V/3.3 V rails, yet VESC Tool 3.01 still crashes mid-calibration if 5 V throttles hit the STM32 input—stick to 3.00/5.2 firmware or add voltage dividers before final assembly.【F:data/vesc_help_group/text_slices/input_part001.txt†L8424-L8453】
 
 ## Signal & Power Budget Cheatsheet
@@ -15,6 +18,9 @@
 | Spintend ADC v3 accessory rail | 12 V (buck) | ≈3 A total | Tail lights, brake triggers, small relays | Parallel 18 W lamps already flirt with the limit—push heavier loads through an external converter.[^3][^10] |
 | Controller logic rail | 5 V from onboard DC/DC | <0.5 A budget | Displays, hall sensors, footpads | Never back-feed from other controllers or dashes; a single short can blow the logic board and even 5 V throttle feeds have cooked STM32 ADC stages.[^5][^14][^16] |
 | External DC/DC (recommended) | Pack → 12 V/5 V | Sized to load | Headlights, horns, pumps, fans | Use relays or MOSFETs triggered by the ADC board for safe switching.[^9][^11][^15] |
+| Makerbase Lite ignition rail | ≈12 V logic tap | Light accessory top-ups | The rail can wake a phone charger but trips on heavier loads—treat it as a trigger for a dedicated buck, not a lighting supply.【F:knowledge/notes/input_part011_review.md†L372-L377】 |
+
+> **Field note:** When deck space is tight, riders still power headlights from a dedicated buck instead of the ADC rail; Noname’s Jetson build proved a stand-alone DC-DC keeps Spintend’s accessory outputs in reserve while USB-rechargeable bar lights offer long runtime without tapping controller power.【F:knowledge/notes/input_part011_review.md†L318-L332】
 
 ## Wiring Recipes
 ### Throttles & Brakes
@@ -31,6 +37,7 @@
 6. **Fail-safe defaults:** Add a pull-down resistor from throttle signal to ground so any broken wire snaps to zero instead of ghost acceleration.[^19]
 - **Prototype curve throttles carefully.** Early scroll-wheel “curve throttle” builds dedicate forward travel to acceleration and reverse travel to regen, giving smooth proportional braking once firmware supports dual-action mapping—keep wiring modular so you can fall back to proven hall throttles mid-test.【F:knowledge/notes/input_part001_review.md†L504-L505】
 - **Shield noisy harnesses:** High-phase-current builds needed shielded throttle looms and 5 V→3.3 V adapter boards (e.g., Spintend’s filter) to stop hall noise from overwhelming the ADC rail long-term.【F:data/vesc_help_group/text_slices/input_part001.txt†L3494-L3605】
+- **Beware 300X throttle EMI.** عمر’s Tronic X12 surged violently after swapping to a 300X throttle until he separated throttle/CAN/Bluetooth looms, reverted to BLDC for testing, and added a ~2 kΩ pull-down on the signal to tame hall noise coupling into the CAN harness.【F:knowledge/notes/input_part011_review.md†L435-L437】
 - **Pick flexible multi-core looms.** Shared-ground 24–26 AWG cables or slim AliExpress harnesses keep throttle/brake/start wiring tidy through cramped passthroughs; stiff Ethernet looms fatigue quickly on Xiaomi/VSETT decks.【F:data/vesc_help_group/text_slices/input_part001.txt†L6481-L6504】
 7. **Legacy dash retention:** Leaving throttle through a dash adapter adds perceptible lag; many builders keep the dash for display only and wire throttles directly to the controller instead.[^20]
 8. **Refresh mappings after downtime.** Scooters that sat for months have thrown false brake/throttle behaviour until riders reran the ADC wizard and removed stale inversion flags inside VESC Tool.[^storage-cal]
@@ -39,9 +46,14 @@
 7. **Shield noisy looms.** Running ADC throttles and SmartDisplay UART over shielded cable tied to controller ground cleared 120 A jitter, and separating signal bundles from phase wires kept FOC noise out of high-amp Ubox builds.[^signal-shield]
 8. **Fail-safe defaults:** Add a pull-down resistor from throttle signal to ground so any broken wire snaps to zero instead of ghost acceleration.[^19]
 9. **Legacy dash retention:** Leaving throttle through a dash adapter adds perceptible lag; many builders keep the dash for display only and wire throttles directly to the controller instead.[^20]
-10. **Refresh mappings after downtime.** Scooters that sat for months have thrown false brake/throttle behaviour until riders reran the ADC wizard and removed stale inversion flags inside VESC Tool.[^storage-cal]
+10. **Refresh mappings after downtime.** Scooters that sat for months have thrown false brake/throttle behaviour until riders checked the hardware-mode switch, reran the ADC wizard, and removed stale inversion flags inside VESC Tool.[^storage-cal]
 11. **Monitor brake sensors.** Dead brake halls make some VESC scooters pulse the motor every second or two under throttle, so replace failed sensors before ride testing.【F:knowledge/notes/input_part000_review.md†L39-L39】
 12. **Keep hall brakes separate.** Do not tie two hall levers to one ADC input—floating outputs land at different voltages and can latch regen; dedicate one channel per lever and leave the spare brake mechanical if you run out of inputs.【F:knowledge/notes/input_part000_review.md†L335-L337】
+
+### Pedal Assist (PAS)
+- **Split the loom correctly.** Flipsky PAS harnesses expect a four-wire breakout (5 V, ground, cadence signal, and often a brake/enable lead) with the signal routed to ADC1 while a regen throttle lives on ADC2; plan the split before sealing the controller cavity so you do not lose throttle redundancy.【F:knowledge/notes/input_part011_review.md†L22-L23】
+- **Validate hall swing.** PAS sensors only register once the hall output toggles roughly 0–1.5 V on ADC1; if regen releases bounce the signal, tighten filtering so the throttle does not re-engage after braking.【F:knowledge/notes/input_part011_review.md†L23-L24】
+- **Makerbase/Flipsky quirks.** Current 75100 Pro V2 firmware only exposes a quadrature PAS mode, so adapting three-wire cadence sensors needs an intermediary microcontroller, and the servo header’s 5 V tolerance is still unconfirmed—test before powering accessories straight from that pin.【F:knowledge/notes/input_part011_review.md†L496-L498】
 
 ### Regen Buttons & Variable Brakes
 - **Momentary button recipe:** Wire the button between ADC2 signal and the 3.3 V rail; avoid series resistors because they created “stuck brake” faults in testing.[^6]
@@ -54,6 +66,9 @@
 - **Scroll-wheel throttles:** Thumbwheel throttles work well as dedicated regen controls—Mirono’s Ubox build runs ~80 A phase / 15 A battery for a smooth 47 km/h eco mode while still craving BLDC punch at launch.【F:data/vesc_help_group/text_slices/input_part000.txt†L17625-L17654】【F:data/vesc_help_group/text_slices/input_part000.txt†L18388-L18395】
 - **Front-only caution:** Riders running “Shigura” hybrids keep front regen low or disabled; abrupt ramps can lock a lightly loaded front tyre on wet pavement.[^26]
 - **Boosted Rev mapping:** Expect ≈1.6 V full brake, 2.54 V neutral, and 3.3 V wide open on Boosted Rev thumbwheels once mapped to VESC ADC inputs, delivering strong regen with minimal mechanical braking.[^boosted-map]
+
+### Dash & Display Options
+- **CrowPanel touch dashboards free up IO.** Builders moving to CrowPanel’s 5" 800×480 ESP32-S3 display route the VESC BMS over CAN and dedicate UART to the dash; plan for LVGL-based touch controls plus extra GPIO for profile switching when the stock dash already consumes UART.【F:knowledge/notes/input_part011_review.md†L343-L349】
 
 ### Profile & Gear Switching
 - **Document throttle reassignment before adding gear toggles.** Builders shorting ADC1 to ground with a momentary switch—without moving the throttle signal to ADC2—have repeatedly blown MakerX ADC3 daughterboards. Treat profile toggles as signal bridges that need proper wiring diagrams and pull-downs before testing.[^gear-toggle]
@@ -123,6 +138,7 @@
 [^22]: Hall-diagnostics workflow focusing on ADC count deltas and re-testing with a clean 5 V rail when noisy 3.3 V supplies flatten readings.【F:knowledge/notes/input_part001_review.md†L15-L16】
 [^23]: Shorting the Spintend 85240 aux rail to ground killed the unfused buck regulator, reinforcing the need for inline fuses or external converters when powering lighting from the adapter.【F:knowledge/notes/input_part011_review.md†L659-L660】
 [^24]: Illuminated AliExpress switch pods leak voltage into ADC signal lines and require major rewiring to behave.【F:knowledge/notes/input_part010_review.md†L74-L77】
+[^spintend_toggle]: Spintend ADC expander scripts for 1WD/2WD toggles demand CAN or power isolation so sleeping controllers stop mirroring battery current.【F:data/vesc_help_group/text_slices/input_part011.txt†L11899-L11907】【F:data/vesc_help_group/text_slices/input_part011.txt†L12376-L12381】
 [^spintend-diodes]: Smart Repair’s wiring log shows the Spintend ADC adapter happily sharing a single lamp when the reverse feed is diode-isolated and paralleled with the headlight output.【F:knowledge/notes/input_part008_review.md†L84-L86】
 [^aux-port]: 🇪🇸AYO#74 warned that the auxiliary port beside the CAN header stays powered until shutdown, so tapping it leaves lights on unless you add a dedicated switch.【F:knowledge/notes/input_part008_review.md†L85-L85】
 [^dash-coexist]: The same build ran the Spintend adapter on ADC1/ADC2 and left the Xiaomi dash on UART without conflicts once wiring was tidied.【F:knowledge/notes/input_part008_review.md†L86-L86】
