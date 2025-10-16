@@ -19,6 +19,12 @@
 - Front-only regen testing on light scooters still locks wheels on low-traction surfaces; veterans either limit the front battery target or disable it entirely once “Shigura” hybrids are installed.[^front_regen]
 - Lock-ring grip pods with tactile turn buttons mimic VSETT controls at a fraction of OEM cost, trading a bit of mass for better commuter ergonomics once wired into the ADC board.[^3]
 
+## Variable Regen Hardware Experiments
+
+- Builders chasing proportional braking often add a second throttle or dedicated hall-sensor brake lever for regen; VESC firmware still forces a binary choice between cutoff or proportional mode, while Nucular owners remap CAN brake ports so they keep both mechanical cutoffs and variable regen on the same lever.[^regen_hardware]
+- Demand for purpose-built controls remains high—Spintend is prototyping a “curve” thumbwheel to mimic Rion’s dual-action throttle so regen scales smoothly without sacrificing the main trigger.[^ip001-curve]
+- Dedicated regen levers dramatically cut rotor heat and brake fade, but riders still keep mechanical brakes ready for emergencies—especially at full charge when limited voltage headroom weakens regen authority.[^regen_heatdrop]
+
 ## Signal Conditioning Hardware
 
 - The "smartcontroller" accessory intercepts 0–5 V throttle and brake signals, outputs a 0–3.3 V DAC feed to the VESC, and enforces features such as anti-theft throttle lockouts and safe MiniMotors EYE compatibility.[^smartcontroller_overview]
@@ -38,6 +44,13 @@
 ## Throttle & Harness Maintenance
 
 - Sudden surging that mimics hall dropout has traced back to cracked plastic throttles; soldering hall connectors directly and upgrading to higher-quality throttles restored smooth acceleration on high-current builds.[^throttle_failure]
+- Xiaomi-style thumb throttles remain the ergonomic favourite—builders trim their long dead zones by recalibrating VESC min/max voltage and often add left-hand triggers for dedicated regen inputs.[^ip001-xiaomi-cal]
+- Cheap AliExpress hall triggers still ship with 20–30 % dead travel and sore thumbs; Domino 270X units feel better yet remain imperfect, underscoring the need for higher-quality halls or curve tuning when chasing precise control.[^ip001-domino]
+
+## Dual-Action Throttle Prototypes
+
+- Scroll-wheel throttles like the Rion Curve remain in high demand; Spintend users are prototyping remotes that relocate the wheel and display to mimic dual-action ergonomics while they wait for production hardware to return.[^scroll_prototype]
+- Community experiments split trigger travel into roughly 70 % throttle / 30 % regen or add dual springs, curved magnets, and even pressure sensors under the trigger to deliver proportional braking without sacrificing grip.[^scroll_experiments]
 
 ## Regen Safety Guidelines
 
@@ -91,6 +104,13 @@
 [^regen_negative_current]: Source: data/vesc_help_group/text_slices/input_part004.txt†L22556-L22580 and L22848-L22891
 [^regen_ripple]: Source: data/vesc_help_group/text_slices/input_part004.txt†L18291-L18318 and L18375-L18380
 [^pas_calibration]: Source: data/vesc_help_group/text_slices/input_part004.txt†L23944-L23952 and L24084-L24086
+[^regen_hardware]: Source: knowledge/notes/input_part001_review.md†L512-L514
+[^regen_heatdrop]: Source: knowledge/notes/input_part001_review.md†L514-L514
+[^ip001-curve]: Source: knowledge/notes/input_part001_review.md†L646-L648
+[^scroll_prototype]: Source: knowledge/notes/input_part001_review.md†L552-L554
+[^scroll_experiments]: Source: knowledge/notes/input_part001_review.md†L580-L582
+[^ip001-xiaomi-cal]: Source: data/vesc_help_group/text_slices/input_part001.txt†L18296-L18656
+[^ip001-domino]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24290-L24311
 
 
 ## References

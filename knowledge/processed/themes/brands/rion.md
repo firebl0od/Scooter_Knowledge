@@ -35,6 +35,7 @@
 - **Battery truth gap:** Until you have telemetry confirming sustained current delivery, assume marketing numbers overstate real capability.[^1]
 - **Weather exposure:** Stock seals are insufficient; moisture ingress will jeopardise both the carbon structure and high-voltage electronics if left untreated.[^2]
 - **Chassis flex:** RX carbon frames feel “chewing gum” at 400 A—plan dampers, reinforcement plates, and tyre upgrades if you chase high-speed stability.[^7]
+- **Upgrade braking hardware:** Stock 140 mm rotors are overwhelmed on today’s dual-motor builds; track riders push dual 160 mm discs (or a 180 mm front when clearance allows) to keep fade in check on 11-inch wheels.[^ip001-rion-rotor]
 - **Handling opinions diverge:** Paolo praises RX2000 stability without a damper near 100 km/h, but Face de Pin Sucé still calls the chassis twitchy versus Weped builds—log your own high-speed telemetry before trimming safety margins.[^1]
 - **Track-day feedback is harsh:** Angerville kart racers cited brake fade, frame flex, and high centres of gravity that made Rions sketchy on tight circuits; their workaround mixes dual throttles, external controller mounts, ferrofluid-cooled Vsett motors, and upgraded Magura brakes.[^2]
 - **Motor bottlenecks:** The LY-manufactured hubs remain the limiting factor—pushing phase current past ≈200 A or ignoring lead temperatures risks overheating long before the controllers run out of headroom.[^4]
@@ -62,6 +63,7 @@
 - **Battery-first tuning:** Focus on validating cell balance and temperature spread; pursue pack upgrades or parallel modules before increasing controller current limits.[^2]
 - **Motor swaps & spacing:** “Rion 1337” 70 mm magnet hubs ship with ~155–160 mm axles, 33 Kv windings, and ~9.5 AWG phase leads—too wide for Monorim or VSETT forks without custom plates, but they drop into Zero 11X-scale swingarms once you budget torque arms and ferrofluid cooling.[^3][^6][^8]
 - **Controller pairing:** High-KV hubs routinely cook 75/200-class VESCs; stepping up to Kelly, Sabvoton, or dual Tronic hardware keeps ≥250 A phase targets realistic without sensorless stalls.[^5]
+- **BAC controller caveats:** Riders balk at BAC4000/8000 prices near $1 300 because tuning stays vendor-locked—buyers still depend on resellers for motor profiles, limits, and firmware tweaks.[^ip001-bac-lock]
 - **Controller mix:** BAC 4000 twins only appeared on the Thrust prototype; production scooters stayed on Tronic stacks with the BACs simply sharing a throttle signal, so plan wiring and expectations accordingly if you chase non-Tronic swaps.[^bac_pairing]
 - **Throttle ergonomics:** The pricey CNC thumbwheel is still a basic hall sensor—builders cloning it with Spintend Spinny or Davega hardware report similar feel once wiring is sorted, and Spintend is now prototyping a “curve” thumbwheel to mirror the dual-action control without the premium casing.[^throttle_clone][^curve_thumb]
 - **Tyre & brake strategy:** Evaluate slicks or semi-slicks that match the platform’s dry-focus geometry, but keep a wet-weather set and mechanical braking upgrades ready because regen-only setups still falter when BMS charge FETs open.[^2][^9]
@@ -93,6 +95,8 @@
 [^steering_crack]: Face de Pin Sucé dissected older Rion frames and found cracked steering heads, flexing plates, under-specced Kelly controllers, and dead-end fan ducts—modern power levels require reinforcement before trusting legacy chassis. Source: knowledge/notes/input_part013_review.md, L716 to L716
 [^legacy_fans]: Face de Pin Sucé noted the legacy RX fan ducts literally blow into carbon walls and pair with underspec’d Kelly controllers, demanding airflow and controller upgrades before modern 400 A tunes. Source: knowledge/notes/input_part013_review.md, L716 to L716
 [^future_swap]: Jose and Yamal are delaying firmware work until they swap in 3Shul 700/1400 controllers and dual Lonnyo 100 H hubs on 50PL cells, signaling how upcoming driveline upgrades reshape Rion tuning plans. Source: knowledge/notes/input_part013_review.md, L39 to L39
+[^ip001-rion-rotor]: Source: data/vesc_help_group/text_slices/input_part001.txt†L23924-L23966
+[^ip001-bac-lock]: Source: data/vesc_help_group/text_slices/input_part001.txt†L27446-L27457; data/vesc_help_group/text_slices/input_part001.txt†L27600-L27607
 
 ## Rider Protection Expectations
 

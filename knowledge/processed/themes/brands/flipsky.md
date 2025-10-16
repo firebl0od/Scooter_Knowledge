@@ -27,6 +27,7 @@
 
 - **Random early deaths remain common.** Multiple riders still see Flipsky stages fail within weeks—even under modest load—so budget time for burn-in and consider stocking spares before customer deployments.⁶
 - **4.2 hardware taps out early.** Pushing phase current to 150 A on 4.2 boards triggered repeated `fault_code_drv` errors and left BLDC mode as the only fallback, underscoring how quietly MOSFETs degrade when you exceed the published envelope.[^1]
+- **4.2 internals only sense two phases.** Teardowns show just two shunts with the third phase calculated in firmware, explaining their weak FOC behaviour and why legacy displays still need firmware downgrades to 3.6 or earlier.[^ip001-flip42-shunt]
 - **New enclosures still need help.** Upcoming GT100 and revised 75100 enclosures ship with higher-spec Magnachip FETs and tidier cases, yet riders warn performance still hinges on clamping the housing directly to the frame or stripping covers for tighter thermal contact.[^2]
 - **Capacitor banks are a recurring weak link.** Units have dropped to 14 V readings on 20 S packs after repeated capacitor explosions; simple cap swaps rarely hold.⁷
 - **Rectangular-case 75100s arrive half-finished.** Shops keep finding floating bus capacitors, dry thermal interfaces, and misreported firmware IDs (HW75300) on the new aluminium enclosures—open every unit, re-torque hardware, add paste, and verify IDs before loading customer profiles.[^3]
@@ -152,6 +153,7 @@
 [^can_soft]: Flipsky 75200 CAN communication soft failures resolved with factory defaults. Source: knowledge/notes/input_part004_review.md, L89 to L89
 [^cap_stake]: Loose bus capacitors and low-voltage bench test failures on repaired 75100 units. Source: knowledge/notes/input_part004_review.md, L312 to L312
 [^param_persist]: Parameter persistence issues with wattage/regen limits resetting on 75100 boards. Source: knowledge/notes/input_part004_review.md, L283 to L283
+[^ip001-flip42-shunt]: Source: data/vesc_help_group/text_slices/input_part001.txt†L22679-L22725
 
 ## References
 

@@ -7,6 +7,7 @@
 - Mirono steers newcomers toward Docreate’s ~€100 capacitor welder and copper-under-nickel sandwiches (≈40 J for nickel, 60–70 J for copper) because LSUC-branded caps underdeliver and bare copper strips fail pull tests without a nickel cap.[^1]
 - Size busbars with real cross-sectional math instead of stacking nickel.
   - triple 0.30 mm stacks still run resistive at 70 A, so teams now flip to copper once welders are dialled.[^2][^3]
+- Nickel-plated steel strips remain serviceable when the welds are sealed under Kapton, fish paper, and shrink; leave plating exposed to humid decks and the steel rusts, while pure nickel keeps resistance lower if you can justify the cost.[^ip001-nickel-steel][^ip001-pure-nickel]
 - Xiaomi Pro 2 and Navee conversions prove 20 S packs fit only when BMS and controllers move.
   - Gabe’s sleeper pack splits 11 S in-deck/9 S external with twin 6 AWG leads while controllers live in a 50 mm spacer and the BMS rides the stem; a 10 mm JBD board keeps Navee bays viable.[^4]
 - Budget worksheets should factor in consumables, BMS headroom, and future tariff shocks (e.g., QS8 connectors drifting toward $35) to avoid mid-build redesigns when scaling beyond 300 A continuous.[^4][^5]
@@ -909,3 +910,5 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^289]: Source: knowledge/notes/input_part004_review.md†L37-L37
 [^external_bag_reinforcement]: Source: knowledge/notes/input_part009_review.md†L420-L420
 [^copper_pretension]: Source: knowledge/notes/input_part009_review.md†L401-L401
+[^ip001-nickel-steel]: Source: data/vesc_help_group/text_slices/input_part001.txt†L18901-L18945
+[^ip001-pure-nickel]: Source: data/vesc_help_group/text_slices/input_part001.txt†L18920-L18933

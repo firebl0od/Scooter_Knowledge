@@ -12,6 +12,7 @@
 
 - Stock Daly packs sag and trip near 160 A combined battery draw once 22 S controllers are installed, so rebuild the busbars and upgrade to BMS hardware that tolerates higher burst currents before raising limits.[^1]
 - Wolf decks only fit one large controller without risers; dual-controller conversions rely on 3D-printed spacers, staggered mounting, and careful cable routing to keep 22 S harnesses from chafing or overheating.[^2]
+- Stock pack options span 16 S10 P 18650 (Warrior), 16 S7 P 21700 (Warrior GT), 20 S8 P 18650 (Wolf King), and 20 S7 P 21700 (Wolf King GT), but the cramped deck (≈172 × 70 × 430 mm internal volume, ~68 mm usable height once wiring is routed) still forces controllers outside and leaves little upgrade room—budget wiring changes before promising higher-current packs.[^ip001-wolf-pack]
 - Remanufacturers now order custom 3 mm rotors and 10 mm² phase looms for Wolf/VSETT builds targeting >300 A launches—have CAD ready for rotor suppliers and budget thicker cabling to stop voltage drop on high-current pulls.[^3]
 
 ## Blade & GT-Series Chassis Care
@@ -46,6 +47,7 @@
 
 - Treat the sealed OEM BMS as a temporary solution. Until a smart BMS or telemetry tap goes in, riders manually monitor cell groups to catch imbalances early.[^12]
 - High-power upgrades call for custom torque plates and thicker rotor materials—laser-cut 1 cm steel remains the baseline for reining 20 S launches without deforming the stock dropouts.[^14]
+- Confirm hall sensor coverage before controller swaps—older square-wave Kaabo hubs often omit halls while Wolf King GT sine packages include them, saving retrofit time.[^ip001-hall-coverage]
 
 ## Sourcing & Upgrade Watchlist
 
@@ -78,3 +80,5 @@
 [^18]: Source: knowledge/notes/input_part014_review.md, L218 to L276
 [^mantis_high_density]: Source: data/vesc_help_group/text_slices/input_part004.txt†L25331-L25384
 [^mantis_daily_spec]: Source: data/vesc_help_group/text_slices/input_part004.txt†L25380-L25391
+[^ip001-wolf-pack]: Source: data/vesc_help_group/text_slices/input_part001.txt†L26535-L26855
+[^ip001-hall-coverage]: Source: data/vesc_help_group/text_slices/input_part001.txt†L27111-L27168

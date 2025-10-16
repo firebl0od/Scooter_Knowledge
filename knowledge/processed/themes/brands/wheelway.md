@@ -3,6 +3,7 @@
 ## Quality & Reliability Notes
 
 - Teardowns of Wheelway hub motors keep uncovering debris in the stator, mismatched hall sensors (SS41F outers with an unknown center), and even unused slots that riders now repurpose for thermistors—thorough cleaning and inspection is mandatory before sealing a motor.[^1]
+- A recent crash autopsy found cooked hall leads and heat-soaked windings that finally killed the hall board entirely; once the magnets and sideplates reach that state, veterans retire the hub rather than attempt rewinds on compromised hardware.[^ip001-wheelway-failure]
 - Multiple riders lost halls within the first 25 km; the motors still ran fine on Xiaomi controllers but desynced on VESC hardware until the sensors were swapped or the build was run sensorless, suggesting inconsistent component grading rather than wiring mistakes.[^2]
 
 ## Service & Troubleshooting
@@ -24,3 +25,4 @@
 [^6]: Source: knowledge/notes/input_part000_review.md, L522 to L531
 [^7]: Source: knowledge/notes/input_part000_review.md, L572 to L574
 [^8]: Source: knowledge/notes/input_part000_review.md, L732 to L736
+[^ip001-wheelway-failure]: Source: data/vesc_help_group/text_slices/input_part001.txt†L27264-L27282

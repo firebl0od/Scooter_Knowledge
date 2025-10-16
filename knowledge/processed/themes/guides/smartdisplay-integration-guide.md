@@ -5,6 +5,7 @@
 - SmartDisplay now ships with modular harnesses that bridge VESC Tool, Minimotors, Kelly, Zero, and VSETT controllers while logging GPS, RTC, and media controls, so plan UART + CAN runs even if you start with legacy hardware.[^1]
 - Current production firmware bundles Kelly KLS profiles and police-mode button combos, with Sabvoton and BAC support queued once hardware output stabilises; OTA updates arrive over HTTPS with encrypted images to deter cloning.[^2]
 - SmartDisplay pairs with VESC and legacy controllers over UART today and will gain native CAN + VESC Express support on the incoming hardware spin, so budget both 5 V logic power and CAN high/low when future-proofing harnesses.[^1]
+- Cruise control stays speed-hold today—double-tap to engage, throttle/brake to exit—while ebike users keep lobbying for amp-based cruise profiles in future firmware.[^ip001-cruise]
 - The latest CNC aluminium housing ships with anti-glare glass, RTC, navigation, music controls, and dual buttons that already support single/double-click mapping; encoder knobs are planned for the production wave later this year.[^cnc-case]
 - Treat the display as the hub for lighting, telemetry, and speed-mode governance: its OTA chain flashes every connected accessory board (5 V/12 V light drivers, button pods) alongside the head unit, simplifying updates if the CAN bus is wired correctly.[^2]
 - Never tether SmartDisplay’s USB port to a computer while the controller is live; a single ground loop already blew the 3.3 V rail and STM32 on a Ubox, forcing an RMA.[^3]
@@ -89,6 +90,7 @@
   - explaining the ~€500 price point despite open-hardware roots.[^25]
 - Beta batches sold at **300 €** for 15 testers with August assembly runs; production pricing remains under review.[^11]
 - Rage Mechanics currently bundles SmartDisplay with its dual-controller kits (~489 €), and standalone sales are pending cost-down work—plan purchases early if you need just the dash.[^12]
+- Small-batch SLS cases still cost roughly €25–35 each, keeping retail around €300+ until a 1,000-unit injection run amortises tooling and halves enclosure pricing.[^ip001-sls-cost]
 - Expect retail pricing closer to €500 once the premium feature set (CAN/UART breakout, telemetry, OTA, GPS, lighting control) is factored in.
   - Face de Pin Sucé’s rundown helps set expectations for new buyers.[^26]
 - Riders chasing budget instrumentation still repurpose RTV VESC-only displays or even spare phones when SmartDisplay pricing overshoots a project’s scope.[^27]
@@ -146,6 +148,10 @@
 [^13]: Voyage Megan IPS display positioning at 300–400 € and community comparisons favoring SmartDisplay’s richer feature set.[^47]
 [^megan_alt]: Arnau’s Voyage Megan bundle lacks out-of-box waterproofing and costs ~€400, so Smart Repair points budget builders toward mark99i’s Raspberry Pi dashboard as a configurable alternative.[^48]
 [^14]: Encrypted OTA releases, €300+ price expectations, distributor planning, and SmartDisplay “panic mode” presets outlined during beta updates.[^49][^50][^51]
+[^ip001-panic]: Source: knowledge/notes/input_part001_review.md†L668-L669
+[^ip001-production]: Source: knowledge/notes/input_part001_review.md†L670-L670
+[^ip001-cruise]: Source: knowledge/notes/input_part001_review.md†L692-L693
+[^ip001-sls-cost]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17990-L18060
 [^15]: SmartDisplay assembly photos and UI previews showing temperature alarms, custom icons, and Rage Mechanics’ commercial support prep ahead of mass release.[^18][^19]
 [^boot]: MCU firmware initializes dashboards in ≈10 s, avoiding the 45–95 s boot delays seen on Raspberry Pi VESC displays.[^52]
 [^uart-crc]: SmartDisplay throttle traffic includes CRC checks—log the UART stream before chasing shielding fixes for perceived duty dips.[^53]
@@ -161,6 +167,8 @@
 ## Production Timeline & Pricing Updates
 
 - **SmartDisplay nearing production with premium pricing.** Rage Mechanics' SmartDisplay now lives in a CNC aluminium, anti-glare housing with VESC Tool bridging, navigation, RTC timekeeping, and music controls; two buttons support single/double-click mapping today, with knob controls planned once production launches.
+- Riders are lobbying for a “panic mode” button that flashes 125 W/20 km/h limits into the controller for roadside checks; firmware needs country-specific caps and ideally support for third-party VESC hardware to make it worthwhile.[^ip001-panic]
+- Production is scaling cautiously—simplified enclosures, distributor tooling, and a 20-unit assembled batch are targeted for May alongside new central-mount housings.[^ip001-production]
   - early adopters expect €199.99 launch slots before the €400–600 retail range.[^smart_production]
 - **Harnesses are modular and interchangeable.** Production units ship with interchangeable harnesses for VESC, Minimotors, Kelly, Zero, and Vsett pins, and the project is no longer open source despite earlier forks.[^smart_harness]
 

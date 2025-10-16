@@ -10,6 +10,7 @@
   - budget headroom accordingly before committing to bargain hardware.[^5]
 - Commission every pack like a high-energy experiment.
   - enable both charge and discharge FETs before regen tests, validate balance-lead order, and log first rides because a single BMS cutoff or miswire has already nuked controllers and power stages that survived normal abuse.[^4][^5][^6]
+- JK’s 150 A boards carry thick copper planes and dual 7 AWG leads that soak heat; shops lean on 140 W irons, broad tips, and long preheat cycles so solder actually wets both sides without lifting FET pads.[^jk_rework]
 - Treat balancing and calibration as routine maintenance: Daly boards need full charge/discharge learning and higher voltage to balance, while JK hardware wakes via the accessory display, runs active shuttling above ~0.015 V delta, and benefits from monthly thermal/IR audits.[^7][^8][^9]
 - Daly smart boards keep brownout-killing ride packs.
   - multiple crews now reserve them for stationary “powerwall” duty after cheap units drained LiPos to 0 V; pick LLT or JK hardware for scooters that see real current swings.[^6]
@@ -160,6 +161,10 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 ## Balancing & Calibration Practices
 
 - **Map delta thresholds to chemistry.** Experienced builders trigger active balancing around 0.015–0.025 V and cap charge at ~4.15 V when longevity outweighs peak range.[^9]
+- **Expect Daly balancing to pause early.** Regen-heavy Daly installs routinely show zero charge current once the dashboard calls the pack “full,” even with ≈0.1 V spread; reseat loose sense leads when 4.9 V ghost readings appear after service.[^ip001-daly-bal][^ip001-ghost-voltage]
+- **JK active balancers wake above ≈3.5 V.** JK boards resume shuttling whenever cells sit above roughly 3.5 V with ≥0.1 V delta and idle again below that threshold or on fault, so plan top-off routines around those voltage windows.[^ip001-jk-threshold]
+- **Wake new JK boards before sealing packs.** Fresh JK shipments arrive in protection mode; power them with the optional display or a higher-voltage bench supply to enable charge/discharge before buttoning up the enclosure.[^ip001-jk-activation]
+- **Tie longevity targets to chemistry.** Samsung 40T packs fall to roughly 70 % capacity after ≈500 full cycles at 4.20 V, while Samsung 48X strings are projected near 3,000 cycles when capped around 4.15 V—reinforcing conservative balance thresholds.[^cycle_life]
 - **Audit OEM balance behavior.** Ninebot Max G2 packs with passive bleed resistors stay within ≈5 mV, but Navee N65 batteries wander by ~0.7 V because their protective-only BMS rarely balances.
   - swap to JK active boards when consistency matters.[^57]
 - **Memorize per-cell math for quick checks.** Riders divide total pack voltage by the series count (e.g., 22 for 22 S builds) and lean on the familiar 3.1–4.2 V window to translate on-the-fly percentage readouts into actionable per-cell health estimates during tours or diagnostics.[^58]
@@ -175,6 +180,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 - **Expect Daly learning cycles.** Their coulomb-counting SoC meters read low for several rides; plan full discharge/charge sessions or manual 100 % resets so telemetry aligns with reality.[^7]
 - **Leverage telemetry displays.** JK screens offer long-range Bluetooth and remote toggles, effectively doubling as pack dashboards on scooters lacking dedicated HUD space.[^10]
 - **Schedule thermal/IR checks.** JK smart boards run warm near 60 A; monthly infrared sweeps and rest torque checks catch rising resistance before it snowballs.[^10]
+- **Plan for BMS heat.** Copper-reinforced JK boards and Daly charge FETs legitimately warm up around their 60 A envelopes; give them airflow and logging instead of assuming every hot-to-the-touch enclosure signals an imminent failure.[^ip001-bms-heat]
 - **Document platform quirks.** Ninebot Max G2 packs balance reliably with passive bleeders (~5 mV delta), while Navee N65 packs can drift 0.7 V because their protection-only BMS rarely equalises.
   - budget JK/ANT retrofits when swapping between the two platforms.[^62]
 - **Recalibrate VESC SoC after deck work.** Grinding or drilling inside the deck rains conductive dust onto harnesses; vacuum the bay, flush boards with IPA, and then reset coulomb counters or retune voltage curves (or switch to SmartDisplay dashboards) so telemetry lines up once stray metal no longer fools the BMS.[^63]
@@ -192,6 +198,8 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 - **Carry multi-voltage chargers for travel.** Switchable 16–24 S/20 A units fill gaps when premium 21 S chargers are out of stock, letting one brick service multiple scooter voltages.[^multi_brick_smart]
 - **Seek CC/CV bricks with adjustable ceilings.** Riders chasing 95 % state-of-charge targets are standardising on programmable supplies, and one BMS recently caught a CC-only converter stuck at 4.3 A even at full voltage.
   - proof that smart-pack safeguards remain essential.[^68]
+- **Lab-adjustable CC/CV bricks are in demand.** Builders are actively sourcing adjustable-voltage telecom chargers so they can cap daily charging around 95 % SOC instead of the default 100 %.[^adj_voltage]
+- **Let the BMS police cheap supplies.** A smart pack shut down a bargain CC-only brick that kept pushing 4.3 A at full voltage, underscoring why converters still need supervised sessions and logged protections.[^cc_only_trip]
 - **Prep telecom PSUs carefully.** Adjustable 100 V/45 A bricks need earth bonding and should be energised before connecting the scooter charge lead to avoid port-sparking mishaps.[^69]
 - **Match pilot resistors on Type 2 adapters.** Swapping the pilot to ~880 Ω brought DIY EVSE dongles online reliably.
   - validate wiring before hitting public posts.[^70]
@@ -364,6 +372,10 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 [^71]: Source: knowledge/notes/input_part003_review.md†L142-L142
 [^72]: Source: knowledge/notes/input_part001_review.md†L558-L560
 [^73]: Source: knowledge/notes/input_part006_review.md†L239-L239
+[^jk_rework]: Source: knowledge/notes/input_part001_review.md†L568-L570
+[^adj_voltage]: Source: knowledge/notes/input_part001_review.md†L504-L505
+[^cc_only_trip]: Source: knowledge/notes/input_part001_review.md†L506-L506
+[^cycle_life]: Source: knowledge/notes/input_part001_review.md†L502-L503
 [^74]: Source: knowledge/notes/input_part011_review.md†L357-L366
 [^75]: Source: knowledge/notes/input_part011_review.md†L366-L374
 [^76]: Source: knowledge/notes/input_part011_review.md†L352-L354
@@ -425,3 +437,8 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 [^131]: Source: knowledge/notes/input_part012_review.md†L11401-L11411
 [^132]: Source: knowledge/notes/input_part012_review.md†L11792-L11797
 [^133]: Source: knowledge/notes/input_part014_review.md†L98-L100
+[^ip001-daly-bal]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17551-L17690
+[^ip001-ghost-voltage]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17796-L17860
+[^ip001-jk-threshold]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17579-L17670
+[^ip001-jk-activation]: Source: data/vesc_help_group/text_slices/input_part001.txt†L22497-L22572
+[^ip001-bms-heat]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19285-L19320

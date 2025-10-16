@@ -8,6 +8,9 @@
 
 - Riders switching from sine-wave controllers to full field-oriented control report higher top speeds and cooler motors on the same battery settings, noting that Xiaomi M365 conversions only held 90 A after reinforcing their hardware.[^foc_advantages]
 - Square-wave aftermarket controller kits remain tempting at ~€80 for a dual pack with dash, but they hammer 150–200 A phase at launch, ride harsher for new users, and run noisier than VESC-based FOC setups despite the simple wiring.[^1]
+- Sabvoton’s phone app still lacks live current readouts and its heavy case worries single-stem builders; Kelly deployments continue to work but demand staged programming, BLE adapters, and careful wiring to avoid red-light detection faults on high-KV hubs.[^sabvoton_kelly]
+- When updating Spintend firmware, stick with the vendor-supplied FW 5.3 BIN and let VESC Tool auto-detect the R3 hardware; forcing V6 targets or manual overrides has already bricked FlipSky units.[^ip001-spintendfw]
+- Paolo’s unlocked FW 5.3 binary lifts thermal/current ceilings on Flipsky 75100 controllers, but there is no equivalent for the Spintend Ubox V2 yet because the vendor firmware needed to port the hack is unavailable; plan on staying within stock limits on Ubox hardware.[^ip001-flipsky-unlock]
 - Sustained cut-outs under load may point to BMS current limits: scooters that pass bench tests but trip under rider weight likely need higher-capacity packs or relaxed protection thresholds.[^bms_cutout]
 - Logs from 12 S setups show ~45 km/h at 32.5 A; raising voltage to 15 S and reducing current is recommended for better efficiency and lower heat.[^voltage_swap]
 
@@ -26,6 +29,7 @@
 - Track controller and stator telemetry together.
   - Koxx’s logs showed phase current clipping once battery limits were reached around 25–30 km/h and that hard regen pulses add ≈5 °C to the stator, highlighting why current math and temperature logging must be reviewed together after every tune change.[^3]
 - Treat field-weakening as a high-speed tool only; riders are still seeing 20–40 km/h gains but warn that the extra current draw demands tight temperature monitoring and duty-cycle triggers so launch torque and controller temps stay manageable.[^4]
+- Updating Nucular controllers requires a FAT32 microSD with one firmware file per device (e.g., `Ncontr.bin`, `Ndisp.bin`); flash controller stages before the display and consider zeroing flux linkage to disable MTPA after detection if FW 0.8.5 quirks appear while you evaluate 0.8.6.[^ip001-nucular-fw]
 - Dual Spintend crews treat 120–130 A phase per motor (≈160 A ABS max) as the realistic ceiling; if a hub “stutters” above ~85 A, assume a blown MOSFET or loose phase and inspect wiring or rerun sensorless detection before simply lowering limits.[^5]
 
 ## Thermal Management & Regen Safety
@@ -83,11 +87,15 @@
 [^stealth-profile]: Source: knowledge/notes/input_part012_review.md, line 432.
 [^hall-tester]: Source: knowledge/notes/input_part012_review.md, line 433.
 [^vsett-colors]: Source: knowledge/notes/input_part012_review.md, line 431.
+[^ip001-flipsky-unlock]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17515-L17566
+[^ip001-nucular-fw]: Source: data/vesc_help_group/text_slices/input_part001.txt†L23984-L23992
 
 
 ## References
 
 [^1]: Source: knowledge/notes/input_part000_review.md†L671-L675
+[^sabvoton_kelly]: Source: knowledge/notes/input_part001_review.md†L590-L590
+[^ip001-spintendfw]: Source: knowledge/notes/input_part001_review.md†L632-L633
 [^2]: Source: knowledge/notes/input_part000_review.md†L304-L304
 [^3]: Source: knowledge/notes/input_part000_review.md†L306-L306
 [^4]: Source: knowledge/notes/input_part000_review.md†L307-L307

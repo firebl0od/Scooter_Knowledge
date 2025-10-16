@@ -24,6 +24,7 @@ Weped’s factory 16S6P Samsung 50E battery ships on the GTS and Fold series, bu
 ### Chemistry Debates & Parallel Scaling
 
 Despite the criticism, Yoann’s four-year-old Weped FS still peaks 240 A on the original 50E module with an ANT smart BMS, demonstrating that the cells can deliver when backed by large parallel strings and conservative thermal management.[^3] Builders chasing harder acceleration prefer Samsung 40T or Molicel P42A/P45B packs once current demands exceed what 50E chemistry tolerates per cell, treating the OEM block as a long-range option rather than a high-discharge foundation.[^3]
+- Treat Samsung 50E cells as ~10 A parts—pushing 15 A per cell drives them toward 70 °C within minutes, mirroring the stock 16 S6 P Weped pack’s limits unless you add aggressive cooling.[^ip001-50e-limit]
 
 ### BMS, Regen & Controller Survivability
 
@@ -96,3 +97,4 @@ Community audits describe new Wepeds as expensive kits: owners routinely replace
 [^14]: Source: knowledge/notes/input_part000_review.md, L449 to L449
 [^15]: Source: knowledge/notes/input_part000_review.md, L698 to L698
 [^16]: Source: knowledge/notes/input_part001_review.md, L51 to L52
+[^ip001-50e-limit]: Source: data/vesc_help_group/text_slices/input_part001.txt†L26670-L26700

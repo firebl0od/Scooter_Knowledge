@@ -9,6 +9,8 @@
   - generic 10 AWG silicone overheats inside the axle and stock phases already run hot when paired with big controllers.[^65h-requirements]
 - TCP-branded hubs with the latest 70 mm magnet stack still tuck into 11 in rims, so plan packaging around that diameter instead of assuming you need a 12 in shell.[^hub-magnet-stack]
 - Rosheee's dyno and road runs showed a single 16 s 6 p M50LT pack with a 60 A BMS outrunning dual 50 H hubs from 0–30 km/h; builders trade some top speed because 65 H stators have lower Kv.[^65h-performance]
+- Artem and Happy Giraffe’s sims keep targeting loaded speed ≈25 % above desired cruise so hubs operate at roughly 75–80 % of free-spin RPM where efficiency, torque, and airflow balance out.[^ip001-kv-target]
+- High-Kv motors shine once you supply matching phase amps and voltage headroom; low-Kv winds punch harder off the line but overheat sooner at cruise without extra current limits.[^ip001-kv-trade]
 
 ## Controller Selection & Limits
 
@@ -22,6 +24,7 @@
 - Makerbase engineers are now iterating an 84 V/200 A INA241 board in the open via esk8.news threads.
   - expect layout tweaks and firmware revisions before treating the higher-voltage lineup as production-ready.[^1]
 - Fardriver controllers deliver multi-kiloamp capability (up to 2,600 A) and appear on production Weped Sonic builds; VESC hardware is still pricier and more delicate at those power levels.[^fardriver]
+- ASI BAC controllers remain potent but frustrating—firmware is locked to specific motors, provisioning changes void warranties, and riders chasing flexibility keep defecting to Spintend or Nucular despite BAC’s police-mode perks.[^ip001-bac]
 - Nucular 24F controllers remain scarce, heavy, and four-figure purchases; builders favor the 3Shul C700 as a more practical high-power upgrade path.[^nucular]
 - Dual-motor controllers house two linked boards sharing a heatsink, making them viable for dual 500 W Monorim setups so long as each phase channel stays inside spec (Gabe reports 75 km/h sustained without overheating).[^dual-esc]
 - Race crews cap competition scooters at 22 s because today's 30 s hardware can't feed equivalent battery amps; 22 s 18 p packs remain the winning compromise.[^race-voltage]
@@ -42,6 +45,8 @@
 - Mirono’s CL-series caution still stands: auto-detected regen mirrors drive current, so hand-tune motor/brake amps before hard launches or you will spike hardware.
   - newcomers should expect manual setup or choose simpler controllers.[^2]
 - Makerbase 80100 hardware only hits the advertised 250 A phase once you flash no-limit firmware; stock builds plateau around 150–160 A even with ample cooling.[^3]
+- Mixing different battery limits front and rear is workable—rear motors simply carry more load as duty climbs—but keep pack voltages matched and bias phase amps rearward to preserve grip without resorting to traction control.[^ip001-dual-share]
+- Limited-edition dual-phase VSETT hubs are misreporting ≈270 A recommendations during auto-detect instead of the normal 120–130 A; treat ~200 A as the ceiling until Spintend patches the estimator so the twin-lead motors stay inside safe limits.[^ip001-dual-phase-detect]
 
 ## Thermal Management & Cooling
 
@@ -76,8 +81,10 @@
   - stick to homogeneous pairs or rework resistor networks before linking them.[^6]
 - Use mechanical fasteners rather than brazing when bonding heatsinks to frames; aluminum brazing demands specialty flux, risks galvanic corrosion, and is best reserved as a last resort.[^brazing]
 - When designing external heatsinks, drop the sink through the deck, drill and tap for anchors, and bolt the controller directly with paste so airflow can reach the fins.[^external-heatsink]
+- Torque arms rarely add value on scooter swingarms that already clamp 15 mm axles—torque washers and proper clamping suffice unless you are grafting ultra-low-Kv ebike hubs like QS205s.[^ip001-torque-vs-swingarm]
 - Older Lonnyo hubs only leave 7–8 mm of axle clearance.
   - plan to strip factory leads, thread thicker phase cables, and add extra sleeving between conductors so the bundle sheds heat instead of cooking insulation.[^lonnyo-clearance]
+- When hub covers seize, reinstall the opposite side and tap the axle through a protected nut to break the seal, photographing lead routing so phases return to their original channels during reassembly.[^ip001-hub-service]
 
 ## Battery & BMS Interactions
 
@@ -110,6 +117,11 @@
   - Asyan4ik lost a logic chip without warning yet had the controller running again within an hour after swapping the $30 part.[^8]
 - Matthew’s controller began throttling around 91 °C and shut down at 95 °C despite a 105 °C limit, suggesting sensor calibration or firmware clamps need verification during thermal diagnostics.[^thermal_clamp]
 
+## Logging & Telemetry Discipline
+
+- Benchmark acceleration with purpose-built tools: VESC Tool Bluetooth logging, Dragy GPS meters, and Nucular CSV exports (convertible into Excel/Datazap) capture 0–60 mph, voltage sag, and thermal trends, though builders still want friendlier graphing software.[^ip001-telemetry]
+- Remember VESC log timestamps only offer 100 ms resolution; supplement with 60 fps video or Dragy/Racelogic boxes (~€160) when you need trustworthy 0–40 mph metrics and avoid relying solely on phone GPS.[^ip001-accel-tools]
+
 ## Track & Chassis Notes
 
 - Dual intake/exhaust fans alone can't stabilize controller bays; integrate external heatsinks and tie them thermally into the chassis.[^cooling-bays]
@@ -134,11 +146,14 @@
 [^qs90]: knowledge/notes/input_part007_review.md lines 46-47.
 [^65h-requirements]: knowledge/notes/input_part007_review.md lines 38-39.
 [^65h-performance]: knowledge/notes/input_part007_review.md lines 65-65.
+[^ip001-kv-target]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19147-L19185
+[^ip001-kv-trade]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19147-L19264
 [^84100]: knowledge/notes/input_part007_review.md lines 15-15.
 [^84100-nc]: knowledge/notes/input_part007_review.md lines 201-202.
 [^75100-pricing]: knowledge/notes/input_part007_review.md lines 23-23.
 [^75200-shutdown]: knowledge/notes/input_part007_review.md lines 25-25.
 [^fardriver]: knowledge/notes/input_part007_review.md lines 40-40.
+[^ip001-bac]: Source: knowledge/notes/input_part001_review.md†L650-L651
 [^nucular]: knowledge/notes/input_part007_review.md lines 34-34.
 [^dual-esc]: knowledge/notes/input_part007_review.md lines 35-35.
 [^race-voltage]: knowledge/notes/input_part007_review.md lines 36-36.
@@ -166,9 +181,12 @@
 [^zero10x-axle]: Source: knowledge/notes/input_part006_review.md†L39-L39
 [^brazing]: knowledge/notes/input_part007_review.md lines 94-94.
 [^external-heatsink]: knowledge/notes/input_part007_review.md lines 99-99.
+[^ip001-torque-vs-swingarm]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24363-L24371
 [^bms-charge]: knowledge/notes/input_part007_review.md lines 27-27.
 [^jk-tracker]: knowledge/notes/input_part007_review.md lines 74-74.
 [^mixed-pack]: knowledge/notes/input_part007_review.md lines 75-75.
+[^ip001-dual-share]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19780-L19806
+[^ip001-dual-phase-detect]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24642-L24683
 [^ferrofluid-sourcing]: knowledge/notes/input_part007_review.md lines 76-76.
 [^nami-conversion]: knowledge/notes/input_part007_review.md lines 21-21.
 [^throttle-sweep]: Source: knowledge/notes/input_part006_review.md†L43-L43
@@ -197,6 +215,7 @@
 [^thermal-60c]: knowledge/notes/input_part007_review.md lines 123-123.
 [^lonnyo-clearance]: knowledge/notes/input_part007_review.md lines 122-126.
 [^vesc-logging]: knowledge/notes/input_part007_review.md lines 103-103.
+[^ip001-hub-service]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24712-L24744
 [^75100-tempfix]: knowledge/notes/input_part007_review.md line 233.
 [^negative-ramp]: knowledge/notes/input_part007_review.md line 264.
 [^regen-dash]: knowledge/notes/input_part007_review.md line 273.
@@ -206,6 +225,8 @@
 [^chain-drive]: knowledge/notes/input_part007_review.md lines 168-168.
 [^vsett-fork]: knowledge/notes/input_part007_review.md lines 84-84.
 [^dual-disc]: knowledge/notes/input_part007_review.md lines 85-85.
+[^ip001-telemetry]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17940-L18080
+[^ip001-accel-tools]: Source: data/vesc_help_group/text_slices/input_part001.txt†L26930-L26952
 
 
 ## References
