@@ -278,8 +278,8 @@
 [^76]: Source: knowledge/notes/input_part014_review.md†L8930-L8933
 [^77]: Source: knowledge/notes/input_part014_review.md†L10001-L10055
 [^78]: Source: knowledge/notes/input_part009_review.md†L87-L87
-[^79]: Source: knowledge/notes/input_part004_review.md†L20-L20
-[^80]: Source: knowledge/notes/input_part004_review.md†L97-L97
-[^81]: Source: knowledge/notes/input_part004_review.md†L336-L336
-[^82]: Source: knowledge/notes/input_part004_review.md†L570-L570
-[^83]: Source: knowledge/notes/input_part004_review.md†L315-L315
+[^79]: Source: data/vesc_help_group/text_slices/input_part004.txt†L1197-L1253
+[^80]: Source: data/vesc_help_group/text_slices/input_part004.txt†L1247-L1259
+[^81]: Source: data/vesc_help_group/text_slices/input_part004.txt†L23716-L23735
+[^82]: Source: data/vesc_help_group/text_slices/input_part004.txt†L1247-L1259
+[^83]: Source: data/vesc_help_group/text_slices/input_part004.txt†L21108-L21182

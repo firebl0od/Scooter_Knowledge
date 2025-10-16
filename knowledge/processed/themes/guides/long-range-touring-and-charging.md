@@ -72,7 +72,10 @@
 ### Programmable Telecom Supplies & Bench Chargers
 
 - **AliExpress adjustable bricks struggle above 84 V.** Community testing on adjustable 20 S/24 S chargers shows budget units browning out or failing outright once riders push past ≈84 V, so bring spares or derate them when touring with 96 V packs.[^23]
+- **Celler-branded 20 S adjustable brick has field approval—monitor the fan.** Jonas’ long-term test group rates the Celler AliExpress charger as accurate and mechanically solid, noting the only annoyance so far is its always-on fan.[^celler]
+- **Inspect adjustable 20 S supplies before first ride.** Recent teardown chatter urges buyers to open housings, upsize output leads to ≥4 mm² for sustained 20–30 A service, and always energise the charger from the wall before connecting scooter packs so diode-less stages don’t arc across XT plugs.[^adjustable-20s]
 - **WANPTEK benchtops are voltage-flexible but current-limited.** Their compact supplies work as emergency travel chargers thanks to programmable setpoints, yet the 3 A ceiling makes them impractical for fast top-ups.
+- **Map the trim pots before tweaking Meanwell-style supplies.** VR1 handles output voltage, VR2 sets charge current, and VR3 defines cutoff current; tune against a partially discharged pack while watching a meter so you don’t overshoot setpoints.[^charger-trims]
   - plan overnight charges only.[^23]
 - **Huawei telecom rectifiers remain the reliable high-power option.** Riders still prize these 4 kW-class bricks for 20 S+ builds because they hold voltage under load and integrate with app-based control, though the size, cost, and fan noise make them best suited to support vans or home base charging hubs rather than café stops.[^23][^24]
 - **Compact 2 kW adjustable chargers are resurfacing.** AliExpress listings now advertise 66–93 V @ 23 A and 72–101 V @ 16 A bricks; stock remains sparse, so treat them as opportunistic pickups rather than dependable tour gear.[^25]
@@ -211,6 +214,9 @@
 [^21]: Source: data/vesc_help_group/text_slices/input_part005.txt†L23075-L23093
 [^22]: Source: data/vesc_help_group/text_slices/input_part005.txt†L23941-L23953
 [^23]: Source: knowledge/notes/input_part011_review.md†L101-L106
+[^celler]: Source: data/vesc_help_group/text_slices/input_part004.txt†L19666-L19710
+[^adjustable-20s]: Source: data/vesc_help_group/text_slices/input_part004.txt†L22000-L22046
+[^charger-trims]: Source: data/vesc_help_group/text_slices/input_part004.txt†L17519-L17544
 [^24]: Source: knowledge/notes/input_part011_review.md†L209-L212
 [^25]: Source: knowledge/notes/input_part011_review.md†L460-L463
 [^26]: Source: knowledge/notes/input_part012_review.md†L303-L303

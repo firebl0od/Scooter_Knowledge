@@ -32,6 +32,7 @@
 | Symptom | Likely Cause | Resolution |
 | --- | --- | --- |
 | Pack shows voltage but no output | Board ships asleep until first charge pulse | Connect a charger briefly to wake the discharge MOSFETs.[^8] |
+| Output stays latched off after reconnecting the pack | Protection tripped on inrush when the controller was reattached | Blip the charger to reset the MOSFETs before riding; some Xiaomi-oriented boards require this wake pulse every time they shut down.[^happy-latch] |
 | Charging stalls below pack voltage | Input supply under 47 V on 48 V builds | Use a true 48 V CC/CV charger; Xiaomi bricks at 42 V leave the BMS idle.[^18] |
 | Error 24 or BLE faults after flashing | Firmware flashed without a 10 S reference pack | Flash with a lower-voltage pack connected, then reconfigure cell count in the Embedden app.[^19] |
 | Repeated fuse trips above 44 A | Overcurrent beyond design envelope | Reinforce wiring and step up to Daly/ANT-class boards for ≥50 A builds.[^5] |
@@ -80,3 +81,4 @@
 [^26]: Source: knowledge/notes/denis_all_part02_review.md, L70 to L71
 [^27]: Source: knowledge/notes/denis_all_part02_review.md, L553 to L553
 [^28]: Source: knowledge/notes/denis_all_part02_review.md, L536 to L536
+[^happy-latch]: Source: data/vesc_help_group/text_slices/input_part004.txt†L19788-L19840

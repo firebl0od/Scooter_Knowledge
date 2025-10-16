@@ -97,6 +97,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - **Single Ubox 100/100 daily safe zone:** Lonnyo 65 H commuters are holding tunes near 130–135 A phase with 85–90 A battery and 150–180 A absolute, trimming duty to ~98 % and starting FW around 88 % to clear residual stutter without climbing past 40 °C case temps.[^u100_daily]
 - With upgraded MOT1111T silicon and external cooling, riders have logged ~480 A phase bursts per controller on 85250 stacks—proof the hardware has headroom when thermals are engineered properly.[^hackintosh_burst]
 - Field logs from daily 18 S commuters show 85150 hardware getting unhappy above ~240 A phase; trimming tunes to roughly 220 A phase, 90 A battery, and ≈60 A of field weakening kept case temps stable without neutering performance.[^45][^46]
+- Maike-branded “3000 W” dual hubs plateaued near 25 km/h until motor current climbed toward 140 A (battery ≈70 A) and the stage gained better thermal coupling—stock 16 S commuter packs with dual XT60 leads still bottleneck full Ubox upgrades without cooling mods.[^maike_uplift]
 - Real-world logs show dual Lite builds requesting 160/140 A phase yet barely topping 100 A peaks, underscoring the need to capture data from both controllers before chasing higher numbers.[^10]
 - Dualtron GT riders running Ubox Lite hardware corroborate those peaks: 55–60 A battery per motor with 160/140 A phase commands only logged ~100 A, offering a realistic ceiling for keeping stock hubs alive at highway pace.[^47]
 - Solo commuters copying the shared 300 A hardware-limit BIN still hold tunes near 80 A battery / 130 A phase until they validate heatsinking and airflow; the file only removes software clamps—it does not grant extra headroom.[^40]
@@ -225,6 +226,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Warranty debates flared when a rider refused to return hardware; moderators reiterated that Spintend covers repairs with paid return shipping and contrasted the turnaround with slower Rion/Tronic replacements before issuing a ban.[^70][^71]
 - Storefront reputation took a hit after community members spotted deleted negative Spin-Y reviews despite active Telegram support—set expectations around official response cadence before promising service levels.[^72]
 - ExpressLine DDP shipments are clearing customs in about a week for EU buyers, yet import offices still assess duties despite the “duty paid” label.[^14]
+- Recent FedEx fulfilment on direct orders landed within four to seven days, letting installers schedule deck tear-downs a week after purchase instead of waiting on slow postal legs.[^spintend-fedex]
 - Regional mark-ups can double MSRP—Israeli riders now see ~$575 street pricing, pushing them toward direct factory orders or alternative brands when budgets are tight.[^14]
 - Sellers occasionally under-declare controller value (e.g., listing €160 modules at €55); while it trims duties, buyers carry the audit risk if customs spot the mismatch.[^14]
 - Treat the €140 “Spintend” AliExpress storefront as a likely scam—new account, no replies, and a bill of materials that already costs more than the asking price.[^73]
@@ -245,6 +247,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Vet MOSFET swaps before chasing 200 A+: bargain JJmicro devices underperform while Huayi parts have held 20 kW loads below 40 °C, so confirm datasheets before reflowing silicon.[^37]
 - Log every ride by exporting VESC Tool CSVs or bridging Android sessions to desktop so you can correlate current spikes, duty limits, and temps before relaxing guardrails.[^38]
 - Inspect for contamination after heavy service—moisture ingress and solder splatter have spoofed temperature telemetry and shorted controllers even after repairs, so schedule post-ride inspections after rain or workshop work.[^39]
+- Water ingress on 1 kΩ PTC sensors has pegged motor temps around 90–95 °C on some Ubox installs; raise firmware cutoffs cautiously or repair the harness before blaming controller firmware.[^spintend-temp-water]
 - Stock firmware on single 80/85-series boards still caps phase near 150 A/ABS 210 A; flash the no-limit build and raise ABS toward 240 A with solid cooling before commanding 100 A battery / 180 A phase, and remember that smaller hubs saturate near 100 A regardless.[^76]
 - Treat AI-generated traction-control scripts as experimental—recent CAN/UART toggler code needed debouncing, cached telemetry, voltage checks, and divide-by-zero fixes before it was safe to run on live hardware.[^77]
 - Franchesco’s brand-new 85/250 flashed internally within a few metres on a 20 S 42 Ah build tuned for 150 A battery / 250 A phase (350 A absolute); peers are urging photo documentation and a warranty claim while warning others not to re-energise smoked hardware.[^78]
@@ -346,6 +349,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^37]: MOSFET reliability comparisons favouring Huayi devices over cheaper alternatives for 200 A-class loads. Source: knowledge/notes/input_part009_review.md, L88 to L88
 [^38]: Recommended CSV logging workflows via VESC Tool and Android bridge methods. Source: knowledge/notes/input_part001_review.md, L149 to L150
 [^39]: Moisture contamination spoofing temperature telemetry until enclosures were cleaned and resealed. Source: knowledge/notes/input_part008_review.md, L40 to L40
+[^spintend-temp-water]: Source: data/vesc_help_group/text_slices/input_part004.txt†L25304-L25341
 [^v2_ntc]: Ubox V2’s higher reported temperatures trace back to NTC placement and higher phase current, and riders found the stock Spintend pads cooled better than aftermarket Thermal Grizzly sheets once clamp pressure was restored. Source: data/vesc_help_group/text_slices/input_part001.txt, L24976 to L25009. Source: data/vesc_help_group/text_slices/input_part001.txt, L25349 to L25359
 [^ble_dongle]: Official Spintend Bluetooth modules arrive pre-flashed around €29 with taxes included, while generic NRF51822 boards demand manual flashing before they pair reliably, so most riders pay for the plug-and-play option. Source: data/vesc_help_group/text_slices/input_part001.txt, L24903 to L24930
 [^ble_required]: Veteran 75100 users keep Bluetooth enabled on Spintend controllers because field tuning and fault collection are impractical without wireless access once the deck is sealed. Source: data/vesc_help_group/text_slices/input_part001.txt, L24915 to L24921
@@ -372,6 +376,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^44]: Ubox Lite ESD failures caused by unsymmetrical power disconnects while CAN remained energised. Source: knowledge/notes/input_part008_review.md, L269 to L269
 [^45]: Standby draw measurements and LED behaviour on Spintend’s latching power switch. Source: knowledge/notes/input_part001_review.md, L214 to L216
 [^46]: Community flashing workflow relying on Spintend-supplied BINs and auto-detection to avoid bricking controllers. Source: knowledge/notes/input_part001_review.md, L632 to L633
+[^maike_uplift]: Source: data/vesc_help_group/text_slices/input_part004.txt†L25285-L25303
 [^47]: Auto-detect anomalies recommending ~270 A on dual-phase hubs until limits are manually corrected. Source: knowledge/notes/input_part001_review.md, L824 to L825
 [^single-proto]: Paolo’s single-board Spintend prototype measures ~60 mm wide without the case, adds capacitance over a Nucular 12F, should manage ≈150 A battery on flat roads, and still needs external sealing for wet decks. Source: knowledge/notes/input_part001_review.md, L80 to L82
 [^single-can]: Koxx confirmed the single Ubox exposes CAN, Bluetooth, and USB simultaneously, letting accessories and diagnostics stay online without swapping cables. Source: knowledge/notes/input_part001_review.md, L99 to L99
@@ -461,6 +466,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^69]: Source: knowledge/notes/input_part004_review.md, L32 to L32
 [^70]: Source: data/vesc_help_group/text_slices/input_part003.txt, L2209 to L2223
 [^71]: Source: data/vesc_help_group/text_slices/input_part003.txt, L231 to L297
+[^spintend-fedex]: Source: data/vesc_help_group/text_slices/input_part004.txt†L25283-L25299
 [^72]: Source: data/vesc_help_group/text_slices/input_part003.txt, L5746 to L5754
 [^73]: Source: knowledge/notes/input_part000_review.md, L348 to L348
 [^74]: Source: knowledge/notes/input_part000_review.md, L333 to L334

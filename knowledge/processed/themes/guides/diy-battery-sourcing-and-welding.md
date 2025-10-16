@@ -607,7 +607,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 
 [^busbar_braze]: Copper busbar brazing with shielding gas to prevent oxidation failures.[^234]
 [^insulation_layers]: Proper battery insulation materials and parallel-group alignment techniques.[^150]
-[^20s5p_fit]: 20 S 5 P pack fitment challenges in G30 decks.[^288]
+[^20s5p_fit]: Source: data/vesc_help_group/text_slices/input_part004.txt†L21277-L21290
 [^ir_calibration]: Cell internal resistance measurement and calibration procedures.[^289]
 
 
@@ -762,14 +762,14 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^147]: Source: knowledge/notes/input_part006_review.md†L55-L57
 [^148]: Source: knowledge/notes/denis_all_part02_review.md†L98595-L98598
 [^149]: Source: knowledge/notes/denis_all_part02_review.md†L97241-L97259
-[^150]: Source: knowledge/notes/input_part004_review.md†L317-L317
-[^151]: Source: knowledge/notes/input_part004_review.md†L341-L341
-[^152]: Source: knowledge/notes/input_part004_review.md†L330-L330
+[^150]: Source: data/vesc_help_group/text_slices/input_part004.txt†L21252-L21324 and L21888-L21899
+[^151]: Source: data/vesc_help_group/text_slices/input_part004.txt†L22724-L22760
+[^152]: Source: data/vesc_help_group/text_slices/input_part004.txt†L22762-L22798
 [^153]: Source: data/vesc_help_group/text_slices/input_part004.txt†L11470-L11499
-[^154]: Source: knowledge/notes/input_part004_review.md†L366-L366
-[^155]: Source: knowledge/notes/input_part004_review.md†L360-L360
-[^156]: Source: knowledge/notes/input_part004_review.md†L301-L302
-[^157]: Source: knowledge/notes/input_part004_review.md†L387-L387
+[^154]: Source: data/vesc_help_group/text_slices/input_part004.txt†L17752-L17764 and L18123-L18139
+[^155]: Source: data/vesc_help_group/text_slices/input_part004.txt†L17519-L17544
+[^156]: Source: data/vesc_help_group/text_slices/input_part004.txt†L19788-L19840
+[^157]: Source: data/vesc_help_group/text_slices/input_part004.txt†L15089-L15110
 [^158]: Source: knowledge/notes/input_part011_review.md†L325-L329
 [^159]: Source: data/vesc_help_group/text_slices/input_part007.txt†L283-L296
 [^160]: Source: data/vesc_help_group/text_slices/input_part007.txt†L290-L290

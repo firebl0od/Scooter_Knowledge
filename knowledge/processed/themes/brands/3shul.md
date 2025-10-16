@@ -7,6 +7,7 @@
 - Marketing about 32 S compatibility still outpaces validated telemetry—veterans cap CL-series controllers near 29–30 S with regen disabled because the 135 V FET stack and onboard DC/DC rails offer thin transient margin above that point.[^voltage_cap]
 - Traction-control and field-weakening experiments show 3Shul hardware shunting torque rearward at 22 S, but those gains hinge on accurate hall data, tuned observers, and disciplined logging to avoid ABS over-current faults.[^tc_fw]
 - Rage Mechanics is already teasing CL500/CL700/CL1000 successors with flatter capacitor banks, thicker busbars, and 30 S ambitions, yet the community still wants burn-in data before treating the roadmap as production-ready.[^roadmap]
+- Current C350 batches ship with thicker IMS plates, a 200 A battery rating, and bundled ESP32 BLE/IMU telemetry plus a 12 V 3 A rail—wiring looms remain DIY, but the hardware is edging toward SmartDisplay-ready kits.[^c350-refresh-2023]
 
 ## Product Line Cheat Sheet
 
@@ -77,6 +78,7 @@
 [^voltage_cap]: CL-series voltage ceiling warnings and DC/DC sag observations that cap practical operation near 29–30 S without regen. Source: knowledge/notes/input_part006_review.md, L71 to L72
 [^tc_fw]: Traction-control and field-weakening behavior on 22 S LY hubs, plus logging discipline required to avoid inflated speed readings or control faults. Source: knowledge/notes/input_part009_review.md, L109 to L124. Source: knowledge/notes/input_part009_review.md, L121 to L121
 [^roadmap]: CL500/CL700/CL1000 roadmap previews, packaging dimensions, and distribution updates from Rage Mechanics. Source: knowledge/notes/input_part004_review.md, L288 to L288. Source: knowledge/notes/input_part004_review.md, L436 to L436
+[^c350-refresh-2023]: Source: data/vesc_help_group/text_slices/input_part004.txt†L24404-L24428
 [^c350_specs]: Field data confirming the C350’s 400 A phase / 200 A battery envelope on disciplined builds. Source: knowledge/notes/input_part012_review.md, L256 to L258
 [^r350_specs]: R350 feature comparison including the 12 V 3 A rail, smart latch, and 250 A battery rating. Source: knowledge/notes/input_part011_review.md, L26 to L28
 [^cl350_heat]: Reports of CL350 heat and QC variance relative to C350 units on 22 S race scooters. Source: knowledge/notes/input_part008_review.md, L305 to L305

@@ -3,6 +3,7 @@
 ## Brake Sensor Requirements
 
 - Faulty or missing brake sensors can cause rhythmic surging every one to two seconds under throttle, so maintaining functional brake inputs is critical before road testing.[^brake_surge]
+- Two-wire reed assemblies (Nutt, generic) still need a 5–10 kΩ pull-up to your logic rail when feeding VESC ADC inputs; treat them as dry contacts, not hall sensors, and plan external 12 V feeds if the controller’s accessory rail is weak.[^brake_wiring_basics]
 
 ## Proportional Braking Hardware
 
@@ -48,6 +49,8 @@
 - Field tests on a 10 S 2 P P42A pack produced 2.55 kW regen bursts and rapid motor/MOSFET heating, reinforcing why aggressive profiles need live temperature logging rather than bench guesses.[^regen_heat]
 - Riders reminded each other that regen-only configurations are unsafe on 20 S builds.
   - keep mechanical brakes adjusted and in service before trusting wheel-locking e-brakes at 50–65 km/h.[^4]
+- Leaving a small negative battery current target keeps lever-based e-brakes alive; setting regen to zero disables the switch entirely, so balance throttle curves with ADC apps on 6.05+ firmware instead of relying on legacy remote settings.[^regen_negative_current]
+- Regen ripple around −110 A phase / −15 A battery has already caused brake stutter and voltage spikes—raise battery regen limits gradually, balance currents front to rear, and verify mechanical brakes can take over if electronic braking falters.[^regen_ripple]
 
 ## Throttle Voltage Maps & Calibration
 
@@ -55,6 +58,10 @@
 - Sensor suites that mix ADC throttles and SmartDisplay UART stay stable when the loom uses shielded cable tied to controller ground and routed away from phase leads, which also eliminated cruise-control jitter at 120 A phase.[^shielded_looms]
 - Polish-built hall triggers from e-bikestuff ship with a 0.96–4.31 V sweep, zero deadband, and VESC-adjustable endpoints.
   - premium alternatives to Xiaomi/Zero throttles if you can stomach shipping costs.[^5]
+
+## Pedal Assist Integration
+
+- Torque-sensing bottom brackets like the eRider T9N only swing 1.5–3.3 V in quick spikes; add ADC filtering or external microcontroller smoothing when blending PAS with throttle on high-power builds so the controller doesn’t misinterpret short bursts.[^pas_calibration]
 
 
 [^brake_surge]: Source: knowledge/notes/input_part000_review.md, line 39.
@@ -80,6 +87,10 @@
 [^regen_heat]: Source: knowledge/notes/input_part000_review.md, line 256.
 [^boosted_profile]: Source: knowledge/notes/input_part000_review.md, line 247.
 [^shielded_looms]: Source: knowledge/notes/input_part000_review.md, line 261.
+[^brake_wiring_basics]: Source: data/vesc_help_group/text_slices/input_part004.txt†L23763-L23771 and L24697-L24700
+[^regen_negative_current]: Source: data/vesc_help_group/text_slices/input_part004.txt†L22556-L22580 and L22848-L22891
+[^regen_ripple]: Source: data/vesc_help_group/text_slices/input_part004.txt†L18291-L18318 and L18375-L18380
+[^pas_calibration]: Source: data/vesc_help_group/text_slices/input_part004.txt†L23944-L23952 and L24084-L24086
 
 
 ## References
