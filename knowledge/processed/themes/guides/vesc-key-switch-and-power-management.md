@@ -16,13 +16,14 @@
 
 ### Makerbase Ignition Logic
 - **75100 units expect momentary latch.** Bridge 5 V to the AD15 enable pin for roughly a second to turn on (three seconds to shut down), and set the ADC shutdown timer so the controller actually unlatches.[^makerbase_latch]
-- **84100HP needs normally-closed switches or pull-down mod.** 84100HP controllers need a normally-closed switch or the documented 1 MΩ pull-down to mimic Ubox-style keys.[^makerbase_84100]
+- **84100HP needs normally-closed switches or pull-down mod.** 84100HP controllers need a normally-closed switch or the documented 1 MΩ pull-down to mimic Ubox-style keys; source NC hardware or build a relay adapter if you want bar-mounted ignitions.【F:data/vesc_help_group/text_slices/input_part009.txt†L13398-L13404】[^makerbase_84100]
 
 ## Anti-Spark & Key Switch Failures
 
 ### Common Failure Modes
 - **Generic anti-spark buttons explode on K-line.** Attempts to hang generic anti-spark buttons on the "K" ignition leads have caused switch explosions; these keys have strict voltage/current ratings and must be sized properly or replaced with true latching hardware.[^antispark_fail]
 - **Key switches must target the DC/DC, not ADC lines.** Martin's attempt to break the ADC line with a relay triggered a full-throttle runaway because 0 V maps to maximum duty; Кирилл and Paolo reminded everyone to switch the DC/DC enable or force e-brake input instead so a keyed relay safely disables power without touching throttle lines.[^key_adc_danger]
+- **Inspect anti-spark resistors.** Noname caught the precharge strip inside an anti-spark connector heating up after repeated plug cycles—replace browned hardware before it melts under high-current starts.【F:data/vesc_help_group/text_slices/input_part009.txt†L20442-L20448】
 
 ### Proper Implementation
 - **Size switches for actual current.** If hanging switches on ignition lines, verify they're rated for the actual current path—most "anti-spark" switches are only rated for signal-level currents.
@@ -46,6 +47,8 @@
 1. **Document baseline idle draw.** Expect roughly 20 mA standby current with latching power buttons off—any illuminated LED signals a wiring fault.
 2. **Use proper anti-spark connectors.** XT90S loop keys or AS150 anti-spark variants provide reliable make/break without arcing on high-current connections.
 3. **Verify polarity before power-up.** Fresh Ubox units have shipped with reversed Bluetooth harnesses, killing modules instantly—check continuity before energizing boards.
+4. **Wait for bus caps and BMS rails to discharge before probing.** Dual Ubox stacks briefly wake from stored capacitor energy even with the pack unplugged, and Noname shorted a lit Nucular light board because the new BMS was still awake—watch status LEDs go dark and depower accessories before unplugging sense boards.【F:data/vesc_help_group/text_slices/input_part009.txt†L19021-L19022】【F:data/vesc_help_group/text_slices/input_part009.txt†L15284-L15290】
+5. **Trigger external 12 V rails with the controller.** One Vsett 10+ conversion now drives an Arduino relay from the VESC 5 V line to energise a battery-fed 12 V converter, keeping lights and accessories off the fragile OEM fuse while still powering on with the controller.【F:data/vesc_help_group/text_slices/input_part009.txt†L6603-L6608】
 
 ### Safety Checklist
 1. **Never use ADC lines for power switching.** Breaking ADC throttle lines can cause runaway acceleration—only switch DC/DC enable or use e-brake failsafes.

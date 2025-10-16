@@ -30,6 +30,7 @@
 - **Budget vertical clearance.** Once screw heads and silicone pads are added, JBD shells swell beyond spec—print spacers or add silicone isolation pads before final assembly.[^3][^16]
 - **Lay out insulation stacks.** Silicone or fishpaper isolators under the output studs and between series planes keep repasted heatsinks from chafing cells.[^3][^16]
 - **Stage harness and sense-lead routing.** Dry-fit the balance loom, confirm reach to each parallel group, and label identical white leads before the pack is sealed.[^14][^17]
+- **Label identical sense leads before rework.** Rewiring JBD harnesses without keeping parallel leads tied to the same terminal produced false zero readings until the parallels were rejoined—double-check diagrams before moving balance wires mid-repair.【F:data/vesc_help_group/text_slices/input_part009.txt†L6669-L6686】
 
 ## Wiring & Commissioning Workflow
 1. **Land B− before balance taps.** Builders who connected sense leads first saw zero-voltage groups until the missing parallels were tied back in—attach B−, then walk the harness up the stack while verifying voltages stepwise.[^14][^17]

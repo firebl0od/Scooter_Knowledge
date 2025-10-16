@@ -2,6 +2,7 @@
 
 ## TL;DR
 - **Build around quality pneumatics and matched shocks.** Pair Monorim front forks with DNM or EXA dampers and a proper rear shock; foam “solid” tires and mismatched hardware shake magnets loose above ~45 km/h.【F:knowledge/notes/denis_all_part02_review.md†L13-L14】【F:knowledge/notes/denis_all_part02_review.md†L717-L717】
+- **KKE shocks beat EXA 388/291 for light riders.** 60 kg owners are starting around 650–850 lb springs (1,000 lb on twin-shock setups) and only stepping up if they want a firmer feel, noting better damping than EXA units in the same weight class.【F:data/vesc_help_group/text_slices/input_part009.txt†L5168-L5228】
 - **Recreate the factory hardware stack.** Reinstall the short upper screw, small top ring, and fresh bearings during stem assemblies—missing parts are the leading cause of Monorim wobble.【F:knowledge/notes/denis_all_part02_review.md†L22-L23】
 - **Upgrade fasteners immediately.** Swap the kit’s soft bolts for grade 12.9 hardware, trim overly long screws, and add washers/Loctite so pivots stop loosening and knocking after a few rides.【F:knowledge/notes/denis_all_part02_review.md†L515-L515】【F:knowledge/notes/denis_all_part02_review.md†L1171-L1171】
 - **Match spring hardware to rider weight.** EXA 291 coils (150–350 lb springs) stay supple for ~90 kg riders, while RockShox or Fox air shocks add adjustability—just confirm leverage ratios and clearance before swapping hardware.【F:data/vesc_help_group/text_slices/input_part003.txt†L23160-L23216】

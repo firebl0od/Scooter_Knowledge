@@ -9,6 +9,7 @@
 
 ## Base Scooter Preparation
 - Flash the latest ScooterHacking G30 BMS firmware to lift discharge ceilings past 20 A while retaining stock harnesses—essential before pushing VESC phase currents.【F:knowledge/notes/input_part014_review.md†L103-L104】
+- Swap the factory “silver” phase leads for quality 12 AWG silicone—stock G30 wires are just tinned copper and run hot above 20 A continuous even though scooter duty cycles let 12 AWG survive short bursts.【F:knowledge/notes/input_part009_review.md†L369-L369】
 - Measure the deck cavity early: builders logged ~120 mm width and 74 mm depth, giving clear constraints before committing to dual controllers or double-stack battery layouts.【F:knowledge/notes/input_part004_review.md†L220-L220】
 - Build a spacer/pack checklist before welding: 20 S 4 P layouts fit with printed or CNC spacers plus minor cable reroutes, while 20 S 5 P bricks demand tray trimming, recessed fasteners, and harness standoffs to preserve deck clearance.【F:knowledge/notes/input_part004_review.md†L247-L248】
 - Strip the frame and inspect deck welds prior to grinding rails for larger packs; documented builds plan rail relief plus 3 mm aluminum skid plates as interim reinforcement.【F:knowledge/notes/input_part014_review.md†L106-L106】【F:knowledge/notes/input_part014_review.md†L118-L119】
@@ -49,6 +50,7 @@
 - **Map deck configurations early.** Builders split 20 S packs between the deck and shoulder bags, slide 20 S4 P externals under the stem, or relocate controllers outside the deck to free space for 9 P cores—document wiring paths before cutting rails.【F:knowledge/notes/input_part005_review.md†L606-L606】
 - **Plan SNSC fork swaps with CNC fixtures.** The community now machines custom stems that capture SNSC forks while accommodating star nuts and cable routing; print drill guides before sending aluminum to the mill to guarantee headset alignment.【F:knowledge/notes/input_part005_review.md†L606-L606】
 - **Front disc conversions can reuse Pro 2 hubs.** Repurposing a Ninebot Pro 2 front motor keeps geometry intact, then you only need custom spacers and a caliper bracket to add a disc without Monorim suspension bulk.【F:knowledge/notes/input_part005_review.md†L607-L607】
+- **Blueprint tall-pack builds before welding.** GABE’s 20 S 12 P concept stacks cells to ~14.5 cm, parks the BMS vertically at the nose, mounts dual MP2 controllers in a welded rear box, and splits current across QS8 leads with parallel 8 AWG runs—mock up the layout so harness slack and deck arches clear before committing to metalwork.【F:data/vesc_help_group/text_slices/input_part009.txt†L21900-L21939】
 
 ## Control & Traction Tuning
 - Update Xiaomi/Ninebot dashboards to firmware 6.05 before pairing dual controllers—the community Lisp build on 6.02 only forwards CAN for a single ESC, so flash Xiaomi firmware or the 6.05 beta images before wiring two VESCs to the dash.【F:knowledge/notes/input_part005_review.md†L206-L207】

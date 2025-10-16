@@ -11,6 +11,7 @@
 ## Track & Hyper Builds
 - A Swedish “hyper” customer pushing Rage Mechanics drivetrain parts past 117 km/h now runs 22×3 windings, 700 mm bars, and a steering damper—evidence that chassis bracing and dampers become mandatory once G30-based builds cross triple-digit speeds.【F:knowledge/notes/input_part012_review.md†L391-L392】
 - The RM-Light race scooter pairs a Dualtron Compact frame with a 22 S 4 P tabless pack, C350 RM-X motor, Beringer brakes, and a titanium pole to hit roughly 140 km/h at just 37 kg, underscoring that the platform targets short sprint sessions rather than street duty.【F:knowledge/notes/input_part012_review.md†L393-L394】
+- Rage’s latest customer build packages dual XHS75 hubs, paired CL350 controllers, and a 20 S 10 P P45B pack inside twin waterproof cases with a steel steering pole, SmartDisplay dash, and Hope Tech 4 V4 brakes—ready for 0–100 km/h testing once weather cooperates.【F:knowledge/notes/input_part009_review.md†L306-L306】
 
 ## Source Notes
 [^deck_specs]: Rage Mechanics’ Dualtron deck pricing, dimensions, and usable floor length once the lips are removed.【F:knowledge/notes/input_part012_review.md†L19-L19】
