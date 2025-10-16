@@ -36,7 +36,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 3. **Map every connector before power-up.** MakerBase looms expose 3.3 V/GND/ADC1 at the “comm” header and reroute Bluetooth through the NRF pins; miswired TX/RX leads cause telemetry dropouts or back-power logic rails.[^22]
 4. **Favor multi-core RVVP over solid Ethernet in stems.** Fine-strand shielded RVVP survives stem flex better than solid-core Cat6, still carries halls, CAN, and spare conductors, and keeps throttles from snapping wide open when wires fracture.[^23]
 5. **Reserve shielded Ethernet for signal runs only.** Builders keep XT150/QS8 on the power leads and repurpose Ethernet or RVVP pairs for 5 V, hall, and CAN wiring so accessories can be added later without tearing the stem apart.[^24][^25]
-4. **Secure hall boards and sensor looms.** Hall PCBs that peel free can short against the rotor housing and mimic logic-rail failures; inspect adhesive and strain relief during reassembly.[^26]
+4. **Secure hall boards and sensor looms.** Pandalgns’ front hall PCB peeled loose, shorted against the rotor, and even masqueraded as serial-port dropouts until it was re-glued and strain-relieved; bake adhesive checks and harness support into every reassembly.[^hall_short_fix]
 5. **Exploit the ADC harness features.** Spintend’s ADC v3 board already supports spin dial throttles, dual-button pods, and turn-signal LED strips.
   - plan channel assignments before closing the deck and keep phase leads equal length when trimming looms.[^27]
 6. **Never steal headlight power from throttle rails.** Dragging even 0.5 A from the throttle’s 5 V supply collapses the regulator, starves the ADC daughterboard, and can back-feed the 12 V converter.
@@ -109,6 +109,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 - Analog gauge clusters look cool but add little.
   - VESC already logs current and voltage, so most riders simply mount a phone dash unless they crave retro styling.[^57]
 - **SimpleVescDisplay (ESP32).** Smart Repair recommends flashing the open-source SimpleVescDisplay and 3D-printing its mount as a reliable alternative when Flipsky Voyage units glitch.[^58]
+- **Profile templates worth copying.** Yamal maintains a 23 km/h compliance mode, a 14 kW “Seven Routes” touring preset, and a “Hot Summer” throttle clamp to keep dual Uboxes cool in 40 °C commutes—log similar modes for riders balancing legality and thermals.[^yamal-profiles]
 - **Tiny NRF boards have no range.** Flashing Vedder’s `nrf51_vesc` firmware onto ultra-small BLE boards left riders with unusable range, so they still buy the €2 full-size modules for dependable VESC Tool links.[^59]
 - **SimpleVescDisplay odometer logging.** NetworkDir’s latest firmware now buffers odometer data locally on the ESP32 so riders keep mileage even if CAN frames drop, giving budget builds a telemetry path that still respects VESC Tool logs.[^60]
 - **JPPL Smart Display RAM ceiling.** Running Wi-Fi and Bluetooth simultaneously exhausts the JPPL display’s RAM; leave only one wireless interface active to keep the UI responsive.[^61]
@@ -300,6 +301,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
   - **Read → edit → Write**
   - and explicitly hit **Write Motor/App Config** after each wizard so Xiaomi throttles and ADC settings persist across power cycles instead of forcing full detections at the next boot.[^174][^175]
 - Haku routinely feeds inexpensive AliExpress lightbars through the ADC harness, underscoring why guides should spell out current limits, fuse values, and wiring diagrams before riders stack accessories on controller rails.[^176]
+- Rogerio’s tests show Spinny/ADC daughterboards fry if you power them from external 12 V rails after the controller wakes—energise the auxiliary supply first or keep them on the native rail.[^spinny-sequence]
 - Map the MakerBase comm header before plugging in displays.
   - NRF pins handle Bluetooth, the hall plug feeds sensors, and the comm port exposes 3.3 V/GND/ADC1 for throttles, so labelling each lead prevents back-powering telemetry gear.[^177]
 - Before flashing or editing parameters, follow the VESC Tool workflow.
@@ -416,6 +418,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^59]: Source: knowledge/notes/input_part005_review.md†L346-L347
 [^60]: Source: knowledge/notes/input_part008_review.md†L203-L204
 [^61]: Source: data/vesc_help_group/text_slices/input_part009.txt†L12510-L12513
+[^yamal-profiles]: Source: knowledge/notes/input_part013_review.md†L841-L841
 [^62]: Source: knowledge/notes/input_part003_review.md†L108-L163
 [^63]: Source: knowledge/notes/input_part003_review.md†L192-L192
 [^64]: Source: data/vesc_help_group/text_slices/input_part003.txt†L26600-L26606
@@ -498,6 +501,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^141]: Source: data/vesc_help_group/text_slices/input_part003.txt†L4700-L4890
 [^142]: Source: knowledge/notes/input_part005_review.md†L127-L127
 [^143]: Source: data/vesc_help_group/text_slices/input_part005.txt†L22250-L22257
+[^hall_short_fix]: Source: knowledge/notes/input_part013_review.md†L604-L604
 [^144]: Source: knowledge/notes/input_part005_review.md†L58-L59
 [^145]: Source: knowledge/notes/input_part000_review.md†L47-L48
 [^146]: Source: data/vesc_help_group/text_slices/input_part003.txt†L8188-L8223
@@ -531,6 +535,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^174]: Source: knowledge/notes/input_part013_review.md†L542-L544
 [^175]: Source: data/vesc_help_group/text_slices/input_part005.txt†L22481-L22495
 [^176]: Source: knowledge/notes/input_part013_review.md†L222-L249
+[^spinny-sequence]: Source: knowledge/notes/input_part013_review.md†L796-L796
 [^177]: Source: knowledge/notes/input_part013_review.md†L406-L408
 [^178]: Source: knowledge/notes/input_part005_review.md†L410-L413
 [^179]: Source: knowledge/notes/input_part004_review.md†L197-L197

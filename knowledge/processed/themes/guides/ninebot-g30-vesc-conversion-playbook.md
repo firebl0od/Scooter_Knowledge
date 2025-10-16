@@ -138,6 +138,7 @@
 
 ## Thermal & Mechanical Safeguards
 
+- Expect roughly 125 mm between flats on the stock rear fork; wider hubs still need spacer stacks or dropout machining before 20×3 conversions clear safely.[^rear-fork]
 - Cap field-weakening around 20 A on stock 6×TO-220 Makerbase 75100 boards.
   - extended 35 A pulls at 130 A phase have already burned MOSFETs, so step up to the aluminum-PCB/vented variants if you need sustained high-speed duty.[^67]
 - Pune’s single-motor log showed a Makerbase 75100 holding ~4.2 kW peaks at ~44 °C when clamped inside the stock controller can.
@@ -145,6 +146,7 @@
 - Monitor per-motor temperatures; aim for ≤45 °C controller temps and ≤90–100 °C stator temps by refreshing thermal paste and clamping controllers to thick skid plates.[^69][^70]
 - Bond controllers to the deck with thermal epoxy where possible.
   - Matthew’s single 85150 now idles near 40 °C with ~60 °C peaks after the previous mount let temps spike toward 80 °C and a BMS cutoff shorted its partner.[^71]
+- Matthew’s Max G30LP commuter pairs a single Spintend 100/100 Lite (40 A battery / 100 A phase) with a 14 S 20 Ah pack, Lonnyo 65 H 17×4 hub plus Statorade, dual light bars, a water-cooled controller plate, reinforced Monorim suspension, and trunk space prepped for extra 16 S packs—use it as a blueprint for mid-voltage conversions that still chase range.[^matthew-g30lp]
 - Plan for valve-stem service and bead reseating after pothole hits.
   - tubeless split rims can burp air, so keep compressors and soapy water handy during test rides.[^72]
 - Track tire availability: true 12″ tubeless slicks remain limited to rare Touvt 12×4.5‑6.5 listings, so expect lead times or plan alternate wheelsets when chasing maximum footprint on VESC builds.[^73]
@@ -283,6 +285,8 @@
 [^69]: Source: knowledge/notes/input_part014_review.md†L73-L76
 [^70]: Source: knowledge/notes/input_part014_review.md†L119-L119
 [^71]: Source: knowledge/notes/input_part011_review.md†L35-L35
+[^matthew-g30lp]: Source: knowledge/notes/input_part013_review.md†L721-L721
+[^rear-fork]: Source: knowledge/notes/input_part013_review.md†L827-L827
 [^72]: Source: knowledge/notes/input_part014_review.md†L46-L46
 [^73]: Source: knowledge/notes/input_part005_review.md†L502-L502
 [^74]: Source: knowledge/notes/input_part014_review.md†L43-L43

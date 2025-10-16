@@ -12,6 +12,7 @@
 ## Long-Range Riding Benchmarks
 
 - Noname logged an 18-hour Appalachian ride covering roughly 150 miles at 50 mph bursts, noting the VESC stayed cool and demonstrating that high-capacity packs (likely 10+ kWh class given the distance) enable extended touring when thermal management is dialed in.[^appalachian]
+- 🇪🇸AYO#74’s crew keeps posting 147 km/h GPS pulls on 22 S 11 P Nami builds, but Paolo calculates they’d need ~65 kW continuous to hit the advertised 0–100 km/h in 2.5 s—traction, legality, and efficiency become the limiting factors even when the hardware survives.[^nami-65kw]
 - Yamal squeezes about 100 km from a 40 Ah pack by planning two 10 A charge stops each way on weekend tours and now considers a 20 A fast charger plus a spare pack the key upgrades for quicker turnarounds between legs.[^2]
 - His latest mountain loop stacked 260 miles in 12 hours by chaining 45 A roadside charges (≈100 miles added per hour back to ~74 % state of charge) and confirms 50 A is tolerable while 70 A “is too much” without extra cooling.
   - bake those thresholds into fast-charge planning for alpine routes.[^3][^4]
@@ -21,6 +22,8 @@
 - Shade and redundancy mattered on that ride.
   - cooling packs under tree cover during 50 A stops and carrying spare phones for offline navigation both kept the schedule intact when cell service dropped.[^7][^8]
 - The same rider’s 20 S 35 P (≈700-cell) 18650 pack delivered 96 miles while using only about half of its 10.2 kWh capacity, showing how oversized bricks can double range without stressing cells when the chassis can carry the weight.[^noname-96mi]
+- Noname later pushed his 300 lb emoped 276–277 miles in a day at 35–50 mph, burning roughly 2 h 45 m of charging plus meal stops and concluding that 100–130 mile legs are the comfortable cap without hotel breaks.[^noname-277mi]
+- Jason’s 160 km standing ride demanded four to five fast-charge stops because his compact pack overheats above ~25 A, highlighting how lightweight builds trade top-off speed for portability.[^jason-160km]
 - Pack sizing for 150+ mile rides typically requires 7–10 kWh or more depending on terrain, speed, and rider weight; builders planning tours should log Wh/mi consumption during shorter test rides to estimate realistic range before committing to long routes.[^pack-sizing]
 - Mirono’s 3D-printed deck extender now houses 260 cells (~15 S 17 P) to chase 120 km coastal rides, while the group prototypes cargo trailers for hauling auxiliary batteries, logging ~2 A at 36 V from 80 W folding solar panels during scouting runs.[^deck-extender]
 - Artem’s Xiaomi/Ninebot controller shootout underscores tuning impact on Wh/km: the stock 52 V 13 Ah square-wave build burned ~26 Wh/km flat out, his dual-motor VESC swap held ~22.5 Wh/km at higher speeds, and a sine-modulated Vsett managed ~17 Wh/km cruising 25–35 km/h on a 676 Wh pack.[^9]
@@ -49,6 +52,7 @@
 - Noname cataloged AliExpress telecom-derived bricks.
   - around US$340 for Huawei 60 A units or US$260 for touchscreen 50 A models
   - emphasizing they are rebadged rectifiers despite factory-style marketing.[^telecom-fast]
+- Race riders still hunt 40–50 A chargers; peers note that 20 A units refill large packs in roughly two hours but true quick-charge hardware remains scarce and typically costs more than €200 when you can find it.[^40a-chargers]
 
 ### Charging Etiquette & Best Practices
 
@@ -140,6 +144,7 @@
 
 - Spanish riders are already budgeting stealthier frames, €3 k shell swaps, or downsized scooters ahead of the 2027 crackdown.
   - expect to validate deck dimensions (e.g., Achilleus vs. Thunder) and controller placements against DGT listings when planning tours across stricter jurisdictions.[^46]
+- U.S. trail riders are now seeing “class 1 only” signs and camera enforcement on shared paths, so some are plating heavier builds or reverting VSETTs to stock profiles to avoid fines while commuting.[^class1-signs]
 - Local enforcement is already citing micromobility capable of >35 mph in Las Vegas after a fatal crash; high-speed builds need route plans that respect posted limits and rider training when sharing public streets.[^47][^48]
 5. **Prep for winter efficiency hits.** Riders report Wh/km nearly doubling in freezing conditions (≈30 Wh/km vs. 18–20 Wh/km in summer); keep packs warm indoors or add gentle heaters before rolling out in sub-zero weather.[^49]
 
@@ -159,7 +164,10 @@
 [^tesla-protocol]: Tesla plug requirement for protocol triggers (FoCcci boards) to initiate charging handshake sequences.[^51]
 [^generator]: Theoretical 1 kW generator + 5 kWh pack configuration for coast-to-coast touring attempts.[^50]
 [^appalachian]: Noname's 150-mile ride log demonstrating thermal management and extended touring feasibility.[^50]
+[^nami-65kw]: Source: knowledge/notes/input_part013_review.md†L810-L810
 [^noname-96mi]: Noname’s 20 S 35 P commuter pack recorded 96 miles of riding while burning roughly half its 10.2 kWh capacity.[^52]
+[^noname-277mi]: Source: knowledge/notes/input_part013_review.md†L799-L799
+[^jason-160km]: Source: knowledge/notes/input_part013_review.md†L800-L800
 [^pack-sizing]: General guidance for 7–10 kWh pack sizing for 150+ mile tours based on consumption testing.
 [^deck-extender]: Source: knowledge/notes/input_part000_review.md, line 159.
 [^etiquette]: Charging bay etiquette reminders to respect time limits and communicate with EV drivers.
@@ -171,6 +179,7 @@
 [^bms-thermal]: BMS thermal management during sustained high-capacity pack discharge.
 [^charge-limits]: BMS charge current limit matching for public infrastructure compatibility.
 [^telecom-fast]: Fast-charging cautions highlighting ≈1 C limits on Samsung 40T/Molicel P42A packs and pricing for telecom-derived 50–60 A chargers.[^53]
+[^40a-chargers]: Source: knowledge/notes/input_part013_review.md†L720-L720
 [^bms-balance]: Yamal and 🇪🇸AYO#74’s top-off routine.
   - rest before balance charging, limit equalisation to 2–4 A, and tighten drift thresholds near 0.01 V to stop endless micro-charging.[^54]
 [^pre-test]: Pre-departure adapter testing protocols with multimeter and thermal validation.
@@ -234,6 +243,7 @@
 [^44]: Source: knowledge/notes/input_part012_review.md†L306-L306
 [^45]: Source: knowledge/notes/input_part012_review.md†L309-L309
 [^46]: Source: knowledge/notes/input_part013_review.md†L238-L239
+[^class1-signs]: Source: knowledge/notes/input_part013_review.md†L772-L772
 [^47]: Source: data/vesc_help_group/text_slices/input_part013.txt†L15064-L15090
 [^48]: Source: data/vesc_help_group/text_slices/input_part013.txt†L15084-L15086
 [^49]: Source: knowledge/notes/denis_all_part02_review.md†L115861-L115872

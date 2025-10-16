@@ -86,6 +86,7 @@
   - proof the compact case works if you clamp it properly.[^16]
 - **Stock guardrails:** Community logs keep single 100/100 controllers near 130 A phase and factory 85150 hardware near 220 A phase unless silicon and cooling are upgraded.
   - expecting more without rework simply burns MOSFETs.[^phase_guardrail]
+- **Smart Repair’s 85 250/240 baseline:** The latest field comparisons cap customer tunes around 200 A battery, 380 A phase, and 480 A absolute once decks are stripped to bare metal and backed with extra thermal mass; skipping the prep still cooks controllers at those numbers.[^85250_envelope]
 - **Single 100/100 baselines:** Lonnyo 65 H commuters now hover around 130–135 A phase, 85–90 A battery, and 150–180 A absolute on single Ubox 100/100 stacks, trimming duty to 98 % and kicking in FW around 88 % to eliminate stutter before heat creeps past 40 °C.[^u100_daily]
 - **Regen Discipline:** Bench testing shows that even –5 A battery regen can trip controllers on unloaded wheels; cap regen amps to roughly the pack’s amp-hour rating plus a small overhead so the FETs absorb the excess.[^8]
 - **Raise Absolute Max when faults persist.** Dual 100/100 owners clearing 200 A overcurrent faults in VESC Tool Mobile now toggle inactivity shutdown (App Config → General) and bump `ABS Max Current` above their commanded peak once wiring checks out.[^17]
@@ -276,6 +277,7 @@
 [^adc_lighting]: The Spintend ADC board already drives LED strips for turn indicators, so custom amber lighting mainly needs channel routing while heavier loads move to an external converter.[^133]
 [^dual_switch]: Leaving the dual-controller interconnect cable in place lets a single latching switch wake both Spintend 100 V/100 A units; unplugging it isolates one controller but stops shared-button startups.[^134]
 [^phase_guardrail]: Community tuning still caps Spintend 100/100 controllers near 130 A phase and stock 85150 hardware around 220 A phase unless silicon and cooling are upgraded.[^135]
+[^85250_envelope]: Source: knowledge/notes/input_part013_review.md†L601-L601
 [^rim_fitment]: Detachable 110 mm Spintend rims favour 13×5.00-6.5 tyres; Hope Tech GR4 calipers clear 3 mm rotors, but most owners stick with 160 mm, ≈2.7–3 mm discs to maintain clearance and common spares.[^136][^137]
 
 

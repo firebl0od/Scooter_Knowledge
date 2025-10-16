@@ -219,7 +219,7 @@
 [^17]: Source: knowledge/notes/input_part005_review.md†L38-L38
 [^18]: Source: knowledge/notes/input_part002_review.md†L51-L52
 [^19]: Source: data/vesc_help_group/text_slices/input_part001.txt†L10537-L10629
-[^20]: Source: knowledge/notes/input_part000_review.md†L351-L351
+[^20]: Sources: knowledge/notes/input_part000_review.md†L351-L351; knowledge/notes/input_part013_review.md†L709-L709
 [^21]: Source: data/vesc_help_group/text_slices/input_part003.txt†L10215-L10280
 [^22]: Source: data/vesc_help_group/text_slices/input_part003.txt†L10383-L10407
 [^23]: Source: knowledge/notes/input_part012_review.md†L301-L301

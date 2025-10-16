@@ -58,8 +58,11 @@
 - Single Monorim 500 W hubs stay happy around 80 A phase.
   - ideally with ferrofluid
   - while the crew’s Xiaomi-class builds overheat quickly once they push 65–73 A without battery temperature sensing or keep more than roughly 30–35 A combined draw from paired 12 S packs.[^42]
+- Lonnyo 70 H torque hubs already hit ~70 °C when fed ~220 A on compact emopeds; swapping to 12" 50 H windings trims heat but costs launch torque unless you widen 230 mm dropouts—plan ferrofluid, liquid loops, or other cooling before chasing 17 kW on small cans.[^lonnyo-thermals]
+- Mixing 70 H and 100 H stacks demands extra instrumentation: 🇪🇸AYO#74’s plan to run a 100 H 33×2 rear with a 70 H front will need more field weakening to sync wheel speeds, amplifying rear hub heat until traction-control gaps, rider weight bias, and working temp sensors keep the motor under ~110 °C.[^ayo-100h]
 - Gen 4 Ninebot G30 hubs have already squealed and overheated after 30 km of 35 A battery riding in 35 °C ambient without temp sensors on the motor or ESC.
   - treat instrumentation as mandatory before chasing high-phase tunes on commuter hubs.[^43]
+- Dual Lonnyo 33/2 “speed” windings have proven surprisingly tractable: Yamal’s 20 S commuter holds roughly 49–63 °C motor temps even while pulling ~200 A per controller, showing how much torque the wider laminations deliver when cooling and cabling keep up.[^yamal-33x2]
 
 ## Micro-Hub Voltage Stress Signals
 
@@ -166,6 +169,10 @@
   - anything hotter accelerates degradation and calls for gentler tunes.[^106]
 - Dry hub motors start complaining above ~90–105 °C; riders treat that range as the safe ceiling without ferrofluid and switch pads/rotors before chasing 100 km/h pulls.[^107]
 - Makerbase 100/100-class controllers start current limiting once MOSFETs touch ~70 °C if the base plate lacks fresh thermal paste; the crew now treats 70 °C as the everyday limit and 100 °C as the hard ceiling for VESC MOSFETs to preserve lifespan.[^108]
+- Face de Pin Sucé logged G300 cases jumping from 45 °C to 60 °C in under six seconds when mounted sideways against plastic inside a Dualtron Achilleus; relocate the controller under the deck with a real aluminum heat path (or go dual-motor) because fans and MOSFET swaps can’t rescue a badly mounted single 90 H setup.[^g300-heatsoak]
+- Expect extra labour when inheriting epoxy-bonded controllers: Matthew had to gut the case and mechanically break adhesive rails before refitting larger 85× boards, so budget time for careful grinding if you plan thermal upgrades.[^epoxy-removal]
+- 🇪🇸AYO#74 and Arnau discovered that dual 70 H 33×2 hubs on 22 S 11 P packs still current-limit after three hard launches around 90/100 A—race gearing overwhelms cooling fast even with large stators.[^dual-70h-limit]
+- Arnau also cooked a 50 H hub at 60 V/110 A phase while riding without temperature telemetry, a reminder to wire sensors before single-motor track sessions.[^50h-telemetry]
 - Larger packs and long shocks trap heat around the deck; riders re-bend frames, add inner/outer steel plates, and swap to lower-rate springs instead of trimming coils so the chassis and cells stop cooking each other.[^109]
 - Abuse tests that pumped 84 V/2 000 W into stock 250 W hubs demagnetised rotors once magnets crossed ~80 °C, permanently reducing speed.
   - log stator temps on recycled hardware before chasing high-voltage experiments.[^110]
@@ -368,6 +375,8 @@
 [^40]: Source: knowledge/notes/input_part012_review.md†L217-L219
 [^41]: Source: data/vesc_help_group/text_slices/input_part013.txt†L6230-L6247
 [^42]: Source: knowledge/notes/input_part007_review.md†L18-L19
+[^lonnyo-thermals]: Source: knowledge/notes/input_part013_review.md†L817-L817
+[^ayo-100h]: Source: knowledge/notes/input_part013_review.md†L868-L868
 [^43]: Source: data/vesc_help_group/text_slices/input_part009.txt†L15009-L15026
 [^44]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19101-L19145
 [^45]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19136-L19173
@@ -509,3 +518,8 @@
 [^181]: Source: knowledge/notes/input_part013_review.md†L513-L513
 [^182]: Source: knowledge/notes/input_part013_review.md†L156-L156
 [^183]: Source: knowledge/notes/input_part002_review.md†L46-L48
+[^yamal-33x2]: Source: knowledge/notes/input_part013_review.md†L715-L715
+[^g300-heatsoak]: Source: knowledge/notes/input_part013_review.md†L784-L784
+[^epoxy-removal]: Source: knowledge/notes/input_part013_review.md†L785-L785
+[^dual-70h-limit]: Source: knowledge/notes/input_part013_review.md†L786-L786
+[^50h-telemetry]: Source: knowledge/notes/input_part013_review.md†L787-L787

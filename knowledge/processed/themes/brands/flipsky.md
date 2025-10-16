@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-- Budget-friendly VESC hardware that can deliver 20–30 kW peaks, but quality control remains inconsistent and requires hands-on inspection before trust.
+- Budget-friendly VESC hardware that can deliver 20–30 kW peaks, but quality control remains inconsistent and requires hands-on inspection before trust.[^qc-2025]
 - Treat 75100/75200-class units as 300 A absolute-max controllers unless you invest heavily in cooling, QA, and conservative regen ramping.
 - Document every change—firmware, wiring, displays, and aux power mods—to survive support escalations and keep commuter builds reliable.
 
@@ -146,6 +146,7 @@
 [^sensorless_hash]: Source: knowledge/notes/input_part000_review.md, lines 193-194.
 [^group-buy]: Coordinated orders leverage Flipsky’s one-time 20 % discount code, which support can manually reopen if the 24-hour window is missed. Source: knowledge/notes/input_part000_review.md, L30 to L32
 [^starter-kit]: Community starter list pairs twin 7550 controllers with Bluetooth v6, CAN cabling, anti-spark switches for ≥20 S packs, and spare JST leads for halls, throttle, and brake wiring. Source: knowledge/notes/input_part000_review.md, L31 to L33
+[^qc-2025]: Source: knowledge/notes/input_part013_review.md†L780-L780
 [^wiring-supplies]: Builders pre-stock XT60/XT90 plugs, JST assortments, and 4–6 mm motor bullet connectors to keep conversions moving. Source: knowledge/notes/input_part000_review.md, L33 to L33
 [^budget-plan]: Expect roughly €940 including VAT for a dual-controller upgrade and plan insurance or reserve funds accordingly. Source: knowledge/notes/input_part000_review.md, L34 to L34
 [^fw_mismatch]: Flipsky 75100 ALU firmware mismatch issues requiring bootloader and firmware pair reflashing. Source: knowledge/notes/input_part004_review.md, L60 to L60. Source: knowledge/notes/input_part004_review.md, L327 to L327

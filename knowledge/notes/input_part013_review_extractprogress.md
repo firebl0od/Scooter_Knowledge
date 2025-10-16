@@ -42,3 +42,28 @@
 - Updated battery architecture notes with modern high-power cell rosters, Samsung 48G discharge estimates, ferrofluid dosing cautions, and headset maintenance reminders across the pack, cooling, and mechanical guides.
 - Tracked open diagnostics (G2 CAN aggregation, MP2 voltage scaling, MakerBase key-switch inversion, 4WD CAN linking, backup-format clarification) in the diagnostic toolkit for follow-up.
 - Next pass: begin at line 601.
+
+## 2025-10-18 (Pass 7)
+- Covered lines 601–700 of `input_part013_review.md`.
+- Logged Smart Repair’s 85 250/240 current envelope (200 A battery / 380 A phase / 480 A absolute with mandatory deck prep) in the Spintend Ubox integration handbook so tuning guardrails reflect the latest field data.
+- Captured Pandalgns’ hall-board short fix—re-gluing and strain-relieving the loose PCB that mimicked serial dropouts—inside the accessory power and display guide, and retargeted the Makerbase 84200HP capacitor-trim caution to the correct review lines.
+- Next pass: begin at line 701.
+
+## 2025-10-18 (Pass 8)
+- Covered lines 701–800 of `input_part013_review.md`.
+- Recorded new current-guardrail context: acceptable 22 S sag spans (4–8 V vs. >10 V red flags), MakerBase 75200 thermal fade at 250 A / 150 A, and Paolo’s reminder that sine-wave observers enforce phase ceilings without halls.
+- Documented practical fixes and hardware notes including Hope brake piston servicing, LY rim manufacturing defects, Matthew’s Ninebot Max G30LP Spintend conversion, keyed Spintend Lite harness connectors, and Fry the Guy’s pothole-induced “voltage imbalance” diagnostic workflow.
+- Logged touring, supply-chain, and safety updates such as scarce 40–50 A chargers, NFC immobiliser demand, U.S. “class 1” trail enforcement, tracker comparisons, and the latest Tronic/Seven and 3Shul sourcing intel.
+- Next pass: begin at line 801.
+
+## 2025-10-19 (Pass 9)
+- Covered lines 801–900 of `input_part013_review.md`.
+- Captured new guardrails: compact 6-FET Ubox stages implode around 280 A / 550 A with heavy field weakening, Spintend 85250 V2 stock MOSFETs surviving 135–170 A battery / 300 A phase bursts, and boutique controllers sticking to FR-4 cooling limits even as TolT upgrades fill the supply gap.
+- Logged chassis and safety lessons including budget steering dampers introducing wobble, Yisuntrek R8 packaging requirements (6 AWG looms, QS8V2s, Lonnyo 70 H motors), Dualtron Victor chassis supporting 21 S 7 P packs, and Rage Mechanics’ titanium stem plus Hope brake preferences.
+- Documented battery/sensor workflows: €650 turnkey 20 S 6 P P45B pack benchmarks, G30 deck-rail trimming for 6 P layouts, 0.15 mm copper welding limits, ANT fast-charge/425 A upgrades for 100 Ah packs, and TEMP/GND wiring for 10 kΩ NTC probes.
+- Next pass: begin at line 901.
+
+## 2025-10-19 (Pass 10)
+- Attempted to cover lines 901–1000 of `input_part013_review.md`, but the notebook currently ends at line 871 so there was no new source text beyond the prior pass.
+- Re-verified the closing Batch 16 highlights and logged the remaining actionable insight (CYD-based SimpleVescDisplay prototype) into the SmartDisplay integration guide.
+- Next pass: blocked until additional notes are appended beyond line 871.

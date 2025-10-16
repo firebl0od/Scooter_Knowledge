@@ -16,8 +16,13 @@
   - use the same discipline whenever you squeeze high-capacity cells into 5 P commuters.[^4]
 - AWD conversions should run a single motor until a 16 S 5–7 P (or internal/external hybrid) battery is ready; 12 S 3 P packs sag or overheat on VESC hardware even when the controller can deliver the amps.[^5]
 - Mixed MJ1/MH1 parallels sag 10–12 V at ≈9 A per cell; veterans cap both chemistries near 7 A and pivot to Samsung 50G, Molicel P42A, or Murata VTC6 for higher-current builds instead of chasing firmware fixes.[^6]
+- Yamal is dailying Samsung 40T cells in a 20 S 10 P layout (≈35 A nominal per cell) and reminded builders that LR2170LA “45 A” Lishens only hold that rating briefly—cross-check real discharge tests before promising 300 A builds.[^yamal-40t]
+- Ausias plans to sell his 20 S 10 P P45B Nami pack to step into a 22 S 11 P layout, while peers debate stacking extra parallels above the battery box—log packaging constraints before you commit to 450 A-capable packs inside the deck.[^ausias-22s]
 - Budget Liitokala LiFePO₄ cells arrive unbalanced, sag heavily above ≈12 A, and often ship slowly by boat.
   - reserve them for stationary projects unless you can package much larger scooter enclosures.[^7]
+- Paolo’s turnkey 20 S 6 P P45B pack (full-copper busbars, 425 A ANT BMS, dual QS8s, 7 AWG leads) lands near €650, providing a price-to-spec baseline when weighing DIY versus boutique high-current batteries.[^p45b-benchmark]
+- Long-range planners are sketching 60–70 Ah “legal chassis” scooters with ruggedised enclosures and fast-charge capability so mixed dirt/pavement tours stay compliant—evidence that endurance-focused VESC pack guides need as much attention as sprint builds.[^legal-chassis]
+- Builders debating 50 PL tabless upgrades versus cheaper 50E/50S strings report WePoor decks max near 20 S 12 P unless you mill the top rail, setting realistic capacity ceilings for those frames.[^50pl-vs-50e]
 
 ## Layout and Interconnects
 
@@ -36,6 +41,10 @@
   - rebuild with sheet bussing or at least five 7–8 mm straps in parallel (0.25–0.30 mm thick) so each bridge carries ≥35–40 A without hot spots before scaling voltage or series count.[^13]
 - Rental G30 conversions swallow "thick" 13 S 5 P 21700 packs once the spacer grows the cavity to ≈155 mm × 400 mm, but EU builders struggle to source 220 mm shrink locally.
   - plan packaging and consumables early for long-range decks.[^14]
+- Ninebot G30 6 P conversions need deck-rail trimming, custom assembly jigs, and capable soldering gear before you outgrow the stock pack—budget the tooling overhead before promising larger parallels.[^g30-rail]
+- Hobby spot welders handle pure copper busbars up to roughly 0.15 mm consistently; 0.2 mm strips already push their limits, so plan industrial tooling if you want thicker copper laminates.[^copper-weld-limit]
+- LiquorHole’s Yisuntrek R8 runs a 100 Ah CATL prismatic pack (~25 kW) inside a 26 × 14 in deck; after a frame failure the electronics survived, highlighting that the chassis becomes the consumable on heavyweight commuters.[^yisuntrek-pack]
+- Stock Nami Burn-E packs remain 20 S 10 P bricks that tightly fill the plastic enclosure with straight rows, leaving little slack for retrofits.[^burne-pack]
 
 ## Testing & Service Notes
 
@@ -46,10 +55,20 @@
 - Inmotion LF8 rental packs expose B+/B− pads under silicone-potted BMS boards.
   - bypassers now solder straight to the nickel busbars but stress that unsupervised discharge or secondary-BMS deletes are a fire risk.[^18]
 - Face de Pin Sucé’s 16 S 10 P P42A pack tolerated 47 A fast charging once paired with an external power stage and active cooling, setting a benchmark for pit-charge workflows on high-capacity builds.[^19]
+- Mattia’s booster pack refused to wake after two idle weeks until AG.racing found a broken balance lead—add balance-wire inspections to your diagnostic checklist before condemning the BMS.[^booster-balance]
 - Artem’s latest 14 S pack stacks dual 3 mm copper busbars, layered insulation, and remote BMS wiring that demands a 5 V pre-charge before plugging in the balance loom.
   - document that activation sequence before shipping SIM-enabled boards to customers.[^20]
 - Range logs from 12 S 4 P P42A packs show 15–20 km of aggressive riding consuming ~40 % capacity with 40 A battery / 80 A phase peaks, underscoring how lower-voltage Wheelway hubs heat quickly without thermistors or active cooling.[^21]
+- LiquorHole is upsizing the ANT BMS on that 100 Ah pack from 325 A to 425 A after logging 270 A, 20 S bursts and now runs 20 A fast charging through XT60 leads (25 A max), trimming full cycles to ~5 h—use similar upgrades when prismatic packs outgrow their charge hardware.[^ant-upgrade]
 
+[^p45b-benchmark]: Source: knowledge/notes/input_part013_review.md†L832-L832
+[^legal-chassis]: Source: knowledge/notes/input_part013_review.md†L835-L835
+[^50pl-vs-50e]: Source: knowledge/notes/input_part013_review.md†L864-L864
+[^g30-rail]: Source: knowledge/notes/input_part013_review.md†L833-L833
+[^copper-weld-limit]: Source: knowledge/notes/input_part013_review.md†L834-L834
+[^yisuntrek-pack]: Source: knowledge/notes/input_part013_review.md†L836-L836
+[^burne-pack]: Source: knowledge/notes/input_part013_review.md†L861-L861
+[^ant-upgrade]: Source: knowledge/notes/input_part013_review.md†L865-L865
 [^pack_cells]: Source: knowledge/notes/input_part000_review.md, line 63.
 [^cell_refresh]: Source: knowledge/notes/input_part000_review.md, line 117.
 [^pack_layout]: Source: knowledge/notes/input_part000_review.md, line 64.
@@ -57,6 +76,9 @@
 [^deck_extension]: Source: knowledge/notes/input_part000_review.md, line 75.
 [^petg_honeycomb]: Source: knowledge/notes/input_part000_review.md, line 216.
 [^copper_sandwich]: Source: knowledge/notes/input_part000_review.md, lines 240 and 314.
+[^yamal-40t]: Source: knowledge/notes/input_part013_review.md†L750-L750
+[^ausias-22s]: Source: knowledge/notes/input_part013_review.md†L751-L752
+[^booster-balance]: Source: knowledge/notes/input_part013_review.md†L753-L753
 
 
 ## References

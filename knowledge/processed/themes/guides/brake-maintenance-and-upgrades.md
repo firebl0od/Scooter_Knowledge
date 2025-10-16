@@ -160,6 +160,7 @@
 ### Hope Tech/Tesch 3 Caliper Service
 
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
+- 🇪🇸AYO#74 finally cleared a four-year sticky-piston saga by stripping and re-greasing his Hope caliper; he also flagged the latest Tesch 3 V4 pads as ~2 mm taller than earlier tablets, so update spares lists before ordering replacements.[^hope-regrease]
 - Kaabo Wolf riders source rear Magura adapters from Javamba after discovering flipped front hubs could not accommodate left-side calipers.
   - keep vendor links handy before tearing down the rear motor.[^55]
 - AliExpress shim kits (2–5 mm rotors spacers plus washers) keep oversized calipers from fouling hub flanges, giving Dualtron and Kaabo owners a cheap path to widen rotor stance without machining custom spacers.[^56]
@@ -279,7 +280,8 @@
 
 [^bleed-technique]: Magura bleeding technique emphasizing level levers, hose flicking, and patient lever cycling.[^72]
 [^magura-bleed]: Successful Magura MT5/MT7 bleed procedure following bicycle-service best practices.[^72]
-[^seal-damage]: MT5 lever seal burst from pushing pistons without relieving pressure via bleed screw.[^73]
+[^seal-damage]: MT5 lever seal burst from pushing pistons without relieving pressure via bleed screw.[^73][^seal-damage-2025]
+[^seal-damage-2025]: Source: knowledge/notes/input_part013_review.md†L747-L747
 [^four-piston-cost]: Shimano M7120 four-piston caliper pricing and thermal mass benefits.[^74]
 [^four-piston-vs-two]: Four-piston caliper benefits for high-performance builds vs. two-piston sufficiency for commuters.
 [^rotor-sizing]: Rotor sizing from 180 mm to 203 mm for thermal mass and leverage, with frame clearance warnings.[^75]
@@ -290,6 +292,7 @@
 [^bad-lever]: Jan called out a Magura-compatible lever with plastic threads/screws as the worst he has used—treat cheap bundles as suspect.[^80]
 [^hope-pricing]: Hope Tech Evo pricing and 3 mm rotor clearance observations from group buys.[^81]
 [^hope-service]: Hope Tech/Tesch 3 caliper service covering piston re-greasing and pad compatibility.[^82]
+[^hope-regrease]: Source: knowledge/notes/input_part013_review.md†L714-L714
 [^f2-upgrade]: Ninebot F2 Pro brake upgrade using sintered pads and compatible rotors.[^83]
 [^centering-kits]: Wheel-centering kits and dual-caliper setups for wobble elimination on 80/100H racing builds.[^84]
 [^dual-caliper-when]: When to consider dual-caliper systems based on speed and use case.

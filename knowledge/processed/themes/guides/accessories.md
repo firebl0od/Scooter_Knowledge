@@ -15,9 +15,14 @@
 
 - The platform supports sleep mode, but implementing a physical power switch requires custom wiring; many builds still rely on anti-spark switches as manual cut-offs.[^sleep_wiring]
 
+## Security & Immobilisers
+
+- Spintend owners are actively hunting NFC-based locks so they can ditch physical keys on premium builds—document plug-and-play immobiliser options as soon as vetted hardware appears.[^nfc-lock]
+
 [^dashboard_gap]: Source: knowledge/notes/input_part000_review.md, line 38.
 [^tft_mounts]: Source: knowledge/notes/input_part000_review.md, line 46.
 [^display_comparison]: Source: knowledge/notes/input_part000_review.md, line 57.
 [^smart_dash_roadmap]: Source: knowledge/notes/input_part000_review.md, line 59.
 [^lighting_tests]: Source: knowledge/notes/input_part000_review.md, line 47.
 [^sleep_wiring]: Source: knowledge/notes/input_part000_review.md, line 45.
+[^nfc-lock]: Source: knowledge/notes/input_part013_review.md†L723-L723

@@ -43,7 +43,7 @@
 - **Treat thin cables as token deterrents.** City riders report compact cable locks stop nothing.
   - start with ≥8 mm hardened chains for real security.[^27]
 - **Gig riders budget time for serious locks.** European couriers report food-delivery pay dipping from ≈€20/h toward “slavery” wages post-acquisitions, so they now stage 2–3 heavy chains and padlocks at regular stops to keep scooters secured between orders.[^28]
-- **Pick proven trackers.** Invoxia GPS units remain the €100 gold standard because Bluetooth tags lose coverage away from crowds, while DIY LTE trackers powered off the scooter pack can log to self-hosted dashboards and fall back to roaming SIM batteries when unplugged.[^29]
+- **Pick proven trackers.** Invoxia GPS units remain the €100 gold standard because Bluetooth tags lose coverage away from crowds, while Jason’s DIY LTE tracker stores data in Grafana, runs from the scooter pack, and falls back to a roaming SIM battery when unplugged.[^29][^invoxia-2025]
 - **Expect opportunists.** Dense-city riders report scooters disappearing within minutes if left unlatched, so treat even short drop-offs like high-risk events and keep the alarm armed.[^26]
 - **Double up locks in theft hot spots.** Paris commuters now pair U-locks with Kryptonite chains and keep scooters within sight while obeying 25 km/h limits, lighting, and bike-lane rules to avoid roadside seizures.[^30]
 - **Upgrade hardpoints.** Builds pushing 8 kW+ torque now weld steel eyelets, use ≥10 mm hardened chains, and recess security bolts because factory aluminum tabs vanish under cordless grinders.[^31]

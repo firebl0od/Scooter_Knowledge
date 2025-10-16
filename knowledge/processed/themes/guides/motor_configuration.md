@@ -34,6 +34,8 @@
 - HM’s 60 V 1.6–3.5 kW hubs ship for ≈€160 from Spain but arrive with conservative 25/37 A current recommendations.
   - builders intend to validate phase-amp headroom before trusting the spec sheet.[^9]
 - PaoloWu’s Blade 10 hub remains the go-to Xiaomi drop-in: riders report 55–60 km/h on 13 S, ~65 km/h with field weakening, and reliable ~150 A phase tolerance for roughly €150 plus shipping, while Zero 10X and Boyueda alternatives cost more for similar kv.[^10]
+- Dualtron Achilleus comparisons show the 40×2, 25 kV 90 H stator (~10.5 kg) tolerates 340–400 A phase on 21 S but still needs heavy field weakening to break 110 km/h, while 90 H 33×2 speed cans stay nearer 30 kV with less launch torque—log gearing trade-offs before picking 22×3 builds.[^achilleus-90h]
+- Massimo’s 20 S 4 P commuter tapped out its stock 500 W Monorim motor at 57 km/h (MKSESC 75100 capped around 50 A battery / 90 A phase) and is already ordering a Lonnyo 60 H hub plus custom fork to unlock the controller and pack headroom.[^massimo-upgrade]
 - Marketing wattage is meaningless on Vsett 10+ motors.
   - inspect winding fill and magnet stack height to judge headroom before pushing phase amps or buying donor wheels for AWD swaps.[^11]
 - Happy Giraffe logged key Blade hub dimensions (130 mm inner axle, ≈160 mm fork span, M12 threads with 10 mm flats, 12 mm rotor offset, 4 mm hex hardware) and confirmed the shell is tubeless-ready, giving Xiaomi builders a reference checklist before ordering forks and spacers.[^12]
@@ -70,6 +72,8 @@
 [^8]: Source: knowledge/notes/input_part000_review.md†L387-L387
 [^9]: Source: knowledge/notes/input_part000_review.md†L388-L388
 [^10]: Source: knowledge/notes/input_part000_review.md†L434-L440
+[^achilleus-90h]: Source: knowledge/notes/input_part013_review.md†L818-L818
+[^massimo-upgrade]: Source: knowledge/notes/input_part013_review.md†L811-L811
 [^11]: Source: knowledge/notes/input_part000_review.md†L440-L443
 [^12]: Source: knowledge/notes/input_part000_review.md†L502-L505
 [^13]: Source: knowledge/notes/input_part000_review.md†L494-L498

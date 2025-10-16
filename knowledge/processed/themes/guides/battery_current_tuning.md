@@ -63,6 +63,7 @@ Taming current limits is the difference between a scooter that rips for years an
 - Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
 - Screen-record smart-BMS or XMatic telemetry while you test—Yamal and Yoann log ~286–290 A battery peaks so the crew can vet discharge ceilings without guessing from feel alone.[^xmatic-logging]
 - Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
+- Treat 22 S sag as a health tell: race scooters logging 4–8 V drop under peak load are in the safe zone, while anything beyond ~10 V calls for pack or wiring triage before raising current limits.[^sag-guardrail]
 - Cranking `iQ target` for harder launches can still trip pack protection.
   - logs show some BMS boards dropping output to zero when the requested torque outpaces battery capability, so treat that setting as additive load on the cells.[^15]
 - Expect extra sag in winter—Mirono logs an additional 3–4 V drop near 1 °C and eases battery current to save range and pack temperature.[^cold-sag]
@@ -79,6 +80,7 @@ Taming current limits is the difference between a scooter that rips for years an
   - one enduro rider regained speed by trimming inductance targets and re-running detection instead of chasing 550 A phase fantasies.[^18]
 4. **Layer in regen**
    - Add regen after forward currents stabilize. Keep battery regen gentler than your discharge target (−5 A to −10 A is plenty for commuter packs) and ramp up slowly to avoid BMS or controller cutoffs.⁵ ¹¹
+- Match the pack’s charge hardware before cranking brake force—raise smart-BMS charge limits (e.g., 100 A on JBD boards) and set VESC’s max regen voltage below the pack ceiling so braking wattage doesn’t spike controllers or MOSFETs.[^regen-guardrail]
 - ≥21 S packs demand extra headroom.
   - keep regen targets under −50 A and leave a few volts of pack margin to avoid the overvoltage spikes documented on 23 S builds.[^19]
    - Dual-motor commuters start around −30 A battery/−80 A phase on the rear and −25 A/−55 A up front; log stator temps during shakedowns before increasing braking torque.[^regen_baseline]
@@ -101,6 +103,7 @@ Taming current limits is the difference between a scooter that rips for years an
 | Flipsky 75200 Pro V2 | 20 S commuters | 50–60 A | 100–120 A (idle fix), up to 150 A with cooling | −5 A / −40 A | Requires phase-filter disable + `mxlemming` observer to prevent idle heating.⁵ |
 | MakerX single (GO-FOC HI100) | 16–20 S duals | 60 A | 200 A | −8 A / −45 A | Runs cooler than equivalent Flipsky hardware when bolted to metal decks.⁴ |
 | Spintend Ubox 85/150 | 20–22 S duals | 80–100 A (≈200 A max on 22 S) | 250–300 A | −12 A / −60 A | Firmware clamps phase ≈350 A; community keeps 22 S tunes near 200 A battery / 300 A phase for longevity.¹⁵ ²⁶ |
+| Spintend 85250 V2 (early data) | 20–22 S race builds | 175–200 A target until long-term 22 S logs land | 300 A comfortable, 350 A experimental | Match regen to the battery plan | Riders expect the V2 hardware to survive 22 S (~92 V) but are still hunting long-term validation before committing flagship builds.[^85250-v2] |
 | Spintend 85/250 cheat sheet | 22 S race scooters | ≈200 A battery baseline (260 A only for testing) | 300 A comfortable, 350 A runs but not “safe” | Match regen to the battery plan | Yamal’s crew treats ≈300 A phase / 200 A battery as the reliable ceiling and logs any 260 A experiments so the reference sheet stays current.[^23]|
 | Makerbase 84100 HP | 20 S singles | 60–80 A | ≤135 A | −8 A / −35 A | Higher settings have produced instant failures—treat datasheet peaks as marketing.³ |
 | Boutique Tronic X12 | 22–24 S race | 100 A (stock firmware) | 400 A phase, ABS ≈600 A limit | −15 A / −80 A | No-limit firmware lifts ABS but demands extensive cooling and logging.¹⁶ |
@@ -297,6 +300,9 @@ Taming current limits is the difference between a scooter that rips for years an
 [^58]: Source: knowledge/notes/input_part003_review.md†L470-L474
 [^59]: Source: knowledge/notes/input_part008_review.md†L103-L106
 [^60]: Source: knowledge/notes/input_part011_review.md†L569-L571
+[^sag-guardrail]: Source: knowledge/notes/input_part013_review.md†L702-L702
+[^regen-guardrail]: Source: knowledge/notes/input_part013_review.md†L703-L703
+[^85250-v2]: Source: knowledge/notes/input_part013_review.md†L710-L710
 [^61]: Source: knowledge/notes/input_part008_review.md†L103-L105
 [^62]: Source: knowledge/notes/input_part003_review.md†L517-L519
 [^63]: Source: knowledge/notes/input_part003_review.md†L449-L449

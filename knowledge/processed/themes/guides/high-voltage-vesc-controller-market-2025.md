@@ -7,6 +7,7 @@
   - plan enclosure space and thermal margin before chasing headline voltage gains.[^2]
 - Vedder’s new Maxim 120 V ecosystem (Maxim singles, Duet dual, and the companion smart BMS) finally gives builders an official high-voltage option, yet the ~€530 bundle, STM32F4 control, and limited field data spark debate against cheaper Chinese controllers.[^3]
 - Vedder also teased a palm-sized “VESC Express Micro” controller for 36–48 V scooters: it promises 50 A continuous / 100 A dual-channel output with onboard logging and Express integration, providing a compact option for youth builds despite offering roughly half the battery current of a Ubox 100/100.[^4]
+- Paolo is shipping bare Tronic X12 boards around €350, but he warns Seven-branded controllers still ride FR-4 PCBs with mediocre cooling—budget enclosure mods or alternative hardware before planning 22 S race builds.[^tronic-bare][^seven-fr4]
 - 3Shul’s CL-series and Tronic X12 controllers occupy the premium tier for riders chasing 23 S+ or 500 A ambitions, but supply volatility, firmware transparency, and pricing nearly double that of Spintend/Ennoid alternatives require group-buy planning and spare telemetry gear for validation.[^5][^6]
 - Makerbase’s 84xxx HP hardware has emerged as the dependable mid-budget foil: real-world logs show it surviving 22 S abuse when wiring is clean, while 12-FET Spintend stages continue to brown out under heavier riders despite water-cooling success stories.[^7]
 - Raphaël Foujiwara’s dual-VESC prototype targets 100 V packs with 12 TO‑247 MOSFETs per motor, 400 A phase / 300 A battery goals, and a 110 × 110 mm footprint, but the €200 MOSFET bill and twin STM32s already push projected pricing beyond €1 000 unless assembly is automated.
@@ -103,8 +104,8 @@
 - HY-branded Spintend replacement stages stay capped around 20 S (~400 A phase) unless Raphaël’s HF filters and cooling mods are added—treat them as service parts, not 22 S upgrades.[^hy_limit]
 - Multiple 85/250 units are now arriving DOA or dying within weeks at ~200 A battery / 170 A motor.
   - stock spares or pivot to Seven/3Shul while the revised 85/240 ships via New Jersey to keep high-phase projects alive.[^76][^77]
-- Treat “too good to be true” AliExpress listings as scams.
-  - the €140 “Spintend” storefront that appeared with thousands of units in stock ignored all messages, and the BOM alone costs more than the asking price.[^78]
+- Treat “too good to be true” listings as scams.
+  - the €140 “Spintend” storefront that appeared with thousands of units in stock ignored all messages, and the crew just caught @JetGlideOfficial recycling guitar-pedal photos instead of real MP2 hardware.[^78][^mp2-scam]
 - Kelly 7212/7218 controllers still earn “random death” reputations despite waterproof housings, whereas Sabvoton’s 95 V kits pair TVS-protected hardware with enough regen headroom for 18 S commuters so long as charge voltage stays under ~75 V.[^79]
 
 ## Field-Weakening & Thermal Guardrails
@@ -145,6 +146,7 @@
 - Group buys continue shaping premium hardware access: hardened 160 mm brake discs, Seven 18 controllers, and Voyage Megan dashboards are all moving through curated batches rather than retail shelves.
   - document order windows and spares budgeting alongside controller selections.[^96][^87]
 - Alibaba listings of discontinued Tronic/Seven controllers now come straight from the original contract manufacturer; pricing mirrors the defunct brand but buyers should expect minimal support and plan self-managed repairs.[^97]
+- JPPL confirmed Tronic and Seven controllers now ship directly from a Chinese drone manufacturer willing to supply X12 Pro 120 V units (~$1.1 k) and quick-turn Seven-18 builds, proving both “American” brands were outsourcing production all along—budget due diligence before wiring funds.[^tronic-oem]
 - JPPL’s X12 install details a compact 88 × 38 × 70 mm extrusion with a 12 × 80 × 100 mm base plate; because the onboard rail only supplies 5 V at ≈150 mA, builders pair the controller with Spintend’s ADC board plus an external buck for 12 V accessories.[^98]
 - BAC 4000 bundles remain a tough sell at ~$1 300 given they still require reseller-flashed motor profiles and leave amp limits murky compared with VESC/Nucular ecosystems.
   - budget-conscious builders are pausing purchases until support improves.[^99]
@@ -192,6 +194,8 @@
 [^2]: Source: knowledge/notes/input_part000_review.md†L601-L604
 [^3]: Source: knowledge/notes/input_part014_review.md†L24-L27
 [^4]: Source: knowledge/notes/input_part014_review.md†L3337-L3358
+[^tronic-bare]: Source: knowledge/notes/input_part013_review.md†L822-L822
+[^seven-fr4]: Source: knowledge/notes/input_part013_review.md†L822-L823
 [^5]: Source: knowledge/notes/input_part014_review.md†L15-L16
 [^6]: Source: knowledge/notes/input_part014_review.md†L162-L165
 [^7]: Source: knowledge/notes/input_part014_review.md†L18-L21
@@ -311,3 +315,5 @@
 [^121]: Source: data/vesc_help_group/text_slices/input_part014.txt†L10206-L10212
 [^122]: Source: data/vesc_help_group/text_slices/input_part014.txt†L9782-L9789
 [^123]: Source: data/vesc_help_group/text_slices/input_part014.txt†L9884-L9890
+[^mp2-scam]: Source: knowledge/notes/input_part013_review.md†L722-L722
+[^tronic-oem]: Source: knowledge/notes/input_part013_review.md†L790-L791
