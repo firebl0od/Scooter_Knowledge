@@ -16,6 +16,10 @@
 - App-controlled charging stations (ChargePoint, Blink, etc.) typically release only one charging handle per session, so riders planning group tours must coordinate with EV drivers or use multiple stations to charge simultaneously.[^app-locks]
 - Tesla destination chargers and Superchargers require protocol triggers such as FoCcci boards to initiate handshake sequences; without these adapters, the plug will not energize even with a physical J1772 adapter installed.[^tesla-protocol]
 
+### Telecom & Lab-Supply Chargers
+- Fast-charger demos remind builders that healthy packs still prefer ≈1 C; for example, a 20 S 6 P Samsung 40T/Molicel P42A pack already pulls roughly 6.3 kW, so plan EV-grade infrastructure and tight thermal monitoring before pushing higher.[^telecom-fast]
+- Noname cataloged AliExpress telecom-derived bricks—around US$340 for Huawei 60 A units or US$260 for touchscreen 50 A models—emphasizing they are rebadged rectifiers despite factory-style marketing.[^telecom-fast]
+
 ### Charging Etiquette & Best Practices
 1. **Respect charging bay time limits.** Move scooters promptly once charged to free stations for EV drivers who often have fewer alternatives than scooter riders with portable packs.[^etiquette]
 2. **Communicate charge rate expectations.** Inform station operators or fellow users when drawing only 2–3 A for safety testing versus full-rate charging to avoid confusion about bay availability.[^charge-rate]
@@ -36,6 +40,7 @@
 - **Over-provision capacity:** Plan for 20–30 % reserve capacity to account for voltage sag, cold weather, headwinds, and unexpected detours; aggressive riders logging 2 Wh/mi at 30 mph should budget ≥3 Wh/mi for tour planning.[^capacity-buffer]
 - **BMS thermal limits:** High-capacity packs (≥7 kWh) under sustained discharge can heat BMS MOSFETs or balance boards; log temps during test rides and add active cooling if boards exceed 50 °C under load.[^bms-thermal]
 - **Charge rate planning:** If fast-charging via Level 2 infrastructure, ensure BMS charge current limits (typically 10–30 A for scooter-class hardware) match adapter capabilities and won't trip thermal or over-current protections.[^charge-limits]
+- **Balance gently at the top:** Yamal lets packs rest before topping off with a 2.8 A brick, and 🇪🇸AYO#74 caps equalisation around 2–4 A while tightening drift thresholds near 0.01 V so BMSs stop “micro-charging” all night.[^bms-balance]
 
 ## Safety & Reliability Tips
 1. **Test all charging adapters at home before departure.** Verify voltage, current draw, and thermal behavior with a multimeter and infrared thermometer during bench charging sessions.[^pre-test]
@@ -66,6 +71,8 @@
 [^capacity-buffer]: Reserve capacity planning (20–30 %) for voltage sag, weather, and detours.
 [^bms-thermal]: BMS thermal management during sustained high-capacity pack discharge.
 [^charge-limits]: BMS charge current limit matching for public infrastructure compatibility.
+[^telecom-fast]: Fast-charging cautions highlighting ≈1 C limits on Samsung 40T/Molicel P42A packs and pricing for telecom-derived 50–60 A chargers.【F:knowledge/notes/input_part010_review.md†L245-L247】
+[^bms-balance]: Yamal and 🇪🇸AYO#74’s top-off routine—rest before balance charging, limit equalisation to 2–4 A, and tighten drift thresholds near 0.01 V to stop endless micro-charging.【F:knowledge/notes/input_part010_review.md†L269-L270】
 [^pre-test]: Pre-departure adapter testing protocols with multimeter and thermal validation.
 [^backup]: Backup charging equipment recommendations for reliability.
 [^telemetry]: Ride telemetry logging for consumption tracking and pack health monitoring.

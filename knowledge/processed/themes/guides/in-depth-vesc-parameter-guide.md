@@ -457,6 +457,7 @@ Params: l_temp_motor_start, l_temp_motor_end
 **Potential Side Effects**
 - If set incorrectly low, you lose power even though the motor can handle more.
 - If set too high, you risk permanent magnet damage or winding insulation issues.
+- Patrick recently traced sluggish launches to a `0 °C` motor limit inherited from traction-control experiments—the firmware clamped phase current to ~86 A until he restored a 112–120 °C ceiling, so sanity-check values after firmware tests.【F:knowledge/notes/input_part010_review.md†L398-L399】
 
 
 ### 4.3 Acceleration Temperature Decrease
@@ -807,6 +808,7 @@ Params: foc_fw_current_max, foc_fw_duty_start, etc.
 - For 5–30A FW as a start, set duty_start ~0.9.
 - Validate logs on actual rides.
 - Stage FW increases alongside traction-control and phase-current reviews—24 S Rion builds found front-wheel spin and recurring faults when FW stacked on already aggressive 200 A tunes.[^fw-rion]
+- Community tuning on dual 75100 Mantises capped field weakening around 15 A—NetworkDir endorsed that ceiling but warned riders not to touch flux linkage fields unless they understand the math, keeping the wizard values intact for stability.【F:knowledge/notes/input_part010_review.md†L38-L39】
 - If you dial FW back to zero for efficiency testing, be ready to trim phase current too—one commuter logged controller temps jumping from 46 °C to 55 °C within 15 minutes once extra amps replaced the missing FW headroom.[^fw-zero]
 
 **Potential Side Effects**

@@ -22,6 +22,7 @@
 
 ## Reliability & Failure Patterns
 - **Random early deaths remain common.** Multiple riders still see Flipsky stages fail within weeks—even under modest load—so budget time for burn-in and consider stocking spares before customer deployments.⁶
+- **Pack cut-offs still brick 75100s.** NetworkDir is now warning Xiaomi Pro 2 owners that BMS-induced shutoffs continue to kill Makerbase/Flipsky 75100s, steering newcomers toward dual Spintend Ubox hardware instead.【F:knowledge/notes/input_part010_review.md†L32-L33】
 - **Capacitor banks are a recurring weak link.** Units have dropped to 14 V readings on 20 S packs after repeated capacitor explosions; veterans like ‘lekrsu’ and Haku pin the failures on bargain components rather than layout, so simple cap swaps rarely hold.⁷
 - **Regen cutoffs can brick controllers.** Aggressive negative current spikes triggered logic-board shutdowns on otherwise healthy 75100s; tune regen ramps gently and log results before releasing builds.⁸
 - **Firmware 5.3 introduced a brake-lock scare.** One 75100 flashed to 5.3 locked the wheel at ~45 km/h despite unchanged current limits; double-check UART handbrake scripts, phase insulation, and wiring before road tests after a firmware jump.【F:data/vesc_help_group/text_slices/input_part001.txt†L25875-L25943】

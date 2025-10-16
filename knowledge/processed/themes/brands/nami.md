@@ -22,9 +22,11 @@
 - Aftermarket shocks rarely match the Viper’s leverage curve—most MTB units feel nearly solid, so owners are still hunting purpose-built dampers instead of relying on drop-in swaps.【F:knowledge/notes/input_part006_review.md†L97-L97】
 - Fabrication escalates quickly—22 S 10 P hybrids inspired by Rion builds required fork machining to clear 70H hubs and 3 mm rotors, so plan machine time before ordering oversized drivetrains.[^11]
 - Kaabo fork swaps remain largely cosmetic: the community confirmed 70 H hubs fit but 75 H is doubtful without extra machining, so most riders stick with stock hardware unless aesthetics trump effort.[^kaabo-swap]
+- Riders chasing stiffer suspension for high-speed runs keep circling back to the stock springs—most aftermarket air shocks run too soft and short, so meaningful firmness gains require sourcing the stiffest factory-rate springs and tuning damping instead.【F:knowledge/notes/input_part010_review.md†L56-L57】
 
 ## Power & Thermal Guardrails
 - Paolo now caps motor phase near 200–250 A unless you rewire with shorter, larger-gauge leads; the stock PTFE insulation looks thin but sheds heat better than silicone, so verify cross-section before tearing harnesses apart.【F:knowledge/notes/input_part009_review.md†L309-L310】
+- Catalog hub winds before tuning: stock 60 H cans are usually 17/4 torque windings, while 22/3 and 33/2 variants trade torque for speed. Paolo reminded builders the notation is “turns × parallels,” so document wind counts or freewheel speed when spec sheets are missing.【F:knowledge/notes/input_part010_review.md†L339-L341】
 - Favor dual-drive current splits: the same Tronic 250 hardware that bakes at ~60 °C as a single motor holds near 40 °C when the load is shared across both ends.[^1]
 - Upgrade overheated harnesses with 10 AWG silicone phase leads—the swap let Rob Ver hold 116 A battery and 240 A phase without cooking the loom, provided pack and controller temps stayed logged.[^tronic_harness]
 - Treat 200 A battery / 310 A phase experiments as short-lived: even purpose-built dual Spintend setups report hub and pack overheating at those levels.[^2]
@@ -48,6 +50,7 @@
 - Document accessory power paths before splicing dashboards or smart displays; riders are still mapping which 5 V/12 V rails share regulators on Ubox and Makerbase logic stages.[^13]
 
 ## Reliability Watchlist
+- Early production stems still ship with the softer front axle—🇪🇸AYO#74 recommends swapping to the stainless replacement (≈€60 installed) to avoid the stem failures that triggered factory recalls.【F:data/vesc_help_group/text_slices/input_part010.txt†L10386-L10394】
 - First-generation frames have shown weld cracking; later 72/40 chassis add gussets, giving buyers a visual checklist when sourcing used NAMI decks.[^14]
 - Handmade 22 S hybrids need machine work and inspection of fork clearances, and water sealing should be rechecked whenever machining exposes fresh metal.[^11]
 - Race outfits have started enclosing the C350 controller in custom waterproof housings—Face de Pin’s crew was the only team still lapping Albaida once rain hit and now machines most of their replacement frame parts in-house—reinforcing that sealing electronics and reinforcing hinges is essential before endurance sessions.[^c350-case]
