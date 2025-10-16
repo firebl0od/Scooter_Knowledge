@@ -1,44 +1,237 @@
-# Aerlang 500 W Scooter Dossier
+# Aerlang 500W Electric Scooter
 
-## TL;DR
+## Overview
 
-- Out-of-the-box package combines a compact 48 V/25 A controller with built-in Bluetooth, app-based lighting, horn, and alarm control, paired to a 48 V 17.5 Ah battery and supple rear suspension for roughly €400 street pricing—good for about 45 km/h once derestricted.[^1]
-- The otherwise polished commuter chassis hides a critical flaw: the flat deck plate work-hardens and cracks at the steering neck or rear suspension mounts unless it is reinforced before sustained high-speed riding.[^1]
-- Firmware is read/write locked, leaving shunt tweaks as the only sanctioned power mod and making wholesale controller swaps the practical upgrade path.[^2]
-- Legal 25 km/h mode can be re-engaged with an eight-click input sequence, letting riders present a compliant profile during inspections and unlock full power when conditions allow.[^3]
+Aerlang produces budget-friendly electric scooters targeting the legal commuter market. Their 500W model offers impressive features for the price point but has a critical structural weakness that requires attention. This guide covers what you need to know about the platform, its strengths, and how to prevent catastrophic deck failures.
 
-## Platform Snapshot
+## Product Specifications
 
-| Focus | Stock Insight | Upgrade Levers |
-| --- | --- | --- |
-| Electronics & UX | Integrated controller manages throttle, braking, lighting, horn, Bluetooth app, and alarm, and has proven reliable in community use.[^1] | Because the firmware is encrypted, riders either live within the stock feature set or plan full controller replacements (e.g., VESC conversions) if they need custom logic.[^2] |
-| Battery & Performance | Factory 48 V 17.5 Ah module and 45 km/h ceiling give the Aerlang one of the strongest legal-mode packages in its price class.[^1] | Unlocking the speed cap requires only the built-in click sequence, so keep a derestricted profile ready for private roads while preserving legal mode for public areas.[^3] |
-| Chassis & Ride Quality | Ten-inch wheels and a notably plush rear suspension deliver a refined ride for urban commuting straight from the box.[^1] | Before adding power or mileage, budget time for welding or gusseting around the deck’s neck and rear suspension mounts to prevent catastrophic cracks.[^1] |
-| Value Positioning | Street pricing around €400 places the scooter in accessible territory for riders wanting a high-spec legal machine.[^1] | Invest savings into structural reinforcement and safety gear rather than incremental electronics mods that the locked firmware won’t expose.[^1][^2] |
+### Stock Configuration
 
-## Structural Priorities
+**Power System**:[^1]
+- 48V / 25A integrated controller
+- 48V 17.5Ah battery pack
+- ~500W motor (nominal)
+- Top speed: 45 km/h (when derestricted)
 
-- Inspect the deck plate for early signs of bending near the steering column and rear suspension bosses; repeated pothole or speed-bump impacts can precipitate sudden fractures without much warning.[^1]
-- Reinforcement options include welding gussets along the neck interface or fabricating a boxed deck section before raising speed limits, ensuring the platform stays intact under the scooter’s full 45 km/h potential.[^1]
+**Features**:[^1]
+- Built-in Bluetooth connectivity
+- App-based control for:
+  - Lighting
+  - Horn
+  - Alarm system
+- Ten-inch wheels
+- Plush rear suspension
 
-## Compliance & Mode Management
+**Pricing**: ~€400 street price[^1]
 
-- Keep the factory 25 km/h cap engaged in jurisdictions with strict micromobility limits, demonstrating compliance on demand and reducing the chance of roadside confiscation.[^3]
-- Memorise the eight-click derestriction to toggle between “police mode” and full output without external tools; practice re-locking quickly so an officer cannot simply press a mode button to expose a higher setting.[^3]
+### Legal Compliance
 
-## Modification Outlook
+**Speed Modes**:[^3]
+- **Legal Mode**: 25 km/h (for jurisdictions with micromobility limits)
+- **Full Power**: 45 km/h
+- **Toggle**: Eight-click input sequence switches between modes
 
-- Because software access is encrypted, shunt modifications are the only native path to raise current—use them sparingly to avoid overstressing the stock harness and thermal design.[^2]
-- Riders considering advanced telemetry, custom ride modes, or higher current ceilings should plan for a full controller transplant (e.g., VESC), treating the stock electronics as a sealed system best left intact until a replacement is ready.[^2]
+> **💡 Pro Tip**: Practice the eight-click sequence while stationary so you can quickly demonstrate compliance during roadside checks.
 
-## Ramp-Up Checklist for New Owners
+## Critical Issue: Deck Plate Failure
 
-1. **Baseline inspection** – Photograph the deck welds and suspension mounts before the first ride to document any factory defects and guide future reinforcement work.[^1]
-2. **Legal mode drill** – Practice the eight-click limit toggle while stationary so compliance checks are quick and confident.[^3]
-3. **Upgrade roadmap** – Decide early whether to live within the sealed firmware or scope a controller swap; ordering parts ahead avoids downtime once the structural reinforcements are complete.[^2]
+### The Problem
 
-## Source Notes
+**Structural Weakness**:[^1]
+The flat aluminum deck plate work-hardens and cracks under repeated stress. Failure points:
+- **Steering neck junction** - Where deck meets headtube
+- **Rear suspension mounts** - High stress concentration
 
-[^1]: Aerlang stock feature breakdown, pricing, and deck failure reports captured in the curated review notes. Source: knowledge/notes/input_part000_review.md, L121 to L123
-[^2]: Commentary on encrypted firmware limiting modifications to shunt tweaks and motivating controller swaps. Source: knowledge/notes/input_part000_review.md, L122 to L122
-[^3]: Eight-click limiter override procedure enabling quick toggling between legal and full-power modes. Source: knowledge/notes/input_part000_review.md, L123 to L123
+**Risk Factors**:
+- Sustained high-speed riding (40-45 km/h)
+- Rough road surfaces
+- Potholes and speed bumps
+- Heavy rider weight
+- Aggressive acceleration/braking
+
+> **⚠️ Critical Safety Warning**: Deck cracks can occur suddenly without much warning, potentially causing loss of control at speed. This is a serious safety issue that must be addressed before pushing the scooter to its limits.
+
+### Prevention Strategy
+
+**Before Riding at Full Speed**:[^1]
+
+**Inspection**:
+1. Photograph deck welds on delivery
+2. Look for existing cracks or stress marks
+3. Check suspension mount areas
+4. Inspect neck junction thoroughly
+
+**Reinforcement Options**:
+1. **Weld Gussets**
+   - Add triangular braces at neck junction
+   - Reinforce suspension mount points
+   - Distribute stress over larger area
+
+2. **Boxed Deck Section**
+   - Fabricate enclosed structure around critical areas
+   - Significantly increases rigidity
+   - Professional welding recommended
+
+> **⚠️ Important**: Budget for structural reinforcement before attempting sustained 45 km/h riding. This is not optional.
+
+## Electronics & Firmware
+
+### Controller Features
+
+**Integrated System**:[^1]
+- Throttle control
+- Regenerative braking
+- Lighting management
+- Horn/alarm system
+- Bluetooth app interface
+- All in one sealed unit
+
+**Reliability**: Community reports indicate the integrated controller is generally reliable for daily use.
+
+### Firmware Limitations
+
+**Locked System**:[^2]
+- **Read/Write Protected**: Cannot modify firmware
+- **Limited Modifications**: Only shunt tweaks possible
+- **No Custom Logic**: Sealed system
+
+**Implications**:
+- Cannot adjust power curves
+- Cannot add custom features
+- Cannot optimize efficiency
+- Upgrade path requires complete controller replacement
+
+### Modification Options
+
+**Within Locked System**:[^2]
+- **Shunt Modifications**: Only native path to increase current
+  - Use sparingly
+  - Risk overstressing harness
+  - May exceed thermal design limits
+
+**Full Upgrade Path**:[^2]
+- Plan complete controller replacement (e.g., VESC conversion)
+- Treat stock electronics as sealed until replacement ready
+- Budget for new controller, harness, display
+- Requires significant technical knowledge
+
+## Legal Mode Management
+
+### Compliance Strategy
+
+**Why Use Legal Mode**:[^3]
+- Demonstrates compliance on demand
+- Reduces confiscation risk
+- Shows good faith to authorities
+- Required in many jurisdictions
+
+**Eight-Click Sequence**:[^3]
+1. Memorize the input pattern
+2. Practice until you can do it quickly
+3. Can toggle without external tools
+4. Works while stationary
+5. Fast enough for roadside compliance checks
+
+**"Police Mode" Protocol**:
+- Keep in 25 km/h mode on public roads where required
+- Toggle to full power only on private property
+- An officer cannot simply press a button to expose higher settings
+- You control when the scooter operates at full speed
+
+## Value Proposition
+
+### What You Get for €400
+
+**Strengths**:[^1]
+- High-spec legal mode features
+- Decent performance when derestricted
+- Good ride quality (suspension, wheels)
+- Integrated smart features
+- Competitive pricing for feature set
+
+**Investment Strategy**:[^1]
+- Use savings for structural reinforcement
+- Budget for safety gear
+- Don't invest heavily in electronics mods (firmware locked)
+- Focus on mechanical reliability
+
+### Comparison with Alternatives
+
+**vs. Higher-End Scooters**:
+- Lower price point
+- Similar feature set
+- Structural weakness is unique disadvantage
+- Locked firmware limits upgrades
+
+**vs. Budget Models**:
+- Better features and integration
+- Higher performance potential
+- Still needs reinforcement
+
+## New Owner Checklist
+
+### Before First Ride
+
+**1. Baseline Inspection**:[^1]
+- [ ] Photograph all deck welds
+- [ ] Document suspension mount condition
+- [ ] Check neck junction for defects
+- [ ] Note any factory issues
+
+**2. Legal Mode Drill**:[^3]
+- [ ] Learn eight-click sequence
+- [ ] Practice while stationary
+- [ ] Verify both modes work
+- [ ] Understand when to use each
+
+**3. Upgrade Planning**:[^2]
+- [ ] Decide: live with locked firmware or plan controller swap
+- [ ] If swapping: research VESC conversion options
+- [ ] Order parts ahead of time if upgrading
+- [ ] Complete reinforcement before controller upgrade
+
+### Structural Reinforcement Timeline
+
+**Priority Order**:
+1. **Immediate**: Inspect for existing damage
+2. **Before speed testing**: Plan reinforcement approach
+3. **Before regular 40+ km/h use**: Complete welding/gusseting
+4. **Ongoing**: Periodic inspections for new cracks
+
+## Maintenance & Monitoring
+
+### Regular Checks
+
+**Deck Inspection Schedule**:
+- After every rough ride
+- Monthly for normal use
+- Before any long trip
+- After any crash or impact
+
+**What to Look For**:
+- New cracks starting
+- Weld integrity
+- Paint cracking (indicates flex)
+- Loose fasteners
+- Stress marks in metal
+
+### When to Seek Help
+
+- Any visible cracks appear
+- Unusual noises from deck area
+- Steering feels loose
+- Suspension mounts shift
+- Before attempting reinforcement if not experienced with welding
+
+## Related Guides
+
+- [Controller Setup](../guides/controller_setup.md)
+- [Power Distribution](../guides/power_distribution.md)
+- [Scooter Waterproofing & Security](../guides/scooter_waterproofing_and_security.md)
+
+## References
+
+[^1]: Source: knowledge/notes/input_part000_review.md, L121 to L123
+[^2]: Source: knowledge/notes/input_part000_review.md, L122 to L122
+[^3]: Source: knowledge/notes/input_part000_review.md, L123 to L123

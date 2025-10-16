@@ -1,53 +1,289 @@
-# Seven Controllers Brand Dossier
+# Seven Controllers
 
-## TL;DR
+## Overview
 
-- Seven 18-class controllers mirror Tronic X12 offerings with 24 S and 30 S options, 18- or 30-FET power stages, onboard logging memory, and a 12 V / 4 A auxiliary rail—positioning them as a premium alternative once inventory stabilises.[^lineup]
-- Early tuning data keeps 16 S baselines near 180 A battery, 300 A phase, and ~50 A of field weakening at 87 % duty; more FW headroom is possible, but only after validating thermal and traction margins.[^fw_baseline]
-- Firmware releases lag hardware: launch units ship with VESC Tool 6.06 binaries but no published source, and the bundled VESC Express board still fails to enumerate without a separate CAN-connected module.[^firmware][^express]
-- Alibaba resellers now liquidate Seven/Tronic stock straight from the contract manufacturer, so pricing resembles the defunct brand while official support remains uncertain—treat purchases as boutique hardware that needs self-managed documentation.[^supply]
+Seven produces high-voltage VESC controllers designed for extreme performance electric scooters. Their controllers mirror Tronic X12 offerings with 24S and 30S capabilities. However, Seven is a new brand with limited field testing, firmware availability issues, and uncertain support infrastructure. This guide helps you understand what you're getting into if you choose Seven hardware.
 
-## Product Snapshot
+## Product Line
 
-| Variant | Nominal Pack Window | Stock Aux Outputs | Differentiators & Watchpoints |
-| --- | --- | --- | --- |
-| Seven 18 (18 FET) | 24 S marketing target | 12 V / 4 A rail, bundled Express daughterboard | Shares Toll-class MOSFETs with Tronic X12; stacked on 1.6 mm FR-4 so the thermal edge over X12 heat-sink mounting is only ≈15–20 %. Verify clamping and paste before chasing 500 A claims.[^lineup][^thermal]
-| Seven 30 (30 FET) | 30 S ambitions | 12 V / 4 A rail, logging memory | Inventory still rumoured; expect identical firmware caveats and insist on source drops plus Express fixes before committing race builds.[^lineup][^firmware]
+### Seven 18 (18-FET)
 
-## Operating Envelope & Tuning Baselines
+**Specifications**:[^lineup]
+- **Voltage**: 24S marketing target
+- **FET Count**: 18 Toll-class MOSFETs
+- **Aux Power**: 12V / 4A rail
+- **Telemetry**: Bundled VESC Express daughterboard
+- **Logging**: Onboard memory
 
-- Hold initial tunes near the documented 16 S recipe (≈180 A battery, 300 A phase, ~50 A FW at 87 % duty) until independent logs confirm higher limits; heavier FW experiments should ramp slowly with traction-control audits.[^fw_baseline]
-- Pair Toll-FET stages with robust cooling—Paolo’s teardown shows the FR-4 sandwich limiting thermal spread, so racers seeking a major headroom jump may still prefer direct-to-heatsink platforms like the K900 until Seven publishes validated datalogs.[^thermal]
+**PCB Construction**:[^thermal]
+- 1.6mm FR-4 substrate
+- Similar to Tronic X12 design
+- Thermal advantage over X12: Only ~15-20%
 
-## Firmware, Telemetry & Compliance
+### Seven 30 (30-FET)
 
-- Demand the GPL-mandated `.c/.h` releases alongside binaries; current shipments arrive with 6.06 firmware but no source, putting builders in a legal and support grey area until Seven responds.[^firmware]
-- Budget an external Express or CAN logger—the bundled board has yet to enumerate reliably, forcing JPPL to hang a separate Express module for telemetry.[^express]
-- Track VESC Tool compatibility: Bluetooth pairing hiccups on 6.06 already nudged crews back to 6.05 until patches landed, so document software builds whenever flashing new Seven hardware.[^firmware]
+**Specifications**:[^lineup]
+- **Voltage**: 30S ambitions (marketing)
+- **FET Count**: 30 MOSFETs
+- **Aux Power**: 12V / 4A rail
+- **Logging**: Onboard memory
+- **Status**: Inventory still rumored, limited availability
 
-## Supply Chain & Support Reality
+> **⚠️ Important**: Both variants share the same firmware and support caveats. Expect limited documentation and community knowledge.
 
-- Treat Alibaba listings as direct-from-factory clearances. Pricing matches historical Seven/Tronic numbers but arrives without brand backing, so stock spares, log calibrations, and plan local repair options before deployment.[^supply]
-- Early adopters are still waiting on partial shipments—one six-pack order only delivered two controllers after four months—and the community still lacks substantive field reviews beyond promotional photos, so budget long lead times and validation gaps.[^1]
-- Catalog serial numbers, MOSFET batches, and thermal-interface steps for every install—the community “VESC museum” is already queuing comparison runs against Maxim, Tronic, and MakerX controllers, and shared telemetry will accelerate validation once source drops catch up.[^lineup][^tracking]
+## Performance Baselines
 
-## Action Items
+### Conservative Starting Point
 
-1. **Archive firmware and demand source** before installing—refuse to run closed drops on production fleets.[^firmware]
-2. **Verify Express telemetry** with a separate CAN-connected board until bundled hardware enumerates cleanly.[^express]
-3. **Log thermal profiles** on first rides to confirm the FR-4 sandwich delivers the promised headroom over X12 mounts.[^thermal]
-4. **Document pricing and support contacts** whenever sourcing via Alibaba so future buyers understand warranty realities.[^supply]
+**Documented 16S Recipe**:[^fw_baseline]
+- **Battery Current**: ~180A
+- **Phase Current**: 300A
+- **Field Weakening**: ~50A at 87% duty cycle
 
-## Source Notes
+**Why Start Here**:
+- Proven baseline from early adopters
+- Allows thermal validation
+- Provides comparison point
+- Can increase gradually with logging
 
-[^lineup]: Seven 18 product outline covering 24 S/30 S variants with 18 or 30 FETs, onboard logging, and a 12 V / 4 A rail, plus plans to benchmark them alongside Maxim launches. Source: knowledge/notes/input_part014_review.md, L52 to L54. Source: knowledge/notes/input_part014_review.md, L27 to L27
-[^fw_baseline]: Reported Seven/Spintend tuning baseline of ≈180 A battery, 300 A phase, and ~50 A FW at 87 % duty for 16 S builds. Source: knowledge/notes/input_part014_review.md, L54 to L54
-[^firmware]: Seven 18 prototypes arriving with VESC Tool 6.06 firmware but no source release, prompting GPL compliance reminders and firmware-tracking discipline. Source: knowledge/notes/input_part014_review.md, L147 to L148
-[^express]: Bundled VESC Express boards failing to enumerate, forcing installers to hang separate CAN-connected modules for telemetry until firmware and header maps are fixed. Source: knowledge/notes/input_part014_review.md, L146 to L148. Source: knowledge/notes/input_part014_review.md, L180 to L180
-[^supply]: Alibaba listings shipping Seven/Tronic controllers directly from the contract manufacturer with historical pricing but uncertain official support. Source: knowledge/notes/input_part014_review.md, L163 to L164
-[^thermal]: Paolo’s assessment that the 18-FET Seven sandwiches Toll-class MOSFETs on 1.6 mm FR-4, yielding only ~15–20 % thermal improvement over X12 heat-sink mounting and keeping racers interested in alternatives like the K900. Source: knowledge/notes/input_part014_review.md, L164 to L164
-[^tracking]: Community focus on logging Seven availability, pricing, and verified current limits as testing pushes past 210 A battery / 310 A phase baselines. Source: knowledge/notes/input_part014_review.md, L217 to L217
+### Field Weakening Cautions
+
+**Progressive Approach**:[^fw_baseline]
+1. Start at documented 50A FW
+2. Monitor temperatures closely
+3. Log traction performance
+4. Audit traction control behavior
+5. Only increase after validation
+
+> **💡 Pro Tip**: Heavier FW experiments should ramp slowly. Traction control audits are essential to avoid surprises at high speeds.
+
+## Thermal Considerations
+
+### FR-4 Substrate Limitations
+
+**Paolo's Assessment**:[^thermal]
+- MOSFETs sandwiched on 1.6mm FR-4
+- Thermal improvement over X12: Only 15-20%
+- Not a major leap in heat management
+
+**Implications**:
+- **Robust cooling still required**
+- **Not significantly better than alternatives**
+- **Racers may prefer direct-to-heatsink platforms** (e.g., K900)
+
+**Cooling Requirements**:
+- Mount to metal chassis with thermal paste
+- Consider active cooling (fans)
+- External heatsinks may be necessary
+- Monitor temperatures on first rides
+
+### Comparison with Alternatives
+
+**vs. Tronic X12**:
+- Similar thermal performance
+- Seven has slight edge (15-20%)
+- Not enough to justify switching if X12 working
+
+**vs. Direct-Mount Controllers**:
+- K900 and similar have better heat dissipation
+- May be better choice for extreme builds
+- Seven's advantage is limited
+
+## Critical Firmware Issues
+
+### Source Code Availability
+
+**The Problem**:[^firmware]
+- Ships with VESC Tool 6.06 binaries
+- **No published source code**
+- Violates GPL licensing
+- Creates support and legal grey area
+
+**What You Should Do**:
+1. **Demand GPL-compliant source releases**
+2. **Archive firmware before installing**
+3. **Refuse closed drops on production fleets**
+4. **Document everything**
+
+> **⚠️ Legal Issue**: VESC firmware is GPL-licensed. Withholding source code violates the license. This puts users in a difficult position for support and modifications.
+
+### VESC Tool Compatibility
+
+**Known Issues**:[^firmware]
+- Bluetooth pairing hiccups on 6.06
+- Some users reverted to 6.05
+- Wait for patches before updating
+- Document software builds
+
+**Best Practice**:
+- Test firmware before deployment
+- Keep backup of working versions
+- Track VESC Tool version compatibility
+- Join community forums for updates
+
+### VESC Express Problems
+
+**Bundled Hardware Fails**:[^express]
+- Express board fails to enumerate reliably
+- Cannot use for telemetry without workarounds
+- Forces external solutions
+
+**Workaround**:[^express]
+- Hang separate CAN-connected Express module
+- Use for telemetry until bundled version fixed
+- Budget for external module in BOM
+
+> **📝 Note**: JPPL had to add separate Express module for telemetry. This is an extra cost and complexity you should plan for.
+
+## Supply Chain Reality
+
+### Alibaba Direct Sales
+
+**Current Situation**:[^supply]
+- Controllers sold via Alibaba
+- Direct from contract manufacturer
+- Historical Seven/Tronic pricing
+- **No brand support infrastructure**
+
+**What This Means**:
+- Treat as boutique hardware
+- Self-managed documentation required
+- No official warranty support
+- Must solve problems yourself
+
+### Availability Issues
+
+**Delivery Problems**:[^1]
+- Long lead times (4+ months reported)
+- Partial shipments common
+- Example: 6-pack order delivered only 2 units
+- Plan for delays and shortages
+
+**Recommendations**:
+- Order well in advance
+- Have backup plan
+- Stock spares if possible
+- Join community for group buys
+
+### Limited Field Testing
+
+**Documentation Gap**:[^supply]
+- Few substantive field reviews
+- Mostly promotional materials
+- Community lacks long-term data
+- Validation gaps remain
+
+**Before Committing**:
+- Research available reviews carefully
+- Ask in community forums
+- Look for actual user experiences
+- Budget validation time and testing
+
+## Installation & Setup
+
+### Pre-Installation
+
+**Documentation Requirements**:[^tracking]
+1. Catalog serial numbers
+2. Note MOSFET batch codes
+3. Document thermal interface
+4. Photograph all connections
+5. Record firmware versions
+
+**Why This Matters**:
+- Community building comparison database
+- Helps troubleshooting
+- Enables warranty claims
+- Contributes to collective knowledge
+
+### Validation Testing
+
+**First Ride Protocol**:[^thermal]
+1. Start at conservative settings
+2. Log thermal profiles immediately
+3. Monitor all temperatures
+4. Compare to X12 if available
+5. Verify FR-4 sandwich delivers promised headroom
+
+**What to Watch**:
+- MOSFET temperatures
+- Case temperatures
+- Thermal throttling
+- Performance consistency
+
+## When to Choose Seven
+
+**Good Fit If**:
+- You can handle limited support
+- You're comfortable with GPL issues
+- You need 24S+ capability
+- You can validate yourself
+- You want to contribute to community knowledge
+
+**Choose Alternatives If**:
+- You need reliable support
+- You want proven track record
+- You need source code access
+- You can't afford validation time
+- You need guaranteed availability
+
+## Alternative Recommendations
+
+**For Similar Capability**:
+- Tronic X12 (more established)
+- 3Shul controllers (proven at high voltage)
+- Spintend (better support, lower voltage)
+
+**For Better Thermal**:
+- K900 (direct-to-heatsink mounting)
+- Other platforms with better heat dissipation
+
+## Action Items for Seven Owners
+
+### Before Installation
+
+**Critical Steps**:[^firmware][^express][^thermal]
+1. **Archive firmware and demand source**
+2. **Verify Express telemetry** with separate board
+3. **Log thermal profiles** on first rides
+4. **Document pricing and support contacts**
+
+### Ongoing
+
+- Share findings with community
+- Contribute to validation database
+- Report issues publicly
+- Help build collective knowledge
+
+## Community Involvement
+
+### VESC Museum Project
+
+**Comparison Testing**:[^lineup][^tracking]
+- Seven queued for benchmarking
+- Compared against: Maxim, Tronic, MakerX
+- Shared telemetry accelerates validation
+- Community-driven documentation
+
+**How to Contribute**:
+- Share thermal data
+- Post firmware experiences
+- Document failures and successes
+- Help others troubleshoot
+
+## Related Guides
+
+- [High-Voltage VESC Controller Market](../guides/high-voltage-vesc-controller-market-2025.md)
+- [Controller Setup](../guides/controller_setup.md)
+- [Motor Controller Tuning](../guides/motor_controller_tuning.md)
 
 ## References
 
+[^lineup]: Source: knowledge/notes/input_part014_review.md, L52 to L54; L27 to L27
+[^fw_baseline]: Source: knowledge/notes/input_part014_review.md, L54 to L54
+[^firmware]: Source: knowledge/notes/input_part014_review.md, L147 to L148
+[^express]: Source: knowledge/notes/input_part014_review.md, L146 to L148; L180 to L180
+[^supply]: Source: knowledge/notes/input_part014_review.md, L163 to L164
+[^thermal]: Source: knowledge/notes/input_part014_review.md, L164 to L164
+[^tracking]: Source: knowledge/notes/input_part014_review.md, L217 to L217
 [^1]: Source: data/raw/telegram_exports/vesc_help_group/input_part011.json, L21556 to L21680
