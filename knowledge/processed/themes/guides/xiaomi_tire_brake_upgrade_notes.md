@@ -72,6 +72,7 @@
   - plan on lathe work or pick narrower casings to avoid sketchy bead fitment.[^46]
 - **Machine rims for true 10×2.5″ tires.** Shave ≈1.5 mm from Xiaomi rims (lathe preferred), deburr carefully, and swap to curved valves so Monorim forks clear the stem.
   - run 60–65 psi for 90 kg riders and treat wet pavement with caution. Builders chasing 10×3 conversions on the Pro 2 received the same advice along with reminders to upgrade controller MOSFETs/caps before pairing wider rubber with 48 V tunes.[^47][^lathe]
+- **Share Blade hub fitment drawings.** Capture axle span, disc offset, and hardware stacks so Xiaomi fork swaps repeat cleanly without re-measuring every shipment.[^blade_drawings]
 - **Verify valve orientation and bushing stacks.** PMT 10×3 or CST 10×2 tubes can bind or leak if stems point the wrong way or bushings sit unevenly.
   - check orientation before closing the fork, especially on dual 60H/50H hubs.[^48]
 - **Expect PMT 10×3 machining.** Plan to remove roughly 2 mm from the rim sidewalls (or migrate to Dualtron-style rims) before PMT 10×3 carcasses will seat.
@@ -104,6 +105,7 @@
 ## Brake Packages
 
 - Keep front mechanical or hydraulic brakes dialled even on regen-heavy builds, and back axle nuts with blue Loctite plus lock washers instead of guessing torque on soft aluminum dropouts.[^65]
+- Build a Monorim brake adapter template—torque arm profile, shim stack, and bolt lengths—for 140–160 mm discs so installers stop grinding fork legs to clear rotors.[^monorim_adapter]
 - **Semi-metallic pads:** Gold-toned semi-metallic pads last longer and maintain bite in rain compared with organic pads bundled with XTech calipers; ceramics run hotter and demand rotor monitoring.[^66]
 - **Semi-metallic pads:** Gold-toned semi-metallic pads last longer and maintain bite in rain compared with organic pads bundled with XTech calipers; ceramics run hotter and demand rotor monitoring.[^67][^66]
 - **Rotor sizing:** Community swaps standardize on 135–140 mm rotors for Pro decks and 120 mm for base models when installing X-Tech HB100s or higher-end hydraulics.[^68]
@@ -234,6 +236,7 @@
 [^55]: Source: knowledge/notes/input_part006_review.md†L310-L310
 [^56]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L20004-L20007
 [^57]: Source: knowledge/notes/input_part000_review.md†L501-L503
+[^blade_drawings]: Source: knowledge/notes/input_part000_review.md†L811-L811
 [^58]: Source: knowledge/notes/input_part000_review.md†L536-L537
 [^59]: Source: knowledge/notes/input_part000_review.md†L538-L538
 [^60]: Source: knowledge/notes/input_part000_review.md†L539-L539
@@ -243,6 +246,7 @@
 [^64]: Source: knowledge/notes/input_part006_review.md†L219-L219
 [^65]: Source: knowledge/notes/input_part005_review.md†L133-L133
 [^66]: Source: knowledge/notes/all_part01_review.md†L226-L227
+[^monorim_adapter]: Source: knowledge/notes/input_part000_review.md†L805-L805
 [^67]: Source: knowledge/notes/all_part01_review.md†L187-L187
 [^68]: Source: knowledge/notes/all_part01_review.md†L338-L338
 [^69]: Source: data/vesc_help_group/text_slices/input_part003.txt†L20636-L20643

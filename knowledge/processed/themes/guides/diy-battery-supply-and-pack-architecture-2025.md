@@ -242,7 +242,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 - Heavy fast-chargers who push 15–25 A into dual GX16 ports accept accelerated wear and check connector temps mid-charge, whereas commuters favour 0.2–0.3 C overnight balancing for pack longevity.[^171]
 - Budget “smart” BMS boards remain a packaging trade-off.
   - the latest no-name unit was twice the size of an ANT despite lower amp ratings, while a 21 S 100 A JBD still fit between 18650 rows for €45 during an AliExpress sale.[^172]
-- Budget 5 A “travel” chargers that never leave constant-current mode have held 4.3–4.4 A into full packs with no CV taper.
+- Budget 5 A “travel” chargers that never leave constant-current mode have held 4.3–4.4 A into full packs with no CV taper.[^cc_only]
   - treat them as emergency bricks only and invest in adjustable YZPower-style supplies for daily use.[^173][^174]
 
 ## Refurbishment & Secondhand Pack QA
@@ -598,6 +598,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 [^216]: Source: data/vesc_help_group/text_slices/input_part001.txt†L9376-L9399
 [^217]: Source: knowledge/notes/input_part014_review.md†L100-L100
 [^218]: Source: knowledge/notes/input_part008_review.md†L138-L138
+[^cc_only]: Source: knowledge/notes/input_part000_review.md†L709-L712
 [^219]: Source: knowledge/notes/input_part000_review.md†L271-L273
 [^vc8s_upgrade]: Source: knowledge/notes/input_part008_review.md†L302-L302
 [^dual_80h_pack]: Source: knowledge/notes/input_part008_review.md†L307-L307

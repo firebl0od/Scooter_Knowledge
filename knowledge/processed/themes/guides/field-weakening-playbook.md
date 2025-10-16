@@ -7,6 +7,7 @@
   - 16 S Vsett logs only gained ~8 km/h when adding 30 A per motor (69→76 km/h) while pack draw doubled, so higher series count remains the cleaner path to top speed.[^1]
 - New tuners are better off raising voltage or revisiting gearing.
   - Telegram veterans keep hammering that hub-motor limits make FW a bad shortcut when you can solve speed with hardware instead of dumping more heat into the drivetrain.[^2]
+- Plan a post-beta checklist once VESC Tool 5.3 lands stable—capture enablement steps, duty triggers, and current ceilings before telling builders to chase the extra ~8 km/h.[^fw53_rollout]
 - Stable implementations rely on firmware 5.3-era builds, instrumented temperature and voltage logging, and conservative regen; high-voltage packs or 24S conversions demand extra surge headroom because regen spikes can brick controllers when FW is active.[^4][^5]
 - Start with single-digit or 10–30 A FW setpoints validated by telemetry; riders jumping to 55–60 A routinely saturate hubs within an hour unless they raise phase current carefully, add cooling, and watch logs for current overshoot.[^6][^7]
 - Most builds arm FW against duty cycle.
@@ -254,6 +255,7 @@
 [^40]: Source: knowledge/notes/input_part006_review.md†L408-L423
 [^41]: Source: knowledge/notes/input_part006_review.md†L423-L436
 [^42]: Source: knowledge/notes/input_part000_review.md†L727-L727
+[^fw53_rollout]: Source: knowledge/notes/input_part000_review.md†L806-L806
 [^43]: Source: knowledge/notes/input_part001_review.md†L111-L112
 [^44]: Source: data/vesc_help_group/text_slices/input_part001.txt†L2706-L2975
 [^45]: Source: data/vesc_help_group/text_slices/input_part001.txt†L4000-L4052

@@ -11,6 +11,10 @@
 - For throttle-signal filtering, the crew scavenges ~100 nF ceramic capacitors from dead electronics instead of grafting oversized drone caps; always discharge and meter salvaged parts before bridging signal-to-ground so you know the exact capacitance you are adding.[^ceramic_scavenge]
 - When paralleling 16 S packs, tie all grounds together, match series counts and capacities, pre-balance voltages, and watch for cross-charging so the smaller pack is not over-stressed despite individual BMS protection.[^parallel_rules]
 
+## 48 V Lighting Quick Reference
+
+- Publish a quick sheet with 48 V lighting fuse sizing, gauge picks, and load math so commuters stop oversizing harnesses or skipping inline protection on accessory runs.[^lighting_quickref]
+
 ## High-Current Harness Upgrades
 
 - External battery riders are graduating to 4 mm gold bullets, AS120 mains, and even direct-soldered phase leads after discovering stock 2 mm conductors and MR60 plugs overheat above ~80–100 A; backpack packs stay cool once the heavier hardware is in place.[^1]
@@ -77,3 +81,4 @@
 [^xt150-guidance]: Source: knowledge/notes/input_part010_review.md†L481-L482
 [^wolf-phase]: Source: knowledge/notes/input_part010_review.md†L511-L512
 [^amass-fit]: Source: knowledge/notes/input_part010_review.md†L531-L532,†L704-L704
+[^lighting_quickref]: Source: knowledge/notes/input_part000_review.md†L809-L809

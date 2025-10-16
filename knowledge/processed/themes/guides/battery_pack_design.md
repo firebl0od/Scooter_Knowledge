@@ -43,6 +43,7 @@
 - Stock G30 frames already hide 20 S 6 P packs internally, but stretching to 20 S 9 P by machining deck rails and deleting the OEM ESC introduces convoluted busbars and structural compromises—seasoned builders steer first-timers toward simple rectangular stacks instead of chasing every last cell.[^g30-20s9p]
 - Backpack commuters still squeeze folded 20 S4 P modules into stripped 5 L packs, but aluminium quick-release racks need reinforcement before they can safely haul the extra mass.[^backpack-20s]
 - Tudor’s PETG honeycomb holders and interlocking connectors let Xiaomi and G30 packs dry-fit without glue, while other builders laser-cut 3–6 mm kraftplex skeletons, wrap them in thin PETG jackets, and still tape the stack with fish paper because sealed decks trap heat regardless of insulation choices.[^petg_honeycomb]
+- Document hot-glue beads, silicone ribs, and honeycomb spacers against 80 °C ovens and vibration rigs so retention guides can name which combinations actually survive dense commuter packs without letting cells drift.[^retention_testing]
 - Recycling pledges are nudging EU pack shops toward kraftplex or other recyclable wraps, yet fish-paper rolls are scarce enough that crews are prototyping 0.8 mm kraftplex jackets while still insisting on series separators to prevent can-to-can shorts.[^8]
 - Koxx’s 14 S 6 P build uses RePackr-balanced groups, glued cells, and glass-fibre spacers between layers to equalise resistance across parallels inside cramped decks.
   - mirror the approach when you need uniform discharge in tight enclosures.[^9]
@@ -92,6 +93,7 @@
 [^deck_extension]: Source: knowledge/notes/input_part000_review.md, line 75.
 [^g30-20s9p]: Source: knowledge/notes/input_part006_review.md†L27-L27
 [^petg_honeycomb]: Source: knowledge/notes/input_part000_review.md, line 216.
+[^retention_testing]: Source: knowledge/notes/input_part000_review.md, line 803.
 [^copper_sandwich]: Source: knowledge/notes/input_part000_review.md, lines 240 and 314.
 [^ip001-bmsheat]: Source: knowledge/notes/input_part001_review.md†L661-L662
 [^ip001-overcharge]: Source: knowledge/notes/input_part001_review.md†L663-L663

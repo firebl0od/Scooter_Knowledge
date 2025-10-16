@@ -112,6 +112,8 @@
   - stock spares or pivot to Seven/3Shul while the revised 85/240 ships via New Jersey to keep high-phase projects alive.[^76][^77]
 - Treat “too good to be true” listings as scams.
   - the €140 “Spintend” storefront that appeared with thousands of units in stock ignored all messages, and the crew just caught @JetGlideOfficial recycling guitar-pedal photos instead of real MP2 hardware.[^78][^mp2-scam]
+- Treat “too good to be true” AliExpress listings as scams and build a vendor-vetting checklist (stock proof, response cadence, component sourcing) before wiring money.
+  - the €140 “Spintend” storefront that appeared with thousands of units in stock ignored all messages, and the BOM alone costs more than the asking price.[^78][^vetting_checklist]
 - Kelly 7212/7218 controllers still earn “random death” reputations despite waterproof housings, whereas Sabvoton’s 95 V kits pair TVS-protected hardware with enough regen headroom for 18 S commuters so long as charge voltage stays under ~75 V.[^79]
 
 ## Field-Weakening & Thermal Guardrails
@@ -212,7 +214,7 @@
 [^10]: Source: knowledge/notes/input_part000_review.md†L251-L252
 [^11]: Source: data/vesc_help_group/text_slices/input_part002.txt†L8204-L8271
 [^12]: Source: data/vesc_help_group/text_slices/input_part002.txt†L8620-L8690
-[^13]: Source: knowledge/notes/input_part000_review.md†L732-L733
+[^13]: Source: knowledge/notes/input_part000_review.md†L714-L716
 [^14]: Source: data/vesc_help_group/text_slices/input_part002.txt†L2629-L2692
 [^c350-go-to]: Source: knowledge/notes/input_part010_review.md†L415-L416
 [^15]: Source: knowledge/notes/input_part014_review.md†L17-L21
@@ -279,6 +281,7 @@
 [^76]: Source: knowledge/notes/input_part012_review.md†L110-L111
 [^77]: Source: knowledge/notes/input_part012_review.md†L379-L405
 [^78]: Source: knowledge/notes/input_part000_review.md†L346-L347
+[^vetting_checklist]: Source: knowledge/notes/input_part000_review.md†L804-L804
 [^79]: Source: data/vesc_help_group/text_slices/input_part001.txt†L8290-L8418
 [^80]: Source: knowledge/notes/input_part014_review.md†L166-L169
 [^81]: Source: knowledge/notes/input_part014_review.md†L168-L169

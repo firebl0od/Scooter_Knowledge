@@ -10,8 +10,8 @@ This guide distills field reports on powering lights, horns, and dashboards from
 | --- | --- | --- | --- |
 | Tronic X12 | 5 V logic (≈150 mA) | Rail cannot sustain heavy peripherals such as displays or fans without brownouts.[^2] | Budget an external buck converter for any load above small sensors and throttle/gear switches.[^2] |
 | Spintend Ubox 85×/24× | 5 V logic, 12 V rail (rated 3 A) | Field tests keep the onboard 12 V rail around 1.5 A.
-  - enough for wireless switches or a limiter relay
-  - while dual head/tail-light loads still overwhelm the regulator.[^3][^4] | Keep lighting minimalist or offload to a dedicated buck; fuse each branch so single shorts do not collapse the regulator.[^3] |
+  - enough for wireless switches or a limiter relay—remote receivers draw about 1.5 A on Spintend’s rail, so verify load before ditching a dedicated DC-DC converter[^spintend_relay_current]
+  - while dual head/tail-light loads still overwhelm the regulator.[^3][^4][^spintend_remote] | Keep lighting minimalist or offload to a dedicated buck; fuse each branch so single shorts do not collapse the regulator.[^3] |
 | Spintend X12 / upcoming 120 V | 5 V rail only (~150 mA) | The compact extrusion exposes just a weak 5 V output, so Express boards and lighting demand a separate buck or the ADC adapter plus DC/DC combo.[^5] | Pair the ADC board with an external step-down to feed 12 V lighting, and mount panel QS8 connectors to tidy high-current leads.[^6] |
 | MakerBase 75×/85×/X12 bridge | 3.3 V ADC, 5 V UART/Comm | Hall throttles must stay near 3.3 V; 5 V injection into ADCs burns STM32 inputs, and older Xiaomi 5 V throttles still need resistor ladders whereas the 3.3 V variants can wire straight in.[^7][^8][^9] | Measure throttle min/max before connection; insert resistor ladders or shunt regulators if the lever exceeds 3.3 V.[^7] |
 | MP2 open-source ESC | Open-frame 12 V DC/DC brick | Stable on 30 S packs but the stock transformer footprint is bulky, so builders are investigating custom windings to shrink the module for tighter decks.[^10] | Budget space for the brick or commission a smaller winding before finalizing enclosure CAD; keep a separate buck ready if you split accessory loads. |
@@ -379,6 +379,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^2]: Source: knowledge/notes/input_part013_review.md†L360-L361
 [^3]: Source: knowledge/notes/input_part013_review.md†L430-L431
 [^4]: Source: knowledge/notes/input_part000_review.md†L687-L687
+[^spintend_remote]: Source: knowledge/notes/input_part000_review.md†L735-L736
 [^5]: Source: knowledge/notes/input_part014_review.md†L140-L144
 [^6]: Source: knowledge/notes/input_part014_review.md†L140-L145
 [^7]: Source: knowledge/notes/input_part013_review.md†L503-L505
@@ -408,6 +409,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^31]: Source: knowledge/notes/input_part000_review.md†L556-L559
 [^32]: Source: knowledge/notes/input_part000_review.md†L544-L544
 [^33]: Source: knowledge/notes/input_part010_review.md†L75-L77
+[^spintend_relay_current]: Source: knowledge/notes/input_part000_review.md†L735-L735
 [^34]: Source: knowledge/notes/input_part012_review.md†L180-L180
 [^35]: Source: knowledge/notes/input_part012_review.md†L97-L97
 [^36]: Source: knowledge/notes/input_part012_review.md†L434-L434

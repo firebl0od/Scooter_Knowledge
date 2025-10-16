@@ -12,8 +12,10 @@
   - enable both charge and discharge FETs before regen tests, validate balance-lead order, and log first rides because a single BMS cutoff or miswire has already nuked controllers and power stages that survived normal abuse.[^4][^5][^6]
 - JK’s 150 A boards carry thick copper planes and dual 7 AWG leads that soak heat; shops lean on 140 W irons, broad tips, and long preheat cycles so solder actually wets both sides without lifting FET pads.[^jk_rework]
 - Treat balancing and calibration as routine maintenance: Daly boards need full charge/discharge learning and higher voltage to balance, while JK hardware wakes via the accessory display, runs active shuttling above ~0.015 V delta, and benefits from monthly thermal/IR audits.[^7][^8][^9]
+- Artem’s active-balancing platform begins moving roughly 600 mA as soon as cell delta crosses ≈0.01 V, holding groups within about 3–7 mV during discharge and cutting charge above 4.22 V; give those boards true CC/CV chargers so their safeguards aren’t fighting a brick that never tapers.[^artem_balancer]
 - Daly smart boards keep brownout-killing ride packs.
   - multiple crews now reserve them for stationary “powerwall” duty after cheap units drained LiPos to 0 V; pick LLT or JK hardware for scooters that see real current swings.[^6]
+- Travel-friendly “5 A” bricks that stay at ~4.3 A all the way to full charge are a last-resort quick-charge option only; swap to adjustable YZPower-style supplies for daily use so a smart BMS isn’t forced to absorb constant-current overflow near 4.2 V per cell.[^cc_only]
 - ANT owners still note 0.5–0.8 V pack settling after charge; pair those boards with latching throttles or breakers so VESC standby draw doesn’t drain winter storage scooters.[^7]
 - ANT units sip microamps with Bluetooth awake while Daly and LLT boards offer configurable sleep timers; trim status LEDs or use LLT’s hardware switch when parking packs for weeks to stop parasitic drain.[^8]
 - Pack size influences BMS choice: high-capacity 53 Ah+ builds stick with JK’s active shuttling for fast charging, smaller commuter packs tolerate ANT’s lighter balancing current, and JBD hardware remains feature-parity with LLT once sensors and harnesses are sized correctly.[^9][^10]
@@ -318,7 +320,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 [^14]: Source: knowledge/notes/input_part007_review.md†L205-L214
 [^15]: Source: data/vesc_help_group/text_slices/input_part002.txt†L2758-L2792
 [^16]: Source: knowledge/notes/input_part011_review.md†L46-L46
-[^17]: Source: knowledge/notes/input_part000_review.md†L742-L747
+[^17]: Source: knowledge/notes/input_part000_review.md†L738-L740
 [^18]: Source: knowledge/notes/input_part000_review.md†L516-L520
 [^19]: Source: knowledge/notes/input_part006_review.md†L404-L404
 [^20]: Source: data/vesc_help_group/text_slices/input_part009.txt†L20355-L20374
@@ -429,6 +431,8 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 [^120]: Source: knowledge/notes/input_part005_review.md†L101-L106
 [^121]: Source: knowledge/notes/input_part005_review.md†L104-L108
 [^122]: Source: knowledge/notes/input_part005_review.md†L108-L114
+[^artem_balancer]: Source: knowledge/notes/input_part000_review.md†L711-L712
+[^cc_only]: Source: knowledge/notes/input_part000_review.md†L709-L712
 [^123]: Source: knowledge/notes/input_part009_review.md†L35-L36
 [^124]: Source: knowledge/notes/input_part009_review.md†L29-L35
 [^125]: Source: knowledge/notes/input_part009_review.md†L467-L469

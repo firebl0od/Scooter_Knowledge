@@ -26,7 +26,9 @@
 
 - Stock VSETT 9 hubs feature 92 mm stators, 15 pole pairs, and a tight 0.5 mm air gap—pair them with the taller 10-inch carcass to smooth harsh pavement while keeping torque respectable.[^2]
 - Artem now pegs the Vsett 9 hub around 48 km/h on 52 V (≈58 km/h dual) and says the 10+ wheel needs 60 V to shine; expect muted top speed on 48 V despite its ~130 A/50 A thermal headroom and 1 400 W nominal rating.[^14]
+- Build a reference card for Vsett 9/10 hubs—52 V vs. 60 V speed, split-rim service order, and shipping options—so 48 V riders know the upgrade path before committing to 60 V hardware.[^vsett_map]
 - Ignore marketing wattage on Vsett 10+ motors—inspect winding fill and magnet stack height before pushing phase amps or buying donor wheels for AWD conversions.[^15]
+- Paolo is distributing 6 mm (≈9 AWG) motor leads rated around 3 kW continuous per hub, giving retrofitters a vetted harness option when Vsett 10+ spares pop up.[^paolo_leads]
 - Recent teardowns logged 9×7 slot/pole counts, 0.5 mm laminations, and RUWH 6003RS bearings; blank front covers from Vsett 9 rentals can disguise dual-motor conversions by hiding the second hub’s wattage rating during inspections.[^16]
 - Vsett 9+/10+ hubs comfortably burst near 5 kW when temperature sensors track sustained loads, so treat the “600 W” label as commuter-only marketing and log temps before upping duty cycles.[^17]
 - Stock hub hardware has already endured serious power—the community logged 10–12 kW pushes on OEM motors before Nucular 12F limits intervened—so thermal headroom comes from cooling and harness upgrades rather than immediate motor swaps.[^18]
@@ -51,6 +53,11 @@
 - Inspect “new” OEM hubs before installation—one VSETT motor shipped rusty with loose magnets, and the community now strips corrosion and bonds magnets back with Loctite AA326 before reuse.[^37]
 - Fresh 60 mm VSETT hubs respond well to ferrofluid fills and careful clamping; riders are comfortable around ~50 A battery and 100 A phase once the stator is rewrapped and torqued correctly.[^38]
 - High-torque 11-inch hubs start shedding magnets when hammered with sustained 200 A+ phase current—dial back current or expect heat-driven failures on VSETT conversions pushing that envelope.[^39]
+
+### Harness, Display & Control Integration
+
+- The factory “DS” conductor backfeeds display power into the controller once the RFID tag authenticates; keep the line intact when repinning harnesses so the throttle stays analog while CAN-style messages update ride modes every 200–500 ms.[^vsett_ds_harness]
+- Dual-motor enable traces share continuity between the handlebar button, display, and controller, so VESC swaps must preserve that signal path or the dash will light up without actually waking the slave controller.[^vsett_dual_enable]
 
 ### Tire, Pressure & Maintenance Guidance
 
@@ -154,6 +161,7 @@
 
 ### Thermal Management & Instrumentation
 
+- Dual Ubox retrofits still need fresh paste and a clean deck interface even if the outgoing Minimotors square-wave ESCs ran hotter; expect to pull the battery to reach the mounting blocks during the swap.[^vsett_ubox_paste]
 - Dose 6–6.5 ml of Statorade per VSETT 10+ hub to drop winding peaks from ~145 °F to ~104 °F without noticeable drag; fill after the stator is seated, avoid metal syringe tips, and seal covers with silicone so the ferrofluid stays put. Larger 60 mm magnet motors may need 7–8 ml, while overfilling beyond ~8 ml adds friction—cheap AliExpress ferrofluids pass conductivity tests yet flash early, so riders stick with €30 EU-sourced Statorade and cap magnet temps around 90 °C when fluid is present.[^104][^105][^106]
 - Community consensus keeps Statorade fills between roughly 4–8 ml per hub (≈6 ml in VSETT motors), resealing covers after inspections and weighing vent holes (≈5–10 °C gains) against the risk of fluid loss and water ingress.[^fill_guidance]
 - 50 mm VSETT hubs running 17 S packs rarely need more than 60–70 A battery; most riders hold 125–180 A phase and rely on ferrofluid instead of pushing 90 A battery, because that simply cooks the motors faster.[^ip001-17s-limit]
@@ -192,6 +200,11 @@
 [^12]: Source: data/vesc_help_group/text_slices/input_part003.txt, L10118 to L10132
 [^13]: Source: data/vesc_help_group/text_slices/input_part010.txt, L20034 to L20062
 [^14]: Source: knowledge/notes/input_part000_review.md, L352 to L352
+[^vsett_map]: Source: knowledge/notes/input_part000_review.md†L807-L807
+[^vsett_ubox_paste]: Source: knowledge/notes/input_part000_review.md†L702-L703
+[^paolo_leads]: Source: knowledge/notes/input_part000_review.md†L723-L723
+[^vsett_ds_harness]: Source: knowledge/notes/input_part000_review.md†L731-L731
+[^vsett_dual_enable]: Source: knowledge/notes/input_part000_review.md†L732-L732
 [^15]: Source: knowledge/notes/input_part000_review.md, L440 to L443
 [^16]: Source: knowledge/notes/input_part000_review.md, L387 to L388
 [^17]: Source: knowledge/notes/input_part005_review.md, L69 to L69
