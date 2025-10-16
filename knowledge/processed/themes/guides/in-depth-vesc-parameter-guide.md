@@ -122,6 +122,7 @@ Structure for each parameter:
 - Setting too high can overheat the motor or saturate the ESC’s thermal limits.
 - Real-time telemetry over CAN aggregates both controllers, so dual-motor builds will see summed phase amps (e.g., two 300 A stacks display ≈600 A) even though each ESC enforces its own limit.【F:data/vesc_help_group/text_slices/input_part014.txt†L10429-L10498】
 - Dual 85250/100-100 stacks keep the front controller’s ABS Max lower—racers bump it to ≈165 A so the smaller hub stops tripping while the rear holds 300 A, then retune traction once logs confirm balance.【F:data/vesc_help_group/text_slices/input_part014.txt†L10456-L10498】
+- When CAN-linked controllers stream together, VESC Tool doubles the displayed phase current; program each ESC individually (skip the multi-setup wizard), then sync limits so the dash reflects true per-motor draw.【F:data/vesc_help_group/text_slices/input_part014.txt†L10429-L10437】
 
 **How / When to Modify**
 - Check motor’s continuous & peak ratings.
@@ -133,6 +134,7 @@ Structure for each parameter:
 - Excessively high = thermal runaway in motor windings or ESC MOSFET burnouts.
 - Too low = weak acceleration, under-utilized motor.
 - Firmware quirks matter: Spintend 100/100 controllers on VESC Tool 6.06 refused to spin until owners reverted to 6.05 and rechecked current caps, so log software builds before blaming the limit.[^spintend-606]
+- Mobile VESC Tool 6.0 hides non-default firmware once you connect—desktop builds with “Show non-default firmware” (or manual compilation) are still required to load vendor bins like the Ubox single 100 V profiles.【F:knowledge/notes/input_part003_review.md†L138-L138】
 
 
 ### 2.2 Motor Current Max Brake
@@ -167,6 +169,7 @@ Structure for each parameter:
 - Some Makerbase 75100 batches under-report real draw by roughly half to one-third; trust verified shunt-calibrated logs from a smart BMS or clamp meter before assuming the GUI shows the truth.[^makerbase-current]
 - Added capacitance on the low-voltage rails can stabilize telemetry on noisy controllers, so confirm current readings only after solving any brownout behaviour.[^makerbase-cap-fix]
 - VESC real-time power traces exaggerate peaks without filtering—compare against SmartDisplay or external meters before assuming a current limit is safe.[^vesc-power]
+- Realtime “Power” readings multiply pack voltage by phase amps, so they overshoot true battery watts until you corroborate with BMS pack current or the logged `l_in_current` channel.【F:data/vesc_help_group/text_slices/input_part009.txt†L9504-L9514】
 - Spintend 85150 builds have plateaued around 150 A battery despite 210–280 A commands, signalling firmware ABS caps or BMS enforcement before hardware saturation—validate those clamps before assuming controller failure.[^spintend-85150-cap]
 
 **How / When to Modify**
@@ -342,6 +345,8 @@ Structure for each parameter:
 - If you do reversing, be sure you set safe speeds for direction changes.
 
 **Potential Side Effects**
+- Firmware 6.05 build 20 restores consistent e-brake behaviour when ERPM speed limits are enabled and also clears a mobile calibration glitch that could peg throttles wide open—update if braking vanishes at low speed.【F:knowledge/notes/input_part005_review.md†L151-L151】
+- Commit `2a783d6e` introduced an ADC regression on 6.05; riders are holding firmware at Beta 15 or rolling back to 6.02 until the fix lands and pulling matching Lisp scripts (`main` for 6.02, `6_05_adc` for 6.05) to avoid malformed-token errors during dash installs.【F:knowledge/notes/input_part005_review.md†L366-L373】【F:knowledge/notes/input_part005_review.md†L374-L376】
 - Setting them too high can let you attempt direction reversals at dangerous speeds in BLDC.
 
 
@@ -457,6 +462,7 @@ Params: l_temp_motor_start, l_temp_motor_end
 **Potential Side Effects**
 - If set incorrectly low, you lose power even though the motor can handle more.
 - If set too high, you risk permanent magnet damage or winding insulation issues.
+- Patrick recently traced sluggish launches to a `0 °C` motor limit inherited from traction-control experiments—the firmware clamped phase current to ~86 A until he restored a 112–120 °C ceiling, so sanity-check values after firmware tests.【F:knowledge/notes/input_part010_review.md†L398-L399】
 
 
 ### 4.3 Acceleration Temperature Decrease
@@ -494,6 +500,7 @@ Params: l_min_duty, l_max_duty
 
 **Potential Side Effects**
 - Setting max_duty=1.0 can cause issues with current sampling if your hardware can’t handle near 100% well.
+- Community logs show 98–99 % duty nets ~4 % more top speed on modern hardware, but pushing to a true 100 % still risks sampling faults and sudden cutouts—leave a sliver of headroom unless you’ve validated the controller on the bench.【F:knowledge/notes/input_part003_review.md†L104-L104】
 - High min_duty can produce a “push” at idle, not fully freewheeling.
 
 
@@ -670,10 +677,13 @@ Params: foc_encoder_inverted, foc_encoder_offset, foc_encoder_ratio
 - For FOC, chooses “Sensorless, Encoder, Hall Sensors, HFI, VSS, 45 Deg HFI, Coupled HFI,” etc.
 
 **Deeper Insights**
-- Hall Sensors = instant start with no guess. 
+- Hall Sensors = instant start with no guess.
 - HFI or VSS helps sensorless start from 0 rpm if the motor has enough saliency.
+- Vedder Sensorless Start (VSS) actually lives under the sensorless encoder profile and expects motor-temperature telemetry; without it the controller falls back to noisy hall-only launches and hill-starts stretch toward five seconds.【F:data/vesc_help_group/text_slices/input_part001.txt†L7351-L7415】
+- Riders report the Virtual Speed Sensor works reliably once selected, configured, and paired with the right pole count—hall-less scooters perform markedly better than open-loop fallback when sensors fail.【F:knowledge/notes/input_part014_review.md†L4211-L4215】
 **How / When to Modify**
-- If you have physical halls, choose “Hall Sensors.” 
+- If you have physical halls, choose “Hall Sensors.”
+- 41F/43F/413 hall boards still cover 800 W–3 kW hubs; beyond roughly 20 km/h most riders let VESC hand off to sensorless FOC and keep the halls only for launch torque.【F:knowledge/notes/input_part003_review.md†L105-L105】
 - If sensorless is desired with high torque from standstill, consider 45 Deg V0V7 HFI or Coupled HFI.
 
 **Potential Side Effects**
@@ -807,6 +817,7 @@ Params: foc_fw_current_max, foc_fw_duty_start, etc.
 - For 5–30A FW as a start, set duty_start ~0.9.
 - Validate logs on actual rides.
 - Stage FW increases alongside traction-control and phase-current reviews—24 S Rion builds found front-wheel spin and recurring faults when FW stacked on already aggressive 200 A tunes.[^fw-rion]
+- Community tuning on dual 75100 Mantises capped field weakening around 15 A—NetworkDir endorsed that ceiling but warned riders not to touch flux linkage fields unless they understand the math, keeping the wizard values intact for stability.【F:knowledge/notes/input_part010_review.md†L38-L39】
 - If you dial FW back to zero for efficiency testing, be ready to trim phase current too—one commuter logged controller temps jumping from 46 °C to 55 °C within 15 minutes once extra amps replaced the missing FW headroom.[^fw-zero]
 
 **Potential Side Effects**
@@ -873,6 +884,21 @@ Params: foc_fw_current_max, foc_fw_duty_start, etc.
 
 **Potential Side Effects**
 - Slightly rougher waveforms = more motor heat or noise at top speed.
+
+### 6.16 Scooter Launch Recipes & Throttle Feel
+**What It Does**
+- Packages the community’s go-to wizard settings, ramps, and PID tweaks for heavier scooter hubs so FOC starts feel closer to square-wave ESC launches.
+
+**Deeper Insights**
+- VSETT/Blade clinics default to the motor-wizard’s 1,200 W preset with current limits unchecked, 20 kHz switching, hall interpolation tweaks, and aggressive PID gains; logs show 90 kg riders holding full throttle above 30 km/h while pulling roughly 100 A less than stock curves once the tune is in place.【F:data/vesc_help_group/text_slices/input_part001.txt†L6990-L7058】【F:data/vesc_help_group/text_slices/input_part001.txt†L7003-L7028】【F:data/vesc_help_group/text_slices/input_part001.txt†L7220-L7256】
+- Compared with square-wave controllers, FOC throttle maps feel softer until you raise start current, adjust duty ramps, or reshape throttle curves—without those changes, sensorless surges around 25 km/h return as soon as the controller transitions off halls.【F:data/vesc_help_group/text_slices/input_part001.txt†L6860-L6899】
+
+**How / When to Modify**
+- Start with the wizard baseline, then extend start current or shorten positive ramps in 0.05–0.1 s steps until launches feel responsive without tripping ABS faults.
+- Re-run detection whenever you change observers or hall interpolation; the same clinics rerun the wizard after every hardware swap to keep KV, flux, and PID values aligned with the new setup.【F:data/vesc_help_group/text_slices/input_part001.txt†L6990-L7058】
+
+**Potential Side Effects**
+- Too much start current or an unchecked PID loop still causes wheel hop on high-grip tires; pair launch tweaks with traction-control or ramp limits if riders complain about sudden surges.
 
 ## 7. SPEED & POSITION PID
 
@@ -1093,8 +1119,22 @@ Params: m_bldc_f_sw_min, m_bldc_f_sw_max
 - If using adaptive switching in BLDC, it can move between min & max freq.
 
 **Deeper Insights**
-- Default range ~3 kHz to 35 kHz. 
+- Default range ~3 kHz to 35 kHz.
 - Lower freq => audible noise, higher => more heat in MOSFETs.
+
+### 9.6 Virtual Speed Sensor (VSS)
+
+**What It Does**
+- Synthesises hall pulses from the observer so the controller still reports accurate wheel speed when physical sensors are missing or damaged.
+
+**Deeper Insights**
+- Once enabled and configured, VSS delivers steadier launches than open-loop fallback on scooters that have lost their hall boards, making it a practical hall-less safety net.【F:knowledge/notes/input_part014_review.md†L124-L124】
+
+**How / When to Modify**
+- Select the VSS mode in the sensor port menu when you want the ESC to infer speed without real hall sensors, then set motor pole pairs and wheel circumference so speed and traction-control features stay calibrated.
+
+**Potential Side Effects**
+- Poorly tuned observer gains or incorrect wheel data will still skew traction control and dashboards, so validate against GPS logs after switching to VSS.
 
 **Potential Side Effects**
 - Too high freq on old boards => driver errors or MOSFET overheating.
@@ -1147,6 +1187,22 @@ Params under bms.*
 - If BMS data is invalid or missing, the ESC might clamp power incorrectly. 
 - Misconfigured voltage or SOC limits can hamper performance or cause weird cutouts.
 
+
+## 11. Traction, Current Balancing & PWM Strategy
+
+### 11.1 Dual-Motor Slip Targets
+- Dual-drive riders find 2–3 kERPM slip thresholds livable, but many prefer reshaping power-per-ERPM curves instead of letting traction control yank torque abruptly; front-only traction control remains the safest option after rear controllers tripped when grip snapped back at high phase current.【F:data/vesc_help_group/text_slices/input_part003.txt†L9688-L9748】【F:data/vesc_help_group/text_slices/input_part003.txt†L19680-L19699】
+
+### 11.2 Balancing Phase & Battery Current
+- Balance battery and phase targets between axles so free-spin events don’t desynchronise power delivery—matching the front motor’s limits to the rear prevents runaway slip while single-motor builds still rely on higher phase-to-battery ratios and upgraded pads to avoid overheating.【F:data/vesc_help_group/text_slices/input_part003.txt†L9725-L9748】
+
+### 11.3 PWM Frequency Trade-Offs
+- Dropping zero-vector PWM toward 16–20 kHz sheds controller heat but pushes losses into the motor, while 30–40 kHz cools the hub at the expense of hotter MOSFETs and lower low-speed torque—log both motor and controller temps before settling on a switching plan.【F:data/vesc_help_group/text_slices/input_part003.txt†L10215-L10280】【F:data/vesc_help_group/text_slices/input_part003.txt†L10383-L10407】
+- Artem also reminded builders that practical VESC setups really span 10–20 kHz despite theoretical 100 kHz ceilings; higher frequencies demand careful logging to catch combo-specific instabilities.【F:data/vesc_help_group/text_slices/input_part003.txt†L10383-L10407】
+
+### 11.4 Duty-Cycle & Traction-Control Guardrails
+- Modern hardware tolerates 98–99 % duty for a modest top-speed bump (~4 %), but crews still treat 100 % duty as off-limits to avoid runaway faults once FW or PWM tweaks stack up—log duty peaks whenever you adjust speed targets.【F:data/vesc_help_group/text_slices/input_part003.txt†L11586-L11610】
+- Tronic traction-control experiments showed MOSFET fires when TC slammed phase current back in as grip returned; dial slip thresholds conservatively and validate TC behaviour whenever you change duty ceilings or PWM frequency.【F:data/vesc_help_group/text_slices/input_part003.txt†L12565-L12640】
 
 ## Footnotes
 

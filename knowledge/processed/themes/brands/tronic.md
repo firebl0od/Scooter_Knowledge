@@ -3,7 +3,9 @@
 ## TL;DR
 - Race tuners now treat the six-FET Tronic 250 family as ~200 A hardware—pushing toward the marketing 250 A claims triggers thermal cutouts or outright failures, especially once heavy field weakening is layered on top.[^1][^2]
 - The Tronic X12 remains the flagship, delivering just under 30 kW on 24 S packs, but its onboard 5 V rail only sources about 150 mA and the stock looms melt without 10 AWG upgrades, so accessories still need dedicated bucks.[^3]
+- Builders still call Tronic tuning temperamental—yoann tsobanoglou reports hall detection misses, ignored phase limits, runaway battery amps, and audible gate noise that make 3Shul packages feel plug-and-play by comparison.【F:knowledge/notes/input_part011_review.md†L40-L41】
 - JPPL now conformal-coats both the logic and power boards before assembly and reminds builders that stock firmware clamps absolute current near 600 A—reaching the marketed 650 A still demands the no-limit build plus proven cooling, even though 20 S/100 A-per-controller tunes already logged ~150 km/h on his Lonnyo setup.【F:knowledge/notes/input_part011_review.md†L720-L738】
+- Mirono just catalogued three fresh arrivals (250R, T12T, X12) and still could not reconcile the switch wiring or the advertised 500 A peaks, reinforcing how murky Tronic’s product matrix remains versus what actually shows up from stock.【F:knowledge/notes/input_part011_review.md†L201-L205】
 - Reliability work focuses on preventing traction-control current spikes and reinforcing the fragile DC-DC enable pad; moisture or incomplete post-cleaning rework continues to brick boards until those hot spots are addressed.[^4]
 - Tronic hardware now ships directly from the contract manufacturer that previously white-labeled the brand, so pricing is steady but support and cooling expectations mirror the bare FR-4 chassis buyers are receiving.[^5][^6]
 
@@ -19,6 +21,7 @@
 ### Battery & Phase Current Targets
 - Veteran tuners keep dual Tronic 250 builds near 200 A rear / 180 A front phase current, reserving the published 250 A rating as an absolute ceiling.[^1]
 - X12 owners pair roughly 200 A battery with 310 A phase to stay inside the MOSFET envelope, matching Smart Repair’s 24 S playbook.[^3]
+- Smart Repair finally held 250 A rear / 140 A front settings on a GT1-based build after re-detecting both motors, though the smaller front hub still limits traction until dual 70 H hardware lands.【F:knowledge/notes/input_part012_review.md†L79-L79】
 - Community baselines for Tronic and Spintend 85‑250 class controllers hover around 150 A battery / 200 A phase continuous on 20 S packs, with higher peaks only after confirming thermal headroom.[^9]
 
 ### Voltage & Field-Weakening Discipline
@@ -40,19 +43,23 @@
 - Rion race teams now pre-flight every controller before reinstalling—lifting MOSFET clamps, scraping and repasting the baseplate, reseating shunts, and soldering a jumper across the fragile DC-DC enable pad—because the latest teardown found all three defects waiting to trigger another 117 km/h inferno if left untouched.【F:data/vesc_help_group/text_slices/input_part003.txt†L23300-L23653】
 - Recent QC autopsies uncovered cracked MOSFET cans, uneven paste, and a fragile DC-DC enable pad that only re-latched after IPA baths—plan solder rework and connector upgrades before sending Tronic boards back into service.【F:data/vesc_help_group/text_slices/input_part003.txt†L23300-L23538】【F:data/vesc_help_group/text_slices/input_part003.txt†L23563-L23653】
 - Sudden ABS over-current or regen spikes often track back to mismatched shunts or instrumentation blind spots—log actual phase and battery currents rather than trusting on-screen values.[^2][^11]
+- High-duty ABS cutouts have resurfaced above ~130 km/h on MP2/Tronic boards when front/rear shunt mods drift more than 30 %; riders are capping duty around 95 % or reverting firmware until matched sensing solves the fault.【F:knowledge/notes/input_part004_review.md†L232-L232】【F:knowledge/notes/input_part004_review.md†L240-L240】
 
 ## Integration & Accessory Notes
 - The X12’s 5 V rail maxes out around 150 mA, so horn, lighting, and telemetry accessories still need external buck converters even though the controller advertises auxiliary power.[^3]
 - Tronic looms benefit from voltage-sequencing discipline: bring auxiliary 12 V rails online before waking ADC boards to avoid frying spinny throttles or lighting bridges.[^12]
+- Reusing Ninebot/Xiaomi dashes on Tronic hardware confirmed ADC2 lives on the MISO pin beside TX; feed the adapter with 3.3 V and pin ground/ADC1/ADC2 carefully or you will fry the throttle interface.【F:knowledge/notes/input_part011_review.md†L360-L366】
 
 ## Procurement & Support Outlook
 - JPPL confirmed the drone factory that built Tronic and Seven controllers now sells them directly, offering immediate stock but no added support.[^5]
 - Seven-branded derivatives keep the FR-4 sandwich with Toll-package MOSFETs, yielding only a modest thermal advantage; racers should budget for external heatsinks just as they do with X12 boards.[^6]
 - Secondary-market sellers are already moving bare X12 boards for about €350, reinforcing that buyers must self-support wiring, enclosures, and documentation.[^13]
+- Factory storefront promos are dangling two-pack X12 bundles at $598 (singles $450) and promising 26 S headroom, so double-check what hardware actually ships—pricing is attractive, but harness pinouts and switch gear still vary batch-to-batch.【F:knowledge/notes/input_part011_review.md†L205-L211】
 - The official Tronic storefront still flakes out, so riders in Europe lean on Protopulse’s €600 X12 inventory when they need a verified reseller without gambling on the factory shop.[^protopulse]
 
 ## Outstanding Research Backlog
 - Publish verified current limits for the latest Seven 18 / Tronic X12 Toll-FET builds once community tests push past 210 A battery / 310 A phase.[^6][^14]
+- Log Little FOCer V3.1 field data—Rosheee just received dual 290 A phase / 190 A battery units for his G30/Rion hybrid while waiting on Rion’s 450 A controller shipment, confirming boutique 100 V hardware is shipping again in small batches.[^lfocer-v31]
 - Capture teardown photos and torque specs for reinforcing the DC-DC section and connector terminations before the next round of high-speed validations.[^4]
 - Log the pending warm-weather bench campaign for Tronic 250 v2, 250R, and Little FOCer v3.1 controllers once ambient temps rise above the -6 °C winter testing ceiling so reliability claims reflect real riding conditions.[^winter_tests]
 
@@ -73,3 +80,4 @@
 [^14]: Community request to log verified limits for Toll-FET Seven/Tronic builds as testing expands.【F:knowledge/notes/input_part014_review.md†L212-L218】
 [^15]: 117 km/h Rion front-controller fire and ensuing DC-DC diagnostics highlighting paste quality and connector choices.【F:knowledge/notes/input_part003_review.md†L178-L179】
 [^winter_tests]: Rosheee’s plan to re-bench Tronic 250 v2, 250R, and Little FOCer v3.1 hardware once temperatures climb above -6 °C so winter pack limits stop masking controller reliability.【F:knowledge/notes/input_part003_review.md†L716-L718】
+[^lfocer-v31]: Rosheee secured Little FOCer V3.1 controllers rated around 290 A phase / 190 A battery for his G30/Rion hybrid while waiting on a 450 A Rion shipment, signalling boutique 100 V stock is moving again albeit in limited batches.【F:knowledge/notes/input_part002_review.md†L163-L164】

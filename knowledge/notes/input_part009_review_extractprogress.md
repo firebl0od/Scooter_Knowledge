@@ -1,0 +1,7 @@
+# input_part009_review Extraction Progress
+
+- Processed lines 1-100 (Lighting & Control Wiring through Controller Setup faults clearing) into processed themes and guides.
+- Processed lines 101-200 (Pack stress benchmarks through Suspension & Tire notes) into processed themes and guides.
+- Processed lines 201-300 (Sensorless pack bring-up through waterproofed Thunder/Nami race prep) into processed themes and guides, covering the sensorless detection template for 🇪🇸AYO#74’s 22S P45B pack, compact regen lever/sensor solutions, anti-spark connector inspection tips, Windows VESC Tool 6.05 installer caveats, Spintend mini current ceilings, and the new ESP32/Sunton dash options.
+- Processed lines 301-400 (High-power commuting thermals through copper pack fabrication tactics) into processed themes and guides, including single-Ubox endurance current caps, RM-X and Langfeite telemetry corrections, legal context updates, stem-pack safety pushback, BMS quick-voltage math, clamp-meter calibration reminders, Zero 10X highway guardrails, throttle/lever hardware picks, and copper busbar insulation workflows.
+- Processed lines 401-500 (Copper pack handling through VSETT dash bridges) into processed themes and guides, covering copper strip pre-tensioning, external pack reinforcement, ANT harness down-pop pinouts, Zero 10X dummy hubs plus 11" fork spacing, Face de Pin Thunder clamp waterproofing, GABE's 70 H Ninebot packaging, VESC Tool 6.05 audio-demo limits, LemmingMX commuter tuning, high-speed brake safety, and accessory buck/display integration.

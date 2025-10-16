@@ -1,0 +1,31 @@
+# input_part007_review Extraction Progress
+
+- 2024-05-29: Processed lines 1-100 → knowledge/processed/themes/guides/motor_controller_tuning.md
+- 2024-05-29: Processed lines 101-200 → knowledge/processed/themes/guides/
+  - motor_controller_tuning.md
+  - battery_current_tuning.md
+  - smart-bms-integration-handbook.md
+  - brake-maintenance-and-upgrades.md
+  - vesc-key-switch-and-power-management.md
+  - vesc-accessory-power-and-display-integration.md
+  - high-power-vesc-scooter-reliability-guide.md
+  - diy-battery-sourcing-and-welding.md
+- 2024-05-29: Processed lines 201-300 → knowledge/processed/themes/guides/
+  - motor_controller_tuning.md
+  - battery_current_tuning.md
+  - smart-bms-integration-handbook.md
+  - brake-maintenance-and-upgrades.md
+  - vesc-key-switch-and-power-management.md
+  - vesc-accessory-power-and-display-integration.md
+  - high-power-vesc-scooter-reliability-guide.md
+  - ninebot-g30-vesc-conversion-playbook.md
+  - diy-battery-sourcing-and-welding.md
+- 2024-05-29: Processed lines 301-400 → knowledge/processed/themes/guides/
+  - diy-battery-sourcing-and-welding.md
+  - smart-bms-integration-handbook.md
+  - motor_controller_tuning.md
+  - vesc-accessory-power-and-display-integration.md
+  - high-power-vesc-scooter-reliability-guide.md
+  - brake-maintenance-and-upgrades.md
+  - xiaomi_high_voltage_upgrade_checklist.md
+- Next start line: 401

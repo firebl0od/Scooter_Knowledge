@@ -34,13 +34,18 @@
 
 ## Thermal & Performance Management
 - Expect the hub to overheat once the stator is heat-soaked; practical street duty keeps output around 1.6 kW and avoids field weakening, which has fried stock motors at only 4 A in testing.[^3]
+- Haku still refuses to run field weakening after killing multiple stock hubs at ~4 A—he limits the Jetson to 20 S commuter duty with hydraulic brakes and monitors stator temps closely on long errands.【F:knowledge/notes/input_part011_review.md†L322-L332】
 - Monitor voltage discrepancies between VESC Tool and the JBD BMS—the readings often converge only under load, making it easy to misdiagnose faults during bench tests.[^3]
+- Avoid burnout demos that lock the rear wheel—seasoned builders note controller deaths usually follow abusive front-wheel burnouts, not regular commuting.【F:knowledge/notes/input_part010_review.md†L359-L360】
 - Avoid field-weakening experiments until cooling upgrades (ferrofluid, heatsinks, forced airflow) are proven; modest FW increments still spike both battery and phase current on this platform.[^3]
 
 ## Lighting, Brakes & Daily Use
 - Budget-friendly hydraulic conversions and DOT brake fluid dramatically improve stopping power; riders report reliable modulation even after controller swaps so long as the hub remains direct drive.[^6]
 - Space constraints favor external or printed light mounts—consider USB-rechargeable bars or flashlight setups, and isolate their power supplies to prevent noise on the control harness.[^11]
 - For delivery or commuter duty, plan for swappable battery modules or higher-capacity cells only after validating shift length; 5 Ah-class cells add ~0.8 kWh versus P42A baselines but may demand enclosure redesigns.[^12]
+
+## Ownership & Resale Outlook
+- Custom Jetson builds with 20 S 3 P packs, JBD BMS, Spintend 85/150 controllers, and hydraulic discs are fetching offers around $400, but owners weigh family hand-me-down plans and evolving regulations before selling.【F:knowledge/notes/input_part011_review.md†L327-L332】
 
 ## Build Readiness Checklist
 1. **Document pack layout and connector choices** before sealing the battery bay so future service can trace balance leads.[^4]
@@ -49,16 +54,16 @@
 4. **Capture wiring diagrams and VESC XML backups** once hall sensors, DC-DC converters, and lighting harnesses are stable, streamlining future troubleshooting.[^9]
 
 ## Source Notes
-[^1]: Jetson Bolt dropout width, stock battery cavity limits, and second-motor mounting points plus warnings against 10″ QS hub swaps.【F:knowledge/notes/input_part010_review.md†L556-L558】
-[^2]: Community guidance to hold phase current near 30–50 A on 72 V Jetson builds and sustained-current anecdotes around 72 V Sabvoton conversions.【F:knowledge/notes/input_part010_review.md†L557-L557】【F:knowledge/notes/input_part010_review.md†L670-L670】
+[^1]: Jetson Bolt dropout width, stock battery cavity limits, and second-motor mounting points plus warnings against 10″ QS hub swaps.【F:data/vesc_help_group/text_slices/input_part010.txt†L8423-L8438】
+[^2]: Community guidance to hold phase current near 30–50 A on 72 V Jetson builds and sustained-current anecdotes around 72 V Sabvoton conversions.【F:data/vesc_help_group/text_slices/input_part010.txt†L8459-L8463】【F:data/vesc_help_group/text_slices/input_part010.txt†L9553-L9559】
 [^3]: Jetson 20 S 3 P Samsung 35E pack performance, 1.6 kW cap, high-voltage faults despite 85 V limits, long-range usage notes, and field-weakening burnout cautions.【F:knowledge/notes/input_part011_review.md†L15-L15】【F:knowledge/notes/input_part011_review.md†L55-L58】【F:knowledge/notes/input_part011_review.md†L301-L304】
-[^4]: Printable Jetson battery carriers, compartment extensions, and mesh-protected holders for compact frames.【F:knowledge/notes/input_part010_review.md†L558-L559】【F:knowledge/notes/input_part010_review.md†L627-L627】
-[^5]: Mini-format VESC requirements, lack of internal space for full-size controllers, and hub fitment cautions for wide motors.【F:knowledge/notes/input_part010_review.md†L583-L583】【F:knowledge/notes/input_part010_review.md†L556-L558】
-[^6]: Bench-supply spin tests, dual-motor mounting provisions, and confirmation that the Jetson hub is direct drive with proven four-piston brake upgrades.【F:knowledge/notes/input_part010_review.md†L559-L560】
+[^4]: Printable Jetson battery carriers, compartment extensions, and mesh-protected holders for compact frames.【F:data/vesc_help_group/text_slices/input_part010.txt†L6769-L6807】【F:data/vesc_help_group/text_slices/input_part010.txt†L8120-L8139】
+[^5]: Mini-format VESC requirements, lack of internal space for full-size controllers, and hub fitment cautions for wide motors.【F:data/vesc_help_group/text_slices/input_part010.txt†L9745-L9749】【F:data/vesc_help_group/text_slices/input_part010.txt†L8423-L8438】
+[^6]: Bench-supply spin tests, dual-motor mounting provisions, and confirmation that the Jetson hub is direct drive with proven four-piston brake upgrades.【F:data/vesc_help_group/text_slices/input_part010.txt†L8423-L8438】
 [^7]: Recommended VESC low-voltage start/end values for 22 S Jetson experiments to avoid undervoltage flags.【F:knowledge/notes/input_part010_review.md†L343-L343】
 [^8]: Controller failures tied to BMS cut-offs and regen spikes on Flipsky hardware plus general caution about sudden pack disconnects.【F:knowledge/notes/input_part011_review.md†L15-L15】【F:knowledge/notes/input_part011_review.md†L53-L53】
 [^9]: Jetson hall-detection troubleshooting, sensorless zero-start fallback, post-detection electrical measurements, and the need to re-run motor detection after wiring fixes.【F:knowledge/notes/input_part011_review.md†L10-L14】
 [^10]: Community reminder to power suspect hardware on a 30–50 mA current-limited bench supply before connecting full packs.【F:knowledge/notes/input_part011_review.md†L186-L187】
 [^11]: Advice to power Jetson lighting from dedicated DC-DC converters because ADC expanders are space-constrained in this chassis.【F:knowledge/notes/input_part011_review.md†L142-L142】
 [^12]: Delivery-range planning discussions weighing higher-capacity cells versus packaging limits for commuter duty.【F:knowledge/notes/input_part011_review.md†L145-L147】
-[^13]: OEM Jetson hub current tolerance (~30 A at 72 V), dropout measurement, and 12×6 (60 H) hub recommendations for higher-torque 20 S builds.【F:knowledge/notes/input_part010_review.md†L60-L62】
+[^13]: OEM Jetson hub current tolerance (~30 A at 72 V), dropout measurement, and 12×6 (60 H) hub recommendations for higher-torque 20 S builds.【F:data/vesc_help_group/text_slices/input_part010.txt†L8423-L8463】【F:data/vesc_help_group/text_slices/input_part010.txt†L9553-L9559】

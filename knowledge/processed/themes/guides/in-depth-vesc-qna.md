@@ -340,8 +340,9 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 1. FOC detection – Double-check the measured R, L, flux. If it’s inaccurate, re-run detection with a different “Max power loss” or “Motor current” detection parameter. 
 2. Observer Gain – You might lower foc_observer_gain if it’s overshooting angle at near-zero speed. 
-3. Startup Current – If it saturates, reduce the startup current or use openloop_rpm/time to ramp more gently. 
+3. Startup Current – If it saturates, reduce the startup current or use openloop_rpm/time to ramp more gently.
 4. Add HFI or use hall sensors if physically possible.
+5. Expect compromises on heavy hubs today – even with HFI/VSS, riders still cap launch torque or give a light push because zero-speed starts tend to chatter on sensorless-only scooters.【F:knowledge/notes/input_part012_review.md†L14-L14】
 
 </details>
 
@@ -460,6 +461,7 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 3. Set gentle cutoffs (voltage, current, thermal) to avoid abrupt BMS or ESC-level fault cutouts. 
 4. Use properly rated connectors (phase & battery) so you don’t melt them at high current. 
 5. If running advanced features like MTPA or Field Weakening, do incremental tests in a safe area, watch for voltage spikes, and confirm it’s stable.
+6. Release the throttle when a fault appears—VESC clears the fault automatically once input drops to zero, but holding the trigger keeps the controller in a prolonged shutdown state.【F:knowledge/notes/input_part009_review.md†L100-L100】
 
 </details>
 
@@ -676,10 +678,12 @@ Below are more advanced or niche questions (continuing from Q30), focusing on ed
 
 **Answer**
 
-1. App Settings – In VESC Tool, set “APP to use = ADC” or “ADC and UART,” etc. 
-2. Calibrate – The min and max voltage for the throttle to ensure 0-100% range. 
-3. Filter – You can add a small throttle ramp or filter to smooth out noise in analog signals. 
+1. App Settings – In VESC Tool, set “APP to use = ADC” or “ADC and UART,” etc.
+2. Calibrate – The min and max voltage for the throttle to ensure 0-100% range.
+3. Filter – You can add a small throttle ramp or filter to smooth out noise in analog signals.
 4. Hall Throttle vs. Potentiometer – Some throttles are hall-based with ~1–4V output, others are purely resistive. Make sure your wiring and supply voltage match.
+5. Input sources – VESC Tool can drive the scooter from the Balance app, UART remotes, or CAN clients even without a physical throttle; lock Bluetooth or power down when you walk away so nobody nearby rewrites settings mid-session.【F:knowledge/notes/input_part009_review.md†L80-L80】
+6. Keyboard override – Desktop VESC Tool keeps the keyboard control toggle on the right side; enable it after detection before expecting WASD/arrow inputs to move the motor.【F:knowledge/notes/input_part009_review.md†L83-L83】
 
 </details>
 
@@ -1216,9 +1220,10 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 
 **Answer**
 
-- If your battery is 100 A total, four ESCs means ideally each is ~25 A for stable operation if all can run full. 
-- In reality, some do keep each at 100 A because it’s unlikely all four motors pull max simultaneously, but that can be risky. 
+- If your battery is 100 A total, four ESCs means ideally each is ~25 A for stable operation if all can run full.
+- In reality, some do keep each at 100 A because it’s unlikely all four motors pull max simultaneously, but that can be risky.
 - You might do partial offset: 50 A each, to not exceed 200 A total if two motors heavily load. Understand your BMS and acceptance of risk.
+- Remember that a single VESC cannot run two motors simultaneously—plan one controller per hub plus CAN (or another coordination layer) for multi-motor vehicles.【F:data/vesc_help_group/text_slices/input_part009.txt†L12486-L12489】
 
 </details>
 
@@ -1391,10 +1396,11 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 
 **Answer**
 
-- ABS Over Current: The software fault triggered from current sense. 
-- DRV Fault: The DRV chip signaled an overcurrent or under/overvoltage condition. 
-- MOSFET Short or Gate Driver Error: Usually results in immediate destructive fault—ESC might not just code an error but physically fail. 
+- ABS Over Current: The software fault triggered from current sense.
+- DRV Fault: The DRV chip signaled an overcurrent or under/overvoltage condition.
+- MOSFET Short or Gate Driver Error: Usually results in immediate destructive fault—ESC might not just code an error but physically fail.
 - For repeated DRV fault, suspect hardware or config mismatch. For repeated ABS Over Current, adjust or slow down current ramp.
+- Once wiring and observers check out, lift `l_abs_current_max` (and optionally disable the slow ABS filter) so transient phase spikes stop tripping the controller mid-launch.【F:knowledge/notes/input_part009_review.md†L82-L82】
 
 </details>
 
@@ -1418,9 +1424,10 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 **Answer**
 
 - Often discouraged if you push near the hardware’s voltage limit. The DRV8302 can be fragile with voltage spikes. 
-- If you do attempt it, keep a small margin. 
-- A 4.12 at 12S is safer for FW than 4.12 at 14 or 16S. 
+- If you do attempt it, keep a small margin.
+- A 4.12 at 12S is safer for FW than 4.12 at 14 or 16S.
 - Many prefer a 6-based hardware or higher voltage rating for stable FW.
+- Trampa’s legacy VESC MK6 firmware effectively caps the platform at 12 S—13 S experiments killed braking outright, forcing riders back onto low-power Xiaomi hubs until they sourced modern controllers.【F:knowledge/notes/input_part001_review.md†L85-L85】
 
 </details>
 

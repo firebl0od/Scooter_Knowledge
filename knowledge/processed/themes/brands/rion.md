@@ -32,6 +32,7 @@
 - **Weather exposure:** Stock seals are insufficient; moisture ingress will jeopardise both the carbon structure and high-voltage electronics if left untreated.[^2]
 - **Chassis flex:** RX carbon frames feel “chewing gum” at 400 A—plan dampers, reinforcement plates, and tyre upgrades if you chase high-speed stability.[^7]
 - **Handling opinions diverge:** Paolo praises RX2000 stability without a damper near 100 km/h, but Face de Pin Sucé still calls the chassis twitchy versus Weped builds—log your own high-speed telemetry before trimming safety margins.【F:knowledge/notes/input_part001_review.md†L50-L51】
+- **Track-day feedback is harsh:** Angerville kart racers cited brake fade, frame flex, and high centres of gravity that made Rions sketchy on tight circuits; their workaround mixes dual throttles, external controller mounts, ferrofluid-cooled Vsett motors, and upgraded Magura brakes.【F:data/vesc_help_group/text_slices/input_part002.txt†L8720-L8783】
 - **Motor bottlenecks:** The LY-manufactured hubs remain the limiting factor—pushing phase current past ≈200 A or ignoring lead temperatures risks overheating long before the controllers run out of headroom.[^4]
 - **Logistics churn:** Replacement motors are attainable but shipping shocks can nullify savings—budget for customs fees or arrange local pickup.[^3]
 - **Legacy chassis cracks:** Tear down older Rion frames—Face de Pin Sucé uncovered cracked steering heads, flexing plates, underspec’d Kelly controllers, and fan ducts that just slam into carbon walls until you rework airflow.[^steering_crack][^legacy_fans]
@@ -62,14 +63,15 @@
 
 ## Market & Procurement Signals
 - Leo Apex pricing now clears €9 000 while still shipping with Nutt brakes; factor in the premium for branding when comparing against custom Rion builds or competing factory frames.[^5]
+- French kart tracks host regular scooter days for roughly €25–35, while Swiss riders are still negotiating local access—context for planning shakedown trips or track testing.【F:data/vesc_help_group/text_slices/input_part002.txt†L9165-L9186】
 - Fresh inventory sightings include 100 V Tronic X12 controllers and 33×2 60 H motors with 125 mm dropouts and 4 mm banana leads around €300 delivered inside the EU, giving owners a benchmark for sourcing spares without paying Rion’s full markup.[^10]
 
 ## Source Notes
 [^1]: Cost breakdowns and skepticism toward 400 A/136 PS marketing around the RE90 import experience.【F:knowledge/notes/input_part000_review.md†L49-L51】
 [^2]: Praise for the 23 S 6 P battery and carbon build alongside warnings about limited waterproofing and dry-optimised tyres.【F:knowledge/notes/input_part000_review.md†L51-L53】
 [^3]: Availability and pricing realities for Rion/Weped FF-spec motors sourced within France.【F:knowledge/notes/input_part000_review.md†L698-L698】
-[^4]: Leo Apex/Rion motor limits, phase-lead size, and traction-limited launches logged on 24 S Tronic builds.【F:knowledge/notes/input_part010_review.md†L67-L69】【F:knowledge/notes/input_part007_review.md†L52-L55】
-[^5]: Controller and wiring requirements for high-KV Rion hubs, including ≥250 A phase demand, 4 mm² lead overheating, and the premium pricing that still ships with Nutt brakes.【F:knowledge/notes/input_part001_review.md†L147-L147】【F:knowledge/notes/input_part001_review.md†L163-L163】【F:knowledge/notes/input_part010_review.md†L68-L69】
+[^4]: Leo Apex/Rion motor limits, phase-lead size, and traction-limited launches logged on 24 S Tronic builds.【F:data/vesc_help_group/text_slices/input_part010.txt†L8543-L8566】【F:knowledge/notes/input_part007_review.md†L52-L55】
+[^5]: Controller and wiring requirements for high-KV Rion hubs, including ≥250 A phase demand, 4 mm² lead overheating, and the premium pricing that still ships with Nutt brakes.【F:knowledge/notes/input_part001_review.md†L147-L147】【F:knowledge/notes/input_part001_review.md†L163-L163】【F:data/vesc_help_group/text_slices/input_part010.txt†L8543-L8586】
 [^6]: “Rion 1337” hub specifications—70 mm magnets, ~9.5 AWG leads, and 155–160 mm axles—plus repair cautions after MOSFET swaps on Tronic hardware.【F:knowledge/notes/input_part001_review.md†L409-L409】【F:knowledge/notes/input_part001_review.md†L428-L428】【F:knowledge/notes/input_part002_review.md†L84-L84】
 [^7]: Rider feedback calling the RX carbon chassis “chewing gum” under modern power levels and noting stability concerns versus Weped builds.【F:knowledge/notes/input_part001_review.md†L51-L51】【F:knowledge/notes/input_part001_review.md†L800-L801】
 [^8]: Reference measurements placing HM, Blade, and Rion hub resistances plus axle width comparisons for swap planning.【F:knowledge/notes/input_part001_review.md†L314-L314】【F:knowledge/notes/input_part001_review.md†L409-L409】
@@ -82,3 +84,8 @@
 [^steering_crack]: Face de Pin Sucé dissected older Rion frames and found cracked steering heads, flexing plates, under-specced Kelly controllers, and dead-end fan ducts—modern power levels require reinforcement before trusting legacy chassis.【F:knowledge/notes/input_part013_review.md†L716-L716】
 [^legacy_fans]: Face de Pin Sucé noted the legacy RX fan ducts literally blow into carbon walls and pair with underspec’d Kelly controllers, demanding airflow and controller upgrades before modern 400 A tunes.【F:knowledge/notes/input_part013_review.md†L716-L716】
 [^future_swap]: Jose and Yamal are delaying firmware work until they swap in 3Shul 700/1400 controllers and dual Lonnyo 100 H hubs on 50PL cells, signaling how upcoming driveline upgrades reshape Rion tuning plans.【F:knowledge/notes/input_part013_review.md†L39-L39】
+
+## Rider Protection Expectations
+- Community veterans recommend jackets with D3O or other level-2 armour plus Alpinestars-branded protection to match the RE90's high-speed ambitions.[^rion_protection]
+
+[^rion_protection]: Source: knowledge/notes/input_part000_review.md, line 52.
