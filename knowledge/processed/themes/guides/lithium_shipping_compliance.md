@@ -22,6 +22,7 @@
 - **Leverage trusted intermediaries for personal-use imports.** Riders struggling with formal customs (e.g., Jason sourcing Samsung 40T/50S packs into South Korea) now lean on EU partners like Yamal who can forward cells as personal parcels via established transport networks, but they still plan for paperwork and potential scrutiny at the border.[^10]
 - **Document every parcel.** Keep copies of declarations, MSDS sheets, and carrier acknowledgements so you can prove due diligence if an incident occurs; Denis captures these records alongside order IDs during manual payment reconciliation.[^11][^5]
 - **Plan for stock outages.** Charger shortages, bag delays, and hazmat paperwork slowdowns can halt complete-kit sales; maintain communication channels (newsletters, storefront notices) to reset expectations before customers escalate.[^3]
+- **Expect semiconductor bottlenecks and Brexit friction.** Rita adapters and smart packs hit production delays through March 2021 because of chip shortages, and UK-bound lithium parcels were routinely stalled or returned even while non-battery shipments still cleared to Canada faster than parts of the EU.[^rita_shipping_delays]
 - **Budget postal routes accordingly.** Returning a controller via national post cost roughly €15 versus €60–€80 with DHL/UPS, but EMS recently bounced electronics out of Guangzhou.
   - expect rerouted shipments when mail centres tighten lithium rules.[^12]
 - **Pay with strong buyer protection.** AliExpress disputes can idle for months.
@@ -33,6 +34,7 @@
 ## Regional Compliance Watch
 
 - **Spain’s 2024–2027 crackdown.** Cheap Xiaomi clones with flimsy 110 mm rotors and bargain electronics triggered fires and are being banned; by 2027 riders must shift to plated, certified models such as the Xiaomi 4 series to stay legal.[^15]
+- **UK/Australia logistics remain tight.** Shipping lithium packs into the UK or Australia is still difficult; UK builders lean on local fabricators like Tudor and even push petitions for broader legalisation.[^uk_aus_shipping]
 
 
 
@@ -53,3 +55,5 @@
 [^13]: Source: knowledge/notes/input_part000_review.md†L401-L404
 [^14]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L90969-L91040
 [^15]: Source: knowledge/notes/input_part007_review.md†L410-L410
+[^uk_aus_shipping]: Source: knowledge/notes/all_part01_review.md†L631-L631
+[^rita_shipping_delays]: Source: knowledge/notes/all_part01_review.md†L744-L746

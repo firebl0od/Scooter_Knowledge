@@ -3,6 +3,7 @@
 ## Tire Selection & Pressures
 
 - **10" pneumatic upgrades:** CST 10×2.25, Wanda 10×2, and Xuancheng casings deliver the best grip once inflated toward 3.5–4.2 bar; running them near 36 psi dulls the expected 12 S speed gains and risks fender rub until clearances are checked.[^1][^2][^3]
+  - Genuine Xuancheng tires reuse the stock 8.5" tube, run happily around 45–50 psi, and last roughly 700 km—verify the factory label to avoid counterfeit casings.[^xuancheng_factory]
 - **Artem’s 10-inch benchmark:** PMT 10×3 remains the gold-standard VSETT tire at roughly 48 psi, with CST 10×3 the value pick.
   - just remember the CST bead runs small, so seat it evenly to avoid wobble.[^4]
 - **Premium compound trade-offs:** PMT E-Fire 10×3 radials land around $175 per pair shipped from Italy, while PMT Stradales can feel skittish on Weped frames where softer Shinko rubber hooks up better.
@@ -16,9 +17,11 @@
 - **Case-specific fit notes:** CST 10×2.25 carcasses often need rim sanding, Kenda-branded 152 mm casings mount tight, and Wanda 10×2 options stay grippy at ~4.2 bar while outlasting ultra-soft red compounds.[^10]
 - **Solid vs. pneumatic:** Riders report roughly 20 % higher energy use, harsher ride quality, and accelerated fatigue on battery tabs when solid tires replace pneumatics.
   - reserve solids for short-range emergency duty.[^11][^8]
+- **Monorim solid tires deform under torque:** Preheat stubborn solids around 100 °C and recruit a helper for installation, but most owners ultimately switch back to pneumatic or alternative compounds for better feel.[^monorim_solid]
 - **Solid vs. pneumatic:** Riders report roughly 20 % higher energy use, harsh ride quality, and accelerated battery-tab fatigue on solid tires; Denis’ crew now calls 9.5-inch solids dangerous and steers commuters toward quality pneumatic or tubeless casings instead.[^8][^12]
 - **Valve and rim prep:** Monorim 500 W hubs ship without valve holes; drill carefully and add angled stems before installing tubes. Sand thick CST beads or rim casting bumps so 10" conversions seat evenly and avoid wobble. Blade owners even notch the split rim so a beefier Schrader clears the casting.
   - valve extensions help you inflate but still expect to relieve metal around the stem on compact rims.[^9][^3][^13]
+- **CST 10×2.5″ remains the go-to pneumatic swap** for Pro/1S scooters, but cloning Monorim suspension geometry or mixing Sharkset hardware demands careful bolt sizing and occasional metalwork so travel stays smooth.[^cst_go_to]
 - **Budget hub sourcing:** Blade-branded Longyu 60 V motors are landing around €180 each (hub only), but factor in rim/tire costs and scarce Weped-spec 75 mm variants.
   - forwarders or local dealers often bundle tires to avoid inflated AliExpress freight.[^14]
 - **Dropout prep for VSETT hubs:** Reversing Monorim swingarms, drilling fresh axle slots, and trimming dropouts for security washers are mandatory when fitting VSETT 10+ hubs; bent retainers or cheap sliders won’t hold torque without that rework.[^15]
@@ -29,6 +32,7 @@
   - reputable ULIP and PMT sets seat correctly on 6.1" rims even if they cost more.[^19][^20]
 - **Pressure by load:** Heavy riders stabilize handling by targeting ≈4 bar rear / 3.5 bar front once mudguard brackets and wiring are rerouted for the taller rubber.[^2]
 - **10" vs. 8.5" debate:** August workshop notes show consensus in favour of 10" pneumatic conversions for smoother rides and slightly higher top speed, provided braking upgrades keep pace, yet some riders revert to 8.5" rubber with Monorim V2 when XuanCheng 10" casings introduce S-shaped wobbles or pogoing on rough pavement.[^21][^22]
+- **10×3 conversions need real suspension.** Even dual shocks couldn’t tame solid 10×2.5 tires, pushing riders back to CST 3" air casings or custom forks when chasing that footprint.[^ten_by_three]
 - **Bearing choice:** SKF-style 2RS bearings seal better than 2Z shields when you expect wet rides, keeping grit out of Xiaomi and Monorim hubs.[^23]
 - **Track pressures:** PMT 10×3 slicks settle around 2.4 bar for general track duty, Vsett racers push 3.5 bar, and dropping to 1.8 bar shreds cords.
   - log rider weight alongside PSI when tuning Xiaomi race builds.[^24][^25]
@@ -47,6 +51,7 @@
   - builders saw efficiency losses when they skipped the full-pressure step.[^31]
 - Spin the wheel off the ground and watch for tread wobble before blaming balance weights—most vibrations trace back to uneven bead seating.[^32]
 - **Warm and center stubborn casings.** Dust rims and tubes with talc, pre-warm Xuancheng/PMT shells with a heat gun, and cinch the tread with zip ties so beads drop into the rim center before levering the tire home.[^33][^34]
+- **Pull the brake disc before tackling a puncture.** Removing the rotor prevents scratches, and dusting tubes plus using plastic spoons keeps CST V3 and other 8.5"/10" casings from slicing replacements during reinstallation.[^disc_off_first]
 - **Use air volume, not pressure spikes.** Hand pumps stall near 105 psi.
   - seat tubeless tires with high-flow foot pumps, station compressors, or ratchet straps that momentarily seal the beads.[^35]
 - **Blast stubborn tubeless beads.** For 11 in conversions, remove the valve core, flood the bead with soapy water, cinch the tread, and dump ~150 psi from a bead bazooka or large compressor.
@@ -62,11 +67,13 @@
   - suspended G30 builds still need correct tire pressure and post-curb inspections.[^43]
 - **Tubeless-on-solid rims is still a headache.** Cutting the bead wire and stuffing in a tube can get you rolling, but veteran builders warn those hybrids can fail at 65 km/h and recommend dish soap, split rims, or professional presses instead of brute force.[^44]
 - **Split rims ease roadside swaps.** Premium platforms like Weped pair rubber isolators with dual bolt circles to seal halves, reinforcing why proper hardware matters when chasing airtight builds and debating tubeless versus tube reliability.[^45]
+- **True freshly machined rims.** After shaving Xiaomi hubs for 10×2.5″ installs, spin the wheel or use a rubber eraser wheel against a powered axle to remove high spots before final assembly.[^rim_truing_technique]
 
 ## Conversion & Fitment Steps
 
 - 10×2.5 tires sized for 6.0 in rims will not seat on Xiaomi’s 6.1 in hubs without machining the shoulder.
   - plan on lathe work or pick narrower casings to avoid sketchy bead fitment.[^46]
+- **Expect frame tweaks on smaller models.** Classic M365 and 1S frames often need grinding or bending to clear 10" rubber, while Pro frames typically fit without trimming; file mudguard brackets or flex stays to stop rub.[^frame_tweak]
 - **Machine rims for true 10×2.5″ tires.** Shave ≈1.5 mm from Xiaomi rims (lathe preferred), deburr carefully, and swap to curved valves so Monorim forks clear the stem.
   - run 60–65 psi for 90 kg riders and treat wet pavement with caution. Builders chasing 10×3 conversions on the Pro 2 received the same advice along with reminders to upgrade controller MOSFETs/caps before pairing wider rubber with 48 V tunes.[^47][^lathe]
 - **Verify valve orientation and bushing stacks.** PMT 10×3 or CST 10×2 tubes can bind or leak if stems point the wrong way or bushings sit unevenly.
@@ -74,6 +81,8 @@
 - **Expect PMT 10×3 machining.** Plan to remove roughly 2 mm from the rim sidewalls (or migrate to Dualtron-style rims) before PMT 10×3 carcasses will seat.
   - PMT 10×2.125 rubber still slips onto 6.1" rims without grinding when grip is the only goal.[^49]
 - **Open Xiaomi fender clearance.** Countersink the front mudguard bolt, shim the guard up a few millimetres, and brace the rear fender so quality 10" rubber clears on rough roads.[^50]
+- **Monorim front mudguards need trimming.** Remove spacer foam, shorten mounting screws, or swap brackets when 10" wheels kiss the guard; a few millimetres of clearance prevents rubbing.[^monorim_mudguard]
+- **Keep 10" setups disciplined.** Run Xuancheng casings around 4.0–4.2 bar, dust tubes with talc, and use slime or careful lever work to avoid tube pinch during swaps.[^tire_discipline]
 - **Swap to low-profile hardware up front.** Replacing fork bolts with low-head M6 hardware or trimming plastics keeps 10-inch front tires from rubbing the fork after conversions.[^51][^52]
 - **Verify valve orientation and bushing stacks.** PMT 10×3 or CST 10×2 tubes can bind or leak if stems point the wrong way or bushings sit unevenly.
   - check orientation before closing the fork, especially on dual 60H/50H hubs.[^53]
@@ -116,6 +125,7 @@
   - the bite is excellent but the calipers ship thick and dry compared with scooter hydraulics.[^72]
 - **Support brake housing runs.** Tie the cable housing to the frame and trim excess length.
   - loose housing eats lever travel and ruins braking force no matter the caliper upgrade.[^73]
+- **Chase brake chatter methodically.** Pinched housings under the controller or damaged cable sheaths caused most squeal—refresh the housing, lubricate barrel adjusters, and consider TRP Spyke or NUTT calipers with proper spring tension.[^brake_chatter_diagnostic]
 - **Graduate to full hydraulics for 80 km/h builds.** Xtech hybrids struggle to slow tuned Pro 2 conversions at highway speed; riders switch to Magura-class brakes and add lever sensors if they still want regen without killing lever feel, finishing with a proper bleed after routing new hoses.[^74]
 - **Watch Magura clearance.** MT7/MT8 calipers squeezed onto Xiaomi G30 and VSETT frames can lose their <5 mm tire gap as the casing flexes.
   - check clearance regularly, keep spare banjos/hardware, and reconsider external hose reroutes that rub 10×3 tires after flats.[^75]
@@ -132,6 +142,7 @@
 - **Move and seal charge ports:** Many riders shift the charge port higher on the stem once 10" tires and rerouted wiring go in, resealing the deck to keep grit out.[^82]
 - **Rear suspension stretch:** Bolt-on rear suspension kits extend wheelbase roughly 10 cm, noticeably calming Xiaomi chassis at 35–40 km/h once brake adapters are spaced correctly.[^83][^66]
 - **Stem stability:** Pair plastic shims with Foldster X-Lock or Phoenix clamps to eliminate wobble; trim or relocate latch hardware so Wildman battery bags clear the hook without scuffing packs.[^84][^85][^86]
+- **Stiffen high-speed steering.** 3D-printed steering-damper brackets tame bar shake around 30 km/h, and hand-built mudguard mounts survive jumps and heavy spray better than stock plastic on faster builds.[^steering_damper_bracket]
 - **Source genuine suspension hardware:** 3D-printed supports and lock extender kits improve Wildman bag clearance, but genuine Monorim parts remain scarce and pricier through EU resellers.
   - budget time and cost accordingly.[^87]
 - **Lighting integration:** 3D-printed fender supports and extender housings can host sealed LED strips, wireless turn-signal pods, Lumos Matrix helmet mounts, or DIY 12 V strobes.
@@ -155,6 +166,7 @@
 ## Performance Notes
 
 - **500 W hubs on 12 S:** Swapping to 500 W motors and 12 S packs holds 45–48 km/h on flats without the voltage sag that drags 300 W hubs toward ~44 km/h once heat builds.[^96]
+- **Mixed-wheel combos:** Running a 10" front with an 8.5" rear still delivers 48–50 km/h when pack voltage stays high, but inspect hall sensors and brake hardware frequently—neglect leads to repeated ESC failures.[^mixed_wheel_upkeep]
 
 ## Setup Checklist
 
@@ -272,3 +284,15 @@
 [^99]: Source: knowledge/notes/all_part01_review.md†L93717-L93725
 [^100]: Source: knowledge/notes/all_part01_review.md†L107469-L107478
 [^101]: Source: knowledge/notes/all_part01_review.md†L111977-L111999
+[^xuancheng_factory]: Source: knowledge/notes/all_part01_review.md†L624-L624
+[^monorim_solid]: Source: knowledge/notes/all_part01_review.md†L626-L626
+[^frame_tweak]: Source: knowledge/notes/all_part01_review.md†L625-L625
+[^monorim_mudguard]: Source: knowledge/notes/all_part01_review.md†L627-L627
+[^tire_discipline]: Source: knowledge/notes/all_part01_review.md†L696-L696
+[^mixed_wheel_upkeep]: Source: knowledge/notes/all_part01_review.md†L738-L738
+[^ten_by_three]: Source: knowledge/notes/all_part01_review.md†L692-L692
+[^cst_go_to]: Source: knowledge/notes/all_part01_review.md†L816-L816
+[^disc_off_first]: Source: knowledge/notes/all_part01_review.md†L832-L832
+[^brake_chatter_diagnostic]: Source: knowledge/notes/all_part01_review.md†L817-L817
+[^steering_damper_bracket]: Source: knowledge/notes/all_part01_review.md†L815-L815
+[^rim_truing_technique]: Source: knowledge/notes/all_part01_review.md†L893-L893

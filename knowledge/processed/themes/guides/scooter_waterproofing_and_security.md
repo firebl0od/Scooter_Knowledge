@@ -3,6 +3,7 @@
 ## Weatherproof the Chassis Before the Storm
 
 - **Seal every seam.** Run silicone along deck joints, cable pass-throughs, and the charge door, then coat hub interfaces with lithium grease so sustained rain rides don\'t wick water into the pack or motor bay.[^1]
+- **Add cheap dash protection.** A hydrogel phone film keeps Xiaomi dash buttons responsive in the rain, and engine gasket sealant around deck seams and grommets finishes a £1–2 waterproofing job.[^hydrogel_dash_seal]
 - **Repack leaky Kaabo hubs.** RTV the shell seam and stuff fresh lithium grease into the bearings.
   - rusted motors often recover once water ingress is halted.[^2]
 - **Weatherproof external packs thoroughly.** Riders strapping batteries to rear suspensions silicone every seam to keep exposed packs dry on long commutes.
@@ -38,8 +39,11 @@
 ## Layered Theft & Compliance Tactics
 
 - **Build loud, cheap alarms.** Pair gyroscopes with 120 dB buzzers tied to ignition keys or BLE presence so tampering keeps the siren blaring until the scooter rests motionless.[^24]
+- **Wire BLE-powered relays correctly.** Feed the relay from the dashboard’s 5 V red/black leads, return the out pair to the dash, and avoid switching the high-current battery line directly.[^ble_relay]
 - **Mount motion sensors in the battery bag.** Couriers hide Arduino-driven buzzers inside Wildman cases so cutting the strap or unzipping the bag triggers instant noise without alerting thieves to the electronics location.[^1]
 - **Carry layered locks.** Quick errands get a compact Master Lock cable that stays smooth with graphite; long stops call for hardened chains plus GPS trackers taped into the loom.[^25][^26]
+- **Layer active deterrents.** Hide GPS trackers along the main harness, tuck motion alarms in the battery bag, keep hardened chains ready, and consider immobilisers that lock the front wheel until a fob reactivates the scooter.[^layered_deterrence]
+- **Treat Abus Granit-style chains as the baseline.** Even “unpickable” locks fall to cutters, so riders double up heavy chains or keep the scooter within sight despite the weight penalty.[^abus_granit_benchmark]
 - **Treat thin cables as token deterrents.** City riders report compact cable locks stop nothing.
   - start with ≥8 mm hardened chains for real security.[^27]
 - **Gig riders budget time for serious locks.** European couriers report food-delivery pay dipping from ≈€20/h toward “slavery” wages post-acquisitions, so they now stage 2–3 heavy chains and padlocks at regular stops to keep scooters secured between orders.[^28]
@@ -64,6 +68,7 @@
 ## Regional Compliance Pressure
 
 - Ireland and UK riders report €1,500 fines and confiscations for overpowered scooters, so stealth builds and restrained riding remain the safest path in strict EU jurisdictions.[^42]
+- Germany still caps e-scooters at 20 km/h with insurance requirements, and French enforcement is catching up; riders keep builds discreet and ride cautiously to avoid roadside trouble.[^de_fr_rules]
 - **Plan for roadside inspections.** Finnish police are confiscating scooters that exceed 25 km/h without registration and even checking bulb part numbers, while southern EU riders dodge €8–9 k fines by programming low-power “police modes” and swapping to halogen BA9S lamps to satisfy moped rules.[^43]
 - **Swiss crackdowns escalate.** Authorities recently seized a 133 km/h Wolf Warrior outright, reinforcing the need to keep legal commuter profiles alongside race setups.[^44]
 - **Pre-stage a legal profile.** Belgian riders have seen 50 km/h scooters confiscated and cases escalated to lawyers; their workaround is to flash a 25–30 km/h VESC profile for roadside checks while keeping a high-speed mode for private property, paired with calm riding to avoid attracting attention.[^45]
@@ -126,8 +131,11 @@
 [^22]: Source: knowledge/notes/denis_all_part02_review.md†L433-L436
 [^23]: Source: knowledge/notes/denis_all_part02_review.md†L440-L441
 [^24]: Source: knowledge/notes/all_part01_review.md†L88-L88
+[^ble_relay]: Source: knowledge/notes/all_part01_review.md†L642-L642
 [^25]: Source: knowledge/notes/all_part01_review.md†L167-L167
 [^26]: Source: knowledge/notes/all_part01_review.md†L27392-L27407
+[^layered_deterrence]: Source: knowledge/notes/all_part01_review.md†L895-L895
+[^abus_granit_benchmark]: Source: knowledge/notes/all_part01_review.md†L741-L741
 [^27]: Source: knowledge/notes/input_part006_review.md†L252-L252
 [^28]: Source: knowledge/notes/input_part011_review.md†L330-L337
 [^29]: Source: knowledge/notes/input_part013_review.md†L794-L796
@@ -144,6 +152,8 @@
 [^40]: Source: knowledge/notes/input_part006_review.md†L428-L429
 [^41]: Source: knowledge/notes/input_part012_review.md†L201-L203
 [^42]: Source: knowledge/notes/input_part005_review.md†L124-L124
+[^de_fr_rules]: Source: knowledge/notes/all_part01_review.md†L632-L632
+[^hydrogel_dash_seal]: Source: knowledge/notes/all_part01_review.md†L876-L876
 [^43]: Source: knowledge/notes/input_part005_review.md†L225-L227
 [^44]: Source: data/vesc_help_group/text_slices/input_part002.txt†L9471-L9489
 [^45]: Source: data/vesc_help_group/text_slices/input_part002.txt†L9502-L9510

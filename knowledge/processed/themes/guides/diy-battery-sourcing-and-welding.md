@@ -12,29 +12,37 @@
 - Budget worksheets should factor in consumables, BMS headroom, and future tariff shocks (e.g., QS8 connectors drifting toward $35) to avoid mid-build redesigns when scaling beyond 300 A continuous.[^4][^5]
 - One builder left boards on the hotplate briefly without visible damage, but the scare reinforced double-checking preheat routines before solder prep.
   - treat hotplate stages as live-fire operations every time.[^5]
+- Samsung 50E vs. 35E debates continue: the 50E sags less but caps around 30 A on a 3 P string, global shortages hit both cells, and some branded Liitokala packs arrived with mystery “BICO” cells unfit for high-current builds.[^50e_supply]
 
 ## Workshop Pricing & BMS Baselines
 
 - Denis’ catalog still quotes ~€170 for a 10S4P Samsung 35E pack, €30 for the Wildman bag, and roughly €20 for EU shipping via DPD/UPS; he insists on genuine XT30 hardware and 20 A common-port BMS boards rather than AliExpress knock-offs.[^denis-pricing]
+- Builders are binning cells by internal resistance with RePackr and double-checking charger calibration whenever meter readings disagree, keeping parallel groups balanced before welding.[^repackr_ir_match]
 - Match BMS boards to the intended series count.
   - 12S packs need true 12S PCM/PCB hardware rated around 30 A so Rita installs do not outrun protection stages.[^6]
+- Riders sourcing 15 S externals stick with common-port packs (AliExpress/Alibaba) that ship with integrated BMS hardware and budget for higher voltage alongside extra current headroom as parallels scale up.[^15s_common_port]
 - Community teardown of a so-called “36 V 20 Ah” AliExpress pack revealed just 12 cells and sand filler.
   - treat round-number claims or >42 V open-circuit readings as immediate scams unless the seller proves a 10S6P layout.[^aliexpress-sand]
 - Swap separate-port AliExpress BMS boards before paralleling with Rita; otherwise the discharge lead backfeeds chargers and overfills cells through the wrong path.[^7]
+- Wary of flaky AliExpress “smart” boards, veterans are swapping to Daly hardware and only editing per-group internal-resistance tables after confirming wiring and cycling the pack.[^daly_swap]
 - Expect honest 10S materials to cost roughly €100 before labor and tax—anything cheaper usually hides weak cells or flimsy protection hardware.[^8]
 - Tudor/VTA external packs arrive with same-port BMS wiring; tie Rita’s XT30 into C-/B- and leave P- empty so charge and discharge share the protected port without bypassing the board.[^tudor-common]
 - The workshop flags “fire emoji” AliExpress packs built from laptop pulls.
   - builders cap Happy BMS builds near 53 V/40 A and lean on refurbished OEM modules plus externals for range instead of forcing Rita past spec.[^ali-pack-warning-diy]
+- If a smart BMS reports one parallel group drifting, verify cell authenticity and log voltages with a multimeter—bad cells are rare but easier to catch before they torch usable range.[^bms_drift_check]
 - Vet cheap-pack marketing claims with lab-grade tools.
   - François leaned on a Hyperion 1420 charger, 800 W PSU, and a load bank to expose fraudulent capacity numbers, underscoring how expensive proper validation is.[^lab-gear]
 - Aerdu’s inexpensive 10S packs can deliver honest capacity when properly potted, but missing fish paper between series groups remains a fire risk.
   - veterans still favour reputable cell sellers (e.g., NKON) and add insulation themselves before shipping customs builds.[^9]
+- LiitoKala’s advertised 21 Ah packs recently tore down to uncertified ≈2200 mAh cells, dubious stickers, and weak QC; disappointed buyers opted back to Denis’ Samsung builds despite shipping headaches.[^liitokala_warning]
+- EU paperwork and cell shortages have paused Denis’ kit shipments to the UK; NKON and other warehouses are dry, so Tudor is quoting bespoke 48 V/25 Ah builds while customers wait.[^uk_cell_shortage]
 - External packs stay on common-port BMSes so Rita can police charge flow.
   - Denis refuses to ship his smart separate-port boards in range kits because they can’t stop overcharge through the discharge lead.[^common-port-chat]
 - Retrofit third-party externals with 40 A UART485 common-port boards (often AliExpress kits bundled with Bluetooth dongles) so adapters can monitor and tune pack behaviour safely.[^uart485-diy]
 - Among AliExpress vendors, Laudation remains one of the few delivering rated capacity—treat flashy “60 000 mAh” marketing as a red flag even when the listing looks professional.[^laudation-diy]
 - Production packs come from the m365Krakow workshop; Denis handles support and logistics while the partner assembles cells, so large orders should plan around their combined lead times.[^m365krakow]
 - Denis’ repair BMS defaults to ≈4.15 V/cell (≈4.14 V after its diode drop) yet lets riders raise or lower the ceiling to trade longevity for range; bench tests logged ≈37 A discharge headroom when paralleled with another 10S pack despite the older board’s 3 A charge limit.[^10]
+- Import math still favours regional resellers: EU buyers report ~$40 shipping plus ≈€20 customs per motor with multi-week waits from China, so Kroxne/VTA stock often wins despite higher sticker prices.[^import_math]
 - LLT’s 100 A smart boards remain the viable option for 4 S boosters.
   - cheaper BMSes brown out, and pushing Flipsky 75100 boxes to 20 S simply moves failure to the wiring long before the ESC runs out of headroom.[^11]
 - JK active-balancing boards keep outrunning Daly units on telemetry and balancing strength; builders now reserve Daly for budget builds and spec JK or LLT when 20 S packs need reliable comms and cell maintenance.[^12]
@@ -576,6 +584,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^aliexpress-sand]: [^273]
 [^tudor-common]: [^274]
 [^ali-pack-warning-diy]: [^275]
+[^bms_drift_check]: Source: knowledge/notes/all_part01_review.md†L546-L546
 [^lab-gear]: [^276]
 [^common-port-chat]: [^274][^277]
 [^uart485-diy]: [^278]
@@ -902,3 +911,10 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^287]: Source: knowledge/notes/input_part013_review.md†L322-L324
 [^288]: Source: knowledge/notes/input_part004_review.md†L318-L318
 [^289]: Source: knowledge/notes/input_part004_review.md†L37-L37
+[^import_math]: Source: knowledge/notes/all_part01_review.md†L661-L661
+[^50e_supply]: Source: knowledge/notes/all_part01_review.md†L677-L677
+[^uk_cell_shortage]: Source: knowledge/notes/all_part01_review.md†L698-L698
+[^repackr_ir_match]: Source: knowledge/notes/all_part01_review.md†L706-L706
+[^daly_swap]: Source: knowledge/notes/all_part01_review.md†L722-L722
+[^15s_common_port]: Source: knowledge/notes/all_part01_review.md†L609-L609
+[^liitokala_warning]: Source: knowledge/notes/all_part01_review.md†L610-L610
