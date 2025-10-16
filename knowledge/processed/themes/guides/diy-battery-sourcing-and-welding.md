@@ -59,6 +59,8 @@ Regional sourcing realities still shape chemistry choices: Turkish builders bloc
 | Mixed chemistries (pouch + cylindrical) | Use adjustable pulse welders with copper/nickel sandwiches | Controls heat on dissimilar tabs, minimizes swelling risk | Pair with upgraded ≥230 A BMS and temperature probes on parallel groups.[^6] |
 | Tight copper layouts | Stack 0.1 mm copper under nickel and cap each strike near 50–60 J | Dual-strip “infinite slot” technique pushes current into the can without cracking copper | Validate that 10 mm-wide copper already supports ~15–20 A per cell (≈200 A on 9 P) before oversizing plates.【F:data/vesc_help_group/text_slices/input_part001.txt†L25425-L25518】【F:data/vesc_help_group/text_slices/input_part001.txt†L25469-L25490】 |
 
+- **Power the welder properly.** Car batteries sag after only a handful of welds; builders now favour CNHL 4S 9.5 Ah hardcase LiPos or similar high-C packs to keep K-weld pulses near 2 kA without undervoltage alarms, while aging RC packs and USB power banks overheat even with extra heatsinks.【F:knowledge/notes/input_part008_review.md†L237-L238】
+
 - Malectrics V4 welders now ship with parallel MOSFET daughterboards and run happily from triple 3 S LiPos; some builders still drop to 2 S packs to tame FET heating because the welder regulates to ~5–6 V at the electrodes.【F:knowledge/notes/input_part001_review.md†L604-L605】
 - Artem’s 0.1 mm copper-under-nickel stacks respond best to heavy compression and careful hot-glue alignment—done right they only sag ~3.5 V at 60 A on 60 V Samsung 35E packs versus the 7–20 V drop seen on looser busbars.【F:knowledge/notes/input_part001_review.md†L607-L608】
 

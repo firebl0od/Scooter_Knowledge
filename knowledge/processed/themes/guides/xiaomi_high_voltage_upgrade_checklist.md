@@ -82,6 +82,9 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 - Expect winter range to fall sharply (~30 Wh/km vs 18–20 Wh/km in summer); keep packs warm indoors or add gentle heaters before charging below freezing.[^winter]
 - Pro 2 dashboards shipped after DRV2.2.3 clamp custom firmware; stay on DRV2.2.3 or temporarily downgrade to DRV155 to configure Rita before returning to the latest release.[^pro2-fw]
 - Never power a 16 S conversion by tapping a 10 S segment for the controller—the idle draw unbalances the pack faster than the BMS can correct, even if the adapter only sips ≈12 mA.[^tap-imbalance]
+- Secret-mode unlocks still require holding full brake and throttle while double-tapping the dash button; forgetting to exit walk mode caps speed near 20 km/h, and removing the dash Lisp while it’s locked freezes the limit until you reinstall it.【F:knowledge/notes/input_part008_review.md†L215-L216】
+- Firmware 6.05’s Ninebot branch adds fixed `secret-sport-fw`/`secret-sport-watts` parameters and a ~470 Ω throttle resistor recommendation, and riders add RC filters across the hall supply so headlights stop dragging brake voltage low.【F:knowledge/notes/input_part008_review.md†L216-L216】
+- Keep throttle and brake harnesses hard-wired once configuration is done; field reports show random power cuts when the dash proxies those signals, so treat the display as instrumentation rather than a control path.【F:knowledge/notes/input_part008_review.md†L217-L217】
 
 ---
 

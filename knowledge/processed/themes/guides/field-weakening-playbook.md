@@ -42,6 +42,7 @@
 
 ## Risk Controls & Telemetry
 - **Thermal Watch:** Riders pushing 16 S commuter packs noted 150 °C stators at only 35 A FW, reinforcing that ferrofluid or temperature probes are mandatory if you insist on FW in enclosed hubs.[^18]
+- **Little FOCer burnout case study.** A 100 A battery / 200 A phase tune with 37 A FW killed a Little FOCer after a brief field-weakening run—its owner now caps phase near 150 A and is migrating to 12-FET controllers for dual-motor duty.【F:knowledge/notes/input_part008_review.md†L128-L128】
 - **Plan AWD for single-drive heat saturation:** 3.6 kW single-motor builds backed off FW after hot-weather pulls saturated hubs and triggered plans for AWD conversions to spread load.【F:knowledge/notes/input_part008_review.md†L16099-L16129】
 - **Voltage Monitoring:** Keep oscilloscope or high-speed logging on regen-heavy tests—22 S Spintend builds disable regen entirely when extending pack voltage to avoid BMS-induced surges.[^19]
 - **Fault Masking:** Sudden current drops or pothole-induced cut-outs that disappear when FW is enabled can signal mechanical faults (loose magnets, wiring) rather than firmware bugs; investigate hardware first.[^16]

@@ -32,6 +32,10 @@
 - Artem's freshly delivered Shimano M7120 four-piston set (≈€155 for the pair without rotors) brings stiffer one-finger levers and extra thermal mass that he plans to migrate from his trial bike to the scooter if he decides four pistons are overkill off-road.[^four-piston-cost]
 - Four-piston systems improve heat dissipation during repeated high-speed stops but may be excessive for commuter builds under 60 km/h where two-piston Magura MT5 or similar calipers provide adequate stopping power.[^four-piston-vs-two]
 
+### Regen Modulation Lessons
+- Riders experimenting with high-force regen reported −80 A electronic braking nearly pitching them over the bars; most now tune Spinny/ADC profiles so regen complements (rather than replaces) hydraulic stoppers.【F:knowledge/notes/input_part008_review.md†L249-L249】
+- Heavy scooters devour cheap pads even with regen assist—switching to metallic compounds such as Galfer keeps feel consistent when regen is dialed back for wet roads.【F:knowledge/notes/input_part008_review.md†L250-L251】
+
 ### Rotor Sizing Considerations
 - Brake discussions suggest upsizing rotors from 180 mm to 203 mm mainly boosts thermal mass and leverage but may be excessive for scooters; larger rotors require frame clearance checks and stronger mounting tabs to handle increased braking forces.[^rotor-sizing]
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
