@@ -7,6 +7,8 @@
 - SmartDisplay pairs with VESC and legacy controllers over UART today and will gain native CAN + VESC Express support on the incoming hardware spin, so budget both 5 V logic power and CAN high/low when future-proofing harnesses.[^1]
 - The latest CNC aluminium housing ships with anti-glare glass, RTC, navigation, music controls, and dual buttons that already support single/double-click mapping; encoder knobs are planned for the production wave later this year.[^cnc-case]
 - Treat the display as the hub for lighting, telemetry, and speed-mode governance: its OTA chain flashes every connected accessory board (5 V/12 V light drivers, button pods) alongside the head unit, simplifying updates if the CAN bus is wired correctly.[^2]
+- Francois’ CAN light board now drives 5 V/12 V front, rear, brake, and turn outputs and rides every OTA push, returning unified error feedback for Kelly and VESC installs.[^smart_light_bus]
+- SmartDisplay writes configurable speed and phase limits over CAN or UART, exposes nearly every setting on the dash or iOS/Android apps, and delivers Wi-Fi firmware updates; the beta run is capped at 15 units for 300 € with assembly slated for August.[^smart_limits]
 - Never tether SmartDisplay’s USB port to a computer while the controller is live; a single ground loop already blew the 3.3 V rail and STM32 on a Ubox, forcing an RMA.[^3]
 - Enable the “transparent” BLE bridge when controllers lack onboard Bluetooth.
   - the SmartDisplay can proxy VESC Tool traffic like a USB dongle, but veterans still default to wired sessions if nearby trackers or radios inject interference.[^15]
@@ -167,6 +169,8 @@
 
 [^smart_production]: SmartDisplay production timeline, hardware features, and pricing expectations.[^62][^63]
 [^smart_harness]: SmartDisplay modular harness system for various controller brands.[^63][^3]
+[^smart_light_bus]: Source: data/vesc_help_group/text_slices/input_part002.txt†L24506-L24515
+[^smart_limits]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25099-L25145; data/vesc_help_group/text_slices/input_part002.txt†L25176-L25182
 [^boot]: SmartDisplay boot time comparison vs. Raspberry Pi dashboards.[^52]
 [^uart-crc]: SmartDisplay UART throttle troubleshooting and CRC-protected command stream.[^64]
 [^jp-generic]: Colour-match “generic JP” SmartDisplay clones to TF/TS100 harness order and keep the UART loom intact until the CAN/Express hardware refresh arrives.[^65]

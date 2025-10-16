@@ -22,9 +22,13 @@
 - Heavy 90–150 A phase runs are shifting toward XT150 bullets or AS150U anti-spark leads.
   - roughly 0.20 mΩ resistance and spare signal pins
   - so controllers can feed trackers or smart BMS links without extra connectors while keeping voltage drop minimal.[^5]
+- Dualtron riders trying 150 A battery per uBox v2 watched 10 AWG leads, XT150 connectors, and the controllers themselves overheat or current-limit, so the crew now caps daily setups around 70–90 A per ESC even on stout 20 S packs.[^ubox_battery_limits]
+- Oversized phase wires can chafe against axle exits; stick with 11 AWG Higo looms proven to survive 80/225 A tunes without nicking insulation.[^phase_wire_clearance]
 - Treat solder as mechanical filler, not the conductor: twist or fold AWG12 leads to double their contact area before wetting bullets, because even silver-bearing solder conducts two to five times worse than copper.[^6]
 - Builders graduating dual VESC setups beyond 150 A phase are standardising on Amass AS150U anti-spark pairs with 8 AWG tails and XT150/AS150 mains once burst logs show 500 A phase.
   - XT90s are now treated as temporary jumpers to avoid the 200–300 A desoldering failures others recorded.[^7]
+- QS8 mains remain the right call for triple-digit amp peaks, but riders chasing slimmer harnesses are flattening HXT 8 mm bullets directly onto conductors so copper, not solder, carries 120 A-class loads while XT90s are demoted to ≈45 A continuous service.[^qs8_hxt]
+- Vsett 9 owners stepping up from stock banana leads now favour XT150 housings because their 6 mm bullets stay cool around 35–40 A battery and 95 A phase without sacrificing ease of service.[^xt150_vsett9]
 
 [^long_leads]: Source: knowledge/notes/input_part000_review.md, line 84.
 [^emi_routing]: Source: knowledge/notes/input_part000_review.md, line 85.
@@ -41,3 +45,7 @@
 [^5]: Source: knowledge/notes/input_part000_review.md†L546-L548
 [^6]: Source: knowledge/notes/input_part000_review.md†L548-L549
 [^7]: Source: knowledge/notes/input_part000_review.md†L618-L627
+[^qs8_hxt]: Source: knowledge/notes/input_part002_review.md†L523-L527
+[^xt150_vsett9]: Source: knowledge/notes/input_part002_review.md†L525-L526
+[^ubox_battery_limits]: Source: data/vesc_help_group/text_slices/input_part002.txt†L24622-L24692
+[^phase_wire_clearance]: Source: data/vesc_help_group/text_slices/input_part002.txt†L24711-L24715

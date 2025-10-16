@@ -14,6 +14,7 @@
 - Riders are still begging for accessible 100 V/80–100 A-per-channel controllers.
   - Paolo’s single-channel prototype and any future Nucular 12F restock remain top-of-mind while the $1 300 BAC4000 is dismissed as overpriced for scooter duty.[^8]
 - Compact single-channel contenders are arriving: ENNOID teased a 100 V/75 A board in a 70 × 75 × 16 mm shell (~$200), and Spintend’s single-core preview aims for ≈100 A with active cooling in an XT90-sized case priced around $150.[^9][^10]
+- Mirono also spotted an 18-FET open-source VESC with 500 A shunts under test, a promising budget alternative while Nucular stock stays scarce.[^open_source_500a]
 - Rider comparisons pit €400-per-side Tronic/Little FOCer stacks (100 A battery / 250 A phase) against Spintend duals that bundle heatsinks, while YYK square-wave units earn points for short-circuit survival despite lacking VESC tuning.
   - underscoring the trade-offs between configurability, price, and robustness.[^11][^12]
 - Community builders are filling the 200 A single-controller gap.
@@ -198,6 +199,7 @@
 [^8]: Source: knowledge/notes/input_part002_review.md†L11-L13
 [^9]: Source: knowledge/notes/input_part000_review.md†L210-L212
 [^10]: Source: knowledge/notes/input_part000_review.md†L251-L252
+[^open_source_500a]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25526-L25530
 [^11]: Source: data/vesc_help_group/text_slices/input_part002.txt†L8204-L8271
 [^12]: Source: data/vesc_help_group/text_slices/input_part002.txt†L8620-L8690
 [^13]: Source: knowledge/notes/input_part000_review.md†L732-L733

@@ -7,10 +7,12 @@
   - builders even turn the parts on lathes, whereas filler-only filaments offer little benefit beyond marketing.[^2]
 - Keep epoxy, cyanoacrylate, or specialty plastic adhesives on hand when reinforcing PETG/PLA accessories.
   - these glues bond without melting the print and keep commuter hardware intact.[^3]
+- Smooth PEI sheets grip PETG aggressively—bump Z offset ~0.1 mm or switch to glass, textured PEI, FR4, or a glue-stick barrier before ripping the coating during enclosure runs.[^smooth_pei_offset]
 
 ## Production Discipline
 
 - PETG battery holders crack when printed wet or too fast; veterans dry filament, slow to 80–120 mm/s with 0.6 mm nozzles, run 240–260 °C hotends, and tune retraction/fan settings before trusting cages to hold 21700 cells.[^4]
+- Artem finally tamed PETG stringing by running 0.3 mm layers at 0.4 mm width around 140 mm/s (~14 mm³/s) and cycling rolls within two days so the filament never needs drying on current tooling.[^petg_fast]
 - Printing transparent PETG carriers demands ~13 mm/s speeds, minimal cooling, and post-polish to avoid haze.
   - stock Bambu profiles run too hot and cloud the parts immediately.[^5]
 - Stuffing twin 12 AWG leads into QS8 shells is notoriously tight.
@@ -18,6 +20,10 @@
 - Keep textured PEI sheets spotless (dish soap or IPA) and hold the bed near 95 °C so PETG grips without warping; too much adhesion still calls for careful part removal despite the texture.[^7]
 - Skip exotic PEEK or metal prints for high-load gearboxes.
   - builders remind 130 kg riders pushing 150 A at 10 krpm that plastic reducers fail fast, while chain drives with QS90 hubs survive cramped frames far better.[^8]
+
+## Shared Print Assets
+
+- Community brace kits for Ninebot G30 decks now circulate as `middle.stl` plus `front/left/right/rear.3mf` files so builders can reinforce ground decks after heavy grinding without redrawing the geometry from scratch.[^g30_brace]
 
 
 ## References
@@ -30,3 +36,6 @@
 [^6]: Source: knowledge/notes/input_part006_review.md†L194-L194
 [^7]: Source: knowledge/notes/input_part006_review.md†L362-L362
 [^8]: Source: knowledge/notes/input_part006_review.md†L363-L363
+[^petg_fast]: Source: knowledge/notes/input_part002_review.md†L645-L646
+[^g30_brace]: Source: knowledge/notes/input_part002_review.md†L526-L526
+[^smooth_pei_offset]: Source: knowledge/notes/input_part002_review.md†L19661-L19664

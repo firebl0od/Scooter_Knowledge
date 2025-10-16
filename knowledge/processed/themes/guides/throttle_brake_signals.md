@@ -37,6 +37,7 @@
 ## Throttle & Harness Maintenance
 
 - Sudden surging that mimics hall dropout has traced back to cracked plastic throttles; soldering hall connectors directly and upgrading to higher-quality throttles restored smooth acceleration on high-current builds.[^throttle_failure]
+- Artem signed off on the CNC Spin-Y throttle samples, plans first-week-of-August shipping, and already smoothed the return spring with heavy lubricant; buyers favoured black housings with raw aluminium accents but renders now cover black, silver, red, and orange combos for local anodising.[^spin_y_ship][^spin_y_palette]
 
 ## Regen Safety Guidelines
 
@@ -80,6 +81,8 @@
 [^regen_heat]: Source: knowledge/notes/input_part000_review.md, line 256.
 [^boosted_profile]: Source: knowledge/notes/input_part000_review.md, line 247.
 [^shielded_looms]: Source: knowledge/notes/input_part000_review.md, line 261.
+[^spin_y_ship]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25207-L25271
+[^spin_y_palette]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25744-L25799
 
 
 ## References

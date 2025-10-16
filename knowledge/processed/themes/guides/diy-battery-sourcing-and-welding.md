@@ -49,6 +49,8 @@
 
 ## Cell Market Benchmarks
 
+- Artem still steers 25 A-per-cell builds toward P42A-class chemistries, treats Samsung 48X as only a mild upgrade over 50G, highlights Samsung M50LT Gen 2 for 0–15 A commuters, and notes 20 S9 P Samsung 48X packs landing around $5.75 per cell delivered from Canada with 40–80 mile range potential.[^artem_cells][^pack_48x_cost]
+
 | Source | Typical Price & Availability | Verified Performance | Procurement Notes |
 | --- | --- | --- | --- |
 | **Stark Varg salvage modules (50PL)** | ≈€1–1.2 per cell after labor in Europe | Bench-tested at 60 A discharge / 15 A charge with tight variance | Requires teardown expertise, cycle-life verification, and logistics for pallet shipments before trusting the pulls in customer packs.[^1][^varg-salvage] |
@@ -81,6 +83,11 @@
   - plan 72 V controllers and packs before going dual motor so torque stays controllable.[^28]
 [^72v-3p5kw]: Happy Giraffe reminded the group that 48 A at 72 V is ~3.5 kW.
   - raise voltage and lean on ~100 A phase instead of stuffing more battery amps into MH1 cells.[^29]
+
+### Shrink Wrap & Pack Retention
+
+- Packing crews now double-layer shrink—light “Albert” sleeves under thicker “Denis” stock—with foam padding over balance leads so shipping vibration doesn’t abrade insulation; a heat gun leaves cleaner seams than a hair dryer when closing the pack.[^shrink_layers]
+- If shrink wrap scuffs once installed, treat it as a clamping failure rather than bad material and tighten the enclosure so the battery cannot slide.[^pack_clamp]
 
 ### Logistics Snapshots & Supplier QA
 
@@ -312,11 +319,13 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 | Tape between nickel layers, triple shrink with silicone-sealed exits, and route balance leads through plexiglass channels to protect 20 S harnesses from wet-deck chafing.[^115] | Overbuild insulation wherever 20 S looms exit tight decks. | Keeps high-series harnesses from abrading through on commuters. |
 | Active-balancing hardware only shuttles ~600 mA between groups.
   - confirm the gain before reordering hardware or count on passive boards that simply dump excess energy as heat.[^116] | Pick balancers based on real current instead of marketing numbers. | Prevents disappointment with pricey “active” hardware. |
+| JK’s 150 A/300 A smart BMS with a 1 A active balancer held groups within 0.001 V after 100+ days, but the enclosure is larger than ANT units despite better harnesses and app support.[^jk_balancer] | Budget space for the bigger board or keep ANT for tight decks. | Confirms the balancing upgrade works if you can accommodate the physical size. |
 | Stop routine charges around 90 % if the BMS still balances there.
   - commuters quadruple pack life by avoiding full charges.[^117] | Set chargers and rider habits for partial charges when longevity outranks maximum range. | Extends cycle life on daily-use packs. |
 | Salvaged Dyson V8 modules hide 6 S 1 P Molicels; release the enclosure’s hidden pins, refresh welds, and be ready to reflash the smart BMS with a Pickit 3 to clear soft-locks.[^118][^119] | Treat vacuum modules as quality donor cells once electronics are reset. | Adds an affordable path to high-discharge cells for scooter packs. |
 | Samsung 50E chemistries polarise builders.
   - four-year Weped FS packs still hit 240 A with low sag, yet many reserve the cells for huge parallel counts while relying on 40T/P42A for high-amp builds.[^120] | Size 50E packs for high parallel count or pick punchier chemistry when current demand is high. | Matches chemistry to the mission to avoid premature sag. |
+- Rosheee’s Kaabo testing pulled 130 A from a Samsung 50E 5 P block, melted a 3D-printed battery frame, and tripped the BMS at 180 A—treat 50E as an ~8 A real-world cell and plan 20 S6 P/20 S7 P upgrades for sustained high power.[^50e_abuse]
 
 #### Consumables & Logistics
 
@@ -446,6 +455,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
   - verify deck clearance and inspect any shipped pack with crushed heat-shrink or stray metal before trusting it on a ride.[^178]
 - **Retire fatigued brackets.** Heavy 13S packs crack 3D-printed rear supports near the rear bolt; inspect and replace printed mounts routinely or swap to metal before pushing high-speed builds.[^179]
 - **Budget deck spacers for Zero 10X builds.** 20 S 7 P packs plus dual ESCs fit once you add ≈45 mm of deck spacing; G30 owners manage 18 S 5 P internally, but foam thicker than ~0.5 mm lets cells walk in holderless layouts.[^180]
+- Zero 10X owners logged 360 × 133 × 62 mm beneath the carbon deck—ample for bespoke 20 S6 P/20 S7 P packs once controllers relocate or rails are removed.[^zero10x_dims]
 - **Map Xiaomi sleeper layouts.** Gabe’s 20 S 8 P Pro 2 build splits cells between deck and bag, prints 35–36 mm spacers, reroutes phases, and trims foam so dual controllers and the pack coexist without killing ground clearance.[^181]
 
 ### Salvage & Pack Handling Lessons
@@ -465,6 +475,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 - **Budget extra time for soldered salvage packs.** Military surplus modules arrived with soldered busbars and even fasteners, forcing full desoldering or dremel work instead of quick bolt removal.[^190]
 - **Scrap waterlogged LG M26 stock.** Builders binned cells that took on water rather than risk corrosion-induced failures in new high-capacity packs.[^191]
 - **Leverage welded 50E clear-outs.** Surplus Samsung 50E modules pre-welded for robots have dropped near $0.80 per cell when you buy 2,000+, making them worthwhile commuters after full inspection and re-termination.[^192]
+- A dropped Nordbot 13 S pack lost an entire parallel pair and had to be rebuilt as 12 S—keep dense wraps, cell insulators, and cautious transport habits even after packs survive high-current testing.[^nordbot_drop]
 - **Avoid grinders on aluminum shells.** Score the silicone bead with a utility knife, brace the enclosure in a vise, and drive the cell brick out with a wooden drift from the non-BMS end to preserve wiring.[^16]
 - **Treat 0.1 mm nickel stacks like structural parts.** Double layers safely carry ≈20 A BMS currents, but only when bonded with multiple high-energy weld strikes.
   - thin hot glue fails once packs warm.[^17]
@@ -598,6 +609,8 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
   - within limits.** Mirono signs off on 0.15 mm strip in a W-bridge layout for ~40 A scooter packs provided per-cell current stays under the strip’s rating, sparing builders from copper busbars on moderate loads.[^286]
 - **Laminate copper when welders lack punch.** Hackintoshhhh now stacks two 0.1 mm copper–nickel sheets instead of a single 0.2 mm strip because his Glitter 801D welder cannot penetrate thicker busbars reliably.
   - an approachable workaround until higher-output welders arrive.[^287]
+- **Bridge big packs with multiple jumpers.** 16 S8 P layouts fed by just two series jumpers overheat interior rows; add extra links or second-layer plates so every parallel group shares load evenly.[^busbar_bridge]
+- **Fold copper after soldering main leads.** Builders now solder main outputs to the copper strip before welding, fold the metal over as a double-thickness busbar, cover as many cell tops as possible, and insulate with fish paper or Kapton before sealing the pack.[^busbar_layout]
 
 ## Cell Internal Resistance Calibration
 
@@ -608,6 +621,8 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^busbar_braze]: Copper busbar brazing with shielding gas to prevent oxidation failures.[^234]
 [^insulation_layers]: Proper battery insulation materials and parallel-group alignment techniques.[^150]
 [^20s5p_fit]: 20 S 5 P pack fitment challenges in G30 decks.[^288]
+[^busbar_bridge]: Source: knowledge/notes/input_part002_review.md†L606-L607
+[^busbar_layout]: Source: knowledge/notes/input_part002_review.md†L607-L608
 [^ir_calibration]: Cell internal resistance measurement and calibration procedures.[^289]
 
 
@@ -729,10 +744,12 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^114]: Source: knowledge/notes/input_part007_review.md†L315-L321
 [^115]: Source: knowledge/notes/input_part007_review.md†L325-L329
 [^116]: Source: knowledge/notes/input_part007_review.md†L329-L334
+[^jk_balancer]: Source: knowledge/notes/input_part002_review.md†L610-L611
 [^117]: Source: knowledge/notes/input_part007_review.md†L334-L336
 [^118]: Source: knowledge/notes/input_part007_review.md†L336-L349
 [^119]: Source: knowledge/notes/input_part007_review.md†L349-L353
 [^120]: Source: knowledge/notes/input_part007_review.md†L353-L356
+[^50e_abuse]: Source: knowledge/notes/input_part002_review.md†L535-L537
 [^121]: Source: knowledge/notes/input_part008_review.md†L16198-L16266
 [^122]: Source: knowledge/notes/input_part001_review.md†L94-L95
 [^123]: Source: data/vesc_help_group/text_slices/input_part001.txt†L9376-L9399
@@ -793,6 +810,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^178]: Source: knowledge/notes/input_part005_review.md†L501-L501
 [^179]: Source: knowledge/notes/denis_all_part02_review.md†L352-L352
 [^180]: Source: knowledge/notes/input_part007_review.md†L442-L442
+[^zero10x_dims]: Source: knowledge/notes/input_part002_review.md†L539-L540
 [^181]: Source: knowledge/notes/input_part007_review.md†L476-L476
 [^182]: Source: knowledge/notes/input_part007_review.md†L309-L311
 [^183]: Source: knowledge/notes/input_part006_review.md†L245-L245
@@ -805,6 +823,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^190]: Source: knowledge/notes/input_part008_review.md†L395-L396
 [^191]: Source: knowledge/notes/input_part008_review.md†L518-L522
 [^192]: Source: knowledge/notes/input_part008_review.md†L500-L503
+[^nordbot_drop]: Source: knowledge/notes/input_part002_review.md†L602-L603
 [^193]: Source: knowledge/notes/denis_all_part02_review.md†L333-L333
 [^194]: Source: knowledge/notes/input_part007_review.md†L369-L369
 [^195]: Source: knowledge/notes/input_part007_review.md†L368-L368
@@ -822,6 +841,8 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^207]: Source: knowledge/notes/input_part009_review.md†L33-L33
 [^208]: Source: knowledge/notes/input_part009_review.md†L35-L35
 [^209]: Source: knowledge/notes/input_part009_review.md†L36-L36
+[^shrink_layers]: Source: knowledge/notes/input_part002_review.md†L671-L672
+[^pack_clamp]: Source: knowledge/notes/input_part002_review.md†L673-L673
 [^210]: Source: knowledge/notes/input_part009_review.md†L403-L403
 [^211]: Source: knowledge/notes/input_part009_review.md†L18-L18
 [^212]: Source: knowledge/notes/input_part009_review.md†L25-L25
@@ -902,3 +923,5 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^287]: Source: knowledge/notes/input_part013_review.md†L322-L324
 [^288]: Source: knowledge/notes/input_part004_review.md†L318-L318
 [^289]: Source: knowledge/notes/input_part004_review.md†L37-L37
+[^artem_cells]: Source: knowledge/notes/input_part002_review.md†L18123-L18224
+[^pack_48x_cost]: Source: knowledge/notes/input_part002_review.md†L17924-L17948
