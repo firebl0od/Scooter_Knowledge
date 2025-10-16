@@ -23,9 +23,24 @@
   - complete with 60 V packs and heavy-duty motors
   - illustrating how friendships and group buys keep premium frames affordable.[^7]
 
+## Zero 10X and Thunder Fitment Updates
+
+- Some regions still deliver the Zero 10X with a dummy front hub; upgrading to dual drive means importing a live motor (often from FalconPEV), rewiring Zero/Mantis harness mixes, and watching frame integrity once speeds climb past ~100 km/h.[^zero_dummy_hub]
+- Paolo’s measurements show 11-inch hubs need ≈145 mm fork spacing and a longer axle on the Zero 10X, while the stock 125 mm dropouts cap builds around 65 H 10-inch motors unless you extend the swingarm or buy a conversion kit.[^zero_11inch]
+- Face de Pin’s clamp that ties both steering-nut lockrings to the stem has become the go-to insurance mod against Thunder hinge failures, and the same crew is packaging 22 S 8 P C350 controllers inside proprietary cases to keep rain out during race duty.[^thunder_clamp]
+- High-power Zero builds in France are stuffing ~22 S 11 P packs inside bespoke frames (“French style”) while relocating controllers externally; the tradeoff is custom fabrication cost for every donor chassis.[^zero_custom_packaging]
+- Lengthened frames can still squeeze 24 S stacks without deck spacers, but Andrei notes the stretched wheelbase complicates transport through elevators and tight hallways.[^extended_frames]
+- The current fork project clears 70 H motors yet likely refuses thicker 75 H stators, so confirm measurements before ordering oversized hubs.[^fork_clearance]
+
 [^bearing_sizes]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^tire_clearance]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^dualtron_spider]: Source: knowledge/notes/input_part000_review.md, line 187.
+[^zero_dummy_hub]: Source: knowledge/notes/input_part009_review.md†L406-L406.
+[^zero_11inch]: Source: knowledge/notes/input_part009_review.md†L407-L407.
+[^thunder_clamp]: Source: knowledge/notes/input_part009_review.md†L408-L409.
+[^zero_custom_packaging]: Source: knowledge/notes/input_part009_review.md†L427-L427.
+[^extended_frames]: Source: knowledge/notes/input_part009_review.md†L429-L429.
+[^fork_clearance]: Source: knowledge/notes/input_part009_review.md†L432-L432.
 
 
 ## References
