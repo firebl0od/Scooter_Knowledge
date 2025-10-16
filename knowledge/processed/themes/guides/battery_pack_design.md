@@ -26,6 +26,7 @@
 - Proposed geometries include 16 S 7 P and 12 S 9 P assemblies that rely on wider nickel strips and copper busbar "sandwich" welds to sustain 70–80 A continuous discharge without overheating.[^pack_layout]
 - Community connector tables drive upgrades from stock 10–12 AWG leads to heavier wiring and lower-resistance plugs (XT60/90/150, EC5) on Ubox builds.[^pack_connectors]
 - Ninebot Max and Xiaomi Pro deck extensions can accommodate up to 16 S 5 P 21700 modules with ~27 mm spacers, though installers often trim or rotate controller housings to keep packaging tidy.[^deck_extension]
+- Stock G30 frames already hide 20 S 6 P packs internally, but stretching to 20 S 9 P by machining deck rails and deleting the OEM ESC introduces convoluted busbars and structural compromises—seasoned builders steer first-timers toward simple rectangular stacks instead of chasing every last cell.[^g30-20s9p]
 - Tudor’s PETG honeycomb holders and interlocking connectors let Xiaomi and G30 packs dry-fit without glue, while other builders laser-cut 3–6 mm kraftplex skeletons, wrap them in thin PETG jackets, and still tape the stack with fish paper because sealed decks trap heat regardless of insulation choices.[^petg_honeycomb]
 - Recycling pledges are nudging EU pack shops toward kraftplex or other recyclable wraps, yet fish-paper rolls are scarce enough that crews are prototyping 0.8 mm kraftplex jackets while still insisting on series separators to prevent can-to-can shorts.[^8]
 - Koxx’s 14 S 6 P build uses RePackr-balanced groups, glued cells, and glass-fibre spacers between layers to equalise resistance across parallels inside cramped decks.
@@ -57,6 +58,7 @@
 [^pack_layout]: Source: knowledge/notes/input_part000_review.md, line 64.
 [^pack_connectors]: Source: knowledge/notes/input_part000_review.md, line 65.
 [^deck_extension]: Source: knowledge/notes/input_part000_review.md, line 75.
+[^g30-20s9p]: Source: knowledge/notes/input_part006_review.md†L27-L27
 [^petg_honeycomb]: Source: knowledge/notes/input_part000_review.md, line 216.
 [^copper_sandwich]: Source: knowledge/notes/input_part000_review.md, lines 240 and 314.
 

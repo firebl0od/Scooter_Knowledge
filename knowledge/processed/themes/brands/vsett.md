@@ -62,6 +62,7 @@
 - Triangulated neck brackets tying Matris dampers into PMT tires and EXA shocks eliminate wobble on VSETT 10 builds; ensure at least three anchor points instead of relying on the flex-prone stock tab.[^45]
 - Genuine Matris dampers ship around €250 and need inspection—budget clones from FalconPEV, AliExpress, or Amazon masquerade as Matris/Öhlins but lack consistent internals.[^46]
 - Reserve dampers for robust frames—Monorim-equipped Xiaomi forks remain only ~4 mm thick, making 90 km/h runs suicidal without serious reinforcement.[^47]
+- **Chasing a post-service “clunk.”** Loud knocks that appear between braking and throttle after wheel bearing work usually trace to loose axles or missing torque washers; snug hardware and fit proper torque arms before assuming controller faults.[^axle-clunk]
 
 ### Performance & Telemetry Benchmarks
 
@@ -272,3 +273,4 @@
 [^116]: Source: knowledge/notes/input_part001_review.md, L638 to L640
 [^117]: Source: knowledge/notes/input_part001_review.md, L25 to L74
 [^118]: Source: knowledge/notes/input_part001_review.md, L59 to L70
+[^axle-clunk]: Source: knowledge/notes/input_part006_review.md†L16-L16

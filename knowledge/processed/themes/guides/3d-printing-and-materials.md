@@ -15,6 +15,7 @@
   - stock Bambu profiles run too hot and cloud the parts immediately.[^5]
 - Stuffing twin 12 AWG leads into QS8 shells is notoriously tight.
   - use plenty of flux, fully wet both conductors, and layer heat-shrink when the plastic lid refuses to latch cleanly.[^6]
+- Working aluminium or PETG parts throws fine particulates; wear gloves, wash thoroughly, and avoid eating until you clean up to limit microplastic exposure.[^microplastic-ppe]
 - Keep textured PEI sheets spotless (dish soap or IPA) and hold the bed near 95 °C so PETG grips without warping; too much adhesion still calls for careful part removal despite the texture.[^7]
 - Skip exotic PEEK or metal prints for high-load gearboxes.
   - builders remind 130 kg riders pushing 150 A at 10 krpm that plastic reducers fail fast, while chain drives with QS90 hubs survive cramped frames far better.[^8]
@@ -28,5 +29,6 @@
 [^4]: Source: knowledge/notes/input_part006_review.md†L192-L192
 [^5]: Source: knowledge/notes/input_part006_review.md†L243-L243
 [^6]: Source: knowledge/notes/input_part006_review.md†L194-L194
+[^microplastic-ppe]: Source: knowledge/notes/input_part006_review.md†L90-L90
 [^7]: Source: knowledge/notes/input_part006_review.md†L362-L362
 [^8]: Source: knowledge/notes/input_part006_review.md†L363-L363

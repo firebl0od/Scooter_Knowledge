@@ -63,6 +63,7 @@
 - Bench-test CAN alongside the 12 V rail: multiple “V2” clones shipped with dead CAN transceivers despite tri-shunt markings, and sudden first-launch deaths usually track back to firmware or 12 V supply faults rather than MOSFET legs. Reflow power leads, disable phase filters, rerun detection, and confirm network health before hitting the street. [^52]
 - Add bulk capacitance to the 12 V (and where accessible, 5 V/3.3 V) rails—the retrofit prevents infamous brownouts when BMSs trip or accessories spike load, especially on resin-potted boards.[^53][^54]
 - Resin-potted 75100s still need the ignition/12 V cutoff fix; builders now tack capacitors onto exposed 5 V/3.3 V rails or sneak them into the harness because random key-off events keep nuking MOSFET drivers otherwise.[^55]
+- Aluminum 75×100 boards still benefit from adding ≥220 µF across the DC link plus small 16 V capacitors at the gate drivers and revisiting undervoltage limits; the combo stopped recurring “MOS die” failures on recent Vsett conversions.[^dc-link-recap]
 - Budget gate-driver spares and scope time—dead EG3112s have been shorting the 5 V rail after MOSFET pops, so techs now replace the drivers alongside FETs and verify clean gate waveforms before sealing the case again.[^56]
 - Debate over the boxed 75100’s factory shunts persists: some builders still rip them out as “trash” that misreport current while others find the aluminium revision strong once reworked, so budget time either to replace the shunt stack or to tune around its quirks.[^57]
 - Add bulk capacitance to the 12 V (and where accessible, 5 V/3.3 V) rails—the retrofit prevents infamous brownouts when BMSs trip or accessories spike load, especially on resin-potted boards. [^58][^59]
@@ -113,6 +114,7 @@
 - Power throttles from the 3.3 V rail and use resistor dividers for 5 V hall inputs; direct 5 V feeds have already killed STM32 ADC stages on Makerbase boards. [^106][^107]
 - Makerbase 84 200 controllers happily wake from external dashboard/key switches—reuse the display’s power button circuit instead of hot-wiring pack leads, but log the wiring so the logic rail doesn’t back-feed accessories.[^108]
 - Makerbase harness accessory headers use JST-GH 1.27 mm pitch—plan pigtails accordingly when integrating dashboards or brake sensors. [^109]
+- The boxed 75×100 “on/off” revision simply adds a resistor pair to the ignition bridge, and the NRF header still powers aftermarket BLE modules once you trim the deck for the enclosure.[^onoff-ble]
 - Label the NRF Bluetooth header, hall plug, power-button leads, and comm-port 3.3 V/GND/ADC1 before adding dashboards—the crew just refreshed the colour map after repeated miswires cooked MakerX ADC daughterboards.[^110]
 - Pair ADC adapters or dashboards with external relays if you need a real kill switch; the ADC lighting bridge only sources a few amps and cannot isolate the battery. [^111][^112]
 - Keep horn/lighting loads small on the ADC harness—the Makerbase/Spintend “horn” pin sources only a couple of amps, so 35 W halogens belong on a dedicated DC/DC rail with the controller output simply driving a relay.[^adc_load]
@@ -213,6 +215,8 @@
 [^57]: Source: knowledge/notes/input_part006_review.md, L341 to L341
 [^58]: Source: knowledge/notes/input_part005_review.md, L448 to L451
 [^59]: Source: knowledge/notes/input_part005_review.md, L510 to L510
+[^dc-link-recap]: Source: knowledge/notes/input_part006_review.md†L31-L31
+[^onoff-ble]: Source: knowledge/notes/input_part006_review.md†L40-L40
 [^60]: Source: knowledge/notes/input_part006_review.md, L45 to L45
 [^61]: Source: knowledge/notes/input_part013_review.md, L611 to L615
 [^62]: Source: knowledge/notes/input_part013_review.md, L60 to L60

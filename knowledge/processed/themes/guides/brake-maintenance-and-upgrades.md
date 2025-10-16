@@ -7,6 +7,8 @@
 - Wheel-centering kits and dual-caliper setups eliminate rotor wobble and improve braking consistency on racing builds, but add complexity and weight that commuter riders may not need.[^centering-kits]
 - Keep at least one mechanical brake active even on regen-heavy builds.
   - logs show regen-only riding overheats controllers quickly, and dual-motor setups still rely on mechanical rotors to stop safely when electronics fault.[^1][^2]
+- Leave expansion room in master cylinders. Overfilled reservoirs build pressure as fluid heats, forcing fittings to burp fluid or leak once systems see triple-digit Celsius rotor temps.[^heat-expansion]
+- Expect the front brake to carry the bulk of stopping duty; riders relying on rear-only braking continue to report easy slides, so dual-hydraulic setups or regen+front hydraulic pairings remain the safe baseline for high-power scooters.[^front-bias]
 
 ## Bleeding Techniques
 
@@ -76,6 +78,7 @@
 - Premium rotors from Shimano, Magura, or Galfer stay on the shopping list while AliExpress specials are avoided for 70 km/h builds despite the price gap.[^14]
 - Kaabo Wolf owners now swap to 3 mm Kaabo discs after stock rotors warped.
   - confirm caliper spacing and expect longer life once the thicker rotors are paired with Wolf motors.[^15]
+- Skip Shimano “resin only” 160 mm rotors on 72 V-class scooters; the thin rotors fade quickly and risk glazing metallic pads. Veterans instead budget 2 mm rotors rated for metallic compounds and pair them with full-hydraulic calipers before raising pack voltage.[^shimano-metal]
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
 - Tall brake adapters should use a single ring spacer instead of stacked washers so axial loads do not rock the disc bolts.
   - 5 mm steel rings have proven stable on custom Blade hubs, while 1.7 mm washer stacks remain a stopgap only.[^16]
@@ -146,6 +149,7 @@
 - 3 mm × 170 mm rotors dramatically stiffen braking response but require retracting pistons fully for clearance and a quick true after the first bedding stops.[^47]
 - A commuter who bent a Vsett rotor mid-ride now keeps spares on hand and leans on e-brakes when mechanical hardware warps unexpectedly.
   - plan redundancy for traffic incidents.[^48]
+- Even premium hardware stacks can boil fluid. One MT7/MT8 build with copper sintered pads, Bionol fluid, Steelflex hoses, and prototype levers still flashed 360 °C fluid and leaked at the banjo, forcing pad and rotor inspections after every downhill session; treat aggressive descents as consumable events even on boutique components.[^mt7-boil]
 - Skrtt’s 2.3 mm rotor experiments required shaving calipers while 🇪🇸AYO#74 stressed using “elevator” spacers to clear thicker discs.
   - document allowable rotor thickness per caliper so riders stop guessing on machining limits.[^49]
 - Ausias is milling Magura MT5 calipers “radially” to clear 3.6 mm rotors; peers warned most bicycle brakes expect ≤2.8 mm discs, so publish machining tolerances, lever upgrades, and testing steps before anyone copies the mod.[^50]
@@ -416,3 +420,7 @@
 [^94]: Source: knowledge/notes/input_part007_review.md†L238-L238
 [^95]: Source: knowledge/notes/input_part014_review.md†L10356-L10365
 [^96]: Source: knowledge/notes/denis_all_part02_review.md†L348-L349
+[^heat-expansion]: Source: knowledge/notes/input_part006_review.md†L13-L13
+[^front-bias]: Source: knowledge/notes/input_part006_review.md†L14-L14
+[^shimano-metal]: Source: knowledge/notes/input_part006_review.md†L15-L15
+[^mt7-boil]: Source: knowledge/notes/input_part006_review.md†L12-L12

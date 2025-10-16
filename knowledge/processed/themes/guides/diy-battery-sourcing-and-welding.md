@@ -99,7 +99,7 @@
 - Nickel’s 2022 price surge (+250 %) pushed pack builders toward 0.1–0.15 mm copper strip.
   - it bends easier over cell tops, carries more current, and costs less than the remaining nickel stockpile.[^36]
 - Telegram teardown threads just caught “nickel” strip that was actually plated steel.
-  - builders now scratch-test every batch and favour pre-cut busbars or stacked pure nickel when targeting 5 kW outputs so counterfeit stock does not bottleneck current.[^37]
+   - plated stock measures roughly six times the resistance of pure nickel, so veterans now scratch-test every batch, source from trusted vendors such as Nkon, and favour pre-cut busbars or stacked pure nickel when targeting 5 kW outputs so counterfeit stock does not bottleneck current.[^37][^nkon-pure]
 - Sony VTC5D prototypes are landing alongside Samsung 35E/50G/50S, Molicel P28A/P42A, and Samsung 48X cells; Artem is sourcing fresh 40T/48X/50G stock at €4–5 per cell while group buys quote P42A around €4 and 50S near €12.95, setting the 2025 price floor for high-discharge packs.[^38]
 - **Samsung 50S group buys:** Community orders are landing grade-A 50S cells at €4.71 each with the potential for ~15 % savings when payments avoid eBay/PayPal fees.
   - coordinate escrow and inspection to lock in the deal before public pricing rebounds above €6.50.[^39]
@@ -149,6 +149,7 @@ High-current harness work still rewards oversized irons.
 | Mixed chemistries (pouch + cylindrical) | Use adjustable pulse welders with copper/nickel sandwiches | Controls heat on dissimilar tabs, minimizes swelling risk | Pair with upgraded ≥230 A BMS and temperature probes on parallel groups.[^6] |
 | Tight copper layouts | Stack 0.1 mm copper under 0.15 mm overlays and cap each strike near 50–60 J | Dual-strip “infinite slot” technique pushes current into the can without cracking copper; the same stack is fuelling 320–800 A pack targets even when smart BMS hardware only tolerates 30–60 s at 800 A.[^62] | Validate that 10 mm-wide copper already supports ~15–20 A per cell (≈200 A on 9 P) before oversizing plates.[^63][^64] |
 
+- Copper strip thicker than ≈0.1 mm overwhelms hobby shears and improvised car-battery welders; shops either outsource laser/water-jet cutting or invest in Glitter-class welders instead of risking weak joints and blown cells.[^thick-copper-tooling]
 - Cheap 20 € control boards still demand ~€100 worth of 3 S high-rate packs or supercapacitors.
   - plan those hidden costs before assuming a bargain welder will fuse copper reliably.[^65]
 - Builders get by with inexpensive 230 V stick irons and €6 pencil irons for quick controller jobs, but aluminum-PCB MOSFET arrays still demand 200 W stations or hot air so the large pads heat evenly.[^66]
@@ -650,6 +651,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^35]: Source: knowledge/notes/input_part013_review.md†L96-L96
 [^36]: Source: knowledge/notes/input_part001_review.md†L686-L687
 [^37]: Source: knowledge/notes/input_part006_review.md†L104-L104
+[^nkon-pure]: Source: knowledge/notes/input_part006_review.md†L28-L28
 [^38]: Source: knowledge/notes/input_part001_review.md†L695-L696
 [^39]: Source: knowledge/notes/input_part000_review.md†L148-L150
 [^40]: Source: knowledge/notes/input_part000_review.md†L606-L607
@@ -657,6 +659,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^42]: Source: knowledge/notes/input_part000_review.md†L118-L118
 [^43]: Source: data/vesc_help_group/text_slices/input_part000.txt†L17309-L17312
 [^44]: Source: knowledge/notes/input_part013_review.md†L57-L57
+[^thick-copper-tooling]: Source: knowledge/notes/input_part006_review.md†L29-L29
 [^45]: Source: knowledge/notes/input_part014_review.md†L6601-L6633
 [^46]: Source: knowledge/notes/input_part014_review.md†L6637-L6642
 [^47]: Source: data/vesc_help_group/text_slices/input_part005.txt†L24420-L24451

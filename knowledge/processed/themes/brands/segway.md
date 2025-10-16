@@ -43,6 +43,7 @@
 - Monorim setups need tuning: Mirko’s G30 build settled on 250 lb EXA 291R shocks for ≈95 kg riders and a steering damper to quash 55 km/h wobbles once the vertical hinge hardware is torqued correctly.[^12]
 - Builders chasing GT acceleration are already machining thicker stainless dropouts and custom Monorim plates so Xiaomi-class forks can fit ever-wider hubs without tearing the swingarm.[^13][^14]
 - Max G2 owners are machining swingarm extensions to swallow larger rear hubs while keeping 20 S 5 P packs inside the frame with only a 2 mm spacer—proof the chassis can host sleeper upgrades without external battery boxes when fabrication time is budgeted.[^15]
+- 130 kg riders have cracked G30 swingarms at the deck cut-outs; fabricators are modelling reinforcement plates that spread load around the rear fork bracket before stacking more power into the chassis.[^g30-swingarm]
 - Grinding G30 forks for 11″ tires weakens the structure; veterans add triangulated reinforcement or welded plates instead of relying on hollow webbing after clearancing the castings.[^16]
 - F-series and budget Segways exhibit rough welds and cracked deck braces near the folding joint, so inspections, gussets, or protective film are prerequisites for commuter-duty reliability.[^14]
 - When reworking folding joints that were epoxied from the factory, strip the assembly, heat the glue thoroughly, and only then press components apart to avoid cracking the stem casting or leaving hidden voids.[^17]
@@ -176,6 +177,7 @@
 [^13]: Source: data/vesc_help_group/text_slices/input_part001.txt, L26146 to L26158
 [^14]: Source: data/vesc_help_group/text_slices/input_part001.txt, L26395 to L26399
 [^15]: Source: knowledge/notes/input_part006_review.md, L349 to L349
+[^g30-swingarm]: Source: knowledge/notes/input_part006_review.md†L18-L18
 [^16]: Source: knowledge/notes/input_part006_review.md, L350 to L350
 [^17]: Source: knowledge/notes/input_part006_review.md, L449 to L449
 [^18]: Source: knowledge/notes/input_part012_review.md, L338 to L339

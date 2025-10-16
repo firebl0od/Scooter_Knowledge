@@ -17,6 +17,7 @@
   - rewire the lead for Zero-style harnesses or pair it with an NC key, and treat the replaceable 0 Ω links as sacrificial fuses that protect the logic rails.[^84100-nc]
 - Makerbase 75100 V2 units run about €75 delivered versus ~€150 for Spintend 12-fet controllers; Izuna's custom firmware already fixes the aluminum-case voltage readout bug.[^75100-pricing]
 - Makerbase 75200 V2 now includes a built-in shutdown input, sparing budget builds from external antisparks.[^75200-shutdown]
+- Makerbase’s boxed 75×100 “on/off” revision simply adds a resistor pair, and the NRF header still powers aftermarket BLE modules once the deck is trimmed for the enclosure.[^makerbase-onoff]
 - Makerbase engineers are now iterating an 84 V/200 A INA241 board in the open via esk8.news threads.
   - expect layout tweaks and firmware revisions before treating the higher-voltage lineup as production-ready.[^1]
 - Fardriver controllers deliver multi-kiloamp capability (up to 2,600 A) and appear on production Weped Sonic builds; VESC hardware is still pricier and more delicate at those power levels.[^fardriver]
@@ -32,6 +33,8 @@
 - On Ubox builds, set absolute current only 10–20 % above motor current; explore observer options, reduce observer gain by half, tweak inductance by ~20 %, experiment with PWM frequency, and avoid slow-ABS to stop over-current oscillations without neutering torque.[^abs-oc]
 - Phase amps, not motor Kv, create launch torque: Deadword's 75100/Ninebot G30 regained punch only after raising motor current beyond 35 A (within safe hardware limits).[^phase-amps]
 - Rochee's testing on Jesús's Rion confirmed that extreme phase amps and field-weakening reintroduce grinding noises and cutouts; backing phase current down keeps 24 s builds reliable.[^phase-ceiling]
+- Zero 10X 1 200 W hubs fed by 68 V/59 A packs hit magnetic saturation around 7–8 kW; riders cap real output near 4 kW unless stator temps stay under ≈80 °C and favour dual-motor CAN setups to share the load at higher speeds.[^zero10x-saturate]
+- Mid-drive e-bike swaps that stall around 16 km/h typically need motor current lifted to roughly 80 A phase/20 A battery, ERPM recalculated for wheel size/gear ratio, and duty-cycle logging to reach 30–40 km/h while watching for BMS cut-outs.[^mid-drive-boost]
 - When ride logs show the hub is already saturating, follow Yoann's example and dial current back.
   - hardware changes move the needle more than piling on phase amps once the stator is tapped out.[^saturation-logging]
 - Mirono’s CL-series caution still stands: auto-detected regen mirrors drive current, so hand-tune motor/brake amps before hard launches or you will spike hardware.
@@ -57,12 +60,14 @@
 
 - Upgrade GT2 or Lonnyo hub leads to ~8 mm² cabling, warming thick silicone jackets with low heat before bending so the larger phases seat cleanly.[^gt2-leads]
 - Replace corroded XT60s outright; when soldering bullet connectors, heat the connector (not the wire) so solder flows, then slide the molded cover to shield the last ~3 mm before shrinking insulation.[^soldering]
+- Deck-mounted Makerbase 75×100 twins stay reliable with flexible shielded RVVP looms rather than solid Ethernet; stiff conductors have snapped throttles and pinned controllers wide open.[^rvvp-harness]
 - For hall chattering Monorim builds, re-detect halls, raise the sensored→sensorless handoff to ~3,000 ERPM, and switch observers to Ortega for clean transitions.[^monorim-chatter]
 - Stay in hall-sensor mode when pushing high phase current; Mxlemming observers can launch at 150 A on 10 s 5 p packs but saturate sooner than Ortega, so revisit observer and current-coupling parameters when saturation appears.[^hall-mode]
 - Investigate hall sensor "absent" errors by checking the thin hall leads and verifying continuity with a multimeter's beep mode before rerunning setup.[^hall-diagnostics]
 - Before re-energizing suspect controllers, beep-test between pack leads and every phase to catch shorts, confirm 5 V accessory output, isolate hall supplies with dual 1N4148 diodes if needed, and inspect resettable fuses guarding the Ubox's 12 V/5 V/3.3 V rails.[^prepower-checks]
 - Cold-soldered phase leads can melt and short, killing FETs; test each MOSFET drain-to-source, inspect both sides of the board, and verify Bluetooth plus the 5 V rail before reconnecting.[^phase-meltdown]
 - Zero owners mounting paired VESCs should enlarge bolt holes gradually, strip paint to use the chassis as a heat bridge, clamp with hardware and threadlocker, refresh thermal pads with paste, and avoid insulating foam stuffing.[^zero-mounting]
+- Fitting 11 in hubs on Zero 10X frames demands machining the swingarm axle for clearance; skipping the cut leaves the wheel misaligned and binding under load.[^zero10x-axle]
 - Mixing Makerbase 75100s with FlipSky 75100s on a shared CAN bus pops transceivers thanks to mismatched termination.
   - stick to homogeneous pairs or rework resistor networks before linking them.[^6]
 - Use mechanical fasteners rather than brazing when bonding heatsinks to frames; aluminum brazing demands specialty flux, risks galvanic corrosion, and is best reserved as a last resort.[^brazing]
@@ -79,6 +84,7 @@
 
 ## Instrumentation & Controls
 
+- Troubleshoot lethargic hubs by confirming the throttle voltage sweep before rewriting firmware; a clean sweep proves the controller is receiving full command before you dive into firmware changes.[^throttle-sweep]
 - Yoann's dual Spintend 85 V/250 A Nami conversion highlighted weak launch torque, clunking under load, GNSS vs. VESC speed gaps (~30 km/h) even with wheel diameter entered, and noisy Spiny 2 throttle voltage (likely from routing beside phase leads).
   - log everything during shakedowns.[^nami-conversion]
 - Spin Y throttles work on Spintend and Ubox setups: Version 1 needs custom JST-1.0 leads into ADC2/COMM2, while Version 2 simplifies wiring with a four-conductor harness.[^spiny]
@@ -86,6 +92,7 @@
 - Vsett display retermination: drill a tiny hole, lever the ultrasonically welded shell apart, resolder or reroute the six-wire harness (mind RX/TX orientation), reseal with quality two-part adhesive, and reapply the throttle sticker with warm air.[^vsett-display]
 - Incline readouts need an IMU; Ubox includes a gyroscope so it self-levels on boot, whereas bare VESCs without IMUs cannot show accurate slope.[^imu]
 - Capture VESC Tool logs whenever behaviour feels odd—the TCP hub issue Yoann spotted only has a root-cause plan because he committed to record full logs for the group.[^vesc-logging]
+- Mid-drive crews ignore blanket “BBSHD maxes at 3.5 kW” claims; rely on on-winding thermistors to set safe battery current instead of hearsay caps.[^bbshd-thermistor]
 - Swap the 01C (10 kΩ) temp-sense resistor into recent Makerbase 75100 V2 runs so motor telemetry stops reporting bogus numbers before thermal limits bite.[^75100-tempfix]
 - Negative throttle ramping keeps torque on after you release the lever; switch back to the natural curve to kill the dead zone without upsetting launches.[^negative-ramp]
 - Regen throttles mapped to “current no reverse” on ADC2 should be calibrated with 30 pole pairs and GPS cross-checks so dash speed stays honest while tuning braking torque.[^regen-dash]
@@ -129,6 +136,9 @@
 [^abs-oc]: knowledge/notes/input_part007_review.md lines 19-19.
 [^phase-amps]: knowledge/notes/input_part007_review.md lines 70-70.
 [^phase-ceiling]: knowledge/notes/input_part007_review.md lines 71-71.
+[^zero10x-saturate]: Source: knowledge/notes/input_part006_review.md†L37-L37
+[^mid-drive-boost]: Source: knowledge/notes/input_part006_review.md†L38-L38
+[^bbshd-thermistor]: Source: knowledge/notes/input_part006_review.md†L454-L456
 [^mosfet-limits]: knowledge/notes/input_part007_review.md lines 45-45.
 [^cooling-bays]: knowledge/notes/input_part007_review.md lines 26-26.
 [^alubox]: knowledge/notes/input_part007_review.md lines 46-46.
@@ -136,12 +146,14 @@
 [^statorade]: knowledge/notes/input_part007_review.md lines 64-64.
 [^gt2-leads]: knowledge/notes/input_part007_review.md lines 22-22.
 [^soldering]: knowledge/notes/input_part007_review.md lines 100-100.
+[^rvvp-harness]: Source: knowledge/notes/input_part006_review.md†L32-L32
 [^monorim-chatter]: knowledge/notes/input_part007_review.md lines 17-17.
 [^hall-mode]: knowledge/notes/input_part007_review.md lines 18-18.
 [^hall-diagnostics]: knowledge/notes/input_part007_review.md lines 20-20.
 [^prepower-checks]: knowledge/notes/input_part007_review.md lines 32-32.
 [^phase-meltdown]: knowledge/notes/input_part007_review.md lines 31-31.
 [^zero-mounting]: knowledge/notes/input_part007_review.md lines 28-28.
+[^zero10x-axle]: Source: knowledge/notes/input_part006_review.md†L39-L39
 [^brazing]: knowledge/notes/input_part007_review.md lines 94-94.
 [^external-heatsink]: knowledge/notes/input_part007_review.md lines 99-99.
 [^bms-charge]: knowledge/notes/input_part007_review.md lines 27-27.
@@ -149,9 +161,11 @@
 [^mixed-pack]: knowledge/notes/input_part007_review.md lines 75-75.
 [^ferrofluid-sourcing]: knowledge/notes/input_part007_review.md lines 76-76.
 [^nami-conversion]: knowledge/notes/input_part007_review.md lines 21-21.
+[^throttle-sweep]: Source: knowledge/notes/input_part006_review.md†L43-L43
 [^spiny]: knowledge/notes/input_part007_review.md lines 63-63.
 [^open-display]: knowledge/notes/input_part007_review.md lines 96-96.
 [^vsett-display]: knowledge/notes/input_part007_review.md lines 93-93.
+[^makerbase-onoff]: Source: knowledge/notes/input_part006_review.md†L40-L40
 [^imu]: knowledge/notes/input_part007_review.md lines 30-30.
 [^regen-75100]: knowledge/notes/input_part007_review.md lines 13-13.
 [^nami-chassis]: knowledge/notes/input_part007_review.md lines 88-88.

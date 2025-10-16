@@ -75,7 +75,8 @@
   - cap FW around 20 A on air-cooled builds or switch to the aluminum-PCB/vented variants.[^9]
 - **Disable FW before steep descents.** VESC hub riders have locked wheels by lightly tapping brakes around 50 km/h while FW held them at the non-FW speed ceiling.
   - either roll off FW or ease into braking before dropping big hills.[^10]
-- **Measure on the windings, not the shell.** 100 A battery draw never equals 100 A phase, on-winding thermistors expose the real ceiling, and veterans treat 25–40 % FW marketing claims as hype until the motor designer vouches for them with data.[^11]
+- **Measure on the windings, not the shell.** External hub housings lag far behind the copper temperature, 100 A battery draw never equals 100 A phase, and on-winding thermistors expose the real ceiling—treat 25–40 % FW promises and “3.5 kW max BBSHD” claims as marketing until the motor designer provides validated data.[^11][^fw_shell_lag]
+- **Log both battery and phase currents.** Riders keep flagging confusion around battery-vs-phase limits and note that layering extra D-axis amps for FW audibly raises motor noise, so plan tunes around both data channels instead of assuming one value tells the whole story.[^fw_current_logging]
 - **Embedded sensors only.** Shell probes lag winding heat badly—plant thermistors inside the motor before trusting FW headroom.[^12]
 - **Ignore 70 A FW “single-motor” recipes.** Veterans immediately shot down suggestions like 70 A of FW layered on 120 A battery limits because the combo risks blowing controllers or saturating single-motor stators.[^13]
 - **Little FOCer burnout case study.** A 100 A battery / 200 A phase tune with 37 A FW killed a Little FOCer after a brief field-weakening run.
@@ -202,6 +203,8 @@
 [^flipsky_fw_ignore]: Flipsky controllers ignoring battery current limits during field weakening.[^83]
 [^fw_mosfet]: Spintend 85150 MOSFET failures under high field-weakening loads.[^79]
 
+[^fw_shell_lag]: Source: knowledge/notes/input_part006_review.md†L452-L457
+[^fw_current_logging]: Source: knowledge/notes/input_part006_review.md†L455-L456
 
 ## References
 
