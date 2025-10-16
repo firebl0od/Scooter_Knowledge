@@ -7,6 +7,7 @@
 - Treat every 3.3 V accessory rail as sacred: footpads, throttles, and ADC gear all expect logic-level supplies, and miswiring to 5 V has already killed sensors and daughterboards.【F:knowledge/notes/input_part012_review.md†L255-L256】【F:knowledge/notes/input_part012_review.md†L347-L349】【F:knowledge/notes/input_part013_review.md†L407-L409】
 - Makerbase’s 75×100 docs now live on GitHub, and the on/off revision simply swaps a resistor pair; riders also confirmed third-party BLE modules run happily from the NRF header once wired correctly.【F:knowledge/notes/input_part006_review.md†L430-L431】
 - G300-class stacks plateau around 22 S / 320 A phase today, while rumoured K900/KG00 firmwares remain unproven—plan upgrades around documented limits or step to C350/3Shul hardware for higher-voltage racing.【F:knowledge/notes/input_part013_review.md†L416-L417】【F:knowledge/notes/input_part013_review.md†L462-L462】
+- European racers confirmed Ambrosini RS500, Rage Robers, and MakerX G300 controllers share the same hardware—pricing reflects branding, not silicon, so focus on firmware provenance and support rather than rebadges.【F:knowledge/notes/input_part012_review.md†L387-L387】
 - Discounted “MakerX” dual controllers claiming 16 S, 100 A continuous, and 200 A peak appear to be 75 300-derived boards packaged like Nucular 24F clones—validate specs before buying the rebrand.【F:data/vesc_help_group/text_slices/input_part001.txt†L25282-L25299】
 
 ## Product Line Cheat Sheet

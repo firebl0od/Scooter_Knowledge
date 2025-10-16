@@ -7,6 +7,7 @@
 - Size busbars with real cross-sectional math instead of stacking nickel—triple 0.30 mm stacks still run resistive at 70 A, so teams now flip to copper once welders are dialled.【F:knowledge/notes/input_part007_review.md†L301-L307】【F:knowledge/notes/input_part007_review.md†L321-L325】
 - Xiaomi Pro 2 and Navee conversions prove 20 S packs fit only when BMS and controllers move—Gabe’s sleeper pack splits 11 S in-deck/9 S external with twin 6 AWG leads while controllers live in a 50 mm spacer and the BMS rides the stem; a 10 mm JBD board keeps Navee bays viable.【F:knowledge/notes/input_part007_review.md†L309-L317】
 - Budget worksheets should factor in consumables, BMS headroom, and future tariff shocks (e.g., QS8 connectors drifting toward $35) to avoid mid-build redesigns when scaling beyond 300 A continuous.[^4][^5]
+- One builder left boards on the hotplate briefly without visible damage, but the scare reinforced double-checking preheat routines before solder prep—treat hotplate stages as live-fire operations every time.【F:knowledge/notes/input_part012_review.md†L80-L80】
 
 ## Workshop Pricing & BMS Baselines
 - Denis’ catalog still quotes ~€170 for a 10S4P Samsung 35E pack, €30 for the Wildman bag, and roughly €20 for EU shipping via DPD/UPS; he insists on genuine XT30 hardware and 20 A common-port BMS boards rather than AliExpress knock-offs.[^denis-pricing]

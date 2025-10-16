@@ -27,6 +27,12 @@
   3. Close bleed screw and verify no leaks
   4. Install new pads and bed them properly on first rides[^seal-damage]
 
+### Pad Conditioning & Bedding
+- Riders formed a “sanded pad club,” resurfacing pads before bedding to tame squeal and keep braking consistent after swapping to thicker rotors.【F:knowledge/notes/input_part012_review.md†L35-L35】
+
+### Lever Durability Notes
+- Magura composite lever hardware can snap with hand force—many owners preemptively swap to Shimano Saint or other metal bodies before trusting 3 mm rotors and high-torque braking setups.【F:knowledge/notes/input_part012_review.md†L34-L34】
+
 ## Brake Upgrades & Sizing
 
 ### Four-Piston Caliper Benefits
@@ -84,9 +90,10 @@
 - Yamal warned that floating bicycle rotors look flashy but perform worse on high-power scooters—stick with proven solid discs for consistent bite.【F:knowledge/notes/input_part010_review.md†L262-L263】
 - Yamal and 🇪🇸AYO#74 still favour the solid 3 mm “Wolf” discs from AliExpress—non-floating despite the two-piece look—because they survive where riveted rotors sheared; at ≈€30 online (vs. €80–100 retail) riders buy them in sets of four.【F:data/vesc_help_group/text_slices/input_part010.txt†L18701-L18712】
 - Brake-Stuff’s Shimano-pattern 6-bolt rotors are proving durable replacements for worn discs on VESC conversions—Yamal’s installs slot straight onto common hubs when builders want mid-tier pricing without sacrificing material quality.【F:knowledge/notes/input_part010_review.md†L391-L392】
-
 ### Superbikes & Heat Management
 - Racers weighing €1.2 k Trickstuff Maxima kits against Magura MT5/MT7 setups note that motorcycle Brembos rarely clear scooter forks; 150 km/h stopping demands bigger rotors and higher-volume masters no matter which premium caliper you choose.【F:knowledge/notes/input_part011_review.md†L368-L374】
+- 3 mm × 170 mm rotors dramatically stiffen braking response but require retracting pistons fully for clearance and a quick true after the first bedding stops.【F:knowledge/notes/input_part012_review.md†L33-L33】
+- A commuter who bent a Vsett rotor mid-ride now keeps spares on hand and leans on e-brakes when mechanical hardware warps unexpectedly—plan redundancy for traffic incidents.【F:knowledge/notes/input_part012_review.md†L186-L186】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -139,6 +146,10 @@
   - 2+ CFM flow rate to seat beads quickly before air leaks past unseated tire
   - Use bead seater tools or ratchet straps around tire circumference to help initial seating
   - Remove valve core temporarily during seating to maximize airflow, reinstall once beads are set[^tire-inflation]
+- Stock extra casings and tubes—one PMT puncture forced a 4 km walk, highlighting how quickly high-speed tires destroy rims when no spare is available.【F:knowledge/notes/input_part012_review.md†L37-L37】
+
+## Hose & Banjo Hardware
+- Dualtron owners flipping banjo orientation often choose Fastride’s stainless dual-M8 kit (~€40) because it includes crush washers and O-rings, avoiding piecemeal sourcing for hose reroutes.【F:knowledge/notes/input_part012_review.md†L38-L38】
 
 ## Brake Fluid & Compatibility
 - Xtech hydraulic conversions rely on mineral oil (not DOT fluid) for Magura-compatible systems; Mirono bled his calipers with dual syringes and quickly abandoned the idea of using water after seeing trapped bubbles compromise lever feel.[^mineral-oil]

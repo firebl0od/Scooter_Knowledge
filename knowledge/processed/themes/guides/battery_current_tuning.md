@@ -54,6 +54,7 @@ Taming current limits is the difference between a scooter that rips for years an
 - Treat VESC Tool’s state-of-charge gauge as a rough helper—it linearly maps 4.2–3.3 V per cell (≈66 V on 20 S), so keep your cutoffs a few volts above the BMS trip to prevent surprise throttling once the display reads “empty.”²⁵
 - Stage controller low-voltage cutoffs above the BMS limit so power tapers before the protection opens; pair that with temp logging on marginal packs so sag-induced heating doesn’t sneak up mid-ride.[^cutoff-margin]
 - Use phase-current behaviour as a health check: dual Spintend builds hold 120–130 A phase per motor (≈160 A ABS) happily—if a hub starts stuttering above ~85 A, dig for a blown MOSFET or loose phase lead instead of simply backing off current.【F:knowledge/notes/input_part000_review.md†L663-L664】
+- Sensorless hubs that bog or howl when phase current crosses ~200 A usually need fresh detection values more than higher current limits—one enduro rider regained speed by trimming inductance targets and re-running detection instead of chasing 550 A phase fantasies.【F:knowledge/notes/input_part012_review.md†L15-L15】
 4. **Layer in regen**
    - Add regen after forward currents stabilize. Keep battery regen gentler than your discharge target (−5 A to −10 A is plenty for commuter packs) and ramp up slowly to avoid BMS or controller cutoffs.⁵ ¹¹
    - ≥21 S packs demand extra headroom—keep regen targets under −50 A and leave a few volts of pack margin to avoid the overvoltage spikes documented on 23 S builds.【F:data/vesc_help_group/text_slices/input_part004.txt†L12557-L12583】
@@ -64,6 +65,8 @@ Taming current limits is the difference between a scooter that rips for years an
    - Treat the extra FW amps as additive to your battery limit—if you budget 100 A battery and add 25 A FW, logs will still show ≈125 A at the pack.【F:data/vesc_help_group/text_slices/input_part004.txt†L10300-L10305】
    - On dual drives, enable traction control on the front controller first and monitor for MOSFET surges when grip returns.¹³
    - September 2022 track work showed traction-control launches heating Ubox singles faster than manual pulls; budget extra heatsinking or relax slip targets during long straights.[^tc_heat_2022]
+   - Nami tuners treat 12-FET Ubox stacks as reliable only up to roughly 300 A phase / 350 A battery combined—pushing harder has correlated with sudden failures even on fresh hardware.【F:knowledge/notes/input_part012_review.md†L148-L148】
+   - Pair controller targets with cell capability: 20 S10 P P42A packs can momentarily deliver ~450 A, but sustained draws demand temperature monitoring and margin for pack aging.【F:knowledge/notes/input_part012_review.md†L150-L150】
 
 ## Hardware Guardrail Table
 | Controller | Typical Pack | Battery Current (per controller) | Phase Current | Regen (Battery / Phase) | Notes |
@@ -72,6 +75,7 @@ Taming current limits is the difference between a scooter that rips for years an
 | Flipsky 75200 Pro V2 | 20 S commuters | 50–60 A | 100–120 A (idle fix), up to 150 A with cooling | −5 A / −40 A | Requires phase-filter disable + `mxlemming` observer to prevent idle heating.⁵ |
 | MakerX single (GO-FOC HI100) | 16–20 S duals | 60 A | 200 A | −8 A / −45 A | Runs cooler than equivalent Flipsky hardware when bolted to metal decks.⁴ |
 | Spintend Ubox 85/150 | 20–22 S duals | 80–100 A (≈200 A max on 22 S) | 250–300 A | −12 A / −60 A | Firmware clamps phase ≈350 A; community keeps 22 S tunes near 200 A battery / 300 A phase for longevity.¹⁵ ²⁶ |
+| Spintend 85/250 cheat sheet | 22 S race scooters | ≈200 A battery baseline (260 A only for testing) | 300 A comfortable, 350 A runs but not “safe” | Match regen to the battery plan | Yamal’s crew treats ≈300 A phase / 200 A battery as the reliable ceiling and logs any 260 A experiments so the reference sheet stays current.【F:data/vesc_help_group/text_slices/input_part012.txt†L15288-L15307】|
 | Makerbase 84100 HP | 20 S singles | 60–80 A | ≤135 A | −8 A / −35 A | Higher settings have produced instant failures—treat datasheet peaks as marketing.³ |
 | Boutique Tronic X12 | 22–24 S race | 100 A (stock firmware) | 400 A phase, ABS ≈600 A limit | −15 A / −80 A | No-limit firmware lifts ABS but demands extensive cooling and logging.¹⁶ |
 
@@ -82,6 +86,8 @@ Taming current limits is the difference between a scooter that rips for years an
 - **Stagger braking inputs.** Pair mechanical brakes with modest regen; runaway regen has bricked 75100 logic boards when negative current spikes hit unstable hardware.¹⁸
 - **Leave regen enabled for lever brakes.** Zeroing battery regen also disables lever-based e-brakes; keep a small negative current target and shape throttle curves inside ADC apps instead.【F:knowledge/notes/input_part004_review.md†L329-L329】
 - **Throttle & ramp tuning.** Shorten positive ramp to ~0.1 s and sculpt throttle curves once your current caps are dialed—especially on controllers that feel soft off the line.¹⁹
+- **Log phase vs. battery regen ratios.** Recent 65 H/85250 builds run ≈90 A phase regen per motor, while Matthew is experimenting with 120 A phase / 20 A battery targets—he’s revisiting those numbers carefully after prior “kabooms” blamed on aggressive negative current limits.【F:data/vesc_help_group/text_slices/input_part012.txt†L13576-L13595】
+- **Document regen heuristics from the latest 65 H builds.** Recent 85250 logs show Noname holding ≈90 A phase regen per motor while Matthew experiments with 120 A phase / 20 A battery targets—record the ratios before others repeat the “kabooms” blamed on aggressive negative currents.【F:data/vesc_help_group/text_slices/input_part012.txt†L13576-L13595】
 
 ## Pack Protection & Monitoring
 - **Running pack-only is risky.** Riders skipping BMS boards to “save space” saw cell drift and failures within months—if you insist on BMS-less packs, log every group, schedule manual balancing, and accept the elevated fire risk.【F:data/vesc_help_group/text_slices/input_part004.txt†L9921-L9939】
