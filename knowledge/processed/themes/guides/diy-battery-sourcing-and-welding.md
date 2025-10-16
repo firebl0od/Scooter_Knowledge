@@ -5,6 +5,8 @@
 - Grade-A 50PL and P45B cells now define the performance ceiling, but prices swing from €1–1.5 in the EU to ~$9 in the US, so teams must align sourcing tactics with customs realities before scoping pack power levels.[^1][^2]
 - Copper spot welding remains the gating competency: bargain 90 € welders rarely prove 0.15 mm claims, while K-Weld or Glitter rigs with proper maintenance reliably join 0.1 mm copper for 22 S packs.[^3][^10]
 - Mirono steers newcomers toward Docreate’s ~€100 capacitor welder and copper-under-nickel sandwiches (≈40 J for nickel, 60–70 J for copper) because LSUC-branded caps underdeliver and bare copper strips fail pull tests without a nickel cap.[^1]
+- Before committing to copper busbars, Pandalgns is test-firing a €100–€120 welder at ≈0.1 s pulses to confirm it can join copper reliably—proof that bench tests should precede full 20 S10 P builds.[^welder-trials]
+- Pack shops now expect reinforced printed holders and pro-grade tooling; Pandalgns is redesigning 20S8P cages after flimsy STLs failed, and Noname is pricing a $17 k laser welder to keep precision builds moving.[^stiff-holders]
 - Size busbars with real cross-sectional math instead of stacking nickel.
   - triple 0.30 mm stacks still run resistive at 70 A, so teams now flip to copper once welders are dialled.[^2][^3]
 - Nickel-plated steel strips remain serviceable when the welds are sealed under Kapton, fish paper, and shrink; leave plating exposed to humid decks and the steel rusts, while pure nickel keeps resistance lower if you can justify the cost.[^ip001-nickel-steel][^ip001-pure-nickel]
@@ -940,3 +942,5 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^copper_pretension]: Source: knowledge/notes/input_part009_review.md†L401-L401
 [^ip001-nickel-steel]: Source: data/vesc_help_group/text_slices/input_part001.txt†L18901-L18945
 [^ip001-pure-nickel]: Source: data/vesc_help_group/text_slices/input_part001.txt†L18920-L18933
+[^welder-trials]: Source: knowledge/notes/input_part010_review.md†L492-L493
+[^stiff-holders]: Source: knowledge/notes/input_part010_review.md†L611-L612

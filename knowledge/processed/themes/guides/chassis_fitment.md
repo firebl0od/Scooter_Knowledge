@@ -9,6 +9,10 @@
 ## Frame Stiffness Checks
 
 - Removing the deck from a Dualtron Spider leaves the frame too flexy to stand on; riders are adding reinforcement and planning higher-power motor swaps only after hall wiring and 10 AWG phase leads are sorted to keep the chassis stable.[^dualtron_spider]
+- Zero 10X stems, frames, and OEM suspension pieces have cracked when riders push past ~60 km/h; NetworkDir nudges builders toward Vsett 10+ chassis with dual stems when planning high-power conversions.[^zero10x_fail]
+- Zero 10X conversions that jump to 11-inch wheels also need upgraded brake kits for rotor clearance before the new wheelset is rideable.[^zero10x_11in]
+- Slack Core 920R frames have snapped before upgrade work even began; inspect boutique chassis for hidden damage before pouring money into power mods.[^slack_core_fail]
+- Dualtron race builds still require heavy frame, fork, and motor rework despite the platform’s popularity, because Minimotors outsources much of the hardware.[^dualtron_outsource]
 
 ## Deck Fabrication & Accessories
 
@@ -76,6 +80,13 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 - Zero 10X suspension tuning now centres on 165 mm/1,500 lb rear springs and 135–150 mm/1,500 lb fronts, with ~70 kg riders still favouring stiff rates for asphalt while heavier racers rotate 1,250–1,800 lb coils by terrain.[^zero10x_spring_rates]
 - Tighten wobbly Zero/Vsett folding clamps with a rag and channel locks; once torqued properly the joint rarely folds tool-free, but it stops stem play before rotors groove the pads.[^folding_clamp_fix]
 
+## High-Power Suspension & Frame Upgrades
+
+- The Weepor’s rear suspension bottoms out under heavier riders; budget an EXA 150 mm shock or similar-quality damper before unlocking more power.[^weepor_shock]
+- Thunder-frame builders are mapping 22 S11 P battery bays (with BMS) or 22 S10 P layouts using next-gen 40PL cells to balance weight and capacity.[^thunder_pack]
+- Scarcity and steep local pricing are pushing some builders away from Thunder frames entirely, opting for heavier Nami or Teverun Blade platforms despite the weight hit.[^thunder_scarcity]
+- Raphael Foujiguara Performance now offers reinforced decks, welded battery boxes, and mudguards tailored to 20 S-class scooters with Thunder-style necks—handy when OEM frames skip critical accessories.[^rfp_accessories]
+
 [^bearing_sizes]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^tire_clearance]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^sealed_bearing_fill]: Source: knowledge/notes/input_part006_review.md†L450-L451
@@ -96,6 +107,14 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 [^achilleus-neck]: Source: knowledge/notes/input_part012_review.md, line 478.
 [^eu-motorcycle]: Source: knowledge/notes/input_part012_review.md, line 455.
 [^project-costs]: Source: knowledge/notes/input_part012_review.md, line 456.
+[^zero10x_fail]: Source: knowledge/notes/input_part010_review.md†L407-L408
+[^zero10x_11in]: Source: knowledge/notes/input_part010_review.md†L618-L618
+[^slack_core_fail]: Source: knowledge/notes/input_part010_review.md†L618-L619
+[^dualtron_outsource]: Source: knowledge/notes/input_part010_review.md†L621-L621
+[^weepor_shock]: Source: knowledge/notes/input_part010_review.md†L458-L459
+[^thunder_pack]: Source: knowledge/notes/input_part010_review.md†L505-L506
+[^thunder_scarcity]: Source: knowledge/notes/input_part010_review.md†L687-L687
+[^rfp_accessories]: Source: knowledge/notes/input_part010_review.md†L514-L515
 
 
 ## References

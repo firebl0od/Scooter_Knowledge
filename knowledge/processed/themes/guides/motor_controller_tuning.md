@@ -25,11 +25,14 @@
   - expect layout tweaks and firmware revisions before treating the higher-voltage lineup as production-ready.[^1]
 - Fardriver controllers deliver multi-kiloamp capability (up to 2,600 A) and appear on production Weped Sonic builds; VESC hardware is still pricier and more delicate at those power levels.[^fardriver]
 - ASI BAC controllers remain potent but frustrating—firmware is locked to specific motors, provisioning changes void warranties, and riders chasing flexibility keep defecting to Spintend or Nucular despite BAC’s police-mode perks.[^ip001-bac]
+  - Benchmark the scooter-sized 450 A units before recommending them—current owners are still asking whether typical hub motors survive those targets and how usable the tuning software feels.[^fardriver-450a]
 - Nucular 24F controllers remain scarce, heavy, and four-figure purchases; builders favor the 3Shul C700 as a more practical high-power upgrade path.[^nucular]
 - Dual-motor controllers house two linked boards sharing a heatsink, making them viable for dual 500 W Monorim setups so long as each phase channel stays inside spec (Gabe reports 75 km/h sustained without overheating).[^dual-esc]
 - Race crews cap competition scooters at 22 s because today's 30 s hardware can't feed equivalent battery amps; 22 s 18 p packs remain the winning compromise.[^race-voltage]
 - Spintend 85 V/250 A controllers stay attractive for packaging.
   - they slide under skid pans, keep 20 s battery caps, and let riders redeploy Nucular 24Fs elsewhere, but expect deck spacers or external mounts to clear their height.[^spintend-85250]
+- Gabe still sees XESC controllers eke out more top speed than equivalently tuned VESCs on stock Laotie hardware, but 13 S commuters plateau near 35 km/h while 20 S+ tunes demand MP2 packaging tricks to fit the cells.[^xesc-speed]
+- Most scooter-focused controllers still rely on low-side shunts; three-phase current sensing only helps extremely low-inductance or high-ERPM machines and will not rescue noisy HFI hubs on its own.[^low-side-shunt]
 
 ## Current & Voltage Guardrails
 
@@ -47,6 +50,7 @@
 - Makerbase 80100 hardware only hits the advertised 250 A phase once you flash no-limit firmware; stock builds plateau around 150–160 A even with ample cooling.[^3]
 - Mixing different battery limits front and rear is workable—rear motors simply carry more load as duty climbs—but keep pack voltages matched and bias phase amps rearward to preserve grip without resorting to traction control.[^ip001-dual-share]
 - Limited-edition dual-phase VSETT hubs are misreporting ≈270 A recommendations during auto-detect instead of the normal 120–130 A; treat ~200 A as the ceiling until Spintend patches the estimator so the twin-lead motors stay inside safe limits.[^ip001-dual-phase-detect]
+- NetworkDir is comfortable adding about 15 A of field weakening on healthy dual 75100 Mantis builds for a modest speed bump without overstressing the hardware.[^mantis-fw15]
 
 ## Thermal Management & Cooling
 
@@ -73,6 +77,8 @@
   - Dimos now steers riders toward Ortega or lower phase amps when mxlemming trips ABS, reserving saturation compensation as the last resort.[^mxlemming-abs]
 - Investigate hall sensor "absent" errors by checking the thin hall leads and verifying continuity with a multimeter's beep mode before rerunning setup.[^hall-diagnostics]
 - Makerbase 75100 current telemetry stays honest only after removing two of the parallel shunts that creep in during repairs; otherwise VESC under-reports motor draw.[^shunt-trim]
+- Once the motor profile is dialled, rerun hall detection without repeating full motor detection to validate repairs quickly—AYO#74 treats it as a post-service sanity check.[^hall-redetect]
+- Wheelway 1 000 W hubs that chatter above ~70 A phase usually clear up after rerunning detection with higher phase-current limits, raising the power-loss estimate toward 1 kW, shortening phase leads, or ultimately stepping to LY 60H 22/3 motors for more torque headroom.[^wheelway-fix]
 - Before re-energizing suspect controllers, beep-test between pack leads and every phase to catch shorts, confirm 5 V accessory output, isolate hall supplies with dual 1N4148 diodes if needed, and inspect resettable fuses guarding the Ubox's 12 V/5 V/3.3 V rails.[^prepower-checks]
 - Cold-soldered phase leads can melt and short, killing FETs; test each MOSFET drain-to-source, inspect both sides of the board, and verify Bluetooth plus the 5 V rail before reconnecting.[^phase-meltdown]
 - Zero owners mounting paired VESCs should enlarge bolt holes gradually, strip paint to use the chassis as a heat bridge, clamp with hardware and threadlocker, refresh thermal pads with paste, and avoid insulating foam stuffing.[^zero-mounting]
@@ -101,10 +107,16 @@
 - Spin Y throttles work on Spintend and Ubox setups: Version 1 needs custom JST-1.0 leads into ADC2/COMM2, while Version 2 simplifies wiring with a four-conductor harness.[^spiny]
 - NetworkDir and PuneDir are building an open-source VESC display with profile switching and GitHub-hosted code, plus mounts for 22 mm bars to ease commuter adoption.[^open-display]
 - Vsett display retermination: drill a tiny hole, lever the ultrasonically welded shell apart, resolder or reroute the six-wire harness (mind RX/TX orientation), reseal with quality two-part adhesive, and reapply the throttle sticker with warm air.[^vsett-display]
+- `lekrsu` warns that leaving Xiaomi/Laotie builds on wizard defaults makes them feel sluggish; enable his “rocket fuel” tune, tighten acceleration ramp time, and be ready to dial ramping back if wheelspin returns.[^rocket-fuel]
+  - Traction-control riders now drop positive ramp delay to effectively zero so launch response stays sharp without masking slip elsewhere in the tune.[^ramp-zero]
 - Incline readouts need an IMU; Ubox includes a gyroscope so it self-levels on boot, whereas bare VESCs without IMUs cannot show accurate slope.[^imu]
 - Capture VESC Tool logs whenever behaviour feels odd—the TCP hub issue Yoann spotted only has a root-cause plan because he committed to record full logs for the group.[^vesc-logging]
 - Mid-drive crews ignore blanket “BBSHD maxes at 3.5 kW” claims; rely on on-winding thermistors to set safe battery current instead of hearsay caps.[^bbshd-thermistor]
 - Swap the 01C (10 kΩ) temp-sense resistor into recent Makerbase 75100 V2 runs so motor telemetry stops reporting bogus numbers before thermal limits bite.[^75100-tempfix]
+- Enable Spintend traction control directly in VESC Tool’s ADC tab (local controller only), log the slip behaviour, and remember the NRF header hosts the Bluetooth module while ADC1 carries the throttle signal.[^tc-adc]
+- If sensorless scooters still stutter off the line, expect to kick-start them—sensorless control cannot hold from zero speed without hall sensors.[^sensorless-kick]
+- SmartESC firmware on Xiaomi Pro controllers only mimics the VESC Tool UI—the ST-based boards still lack full VESC feature depth, so temper open-tuning expectations.[^smartesc-warning]
+- Before blaming firmware for traction hiccups, inspect fork and neck harnesses for pinched wires at full steering lock; damaged leads often mimic controller faults.[^fork-harness]
 - Negative throttle ramping keeps torque on after you release the lever; switch back to the natural curve to kill the dead zone without upsetting launches.[^negative-ramp]
 - Regen throttles mapped to “current no reverse” on ADC2 should be calibrated with 30 pole pairs and GPS cross-checks so dash speed stays honest while tuning braking torque.[^regen-dash]
 - Centered-throttle KERS setups go smoother when you calibrate ADCs with the wheel in the air, leave the config page open while sweeping the lever, and then stage negative battery/motor currents so regen ramps in without overloading the pack.[^kers-setup]
@@ -113,6 +125,9 @@
 ## Safety & Fault Recovery
 
 - Temper regen/battery limits on Makerbase 75100 V2 controllers when stretching to 100 V packs—Rogerio destroyed one by braking a 22 s build at ~5 km/h.[^regen-75100]
+- Remember to disable the VESC Tool hand test after verifying throttle/brake mapping; leaving it armed blocks normal control inputs on the next power cycle.[^hand-test]
+- Burnout-induced controller deaths get a full autopsy now: beep between pack and phases to confirm no hard short, check that the motor spins freely, and expect multiple shorted FETs on the aluminium power board.[^burnout-autopsy]
+- Avoid opening controllers while short-circuit protection is active and never mix MOSFETs across 6-fet and 12-fet Spintend boards; if you must ride while repairs are pending, detune to smaller controllers and lean on mechanical brakes instead of regen-only stops.[^burnout-repair]
 - Keep spare STM32 MCUs on hand for aging FlipSky 75100s.
   - Asyan4ik lost a logic chip without warning yet had the controller running again within an hour after swapping the $30 part.[^8]
 - Matthew’s controller began throttling around 91 °C and shut down at 95 °C despite a 105 °C limit, suggesting sensor calibration or firmware clamps need verification during thermal diagnostics.[^thermal_clamp]
@@ -139,6 +154,7 @@
 - Smart Repair’s GT1 build now runs 420 A phase on the rear and just 120 A up front (both capped around 85 A battery) because the front tyre spins at 80 km/h—traction, not controller ceiling, is the bottleneck.[^smart_traction]
 - EU riders keep reminding each other that public roads remain capped at 25 km/h despite 22 S/200 A builds, so stealth profiles and gentle launches stay part of compliance strategy.[^eu_cap]
 - Builders still want data on VESC traction control mid-corner—the community is logging tests to confirm whether it prevents burnouts or can stabilise lean angles too.[^tc_question]
+- 🇪🇸AYO#74 trims traction-control strength toward 80 % and raises the activation band to ~4 000 ERPM after the front spun past 135 km/h on his 33×2/70 H build; expect to revisit slip targets once steering-cam sensors return.[^tc-highspeed]
 
 ---
 [^hub-lineup]: knowledge/notes/input_part007_review.md lines 12-16.
@@ -154,6 +170,7 @@
 [^75200-shutdown]: knowledge/notes/input_part007_review.md lines 25-25.
 [^fardriver]: knowledge/notes/input_part007_review.md lines 40-40.
 [^ip001-bac]: Source: knowledge/notes/input_part001_review.md†L650-L651
+[^fardriver-450a]: Source: knowledge/notes/input_part010_review.md†L706-L706
 [^nucular]: knowledge/notes/input_part007_review.md lines 34-34.
 [^dual-esc]: knowledge/notes/input_part007_review.md lines 35-35.
 [^race-voltage]: knowledge/notes/input_part007_review.md lines 36-36.
@@ -175,6 +192,11 @@
 [^monorim-chatter]: knowledge/notes/input_part007_review.md lines 17-17.
 [^hall-mode]: knowledge/notes/input_part007_review.md lines 18-18.
 [^hall-diagnostics]: knowledge/notes/input_part007_review.md lines 20-20.
+[^hall-redetect]: knowledge/notes/input_part010_review.md†L428-L428
+[^low-side-shunt]: knowledge/notes/input_part010_review.md†L633-L633
+[^wheelway-fix]: knowledge/notes/input_part010_review.md†L634-L634
+[^mantis-fw15]: knowledge/notes/input_part010_review.md†L657-L659
+[^smartesc-warning]: knowledge/notes/input_part010_review.md†L658-L659
 [^prepower-checks]: knowledge/notes/input_part007_review.md lines 32-32.
 [^phase-meltdown]: knowledge/notes/input_part007_review.md lines 31-31.
 [^zero-mounting]: knowledge/notes/input_part007_review.md lines 28-28.
@@ -194,8 +216,11 @@
 [^open-display]: knowledge/notes/input_part007_review.md lines 96-96.
 [^vsett-display]: knowledge/notes/input_part007_review.md lines 93-93.
 [^makerbase-onoff]: Source: knowledge/notes/input_part006_review.md†L40-L40
+[^rocket-fuel]: knowledge/notes/input_part010_review.md†L426-L427
+[^ramp-zero]: Source: knowledge/notes/input_part010_review.md†L535-L536
 [^imu]: knowledge/notes/input_part007_review.md lines 30-30.
 [^regen-75100]: knowledge/notes/input_part007_review.md lines 13-13.
+[^hand-test]: knowledge/notes/input_part010_review.md†L429-L429
 [^nami-chassis]: knowledge/notes/input_part007_review.md lines 88-88.
 [^donor-frame]: knowledge/notes/input_part007_review.md lines 89-89.
 [^tubeless]: knowledge/notes/input_part007_review.md lines 90-90, 166-166.
@@ -217,16 +242,22 @@
 [^vesc-logging]: knowledge/notes/input_part007_review.md lines 103-103.
 [^ip001-hub-service]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24712-L24744
 [^75100-tempfix]: knowledge/notes/input_part007_review.md line 233.
+[^tc-adc]: Source: knowledge/notes/input_part010_review.md L539-L539
+[^sensorless-kick]: Source: knowledge/notes/input_part010_review.md L540-L540
+[^fork-harness]: Source: knowledge/notes/input_part010_review.md L538-L538
 [^negative-ramp]: knowledge/notes/input_part007_review.md line 264.
 [^regen-dash]: knowledge/notes/input_part007_review.md line 273.
 [^kers-setup]: knowledge/notes/input_part007_review.md line 274.
 [^monofork]: knowledge/notes/input_part007_review.md lines 116-116.
 [^light-pack]: knowledge/notes/input_part007_review.md lines 161-161.
 [^chain-drive]: knowledge/notes/input_part007_review.md lines 168-168.
+[^tc-highspeed]: knowledge/notes/input_part010_review.md†L461-L463
 [^vsett-fork]: knowledge/notes/input_part007_review.md lines 84-84.
 [^dual-disc]: knowledge/notes/input_part007_review.md lines 85-85.
 [^ip001-telemetry]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17940-L18080
 [^ip001-accel-tools]: Source: data/vesc_help_group/text_slices/input_part001.txt†L26930-L26952
+[^burnout-autopsy]: Source: knowledge/notes/input_part010_review.md†L526-L528
+[^burnout-repair]: Source: knowledge/notes/input_part010_review.md†L527-L528
 
 
 ## References
@@ -239,3 +270,5 @@
 [^6]: Source: knowledge/notes/input_part007_review.md†L369-L375
 [^7]: Source: knowledge/notes/input_part007_review.md†L379-L383
 [^8]: Source: knowledge/notes/input_part007_review.md†L362-L365
+
+[^xesc-speed]: knowledge/notes/input_part010_review.md†L616-L616

@@ -18,6 +18,8 @@
 - **Choose the right bearings.** Swap stock 2Z hubs for sealed 2RS units rated for 80–100 °C, then refresh grease after wet weeks so rain rides don’t cook Xiaomi or Monorim front ends.[^7][^8]
 - **Revive soaked motors methodically.** Niu hubs that sat underwater came back after thorough drying and fresh grease, but the crew now treats sealed bearings and upgraded seals as mandatory before splashing through floods again.[^9]
 - **Waterproof race controllers deliberately.** Face de Pin’s Thunder and Nami builds machine custom C350 enclosures, add drain paths, and fabricate frame parts so the electronics stay sealed without sacrificing serviceability during rainy track days.[^10][^11]
+- **Copy proven controller shells.** Haku told Noname to mimic Peak G30-style cases and seal ports with silicone instead of plastic wrap when mounting exposed controllers in wet climates.[^peak-case]
+  - Nami chassis still need purpose-built watertight boxes beneath the heatsink if they will ever see heavy rain; don’t trust shrink-wrap stopgaps on exposed controller stacks.[^nami-box]
 - **Inspect after every soak.** Error 28 beeps and erratic state-of-charge readings usually mean the controller or white battery plug corroded.
   - scrub with contact cleaner, dry thoroughly, and don\'t trust factory IP54 stickers.[^12][^13]
 - **Reseal deck mods.** Grinding Xiaomi/Ninebot ribs to fit BMS hardware opens new leak paths; reseal the deck lid and servo-lock cavity with silicone rather than leaving raw metal to rust.[^14]
@@ -115,6 +117,8 @@
 [^9]: Source: knowledge/notes/input_part009_review.md†L322-L322
 [^10]: Source: data/vesc_help_group/text_slices/input_part009.txt†L22050-L22053
 [^11]: Source: data/vesc_help_group/text_slices/input_part009.txt†L22066-L22072
+[^peak-case]: Source: knowledge/notes/input_part010_review.md†L503-L503
+[^nami-box]: Source: knowledge/notes/input_part010_review.md†L503-L503
 [^12]: Source: knowledge/notes/denis_all_part02_review.md†L419-L421
 [^13]: Source: knowledge/notes/denis_all_part02_review.md†L454-L455
 [^14]: Source: knowledge/notes/input_part000_review.md†L292-L293

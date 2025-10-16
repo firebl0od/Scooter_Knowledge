@@ -82,6 +82,7 @@
 - Kaabo Wolf owners now swap to 3 mm Kaabo discs after stock rotors warped.
   - confirm caliper spacing and expect longer life once the thicker rotors are paired with Wolf motors.[^15]
 - Skip Shimano “resin only” 160 mm rotors on 72 V-class scooters; the thin rotors fade quickly and risk glazing metallic pads. Veterans instead budget 2 mm rotors rated for metallic compounds and pair them with full-hydraulic calipers before raising pack voltage.[^shimano-metal]
+- Builders hunting thicker 160 mm options are sourcing 3 mm AliExpress rotors that clear Hope calipers without machining, smoothing upgrades on Zero and Dualtron conversions.[^ali-3mm]
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
 - Tall brake adapters should use a single ring spacer instead of stacked washers so axial loads do not rock the disc bolts.
   - 5 mm steel rings have proven stable on custom Blade hubs, while 1.7 mm washer stacks remain a stopgap only.[^16]
@@ -146,6 +147,7 @@
 - Yamal and 🇪🇸AYO#74 still favour the solid 3 mm “Wolf” discs from AliExpress.
   - non-floating despite the two-piece look
   - because they survive where riveted rotors sheared; at ≈€30 online (vs. €80–100 retail) riders buy them in sets of four.[^44]
+- Sonken-branded 160 mm rotors mirror the weak inner-ring geometry that doomed earlier Brakestuff copies; without better tempering and precise Hope caliper shimming they bend within months on RM-X race scooters.[^sonken-warning]
 - Brake-Stuff’s Shimano-pattern 6-bolt rotors are proving durable replacements for worn discs on VESC conversions.
   - Yamal’s installs slot straight onto common hubs when builders want mid-tier pricing without sacrificing material quality.[^45]
 
@@ -380,6 +382,8 @@
 [^42]: Source: knowledge/notes/input_part010_review.md†L261-L262
 [^43]: Source: knowledge/notes/input_part010_review.md†L262-L263
 [^44]: Source: data/vesc_help_group/text_slices/input_part010.txt†L18701-L18712
+[^ali-3mm]: Source: knowledge/notes/input_part010_review.md†L620-L620
+[^sonken-warning]: Source: knowledge/notes/input_part010_review.md†L665-L665
 [^45]: Source: knowledge/notes/input_part010_review.md†L391-L392
 [^46]: Source: knowledge/notes/input_part011_review.md†L368-L374
 [^47]: Source: knowledge/notes/input_part012_review.md†L33-L33

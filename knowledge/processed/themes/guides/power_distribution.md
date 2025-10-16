@@ -4,6 +4,7 @@
 
 - Long 16 AWG leads paired with XT30 connectors caused ~0.5 V per-cell drops at 40 A on a 12 S 7 P pack; shortening runs, upgrading to XT60/XT90, and using 10–12 AWG wiring markedly improves voltage sag.[^long_leads]
 - Routing high-current cabling on one deck side and signal/brake harnesses on the other reduces EMI in tight Vsett installations, especially once connectors are upsized.[^emi_routing]
+- Stainless “metal zip ties” stay flexible in cold garages and secure battery looms without the bulk of hose clamps—handy when plastic ties crack in winter storage.[^metal_zipties]
 
 ## Signal Filtering & Parallel Pack Discipline
 
@@ -30,6 +31,7 @@
 - Avoid dropping L1019 connectors into 60–70 mm motors without reworking the solder—builders are desoldering the factory “blob” and upsizing leads before higher-current installs.[^ip001-l1019-limit]
 - QS8 main leads that regularly see ~350 A peaks now step up to 6 AWG when a single connector carries the pack current; dual-QS8 layouts can stay on paired 8 AWG runs, but the crew keeps warning newcomers not to trust “100 A” house wire marketing on cheap silicone leads.
   - budget the thicker copper before finalising harness lengths.[^qs8_awg]
+- Jason still specs XT150 bullets on motor phases while leaving XT90s on the battery feed, and `lekrsu` reminds builders that MT60 plugs bundle three XT60-style bullets for tidy triple-phase hookups.[^xt150-guidance]
 - Treat solder as mechanical filler, not the conductor: twist or fold AWG12 leads to double their contact area before wetting bullets, because even silver-bearing solder conducts two to five times worse than copper.[^6]
 - A melted MT60 phase plug that shorted a Kelly controller at ~200 A convinced the crew to retire drone-class connectors above 72 V; step up to XT150/AS150 bullets or lugs once battery demand enters the 150–200 A bracket.[^ip001-mt60-failure]
 - Builders graduating dual VESC setups beyond 150 A phase are standardising on Amass AS150U anti-spark pairs with 8 AWG tails and XT150/AS150 mains once burst logs show 500 A phase.
@@ -41,9 +43,12 @@
 - Compact 25 W/3 500 lm headlights and parallel-wired high/low beams fit scooter cockpits but demand honest current budgets; the touted 3 A step-downs need heatsinking, each Nucular controller only supplies 12 V/3 A (≈6 A dual), and many riders prefer lamps with integrated buck converters to avoid voltage drop across long runs.[^ip001-lighting]
 - Popular mini voltmeters cap at 35 V and expect a 12 V feed, forcing 72–100 V builds to add dedicated step-downs or repurpose throttle displays since control rails only provide ~3.3 V.[^ip001-voltmeter]
 - Kelly 7230 harnesses cram doubled 4 AWG phase leads into 8 mm bullets; seasoned racers instead rewire with slimmer conductors or 10 mm hardware rather than forcing oversized plugs that compromise safety.[^kelly_bullet_debate]
+- Wolf-class hubs ship with roughly 4 mm (≈AWG 11–12) phase leads that tolerate about 130 A once properly cooled; measure the copper cross-section and frame clearance before ordering 11-inch wheel kits or drilling axles for thicker wiring.[^wolf-phase]
+- Genuine Amass 8 mm bullets clamp dual 10 AWG phases far tighter than generic 8 mm copies; expect to hand-fit or even shave 10 mm bullets if you mix brands on high-current leads, and budget space for 10 mm hardware when controllers ship with doubled 10 AWG phase tails.[^amass-fit]
 
 [^long_leads]: Source: knowledge/notes/input_part000_review.md, line 84.
 [^emi_routing]: Source: knowledge/notes/input_part000_review.md, line 85.
+[^metal_zipties]: Source: knowledge/notes/input_part010_review.md†L672-L673
 [^ceramic_scavenge]: Source: knowledge/notes/input_part000_review.md, line 126.
 [^parallel_rules]: Source: knowledge/notes/input_part000_review.md, line 127.
 [^antispark_tradeoff]: Source: knowledge/notes/input_part003_review.md†L511-L515
@@ -69,3 +74,6 @@
 [^ip001-voltmeter]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24411-L24421
 [^qs8_awg]: Source: data/vesc_help_group/text_slices/input_part005.txt†L24298-L24309
 [^kelly_bullet_debate]: Source: knowledge/notes/input_part008_review.md†L488-L490
+[^xt150-guidance]: Source: knowledge/notes/input_part010_review.md†L481-L482
+[^wolf-phase]: Source: knowledge/notes/input_part010_review.md†L511-L512
+[^amass-fit]: Source: knowledge/notes/input_part010_review.md†L531-L532,†L704-L704

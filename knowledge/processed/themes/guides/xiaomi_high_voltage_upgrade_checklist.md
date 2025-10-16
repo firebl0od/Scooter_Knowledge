@@ -71,6 +71,11 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
   - budget Daly replacements if the existing BMS forces 4.18 V/cell to balance and accept ~20 V sag until wiring is upsized.[^15][^16]
 2. Until a programmable charger arrives, set 16 S supplies around 67 V for partial charges and monitor balance delta closely; Daly hardware often refuses to wake balancing without near-full voltage.[^16]
 
+### 3.4 22S Pro 2 Packaging Experiment
+
+1. GABE proved a 22 S pack fits once PETG carriers slide between the rails (~660 Wh), but he plans to disable or heavily limit regen so the Mini Ubox survives and may short-charge to ≈21.5 S to keep braking headroom.[^gabe-22s]
+2. Expect sanding or external enclosures if deck tolerances clamp the PETG carriers; the build only clears once spacer thickness and rail clearance are tuned.[^gabe-22s]
+
 ## 4. Charger & BMS Planning
 
 - Modify OEM chargers by replacing the 10 kΩ feedback resistor with a 30 kΩ+27 kΩ stack (~14.3 kΩ) and fine-tuning the trim pot to 50.4 V for 12S packs.[^10]
@@ -309,3 +314,4 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 [^103]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19101-L19145
 [^104]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19136-L19173
 [^105]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19145-L19185
+[^gabe-22s]: Source: knowledge/notes/input_part010_review.md†L499-L500

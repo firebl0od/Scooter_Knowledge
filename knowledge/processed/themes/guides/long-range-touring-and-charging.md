@@ -36,6 +36,7 @@
 - Yamal carries a fast charger into cafés on 100 km+ itineraries; his 20 S 10 P pack returns roughly 100 km of range in mild weather when he tops up partway through the day.[^13]
 - Long-range Vsett crews plan 125–200 mile weekends by chaining J1772 pedestals through ~2 kW Huawei supplies, accepting ~10 mph average speed once four partial charges are factored in while dual Spintend 85/250 controllers stay cool over 320 km of mixed riding.[^vsett_weekend_loop]
 - A 16 S 6 P Sanyo pack paired with dual Spintend 85/250 controllers still delivers roughly 10.8 kW and 54 mph when riders focus on voltage monitoring instead of full telemetry dashboards.[^sanyo_spintend_benchmark]
+- VESC Project Paradise capped 10 P Samsung 40T packs around 20 A (≈1.6 kW) for daily fast-charging, noting that 50 A pushes the chemistry too hard and the bigger headache is locating outlets that actually supply the current—aligning with Noname’s warning that public hardware struggles much past ~0.5 C.[^40t-charge][^half-c-field]
 - Denis’ production data puts a Pro 2 with his 36 V 10 Ah external “boat” pack around 50 km of real range, while mixed 10S3P/10S4P clone combos manage ≈30 km before tapering.
   - proof that pack health and chemistry drive perceived acceleration more than motor swaps on voltage-limited hubs.[^14][^15]
 
@@ -233,6 +234,8 @@
 [^11]: Source: knowledge/notes/input_part011_review.md†L301-L305
 [^12]: Source: knowledge/notes/input_part012_review.md†L208-L213
 [^13]: Source: knowledge/notes/input_part012_review.md†L209-L213
+[^40t-charge]: Source: knowledge/notes/input_part010_review.md†L561-L561
+[^half-c-field]: Source: knowledge/notes/input_part010_review.md†L682-L682
 [^14]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L91124-L91132
 [^15]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L93450-L93478
 [^16]: Source: knowledge/notes/input_part005_review.md†L142-L142

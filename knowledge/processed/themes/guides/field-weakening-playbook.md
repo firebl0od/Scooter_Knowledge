@@ -40,12 +40,14 @@
 1. **Baseline Tune:** Run standard motor detection, confirm smooth sensorless transitions, and road-test without FW to verify the observer and throttle feel.[^7][^10]
 2. **Enable FW Incrementally:** Increase `Field Weakening Current` in 5–10 A steps. Dual 84100 setups typically settle near 15–30 A per controller for 100 km/h GPS runs, while heavier 72 V builds may stretch toward 40–55 A once cooling and battery delivery are proven.[^7][^11][^12]
    - Rosheee staggers activation—rear FW at 87.5–89.5 % duty, front at 93 % with a 97 % max—and adds ~25 % to the ADC throttle curve so both controllers avoid simultaneous current spikes.[^rosheee_fw]
+   - If current telemetry looks wrong after MOSFET work, inspect for lifted source legs or shunts before blaming firmware; Yoann’s mis-soldered leg mimicked sensor faults until it was reflowed.[^84]
 3. **Pair with quicker ramps judiciously.** Dropping acceleration ramping to 0.05 s sharpens launches alongside FW, but only apply it if the chassis and rider can tolerate the snappier response without spinning tires.[^6]
 4. **Re-verify Current Limits:** After each change, check live logs for battery spikes above set limits and rerun detection if overshoot appears.
   - the VESC Tool wizard reset resolved a 60 A ceiling breach on one build.[^8]
 5. **Test Regen:** Perform controlled braking drills to confirm bus voltage stays within component ratings; log against Spintend’s ≈100 V ceiling so 80–100 km/h stops with FW don’t spike the DC link beyond the hardware limit.[^13]
 6. **Fault Review:** After hard pulls, run the `faults` command and inspect absolute current headroom (200–250 A for 120–130 A phase tunes) to avoid ABS cut-outs at high duty cycle.[^fw-faults]
 7. **Duty Cycle Discipline:** Keep maximum duty near firmware defaults (~95 %); stretching toward 99–100 % has produced abrupt cut-outs above 70 km/h on FW-enabled builds.[^fw-duty]
+   - Commuter builds that never hit 80 % duty can lower the FW trigger and tweak Lisp caps so FW still engages; `lekrsu` even enables VSS speed estimation on sensorless Flipsky 75200 M365s because VESC already leverages back-EMF once the wheel clears ~5 km/h.[^85]
 8. **Duty-trigger experiments:** Genuine FW sliders stay locked behind firmware 5.3, so early adopters sideload 300 A bins and set duty-cycle triggers around 70 % to push past the 95–98 % plateau.
   - treat those settings as advanced-only until thermals and voltage headroom are proven.[^7]
 5. **Test Regen:** Perform controlled braking drills to confirm bus voltage stays within component ratings; Spintend riders retain regen at 80–100 km/h with FW but still watch bus voltage for surprises.[^13]
@@ -125,6 +127,7 @@
 
 - **Choose Higher Voltage / Different Windings When:** You need sustained highway speed, the motor already runs hot without FW, or you’re targeting >120 km/h.
   - builders hitting 118 km/h on 22×3 hubs without FW prove gearing changes scale better than stacking FW amps.[^11][^21]
+- **Match winding choice to your target speed before touching FW.** 22/3 stators deliver ferocious launch torque but stall near 120 km/h without FW, while 33/2 winds scale for highway pulls if you can feed the extra battery and phase current—pick the geometry that meets your duty-cycle goals instead of leaning on FW as a crutch.[^winding-fw]
 - **Use Field Weakening When:** The pack and controller have proven thermal headroom, the chassis can handle added speed, and you only need short bursts to overtake or extend top speed marginally (≈5–15 km/h gains). Riders logging 85 km/h on 20 S singles with 30 A FW treat it as a momentary boost, not a permanent setting.[^11][^22]
 - **Dial zero-vector frequency with FW.** Sensorless 6.06 tunes smooth out once zero-vector frequency hovers around 16 kHz; combine that with 5–10 A FW ramps to tame launch vibration before chasing higher duty-cycle gains.[^34]
 - **Keep phase headroom for saturation compensation.** Shlomozero’s 90 H hubs respond best with 300–400 A phase and conservative 10–15 A FW; pushing FW when phase amps are already maxed leaves no headroom for saturation compensation and quickly overheats 300 A-class controllers.[^35][^36]
@@ -159,6 +162,7 @@
 [^11]: Wolf King GT Pro and similar high-power builds using 55 A FW for ~66 mph road speeds.[^53][^54]
 [^12]: Halo runaway RPM and general caution for unloaded FW testing.[^55]
 [^13]: High-speed regen viability with FW and the need to log bus voltage.[^56]
+[^winding-fw]: Source: knowledge/notes/input_part010_review.md†L508-L509
 [^fw-faults]: Using the `faults` command and raising absolute current headroom (≈200–250 A for 120–130 A phase tunes) to prevent ABS overcurrent trips during FW pulls.[^57][^58]
 [^fw-duty]: Duty-cycle ceiling warnings for FW-enabled builds.
 [^front_tc]: Traction-control guidance to set front-only TC first so rear controllers avoid fresh MOSFET surges.[^134]
@@ -299,3 +303,5 @@
 [^81]: Source: data/vesc_help_group/text_slices/input_part004.txt†L23716-L23735
 [^82]: Source: data/vesc_help_group/text_slices/input_part004.txt†L1247-L1259
 [^83]: Source: data/vesc_help_group/text_slices/input_part004.txt†L21108-L21182
+[^84]: Source: knowledge/notes/input_part010_review.md†L403-L404
+[^85]: Source: knowledge/notes/input_part010_review.md†L405-L405

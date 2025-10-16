@@ -104,6 +104,7 @@
 - **Validate hall swing.** PAS sensors only register once the hall output toggles roughly 0–1.5 V on ADC1; if regen releases bounce the signal, tighten filtering so the throttle does not re-engage after braking.[^42]
 - **Makerbase/Flipsky quirks.** Current 75100 Pro V2 firmware only exposes a quadrature PAS mode, so adapting three-wire cadence sensors needs an intermediary microcontroller, and the servo header’s 5 V tolerance is still unconfirmed.
   - test before powering accessories straight from that pin.[^43]
+- **Three-wire PAS on Flipsky hardware.** Share 5 V and ground with the throttle, land the PAS signal on ADC1, keep the throttle on ADC2, and terminate everything in soldered JST shells instead of temporary terminal blocks so vibration does not shake the joints loose.[^flipsky-3wire-pas]
 
 ### Regen Buttons & Variable Brakes
 
@@ -357,6 +358,7 @@
 [^73]: Source: knowledge/notes/input_part003_review.md†L554-L554
 [^74]: Source: knowledge/notes/input_part003_review.md†L553-L553
 [^75]: Source: knowledge/notes/input_part003_review.md†L552-L553
+[^flipsky-3wire-pas]: Source: knowledge/notes/input_part010_review.md†L703-L704
 [^44]: Source: knowledge/notes/input_part001_review.md†L512-L514
 [^45]: Source: knowledge/notes/input_part001_review.md†L646-L647
 [^46]: Source: knowledge/notes/input_part013_review.md†L206-L206

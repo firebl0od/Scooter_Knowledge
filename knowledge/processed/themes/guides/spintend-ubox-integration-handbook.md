@@ -4,6 +4,7 @@
 
 - Treat every unit as a kit: tear it down before energising, photograph QC issues for support, and follow VESC-safe power-up rituals (precharge, discharge caps, avoid hot-plugging) to prevent latent shorts or MCU damage.[^1][^2][^3]
 - Clamp the case hard to a heat sink and budget active airflow if phase current will exceed ~120 A per channel; pad thickness and surface prep matter more than exotic materials.[^4][^5][^6][^7]
+- Treat the Lite boards as ~150 A-per-motor hardware even in dual housings; `lekrsu`’s reminders keep traction upgrades realistic until you step up to full-size Spintend or 3Shul stages.[^lite-phase-cap]
 - Keep regen conservative.
   - match battery regen amps to pack capacity, disable traction-control modes on single-motor builds, and check faults via USB before power-cycling if Bluetooth is absent.[^8][^9][^10]
 - Plan accessories around the power rails you actually have: the dual exposes cruise/lighting outputs and a 12 V rail, but the single requires external buck converters and careful ADC board wiring.[^11][^12][^13][^14]
@@ -11,6 +12,7 @@
 - Synchronise controller power-ups before linking CAN and budget an external BLE bridge for singles.
   - the current batches still ship without Bluetooth and can pop transceivers if one side wakes late.[^can-cite][^single-ble]
 - Treat the built-in alarm as a failsafe only: if the remote misses handshake at boot the Ubox will scream while still energising the hub, so wire brake interlocks or auxiliary sirens for theft deterrence.[^ubox-alarm]
+- Spintend’s refreshed 12‑FET (85 V/240 A) board simply doubles the proven 6‑FET layout, so budget ≈26 kW practical ceiling and plan to buy through trusted resellers like James Soderstrom to skip month-long factory queues.[^138]
 
 ## Pre-Delivery QC & Bench Setup
 
@@ -427,3 +429,5 @@
 [^135]: Source: data/vesc_help_group/text_slices/input_part014.txt†L10587-L10605
 [^136]: Source: data/vesc_help_group/text_slices/input_part014.txt†L10409-L10492
 [^137]: Source: data/vesc_help_group/text_slices/input_part014.txt†L10613-L10619
+[^138]: Source: knowledge/notes/input_part010_review.md†L401-L401
+[^lite-phase-cap]: Source: knowledge/notes/input_part010_review.md†L601-L601

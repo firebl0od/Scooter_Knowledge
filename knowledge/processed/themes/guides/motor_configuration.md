@@ -39,9 +39,12 @@
 - PaoloWu’s Blade 10 hub remains the go-to Xiaomi drop-in: riders report 55–60 km/h on 13 S, ~65 km/h with field weakening, and reliable ~150 A phase tolerance for roughly €150 plus shipping, while Zero 10X and Boyueda alternatives cost more for similar kv.[^10]
 - Smart Repair keeps a spare 70H motor on hand but says the conversion isn’t worth the effort compared with jumping straight to an 80H hub fed by multiple ESCs when chasing big rear-wheel torque.[^smart_70h]
 - Matthew is eyeing Lonnyo 80H 33/2 rear hubs for a Yume Y11+ conversion, confirming the frame can house higher-output drivetrains if you stay ahead of thermal load and phase-current demand.[^lonnyo_y11]
+- Pandalgns opened a 3 kW hub’s axle from 8 mm to 10 mm to feed 12 AWG phase leads and 28 AWG hall wiring, reporting only light material removal was needed to preserve shaft strength for 72 V conversions chasing higher phase current.[^axle-drill]
 - Marketing wattage is meaningless on Vsett 10+ motors.
   - inspect winding fill and magnet stack height to judge headroom before pushing phase amps or buying donor wheels for AWD swaps.[^11]
 - Happy Giraffe logged key Blade hub dimensions (130 mm inner axle, ≈160 mm fork span, M12 threads with 10 mm flats, 12 mm rotor offset, 4 mm hex hardware) and confirmed the shell is tubeless-ready, giving Xiaomi builders a reference checklist before ordering forks and spacers.[^12]
+- PuneDir’s sluggish 27 H rear hub shows why some regions need to source QS or YM motors locally when customs block AliExpress imports.[^pundir-27h]
+- Jetson minibike 72 V Sabvoton swaps pull about 30 A but still demand vigilant motor temperature monitoring until a cleaner all-internal VESC solution lands.[^jetson-minibike]
 - Rage Mechanics’ 75 mm stator motors are sustaining 10 kW per wheel on Weped platforms but cost ≈€650 each and require wider axles.
   - plan chassis spacing before chasing 120 km/h builds with them.[^13]
 
@@ -49,6 +52,8 @@
 
 - Replace Ninebot G30 hall ICs with the matching part numbers (SS41F vs. R43) and keep the stamped face oriented the same direction; mismatched or reversed sensors output ~2 V constantly and will not sync until the firmware detects proper alignment.[^14]
 - Superglue or RTV secures loose sensors, but rerun motor detection and temporarily cap limits around 40 A battery / 80 A phase after repairs until you source proper hall spares.[^15]
+- Skip hot glue on hall boards—🇪🇸AYO#74 and `lekrsu` now rely on high-temp silicone or epoxy because hot glue softens near 120 °C and lets sensors drift during hub heat cycles.[^hall-adhesive]
+- Kaabo Wolf King GT 60 H motors accept a 60° AliExpress hall board that 🇪🇸AYO#74 vetted; stock a spare before refurbishing large hubs.[^wolf-hall]
 
 ## Efficiency & Range Benchmarks
 
@@ -82,8 +87,14 @@
 [^13]: Source: knowledge/notes/input_part000_review.md†L494-L498
 [^14]: Source: knowledge/notes/input_part000_review.md†L391-L391
 [^15]: Source: knowledge/notes/input_part000_review.md†L392-L392
+[^hall-adhesive]: Source: knowledge/notes/input_part010_review.md†L517-L518
+[^wolf-hall]: Source: knowledge/notes/input_part010_review.md†L518-L519
+[^axle-drill]: Source: knowledge/notes/input_part010_review.md†L549-L550
+[^pundir-27h]: Source: knowledge/notes/input_part010_review.md†L636-L636
 [^16]: Source: knowledge/notes/input_part000_review.md†L486-L489
 [^17]: Source: knowledge/notes/input_part000_review.md†L489-L493
 [^rob_vsett120]: Source: knowledge/notes/input_part012_review.md, line 463.
 [^smart_70h]: Source: knowledge/notes/input_part012_review.md, line 462.
 [^lonnyo_y11]: Source: knowledge/notes/input_part012_review.md, line 464.
+
+[^jetson-minibike]: knowledge/notes/input_part010_review.md†L683-L683

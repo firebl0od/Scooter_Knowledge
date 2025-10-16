@@ -61,6 +61,8 @@
 - A Zero 10X dialled to 100 A rear / 60 A front phase with 80 A/50 A battery caps provides smooth launches and strong mid-speed pull without overheating.[^zero10x]
 - Stock VSETT controllers taper output around 52 V (~10 % state of charge), effectively reducing battery current to protect aging cells.
   - behaviour the community wants to replicate in VESC firmware for builds lacking smart BMS data.[^vsett_taper]
+- Yoann’s Vsett 10 dual Lite conversion uses the ADC board’s 5 V rail to trigger a relay for a dedicated 12 V converter, keeps OEM lighting happy, and flags that the stock front suspension and tyres need upgrading once dual torque is unlocked.[^vsett-dual-lite]
+- The build reuses a Nami 80 A BMS that trips near 120 A total, so Yoann caps pack current around 100–120 A while custom Lisp code scales phase amps versus ERPM to prevent wheelspin; note the thinner Alu Lite baseplate solders easier but trades some thermal mass.[^vsett-dual-lite]
 - Kelly KLS scooter controllers often refuse USB connections.
   - plan on the BLE module or legacy Windows XP drivers when you need to flash or configure those platforms.[^11]
 
@@ -84,6 +86,12 @@
 ## Harness Mapping & Diagnostics
 
 - Vsett harness tear-downs map orange to pack voltage, pink to the on/off detect line, white to the brake signal, and black to ground—meter continuity before repinning so accessory wiring doesn’t backfeed logic rails.[^vsett-colors]
+## Platform-Specific Notes
+
+- For the 52 V dual-motor Kukirin G2 Master, Haku recommends twin Mini Ubox controllers to retain the stock pack and 1 000 W hubs, while Marius warns the chassis wobbles above ~40 km/h even with a steering damper—keep speed near 50 km/h or move to a more stable frame for 15 kW ambitions.[^kukirin-g2]
+- Expect roughly €100–120 per Alu Lite when budgeting European Mini Ubox stacks, setting realistic expectations when comparing DIY conversions against turnkey retrofits.[^kukirin-g2]
+- 🇪🇸AYO#74 is rewiring a 60 V pack for 72 V Nami controllers; treat the phase-swapped experiment as provisional until field logs confirm the controllers stay happy on lower voltage.
+  - capture start-up behaviour, temperature swing, and any firmware guardrails before recommending the retrofit.[^nami-72v-on-60v]
 
 [^build_example]: Source: knowledge/notes/input_part000_review.md, line 37.
 [^foc_advantages]: Source: knowledge/notes/input_part000_review.md, line 68.
@@ -94,6 +102,7 @@
 [^vesc_audio_demo]: Source: knowledge/notes/input_part009_review.md†L414-L414.
 [^zero10x]: Source: knowledge/notes/input_part000_review.md, line 92.
 [^vsett_taper]: Source: knowledge/notes/input_part000_review.md, line 93.
+[^vsett-dual-lite]: Source: knowledge/notes/input_part010_review.md†L604-L605
 [^accel_logging]: Source: knowledge/notes/input_part000_review.md, line 133.
 [^speed_alignment]: Source: knowledge/notes/input_part000_review.md, line 135.
 [^phase_baseline]: Source: knowledge/notes/input_part000_review.md, line 198.
@@ -113,6 +122,8 @@
 [^makerbase_disconnect]: Source: knowledge/notes/input_part008_review.md†L446-L447
 [^regen_phase_ratio]: Source: knowledge/notes/input_part008_review.md†L447-L448
 [^manual_inductance_override]: Source: knowledge/notes/input_part008_review.md†L450-L451
+[^kukirin-g2]: Source: knowledge/notes/input_part010_review.md†L469-L471
+[^nami-72v-on-60v]: Source: knowledge/notes/input_part010_review.md†L701-L703
 
 
 ## References

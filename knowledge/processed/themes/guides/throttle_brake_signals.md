@@ -51,6 +51,9 @@
 
 - Scroll-wheel throttles like the Rion Curve remain in high demand; Spintend users are prototyping remotes that relocate the wheel and display to mimic dual-action ergonomics while they wait for production hardware to return.[^scroll_prototype]
 - Community experiments split trigger travel into roughly 70 % throttle / 30 % regen or add dual springs, curved magnets, and even pressure sensors under the trigger to deliver proportional braking without sacrificing grip.[^scroll_experiments]
+- Давно пора’s Xiaomi wiring recipe lands red/black on the controller’s 3.3 V/GND rails and sends the blue (or green) signal lead straight to ADC2, skipping BLE dash pucks during conversions.[^xiaomi-wiring]
+- If a fresh motor knocks only at light throttle, retest hall sensors—bad halls manifest at low ERPM before full-throttle smooths out.[^hall-knock]
+- Spintend throttle looms land red on the 3.3 V rail, black on ground, and route the signal into ADC1 while the NRF header carries the Bluetooth module; confirm the pinout before repinning harnesses for traction-control experiments.[^spintend-adc]
 
 ## Regen Safety Guidelines
 
@@ -90,6 +93,9 @@
 [^signal_divider]: Source: knowledge/notes/input_part000_review.md, line 98.
 [^signal_deadband]: Source: knowledge/notes/input_part000_review.md, line 99.
 [^throttle_failure]: Source: knowledge/notes/input_part000_review.md, line 190.
+[^xiaomi-wiring]: Source: knowledge/notes/input_part010_review.md†L477-L477
+[^hall-knock]: Source: knowledge/notes/input_part010_review.md†L479-L479
+[^spintend-adc]: Source: knowledge/notes/input_part010_review.md†L539-L539
 [^bench_trip]: Source: knowledge/notes/input_part000_review.md, line 177.
 [^regen_ratio]: Source: knowledge/notes/input_part000_review.md, line 178.
 [^lab_supply]: Source: knowledge/notes/input_part000_review.md, line 179.

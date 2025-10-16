@@ -9,8 +9,10 @@
 - Community case studies still favour passive conduction upgrades over active plumbing: Mirko’s 15 mm aluminum deck plate plus open vents held dual 190 A phase / 70 A battery runs near 52 °C, while heat-pipe experiments outperformed vibration-prone water loops on cramped decks.[^4][^5]
 - Skip deck-mounted water loops unless you have room for pumps and vibration isolation.
   - track crews found the plumbing rarely fits scooter decks and prefer heat pipes with thin pads for reliable thermal headroom.[^6]
+- Builders now relocate controllers into clean airflow before entertaining radiator loops; leaks can kill a VESC outright and the coolant mass is a heavy penalty on already weighty builds.[^relocate-before-water]
 - Fresh water-cooled, resin-potted controller builds with INA181 current sensors promise better cut-off behaviour, yet veterans still warn that MOSFET-to-heatsink transfer is the real bottleneck until someone logs sustained high-power runs on the new hardware.[^7]
 - When water cooling is unavoidable, Smart Repair’s X12 loop blueprint calls for a 40 × 80 mm block on the MOSFET bank, a PWM-controlled ~800 L/h pump, small radiator, and roughly 1 kg total system mass (≈300 g coolant, 300 g pump, 500 g hardware) with conformal coating and Kapton to harden the controller after prior water damage.[^8]
+- High-speed roadsters are treating controller cooling as the ceiling—Lieven keeps pushing full radiator loops because a VESC sitting in airflow lacks surface area, and CPU-style AIO kits still bottleneck unless you engineer the entire loop for continuous load.[^controller-loop]
 
 ## Oil Cooling Experiments
 
@@ -37,6 +39,7 @@
   - before flooding a motor.[^13]
 - Riders comparing ferrofluid against oil cooling still favour ferrofluid because it clings to magnets, wipes clean, and avoids the leaks and constant top-offs that plague oil-filled hubs unless covers are perfectly sealed and paint-free.[^ip001-ferro-vs-oil]
 - Even ferrofluid needs periodic checks; high-RPM builds see the fluid migrate deeper into magnet gaps over time, so owners now schedule top-off inspections after hard seasons.[^ip001-ff-check]
+- Jan reminded experimenters that ferrofluid is still the cheapest first step and that serious drilling or ebike-block cooling projects should start on sacrificial motors until machining budgets and failure tolerance exist.[^ferrofluid-first]
 - Ferrotec APG1110 remains the benchmark for hub fillings, while Supermagnete’s 10 mL bottles offer reliable sourcing for EU riders upgrading Xiaomi and G30 hubs without importing large lots.[^14]
 - HeroDasH demonstrated clean application with magnetic bottles that pull fluid straight into magnet gaps and warned against overfilling because excess drag hurts efficiency; peers now lean on ebikes.ca’s simulator to visualize how kv and resistance tweaks shift the efficiency curve before sealing hubs.[^15]
 - Grin’s Statorade has logged roughly 30 % winding-temperature drops with 6 ml doses and no noticeable drag, whereas bargain ferrofluids risk conductivity, residue, and magnet damage once they bake inside the hub.[^16][^17]
@@ -50,11 +53,13 @@
 ## Hub Heatsinks & External Cooling
 
 - Builders chasing sustained 70–75 km/h add bolt-on hubsinks with thermal paste to move heat into airflow, noting that balanced e-bike rings avoid vibration if machined precisely.[^23]
+- Custom controller enclosures now include 56 mm-tall rear mounts with bi-directional fins and skived 250 × 150 × 30 mm heat sinks that often need trimming to clear decks—DIY proof that packaging drives cooling choices.[^andrei-heatsink]
 - Custom deck spacers and ducted lighting housings are being hand-cut from PVC/acrylic to route airflow past motors while freeing deck space for taller battery packs.[^24]
 - Riders toying with automatic transmission fluid (ATF) were warned it will leak through cable glands and bearings.
   - stick with ferrofluid for controllable rotor-gap transfer unless you have data proving a hybrid fill can stay sealed.[^atf-leak]
 - Mirono’s wrap-and-fluid test showed thermal tape fins plus ferrofluid kept a bag-mounted VESC near ambient (≈42 °C heatsink in 34 °C weather) while the hub shell matched coil temps, confirming the stator finally dumps heat into the case efficiently.[^25][^26]
 - Builders reseating ferrofluid-treated stators set the rim between their feet, slide the stator straight in, and tape XT150 terminations with Kapton to avoid slicing insulation while keeping service access.[^27]
+- Street builds are skipping vented covers even when welding fins because grit intrusion outweighs the airflow gains; sealed ferrofluid hubs remain the safer path despite a bit of drag.[^vented-grit]
 - Community debate over branded Statorade vs. generic ferrofluids continues: premium mixes claim tuned viscosity, yet budget blends still deliver major gains unless you’re chasing Rosheee-level power, provided there’s a solid path from stator to ambient air.[^28]
 - Expect roughly a 10 % premium on ferrofluid and hubsinks to net 15–30 % more continuous output; riders paying CHF 21 per 10 mL import fee for genuine Statorade still call the trade worthwhile for €200 hubs when paired with machined “windmill” fans.[^29][^30]
 - Late-2022 teardown logs converged on dosing sealed 10″ hubs with roughly 2.5–5 ml of ferrofluid (3–4 ml for 11″ cans), applied between magnets after pulling the stator so the air gap fills without spraying grit into open-frame motors.[^31]
@@ -132,6 +137,7 @@
 - Resin-potted water-cooled Flipsky builds now ship with INA181 phase sensors and denser heatsinks, but veterans still expect MOSFET-to-heatsink contact to be the bottleneck until independent testing confirms the claimed improvements.[^73]
 - Passive mods still need conduction.
   - welded side-cover fins only shed heat when ferrofluid is present; otherwise the stator stays insulated by the air gap and drilled vent holes just invite debris without improving transfer.[^74]
+- Even with ferrofluid and airflow, PETG spacers and ducts can soften above ~80 °C, nudging summer builds back toward machined metal hardware for mounts and cooling plates.[^petg-soft]
 - Jan and others confirmed that adding internal fins or covers barely changes temperatures because the stator still floats across an air gap; meaningful cooling jumps require water quick-connects or abandoning hubs for mid-drives, despite the packaging headache of chains and belts on scooter frames.[^75]
 
 ## Controller Mounting & Airflow Discipline
@@ -358,6 +364,8 @@
 [^6]: Source: data/vesc_help_group/text_slices/input_part003.txt†L20860-L20920
 [^7]: Source: data/vesc_help_group/text_slices/input_part005.txt†L23967-L23995
 [^8]: Source: knowledge/notes/input_part011_review.md†L431-L433
+[^controller-loop]: Source: knowledge/notes/input_part010_review.md†L521-L522
+[^ferrofluid-first]: Source: knowledge/notes/input_part010_review.md†L522-L523
 [^9]: Source: knowledge/notes/input_part012_review.md†L41-L41
 [^10]: Source: knowledge/notes/input_part012_review.md†L42-L42
 [^11]: Source: knowledge/notes/denis_all_part02_review.md†L433-L436
@@ -433,7 +441,7 @@
 [^71]: Source: knowledge/notes/input_part005_review.md†L115-L124
 [^72]: Source: knowledge/notes/input_part005_review.md†L111-L112
 [^73]: Source: knowledge/notes/input_part005_review.md†L486-L488
-[^74]: Source: knowledge/notes/input_part010_review.md†L27-L28
+[^74]: Source: knowledge/notes/input_part010_review.md†L442-L443
 [^75]: Source: knowledge/notes/input_part010_review.md†L238-L240
 [^76]: Source: knowledge/notes/input_part008_review.md†L25-L25
 [^77]: Source: knowledge/notes/input_part008_review.md†L26-L26
@@ -455,7 +463,7 @@
 [^93]: Source: knowledge/notes/input_part000_review.md†L635-L639
 [^94]: Source: knowledge/notes/input_part002_review.md†L484-L486
 [^95]: Source: data/vesc_help_group/text_slices/input_part003.txt†L18986-L19004
-[^96]: Source: knowledge/notes/input_part010_review.md†L26-L27
+[^96]: Source: knowledge/notes/input_part010_review.md†L440-L443
 [^97]: Source: knowledge/notes/input_part012_review.md†L234-L235
 [^98]: Source: knowledge/notes/input_part012_review.md†L235-L235
 [^99]: Source: knowledge/notes/input_part012_review.md†L251-L251
@@ -551,3 +559,7 @@
 [^183]: Source: knowledge/notes/input_part002_review.md†L46-L48
 [^ip001-copper-deck]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24459-L24505
 [^ip001-thermal-pad]: Source: data/vesc_help_group/text_slices/input_part001.txt†L18536-L18640
+[^relocate-before-water]: Source: knowledge/notes/input_part010_review.md†L646-L647
+[^vented-grit]: Source: knowledge/notes/input_part010_review.md†L648-L648
+[^petg-soft]: Source: knowledge/notes/input_part010_review.md†L651-L651
+[^andrei-heatsink]: Source: knowledge/notes/input_part010_review.md†L638-L640

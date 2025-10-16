@@ -25,6 +25,7 @@
   - ideal for sorting cells before pack assembly.[^18]
 - **LCR-T4 component tester:** Handy for confirming MOSFETs, caps, and diodes on suspect VESC boards when DC readings look off.
   - builders caught 1–2 V voltage-sense drift and shorted drivers before reinstalling hardware.[^19]
+- **Keep spare CAN transceivers.** The TJA1051 package keeps resurfacing in controller repairs, so stock a few SMD parts before CAN drops sideline an entire scooter.[^tja1051]
 - **PlatformIO build environment:** The aging VescUart Arduino libraries compile reliably under PlatformIO (Nano/Pro Mini profiles); the stock Arduino IDE often misses dependencies for custom dashboards. Use the PlatformIO quick-start from the VESC telemetry display project to clone configs, flash boards, and share binaries quickly.[^20][^21]
 - **DIY dashboard replicas:** NeatDash-style boards work only when the published resistor (120–150 Ω) and diode orientation are followed; clone BLE controllers still refuse to talk reliably, so shops are preparing ESP32/OLED replacements once Mirono and NVRAM publish open-source hardware.[^22]
 - **VESC Tool mobile update workflow:** Back up motor/app XMLs before flashing in the Android/iOS app, use the in-app firmware flasher while the pack is connected, and sideload older APKs if 6.0+ releases hide configuration menus.
@@ -370,6 +371,7 @@
 [^17]: Source: knowledge/notes/input_part011_review.md†L280-L287
 [^18]: Source: knowledge/notes/input_part004_review.md†L206-L206
 [^19]: Source: data/vesc_help_group/text_slices/input_part005.txt†L23147-L23160
+[^tja1051]: Source: knowledge/notes/input_part010_review.md†L599-L600
 [^20]: Source: knowledge/notes/input_part004_review.md†L261-L261
 [^21]: Source: data/vesc_help_group/text_slices/input_part004.txt†L12626-L12646
 [^22]: Source: knowledge/notes/denis_all_part02_review.md†L318-L320
