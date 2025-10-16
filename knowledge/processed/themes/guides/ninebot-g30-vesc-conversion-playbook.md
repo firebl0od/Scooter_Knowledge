@@ -9,6 +9,7 @@
 
 ## Base Scooter Preparation
 - Flash the latest ScooterHacking G30 BMS firmware to lift discharge ceilings past 20 A while retaining stock harnesses—essential before pushing VESC phase currents.【F:knowledge/notes/input_part014_review.md†L103-L104】
+- Stage an ST-Link and legacy BLE packages before teardown—DE-market Pro 2 dashboards on BLE 1.55+ refuse OTA downgrades, clone controllers spoof serials yet still block flashes, and forcing new Xiaomi BMS firmware through ST-Link has bricked boards mid-conversion.【F:knowledge/notes/denis_all_part02_review.md†L304-L305】
 - Measure the deck cavity early: builders logged ~120 mm width and 74 mm depth, giving clear constraints before committing to dual controllers or double-stack battery layouts.【F:knowledge/notes/input_part004_review.md†L220-L220】
 - Build a spacer/pack checklist before welding: 20 S 4 P layouts fit with printed or CNC spacers plus minor cable reroutes, while 20 S 5 P bricks demand tray trimming, recessed fasteners, and harness standoffs to preserve deck clearance.【F:knowledge/notes/input_part004_review.md†L247-L248】
 - Strip the frame and inspect deck welds prior to grinding rails for larger packs; documented builds plan rail relief plus 3 mm aluminum skid plates as interim reinforcement.【F:knowledge/notes/input_part014_review.md†L106-L106】【F:knowledge/notes/input_part014_review.md†L118-L119】
@@ -61,6 +62,7 @@
 ## Dash Scripting & Secret-Mode Management
 - Unlock “secret mode” by holding both brake and throttle while double-tapping the dash button; remember to exit walk mode first or the scooter stays capped near 20 km/h.【F:knowledge/notes/input_part008_review.md†L215-L215】
 - Firmware 6.05’s ADC branch introduces `secret-sport-fw` and `secret-sport-watts` parameters plus a lower ≈470 Ω throttle resistor target—add RC filtering across the hall supply if the headlight drags the brake line low.【F:knowledge/notes/input_part008_review.md†L216-L216】
+- Late-production dashboards now block OTA downgrades for >32 km/h unlocks—budget ST-Link access and a Windows flash session to push XiaoDash firmware before promising higher speed caps to new G30 owners.【F:knowledge/notes/denis_all_part02_review.md†L99608-L99636】
 - Removing the dash entirely—or at least desoldering its Bluetooth radio—cuts the parked idle draw on alarmed builds so overnight battery drain no longer eats reserve capacity.【F:knowledge/notes/input_part008_review.md†L615-L617】
 - Remove dash scripts only after unlocking; deleting them mid-lock freezes the limit, and random mid-ride power cuts are still reported—treat the display as instrumentation once configuration is complete.【F:knowledge/notes/input_part008_review.md†L217-L217】
 

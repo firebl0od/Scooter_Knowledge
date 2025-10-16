@@ -31,10 +31,12 @@
 ### Four-Piston Caliper Benefits
 - Artem's freshly delivered Shimano M7120 four-piston set (≈€155 for the pair without rotors) brings stiffer one-finger levers and extra thermal mass that he plans to migrate from his trial bike to the scooter if he decides four pistons are overkill off-road.[^four-piston-cost]
 - Four-piston systems improve heat dissipation during repeated high-speed stops but may be excessive for commuter builds under 60 km/h where two-piston Magura MT5 or similar calipers provide adequate stopping power.[^four-piston-vs-two]
+- Denis’ workshop now treats Magura-class hydraulics as mandatory once Pro 2 builds creep toward 80 km/h—Xtech hybrids can’t arrest the extra energy, so riders add lever sensors if they still want regen without sacrificing lever feel and plan a careful bleed after rerouting hoses.【F:knowledge/notes/denis_all_part02_review.md†L433-L433】
 
 ### Rotor Sizing Considerations
 - Brake discussions suggest upsizing rotors from 180 mm to 203 mm mainly boosts thermal mass and leverage but may be excessive for scooters; larger rotors require frame clearance checks and stronger mounting tabs to handle increased braking forces.[^rotor-sizing]
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
+- 160 mm rotor upgrades on Xiaomi frames need careful spacing—builders raised calipers or machined thicker adapters so disc bolts stop striking tire adapters after aggressive braking tests on AWD/RWD conversions.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L89952-L90018】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -105,3 +107,4 @@
 [^fluid-compat]: Brake fluid compatibility chart for common hydraulic brake systems.
 [^follow-centering]: Follow-up action to create wheel-centering and dual-caliper setup guide.【F:knowledge/notes/input_part013_review.md†L645-L647】
 [^follow-dual-disc]: Follow-up action to document dual-disc vs. dual-caliper decision matrix.【F:knowledge/notes/input_part013_review.md†L635-L637】
+- **Support cable housing runs.** Zip-tie the housing to the frame and trim excess slack before chasing pad or caliper issues—every bit of housing flex steals lever travel and torpedoes braking force.【F:knowledge/notes/denis_all_part02_review.md†L348-L349】

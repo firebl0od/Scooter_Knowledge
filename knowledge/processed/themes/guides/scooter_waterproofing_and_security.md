@@ -2,10 +2,12 @@
 
 ## Weatherproof the Chassis Before the Storm
 - **Seal every seam.** Run silicone along deck joints, cable pass-throughs, and the charge door, then coat hub interfaces with lithium grease so sustained rain rides don\'t wick water into the pack or motor bay.【F:knowledge/notes/all_part01_review.md†L86-L87】
+- **Weatherproof external packs thoroughly.** Riders strapping batteries to rear suspensions silicone every seam to keep exposed packs dry on long commutes—expect to lose folding ability but gain reliable sealing.【F:knowledge/notes/denis_all_part02_review.md†L99839-L99856】
 - **Add moisture sentries.** Builders embed hydrometers on DC–DC converters that feed Arduinos driving buzzers; when the sensor trips, the alarm screams before corrosion sets in.【F:knowledge/notes/all_part01_review.md†L86-L87】
 - **Pack silica gel inside decks.** Rental-frame conversions stay dry longest when silica packets live beside the battery and automotive engine sealant closes the lid—silicone peels by hand for service yet seals better than chasing custom gaskets.【F:knowledge/notes/input_part000_review.md†L685-L685】
 - **Choose the right bearings.** Swap stock 2Z hubs for sealed 2RS units and refresh grease after wet weeks to keep Monorim and Xiaomi front ends from grinding themselves apart.【F:knowledge/notes/all_part01_review.md†L27274-L27275】
-- **Inspect after every soak.** Error 28 beeps and erratic state-of-charge readings usually mean the controller or white battery plug corroded—scrub with contact cleaner, dry thoroughly, and don\'t trust factory IP54 stickers.【F:knowledge/notes/denis_all_part02_review.md†L419-L421】【F:knowledge/notes/denis_all_part02_review.md†L454-L455】
+- **Inspect after every soak.** Error 28 beeps and erratic state-of-charge readings usually mean the controller or white battery plug corroded—look for pink moisture stickers, scrub with contact cleaner, dry thoroughly, and don\'t trust factory IP54 stickers after floods.【F:knowledge/notes/denis_all_part02_review.md†L307-L309】【F:knowledge/notes/denis_all_part02_review.md†L419-L421】【F:knowledge/notes/denis_all_part02_review.md†L454-L455】
+- **Skip deck fan cutouts.** PC fans mounted under the deck barely move heat yet open a direct water path—keep the aluminum plate intact and rely on thermal pads instead of venting that shorts controllers or LiPo-powered fan mods strapped nearby.【F:knowledge/notes/denis_all_part02_review.md†L433-L436】【F:knowledge/notes/denis_all_part02_review.md†L440-L441】
 
 ## Layered Theft & Compliance Tactics
 - **Build loud, cheap alarms.** Pair gyroscopes with 120 dB buzzers tied to ignition keys or BLE presence so tampering keeps the siren blaring until the scooter rests motionless.【F:knowledge/notes/all_part01_review.md†L88-L88】
@@ -27,7 +29,7 @@
 
 ## Travel & Storage Tips
 - **Drain packs safely for flights.** Commuters running 24 Ah externals discharge with incandescent lamps for hours to hit airline targets, proving how long large packs need to reach “safe” storage levels.【F:knowledge/notes/denis_all_part02_review.md†L414-L415】
-- **Recharge before hibernation.** Rita draws a small standby current even when the scooter is off, so top packs to storage voltage if the build will sit for weeks rather than leaving it connected indefinitely.【F:knowledge/notes/denis_all_part02_review.md†L97264-L97268】
+- **Recharge before hibernation.** Rita draws a small standby current even when the scooter is off, so top packs to storage voltage if the build will sit for weeks rather than leaving it connected indefinitely.【F:knowledge/notes/denis_all_part02_review.md†L483-L484】
 - **Know the local rules.** Dutch riders remind visitors that stand-up scooters remain illegal without seats; expect enforcement even if locals still spot Xiaomi commuters around Venlo.【F:knowledge/notes/input_part006_review.md†L59-L59】
 - **Check accessory ergonomics.** Bolt-on saddles push weight rearward and complicate unloading speed bumps, and 2.5 L frame bags are shorter but wider than 3 L options—mock up foot room before committing.【F:knowledge/notes/input_part006_review.md†L94-L94】
 

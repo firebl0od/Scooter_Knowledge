@@ -8,6 +8,7 @@
 ## Long-Range Riding Benchmarks
 - Noname logged an 18-hour Appalachian ride covering roughly 150 miles at 50 mph bursts, noting the VESC stayed cool and demonstrating that high-capacity packs (likely 10+ kWh class given the distance) enable extended touring when thermal management is dialed in.[^appalachian]
 - Pack sizing for 150+ mile rides typically requires 7–10 kWh or more depending on terrain, speed, and rider weight; builders planning tours should log Wh/mi consumption during shorter test rides to estimate realistic range before committing to long routes.[^pack-sizing]
+- Denis’ production data puts a Pro 2 with his 36 V 10 Ah external “boat” pack around 50 km of real range, while mixed 10S3P/10S4P clone combos manage ≈30 km before tapering—proof that pack health and chemistry drive perceived acceleration more than motor swaps on voltage-limited hubs.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L91124-L91132】【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L93450-L93478】
 
 ## Public Charging Strategies
 
@@ -42,6 +43,7 @@
 2. **Carry backup charging bricks and cables.** Hotel outlets and standard 120 V receptacles remain the most reliable fallback when public infrastructure is unavailable or malfunctioning.[^backup]
 3. **Log ride telemetry and charging sessions.** Track Wh consumed per mile, charge times, and thermal peaks to refine future tour plans and identify pack degradation early.[^telemetry]
 4. **Plan routes with charging station density in mind.** Use PlugShare or ChargePoint maps to identify backup stations within 20–30 miles of primary stops in case of equipment failure or station downtime.[^route-planning]
+5. **Prep for winter efficiency hits.** Riders report Wh/km nearly doubling in freezing conditions (≈30 Wh/km vs. 18–20 Wh/km in summer); keep packs warm indoors or add gentle heaters before rolling out in sub-zero weather.【F:knowledge/notes/denis_all_part02_review.md†L115861-L115872】
 
 ## Follow-Up Actions Needed
 - Draft EV-charger etiquette notes covering time limits, single-handle session restrictions, and communication protocols for mixed scooter/EV charging scenarios.[^follow-etiquette]

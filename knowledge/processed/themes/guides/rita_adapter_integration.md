@@ -4,7 +4,7 @@ A structured checklist for planning, installing, and operating Denis Yurev's Rit
 
 ## Core Capabilities & Limits
 - Designed around Xiaomi's CAN/data-line behavior: it only supports parallel auxiliary packs, can masquerade as the scooter BMS via the "permanent emulator" mode, and still accepts serial or BLE configuration when the stock dashboard is missing.[^1]
-- Factory harnesses ship with XT30 connectors sized for the deck cavity; XT60 shells do not fit without rework, and the adapter's protections assume XT30 current levels.[^2]
+- Factory harnesses historically shipped with XT30 connectors sized for the deck cavity, but current batches include XT60 leads plus an XT30 adapter—plan harness routing accordingly and keep anti-spark hardware in-line so the adapter’s protections still trip correctly.[^2][^17]
 - Power handling peaks around 25–30 A continuous (≈1.5 kW on 13S); Rita v4 now reports up to 15S packs but still enforces that battery-current ceiling, so serious hill-climb torque demands uprated controllers or dual motors.[^3][^4]
 - Newer hardware revisions add charger and regen over-voltage protection, yet legacy boards rely entirely on pack BMS behavior. Keep the three-way charge splitter inline when relocating the port; otherwise the adapter cannot sense charger events, and anything above 42 V remains advanced use with conservative ~95 % state-of-charge targets.[^5]
 - Expect a floating +5 V on whichever battery input is idle; Rita energises the sense rail even with one pack disconnected, which Denis calls normal during bench diagnostics.[^5a]
@@ -53,12 +53,14 @@ A structured checklist for planning, installing, and operating Denis Yurev's Rit
 2. Flash XiaoFlasher/XiaoGen presets that raise nominal voltage and disable charge prompts for 12S builds.[^10]
 3. On scooters without smart dashboards, toggle "permanent emulator" inside M365 BMS Tool so Rita spoofs telemetry.[^1]
 4. Remember that telemetry alternates between packs when voltages are close; bump the auxiliary ~0.5 V higher or briefly disconnect to inspect external stats.[^20]
+- When Android builds lag behind, connect a USB-UART adapter (ground plus yellow/white leads with a pull-up) and configure Rita from a PC; Denis even sells a ready-made cable for hassle-free bench tuning.【F:knowledge/notes/denis_all_part02_review.md†L473-L474】
 - Avoid XiaoFlasher’s 13 S emulator for daily riding—it introduces throttle lag, whereas Rita’s emulation keeps instant response once large internal packs share the dash.[^xiaoflasher_lag]
 
 ## Operating Guardrails
 | Risk | Symptom | Mitigation |
 | --- | --- | --- |
 | External pack not configured | Rita throws error 39 and may beep after long pulls; charging pauses near 40 °C pack temperature. | Set series count/capacity in the app before paralleling packs and let them cool to ≈35 °C before resuming charge current.【F:knowledge/notes/denis_all_part02_review.md†L315-L316】 |
+| Error 39 after firmware tunes or swapping between 36 V and 48 V externals | Adapter overheats or ignores the new pack once voltages change, especially when current logs show >30 A pulls. | Record live amps with m365Tools, dial battery current back under 30 A, and reconfigure Rita’s series/capacity settings every time you connect a pack with a different voltage profile.【F:knowledge/notes/denis_all_part02_review.md†L55-L59】【F:knowledge/notes/denis_all_part02_review.md†L365-L368】 |
 | Internal pack refuses to share charge | Rita fills the external while the OEM pack stays low; Happy app may show missing temperature data. | Disconnect Rita, verify both OEM temperature sensors, and replace the failed probe before blaming the adapter.【F:knowledge/notes/denis_all_part02_review.md†L505-L505】 |
 | Current spikes >30 A | Rita logs surges, controllers overheat, or ABS trips. | Reinforce controller traces, upgrade MOSFET cooling, or step up to dual-motor conversions for hill climbs.[^3][^27][^28]
 | Miswired AWD harness | BMS error 21 or dashboards reboot. | Tie both controller grounds, forward only the white data lead to the slave dash, and keep Rita as the master BMS.[^29]
