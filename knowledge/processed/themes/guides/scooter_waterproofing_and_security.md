@@ -32,6 +32,7 @@
 - **Pre-stage a legal profile.** Belgian riders have seen 50 km/h scooters confiscated and cases escalated to lawyers; their workaround is to flash a 25–30 km/h VESC profile for roadside checks while keeping a high-speed mode for private property, paired with calm riding to avoid attracting attention.【F:data/vesc_help_group/text_slices/input_part002.txt†L9502-L9510】
 
 ## Post-Ride Water Diagnostics
+- **Run the emergency dry-out drill immediately.** Kill power, open the deck, and disconnect the battery as soon as water reaches board level; forced air, alcohol rinses, and fresh desiccant beat passive “rice bag” drying before you reseal seams with silicone.【F:data/vesc_help_group/text_slices/input_part003.txt†L337-L345】【F:data/vesc_help_group/text_slices/input_part003.txt†L345-L346】
 - **Track regen-related faults.** Error 21 after a panic stop usually points to a cooked data line, not a dead BMS—bench-test packs on a known-good scooter before blaming Happy BMS or Rita.【F:knowledge/notes/denis_all_part02_review.md†L368-L369】
 - **Recognize Rita\'s behavior.** External packs lose regen while full by design; bleed a few percent off the top and confirm series-count settings before chasing wiring ghosts.【F:knowledge/notes/denis_all_part02_review.md†L374-L375】
 - **Keep electronics dry when folding.** Monorim and Mi 3 dashboards that auto-boot after rain usually revive after 99 % isopropyl baths and patient drying—never fold a wet stem onto the deck where water can pool around the button PCB.【F:knowledge/notes/denis_all_part02_review.md†L455-L455】

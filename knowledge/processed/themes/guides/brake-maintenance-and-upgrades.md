@@ -53,6 +53,10 @@
 - Even with premium hardware, external routing can crush Magura MT7 lines after flats or tire swaps—inspect clearance after every wheel service and carry spare banjos plus hoses for roadside replacements.【F:knowledge/notes/input_part001_review.md†L642-L644】
 ### Semi-Hydraulic Caliper Limitations
 - XTech-style semi-hydraulic calipers carry minimal oil volume, rely on rattly auto-centering hardware, and have warped rotors on scooters above 60 km/h—upgrade to sturdier discs, avoid flimsy quad calipers, and inspect the whole brake stack after flats or heavy emergency stops.【F:data/vesc_help_group/text_slices/input_part001.txt†L20680-L20760】
+- Track abuse already pushed Magura calipers past the Curie point (>700 °C), wiping magnetism and underscoring the need for engine braking or larger rotors on race builds before mechanical fade sets in.【F:data/vesc_help_group/text_slices/input_part003.txt†L8386-L8400】
+- 100 km/h track logs keep comparing Trickstuff, Kool-Stop, Shimano, and XLC rotors—prep extra thermal mass, ventilation, and pad choices before sprint sessions so glowing hardware doesn’t demagnetise calipers or chew pads mid-run.【F:knowledge/notes/input_part003_review.md†L103-L103】
+- Dual-rotor experiments now include Trickstuff, Kool-Stop, Shimano Saint, Ashima, and XLC floating discs; the budget XLC hardware bites hard but its floating hardware feels suspect on dual G30 conversions, so budget inspections between sessions.【F:data/vesc_help_group/text_slices/input_part003.txt†L11517-L11570】【F:data/vesc_help_group/text_slices/input_part003.txt†L11935-L11970】
+- Bosch’s e-bike ABS pairs cleanly with Magura CMe5 levers, giving scooters a path to anti-lock hydraulics while still functioning as premium standalone brakes if you skip the controller module.【F:knowledge/notes/input_part003_review.md†L166-L166】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -73,6 +77,7 @@
   - Source 120 mm rotors compatible with F2 Pro mounting pattern
   - Expect accelerated rotor wear compared to higher-grade steel on premium builds
   - Budget for rotor replacement every 1,000–2,000 km depending on riding style[^f2-upgrade]
+- **Hydraulic retrofit fitment.** 1200 W Blade and Monorim front ends accept full hydraulic kits with 2 m hoses, but expect adapter sourcing drama on Xiaomi frames—pre-fit brackets and hose routing before committing to the swap.【F:data/vesc_help_group/text_slices/input_part003.txt†L11882-L11884】
 
 ## Wheel Centering & Dual-Caliper Setups
 

@@ -133,6 +133,7 @@ Structure for each parameter:
 - Excessively high = thermal runaway in motor windings or ESC MOSFET burnouts.
 - Too low = weak acceleration, under-utilized motor.
 - Firmware quirks matter: Spintend 100/100 controllers on VESC Tool 6.06 refused to spin until owners reverted to 6.05 and rechecked current caps, so log software builds before blaming the limit.[^spintend-606]
+- Mobile VESC Tool 6.0 hides non-default firmware once you connect—desktop builds with “Show non-default firmware” (or manual compilation) are still required to load vendor bins like the Ubox single 100 V profiles.【F:knowledge/notes/input_part003_review.md†L138-L138】
 
 
 ### 2.2 Motor Current Max Brake
@@ -494,6 +495,7 @@ Params: l_min_duty, l_max_duty
 
 **Potential Side Effects**
 - Setting max_duty=1.0 can cause issues with current sampling if your hardware can’t handle near 100% well.
+- Community logs show 98–99 % duty nets ~4 % more top speed on modern hardware, but pushing to a true 100 % still risks sampling faults and sudden cutouts—leave a sliver of headroom unless you’ve validated the controller on the bench.【F:knowledge/notes/input_part003_review.md†L104-L104】
 - High min_duty can produce a “push” at idle, not fully freewheeling.
 
 
@@ -675,6 +677,10 @@ Params: foc_encoder_inverted, foc_encoder_offset, foc_encoder_ratio
 - Vedder Sensorless Start (VSS) actually lives under the sensorless encoder profile and expects motor-temperature telemetry; without it the controller falls back to noisy hall-only launches and hill-starts stretch toward five seconds.【F:data/vesc_help_group/text_slices/input_part001.txt†L7351-L7415】
 **How / When to Modify**
 - If you have physical halls, choose “Hall Sensors.”
+<<<<<<< HEAD
+=======
+- 41F/43F/413 hall boards still cover 800 W–3 kW hubs; beyond roughly 20 km/h most riders let VESC hand off to sensorless FOC and keep the halls only for launch torque.【F:knowledge/notes/input_part003_review.md†L105-L105】
+>>>>>>> pr-141
 - If sensorless is desired with high torque from standstill, consider 45 Deg V0V7 HFI or Coupled HFI.
 
 **Potential Side Effects**
@@ -1163,6 +1169,22 @@ Params under bms.*
 - If BMS data is invalid or missing, the ESC might clamp power incorrectly. 
 - Misconfigured voltage or SOC limits can hamper performance or cause weird cutouts.
 
+
+## 11. Traction, Current Balancing & PWM Strategy
+
+### 11.1 Dual-Motor Slip Targets
+- Dual-drive riders find 2–3 kERPM slip thresholds livable, but many prefer reshaping power-per-ERPM curves instead of letting traction control yank torque abruptly; front-only traction control remains the safest option after rear controllers tripped when grip snapped back at high phase current.【F:data/vesc_help_group/text_slices/input_part003.txt†L9688-L9748】【F:data/vesc_help_group/text_slices/input_part003.txt†L19680-L19699】
+
+### 11.2 Balancing Phase & Battery Current
+- Balance battery and phase targets between axles so free-spin events don’t desynchronise power delivery—matching the front motor’s limits to the rear prevents runaway slip while single-motor builds still rely on higher phase-to-battery ratios and upgraded pads to avoid overheating.【F:data/vesc_help_group/text_slices/input_part003.txt†L9725-L9748】
+
+### 11.3 PWM Frequency Trade-Offs
+- Dropping zero-vector PWM toward 16–20 kHz sheds controller heat but pushes losses into the motor, while 30–40 kHz cools the hub at the expense of hotter MOSFETs and lower low-speed torque—log both motor and controller temps before settling on a switching plan.【F:data/vesc_help_group/text_slices/input_part003.txt†L10215-L10280】【F:data/vesc_help_group/text_slices/input_part003.txt†L10383-L10407】
+- Artem also reminded builders that practical VESC setups really span 10–20 kHz despite theoretical 100 kHz ceilings; higher frequencies demand careful logging to catch combo-specific instabilities.【F:data/vesc_help_group/text_slices/input_part003.txt†L10383-L10407】
+
+### 11.4 Duty-Cycle & Traction-Control Guardrails
+- Modern hardware tolerates 98–99 % duty for a modest top-speed bump (~4 %), but crews still treat 100 % duty as off-limits to avoid runaway faults once FW or PWM tweaks stack up—log duty peaks whenever you adjust speed targets.【F:data/vesc_help_group/text_slices/input_part003.txt†L11586-L11610】
+- Tronic traction-control experiments showed MOSFET fires when TC slammed phase current back in as grip returned; dial slip thresholds conservatively and validate TC behaviour whenever you change duty ceilings or PWM frequency.【F:data/vesc_help_group/text_slices/input_part003.txt†L12565-L12640】
 
 ## Footnotes
 

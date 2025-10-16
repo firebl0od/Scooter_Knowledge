@@ -6,6 +6,7 @@
 - Commission every pack like a high-energy experiment—enable both charge and discharge FETs before regen tests, validate balance-lead order, and log first rides because a single BMS cutoff or miswire has already nuked controllers and power stages that survived normal abuse.[^4][^5][^6]
 - Treat balancing and calibration as routine maintenance: Daly boards need full charge/discharge learning and higher voltage to balance, while JK hardware wakes via the accessory display, runs active shuttling above ~0.015 V delta, and benefits from monthly thermal/IR audits.[^7][^8][^9]
 - ANT owners still note 0.5–0.8 V pack settling after charge; pair those boards with latching throttles or breakers so VESC standby draw doesn’t drain winter storage scooters.【F:data/vesc_help_group/text_slices/input_part003.txt†L16080-L16102】
+- ANT units sip microamps with Bluetooth awake while Daly and LLT boards offer configurable sleep timers; trim status LEDs or use LLT’s hardware switch when parking packs for weeks to stop parasitic drain.【F:data/vesc_help_group/text_slices/input_part003.txt†L7690-L7712】
 - Pack size influences BMS choice: high-capacity 53 Ah+ builds stick with JK’s active shuttling for fast charging, smaller commuter packs tolerate ANT’s lighter balancing current, and JBD hardware remains feature-parity with LLT once sensors and harnesses are sized correctly.【F:data/vesc_help_group/text_slices/input_part003.txt†L10726-L10767】【F:data/vesc_help_group/text_slices/input_part003.txt†L11610-L11612】
 
 ---
@@ -79,6 +80,9 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 - **Programmable supplies cover odd voltages.** Adjustable 22 S/18 A bricks paired with ANT sleep timers keep 21 S packs topped without drifting when scooters sit for weeks.[^adj_supply_smart]
 - **Carry multi-voltage chargers for travel.** Switchable 16–24 S/20 A units fill gaps when premium 21 S chargers are out of stock, letting one brick service multiple scooter voltages.[^multi_brick_smart]
 - **Seek CC/CV bricks with adjustable ceilings.** Riders chasing 95 % state-of-charge targets are standardising on programmable supplies, and one BMS recently caught a CC-only converter stuck at 4.3 A even at full voltage—proof that smart-pack safeguards remain essential.【F:knowledge/notes/input_part001_review.md†L504-L506】
+- **Prep telecom PSUs carefully.** Adjustable 100 V/45 A bricks need earth bonding and should be energised before connecting the scooter charge lead to avoid port-sparking mishaps.【F:knowledge/notes/input_part003_review.md†L141-L141】
+- **Match pilot resistors on Type 2 adapters.** Swapping the pilot to ~880 Ω brought DIY EVSE dongles online reliably—validate wiring before hitting public posts.【F:knowledge/notes/input_part003_review.md†L135-L135】
+- **Stretching OEM chargers has limits.** Raising Xiaomi bricks to 61.5 V via trim pots still leaves them as CC-only supplies—upgrade output caps and babysit the cutoff when feeding 15 S packs.【F:knowledge/notes/input_part003_review.md†L142-L142】
 
 ## Troubleshooting & Service Checklist
 - **Document anti-theft workflows.** JK’s remote discharge disable doubles as a parking lock; confirm the board re-arms before rides to avoid brownouts.[^23]
