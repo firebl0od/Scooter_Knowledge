@@ -19,9 +19,11 @@
 ## Wiring Recipes
 ### Throttles & Brakes
 1. **Direct hall wiring:** Route throttle and brake halls straight to ADC1/ADC2 signal, 3.3 V, and ground to keep control even when the OEM dash is removed.[^1] Keep the sensors on the controller’s 3.3 V rail—feeding 5 V halls directly into STM32 ADCs has already killed logic stages.【F:knowledge/notes/input_part000_review.md†L82-L84】
+1. **Roll back firmware if ADC channels vanish.** Xiaomi throttles that lost response on beta firmware came back after downgrading to VESC 6.02, rerunning the motor/ADC wizards, and explicitly writing both app and motor configs before power-cycling.【F:data/vesc_help_group/text_slices/input_part005.txt†L21844-L21933】【F:data/vesc_help_group/text_slices/input_part005.txt†L22481-L22495】
 2. **Clamp 5 V inputs.** Xiaomi/Boosted-style throttles swing ≈0.8–4.1 V from a 5 V rail; drop them through a 1 kΩ/2 kΩ divider or use the ADC adapter so the STM32 never sees more than 3.3 V.[^voltage-divider]
 2. **Match lever logic.** Magura’s MT5e ships in normally-closed (2700985) and normally-open (2700984) variants, and the Spintend ADC board can flip between switch and hall sensing with onboard toggles plus 5 V/3.3 V selection—confirm the lever SKU before crimping harnesses.[^25]
 3. **Spin-Y & other multi-button throttles:** Version 1 units need custom JST‑1.0 leads into ADC2/COMM2; version 2 ships with a four-conductor harness that lands cleanly on the adapter board.[^2]
+3. **QS-S4 throttles wire like any hall lever.** Land 3.3 V, signal, and ground on the ADC harness, then recalibrate SOC maths—controllers still read pack voltage while dashboards may show 13 % after a cold-weather BMS cut near freezing.【F:data/vesc_help_group/text_slices/input_part005.txt†L23069-L23093】
 3. **Spintend adapter v3 harness:** Modern boards arrive with keyed plugs—no more screw terminals—so match the supplied loom instead of hand-crimping tiny JST shells.[^3]
 4. **Makerbase accessory headers use GH 1.27 mm.** Izuna confirmed the tiny Makerbase harness lands on GH-series plugs—order JST-GH pigtails instead of trying to force JST-PH shells onto the board.【F:knowledge/notes/input_part004_review.md†L328-L328】
 4. **MakerX footpads & 3.3 V-only sensors:** Confirm both ADC rails output 3.3 V before blaming pads; swapping to 5 V kills the hall board.[^4]
@@ -116,7 +118,7 @@
 [^15]: Drawing accessory power from the X12 headlight feed drags the logic rail and wastes energy.【F:knowledge/notes/input_part012_review.md†L395-L395】
 [^16]: Shorting controller auxiliary leads has destroyed logic boards, proving the need for isolated accessory supplies.【F:knowledge/notes/input_part012_review.md†L248-L248】【F:knowledge/notes/input_part012_review.md†L258-L258】
 [^17]: Builders still rely on loop keys, smart-BMS buttons, and Safe Start—ADC boards alone do not provide a true kill switch.【F:knowledge/notes/input_part005_review.md†L348-L350】
-[^18]: Spintend’s ADC adapter v2 only ferries 5 V/12 V accessory power, is rated for ≈60 V pack input, and cannot act as an anti-spark or ignition switch—route kill switches through a smart BMS or loop key instead.【F:knowledge/notes/input_part005_review.md†L451-L452】【F:knowledge/notes/input_part005_review.md†L454-L455】
+[^18]: Spintend’s ADC adapter v2 only ferries 5 V/12 V accessory power, is rated for ≈60 V pack input, and cannot act as an anti-spark or ignition switch—route kill switches through a smart BMS or loop key instead.【F:data/vesc_help_group/text_slices/input_part005.txt†L24198-L24224】【F:data/vesc_help_group/text_slices/input_part005.txt†L24281-L24282】
 [^19]: Pull-down resistors on throttle lines guarantee a zero output if the signal wire opens.【F:knowledge/notes/input_part007_review.md†L223-L223】
 [^20]: Routing throttle through dash adapters adds noticeable lag; direct ADC wiring restores responsiveness.【F:knowledge/notes/input_part007_review.md†L225-L225】
 [^21]: VESC Tool can wipe ADC settings after reconnects unless you explicitly write both motor and app configs.【F:knowledge/notes/input_part005_review.md†L410-L413】

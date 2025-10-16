@@ -16,6 +16,7 @@
 
 ### Motor & Wheel Options
 - Stock VSETT 9 hubs feature 92 mm stators, 15 pole pairs, and a tight 0.5 mm air gap—pair them with the taller 10-inch carcass to smooth harsh pavement while keeping torque respectable.【F:knowledge/notes/input_part001_review.md†L42-L42】
+- Vsett 9+/10+ hubs comfortably burst near 5 kW when temperature sensors track sustained loads, so treat the “600 W” label as commuter-only marketing and log temps before upping duty cycles.【F:knowledge/notes/input_part005_review.md†L69-L69】
 - Split rims allow tire swaps without disconnecting harnesses, but install 6 mm bullets on phases plus 6-pin Higo/Julet blocks for halls and thermistors to simplify maintenance.【F:knowledge/notes/input_part001_review.md†L59-L63】【F:knowledge/notes/input_part001_review.md†L73-L74】
 - Kaabo-sourced hubs vary: square-wave throttle kits often ship hall-less while sine-wave GT packages include sensors—verify before planning regen-heavy controller swaps.【F:knowledge/notes/input_part001_review.md†L74-L74】
 - “SHDC” castings show up across Kaabo/Nanrobot supply chains and will add hall sensors on request; Wolf GT owners confirm newer sine-wave motors arrive with halls while Kelly conversions retrofit them for reliable starts.【F:knowledge/notes/input_part001_review.md†L583-L584】

@@ -18,7 +18,9 @@
 - **Layer trackers by medium.** Mix AirTags or SmartTags for crowd-sourced pings with SIM trackers (TK806, SIM800) where IMEI registration allows ongoing data plans so a stolen scooter keeps reporting in real time.【F:knowledge/notes/input_part005_review.md†L350-L351】
 
 ## Regional Compliance Pressure
+- Ireland and UK riders report €1,500 fines and confiscations for overpowered scooters, so stealth builds and restrained riding remain the safest path in strict EU jurisdictions.【F:knowledge/notes/input_part005_review.md†L124-L124】
 - **Plan for roadside inspections.** Finnish police are confiscating scooters that exceed 25 km/h without registration and even checking bulb part numbers, while southern EU riders dodge €8–9 k fines by programming low-power “police modes” and swapping to halogen BA9S lamps to satisfy moped rules.【F:knowledge/notes/input_part005_review.md†L225-L227】
+- **Match frame choice to insurance rules.** Converting 50 cc mopeds to QS hubs can void payouts because paperwork still lists ICE drivetrains, and Israeli riders report dual-motor scooters are outright illegal—keep Zero 10X builds single-motor despite upgrades.【F:knowledge/notes/input_part005_review.md†L358-L365】
 
 ## Post-Ride Water Diagnostics
 - **Track regen-related faults.** Error 21 after a panic stop usually points to a cooked data line, not a dead BMS—bench-test packs on a known-good scooter before blaming Happy BMS or Rita.【F:knowledge/notes/denis_all_part02_review.md†L368-L369】

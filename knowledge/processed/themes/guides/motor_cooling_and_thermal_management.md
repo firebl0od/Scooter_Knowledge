@@ -5,6 +5,7 @@
 - Riders debating CPU-style blowers learned that evaporation-driven skin cooling does not apply to dry aluminum shells; without a wet surface the only lever is temperature delta, so focus on conductive paths instead of add-on spinners.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L424-L441】
 - Veterans recommended ferrofluid or oil-fill experiments (with leak safeguards) if you need real winding-to-shell transfer—simply drilling covers or gluing “windmills” to the hub only cools the outer case.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L456-L520】
 - Community case studies still favour passive conduction upgrades over active plumbing: Mirko’s 15 mm aluminum deck plate plus open vents held dual 190 A phase / 70 A battery runs near 52 °C, while heat-pipe experiments outperformed vibration-prone water loops on cramped decks.【F:knowledge/notes/input_part003_review.md†L115-L115】【F:knowledge/notes/input_part003_review.md†L240-L240】
+- Fresh water-cooled, resin-potted controller builds with INA181 current sensors promise better cut-off behaviour, yet veterans still warn that MOSFET-to-heatsink transfer is the real bottleneck until someone logs sustained high-power runs on the new hardware.【F:data/vesc_help_group/text_slices/input_part005.txt†L23967-L23995】
 
 ## Ferrofluid Selection & Handling
 - The VESC Help crew continues to vouch for ferrofluid/Statorade when the goal is winding-to-shell transfer, but they emphasise reading datasheets—some mixes flash at low temperature and budget hubs can demagnetise above ~80 °C—before flooding a motor.【F:knowledge/notes/input_part007_review.md†L48-L48】
@@ -24,6 +25,7 @@
 - Keep silicone pads on hand when chasing 48 V/15 S tunes; the crew pairs IRFB4110 MOSFETs with 100 V 1,000 µF and 47 µF capacitors and swaps pads plus paste before closing the case.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60009-L60024】
 - Deck-mounted controller plates should be sanded to bare metal and paired with thin thermal pads; open-vent decks plus 15 mm aluminum plates have proven the most repeatable way to keep single- and dual-motor builds near 50 °C under 190 A phase loads.【F:knowledge/notes/input_part003_review.md†L115-L115】
 - Hard-mount controllers whenever possible: bolting a MakerX HI100 to an aluminum cradle dropped case temps to ~23 °C on 60 A battery / 200 A phase pulls at 7 °C ambient versus 60–80 °C when the unit was bag-mounted.【F:data/vesc_help_group/text_slices/input_part003.txt†L13806-L13840】
+- Treat magnet grades as the limiting factor: budget neodymium begins fading around 80 °C, premium specs survive closer to 120 °C, and enamel windings only last near 150 °C—monitor stator temps and dose ferrofluid carefully so repeated 3 kW pulls don’t demagnetise the rotor and raise Kv.【F:knowledge/notes/input_part005_review.md†L236-L237】
 - Mirko’s machined radiator plate hangs roughly 3 cm below the frame (7.5 cm ground clearance unloaded) and needs insulated FET interfaces plus potential heat pipes to spread hotspot load—log spacer stacks and insulation plans before copying the design.【F:data/vesc_help_group/text_slices/input_part003.txt†L6630-L6678】【F:data/vesc_help_group/text_slices/input_part003.txt†L7291-L7303】
 
 ### Deck Radiator & Thermal Interface Experiments
@@ -34,6 +36,8 @@
 ## Heat Transfer Upgrades from VESC Field Logs
 - Spintend dual-Ubox owners report the factory ships thermal pads (not paste) on MOSFET plates; lapping the deck and adding fresh paste keeps Laotie builds under ≈80 °C even on hard pulls.【F:knowledge/notes/input_part005_review.md†L113-L121】
 - Epoxy putty doubles as a heat spreader around controller cases while builders embed thermistors through the existing hall harness and pot them with epoxy or silicone for direct winding contact.【F:knowledge/notes/input_part005_review.md†L115-L124】
+- Marketing tags like “5,600 W” on Laotie hubs hide commuter-class limits—tuners see roughly 1.2 kW continuous and ≈3 kW peaks unless you step up to true 60 H/70 H race cans, dual controllers, ferrofluid, and fat phase leads to move 20–33 kW safely.【F:knowledge/notes/input_part005_review.md†L111-L112】
+- Longer magnets and thicker stators are what lift continuous power; removable-rim Huameng hubs trade iron volume for convenience while 90 H LY motors justify the machining effort when you actually need ~30 kW dual setups.【F:knowledge/notes/input_part005_review.md†L111-L112】
 - Resin-potted water-cooled Flipsky builds now ship with INA181 phase sensors and denser heatsinks, but veterans still expect MOSFET-to-heatsink contact to be the bottleneck until independent testing confirms the claimed improvements.【F:knowledge/notes/input_part005_review.md†L486-L488】
 
 ## Controller Mounting & Airflow Discipline
@@ -116,6 +120,7 @@
 - **60H builds prefer 50 A battery / 100 A phase with ferrofluid.** Riders reported smooth launches after sealing leads, adding ferrofluid, and pairing the tune with ~10 A field-weakening that engages around 91.5% duty while holding full duty near 95%; still install temperature sensors before chasing 16 S, 60 km/h targets on long hill routes.[^60h_baseline]
 
 ## High-Torque Motor Stress & Thermal Limits
+- Rental SNSC/350 W hubs saturate and shudder past roughly 25 A continuous per motor—dual setups handle short 40 A bursts, but expect heat and torque ripple instead of miracles at 2.5 kW each.【F:knowledge/notes/input_part005_review.md†L160-L160】
 - **80H 22×3 motors twisted stators after sustained high-current abuse.** Multiple builds failed after 350–500 A phase assaults at 133–144 °C core temps; prolonged heat softens lamination glue, and rotors demagnetize above ≈120 °C, especially on LY's double-magnet stack designs.[^80h-stress]
 - **Magnet demagnetization occurs above 100–120 °C stator temps.** Paolo warned that magnets lose strength once core temps breach this threshold, and LY 70/75/80 H units have twisted under 400 A, prompting race teams to wind custom stators and mandate traction control even on 0–100 km/h builds that complete sprints in ~3.7 s.[^demagnetization]
 - **Single 60H hubs survive 500 A launches at 107 km/h without field-weakening.** Leon's data demonstrates both torque potential and heat-management challenges when running smaller rotors at extreme phase current, underscoring the need for active cooling or conservative duty cycles on high-stress builds.[^60h-extreme]
