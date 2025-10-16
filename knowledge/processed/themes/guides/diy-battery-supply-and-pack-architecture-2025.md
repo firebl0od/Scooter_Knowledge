@@ -40,6 +40,7 @@
   - keeping 21700 formats as the preferred baseline for sustained torque.[^28]
 - **Monitor Denis’ in-house Pro/Pro 2 pack program.** His custom internal battery just entered production with hand-braided heavy-gauge charge/discharge looms that mirror the earlier 36 V kits.
   - expect vetted harness lengths and drop-in Xiaomi fitment once inventory lands.[^29]
+- Even premium scooters rarely ship high-discharge cells beyond names like Nami, so builders plan sleeper 20 S 3 P Molicel packs or full 20 S 9 P 21700 conversions whenever packaging allows.[^premium-cells]
 | Component | EU Pricing & Availability | North America Reality | Immediate Actions |
 | --- | --- | --- | --- |
 | **EVE 50PL 21700** | Salvaged Stark Varg modules deliver grade-A cells for ~1 € each after labor; retail bulk hovers 1.5 € with logos shaved yet still grade A.[^30] | ~$9 per cell retail with looming import duties.[^31] | Form cooperative buys, pre-clear customs brokers, and reserve storage for incoming pallets. |
@@ -607,6 +608,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 [^241]: Source: knowledge/notes/input_part006_review.md†L24-L26
 [^242]: Source: knowledge/notes/input_part006_review.md†L48-L48
 [^243]: Source: knowledge/notes/input_part006_review.md†L62-L63
+[^premium-cells]: Source: knowledge/notes/input_part006_review.md†L102-L102
 [^244]: Source: knowledge/notes/input_part002_review.md†L145-L147
 [^245]: Source: knowledge/notes/input_part002_review.md†L148-L149
 [^246]: Source: knowledge/notes/input_part002_review.md†L205-L207

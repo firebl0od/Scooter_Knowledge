@@ -56,6 +56,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 8. **Break out heavy lighting loads.** On 85250 builds, Smart Repair steers anything beyond two 12 V lamps through the ADC breakout so the controller still feeds brake-light logic while a DC/DC handles lamp current; the same harness confirmed Spin-Y2 throttle compatibility once the adapter is in place.[^34]
 9. **Don’t overload the horn lead.** The Makerbase/Spintend horn channel only sources a couple of amps.
   - driving vintage 12 V 35 W halogens directly risks cooking the board; use the line to trigger a relay or low-current accessory instead.[^35]
+9. **Stabilise Makerbase dash power on controller swaps.** When a Makerbase dash moves from Flipsky to Spintend/UBOX hardware, add ≈220 µF of bulk capacitance on the 5 V bus plus ~50 µF near the drivers and correct misplaced pull-up resistors to cure reboot loops under heavy accessory load.[^makerbase-dash-rails]
 10. **Follow the factory lighting diagrams.** One owner cured button issues only after rewiring the Spintend ADC lighting board exactly as shown in the manual.
   - misplaced leads ghost buttons and confuse the controller.[^36]
 10. **Confirm ADC signal voltage mixing.** AliExpress ADC adapters have been proven to coexist with Flipsky 75100 throttles while mixing 5 V brake levers and 3.3 V throttle inputs.
@@ -97,7 +98,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 - **Dual 75100 harness essentials.** Keep Makerbase twins on CAN-only links, share a single momentary power button, and bypass the G30 dash UART bridge whenever loops appear; the community wiring sketch routes each controller to its own CAN tail while the OEM dash lives on a dedicated UART breakout.[^52]
 - **Keep the G30 dash powered.** Deadword proved the open-source dash lets a Makerbase 75100 route throttle and brake through the stock harness so long as the display remains powered from the VESC rail.[^53]
 - **Respect CAN termination.** Mixed-controller buses pop transceivers.
-  - document whether 60 Ω or 120 Ω ends are fitted, list the SN65/TJA part numbers, and isolate FlipSky units rather than trusting mismatched resistors on shared harnesses.[^54]
+  - document whether 60 Ω or 120 Ω ends are fitted, list the SN65/TJA part numbers, and isolate FlipSky units rather than trusting mismatched resistors on shared harnesses; Zero 10X experiments confirmed 120 Ω termination is mandatory and dropping to 100 Ω invites bus faults, so leave the OEM ALU-PCB to act as an antispark/key switch instead of swapping resistor values.[^54][^zero10x-120ohm]
 - **Confirm what dual power leads actually feed.** One new VESC convert was already on XT150 motor leads and dual XT90 battery plugs, but the vendor demo only powered a rear wheel.
   - verify whether the second XT90 is just a pass-through before planning split-current experiments.[^xt150-split]
 - **Leave the 5 V rails isolated.** Linking twin 75100s only needs CAN-H/CAN-L; tying logic rails together without a shared switch has killed hardware, so land throttles directly on a controller if the dash bridge causes loops.[^dual-5v]
@@ -110,6 +111,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
   - VESC already logs current and voltage, so most riders simply mount a phone dash unless they crave retro styling.[^57]
 - **SimpleVescDisplay (ESP32).** Smart Repair recommends flashing the open-source SimpleVescDisplay and 3D-printing its mount as a reliable alternative when Flipsky Voyage units glitch.[^58]
 - **Tiny NRF boards have no range.** Flashing Vedder’s `nrf51_vesc` firmware onto ultra-small BLE boards left riders with unusable range, so they still buy the €2 full-size modules for dependable VESC Tool links.[^59]
+- **Vedder’s `code_server` is still the stable CAN bridge.** It automatically retries failed frames five times, but you must flip RX/TX leads when moving a Makerbase/Flipsky dash loom onto Spintend/UBOX controllers and flash `slave_esc.lisp` onto every CAN slave before the dash comes alive.[^code-server]
 - **SimpleVescDisplay odometer logging.** NetworkDir’s latest firmware now buffers odometer data locally on the ESP32 so riders keep mileage even if CAN frames drop, giving budget builds a telemetry path that still respects VESC Tool logs.[^60]
 - **JPPL Smart Display RAM ceiling.** Running Wi-Fi and Bluetooth simultaneously exhausts the JPPL display’s RAM; leave only one wireless interface active to keep the UI responsive.[^61]
 - **Rage SmartDisplay roadmap.** Rage Mechanics teased an official SmartDisplay UI refresh with thumb-wheel ergonomics feedback plus a 3.5 in navigation prototype that folds GPS into the dash.
@@ -558,3 +560,6 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^201]: Source: knowledge/notes/input_part014_review.md†L189-L189
 [^202]: Source: knowledge/notes/input_part010_review.md†L16-L18
 [^203]: Source: knowledge/notes/input_part010_review.md†L18-L18
+[^code-server]: Source: knowledge/notes/input_part006_review.md†L21-L21
+[^makerbase-dash-rails]: Source: knowledge/notes/input_part006_review.md†L23-L23
+[^zero10x-120ohm]: Source: knowledge/notes/input_part006_review.md†L24-L24

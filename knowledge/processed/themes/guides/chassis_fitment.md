@@ -4,6 +4,7 @@
 
 - Monorim 500 W hub motors accept 6001 rear bearings and 16003 stainless fronts when refreshing the rolling hardware, supporting wider tire conversions.[^bearing_sizes]
 - Xiaomi frames can host 2.5–3.0 inch tires, but builders watch for clearance limits to avoid rubbing after the wider fitment.[^tire_clearance]
+- Scooter bearing techs warn against cracking open sealed hubs or stuffing them with 70 % grease fills; standard-clearance cartridges already tolerate thermal expansion, so riders stick with OEM-style fills instead of chasing C3 replacements that only add drag.[^sealed_bearing_fill]
 
 ## Frame Stiffness Checks
 
@@ -25,6 +26,7 @@
 
 [^bearing_sizes]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^tire_clearance]: Source: knowledge/notes/input_part000_review.md, line 74.
+[^sealed_bearing_fill]: Source: knowledge/notes/input_part006_review.md†L450-L451
 [^dualtron_spider]: Source: knowledge/notes/input_part000_review.md, line 187.
 
 
