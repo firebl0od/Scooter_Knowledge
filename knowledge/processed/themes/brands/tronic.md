@@ -3,7 +3,9 @@
 ## TL;DR
 - Race tuners now treat the six-FET Tronic 250 family as ~200 A hardware—pushing toward the marketing 250 A claims triggers thermal cutouts or outright failures, especially once heavy field weakening is layered on top.[^1][^2]
 - The Tronic X12 remains the flagship, delivering just under 30 kW on 24 S packs, but its onboard 5 V rail only sources about 150 mA and the stock looms melt without 10 AWG upgrades, so accessories still need dedicated bucks.[^3]
+- Builders still call Tronic tuning temperamental—yoann tsobanoglou reports hall detection misses, ignored phase limits, runaway battery amps, and audible gate noise that make 3Shul packages feel plug-and-play by comparison.【F:knowledge/notes/input_part011_review.md†L40-L41】
 - JPPL now conformal-coats both the logic and power boards before assembly and reminds builders that stock firmware clamps absolute current near 600 A—reaching the marketed 650 A still demands the no-limit build plus proven cooling, even though 20 S/100 A-per-controller tunes already logged ~150 km/h on his Lonnyo setup.【F:knowledge/notes/input_part011_review.md†L720-L738】
+- Mirono just catalogued three fresh arrivals (250R, T12T, X12) and still could not reconcile the switch wiring or the advertised 500 A peaks, reinforcing how murky Tronic’s product matrix remains versus what actually shows up from stock.【F:knowledge/notes/input_part011_review.md†L201-L205】
 - Reliability work focuses on preventing traction-control current spikes and reinforcing the fragile DC-DC enable pad; moisture or incomplete post-cleaning rework continues to brick boards until those hot spots are addressed.[^4]
 - Tronic hardware now ships directly from the contract manufacturer that previously white-labeled the brand, so pricing is steady but support and cooling expectations mirror the bare FR-4 chassis buyers are receiving.[^5][^6]
 
@@ -45,11 +47,13 @@
 ## Integration & Accessory Notes
 - The X12’s 5 V rail maxes out around 150 mA, so horn, lighting, and telemetry accessories still need external buck converters even though the controller advertises auxiliary power.[^3]
 - Tronic looms benefit from voltage-sequencing discipline: bring auxiliary 12 V rails online before waking ADC boards to avoid frying spinny throttles or lighting bridges.[^12]
+- Reusing Ninebot/Xiaomi dashes on Tronic hardware confirmed ADC2 lives on the MISO pin beside TX; feed the adapter with 3.3 V and pin ground/ADC1/ADC2 carefully or you will fry the throttle interface.【F:knowledge/notes/input_part011_review.md†L360-L366】
 
 ## Procurement & Support Outlook
 - JPPL confirmed the drone factory that built Tronic and Seven controllers now sells them directly, offering immediate stock but no added support.[^5]
 - Seven-branded derivatives keep the FR-4 sandwich with Toll-package MOSFETs, yielding only a modest thermal advantage; racers should budget for external heatsinks just as they do with X12 boards.[^6]
 - Secondary-market sellers are already moving bare X12 boards for about €350, reinforcing that buyers must self-support wiring, enclosures, and documentation.[^13]
+- Factory storefront promos are dangling two-pack X12 bundles at $598 (singles $450) and promising 26 S headroom, so double-check what hardware actually ships—pricing is attractive, but harness pinouts and switch gear still vary batch-to-batch.【F:knowledge/notes/input_part011_review.md†L205-L211】
 - The official Tronic storefront still flakes out, so riders in Europe lean on Protopulse’s €600 X12 inventory when they need a verified reseller without gambling on the factory shop.[^protopulse]
 
 ## Outstanding Research Backlog

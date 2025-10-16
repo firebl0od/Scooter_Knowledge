@@ -47,6 +47,7 @@
 - Repeated 80–90 km/h stops roasted 120 mm rotors and overheated Magura MT8s; the crew now defaults to dual front brakes or 203 mm discs on heavy scooters to regain thermal margin.【F:data/vesc_help_group/text_slices/input_part002.txt†L11088-L11137】
 - When rotors need a millimetre of offset, riders cut thin shim plates (nickel strip or torque-arm washers) instead of stacking round washers that flex loose under repeated braking loads.【F:data/vesc_help_group/text_slices/input_part002.txt†L11406-L11455】
 - Premium rotors from Shimano, Magura, or Galfer stay on the shopping list while AliExpress specials are avoided for 70 km/h builds despite the price gap.【F:data/vesc_help_group/text_slices/input_part002.txt†L12102-L12151】
+- Kaabo Wolf owners now swap to 3 mm Kaabo discs after stock rotors warped—confirm caliper spacing and expect longer life once the thicker rotors are paired with Wolf motors.【F:knowledge/notes/input_part011_review.md†L346-L351】
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
 - Tall brake adapters should use a single ring spacer instead of stacked washers so axial loads do not rock the disc bolts—5 mm steel rings have proven stable on custom Blade hubs, while 1.7 mm washer stacks remain a stopgap only.【F:knowledge/notes/input_part000_review.md†L520-L522】
 - Expect to budget CNC time for bespoke rotor shims because six-hole aftermarket rims rarely align with Xiaomi five-hole spacers when mixing OEM and custom hubs.【F:knowledge/notes/input_part000_review.md†L521-L522】
@@ -84,8 +85,13 @@
 - Yamal and 🇪🇸AYO#74 still favour the solid 3 mm “Wolf” discs from AliExpress—non-floating despite the two-piece look—because they survive where riveted rotors sheared; at ≈€30 online (vs. €80–100 retail) riders buy them in sets of four.【F:data/vesc_help_group/text_slices/input_part010.txt†L18701-L18712】
 - Brake-Stuff’s Shimano-pattern 6-bolt rotors are proving durable replacements for worn discs on VESC conversions—Yamal’s installs slot straight onto common hubs when builders want mid-tier pricing without sacrificing material quality.【F:knowledge/notes/input_part010_review.md†L391-L392】
 
+### Superbikes & Heat Management
+- Racers weighing €1.2 k Trickstuff Maxima kits against Magura MT5/MT7 setups note that motorcycle Brembos rarely clear scooter forks; 150 km/h stopping demands bigger rotors and higher-volume masters no matter which premium caliper you choose.【F:knowledge/notes/input_part011_review.md†L368-L374】
+
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
+- Kaabo Wolf riders source rear Magura adapters from Javamba after discovering flipped front hubs could not accommodate left-side calipers—keep vendor links handy before tearing down the rear motor.【F:knowledge/notes/input_part011_review.md†L406-L408】
+- AliExpress shim kits (2–5 mm rotors spacers plus washers) keep oversized calipers from fouling hub flanges, giving Dualtron and Kaabo owners a cheap path to widen rotor stance without machining custom spacers.【F:knowledge/notes/input_part011_review.md†L304-L308】
 - **Hope caliper maintenance tips:**
   - Disassemble calipers and clean pistons with isopropyl alcohol
   - Apply fresh brake-specific grease to piston seals (avoid petroleum-based products)

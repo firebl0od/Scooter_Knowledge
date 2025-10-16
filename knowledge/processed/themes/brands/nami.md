@@ -60,6 +60,7 @@
 - High-voltage experiments above stock (26 S or more) demand validated controllers—confirm CAN, throttle, and hall health before blaming firmware for traction loss.[^7]
 - Avoid 12" AliExpress rim swaps without suspension mods—the community expects spring interference and rubbing, so 65 mm front / 80 mm rear LY combinations remain the safe default for wide-hub conversions.[^rim_warning]
 - Tubeless Ambrosini rims can burp air after potholes; reseat by pulling the valve core, blasting the bead with a compressor, and cleaning debris before reinflating.[^burp_fix]
+- If the dash shows 84.5 V at startup with no throttle, inspect the ADC divider and recalibrate voltage sensing—the control board may misreport pack voltage even when the charger caps at 83.6 V.【F:knowledge/notes/input_part011_review.md†L394-L395】
 
 ## Tires & Wheel Fitment
 - PMT’s rain tread in 90 mm and 100 mm widths costs about $80 per tire but remains the go-to upgrade when riders need wet grip over cheaper slicks.[^pmt_rain]

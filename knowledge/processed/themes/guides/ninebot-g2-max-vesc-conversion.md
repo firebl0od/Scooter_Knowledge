@@ -44,6 +44,7 @@
 - **Hybrid braking setups:** Some conversions lean on −90 A motor brake plus a front drum until displays arrive—treat this as temporary and prioritise fitting the Magura MT7 hydraulic system for repeatable stops.【F:knowledge/notes/input_part013_review.md†L163-L163】
 - **Rotor upgrades:** If you pursue 203 mm moto rotors, follow the community spacer blueprint that aligns Sur-Ron discs with Magura calipers to avoid pad taper and caliper rub.【F:knowledge/notes/input_part013_review.md†L160-L160】
 - **Monitor arm fatigue:** Builders are already cracking stock G2 suspension arms under high-power loads; swap to reinforced forks or aftermarket arms if you plan to add a second 65H motor or daily heavy riders.【F:knowledge/notes/input_part011_review.md†L713-L714】
+- **Retire Monorim hardware for high-power builds.** Community 80 km/h plans keep noting Monorim front ends bend, strip threads, and misalign under heavy hubs—budget a speed fork or upgraded suspension before adding dual motors or moto-class brakes.【F:knowledge/notes/input_part011_review.md†L460-L461】
 - **Headset service:** Clean any carbon paste overspill from the steering bearings; the paste can masquerade as a steering damper but eventually seizes the headset.【F:knowledge/notes/input_part013_review.md†L194-L194】
 
 ## Wiring & Regen Considerations

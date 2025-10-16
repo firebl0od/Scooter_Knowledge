@@ -27,6 +27,7 @@
 - **Capacitor banks are a recurring weak link.** Units have dropped to 14 V readings on 20 S packs after repeated capacitor explosions; simple cap swaps rarely hold.⁷
 - **Rectangular-case 75100s arrive half-finished.** Shops keep finding floating bus capacitors, dry thermal interfaces, and misreported firmware IDs (HW75300) on the new aluminium enclosures—open every unit, re-torque hardware, add paste, and verify IDs before loading customer profiles.【F:knowledge/notes/input_part004_review.md†L229-L229】
 - **Pack cut-offs still brick 75100s.** NetworkDir is now warning Xiaomi Pro 2 owners that BMS-induced shutoffs continue to kill Makerbase/Flipsky 75100s, steering newcomers toward dual Spintend Ubox hardware instead.【F:knowledge/notes/input_part010_review.md†L32-L33】
+- Matte continues to see controllers die within a month and Jason lost one to a single hard pull before his Ninebot BMS intervened—treat Flipsky hardware as disposable unless cooling and conservative current limits are dialed.【F:knowledge/notes/input_part011_review.md†L465-L465】
 - **Capacitor banks are a recurring weak link.** Units have dropped to 14 V readings on 20 S packs after repeated capacitor explosions; veterans like ‘lekrsu’ and Haku pin the failures on bargain components rather than layout, so simple cap swaps rarely hold.⁷
 - **Water-cooled 75350s still need plumbing.** The nose-inlet/optional-pump/rear-outlet loop the plate was designed for keeps heat moving; bolting the cooler onto another spreader starves flow and wastes the upgrade, which is why e-foil builders stick with full loops bathed in 20 °C water.【F:knowledge/notes/input_part006_review.md†L302-L302】
 - **Regen cutoffs can brick controllers.** Aggressive negative current spikes triggered logic-board shutdowns on otherwise healthy 75100s; tune regen ramps gently and log results before releasing builds.⁸
@@ -36,6 +37,7 @@
 - **Firmware support is community-driven.** Izuna pushed 6.0 beta binaries with custom VESC Tool builds to quiet high-throttle oscillations, coordinating GitHub Actions artifacts for testers rather than waiting on official releases.【F:data/vesc_help_group/text_slices/input_part003.txt†L10460-L10478】
 - **Buffer the low-voltage rails.** Riders now treat extra capacitance on the 12 V, 5 V, and even 3.3 V rails as mandatory—Konstantin’s teardown and Mirono’s field fixes both tied the infamous cut-off to undersized caps, and the mod applies even to resin-potted boards.【F:data/vesc_help_group/text_slices/input_part005.txt†L24020-L24070】【F:data/vesc_help_group/text_slices/input_part005.txt†L24662-L24694】
 - **Water-cooled resin builds remain experimental.** New potted 75× boards with INA181 current sensors and water loops promise better cut-off behaviour, but veterans still warn that MOSFET-to-heatsink transfer is the bottleneck until someone logs sustained high-power runs.【F:data/vesc_help_group/text_slices/input_part005.txt†L23967-L23995】
+- Firmware updates can scramble voltage limits. A commuter chasing 84 V cut-outs confirmed the pack was still 20 S, flashed the no-limit firmware via the PC tool, reset the max input voltage, then reran the input wizard to regain throttle before exploring LCD4 dash integrations.【F:knowledge/notes/input_part011_review.md†L55-L56】
 - **Firmware 5.3 introduced a brake-lock scare.** One 75100 flashed to 5.3 locked the wheel at ~45 km/h despite unchanged current limits; double-check UART handbrake scripts, phase insulation, and wiring before road tests after a firmware jump.【F:data/vesc_help_group/text_slices/input_part001.txt†L25875-L25943】
 - **Firmware 6.0 remains unstable on 75100 hardware.** Self-compiled VESC 6.0 builds made motors jitter until riders reverted to 5.3 binaries, underscoring that the 75100 still lacks official 6.0 support despite the updated Lisp-based app.【F:data/vesc_help_group/text_slices/input_part002.txt†L11299-L11319】【F:data/vesc_help_group/text_slices/input_part002.txt†L11369-L11379】
 - **75100 provenance drama.** Community sleuthing ties the 75100 PCB to a student project that Flipsky allegedly cloned without fixing layout flaws; rumours of the original designer reclaiming rights surfaced after official listings disappeared, even though AliExpress resellers still show stock.【F:data/vesc_help_group/text_slices/input_part001.txt†L10395-L10571】
@@ -90,6 +92,12 @@
 ## Ecosystem & Accessories
 - **Spintend BLE modules plug straight in.** When the stock Bluetooth dongle is missing, Spintend’s module drops onto the 75100 header without rewiring, giving builders another telemetry option while they source official replacements.【F:knowledge/notes/input_part002_review.md†L35-L35】
 - **Displays:** The yellow ESP32 “Smart Display” clones work once flashed with SimpleVescDisplay firmware; stock apps remain unstable.⁶ ¹¹
+<<<<<<< HEAD
+=======
+- Flipsky’s own yellow ESP32 display remains under evaluation, but riders point to the open-source SimpleVescDisplay firmware as the safer path until the bundle proves itself.【F:knowledge/notes/input_part011_review.md†L466-L466】
+- **Upcoming dashboards:** Rage Mechanics previewed a native SmartDisplay UI in late 2022 alongside a 3.5 in navigation prototype and a Waze overlay proof-of-concept for Spintend CAN feeds—plan firmware support before promising customers integrated maps.²¹
+- **Mobile app regressions:** Flipsky’s Android app briefly dropped GPS logging on FW 5.3—keep trusted APK archives so you can sideload stable builds when updates regress features.【F:knowledge/notes/input_part003_review.md†L227-L227】
+>>>>>>> pr-149
 - **Pedal assist & aux controls:** PAS harnesses expect a four-wire split (5 V, GND, signal, brake/enable) with cadence routed to ADC1. Confirm servo-pin voltage limits before powering sensors.¹¹
 - **Lighting rails:** Fuse every 12 V accessory lead—shorted aux rails have killed fresh controllers.¹²
 - **Profile switching:** Community ESP32 scripts now debounce CAN messages and validate voltage before toggling 1WD/2WD modes; adopt the revised code to avoid divide-by-zero bugs.¹²
@@ -108,7 +116,7 @@
 [^5]: Community skepticism about the FT85KS “non-VESC” controller variant.【F:knowledge/notes/input_part011_review.md†L668-L669】
 [^6]: Ongoing QC complaints and display experiments around Flipsky controllers.【F:knowledge/notes/input_part011_review.md†L452-L454】
 [^7]: Repeated capacitor explosions and component-quality concerns on 20 S builds.【F:knowledge/notes/input_part011_review.md†L753-L755】
-[^8]: Regen-triggered shutdown anecdotes on 75100 hardware.【F:knowledge/notes/input_part011_review.md†L764-L765】
+[^8]: Regen-triggered shutdown anecdotes on 75100 hardware.【F:knowledge/notes/input_part011_review.md†L764-L765】【F:knowledge/notes/input_part011_review.md†L58-L60】
 [^9]: Hall-detection failures tied to 5 V rail issues.【F:knowledge/notes/input_part011_review.md†L569-L571】
 [^10]: Harness part-number cataloging for aluminum 75100 revisions.【F:knowledge/notes/input_part003_review.md†L520-L520】
 [^11]: PAS integration threads and standby-draw measurements on Flipsky hardware.【F:knowledge/notes/input_part011_review.md†L484-L486】【F:knowledge/notes/input_part001_review.md†L913-L916】

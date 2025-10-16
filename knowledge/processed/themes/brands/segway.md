@@ -69,7 +69,7 @@
 - Segway GT decks sag under multi-kilowatt pulls, so add aluminum spreaders or belly plates when doubling controller power, mirroring the community’s 3 mm laser-cut solutions.[^2][^9]
 
 ## Battery & Charging Strategy
-- GT packs sag roughly 12 V at 500 A phase; upgrading to copper-bridged busbars and planning 22 S successors keeps voltage headroom for high-power controllers.[^9]
+- Smart Repair’s Kaabo GT pack blueprint logs about 12 V sag at 500 A phase on a self-built 20 S 9 P Eve 40 module with a 550 A-rated BMS, reinforcing why he stacks three 0.2 mm copper sheets over the nickel busbars while planning a 22 S successor once the front hub jumps to 65 H hardware.【F:knowledge/notes/input_part011_review.md†L479-L481】
 - Extreme G30 conversions stacking twin MP2s now model 20 S 12 P bricks roughly 14.5 cm tall with the smart BMS standing vertically at the pack’s nose and parallel QS8/8 AWG leads feeding a welded rear controller box so the deck arches stay intact.[^g30-blueprint]
 - C80 owners have demonstrated ~6–7 kW charging through the stock 100/100 Lite controller at mid-pack SOC, keeping compact scooters viable if thermal paths are improved.[^12]
 - Group rides now haul 6 kW Hyper Chargers and EV adapters, but Jason’s pack still bottlenecked charge rate while the pedestal had headroom—set current at the charger or pack rather than assuming infrastructure is the limit.【F:knowledge/notes/input_part012_review.md†L335-L336】

@@ -13,6 +13,7 @@
 - Mirono’s 3D-printed deck extender now houses 260 cells (~15 S 17 P) to chase 120 km coastal rides, while the group prototypes cargo trailers for hauling auxiliary batteries, logging ~2 A at 36 V from 80 W folding solar panels during scouting runs.[^deck-extender]
 - Artem’s Xiaomi/Ninebot controller shootout underscores tuning impact on Wh/km: the stock 52 V 13 Ah square-wave build burned ~26 Wh/km flat out, his dual-motor VESC swap held ~22.5 Wh/km at higher speeds, and a sine-modulated Vsett managed ~17 Wh/km cruising 25–35 km/h on a 676 Wh pack.【F:knowledge/notes/input_part000_review.md†L486-L489】
 - Bolt-on saddles shift rider weight rearward and make speed bumps harder to unload—test balance changes before multi-day tours and confirm frame-bag width still leaves foot room when swapping between 2.5 L and 3 L options.【F:knowledge/notes/input_part006_review.md†L133-L133】
+- Real-world comparisons between Wepoor and dual Lonnyo 22×3 builds highlight how gearing, tire size, and pack capacity shape usable range: a 12 P Wepoor returns roughly 50 miles at 35–50 mph but drains quickly past 65 mph, while a 10 P 22×3 setup stretches to ~100 km per charge at similar cruising speeds.【F:knowledge/notes/input_part011_review.md†L301-L305】
 
 ## Public Charging Strategies
 
@@ -42,6 +43,12 @@
 - **Stick with proven CC‑CV bricks.** The group keeps defaulting to Wate or YZPower chargers because bargain adjustables wander off voltage set-points and cook packs unless you meter every session; CC-only supplies still leave passive-balancing BMSs short of a full charge.【F:data/vesc_help_group/text_slices/input_part005.txt†L24033-L24075】
 - **Treat series-stacked chargers as a stopgap.** Builders will stack dual 10 S bricks only while waiting for proper 20 S units and even then monitor them closely—dedicated charge ports and sealed enclosures remain the commuter-friendly solution for high-voltage packs.【F:data/vesc_help_group/text_slices/input_part005.txt†L23075-L23093】【F:data/vesc_help_group/text_slices/input_part005.txt†L23941-L23953】
 
+### Programmable Telecom Supplies & Bench Chargers
+- **AliExpress adjustable bricks struggle above 84 V.** Community testing on adjustable 20 S/24 S chargers shows budget units browning out or failing outright once riders push past ≈84 V, so bring spares or derate them when touring with 96 V packs.【F:knowledge/notes/input_part011_review.md†L101-L106】
+- **WANPTEK benchtops are voltage-flexible but current-limited.** Their compact supplies work as emergency travel chargers thanks to programmable setpoints, yet the 3 A ceiling makes them impractical for fast top-ups—plan overnight charges only.【F:knowledge/notes/input_part011_review.md†L101-L106】
+- **Huawei telecom rectifiers remain the reliable high-power option.** Riders still prize these 4 kW-class bricks for 20 S+ builds because they hold voltage under load and integrate with app-based control, though the size, cost, and fan noise make them best suited to support vans or home base charging hubs rather than café stops.【F:knowledge/notes/input_part011_review.md†L101-L106】【F:knowledge/notes/input_part011_review.md†L209-L212】
+- **Compact 2 kW adjustable chargers are resurfacing.** AliExpress listings now advertise 66–93 V @ 23 A and 72–101 V @ 16 A bricks; stock remains sparse, so treat them as opportunistic pickups rather than dependable tour gear.【F:knowledge/notes/input_part011_review.md†L460-L463】
+
 ## Generator-Assisted Touring (Experimental)
 - A 1 kW portable generator paired with a 5+ kWh pack has been theorized for coast-to-coast scooter attempts, potentially providing 8–10 hours of riding per fuel tank when charging on-the-go at low rates.[^generator]
 - Weight penalties (generator, fuel, mounting hardware) and noise considerations make this strategy impractical for urban routes or stealth camping scenarios; field testing is needed before committing to this approach for serious tours.[^generator-limits]
@@ -49,6 +56,7 @@
 
 ## Pack & BMS Considerations for Touring
 - **Over-provision capacity:** Plan for 20–30 % reserve capacity to account for voltage sag, cold weather, headwinds, and unexpected detours; aggressive riders logging 2 Wh/mi at 30 mph should budget ≥3 Wh/mi for tour planning.[^capacity-buffer]
+- **Quantify delivery duty cycles before rebuilding packs.** Swapping from P42A to 5 Ah-class cells only nets ≈0.8 kWh extra on typical delivery scooters; interview couriers about shift length and swap packs before committing to a full rebuild.【F:knowledge/notes/input_part011_review.md†L332-L339】
 - **BMS thermal limits:** High-capacity packs (≥7 kWh) under sustained discharge can heat BMS MOSFETs or balance boards; log temps during test rides and add active cooling if boards exceed 50 °C under load.[^bms-thermal]
 - **Charge rate planning:** If fast-charging via Level 2 infrastructure, ensure BMS charge current limits (typically 10–30 A for scooter-class hardware) match adapter capabilities and won't trip thermal or over-current protections.[^charge-limits]
 - **Respect OEM charge ceilings:** Segway Ninebot G30 BMS firmware trips if charge current exceeds ~8 A even though the pack accepts Segway’s 5 A fast charger, while F-series and Xiaomi packs top out around 4 A continuous—dial adjustable lab supplies accordingly to avoid nuisance cut-offs.[^g30-charge-limit]
