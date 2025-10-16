@@ -4,6 +4,7 @@
 
 - Oversize protection hardware and choose the right architecture for the pack: JK active-balancing boards bring dual 7 AWG busbars, 1 A or 2 A shuttling variants, and remote toggles, but recent self-burn reports push installers toward JBD/LLT or ANT units when decks are cramped or uptime is critical.[^1][^1][^2][^3]
 - Oversize protection hardware and choose the right architecture for the pack: JK active-balancing boards bring dual 7 AWG busbars, per-channel charge/discharge/balance toggles, and harness-resistance telemetry while still leaving room for GPS/4G trackers once rewired with silicone pigtails, but recent self-burn reports push installers toward JBD/LLT or ANT units when decks are cramped or uptime is critical.[^2][^3][^1][^2][^3]
+- Silver-case JK 8 p boards now have a habit of burning the same PCB corner even while idle; builders are shelving them until JK issues a fix.[^jk-silver8p]
 - Field failures now include JK dashboards freezing the moment the discharge page opens; builders document the fault, prep JBD harness swaps, and treat JK hardware as a risk unless the pack truly needs its active balancing.[^4]
 - JK and ANT families remain the consensus picks for high-current scooters, while Daly stays the “worst in the industry” fallback even if it remains widely available.
   - budget headroom accordingly before committing to bargain hardware.[^5]
@@ -78,6 +79,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 *Reminder:* If a smart BMS was shut down over BLE, tapping it with a charger wakes the board.
   - never “test” with an 84 V charger on 42 V/54.6 V packs or you risk blowing the BMS outright.[^33]
 4. **Stage first rides with logging.** Riders lost Spintend and Makerbase controllers the moment a BMS tripped under load; gather current and voltage traces to verify the protection stays latched through braking and launches.[^6]
+- **Reboot stubborn JK boards.** After a reset, hold the onboard button until the display wakes—the Wi‑Fi password reverts to `1234`, so update credentials before handing the scooter back.[^jk-reset]
 
 - When regen has previously latched undervoltage faults, enable the smart-BMS discharge MOSFET before reconnecting the controller and raise pre-charge targets toward 40 A on large 16 S packs so startups pass self-tests without brownouts.[^precharge40]
 - If smart-BMS telemetry suddenly reads nonsense after a teardown, hunt for conductive debris.
@@ -238,6 +240,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 [^jk-warranty]: NetworkDir’s JK warranty case yielded only an $8 coupon and a return request after the board burned, so the chat now tells newcomers to skip JK orders and prep replacements.[^98]
 [^jk-delta-smart]: Finn’s crew leaves JK active balancing enabled, tightens delta to ~0.01 V, and limits shuttle current to ~0.2 A so 7 p modules stay aligned without roasting resistors.[^99]
 [^11]: Recent JK batches self-destructed even while idle or during basic app interactions, earning community warnings to prep JBD swaps as insurance.[^82]
+[^jk-silver8p]: Source: knowledge/notes/input_part007_review.md†L408-L408
 [^12]: ANT hardware’s simultaneous balancing and compact footprint have proven reliable on long-lived Weped FS packs despite high peak currents.[^100]
 [^precharge40]: Source: knowledge/notes/input_part000_review.md, line 170.
 [^13]: Side-mounted Vsett builds demonstrate ANT’s 240 A/600 A board fitting alongside controllers, validating the form factor for cramped decks.[^84]
@@ -267,6 +270,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 [^laotie-sag]: Laotie “38 Ah” packs logged ~10 V sag under load and stranded riders at 52 V despite 20 % indicated SoC; they now log real voltage, raise cutoffs toward 55 V, or plan pack rebuilds before upping current.[^122]
 [^23]: JK’s app-controlled discharge disable doubles as an anti-theft toggle once the pack is charged, a workflow riders now bake into parking habits.[^123]
 [^24]: Recovery checklists cover JK low-voltage wake-ups around 57 V on 20 s packs and balance-lead troubleshooting so riders don’t lose telemetry after servicing.[^124][^125]
+[^jk-reset]: Source: knowledge/notes/input_part007_review.md†L409-L409
 [^bridge]: VESC Bridge V2 documentation promises plug-and-play harnesses plus future JK/JBD/ANT/Daly support, making it easier to integrate smart BMS telemetry with controller dashboards once released.[^126]
 [^cheap-externals]: Denis’ workshop found cheap “13 Ah” externals sagging immediately, forcing the primary battery to supply all current.
   - test them solo at low load before wiring them into parallel stacks or trusting their telemetry.[^127]

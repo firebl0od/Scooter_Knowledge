@@ -31,6 +31,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 2. **Order matters on dual-rail harnesses.** Feeding 5 V into a Flipsky Smart Display before the 12 V lead repeatedly destroyed Spintend ADC daughterboards; always energise 12 V first, then 5 V, and confirm the display ground is shared with the controller.[^17]
 3. **Spec brake-sensor resistors intentionally.** Dual brake throttles still need resistor values that match the controller’s expected voltage.
   - publish a reference chart so builders stop guessing on Zoom/Nutt lever wiring.[^18]
+4. **Tame floating hall throttles.** Makerbase/Flipsky throttles that float when unplugged calm down once you add a 3.3 kΩ pull-down on ADC 1; if a lever only wakes when hard-wired to the controller, assume the harness opened up during repairs and add the resistor before reassembling the loom.[^adc-pulldown]
 2. **Order matters on dual-rail harnesses.** Feeding 5 V into a Flipsky Smart Display before the 12 V lead repeatedly destroyed Spintend ADC daughterboards; always energise 12 V first, then 5 V, and confirm the display ground is shared with the controller.[^19]
 3. **G300 power buttons ship as momentary inputs.** Reconfigure App → General so a button press toggles shutdown; otherwise the controller only wakes when the battery connects and ignores the dash switch.[^20][^21]
 3. **Map every connector before power-up.** MakerBase looms expose 3.3 V/GND/ADC1 at the “comm” header and reroute Bluetooth through the NRF pins; miswired TX/RX leads cause telemetry dropouts or back-power logic rails.[^22]
@@ -108,14 +109,15 @@ This guide distills field reports on powering lights, horns, and dashboards from
 
 - Analog gauge clusters look cool but add little.
   - VESC already logs current and voltage, so most riders simply mount a phone dash unless they crave retro styling.[^57]
-- **SimpleVescDisplay (ESP32).** Smart Repair recommends flashing the open-source SimpleVescDisplay and 3D-printing its mount as a reliable alternative when Flipsky Voyage units glitch.[^58]
+- **SimpleVescDisplay (ESP32).** Smart Repair recommends flashing the open-source SimpleVescDisplay and 3D-printing its mount as a reliable alternative when Flipsky Voyage units glitch; PuneDir and NetworkDir now run the firmware on a €9 ESP32 touch panel that mirrors VESC Tool over BLE/Wi‑Fi, refreshes telemetry every 10 ms, keeps odometer counts stable versus 6.05 firmware, and leaves CAN free by riding over UART.[^58][^esp32-panel]
 - **Tiny NRF boards have no range.** Flashing Vedder’s `nrf51_vesc` firmware onto ultra-small BLE boards left riders with unusable range, so they still buy the €2 full-size modules for dependable VESC Tool links.[^59]
 - **SimpleVescDisplay odometer logging.** NetworkDir’s latest firmware now buffers odometer data locally on the ESP32 so riders keep mileage even if CAN frames drop, giving budget builds a telemetry path that still respects VESC Tool logs.[^60]
 - **JPPL Smart Display RAM ceiling.** Running Wi-Fi and Bluetooth simultaneously exhausts the JPPL display’s RAM; leave only one wireless interface active to keep the UI responsive.[^61]
 - **Rage SmartDisplay roadmap.** Rage Mechanics teased an official SmartDisplay UI refresh with thumb-wheel ergonomics feedback plus a 3.5 in navigation prototype that folds GPS into the dash.
-  - validate firmware support before promising integrated maps.[^62]
+  - validate firmware support before promising integrated maps and remember the new display only ships with controllers until CE paperwork clears; a companion anti-theft module is also in the works to hook any controller over 4/5G links.[^62][^rage-ce]
 - **Waze overlay proof.** Early testers piped Waze alerts over the SmartDisplay CAN feed, proving richer overlays are feasible once the navigation stack ships.
   - capture the workflow Francois used so commuters can reproduce the police-alert demo.[^63][^64]
+- **iOS configuration lockouts.** iOS riders found firmware 6.05 sessions stay read-only unless they install the TestFlight beta or pay for the App Store build—plan for the upgrade before attempting on-scooter tuning over BLE.[^ios-beta]
 - **Reinstall VESC Tool before flashing Lisp.** Dash-side Lisp scripts that crashed on upload cleaned up after reinstalling the desktop app, so refresh the environment before assuming the hardware bricked.[^65]
 - **Navigation demand.** Vsett and other high-speed riders want the SmartDisplay precisely to avoid strapping phones to 100 km/h scooters; the 10 cm × 6.5 cm mock-up with CAN telemetry and prompts addresses those ergonomics complaints.[^66]
 - **ANT BMS display repurpose.** With few dedicated VESC dashboards shipping, riders now mount ANT smart-BMS displays as secondary cockpits to surface pack telemetry alongside MakerX and similar builds, strapping the budget screens near the bars for live pack voltage/current until purpose-built VESC dashes are available.[^67][^68]
@@ -522,6 +524,10 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^165]: Source: knowledge/notes/input_part009_review.md†L396-L396
 [^166]: Source: knowledge/notes/input_part000_review.md†L529-L529
 [^167]: Source: knowledge/notes/input_part007_review.md†L404-L408
+[^adc-pulldown]: knowledge/notes/input_part007_review.md lines 401-401.
+[^esp32-panel]: knowledge/notes/input_part007_review.md lines 405-405.
+[^rage-ce]: knowledge/notes/input_part007_review.md lines 406-406.
+[^ios-beta]: knowledge/notes/input_part007_review.md lines 407-407.
 [^168]: Source: data/vesc_help_group/text_slices/input_part009.txt†L7134-L7141
 [^169]: Source: data/vesc_help_group/text_slices/input_part009.txt†L7741-L7754
 [^170]: Source: knowledge/notes/input_part013_review.md†L217-L224

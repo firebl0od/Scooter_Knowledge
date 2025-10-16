@@ -485,9 +485,9 @@
 [^137]: Source: knowledge/notes/denis_all_part02_review.md†L465-L465
 [^138]: Source: knowledge/notes/denis_all_part02_review.md†L121801-L121804
 [^139]: Source: knowledge/notes/input_part009_review.md†L381-L381
-[^140]: Source: knowledge/notes/input_part007_review.md†L403-L404
+[^140]: Source: knowledge/notes/input_part007_review.md†L411-L411
 [^141]: Source: knowledge/notes/input_part012_review.md†L176-L176
-[^142]: Source: knowledge/notes/input_part007_review.md†L404-L404
+[^142]: Source: knowledge/notes/input_part007_review.md†L412-L412
 [^143]: Source: knowledge/notes/input_part013_review.md†L219-L219
 [^144]: Source: knowledge/notes/input_part013_review.md†L391-L393
 [^145]: Source: data/vesc_help_group/text_slices/input_part013.txt†L16110-L16111

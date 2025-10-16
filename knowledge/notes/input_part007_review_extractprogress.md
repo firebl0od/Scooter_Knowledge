@@ -28,4 +28,11 @@
   - high-power-vesc-scooter-reliability-guide.md
   - brake-maintenance-and-upgrades.md
   - xiaomi_high_voltage_upgrade_checklist.md
-- Next start line: 401
+- 2024-05-29: Processed lines 401-500 → knowledge/processed/themes/guides/
+  - motor_controller_tuning.md
+  - vesc-accessory-power-and-display-integration.md
+  - high-power-vesc-scooter-reliability-guide.md
+  - smart-bms-integration-handbook.md
+  - ninebot-g30-vesc-conversion-playbook.md
+  - scooter_diagnostic_toolkit.md
+- Next start line: 501

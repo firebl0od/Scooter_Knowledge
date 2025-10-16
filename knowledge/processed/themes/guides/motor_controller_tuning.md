@@ -30,6 +30,7 @@
 
 - Keep regen voltage below ~84 V on 80100/84100 hardware when running high-voltage packs—above that the hardware becomes fragile even if throttle operation is fine.[^regen-threshold]
 - On Ubox builds, set absolute current only 10–20 % above motor current; explore observer options, reduce observer gain by half, tweak inductance by ~20 %, experiment with PWM frequency, and avoid slow-ABS to stop over-current oscillations without neutering torque.[^abs-oc]
+- Expect motor current targets around 2.5× battery current; log GPS speed while adjusting wheel diameter—Zero 10X builders settle near 250 mm because the “10 inch” tire squats under rider load.[^motor-batt-ratio]
 - Phase amps, not motor Kv, create launch torque: Deadword's 75100/Ninebot G30 regained punch only after raising motor current beyond 35 A (within safe hardware limits).[^phase-amps]
 - Rochee's testing on Jesús's Rion confirmed that extreme phase amps and field-weakening reintroduce grinding noises and cutouts; backing phase current down keeps 24 s builds reliable.[^phase-ceiling]
 - When ride logs show the hub is already saturating, follow Yoann's example and dial current back.
@@ -60,6 +61,7 @@
 - For hall chattering Monorim builds, re-detect halls, raise the sensored→sensorless handoff to ~3,000 ERPM, and switch observers to Ortega for clean transitions.[^monorim-chatter]
 - Stay in hall-sensor mode when pushing high phase current; Mxlemming observers can launch at 150 A on 10 s 5 p packs but saturate sooner than Ortega, so revisit observer and current-coupling parameters when saturation appears.[^hall-mode]
 - Investigate hall sensor "absent" errors by checking the thin hall leads and verifying continuity with a multimeter's beep mode before rerunning setup.[^hall-diagnostics]
+- Makerbase 75100 current telemetry stays honest only after removing two of the parallel shunts that creep in during repairs; otherwise VESC under-reports motor draw.[^shunt-trim]
 - Before re-energizing suspect controllers, beep-test between pack leads and every phase to catch shorts, confirm 5 V accessory output, isolate hall supplies with dual 1N4148 diodes if needed, and inspect resettable fuses guarding the Ubox's 12 V/5 V/3.3 V rails.[^prepower-checks]
 - Cold-soldered phase leads can melt and short, killing FETs; test each MOSFET drain-to-source, inspect both sides of the board, and verify Bluetooth plus the 5 V rail before reconnecting.[^phase-meltdown]
 - Zero owners mounting paired VESCs should enlarge bolt holes gradually, strip paint to use the chassis as a heat bridge, clamp with hardware and threadlocker, refresh thermal pads with paste, and avoid insulating foam stuffing.[^zero-mounting]
@@ -158,6 +160,8 @@
 [^donor-frame]: knowledge/notes/input_part007_review.md lines 89-89.
 [^tubeless]: knowledge/notes/input_part007_review.md lines 90-90, 166-166.
 [^hub-magnet-stack]: knowledge/notes/input_part007_review.md lines 105-105.
+[^motor-batt-ratio]: knowledge/notes/input_part007_review.md lines 402-402.
+[^shunt-trim]: knowledge/notes/input_part007_review.md lines 410-410.
 [^spintend-85250]: knowledge/notes/input_part007_review.md lines 139-140.
 [^saturation-logging]: knowledge/notes/input_part007_review.md lines 104-104.
 [^thermal-60c]: knowledge/notes/input_part007_review.md lines 123-123.

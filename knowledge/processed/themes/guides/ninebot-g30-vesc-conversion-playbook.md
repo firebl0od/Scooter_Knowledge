@@ -54,6 +54,7 @@
 | 22 S race prep | Targeting 22×3 or 33×2 motors, 300 A phase, positive ramp ~0.4 s | Focus on traction control slip windows (11 k–17 k rpm) to avoid wheelspin | Requires spare motors and throttle filtering to mitigate spike-induced controller shutdowns.[^5][^6] |
 
 - Builders chasing 14 S commuter tunes still favor Spintend’s Ubox over Flipsky thanks to beefier MOSFETs and cooling; early Ubox batches like extra thermal pads, and 30Q/40T packs comfortably supply the ~70 A battery draw when motors can stomach it.[^28]
+- Makerbase 75100 swaps still demand the basics: run the motor wizard, stay on Ortega with BEMF decoupling so the dash keeps speed reporting, and match mobile/ESC firmware to avoid “limited mode” until the right version is loaded and power-cycled.[^deadword-pitfalls]
 
 ## Battery & BMS Planning
 
@@ -321,3 +322,4 @@
 [^107]: Source: knowledge/notes/input_part007_review.md†L262-L262
 [^108]: Source: knowledge/notes/input_part004_review.md†L13-L19
 [^109]: Source: data/raw/telegram_exports/vesc_help_group/input_part007.json†L410572-L410744
+[^deadword-pitfalls]: Source: knowledge/notes/input_part007_review.md†L413-L413
