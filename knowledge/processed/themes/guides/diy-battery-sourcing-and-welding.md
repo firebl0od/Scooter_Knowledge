@@ -79,6 +79,7 @@ Regional sourcing realities still shape chemistry choices: Turkish builders bloc
 
 - Cheap 20 € control boards still demand ~€100 worth of 3 S high-rate packs or supercapacitors—plan those hidden costs before assuming a bargain welder will fuse copper reliably.【F:knowledge/notes/input_part005_review.md†L115-L116】
 - Builders get by with inexpensive 230 V stick irons and €6 pencil irons for quick controller jobs, but aluminum-PCB MOSFET arrays still demand 200 W stations or hot air so the large pads heat evenly.【F:knowledge/notes/input_part005_review.md†L117-L117】
+- **Power the welder properly.** Car batteries sag after only a handful of welds; builders now favour CNHL 4S 9.5 Ah hardcase LiPos or similar high-C packs to keep K-weld pulses near 2 kA without undervoltage alarms, while aging RC packs and USB power banks overheat even with extra heatsinks.【F:knowledge/notes/input_part008_review.md†L237-L238】
 - Malectrics V4 welders now ship with parallel MOSFET daughterboards and run happily from triple 3 S LiPos; some builders still drop to 2 S packs to tame FET heating because the welder regulates to ~5–6 V at the electrodes.【F:knowledge/notes/input_part001_review.md†L604-L605】
 - Artem’s 0.1 mm copper-under-nickel stacks respond best to heavy compression and careful hot-glue alignment—done right they only sag ~3.5 V at 60 A on 60 V Samsung 35E packs versus the 7–20 V drop seen on looser busbars.【F:knowledge/notes/input_part001_review.md†L607-L608】
 

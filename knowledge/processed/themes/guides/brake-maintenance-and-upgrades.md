@@ -37,6 +37,10 @@
 ### Motorcycle-Caliper Imports (Kotto Example)
 - Kotto’s 3 mm motorcycle kits deliver fierce bite out of the box but ship dry and oversized—expect to bleed them immediately and clearance thick rotors or caliper mounts so the hardware sits square on scooter forks.【F:knowledge/notes/input_part004_review.md†L221-L221】
 
+### Regen Modulation Lessons
+- Riders experimenting with high-force regen reported −80 A electronic braking nearly pitching them over the bars; most now tune Spinny/ADC profiles so regen complements (rather than replaces) hydraulic stoppers.【F:knowledge/notes/input_part008_review.md†L249-L249】
+- Heavy scooters devour cheap pads even with regen assist—switching to metallic compounds such as Galfer keeps feel consistent when regen is dialed back for wet roads.【F:knowledge/notes/input_part008_review.md†L250-L251】
+
 ### Rotor Sizing Considerations
 - Brake discussions suggest upsizing rotors from 180 mm to 203 mm mainly boosts thermal mass and leverage but may be excessive for scooters; larger rotors require frame clearance checks and stronger mounting tabs to handle increased braking forces.[^rotor-sizing]
 - Magura MT7/MT5 calipers barely clear 2.9 mm Kaabo rotors—fresh pads or 3 mm aftermarket discs often rub unless you machine custom spacers—so many riders stick with stock Zoom calipers or thinner discs when chasing upgrades.【F:knowledge/notes/input_part002_review.md†L141-L142】
