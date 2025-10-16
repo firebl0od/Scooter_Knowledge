@@ -36,6 +36,7 @@
 
 - **Skip ideal diodes for everyday riding.** Diode-protected tests on 17 S/16 S packs triggered throttle cut-outs without meaningfully reducing balancing current. Instead, match voltages, plug in directly, and rely on pack capacity differences to dictate current share (larger packs naturally absorb more regen).[^14]
 - **Use high-quality connectors and inspections.** High-current scooters running parallel harnesses have destroyed QS8 links and controllers when connections loosened; add pre-ride continuity checks whenever you modify pack wiring.[^23]
+- **Parallel external packs before the controller.** Noname walked cihan through tying positives to positives and negatives to negatives ahead of the controller while upsizing the external leads so both Ninebot packs share current without back-charging each other.[^parallel-ninebot]
 - **Fuse each leg.** Install inline fuses or breakers per pack so a single short does not cascade through the entire parallel assembly.
   - a lesson reinforced by riders dailying 20 S packs without discharge-side BMS protection.[^24]
 
@@ -124,6 +125,7 @@
 [^21]: Source: knowledge/notes/input_part013_review.md†L125-L125
 [^22]: Source: data/vesc_help_group/text_slices/input_part001.txt†L7100-L7125
 [^23]: Source: knowledge/notes/input_part013_review.md†L411-L411
+[^parallel-ninebot]: Source: knowledge/notes/input_part013_review.md†L762-L762
 [^24]: Source: knowledge/notes/input_part013_review.md†L224-L224
 [^25]: Source: knowledge/notes/input_part013_review.md†L173-L173
 [^26]: Source: knowledge/notes/input_part008_review.md†L219-L221

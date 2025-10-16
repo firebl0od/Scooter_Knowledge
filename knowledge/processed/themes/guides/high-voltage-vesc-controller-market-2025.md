@@ -5,15 +5,20 @@
 - Spintend’s mature 85 V line still anchors budget 20–22 S builds, but unresolved throttle jitter, capacitor stress on heavy hubs, and a wave of 12-FET failures keep veterans steering high-mass projects toward larger "fat VESC" platforms or FarDriver-class hardware.[^1]
 - Stepping from 16 S to 20 S trims current draw and adds ≈2.5 km/h per series cell, yet 100 V-class MOSFETs carry ~33 % higher Rds(on) than 75 V parts while pack length, insulation, and safety checks all get harder.
   - plan enclosure space and thermal margin before chasing headline voltage gains.[^2]
+- Tronic X12 controllers budget only about 0.4 A at 5 V for logic, hide the 12 V rail on the harness, and lack CAN-based shutdown; tying dual units to one relay has already cooked both DC/DC modules, so lighting and accessories need independent converters.[^x12-dcdc]
 - Vedder’s new Maxim 120 V ecosystem (Maxim singles, Duet dual, and the companion smart BMS) finally gives builders an official high-voltage option, yet the ~€530 bundle, STM32F4 control, and limited field data spark debate against cheaper Chinese controllers.[^3]
 - Vedder also teased a palm-sized “VESC Express Micro” controller for 36–48 V scooters: it promises 50 A continuous / 100 A dual-channel output with onboard logging and Express integration, providing a compact option for youth builds despite offering roughly half the battery current of a Ubox 100/100.[^4]
+- Paolo is shipping bare Tronic X12 boards around €350, but he warns Seven-branded controllers still ride FR-4 PCBs with mediocre cooling—budget enclosure mods or alternative hardware before planning 22 S race builds.[^tronic-bare][^seven-fr4]
 - 3Shul’s CL-series and Tronic X12 controllers occupy the premium tier for riders chasing 23 S+ or 500 A ambitions, but supply volatility, firmware transparency, and pricing nearly double that of Spintend/Ennoid alternatives require group-buy planning and spare telemetry gear for validation.[^5][^6]
 - Makerbase’s 84xxx HP hardware has emerged as the dependable mid-budget foil: real-world logs show it surviving 22 S abuse when wiring is clean, while 12-FET Spintend stages continue to brown out under heavier riders despite water-cooling success stories.[^7]
+- With Spintend 85/150 singles back-ordered, Vsett 10+ owners are pivoting to Makerbase 75100s but must add external BMS/contactors because the board still lacks a native on/off stage.[^makerbase-fallback]
+- Rage Mechanics’ C350 remains the community’s answer when riders ask for native VESCs that hold ≈28 S, ~200 A battery, and ~700 A phase—still ranked above Kelly/Votol yet below FarDriver for extreme scooters.[^c350-go-to]
 - Raphaël Foujiwara’s dual-VESC prototype targets 100 V packs with 12 TO‑247 MOSFETs per motor, 400 A phase / 300 A battery goals, and a 110 × 110 mm footprint, but the €200 MOSFET bill and twin STM32s already push projected pricing beyond €1 000 unless assembly is automated.
   - highlighting the cost pressure on boutique duals.[^raphael-proto]
 - Riders are still begging for accessible 100 V/80–100 A-per-channel controllers.
   - Paolo’s single-channel prototype and any future Nucular 12F restock remain top-of-mind while the $1 300 BAC4000 is dismissed as overpriced for scooter duty.[^8]
 - Compact single-channel contenders are arriving: ENNOID teased a 100 V/75 A board in a 70 × 75 × 16 mm shell (~$200), and Spintend’s single-core preview aims for ≈100 A with active cooling in an XT90-sized case priced around $150.[^9][^10]
+- Mirono also spotted an 18-FET open-source VESC with 500 A shunts under test, a promising budget alternative while Nucular stock stays scarce.[^open_source_500a]
 - Rider comparisons pit €400-per-side Tronic/Little FOCer stacks (100 A battery / 250 A phase) against Spintend duals that bundle heatsinks, while YYK square-wave units earn points for short-circuit survival despite lacking VESC tuning.
   - underscoring the trade-offs between configurability, price, and robustness.[^11][^12]
 - Community builders are filling the 200 A single-controller gap.
@@ -33,7 +38,7 @@
   - treat the silicon upgrade as necessary but not sufficient | Budget single-motor builds that can clamp the case directly to the chassis or add external sinks before chasing >50 A battery[^23] |
 | **Ennoid MK8** | Footprint matches Spintend 85150; stretches toward 26 S / 500 A phase with IPTC017N12NM6 FET swaps | Requires component upgrades and careful assembly discipline championed by Smart Repair | Builders who can solder/pot Toll FETs and want Spintend-sized hardware with higher ceiling[^24][^25] |
 | **Ennoid compact single (teased)** | 100 V / 75 A in a 70 × 75 × 16 mm package (~$200) | Targeting builders waiting on Spintend singles; enclosure production slated for mid-year beta | Lightweight decks that need a standalone VESC before dual-controller budgets make sense[^26] |
-| **Tronic X12** | ≈24 S capable; ~20 kW from 12 FETs, eleven electrolytic caps, bundled 6 AWG leads, onboard ESP32/VESC Express, color-coded voltage SKUs (100 V blue, 24 S red, 150 V violet) | Considered a drop-in for high-output builds, but storefront outages and firmware access limit availability | Race scooters needing >400 A phase with proven logs and spare controllers on hand[^24][^6][^27] |
+| **Tronic X12** | ≈24 S capable; ~20 kW from 12 FETs, eleven electrolytic caps, bundled 6 AWG leads, onboard ESP32/VESC Express, color-coded voltage SKUs (100 V blue, 24 S red, 150 V violet) | Considered a drop-in for high-output builds, but storefront outages, closed firmware, and a fragile ≈0.4 A logic rail (no CAN-based shutdown) demand external DC/DCs and disciplined wiring | Race scooters needing >400 A phase with proven logs and spare controllers on hand[^24][^6][^27][^x12-dcdc] |
 | **3Shul CL350** | Comfortably runs 23 S+ with robust capacitor banks; community pegs it above Spintend for power headroom | Manufacturer transparency still thin; price nearly double Spintend, so teams lean on group buys and Voyage Megan dashboards for CAN telemetry | Heavy QS/LY hub builds where budget covers premium controllers and logging accessories[^5][^28] |
 | **Tronic X12** | ≈24 S capable; heavy-duty shunt sensing stock | Considered a drop-in for high-output builds, but storefront outages and firmware access limit availability; Paolo pegs real-world ceilings closer to 600 A battery despite 1,000 A marketing because the platform still leans on older MOSFET packages | Race scooters needing >400 A phase with proven logs and spare controllers on hand[^24][^6][^29] |
 | **VESC Express Micro (preview)** | 36–48 V target, ≈50 A continuous / 100 A dual-channel | Integrates Express telemetry in a notably compact footprint, drawing interest for Peak G30 youth builds that can live with the lower battery current ceiling | Lightweight scooters needing VESC tooling and logging without the bulk or amperage of full-size dual controllers[^4] |
@@ -53,6 +58,11 @@
 | **Seven TOLL/TOLT (upcoming)** | Modular 18- and 30-MOSFET stacks in 100/135/150 V trims with multilayer PCBs packed with thermal vias, swappable VESC Express daughterboards, CNC housings, twist-throttle accessories, and even a 400 V variant on the roadmap | Still in preview.
   - watch for production pricing and enclosure machining timelines | Builders planning premium duals who want Seven’s ecosystem once hardware ships[^43] |
 | **MP2 Open-Source ESC** | Community-targeted 100 V/300 A stack (F405 + modular busbars) | Group buys revived EU production; expect DIY soldering, heat-beds for busbars, and a bring-your-own firmware workflow | Makers who prefer open hardware, need 300 A envelopes, and can validate their own cooling/heatsink designs.[^40][^41] |
+
+## Emerging Hardware Watchlist
+
+- Track Jason’s 30 S MP2 pack build, the 18-FET Toll-stage debug, and any validated 600 A phase experiments so the MP2 row reflects proven limits instead of wishlist targets.[^watch-mp2]
+- Capture specs, FET counts, build quality, and regional availability once the Trumoto “Noisy Cricket” controller is verified so the market snapshot doesn’t rely on rumour.[^watch-noisy]
 
 ## Reliability & Warranty Lessons
 
@@ -76,6 +86,7 @@
 - Smart Repair traces many controller deaths to workmanship.
   - scratched insulation, loose bullets, unstable observers
   - so implementing checklist inspections before power-up is as important as choosing a premium ESC.[^25]
+- Pandalgns continues to flog Makerbase 84200s around 350 A battery on 60 V while waiting for the recalled 100300 model, framing the budget boards as consumables compared with premium controllers.[^mk84200]
 - Makerbase 84xxx HP controllers can survive 22 S punishment once wiring faults are resolved, yet the latest attrition logs underscore that harness diligence alone may not prevent catastrophic failure.[^56][^57][^58][^59]
 - New July reports show the opposite: 75100s failing at cruise, 75200s DOA, and stationary ignition fires reinforce that Makerbase remains a risky stopgap for anything above commuter power levels.[^57][^58][^59]
 - Persistent throttle jitter on Spintend 85/240 and 100/100 hardware, plus random spikes logged on refreshed 85/250 v2 units, point to lingering ADC filtering and grounding issues that must be solved before customer delivery.[^17]
@@ -93,7 +104,9 @@
 - Spintend 85/150 units mislabeled as 100 A have already popped input capacitors mid-ride and even melted CAN jumpers; budget time for RMA delays or pivot upmarket when planning 20 S commuters.[^69]
 - NetworkDir is steering Dualtron owners toward the dual Ubox 100 V/100 A kit plus ADC v3 lighting module after repeated Makerbase and Flipsky issues, highlighting a more reliable mid-tier path.[^70]
 - Jason’s MP2 roadmap clarifies that the six-FET-per-phase stack holds ≈300 A continuous with ~450 A hardware OC, giving DIYers an open-source alternative when commercial supply dries up.[^71]
+- French racers report the waterproofed 18-FET G300 runs happily on 22 S at roughly 250 A battery / 500 A phase but overheats if regen is hammered; treat it as a street or sprint controller rather than a sustained hill-climb unit.[^g300_use]
 - Even boutique Little FOCer/Tronic 250 lineage boards start dying near 200 A; Yamal recommends keeping them around 150 A per controller for longevity.[^72]
+- Yamal’s own 22 S shortlist (X12, Seven18, C350, G300, Trampa 100/250, Thor 400, MakerX, 3Shul, Tronic) plus his 85/250 “Uppsala” Nami tuned around 300 A phase per 80H hub gives builders a grounded procurement roadmap for high-voltage scooters.[^yamal_shortlist]
 - Cheap FOCer 3 controllers (≈70 A battery/120 A motor continuous with active cooling) tempt compact builds, but riders note that Flipsky minis already deliver higher power in smaller footprints.
   - budget testing time before switching platforms.[^73]
 - Flipsky 75350 hardware can hang with 19 kW bursts and 15 kW sustained loads once firmware spikes are tamed.
@@ -103,8 +116,10 @@
 - HY-branded Spintend replacement stages stay capped around 20 S (~400 A phase) unless Raphaël’s HF filters and cooling mods are added—treat them as service parts, not 22 S upgrades.[^hy_limit]
 - Multiple 85/250 units are now arriving DOA or dying within weeks at ~200 A battery / 170 A motor.
   - stock spares or pivot to Seven/3Shul while the revised 85/240 ships via New Jersey to keep high-phase projects alive.[^76][^77]
-- Treat “too good to be true” AliExpress listings as scams.
-  - the €140 “Spintend” storefront that appeared with thousands of units in stock ignored all messages, and the BOM alone costs more than the asking price.[^78]
+- Treat “too good to be true” listings as scams.
+  - the €140 “Spintend” storefront that appeared with thousands of units in stock ignored all messages, and the crew just caught @JetGlideOfficial recycling guitar-pedal photos instead of real MP2 hardware.[^78][^mp2-scam]
+- Treat “too good to be true” AliExpress listings as scams and build a vendor-vetting checklist (stock proof, response cadence, component sourcing) before wiring money.
+  - the €140 “Spintend” storefront that appeared with thousands of units in stock ignored all messages, and the BOM alone costs more than the asking price.[^78][^vetting_checklist]
 - Kelly 7212/7218 controllers still earn “random death” reputations despite waterproof housings, whereas Sabvoton’s 95 V kits pair TVS-protected hardware with enough regen headroom for 18 S commuters so long as charge voltage stays under ~75 V.[^79]
 
 ## Field-Weakening & Thermal Guardrails
@@ -141,10 +156,12 @@
   - update packaging CAD and wiring plans accordingly.[^92]
 - Raphaël reiterates that CL controllers only make sense once voltage climbs above ≈80 V; 60–72 V commuters should stay on C-series hardware to avoid needless size, cost, and regen loss.[^93]
 - EU riders secure EVE 50PL cells for €1–1.5 each while US buyers face ~$9, prompting cross-border sourcing, customs planning, and early stockpiling of QS8 connectors before tariffs spike prices toward $35.[^94]
+- Amy’s factory still repairs $160 450 A FarDrivers for free, giving experimenters a service safety net even if they distrust the platform’s software.[^fardriver-repair]
 - Watch controller sourcing lists: overpriced “dual 75100” enclosures, revised Flipsky 75200s missing bulk caps, and Vsett 10 packs lacking fast over-current protection are all on the community’s QC radar.[^95]
 - Group buys continue shaping premium hardware access: hardened 160 mm brake discs, Seven 18 controllers, and Voyage Megan dashboards are all moving through curated batches rather than retail shelves.
   - document order windows and spares budgeting alongside controller selections.[^96][^87]
 - Alibaba listings of discontinued Tronic/Seven controllers now come straight from the original contract manufacturer; pricing mirrors the defunct brand but buyers should expect minimal support and plan self-managed repairs.[^97]
+- JPPL confirmed Tronic and Seven controllers now ship directly from a Chinese drone manufacturer willing to supply X12 Pro 120 V units (~$1.1 k) and quick-turn Seven-18 builds, proving both “American” brands were outsourcing production all along—budget due diligence before wiring funds.[^tronic-oem]
 - JPPL’s X12 install details a compact 88 × 38 × 70 mm extrusion with a 12 × 80 × 100 mm base plate; because the onboard rail only supplies 5 V at ≈150 mA, builders pair the controller with Spintend’s ADC board plus an external buck for 12 V accessories.[^98]
 - BAC 4000 bundles remain a tough sell at ~$1 300 given they still require reseller-flashed motor profiles and leave amp limits murky compared with VESC/Nucular ecosystems.
   - budget-conscious builders are pausing purchases until support improves.[^99]
@@ -192,16 +209,21 @@
 [^2]: Source: knowledge/notes/input_part000_review.md†L601-L604
 [^3]: Source: knowledge/notes/input_part014_review.md†L24-L27
 [^4]: Source: knowledge/notes/input_part014_review.md†L3337-L3358
+[^tronic-bare]: Source: knowledge/notes/input_part013_review.md†L822-L822
+[^seven-fr4]: Source: knowledge/notes/input_part013_review.md†L822-L823
 [^5]: Source: knowledge/notes/input_part014_review.md†L15-L16
 [^6]: Source: knowledge/notes/input_part014_review.md†L162-L165
 [^7]: Source: knowledge/notes/input_part014_review.md†L18-L21
+[^makerbase-fallback]: Source: knowledge/notes/input_part010_review.md†L677-L677
 [^8]: Source: knowledge/notes/input_part002_review.md†L11-L13
 [^9]: Source: knowledge/notes/input_part000_review.md†L210-L212
 [^10]: Source: knowledge/notes/input_part000_review.md†L251-L252
+[^open_source_500a]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25526-L25530
 [^11]: Source: data/vesc_help_group/text_slices/input_part002.txt†L8204-L8271
 [^12]: Source: data/vesc_help_group/text_slices/input_part002.txt†L8620-L8690
-[^13]: Source: knowledge/notes/input_part000_review.md†L732-L733
+[^13]: Source: knowledge/notes/input_part000_review.md†L714-L716
 [^14]: Source: data/vesc_help_group/text_slices/input_part002.txt†L2629-L2692
+[^c350-go-to]: Source: knowledge/notes/input_part010_review.md†L415-L416
 [^15]: Source: knowledge/notes/input_part014_review.md†L17-L21
 [^16]: Source: knowledge/notes/input_part014_review.md†L73-L76
 [^17]: Source: knowledge/notes/input_part014_review.md†L17-L18
@@ -253,6 +275,8 @@
 [^63]: Source: data/vesc_help_group/text_slices/input_part004.txt†L15623-L15690
 [^64]: Source: knowledge/notes/input_part004_review.md†L233-L233
 [^65]: Source: knowledge/notes/input_part014_review.md†L20-L21
+[^watch-mp2]: Jason’s MP2 roadmap covering the 30 S pack, 18 FET Toll-stage debug, and planned 600 A phase experiments awaiting validation. Source: knowledge/notes/input_part011_review.md†L903-L903
+[^watch-noisy]: Pending confirmation of the Trumoto “Noisy Cricket” controller’s specifications and availability. Source: knowledge/notes/input_part011_review.md†L917-L917
 [^66]: Source: knowledge/notes/input_part004_review.md†L370-L370
 [^67]: Source: knowledge/notes/input_part014_review.md†L21-L22
 [^68]: Source: knowledge/notes/input_part008_review.md†L429-L437
@@ -266,6 +290,7 @@
 [^76]: Source: knowledge/notes/input_part012_review.md†L110-L111
 [^77]: Source: knowledge/notes/input_part012_review.md†L379-L405
 [^78]: Source: knowledge/notes/input_part000_review.md†L346-L347
+[^vetting_checklist]: Source: knowledge/notes/input_part000_review.md†L804-L804
 [^79]: Source: data/vesc_help_group/text_slices/input_part001.txt†L8290-L8418
 [^80]: Source: knowledge/notes/input_part014_review.md†L166-L169
 [^81]: Source: knowledge/notes/input_part014_review.md†L168-L169
@@ -283,6 +308,7 @@
 [^93]: Source: data/vesc_help_group/text_slices/input_part004.txt†L18919-L18927
 [^94]: Source: knowledge/notes/input_part014_review.md†L35-L38
 [^95]: Source: knowledge/notes/input_part004_review.md†L278-L278
+[^fardriver-repair]: Source: knowledge/notes/input_part010_review.md†L533-L533
 [^96]: Source: knowledge/notes/input_part014_review.md†L27-L28
 [^97]: Source: knowledge/notes/input_part014_review.md†L8981-L8991
 [^98]: Source: knowledge/notes/input_part014_review.md†L7726-L7758
@@ -311,3 +337,9 @@
 [^121]: Source: data/vesc_help_group/text_slices/input_part014.txt†L10206-L10212
 [^122]: Source: data/vesc_help_group/text_slices/input_part014.txt†L9782-L9789
 [^123]: Source: data/vesc_help_group/text_slices/input_part014.txt†L9884-L9890
+[^x12-dcdc]: Source: knowledge/notes/input_part012_review.md, lines 404-405.
+[^mk84200]: Source: knowledge/notes/input_part012_review.md, lines 407.
+[^g300_use]: Source: knowledge/notes/input_part012_review.md, line 408.
+[^yamal_shortlist]: Source: knowledge/notes/input_part012_review.md, line 409.
+[^mp2-scam]: Source: knowledge/notes/input_part013_review.md†L722-L722
+[^tronic-oem]: Source: knowledge/notes/input_part013_review.md†L790-L791

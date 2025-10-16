@@ -27,6 +27,7 @@
 - Track chassis revisions before trusting hand-me-down frames: V1 “Pringle” necks shipped without reinforcement, mid-generation updates added a metal battery box plus thicker side plates, and the latest “Tesla reinforcement” necks have survived 20 k+ miles once braced—inspect welds before pushing highway power.[^4]
 - Fabrication escalates quickly—22 S 10 P hybrids inspired by Rion builds required fork machining to clear 70H hubs and 3 mm rotors, so plan machine time before ordering oversized drivetrains.[^11]
 - Kaabo fork swaps remain largely cosmetic: the community confirmed 70 H hubs fit but 75 H is doubtful without extra machining, so most riders stick with stock hardware unless aesthetics trump effort.[^kaabo-swap]
+- Swapping to Lonnyo 80 H hubs demands longer swingarm bolts to clear the caliper before the wheelset goes back together—budget hardware sourcing alongside the motor swap.[^lonnyo80_bolts]
 - Riders chasing stiffer suspension for high-speed runs keep circling back to the stock springs—most aftermarket air shocks run too soft and short, so meaningful firmness gains require sourcing the stiffest factory-rate springs and tuning damping instead.[^5]
 
 ## Power & Thermal Guardrails
@@ -37,8 +38,10 @@
 - Upgrade overheated harnesses with 10 AWG silicone phase leads—the swap let Rob Ver hold 116 A battery and 240 A phase without cooking the loom, provided pack and controller temps stayed logged.[^tronic_harness]
 - Treat 200 A battery / 310 A phase experiments as short-lived: even purpose-built dual Spintend setups report hub and pack overheating at those levels.[^2]
 - Respect the stock module’s ≈116 A continuous ceiling—AYÓ advises capping peaks near 135 A until the pack is rebuilt or paralleled.[^2]
+- Arnau’s next step pairs a 22 S 10 P P45B pack with Ambrosini 75 H motors and a 10 mm aluminum heat spreader; he’s racing his current G30/Spintend combo until the prototype clears packaging checks, underscoring how much prep a full NAMI overhaul still demands.[^arnau_nami]
 - Data logging must sum both controllers; otherwise, power traces plateau near 19 kW even while riders believe they’re pushing 170 A/200 A per side.[^9]
 - Track NAMI builds already touch triple digits on 65H motors without FW; spend effort on tire compound, suspension balance, and braking instead of chasing voltage for speed alone.[^4]
+- Yamal jokes his current setup could push 25 kW but still lacks motor-temperature sensing; LY hubs with 10 mm phases, fresh bearings, and a new steering axle sit on the upgrade list once his next project settles.[^yamal_ly]
 - Hotdog-class 100 H rears paired with 70 H fronts survive 500 A phase pulls when fed by 22 S 11 P P45 packs, but only with traction control engaged and front-motor FW at 100 % to match wheel speed—expect front-wheel lift at 120 km/h if TC is disabled.[^hotdog]
 - 🇪🇸AYO#74 is testing whether stock 72 V controllers stay happy on a homemade 60 V pack by rewiring phase leads—down-voltage behaviour remains unproven, so log carefully before committing a commuter build.[^8]
 
@@ -61,6 +64,7 @@
 ## Reliability Watchlist
 
 - Early production stems still ship with the softer front axle—🇪🇸AYO#74 recommends swapping to the stainless replacement (≈€60 installed) to avoid the stem failures that triggered factory recalls.[^10]
+- Rain-season prep now includes conformal coating both controller boards and sealing them inside gasketed boxes; builders repurpose IKEA lunchboxes with silicone grommets and automotive connectors while noting G300 controllers already arrive with rubber gaskets for splash resistance.[^nami_waterproofing]
 - First-generation frames have shown weld cracking; later 72/40 chassis add gussets, giving buyers a visual checklist when sourcing used NAMI decks.[^14]
 - Handmade 22 S hybrids need machine work and inspection of fork clearances, and water sealing should be rechecked whenever machining exposes fresh metal.[^11]
 - Race outfits have started enclosing the C350 controller in custom waterproof housings—Face de Pin’s crew was the only team still lapping Albaida once rain hit and now machines most of their replacement frame parts in-house—reinforcing that sealing electronics and reinforcing hinges is essential before endurance sessions.[^c350-case]
@@ -94,6 +98,10 @@
 [^9]: Dual-controller power logging plateau around 19 kW without aggregated telemetry. Source: knowledge/notes/input_part013_review.md, L454 to L459
 [^10]: Reports of cheap steering dampers failing and recommendations for motorcycle-grade replacements on NAMI chassis. Source: knowledge/notes/input_part008_review.md, L293 to L296
 [^11]: Fabrication needs when merging NAMI Viper and Rion components for 22 S 10 P builds. Source: knowledge/notes/input_part008_review.md, L205 to L208
+[^arnau_nami]: Source: knowledge/notes/input_part011_review.md†L514-L514
+[^nami_waterproofing]: Source: data/vesc_help_group/text_slices/input_part011.txt, L20438 to L20473
+[^lonnyo80_bolts]: Source: data/vesc_help_group/text_slices/input_part011.txt, L20733 to L20744
+[^yamal_ly]: Source: data/raw/telegram_exports/vesc_help_group/input_part011.json, L21860 to L21899
 [^12]: Controller horn/aux channels sourcing only a few amps—relay heavy lighting loads instead of direct wiring. Source: knowledge/notes/input_part012_review.md, L96 to L99
 [^13]: Accessory-rail documentation gaps and current-limit questions on Ubox 85240/85250 harnesses. Source: knowledge/notes/input_part013_review.md, L116 to L130
 [^14]: Visual differences between cracked first-gen NAMI frames and reinforced 72/40 chassis. Source: knowledge/notes/input_part012_review.md, L129 to L132

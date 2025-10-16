@@ -10,14 +10,20 @@ This guide distills field reports on powering lights, horns, and dashboards from
 | --- | --- | --- | --- |
 | Tronic X12 | 5 V logic (≈150 mA) | Rail cannot sustain heavy peripherals such as displays or fans without brownouts.[^2] | Budget an external buck converter for any load above small sensors and throttle/gear switches.[^2] |
 | Spintend Ubox 85×/24× | 5 V logic, 12 V rail (rated 3 A) | Field tests keep the onboard 12 V rail around 1.5 A.
-  - enough for wireless switches or a limiter relay
-  - while dual head/tail-light loads still overwhelm the regulator.[^3][^4] | Keep lighting minimalist or offload to a dedicated buck; fuse each branch so single shorts do not collapse the regulator.[^3] |
+  - enough for wireless switches or a limiter relay—remote receivers draw about 1.5 A on Spintend’s rail, so verify load before ditching a dedicated DC-DC converter[^spintend_relay_current]
+  - while dual head/tail-light loads still overwhelm the regulator.[^3][^4][^spintend_remote] | Keep lighting minimalist or offload to a dedicated buck; fuse each branch so single shorts do not collapse the regulator.[^3] |
 | Spintend X12 / upcoming 120 V | 5 V rail only (~150 mA) | The compact extrusion exposes just a weak 5 V output, so Express boards and lighting demand a separate buck or the ADC adapter plus DC/DC combo.[^5] | Pair the ADC board with an external step-down to feed 12 V lighting, and mount panel QS8 connectors to tidy high-current leads.[^6] |
 | MakerBase 75×/85×/X12 bridge | 3.3 V ADC, 5 V UART/Comm | Hall throttles must stay near 3.3 V; 5 V injection into ADCs burns STM32 inputs, and older Xiaomi 5 V throttles still need resistor ladders whereas the 3.3 V variants can wire straight in.[^7][^8][^9] | Measure throttle min/max before connection; insert resistor ladders or shunt regulators if the lever exceeds 3.3 V.[^7] |
 | MP2 open-source ESC | Open-frame 12 V DC/DC brick | Stable on 30 S packs but the stock transformer footprint is bulky, so builders are investigating custom windings to shrink the module for tighter decks.[^10] | Budget space for the brick or commission a smaller winding before finalizing enclosure CAD; keep a separate buck ready if you split accessory loads. |
 | Spintend X12 / upcoming 120 V | 5 V rail only (~150 mA) | The compact 88 × 38 × 70 mm extrusion exposes just a weak 5 V output, so Express boards and lighting demand a separate buck or the ADC adapter plus DC/DC combo.[^5][^11] | Pair the ADC board with an external step-down to feed 12 V lighting, and mount panel QS8 connectors to tidy high-current leads.[^6] |
 | MakerBase 75×/85×/X12 bridge | 3.3 V ADC, 5 V UART/Comm | Hall throttles must stay near 3.3 V; 5 V injection into ADCs burns STM32 inputs, and older Xiaomi 5 V throttles still need resistor ladders whereas the 3.3 V variants can wire straight in.[^7][^8][^12] | Measure throttle min/max before connection; insert resistor ladders or shunt regulators if the lever exceeds 3.3 V.[^7] |
 | Any high-load build | External 12 V/20 A buck | Horns and compressors spike current; expect ≈4–6 A draw from a 60 V pack when heavily accessorised.[^13] | Adjust controller battery limits to preserve BMS overhead; isolate horns on separate fuses or relays.[^13] |
+
+## Dash Replacement Notes
+
+- Unbranded “generic JP” TFTs follow TF/TS100 button colour order; wire RX/TX/GND/5 V today and keep loom slack because NetworkDir’s next hardware spin will speak native CAN and host an ESP32‑C3 VESC Express module.[^jp-generic]
+- Voyage’s “Megan” CAN dash remains the premium plug-and-play option when you need polished lighting integration without UART compromises.[^voyage-megan]
+- RFP and Voyage are also fielding CAN-first displays that require firmware 6.05 plus custom Lisp on every controller; builders leaning Express kits get similar telemetry without rewiring UART looms.[^can-display-roadmap]
 
 ## Telemetry Accuracy & Power Auditing
 
@@ -31,12 +37,16 @@ This guide distills field reports on powering lights, horns, and dashboards from
 2. **Order matters on dual-rail harnesses.** Feeding 5 V into a Flipsky Smart Display before the 12 V lead repeatedly destroyed Spintend ADC daughterboards; always energise 12 V first, then 5 V, and confirm the display ground is shared with the controller.[^17]
 3. **Spec brake-sensor resistors intentionally.** Dual brake throttles still need resistor values that match the controller’s expected voltage.
   - publish a reference chart so builders stop guessing on Zoom/Nutt lever wiring.[^18]
+4. **Tame floating hall throttles.** Makerbase/Flipsky throttles that float when unplugged calm down once you add a 3.3 kΩ pull-down on ADC 1; if a lever only wakes when hard-wired to the controller, assume the harness opened up during repairs and add the resistor before reassembling the loom.[^adc-pulldown]
 2. **Order matters on dual-rail harnesses.** Feeding 5 V into a Flipsky Smart Display before the 12 V lead repeatedly destroyed Spintend ADC daughterboards; always energise 12 V first, then 5 V, and confirm the display ground is shared with the controller.[^19]
 3. **G300 power buttons ship as momentary inputs.** Reconfigure App → General so a button press toggles shutdown; otherwise the controller only wakes when the battery connects and ignores the dash switch.[^20][^21]
 3. **Map every connector before power-up.** MakerBase looms expose 3.3 V/GND/ADC1 at the “comm” header and reroute Bluetooth through the NRF pins; miswired TX/RX leads cause telemetry dropouts or back-power logic rails.[^22]
 4. **Favor multi-core RVVP over solid Ethernet in stems.** Fine-strand shielded RVVP survives stem flex better than solid-core Cat6, still carries halls, CAN, and spare conductors, and keeps throttles from snapping wide open when wires fracture.[^23]
 5. **Reserve shielded Ethernet for signal runs only.** Builders keep XT150/QS8 on the power leads and repurpose Ethernet or RVVP pairs for 5 V, hall, and CAN wiring so accessories can be added later without tearing the stem apart.[^24][^25]
+- **Pull the always-on accessory module if you don’t need it.** Some VESC kits ship with a piggyback board that keeps the controller awake indefinitely—removing it frees deck space and restores true shutdown behaviour.[^accessory-sleep]
+- Compact stand-alone 12 V DC-DC converters tuck beside Flipsky ESCs when you need accessory power without opening the stock loom.[^compact-dcdc]
 4. **Secure hall boards and sensor looms.** Hall PCBs that peel free can short against the rotor housing and mimic logic-rail failures; inspect adhesive and strain relief during reassembly.[^26]
+4. **Secure hall boards and sensor looms.** Pandalgns’ front hall PCB peeled loose, shorted against the rotor, and even masqueraded as serial-port dropouts until it was re-glued and strain-relieved; bake adhesive checks and harness support into every reassembly.[^hall_short_fix]
 5. **Exploit the ADC harness features.** Spintend’s ADC v3 board already supports spin dial throttles, dual-button pods, and turn-signal LED strips.
   - plan channel assignments before closing the deck and keep phase leads equal length when trimming looms.[^27]
 6. **Never steal headlight power from throttle rails.** Dragging even 0.5 A from the throttle’s 5 V supply collapses the regulator, starves the ADC daughterboard, and can back-feed the 12 V converter.
@@ -56,6 +66,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 8. **Break out heavy lighting loads.** On 85250 builds, Smart Repair steers anything beyond two 12 V lamps through the ADC breakout so the controller still feeds brake-light logic while a DC/DC handles lamp current; the same harness confirmed Spin-Y2 throttle compatibility once the adapter is in place.[^34]
 9. **Don’t overload the horn lead.** The Makerbase/Spintend horn channel only sources a couple of amps.
   - driving vintage 12 V 35 W halogens directly risks cooking the board; use the line to trigger a relay or low-current accessory instead.[^35]
+9. **Stabilise Makerbase dash power on controller swaps.** When a Makerbase dash moves from Flipsky to Spintend/UBOX hardware, add ≈220 µF of bulk capacitance on the 5 V bus plus ~50 µF near the drivers and correct misplaced pull-up resistors to cure reboot loops under heavy accessory load.[^makerbase-dash-rails]
 10. **Follow the factory lighting diagrams.** One owner cured button issues only after rewiring the Spintend ADC lighting board exactly as shown in the manual.
   - misplaced leads ghost buttons and confuse the controller.[^36]
 10. **Confirm ADC signal voltage mixing.** AliExpress ADC adapters have been proven to coexist with Flipsky 75100 throttles while mixing 5 V brake levers and 3.3 V throttle inputs.
@@ -95,9 +106,10 @@ This guide distills field reports on powering lights, horns, and dashboards from
 ## Dual-Controller Wiring Patterns
 
 - **Dual 75100 harness essentials.** Keep Makerbase twins on CAN-only links, share a single momentary power button, and bypass the G30 dash UART bridge whenever loops appear; the community wiring sketch routes each controller to its own CAN tail while the OEM dash lives on a dedicated UART breakout.[^52]
+- **Quick single/dual-drive toggles.** JPPL’s field hacks kill one controller with the power button, break CAN with a switch, disable CAN in software, or bolt on Spintend’s ADC board; Smart Repair’s cleaned-up Arduino sender now debounces buttons, caches telemetry, and checks `v_in` before broadcasting profile changes across master/slave pairs.[^profile_toggle]
 - **Keep the G30 dash powered.** Deadword proved the open-source dash lets a Makerbase 75100 route throttle and brake through the stock harness so long as the display remains powered from the VESC rail.[^53]
 - **Respect CAN termination.** Mixed-controller buses pop transceivers.
-  - document whether 60 Ω or 120 Ω ends are fitted, list the SN65/TJA part numbers, and isolate FlipSky units rather than trusting mismatched resistors on shared harnesses.[^54]
+  - document whether 60 Ω or 120 Ω ends are fitted, list the SN65/TJA part numbers, and isolate FlipSky units rather than trusting mismatched resistors on shared harnesses; Zero 10X experiments confirmed 120 Ω termination is mandatory and dropping to 100 Ω invites bus faults, so leave the OEM ALU-PCB to act as an antispark/key switch instead of swapping resistor values.[^54][^zero10x-120ohm]
 - **Confirm what dual power leads actually feed.** One new VESC convert was already on XT150 motor leads and dual XT90 battery plugs, but the vendor demo only powered a rear wheel.
   - verify whether the second XT90 is just a pass-through before planning split-current experiments.[^xt150-split]
 - **Leave the 5 V rails isolated.** Linking twin 75100s only needs CAN-H/CAN-L; tying logic rails together without a shared switch has killed hardware, so land throttles directly on a controller if the dash bridge causes loops.[^dual-5v]
@@ -108,14 +120,21 @@ This guide distills field reports on powering lights, horns, and dashboards from
 
 - Analog gauge clusters look cool but add little.
   - VESC already logs current and voltage, so most riders simply mount a phone dash unless they crave retro styling.[^57]
+- **SimpleVescDisplay (ESP32).** Smart Repair recommends flashing the open-source SimpleVescDisplay and 3D-printing its mount as a reliable alternative when Flipsky Voyage units glitch; PuneDir and NetworkDir now run the firmware on a €9 ESP32 touch panel that mirrors VESC Tool over BLE/Wi‑Fi, refreshes telemetry every 10 ms, keeps odometer counts stable versus 6.05 firmware, and leaves CAN free by riding over UART.[^58][^esp32-panel]
+- NetworkDir surfaced the official Dualtron EY2 firmware hex and confirmed EY1/EY2/EY4 clusters run WCH CH582M MCUs that flash via WCHISPStudio, giving Dualtron owners a reproducible path to compile 6-series builds.[^dualtron_ey2_firmware]
+- Oreo huzky’s CarPlay retrofit mirrors VESC telemetry onto a jailbroken iPhone or custom Android script, offering a high-visibility dash option when you’d rather leave the main phone stowed.[^carplay_dash_demo]
 - **SimpleVescDisplay (ESP32).** Smart Repair recommends flashing the open-source SimpleVescDisplay and 3D-printing its mount as a reliable alternative when Flipsky Voyage units glitch.[^58]
+- **Profile templates worth copying.** Yamal maintains a 23 km/h compliance mode, a 14 kW “Seven Routes” touring preset, and a “Hot Summer” throttle clamp to keep dual Uboxes cool in 40 °C commutes—log similar modes for riders balancing legality and thermals.[^yamal-profiles]
+- **SimpleVescDisplay (ESP32).** Smart Repair recommends flashing the open-source SimpleVescDisplay and 3D-printing its mount as a reliable alternative when Flipsky Voyage units glitch, and NetworkDir just proved the generic yellow ESP32 panels can feed UART straight into ADC1 once the firmware is loaded—handy when phones or OEM screens go missing.[^58][^esp32_adc]
 - **Tiny NRF boards have no range.** Flashing Vedder’s `nrf51_vesc` firmware onto ultra-small BLE boards left riders with unusable range, so they still buy the €2 full-size modules for dependable VESC Tool links.[^59]
+- **Vedder’s `code_server` is still the stable CAN bridge.** It automatically retries failed frames five times, but you must flip RX/TX leads when moving a Makerbase/Flipsky dash loom onto Spintend/UBOX controllers and flash `slave_esc.lisp` onto every CAN slave before the dash comes alive.[^code-server]
 - **SimpleVescDisplay odometer logging.** NetworkDir’s latest firmware now buffers odometer data locally on the ESP32 so riders keep mileage even if CAN frames drop, giving budget builds a telemetry path that still respects VESC Tool logs.[^60]
 - **JPPL Smart Display RAM ceiling.** Running Wi-Fi and Bluetooth simultaneously exhausts the JPPL display’s RAM; leave only one wireless interface active to keep the UI responsive.[^61]
 - **Rage SmartDisplay roadmap.** Rage Mechanics teased an official SmartDisplay UI refresh with thumb-wheel ergonomics feedback plus a 3.5 in navigation prototype that folds GPS into the dash.
-  - validate firmware support before promising integrated maps.[^62]
+  - validate firmware support before promising integrated maps and remember the new display only ships with controllers until CE paperwork clears; a companion anti-theft module is also in the works to hook any controller over 4/5G links.[^62][^rage-ce]
 - **Waze overlay proof.** Early testers piped Waze alerts over the SmartDisplay CAN feed, proving richer overlays are feasible once the navigation stack ships.
   - capture the workflow Francois used so commuters can reproduce the police-alert demo.[^63][^64]
+- **iOS configuration lockouts.** iOS riders found firmware 6.05 sessions stay read-only unless they install the TestFlight beta or pay for the App Store build—plan for the upgrade before attempting on-scooter tuning over BLE.[^ios-beta]
 - **Reinstall VESC Tool before flashing Lisp.** Dash-side Lisp scripts that crashed on upload cleaned up after reinstalling the desktop app, so refresh the environment before assuming the hardware bricked.[^65]
 - **Navigation demand.** Vsett and other high-speed riders want the SmartDisplay precisely to avoid strapping phones to 100 km/h scooters; the 10 cm × 6.5 cm mock-up with CAN telemetry and prompts addresses those ergonomics complaints.[^66]
 - **ANT BMS display repurpose.** With few dedicated VESC dashboards shipping, riders now mount ANT smart-BMS displays as secondary cockpits to surface pack telemetry alongside MakerX and similar builds, strapping the budget screens near the bars for live pack voltage/current until purpose-built VESC dashes are available.[^67][^68]
@@ -158,7 +177,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 - **Lock down the Express bridge.** New hardware enforces BLE passwords and exposes a Wi-Fi gateway, but the documentation lags.
   - capture setup steps so commuters don’t leave dashboards open to opportunistic pairing.[^98]
 - **Raspberry Pi dash bridge.** Yoann’s Pi-powered display now ships with a TCP bridge because the Pi Zero UART is tied up by the touchscreen; dropping baud to 9,600 cleared timeouts temporarily, but USB restored the original speed and a shared 3D case is on the way.[^99]
-- **Budget BLE bridges.** Generic nRF51 and ESP32 modules remain drop-in VESC Tool adapters once flashed with Vedder’s firmware, saving buyers from pricey Bluetooth dongles.[^100][^101]
+- **Budget BLE bridges.** Generic nRF51 and ESP32 modules remain drop-in VESC Tool adapters once flashed with Vedder’s firmware, saving buyers from pricey Bluetooth dongles—and Mirono keeps steering newcomers toward reflashed ESP32s instead of branded dongles when they want reliable telemetry on a budget.[^100][^101][^esp32-ble-swap]
 - **Stabilise nRF51822 boards.** A €2 BLE module held a 10 m connection through walls after a 10 µF ceramic decoupler was soldered across its supply rails, curing the random crashes riders saw on bare modules.[^102]
 - **Track emerging CAN dashboards.** JPPL is test-driving the Titaone X10 controller plus Bluetooth module to see if it exposes VESC telemetry while sharing power with a 20 S 4 P commuter pack at 60 A.
   - log compatibility findings before promising customers a drop-in alt-dash.[^103]
@@ -192,6 +211,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 
 - **Koxx CAN lighting daughterboard.** Provides brake/turn LED outputs plus a programming header and extra button inputs but expects an external 5 V/12 V feed.
   - budget a buck converter or tap the Ubox rail when adding addressable strips or steering-column buttons.[^121]
+- **C350 accessory rail refresh.** The latest C350 controllers now expose a ~1.2 A 12 V output for running lights, so older revisions still need an external reducer while new batches can power low-draw lamps directly.[^c350-rail]
 - **Premium throttle triggers.** Polish-made e-bikestuff triggers deliver a 0.96–4.31 V sweep with zero deadband, letting riders set endpoints cleanly in VESC Tool for smoother launches if they can justify the shipping cost.[^122]
 - **Lock-ring button pods.** Clamp-on grip modules add tactile turn buttons and mimic Vsett switchgear at budget prices, trading a bit of mass for ergonomic access to indicators and lighting.[^123]
 
@@ -261,6 +281,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 
 - Choose 12 V-friendly WS2815 or similar pixel strips so a single buck can feed both controller logic and the lighting rail without brownouts; they still need ESP32/WLED drivers and regulated supplies or the strips overheat.[^159]
 - Flash ESP32/WLED controllers with per-mode current caps, set boot presets that default to dim commuter profiles, and isolate the data line with a logic-level shifter when the strip sits far from the controller harness.[^159]
+- **Repurpose failed controllers as CAN/BLE hubs.** Even with the power stage removed, a VESC still runs dashboards, BLE bridges, and other peripherals when its DC/DC section is intact, letting travelers keep telemetry alive while waiting on replacement ESCs.[^vesc-can-bridge]
 - Budget fusing and surge suppression.
   - inline 3–5 A fuses plus TVS diodes on the buck output prevent decorative installs from collapsing the accessory rail when pixels short or moisture enters connectors.[^159]
 
@@ -300,6 +321,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
   - **Read → edit → Write**
   - and explicitly hit **Write Motor/App Config** after each wizard so Xiaomi throttles and ADC settings persist across power cycles instead of forcing full detections at the next boot.[^174][^175]
 - Haku routinely feeds inexpensive AliExpress lightbars through the ADC harness, underscoring why guides should spell out current limits, fuse values, and wiring diagrams before riders stack accessories on controller rails.[^176]
+- Rogerio’s tests show Spinny/ADC daughterboards fry if you power them from external 12 V rails after the controller wakes—energise the auxiliary supply first or keep them on the native rail.[^spinny-sequence]
 - Map the MakerBase comm header before plugging in displays.
   - NRF pins handle Bluetooth, the hall plug feeds sensors, and the comm port exposes 3.3 V/GND/ADC1 for throttles, so labelling each lead prevents back-powering telemetry gear.[^177]
 - Before flashing or editing parameters, follow the VESC Tool workflow.
@@ -325,6 +347,8 @@ This guide distills field reports on powering lights, horns, and dashboards from
   - Thierry still compiles it manually and patches header typos because VESC Tool omits the binary and 6.02 throws build errors while 6.05 beta remains the safe fallback.[^99]
 4. Confirm whether the twin 12 V outputs on Ubox 85240 controllers share a single buck regulator before riders parallel them for higher current loads, and publish continuity test steps once validated.[^184]
 5. Track the community Nextion/Pico dash builds and the promised €120 integrator display so we can ship pinout diagrams the moment production units land.[^182][^183]
+6. Document Smart Repair’s hunt for hall-enabled hydraulic brake levers that play nicely with Spintend ADC boards and clarify the profile-toggle wiring once guidance lands.[^adc-hall-lever]
+7. Follow NetworkDir’s Dualtron Lisp port and confirm whether luffydnoob keeps the stock throttle after the scripts land so migration guidance stays accurate.[^dualtron-lisp]
 
 ## Source Notes
 
@@ -351,6 +375,8 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^jp-generic]: TF/TS100-style colour order confirmation for the unlabeled “generic JP” display plus upcoming CAN/SmartDisplay hardware that keeps RX, TX, GND, and 5 V today and adds ESP32-C3 Express telemetry next revision.[^202]
 [^voyage-megan]: Voyage “Megan” dash sold direct to riders chasing CAN-first lighting integrations without UART compromises.[^203]
 [^spintend-pod]: Spintend’s illuminated handlebar pod feeds voltage back into ADC signal lines instead of acting as isolated switches, so it requires rewiring for VESC compatibility.[^33]
+[^adc-hall-lever]: Open item to confirm hall-enabled hydraulic lever options and ADC profile-toggle guidance for Spintend controllers. Source: knowledge/notes/input_part011_review.md†L901-L901
+[^dualtron-lisp]: Outstanding Dualtron display Lisp scripting status and throttle decisions after the port. Source: knowledge/notes/input_part011_review.md†L909-L909
 
 
 ## References
@@ -359,6 +385,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^2]: Source: knowledge/notes/input_part013_review.md†L360-L361
 [^3]: Source: knowledge/notes/input_part013_review.md†L430-L431
 [^4]: Source: knowledge/notes/input_part000_review.md†L687-L687
+[^spintend_remote]: Source: knowledge/notes/input_part000_review.md†L735-L736
 [^5]: Source: knowledge/notes/input_part014_review.md†L140-L144
 [^6]: Source: knowledge/notes/input_part014_review.md†L140-L145
 [^7]: Source: knowledge/notes/input_part013_review.md†L503-L505
@@ -388,6 +415,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^31]: Source: knowledge/notes/input_part000_review.md†L556-L559
 [^32]: Source: knowledge/notes/input_part000_review.md†L544-L544
 [^33]: Source: knowledge/notes/input_part010_review.md†L75-L77
+[^spintend_relay_current]: Source: knowledge/notes/input_part000_review.md†L735-L735
 [^34]: Source: knowledge/notes/input_part012_review.md†L180-L180
 [^35]: Source: knowledge/notes/input_part012_review.md†L97-L97
 [^36]: Source: knowledge/notes/input_part012_review.md†L434-L434
@@ -416,8 +444,11 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^59]: Source: knowledge/notes/input_part005_review.md†L346-L347
 [^60]: Source: knowledge/notes/input_part008_review.md†L203-L204
 [^61]: Source: data/vesc_help_group/text_slices/input_part009.txt†L12510-L12513
+[^yamal-profiles]: Source: knowledge/notes/input_part013_review.md†L841-L841
 [^62]: Source: knowledge/notes/input_part003_review.md†L108-L163
 [^63]: Source: knowledge/notes/input_part003_review.md†L192-L192
+[^esp32-ble-swap]: Source: data/vesc_help_group/text_slices/input_part004.txt†L20350-L20370
+[^vesc-can-bridge]: Source: data/vesc_help_group/text_slices/input_part004.txt†L23039-L23042
 [^64]: Source: data/vesc_help_group/text_slices/input_part003.txt†L26600-L26606
 [^65]: Source: knowledge/notes/input_part012_review.md†L170-L170
 [^66]: Source: data/vesc_help_group/text_slices/input_part003.txt†L21249-L21272
@@ -476,6 +507,8 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^119]: Source: data/vesc_help_group/text_slices/input_part003.txt†L8798-L8799
 [^120]: Source: knowledge/notes/input_part000_review.md†L734-L741
 [^121]: Source: knowledge/notes/input_part000_review.md†L624-L624
+[^accessory-sleep]: Source: knowledge/notes/input_part010_review.md†L543-L543
+[^c350-rail]: Source: knowledge/notes/input_part010_review.md†L584-L584
 [^122]: Source: knowledge/notes/input_part000_review.md†L625-L625
 [^123]: Source: knowledge/notes/input_part000_review.md†L626-L626
 [^124]: Source: data/vesc_help_group/text_slices/input_part000.txt†L17986-L18013
@@ -498,6 +531,9 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^141]: Source: data/vesc_help_group/text_slices/input_part003.txt†L4700-L4890
 [^142]: Source: knowledge/notes/input_part005_review.md†L127-L127
 [^143]: Source: data/vesc_help_group/text_slices/input_part005.txt†L22250-L22257
+[^dualtron_ey2_firmware]: Source: knowledge/notes/input_part008_review.md†L479-L480
+[^carplay_dash_demo]: Source: knowledge/notes/input_part008_review.md†L481-L481
+[^hall_short_fix]: Source: knowledge/notes/input_part013_review.md†L604-L604
 [^144]: Source: knowledge/notes/input_part005_review.md†L58-L59
 [^145]: Source: knowledge/notes/input_part000_review.md†L47-L48
 [^146]: Source: data/vesc_help_group/text_slices/input_part003.txt†L8188-L8223
@@ -522,6 +558,10 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^165]: Source: knowledge/notes/input_part009_review.md†L396-L396
 [^166]: Source: knowledge/notes/input_part000_review.md†L529-L529
 [^167]: Source: knowledge/notes/input_part007_review.md†L404-L408
+[^adc-pulldown]: knowledge/notes/input_part007_review.md lines 401-401.
+[^esp32-panel]: knowledge/notes/input_part007_review.md lines 405-405.
+[^rage-ce]: knowledge/notes/input_part007_review.md lines 406-406.
+[^ios-beta]: knowledge/notes/input_part007_review.md lines 407-407.
 [^168]: Source: data/vesc_help_group/text_slices/input_part009.txt†L7134-L7141
 [^169]: Source: data/vesc_help_group/text_slices/input_part009.txt†L7741-L7754
 [^170]: Source: knowledge/notes/input_part013_review.md†L217-L224
@@ -531,6 +571,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^174]: Source: knowledge/notes/input_part013_review.md†L542-L544
 [^175]: Source: data/vesc_help_group/text_slices/input_part005.txt†L22481-L22495
 [^176]: Source: knowledge/notes/input_part013_review.md†L222-L249
+[^spinny-sequence]: Source: knowledge/notes/input_part013_review.md†L796-L796
 [^177]: Source: knowledge/notes/input_part013_review.md†L406-L408
 [^178]: Source: knowledge/notes/input_part005_review.md†L410-L413
 [^179]: Source: knowledge/notes/input_part004_review.md†L197-L197
@@ -558,3 +599,10 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^201]: Source: knowledge/notes/input_part014_review.md†L189-L189
 [^202]: Source: knowledge/notes/input_part010_review.md†L16-L18
 [^203]: Source: knowledge/notes/input_part010_review.md†L18-L18
+[^code-server]: Source: knowledge/notes/input_part006_review.md†L21-L21
+[^makerbase-dash-rails]: Source: knowledge/notes/input_part006_review.md†L23-L23
+[^zero10x-120ohm]: Source: knowledge/notes/input_part006_review.md†L24-L24
+[^can-display-roadmap]: Source: knowledge/notes/input_part010_review.md†L668-L668
+[^compact-dcdc]: Source: knowledge/notes/input_part010_review.md†L670-L670
+[^profile_toggle]: Source: knowledge/notes/input_part011_review.md†L592-L593
+[^esp32_adc]: Source: knowledge/notes/input_part011_review.md†L585-L586

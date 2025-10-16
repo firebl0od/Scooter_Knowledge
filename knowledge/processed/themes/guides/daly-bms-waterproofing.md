@@ -9,6 +9,7 @@
 - Keep the Daly Bluetooth app handy (default password 123456) to re-enable charge/discharge MOSFETs after moisture-induced trips once the hardware is verified.[^4]
 - Daly smart boards only balance at ~30 mA and struggle during 25 A charges.
   - pair them with monitored 4 A active balancers and watch for reverse-current experiments that can fry the helper board.[^1]
+- If a Daly 10S board stops balancing after only a week of service, replace it—Rita won’t cover the fault—and double-check the balance-lead pinout when you install the new hardware.[^denis-daly-balance]
 
 ## Failure Signals to Watch
 
@@ -22,6 +23,10 @@
 2. **Expose the electronics:** Remove outer shrink and insulation to access the Daly board and harness entry points; note original routing for reassembly.[^1]
 3. **Purge moisture:** Use controlled hot air to dry balance leads and PCB surfaces, following with an isopropyl alcohol rinse to displace residual water inside the mostly potted enclosure.[^1]
 4. **Rest the pack:** Allow the assembly to air out overnight after heat cycles; confirm no condensation is present before moving on.[^3]
+
+## Shutdown Trip & Back-EMF Recovery
+
+- Publish a shutdown/back-EMF SOP: inspect for lingering moisture, clear solder balls around the controller bay, and document fault codes before re-arming a Daly that tripped mid-ride so the companion VESC doesn’t repeat the failure.[^daly_shutdown_sop]
 
 ## Rebuild & Waterproofing Stack
 
@@ -48,6 +53,7 @@
 [^2]: Recommended insulation stack and silica-gel usage after a moisture incident.[^3]
 [^3]: Guidance to dry the assembly with repeated hair-dryer cycles and overnight airing before resealing.[^4]
 [^4]: Daly smart BMS discharge/charge MOSFET control via the Bluetooth app (password 123456) required after trips.[^5]
+[^daly_shutdown_sop]: Source: knowledge/notes/input_part000_review.md†L808-L808
 
 
 ## References
@@ -57,3 +63,4 @@
 [^3]: Source: knowledge/notes/input_part000_review.md†L155-L155
 [^4]: Source: knowledge/notes/input_part000_review.md†L156-L156
 [^5]: Source: knowledge/notes/input_part000_review.md†L367-L367
+[^denis-daly-balance]: Source: knowledge/notes/denis_all_part02_review.md†L740-L740

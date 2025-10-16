@@ -2,11 +2,13 @@
 
 ## TL;DR
 
+- G300 controllers remain easier to source than boutique R-series stock in Europe, but they still demand aggressive cooling; JPPL calls the unit a “rock” provided the case can dump heat, while race teams lean on the rarer R350 when they can secure it.[^g300_stock]
 - C350-class stacks keep surviving 22 S race weekends around 400 A phase / 200 A battery provided regen stays off and installs are logged meticulously, while CL350 revisions still run hotter and deserve conservative envelopes until proven otherwise.[^race22s]
 - Capability arrives with boutique support: Raphaël Foujiwara contrasts C350 vs. R350 hardware but reminds buyers that post-sale help is paid, regional techs bill hourly, and DIY installs rarely win warranty leniency.[^support]
 - Marketing about 32 S compatibility still outpaces validated telemetry—veterans cap CL-series controllers near 29–30 S with regen disabled because the 135 V FET stack and onboard DC/DC rails offer thin transient margin above that point.[^voltage_cap]
 - Traction-control and field-weakening experiments show 3Shul hardware shunting torque rearward at 22 S, but those gains hinge on accurate hall data, tuned observers, and disciplined logging to avoid ABS over-current faults.[^tc_fw]
 - Rage Mechanics is already teasing CL500/CL700/CL1000 successors with flatter capacitor banks, thicker busbars, and 30 S ambitions, yet the community still wants burn-in data before treating the roadmap as production-ready.[^roadmap]
+- Current C350 batches ship with thicker IMS plates, a 200 A battery rating, and bundled ESP32 BLE/IMU telemetry plus a 12 V 3 A rail—wiring looms remain DIY, but the hardware is edging toward SmartDisplay-ready kits.[^c350-refresh-2023]
 
 ## Product Line Cheat Sheet
 
@@ -46,12 +48,14 @@
 
 ## Motor Pairing & Field-Weakening Insights
 
+- Arnau’s Valencia build plan pairs twin G300s with Ambrosini 75H motors, a 22 S 10 P P45B pack, and a 10 mm RTR aluminum spreader purely to tame controller temps while the pack is finished—treat heat sinking as mandatory when leaning on readily available G-series hardware for race duty.[^arnau_valencia]
 - 3Shul’s C700 motor catalogue documents 70H vs. 75H rim options, ~28.6 KV windings, and 350 A phase capability while warning that counterfeit Panasonic packs marketed alongside the hubs cannot sustain the advertised performance—quality cells and sag monitoring remain non-negotiable.[^c700_hub]
 - Race teams pushing 22 S+ builds still log each pull, monitor pack sag, and treat ≥10 P parallels with copper busbars as the minimum for sustained 200 A-per-controller launches.[^race22s]
 - Volkan’s Langfeite GT2RS telemetry shows twin LY hubs on 24 S 20 P EVE 40PL packs pulling 330 A phase / 170 A battery with ~3 V sag while 100 A of field weakening holds 20 kHz switching; correcting a mis-set 30-pole magnet count to the real 40 poles dropped the claimed 150–160 km/h to ~120 km/h GPS—validate sensors before celebrating speed gains.[^volkan_gt2rs]
 
 ## Packaging & Integration Notes
 
+- Fresh G300 teardowns revealed an 18-FET stack literally bedded in thick thermal compound that floods into the CNC housing; messy or not, the paste turns the enclosure into a dual-sided heatsink so builders now resist scraping it out during QC checks.[^g300_paste]
 - Rage Mechanics is revising C350 packaging with flatter capacitor stacks and dual high-current plugs to squeeze into 100 × 120 × 25 mm cavities where Little FOCer and Tronic boards keep failing—expect install footprints to shrink slightly once those batches land.[^packaging_refresh]
 - EU buyers now route orders through Face de Pin Sucé to secure 2023 batches that ship with 8 AWG motor leads and tidier harness QC instead of gambling on ad-hoc Telegram resellers.[^eu_sourcing]
 - Dual-controller Ninebot decks only fit with stripped housings and tidy harness routing; builders planning AWD conversions pair custom plates with external heatsinks to keep 22 S hardware cool.[^deck_fit]
@@ -77,6 +81,7 @@
 [^voltage_cap]: CL-series voltage ceiling warnings and DC/DC sag observations that cap practical operation near 29–30 S without regen. Source: knowledge/notes/input_part006_review.md, L71 to L72
 [^tc_fw]: Traction-control and field-weakening behavior on 22 S LY hubs, plus logging discipline required to avoid inflated speed readings or control faults. Source: knowledge/notes/input_part009_review.md, L109 to L124. Source: knowledge/notes/input_part009_review.md, L121 to L121
 [^roadmap]: CL500/CL700/CL1000 roadmap previews, packaging dimensions, and distribution updates from Rage Mechanics. Source: knowledge/notes/input_part004_review.md, L288 to L288. Source: knowledge/notes/input_part004_review.md, L436 to L436
+[^c350-refresh-2023]: Source: data/vesc_help_group/text_slices/input_part004.txt†L24404-L24428
 [^c350_specs]: Field data confirming the C350’s 400 A phase / 200 A battery envelope on disciplined builds. Source: knowledge/notes/input_part012_review.md, L256 to L258
 [^r350_specs]: R350 feature comparison including the 12 V 3 A rail, smart latch, and 250 A battery rating. Source: knowledge/notes/input_part011_review.md, L26 to L28
 [^cl350_heat]: Reports of CL350 heat and QC variance relative to C350 units on 22 S race scooters. Source: knowledge/notes/input_part008_review.md, L305 to L305
@@ -103,6 +108,9 @@
 [^mosfet_crossref]: Community teardown confirming 3Shul’s MOSFETs match ON Semi HSBL009N10T components, easing replacement sourcing after failures. Source: knowledge/notes/input_part013_review.md, L791 to L791
 [^volkan_gt2rs]: Langfeite GT2RS data showing 330 A phase / 170 A battery pulls with ~3 V sag on 24 S 20 P EVE 40PL packs and corrected 120 km/h GPS speeds once the magnet count was set to the proper 40 poles. Source: knowledge/notes/input_part009_review.md, L291 to L291
 [^ignition_wiring]: Key-switch wiring guidance confirming both CL controllers need the ignition lead, that failed Bluetooth boards can dead-short the rail, and that the latch circuit remains live with the pack connected. Source: knowledge/notes/input_part004_review.md, L56 to L60. Source: knowledge/notes/input_part004_review.md, L203 to L207. Source: knowledge/notes/input_part004_review.md, L292 to L296
+[^g300_stock]: JPPL and Yamal contrasted easily sourced G300 controllers with harder-to-find R350 race hardware, noting the G-series still needs serious cooling despite its availability. Source: knowledge/notes/input_part011_review.md†L601-L602
+[^g300_paste]: JPPL’s G300 teardown found the 18-FET stack immersed in thermal compound that conducts into the CNC housing, effectively turning the case into a dual-sided heatsink. Source: knowledge/notes/input_part011_review.md†L698-L699
+[^arnau_valencia]: Arnau’s Valencia race prep pairs twin G300s with Ambrosini 75H motors, a 22 S 10 P P45B pack, and a 10 mm RTR aluminum spreader to manage controller heat while the battery build finishes. Source: knowledge/notes/input_part011_review.md†L631-L632
 
 ## References
 

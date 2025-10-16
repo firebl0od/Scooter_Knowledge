@@ -5,6 +5,7 @@
 - Kelly 7212 singles comfortably push about 200 A phase from 48 V packs, but riders wire horns and lighting directly to the battery through relays because the onboard DC/DC rail browns out if it feeds accessories; continuous battery draw sits near half the quoted phase rating (e.g., 120 A phase ≈ 80 A battery).[^1]
 - Dual-controller Kelly installs simply parallel throttle 5 V/signal lines, brake inputs, and power buttons, yet the crew insists on QS8-class antispark hardware because XT90S resistors cannot survive repeated inrush events during autotune or hot plugging.[^2]
 - Higher-spec CL/Kelly stacks advertise 350 A continuous and 700 A peak, but veterans still tune them conservatively and finish autotune by hand to avoid firmware bricks on first power-up.[^3]
+- Recent Blade conversions are running dual Kelly KLS7230 controllers on 20 S10 P Samsung 40T packs, unlocking ≈350 A discharge for oversized hub motors once the frames are TIG-reinforced and controllers live externally.[^ip001-kelly-7230]
 
 ## Setup & Wiring Patterns
 
@@ -35,3 +36,4 @@
 [^5]: Source: data/vesc_help_group/text_slices/input_part003.txt, L337 to L345
 [^6]: Source: knowledge/notes/input_part003_review.md, L36 to L36
 [^7]: Source: knowledge/notes/input_part003_review.md, L36 to L38
+[^ip001-kelly-7230]: Source: data/vesc_help_group/text_slices/input_part001.txt†L27399-L27415

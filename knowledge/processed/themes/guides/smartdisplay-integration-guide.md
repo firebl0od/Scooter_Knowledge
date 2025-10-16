@@ -5,8 +5,11 @@
 - SmartDisplay now ships with modular harnesses that bridge VESC Tool, Minimotors, Kelly, Zero, and VSETT controllers while logging GPS, RTC, and media controls, so plan UART + CAN runs even if you start with legacy hardware.[^1]
 - Current production firmware bundles Kelly KLS profiles and police-mode button combos, with Sabvoton and BAC support queued once hardware output stabilises; OTA updates arrive over HTTPS with encrypted images to deter cloning.[^2]
 - SmartDisplay pairs with VESC and legacy controllers over UART today and will gain native CAN + VESC Express support on the incoming hardware spin, so budget both 5 V logic power and CAN high/low when future-proofing harnesses.[^1]
+- Cruise control stays speed-hold today—double-tap to engage, throttle/brake to exit—while ebike users keep lobbying for amp-based cruise profiles in future firmware.[^ip001-cruise]
 - The latest CNC aluminium housing ships with anti-glare glass, RTC, navigation, music controls, and dual buttons that already support single/double-click mapping; encoder knobs are planned for the production wave later this year.[^cnc-case]
 - Treat the display as the hub for lighting, telemetry, and speed-mode governance: its OTA chain flashes every connected accessory board (5 V/12 V light drivers, button pods) alongside the head unit, simplifying updates if the CAN bus is wired correctly.[^2]
+- Francois’ CAN light board now drives 5 V/12 V front, rear, brake, and turn outputs and rides every OTA push, returning unified error feedback for Kelly and VESC installs.[^smart_light_bus]
+- SmartDisplay writes configurable speed and phase limits over CAN or UART, exposes nearly every setting on the dash or iOS/Android apps, and delivers Wi-Fi firmware updates; the beta run is capped at 15 units for 300 € with assembly slated for August.[^smart_limits]
 - Never tether SmartDisplay’s USB port to a computer while the controller is live; a single ground loop already blew the 3.3 V rail and STM32 on a Ubox, forcing an RMA.[^3]
 - Enable the “transparent” BLE bridge when controllers lack onboard Bluetooth.
   - the SmartDisplay can proxy VESC Tool traffic like a USB dongle, but veterans still default to wired sessions if nearby trackers or radios inject interference.[^15]
@@ -26,6 +29,8 @@
 - Rage Mechanics’ latest C350 controller kits now bundle SmartDisplay, thicker IMS plates, and ESP32-based BLE/IMU telemetry with an onboard 12 V 3 A rail.
   - harnesses remain DIY extras for now, so budget fabrication time.[^3]
 - Builders priced a €17 ESP32 touch display that ships with ready-to-flash Arduino code, letting teams print a housing and add Wi‑Fi/Bluetooth telemetry without buying premium dashboards; community members even offer remote flashing help and printable cases for the €20 Turkish variant if you need a turnkey budget dash.[^4][^5][^6][^7]
+- Jason is also flashing community firmware onto inexpensive CYD smart-display boards as a SimpleVescDisplay-class fallback, framing the commodity screen as cheap and the custom code as the real investment.[^cyd-prototype]
+- JPPL’s Simple VESC Display fork stopped throwing compile errors after he reinstalled the Arduino IDE, selected the correct ESP32 board profile, and reflashed; the firmware only needs VESC RX/TX plus 5 V (or 3.3 V) and ground, leaving another COMM port free for accessories while the team eyes a VESC Express port for the low-cost yellow-screen hardware.[^simple_esp32]
 
 ## Companion Boards & OEM Dash Retention
 
@@ -69,6 +74,7 @@
 - **Waze Overlay.** Beta firmware already overlays Waze police alerts directly on the dashboard, foreshadowing richer third-party integrations once CAN message catalogs stabilize.[^9]
 - **Active dev logs map the roadmap.** Weekly SmartDisplay diaries document layout experiments, overlay prototypes, and the Waze alert workflow so installers can reproduce CAN dashboards without waiting on formal docs.[^16][^17]
 - **Production gearing up.** Koxx shared assembly photos and UI previews while Rage Mechanics prepared commercial support, signalling that plug-in TFT units with temperature alarms and custom icon packs are nearly ready for wider release.[^18][^19]
+- **Demand is pent up.** Vsett owners unable to reuse OEM TFTs say they’ll buy SmartDisplay as soon as factory negotiations finish, preferring a turnkey dash over juggling phones at 100 km/h.[^smartdisplay_demand]
 - **Theme editor & live switching.** Rage Mechanics now ships a web-based theme designer that can push new skins over Wi‑Fi and swap layouts in real time on the scooter, making it easier to brand race fleets or share telemetry presets.[^20]
 - **Telemetry Dashboards.** Race teams log throttle position, per-motor phase amps, traction-control response, and segment comparisons from SmartDisplay sessions.
   - handy for coaching and driver swaps.[^10]
@@ -88,6 +94,7 @@
   - explaining the ~€500 price point despite open-hardware roots.[^25]
 - Beta batches sold at **300 €** for 15 testers with August assembly runs; production pricing remains under review.[^11]
 - Rage Mechanics currently bundles SmartDisplay with its dual-controller kits (~489 €), and standalone sales are pending cost-down work—plan purchases early if you need just the dash.[^12]
+- Small-batch SLS cases still cost roughly €25–35 each, keeping retail around €300+ until a 1,000-unit injection run amortises tooling and halves enclosure pricing.[^ip001-sls-cost]
 - Expect retail pricing closer to €500 once the premium feature set (CAN/UART breakout, telemetry, OTA, GPS, lighting control) is factored in.
   - Face de Pin Sucé’s rundown helps set expectations for new buyers.[^26]
 - Riders chasing budget instrumentation still repurpose RTV VESC-only displays or even spare phones when SmartDisplay pricing overshoots a project’s scope.[^27]
@@ -145,11 +152,16 @@
 [^13]: Voyage Megan IPS display positioning at 300–400 € and community comparisons favoring SmartDisplay’s richer feature set.[^47]
 [^megan_alt]: Arnau’s Voyage Megan bundle lacks out-of-box waterproofing and costs ~€400, so Smart Repair points budget builders toward mark99i’s Raspberry Pi dashboard as a configurable alternative.[^48]
 [^14]: Encrypted OTA releases, €300+ price expectations, distributor planning, and SmartDisplay “panic mode” presets outlined during beta updates.[^49][^50][^51]
+[^ip001-panic]: Source: knowledge/notes/input_part001_review.md†L668-L669
+[^ip001-production]: Source: knowledge/notes/input_part001_review.md†L670-L670
+[^ip001-cruise]: Source: knowledge/notes/input_part001_review.md†L692-L693
+[^ip001-sls-cost]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17990-L18060
 [^15]: SmartDisplay assembly photos and UI previews showing temperature alarms, custom icons, and Rage Mechanics’ commercial support prep ahead of mass release.[^18][^19]
 [^boot]: MCU firmware initializes dashboards in ≈10 s, avoiding the 45–95 s boot delays seen on Raspberry Pi VESC displays.[^52]
 [^uart-crc]: SmartDisplay throttle traffic includes CRC checks—log the UART stream before chasing shielding fixes for perceived duty dips.[^53]
 [^can-backfeed]: Smart Repair’s harness can power lights directly from the CAN header, but builders add inline resistors and tap the servo PWM pads when they want flashing indicators instead of constant-on lamps.[^54]
 [^15]: SmartDisplay’s transparent BLE bridge lets Android VESC Tool sessions piggyback through the dash like a USB dongle, though the team still leans on wired hookups when local trackers cause interference.[^55]
+[^cyd-prototype]: Jason’s budget dash experiment flashing community firmware onto CYD smart-display boards; he emphasised the low hardware cost versus the heavy custom firmware lift. Source: knowledge/notes/input_part013_review.md†L848-L848
 [^16]: Community STL packs and resin-print finishing steps keep the 3.5 in enclosure centred on the stem while preventing UV yellowing.[^15][^smartdisplay-stl]
 [^17]: CAN-linked presets such as “police mode” are being prototyped to mute the front motor while retaining rear torque for roadside compliance checks.[^56]
 [^18]: Koxx now hand-assembles SmartDisplay and SmartController batches, selling both the dash-mounted unit and a display-less deck module for riders who prefer phone dashboards over BLE.[^57]
@@ -160,6 +172,8 @@
 ## Production Timeline & Pricing Updates
 
 - **SmartDisplay nearing production with premium pricing.** Rage Mechanics' SmartDisplay now lives in a CNC aluminium, anti-glare housing with VESC Tool bridging, navigation, RTC timekeeping, and music controls; two buttons support single/double-click mapping today, with knob controls planned once production launches.
+- Riders are lobbying for a “panic mode” button that flashes 125 W/20 km/h limits into the controller for roadside checks; firmware needs country-specific caps and ideally support for third-party VESC hardware to make it worthwhile.[^ip001-panic]
+- Production is scaling cautiously—simplified enclosures, distributor tooling, and a 20-unit assembled batch are targeted for May alongside new central-mount housings.[^ip001-production]
   - early adopters expect €199.99 launch slots before the €400–600 retail range.[^smart_production]
 - **Harnesses are modular and interchangeable.** Production units ship with interchangeable harnesses for VESC, Minimotors, Kelly, Zero, and Vsett pins, and the project is no longer open source despite earlier forks.[^smart_harness]
 
@@ -167,6 +181,8 @@
 
 [^smart_production]: SmartDisplay production timeline, hardware features, and pricing expectations.[^62][^63]
 [^smart_harness]: SmartDisplay modular harness system for various controller brands.[^63][^3]
+[^smart_light_bus]: Source: data/vesc_help_group/text_slices/input_part002.txt†L24506-L24515
+[^smart_limits]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25099-L25145; data/vesc_help_group/text_slices/input_part002.txt†L25176-L25182
 [^boot]: SmartDisplay boot time comparison vs. Raspberry Pi dashboards.[^52]
 [^uart-crc]: SmartDisplay UART throttle troubleshooting and CRC-protected command stream.[^64]
 [^jp-generic]: Colour-match “generic JP” SmartDisplay clones to TF/TS100 harness order and keep the UART loom intact until the CAN/Express hardware refresh arrives.[^65]
@@ -188,11 +204,13 @@
 [^12]: Source: knowledge/notes/input_part006_review.md†L86-L86
 [^13]: Source: knowledge/notes/input_part006_review.md†L148-L148
 [^14]: Source: knowledge/notes/input_part006_review.md†L54-L54
+[^simple_esp32]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21121 to L21190; L21200 to L21201
 [^15]: Source: data/vesc_help_group/text_slices/input_part010.txt†L10609-L10621
 [^16]: Source: data/vesc_help_group/text_slices/input_part003.txt†L11850-L11955
 [^17]: Source: data/vesc_help_group/text_slices/input_part003.txt†L26600-L26606
 [^18]: Source: data/vesc_help_group/text_slices/input_part003.txt†L11046-L11048
 [^19]: Source: data/vesc_help_group/text_slices/input_part003.txt†L11852-L11872
+[^smartdisplay_demand]: Source: knowledge/notes/input_part003_review.md†L571-L574
 [^20]: Source: knowledge/notes/input_part010_review.md†L312-L314
 [^21]: Source: data/vesc_help_group/text_slices/input_part009.txt†L12929-L12947
 [^22]: Source: data/vesc_help_group/text_slices/input_part009.txt†L13089-L13092

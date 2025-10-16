@@ -58,6 +58,7 @@
 4. **Controller mounting.** 100H swaps often coincide with dual-controller layouts; leave space for 3Shul/Tronic heat spreaders and consider external radiators or aluminum decks before you close the frame.[^5]
 5. **Brake clearance.** Yamal’s 80H retrofit stalled until longer hardware arrived—the caliper physically cannot mount on stock-length swingarm bolts. Test-fit the rotor and caliper with the wheel torqued before final wiring.[^7][^41]
 6. **Harness routing on new batches.** Recent Lonnyo 70H/75H shipments reroute phase leads through the side cover instead of the axle, leaving room for 6 mm²+ upgrades once you heat the silicone jackets and widen tight dropouts.[^side_exit]
+7. **Laotie/TI30 frame prep.** ES19 wobble usually traces to the front swingarm and budget shocks—retorque bolts, upgrade suspension, and brace the stem before aiming for 80 km/h duty. TI30 chassis arrive more stable but still benefit from steering-area reinforcement, and many ship with reclaimed Tesla 21700 cells that need inspection before high-speed use.[^ip001-laotie]
 
 ## Commissioning & Maintenance Playbook
 
@@ -121,6 +122,7 @@
 [^achilleus_axle]: Dualtron Achilleus crews twisting Lonnyo 90 H axles until switching to Victor arms or custom torque hardware and widening clearances to ~176 mm with washer stacks. Source: knowledge/notes/input_part013_review.md, L421 to L421
 [^tubeless_choice]: Community debates over tubed versus tubeless Lonnyo rims—split motors cannot be converted later, so racers pay for tubeless batches while commuters accept tubes and the maintenance trade-off. Source: knowledge/notes/input_part013_review.md, L335 to L338
 [^side_exit]: New-gen Lonnyo 70H/75H hubs route phases through the side cover, freeing room for larger sleeved leads once the silicone jackets are warmed and dropouts are relieved. Source: knowledge/notes/input_part007_review.md, L306 to L306
+[^ip001-laotie]: Source: knowledge/notes/input_part001_review.md†L676-L678
 [^thunder_tc]: Max Rainlogix’s dual-Lonnyo Thunder log covering 320 A battery climbs with traction control and staged phase limits plus earlier 200/300 A experiments that proved wheelie-prone. Source: knowledge/notes/input_part012_review.md, L362 to L363
 [^180c_insulation]: Latest Lonnyo 65H 16×4 hubs shipping with 180 °C potting for commuter builds, highlighting the insulation upgrade over earlier 120 °C stators. Source: knowledge/notes/input_part010_review.md, L87 to L87
 [^spacing-critical]: Lonnyo spacer and offset specifications being critical for proper fitment to avoid axle binding and bearing failures. Source: knowledge/notes/input_part013_review.md, L267 to L267
@@ -135,7 +137,7 @@
 [^4]: Source: knowledge/notes/input_part011_review.md, L340 to L353
 [^5]: Source: knowledge/notes/input_part011_review.md, L365 to L417
 [^6]: Source: knowledge/notes/input_part011_review.md, L482 to L483
-[^7]: Source: knowledge/notes/input_part011_review.md, L531 to L536
+[^7]: Source: knowledge/notes/input_part011_review.md, L531 to L536. Source: knowledge/notes/input_part011_review.md, L544 to L545
 [^8]: Source: knowledge/notes/input_part011_review.md, L463 to L465
 [^9]: Source: knowledge/notes/input_part006_review.md, L315 to L315
 [^10]: Source: data/vesc_help_group/text_slices/input_part014.txt, L10599 to L10612

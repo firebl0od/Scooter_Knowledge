@@ -6,18 +6,26 @@
 - Blade GT+ waterproofing demands selective sealant and bearing service; avoid heavy coatings that trap heat around the stator during high-load runs.[^4]
 - Recurrent Mantis fires—including parked scooters—are being blamed on underspec batteries and poor crimps; Kaabo’s 40 A fuse response (versus 55 A draw) deepened distrust and even spurred reports of a regional blacklist.[^5][^6]
 - Long-term Mantis riders are modeling CNC collar replacements because grade 12.9 bolts still stretch or rust through by ~10 k km—plan improved coatings and grease alongside the hardware swap.[^7]
+- Simone’s 21 S 6 P Samsung 35E Mantis and Face de Pin Sucé’s 24.8 kg daily rider prove Kaabo frames can hide 30 kW-class packs when you budget spacers, SmartDisplay telemetry, and serious cooling—set expectations around deck height and airflow before promising stealth builds.[^mantis_high_density][^mantis_daily_spec]
 
 ## Wolf King GT Build Guidance
 
 - Stock Daly packs sag and trip near 160 A combined battery draw once 22 S controllers are installed, so rebuild the busbars and upgrade to BMS hardware that tolerates higher burst currents before raising limits.[^1]
 - Wolf decks only fit one large controller without risers; dual-controller conversions rely on 3D-printed spacers, staggered mounting, and careful cable routing to keep 22 S harnesses from chafing or overheating.[^2]
+- Stock pack options span 16 S10 P 18650 (Warrior), 16 S7 P 21700 (Warrior GT), 20 S8 P 18650 (Wolf King), and 20 S7 P 21700 (Wolf King GT), but the cramped deck (≈172 × 70 × 430 mm internal volume, ~68 mm usable height once wiring is routed) still forces controllers outside and leaves little upgrade room—budget wiring changes before promising higher-current packs.[^ip001-wolf-pack]
 - Remanufacturers now order custom 3 mm rotors and 10 mm² phase looms for Wolf/VSETT builds targeting >300 A launches—have CAD ready for rotor suppliers and budget thicker cabling to stop voltage drop on high-current pulls.[^3]
+- Recent field logs show a Kaabo GT running a 72 V 50 Ah Samsung 50S pack into a 2000 W (33/3) hub with a Spintend 85 V 240 A controller, providing a baseline before experimenting with parallel packs or higher current limits.[^gt_50s_build]
 
 ## Blade & GT-Series Chassis Care
 
 - Apply sealant only where water intrusion has been observed, service bearings, and skip thick insulating sprays; over-coating traps heat inside the motors during repeated hard pulls.[^4]
 - Segway GT tear-downs show Hope V4 brake swaps and wider rotor packaging translating to Kaabo GT projects—log rotor thickness and caliper clearance before committing to DOT-fluid conversions on Wolf or Blade frames.[^8]
 - German riders chasing road legality are experimenting with VSETT 48 V controllers to retain Kaabo dashboards while unlocking 16 S support—expect wiring adapters but a friendlier compliance path than full VESC swaps.[^9]
+
+## Mantis High-Power Builds
+
+- High-density Mantis conversions now squeeze 21 S 6 P Samsung 35E or even 24 S 7 P packs under the deck with spacers and external cooling; expect ~32 kW peaks around 82 V and plan SmartDisplay telemetry plus airflow before replicating the setup.[^mantis_high_density]
+- Daily commuter trims still hit 75 km/h on 8.5″ tyres by pairing a narrowed FHT60 motor, SmartDisplay logging, and a 21 S 6 P pack while keeping weight under 25 kg.[^mantis_daily_spec]
 
 ## Cockpit & Display Roadmap
 
@@ -40,6 +48,7 @@
 
 - Treat the sealed OEM BMS as a temporary solution. Until a smart BMS or telemetry tap goes in, riders manually monitor cell groups to catch imbalances early.[^12]
 - High-power upgrades call for custom torque plates and thicker rotor materials—laser-cut 1 cm steel remains the baseline for reining 20 S launches without deforming the stock dropouts.[^14]
+- Confirm hall sensor coverage before controller swaps—older square-wave Kaabo hubs often omit halls while Wolf King GT sine packages include them, saving retrofit time.[^ip001-hall-coverage]
 
 ## Sourcing & Upgrade Watchlist
 
@@ -62,6 +71,7 @@
 [^8]: Source: data/vesc_help_group/text_slices/input_part003.txt, L24802 to L25463
 [^9]: Source: data/vesc_help_group/text_slices/input_part003.txt, L2201 to L2206
 [^10]: Source: data/vesc_help_group/text_slices/input_part003.txt, L9804 to L9808
+[^gt_50s_build]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21368 to L21371
 [^11]: Source: knowledge/notes/input_part014_review.md, L218 to L222
 [^12]: Source: knowledge/notes/input_part014_review.md, L230 to L231
 [^13]: Source: knowledge/notes/input_part014_review.md, L268 to L271
@@ -70,3 +80,7 @@
 [^16]: Source: knowledge/notes/input_part014_review.md, L218 to L226
 [^17]: Source: knowledge/notes/input_part014_review.md, L220 to L222
 [^18]: Source: knowledge/notes/input_part014_review.md, L218 to L276
+[^mantis_high_density]: Source: data/vesc_help_group/text_slices/input_part004.txt†L25331-L25384
+[^mantis_daily_spec]: Source: data/vesc_help_group/text_slices/input_part004.txt†L25380-L25391
+[^ip001-wolf-pack]: Source: data/vesc_help_group/text_slices/input_part001.txt†L26535-L26855
+[^ip001-hall-coverage]: Source: data/vesc_help_group/text_slices/input_part001.txt†L27111-L27168

@@ -15,15 +15,20 @@
 ### Frame & Packaging
 
 - Neck-mounted controller relocations open enough deck volume for 20 S 9 P 21700 packs while maintaining stem stiffness, giving commuters long-range options without external battery boxes.[^1]
+- A documented VSETT 10+ build squeezes a 20 S 9 P Samsung 48X pack (≈43.2 Ah, ~150 A max discharge) alongside dual Nucular 12F controllers once the deck is reorganised, cementing the relocation playbook.[^20a]
 - Rental-grade Xiaomi conversions borrowing VSETT hardware add roughly 10 kg with thick stems and oversized fork hardware; expect a sturdier but less portable chassis once dual brakes and battery bays are reinforced.[^11]
 - Artem is confident the Vsett 9 chassis swallows 52 V 30 Ah packs—and even vertical 20 S 8 P trays with spacers—for ~160 km range while keeping everything internal, so plan wiring harnesses with the extra volume in mind.[^12]
+- Packaging experiments now map an 18 S 7 P layout (395 × 151 × 49 mm, 66.6 V/24.5 Ah) that drops straight into VSETT 9 decks without spacers, giving compliance-focused riders stealth high-voltage options.[^pack_18s7p]
+- Fresh bay surveys put the VSETT 9 cavity around 154 × 455 × 49.5 mm with rounded ends; a 25 mm spacer fits 19 S 7 P stacks while 50 mm risers squeeze 20 S 6 P Xiaomi builds at the cost of ground clearance.[^ip001-deck-map]
 - Yoann’s Vsett 10 dual Lite conversion keeps the stock lighting loom by using the ADC 5 V rail to drive a relay that wakes a separate 12 V converter; their 72 V battery mod reuses a Nami 80 A BMS that trips near 120 A, so total pack current stays around 100–120 A while Lisp code blends phase amps versus ERPM to manage wheelspin.[^13]
 
 ### Motor & Wheel Options
 
 - Stock VSETT 9 hubs feature 92 mm stators, 15 pole pairs, and a tight 0.5 mm air gap—pair them with the taller 10-inch carcass to smooth harsh pavement while keeping torque respectable.[^2]
 - Artem now pegs the Vsett 9 hub around 48 km/h on 52 V (≈58 km/h dual) and says the 10+ wheel needs 60 V to shine; expect muted top speed on 48 V despite its ~130 A/50 A thermal headroom and 1 400 W nominal rating.[^14]
+- Build a reference card for Vsett 9/10 hubs—52 V vs. 60 V speed, split-rim service order, and shipping options—so 48 V riders know the upgrade path before committing to 60 V hardware.[^vsett_map]
 - Ignore marketing wattage on Vsett 10+ motors—inspect winding fill and magnet stack height before pushing phase amps or buying donor wheels for AWD conversions.[^15]
+- Paolo is distributing 6 mm (≈9 AWG) motor leads rated around 3 kW continuous per hub, giving retrofitters a vetted harness option when Vsett 10+ spares pop up.[^paolo_leads]
 - Recent teardowns logged 9×7 slot/pole counts, 0.5 mm laminations, and RUWH 6003RS bearings; blank front covers from Vsett 9 rentals can disguise dual-motor conversions by hiding the second hub’s wattage rating during inspections.[^16]
 - Vsett 9+/10+ hubs comfortably burst near 5 kW when temperature sensors track sustained loads, so treat the “600 W” label as commuter-only marketing and log temps before upping duty cycles.[^17]
 - Stock hub hardware has already endured serious power—the community logged 10–12 kW pushes on OEM motors before Nucular 12F limits intervened—so thermal headroom comes from cooling and harness upgrades rather than immediate motor swaps.[^18]
@@ -39,6 +44,8 @@
 - “SHDC” castings show up across Kaabo/Nanrobot supply chains and will add hall sensors on request; Wolf GT owners confirm newer sine-wave motors arrive with halls while Kelly conversions retrofit them for reliable starts.[^29]
 - Xiaomi and VSETT hall boards aren’t interchangeable—the Vsett 10+ rotor spacing keeps Xiaomi controllers from running the hub smoothly even after sensor swaps, so plan controller changes instead of chasing hall geometry fixes.[^30]
 - HM and Blade “limited edition” hubs share the ~135 mm axle spacing, so they drop straight into VSETT 10/G30 swingarms once spacers are trimmed; SibClimb and Paolo’s EU storefronts are the go-to sources when you need the higher-torque windings.[^31][^32]
+- Limited-edition VSETT 10+/Zero 10X hubs even ship with dual phase leads and higher-Kv winds; riders meter them with YR1035s and budget roughly €180 per replacement motor plus shipping.[^ip001-limited-leads][^ip001-limited-price]
+- Dual-phase “limited edition” hubs are also throwing ~270 A recommendations during auto-detect instead of the usual 120–130 A; cap manual limits near 200 A until Spintend updates the estimator.[^ip001-dual-phase-detect]
 - HM-branded hubs demand ≥50 A battery to feel lively yet run noticeably hotter than comparable LY winds, so high-power conversions with identical fork spacing keep favouring the lower-KV LY motors for better thermal margin.[^33]
 - Budget dual-motor swaps are back on the menu: Paolo is selling Blade hubs for about €200 each (≈€520 with PMT slicks) and even offering shipping tricks—declare warranty parts and skip UPS, which has lost multiple high-value parcels.[^34]
 - Paolo’s 60 mm magnet Blade hubs are already holding 85 A battery on 16 S and targeting 20 S tests; expect to lean on ferrofluid and active cooling before chasing higher voltage because the same motor survived 130 A battery/350 A phase only after aggressive thermal prep.[^35]
@@ -47,25 +54,41 @@
 - Fresh 60 mm VSETT hubs respond well to ferrofluid fills and careful clamping; riders are comfortable around ~50 A battery and 100 A phase once the stator is rewrapped and torqued correctly.[^38]
 - High-torque 11-inch hubs start shedding magnets when hammered with sustained 200 A+ phase current—dial back current or expect heat-driven failures on VSETT conversions pushing that envelope.[^39]
 
+### Harness, Display & Control Integration
+
+- The factory “DS” conductor backfeeds display power into the controller once the RFID tag authenticates; keep the line intact when repinning harnesses so the throttle stays analog while CAN-style messages update ride modes every 200–500 ms.[^vsett_ds_harness]
+- Dual-motor enable traces share continuity between the handlebar button, display, and controller, so VESC swaps must preserve that signal path or the dash will light up without actually waking the slave controller.[^vsett_dual_enable]
+
 ### Tire, Pressure & Maintenance Guidance
 
 - Run PMT 10×3 near 48 psi for grip; CST 10×3 tubeless remains the cost-effective choice but bulges into an egg on narrow rims. Stock CST beads run small—seat them carefully to avoid wobble.[^3]
+- Rougher US streets are pushing riders to 43–45 psi on PMT 10×3 tires to stop bending rims, even though smoother European pavement still lets commuters run closer to 30 psi for grip.[^ip001-pmt-psi]
 - PMT casings are tubeless-ready yet tolerate inner tubes (CST 10×2.5 pairing works); the stiff carcass can even limp home deflated for short distances, which is handy for roadside repairs.[^40]
 - Keep spare split-rim halves and bearings—pothole hits can ovalize the shells, so swap components methodically until vibration disappears, documenting tire experiments to isolate causes.[^4]
 - Track pressures by rider weight: PMT slicks stay happy near 2.4 bar, Vsett racers run ~3.5 bar, and dropping to 1.8 bar shreds cords while 4.2 bar CST setups lose grip—log PSI alongside rider mass when comparing setups.[^41]
 - CST 10×2.5 inner tubes have proven durable across months of mixed on/off-road use and are thick enough for 10×3 tires, but 20 S setups still shred them quickly if pressures stay low—log PSI after hard rides.[^42]
 - Persistent flat-prone builds respond well to Vsett 10 inner tubes—Haku already stretches the larger tube onto Ninebot G30 conversions to avoid thin-tube blowouts.[^43]
 
+### Compliance & Insurance Notes
+
+- Scandinavian insurance rules still push stealth builds: Denmark offers no theft coverage above ~20 km/h, Sweden limits legal scooters to 250 W/20 km/h with pedal assist, and Finland sells €50–€70/year policies that lift limits to roughly 1 kW when throttles stay discreet.[^scand_rules]
+
 ### Steering & Stability Hardware
 
 - **Inspect 10-series steering columns for thin-wall cracks.** Photos show the lower weld splitting along the slender extrusion, so retrofit thicker Warrior stems or add machined sleeves before cranking up power levels.[^44]
 - Triangulated neck brackets tying Matris dampers into PMT tires and EXA shocks eliminate wobble on VSETT 10 builds; ensure at least three anchor points instead of relying on the flex-prone stock tab.[^45]
 - Genuine Matris dampers ship around €250 and need inspection—budget clones from FalconPEV, AliExpress, or Amazon masquerade as Matris/Öhlins but lack consistent internals.[^46]
+- A 20-mile shakedown on a bar-mounted damper eliminated wobble at 45–50 mph but highlighted how overly stiff settings slow emergency swerves and tight manoeuvres—tune damping for stability without killing agility.[^ip001-damper]
+- Reports of VSETT 10 motors holding 63 mph on 20 S while Blade frames wobble without real dampers sparked renewed warnings to verify genuine Matris hardware or fabricate three-point mounts; counterfeit kits from Falcon-branded sellers keep surfacing.[^ip001-highspeed]
 - Reserve dampers for robust frames—Monorim-equipped Xiaomi forks remain only ~4 mm thick, making 90 km/h runs suicidal without serious reinforcement.[^47]
+- **Chasing a post-service “clunk.”** Loud knocks that appear between braking and throttle after wheel bearing work usually trace to loose axles or missing torque washers; snug hardware and fit proper torque arms before assuming controller faults.[^axle-clunk]
+- Sharkset’s adjustable cockpit kit (~$100 in Germany) pairs cleanly with Magura MT8 SL brakes (~€200 per wheel) and Kool Stop sintered pads on 17 S builds—budget grinding the stock clamp and planning for higher braking loads when you make the swap.[^ip001-sharkset]
 
 ### Performance & Telemetry Benchmarks
 
 - Fresh Dragy runs clocked a VSETT 10 at 0–60 km/h in roughly 4.75 s and 0–80 km/h in 7.5 s using 78 A/200 A rear and 70 A/130 A front profiles (~148 A battery combined, 196 A rear phase); even with motors staying near 130 °F, riders flagged chassis control as the new limiting factor at those tune levels.[^48]
+- Stock VSETT 8+ controllers have tolerated jumps from 13 S to 17 S (≈63.6 V) without hardware mods, netting roughly 30 % more power, though riders now compare those results against Ubox dual builds and caution that 20 S/field-weakening pushes require aggressive cooling.[^ip001-stock-17s]
+- Correct VSETT 9 speed readings on Ubox builds require entering 15 pole pairs (not 30 poles) and shrinking the wheel diameter to ~210 mm to account for tire compression, otherwise the dash reports barely 28 km/h instead of the real ~55 km/h on 60 V packs.[^speed_cal]
 - Shlomozero keeps Vsett 1400 W hubs above ~55 A phase and caps battery current near 25 A around the stock BMS; Christophe settled on 130 A motor and 45 A battery limits to keep his Spintend 85 V swap reliable around 50 km/h cruise speeds, plus real regen braking.[^49][^50]
 - Ubox speed readings stay honest only after setting 15 pole pairs (instead of 30 poles) and shrinking wheel diameter to ~210 mm for tire squish; skipping the tweak leaves the dash stuck near 28 km/h on 60 V packs even when the scooter is really doing ~55 km/h.[^51]
 - Treat aerodynamic tweaks as meaningful range levers—commuters logged 63–65 Wh/km in calm weather that jumped to ~72 Wh/km when battling headwinds in bulky winter jackets, illustrating how rider silhouette nearly doubles energy draw even when electrical settings hold steady.[^52]
@@ -78,6 +101,7 @@
 - Artem’s refreshed Vsett 9 now runs dual 650 W hubs on a 16 S 8 P Samsung 35E pack with dual Ubox controllers, SmartController integration, LED spacers, and a GPS/4G tracker—logging 0–50 km/h in 5.5 s with only 3.6 V sag at 27 A battery and 80–85 A phase per motor while highlighting rear-motor sync hiccups above ~85 A phase for diagnostics.[^62]
 - Tuned PID ramps paired with the community’s 1200 W wizard preset and 20 kHz switching held 90 kg riders at full throttle above 30 km/h while drawing roughly 100 A less than stock tunes, underscoring how much launch maths lives in firmware rather than brute current.[^6][^7]
 - Samsung 48X 20 S9 P packs are backing 10 kW bursts with only 4–7 V sag at 110–135 A and keeping 64 mph runs under ~65 °C winding temperature, so long as cell delta stays near 0.002 V after spirited rides.[^63]
+- EU pack builders are quoting roughly €540–€990 for 60 V 15–40 Ah Samsung 50G packs with optional smart BMS and XT90 upgrades, providing a benchmark for internal 10-series refreshes.[^ip001-pack-pricing]
 
 ### High-Discharge Build Guardrails
 
@@ -102,6 +126,7 @@
 - Protect every cell: wrap 21700s in heat-shrink and Kapton, slide wax/fish-paper between parallels, sheath the finished pack in epoxy board plus giant heat-shrink, and add a cradle strap so the assembly slides out for service without scuffing the deck.[^77]
 - Swap the stock loom for a Higo L1019 harness when you relocate controllers—three ~11 AWG phases plus seven signal leads share a sealed 7.7 mm jacket, making 6 mm bullet terminations and temperature telemetry tidy even in tight VSETT 9 axle cavities, but retire the plug on 60–70 mm motors where the jacket no longer fits cleanly without trimming the casting.[^78][^79][^80]
 - Owners measuring factory cabling are finding only ~2.5 mm² (≈13 AWG) phase copper, which stays cool around 90 A phase/30 A battery but needs 3 mm²+ upgrades; the latest QS8 anti-spark connectors arrive with 6 AWG cups, making them a better fit than AS150 hardware once dual controllers push 60 A+/135 A combined.[^81][^82]
+- Spintend Ubox V1 auto-detects around 135 A while some V2 units only return ~88 A; sanity-check detection results and be ready to set manual limits before trusting new hardware.[^ip001-ubox-detect]
 - Silicone-insulated 6 mm² (≈10 AWG) phase leads shrug off hub heat better than PVC jackets when rerouting harnesses, and the Higo L1019 bundle fits VSETT 9 axles once you swap to 6 mm bullets—just monitor MT60/XT150 connectors for heat on long pulls.[^78][^83]
 - VSETT 9 commuters can still package 18 S7 P (395 × 151 × 49 mm, 66.6 V/24.5 Ah) without deck spacers, but Italian riders report shops relabelling motors to 500 W and carrying invoices to appease police that assume stock 650 W ratings.[^84]
 - Expect roughly 5 V of sag at 70 % SOC on healthy 10+ packs; larger drops usually trace to resistive wiring or undervoltage cutoffs long before the controllers hit their phase limits.[^85]
@@ -131,16 +156,23 @@
 
 - New Vsett 11+ builders are targeting 60 V 50 Ah packs and documenting LG cell SKUs plus motor wind counts before swapping hardware—the stock 2 000 W hubs already reach ≈10 kW when paired with quality cells, so capture provenance before promising upgrades.[^103]
 - Expect LG M50LT cells in 10 P strings to sustain roughly 9 kW safely; once internal clearances are confirmed you can stage controller upgrades without replacing the battery a second time.[^103]
+- Stock VSETT 8 packs blend DynoVolt 2 600 mAh cells in 5 P (~13 Ah) or LG MH1/MJ1 parallels; keep discharge near 40 A (~3 C) to curb heat, and note how Flipsky 75100 swaps still feel stronger with just ~30 A battery and 90 A phase limits thanks to FOC efficiency.[^ip001-v8-pack][^ip001-foc-swap]
+- First 20 S 9 P Samsung 48X logs hit ~10 kW with only 5–6 V sag at 133 A battery draw, keeping cells below 29 °C and motors near 66 °C after 15 spirited miles—proof that copper busbars and ferrofluid prep unlock higher sustained power.[^ip001-20s9p]
 
 ### Thermal Management & Instrumentation
 
+- Dual Ubox retrofits still need fresh paste and a clean deck interface even if the outgoing Minimotors square-wave ESCs ran hotter; expect to pull the battery to reach the mounting blocks during the swap.[^vsett_ubox_paste]
 - Dose 6–6.5 ml of Statorade per VSETT 10+ hub to drop winding peaks from ~145 °F to ~104 °F without noticeable drag; fill after the stator is seated, avoid metal syringe tips, and seal covers with silicone so the ferrofluid stays put. Larger 60 mm magnet motors may need 7–8 ml, while overfilling beyond ~8 ml adds friction—cheap AliExpress ferrofluids pass conductivity tests yet flash early, so riders stick with €30 EU-sourced Statorade and cap magnet temps around 90 °C when fluid is present.[^104][^105][^106]
+- Community consensus keeps Statorade fills between roughly 4–8 ml per hub (≈6 ml in VSETT motors), resealing covers after inspections and weighing vent holes (≈5–10 °C gains) against the risk of fluid loss and water ingress.[^fill_guidance]
+- 50 mm VSETT hubs running 17 S packs rarely need more than 60–70 A battery; most riders hold 125–180 A phase and rely on ferrofluid instead of pushing 90 A battery, because that simply cooks the motors faster.[^ip001-17s-limit]
+- Poorly mounted Spintend duals are still spiking toward 90 °C until they’re clamped hard against the deck with thicker pads or steel plates; the 100 V revision spreads heat better but still needs solid mechanical contact.[^ip001-spintend-mount]
 - Embed epoxy-coated 100 k B3950 probes under the windings with silicone adhesive, route a single sensor lead through the axle with the phases and halls, and stick with Statorade-grade ferrofluid—even “educational” blends have low flash points and unknown additives.[^107]
 - Use existing cover screws or purpose-drilled ports to inject ferrofluid without disturbing hall boards, then reseal both side covers to stop leaks once the hubs are topped off; drilled vent holes can drop temps another 5–10 °C on smaller motors but risk weeping fluid and water ingress, so weigh airflow against weather sealing.[^108][^109]
 - Check hubs seasonally and top off if fills dip below 4–8 ml—the community treats ≈6 ml as the sweet spot for VSETT motors and reseals covers after every inspection to prevent evaporation and leaks.[^110]
 - Bolt-on hubsinks with thermal paste plus deck spacers or ducted lighting housings cut from PVC/acrylic push heat into the airstream and make room for taller packs, helping sustained 70–75 km/h runs without cooking the stator.[^111]
 - Clamp controllers directly to aluminum structure with thin thermal pads and run lighting through relays; standalone fans on the harness keep running after shutdown because Spintend’s enable lead sources 12 V instead of sinking it.[^112]
 - External 12 V shrouds with mesh filters held 6.2 kW pulls near 50 °C in wet 8 °C weather; plan motor NTC installs before removing firmware current limits so logs capture the new cooling headroom.[^113]
+- One pothole strike left a front hub wobbling until the owner rewound the stator with an embedded temp sensor, swapped rims, and installed fresh bearings—proof that telemetry upgrades can ride along with mechanical repairs.[^ip001-tempwobble]
 - Stock stator joints still need inspection—builders are ordering 10 k 3950 sensors for axle installs and reworking factory solder that left Huameng cores at 30–31 mΩ with stray splatter in the slots.[^114][^115]
 
 ### Bearings & Rolling Hardware
@@ -168,6 +200,11 @@
 [^12]: Source: data/vesc_help_group/text_slices/input_part003.txt, L10118 to L10132
 [^13]: Source: data/vesc_help_group/text_slices/input_part010.txt, L20034 to L20062
 [^14]: Source: knowledge/notes/input_part000_review.md, L352 to L352
+[^vsett_map]: Source: knowledge/notes/input_part000_review.md†L807-L807
+[^vsett_ubox_paste]: Source: knowledge/notes/input_part000_review.md†L702-L703
+[^paolo_leads]: Source: knowledge/notes/input_part000_review.md†L723-L723
+[^vsett_ds_harness]: Source: knowledge/notes/input_part000_review.md†L731-L731
+[^vsett_dual_enable]: Source: knowledge/notes/input_part000_review.md†L732-L732
 [^15]: Source: knowledge/notes/input_part000_review.md, L440 to L443
 [^16]: Source: knowledge/notes/input_part000_review.md, L387 to L388
 [^17]: Source: knowledge/notes/input_part005_review.md, L69 to L69
@@ -189,6 +226,17 @@
 [^33]: Source: knowledge/notes/input_part001_review.md, L43 to L43
 [^34]: Source: data/vesc_help_group/text_slices/input_part001.txt, L26005 to L26103
 [^35]: Source: data/vesc_help_group/text_slices/input_part001.txt, L11407 to L11433
+[^ip001-deck-map]: Source: data/vesc_help_group/text_slices/input_part001.txt†L23033-L23392
+[^ip001-limited-leads]: Source: data/vesc_help_group/text_slices/input_part001.txt†L22030-L22118
+[^ip001-limited-price]: Source: data/vesc_help_group/text_slices/input_part001.txt†L22188-L22221
+[^ip001-dual-phase-detect]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24642-L24683
+[^ip001-pmt-psi]: Source: data/vesc_help_group/text_slices/input_part001.txt†L22120-L22166
+[^ip001-v8-pack]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19007-L19066
+[^ip001-foc-swap]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19038-L19048
+[^ip001-20s9p]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19918-L19960
+[^ip001-17s-limit]: Source: data/vesc_help_group/text_slices/input_part001.txt†L21900-L22033
+[^ip001-spintend-mount]: Source: data/vesc_help_group/text_slices/input_part001.txt†L21960-L22363
+[^ip001-damper]: Source: data/vesc_help_group/text_slices/input_part001.txt†L20060-L20076
 [^36]: Source: data/vesc_help_group/text_slices/input_part003.txt, L23963 to L24010
 [^37]: Source: data/vesc_help_group/text_slices/input_part004.txt, L2133 to L2152
 [^38]: Source: data/vesc_help_group/text_slices/input_part004.txt, L3001 to L3015
@@ -201,6 +249,11 @@
 [^45]: Source: knowledge/notes/input_part001_review.md, L68 to L68
 [^46]: Source: knowledge/notes/input_part001_review.md, L69 to L69
 [^47]: Source: knowledge/notes/input_part001_review.md, L70 to L70
+[^ip001-highspeed]: Source: data/vesc_help_group/text_slices/input_part001.txt†L26428-L26488; data/vesc_help_group/text_slices/input_part001.txt†L26827-L26841
+[^ip001-sharkset]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24574-L24597
+[^ip001-stock-17s]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17870-L17940; data/vesc_help_group/text_slices/input_part001.txt†L18089-L18155
+[^ip001-pack-pricing]: Source: data/vesc_help_group/text_slices/input_part001.txt†L26910-L26910
+[^ip001-ubox-detect]: Source: data/vesc_help_group/text_slices/input_part001.txt†L26956-L26999
 [^48]: Source: data/vesc_help_group/text_slices/input_part001.txt, L27655 to L27667
 [^49]: Source: data/vesc_help_group/text_slices/input_part010.txt, L19045 to L19067
 [^50]: Source: data/vesc_help_group/text_slices/input_part010.txt, L19864 to L19864
@@ -269,6 +322,13 @@
 [^113]: Source: knowledge/notes/input_part003_review.md, L133 to L133
 [^114]: Source: knowledge/notes/input_part003_review.md, L135 to L135
 [^115]: Source: knowledge/notes/input_part003_review.md, L181 to L181
+[^ip001-tempwobble]: Source: knowledge/notes/input_part001_review.md†L665-L666
 [^116]: Source: knowledge/notes/input_part001_review.md, L638 to L640
 [^117]: Source: knowledge/notes/input_part001_review.md, L25 to L74
 [^118]: Source: knowledge/notes/input_part001_review.md, L59 to L70
+[^axle-clunk]: Source: knowledge/notes/input_part006_review.md†L16-L16
+[^20a]: Source: knowledge/notes/input_part001_review.md, L538 to L539
+[^pack_18s7p]: Source: knowledge/notes/input_part001_review.md, L577 to L578
+[^speed_cal]: Source: knowledge/notes/input_part001_review.md, L524 to L526
+[^fill_guidance]: Source: knowledge/notes/input_part001_review.md, L574 to L575
+[^scand_rules]: Source: knowledge/notes/input_part001_review.md, L535 to L537

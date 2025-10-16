@@ -19,6 +19,7 @@
 - Stage an ST-Link and legacy BLE packages before teardown.
   - DE-market Pro 2 dashboards on BLE 1.55+ refuse OTA downgrades, clone controllers spoof serials yet still block flashes, and forcing new Xiaomi BMS firmware through ST-Link has bricked boards mid-conversion.[^10]
 - Measure the deck cavity early: builders logged ~120 mm width and 74 mm depth, giving clear constraints before committing to dual controllers or double-stack battery layouts.[^11]
+- Map your layout before cutting: document whether the project keeps everything internal (20 S 4 P deck packs, controller at the nose) or adds external 20 S boosters, and capture CNC stem dimensions plus star-nut installation steps when adapting SNSC forks so future builds don’t guess at hardware order.[^g30_layouts]
 - Build a spacer/pack checklist before welding: 20 S 4 P layouts fit with printed or CNC spacers plus minor cable reroutes, while 20 S 5 P bricks demand tray trimming, recessed fasteners, and harness standoffs to preserve deck clearance.[^12]
 - 20 S 6 P attempts demand 30 mm frame extensions, ultra-low ride height, and ruthless wire pruning.
   - racers still call the setup risky without spacers and reinforced lids, so weigh ground clearance before copying it.[^13]
@@ -40,6 +41,13 @@
 - Rental G30 chassis earn premium status: fixed stems, dual brakes, oil suspension, and thicker tubing swallow 13 S 5 P 21700 packs plus 1.2 kW hubs without the flex or wobble of stock Xiaomi frames.
   - expect ~10 kg more steel but far less frame twist under launch torque.[^24]
 
+## Dual-Drive & Power Planning
+
+- Mirko’s dual-motor roadmap pairs a 16 S 6 P VTC6A pack with twin Uboxes at ~70 A rear / 55 A front battery and 135 A phase per side, warning that 90 A battery overheats a single Ubox and that shell IR readings under-report stator heat even with ferrofluid.[^g30_dual_plan]
+- Existing Vsett 10+ logs show 80 A battery / 225 A phase on the rear holding below ~185 °F when 6–7 ml of ferrofluid is present, giving Ninebot builders a sanity check for phase limits on similar hubs.[^vsett_ferrofluid]
+- The crew stocks 100 ml ferrofluid bottles (often from Nexun’s EU supply) and feeds fluid through magnet gaps instead of drilling ports, resealing covers with silicone to avoid leaks.[^ferrofluid_stock]
+- Sleeper Ninebot builds targeting ~40 km/h stay on 13 S packs with low-Kv Gen6 or FLJ rear motors, skipping suspension swaps unless comfort demands it.[^g30_sleeper]
+
 ## Powertrain Reference Builds
 
 | Configuration | Controllers & Limits | Reported Performance | Notes |
@@ -54,10 +62,12 @@
 | 22 S race prep | Targeting 22×3 or 33×2 motors, 300 A phase, positive ramp ~0.4 s | Focus on traction control slip windows (11 k–17 k rpm) to avoid wheelspin | Requires spare motors and throttle filtering to mitigate spike-induced controller shutdowns.[^5][^6] |
 
 - Builders chasing 14 S commuter tunes still favor Spintend’s Ubox over Flipsky thanks to beefier MOSFETs and cooling; early Ubox batches like extra thermal pads, and 30Q/40T packs comfortably supply the ~70 A battery draw when motors can stomach it.[^28]
+- Makerbase 75100 swaps still demand the basics: run the motor wizard, stay on Ortega with BEMF decoupling so the dash keeps speed reporting, and match mobile/ESC firmware to avoid “limited mode” until the right version is loaded and power-cycled.[^deadword-pitfalls]
 
 ## Battery & BMS Planning
 
 - Budget packs starting with 20 S Samsung 30Q quotes for commuters, but expect premium 21700 builds (50PL, P45B/P50B) to double total cost once welding, insulation, and shipping are included.[^16]
+- Rosheee is keeping his 16 S5 P pack in service until a 20 S6 P replacement lands and confirmed the 17 S holder STL came from Tudor—line up the print ahead of time if you plan the same upgrade.[^g30_holder]
 - Expect diminishing returns beyond 18 S on stock Xiaomi/Ninebot hubs.
   - doubling pack voltage roughly doubles free-spin speed, but the commuter-class motors cook themselves at 20 S unless you add serious cooling or swap to beefier hubs like Fiido’s wider L3 stator.[^29]
 - Packaging 20 S bricks inside the Xiaomi/M365 deck is a “brain-f***” even for veterans; most builders call 18 S the practical sweet spot unless you are ready to redesign the layout into a G30LP-style chassis with intricate wiring clearances.[^30]
@@ -105,6 +115,7 @@
 - Mini-BMX conversions for “Peak G30 v2” projects should confirm dropout width and tire clearance before buying rubber.
   - 10×3.0-6.5 tires shrink the contact patch, but Haku still needed another 10–15 mm of dropout width or a switch to dual 10″ LY 65H motors with 125 mm axles.[^53]
 - 10×3.0-6.5 tubeless tires measure about 3 inches wide on 73 mm (≈2.84″) rims and sit safer than stretched 70/65-6.5 casings; use the imperial size math (first number = width, second = aspect) to convert between listings confidently.[^54]
+- Vsett 10 inner tubes stretch into G30-class rims better than the stock small tubes and have already outlasted repeated flats on Peak G30 builds—expect a tight fit but far fewer pinch punctures once seated.[^vsett10-tube]
 
 ## Control & Traction Tuning
 
@@ -138,6 +149,7 @@
 
 ## Thermal & Mechanical Safeguards
 
+- Expect roughly 125 mm between flats on the stock rear fork; wider hubs still need spacer stacks or dropout machining before 20×3 conversions clear safely.[^rear-fork]
 - Cap field-weakening around 20 A on stock 6×TO-220 Makerbase 75100 boards.
   - extended 35 A pulls at 130 A phase have already burned MOSFETs, so step up to the aluminum-PCB/vented variants if you need sustained high-speed duty.[^67]
 - Pune’s single-motor log showed a Makerbase 75100 holding ~4.2 kW peaks at ~44 °C when clamped inside the stock controller can.
@@ -145,11 +157,13 @@
 - Monitor per-motor temperatures; aim for ≤45 °C controller temps and ≤90–100 °C stator temps by refreshing thermal paste and clamping controllers to thick skid plates.[^69][^70]
 - Bond controllers to the deck with thermal epoxy where possible.
   - Matthew’s single 85150 now idles near 40 °C with ~60 °C peaks after the previous mount let temps spike toward 80 °C and a BMS cutoff shorted its partner.[^71]
+- Matthew’s Max G30LP commuter pairs a single Spintend 100/100 Lite (40 A battery / 100 A phase) with a 14 S 20 Ah pack, Lonnyo 65 H 17×4 hub plus Statorade, dual light bars, a water-cooled controller plate, reinforced Monorim suspension, and trunk space prepped for extra 16 S packs—use it as a blueprint for mid-voltage conversions that still chase range.[^matthew-g30lp]
 - Plan for valve-stem service and bead reseating after pothole hits.
   - tubeless split rims can burp air, so keep compressors and soapy water handy during test rides.[^72]
 - Track tire availability: true 12″ tubeless slicks remain limited to rare Touvt 12×4.5‑6.5 listings, so expect lead times or plan alternate wheelsets when chasing maximum footprint on VESC builds.[^73]
 - Evaluate braking upgrades alongside power mods; 203 mm rotors add leverage but may be overkill.
   - pair regen tuning with quality hydraulic calipers and DOT 4/5 fluid first.[^74]
+- **Front-disc conversions without Monorim.** Repurpose a Ninebot Pro 2 front motor to gain the factory disc mount, then design spacers and caliper mounts around the stock fork so you avoid bulky Monorim swaps.[^g30_front_disc]
 - Use the €25 ePowerFun 3 mm aluminum floor plate as a quick cooling stopgap.
   - drill five mounting holes, trim the nose to clear JREV spacers, and plan a thicker custom plate once testing confirms heat loads.[^epowerfun]
 - Transparent plexiglass lids look great but need threadlocker, silicone seals, and stronger epoxy/two-part adhesive for LED strips.
@@ -173,6 +187,7 @@
 - Consider Voyage Megan or other CAN dashboards for consolidated telemetry once controllers are upgraded; validate compatibility when mixing CL350 or Express accessories with Ubox hardware.[^84][^85]
 - Budget a dedicated buck converter if you add VESC Express boards.
   - the modules only accept 5 V at ~150 mA and currently reset logging every few seconds on 6.06 firmware, so plan CAN updates or stay on 6.05 for stable telemetry.[^express_power]
+- Track where SNSC rental frames are still available and catalogue printable accessories (battery spacers, lighting pods, cable saddles) that fit Bambu P1S-class beds so builders can fabricate replacements in-house when fleet stock dries up.[^sns_prints]
 - Document J1772 travel adapters as part of the charging kit: a proven harness uses 12 AWG silicone leads plus 2.5 mm² wiring with 2.74 kΩ/1.3 kΩ pilot resistors so public stations handshake cleanly at 3 kW.[^86][^87]
 - Happy Giraffe logged key Blade 10 hub dimensions.
   - 130 mm inner axle, ≈160 mm fork span, M12 threads with 10 mm flats, 12 mm rotor offset, and 4 mm hardware
@@ -196,6 +211,7 @@
 
 - Capture Paolo’s pricing tiers and lead times for the 2 mm versus 3 mm rotor batches so riders can budget machining versus bolt-on fitment before committing to the group buy.[^97]
 - Gather wiring diagrams showing how the front “local” controller shares throttle input over CAN so dual G300/Spintend stacks stay synchronised during future installs.[^98]
+- Log Jason’s first ride data once the 32 S charge-only BMS is fused, contactors are installed, and the G30 bench tests wrap so range/thermal baselines are documented.[^jason-32s]
 
 ## Source Notes
 
@@ -205,6 +221,7 @@
 [^epowerfun]: Builders documented drilling and trimming the budget ePowerFun 3 mm floor plate as a temporary heatsink before commissioning thicker custom skid plates.[^105]
 [^express_power]: VESC Express boards on G30 projects need external 5 V feeds (Spintend rails top out at 150 mA) and stable 6.05 firmware.
   - 6.06 restarts SD logging every three seconds until patched.[^106]
+[^g30_holder]: Source: knowledge/notes/input_part002_review.md†L629-L630
 [^g30-pulldown]: G30 dash retrofits on Makerbase 75100s hinge on adding the pull-down resistor from pin 3; firmware 6.2 currently caps all modes around 60 % current so most builders stay on older releases.[^107]
 [^bms-parity]: Stacking a healthy OEM 10 S pack with a DIY 4 S extender only worked after matching voltages and BMS discharge ratings; a sagging series stack blocked VESC detection until a regulated 60 V source replaced it.[^108]
 [^g30-error10]: Makerbase 75100 V2 swaps trigger a “10 error” on the stock dash until you introduce the display to VESC Tool and program the controller.[^109]
@@ -266,6 +283,7 @@
 [^52]: Source: data/vesc_help_group/text_slices/input_part009.txt†L21900-L21939
 [^53]: Source: knowledge/notes/input_part010_review.md†L285-L288
 [^54]: Source: knowledge/notes/input_part010_review.md†L384-L386
+[^vsett10-tube]: Source: knowledge/notes/input_part010_review.md†L705-L705
 [^55]: Source: knowledge/notes/input_part005_review.md†L206-L207
 [^56]: Source: knowledge/notes/input_part005_review.md†L512-L512
 [^57]: Source: knowledge/notes/input_part014_review.md†L84-L85
@@ -283,6 +301,8 @@
 [^69]: Source: knowledge/notes/input_part014_review.md†L73-L76
 [^70]: Source: knowledge/notes/input_part014_review.md†L119-L119
 [^71]: Source: knowledge/notes/input_part011_review.md†L35-L35
+[^matthew-g30lp]: Source: knowledge/notes/input_part013_review.md†L721-L721
+[^rear-fork]: Source: knowledge/notes/input_part013_review.md†L827-L827
 [^72]: Source: knowledge/notes/input_part014_review.md†L46-L46
 [^73]: Source: knowledge/notes/input_part005_review.md†L502-L502
 [^74]: Source: knowledge/notes/input_part014_review.md†L43-L43
@@ -310,6 +330,7 @@
 [^96]: Source: knowledge/notes/input_part003_review.md†L705-L707
 [^97]: Source: knowledge/notes/input_part014_review.md†L10356-L10365
 [^98]: Source: knowledge/notes/input_part014_review.md†L10352-L10352
+[^jason-32s]: Pending Jason’s first-ride logs after fusing the 32 S charge-only BMS, adding contactors, and completing G30 bench tests. Source: knowledge/notes/input_part011_review.md†L915-L915
 [^99]: Source: knowledge/notes/input_part014_review.md†L79-L119
 [^100]: Source: knowledge/notes/input_part014_review.md†L84-L108
 [^101]: Source: knowledge/notes/input_part014_review.md†L27-L114
@@ -321,3 +342,11 @@
 [^107]: Source: knowledge/notes/input_part007_review.md†L262-L262
 [^108]: Source: knowledge/notes/input_part004_review.md†L13-L19
 [^109]: Source: data/raw/telegram_exports/vesc_help_group/input_part007.json†L410572-L410744
+[^deadword-pitfalls]: Source: knowledge/notes/input_part007_review.md†L413-L413
+[^g30_layouts]: Deck-layout and SNSC stem workflow reminder covering internal/external 20 S pack combos plus CNC stem/star-nut steps for fork swaps. Source: data/vesc_help_group/text_slices/input_part005.txt†L24505-L24536; L24652-L24661.
+[^g30_front_disc]: Guidance on using a Ninebot Pro 2 front motor and custom spacers to add a front disc without a Monorim fork swap. Source: data/vesc_help_group/text_slices/input_part005.txt†L24468-L24477.
+[^sns_prints]: SNSC sourcing and Bambu P1S accessory printing cues for rental-frame conversions. Source: data/vesc_help_group/text_slices/input_part005.txt†L24537-L24568; L24552-L24565.
+[^g30_dual_plan]: Source: knowledge/notes/input_part002_review.md†L18811-L18929
+[^vsett_ferrofluid]: Source: knowledge/notes/input_part002_review.md†L18872-L18882
+[^ferrofluid_stock]: Source: knowledge/notes/input_part002_review.md†L18993-L19004
+[^g30_sleeper]: Source: knowledge/notes/input_part002_review.md†L19756-L19771

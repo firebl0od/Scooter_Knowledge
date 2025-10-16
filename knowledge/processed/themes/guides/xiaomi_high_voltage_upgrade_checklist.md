@@ -7,12 +7,17 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 - External 36 V packs only extend range; meaningful speed gains begin with 12S/13S packs paired with matching chargers and firmware.[^1]
 - Doubling pack voltage roughly doubles no-load speed, but veterans report stock Xiaomi/Ninebot hubs overheat or fail quickly if you jump straight from 10 S to 20 S without major cooling or motor upgrades.
   - treat 18 S as the practical ceiling unless you swap in a beefier hub.[^20s-burn]
+- Recent deck mockups confirm you can cram 20 S 1–2 P (or even tight 30 S 1 P) layouts once the ESC and BMS move under the footplate, but the crew still calls 18 S the “sweet spot” for reliability and packaging sanity.[^deck-relocate]
+- Stem-mounted boosters and skinny OEM forks won’t survive 20 S abuse—budget larger ESx/G30-class hubs and stronger front ends before chasing sleeper builds at those voltages.[^sleeper-hardware]
 - Swapping from 36 V to 48 V at the same amp-hour rating still increases watt-hours and torque, helping heavier riders keep pace even when scooters start from identical hardware.[^1]
 - A 13S6P pack built from 2,500 mAh cells roughly doubles the energy of a stock Pro battery while remaining within Rita’s 5 A shared charging envelope when chargers are split.[^2]
 - Riders chasing 40 km/h+ targets often graduate to 14S or dual-motor builds—confirm you have the braking, tires, and frame reinforcement to match the higher kinetic energy.[^1][^3]
+- Expect 70–80 km/h goals to demand at least 17 S packs, upgraded controllers, full suspension, and 6–10 P batteries that can cost €500–700 in cells alone—far beyond what the stock frame houses without external bags.[^17s_speed]
 - A 16S5P Samsung 35E pack safely feeds about 50 A; chasing 100 km/h on a single-motor Xiaomi with that chemistry is unrealistic without higher-voltage packs, better brakes, and wider forks to house VSETT-class hubs.[^2]
 - Tool and lawnmower packs bring little to the table—Rita waits for ≈36 V before blending, so five-cell modules barely contribute and run dangerously hot under scooter loads.[^tool-pack]
 - Skip 2S/3S “speed booster” bricks strapped in series with the stock pack; the add-ons backfeed once voltage sags and riders have blown OEM ESCs around 54.6 V without heavy reinforcement.[^3][^4]
+- Even dual 13 S packs plateau near 40–42 km/h because stock controllers enforce their own speed ceiling; real top-speed gains require controller swaps or field weakening.[^dual13s_cap]
+- 12 S 350 W hubs log roughly 47 km/h at ≈28 A, while 14 S builds with 75 kg riders reach 49–52 km/h—plan braking and cooling upgrades before chasing those voltages.[^12s14s_speed_benchmark]
 - Ignore bargain “48 V 62 Ah” bundles—builders calculated that the advertised capacity requires non-existent 21 Ah cells and the included controllers rarely survive 48 V operation.[^ali48]
 - Delta-wound 10 S builds already touch ~55 km/h and pull 50–100 A spikes; one rider logged 91 km/h on 16 S before the stock controller died, so plan VESC swaps or limit OEM boards to ≈15 S when chasing top speed.[^5]
 - Xiaomi-class ESCs get flaky above 12 S.
@@ -29,10 +34,12 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 | Rita harness | Leave the gray surge jumper intact for 10–12 S; cut it and the pink sense wire only when pairing 13–15 S externals, then recalibrate firmware.[^7]
 | Motor selection | Stock 300 W hubs survive ~800 W surges briefly; counterfeit “350 W” hubs fail quickly at 62 V.
   - use vetted suppliers for 13S-20S plans and budget ≥€200 for reputable Blade-class replacements; Monorim motors sit below stock quality.[^7][^3][^8] | Source from reputable vendors, note that 10" Kugoo 500 W hubs (≈23–25 Kv) run on stock ESCs or VESCs with 120° halls (or 60° once XiaoDash remaps), and keep OEM hall placement for stable detection.[^8] |
+  - Stock Pro 300 W hubs overheat within minutes past 1 kW, whereas Monorim’s 500 W motor tolerates ~2 kW bursts under wind load—pair voltage jumps with hub upgrades.[^monorim_500w_heat]
 | Motor upgrade budget | Rage Mechanics’ Blade kits, VSETT drop-ins, and Monorim options span roughly €300–€500 per motor before hall-board swaps; confirm quality and lead time before promising Pro 2 customers higher torque builds.[^9] | Set expectations around cost and QC when pitching full Pro 2 conversions. |
 | Controller mounting | Bolt controllers flat with fresh thermal paste and clear wiring; lifted plates overheat on the first long ride and can pinch the brake line.[^mounting]
 | Deck packaging | Splitting a 20 S pack 11 S internal/9 S external kept Gabe’s Pro 2 sleeper build within the deck.
-  - twin 6 AWG feeds, a 50 mm controller spacer, and relocating the BMS into the stem free the cavity for cells.[^10] | Keep electronics outside the main battery bay when chasing 20 S layouts. |
+  - twin 6 AWG feeds, a 50 mm controller spacer, and relocating the BMS into the stem free the cavity for cells.[^10]
+  - Alternative layouts squeeze 20 S 1–2 P or even 30 S 1 P into the tray once the controller lives under the deck (Ubox 100/100 Lite or similar) and the harness is reworked.[^deck-relocate] | Keep electronics outside the main battery bay when chasing 20 S layouts. |
 | Controller mounting | Bolt controllers flat with fresh thermal paste, lap the ESC baseplate and deck for full contact, and clear wiring; lifted plates overheat on the first long ride and can pinch the brake line.[^mounting][^lap-base]
 | Aftermarket ESC installs | Grind standoffs or add thick plates so VESC-class controllers clamp like heat sinks; thin adapter plates let 75100 boards spike within seconds.[^vesc-plate]
 | STM32 ADC protection debate | Denis trusts the factory 10 MΩ divider on 13–16 S builds, but other techs still swap ≈160 kΩ resistors to avoid error 24 or protect STM inputs when emulating a Xiaomi BMS.
@@ -71,6 +78,11 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
   - budget Daly replacements if the existing BMS forces 4.18 V/cell to balance and accept ~20 V sag until wiring is upsized.[^15][^16]
 2. Until a programmable charger arrives, set 16 S supplies around 67 V for partial charges and monitor balance delta closely; Daly hardware often refuses to wake balancing without near-full voltage.[^16]
 
+### 3.4 22S Pro 2 Packaging Experiment
+
+1. GABE proved a 22 S pack fits once PETG carriers slide between the rails (~660 Wh), but he plans to disable or heavily limit regen so the Mini Ubox survives and may short-charge to ≈21.5 S to keep braking headroom.[^gabe-22s]
+2. Expect sanding or external enclosures if deck tolerances clamp the PETG carriers; the build only clears once spacer thickness and rail clearance are tuned.[^gabe-22s]
+
 ## 4. Charger & BMS Planning
 
 - Modify OEM chargers by replacing the 10 kΩ feedback resistor with a 30 kΩ+27 kΩ stack (~14.3 kΩ) and fine-tuning the trim pot to 50.4 V for 12S packs.[^10]
@@ -99,6 +111,9 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 
 ## 6. Operating Guardrails
 
+- Skip serial “booster” bricks on 12 S builds—each extra 1 S segment needs matching parallel count and its own charging path, making a dedicated 15–17 S pack safer than stacking mismatched add-ons.[^series_booster_guardrail]
+- Tudor’s reinforced controllers still top out near 13 S; earlier 17–19 S experiments overheated MOSFETs around 27 A, so future high-voltage hardware is being purpose-built instead of reusing those boards.[^tudor_headroom]
+- Exotic 13 S star/delta experiments have logged 74 km/h freewheel speeds but sit well outside Xiaomi’s safe design envelope—treat them as proof-of-concept rather than commuter targets.[^star_delta_warning]
 - Keep firmware speed limits near 34 km/h despite extra voltage; hardware limit unlocks raise crash risk even if 38.5 km/h is possible.[^24]
 - Expect significant packaging work above 18 S.
   - the crew squeezed 20 S 1–2 P and even 30 S 1 P bricks into M365 decks only by relocating controllers (e.g., Ubox Lite under the floor) and reworking harness routing, effectively turning the scooter into a mini G30LP.[^deck-layout]
@@ -309,3 +324,13 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 [^103]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19101-L19145
 [^104]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19136-L19173
 [^105]: Source: data/vesc_help_group/text_slices/input_part011.txt†L19145-L19185
+[^gabe-22s]: Source: knowledge/notes/input_part010_review.md†L499-L500
+[^deck-relocate]: Source: knowledge/notes/input_part011_review.md†L509-L511 and L610-L611
+[^sleeper-hardware]: Source: knowledge/notes/input_part011_review.md†L510-L510
+[^17s_speed]: Source: knowledge/notes/all_part01_review.md†L676-L676
+[^series_booster_guardrail]: Source: knowledge/notes/all_part01_review.md†L675-L675
+[^tudor_headroom]: Source: knowledge/notes/all_part01_review.md†L684-L684
+[^star_delta_warning]: Source: knowledge/notes/all_part01_review.md†L687-L687
+[^dual13s_cap]: Source: knowledge/notes/all_part01_review.md†L729-L729
+[^12s14s_speed_benchmark]: Source: knowledge/notes/all_part01_review.md†L730-L730
+[^monorim_500w_heat]: Source: knowledge/notes/all_part01_review.md†L728-L728

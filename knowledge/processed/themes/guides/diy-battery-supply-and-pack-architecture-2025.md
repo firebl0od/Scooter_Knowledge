@@ -21,10 +21,21 @@
   - log both approaches so new builders balance ergonomics, legality, and style goals before welding a pack around one camp.[^18]
 - AWD newcomers should stage upgrades: 12 S 3 P commuter packs brown out on VESC duals, so run a single motor until a 16 S 5–7 P pack (or paired internal/external strings) is ready, and treat 13 S 5 P builds as 50–75 A battery systems despite the 15 A-rated cells.[^19][^20]
 
+## Field Failure Watchlist (Denis Part 02, Lines 42 101–44 300 & 15 001–16 500)
+
+- Monorim-branded “upgrade” packs keep arriving with mystery cells, sloppy harness polarity, and poor QC; Denis’ crew now funnels EU buyers toward Scootermode, VTA, or EtorroS packs instead of gambling on the label.[^monorim-battery]
+- Daly Bluetooth boards showing up today often hide SouthROL silicon: expect weak balancing and bogus telemetry unless you can trace provenance or swap to ANT/JK hardware.[^daly-clone]
+- EtorroS’ Kaabo Wolf teardown exposed undersized nickel and collapsing MJ1 parallels once riders maxed controller P-settings; his fix triples the weak groups, keeps P7 ≥ 5, and ends rides near 20 % SoC to avoid repeat failures.[^etorros-wolf]
+- “Dead” Xiaomi packs usually wake when you attach a charger normally—skip risky bypass-charging unless diagnostics confirm the BMS is truly offline.[^sleeping-packs]
+- Serial booster bricks still choke their tiny BMS stages around 25–30 A; red-blinking dashboards or cutouts call for higher-current cells/BMS (60–100 A) rather than firmware hacks, and never parallel packs of different voltages.[^serial-booster]
+- Aerdu-branded externals remain divisive—some 12 Ah packs behave, others arrive imbalanced—so EU riders still lean on Scootermode or Denis’ workshop despite the premium.[^denis-aerdu]
+- A Mirono external pack cooked its BMS and warped the enclosure after field-weakening amps; the shop now doubles heatsinks, underscoring the need for robust wiring, MOSFET cooling, and warranty support on hobby-level builds.[^denis-mirono-overheat]
+
 ## Cell & Component Sourcing Reference
 
 - **Keep the high-power roster current.** Community testers just flagged EVE 40PL/50PL, Molicel P50B, and BAK 45D as the modern reference set for 300 A+ packs.
   - refresh comparison sheets with Mooch’s latest lab data before committing to older chemistries.[^21]
+- **Stock Smart Ant BMS as a Daly fallback.** Mirono rates Xiaoxiang “Smart Ant” boards as a reliable EU-sourced option when Daly lacks 12 S Li-ion hardware.[^denis-smartant]
 - **Log per-cell sag realities.** LG MJ1 parallels started drooping once draws topped ~7–10 A per cell, whereas Samsung 35E banks held voltage better at the same load.
   - document chemistry limits before promising 16 S commuters big torque numbers.[^22]
 - **Budget Xiaomi rebuilds still bottleneck at ~40 A per half-pack.** Dual 20 S stacks built from repacked Xiaomi cells only yield ~17.5 Ah and 40 A per section, so Zero 10X upgrades need parallel 8 AWG-equivalent harnesses at 100 A draws to avoid voltage sag.[^23]
@@ -35,11 +46,14 @@
   - refresh comparison sheets with Mooch’s latest lab data before committing to older chemistries.[^21][^26]
 - **Budget trustworthy refurb lots.** Denis steers budget builds toward refurbished Samsung 35E/50E batches from NKON’s late-2021 stock as a reliable midlife option when premium chemistries are unobtainable.
   - document provenance and avoid mixing them with tired originals.[^27]
+- **Wire Daly boards exactly as printed.** Recent failures traced to doubled balance leads and skipping the negative-first sequence; follow the diagram step by step to avoid instantly popping the BMS.[^denis-daly-wiring]
+- **Don’t cross chemistries on BMS hardware.** LiFePO₄ boards can’t protect Li-ion strings because of voltage-window differences—return them or build a dedicated LiFePO₄ pack instead.[^denis-lifepo4-bms]
 - **Match AWD chemistries to the target current.** Denis steers 15 S all-wheel-drive packs toward LG M29 or EVE 33V cells, while Arsenus adds proven high-draw staples.
   - Molicel P42A/P40T, Samsung 25R/30Q, and Sony VTC5/VTC6
   - keeping 21700 formats as the preferred baseline for sustained torque.[^28]
 - **Monitor Denis’ in-house Pro/Pro 2 pack program.** His custom internal battery just entered production with hand-braided heavy-gauge charge/discharge looms that mirror the earlier 36 V kits.
   - expect vetted harness lengths and drop-in Xiaomi fitment once inventory lands.[^29]
+- Even premium scooters rarely ship high-discharge cells beyond names like Nami, so builders plan sleeper 20 S 3 P Molicel packs or full 20 S 9 P 21700 conversions whenever packaging allows.[^premium-cells]
 | Component | EU Pricing & Availability | North America Reality | Immediate Actions |
 | --- | --- | --- | --- |
 | **EVE 50PL 21700** | Salvaged Stark Varg modules deliver grade-A cells for ~1 € each after labor; retail bulk hovers 1.5 € with logos shaved yet still grade A.[^30] | ~$9 per cell retail with looming import duties.[^31] | Form cooperative buys, pre-clear customs brokers, and reserve storage for incoming pallets. |
@@ -92,6 +106,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 - **20 S 5 P 65H race packs** – Custom 20 S 5 P layouts around 65H 17×4 motors land near 31.5 Ah (≈90 A battery) and force teams to decide between dual 16 S packs for 63 Ah range, a 20 S jump for speed, or a full 32 S leap depending on controller health (85150 vs. 85250).[^69]
 - **Dualtron Achilleus conversions** – Deck cavity (~485 mm × 181 mm) supports 22 S9 P if controllers move to an external mount; stock decks hold 20 S7–8 P and ~100 A battery before needing relocation or compact ESCs.[^70]
 - **Kaabo Wolf deck plans** – Owners sketch 20 S7 P footprints around 160 × 470 × 75 mm and weigh charge-only BMS wiring plus detachable JK balancers against flat ANT/JK smart boards that can actively balance ≈150 A builds inside the deck.[^kaabo-20s7p]
+- **Nami deck risers & reinforcement** – 🇪🇸AYO#74 squeezed a 22 S11 P pack into a Nami by adding an ~8 mm deck riser, while Paolo is doubling nickel where parallels meet and planning ~0.60 mm pure-nickel reinforcement on the 22 S revision to stiffen current paths.[^nami_22s11p_riser][^crimeware_reinforcement]
 - **Deck spacer cautionary tales** – Oversized 3D-printed spacers claiming to fit four Xiaomi Pro packs rely on sparse M3 hardware and plastic trays to restrain ~30 kg of cells; veterans flag braking/suspension limits and insist on metal reinforcements before chasing that capacity.[^71]
 - **Layout planning tools** – RePackr and e4bike.ru configurators help visualise series/parallel counts but miss vertical stacking tricks; CAD mockups remain mandatory for triangle packs and tight decks.[^72]
 - **Hyosung “Puneron” gearing reference** – A 72 T/9 T sprocket set delivered the dirt-bike torque PuneDir was chasing on large-wheel conversions, giving builders a baseline ratio for similar hybrids.[^73]
@@ -110,7 +125,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
   - while demanding controllers that can stomach the heavier current draw.[^82]
 - **Commuter e-bikes benefit from 20 S upgrades.** Swapping 13 S 6 P 35E bricks for 20 S 5 P high-discharge packs nets about 60 % more capacity with less sag, especially when riders stage spare modules to keep handling sharp.[^83]
 - **Navee N65/S65 headroom.** Expect room for dual VESCs and roughly 100 21700 cells with modest spacers, but cramming 120×18650 cells plus a 150 A JK BMS takes aggressive packaging and careful harness routing.[^84]
-- **40PL GT2 envelopes** – Rosheee’s 20 S 6 P Samsung 40PL core from @jamessoderstrom stays inside James’ conservative current caps yet has riders eyeing 26 S upgrades; he’s already ordering 0.3 mm copper busbars so the pack can stretch safely once the chassis is ready.[^85]
+- **40PL GT2 envelopes** – Rosheee’s 20 S 6 P Samsung 40PL core already pushes a G30 past 130 km/h, yet the rear controller faults around 320 A battery; he’s planning a 26 S 8 P (≈32 Ah) GT2 pack with external parallel modules to reach 9 P while keeping the frame sleeper-clean and has 0.3 mm copper busbars on order for the upgrade.[^85]
 - **Stealth 20 S9 P sleepers** – Jerome’s 20 S9 P EVE 40P commuter pack prioritises low internal resistance and cold-weather output even after peers praised Bak 45D; he shelved 40PL cells as overkill for the target scooter.[^86]
 - **30 S single-motor experiments** – Patrick’s 30 S ambitions lean on Samsung 40T because customs complicate EVE imports, and his Lonnyo 16×4 hub plan includes dual-end wiring so he can swap between star and delta when chasing 120 km/h goals.[^87]
 - **20 S12 P high-current commuters** – Haku’s 20 S12 P Molicel P42A pack regularly handles ~250 A battery and 300 A phase with a 520 A BMS cutoff, reinforcing that highway pulls demand large parallels to limit sag and overheating.[^88]
@@ -130,6 +145,9 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 - **Turnkey single-motor benchmark** – Baartu is selling a €1.5 k package (20 S 5 P EVE 40P pack, LY 17×4 65 H hub, Ubox 85150, PMT tires, Monorim suspension) that claims 10.5 kW, 0–50 km/h in 2.2 s, and 85 km/h with field weakening.
   - handy price/performance reference when quoting custom builds.[^98]
 - **22 S 10 P roadmaps** – Race builders still default to Molicel P45B for 22 S 10 P layouts but are already scouting 40–50 PL chemistries and Ampace JP40 cells for future 30–40 S experiments where higher voltage trims amp draw instead of chasing thicker busbars.[^99]
+- **Rob Ver’s JP40 proof point** – His 22 S 9 P Ampace JP40 pack holds roughly 45 A continuous and 140 A peak per cell with only ~6 V sag, staying under 30 °C at 500 A thanks to 0.2 mm copper laminations; a prior 21 S 9 P LG M58T pack with 0.1 mm copper plus 0.1 mm nickel still feeds dual 100 A around 40 °C.[^jp40_pack]
+- **Vsett/G30 packaging guardrail** – Forol squeezed 20 S 6 P (and maybe 7 P with printed spacers) into a dual-motor frame but warns newcomers not to tuck cell groups below the chassis ledge because the cover and BMS still need that volume.[^g30_ceiling]
+- **Forol’s dual-motor deck walkthrough** – Sliding a 20 S pack beneath one ledge frees the opposite ledge for the BMS, slim chargers, or even VESCs when every millimetre is planned.[^forol_walkthrough]
 - **Ninebot GT2 / Max G2 race builds** – Teams now pursue 26 S8 P P42A layouts feeding Tronic X12s; success hinges on clamping dual Ubox controllers to aluminum and retuning wheel diameter/kv for the higher voltage.[^100]
 - **Nami “hotdog” racers** – 22 S11 P P45 builds pair 100 H rear / 70 H front motors, 500 A phase, 550 A absolute, and 100 % front FW to sync wheel speed, netting 146 km/h GPS with manageable 61 °C stator temps.[^4]
 - **VSETT 10+ deck with external controllers** – Relocating controllers outside the deck makes room for a 20 S9 P Samsung 48X pack with ~2 mm side clearance in a 169 mm jig; builders pair it with JK active-balancing BMS boards, waterproof Higo/Julet harnesses, pre-welded copper-clad bus tabs (~$170 shipped), and QS8 anti-spark mains that tuck into copper-reinforced “W” busbars before the lid rises on PVC/acrylic spacers.[^101][^102][^103]
@@ -141,9 +159,13 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
   - plan harness routing before committing to multi-controller layouts, and capture the crossed-cell diagrams so others don’t pinch leads in the fork.[^110][^109]
 - **Noname’s 20 S 32 P moped pack** – The seated build balances ≈9.4 kWh (112 Ah) against a 350 lb curb weight; future iterations will target a lighter 32 S 20 P layout with Seven controllers for better torque, so log enclosure volume, dropout spacing (~165 mm), and weight-handling expectations before copying the stack.[^107][^111]
 - **Segway moped range lessons** – The same platform’s 32 S 20 P refresh plans to redistribute weight and revisit controller selection after the current pack forces awkward lifting; keep these ergonomic notes with your packaging drawings so seated conversions remain serviceable.[^111]
+- **Begode Q3 constraints** – The frame leaves minimal battery space, forcing glass-filled PETG housings and even key relocations to clear the bars when upsizing packs.[^begode_q3_pack]
 - **Turnkey superbike benchmark** – Russia’s billet RTV Ultra scooter ships with dual 3Shul controllers, 26 S 64 Ah packs, 115 mm stators, and 11×PMT130 tires while quoting six-month lead times, offering a reference for premium turnkey builds.[^112]
+- **Sleeper Vsett 11 packaging** – Rob Ver squeezed a 22 S 9 P (~37 Ah) pack and both controllers inside the deck by machining spacers down to the last millimetre, trading exposed hardware for stealth that dodges EU police scrutiny.[^vsett11_pack]
+- **Used Max G2 baseline** – A lightly cycled Segway Max G2 battery that lived indoors provides a sanity check when buying second-hand packs for donor builds.[^maxg2_baseline]
 - **VSETT 10+ deck with external controllers** – Relocating controllers outside the deck makes room for a 20 S9 P Samsung 48X pack with ~2 mm side clearance in a 169 mm jig; builders pair it with JK active-balancing BMS boards and waterproof Higo/Julet harnesses for serviceable installs.[^101][^102]
 - **Cell chemistry trade-offs** – Sony VTC6A cells sag less and run cooler than Molicel P42A but cost roughly twice as much unless ordering ~10 k pieces monthly, while Samsung 30T remains the punchiest option albeit with limited capacity.[^113]
+- **8–9 P performance packs** – Brief riders on how P42A and P45B deliver the best blend of discharge headroom and cycle life for 20 S builds, when Samsung 50S makes sense for fast-charging commuters, and why long-range chemistries like LG M50LT/Samsung 50E still need larger parallels if you expect sustained 300 A duty.[^p42a_brief]
 - **Ninebot G30 MAX** – Builders drill and trim 3 mm ePowerFun skid plates for €25 stopgap protection, map roughly 112–120 horizontal 21700 slots (~17 S8 P) with careful copper folding, swap in custom spacers, and plan 20 S4 P-to-22 S layouts once rails are clear and pack supports printed.
   - just avoid mixing aged grey and purple LG M26 variants that upset balance.[^114][^115][^116]
 - **Xiaomi Pro 2 packaging example** – Relocating the ESC lets a 13 S8 P (104-cell) pack fit with side-mounted BMS modules, highlighting the gains from asymmetrical stacking inside cramped decks.[^117]
@@ -161,6 +183,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 - Budget welders rated for 0.15 mm copper rarely meet spec; proven setups rely on K-Weld or Glitter 811A plus rip-tests, nickel sandwiching, and calibrated power for 0.1 mm sheet.[^55][^56]
 - Turkey-based builders validated the €25 “purple PCB” 12 V welder board when fed by a 72 Ah car battery.
   - it handles 0.2 mm nickel but still lacks the current to weld 0.15 mm copper, so plan on capacitor rigs if customs block pro welders.[^127]
+- GABE’s workhorse welder now throws an E02 fault from a blown board; Haku traced the issue to MOSFET failures, mentioned his own replacement only charges to 5.4 V, and pointed at the heavier Glitter 811H as an upgrade path if repairs stall.[^welder_e02]
 - TIG-welded copper busbars remain the standard for high-current packs.
   - Paolo’s 20 S6 P P45B build is another reminder that nickel alone adds too much resistance at 300 A targets.[^8]
 - 0.3 mm copper laminates waste weight and money because the weldable layer is still nickel.
@@ -199,6 +222,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
   - either parallel two units or accept accelerated wear when chasing 300–350 A discharge goals.[^148]
 - ANT’s published 420 A ceiling leaves Halo-style 22 S 10 P race packs with limited headroom.
   - either parallel two units or accept accelerated wear when chasing 300–350 A discharge goals, because each P45B cell is still spec’d at 45 A continuous despite community attempts to pull 300 A+ through a single BMS.[^149]
+- Jason is prototyping a 32 S charge-only BMS that mirrors VFBMS32 topology but inverts the MOSFET orientation; he’s validating high-side charge paths and diode-drop losses before shrinking the PCB for production.[^vfbms32_eval]
 - Riding big packs on charge-only protection is risky.
   - Yamal’s 20 S 10 P commuter runs an ANT board only on the charge side, and peers warned a short could torch the ESC, so document inspection intervals, discharge-side fusing, and escalation plans until a full BMS lands.[^150][^151]
 - Balance behavior differs: ANT bleeds every cell simultaneously but with limited current, whereas JK hardware addresses two series groups at once, making JK preferable for large parallels needing faster equalization.[^54]
@@ -233,7 +257,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 - Heavy fast-chargers who push 15–25 A into dual GX16 ports accept accelerated wear and check connector temps mid-charge, whereas commuters favour 0.2–0.3 C overnight balancing for pack longevity.[^171]
 - Budget “smart” BMS boards remain a packaging trade-off.
   - the latest no-name unit was twice the size of an ANT despite lower amp ratings, while a 21 S 100 A JBD still fit between 18650 rows for €45 during an AliExpress sale.[^172]
-- Budget 5 A “travel” chargers that never leave constant-current mode have held 4.3–4.4 A into full packs with no CV taper.
+- Budget 5 A “travel” chargers that never leave constant-current mode have held 4.3–4.4 A into full packs with no CV taper.[^cc_only]
   - treat them as emergency bricks only and invest in adjustable YZPower-style supplies for daily use.[^173][^174]
 
 ## Refurbishment & Secondhand Pack QA
@@ -306,6 +330,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 - Mixing LG 40T and LG M50LT strings in parallel demands conservative current draw and a smart 150 A BMS so the weaker chemistry doesn’t overheat or drift out of balance.[^212]
 - Treat glossy spec sheets skeptically: Dualtron 7260R “60 Ah” packs tear down to SK-made 57 Ah pouches rated ≈300 A continuous per cell, and owners warn the labeling gymnastics complicate warranty claims.
   - log actual capacity before mirroring the architecture or promising the marketing numbers.[^213]
+- EU supply is tightening: Samsung 50S already sits around €5.30 per cell locally, 40T and Eve parallels increasingly demand business licences or grey imports, and Jason now leans on scavenged Lime MH1 modules as the budget fallback for commuter packs.[^eu_cell_sourcing]
 - Don’t trust “20 kg, 150 km range” marketing.
   - community math shows 150 km alone demands ~11 kg of cells plus structure, so vet vendor specs before redesigning decks around unrealistic claims.[^214]
 - Vet “used but tested” Samsung 35E/40T lots for weld scars and elevated IR.
@@ -313,8 +338,10 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 - Treat Nordbot “premium” packs with suspicion.
   - community photos showed rewrapped Sanyo cells, exposed bus bars, and flimsy insulation that suggest recycled or stolen modules.[^216]
 - Schedule periodic UV/visual inspections for burned traces on smart BMS boards, especially after preload-failure alarms or unexplained current draw.[^217]
+- Heavy dual 80H hub swaps have roasted undersized 20 S4 P packs; builders now spec 70H/50H combinations or doubled 6 AWG phase leads alongside much larger energy storage when they want 200 A+ headroom.[^dual_80h_pack]
+- Running two smaller packs in series through a single BMS has already cooked hardware when timing mismatches hit 72 V; mock the full pack before welding instead of trusting paired 36 V modules even with triple 6 AWG leads.[^series_pack_warning]
 - Use small insulating pads instead of full foam blocks when cradling deck packs so heat can escape; the crew told Cihan to damp rattles without blanketing the battery in thermal insulation.[^218]
-- Wrap 8 P sticks with clear 160 mm shrink plus kraft paper so inspection windows stay visible, and rely on XTAR VC8 analyzers over budget LittoKala testers when validating reclaimed 21700 lots.[^219]
+- Wrap 8 P sticks with clear 160 mm shrink plus kraft paper so inspection windows stay visible, and rely on XTAR VC8 analyzers over budget LittoKala testers when validating reclaimed 21700 lots—just remember only slots 1–4 run 0.5 A storage/capacity cycles on the VC8, so shops conditioning full 8 P strings upgrade to the VC8S for eight bays at 1 A.[^219][^vc8s_upgrade]
 - Keep 120 mm shrink on hand for stock Xiaomi packs and 170 mm sleeves for Wildman-bag externals; Denis caps Xiaomi ESCs around 55 A phase/30 A battery even with thicker wrap to stay inside hardware limits.[^220]
 - Treat Kapton as a moisture barrier, not primary insulation.
   - high-discharge packs still need fish paper or other thermal shields, and Dualtron Ultra teardowns exposed nickel touching bare cans where insulation was missing entirely.[^221]
@@ -329,6 +356,8 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 - Welding debates from the same thread stressed that ≈1 kA pulse capability and enough voltage to overcome joint resistance matter more than headline kW ratings when joining steel or copper buswork.[^226]
 - Noname proved a shared 9 × 12 in heatsink can host dual VESCs with minimal thermal-paste loss provided you budget deck space; later he kept a single controller near 40 °C at 6 kW with pads, paste, and planned ram-air ducting while Haku’s setup still peaked around 70 °C.
   - use their logs as controller cooling benchmarks during pack planning.[^227][^228]
+- PuneDir’s bag mock-ups show roughly 5 L of volume for 20 S6 P with holders, and Zero 10X decks swallow 20 S7 P of LG M26 cells but leak voltage under 60–70 A, pushing the team toward higher-grade chemistry for future iterations.[^puneron_pack_mock]
+- The Hyosung RX125 “PuneRon” mule now carries a removable belly pan sized for a 20 S20 P pack, and the crew is lining up a Makerbase 84200 with radiator-fed water cooling to chase ~200 A battery and aspirational 300 A phase once controllers restock.[^hyosung_20s20p]
 - Mirono now refuses to build small packs without honeycomb cages or holders; sanding Xiaomi frame rails and adding rubber liners keeps 12 S 4 P 21700 packs plus VESC looms from chafing against the aluminium tray.[^229]
 - A mishandled Mirono pack shows why retention hardware matters.
   - deck rails wore through fish paper, Kapton, and shrink when the battery slid loosely, so add foam blocks or brackets and photograph deliveries to document condition.[^mirono-chafe]
@@ -336,6 +365,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
   - plan mechanical reinforcement alongside electrical upgrades so high-current harnesses survive daily swaps.[^230][^231]
 - QS8 anti-spark plugs are replacing AS150 on 100 A+ scooters thanks to their 110 A continuous rating and the new 6 AWG solder cups, which pair cleanly with 6 mm² phase looms when dual controllers climb past 60 A battery per side.
   - even if EU pricing still hovers around CHF 21.50 per pair.[^232]
+- Builders are already struggling to source leaded solder inside the EU, so document vetted suppliers or compliant alloys before bans derail pack production workflows.[^eu_solder]
 - When paralleling extender packs, match voltages before connecting, use XT90/Y harnesses on common-port BMS designs, and let multiple chargers share the constant-voltage stage so each supply tapers naturally as the packs equalise.[^233]
 - QS8 connectors handle roughly 70 A continuous but take valuable deck space; many riders now substitute 8 mm bullets for compact high-current runs while keeping XT90S on sub-45 A projects.[^234]
 
@@ -360,6 +390,8 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 [^nkon-40t]: NKON shoppers favour Molicel 40T for ≈100 A builds, keep LG M50LT as a tentative backup pending high-current tests, and lean on LG MH1 for budget ebike packs around €1.70 per cell.[^244]
 [^kaabo-20s7p]: Kaabo Wolf owners mapped 160 × 470 × 75 mm decks for 20 S7 P packs, weighed charge-only harnesses plus detachable JK balancers against flat ANT/JK boards, and highlighted the ≈150 A balancing capability of the slim smart units.[^245]
 [^mirono-chafe]: Mirono’s inspection showed loose packs sliding against deck rails can chew through fish paper, Kapton, and shrink, reinforcing the need for foam blocks, brackets, and delivery photos when shipping builds.[^246]
+[^nami_22s11p_riser]: Source: knowledge/notes/input_part008_review.md†L474-L475
+[^crimeware_reinforcement]: Source: knowledge/notes/input_part008_review.md†L476-L476
 
 
 ## References
@@ -448,7 +480,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 [^82]: Source: knowledge/notes/input_part006_review.md†L141-L141
 [^83]: Source: knowledge/notes/input_part006_review.md†L309-L309
 [^84]: Source: knowledge/notes/input_part006_review.md†L85-L85
-[^85]: Source: knowledge/notes/input_part010_review.md†L324-L325
+[^85]: Source: knowledge/notes/input_part010_review.md†L324-L325; knowledge/notes/input_part008_review.md†L431-L433
 [^86]: Source: data/vesc_help_group/text_slices/input_part010.txt†L18727-L18741
 [^87]: Source: data/vesc_help_group/text_slices/input_part010.txt†L19893-L20028
 [^88]: Source: data/vesc_help_group/text_slices/input_part010.txt†L19921-L19942
@@ -477,6 +509,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 [^111]: Source: knowledge/notes/input_part012_review.md†L322-L323
 [^112]: Source: knowledge/notes/input_part012_review.md†L191-L191
 [^113]: Source: data/vesc_help_group/text_slices/input_part001.txt†L1603-L1655
+[^p42a_brief]: Cell-selection TODO capturing P42A/P45B vs. Samsung 50S and LG/Samsung long-range chemistries for 8–9 P scooter packs, including when premium cells justify cost versus leaning on faster charging. Source: data/vesc_help_group/text_slices/input_part005.txt†L24420-L24451.
 [^114]: Source: knowledge/notes/input_part014_review.md†L151-L151
 [^115]: Source: knowledge/notes/input_part014_review.md†L118-L118
 [^116]: Source: knowledge/notes/input_part008_review.md†L184-L184
@@ -491,6 +524,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 [^125]: Source: data/vesc_help_group/text_slices/input_part001.txt†L21239-L21247
 [^126]: Source: data/vesc_help_group/text_slices/input_part001.txt†L20423-L20488
 [^127]: Source: knowledge/notes/input_part008_review.md†L140-L140
+[^welder_e02]: Source: data/raw/telegram_exports/vesc_help_group/input_part011.json, L21901 to L21975; L22311 to L22668
 [^128]: Source: knowledge/notes/input_part008_review.md†L20898-L20916
 [^129]: Source: knowledge/notes/input_part008_review.md†L20943-L20951
 [^130]: Source: knowledge/notes/input_part014_review.md†L119-L120
@@ -582,7 +616,13 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 [^216]: Source: data/vesc_help_group/text_slices/input_part001.txt†L9376-L9399
 [^217]: Source: knowledge/notes/input_part014_review.md†L100-L100
 [^218]: Source: knowledge/notes/input_part008_review.md†L138-L138
+[^cc_only]: Source: knowledge/notes/input_part000_review.md†L709-L712
 [^219]: Source: knowledge/notes/input_part000_review.md†L271-L273
+[^vc8s_upgrade]: Source: knowledge/notes/input_part008_review.md†L302-L302
+[^dual_80h_pack]: Source: knowledge/notes/input_part008_review.md†L307-L307
+[^series_pack_warning]: Source: knowledge/notes/input_part008_review.md†L308-L308
+[^puneron_pack_mock]: Source: knowledge/notes/input_part008_review.md†L333-L333
+[^hyosung_20s20p]: Source: knowledge/notes/input_part008_review.md†L334-L334
 [^220]: Source: knowledge/notes/denis_all_part02_review.md†L329-L330
 [^221]: Source: knowledge/notes/denis_all_part02_review.md†L357-L359
 [^222]: Source: data/vesc_help_group/text_slices/input_part000.txt†L19126-L19172
@@ -607,6 +647,26 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 [^241]: Source: knowledge/notes/input_part006_review.md†L24-L26
 [^242]: Source: knowledge/notes/input_part006_review.md†L48-L48
 [^243]: Source: knowledge/notes/input_part006_review.md†L62-L63
+[^premium-cells]: Source: knowledge/notes/input_part006_review.md†L102-L102
 [^244]: Source: knowledge/notes/input_part002_review.md†L145-L147
 [^245]: Source: knowledge/notes/input_part002_review.md†L148-L149
 [^246]: Source: knowledge/notes/input_part002_review.md†L205-L207
+[^jp40_pack]: Source: knowledge/notes/input_part012_review.md, lines 440-441.
+[^vsett11_pack]: Source: knowledge/notes/input_part012_review.md, line 442.
+[^g30_ceiling]: Source: knowledge/notes/input_part012_review.md, line 438.
+[^maxg2_baseline]: Source: knowledge/notes/input_part012_review.md, line 443.
+[^begode_q3_pack]: Source: knowledge/notes/input_part012_review.md, line 466.
+[^forol_walkthrough]: Source: knowledge/notes/input_part012_review.md, line 476.
+[^eu_cell_sourcing]: Source: knowledge/notes/input_part011_review.md†L614-L615
+[^vfbms32_eval]: Source: knowledge/notes/input_part011_review.md†L625-L626
+[^eu_solder]: Source: knowledge/notes/input_part011_review.md†L620-L620
+[^monorim-battery]: Source: knowledge/notes/denis_all_part02_review.md†L603-L612
+[^daly-clone]: Source: knowledge/notes/denis_all_part02_review.md†L604-L607
+[^etorros-wolf]: Source: knowledge/notes/denis_all_part02_review.md†L605-L606
+[^sleeping-packs]: Source: knowledge/notes/denis_all_part02_review.md†L607-L607
+[^serial-booster]: Source: knowledge/notes/denis_all_part02_review.md†L631-L631
+[^denis-aerdu]: Source: knowledge/notes/denis_all_part02_review.md†L692-L692
+[^denis-mirono-overheat]: Source: knowledge/notes/denis_all_part02_review.md†L996-L996
+[^denis-smartant]: Source: knowledge/notes/denis_all_part02_review.md†L907-L907
+[^denis-daly-wiring]: Source: knowledge/notes/denis_all_part02_review.md†L953-L953
+[^denis-lifepo4-bms]: Source: knowledge/notes/denis_all_part02_review.md†L954-L954

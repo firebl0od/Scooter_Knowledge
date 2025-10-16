@@ -3,7 +3,9 @@
 ## TL;DR
 
 - Treat every unit as a kit: tear it down before energising, photograph QC issues for support, and follow VESC-safe power-up rituals (precharge, discharge caps, avoid hot-plugging) to prevent latent shorts or MCU damage.[^1][^2][^3]
+- Spintend says the red 75 V dual still uses its best FETs and is teasing a 66 × 83 × 29 mm single-100 V controller to bridge current supply gaps while resale units circulate; brass baseplate concepts were shelved in favour of aluminium or copper spreaders.[^single_proto][^brass_swap]
 - Clamp the case hard to a heat sink and budget active airflow if phase current will exceed ~120 A per channel; pad thickness and surface prep matter more than exotic materials.[^4][^5][^6][^7]
+- Treat the Lite boards as ~150 A-per-motor hardware even in dual housings; `lekrsu`’s reminders keep traction upgrades realistic until you step up to full-size Spintend or 3Shul stages.[^lite-phase-cap]
 - Keep regen conservative.
   - match battery regen amps to pack capacity, disable traction-control modes on single-motor builds, and check faults via USB before power-cycling if Bluetooth is absent.[^8][^9][^10]
 - Plan accessories around the power rails you actually have: the dual exposes cruise/lighting outputs and a 12 V rail, but the single requires external buck converters and careful ADC board wiring.[^11][^12][^13][^14]
@@ -11,6 +13,7 @@
 - Synchronise controller power-ups before linking CAN and budget an external BLE bridge for singles.
   - the current batches still ship without Bluetooth and can pop transceivers if one side wakes late.[^can-cite][^single-ble]
 - Treat the built-in alarm as a failsafe only: if the remote misses handshake at boot the Ubox will scream while still energising the hub, so wire brake interlocks or auxiliary sirens for theft deterrence.[^ubox-alarm]
+- Spintend’s refreshed 12‑FET (85 V/240 A) board simply doubles the proven 6‑FET layout, so budget ≈26 kW practical ceiling and plan to buy through trusted resellers like James Soderstrom to skip month-long factory queues.[^138]
 
 ## Pre-Delivery QC & Bench Setup
 
@@ -69,11 +72,15 @@
   - treat it as the baseline for compact frames.[^13]
 - **Water-cooling option:** Matthew’s custom water-cooled base plate on a 100/100 drops FET temps from ~54 °C back to ~40 °C within a minute during 35 °C ambient pulls at 130 A phase.
   - proof that external radiators can rescue commuters stuck with minimal deck airflow.[^14]
+- **Mock up MP2 decks before ordering parts.** Patrick is printing a custom heatsink so an uncased 85/240 (≈40 mm tall plus an 8 mm fin stack) fits inside an MP2 Pro 2; he’ll road-test a 150 A layout with a 17×4 delta motor before adding an external 20 S 2 P booster once clearances check out.[^mp2_pro2]
+- **Thunder 2 dual-G300 cooling.** JPPL and Shlomozero are 3D-printing radiator mounts, polishing aluminium plates, and reusing dead 75200 fins to bolt heatsinks onto Thunder 2 dual-controller installs—share STL files and insulation checks so others can replicate the cooling stack safely.[^thunder_heatsink]
+- **Template custom fins before cutting metal.** After burning multiple 85/250 controllers on his Wepoor, Haku is mocking up aluminium fin stacks, mounting strips, and potential CNC runs so the 12‑FET stage finally has dedicated airflow and mechanical reinforcement inside the deck.[^wepoor_fins]
 - **Expected Benchmarks:** Well-mounted duals have logged ~100 A battery / 130 A phase at ≈45 °C, while poor contact in sealed Weped decks let cases soar to 80 °C during 500 A combined pulls.
   - plan extra cooling above those loads. Square-wave Zero 11X controllers still out-launch under-cooled 60 V Ubox setups until phase limits rise and airflow improves, underscoring the need for fans in cramped decks.[^6][^20][^zero-launch]
 - **Strip paint before mounting enclosures.** GT-series decks that mount Ubox Lite/MP2 controllers against painted steel trap heat.
   - grind to bare metal, add thermal glue or pads, and avoid single PETG brackets that leave cases at ~64 °C under load.[^15]
-- **Plan hardware for earless cases.** 85/240 housings still ship without mounting ears and rely on tiny M2.5 hardware, so riders print brackets, retap threads, or glue adapters before long-travel suspensions knock under-deck mounts loose.[^31]
+- **Plan hardware for earless cases.** 85/240 housings still ship without mounting ears and rely on tiny M2.5 hardware, so riders print brackets, retap threads, or glue adapters before long-travel suspensions knock under-deck mounts loose; ’lekrsu even 3D-printed a charger-mount adapter and slipped a 0.5 mm thermal pad under the Lite case when bolts were scarce.[^31][^lite_mount]
+- **Skip silicone potting.** Rob Ver now seals controllers with covers and perimeter silicone instead of insulation gel because potted boards become impossible to service once a MOSFET fails.[^no_potting]
 - **Repurpose retired baseplates.** Builders are bolting dead 75/200 heatsinks under live controllers.
   - stacking aluminium shims and thin pads or even radiators tied into Dualtron side plates
   - to add surface area without redesigning the deck.[^baseplate_spreader]
@@ -86,6 +93,7 @@
   - proof the compact case works if you clamp it properly.[^16]
 - **Stock guardrails:** Community logs keep single 100/100 controllers near 130 A phase and factory 85150 hardware near 220 A phase unless silicon and cooling are upgraded.
   - expecting more without rework simply burns MOSFETs.[^phase_guardrail]
+- **Smart Repair’s 85 250/240 baseline:** The latest field comparisons cap customer tunes around 200 A battery, 380 A phase, and 480 A absolute once decks are stripped to bare metal and backed with extra thermal mass; skipping the prep still cooks controllers at those numbers.[^85250_envelope]
 - **Single 100/100 baselines:** Lonnyo 65 H commuters now hover around 130–135 A phase, 85–90 A battery, and 150–180 A absolute on single Ubox 100/100 stacks, trimming duty to 98 % and kicking in FW around 88 % to eliminate stutter before heat creeps past 40 °C.[^u100_daily]
 - **Regen Discipline:** Bench testing shows that even –5 A battery regen can trip controllers on unloaded wheels; cap regen amps to roughly the pack’s amp-hour rating plus a small overhead so the FETs absorb the excess.[^8]
 - **Raise Absolute Max when faults persist.** Dual 100/100 owners clearing 200 A overcurrent faults in VESC Tool Mobile now toggle inactivity shutdown (App Config → General) and bump `ABS Max Current` above their commanded peak once wiring checks out.[^17]
@@ -116,6 +124,7 @@
 
 ## Controls, Accessories & IO
 
+- **Harness staging:** JPPL is finishing a “medium” plug-and-play loom that feeds dual Thor 300 controllers with shared 12 V accessories, VESC Express telemetry, lighting, horn, and Spintend power buttons—built for ≤300 A phase 20 S setups so dual-drive owners can wire once and focus on tuning.[^thor_harness]
 - **Remote & Cruise:** The bundled 2.4 GHz remote offers cruise, horn, and light controls via the receiver, reducing parallel looms compared with bare PPM throttles.[^11]
 - **CNC throttle status:** Early production CNC throttles cleared tolerance checks and will ship once the final countersunk hardware arrives, with anodised and black batches staged after QC approves the mounting kit.[^31]
 - **Cruise troubleshooting:** If the remote beeps but never holds speed, confirm the PPM switch channel toggles in VESC Tool, match firmware between paired controllers, and ensure the accessory rail stays above 5 V when cruise engages.[^32]
@@ -129,6 +138,9 @@
 - **Remember to switch the app to ADC.** Multimeter tests show throttle voltage on the adapter even when VESC Tool ignores it—set the input mode to ADC before tearing the loom apart.[^adapter_mode]
 - **ADC lighting headroom:** The adapter already flashes LED strips for turn indicators, so custom amber side strips mostly need channel routing rather than bespoke firmware.
   - just stay within the ≈3 A rail and isolate heavier lamps on an external converter.[^adc_lighting]
+- **Follow the factory wiring map.** One owner cleared stuck buttons only after repinning the ADC lighting board to match Spintend’s published diagram, a reminder to verify loom order before chasing firmware ghosts.[^adc_wiring]
+- **Blinker channel limits:** Sequential LED strips cannot share the blinker output without extra logic, so some builders rewire lighting looms from scratch to keep the adapter’s tiny signal wires safe.[^sequential_led]
+- **Dualtron LED adapters:** Mario-supplied Dualtron motors arrive with only two wires for decorative LEDs, so installers must adapt the factory three-wire harness if they expect OEM-style lighting behaviour.[^dualtron_leds]
 - **Spin Y-2 throttle checklist:** Batch-two throttles still leave the factory without calibration on occasion.
   - verify which ADC port is populated (older looms expect ADC2, current harnesses ship pinned for ADC3), remap the side buttons before adding regen or lighting loads, keep phase leads equal-length when shortening looms, and log a pre/post-calibration throttle curve so customer bikes ship with crisp response when wired directly to the ESC instead of detouring through displays.[^35][^36]
 - **Single-button wake behaviour:** Leave the dual-controller interconnect in place when wiring a shared latching switch.
@@ -140,6 +152,11 @@
   - wire the latching 16 mm start button or a proper low-voltage switch instead of relying on the BMS as a master disconnect.[^start-button]
 - **Secure the ADC switches.** Warranty cleanups now include removing stray solder balls, upgrading to 1 mm pads before reassembly, and gluing the ADC adapter’s slide switch in the 5 V position to stop intermittent throttle brownouts.[^adc-service]
 - **SmartDisplay ecosystem:** NFC-enabled Zero-style throttles with UART RFID drop into VSETT looms and pair cleanly with SmartDisplay pass-through; CAN “police mode” presets remain in test, aiming to mute the front motor while leaving rear torque for roadside compliance.[^nfc-throttle][^police-mode]
+
+## Pending Field Reports
+
+- Verify whether Arnau’s warranty replacement survives 20 S with regen enabled and note any differences Franchesco reports between the legacy and compact 85/250 housings before updating the reliability guidance.[^arnau-warranty]
+- Gather Finn’s long-term data on the 85/150 beta boards—cooling with 3 mm baseplates, external heatsinks, and safe current ceilings—before recommending those revisions for production builds.[^finn-beta]
 
 ## Firmware, Logging & Fault Recovery
 
@@ -229,13 +246,17 @@
 [^20]: Thermal extremes logged on poorly mounted duals at ~500 A phase combined.[^86]
 [^21]: Practical phase-current ceilings and fault symptoms at higher demand.[^87]
 [^22]: Dual 135 A phase / 71 A battery operating envelope and regen cautions on 17 S packs.[^88]
-[^22s_mod]: Arnau’s plan to stretch an 85/150 to 22 S/150 A sparked reminders to disable regen or upgrade MOSFETs/caps, with Smart Repair steering voltage-hungry builds toward Rage Mechanics’ C350 when 30 S capability is required.[^89]
+[^22s_mod]: Source: knowledge/notes/input_part011_review.md†L525-L526
 [^23]: Early fire incidents during detection runs and the caution to validate baseline tuning before advanced features.[^83]
 [^mini_cap]: haku and Yamal capped dual mini Spintend stacks near 200 A battery (≈300 A phase) per motor after 500 A pushes tripped protections despite cool case temperatures.[^90]
 [^connector_plan]: Yamal is pairing 8 mm Amass bullets with Juliet signal connectors while wiring his dual-controller builds, giving a tidy shared CAN/power loom for 80 H projects.[^91]
 [^baseplate_spreader]: JPPL and Shlomozero are reusing dead 75/200 baseplates as auxiliary heatsinks, stacking aluminium spacers and pad layers or bolting radiator blocks into Dualtron side plates for extra surface area.[^92]
-[^85240_passthrough]: Spintend 85240 cases include passthrough slots that let phase leads exit upward.
+[^85240_passthrough]: Source: knowledge/notes/input_part011_review.md†L530-L530
   - builders reroute wiring through them only after protecting the foam insulation pads.[^93]
+[^thor_harness]: Source: knowledge/notes/input_part011_review.md†L529-L529
+[^mp2_pro2]: Source: knowledge/notes/input_part011_review.md†L551-L552
+[^wepoor_fins]: Source: knowledge/notes/input_part011_review.md†L683-L684
+[^thunder_heatsink]: Source: data/vesc_help_group/text_slices/input_part011.txt, L20246 to L20261
 [^24]: CAN wake wiring updates and anti-slip recommendations for multi-controller builds.[^62][^94]
 [^25]: Official firmware packages with 100 A vs. 300 A limits and the need for matching cooling.[^95]
 [^fw53_support]: Spintend support is still advising riders to hold on firmware 5.2 until its customised 5.3 binaries complete soak testing, so only flash the betas if you can recover from detection failures.[^96]
@@ -258,6 +279,8 @@
 [^zero-launch]: Stock Zero 11X square-wave controllers still beat 60 V Ubox launches until phase limits rise and airflow improves, making active cooling a prerequisite for parity.[^115]
 [^single-rev]: Production single-channel Uboxes now include extra silicone pads and cleaner layouts compared with beta boards, but builders still verify harness pinouts before reuse to avoid damaging refreshed logic stages.[^116]
 [^phase-filter]: Motor-wizard phase filters should be disabled after detection to avoid noise and ABS overcurrent faults on Spintend controllers.[^117]
+[^arnau-warranty]: Pending confirmation that Arnau’s warranty replacement tolerates 20 S with regen and any differences between legacy versus compact 85/250 housings. Source: knowledge/notes/input_part011_review.md†L904-L904
+[^finn-beta]: Awaiting Finn’s long-term 85/150 beta data on cooling mods and safe current ceilings before broad deployment. Source: knowledge/notes/input_part011_review.md†L908-L908
 [^nfc-throttle]: NFC-enabled Zero-style throttles with UART RFID modules plug into VSETT harnesses and align with SmartDisplay pass-through plans.[^118]
 [^police-mode]: CAN “police mode” presets are being prototyped so SmartDisplay buttons can disable the front motor while leaving rear torque for roadside checks.[^119]
 [^ioss-update]: AliExpress’ IOSS rollout adds 21–24 % VAT upfront but removes the €10–€24 postal handling fees across much of the EU.[^120]
@@ -274,8 +297,14 @@
 [^qs8_arcing]: Plugging Ubox controllers without QS8 anti-sparks still dumps inrush into capacitors even when builders disable the BMS discharge FET first.
   - document safe connect/disconnect sequences instead of “quick tapping” the connector.[^132]
 [^adc_lighting]: The Spintend ADC board already drives LED strips for turn indicators, so custom amber lighting mainly needs channel routing while heavier loads move to an external converter.[^133]
+[^adc_wiring]: Source: knowledge/notes/input_part012_review.md, line 434.
+[^lite_mount]: Source: knowledge/notes/input_part012_review.md, lines 429 and 475.
+[^no_potting]: Source: knowledge/notes/input_part012_review.md, line 488.
+[^sequential_led]: Source: knowledge/notes/input_part012_review.md, line 491.
+[^dualtron_leds]: Source: knowledge/notes/input_part012_review.md, line 492.
 [^dual_switch]: Leaving the dual-controller interconnect cable in place lets a single latching switch wake both Spintend 100 V/100 A units; unplugging it isolates one controller but stops shared-button startups.[^134]
 [^phase_guardrail]: Community tuning still caps Spintend 100/100 controllers near 130 A phase and stock 85150 hardware around 220 A phase unless silicon and cooling are upgraded.[^135]
+[^85250_envelope]: Source: knowledge/notes/input_part013_review.md†L601-L601
 [^rim_fitment]: Detachable 110 mm Spintend rims favour 13×5.00-6.5 tyres; Hope Tech GR4 calipers clear 3 mm rotors, but most owners stick with 160 mm, ≈2.7–3 mm discs to maintain clearance and common spares.[^136][^137]
 
 
@@ -284,6 +313,8 @@
 [^1]: Source: data/vesc_help_group/text_slices/input_part001.txt†L20826-L20905
 [^2]: Source: data/vesc_help_group/text_slices/input_part001.txt†L20906-L20947
 [^3]: Source: data/vesc_help_group/text_slices/input_part001.txt†L25713-L25761
+[^single_proto]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25558-L25571
+[^brass_swap]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25573-L25595
 [^4]: Source: data/vesc_help_group/text_slices/input_part002.txt†L26880-L26918
 [^5]: Source: data/vesc_help_group/text_slices/input_part002.txt†L26994-L27020
 [^6]: Source: knowledge/notes/input_part004_review.md†L30-L30
@@ -418,3 +449,5 @@
 [^135]: Source: data/vesc_help_group/text_slices/input_part014.txt†L10587-L10605
 [^136]: Source: data/vesc_help_group/text_slices/input_part014.txt†L10409-L10492
 [^137]: Source: data/vesc_help_group/text_slices/input_part014.txt†L10613-L10619
+[^138]: Source: knowledge/notes/input_part010_review.md†L401-L401
+[^lite-phase-cap]: Source: knowledge/notes/input_part010_review.md†L601-L601

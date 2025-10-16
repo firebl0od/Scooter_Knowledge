@@ -5,7 +5,7 @@
 - Race tuners now treat the six-FET Tronic 250 family as ~200 A hardware—pushing toward the marketing 250 A claims triggers thermal cutouts or outright failures, especially once heavy field weakening is layered on top.[^1][^2]
 - The Tronic X12 remains the flagship, delivering just under 30 kW on 24 S packs, but its onboard 5 V rail only sources about 150 mA and the stock looms melt without 10 AWG upgrades, so accessories still need dedicated bucks.[^3]
 - Builders still call Tronic tuning temperamental—yoann tsobanoglou reports hall detection misses, ignored phase limits, runaway battery amps, and audible gate noise that make 3Shul packages feel plug-and-play by comparison.[^1]
-- JPPL now conformal-coats both the logic and power boards before assembly and reminds builders that stock firmware clamps absolute current near 600 A—reaching the marketed 650 A still demands the no-limit build plus proven cooling, even though 20 S/100 A-per-controller tunes already logged ~150 km/h on his Lonnyo setup.[^2]
+- JPPL now conformal-coats both the logic and power boards before assembly, keeps a 22 S 10 P P45B pack (plus spare 2 S/4 S modules for 24 S testing) ready, and reminds builders that stock firmware clamps absolute current near 600 A—no-limit binaries and serious cooling are still required to chase the marketed 650 A even after his 20 S/100 A-per-controller runs pushed a Lonnyo build to ~150 km/h.[^jppl_x12_plan]
 - Mirono just catalogued three fresh arrivals (250R, T12T, X12) and still could not reconcile the switch wiring or the advertised 500 A peaks, reinforcing how murky Tronic’s product matrix remains versus what actually shows up from stock.[^3]
 - Reliability work focuses on preventing traction-control current spikes and reinforcing the fragile DC-DC enable pad; moisture or incomplete post-cleaning rework continues to brick boards until those hot spots are addressed.[^4]
 - Tronic hardware now ships directly from the contract manufacturer that previously white-labeled the brand, so pricing is steady but support and cooling expectations mirror the bare FR-4 chassis buyers are receiving.[^5][^6]
@@ -31,7 +31,7 @@
 
 - Field-weakening above ~30–40 A on Tronic 250s has already destroyed boards after 20 kW pulls; cap FW draw or step up to 12‑FET hardware before chasing highway speeds.[^2]
 - Enabling ANT BMS discharge mid-commissioning immediately blew an X12, illustrating how toggling pack-side FETs under load can brick the power stage.[^7]
-- JPPL is staging a 22 S 10 P Molicel pack (with spare 2 S/4 S blocks ready for 24 S experiments) and waiting on VESC Tool 6.06’s overmodulation option to squeeze more top speed—yet he reminds builders the stock firmware still hard-stops around 600 A absolute unless you flash the no-limit build.[^5]
+- JPPL is staging a 22 S 10 P P45B pack (with spare 2 S/4 S blocks ready for 24 S experiments) and waiting on VESC Tool 6.06’s overmodulation option to squeeze more top speed—yet he reminds builders the stock firmware still hard-stops around 600 A absolute unless you flash the no-limit build.[^jppl_x12_plan]
 
 ## Thermal & Packaging Playbook
 
@@ -71,11 +71,13 @@
 - Log Little FOCer V3.1 field data—Rosheee just received dual 290 A phase / 190 A battery units for his G30/Rion hybrid while waiting on Rion’s 450 A controller shipment, confirming boutique 100 V hardware is shipping again in small batches.[^lfocer-v31]
 - Capture teardown photos and torque specs for reinforcing the DC-DC section and connector terminations before the next round of high-speed validations.[^4]
 - Log the pending warm-weather bench campaign for Tronic 250 v2, 250R, and Little FOCer v3.1 controllers once ambient temps rise above the -6 °C winter testing ceiling so reliability claims reflect real riding conditions.[^winter_tests]
+- Track Mirono’s documentation pass on the Tronic 250R/T12T/X12 lineup—ignition/off-pin wiring clarity and real peak current numbers remain outstanding.[^mirono-validation]
 
 ## Source Notes
 
 [^1]: Guardrails for Tronic 250 current limits and race usage on 24 S packs. Source: knowledge/notes/input_part007_review.md, L43 to L55
 [^2]: Field-weakening failures and practical phase ceilings for Tronic 250-class hardware. Source: knowledge/notes/input_part009_review.md, L340 to L341
+[^jppl_x12_plan]: JPPL’s X12 preparation—conformal coating both boards, staging a 22 S 10 P pack with extra 2 S/4 S modules for 24 S testing, logging ~150 km/h at 20 S/100 A per controller, and noting the stock firmware’s ~600 A absolute clamp ahead of 6.06 overmodulation trials. Source: data/vesc_help_group/text_slices/input_part011.txt, L20677 to L20723
 [^3]: X12 power targets, logic-rail limits, and wiring upgrades from Smart Repair and Rob Ver. Source: knowledge/notes/input_part013_review.md, L359 to L362
 [^4]: Tronic traction-control surges, DC-DC enable pad repairs, and moisture mitigation lessons across rear and front-controller failures. Source: knowledge/notes/input_part003_review.md, L116 to L124. Source: knowledge/notes/input_part003_review.md, L167 to L179
 [^5]: Contract-manufacturer sourcing now handling Tronic/Seven sales directly. Source: knowledge/notes/input_part013_review.md, L790 to L793
@@ -91,6 +93,7 @@
 [^15]: 117 km/h Rion front-controller fire and ensuing DC-DC diagnostics highlighting paste quality and connector choices. Source: knowledge/notes/input_part003_review.md, L178 to L179
 [^winter_tests]: Rosheee’s plan to re-bench Tronic 250 v2, 250R, and Little FOCer v3.1 hardware once temperatures climb above -6 °C so winter pack limits stop masking controller reliability. Source: knowledge/notes/input_part003_review.md, L716 to L718
 [^lfocer-v31]: Rosheee secured Little FOCer V3.1 controllers rated around 290 A phase / 190 A battery for his G30/Rion hybrid while waiting on a 450 A Rion shipment, signalling boutique 100 V stock is moving again albeit in limited batches. Source: knowledge/notes/input_part002_review.md, L163 to L164
+[^mirono-validation]: Pending clarification of Tronic 250R/T12T/X12 wiring and peak current documentation from Mirono’s teardown notes. Source: knowledge/notes/input_part011_review.md†L907-L907
 
 ## References
 

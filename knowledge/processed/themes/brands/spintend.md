@@ -7,14 +7,17 @@
 - New ALU batches squeeze dual 10 AWG battery leads into a single 8 mm bullet and ship accessory pigtails on tiny keyed connectors, so installs now budget proper crimpers, heavy soldering, or larger bullets to avoid cooking the joint during assembly.[^2]
 - NetworkDir even steers budget dual-motor Xiaomi builds toward paired Ubox controllers because Flipsky/Makerbase 75100s keep dying after pack cut-offs—dual Lites have become the reliable mid-tier choice when riders can’t stretch to premium controllers.[^3]
 - The legacy dual Ubox remains a 75 V-class workhorse that comfortably feeds roughly 150 A phase per side, while the refreshed single 85 V/240 A shell ships with 8 AWG outputs, reversible exits, and pricing below the outgoing 250 A block—teams are already mixing the new singles with older duals on tight decks.[^dual-75v]
+- Production single-channel batches now ship with extra silicone pads and tidier layouts, but owners still double-check harness pinouts before reusing older looms so they don’t smoke the refreshed boards.[^spintend_single_tweaks]
 - Riders note that even when undersized hubs fail catastrophically, Spintend’s 100 V Lite shrugged off the shorts—GABE killed three commuter motors in two days without harming the controller, underscoring the brand’s resilience to motor-side faults.[^motor-survival]
 - Yamal has already logged roughly 2,500 km hammering 200 A battery/phase on a Spintend build without failures, highlighting how meticulous wiring and conservative validation keep the hardware alive even for heavy daily use.[^4]
 - Even with the shared “no limits” firmware, single Ubox installs treat ~80 A battery and 130 A phase as the sensible ceiling—the hardware clamp near 300 A still applies, so cooling and telemetry matter more than chasing the unlocked config file.[^40]
 - Face de Pin Sucé’s benching confirms the public 300 A BIN lets stock V2 hardware flirt with ~250 A phase and 420 A ABS in open air, yet Artem still tells sealed-deck riders to cap tunes around 130 A phase unless they upgrade cooling and rubber first.[^5]
+- LiquorHole and Dxniel have already hammered stock 85250 V2 MOSFETs at 135–170 A battery / 300 A phase without swaps while Nobrrr’s Tokmas builds cruise at 120/160, framing the safe envelope before investing in silicon upgrades.[^85250-v2-stock]
 - Early 85250 V1 controllers used current-transformer sensing that saturates near 100 A and complicates auto-detection, so Smart Repair now nudges heavy builds toward shunt-based MK8/X12 footprints (or waits for the teased 18-FET refresh) unless the board has been reworked with proven Toll MOSFETs.[^ct_limit]
 - Thermal success hinges on treating every Spintend as a passively cooled module: clamp the aluminum base to a 3–5 mm plate with paste or pads and reserve generous deck space for 25 × 15 cm heatsinks so dual stacks stay below ~70 °C.[^2]
-- Stock pad stacks combine a 2 mm × 1.1 cm × 9.6 cm strip with a 0.5 mm × 2.4 cm × 9.6 cm shim; swapping to uniform 1 mm sheets with proper clamp pressure has dropped single-Ubox temperatures from 68 °C at 110 A to 49 °C at 142 A on icy rides, underscoring contact pressure over exotic materials.[^6][^7]
+- Stock pad stacks combine a 2 mm × 1.1 cm × 9.6 cm strip with a 0.5 mm × 2.4 cm × 9.6 cm shim; swapping to uniform 1 mm sheets with proper clamp pressure has dropped single-Ubox temperatures from 68 °C at 110 A to 49 °C at 142 A on icy rides, underscoring contact pressure over exotic materials.[^6][^7][^pad_stack]
 - Treat the ADC lighting bridge as an accessory tap, not a main switch—its ~12 V / 3 A rail and updated harnesses simplify pods and brake throttles, but real kill circuits still require relays, smart-BMS buttons, or loop keys.[^3]
+- Draft a single-Ubox connectivity cheat sheet that lists optional BLE modules, CAN jumpers, and when to add ADC expanders so riders stop missing modules when they pair or daisy-chain singles.[^single_connectivity_doc]
 - Single-channel Uboxes still omit the 12 V/3 A accessory rail, so plan fused buck converters for headlights and horns instead of hijacking fan headers or the ADC board.[^8]
 - Built-in alarms scream if the remote fails to handshake at power-up while still letting the motors drive, so wire brake interlocks or auxiliary sirens if you rely on the feature for theft deterrence.[^9]
 - The cost-reduced Ubox V2 quietly swapped 4 A Infineon gate drivers for 1.5 A generics and dropped the BLE board, so sustained high-duty tunes need extra cooling and independent telemetry.[^v2_downgrade]
@@ -22,17 +25,22 @@
 - Long-haul logs show the controllers outlasting peripherals—throttles and other accessories still fail first even after cleaning factory solder balls, so carry spares and plan quick swaps for track weekends.[^10]
 - The compact V100 revision leans on higher-Rdson MOSFETs plus revised copper tracing to shed heat, yet riders still beg for smaller cases, front-facing connectors, integrated Bluetooth, and direct MOSFET-to-heatsink clamps with copper bars.[^11]
 - Stock MOSFETs still fail when builders push >40 A of field weakening on 20 S packs; plan on HY- or HSBL-class swaps before chasing high-ERPM targets on 85150/85250 hardware.[^20]
+- Field weakening isn’t the only danger—Rogerio and ’lekrsu’ just labeled 22 S MakerBase experiments “suicide” and warned that Spintend 85150s will pop on 20 S if you stack MTPA and high voltage without MOSFET upgrades.[^mtpa-pop]
+- Firmware still clamps the 85/250 around 350 A phase (with brief 400 A peaks); Yamal’s 80H build pairs the controller with 8 mm Amass bullets and Juliet signal connectors to keep battery-current headroom in line with premium hardware.[^spintend_85250_cap]
 - A fresh wave of 100/100 failures—four units within a year despite 20 S packs capped near 60 A battery and 130 A phase—has veterans advising swaps to alternative controllers instead of gambling on replacements.[^12]
+- 22 S experiments on 85-series boards remain touchy: when Arnau floated a Tokmas-swapped 85/150 at 22 S/150 A battery, Jason and GABE reminded him the six-FET powerstage and stock capacitors are the real limits—disable regen/e-brake, upgrade the cap bank, or step up to MP2/C350-class hardware built for 30 S instead of gambling on the Lite chassis.[^spintend-22s][^tokmas_warning]
 - Random throttle surges continue to surface on 85 V/240 A, 100 V/100 A, and even v2 85 V/250 A units, so budget time for filtering, shielded cabling, and harness inspections when diagnosing jitter complaints.[^17]
 - The latest single-board revision lands on an aluminium PCB with G015N10 MOSFETs—stick with the matching gate network instead of improvising swaps or you’ll destabilise the driver stage.[^13]
 - Singles without the integrated BLE module reserve the NRF header for Bluetooth because the lone RX/TX pair is often claimed by dashboards or ADC adapters—plan harnesses accordingly.[^14]
 - Spintend sunset the 85/250 and now routes the 85/240 through a New Jersey hub for U.S. buyers—stock spares if you rely on the higher-rated board because the replacement is easier to source but capped a touch lower.[^logistics_update]
+- With two U.S. boutique suppliers gone, Yamal is already speccing TolT MOSFET upgrades for Ubox installs on motorcycle-class packs, signalling how thin the high-power VESC support network has become for 22 S racers.[^tolT-upgrade]
 - Product management is leaning heavily on group feedback—including Russian-language experimenters—to steer new scooter-specific screens and throttle accessories.[^community_feedback]
-- The single-channel preview shares twin-Ubox DNA but still needs active cooling above ~30–50 A; expect ≈100 A with a fan, Bluetooth sold separately, and ~$150 pricing once anodised cases ship.[^single_preview]
+- Paolo’s single-channel prototype mirrors twin-Ubox architecture in a ~60 mm-wide board (without the case), targeting roughly 150 A battery / 250 A phase once externally heatsunk—Bluetooth still sells separately and it will not coexist with a full Xiaomi deck pack.[^single_preview]
 - Twelve-FET Spintend stacks are still marketed at 400 A but field logs keep them around ~250 A battery / 450 A phase with real heatsinking—riders treat claims of 400 A per side as marketing bravado rather than a daily target.[^15]
 - ExpressLine DDP orders are landing in Germany within about a week, but riders still see surprise import invoices even on “duty paid” shipments—budget customs padding despite the expedited route.[^16]
 - EU buyers still shoulder VAT and customs surprises on accessories—expect €30 invoices on €20 parcels until Spintend rolls IOSS collection or a prepaid tax option into checkout.[^17]
 - DHL eCommerce has stranded multiple RMAs for five weeks and returned singles with recurring capacitor failures, so veteran buyers now film unboxings and pay for FedEx or AliExpress Standard with prepaid VAT despite the surcharge.[^18]
+- Add explicit RMA shipping and capacitor-upgrade guidance for single-board owners so they choose faster couriers and swap electrolytics before repeat failures.[^single_rma_caps]
 - The V2 sales launch kept MSRP at $300 but deleted onboard Bluetooth to avoid metal-deck interference, making external dongles mandatory for sealed builds and signalling that future cases will stay radio-transparent.[^19]
 - Riders are consolidating ADC-board orders after repeated failures and €37 replacement shipping plus on-delivery VAT; some now power throttles straight from the controller’s 3.3 V rail to skip the accessory board entirely.[^20]
 - Upcoming aluminum-core singles are on the roadmap: expect fdbl MOSFET options, thicker copper, SH8/6 AWG support, and firmware-locked tiers up to 300 A phase / 150 A battery once production lands.[^21][^22]
@@ -46,6 +54,7 @@
    - Second-hand single-case uBox controllers have turned up with stray solder balls, uneven MOSFET pad contact, and phase leads chafing through silicone grommets—strip the shell, clean, and add insulation before trusting a resale unit.[^24]
    - Newer housings now fasten with four screws and side-facing ports, but riders still open fresh units to clear stray solder before the first ride.[^25]
 - Latest single-channel batches even arrived without all case bolts or with loose solder balls rattling around the shell, so film inspections and demand replacements before installation.[^26]
+- Track Ubox Pro/100 V launch readiness—confirm revised units arrive without shavings, solder balls, or soft I/O before recommending the upgrade path.[^ubox_pro_readiness]
 - Early Ubox 85150 batches shipped with 100 V/100 A silkscreens on the powerstage despite the 85 V/150 A marketing copy; replacement boards reportedly need two new holes drilled because only two of six screws align with the legacy case.[^27]
 2. **Torque and upgrade the high-current connectors.** Swap factory XT90 jumpers for QS8/AS150-class hardware or busbars with proper lugs, and route control wiring through shielded CAT6A pairs to avoid melted solder-only links.[^42]
    - Factory Ubox looms ship with XT90 battery tails but only female motor bullets; most builders trim lead length, swap to 5.5 mm connectors, and split power vs. signal looms down opposite deck rails to curb EMI.[^motor_connectors]
@@ -61,7 +70,7 @@
 9. **Bench-test current-sense offsets before installation.** Three of four UBOX Single 100/100 boards arrived with shorted op-amps reporting nonsensical offsets (30–4,000 counts), and a working unit blew input capacitors during a routine reconnect—validate sensor readings before trusting controllers in builds.[^qc_input004]
 10. **Check Bluetooth harness polarity on fresh Ubox units.** A new 80 V single shipped with its BLE lead reversed, killing the module immediately—verify continuity before power-up.[^bt_polarity]
 11. **Repin the single-channel JST harness thoughtfully.** The single Ubox shares its eight-pin header between the ADC throttle board and Bluetooth module—borrow ground from elsewhere and keep UART accessories off the CAN header when you shuffle plugs.[^32]
-12. **Lock ADC daughterboard switches before sealing.** The single-channel JST shares the ADC throttle board with Bluetooth; epoxy or tape the 3.3 V/5 V selector so vibration cannot flip it mid-ride and brick the adapter.[^33]
+12. **Lock ADC daughterboard switches before sealing.** The single-channel JST shares the ADC throttle board with Bluetooth; epoxy or tape the 3.3 V/5 V selector so vibration cannot flip it mid-ride and brick the adapter, and always depower before repinning—hot-plugging 5 V throttles into the 3.3 V pins has already killed adapters instantly.[^33][^adc_hotplug]
 13. **Disable traction control on single-motor installs.** The “anti-slip” flag is for dual builds—leaving it enabled on a lone controller cuts power with red/green blink codes at low speed.[^34]
 
 ## Product Line Cheat Sheet
@@ -96,7 +105,9 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Matthew’s latest logs confirm firmware clamps 85150 phase current around 150 A even when commands call for 180 A with 90 A battery, signalling that ABS limits still need manual tuning if you want more torque headroom.[^44]
 - **Single Ubox 100/100 daily safe zone:** Lonnyo 65 H commuters are holding tunes near 130–135 A phase with 85–90 A battery and 150–180 A absolute, trimming duty to ~98 % and starting FW around 88 % to clear residual stutter without climbing past 40 °C case temps.[^u100_daily]
 - With upgraded MOT1111T silicon and external cooling, riders have logged ~480 A phase bursts per controller on 85250 stacks—proof the hardware has headroom when thermals are engineered properly.[^hackintosh_burst]
+- The Lite harness uses a keyed multi-pin plug for the logic loom; Oreo Huzky’s Apollo City dual-Lite build highlighted the need to reuse or source that connector family before extending cables.[^lite-harness]
 - Field logs from daily 18 S commuters show 85150 hardware getting unhappy above ~240 A phase; trimming tunes to roughly 220 A phase, 90 A battery, and ≈60 A of field weakening kept case temps stable without neutering performance.[^45][^46]
+- Maike-branded “3000 W” dual hubs plateaued near 25 km/h until motor current climbed toward 140 A (battery ≈70 A) and the stage gained better thermal coupling—stock 16 S commuter packs with dual XT60 leads still bottleneck full Ubox upgrades without cooling mods.[^maike_uplift]
 - Real-world logs show dual Lite builds requesting 160/140 A phase yet barely topping 100 A peaks, underscoring the need to capture data from both controllers before chasing higher numbers.[^10]
 - Dualtron GT riders running Ubox Lite hardware corroborate those peaks: 55–60 A battery per motor with 160/140 A phase commands only logged ~100 A, offering a realistic ceiling for keeping stock hubs alive at highway pace.[^47]
 - Solo commuters copying the shared 300 A hardware-limit BIN still hold tunes near 80 A battery / 130 A phase until they validate heatsinking and airflow; the file only removes software clamps—it does not grant extra headroom.[^40]
@@ -125,7 +136,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 ### Interfaces & Telemetry
 
 - The single Ubox keeps CAN, Bluetooth, and USB online simultaneously, so you can run diagnostics and accessory modules without swapping cables—just mind idle draw when parking long-term.[^single-can]
-- The onboard fan header feeds a thermostatic 12 V rail only; firmware cannot switch it, so tap a constant 12 V source or external buck for lighting mods instead of relying on that header.[^53]
+- The onboard fan header feeds a thermostatic 12 V rail only; firmware cannot switch it, so tap a constant 12 V source or external buck for lighting mods instead of relying on that header.[^53][^fan_header_ctrl]
 - Beta accessory boards spotted in March bundle addressable LEDs (likely WS2812/WS2815) and a piezo buzzer alongside throttle inputs, signalling that future Spintend harnesses may ship with built-in lighting and alert control instead of relying on third-party strips.[^54]
 - Spintend’s BLE hardware remains a boutique accessory—Paolo hand-builds modules for roughly €20 plus shipping while the official AliExpress listing sits near €29, and Flipsky’s mass-produced NRF clone has climbed to ~€40 despite using a €5 core—budget telemetry extras accordingly and expect to flash third-party boards yourself.[^55][^56][^ble_dongle][^ble_required][^missing_ble]
 - Keep Bluetooth enabled even on headless builds—experienced 75100 converts lean on wireless tuning and fault pulls because Spintend hardware is impractical to service without logs in the field.[^ble_required]
@@ -137,17 +148,23 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 ### Field-Weakening & High-Load Limits
 
 - Stock 85150 MOSFETs overheat quickly once you layer 45 A of field weakening on top of 105–120 A battery and 150–175 A phase requests; riders chasing higher ERPMs swap in HY/HSBL Toll packages with hotplate reflow or back FW down to ~50 A at 87 % duty.[^20]
+- Dual Ubox owners are seeing 2×135 A phase / 2×71 A battery setups stay below 70 °C when the cases are externally mounted, and the 75 V hardware survives 17 S packs without regen—just disable braking on a full charge until the pack bleeds a few percent or expect over-voltage trips.[^ip001-17s-thermal]
+- Compact 6-FET Ubox stages still implode around 280 A phase / 550 A absolute with ~60 A of field weakening, so treat them as 250 A-class hardware even if cooling and wiring suggest otherwise.[^6fet-280]
 - 85240 hardware is happiest at 20 S—one HY-revision board tolerated 21 S, but pushing to 22 S without auditing supporting components risks the same runaway failures seen on overloaded 12-FET stages.[^22]
 - Heavy riders continue blowing 85/250 units even with gentle ramps, so dual-motor “fat VESC” upgrades or derated current ceilings remain the conservative path for >20 S commuters.[^18]
+- Rogerio’s latest log shows another refreshed 85××× failing around 250 A, reinforcing why the community keeps daily targets near 200 A battery / 300 A phase even on updated hardware.[^rogerio-250]
 
 ## Thermal & Packaging Playbook
 
 - Mount each ESC against aluminum with thermal compound on both faces; copper spacers are discouraged because corrosion outweighs the modest conductivity gain once you already have aluminum-to-aluminum contact.[^2]
+- The 100 V Ubox still relies on ≈2 mΩ LFPAK MOSFETs dumping heat through the PCB—device swaps or copper shells add little without improving the soldered interface, so riders chasing high phase current stick with the 75 V hardware unless they can overhaul the thermal path.[^ip001-100v-mosfet]
+- Publish the single-Ubox cooling retrofit (fan placement, copper spacers, deck airflow prep) before green-lighting 130 A regen tunes on Dualtron and Spider builds chasing more braking.[^single_cooling_retrofit]
 - Retain or improve OEM pad compression—Ubox V2 temperature deltas often trace back to NTC placement and clamp pressure more than exotic pad swaps.[^25]
 - Bolt controllers directly to bare metal structure: sand paint, polish deck plates, and clamp the Ubox to aluminum or copper spreaders to hold MOSFETs near 55 °C at 50 A battery / 120 A phase.[^26]
 - Maintain pad thickness discipline; thicker thermal replacements have pushed case temps toward 70 °C when compression was lost.[^27]
 - Mount 6‑FET minis on 3–5 mm aluminum plates with paste on both faces—copper sandwiches corrode faster than they help once you already couple to aluminum.[^28]
 - Share load across dual drives when possible: single-controller hill climbs hit ~60 °C while dual-drive equivalents stay below 40 °C, underscoring the headroom gained by splitting torque.[^29]
+- Copper deck-plate experiments continue, but AliExpress spacers deform and the consensus still favours bolting controllers to bare chassis metal with real airflow rather than chasing heavy copper housings.[^ip001-copper-plate]
 - A single 25 × 15 cm heatsink can host two 12‑FET bodies without fin trimming, giving dual builds a repeatable footprint for under-deck cooling plates.[^2]
 - Plan airflow and strain relief so BMS cutoffs do not shock the controllers—Spintend hardware coasts through pack trips, but keeping harnesses tidy prevents the upstream faults that still kill rivals.[^1]
 - Connector failures still dominate thermal complaints—melted XT90 jumpers on dual Ubox builds traced to soldered bus bars without copper pigtails, so riders now spec QS8/AS150U/QS8H hardware or machined lugs and route low-current controls through shielded CAT6A pairs.[^connector_upgrade]
@@ -165,10 +182,17 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 ## Wiring & Accessory Integration
 
 - The latest v3 ADC adapter arrives with proper harness plugs; pair it with the documented throttle pinout (3.3 V red, ground black, ADC1 signal) and keep the NRF port free for Bluetooth modules.[^3][^13]
+- Flipsky’s NRF51822 Bluetooth dongle works on the Ubox as a stopgap telemetry link until Spintend restocks its own modules, albeit without the pre-flashed convenience.[^fs_nrf]
+- Spare harnesses arrive faster via Instagram DMs than email—second-hand Ubox owners routinely chase Bluetooth and power-button looms separately, so plan spares when buying used hardware.[^ip001-ig-support]
+- Spintend’s BLE module remains compatible with both 75100 and Ubox controllers and shows up on AliExpress around €30 with VAT included, while Paolo sells NRF-based dongles for roughly €20 plus shipping; standby draw is about 2 µA, so leaving them plugged in won’t drain packs provided the throttle stays protected.[^ip001-ble-price][^ip001-ble-supply]
+- JPPL is productising a plug-and-play loom that marries dual Thor300 controllers to a Spintend ADC board, VESC Express telemetry, 12 V lighting, and keyed on/off control so 20 S dual-drive builds can skip bespoke wiring.[^jppl_harness]
+- Builders mixing Makerbase or Spintend hardware lean on the ADC Adapter V3 for keyed ignition and lighting because VESC Tool lets them clamp speed profiles and map accessory channels without custom code.[^adc_v3_control]
 - Budget the ADC rail for light loads only: dual 18 W lamps already stress the ~12 V / 3 A output, so horns, halogens, or RGB kits belong on dedicated DC/DC converters triggered by the adapter or a relay.[^3]
 - Budget the ADC rail for light loads only: dual 18 W lamps already stress the ~12 V / 3 A output, so horns, halogens, or RGB kits belong on dedicated DC/DC converters triggered by the adapter or a relay—and Dualtron riders now reserve the rail for brake lights after burning controllers by running both headlight and taillight sets directly.[^64][^3]
+- Remember the auxiliary buck isn’t fused—one rider shorted the 12 V rail on a brand-new 85240 while wiring lights, killing the regulator (and potentially the power stage) before even riding; escalate repairs to Spintend support and insulate accessory leads or use an external buck, especially if you plan to mix 75/200 and 85-series controllers over CAN as a stopgap.[^aux_short]
 - **Hang heavy accessories on an external buck.** A dedicated 12 V/20 A converter powering horns, pumps, fans, and lights only sips ~4–6 A from a 60 V pack, and trimming controller battery amps preserves BMS headroom during horn spikes.[^accessory_buck]
 - **Treat ADC2 as logic-only.** Builders are seeing barely an amp of safe headroom on the secondary ADC rail, so horns and 12 V headlights now run off battery-fed relays instead of that logic supply.[^adc2_limit]
+- Single Ubox headers still expose enough pins for CAN; riders run Bluetooth, CAN, and USB simultaneously without issue and often add inline throttle kill switches after accidental bumps launched scooters in storage.[^ip001-single-can]
 - When reusing OEM dashes or switches, add pull-down resistors or relays instead of tying controller 5 V rails together—shared ignition lines without isolation have cooked boards in cramped conversions.[^3]
 - The ADC adapter already handles turn-signal strips and Spin dial throttles; use the supplied JST harness for ADC3, calibrate legacy Spin Y pods manually, and keep phase leads equal length when trimming looms.[^23]
 - Artem’s upcoming scroll throttle keeps dual-screw clamps, reversible hall direction, selectable 3.3 V/5 V outputs, and a €45–55 target price; beta CNC runs land before the injection-molded release so riders can stop replacing €160 pods every crash.[^65]
@@ -180,11 +204,14 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 
 ## Common Issues & Troubleshooting
 
+- Ubox V2’s “odometer” card still wipes distance every power cycle despite firmware promises, so export trip data after rides instead of trusting onboard totals.[^ip001-odo-reset]
+- Shlomozero’s blown 85150 ended with a dead STM32—no lights and even ST-Link recoveries failed—highlighting how overdriving compact stages can kill logic outright before hardware checks catch it.[^85150-dead]
 - Voyage dashes can mask low ABS limits—Arnau’s new Voyage-equipped 85 V/150 A controller threw ABS OCP faults immediately until Jason advised connecting with VESC Tool and raising the absolute current ceiling instead of relying on the dash alone.[^66]
 
 ### Auto-Off Failures on 100/100 Units
 
 - Some Spintend 100/100 controllers refuse to shut down even when ADC auto-off timers are disabled in VESC Tool, indicating accessory power bleed or stuck logic rails preventing proper shutdown.[^autooff-issue]
+- Dual-phase VSETT hubs are currently triggering Ubox auto-detect suggestions around 270 A instead of the expected 120–130 A; treat ~200 A as the ceiling until Spintend updates the estimator.[^ip001-dual-detect]
 - **Troubleshooting steps:**
 1. Check for backfeed from auxiliary power sources (displays, lighting, BMS wake circuits) that may be energizing the logic rail.
 2. Verify ADC adapter wiring and confirm no pull-up resistors or external circuits are holding the enable pin high.
@@ -225,8 +252,10 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Warranty debates flared when a rider refused to return hardware; moderators reiterated that Spintend covers repairs with paid return shipping and contrasted the turnaround with slower Rion/Tronic replacements before issuing a ban.[^70][^71]
 - Storefront reputation took a hit after community members spotted deleted negative Spin-Y reviews despite active Telegram support—set expectations around official response cadence before promising service levels.[^72]
 - ExpressLine DDP shipments are clearing customs in about a week for EU buyers, yet import offices still assess duties despite the “duty paid” label.[^14]
+- Recent FedEx fulfilment on direct orders landed within four to seven days, letting installers schedule deck tear-downs a week after purchase instead of waiting on slow postal legs.[^spintend-fedex]
 - Regional mark-ups can double MSRP—Israeli riders now see ~$575 street pricing, pushing them toward direct factory orders or alternative brands when budgets are tight.[^14]
 - Sellers occasionally under-declare controller value (e.g., listing €160 modules at €55); while it trims duties, buyers carry the audit risk if customs spot the mismatch.[^14]
+- Jason is prototyping a Spintend-compatible BMS evaluation board that currently costs about “1.5 boards” in components (~$2.60 per key IC); he plans to validate the full-size layout before shrinking production PCBs.[^spintend_bms_proto]
 - Treat the €140 “Spintend” AliExpress storefront as a likely scam—new account, no replies, and a bill of materials that already costs more than the asking price.[^73]
 - Single-channel boards still ship without Bluetooth; riders bolt on external modules (shared over CAN) or email Spintend for a forgotten dongle, and the CAN harness ships with paired singles so accessories live on the master controller.[^74]
 - Spintend’s 500 W water pump supplier stalled during lockdowns; 350 W replacements run hot and sparked bait-and-switch complaints, so builders now chase alternative pumps or budget for active cooling redesigns.[^75]
@@ -245,6 +274,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Vet MOSFET swaps before chasing 200 A+: bargain JJmicro devices underperform while Huayi parts have held 20 kW loads below 40 °C, so confirm datasheets before reflowing silicon.[^37]
 - Log every ride by exporting VESC Tool CSVs or bridging Android sessions to desktop so you can correlate current spikes, duty limits, and temps before relaxing guardrails.[^38]
 - Inspect for contamination after heavy service—moisture ingress and solder splatter have spoofed temperature telemetry and shorted controllers even after repairs, so schedule post-ride inspections after rain or workshop work.[^39]
+- Water ingress on 1 kΩ PTC sensors has pegged motor temps around 90–95 °C on some Ubox installs; raise firmware cutoffs cautiously or repair the harness before blaming controller firmware.[^spintend-temp-water]
 - Stock firmware on single 80/85-series boards still caps phase near 150 A/ABS 210 A; flash the no-limit build and raise ABS toward 240 A with solid cooling before commanding 100 A battery / 180 A phase, and remember that smaller hubs saturate near 100 A regardless.[^76]
 - Treat AI-generated traction-control scripts as experimental—recent CAN/UART toggler code needed debouncing, cached telemetry, voltage checks, and divide-by-zero fixes before it was safe to run on live hardware.[^77]
 - Franchesco’s brand-new 85/250 flashed internally within a few metres on a 20 S 42 Ah build tuned for 150 A battery / 250 A phase (350 A absolute); peers are urging photo documentation and a warranty claim while warning others not to re-energise smoked hardware.[^78]
@@ -291,6 +321,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^6]: Field logs showing 12‑FET Ubox battery and phase limits when cooled. Source: knowledge/notes/input_part010_review.md, L190 to L190
 [^7]: Details on the revised 85 V/240 A single Ubox with 8 AWG leads and reversible exits. Source: knowledge/notes/input_part010_review.md, L202 to L203
 [^dual-75v]: Legacy dual Ubox safe envelope (~150 A phase per side) plus refreshed 85 V/240 A single with AWG 8 leads and reversible exits priced below the retired 250 A block. Source: knowledge/notes/input_part010_review.md, L201 to L203
+[^spintend_single_tweaks]: Source: knowledge/notes/input_part000_review.md†L716-L716
 [^8]: Early dual 75/100 revisions shipping without populated phase filters. Source: knowledge/notes/input_part005_review.md, L167 to L167
 [^v2_downgrade]: Raphaël confirmed Spintend swapped 4 A Infineon gate drivers for 1.5 A generics and removed the BLE daughterboard on cost-reduced V2 hardware, explaining weaker high-duty performance. Source: knowledge/notes/input_part002_review.md, L129 to L132
 [^single_lid_limit]: The single Ubox enclosure still bolts MOSFETs to the lid, leaving roughly half the thermal mass of the dual case—fans now remind riders it was designed for ~30 A continuous one-wheel builds, not 100 A dual-motor pulls. Source: data/vesc_help_group/text_slices/input_part002.txt, L9689 to L9697
@@ -309,7 +340,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^18]: Heavy riders continuing to burn 12-FET 85/250 hardware despite conservative ramps, reinforcing derating guidance. Source: knowledge/notes/input_part014_review.md, L19 to L19
 [^19]: Warranty denials tied to firmware blame, underscoring the need to document software builds before submitting RMAs. Source: knowledge/notes/input_part014_review.md, L12 to L22
 [^community_feedback]: Spintend monitors rider chats—including Russian-language experiments—to prioritise scooter-focused screens and throttles. Source: knowledge/notes/input_part000_review.md, L56 to L56
-[^single_preview]: Source: knowledge/notes/input_part000_review.md, lines 252 and 299.
+[^single_preview]: Source: data/vesc_help_group/text_slices/input_part001.txt†L27306-L27334
 [^20]: Field-weakening failure case on 85150 hardware and guidance to cap FW or swap MOSFETs before chasing more ERPM. Source: knowledge/notes/input_part014_review.md, L21 to L21. Source: knowledge/notes/input_part014_review.md, L167 to L168
 [^21]: Thermal adhesive mounting tips, per-motor temperature monitoring, and reminders that workmanship faults still kill controllers. Source: knowledge/notes/input_part014_review.md, L22 to L22. Source: knowledge/notes/input_part014_review.md, L45 to L45
 [^22]: Voltage headroom cautions for 85240 revisions and the need for full-component audits before 22 S experiments. Source: knowledge/notes/input_part014_review.md, L205 to L205
@@ -327,12 +358,18 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^33]: Regen adjustments needed to clear BMS over-voltage faults around 76.6 V on 20 S packs. Source: knowledge/notes/input_part008_review.md, L607 to L607
 [^input_caps]: Adding 470 µF low-ESR capacitors close to the controller when pack leads are long prevents MCU brownouts from back-EMF spikes. Source: knowledge/notes/input_part000_review.md, L89 to L89
 [^34]: ADC adapter wiring with diode isolation while keeping UART dashboards online. Source: knowledge/notes/input_part009_review.md, L84 to L86
+[^single_connectivity_doc]: Source: knowledge/notes/input_part000_review.md†L801-L801
 [^tokmas_swap]: Hackintoshhhh’s Tokmas/JMSh1001ATLQ MOSFET swap logs showing 160–180 A battery and ~240 A phase capability alongside hotter case temps, plus Patrick’s reminder that the six-FET stage still caps practical output near 230–250 A. Source: knowledge/notes/input_part011_review.md, L411 to L413
 [^thunder_front85150]: Thunder 2 front-motor plan targeting 150 A battery / 230 A phase with repaste, exposed heatsinks, optional fans, and temperature ceilings that taper output before ~96 °C during 120–130 km/h runs. Source: knowledge/notes/input_part011_review.md, L415 to L417
 [^can_power_sync]: Dual Thunder builds confirmed the 85-series CAN power line wakes both controllers from a single button; isolate supplies if you need independent power-cycling. Source: knowledge/notes/input_part011_review.md, L468 to L470
 [^voyage_megan]: Voyage “Megan” displays bundle Metr integration, trip logging, and mode storage for roughly $400, but riders still avoid rain because the housing is not sealed. Source: knowledge/notes/input_part011_review.md, L447 to L449
 [^35]: Feeding Spintend’s ADC adapter from an external DC-DC on Ubox Lite builds. Source: knowledge/notes/input_part008_review.md, L606 to L606
+[^single_cooling_retrofit]: Source: knowledge/notes/input_part000_review.md†L810-L810
+[^ubox_pro_readiness]: Source: knowledge/notes/input_part000_review.md†L812-L812
+[^single_rma_caps]: Source: knowledge/notes/input_part000_review.md†L813-L813
 [^hackintosh_burst]: Hackintoshhhh’s MOT1111T-equipped 85250 build tolerated ~480 A phase bursts per controller once the upgraded silicon and cooling were dialed in. Source: knowledge/notes/input_part013_review.md, L34 to L34
+[^mtpa-pop]: Source: knowledge/notes/input_part013_review.md†L781-L781
+[^lite-harness]: Source: knowledge/notes/input_part013_review.md†L738-L738
 [^arnau_dropout]: Arnau Martinez Casals’ Ubox 250 stayed powered yet blocked Bluetooth pairing after a 60 V/120 A trip—evidence of failing regulators or CAN protection parts rather than a pure software fault. Source: knowledge/notes/input_part013_review.md, L61 to L62
 [^direct_order]: Matthew’s reminder that direct-from-Spintend orders avoid AliExpress markups and keep warranty support responsive for 85150/85250 hardware. Source: knowledge/notes/input_part013_review.md, L227 to L234
 [^soderstrom]: 🇪🇸AYO#74’s shout-out to James Soderstrom for repairing Spintend driver stages and fabricating replacement BLE modules during RMA backlogs. Source: knowledge/notes/input_part013_review.md, L236 to L244
@@ -346,6 +383,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^37]: MOSFET reliability comparisons favouring Huayi devices over cheaper alternatives for 200 A-class loads. Source: knowledge/notes/input_part009_review.md, L88 to L88
 [^38]: Recommended CSV logging workflows via VESC Tool and Android bridge methods. Source: knowledge/notes/input_part001_review.md, L149 to L150
 [^39]: Moisture contamination spoofing temperature telemetry until enclosures were cleaned and resealed. Source: knowledge/notes/input_part008_review.md, L40 to L40
+[^spintend-temp-water]: Source: data/vesc_help_group/text_slices/input_part004.txt†L25304-L25341
 [^v2_ntc]: Ubox V2’s higher reported temperatures trace back to NTC placement and higher phase current, and riders found the stock Spintend pads cooled better than aftermarket Thermal Grizzly sheets once clamp pressure was restored. Source: data/vesc_help_group/text_slices/input_part001.txt, L24976 to L25009. Source: data/vesc_help_group/text_slices/input_part001.txt, L25349 to L25359
 [^ble_dongle]: Official Spintend Bluetooth modules arrive pre-flashed around €29 with taxes included, while generic NRF51822 boards demand manual flashing before they pair reliably, so most riders pay for the plug-and-play option. Source: data/vesc_help_group/text_slices/input_part001.txt, L24903 to L24930
 [^ble_required]: Veteran 75100 users keep Bluetooth enabled on Spintend controllers because field tuning and fault collection are impractical without wireless access once the deck is sealed. Source: data/vesc_help_group/text_slices/input_part001.txt, L24915 to L24921
@@ -357,11 +395,16 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^fw53_release]: Spintend’s public 5.3 firmware drop earned mixed reviews—official support urged riders to remain on 5.2 until customised 5.3 binaries soak, even as early testers praised smoother acoustics. Source: data/vesc_help_group/text_slices/input_part001.txt, L4000 to L4052. Source: data/vesc_help_group/text_slices/input_part001.txt, L5042 to L5059
 [^u75_vs100]: Early 75 V betas shipped with exposed copper busbars while later 100 V runs hid higher-Rds(on) MOSFETs under resin and still arrived with loose solder balls, prompting riders to open every unit on delivery. Source: data/vesc_help_group/text_slices/input_part001.txt, L25795 to L25855
 [^logistics_update]: Spintend discontinuing the 85/250 while routing 85/240 shipments through a New Jersey hub so U.S. buyers see faster delivery and minimal tariffs, leaving the higher-rated board scarce.[Source: knowledge/notes/input_part012_review.md, L111 to L135. Source: knowledge/notes/input_part012_review.md, L379 to L405]
+[^tolT-upgrade]: Source: knowledge/notes/input_part013_review.md†L823-L823
 [^u100_baseline]: Smart Repair’s teardown of the Ubox 100/100 highlights its 22 S limit, ≈135 A phase / 180 A absolute defaults, lack of ST-Link pads, and the need to tame regen unless you’re ready for MOSFET swaps. Source: knowledge/notes/input_part012_review.md, L48 to L48
 [^u85240_speed]: Single 85/240 builds have already pushed Lonnyo 80 H hubs to ~95 km/h on 22 S, underscoring that the compact case still needs race-grade cooling before chasing dual-drive numbers. Source: knowledge/notes/input_part012_review.md, L24 to L24
 [^seq_led]: Sequential LED strips overrun the ADC turn-signal line without helper logic, so riders rewire lighting looms or add controllers when they want chase effects. Source: knowledge/notes/input_part012_review.md, L481 to L481
 [^mounting_threads]: Riders printing adapter plates, adding 0.5 mm pads, or retapping the tiny M2.5 bosses because 85/240/Lite housings ship without sturdy mounting ears or hardware.[Source: knowledge/notes/input_part012_review.md, L419 to L420. Source: knowledge/notes/input_part012_review.md, L465 to L466
 [^doa250]: Reports of 85/250 controllers arriving DOA or failing quickly at 200 A battery / 170 A motor, prompting owners to migrate toward Seven or 3Shul alternatives.[Source: knowledge/notes/input_part012_review.md, L110 to L111. Source: knowledge/notes/input_part012_review.md, L135 to L136
+[^85250-v2-stock]: Source: knowledge/notes/input_part013_review.md†L820-L820
+[^6fet-280]: Source: knowledge/notes/input_part013_review.md†L804-L804
+[^rogerio-250]: Source: knowledge/notes/input_part013_review.md†L871-L871
+[^85150-dead]: Source: knowledge/notes/input_part013_review.md†L804-L804
 [^40]: Shared 300 A hardware-limit firmware for single Ubox installs and the reminder to keep real tunes near 80 A battery / 130 A phase with solid cooling. Source: knowledge/notes/input_part001_review.md, L12 to L12
 [^41]: Solder-ball contamination on new Ubox V2 units prompting full disassembly and cleaning before use. Source: knowledge/notes/input_part001_review.md, L238 to L240
 [^42]: Connector melt reports that led riders to upgrade to QS8/AS150 hardware with shielded control wiring. Source: knowledge/notes/input_part001_review.md, L242 to L244
@@ -372,6 +415,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^44]: Ubox Lite ESD failures caused by unsymmetrical power disconnects while CAN remained energised. Source: knowledge/notes/input_part008_review.md, L269 to L269
 [^45]: Standby draw measurements and LED behaviour on Spintend’s latching power switch. Source: knowledge/notes/input_part001_review.md, L214 to L216
 [^46]: Community flashing workflow relying on Spintend-supplied BINs and auto-detection to avoid bricking controllers. Source: knowledge/notes/input_part001_review.md, L632 to L633
+[^maike_uplift]: Source: data/vesc_help_group/text_slices/input_part004.txt†L25285-L25303
 [^47]: Auto-detect anomalies recommending ~270 A on dual-phase hubs until limits are manually corrected. Source: knowledge/notes/input_part001_review.md, L824 to L825
 [^single-proto]: Paolo’s single-board Spintend prototype measures ~60 mm wide without the case, adds capacitance over a Nucular 12F, should manage ≈150 A battery on flat roads, and still needs external sealing for wet decks. Source: knowledge/notes/input_part001_review.md, L80 to L82
 [^single-can]: Koxx confirmed the single Ubox exposes CAN, Bluetooth, and USB simultaneously, letting accessories and diagnostics stay online without swapping cables. Source: knowledge/notes/input_part001_review.md, L99 to L99
@@ -393,7 +437,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^1]: Source: knowledge/notes/input_part000_review.md, L502 to L504
 [^2]: Source: knowledge/notes/input_part006_review.md, L107 to L107
 [^3]: Source: knowledge/notes/input_part010_review.md, L32 to L33
-[^4]: Source: knowledge/notes/input_part011_review.md, L759 to L765
+[^4]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21460 to L21485
 [^5]: Source: knowledge/notes/input_part000_review.md, L504 to L504
 [^6]: Source: knowledge/notes/input_part001_review.md, L549 to L550
 [^7]: Source: knowledge/notes/input_part001_review.md, L565 to L566
@@ -423,6 +467,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^31]: Source: knowledge/notes/input_part004_review.md, L203 to L203
 [^32]: Source: knowledge/notes/input_part000_review.md, L588 to L588
 [^33]: Source: knowledge/notes/input_part000_review.md, L588 to L589
+[^adc_hotplug]: Source: knowledge/notes/input_part000_review.md†L705-L707
 [^34]: Source: knowledge/notes/input_part000_review.md, L592 to L593
 [^35]: Source: knowledge/notes/input_part003_review.md, L223 to L223
 [^36]: Source: data/vesc_help_group/text_slices/input_part003.txt, L3006 to L3084
@@ -450,6 +495,9 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^58]: Source: knowledge/notes/input_part001_review.md, L668 to L670
 [^59]: Source: data/vesc_help_group/text_slices/input_part001.txt, L10015 to L10202
 [^60]: Source: data/vesc_help_group/text_slices/input_part001.txt, L10273 to L10314
+[^fan_header_ctrl]: Source: knowledge/notes/input_part001_review.md, L508 to L510
+[^pad_stack]: Source: knowledge/notes/input_part001_review.md, L550 to L550
+[^fs_nrf]: Source: knowledge/notes/input_part001_review.md, L549 to L549
 [^61]: Source: data/vesc_help_group/text_slices/input_part001.txt, L9226 to L9351
 [^62]: Source: data/vesc_help_group/text_slices/input_part001.txt, L9333 to L9348
 [^63]: Source: data/vesc_help_group/text_slices/input_part001.txt, L10314 to L10343
@@ -461,6 +509,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^69]: Source: knowledge/notes/input_part004_review.md, L32 to L32
 [^70]: Source: data/vesc_help_group/text_slices/input_part003.txt, L2209 to L2223
 [^71]: Source: data/vesc_help_group/text_slices/input_part003.txt, L231 to L297
+[^spintend-fedex]: Source: data/vesc_help_group/text_slices/input_part004.txt†L25283-L25299
 [^72]: Source: data/vesc_help_group/text_slices/input_part003.txt, L5746 to L5754
 [^73]: Source: knowledge/notes/input_part000_review.md, L348 to L348
 [^74]: Source: knowledge/notes/input_part000_review.md, L333 to L334
@@ -483,3 +532,19 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^91]: Source: data/vesc_help_group/text_slices/input_part003.txt, L8580 to L8664
 [^92]: Source: knowledge/notes/input_part003_review.md, L84 to L84
 [^93]: Source: knowledge/notes/input_part003_review.md, L143 to L143
+[^ip001-ig-support]: Source: data/vesc_help_group/text_slices/input_part001.txt†L23183-L23219
+[^ip001-ble-price]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24896-L24907
+[^ip001-ble-supply]: Source: data/vesc_help_group/text_slices/input_part001.txt†L27501-L27625
+[^ip001-odo-reset]: Source: data/vesc_help_group/text_slices/input_part001.txt†L20198-L20205
+[^ip001-dual-detect]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24642-L24683
+[^ip001-100v-mosfet]: Source: data/vesc_help_group/text_slices/input_part001.txt†L23602-L23861
+[^ip001-copper-plate]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24459-L24505
+[^ip001-17s-thermal]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17690-L17875
+[^ip001-single-can]: Source: data/vesc_help_group/text_slices/input_part001.txt†L27625-L27652
+[^aux_short]: Source: data/vesc_help_group/text_slices/input_part011.txt, L21413 to L21489
+[^tokmas_warning]: Source: data/vesc_help_group/text_slices/input_part011.txt, L19984 to L20003
+[^jppl_harness]: Source: data/vesc_help_group/text_slices/input_part011.txt, L19928 to L19935
+[^adc_v3_control]: Source: data/vesc_help_group/text_slices/input_part011.txt, L20105 to L20131
+[^spintend_bms_proto]: Source: data/vesc_help_group/text_slices/input_part011.txt, L19571 to L19592
+[^spintend-22s]: Source: knowledge/notes/input_part011_review.md, L525 to L526
+[^spintend_85250_cap]: Source: knowledge/notes/input_part011_review.md, L589 to L589

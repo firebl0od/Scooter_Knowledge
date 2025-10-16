@@ -5,39 +5,68 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 ## 1. Build Planning & Component Selection
 
 - **Controller tiers:** Treat Makerbase/Flipsky aluminum-PCB boxes as interim ≤15 S 50 A solutions; high-power riders standardize on 3Shul C350/CL350, Ubox duals, or BRIESC units for thermal headroom and QC maturity.[^1][^2][^3]
+- **Spintend for Vsett 10+ swaps.** Crew consensus still leans on Spintend’s 12-fet controllers when Vsett 10+ owners want Bluetooth profile switching; the chassis’ larger deck, custom suspension, and improved stem/clamp make packaging bigger batteries easier than on Zero 10X frames.[^spintend-vsett]
+- **Nucular 24F scarcity:** Second-hand 24F units remain rare, but externally mounted controllers sustain ~500 A phase / 300 A battery without overheating and the potted case stays waterproof—keep them outside the battery bay instead of burying them beside hot packs.[^nucular_24f]
+- **Leverage Nucular charge-through-phase.** A 56 V, 2 kW server PSU on 120 V mains pushes roughly 15 A through the controller, and any supply below pack voltage—from spare scooter batteries to EV posts—can top up packs via the same phase leads.[^nucular_phase_charge]
 - **Torque hardware before shakedowns.** Ebike conversions running VESCs have thrown axles within metres when relying on washers; file torque-arm slots for an interference fit, add pinch bolts so 10 mm steel clamps carry axle load, and tighten with short-handled sockets in small increments to avoid crushing thin dropouts.[^1][^2]
+- **Plan closed-course validation for high-speed pulls.** 🇪🇸AYO#74’s 131 km/h rear-motor run ran out of runway, reinforcing that 30 kW scooters need long, obstacle-free straights or track time for testing.[^ayo-131]
+- **Log every shakedown.** With dynos rare, riders lean on CAN traces, GPS runs, and disciplined cooling upgrades instead of optimistic app readouts when validating power claims.[^log-every-run]
 - **Trust alloy handlebars over bargain carbon.** Track telemetry showed cheap carbon bars flexing heavily at speed and failing without warning; stick with quality alloy cockpits even if they add grams.[^3]
+- **Skip bargain steering dampers.** Cheap motorcycle-style dampers have introduced dead zones and wobble; veterans revert to wide bars or invest roughly $400 in quality units, and still rate Nami and LongThunder chassis as the stiffest high-power frames.[^dampers-budget]
 - **Match shunt mods to motor capability.** PuneDir’s shunt-heavy square-wave ESC already saturates a 1 kW motor.
   - traces and FETs have blown before
   - and the “fix” of staying above 50 km/h just hides the real problem, so current limits still need to match motor size instead of what the modded board can momentarily supply.[^4]
+- **Upgrade undersized hubs before raising current limits.** Matthew’s Yume Y11 motor cooked itself at only 16 S and 180 A battery/phase while his Lonnyo hub shrugged off 300 A, underscoring that small OEM cans become the weak link once torque targets rise.[^y11-motor-limit]
 - **Shitsky 75350 proves budget headroom.** A 20 S 13 P LG M58T pack pushed a Shitsky 75350 to ~32 kW (500 A phase / 235 A battery) while holding sag near 7 V and returning 57 Wh/km.
   - evidence that solid busbars and careful wiring let the controller survive real superbike duty.[^5]
+- **Tronic warranty drama persists.** Riders are filing chargebacks after weeks without replacements, citing burnt MOSFETs, inconsistent soldering between units, and warnings that swapping QS8 connectors can void support claims.[^tronic_qc]
 - **Ignore the “V2” hype:** The rumored Makerbase 75100 V2 is just the aluminum-PCB refresh with the same stray solder, inaccurate shunts, missing key-switch support, and weak documentation, so plan upgrades instead of waiting on a non-existent redesign.[^makerbase_v2]
 - **Plan for physical fit.** Makerbase 75200 V2 measures roughly 130 × 68 × 28 mm versus 103 × 58 × 19 mm for 75100 V2, letting all three units squeeze into Navee N65 decks once you trim fins and keep VESC undervoltage above the BMS trip point.[^6]
+- **Treat 6-FET Ubox minis as 250 A-class hardware.** Shlomozero’s replacement 6-FET board exploded at roughly 280 A phase / 550 A absolute with 60 A of field weakening, so compact stages still demand conservative current and FW targets.[^ubox-6fet-failure]
+- **Carry proven backups for commuters.** When that 6-FET died, Shlomozero dropped in a spare Vsett controller to keep his NIU rolling—daily riders should stage drop-in replacements before a controller failure strands their only transport.[^backup-controller]
+- **Log packaging for heavyweight frames.** LiquorHole’s 21 kW Yisuntrek R8 plan now defaults to 6 AWG cabling, QS8 V2 connectors for 10–15 s bursts, actively cooled Spintend 85250 controllers in the stem, and Lonnyo 70 H 33×2 motors because the 150 mm dropouts will not swallow 75 H axles.[^yisuntrek-packaging]
+- **Account for sustained fade on 75××× hardware.** Shlomozero’s MakerBase 75200 started tapering after extended 250 A phase / 150 A battery pulls even with MOSFET telemetry stuck near 100–110 °C, so treat those numbers as the practical ceiling for long climbs rather than chasing the firmware cutoff.[^makerbase-75200-fade]
 - **Expect airflow mods on 84 V Makerbase boxes.** Sideways heatsink screws choke convection on the 84 V “84200HP/84100HP” line, so owners plan thermal pads, custom housings, or deck cut-outs before pushing current.[^7]
+- **Potting choices matter.** Thermally conductive potting compound can drop Ubox internal temperatures about 30 % by coupling the PCB to the housing, but FR4 still bottlenecks heat compared with elusive aluminum-core boards; resin potting flows through gaps and boosts conductivity better than silicone when you need waterproofing.[^potting_drop][^resin_potting]
+- MG Chemicals 422C silicone conformal coating keeps controllers waterproof as long as you mask connectors and leave MOSFETs/MCUs bare for heat transfer; builders still reserve full potting for sacrificial hardware because repairs become brutal once the resin cures.[^mg422c][^potting_tradeoffs]
 - **Spec connectors to match battery current.** Daily riders keep XT90s around 100–110 A battery and step to dual XT90s or QS8s once Spintend-class controllers pull harder.
   - document those breakpoints so parallel-pack builds stop melting undersized plugs.[^8]
+- **Charge outside and validate every smart BMS.** Dejan’s storage-room fire pushed the crew to charge scooters outdoors and lean on smart BMS protections (over-charge, over-current, staged over-voltage cut-offs); Artem still backs ANT, LLT, and JK boards but warns some models allow 180 A surges or enforce 2.8 V cut-offs, and follow-up teardowns showed marginal 60 A BMS wiring that needs thicker leads before returning a rebuild to service.[^bms_fire][^bms_validation][^bms_wiring]
 - **Balance airflow with sealing on under-slung ESCs.** Ausias’ bottom-mounted Kelly controller clogged with dust even without sand exposure; he is switching to a ventilated yet splash-resistant 3D-printed shroud, underscoring that deck-bottom installs need filtered airflow rather than wide-open vents or fully sealed boxes.[^9]
 - **Favor aluminum bases when you can.** Open-air 75100 aluminum plates stayed cool through 30 minute 45 km/h rides at 11 °C while boxed controllers thermal-throttled around 35 A.
+  - log MOSFET telemetry instead of trusting heatsink surface probes—uBox plate readings lag junction temperature, and riders now treat the battery tray as part of the thermal system.[^surface_probe]
   - tie airflow and heatsinking directly into the enclosure choice.[^10]
 - **Keep phase extensions short and anchored.** Three-metre test leads on a Flipsky rig whipped violently once current ramped, reminding builders that long, unsupported phase runs experience Lorentz forces capable of ripping looms apart under load.[^11]
 - PuneDir’s single-motor G30 test still logged ~4.2 kW while a Makerbase 75100 sat near 44 °C inside the stock controller can.
   - evidence that OEM housings can work as heatsinks when airflow is limited.[^12]
+- Cross-check VESC telemetry against smart-BMS logs before celebrating current numbers; a MakerX build set to 70 A battery read ~10 A lower on the ANT BMS until owners reconciled pack-side data.[^telemetry_crosscheck]
 - **Treat ad-hoc dual-motor add-ons skeptically.** Veterans found “bolt-on” second motors with their own controller and pack crowd the deck, delete the rear brake, overheat uncooled controllers, and deliver little efficiency.
   - serious AWD builds demand matched motors, dual controllers, and real cooling from the outset.[^13]
 - **Source hubs with the frame in mind.** Lonnyo and NAMI hubs even share factory engravings; racers grab 70 H magnet stacks to stay within 150 mm dropouts and brace Laotie TI30 tubes with fresh welds and CAD references before chasing 11 kW+ launches.[^14]
+  - 3Shul’s 70H hubs ship with fixed rims for standard 11″ tires while 75H hubs need separate rims; both accept ~350 A phase but the high-torque wind prefers shorter bursts.[^shul_variants]
+- **Pick drivetrains that match copper fill.** Kaabo’s 60 H / 33×3 stators ship with thicker phase leads and shrug off >200 A, while stock Nami hubs overheat once you push past ~200 A unless you upsize cabling—budget swaps accordingly when planning 300 A builds.[^kaabo-vs-nami]
 - **Kaabo/Weped hub genealogy matters.** Wolf Warrior hubs come from the same supplier as Rion/Weped units.
   - the 1 200 W trims carry 60 mm magnets while the GT’s 2 000 W set stretches to 65 mm with 33/43 Kv windings
   - so expect to shunt Minimotors controllers past 50 A or swap to higher-phase VESC hardware to unlock the extra copper.[^15]
 - **“Six-phase” marketing is mostly doubled wiring.** The touted multi-phase hubs are typically standard three-phase motors with parallel windings; the real gain is reduced voltage drop and inductance, so set expectations accordingly.[^16]
 - **Respect Laotie shock geometry.** The rear linkage only clears ≈130 mm eye-to-eye dampers.
   - dropping in 150 mm coils over-extends the swingarm and binds the suspension, so relocate mounts or stick with stock length when upgrading shocks.[^17]
+- **Audit boutique chassis claims.** Face de Pin Sucé tore down legacy Rion frames and found cracked steering heads, flexing plates, under-specced Kelly controllers, and fan ducts blasting straight into walls—reinforce or replace the platform before leaning on 40 kW figures.[^rion-inspection]
+- **Inspect new-production LY rims.** Off-centre drilling, missing bead seats, and inverted bolt patterns on current tubeless runs force brake-rotor removal just to pull wheels and introduce vibration at speed; plan rework or alternative rims for race duty.[^ly-rim-qc]
 - **Victor vs. Vsett hub traits.** Dualtron Victor’s 45 H wind favours higher ERPM while Vsett 10 hubs deliver more torque.
   - pair the motor to your gearing and controller (e.g., MakerBase 75200 on 72 V packs) before chasing 100 km/h benchmarks.[^18]
+- **Range hinges on aero.** Builders estimate a 20 kWh, 20 S motorcycle with optimized aerodynamics can cruise ~350 km at 100 km/h, and a lighter 15 kWh pack plus fairing may outlast heavier bricks once drag is addressed.[^moto_aero]
+  - relocating seats and accessories to reduce frontal area and choosing easy-clean lubricants capped the rebuild checklist for those conversions.[^moto_finish]
 - **Boutique ceilings:** Tronic X12 (24 S), Ubox 240, and Spintend 85250 builds all share MOSFET and shunt limits around 331 A; most racers cap hubs near 150–200 A battery and 310–360 A phase even after swapping to upgraded silicon.[^33]
 - **Hall sensors are now stock on Dualtron Storm/X2 frames.** Current production runs ship with hall-equipped hubs, so VESC conversions can skip aftermarket sensor retrofits and jump straight to tuning once the harness is verified.[^19]
 - **Pick Ubox over Flipsky for 14 S torque pulls.** Denis’ workshop rated Spintend’s Ubox ahead of Flipsky thanks to beefier MOSFETs and cooling; early Ubox units benefit from thicker thermal pads, and 14 S packs built on Samsung 30Q/40T cells can sustain ≈70 A battery draw as long as you respect the motor’s thermal limits.[^denis-ubox]
-- **Mind 22 S on Makerbase 85/250s:** Multiple racers have already popped Ubox 85/250 controllers on 22 S packs even with regen disabled, whereas C350 hardware survives full race weekends so long as regen stays off; CL350s run hotter and now circulate official firmware links community members had to dig up themselves.[^20]
+- **Mind 22 S on Makerbase 85/250s:** Multiple racers have already popped Ubox 85/250 controllers on 22 S packs even with regen disabled, whereas C350 hardware survives full race weekends so long as regen stays off; CL350s run hotter and now circulate official firmware links community members had to dig up themselves.[^makerbase_22s_fail][^cl350_drive_links]
+- **Expect DOA CAN rails on Tronic 250 batches.** Several fresh units have arrived with dead CAN buses; the stopgap is to feed both controllers the same throttle signal while leaving the second ESC’s 3.3 V rail disconnected so you do not fry the accelerator while waiting for warranty replacements.[^tronic_can_doas]
+- **Inspect Ubox V2 sensorless inputs.** Outdoor-mounted dual Ubox builds that suddenly lose sensorless detection have traced the failure to a cracked A6 diode feeding the EG3112 gate driver; replacing or bridging the diode restored detection and highlighted mediocre stock soldering on that rail.[^ubox_a6_diode]
+- **FarDriver ND72450 field report.** A dual ND72450 Roadrunner running half of its battery capability still delivers 450 A phase, 32 kW peaks, working field-weakening, and cool motors—performance the builder preferred over comparable Tronic stacks.[^fardriver_nd72450]
+- **Log field-weakening runaways.** A 75100 stayed spinning after throttle close when FW was active, underscoring the need to capture and report reproducible regressions to Vedder instead of assuming configuration error.[^fw_runaway]
+- **Size Ninebot/GT2 packs for the current you want.** 26 S 8 P P42A builds feeding Tronic X12s already fight thermal issues until dual Uboxes are clamped to aluminum and wheel diameter/kv are tuned for the higher pack voltage.[^gt2_pack]
+- **Validate MXlemming thermal gains.** Aluminum PCBs kept a 3.2 kW setup near 29 °C, and MXlemming tuning on 30 S gear cut controller temps from 80 °C to ~60 °C at ~150 A, though some racers bailed because the algorithm trimmed top speed on high-power hubs.[^mxlemming_thermal]
 - **Keep Kaabo Thunder 2 controllers matched.** Mixing the 45 A front and 60 A rear boards leaves the scooter voltage-limited on top speed and saps launch thrust; either shunt the 45 A unit to match or source a twin 60 A module before raising current limits.[^21]
 - **Burn E2 hub swaps need rotor spacers.** Fry the Guy’s conversion showed Kaabo 2 kW hubs clear the Burn E2 caliper only after adding rotor spacing, and ZAITUO 100/65-6.5 tires drop straight into the chassis.
   - add the note to fitment guides so builders order spacers and tires with the hubs.[^22]
@@ -51,6 +80,8 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - **Treat 22/3 Lonnyo hubs as 250–300 A hardware.** Shlomozero’s 75 H 22/3 hit ~80 °C within minutes at 400 A phase, and Paolo reminded everyone the wind uses fewer parallel strands than 33/2, so hold hill climbs nearer 250–300 A unless you like burned stators.[^28][^29]
 - **MakerX G300 saturation ceiling.** 🇪🇸AYO#74 and Face de Pin Sucé logged repeated heat soak and saturation above ~320 A phase on 22 S packs, forcing racers back to C350 hardware when they want the full 400 A envelope.
   - set expectations accordingly and budget C350 swaps for 22 S sprint builds.[^30]
+- **Schedule post-impact tear-downs.** 🇪🇸AYO#74’s 22 S 70 H rear hub and Fry the Guy’s front Shul both logged current cuts and “voltage imbalance” faults after pothole strikes; inspect magnets, hall boards, and harness strain before the next sprint instead of blaming firmware quirks.[^pothole-teardown]
+- **Overbuild stem hardware on heavy commuters.** LiquorHole’s 220 lb Yisuntrek stayed upright when the frame folded because he had already added a second stem bolt; replacing the chassis still cost about $1.3 k and 10 days, so reinforce steering assemblies before chasing 20 kW launches.[^yisuntrek-stem]
 - **Single-motor Daly builds need accurate sensing.** Arnau’s 20 S 6 P P45B commuter pairs a Ubox 240 at 200 A phase / 100 A battery and keeps FET temps around 36 °C after swapping the thermistor pull-up to 100 kΩ.
   - proof Daly-managed singles survive when sensing is calibrated and currents stay sane.[^31]
 - **Wolf King GT packaging reality.** Mattia’s sleeper build already runs dual 85240s, a 54 Ah Molicel P42A pack, and 6 AWG phase leads but still can’t fit a 75 H hub up front without machining the 140 mm dropout.
@@ -64,6 +95,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - **G300 toggles need firmware tweaks.** The controller ships with a momentary power input; change App → General shutdown settings so a quick button press truly latches the ESC instead of leaving it permanently live when the battery is connected, and treat six red LED blinks as a low-voltage warning until MakerX patches the auto-off fault.[^38][^39][^40]
 - **Respect Spintend 85/150 voltage headroom:** The light 85/150 ships with 100 V-rated components and proven logs only on 20 S packs.
   - stacking high-kV hubs, MTPA, and FW near its ceiling has already popped stages, so plan drop-in HY/Huayi MOSFET swaps or step up to 3Shul/Tronic hardware for sustained spikes.[^spintend-85150]
+- **Spintend 85/150 reliability watch.** One mislabeled “100 A” unit blew three input capacitors mid-ride and melted the CAN harness that backfeeds 12 V from the partner controller; pursue an RMA and audit CAN wiring before tying controllers together.[^spintend_85150_rma]
 - **Overvolting 75 V hardware needs extra capacitance.** Paolo’s FlipSky clone failures and Ubox warnings show 17 S pushes demand more input capacitance plus lower charge targets (~4.1 V/cell) to keep regen spikes from nuking the sparse 220 µF bank.
   - most veterans stop at 16 S unless they retrofit the front end.[^41][^42]
 - **Plan for BMS fault behaviour.** MKSESC 84/200 HP controllers have been blowing MOSFETs the moment a pack BMS opens under load, while Spintend Ubox and 3Shul hardware typically coast through the interruption; riders now favour Ubox 85/150 over Makerbase 84/200 HP despite the price gap, and CL350-class controllers ride out brief supply drops more gracefully when you add extra 12 V capacitance at the input.[^43]
@@ -354,6 +386,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - **Thermal guardrails:** Rental-grade SNSC hubs pushed to 20 S 40 A hit ~160 °C without ferrofluid—daily riders should cap voltage at 13–16 S or add cooling mods.[^14]
 - **BMS vetting:** JK smart BMS units continue to outclass ANT variants for connectivity.
   - the new compact boards ship tidy copper bus rods, dual temp probes, 1 A or 2 A active-balancing variants, and optional OLEDs; wake them by applying 5–7 V above pack voltage (or plugging in the display) before configuring pack parameters, pop the lid to pluck stray solder beads, and source through official channels to ensure RS485/CAN and heater-pad support.[^208][^15]
+- Konstantin’s latest 220 A-rated smart BMS arrives with −2 AWG leads for multi-motor scooters, sparking enclosure redesigns so controllers mount in sealed heatsink cases with direct airflow instead of isolated aluminium blocks.[^bms220]
 - **Retire weak BMS hardware:** Daly smart boards that refuse to balance below 4.18 V/cell or advertise 35 A hardware still struggle at 50 A continuous.
   - builders replacing them with ANT or JK units report fewer shutdowns and healthier pack temps.[^209]
 - **Avoid chemistry mixes inside parallels.** Pairing MJ1 and MH1 cells accelerated sag once discharge topped ~8 A per cell; keep parallels chemistry-matched when chasing 130 A pack output.[^210]
@@ -445,6 +478,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 
 ## 5. Firmware, Calibration & UX Safeguards
 
+- Spintend confirmed uBox hardware is now merged into stock VESC firmware 6.0, covering both the older micro-USB duals and the newer USB‑C revisions so riders can leave the bespoke 5.3 branch behind.[^spintend_fw6]
 - Override desktop input wizard center-voltage prompts on one-direction throttles or finish calibration in the mobile app to prevent reversed brake/throttle mapping.[^19]
 - Rehearse the seven golden commissioning rules.
   - wire everything before energising, pre-charge ≥20 S packs, discharge capacitors after unplugging, keep ADC inputs ≤3.3 V, avoid hot-plugging, eliminate ground loops, and re-check each step before troubleshooting
@@ -583,6 +617,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Tronic controllers revived after water damage still need the DC-DC enable pad scraped clean and re-soldered before conformal recoating.
   - hot-air reflow seals the fix.[^337][^338]
 - Purp’s hall-less Mantis 10 conversion planning shows single Ubox/Spintend modules (~58 mm wide) can be stood on edge along the frame or split between floor and lid; Noname suggests foam or 3D-printed dummies to test fit and warns screw mounting becomes the bottleneck inside cramped controller bays.[^339]
+  - Log the final mounting and cooling layout once Purp finishes street testing so future hall-less swaps know which orientation holds temperature and vibration in check.[^mantis-controller-proof]
 
 ## 7. Chassis Benchmarks & Handling Notes
 
@@ -705,7 +740,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - PuneDir’s Zero 12″ experiments showed upsized tyres exacerbate wobble on marginal trail—fix geometry before chasing larger rubber.[^408]
 - Retire Wheelway hubs when magnet adhesive browns.
   - overheated units have cooked halls clean off and are safer replaced with high-KV Blade motors for 12 S speed builds targeting 35–40 A battery / ~120 A phase.[^409]
-- **Log where rental frames are still available.** SNSC 2.3 chassis are drying up as EU fleets pivot to Okai hardware, so builders are hoarding spares and investing in Bambu P1S printers to fabricate brackets, insulation, and lighting hardware in-house.[^410][^411]
+- **Log where rental frames are still available.** SNSC 2.3 chassis are drying up as EU fleets pivot to Okai hardware, so builders are hoarding spares, cataloguing which operators still auction frames, and standardising Bambu P1S print profiles for spacers, lighting pods, and harness saddles that drop straight onto the rental geometry.[^410][^411]
 - Upgrade braking hardware for 100 km/h stops: thin 1.8 mm bicycle rotors deform under sustained heat, so move to 3 mm+ rotors, fresh pads, and even moped-grade calipers while logging GPS-backed deceleration data to validate gains.[^brake-data]
 - On VSETT-class builds, jump from stock 140 mm discs to 160 mm SRAM Cleansweep or 180 mm Magura MDR-P rotors, align pads with purpose-made brackets, and swap washer stacks for machined mounts to avoid warping under heavy loads.[^412]
 - Routing Magura hoses externally demands short banjos and matched kits.
@@ -721,6 +756,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 
 ## Legal & Compliance Prep
 
+- European crews are booking kart tracks for €25–35 practice sessions, while Swiss police impounded a 133 km/h Wolf Warrior and issued fines plus potential jail time—treat organised practice as a safer outlet than public-road racing.[^kart_practice]
 - Noname confirmed NIU frames ship with VINs while custom builds do not; instead of stamping your own (a crime), pursue homemade-vehicle inspections with DOT tyres or register a donor motorcycle frame because moped plates cap you near 30 mph.[^416]
 - Swiss enforcement campaigns are handing out CHF 20 reflector fines, €1 370 penalties, and even impounding scooters when police spot obvious mods; builders label hardware “250 W,” carry invoices, and keep stock-looking displays plus compliance paperwork ready for roadside tests that clock instantaneous peaks rather than nominal power.[^417]
 - Do not rely on regen-only stopping at 20 S.
@@ -735,6 +771,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - **Size main harnesses for the current goal.** 20 S 9 P packs chasing ~350 A peaks now ship with 6 AWG leads or paired 8 AWG runs on QS8s, and crews remind racers that true 500 A duty calls for ≈50 mm² copper despite short harnesses letting some builds skate by temporarily.[^422]
 - Delta rewinds demand roughly double the phase current for the same torque—upgrade hub leads before flipping to delta to avoid roasting stock windings during high-speed pulls.[^delta-leads]
 - Theft prevention relies on ≥10 mm hardened chains, welded eyelets, and recessed fasteners; thin aluminum tabs remain easy targets for cordless grinders.[^29]
+  - €5 supermarket locks are now dismissed as décor rather than security—budget real chains and padlocks before leaving high-power scooters unattended.[^cheap_locks]
 - Protective gear still matters at commuter speeds.
   - stick with ECE 22.05/22.06 full-face helmets with MIPS-style liners and treat subdued lighting plus “police mode” buttons as tools for avoiding unwanted attention, not excuses to ride unarmoured.[^rider-safety]
 
@@ -752,6 +789,12 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
   - the rebranded chassis ships with sloppy folding tolerances and cheap hardware, so serious riders either rework the frame or avoid the platform entirely.[^429]
 - Properly potted controllers (à la Nucular) pass bucket-immersion tests, wick heat into the housing, and add vibration damping.
   - just discharge capacitors and use non-conductive, low-expansion compounds so the cure cycle doesn’t crack boards.[^430]
+
+## Outstanding Compliance & Diagnostic Follow-Ups
+
+- Watch EU regulatory changes for high-power scooters and confirm whether private insurance remains viable for Halo-class builds so compliance advice stays current.[^eu-halo]
+- Capture Luis’ root-cause analysis of the MKS 84 HP 48 V shutdown—including any pre-charge, shunt, or firmware faults plus logs—before closing out the failure mode section.[^mks-shutdown]
+- Revisit Nawfal’s MKS 84 HP speed cap to document whichever firmware, pole-count, or hardware tweaks restore the expected 80 km/h ceiling.[^mks-speedcap]
 
 ---
 
@@ -778,6 +821,9 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^10]: Waterproof Julet/L1019/HiGo connectors work well but L1019 peaks around 100 A phase; hall/thermistor additions feed reliable telemetry.[^447]
 [^hp-cabling]: Riders are doubling phase cross-section to tame voltage drop, keeping silicone 12 AWG on G30 phases, monitoring 4 mm² (~AWG 11) leads near 250 A, and extending “silver” looms with real copper because the shiny conductors are only tinned.[^448]
 [^11]: Stock packs using LG M50LT/Samsung 29E cells are limited around 120 A discharge; builders monitor IR spread before parallelizing groups.[^449]
+[^eu-halo]: Pending EU legal updates for high-power scooters and insurance viability for Halo-class builds. Source: knowledge/notes/input_part011_review.md†L905-L905
+[^mks-shutdown]: Awaiting Luis’ diagnosis of the MKS 84 HP 48 V shutdown and associated fault logs. Source: knowledge/notes/input_part011_review.md†L906-L906
+[^mks-speedcap]: Outstanding investigation into Nawfal’s capped MKS 84 HP top speed and whatever fixes restore 80 km/h. Source: knowledge/notes/input_part011_review.md†L910-L910
 [^hp-32e-limit]: Samsung 32E cells plateau around 6.5 A each (~39 A for 6 P), so extra nickel over the joints adds little for mid-power scooters.[^450]
 [^12]: Riders cap regen between –5 A and –12 A on 60 V 38 Ah packs until BMS specs are confirmed.[^451]
 [^13]: ERPM speed limits caused intermittent regen dropouts that firmware 6.05 beta (build 20) resolves, preventing over-voltage incidents on high-S setups.[^452]
@@ -865,6 +911,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 3. Bench-test BMS cutoff delays and log phase-current spikes.
   - ANT 300 A boards tripped near 690 A, prompting hardware swaps or timer tweaks before top-speed pulls.[^526]
 4. Stage thermal runs (street, hill, track) to document when ferrofluid, forced air, or extra copper mass is mandatory before lifting controller limits.[^527][^528]
+5. Treat 30 S ambitions as an enclosure and insulation problem first—bigger ESCs, fast fuses, and reinforced sleeving are mandatory, and even Smart Express CAN peripherals struggled with noise above 20 S.[^thirty_s_pack]
 
 ### Controller handling & bench safety refreshers
 
@@ -872,7 +919,9 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
   - a live Makerbase 75200 caught fire mid-rework and reset expectations for “quick” tweaks.[^529]
 - Strip factory paste, inspect pads, and reapply thread-lock on enclosure screws so vibration doesn’t loosen service covers.[^529]
 - When Y-splitting dual Kelly harnesses, leave horns and lights on dedicated battery/DC-DC feeds so controller rails don’t brown out during regen or horn hits.[^530][^531]
+- USB‑C rechargeable horns that double as motion alarms are gaining favour; treat 328 dB marketing claims as fiction because airborne sound tops out near 194 dB.[^horn_alarm]
 - Cap absolute current around 300 A on Flipsky 75100-class hardware until more long-term data clears higher thresholds.[^532]
+- Heat pipes still beat deck-mounted water loops on scooters; Rosheee, Jan, and Paolo keep steering 15 kW builds toward passive conduction because plumbing vibrates loose and chews up deck space.[^heat_pipe_shift_hp]
 
 ### Telemetry & validation workflow reminders
 
@@ -885,16 +934,20 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 
 - Makerbase aluminum-board clones still shatter MOSFETs once absolute current clears ≈450–500 A; any log past the 300 A consensus deserves teardown.[^532]
 - MakerBoard/MakerBase copies routinely ship with poor thermal-pad contact.
-  - redo paste coverage and torque checks or expect overheating.[^537]
+  - redo paste coverage and torque checks or expect overheating; recent arrivals showed patchy TIM that left MOSFETs semi-floating until the owners scraped and repasted the base plate.[^537][^maker_clone_tim]
 - Spin-Y batch‑1 throttles need the 1 mm magnet spacer retrofit to remove the dead zone; flag early units still missing the fix.[^538]
 - Traction-control surges have destroyed Tronic dual setups, including a front-ESC fire after DC/DC contamination.
   - treat post-cleaning inspections as mandatory.[^539][^540]
 - Keep VESC input-voltage limits ~5 V above max pack voltage to avoid BMS-induced MOSFET failures during over-voltage faults.[^541]
 - Counterfeit 52 V 35 Ah packs delivered only ~30 Ah.
   - audit weight, welds, and discharge logs before trusting “Panasonic”-branded bricks.[^542]
+- French riders already forced replacements on “35 Ah Panasonic” packs that only delivered ~30 Ah at 2 A—validate supplier claims before committing them to 20 S racing builds.[^french_pack_recall]
 - Segway GT and SNSC frames have fractured at controller mounts; add welded gussets and reconsider handlebar-mounted battery weight on those chassis.[^543]
+- Wolf GT electronics bays still swallow only a single Flipsky without spacers—plan taller decks or staged mounting when chasing dual-controller conversions.[^wolf_packaging]
+- Xiaomi conversions hanging Ubox singles inside the deck need drilled mounts, threaded inserts, and dedicated bucks for 5 V tail lights to keep harnesses tidy.[^xiaomi_mount]
 - MakerX thermistors misreported temps until firmware coefficients were corrected in VESC Tool 6.0.
   - flash updates or risk unwarranted throttling and shutdowns.[^544]
+- MakerX duals continue to show high attrition: waterlogged singles only returned after reflashing Jaykup firmware and powering BLE boards from the comm rail, fresh duals blew MOSFETs on the first launch, and shop owners report ~70 % DOA rates that pushed them toward Spintend singles.[^makerx_rescue][^makerx_attrition]
 
 ### High-current tuning highlights
 
@@ -951,6 +1004,11 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
   - treat Huayi-sourced MOSFET swaps or a controller upgrade as mandatory if you need more headroom.[^588]
 [^41]: Spintend discontinued the 85/250 and now ships 85/240 controllers through a New Jersey hub, letting U.S. builders avoid tariffs while planning alternatives for higher-rated boards.[^589][^590]
 [^vsett-airflow]: Dual 16 S7 P Samsung 50E builds capped phase current at ~70 A per controller and mounted ducted fans up front to stay inside the pack’s ≈140 A battery comfort zone.[^591]
+[^kart_practice]: Source: knowledge/notes/input_part002_review.md†L521-L521
+[^cheap_locks]: Source: knowledge/notes/input_part002_review.md†L527-L527
+[^spintend_fw6]: Source: knowledge/notes/input_part002_review.md†L617-L617
+[^bms220]: Source: knowledge/notes/input_part002_review.md†L619-L620
+[^horn_alarm]: Source: knowledge/notes/input_part002_review.md†L613-L614
 [^wolfwarrior-ducts]: Wolf Warrior riders pushing 120 A battery / 440 A phase on sealed decks logged MOSFET heat rise until they added ducted cooling or backed off current.[^592]
 [^headset]: Steering-stability guidance emphasising lightly snug head bearings to prevent wobble and premature failure even when using motorcycle-grade dampers.[^593]
 [^wolfx_headset]: Wolf Warrior X owners found the center stem screw over-tightened with dry bearings, requiring disassembly, grease, and careful retorque before the front end freed up.[^594]
@@ -982,6 +1040,17 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^kaabo-sag]: Rosheee’s Wolf logs showed twin Uboxes pulling ~150 A and dropping the stock 16 S5 P pack about 15 V despite 60 A limits, motivating connector and chemistry upgrades toward P42A/P45B/50S options.[^618][^619]
 [^rider-safety]: Helmets with ECE 22.05/22.06 certification and MIPS-style liners remain the minimum; riders keep lighting subtle and reserve “police mode” or field-weakening bursts for brief compliance, not daily cruising.[^620]
 [^denis-ubox]: Riders comparing Spintend Ubox and Flipsky controllers highlighted Ubox’s stronger MOSFETs and cooling headroom; early units benefit from thicker thermal pads, and 14 S Samsung 30Q/40T packs hold ≈70 A battery draw if motor limits are respected.[^621]
+[^makerbase-75200-fade]: Source: knowledge/notes/input_part013_review.md†L706-L706
+[^y11-motor-limit]: Source: knowledge/notes/input_part013_review.md†L803-L803
+[^ubox-6fet-failure]: Source: knowledge/notes/input_part013_review.md†L804-L804
+[^backup-controller]: Source: knowledge/notes/input_part013_review.md†L806-L806
+[^yisuntrek-packaging]: Source: knowledge/notes/input_part013_review.md†L812-L812
+[^dampers-budget]: Source: knowledge/notes/input_part013_review.md†L809-L809
+[^yisuntrek-stem]: Source: knowledge/notes/input_part013_review.md†L829-L829
+[^kaabo-vs-nami]: Source: knowledge/notes/input_part013_review.md†L713-L713
+[^rion-inspection]: Source: knowledge/notes/input_part013_review.md†L716-L716
+[^ly-rim-qc]: Source: knowledge/notes/input_part013_review.md†L717-L717
+[^pothole-teardown]: Source: knowledge/notes/input_part013_review.md†L741-L744
 
 
 ## References
@@ -1006,6 +1075,11 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^18]: Source: data/vesc_help_group/text_slices/input_part013.txt†L5254-L5271
 [^19]: Source: knowledge/notes/input_part013_review.md†L31-L31
 [^20]: Source: knowledge/notes/input_part008_review.md†L305-L305
+[^tronic_can_doas]: Source: knowledge/notes/input_part008_review.md†L419-L420
+[^ubox_a6_diode]: Source: knowledge/notes/input_part008_review.md†L428-L429
+[^fw_runaway]: Source: knowledge/notes/input_part008_review.md†L311-L311
+[^gt2_pack]: Source: knowledge/notes/input_part008_review.md†L312-L312
+[^mxlemming_thermal]: Source: knowledge/notes/input_part008_review.md†L313-L313
 [^21]: Source: knowledge/notes/input_part013_review.md†L47-L47
 [^22]: Source: knowledge/notes/input_part013_review.md†L101-L101
 [^23]: Source: knowledge/notes/input_part013_review.md†L66-L66
@@ -1325,6 +1399,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^337]: Source: data/vesc_help_group/text_slices/input_part003.txt†L21805-L21824
 [^338]: Source: data/vesc_help_group/text_slices/input_part003.txt†L23563-L23653
 [^339]: Source: data/vesc_help_group/text_slices/input_part010.txt†L20034-L20062
+[^mantis-controller-proof]: Source: knowledge/notes/input_part010_review.md†L702-L703
 [^340]: Source: knowledge/notes/input_part008_review.md†L228-L228
 [^341]: Source: knowledge/notes/input_part012_review.md†L22-L22
 [^342]: Source: knowledge/notes/input_part012_review.md†L26-L26
@@ -1407,6 +1482,10 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^419]: Source: data/vesc_help_group/text_slices/input_part000.txt†L17960-L17982
 [^420]: Source: knowledge/notes/input_part007_review.md†L452-L452
 [^421]: Source: knowledge/notes/input_part007_review.md†L244-L244
+[^makerbase_22s_fail]: Source: knowledge/notes/input_part008_review.md†L416-L416
+[^cl350_drive_links]: Source: knowledge/notes/input_part008_review.md†L417-L417
+[^fardriver_nd72450]: Source: knowledge/notes/input_part008_review.md†L453-L454
+[^spintend_85150_rma]: Source: knowledge/notes/input_part008_review.md†L492-L493
 [^422]: Source: data/vesc_help_group/text_slices/input_part005.txt†L24287-L24336
 [^423]: Source: knowledge/notes/input_part004_review.md†L225-L225
 [^424]: Source: knowledge/notes/input_part007_review.md†L242-L242
@@ -1550,6 +1629,16 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^562]: Source: data/vesc_help_group/text_slices/input_part003.txt†L7145-L7164
 [^563]: Source: data/vesc_help_group/text_slices/input_part003.txt†L7443-L7457
 [^564]: Source: data/vesc_help_group/text_slices/input_part003.txt†L7476-L7500
+[^telemetry_crosscheck]: Source: knowledge/notes/input_part003_review.md†L502-L502
+[^maker_clone_tim]: Source: knowledge/notes/input_part003_review.md†L520-L520
+[^makerx_rescue]: Source: knowledge/notes/input_part003_review.md†L546-L546
+[^makerx_attrition]: Source: knowledge/notes/input_part003_review.md†L547-L548
+[^heat_pipe_shift_hp]: Source: knowledge/notes/input_part003_review.md†L556-L557
+[^thirty_s_pack]: Source: knowledge/notes/input_part003_review.md†L558-L559
+[^wolf_packaging]: Source: knowledge/notes/input_part003_review.md†L562-L563
+[^xiaomi_mount]: Source: knowledge/notes/input_part003_review.md†L563-L564
+[^shul_variants]: Source: knowledge/notes/input_part003_review.md†L567-L567
+[^french_pack_recall]: Source: knowledge/notes/input_part003_review.md†L569-L569
 [^565]: Source: data/vesc_help_group/text_slices/input_part003.txt†L18051-L18138
 [^566]: Source: data/vesc_help_group/text_slices/input_part003.txt†L19431-L19437
 [^567]: Source: data/vesc_help_group/text_slices/input_part003.txt†L18841-L18874
@@ -1592,6 +1681,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^604]: Source: data/vesc_help_group/text_slices/input_part001.txt†L3820-L3856
 [^605]: Source: data/vesc_help_group/text_slices/input_part001.txt†L25184-L25233
 [^606]: Source: knowledge/notes/input_part000_review.md†L251-L252
+[^spintend-vsett]: Source: knowledge/notes/input_part007_review.md†L404-L404
 [^607]: Source: knowledge/notes/input_part000_review.md†L256-L256
 [^608]: Source: knowledge/notes/input_part000_review.md†L300-L300
 [^609]: Source: knowledge/notes/input_part000_review.md†L234-L234
@@ -1603,7 +1693,23 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^615]: Source: knowledge/notes/input_part000_review.md†L326-L328
 [^616]: Source: knowledge/notes/input_part000_review.md†L379-L380
 [^617]: Source: knowledge/notes/input_part000_review.md†L349-L350
+[^nucular_24f]: Source: knowledge/notes/input_part002_review.md†L632-L633
+[^nucular_phase_charge]: Source: knowledge/notes/input_part002_review.md†L19957-L20000
+[^tronic_qc]: Source: knowledge/notes/input_part002_review.md†L635-L636
+[^moto_aero]: Source: knowledge/notes/input_part002_review.md†L681-L683
+[^moto_finish]: Source: knowledge/notes/input_part002_review.md†L683-L684
+[^potting_drop]: Source: knowledge/notes/input_part002_review.md†L19733-L19749
+[^resin_potting]: Source: knowledge/notes/input_part002_review.md†L19670-L19678
+[^mg422c]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25480-L25505
+[^potting_tradeoffs]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25482-L25489
+[^bms_fire]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25631-L25669
+[^bms_validation]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25670-L25699
+[^bms_wiring]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25701-L25719
+[^surface_probe]: Source: knowledge/notes/input_part002_review.md†L18427-L18488
 [^618]: Source: knowledge/notes/input_part002_review.md†L180-L181
 [^619]: Source: knowledge/notes/input_part002_review.md†L214-L215
 [^620]: Source: knowledge/notes/input_part000_review.md†L362-L364
 [^621]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L102569-L102598
+
+[^ayo-131]: Source: knowledge/notes/input_part010_review.md†L643-L643
+[^log-every-run]: knowledge/notes/input_part010_review.md†L644-L644

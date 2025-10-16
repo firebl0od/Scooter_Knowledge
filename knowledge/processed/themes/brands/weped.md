@@ -24,6 +24,7 @@ Weped’s factory 16S6P Samsung 50E battery ships on the GTS and Fold series, bu
 ### Chemistry Debates & Parallel Scaling
 
 Despite the criticism, Yoann’s four-year-old Weped FS still peaks 240 A on the original 50E module with an ANT smart BMS, demonstrating that the cells can deliver when backed by large parallel strings and conservative thermal management.[^3] Builders chasing harder acceleration prefer Samsung 40T or Molicel P42A/P45B packs once current demands exceed what 50E chemistry tolerates per cell, treating the OEM block as a long-range option rather than a high-discharge foundation.[^3]
+- Treat Samsung 50E cells as ~10 A parts—pushing 15 A per cell drives them toward 70 °C within minutes, mirroring the stock 16 S6 P Weped pack’s limits unless you add aggressive cooling.[^ip001-50e-limit]
 
 ### BMS, Regen & Controller Survivability
 
@@ -41,6 +42,7 @@ Rage Mechanics’ 75 mm stator hubs remain the go-to race upgrade, pushing wel
 ## Thermal Management & Mechanical Prep
 
 Sealed decks leave almost no thermal margin: dual Spintend installs logged ~500 A phase and 80 °C controller temps until owners sanded paint from the deck, applied quality thermal paste, and bolted the housings directly to the frame.[^10] Even the OEM layout assumes aggressive airflow—paired 30 Ah 40T packs feed opposing side fans at roughly 145 km/h to keep electronics alive, so any stealth conversion must preserve or improve that ducting.[^5] Plan for external heatsinks, repaste jobs, and fan redundancy before lifting current limits.
+- Wepoor owners are now hunting machinists to shave aftermarket fin stacks so Spintend stages can mount flush; removing a fin creates a bolt strip, and direct-to-heatsink installs cool better than remote brackets once insulation checks pass.[^wepoor_fins_trim]
 
 ## Handling & Rider Feedback
 
@@ -76,6 +78,7 @@ Community audits describe new Wepeds as expensive kits: owners routinely replace
 [^8]: Premium pricing contrasted with bargain-spec cockpit hardware on shipped units. Source: knowledge/notes/input_part001_review.md, L787 to L787
 [^9]: Guidance to approach Weped about VESC integration with revised cooling plans. Source: knowledge/notes/input_part010_review.md, L354 to L354
 [^10]: Repeated controller failures on a Weped Wepoor linked to suspected ANT BMS/regen events. Source: knowledge/notes/input_part011_review.md, L227 to L229
+[^wepoor_fins_trim]: Source: data/vesc_help_group/text_slices/input_part011.txt, L20866 to L20903; L21313 to L21319; L21504 to L21518
 [^11]: Rage Mechanics and FF-spec motor sourcing costs for Weped platforms. Source: knowledge/notes/input_part000_review.md, L449 to L449. Source: knowledge/notes/input_part000_review.md, L698 to L698
 
 ## References
@@ -96,3 +99,4 @@ Community audits describe new Wepeds as expensive kits: owners routinely replace
 [^14]: Source: knowledge/notes/input_part000_review.md, L449 to L449
 [^15]: Source: knowledge/notes/input_part000_review.md, L698 to L698
 [^16]: Source: knowledge/notes/input_part001_review.md, L51 to L52
+[^ip001-50e-limit]: Source: data/vesc_help_group/text_slices/input_part001.txt†L26670-L26700

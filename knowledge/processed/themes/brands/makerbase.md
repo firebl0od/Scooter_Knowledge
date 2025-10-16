@@ -3,6 +3,7 @@
 ## TL;DR
 
 - Aluminum-PCB 75100 boards remain the go-to budget dual-controller option for 60 V commuters, but they only stay reliable when capped around 70 A battery / 170–180 A phase and kept below ≈22 S; bumping currents higher has popped freshly installed units in a single launch. [^1][^2][^3]
+- The refreshed “Pro” 75100 revision finally ships with AWG10 leads, Bluetooth, and tidier thermistors, yet it still omits a real enable pin—plan external latching or contactors despite the nicer harness.[^75100-pro-refresh]
 - Community veterans still warn that Makerbase boxes ship with stray solder, weak DC/DC rails, and inconsistent shunt calibration—treat every unit as a kit: open it, add proper heatsinking, and plan fallbacks to 3Shul or Spintend hardware if you need more than ≈50 A battery per controller. [^4][^5]
 - Paulo flagged that the legacy dual 100/100 ran counterfeit or second-hand STM chips sourced during the shortage—those boards glitched on firmware newer than 5.2 and the quality cloud still hangs over early 84100 production until supply chains are verified.[^6]
 - 2023 clone batches arrived with watery thermal paste, uneven pads, and even dead CAN buses; shops now budget time to repaste, reflow power leads, and bench-test comms before mixing them with Flipsky hardware. [^7]
@@ -21,17 +22,22 @@
 | --- | --- | --- | --- |
 | 75100 (Alu PCB) | 48–84 V (≤22 S with regen trimmed) | ≈60–70 A battery, 160–180 A phase once clamped to metal; budget dual-motor CAN builds for G30/Vsett frames | Requires CAN linking for duals, disable regen above ~22 S, inspect firmware headers (often mislabeled as HW75300), and expect duty ripple if firmware/tool versions drift. [^1][^19] |
 | 75200 V2 | 16–22 S (marketing up to 24 S) | ≈90–110 A battery combined in dual installs when cooled; suits mid-power scooters needing native key input | Roughly 130 × 68 × 28 mm with onboard shutdown lead; still needs heatsink trimming in tight decks and thorough thermal paste refresh. [^20][^21] |
+- Expect sustained fade once you push around 250 A phase / 150 A battery—Shlomozero’s 75200 started tapering there even with MOSFET telemetry near 100–110 °C, so treat those figures as the practical ceiling without major cooling changes.[^75200-fade]
 | 60100 HP | ≤15 S commuters | ≤50 A battery on single-motor city builds; reliable regen on Navee N65/Ninebot conversions once the dash is bypassed | Retains OEM dashboards with rewiring, but voltage headroom and 60 V component ratings limit regen spikes—experiments suggest INA241 current-sense swaps could unlock 14–20 S if Makerbase keeps the line alive.[^22][^23] |
 | 84100 HP | 60–84 V (≤20 S recommended) | ≈60–80 A battery, 150–180 A phase for Zero/Nami dual builds; higher only with extensive cooling and telemetry | Ships with NC ignition logic, integrated Bluetooth, sacrificial 0 Ω links, and benefits from the 1 MΩ pull-down mod plus active thermal management before chasing 100 km/h logs. [^12][^24][^25][^11] |
 
 ## Voltage, Current & Regen Guardrails
 
 - Keep regen ceilings conservative on 22 S packs: riders log 75100 and 84100 boards failing when negative current stacks back-EMF above ~84 V, so either disable e-brake or cap battery regen under −10 A on high-voltage builds. [^13][^26]
+- Set VESC battery cutoffs above the BMS trip window so the controller idles before the pack hard-resets; repeated hard cuts are already cooking Makerbase boards in Xiaomi decks.[^makerbase-bms-cutoff]
 - Builders trying to mask weak Laotie packs by running 22 S accept that the aluminum 75×00 hardware only pushes about half the battery amps it reports and that staying safe means disabling electronic brakes altogether; treat those experiments as limp-home strategies, not headroom gains. [^27]
 - Expect the 75200 to soft-cap after sustained pulls: even with thermal cut set around 100–110 °C, riders saw 250 A phase / 150 A battery tunes fade during extended runs, pointing to internal current limiting once the enclosure heat soaks. [^28]
+- Stake every bus capacitor and respect the documented 4–20 S operating window—bench testing on 3 S packs keeps killing repaired boards before they ever get back on the road.[^makerbase-cap-stake]
+- Clamp aluminum boards to real heatsinks before stretching battery current—frame-mounted installs stay near 40–50 A, while 70 A logs only hold once the controller is bolted to a solid aluminum block and every capacitor is mechanically supported.[^makerbase-mounting]
 - Single-controller sleepers still work: a lone 75200 driving a 22×3 70 H hub launched cleanly around the 10 kW mark once cooling and cabling were sized correctly, reinforcing that the hardware can anchor single-motor builds when envelopes stay realistic.[^29]
 - BMS settings are not a safety net—slow-trip Daly boards still let surges vaporize Makerbase gate drivers. Shorten trip delays and log every cutoff instead of assuming rated limits will save a fault. [^30]
 - Firmware reports battery current plus field-weakening draw; budget 10 A of FW as additional pack load so commuter cells stay within safe C-rates. [^31][^32]
+- Flipsky firmware still ignores the battery-current slider once field weakening engages—bypassed Ninebot packs should keep FW at zero until real current logs prove the cells can handle the extra draw.[^fw-bypass-pack]
 - Treat 23 S marketing with skepticism—community testers still cap Makerbase hardware at ≤20–22 S even on the 84100 because component tolerances and regen spikes remain the primary failure points. [^33][^34]
 - Veteran tuners now label 22 S experiments “suicide” unless you derate current, skip MTPA/field weakening, or upgrade the MOSFETs—stock hardware keeps popping when riders apply full 22 S output without significant rework. [^35]
 - Verified 22 S survivors all shared meticulous harness audits—phase shorts to the chassis, not voltage itself, killed the lone documented 84200 HP board—so bake insulation checks and BMS regression tests into every high-voltage install. [^16]
@@ -44,18 +50,21 @@
 ## Reliability & Incoming Inspection
 
 - Open every new board: veterans keep finding loose capacitors, missing thermal paste, and even epoxy jumpers on fresh shipments; reglue caps and retorque hardware before install. [^41][^42]
+- Treat single blown MOSFETs as a warning—replace the entire parallel pair and inspect the driver stage after any hot-plug event to keep uneven stress from hiding partial failures on aluminum PCBs.[^alu-mosfet-pairs]
 - Replace the watery factory paste with full-coverage pads or quality paste before loading the controller—Paolo keeps seeing clone 75100s arrive with barely any contact area, which explains early thermal throttling. [^43]
 - Mirko’s 15 mm aluminum baseplate plus open deck airflow held dual-controller 190 A phase / 70 A battery runs near 52 °C, underscoring how enclosure design matters as much as MOSFET choice when stretching Makerbase hardware.[^44]
 - Don’t piggyback the regulator enable pin—tying accessories straight into the EN pad without isolation browns the gate drivers, so stick with proper antispark hardware and protect the 12 V rail before experimenting with remote switches.[^45]
 - Builders pressed for rain protection are potting 84100 logic boards with conformal coat and printed covers instead of full epoxy so they can still service ADC pins and wiring between storms.[^46]
 - Makerbase 75/200 boards ship with Huayi HYG015N10NS1TA MOSFETs; stick with the same package when repairing blown phases so switching losses and thermal margins stay predictable.[^47]
 - Makerbase Lite riders dropped core temps roughly 25 °C by replacing the factory 5 mm interface with 0.5 mm thermal pads and bolting the case directly to aluminum—treat thick stock pads as insulation, not a heatsink bridge.[^48]
+- Insulate MOSFET legs after repairs, clean metal shavings, and rely on precharge tools or remote switches instead of hot-plugging fresh rebuilds—post-repair sparks and shorted leg pairs keep destroying otherwise healthy stages.[^makerbase-insulation]
 - Makerbase is teasing an epoxy-backed control board that mirrors the G300 layout; the community wants upgraded MOSFETs and better thermal paths before trusting the claimed 300 A rating.[^49]
 - Giuseppe’s supposedly refreshed 75100 V2 still died mysteriously, reminding shops that some batches remain flaky enough to warrant factory diagnostics or outright RMAs before redeploying them on customer scooters.[^50]
 - Hurriicane’s aluminum-PCB 75100 V2 booted fine over SWD but stayed dark on pack voltage until he traced a missing 12 V feed to one EG3112 gate driver—expect constant undervoltage faults until the buck regulator or trace is repaired.[^51]
 - Bench-test CAN alongside the 12 V rail: multiple “V2” clones shipped with dead CAN transceivers despite tri-shunt markings, and sudden first-launch deaths usually track back to firmware or 12 V supply faults rather than MOSFET legs. Reflow power leads, disable phase filters, rerun detection, and confirm network health before hitting the street. [^52]
 - Add bulk capacitance to the 12 V (and where accessible, 5 V/3.3 V) rails—the retrofit prevents infamous brownouts when BMSs trip or accessories spike load, especially on resin-potted boards.[^53][^54]
 - Resin-potted 75100s still need the ignition/12 V cutoff fix; builders now tack capacitors onto exposed 5 V/3.3 V rails or sneak them into the harness because random key-off events keep nuking MOSFET drivers otherwise.[^55]
+- Aluminum 75×100 boards still benefit from adding ≥220 µF across the DC link plus small 16 V capacitors at the gate drivers and revisiting undervoltage limits; the combo stopped recurring “MOS die” failures on recent Vsett conversions.[^dc-link-recap]
 - Budget gate-driver spares and scope time—dead EG3112s have been shorting the 5 V rail after MOSFET pops, so techs now replace the drivers alongside FETs and verify clean gate waveforms before sealing the case again.[^56]
 - Debate over the boxed 75100’s factory shunts persists: some builders still rip them out as “trash” that misreport current while others find the aluminium revision strong once reworked, so budget time either to replace the shunt stack or to tune around its quirks.[^57]
 - Add bulk capacitance to the 12 V (and where accessible, 5 V/3.3 V) rails—the retrofit prevents infamous brownouts when BMSs trip or accessories spike load, especially on resin-potted boards. [^58][^59]
@@ -83,12 +92,13 @@
 - Builders chasing splash protection now CAD PLA+/PETG housings and jet-duct side pods for Xiaomi deck installs, sealing seams with silicone or dielectric epoxy so aluminum-PCB 75100s survive rain without suffocating their heatsinks.[^printed_housings]
 - Log intermittent ignition latch pop-open events; they sometimes self-resolve, hinting at marginal wiring or moisture, but still deserve a ticket before they strand the rider.[^84]
 - **Diagnose dead 5 V rails promptly.** One 75100 Alu board ran on 3.3 V throttle power but measured only 0.3 V on the sensor rail, losing hall detection—classic evidence of a blown DC/DC stage requiring repair before reconnecting sensors.[^dead_5v]
+- Makerbase 100 V riders who lose hall sensors after a controller failure are leaning on VSS detection as a stopgap while rechecking ADC mappings; JPPL also swapped a nuisance-tripping JBD-SP17S005 after it kept flagging charge overcurrent and pulling the pack into undervoltage, reigniting the JK vs. Daly debate for >60 A discharge builds.[^makerbase_vss_bms]
 - **Reflow sloppy MCU solder joints.** Intermittent-boot 75 100 Alu boards were revived by reflowing the GD32 MCU after inspection revealed joints ranging from starved pads to heavy blobs, stabilizing CAN, ABS limits, and USB connectivity.[^mcu_reflow]
 - **Replace cracked MOSFETs with hotplate technique.** Aluminum-PCB repairs require heating the entire sink, checking diode drops as it cools, and verifying gate drivers before reassembly—hot air alone cannot remove devices cleanly.[^mosfet_hotplate]
 
 ## Setup & Commissioning Checklist
 
-1. **Flash matching firmware/tool pairs.** Makerbase boards frequently ship misidentified (e.g., reporting as HW75300); desktop VESC Tool flashing plus phase-filter disable after detection stabilizes idle behavior. [^85][^86]
+1. **Flash matching firmware/tool pairs.** Makerbase boards frequently ship misidentified (e.g., reporting as HW75300); desktop VESC Tool flashing plus phase-filter disable after detection stabilizes idle behavior. Follow up by logging GPS-based wheel speed, matching pole-pair counts to magnet rings, and ignoring the legacy phase-filter sliders that still appear in VESC Tool Mobile—they remain unsupported and can fault 75100 firmware when left on.[^85][^86][^makerbase-wheel-cal]
 2. **Inspect ignition logic before wiring switches.** 75100 units expect a momentary latch—bridge 5 V to the AD15 enable pin for roughly a second to turn on (three seconds to shut down), add a 10 kΩ/100 kΩ divider to hold the EN pin above 1.5 V at minimum pack voltage, and set the ADC shutdown timer so the controller actually unlatches—while 84100HP controllers need a normally-closed switch or the documented 1 MΩ pull-down to mimic Ubox-style keys. If an ignition-mod board still reboots randomly, lower the pull-down resistance further so the enable pin stays latched instead of floating. [^87][^88][^89][^90][^91]
 3. **Leverage the 75200 VCC selector when pairing smart BMS keys.** The latest boards ship with a 3.3 V/5 V selector and SW pins that tie directly into LLT key outputs, letting the BMS precharge and toggle the controller daily without rewiring harness power—enable the controller’s DC/DC control mode when reusing OEM switches. [^92][^93]
 4. **Log both controllers on CAN.** Always `Read` active configs before writing; mismatched IDs or version drift can silently overwrite both nodes during tuning. [^94]
@@ -106,12 +116,15 @@
 - Power throttles from the 3.3 V rail and use resistor dividers for 5 V hall inputs; direct 5 V feeds have already killed STM32 ADC stages on Makerbase boards. [^106][^107]
 - Makerbase 84 200 controllers happily wake from external dashboard/key switches—reuse the display’s power button circuit instead of hot-wiring pack leads, but log the wiring so the logic rail doesn’t back-feed accessories.[^108]
 - Makerbase harness accessory headers use JST-GH 1.27 mm pitch—plan pigtails accordingly when integrating dashboards or brake sensors. [^109]
+- The boxed 75×100 “on/off” revision simply adds a resistor pair to the ignition bridge, and the NRF header still powers aftermarket BLE modules once you trim the deck for the enclosure.[^onoff-ble]
 - Label the NRF Bluetooth header, hall plug, power-button leads, and comm-port 3.3 V/GND/ADC1 before adding dashboards—the crew just refreshed the colour map after repeated miswires cooked MakerX ADC daughterboards.[^110]
 - Pair ADC adapters or dashboards with external relays if you need a real kill switch; the ADC lighting bridge only sources a few amps and cannot isolate the battery. [^111][^112]
 - Keep horn/lighting loads small on the ADC harness—the Makerbase/Spintend “horn” pin sources only a couple of amps, so 35 W halogens belong on a dedicated DC/DC rail with the controller output simply driving a relay.[^adc_load]
 - Publish a wiring card for every build: power BLE modules from the controller’s regulated 5 V, daisy-chain UART between dual controllers without cross-wiring TX/RX, and pin the throttle’s hall wires correctly before first power-up—recent field failures all traced back to inverted reference leads or shared 5 V rails that yanked controllers into limited mode.[^113][^114]
 - For binary accessories or mower-style implements, bridge the throttle shunt’s red/white leads with ~10 kΩ or configure the ADC app with a pulldown so a normally-open switch maps cleanly between 0 % and 100 % duty.[^binary_accessory]
-- The ADC Adapter V3 breakout keeps ignition, lighting, and accessory rails tidy—feed the board from the Makerbase controller, map ADC channel 9 to “control,” and let the adapter provide fused taps instead of back-powering through the BMS.[^adc_adapter]
+- The ADC Adapter V3 breakout keeps ignition, lighting, and accessory rails tidy—flip the controller’s DC/DC switch (pin 9) into control mode, feed 5 V through the key into AD15, map ADC channel 9 to “control,” and let the adapter provide fused taps instead of back-powering through the BMS.[^adc_adapter]
+- AD15 expects a momentary bridge: a ~1 s press latches the controller on, ~3 s holds power it down, and builders trim launch aggression by pairing 0.1 s positive ramping with throttle-curve gain while raising Motor → Current limits to actually deliver the requested torque.[^ad15_momentary]
+  - Inside VESC Tool, that workflow hinges on the ADC/DC-DC page: pulse A15 with 5 V from the key switch, assign ADC 9 to `control`, and enable the shutdown timer so the controller latches cleanly without relying on backfeed from the BMS rail.[^a15_latch]
 - For NC ignition builds on the 84100HP, document the 1 MΩ pull-down and confirm the switch actually opens the STM32 input—builders have destroyed keys by wiring normally-open hardware without the mod. [^89][^115]
 - 75100 V2 signal looms use JST-PH and XHB families—log the exact housings before ordering spares so replacement throttle and hall leads seat correctly. [^116]
 - Rewire suspect throttles to the 3.3 V rail; Paolo’s Wolf revival only came back after ditching a 5 V feed that had crept into the harness. [^117]
@@ -129,13 +142,23 @@
 [^printed_housings]: Community CAD drops document PLA+/PETG housings and jet-duct side pods that add splash protection for Makerbase 75100 decks while keeping airflow over the aluminum PCB. Source: knowledge/notes/input_part005_review.md, L72 to L72
 [^can_first]: Makerbase dual-drive owners advising to wire CAN high/low between controllers before pairing BLE modules so both nodes stay in sync. Source: knowledge/notes/input_part012_review.md, L359 to L360
 [^adc_load]: Makerbase/Spintend horn outputs sourcing only a couple of amps—insufficient for 35 W halogens—so riders trigger relays and power lights from dedicated converters. Source: knowledge/notes/input_part012_review.md, L97 to L98
-[^adc_adapter]: Roby MacGyver’s ADC Adapter V3 workflow for keyed ignition, fused lighting, and profile control on Makerbase hardware without back-powering the BMS. Source: knowledge/notes/input_part011_review.md, L687 to L687
+[^adc_adapter]: Roby MacGyver’s ADC Adapter V3 workflow for keyed ignition, fused lighting, and profile control on Makerbase hardware without back-powering the BMS. Source: data/vesc_help_group/text_slices/input_part011.txt, L20452 to L20522
+[^ad15_momentary]: Makerbase 75100 latch behaviour, ramp tuning, and torque calibration guidance. Source: data/vesc_help_group/text_slices/input_part011.txt, L20502 to L20524; L20652 to L20671; L20776 to L20785
+[^makerbase_vss_bms]: Makerbase hall-loss recovery via VSS sensing and JBD-SP17S005 charge-overcurrent troubleshooting that pushed a swap to alternative BMS hardware. Source: data/vesc_help_group/text_slices/input_part011.txt, L21209 to L21280; L21236 to L21266; L21245 to L21260
 [^alt_consumable]: Veterans treating Makerbase 84xxx controllers as consumables while they chase 300 A logs or wait for higher-rated hardware, steering commuters to Spintend, Tronic, or Seven alternatives instead. Source: knowledge/notes/input_part012_review.md, L374 to L378. Source: knowledge/notes/input_part012_review.md, L397 to L398
 [^kapton_static]: Kapton isolation preventing static discharge from killing a Makerbase 75100’s 3.3 V rail after the Bluetooth module touched the case. Source: knowledge/notes/input_part008_review.md, L45 to L45
 [^binary_accessory]: Makerbase 75×100 owners bridging throttle shunt leads or adding ADC pulldowns to drive binary accessories with clean 0/100 % duty behaviour. Source: knowledge/notes/input_part006_review.md, L197 to L197
 [^dead_5v]: Makerbase 75100 Alu board with dead 5 V rail losing hall detection until DC/DC stage repair. Source: knowledge/notes/input_part004_review.md, L325 to L325
 [^mcu_reflow]: GD32 MCU reflow fixing intermittent boot on 75 100 Alu boards with poor factory solder joints. Source: knowledge/notes/input_part004_review.md, L294 to L294
 [^mosfet_hotplate]: Hotplate technique for replacing cracked G015N10 MOSFETs on aluminum-PCB Makerbase boards. Source: knowledge/notes/input_part004_review.md, L282 to L282
+[^75100-pro-refresh]: Source: data/vesc_help_group/text_slices/input_part004.txt†L20282-L20349
+[^makerbase-bms-cutoff]: Source: data/vesc_help_group/text_slices/input_part004.txt†L20500-L20509
+[^makerbase-cap-stake]: Source: data/vesc_help_group/text_slices/input_part004.txt†L20510-L20549
+[^makerbase-mounting]: Source: data/vesc_help_group/text_slices/input_part004.txt†L20846-L20858
+[^fw-bypass-pack]: Source: data/vesc_help_group/text_slices/input_part004.txt†L21108-L21182
+[^alu-mosfet-pairs]: Source: data/vesc_help_group/text_slices/input_part004.txt†L19922-L19984
+[^makerbase-insulation]: Source: data/vesc_help_group/text_slices/input_part004.txt†L20549-L20600 and L20819-L20838
+[^makerbase-wheel-cal]: Source: data/vesc_help_group/text_slices/input_part004.txt†L21219-L21251 and L21737-L21739
 
 ## References
 
@@ -160,6 +183,7 @@
 [^19]: Source: knowledge/notes/input_part004_review.md, L219 to L229
 [^20]: Source: knowledge/notes/input_part005_review.md, L399 to L400
 [^21]: Source: knowledge/notes/input_part007_review.md, L25 to L25
+[^75200-fade]: Source: knowledge/notes/input_part013_review.md†L706-L706
 [^22]: Source: knowledge/notes/input_part005_review.md, L19 to L19
 [^23]: Source: knowledge/notes/input_part005_review.md, L194 to L197
 [^24]: Source: knowledge/notes/input_part007_review.md, L168 to L168
@@ -198,8 +222,10 @@
 [^57]: Source: knowledge/notes/input_part006_review.md, L341 to L341
 [^58]: Source: knowledge/notes/input_part005_review.md, L448 to L451
 [^59]: Source: knowledge/notes/input_part005_review.md, L510 to L510
+[^dc-link-recap]: Source: knowledge/notes/input_part006_review.md†L31-L31
+[^onoff-ble]: Source: knowledge/notes/input_part006_review.md†L40-L40
 [^60]: Source: knowledge/notes/input_part006_review.md, L45 to L45
-[^61]: Source: knowledge/notes/input_part013_review.md, L611 to L615
+[^61]: Source: knowledge/notes/input_part013_review.md†L605-L605
 [^62]: Source: knowledge/notes/input_part013_review.md, L60 to L60
 [^63]: Source: knowledge/notes/input_part013_review.md, L383 to L385
 [^64]: Source: knowledge/notes/input_part013_review.md, L503 to L505
@@ -262,3 +288,4 @@
 [^121]: Source: knowledge/notes/input_part011_review.md, L699 to L728
 [^122]: Source: knowledge/notes/input_part007_review.md, L45 to L168
 [^123]: Source: knowledge/notes/input_part005_review.md, L17 to L584
+[^a15_latch]: Source: knowledge/notes/input_part011_review.md†L536-L538

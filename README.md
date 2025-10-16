@@ -95,11 +95,29 @@ All processed knowledge documents follow these formatting conventions:
 - **Structured content**: Tables, bullet lists, and sub-bullets for easy scanning
 - **Preserved accuracy**: All technical content is maintained from the original sources
 
+## Project Status
+
+### Current State
+- **72 processed knowledge documents** (44 guides + 28 brand dossiers)
+- **Extraction progress**: ~44% complete across 17 review files
+- **Quality metrics**: 99.98% unique content (0.0% duplication)
+- **Recent work**: All open PRs merged, readability improvements applied
+
+### Status Reports
+- See `EXTRACTION_STATUS.md` for detailed extraction progress by file
+- See `DEDUPLICATION_REPORT.md` for content quality analysis
+- See `MERGE_SUMMARY.md` for PR merge history
+
+### Remaining Work
+- **~6,800 lines** of knowledge to extract from review files
+- See EXTRACTION_STATUS.md for prioritized extraction queue
+
 ## Future improvements
 
 - Build scripts to parse and index the chat logs for quick reference.
 - Create thematic summaries (e.g. battery management, motor tuning, firmware updates).
 - Add tagging or cross-referencing between notes and processed documents for easier navigation.
+- Complete extraction of remaining review content into processed documents.
 
 Happy knowledge mining!
 

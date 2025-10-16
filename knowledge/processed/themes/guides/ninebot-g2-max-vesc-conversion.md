@@ -23,6 +23,7 @@
 
 1. **Swingarm & mudguard:** Reinstall the rear arm with two bolts, metal sleeves, and a 3D-printed mudguard support to restore stiffness after the harness swap, and budget longer swingarm bolts when fitting Lonnyo 80 H hubs so the caliper clears.[^15][^16]
 2. **Dropout widening:** Stock rear spacing (~115 mm) can be stretched to ~150 mm by adding ~10 mm bushings and longer shoulder bolts while retaining OEM screws; choose softer bushing metals (copper/brass) so the frame tabs do not gall.[^17]
+- **Upgrade the rear plates when chasing 80 H hubs.** ’lekrsu’ now laser-cuts new G2 plates with integrated brake mounts and swaps in G3 springs/bushings; pair the hardware with 5 mm torque-arm plates before fitting 80 H motors.[^lekrsu-plates]
 
 - **Exploit deck headroom:** The Max G2 deck hides extra space once you relocate the stock controller, letting you tuck external 20 S modules or triple-layer nickel bricks inside after grinding internal partitions for clearance.[^18]
 3. **Cell packaging ceiling:** Expect ≈208 cylindrical cells before extensive deck surgery; plan your enclosure and harness routing before welding to avoid overcrowding the swingarm pivot area.[^19]
@@ -112,6 +113,7 @@
 [^15]: Source: knowledge/notes/input_part013_review.md†L42-L45
 [^16]: Source: knowledge/notes/input_part011_review.md†L756-L757
 [^17]: Source: knowledge/notes/input_part013_review.md†L355-L355
+[^lekrsu-plates]: Source: knowledge/notes/input_part013_review.md†L828-L828
 [^18]: Source: knowledge/notes/input_part005_review.md†L137-L137
 [^19]: Source: knowledge/notes/input_part013_review.md†L354-L354
 [^20]: Source: knowledge/notes/input_part013_review.md†L123-L123

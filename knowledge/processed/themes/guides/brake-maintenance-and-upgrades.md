@@ -7,6 +7,10 @@
 - Wheel-centering kits and dual-caliper setups eliminate rotor wobble and improve braking consistency on racing builds, but add complexity and weight that commuter riders may not need.[^centering-kits]
 - Keep at least one mechanical brake active even on regen-heavy builds.
   - logs show regen-only riding overheats controllers quickly, and dual-motor setups still rely on mechanical rotors to stop safely when electronics fault.[^1][^2]
+- Leave expansion room in master cylinders. Overfilled reservoirs build pressure as fluid heats, forcing fittings to burp fluid or leak once systems see triple-digit Celsius rotor temps.[^heat-expansion]
+- Expect the front brake to carry the bulk of stopping duty; riders relying on rear-only braking continue to report easy slides, so dual-hydraulic setups or regen+front hydraulic pairings remain the safe baseline for high-power scooters.[^front-bias]
+- After wet rides, flush rotors and calipers with brake cleaner—it is safe on pads—and retorque folding pins or other fasteners so grit and fatigue cracks do not sneak in after rain sessions.[^denis-brake-clean]
+- Riders pushing 40 km/h+ speed builds pair full motorcycle armor with pneumatic tires; the crew now labels solid tires a “death wish” at those speeds because the carcass can unseat mid-ride.[^denis-armor]
 
 ## Bleeding Techniques
 
@@ -24,6 +28,7 @@
   7. Top off reservoir, close ports, reinstall pads and test lever firmness[^magura-bleed]
 
 - 🇪🇸AYO#74 also swapped to a higher-flow bleed needle to tighten Shimano/Magura lever feel, noting the larger bore purged dead-zone bubbles faster than stock fittings.[^3]
+- When calipers keep rubbing after a textbook bleed, remove the block, push each piston out halfway with a syringe full of clean mineral oil, lubricate the seals, and centre the caliper before the first lever pull—spreading the pistons evenly stops the asymmetric bite that causes rotor rub.[^magura_pistons]
 
 ### Preventing Seal Damage During Pad Changes
 
@@ -37,6 +42,23 @@
 ### Pad Conditioning & Bedding
 
 - Riders formed a “sanded pad club,” resurfacing pads before bedding to tame squeal and keep braking consistent after swapping to thicker rotors.[^4]
+- Kool-Stop sintered pads stretch VSETT pad life beyond 800 km provided riders bed them with 30–60 hard 50→0 km/h stops, but they run louder and chew roughly 1 mm off rotors every ~1000 km—plan spare discs for long trips.[^ip001-sintered]
+
+### Pad Selection & Wet-Weather Behavior
+
+- Heavy scooters routinely chew through stock Magura pads in under 500 km; the crew now defaults to full-metallic Kool Stop D170S sets to keep MT5/MT7 systems consistent in gritty, high-power service.[^kool_stop]
+- MT5/MT7 riders pairing Kool Stop sintered pads with Magura MDR-C 2 mm rotors and MT7 HC3 bite-point knobs report fierce bite and on-trail adjustability without reaching for hex tools.[^magura_field]
+- Hope/Jagwire banjo kits cover every washer except the required M6 × 20 mm banjo bolt; after boiling Shimano rotors toward an estimated 350–450 °C, track riders now reinforce hoses with steel-braided “fuckeria” lines before the next session.[^magura_banjo]
+- Magura’s stock Royal Blood boils around 120 °C, so aggressive downhill crews keep Shimano or Brembo mineral oil on hand for repeated 100 → 0 km/h stops and log rotor temps that push past 110 °C even on flat routes.[^royal_blood]
+- Xiaomi Xtech calipers grab harder once the rotor is wet, so riders plan fresh bleeds and bedding cycles after rain to restore predictable modulation.[^xtech_wet]
+- Logan four-piston calipers on NAMI scooters already deliver Magura-level stopping, so owners only switch brands if they prefer MT-series lever feel or pad options.[^logan_caliper]
+
+### Xiaomi / Pro Brake Fitment Updates
+
+- Stock organic pads on Xiaomi/Pro platforms fade quickly once speeds climb, so fast riders are shifting to sintered or ceramic compounds and, when chasing dual-disc conversions, splitting a single lever’s cable into matched housings so both calipers pull evenly.[^m365_pad_compounds]
+- Classic cable-disc setups dial fine tension with the barrel adjuster and reserve the caliper’s hex bolt for coarse tweaks; if levers start bottoming out, veterans inspect pad wear before blaming cables.[^barrel_adjust]
+- Confirm rotor bolt patterns before importing mountain-bike discs for a Pro 2: that hub uses six bolts while classic M365 rims only offer five, so mismatched hardware will not seat correctly.[^pro2_rotor_pattern]
+- Tudor is gauging interest in a CNC’d Monorim 500 W brake adapter and plans to machine the first batch once roughly 20 riders commit, so builders eyeing dual-disc Monorim setups should register early or organize a group buy.[^monorim_adapter_batch]
 
 ### Lever Durability Notes
 
@@ -51,6 +73,8 @@
 - Four-piston systems improve heat dissipation during repeated high-speed stops but may be excessive for commuter builds under 60 km/h where two-piston Magura MT5 or similar calipers provide adequate stopping power.[^four-piston-vs-two]
 - Zoom-branded hydraulics continue to underperform at speed.
   - riders are standardising on Nutt, Magura MT5e, Shimano Saint, or Hope calipers paired with 3 mm reinforced 160 mm rotors to survive repeated 120→0 km/h stops, noting that Magura reservoirs can crack under extreme loads.[^6]
+- Inokim OXO owners hunting for a four-piston front upgrade either flip a rear swingarm to mount the caliper underneath or machine a dedicated adapter for the stock arm—there’s no bolt-on solution yet.[^oxo-front]
+- Xiaomi riders chasing >50 km/h treat a second hydraulic brake as mandatory; flimsy Monorim adapters flex and 135 mm rotors warp, so upgrade to stiff adapters and 140 mm five-bolt discs or quality dual-caliper setups.[^denis-dual-brake]
 
 ### Motorcycle-Caliper Imports (Kotto Example)
 
@@ -64,6 +88,7 @@
   - switching to metallic compounds such as Galfer keeps feel consistent when regen is dialed back for wet roads.[^9]
 - Denis’ workshop now treats Magura-class hydraulics as mandatory once Pro 2 builds creep toward 80 km/h.
   - Xtech hybrids can’t arrest the extra energy, so riders add lever sensors if they still want regen without sacrificing lever feel and plan a careful bleed after rerouting hoses.[^10]
+- Riders retiring Xiaomi e-brake sensors after repeated controller pops at ~45 km/h now switch to full-hydraulic Shimano or Magura systems and upgrade mechanical cables to tougher bicycle housings when hydraulics are not yet installed.[^sensor_pop]
 
 ### Rotor Sizing Considerations
 
@@ -71,11 +96,17 @@
 - Magura MT7/MT5 calipers barely clear 2.9 mm Kaabo rotors.
   - fresh pads or 3 mm aftermarket discs often rub unless you machine custom spacers
   - so many riders stick with stock Zoom calipers or thinner discs when chasing upgrades.[^11]
+- A Brakestuff rotor cracked after just a few races, sparking debate over its twin-ring design and whether added venting is needed to stop flipping/warping under race heat.[^brakestuff_rotor_debate]
+- Magura Storm HC rotors measure about 1.9 mm new and get replaced near 1.8 mm; setting reach adjusters fully out, bleeding with piston blocks, and holding the caliper above the lever while closing ports prevents rubbing when fitting thicker MDR-C or MDR-P rotors with Kool Stop pads.[^storm_hc]
+- X-Tech calipers quickly expose flimsy bargain rotors—if the disc warps after a ride, replace it with bike-shop-grade hardware rather than blaming the caliper.[^xtech_rotor_upgrade]
 - Repeated 80–90 km/h stops roasted 120 mm rotors and overheated Magura MT8s; the crew now defaults to dual front brakes or 203 mm discs on heavy scooters to regain thermal margin.[^12]
 - When rotors need a millimetre of offset, riders cut thin shim plates (nickel strip or torque-arm washers) instead of stacking round washers that flex loose under repeated braking loads.[^13]
 - Premium rotors from Shimano, Magura, or Galfer stay on the shopping list while AliExpress specials are avoided for 70 km/h builds despite the price gap.[^14]
+- Community tests agree that braking style dominates rotor temperature, yet aggressive metallic compounds can still dump rotor heat into motor shells during repeated panic stops—log hub temps if you lean on sintered pads.[^ip001-rotorheat]
 - Kaabo Wolf owners now swap to 3 mm Kaabo discs after stock rotors warped.
   - confirm caliper spacing and expect longer life once the thicker rotors are paired with Wolf motors.[^15]
+- Skip Shimano “resin only” 160 mm rotors on 72 V-class scooters; the thin rotors fade quickly and risk glazing metallic pads. Veterans instead budget 2 mm rotors rated for metallic compounds and pair them with full-hydraulic calipers before raising pack voltage.[^shimano-metal]
+- Builders hunting thicker 160 mm options are sourcing 3 mm AliExpress rotors that clear Hope calipers without machining, smoothing upgrades on Zero and Dualtron conversions.[^ali-3mm]
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
 - Tall brake adapters should use a single ring spacer instead of stacked washers so axial loads do not rock the disc bolts.
   - 5 mm steel rings have proven stable on custom Blade hubs, while 1.7 mm washer stacks remain a stopgap only.[^16]
@@ -90,16 +121,27 @@
 
 ### External Hose Routing & Quick-Disconnect Hardware
 
+- Magura MT5 single-pad kits ship without pad screws, so riders trim M4×25 mm bolts to fit, and the Jagwire Hyflow + Hope quick-connect set relocates the banjo outward with sealed M6/M5 washers—essential for tight decks like the Ninebot G30.[^magura_hardware]
+- Track builds follow that kit with steel-braided “fuckeria” hoses after boiling Shimano rotors and seeing fade around 350–450 °C.[^magura_track]
 - Rerouting Magura hoses outside the fork demands the correct short banjo bolts and bleed screws; mixing long/short clamp screws has already shorted controller phases, so standardise hardware before final assembly.[^20]
 - The Elvedes Hydro Parts Kit supplies dual M8 banjos for clean fork exits, while Jagwire’s quick-disconnect system costs roughly $120–$125 for enough hose and couplers to outfit dual-motor scooters and requires committing to Jagwire hose diameters.[^21][^22]
 - Hope’s HFA701 kit bundles the correct M6 banjos and bleed screws; if you piece together individual fittings from Venhill, Trickstuff, or AliExpress, match barb dimensions to hose ID or you will fight leaks during the first bleed.[^23]
 - Even with premium hardware, external routing can crush Magura MT7 lines after flats or tire swaps.
   - inspect clearance after every wheel service and carry spare banjos plus hoses for roadside replacements.[^24]
+- Jagwire-style external reroutes can kink MT7 hoses and kill braking until the line is replaced; inspect for damage after any flat and confirm at least 5 mm clearance to 10×3 rubber even when deflated.[^ip001-jagwire]
+- Xiaomi and VSETT frames that run MT7/MT8 calipers close to the tire should stock spare banjos/bolts—sidewall flex can close sub-5 mm gaps mid-ride, so schedule clearance checks alongside pad inspections.[^ip001-clearance]
+- Magura MT5e and MT7 calipers share castings, but the MT7 lever adds bite-point adjustment and four individual pads; most commuters still chase the aluminium one-finger HC lever upgrade for harder stops without the flex of plastic blades.[^mt7_lever]
+- Rosheee’s €90 “Stahlflex” steel-braided hoses keep lever feel consistent under heat, yet fittings must match each brand’s banjo outlets to avoid leaks when mixing Magura, Shimano, or Hope hardware.[^stahlflex]
+- When stock compounds glaze during track sessions, the group swaps to EBC sintered pads as the reliable fallback.[^ebc_pads]
 
 ### Semi-Hydraulic Caliper Limitations
 
+- Aftermarket Xtech calipers bite hard in the dry but rely on cheap seals that rust quickly in rain—daily commuters keep rebuild kits or spares ready for wet-weather riding, flush them seasonally, and still report leaks once road salt enters the mix.[^denis-xtech-seals]
+- Pair X-Tech calipers with quality 140 mm rotors; cheap 135 mm AliExpress discs feel weak until you upgrade the hardware.[^denis-xtech-rotor]
+- **Budget hybrids keep failing.** Shop owners keep seeing piston corrosion and fluid leaks on Xtech-style hybrids, so high-speed builds increasingly jump straight to full hydraulics (Magura) or quality mechanical calipers instead of trusting the semi-hydraulic compromise.[^xtech-corrosion]
 - XTech-style semi-hydraulic calipers carry minimal oil volume, rely on rattly auto-centering hardware, and have warped rotors on scooters above 60 km/h.
   - upgrade to sturdier discs, avoid flimsy quad calipers, and inspect the whole brake stack after flats or heavy emergency stops.[^25]
+- For mechanical builds, the TRP Spyke dual-piston caliper remains the dependable upgrade and even pairs with Xiaomi-style brake levers that include e-brake switches for simple commuter maintenance.[^trp_spyke]
 - Track abuse already pushed Magura calipers past the Curie point (>700 °C), wiping magnetism and underscoring the need for engine braking or larger rotors on race builds before mechanical fade sets in.[^26]
 - 100 km/h track logs keep comparing Trickstuff, Kool-Stop, Shimano, and XLC rotors.
   - prep extra thermal mass, ventilation, and pad choices before sprint sessions so glowing hardware doesn’t demagnetise calipers or chew pads mid-run.[^27]
@@ -119,6 +161,7 @@
 - Burnout-focused builders sometimes leave the MT5e e-brake sensors unplugged or repurpose a single caliper while waiting on replacements; strip non-essential electrical loads when testing to confirm the new hydraulics clear the fork and wiring bundles.[^mt5e-sensors]
 - Inspect bundled levers before trusting them.
   - Jan flagged one aftermarket lever as “the worst” thanks to plastic threads and screws despite pairing with Magura calipers, so budget for higher-quality levers if the kit feels flimsy.[^bad-lever]
+- Treat the supplied 0.5 Nm bleed wrench as mandatory; over-tightening the lever screw by feel strips threads and dumps pressure mid-ride.[^ip001-bleedtorque]
 - Rotor slot orientation matters.
   - aim the cooling slots forward on the front wheel, but flip a rear rotor if the slots face the wrong direction after a wheel swap so debris clears properly.[^35]
 - Rim brakes gouged paint and underperformed on Haku’s 20 mph minibike conversion.
@@ -137,6 +180,7 @@
 - Yamal and 🇪🇸AYO#74 still favour the solid 3 mm “Wolf” discs from AliExpress.
   - non-floating despite the two-piece look
   - because they survive where riveted rotors sheared; at ≈€30 online (vs. €80–100 retail) riders buy them in sets of four.[^44]
+- Sonken-branded 160 mm rotors mirror the weak inner-ring geometry that doomed earlier Brakestuff copies; without better tempering and precise Hope caliper shimming they bend within months on RM-X race scooters.[^sonken-warning]
 - Brake-Stuff’s Shimano-pattern 6-bolt rotors are proving durable replacements for worn discs on VESC conversions.
   - Yamal’s installs slot straight onto common hubs when builders want mid-tier pricing without sacrificing material quality.[^45]
 
@@ -146,6 +190,7 @@
 - 3 mm × 170 mm rotors dramatically stiffen braking response but require retracting pistons fully for clearance and a quick true after the first bedding stops.[^47]
 - A commuter who bent a Vsett rotor mid-ride now keeps spares on hand and leans on e-brakes when mechanical hardware warps unexpectedly.
   - plan redundancy for traffic incidents.[^48]
+- Even premium hardware stacks can boil fluid. One MT7/MT8 build with copper sintered pads, Bionol fluid, Steelflex hoses, and prototype levers still flashed 360 °C fluid and leaked at the banjo, forcing pad and rotor inspections after every downhill session; treat aggressive descents as consumable events even on boutique components.[^mt7-boil]
 - Skrtt’s 2.3 mm rotor experiments required shaving calipers while 🇪🇸AYO#74 stressed using “elevator” spacers to clear thicker discs.
   - document allowable rotor thickness per caliper so riders stop guessing on machining limits.[^49]
 - Ausias is milling Magura MT5 calipers “radially” to clear 3.6 mm rotors; peers warned most bicycle brakes expect ≤2.8 mm discs, so publish machining tolerances, lever upgrades, and testing steps before anyone copies the mod.[^50]
@@ -160,6 +205,7 @@
 ### Hope Tech/Tesch 3 Caliper Service
 
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
+- 🇪🇸AYO#74 finally cleared a four-year sticky-piston saga by stripping and re-greasing his Hope caliper; he also flagged the latest Tesch 3 V4 pads as ~2 mm taller than earlier tablets, so update spares lists before ordering replacements.[^hope-regrease]
 - Kaabo Wolf riders source rear Magura adapters from Javamba after discovering flipped front hubs could not accommodate left-side calipers.
   - keep vendor links handy before tearing down the rear motor.[^55]
 - AliExpress shim kits (2–5 mm rotors spacers plus washers) keep oversized calipers from fouling hub flanges, giving Dualtron and Kaabo owners a cheap path to widen rotor stance without machining custom spacers.[^56]
@@ -279,10 +325,12 @@
 
 [^bleed-technique]: Magura bleeding technique emphasizing level levers, hose flicking, and patient lever cycling.[^72]
 [^magura-bleed]: Successful Magura MT5/MT7 bleed procedure following bicycle-service best practices.[^72]
-[^seal-damage]: MT5 lever seal burst from pushing pistons without relieving pressure via bleed screw.[^73]
+[^seal-damage]: MT5 lever seal burst from pushing pistons without relieving pressure via bleed screw.[^73][^seal-damage-2025]
+[^seal-damage-2025]: Source: knowledge/notes/input_part013_review.md†L747-L747
 [^four-piston-cost]: Shimano M7120 four-piston caliper pricing and thermal mass benefits.[^74]
 [^four-piston-vs-two]: Four-piston caliper benefits for high-performance builds vs. two-piston sufficiency for commuters.
 [^rotor-sizing]: Rotor sizing from 180 mm to 203 mm for thermal mass and leverage, with frame clearance warnings.[^75]
+[^brakestuff_rotor_debate]: Source: knowledge/notes/input_part008_review.md†L456-L457
 [^gt2-rotors]: Segway GT2 2.42 mm rotors providing warp resistance for repeated high-speed stops.[^76]
 [^m6-brackets]: Oversized hydraulic setups demand M6/M8 hardware and tight-tolerance adapters; M5 bolts quickly elongate mounts under MT7 braking loads.[^77]
 [^mt5e-pricing]: Magura MT5e front/rear kits hovering around $200 shipped via Jenson USA/DHL impressed riders expecting higher prices.[^78]
@@ -290,6 +338,7 @@
 [^bad-lever]: Jan called out a Magura-compatible lever with plastic threads/screws as the worst he has used—treat cheap bundles as suspect.[^80]
 [^hope-pricing]: Hope Tech Evo pricing and 3 mm rotor clearance observations from group buys.[^81]
 [^hope-service]: Hope Tech/Tesch 3 caliper service covering piston re-greasing and pad compatibility.[^82]
+[^hope-regrease]: Source: knowledge/notes/input_part013_review.md†L714-L714
 [^f2-upgrade]: Ninebot F2 Pro brake upgrade using sintered pads and compatible rotors.[^83]
 [^centering-kits]: Wheel-centering kits and dual-caliper setups for wobble elimination on 80/100H racing builds.[^84]
 [^dual-caliper-when]: When to consider dual-caliper systems based on speed and use case.
@@ -300,6 +349,11 @@
 [^fluid-compat]: Brake fluid compatibility chart for common hydraulic brake systems.
 [^hall-retrofit]: Adding hall or reed sensors to any hydraulic lever unlocks proportional regen or kill-switch control without hunting rare OEM sensored levers.[^88]
 [^jagwire-hardware]: Jagwire Pro hoses outperform stock Magura lines, but the correct olives/barbs are mandatory at each end to prevent leaks after re-termination.[^88]
+[^ip001-sintered]: Source: knowledge/notes/input_part001_review.md†L620-L621
+[^ip001-jagwire]: Source: knowledge/notes/input_part001_review.md†L642-L643
+[^ip001-clearance]: Source: knowledge/notes/input_part001_review.md†L642-L644
+[^ip001-rotorheat]: Source: knowledge/notes/input_part001_review.md†L680-L681
+[^ip001-bleedtorque]: Source: knowledge/notes/input_part001_review.md†L683-L684
 [^flood-recovery]: Post-flood brakes revive when stripped, cleaned with brake cleaner, and finished with PTFE lube once dry.
   - WD-40 or silicone swell seals and leave rust behind.[^89]
 [^follow-centering]: Follow-up action to create wheel-centering and dual-caliper setup guide.[^84]
@@ -330,6 +384,12 @@
 [^8]: Source: knowledge/notes/input_part008_review.md†L249-L249
 [^9]: Source: knowledge/notes/input_part008_review.md†L250-L251
 [^10]: Source: knowledge/notes/denis_all_part02_review.md†L433-L433
+[^denis-dual-brake]: Source: knowledge/notes/denis_all_part02_review.md†L752-L752
+[^denis-xtech-seals]: Source: knowledge/notes/denis_all_part02_review.md†L933-L933
+[^denis-xtech-rotor]: Source: knowledge/notes/denis_all_part02_review.md†L962-L962
+[^denis-front-disc]: Source: knowledge/notes/denis_all_part02_review.md†L1056-L1056
+[^denis-fork-reinforce]: Source: knowledge/notes/denis_all_part02_review.md†L1057-L1057
+[^denis-mixed-brake]: Source: knowledge/notes/denis_all_part02_review.md†L1079-L1079
 [^11]: Source: knowledge/notes/input_part002_review.md†L141-L142
 [^12]: Source: data/vesc_help_group/text_slices/input_part002.txt†L11088-L11137
 [^13]: Source: data/vesc_help_group/text_slices/input_part002.txt†L11406-L11455
@@ -364,6 +424,8 @@
 [^42]: Source: knowledge/notes/input_part010_review.md†L261-L262
 [^43]: Source: knowledge/notes/input_part010_review.md†L262-L263
 [^44]: Source: data/vesc_help_group/text_slices/input_part010.txt†L18701-L18712
+[^ali-3mm]: Source: knowledge/notes/input_part010_review.md†L620-L620
+[^sonken-warning]: Source: knowledge/notes/input_part010_review.md†L665-L665
 [^45]: Source: knowledge/notes/input_part010_review.md†L391-L392
 [^46]: Source: knowledge/notes/input_part011_review.md†L368-L374
 [^47]: Source: knowledge/notes/input_part012_review.md†L33-L33
@@ -416,3 +478,34 @@
 [^94]: Source: knowledge/notes/input_part007_review.md†L238-L238
 [^95]: Source: knowledge/notes/input_part014_review.md†L10356-L10365
 [^96]: Source: knowledge/notes/denis_all_part02_review.md†L348-L349
+[^heat-expansion]: Source: knowledge/notes/input_part006_review.md†L13-L13
+[^front-bias]: Source: knowledge/notes/input_part006_review.md†L14-L14
+[^shimano-metal]: Source: knowledge/notes/input_part006_review.md†L15-L15
+[^mt7-boil]: Source: knowledge/notes/input_part006_review.md†L12-L12
+[^oxo-front]: Source: knowledge/notes/input_part011_review.md†L513-L513
+[^magura_field]: Source: knowledge/notes/input_part002_review.md†L17154-L17243
+[^magura_banjo]: Source: knowledge/notes/input_part002_review.md†L17178-L17275
+[^magura_pistons]: Source: data/vesc_help_group/text_slices/input_part002.txt†L20741-L20809
+[^royal_blood]: Source: data/vesc_help_group/text_slices/input_part002.txt†L20728-L20753
+[^storm_hc]: Source: knowledge/notes/input_part002_review.md†L19214-L19505
+[^logan_caliper]: Source: knowledge/notes/input_part002_review.md†L19882-L19887
+[^magura_hardware]: Source: knowledge/notes/input_part002_review.md†L638-L639
+[^magura_track]: Source: knowledge/notes/input_part002_review.md†L657-L657
+[^kool_stop]: Source: knowledge/notes/input_part002_review.md†L547-L548
+[^xtech_wet]: Source: knowledge/notes/input_part002_review.md†L549-L549
+[^mt7_lever]: Source: knowledge/notes/input_part002_review.md†L569-L570
+[^stahlflex]: Source: knowledge/notes/input_part002_review.md†L571-L571
+[^ebc_pads]: Source: knowledge/notes/input_part002_review.md†L572-L572
+[^trp_spyke]: Source: knowledge/notes/input_part002_review.md†L600-L600
+[^m365_pad_compounds]: Source: knowledge/notes/all_part01_review.md†L501-L503
+[^barrel_adjust]: Source: knowledge/notes/all_part01_review.md†L602-L602
+[^pro2_rotor_pattern]: Source: knowledge/notes/all_part01_review.md†L502-L502
+[^monorim_adapter_batch]: Source: knowledge/notes/all_part01_review.md†L503-L503
+[^xtech_rotor_upgrade]: Source: knowledge/notes/all_part01_review.md†L736-L736
+[^sensor_pop]: Source: knowledge/notes/all_part01_review.md†L628-L628
+[^xtech-corrosion]: Source: knowledge/notes/denis_all_part02_review.md†L518-L518
+[^denis-brake-clean]: Source: knowledge/notes/denis_all_part02_review.md†L867-L867
+[^denis-armor]: Source: knowledge/notes/denis_all_part02_review.md†L868-L868
+- **Front disc conversions demand discipline.** Learn modulation before hammering the lever, then upgrade calipers, spacers, and suspension brackets so heavier motors and wider tires clear without washing the front wheel.[^denis-front-disc]
+- Reinforce Monorim and custom forks with thicker torque plates or “sandwich” steel stacks, relocate shocks, and consider Nutt calipers with sintered pads to carve clearance for 10×3.0 tires on AWD builds.[^denis-fork-reinforce]
+- Mixed braking setups still work: some riders pair hydraulic fronts with Xiaomi e-brake levers in the rear for stable 50 km/h commutes, while others add Nutt calipers and brake-disc spacers to clear 80/65-6 tires without loose washer stacks.[^denis-mixed-brake]
