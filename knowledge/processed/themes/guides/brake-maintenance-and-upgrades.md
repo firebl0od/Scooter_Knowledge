@@ -37,6 +37,7 @@
 ### Pad Conditioning & Bedding
 
 - Riders formed a “sanded pad club,” resurfacing pads before bedding to tame squeal and keep braking consistent after swapping to thicker rotors.[^4]
+- Kool-Stop sintered pads stretch VSETT pad life beyond 800 km provided riders bed them with 30–60 hard 50→0 km/h stops, but they run louder and chew roughly 1 mm off rotors every ~1000 km—plan spare discs for long trips.[^ip001-sintered]
 
 ### Lever Durability Notes
 
@@ -74,6 +75,7 @@
 - Repeated 80–90 km/h stops roasted 120 mm rotors and overheated Magura MT8s; the crew now defaults to dual front brakes or 203 mm discs on heavy scooters to regain thermal margin.[^12]
 - When rotors need a millimetre of offset, riders cut thin shim plates (nickel strip or torque-arm washers) instead of stacking round washers that flex loose under repeated braking loads.[^13]
 - Premium rotors from Shimano, Magura, or Galfer stay on the shopping list while AliExpress specials are avoided for 70 km/h builds despite the price gap.[^14]
+- Community tests agree that braking style dominates rotor temperature, yet aggressive metallic compounds can still dump rotor heat into motor shells during repeated panic stops—log hub temps if you lean on sintered pads.[^ip001-rotorheat]
 - Kaabo Wolf owners now swap to 3 mm Kaabo discs after stock rotors warped.
   - confirm caliper spacing and expect longer life once the thicker rotors are paired with Wolf motors.[^15]
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
@@ -95,6 +97,8 @@
 - Hope’s HFA701 kit bundles the correct M6 banjos and bleed screws; if you piece together individual fittings from Venhill, Trickstuff, or AliExpress, match barb dimensions to hose ID or you will fight leaks during the first bleed.[^23]
 - Even with premium hardware, external routing can crush Magura MT7 lines after flats or tire swaps.
   - inspect clearance after every wheel service and carry spare banjos plus hoses for roadside replacements.[^24]
+- Jagwire-style external reroutes can kink MT7 hoses and kill braking until the line is replaced; inspect for damage after any flat and confirm at least 5 mm clearance to 10×3 rubber even when deflated.[^ip001-jagwire]
+- Xiaomi and VSETT frames that run MT7/MT8 calipers close to the tire should stock spare banjos/bolts—sidewall flex can close sub-5 mm gaps mid-ride, so schedule clearance checks alongside pad inspections.[^ip001-clearance]
 
 ### Semi-Hydraulic Caliper Limitations
 
@@ -119,6 +123,7 @@
 - Burnout-focused builders sometimes leave the MT5e e-brake sensors unplugged or repurpose a single caliper while waiting on replacements; strip non-essential electrical loads when testing to confirm the new hydraulics clear the fork and wiring bundles.[^mt5e-sensors]
 - Inspect bundled levers before trusting them.
   - Jan flagged one aftermarket lever as “the worst” thanks to plastic threads and screws despite pairing with Magura calipers, so budget for higher-quality levers if the kit feels flimsy.[^bad-lever]
+- Treat the supplied 0.5 Nm bleed wrench as mandatory; over-tightening the lever screw by feel strips threads and dumps pressure mid-ride.[^ip001-bleedtorque]
 - Rotor slot orientation matters.
   - aim the cooling slots forward on the front wheel, but flip a rear rotor if the slots face the wrong direction after a wheel swap so debris clears properly.[^35]
 - Rim brakes gouged paint and underperformed on Haku’s 20 mph minibike conversion.
@@ -300,6 +305,11 @@
 [^fluid-compat]: Brake fluid compatibility chart for common hydraulic brake systems.
 [^hall-retrofit]: Adding hall or reed sensors to any hydraulic lever unlocks proportional regen or kill-switch control without hunting rare OEM sensored levers.[^88]
 [^jagwire-hardware]: Jagwire Pro hoses outperform stock Magura lines, but the correct olives/barbs are mandatory at each end to prevent leaks after re-termination.[^88]
+[^ip001-sintered]: Source: knowledge/notes/input_part001_review.md†L620-L621
+[^ip001-jagwire]: Source: knowledge/notes/input_part001_review.md†L642-L643
+[^ip001-clearance]: Source: knowledge/notes/input_part001_review.md†L642-L644
+[^ip001-rotorheat]: Source: knowledge/notes/input_part001_review.md†L680-L681
+[^ip001-bleedtorque]: Source: knowledge/notes/input_part001_review.md†L683-L684
 [^flood-recovery]: Post-flood brakes revive when stripped, cleaned with brake cleaner, and finished with PTFE lube once dry.
   - WD-40 or silicone swell seals and leave rust behind.[^89]
 [^follow-centering]: Follow-up action to create wheel-centering and dual-caliper setup guide.[^84]

@@ -9,6 +9,8 @@
   - thin alligator clips dropped a healthy P42A to a false 1.9 V at 20 A until the team clamped directly to the tabs
   - so upgrade leads and meters before condemning cells.[^2]
 - EU comparison logs now peg P42A as the 20–30 A workhorse, LG/Samsung 50G as the 7–10 A efficiency pick, and Samsung 50S/Vapcell T50 matching P42A output only if you can justify roughly double the price; community bulk buys land 30T/35E/50G cells near €2.5–€4 each.[^3]
+- Samsung 48X packs shine in 8 P commuters pulling ≤60 A total—they hold similar sag to P42A at 10 A per cell while adding ~20 % usable energy, but builders still pick 40T/P42A when each cell must deliver ≥15 A.[^ip001-48x]
+- LG M50LT curves now rival Samsung 48X at 10 A and stay strong at 15 A with ~4.2 Ah down to 3.0 V; just meter internal resistance because Tesla surplus lots on AliExpress arrive as lower-grade bins.[^ip001-m50lt]
 
 ## Capacity Planning & Chemistry Guardrails
 
@@ -16,6 +18,8 @@
   - use the same discipline whenever you squeeze high-capacity cells into 5 P commuters.[^4]
 - AWD conversions should run a single motor until a 16 S 5–7 P (or internal/external hybrid) battery is ready; 12 S 3 P packs sag or overheat on VESC hardware even when the controller can deliver the amps.[^5]
 - Mixed MJ1/MH1 parallels sag 10–12 V at ≈9 A per cell; veterans cap both chemistries near 7 A and pivot to Samsung 50G, Molicel P42A, or Murata VTC6 for higher-current builds instead of chasing firmware fixes.[^6]
+- Repeated BMS thermal trips permanently raise cell resistance—schedule monthly IR checks and dial charge current back when Daly-class boards run near their limit.[^ip001-bmsheat]
+- A single overcharge to ~4.61 V/cell slashed a 13 S pack’s life to roughly 250 cycles; treat 100 % cutoffs as a hard ceiling and meter chargers after firmware updates.[^ip001-overcharge]
 - Budget Liitokala LiFePO₄ cells arrive unbalanced, sag heavily above ≈12 A, and often ship slowly by boat.
   - reserve them for stationary projects unless you can package much larger scooter enclosures.[^7]
 
@@ -34,6 +38,7 @@
 - Copper “sandwich” busbars (0.1 mm copper capped with nickel) paired with 0.1 mm pure copper links now anchor 120 A BMS builds, proving the laminate holds up when riders document weld energy and clamp pressure.[^copper_sandwich]
 - Honeycomb layouts that funnel a whole 5 P group through a single 8 mm nickel strip have already bottlenecked current.
   - rebuild with sheet bussing or at least five 7–8 mm straps in parallel (0.25–0.30 mm thick) so each bridge carries ≥35–40 A without hot spots before scaling voltage or series count.[^13]
+- For longevity, cycle scooter packs between roughly 20 % and 85 % (≈3.6–4.1 V/cell), keep pack temps under 40–45 °C, and cap sag near 10 %—letting cells drop below 2.8 V or hit 70 °C drives capacity toward ~400 cycles.[^ip001-window]
 - Rental G30 conversions swallow "thick" 13 S 5 P 21700 packs once the spacer grows the cavity to ≈155 mm × 400 mm, but EU builders struggle to source 220 mm shrink locally.
   - plan packaging and consumables early for long-range decks.[^14]
 
@@ -57,6 +62,9 @@
 [^deck_extension]: Source: knowledge/notes/input_part000_review.md, line 75.
 [^petg_honeycomb]: Source: knowledge/notes/input_part000_review.md, line 216.
 [^copper_sandwich]: Source: knowledge/notes/input_part000_review.md, lines 240 and 314.
+[^ip001-bmsheat]: Source: knowledge/notes/input_part001_review.md†L661-L662
+[^ip001-overcharge]: Source: knowledge/notes/input_part001_review.md†L663-L663
+[^ip001-window]: Source: knowledge/notes/input_part001_review.md†L698-L699
 
 
 ## References
@@ -64,6 +72,8 @@
 [^1]: Source: knowledge/notes/input_part000_review.md†L548-L548
 [^2]: Source: knowledge/notes/input_part000_review.md†L605-L607
 [^3]: Source: knowledge/notes/input_part000_review.md†L609-L617
+[^ip001-48x]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19280-L19316
+[^ip001-m50lt]: Source: data/vesc_help_group/text_slices/input_part001.txt†L22760-L22932
 [^4]: Source: knowledge/notes/input_part000_review.md†L311-L311
 [^5]: Source: knowledge/notes/input_part000_review.md†L312-L312
 [^6]: Source: knowledge/notes/input_part000_review.md†L313-L313

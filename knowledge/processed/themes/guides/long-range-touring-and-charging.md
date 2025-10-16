@@ -23,7 +23,11 @@
 - The same rider’s 20 S 35 P (≈700-cell) 18650 pack delivered 96 miles while using only about half of its 10.2 kWh capacity, showing how oversized bricks can double range without stressing cells when the chassis can carry the weight.[^noname-96mi]
 - Pack sizing for 150+ mile rides typically requires 7–10 kWh or more depending on terrain, speed, and rider weight; builders planning tours should log Wh/mi consumption during shorter test rides to estimate realistic range before committing to long routes.[^pack-sizing]
 - Mirono’s 3D-printed deck extender now houses 260 cells (~15 S 17 P) to chase 120 km coastal rides, while the group prototypes cargo trailers for hauling auxiliary batteries, logging ~2 A at 36 V from 80 W folding solar panels during scouting runs.[^deck-extender]
+- Wind drag still dominates at speed—a 20 S VSETT tuned for 63–65 Wh/km in calm conditions jumped to 72 Wh/km in strong headwinds.[^ip001-wind-drag]
 - Artem’s Xiaomi/Ninebot controller shootout underscores tuning impact on Wh/km: the stock 52 V 13 Ah square-wave build burned ~26 Wh/km flat out, his dual-motor VESC swap held ~22.5 Wh/km at higher speeds, and a sine-modulated Vsett managed ~17 Wh/km cruising 25–35 km/h on a 676 Wh pack.[^9]
+- Community VESC logs peg commuter consumption near 25 Wh/km at 40 km/h in calm weather and roughly 28 Wh/km with stiff headwinds; run 20 km loops in both directions to average wind and terrain before quoting numbers publicly.[^ip001-whkm][^ip001-whkm-loop]
+- The same datasets show heavier riders and hilly routes inflating Wh/km even on identical scooters, so benchmark on flat courses when comparing builds.[^ip001-whkm-mass]
+- Expect regen to return modest energy—many Daly dashboards still show zero current during gentle “walking” regen even as pack voltage creeps upward, and VESC riders rarely exceed ~12 % recovery without huge packs and aggressive settings.[^ip001-regen-eff]
 - Bolt-on saddles shift rider weight rearward and make speed bumps harder to unload.
   - test balance changes before multi-day tours and confirm frame-bag width still leaves foot room when swapping between 2.5 L and 3 L options.[^10]
 - Real-world comparisons between Wepoor and dual Lonnyo 22×3 builds highlight how gearing, tire size, and pack capacity shape usable range: a 12 P Wepoor returns roughly 50 miles at 35–50 mph but drains quickly past 65 mph, while a 10 P 22×3 setup stretches to ~100 km per charge at similar cruising speeds.[^11]
@@ -49,6 +53,7 @@
 - Noname cataloged AliExpress telecom-derived bricks.
   - around US$340 for Huawei 60 A units or US$260 for touchscreen 50 A models
   - emphasizing they are rebadged rectifiers despite factory-style marketing.[^telecom-fast]
+- Popular adjustable “lab” supplies shipped through AliExpress have shown over-voltage spikes from crude internal mods; veterans now derate them heavily or avoid using them on traction packs altogether.[^ip001-adjustable-psu]
 
 ### Charging Etiquette & Best Practices
 
@@ -62,9 +67,11 @@
 
 - **J1772 to scooter pack adapter:** Verify pin compatibility, voltage range (most scooters charge at 48–100 V), and current rating before purchasing or fabricating custom adapters.
 - **GTK 0–102 V adjustable supply:** A cheaper wide-voltage bench charger alternative to the Grin Satiator, provided you accept bulkier hardware and ~3 A default current.[^18]
+- **Adjustable-voltage telecom bricks:** Riders are actively sourcing CC/CV chargers with programmable ceilings so they can cap routine charges near 95 % SOC instead of sitting at 100 %.[^adj_voltage]
 - **FoCcci or equivalent Tesla protocol board:** Required for Tesla plug compatibility; confirm firmware version supports your charging voltage before field deployment.
 - **Portable multimeter and voltage monitor:** Essential for verifying station output voltage and diagnosing adapter issues before connecting expensive battery packs.
 - **Plan ahead for 20 S chargers.** 84 V chargers remain scarce outside China, so touring riders stock adjustable lab supplies, series-stack smaller bricks, or wait on AliExpress shipments rather than overvolting 67.2 V units; upgrade thin Xiaomi charge ports to XT60 leads when pushing beyond ~3 A.[^19]
+- **Inspect third-party chargers on arrival.** One “500 W” AliExpress brick arrived labeled 350 W (~70 V×5 A) with lower voltage limits, forcing a partial refund; test and document hardware before the dispute window closes.[^ip001-ali-bait]
 - **Stick with proven CC‑CV bricks.** The group keeps defaulting to Wate or YZPower chargers because bargain adjustables wander off voltage set-points and cook packs unless you meter every session; CC-only supplies still leave passive-balancing BMSs short of a full charge.[^20]
 - **Treat series-stacked chargers as a stopgap.** Builders will stack dual 10 S bricks only while waiting for proper 20 S units and even then monitor them closely.
   - dedicated charge ports and sealed enclosures remain the commuter-friendly solution for high-voltage packs.[^21][^22]
@@ -140,6 +147,9 @@
 
 - Spanish riders are already budgeting stealthier frames, €3 k shell swaps, or downsized scooters ahead of the 2027 crackdown.
   - expect to validate deck dimensions (e.g., Achilleus vs. Thunder) and controller placements against DGT listings when planning tours across stricter jurisdictions.[^46]
+- Scandinavia’s patchwork rules complicate touring—Denmark lacks theft coverage above ≈20 km/h, Sweden caps legal scooters at 250 W/20 km/h with pedal assist, and Finland sells ~€50–€70/year policies that lift limits to roughly 1 kW when throttles stay discreet.[^scand_rules]
+- Swiss roadside checks now cite riders more than €1 300 and even impound scooters if they appear modified; Rosheee’s scooter was seized until paperwork proved a “250 W” profile, highlighting the need for stealth modes and documentation.[^swiss_fines]
+  - Enforcement benches log instantaneous wattage—one dual-motor build limited to 250 W/25 km/h still read 665 W—so keep invoices and compliance paperwork ready before the officer plugs in the dyno.[^swiss_peaktest]
 - Local enforcement is already citing micromobility capable of >35 mph in Las Vegas after a fatal crash; high-speed builds need route plans that respect posted limits and rider training when sharing public streets.[^47][^48]
 5. **Prep for winter efficiency hits.** Riders report Wh/km nearly doubling in freezing conditions (≈30 Wh/km vs. 18–20 Wh/km in summer); keep packs warm indoors or add gentle heaters before rolling out in sub-zero weather.[^49]
 
@@ -158,10 +168,16 @@
 [^app-locks]: App-controlled charging stations releasing only one handle per session, requiring coordination for group tours.[^51]
 [^tesla-protocol]: Tesla plug requirement for protocol triggers (FoCcci boards) to initiate charging handshake sequences.[^51]
 [^generator]: Theoretical 1 kW generator + 5 kWh pack configuration for coast-to-coast touring attempts.[^50]
+[^adj_voltage]: Source: knowledge/notes/input_part001_review.md†L504-L505
+[^ip001-whkm]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19187-L19265
+[^ip001-whkm-loop]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19187-L19265
+[^ip001-whkm-mass]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19206-L19227
+[^ip001-regen-eff]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17551-L17690
 [^appalachian]: Noname's 150-mile ride log demonstrating thermal management and extended touring feasibility.[^50]
 [^noname-96mi]: Noname’s 20 S 35 P commuter pack recorded 96 miles of riding while burning roughly half its 10.2 kWh capacity.[^52]
 [^pack-sizing]: General guidance for 7–10 kWh pack sizing for 150+ mile tours based on consumption testing.
 [^deck-extender]: Source: knowledge/notes/input_part000_review.md, line 159.
+[^ip001-wind-drag]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24891-L24895
 [^etiquette]: Charging bay etiquette reminders to respect time limits and communicate with EV drivers.
 [^charge-rate]: Communication guidelines for low-rate vs. full-rate charging to avoid station confusion.
 [^thermal-charging]: Thermal monitoring recommendations during extended charging sessions.
@@ -171,6 +187,7 @@
 [^bms-thermal]: BMS thermal management during sustained high-capacity pack discharge.
 [^charge-limits]: BMS charge current limit matching for public infrastructure compatibility.
 [^telecom-fast]: Fast-charging cautions highlighting ≈1 C limits on Samsung 40T/Molicel P42A packs and pricing for telecom-derived 50–60 A chargers.[^53]
+[^ip001-adjustable-psu]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24277-L24284
 [^bms-balance]: Yamal and 🇪🇸AYO#74’s top-off routine.
   - rest before balance charging, limit equalisation to 2–4 A, and tighten drift thresholds near 0.01 V to stop endless micro-charging.[^54]
 [^pre-test]: Pre-departure adapter testing protocols with multimeter and thermal validation.
@@ -178,12 +195,16 @@
 [^telemetry]: Ride telemetry logging for consumption tracking and pack health monitoring.
 [^route-planning]: Route planning recommendations using PlugShare/ChargePoint for backup station identification.
 [^g30-charge-limit]: Segway G30 packs accept the 5 A fast charger but BMS firmware trips above ~8 A, and smaller F-series/Xiaomi packs prefer ≤4 A continuous from adjustable supplies.[^55]
+[^ip001-ali-bait]: Source: data/vesc_help_group/text_slices/input_part001.txt†L27505-L27534
 [^warehouse-soc]: Warehouse storage guidance recommending 30–50 % SOC even when some scooters arrive closer to 70–100 %, prompting balance checks on delivery.[^56]
 [^winter-bags]: Winter commuters keeping packs above ~10 °C with heated battery bags or external heaters to limit cold-weather sag.[^57]
 [^follow-etiquette]: Follow-up action to draft detailed EV-charger etiquette notes.[^58]
 [^follow-adapter]: Follow-up action to document field-tested J1772 adapter builds.
 [^follow-generator]: Follow-up action to validate generator-assisted touring with real-world data.
 [^follow-thermal]: Follow-up action to capture thermal management strategies for extended charging sessions.
+[^scand_rules]: Source: knowledge/notes/input_part001_review.md†L535-L537
+[^swiss_fines]: Source: knowledge/notes/input_part001_review.md†L601-L603
+[^swiss_peaktest]: Source: knowledge/notes/input_part001_review.md†L610-L611
 
 
 ## References

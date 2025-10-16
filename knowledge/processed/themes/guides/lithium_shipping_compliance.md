@@ -24,6 +24,7 @@
 - **Plan for stock outages.** Charger shortages, bag delays, and hazmat paperwork slowdowns can halt complete-kit sales; maintain communication channels (newsletters, storefront notices) to reset expectations before customers escalate.[^3]
 - **Budget postal routes accordingly.** Returning a controller via national post cost roughly €15 versus €60–€80 with DHL/UPS, but EMS recently bounced electronics out of Guangzhou.
   - expect rerouted shipments when mail centres tighten lithium rules.[^12]
+- **Compare rail vs. air for heavy parts.** EU resellers quote roughly $90–$165 for 9–10 kg motors via rail against $160–$203 by air (plus ~€500 customs on resale stock), while hobbyists lean on DDP services to dodge VAT when importing personal builds.[^ip001-freight]
 - **Pay with strong buyer protection.** AliExpress disputes can idle for months.
   - Mirono’s €80 controller sat at “processing” indefinitely
   - so the crew now favours PayPal or chargeback-friendly cards and documents faulty halls or motors aggressively to retain leverage.[^13]
@@ -53,3 +54,4 @@
 [^13]: Source: knowledge/notes/input_part000_review.md†L401-L404
 [^14]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L90969-L91040
 [^15]: Source: knowledge/notes/input_part007_review.md†L410-L410
+[^ip001-freight]: Source: data/vesc_help_group/text_slices/input_part001.txt†L22896-L22924

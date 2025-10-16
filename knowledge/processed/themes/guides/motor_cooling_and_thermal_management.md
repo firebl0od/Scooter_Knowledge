@@ -12,6 +12,16 @@
 - Fresh water-cooled, resin-potted controller builds with INA181 current sensors promise better cut-off behaviour, yet veterans still warn that MOSFET-to-heatsink transfer is the real bottleneck until someone logs sustained high-power runs on the new hardware.[^7]
 - When water cooling is unavoidable, Smart Repair’s X12 loop blueprint calls for a 40 × 80 mm block on the MOSFET bank, a PWM-controlled ~800 L/h pump, small radiator, and roughly 1 kg total system mass (≈300 g coolant, 300 g pump, 500 g hardware) with conformal coating and Kapton to harden the controller after prior water damage.[^8]
 
+## Oil Cooling Experiments
+
+- Sealed hubs treated with roughly 40 ml of inert oil have dropped winding peaks from ~120 °C to ~75 °C while accelerating cool-down; the fill floats just above the magnets and stays put when axle seals are healthy.[^oil_fill]
+- Artem now advises setting motor thermal rollback around 100 °C with a hard stop near 115 °C, noting that magnets typically remain near 80 °C even when windings crest 120 °C without ferrofluid.[^rollback_limits]
+
+## Motor Insulation Limits
+
+- VSETT hubs ship with glass-fibre sleeves and PTFE inserts good for about 200 °C, so enamel breakdown—not slot insulation—is the common failure; commodity enamel rates 120–155 °C while premium windings tolerate roughly 200 °C before shorting.[^insulation]
+- Burned enamel can self-heal temporarily once cooled, but the crew still rewinds suspect motors because partially fused coils risk controller-killing shorts on the next ride.[^enamel_rewind]
+
 ## Motor Architecture Context
 
 - Axial-flux scooter prototypes mount magnets on facing disks for high power density, while hybrid “raxial” concepts add more phases for torque; production hubs still favour radial flux because the hollow stator leaves little room for liquid cooling hardware and costs stay lower.[^9]
@@ -25,11 +35,15 @@
 - The VESC Help crew continues to vouch for ferrofluid/Statorade when the goal is winding-to-shell transfer, but they emphasise reading datasheets.
   - some mixes flash at low temperature and budget hubs can demagnetise above ~80 °C
   - before flooding a motor.[^13]
+- Riders comparing ferrofluid against oil cooling still favour ferrofluid because it clings to magnets, wipes clean, and avoids the leaks and constant top-offs that plague oil-filled hubs unless covers are perfectly sealed and paint-free.[^ip001-ferro-vs-oil]
+- Even ferrofluid needs periodic checks; high-RPM builds see the fluid migrate deeper into magnet gaps over time, so owners now schedule top-off inspections after hard seasons.[^ip001-ff-check]
 - Ferrotec APG1110 remains the benchmark for hub fillings, while Supermagnete’s 10 mL bottles offer reliable sourcing for EU riders upgrading Xiaomi and G30 hubs without importing large lots.[^14]
 - HeroDasH demonstrated clean application with magnetic bottles that pull fluid straight into magnet gaps and warned against overfilling because excess drag hurts efficiency; peers now lean on ebikes.ca’s simulator to visualize how kv and resistance tweaks shift the efficiency curve before sealing hubs.[^15]
 - Grin’s Statorade has logged roughly 30 % winding-temperature drops with 6 ml doses and no noticeable drag, whereas bargain ferrofluids risk conductivity, residue, and magnet damage once they bake inside the hub.[^16][^17]
 - Budget “educational” ferrofluids coming from lab suppliers carry lower flash points and unknown additives.
   - stick with Statorade/Grin blends even on 60 mm hubs, which still respond well to roughly 5–6 ml fills when you need winding-to-shell transfer.[^18][^19]
+- Most scooter builds keep fills between 3–6 ml per hub (≈6 ml in VSETT motors), reseal covers after every inspection, and top off occasionally as small leaks or evaporation appear.[^fill_guidance]
+- Drilled vent holes can shave another 5–10 °C on smaller motors but invite ferrofluid loss and water ingress, so balance airflow against sealing requirements before modifying covers.[^vent_tradeoffs]
 - Dosing dual 1.4 kW VSETT hubs with roughly 6 ml of Statorade dropped peak winding temperature from ~145 °F (63 °C) to ~104 °F (40 °C) on identical 16 S rides; veterans still log magnet temps because the heat migrates into the rotor during long climbs.[^20][^21]
 - Follow-up tests note magnets running slightly warmer but transferring heat to the case faster, and sealing the covers with automotive silicone keeps the fluid contained even on off-road builds.[^22]
 
@@ -44,6 +58,7 @@
 - Community debate over branded Statorade vs. generic ferrofluids continues: premium mixes claim tuned viscosity, yet budget blends still deliver major gains unless you’re chasing Rosheee-level power, provided there’s a solid path from stator to ambient air.[^28]
 - Expect roughly a 10 % premium on ferrofluid and hubsinks to net 15–30 % more continuous output; riders paying CHF 21 per 10 mL import fee for genuine Statorade still call the trade worthwhile for €200 hubs when paired with machined “windmill” fans.[^29][^30]
 - Late-2022 teardown logs converged on dosing sealed 10″ hubs with roughly 2.5–5 ml of ferrofluid (3–4 ml for 11″ cans), applied between magnets after pulling the stator so the air gap fills without spraying grit into open-frame motors.[^31]
+  - Avoid metal syringe tips, reseat the stator before injecting so magnets level the fill, and wipe covers clean before sealing them with silicone to keep grit out and fluid in.[^ff_syringe]
 - **Service & reseal workflow (2022 refresher).** Photograph stator joints on arrival, resolder undersized leads, inject 2.5–5 ml of ferrofluid between the magnets on sealed hubs, refresh bearings and thermal paste, then pressure-wash or silicone-seal swingarms and cable exits before reinstalling the wheel.[^32][^33][^34][^35][^36]
 - Fresh logs show ferrofluid’s benefit is immediate: once heat soaks into the side plates you can cool an overheated hub by spinning it unloaded instead of riding it harder.
   - hand-test inputs first, then let the wheel freewheel until case temps fall.[^37]
@@ -121,6 +136,7 @@
 
 - Spintend dual and Makerbase/Tronic-class controllers still dump serious heat.
   - riders logging ~180 A phase on 84100-class ESCs report case temperatures climbing fast unless the units are bolted to large external heatsinks with fresh paste, reinforcing that even “cooler” Spintend hardware only halves the dissipation of Tronic boxes when airflow and interface pressure are maximised.[^76]
+- Rosheee’s full-copper deck plates and housings for Ubox controllers remain experimental; early feedback says thin AliExpress spacers deform and that simply bolting the case to bare chassis metal with solid airflow is still the most reliable cooling upgrade.[^ip001-copper-deck]
 - Nucular 12-FET controllers happily sustain roughly 210 A battery current while holding ~48 °C when they are clamped firmly to deck aluminium, underscoring the payoff from rigid mounting pressure on MOSFET plates.[^77]
 - Refresh thermal interfaces on a schedule: the community now treats ESC paste like desktop-PC maintenance.
   - strip the controller every couple of years, clean the heatsink, and reapply high-quality compound before summer pushes start.[^78]
@@ -142,6 +158,7 @@
 - Consensus from recent debates: bolt controllers flat to aluminium chassis plates with quality thermal paste.
   - remote radiator boxes, thick spacers, and long external runs add heat, resistance, and failure points compared with a well-clamped deck or footrest mount.[^92]
 - Cracking deck vents alone only delays thermal cutback; re-bedding Ubox cases with paste against the deck proved to be the repeatable fix for 75 A battery / 190 A phase tunes that otherwise crept toward shutdown.[^93]
+- Thermal Grizzly pads failed to beat Spintend’s stock interface material during 2×65 A battery testing, letting MOSFETs climb toward 70 °C; riders are sticking with the OEM pads until longer trials prove otherwise.[^ip001-thermal-pad]
 - Deck vents alone only buy moments of relief: one Wolf owner carved large side openings yet still saw limited airflow, and others simply ride with deck covers ajar because closing the bay drives controller temps past 80 °C until better cooling arrives.[^94]
 - Xiaomi conversions demonstrate why enclosure shape matters: dual ESCs mounted in printed side pods that funnel oncoming air stay cool even when riders rely on regen-only braking from 70–80 km/h, though builders already plan aluminium skins to survive crashes.[^95]
 - Weeped-class builds proved that sandwiching a VESC on a thin steel plate between the controller and battery just traps heat.
@@ -265,7 +282,8 @@
 ## Motor Temperature Instrumentation
 
 - **Install proper NTC sensors for accurate readings.** Installing EPCOS/TDK B57861S0502F040 2×4 mm NTCs against the hall/phase bundle, secured with thermal epoxy rated to 150 °C, delivered accurate phase readings in minutes and enables reliable over-temp cutbacks.[^ntc_install]
-- **Embed 100 k probes under the windings.** Builders settled on epoxy-coated 100 k B3950 NTC sensors with one-metre leads, gluing them beneath the windings with silicone before routing a single temp wire through the axle alongside phase and hall conductors to keep telemetry stable at high current.[^155]
+ - **Embed 100 k probes under the windings.** Builders settled on epoxy-coated 100 k B3950 NTC sensors with one-metre leads, gluing them beneath the windings with silicone before routing a single temp wire through the axle alongside phase and hall conductors to keep telemetry stable at high current.[^155]
+ - **Match the probe to the controller.** VESC hardware accepts either 10 k or 100 k NTC sensors wired between TEMP and GND, letting factories choose whichever curve matches their dashboards without extra interface boards.[^vesc_ntc]
 - **Route temp leads away from phase bundles.** Gordan's Ubox V2 logs showed thermistor signals collapsing above 80 A until he chased the ground loop, underscoring the need to reroute sensor wiring or add shielding when phase currents spike.[^temp_routing]
 - **Relocate sensors toward the magnet gap when possible.** Artem is experimenting with moving hub thermistors into the air gap so readings reflect magnet temperature instead of coil hotspots.
   - a better proxy for demag risk on ventilated rims.[^156]
@@ -389,6 +407,16 @@
 [^61]: Source: knowledge/notes/input_part014_review.md†L119-L119
 [^62]: Source: data/vesc_help_group/text_slices/input_part003.txt†L23963-L24010
 [^63]: Source: knowledge/notes/input_part002_review.md†L180-L181
+[^oil_fill]: Source: knowledge/notes/input_part001_review.md†L516-L517
+[^rollback_limits]: Source: knowledge/notes/input_part001_review.md†L518-L518
+[^insulation]: Source: knowledge/notes/input_part001_review.md†L520-L521
+[^enamel_rewind]: Source: knowledge/notes/input_part001_review.md†L522-L522
+[^fill_guidance]: Source: knowledge/notes/input_part001_review.md†L574-L575
+[^vent_tradeoffs]: Source: knowledge/notes/input_part001_review.md†L613-L615
+[^ff_syringe]: Source: knowledge/notes/input_part001_review.md†L613-L614
+[^ip001-ferro-vs-oil]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19093-L19113
+[^ip001-ff-check]: Source: data/vesc_help_group/text_slices/input_part001.txt†L19110-L19113
+[^vesc_ntc]: Source: knowledge/notes/input_part001_review.md†L586-L587
 [^64]: Source: data/vesc_help_group/text_slices/input_part003.txt†L16419-L16455
 [^65]: Source: knowledge/notes/input_part005_review.md†L113-L121
 [^66]: Source: data/vesc_help_group/text_slices/input_part002.txt†L11480-L11520
@@ -509,3 +537,5 @@
 [^181]: Source: knowledge/notes/input_part013_review.md†L513-L513
 [^182]: Source: knowledge/notes/input_part013_review.md†L156-L156
 [^183]: Source: knowledge/notes/input_part002_review.md†L46-L48
+[^ip001-copper-deck]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24459-L24505
+[^ip001-thermal-pad]: Source: data/vesc_help_group/text_slices/input_part001.txt†L18536-L18640
