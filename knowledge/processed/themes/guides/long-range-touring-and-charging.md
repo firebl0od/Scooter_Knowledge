@@ -8,6 +8,8 @@
 ## Long-Range Riding Benchmarks
 - Noname logged an 18-hour Appalachian ride covering roughly 150 miles at 50 mph bursts, noting the VESC stayed cool and demonstrating that high-capacity packs (likely 10+ kWh class given the distance) enable extended touring when thermal management is dialed in.[^appalachian]
 - Pack sizing for 150+ mile rides typically requires 7–10 kWh or more depending on terrain, speed, and rider weight; builders planning tours should log Wh/mi consumption during shorter test rides to estimate realistic range before committing to long routes.[^pack-sizing]
+- Mirono’s 3D-printed deck extender now houses 260 cells (~15 S 17 P) to chase 120 km coastal rides, while the group prototypes cargo trailers for hauling auxiliary batteries, logging ~2 A at 36 V from 80 W folding solar panels during scouting runs.[^deck-extender]
+- Artem’s Xiaomi/Ninebot controller shootout underscores tuning impact on Wh/km: the stock 52 V 13 Ah square-wave build burned ~26 Wh/km flat out, his dual-motor VESC swap held ~22.5 Wh/km at higher speeds, and a sine-modulated Vsett managed ~17 Wh/km cruising 25–35 km/h on a 676 Wh pack.【F:knowledge/notes/input_part000_review.md†L486-L489】
 
 ## Public Charging Strategies
 
@@ -58,6 +60,7 @@
 [^generator]: Theoretical 1 kW generator + 5 kWh pack configuration for coast-to-coast touring attempts.【F:knowledge/notes/input_part013_review.md†L146-L146】
 [^appalachian]: Noname's 150-mile ride log demonstrating thermal management and extended touring feasibility.【F:knowledge/notes/input_part013_review.md†L146-L146】
 [^pack-sizing]: General guidance for 7–10 kWh pack sizing for 150+ mile tours based on consumption testing.
+[^deck-extender]: Source: knowledge/notes/input_part000_review.md, line 159.
 [^etiquette]: Charging bay etiquette reminders to respect time limits and communicate with EV drivers.
 [^charge-rate]: Communication guidelines for low-rate vs. full-rate charging to avoid station confusion.
 [^thermal-charging]: Thermal monitoring recommendations during extended charging sessions.

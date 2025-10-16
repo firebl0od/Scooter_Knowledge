@@ -28,6 +28,7 @@
 
 ## Controller & Motor Tests
 - **Continuity sweep before power-up:** With the battery unplugged, probe between B+ / B− and each motor phase. Any reading below ~50 Ω signals a shorted MOSFET that must be replaced before reconnecting cells.【F:knowledge/notes/denis_all_part02_review.md†L37-L38】
+- **Start with the low-voltage rails on “dead” VESCs.** Before condemning a no-power controller, check every LDO regulator and supply rail with a meter; technicians now solder test pigtails or use current-limited supplies so a slipped probe does not vaporise PCB traces during the investigation.[^ldo_probe]
 - **Front-burnout postmortem workflow:** If a VESC dies mid-burnout, meter the QS8 battery connector and each phase to ground in buzzer mode—any tone confirms shorted MOSFETs. Verify the hub still spins freely to rule out a seized motor, then plan a matched-set MOSFET swap using proper hot-air or hot-plate gear; aluminum boards are notoriously hard to rework and you cannot mix spare FETs across controllers. Keep mechanical brakes functional because regen-only setups leave you helpless when the controller faults.【F:data/vesc_help_group/text_slices/input_part010.txt†L11412-L11459】
 - **Hall sensor alignment:** Preserve the original spacing when replacing hall ICs—swapping long packages for short ones costs roughly 10 km/h, and forgetting isolation pads risks shorting MOSFETs to the case.【F:knowledge/notes/denis_all_part02_review.md†L40-L41】
 - **Warm-motor hall detection:** If a scooter clonks off the line, rerun manual hall detection with the motor warm and phase current around 70 A—Mirono’s G30 build stopped stuttering immediately after re-detecting on a full battery.【F:data/vesc_help_group/text_slices/input_part000.txt†L18463-L18495】
@@ -46,6 +47,7 @@
 
 ## Performance Logging & Calibration
 - **Acceleration tests:** Use Dragy or Race Timer to record repeated 0–70 km/h pulls, filming the dash at 60 fps and averaging matching-direction runs so GPS lag doesn’t skew results.【F:knowledge/notes/input_part000_review.md†L133-L133】
+- **Export pack sag logs:** Pull CSV/XLS files from VESC Tool after hill climbs or heavy regen sessions so you can quantify voltage drop before raising current limits or rewiring parallel packs.【F:knowledge/notes/input_part000_review.md†L301-L301】
 - **Speedometer alignment:** Measure wheel circumference under rider load, set accurate pole counts, and bias VESC telemetry slightly above GPS speed so commuters get an early warning before hitting legal caps.【F:knowledge/notes/input_part000_review.md†L134-L134】
 - **Magnet count discipline:** Enter the actual magnet count (not pole pairs) and the compressed tyre diameter in VESC Tool—GPS traces lag too much for launch tuning compared with controller RPM telemetry.【F:knowledge/notes/input_part000_review.md†L326-L328】
 - **Log during tests:** VESCs only store faults while a client is connected; keep xmatic or VESC Tool running on shakedowns so overcurrent or BMS events are captured before power-cycling.【F:knowledge/notes/input_part000_review.md†L381-L381】
@@ -83,4 +85,5 @@
 - **Plan full teardowns:** Packs are heavily sealed—glued busbars, soldered fasteners, and tripped protection boards left entire parallel groups at 0 V—so refurb projects require full BMS removal rather than capacitor swaps.【F:knowledge/notes/input_part008_review.md†L383-L383】
 
 [^damper-oil]: PuneDir’s free steering damper only behaved after switching to lighter fluids; veterans now recommend 10W/60 shock oil or Citroën LHM+ to preserve seals while restoring adjustability.【F:knowledge/notes/input_part008_review.md†L56-L56】
+[^ldo_probe]: Source: knowledge/notes/input_part000_review.md, line 141.
 

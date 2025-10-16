@@ -6,6 +6,7 @@
 - Stable implementations rely on firmware 5.3-era builds, instrumented temperature and voltage logging, and conservative regen; high-voltage packs or 24S conversions demand extra surge headroom because regen spikes can brick controllers when FW is active.[^4][^5]
 - Start with single-digit or 10–30 A FW setpoints validated by telemetry; riders jumping to 55–60 A routinely saturate hubs within an hour unless they raise phase current carefully, add cooling, and watch logs for current overshoot.[^6][^7]
 - Most builds arm FW against duty cycle—not throttle position—so expect the controller to inject current around 90 % duty and yank roughly the same extra 20 A from the battery while it fights back-EMF; reserve those bursts for cool motors only.【F:knowledge/notes/input_part000_review.md†L653-L655】
+- Face de Pin Sucé’s test bench confirmed 100 A of FW current at a 90 % duty trigger can spin a hub from 38 kERPM to 53 kERPM (~40 % more rpm) but still drags ~20 A battery while dumping heat—treat it as a short sprint tool on cool motors rather than a cruising aid.【F:knowledge/notes/input_part000_review.md†L742-L752】
 
 ## How Field Weakening Works
 - FW injects negative d-axis current to cancel back-EMF so the motor surpasses its natural base speed, which inherently reduces torque-per-amp and wastes power as heat.[^1]
@@ -47,6 +48,7 @@
 - **Fault Masking:** Sudden current drops or pothole-induced cut-outs that disappear when FW is enabled can signal mechanical faults (loose magnets, wiring) rather than firmware bugs; investigate hardware first.[^16]
 - **Noise & Surging:** If throttle jitters appear above 80 % duty after enabling 20 A FW on single-motor builds, roll FW back—operators traced the behavior directly to FW injection.[^20]
 - **Duty-cycle trigger awareness:** Remember FW starts at the configured duty threshold, so cold-weather commuters who never exceed ≈90 % duty can leave FW configured without seeing it engage, while summer hill pulls will trigger it early and dump heat fast.【F:knowledge/notes/input_part000_review.md†L653-L655】
+- **5.3 beta isn’t a free lunch.** Firmware 5.3 beta adds roughly +8 km/h when riders request about 20 A of FW, but they still only toggle it above a set speed to preserve launch torque and keep controller temperatures in check on small hubs.【F:knowledge/notes/input_part000_review.md†L351-L351】
 - **Overspeed Discipline:** Avoid free-spinning wheels at high FW. Halo stunt crews saw runaway RPM off-load and controller stress at 125 A FW.[^12]
 - **Front-lift control:** Hotdog 100 H rear builds demand traction control or front FW assistance; otherwise the rear lifts the front well past 120 km/h even while stators only hit ~61 °C, so validate TC before public-road tests.[^hotdog_fw]
 - **PWM frequency trade-offs:** Dropping zero-vector PWM toward 16–20 kHz cools the controller but pushes heat into the motor, while 30–40 kHz relieves motor temps at the cost of hotter FETs—log both motor and controller temperatures during experiments.【F:data/vesc_help_group/text_slices/input_part003.txt†L10215-L10280】【F:data/vesc_help_group/text_slices/input_part003.txt†L10383-L10407】

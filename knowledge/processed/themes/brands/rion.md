@@ -82,3 +82,8 @@
 [^steering_crack]: Face de Pin Sucé dissected older Rion frames and found cracked steering heads, flexing plates, under-specced Kelly controllers, and dead-end fan ducts—modern power levels require reinforcement before trusting legacy chassis.【F:knowledge/notes/input_part013_review.md†L716-L716】
 [^legacy_fans]: Face de Pin Sucé noted the legacy RX fan ducts literally blow into carbon walls and pair with underspec’d Kelly controllers, demanding airflow and controller upgrades before modern 400 A tunes.【F:knowledge/notes/input_part013_review.md†L716-L716】
 [^future_swap]: Jose and Yamal are delaying firmware work until they swap in 3Shul 700/1400 controllers and dual Lonnyo 100 H hubs on 50PL cells, signaling how upcoming driveline upgrades reshape Rion tuning plans.【F:knowledge/notes/input_part013_review.md†L39-L39】
+
+## Rider Protection Expectations
+- Community veterans recommend jackets with D3O or other level-2 armour plus Alpinestars-branded protection to match the RE90's high-speed ambitions.[^rion_protection]
+
+[^rion_protection]: Source: knowledge/notes/input_part000_review.md, line 52.

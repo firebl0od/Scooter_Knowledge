@@ -12,6 +12,9 @@
 - A Swedish “hyper” customer pushing Rage Mechanics drivetrain parts past 117 km/h now runs 22×3 windings, 700 mm bars, and a steering damper—evidence that chassis bracing and dampers become mandatory once G30-based builds cross triple-digit speeds.【F:knowledge/notes/input_part012_review.md†L391-L392】
 - The RM-Light race scooter pairs a Dualtron Compact frame with a 22 S 4 P tabless pack, C350 RM-X motor, Beringer brakes, and a titanium pole to hit roughly 140 km/h at just 37 kg, underscoring that the platform targets short sprint sessions rather than street duty.【F:knowledge/notes/input_part012_review.md†L393-L394】
 
+## Motor Portfolio
+- Rage Mechanics’ 75 mm stator hubs sustain over 10 kW per wheel on Weped builds without overheating but command roughly €650 each depending on order volume, so plan axle spacing and budget before chasing 120 km/h targets.【F:knowledge/notes/input_part000_review.md†L494-L498】
+
 ## Source Notes
 [^deck_specs]: Rage Mechanics’ Dualtron deck pricing, dimensions, and usable floor length once the lips are removed.【F:knowledge/notes/input_part012_review.md†L19-L19】
 [^fitment_caveats]: Builder comparisons knocking FastRide decks for tolerance issues and Sonken swingarms for awkward geometry versus Rage Mechanics or RFP options.【F:knowledge/notes/input_part012_review.md†L20-L20】

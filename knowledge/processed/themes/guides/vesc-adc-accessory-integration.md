@@ -6,6 +6,7 @@
 - Treat the Spintend/MakerX auxiliary board as a low-current signal bridge: its ~12 V/3 A rail can light LEDs or run logic, but headlamps, horns, and pumps still need a dedicated DC/DC or relay-fed supply.[^3][^9][^10][^11]
 - Map and validate every analog input inside VESC Tool before sealing the deck; enabling ADC control blocks bench FWD/REV overrides, so miswired harnesses must be fixed before ride testing.[^7][^8][^13]
 - Protect logic rails by isolating accessory power, adding pull-down failsafes, and avoiding shared 5 V lines between controllers—shorts or ground loops keep blowing MOSFET drivers and display boards.[^14][^16][^17][^19]
+- Follow Koxx’s latest survival checklist: never hot-plug accessories with the main pack live, ban raw 5 V throttles from STM32 ADC pins, and shield every ADC/UART run so voltage spikes can’t cook daughterboards.【F:knowledge/notes/input_part000_review.md†L461-L464】
 - Ubox V2 boards now carry self-reset fuses on 5 V/12 V/3.3 V rails, yet VESC Tool 3.01 still crashes mid-calibration if 5 V throttles hit the STM32 input—stick to 3.00/5.2 firmware or add voltage dividers before final assembly.【F:data/vesc_help_group/text_slices/input_part001.txt†L8424-L8453】
 
 ## Signal & Power Budget Cheatsheet
@@ -36,6 +37,7 @@
 8. **Refresh mappings after downtime.** Scooters that sat for months have thrown false brake/throttle behaviour until riders reran the ADC wizard and removed stale inversion flags inside VESC Tool.[^storage-cal]
 9. **Plan for short harnesses and three-speed toggles.** Early Spin-Y batches shipped with limited cable length and optional ADC v2 three-speed leads; document extension routing and ensure cruise-control wiring lands on the correct pins before sealing the deck.[^spin_wiring]
 9. **Monitor brake sensors.** Dead brake halls make some VESC scooters pulse the motor every second or two under throttle, so replace failed sensors before ride testing.【F:knowledge/notes/input_part000_review.md†L39-L39】
+- **Respect hall voltage levels.** Wheelway and Xiaomi hall boards still output 4.8–4.9 V, so native VESC inputs need proper voltage dividers or rare 3.3 V sensors; two-wire brake cut-offs simply short 5 V to signal for on/off stops with no proportional control.【F:knowledge/notes/input_part000_review.md†L518-L524】
 7. **Shield noisy looms.** Running ADC throttles and SmartDisplay UART over shielded cable tied to controller ground cleared 120 A jitter, and separating signal bundles from phase wires kept FOC noise out of high-amp Ubox builds.[^signal-shield]
 8. **Fail-safe defaults:** Add a pull-down resistor from throttle signal to ground so any broken wire snaps to zero instead of ghost acceleration.[^19]
 9. **Legacy dash retention:** Leaving throttle through a dash adapter adds perceptible lag; many builders keep the dash for display only and wire throttles directly to the controller instead.[^20]

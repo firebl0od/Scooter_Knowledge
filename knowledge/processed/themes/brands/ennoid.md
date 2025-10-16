@@ -4,6 +4,7 @@
 - MK8 controllers mirror the Spintend 85150 footprint but only reach the advertised 26 S / 500 A phase ceiling after swapping in Infineon IPTC017N12NM6 Toll MOSFETs and reworking the power stage—stock hardware behaves like a derated 20 S unit until those upgrades are complete.[^mk8_swap]
 - Smart Repair recommends Ennoid’s shunt-sensed design when Spintend’s current-transformer front end mis-detects motors around 100 A; the MK8 becomes the go-to “fat VESC” footprint when builders are willing to perform the Toll-FET hotplate+hot-air reflow.[^ct_vs_shunt]
 - Community labs keep Ennoid controllers on hand alongside Thor, MakerX, Tronic, and upcoming Maxim hardware so new launches can be benchmarked against a known-good shunt platform; document teardowns and telemetry so comparisons stay apples-to-apples.[^museum]
+- Ennoid is teasing a compact 100 V/75 A single VESC (~70 × 75 × 16 mm, ≈$200) that could cover small-deck builds waiting on Spintend’s single-channel release.[^single_75a]
 
 ## Platform Snapshot
 | Model | Nominal Pack Window | Community Envelope | Notes |
@@ -28,3 +29,4 @@
 [^mk8_swap]: Ennoid MK8 shares the Spintend 85150 footprint but relies on Infineon IPTC017N12NM6 Toll MOSFET swaps to stretch toward 26 S / 500 A phase capability.【F:knowledge/notes/input_part014_review.md†L12-L13】
 [^ct_vs_shunt]: Smart Repair’s diagnosis that Spintend’s current-transformer sensing saturates near 100 A and their recommendation to pivot heavy builds to shunt-based MK8/X12 hardware until an 18-FET refresh arrives.【F:knowledge/notes/input_part014_review.md†L12-L13】
 [^museum]: JPPL’s “VESC museum” inventory—Thor, MakerX, Tronic, Ennoid—maintained to benchmark future Maxim/Seven releases under identical conditions.【F:knowledge/notes/input_part014_review.md†L27-L27】
+[^single_75a]: Source: knowledge/notes/input_part000_review.md, line 211.
