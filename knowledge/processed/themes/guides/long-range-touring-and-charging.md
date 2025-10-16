@@ -9,6 +9,11 @@
 ## Long-Range Riding Benchmarks
 - Noname logged an 18-hour Appalachian ride covering roughly 150 miles at 50 mph bursts, noting the VESC stayed cool and demonstrating that high-capacity packs (likely 10+ kWh class given the distance) enable extended touring when thermal management is dialed in.[^appalachian]
 - Yamal squeezes about 100 km from a 40 Ah pack by planning two 10 A charge stops each way on weekend tours and now considers a 20 A fast charger plus a spare pack the key upgrades for quicker turnarounds between legs.【F:knowledge/notes/input_part009_review.md†L325-L325】
+- His latest mountain loop stacked 260 miles in 12 hours by chaining 45 A roadside charges (≈100 miles added per hour back to ~74 % state of charge) and confirms 50 A is tolerable while 70 A “is too much” without extra cooling—bake those thresholds into fast-charge planning for alpine routes.【F:data/vesc_help_group/text_slices/input_part013.txt†L16054-L16058】【F:data/vesc_help_group/text_slices/input_part013.txt†L16440-L16452】
+- He is now staging a 480 km, seven-day group ride with a chase van, targeting 20 mph cruise speeds, 30–40 km/h efficiency windows, and 2.6 kW fast-charging on EVE 40P packs—use those planning numbers as a starting template for multi-day tours.【F:knowledge/notes/input_part013_review.md†L200-L200】
+- The same crew crammed a Segway C80, Begode Q3, Vsett 10, Master Pro, and EX30 plus camping gear for five riders into a support van, giving planners a proven packing list for multi-scooter road trips.【F:knowledge/notes/input_part013_review.md†L240-L240】
+- Shade and redundancy mattered on that ride—cooling packs under tree cover during 50 A stops and carrying spare phones for offline navigation both kept the schedule intact when cell service dropped.【F:data/vesc_help_group/text_slices/input_part013.txt†L16112-L16121】【F:data/vesc_help_group/text_slices/input_part013.txt†L16347-L16376】
+- The same rider’s 20 S 35 P (≈700-cell) 18650 pack delivered 96 miles while using only about half of its 10.2 kWh capacity, showing how oversized bricks can double range without stressing cells when the chassis can carry the weight.[^noname-96mi]
 - Pack sizing for 150+ mile rides typically requires 7–10 kWh or more depending on terrain, speed, and rider weight; builders planning tours should log Wh/mi consumption during shorter test rides to estimate realistic range before committing to long routes.[^pack-sizing]
 - Mirono’s 3D-printed deck extender now houses 260 cells (~15 S 17 P) to chase 120 km coastal rides, while the group prototypes cargo trailers for hauling auxiliary batteries, logging ~2 A at 36 V from 80 W folding solar panels during scouting runs.[^deck-extender]
 - Artem’s Xiaomi/Ninebot controller shootout underscores tuning impact on Wh/km: the stock 52 V 13 Ah square-wave build burned ~26 Wh/km flat out, his dual-motor VESC swap held ~22.5 Wh/km at higher speeds, and a sine-modulated Vsett managed ~17 Wh/km cruising 25–35 km/h on a 676 Wh pack.【F:knowledge/notes/input_part000_review.md†L486-L489】
@@ -91,6 +96,10 @@
 - **Brush up on fast-charging etiquette.** Revisit how you’ll brief café staff, share bays, and shuffle scooters before rain rolls in; the latest review explicitly called for folding etiquette reminders into the touring checklist rather than leaving them scattered across chat threads.【F:knowledge/notes/input_part012_review.md†L307-L308】
 - **Note ferrofluid and hub-prep chores.** A fresh maintenance list now ties Segway-class hub service (ferrofluid fills, temp probes) to tour prep so high-mileage weeks don’t start with neglected drivetrains.【F:knowledge/notes/input_part012_review.md†L306-L306】【F:knowledge/notes/input_part012_review.md†L309-L309】
 
+## Regional Compliance & Planning Pressure
+- Spanish riders are already budgeting stealthier frames, €3 k shell swaps, or downsized scooters ahead of the 2027 crackdown—expect to validate deck dimensions (e.g., Achilleus vs. Thunder) and controller placements against DGT listings when planning tours across stricter jurisdictions.【F:knowledge/notes/input_part013_review.md†L238-L239】
+- Local enforcement is already citing micromobility capable of >35 mph in Las Vegas after a fatal crash; high-speed builds need route plans that respect posted limits and rider training when sharing public streets.【F:data/vesc_help_group/text_slices/input_part013.txt†L15064-L15090】【F:data/vesc_help_group/text_slices/input_part013.txt†L15084-L15086】
+
 ## Follow-Up Actions Needed
 - Draft EV-charger etiquette notes covering time limits, single-handle session restrictions, and communication protocols for mixed scooter/EV charging scenarios.[^follow-etiquette]
 - Document field-tested J1772 adapter builds (wiring, fusing, voltage range) to provide builders with reproducible charging solutions.[^follow-adapter]
@@ -105,6 +114,7 @@
 [^tesla-protocol]: Tesla plug requirement for protocol triggers (FoCcci boards) to initiate charging handshake sequences.【F:knowledge/notes/input_part013_review.md†L147-L149】
 [^generator]: Theoretical 1 kW generator + 5 kWh pack configuration for coast-to-coast touring attempts.【F:knowledge/notes/input_part013_review.md†L146-L146】
 [^appalachian]: Noname's 150-mile ride log demonstrating thermal management and extended touring feasibility.【F:knowledge/notes/input_part013_review.md†L146-L146】
+[^noname-96mi]: Noname’s 20 S 35 P commuter pack recorded 96 miles of riding while burning roughly half its 10.2 kWh capacity.【F:knowledge/notes/input_part013_review.md†L95-L95】
 [^pack-sizing]: General guidance for 7–10 kWh pack sizing for 150+ mile tours based on consumption testing.
 [^deck-extender]: Source: knowledge/notes/input_part000_review.md, line 159.
 [^etiquette]: Charging bay etiquette reminders to respect time limits and communicate with EV drivers.

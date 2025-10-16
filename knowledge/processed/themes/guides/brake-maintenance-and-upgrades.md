@@ -18,6 +18,7 @@
   5. Gently push fluid from caliper toward lever while flicking hose to dislodge bubbles
   6. Cycle brake lever slowly (5–10 times) to work out remaining air
   7. Top off reservoir, close ports, reinstall pads and test lever firmness[^magura-bleed]
+- 🇪🇸AYO#74 also swapped to a higher-flow bleed needle to tighten Shimano/Magura lever feel, noting the larger bore purged dead-zone bubbles faster than stock fittings.【F:knowledge/notes/input_part013_review.md†L228-L228】
 
 ### Preventing Seal Damage During Pad Changes
 - skrtt burst an MT5 lever seal by pushing pistons back without cracking the bleed screw, so pad-swap guides need to stress releasing system pressure (or upgrading to metal levers) before compressing calipers to avoid hydraulic overload.[^seal-damage]
@@ -94,6 +95,8 @@
 - Racers weighing €1.2 k Trickstuff Maxima kits against Magura MT5/MT7 setups note that motorcycle Brembos rarely clear scooter forks; 150 km/h stopping demands bigger rotors and higher-volume masters no matter which premium caliper you choose.【F:knowledge/notes/input_part011_review.md†L368-L374】
 - 3 mm × 170 mm rotors dramatically stiffen braking response but require retracting pistons fully for clearance and a quick true after the first bedding stops.【F:knowledge/notes/input_part012_review.md†L33-L33】
 - A commuter who bent a Vsett rotor mid-ride now keeps spares on hand and leans on e-brakes when mechanical hardware warps unexpectedly—plan redundancy for traffic incidents.【F:knowledge/notes/input_part012_review.md†L186-L186】
+- Skrtt’s 2.3 mm rotor experiments required shaving calipers while 🇪🇸AYO#74 stressed using “elevator” spacers to clear thicker discs—document allowable rotor thickness per caliper so riders stop guessing on machining limits.【F:knowledge/notes/input_part013_review.md†L161-L161】
+- Ausias is milling Magura MT5 calipers “radially” to clear 3.6 mm rotors; peers warned most bicycle brakes expect ≤2.8 mm discs, so publish machining tolerances, lever upgrades, and testing steps before anyone copies the mod.【F:knowledge/notes/input_part013_review.md†L376-L378】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -114,10 +117,12 @@
 - Expect odd hardware: the F2 Pro uses a 51 mm post mount and five-bolt rotor pattern, so riders stack sturdier post-to-post adapters (avoiding soft Monorim brackets) and often jump to 140 mm rotors to keep pad contact when stacking spacers.【F:knowledge/notes/input_part007_review.md†L348-L352】
 - **F2 Pro brake upgrade recipe:**
   - Install sintered pads for better bite and longevity compared to organic pads
-  - Source 120 mm rotors compatible with F2 Pro mounting pattern
+  - Source inexpensive soft rotors compatible with the F2 Pro mounting pattern—cihan is happy to burn through €2 discs in exchange for the stability boost once they warm up
   - Expect accelerated rotor wear compared to higher-grade steel on premium builds
   - Budget for rotor replacement every 1,000–2,000 km depending on riding style[^f2-upgrade]
 - **Hydraulic retrofit fitment.** 1200 W Blade and Monorim front ends accept full hydraulic kits with 2 m hoses, but expect adapter sourcing drama on Xiaomi frames—pre-fit brackets and hose routing before committing to the swap.【F:data/vesc_help_group/text_slices/input_part003.txt†L11882-L11884】
+
+- **Regen-only braking has limits.** Francois is temporarily riding a front drum plus −90 A motor brake while waiting on display parts—a reminder that regen alone can’t cover emergency stops and should stay supplemental to mechanical brakes.【F:knowledge/notes/input_part013_review.md†L163-L163】【F:knowledge/notes/input_part013_review.md†L5639-L5653】
 
 ## Wheel Centering & Dual-Caliper Setups
 
@@ -147,13 +152,15 @@
   - Use bead seater tools or ratchet straps around tire circumference to help initial seating
   - Remove valve core temporarily during seating to maximize airflow, reinstall once beads are set[^tire-inflation]
 - Stock extra casings and tubes—one PMT puncture forced a 4 km walk, highlighting how quickly high-speed tires destroy rims when no spare is available.【F:knowledge/notes/input_part012_review.md†L37-L37】
-
 ## Hose & Banjo Hardware
 - Dualtron owners flipping banjo orientation often choose Fastride’s stainless dual-M8 kit (~€40) because it includes crush washers and O-rings, avoiding piecemeal sourcing for hose reroutes.【F:knowledge/notes/input_part012_review.md†L38-L38】
-
 ## Brake Fluid & Compatibility
 - Xtech hydraulic conversions rely on mineral oil (not DOT fluid) for Magura-compatible systems; Mirono bled his calipers with dual syringes and quickly abandoned the idea of using water after seeing trapped bubbles compromise lever feel.[^mineral-oil]
 - DOT 5/5.1 silicone formulas eat the seals in Magura and Shimano systems—stick with mineral oil and consider Trickstuff Bionol for downhill scooters because its 300–420 °C boiling range survives the heat that cooks stock fluids.[^dot5-warning]
+- Split tubeless rims still respond best to ratchet straps plus high-flow compressors; skrtt’s bead only sealed after cinching the carcass, and the crew explicitly discouraged flammable “quick seat” tricks—document the safe workflow before recommending tubeless conversions.【F:knowledge/notes/input_part013_review.md†L196-L197】
+## Wheel & Rim References
+- Rage’s CNC rim for Fastgirl measures 65 mm internal width for 11″ 90/65 tires, closely matching skrtt’s new 33×2 profile—log those dimensions so tire-fit calculators stop relying on guesses.【F:knowledge/notes/input_part013_review.md†L131-L131】
+- Mixing Shimano and Magura mineral oils proved safe during field tests, but the crew still monitors lever seals after the swap to confirm no swelling or leaks creep in post-service.【F:knowledge/notes/input_part013_review.md†L228-L229】
 - **Fluid compatibility chart:**
   - **Magura, Shimano, Tektro:** Mineral oil only (DOT fluid damages seals)
   - **Hope, Hayes, Avid:** DOT 4 or DOT 5.1 (never DOT 5 silicone-based)
@@ -189,7 +196,7 @@
 [^mt5e-sensors]: Riders testing MT5e swaps left e-brake sensors unplugged, stripped non-essential loads, and double-checked caliper clearance while waiting on any missing hardware.【F:knowledge/notes/input_part007_review.md†L130-L130】
 [^bad-lever]: Jan called out a Magura-compatible lever with plastic threads/screws as the worst he has used—treat cheap bundles as suspect.【F:knowledge/notes/input_part007_review.md†L147-L147】
 [^hope-service]: Hope Tech/Tesch 3 caliper service covering piston re-greasing and pad compatibility.【F:knowledge/notes/input_part013_review.md†L677-L678】
-[^f2-upgrade]: Ninebot F2 Pro brake upgrade using sintered pads and compatible rotors.【F:knowledge/notes/input_part013_review.md†L653-L653】
+[^f2-upgrade]: Ninebot F2 Pro brake upgrade using sintered pads and compatible rotors.【F:data/vesc_help_group/text_slices/input_part013.txt†L8828-L8831】
 [^centering-kits]: Wheel-centering kits and dual-caliper setups for wobble elimination on 80/100H racing builds.【F:knowledge/notes/input_part013_review.md†L645-L647】
 [^dual-caliper-when]: When to consider dual-caliper systems based on speed and use case.
 [^regen-braking]: Matthew's regen-assisted braking demonstration showing mechanical brakes as backup.【F:knowledge/notes/input_part013_review.md†L635-L637】

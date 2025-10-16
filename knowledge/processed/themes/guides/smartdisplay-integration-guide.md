@@ -78,9 +78,11 @@
 - SmartDisplay power numbers trend ~6–7 kW below VESC RT Tool because it calculates from CAN-reported battery amps × voltage without VESC’s instantaneous filtering; align on one source before publishing specs.[^10]
 - Bench telemetry already logged 332 A / 21.4 kW peaks from a 20 S6 P Molicel 40T pack with heavy sag (~55 A per parallel), so capture per-parallel stress in your logs when validating high-power bursts.【F:data/vesc_help_group/text_slices/input_part003.txt†L21249-L21283】
 - Phase-current overlays highlight traction-control activity (e.g., 189 A front vs. 317 A rear mid-corner) and help tune duty-cycle ramps after firmware changes.[^10]
+- Voyage/Ambrosini dashboards also expose per-controller current when CAN aggregation hides which hub is fading—lean on them or split CAN IDs so SmartDisplay users don’t misread combined ~500 A phase logs as per-wheel data.【F:knowledge/notes/input_part013_review.md†L186-L186】
 
 ## Safety, Service & Troubleshooting
 - **Dash-only scripts drop security features.** Rage Mechanics’ “dash-only” SmartDisplay firmware frees wiring but loses start-speed locks, button combos, and motor lockouts when the dashboard powers down—recreate those safeties elsewhere before relying on the stripped harness.【F:knowledge/notes/input_part004_review.md†L193-L195】
+- **Log firmware + failure modes.** Flipsky Smart Display users have already cooked ADC daughterboards and lost telemetry when firmware lags—document the preferred firmware builds, the 12 V→5 V power-up order, and SimpleVescDisplay swap parts/STLs so riders can fall back to the €10 ESP32 dash when OEM screens glitch.【F:knowledge/notes/input_part013_review.md†L399-L406】【F:knowledge/notes/input_part013_review.md†L409-L411】
 - **Cruise control stays manual.** The team refuses to spoof cruise via Lisp—use the dedicated button on the remote or SmartDisplay’s onboard toggle rather than scripting ADC hacks that can run away.【F:knowledge/notes/input_part004_review.md†L342-L342】
 - **USB Isolation.** Only flash or debug SmartDisplay over Wi‑Fi/BLE when the controller is energized; USB-to-PC tests while the scooter is live can short grounds and nuke 3.3 V logic.[^3]
 - **CAN Health.** Expect ≈3.3 V differential between CANH and CANL on a healthy bus; anomalous readings justify probing harness crimps before blaming firmware.[^6]

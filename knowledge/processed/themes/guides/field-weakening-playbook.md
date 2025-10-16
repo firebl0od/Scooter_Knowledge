@@ -91,6 +91,7 @@
 - **Dial zero-vector frequency with FW.** Sensorless 6.06 tunes smooth out once zero-vector frequency hovers around 16 kHz; combine that with 5–10 A FW ramps to tame launch vibration before chasing higher duty-cycle gains.【F:knowledge/notes/input_part012_review.md†L301-L302】
 - **Keep phase headroom for saturation compensation.** Shlomozero’s 90 H hubs respond best with 300–400 A phase and conservative 10–15 A FW; pushing FW when phase amps are already maxed leaves no headroom for saturation compensation and quickly overheats 300 A-class controllers.【F:knowledge/notes/input_part012_review.md†L302-L304】【F:knowledge/notes/input_part012_review.md†L344-L344】
 - **Never Use FW When:** Working on small commuter hubs or unfinished builds lacking thermistor feedback—multiple riders fried stock motors at single-digit FW currents and now avoid the feature entirely.[^9][^17]
+- **Expect hard limits when hardware caps phase current.** Stone Gasm’s 20×70 kV build only gained ≈19 km/h of freewheel speed with 25 A FW (66 → 84 km/h) and plateaued around 96 km/h even with the 35 A ceiling, underscoring that gearing or voltage changes—not more FW—unlock the next tier of speed.【F:knowledge/notes/input_part013_review.md†L30-L30】
 
 ## Troubleshooting Checklist
 - **Battery Current Overshoot:** Rerun detection/wizard, verify sensor calibration, and ensure battery limits exceed expected FW-induced draw.[^8]

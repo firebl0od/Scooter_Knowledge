@@ -112,6 +112,7 @@
 - Document J1772 travel adapters as part of the charging kit: a proven harness uses 12 AWG silicone leads plus 2.5 mm² wiring with 2.74 kΩ/1.3 kΩ pilot resistors so public stations handshake cleanly at 3 kW.【F:knowledge/notes/input_part012_review.md†L10580-L10588】【F:knowledge/notes/input_part012_review.md†L11100-L11129】
 - Happy Giraffe logged key Blade 10 hub dimensions—130 mm inner axle, ≈160 mm fork span, M12 threads with 10 mm flats, 12 mm rotor offset, and 4 mm hardware—helping G30 builders order forks, spacers, and brake adapters without guesswork.【F:data/vesc_help_group/text_slices/input_part000.txt†L20527-L20536】
 - Wheelway honoured hall-board complaints for the cost of shipping, but replacements still arrive with inconsistent sensors, so bench-test every board before sealing the motor again.【F:data/vesc_help_group/text_slices/input_part000.txt†L20403-L20406】【F:data/vesc_help_group/text_slices/input_part000.txt†L20518-L20520】
+- Monorim’s rear footrest kit (~$69 on AliExpress) bolts straight onto Max frames for a quick stance change without fabrication—handy when riders defer custom machining.【F:knowledge/notes/input_part013_review.md†L100-L100】
 
 ## Pre-Ride Checklist
 1. **Firmware Audit** – Confirm VESC Tool version, traction-control settings, and BMS firmware before road tests to avoid regressions from recent 6.06 pairing issues.【F:knowledge/notes/input_part014_review.md†L29-L29】【F:knowledge/notes/input_part014_review.md†L103-L104】
