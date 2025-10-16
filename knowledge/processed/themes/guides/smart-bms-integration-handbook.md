@@ -207,6 +207,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 - **Match TVS replacements carefully.** When GEE-branded TVS diodes fail on ANT boards, Smart Repair substitutes Vishay’s SMCJ12A to restore a 12 V clamp without altering the layout.[^76]
 - **Teach recovery procedures.** Publish lead-order diagrams and wake-up checklists so drained JK packs (≈57 V on 20 s) or JBD miswires don’t strand riders without telemetry.[^17][^24]
 - **Exploit Daly Bluetooth toggles for safe shutdowns.** The Daly Bluetooth companion app can open outputs without sparks, giving antispark-free builds a tidy way to de-energise harnesses when parking.[^77]
+  - the same app can reboot a tripped pack in situ—handy when you cannot disconnect VESCs or balancers.[^daly_reset]
 - **Reseat suspect balance leads.** A single cold joint on Artem’s JK install forced the board into alternating “short circuit” and “low voltage” alarms until the tap was reflowed.
   - inspect and re-solder every lead after high-heat work before blaming firmware.[^78][^3]
 - **Log mixed-pack behaviour.** Luis’ Wolf Warrior tripped a smart BMS at 115 A while running a 10 S 10 P MJ1 pack in parallel with a 6 P MH1, proving that mismatched chemistries leave little headroom for current spikes and complicate fault tracing.[^mixed_packs]
@@ -361,6 +362,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 [^75]: Source: knowledge/notes/input_part011_review.md†L366-L374
 [^76]: Source: knowledge/notes/input_part011_review.md†L352-L354
 [^77]: Source: data/vesc_help_group/text_slices/input_part002.txt†L9452-L9459
+[^daly_reset]: Source: knowledge/notes/input_part003_review.md†L528-L528
 [^78]: Source: knowledge/notes/input_part000_review.md†L650-L650
 [^79]: Source: data/vesc_help_group/text_slices/input_part001.txt†L9186-L9191
 [^80]: Source: knowledge/notes/input_part001_review.md†L470-L488

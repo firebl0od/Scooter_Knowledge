@@ -34,6 +34,7 @@ Taming current limits is the difference between a scooter that rips for years an
 
 - Start with a 2:1 to 3:1 phase-to-battery ratio (e.g., 40 A battery / 110 A phase on 16 S commuter packs).⁵ ⁷
 - 16 S 5 P Samsung 35E packs stay healthy around 40 A continuous (50 A bursts) with 110–125 A phase and ABS caps near 180 A; keep regen gentle (~7 A battery / 15 A motor) so commuter cells don’t overheat.[^16s35e]
+- Cold-weather logs showed 16 S 6 P LG MJ1 parallels sagging roughly 12 % at 10 A per cell while Samsung 35E strings tolerated the same load with less drop, so riders pick chemistries with winter headroom before raising limits.[^mj1_sag]
 - Budget field-weakening draw in your battery limit.
   - real rides show 65 A-limited 6 P packs sagging instantly when FW amps pile on top of throttle demand.[^8]
 - Match current targets across front/rear controllers to avoid free-spinning the lighter wheel.⁸
@@ -63,6 +64,9 @@ Taming current limits is the difference between a scooter that rips for years an
 - Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
 - Screen-record smart-BMS or XMatic telemetry while you test—Yamal and Yoann log ~286–290 A battery peaks so the crew can vet discharge ceilings without guessing from feel alone.[^xmatic-logging]
 - Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
+- Face de Pin Sucé’s 20 S6 P 40T pack still hit 332 A/21.4 kW, but peaks beyond ~55 A per parallel need to stay under three seconds to avoid runaway sag.[^40t_peaks]
+- Pre-heating 20 S packs with 35–40 A charges lifted cell temps toward 45 °C for winter pulls; the same builds reported 8 A chargers couldn’t achieve similar heat soak.[^winter_heat]
+- Compare sag against ambient: mild-weather Vsett runs only dropped 6–8 V at 60 A battery while 10 °C packs diving to 325 A lost ~19 V, underlining the need for temperature-adjusted expectations.[^sag_comparison]
 - Cranking `iQ target` for harder launches can still trip pack protection.
   - logs show some BMS boards dropping output to zero when the requested torque outpaces battery capability, so treat that setting as additive load on the cells.[^15]
 - Expect extra sag in winter—Mirono logs an additional 3–4 V drop near 1 °C and eases battery current to save range and pack temperature.[^cold-sag]
@@ -125,6 +129,8 @@ Taming current limits is the difference between a scooter that rips for years an
 - **Running pack-only is risky.** Riders skipping BMS boards to “save space” saw cell drift and failures within months.
   - if you insist on BMS-less packs, log every group, schedule manual balancing, and accept the elevated fire risk.[^28]
 - **Charge-only boards aren’t immunity.** Charge-only ANT 40 A stacks still let cells spike toward 40 A each during burnouts, so add temperature sensors and plan manual monitoring before bypassing discharge FETs.[^29]
+- **Expect a little ANT drift even in storage.** Owners still see roughly 0.5–0.8 V of pack settle after charging and now use latching throttles or breakers to keep VESC standby draw from draining winter builds.[^ant_settle]
+- **Match Daly cutoffs to controller settings.** Field reports put Daly smart-BMS trips near 2.7 V per cell, so align VESC cutoffs to avoid mid-ride brownouts while still protecting the pack.[^daly_cutoff]
 - **Respect ANT precharge limits.** The onboard precharge FET taps out near 20 A; add external resistors or buttons for cold starts instead of raising firmware limits and cooking the device.[^30][^31]
 - **Wake sleepy BMS boards with a charger.** Happy/Xiaomi protections sometimes latch off after inrush events.
   - tickle the charge port briefly before condemning the controller.[^32]
@@ -190,6 +196,12 @@ Taming current limits is the difference between a scooter that rips for years an
 [^slow-brick]: Zero 10X owners clock ~11 hours for a 1.75–2 A stock charger to refill an 18.2 Ah pack from ~50 V to 54 V.
   - long charge times alone aren’t proof of pack failure.[^52]
 [^1]: Parallel-pack surge warnings when mixed BMS boards trip under load.[^53]
+[^mj1_sag]: LG MJ1 vs. Samsung 35E sag comparison at 10 A per cell in 16 S packs.[^66]
+[^40t_peaks]: Face de Pin Sucé’s 332 A burst on a 20 S6 P 40T pack and the <3 s guidance for ~55 A-per-parallel peaks.[^90]
+[^winter_heat]: Winter pre-heating routine charging 20 S packs at 35–40 A to reach ~45 °C before high-load pulls.[^91]
+[^sag_comparison]: Contrasting mild-weather 6–8 V sag at 60 A vs. 19 V drop in 10 °C packs during 325 A launches.[^92]
+[^ant_settle]: ANT smart-BMS packs settling 0.5–0.8 V after charge and the recommendation to isolate VESC standby draw with latching switches.[^62]
+[^daly_cutoff]: Daly smart-BMS cutoff behaviour around 2.7 V/cell and the need to align VESC limits to prevent brownouts.[^75]
 [^2]: Connector and heatsink best practices for high-current builds.[^54][^55]
 [^3]: Manual detection workflow and bad auto-tune case studies.[^56]
 [^4]: Thermal rework expectations and MakerX vs. Flipsky mounting comparisons.[^57][^58]
@@ -326,6 +338,9 @@ Taming current limits is the difference between a scooter that rips for years an
 [^87]: Source: knowledge/notes/input_part012_review.md†L436-L436
 [^88]: Source: knowledge/notes/input_part012_review.md†L253-L254
 [^89]: Source: knowledge/notes/input_part012_review.md†L334-L334
+[^90]: Source: knowledge/notes/input_part003_review.md†L577-L577
+[^91]: Source: knowledge/notes/input_part003_review.md†L578-L578
+[^92]: Source: knowledge/notes/input_part003_review.md†L579-L579
 [^90]: Source: knowledge/notes/input_part014_review.md†L150-L153
 [^91]: Source: knowledge/notes/input_part000_review.md†L3770-L3818
 [^92]: Source: knowledge/notes/input_part003_review.md†L71-L71

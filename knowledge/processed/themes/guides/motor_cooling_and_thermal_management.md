@@ -96,9 +96,10 @@
   - treat onboard telemetry as relative trends, not absolute hotspots.[^60]
 - Longitudinal skid plates without thermal paste plateaued around 54 °C even with solid airflow; crews now spread paste across the plate and step up to 25 mm fins or thicker stock before expecting meaningful heat transfer gains.[^61]
 - VSETT stator rewinds revealed lacquer-shelled star points barely wetted from the factory; torch the enamel, brush clean, and fully re-solder before running fresh motor detection to cut resistance and heat soak.[^62]
+- Huameng-sourced VSETT stators have also arrived with dry solder that barely wicked into the phase bundles; riders reflow every joint until per-phase resistance lands near 30–31 mΩ before buttoning up.[^vsett_qc]
 - Paolo reminded riders that handheld IR thermometers aimed at heatsinks under-read MOSFET junction temperatures.
   - reliable checks need bare-die access or pro-grade IR cameras, reinforcing the value of direct FET-to-baseplate contact on Little FOCer or Tronic designs.[^63]
-- Heat-pipe arrays are supplanting water loops on compact decks; builders now pair finned pipes with QS8-class harnesses and 10 mm² (≈8 AWG) leads when paralleling external packs so 80 A continuous transfers without cooking insulation.[^64]
+- Heat-pipe arrays are supplanting water loops on compact decks; builders now pair finned pipes with QS8-class harnesses and 10 mm² (≈8 AWG) leads when paralleling external packs so 80 A continuous transfers without cooking insulation.[^64][^heat_pipe_shift]
 
 ## Heat Transfer Upgrades from VESC Field Logs
 
@@ -121,7 +122,9 @@
 
 - Spintend dual and Makerbase/Tronic-class controllers still dump serious heat.
   - riders logging ~180 A phase on 84100-class ESCs report case temperatures climbing fast unless the units are bolted to large external heatsinks with fresh paste, reinforcing that even “cooler” Spintend hardware only halves the dissipation of Tronic boxes when airflow and interface pressure are maximised.[^76]
+- Hard-mounting works better than bags: bolting a MakerX case to an aluminium cradle dropped sprint temps to ~23 °C where the same controller hit 60–80 °C inside a soft pack, and logs reminded builders to cross-check VESC telemetry against BMS readings when validating those gains.[^hard_mount]
 - Nucular 12-FET controllers happily sustain roughly 210 A battery current while holding ~48 °C when they are clamped firmly to deck aluminium, underscoring the payoff from rigid mounting pressure on MOSFET plates.[^77]
+- Lightweight shrouds still help: a 12 V/0.6 A fan with mesh filters kept a Vsett single near 50 °C during 6.2 kW, 8 °C rain rides and doubled as a reminder to add motor NTCs before lifting current limits.[^vsett_fan]
 - Refresh thermal interfaces on a schedule: the community now treats ESC paste like desktop-PC maintenance.
   - strip the controller every couple of years, clean the heatsink, and reapply high-quality compound before summer pushes start.[^78]
 - Load sharing matters. A lone Tronic 250 on steep climbs still touches ~60 °C, while an equivalent dual-drive setup running the same hills stays under 40 °C because the thermal load splits between controllers and each unit has better deck contact.[^79]
@@ -455,6 +458,10 @@
 [^127]: Source: knowledge/notes/input_part001_review.md†L674-L674
 [^128]: Source: knowledge/notes/input_part014_review.md†L3792-L3858
 [^129]: Source: knowledge/notes/input_part014_review.md†L3588-L3636
+[^hard_mount]: Source: knowledge/notes/input_part003_review.md†L501-L502
+[^vsett_fan]: Source: knowledge/notes/input_part003_review.md†L531-L532
+[^heat_pipe_shift]: Source: knowledge/notes/input_part003_review.md†L522-L522
+[^vsett_qc]: Source: knowledge/notes/input_part003_review.md†L594-L596
 [^130]: Source: knowledge/notes/input_part006_review.md†L42-L42
 [^131]: Source: knowledge/notes/input_part006_review.md†L509-L509
 [^132]: Source: knowledge/notes/input_part006_review.md†L409-L410

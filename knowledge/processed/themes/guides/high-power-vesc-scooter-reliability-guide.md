@@ -23,9 +23,11 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - **Keep phase extensions short and anchored.** Three-metre test leads on a Flipsky rig whipped violently once current ramped, reminding builders that long, unsupported phase runs experience Lorentz forces capable of ripping looms apart under load.[^11]
 - PuneDir’s single-motor G30 test still logged ~4.2 kW while a Makerbase 75100 sat near 44 °C inside the stock controller can.
   - evidence that OEM housings can work as heatsinks when airflow is limited.[^12]
+- Cross-check VESC telemetry against smart-BMS logs before celebrating current numbers; a MakerX build set to 70 A battery read ~10 A lower on the ANT BMS until owners reconciled pack-side data.[^telemetry_crosscheck]
 - **Treat ad-hoc dual-motor add-ons skeptically.** Veterans found “bolt-on” second motors with their own controller and pack crowd the deck, delete the rear brake, overheat uncooled controllers, and deliver little efficiency.
   - serious AWD builds demand matched motors, dual controllers, and real cooling from the outset.[^13]
 - **Source hubs with the frame in mind.** Lonnyo and NAMI hubs even share factory engravings; racers grab 70 H magnet stacks to stay within 150 mm dropouts and brace Laotie TI30 tubes with fresh welds and CAD references before chasing 11 kW+ launches.[^14]
+  - 3Shul’s 70H hubs ship with fixed rims for standard 11″ tires while 75H hubs need separate rims; both accept ~350 A phase but the high-torque wind prefers shorter bursts.[^shul_variants]
 - **Kaabo/Weped hub genealogy matters.** Wolf Warrior hubs come from the same supplier as Rion/Weped units.
   - the 1 200 W trims carry 60 mm magnets while the GT’s 2 000 W set stretches to 65 mm with 33/43 Kv windings
   - so expect to shunt Minimotors controllers past 50 A or swap to higher-phase VESC hardware to unlock the extra copper.[^15]
@@ -865,6 +867,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 3. Bench-test BMS cutoff delays and log phase-current spikes.
   - ANT 300 A boards tripped near 690 A, prompting hardware swaps or timer tweaks before top-speed pulls.[^526]
 4. Stage thermal runs (street, hill, track) to document when ferrofluid, forced air, or extra copper mass is mandatory before lifting controller limits.[^527][^528]
+5. Treat 30 S ambitions as an enclosure and insulation problem first—bigger ESCs, fast fuses, and reinforced sleeving are mandatory, and even Smart Express CAN peripherals struggled with noise above 20 S.[^thirty_s_pack]
 
 ### Controller handling & bench safety refreshers
 
@@ -873,6 +876,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - Strip factory paste, inspect pads, and reapply thread-lock on enclosure screws so vibration doesn’t loosen service covers.[^529]
 - When Y-splitting dual Kelly harnesses, leave horns and lights on dedicated battery/DC-DC feeds so controller rails don’t brown out during regen or horn hits.[^530][^531]
 - Cap absolute current around 300 A on Flipsky 75100-class hardware until more long-term data clears higher thresholds.[^532]
+- Heat pipes still beat deck-mounted water loops on scooters; Rosheee, Jan, and Paolo keep steering 15 kW builds toward passive conduction because plumbing vibrates loose and chews up deck space.[^heat_pipe_shift_hp]
 
 ### Telemetry & validation workflow reminders
 
@@ -885,16 +889,20 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 
 - Makerbase aluminum-board clones still shatter MOSFETs once absolute current clears ≈450–500 A; any log past the 300 A consensus deserves teardown.[^532]
 - MakerBoard/MakerBase copies routinely ship with poor thermal-pad contact.
-  - redo paste coverage and torque checks or expect overheating.[^537]
+  - redo paste coverage and torque checks or expect overheating; recent arrivals showed patchy TIM that left MOSFETs semi-floating until the owners scraped and repasted the base plate.[^537][^maker_clone_tim]
 - Spin-Y batch‑1 throttles need the 1 mm magnet spacer retrofit to remove the dead zone; flag early units still missing the fix.[^538]
 - Traction-control surges have destroyed Tronic dual setups, including a front-ESC fire after DC/DC contamination.
   - treat post-cleaning inspections as mandatory.[^539][^540]
 - Keep VESC input-voltage limits ~5 V above max pack voltage to avoid BMS-induced MOSFET failures during over-voltage faults.[^541]
 - Counterfeit 52 V 35 Ah packs delivered only ~30 Ah.
   - audit weight, welds, and discharge logs before trusting “Panasonic”-branded bricks.[^542]
+- French riders already forced replacements on “35 Ah Panasonic” packs that only delivered ~30 Ah at 2 A—validate supplier claims before committing them to 20 S racing builds.[^french_pack_recall]
 - Segway GT and SNSC frames have fractured at controller mounts; add welded gussets and reconsider handlebar-mounted battery weight on those chassis.[^543]
+- Wolf GT electronics bays still swallow only a single Flipsky without spacers—plan taller decks or staged mounting when chasing dual-controller conversions.[^wolf_packaging]
+- Xiaomi conversions hanging Ubox singles inside the deck need drilled mounts, threaded inserts, and dedicated bucks for 5 V tail lights to keep harnesses tidy.[^xiaomi_mount]
 - MakerX thermistors misreported temps until firmware coefficients were corrected in VESC Tool 6.0.
   - flash updates or risk unwarranted throttling and shutdowns.[^544]
+- MakerX duals continue to show high attrition: waterlogged singles only returned after reflashing Jaykup firmware and powering BLE boards from the comm rail, fresh duals blew MOSFETs on the first launch, and shop owners report ~70 % DOA rates that pushed them toward Spintend singles.[^makerx_rescue][^makerx_attrition]
 
 ### High-current tuning highlights
 
@@ -1550,6 +1558,16 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^562]: Source: data/vesc_help_group/text_slices/input_part003.txt†L7145-L7164
 [^563]: Source: data/vesc_help_group/text_slices/input_part003.txt†L7443-L7457
 [^564]: Source: data/vesc_help_group/text_slices/input_part003.txt†L7476-L7500
+[^telemetry_crosscheck]: Source: knowledge/notes/input_part003_review.md†L502-L502
+[^maker_clone_tim]: Source: knowledge/notes/input_part003_review.md†L520-L520
+[^makerx_rescue]: Source: knowledge/notes/input_part003_review.md†L546-L546
+[^makerx_attrition]: Source: knowledge/notes/input_part003_review.md†L547-L548
+[^heat_pipe_shift_hp]: Source: knowledge/notes/input_part003_review.md†L556-L557
+[^thirty_s_pack]: Source: knowledge/notes/input_part003_review.md†L558-L559
+[^wolf_packaging]: Source: knowledge/notes/input_part003_review.md†L562-L563
+[^xiaomi_mount]: Source: knowledge/notes/input_part003_review.md†L563-L564
+[^shul_variants]: Source: knowledge/notes/input_part003_review.md†L567-L567
+[^french_pack_recall]: Source: knowledge/notes/input_part003_review.md†L569-L569
 [^565]: Source: data/vesc_help_group/text_slices/input_part003.txt†L18051-L18138
 [^566]: Source: data/vesc_help_group/text_slices/input_part003.txt†L19431-L19437
 [^567]: Source: data/vesc_help_group/text_slices/input_part003.txt†L18841-L18874

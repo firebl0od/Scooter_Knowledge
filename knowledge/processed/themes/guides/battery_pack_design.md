@@ -9,6 +9,8 @@
   - thin alligator clips dropped a healthy P42A to a false 1.9 V at 20 A until the team clamped directly to the tabs
   - so upgrade leads and meters before condemning cells.[^2]
 - EU comparison logs now peg P42A as the 20–30 A workhorse, LG/Samsung 50G as the 7–10 A efficiency pick, and Samsung 50S/Vapcell T50 matching P42A output only if you can justify roughly double the price; community bulk buys land 30T/35E/50G cells near €2.5–€4 each.[^3]
+- Inspect Samsung 35E/40T lots for leftover weld marks before buying; “used but tested” batches keep circulating at €2.5–€3 per cell and veterans reject them outright.[^cell_vigilance]
+- 50E packs with cooling can still deliver high energy at ~15 A per cell, but Raphael warns they require stricter protection than typical scooter BMS gear compared with 40T builds.[^50e_protection]
 
 ## Capacity Planning & Chemistry Guardrails
 
@@ -82,3 +84,5 @@
 [^19]: Source: knowledge/notes/input_part000_review.md†L553-L554
 [^20]: Source: knowledge/notes/input_part000_review.md†L512-L516
 [^21]: Source: knowledge/notes/input_part000_review.md†L520-L524
+[^cell_vigilance]: Source: knowledge/notes/input_part003_review.md†L521-L521
+[^50e_protection]: Source: knowledge/notes/input_part003_review.md†L559-L559
