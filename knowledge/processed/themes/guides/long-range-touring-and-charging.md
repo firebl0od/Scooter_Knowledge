@@ -11,6 +11,7 @@
 - Pack sizing for 150+ mile rides typically requires 7–10 kWh or more depending on terrain, speed, and rider weight; builders planning tours should log Wh/mi consumption during shorter test rides to estimate realistic range before committing to long routes.[^pack-sizing]
 - Mirono’s 3D-printed deck extender now houses 260 cells (~15 S 17 P) to chase 120 km coastal rides, while the group prototypes cargo trailers for hauling auxiliary batteries, logging ~2 A at 36 V from 80 W folding solar panels during scouting runs.[^deck-extender]
 - Artem’s Xiaomi/Ninebot controller shootout underscores tuning impact on Wh/km: the stock 52 V 13 Ah square-wave build burned ~26 Wh/km flat out, his dual-motor VESC swap held ~22.5 Wh/km at higher speeds, and a sine-modulated Vsett managed ~17 Wh/km cruising 25–35 km/h on a 676 Wh pack.【F:knowledge/notes/input_part000_review.md†L486-L489】
+- Bolt-on saddles shift rider weight rearward and make speed bumps harder to unload—test balance changes before multi-day tours and confirm frame-bag width still leaves foot room when swapping between 2.5 L and 3 L options.【F:knowledge/notes/input_part006_review.md†L133-L133】
 
 ## Public Charging Strategies
 
@@ -44,6 +45,9 @@
 - **Over-provision capacity:** Plan for 20–30 % reserve capacity to account for voltage sag, cold weather, headwinds, and unexpected detours; aggressive riders logging 2 Wh/mi at 30 mph should budget ≥3 Wh/mi for tour planning.[^capacity-buffer]
 - **BMS thermal limits:** High-capacity packs (≥7 kWh) under sustained discharge can heat BMS MOSFETs or balance boards; log temps during test rides and add active cooling if boards exceed 50 °C under load.[^bms-thermal]
 - **Charge rate planning:** If fast-charging via Level 2 infrastructure, ensure BMS charge current limits (typically 10–30 A for scooter-class hardware) match adapter capabilities and won't trip thermal or over-current protections.[^charge-limits]
+- **Respect OEM charge ceilings:** Segway Ninebot G30 BMS firmware trips if charge current exceeds ~8 A even though the pack accepts Segway’s 5 A fast charger, while F-series and Xiaomi packs top out around 4 A continuous—dial adjustable lab supplies accordingly to avoid nuisance cut-offs.[^g30-charge-limit]
+- **Carry on-the-road spares.** Travellers keep tubes and compact toolkits handy because hotel stairs, missing elevators, and recurring rear flats remain common on high-power builds abroad.【F:knowledge/notes/input_part006_review.md†L180-L180】
+- **Keep scooters multimodal.** Gig riders still favour compact G30/Xiaomi sleepers for train and bus legs, while oversized dual-motor builds demand storage plans before you leave home.【F:knowledge/notes/input_part006_review.md†L228-L228】
 
 ## Safety & Reliability Tips
 1. **Test all charging adapters at home before departure.** Verify voltage, current draw, and thermal behavior with a multimeter and infrared thermometer during bench charging sessions.[^pre-test]
@@ -51,6 +55,12 @@
 3. **Log ride telemetry and charging sessions.** Track Wh consumed per mile, charge times, and thermal peaks to refine future tour plans and identify pack degradation early.[^telemetry]
 4. **Plan routes with charging station density in mind.** Use PlugShare or ChargePoint maps to identify backup stations within 20–30 miles of primary stops in case of equipment failure or station downtime.[^route-planning]
 - **Carry a vetted charger.** Budget 0–90 V/5 A AliExpress bricks (~€76 shipped) keep arriving late or DOA—Mirono lines up disputes in advance—while others swallow the cost of a Grin Satiator to avoid repeated support fights on tour.【F:data/vesc_help_group/text_slices/input_part002.txt†L22438-L22450】
+5. **Confirm delivery SOC and rebalance before tours.** Logistics warehouses often ship scooters between 30–50 % SOC even when some units arrive near 70–100 %; check and balance packs on arrival so you start long trips with known baselines.[^warehouse-soc]
+6. **Keep packs warm in winter.** Riders commuting near freezing rely on heated battery bags or external heaters to hold cells above ~10 °C and reduce cold-weather voltage sag before setting out.[^winter-bags]
+7. **Budget cold-weather PPE.** Winter riders treat full-face helmets and balaclavas as consumables—expect to spend $120+ keeping replacements ready so gear stays warm and theft-resistant during sub-zero commutes.【F:knowledge/notes/input_part006_review.md†L91-L91】
+- 8. **Adjust tire pressure for load.** Fleet technicians keep commuter tires at ≥20 psi and push heavy riders toward ~3.6 bar rear pressure when aiming for 60 km/h travel to fend off chronic punctures.【F:knowledge/notes/input_part006_review.md†L174-L174】
+- 9. **Prioritise torque and thermal resilience.** Even burnout-focused city builds lean on manageable 20 S10 P packs with regen, valuing heat margin over chasing absolute top speed.【F:knowledge/notes/input_part006_review.md†L229-L229】
+- 10. **Integrate track-safe enclosures.** Race officials now ban external battery bags at 100 km/h events because loose packs eject and ignite in crashes—touring builds destined for track days need fully enclosed compartments.【F:knowledge/notes/input_part006_review.md†L385-L385】
 
 ## Follow-Up Actions Needed
 - Draft EV-charger etiquette notes covering time limits, single-handle session restrictions, and communication protocols for mixed scooter/EV charging scenarios.[^follow-etiquette]
@@ -80,6 +90,9 @@
 [^backup]: Backup charging equipment recommendations for reliability.
 [^telemetry]: Ride telemetry logging for consumption tracking and pack health monitoring.
 [^route-planning]: Route planning recommendations using PlugShare/ChargePoint for backup station identification.
+[^g30-charge-limit]: Segway G30 packs accept the 5 A fast charger but BMS firmware trips above ~8 A, and smaller F-series/Xiaomi packs prefer ≤4 A continuous from adjustable supplies.【F:knowledge/notes/input_part006_review.md†L75-L75】
+[^warehouse-soc]: Warehouse storage guidance recommending 30–50 % SOC even when some scooters arrive closer to 70–100 %, prompting balance checks on delivery.【F:knowledge/notes/input_part006_review.md†L76-L76】
+[^winter-bags]: Winter commuters keeping packs above ~10 °C with heated battery bags or external heaters to limit cold-weather sag.【F:knowledge/notes/input_part006_review.md†L77-L77】
 [^follow-etiquette]: Follow-up action to draft detailed EV-charger etiquette notes.【F:knowledge/notes/input_part013_review.md†L516-L516】
 [^follow-adapter]: Follow-up action to document field-tested J1772 adapter builds.
 [^follow-generator]: Follow-up action to validate generator-assisted touring with real-world data.

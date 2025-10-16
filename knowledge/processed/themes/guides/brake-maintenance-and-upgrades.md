@@ -62,6 +62,8 @@
 - Dual-rotor experiments now include Trickstuff, Kool-Stop, Shimano Saint, Ashima, and XLC floating discs; the budget XLC hardware bites hard but its floating hardware feels suspect on dual G30 conversions, so budget inspections between sessions.【F:data/vesc_help_group/text_slices/input_part003.txt†L11517-L11570】【F:data/vesc_help_group/text_slices/input_part003.txt†L11935-L11970】
 - Bosch’s e-bike ABS pairs cleanly with Magura CMe5 levers, giving scooters a path to anti-lock hydraulics while still functioning as premium standalone brakes if you skip the controller module.【F:knowledge/notes/input_part003_review.md†L166-L166】
 - Brakestuff 3 mm rotors reward precise setup—Magura Saints squeal if runout isn’t near perfect, but Hope Tech 4 V4 calipers on the same discs delivered the strongest stops the testers have measured so far.【F:data/vesc_help_group/text_slices/input_part004.txt†L7401-L7405】【F:data/vesc_help_group/text_slices/input_part004.txt†L7469-L7472】
+- Custom rotor projects now target 203 mm discs cut from 2.3–2.5 mm acid-proof steel, but Magura calipers only clear ≈2.1 mm—budget runout checks and pad clearance before ordering thicker hardware.【F:knowledge/notes/input_part006_review.md†L375-L375】
+- Magura and TRP four-piston setups expect 2.0–2.3 mm rotors, and AliExpress Brembo clones often ship in left/right-specific pairs—verify orientation when ordering for right-hand-drive scooters to avoid fitment surprises.【F:knowledge/notes/input_part006_review.md†L123-L123】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -102,6 +104,7 @@
 ## Tire Inflation & Bead Seating
 - Haku's Xiaomi inflator couldn't seat 21×3 tires even with a ratchet strap, reinforcing that serious tubed slick installs demand higher-flow compressors (≥150 PSI, 2+ CFM) or shop assistance to pop beads properly.[^tire-inflation]
 - Roadside swaps go smoother when you break the bead with dish soap, dust tubes in talc or baby powder, and reassemble carefully—the combo stops inner-tube chafing after emergency tire pulls.【F:knowledge/notes/input_part000_review.md†L669-L670】
+- PMT 110/55 R6.5 slicks feel vague at the 2.2 bar sidewall spec; experienced tuners run ~3.5 bar for crisp handling without reported failures.【F:knowledge/notes/input_part006_review.md†L162-L162】
 - **Compressor requirements for large tires:**
   - Minimum 150 PSI working pressure for 21×3 and larger tires
   - 2+ CFM flow rate to seat beads quickly before air leaks past unseated tire
@@ -120,9 +123,13 @@
 ## Hydraulic Sensor Retrofits
 - Builders add hall sensors or reed switches to existing hydraulic levers when they need proportional regen or kill-switch behaviour, freeing them from the limited OEM sensored lever catalog.[^hall-retrofit]
 - When extending short Magura bicycle hoses, reuse the correct olives and barbs at each end—aftermarket lines such as Jagwire Pro handle higher pressure but still leak if the hardware mismatch leaves gaps at the caliper or lever.[^jagwire-hardware]
-
 ## Post-Flood Brake Recovery
 - Flood-soaked calipers should be stripped, scrubbed with dedicated brake cleaner, and dried before touching WD-40 or silicone sprays—those products swell seals and leave corrosion that will seize pistons again.[^flood-recovery]
+### High-Heat Hydraulic Practices
+- **Leave reservoir headroom.** Mountain-pass riders boiling 360 °C Trickstuff Bionol in Magura MT7 stacks watched the banjo burp once expansion had nowhere to go—bleed with a visible air gap so thermal growth doesn’t pop seals mid-descent.[^bionol-flash]
+- **Prioritise front stopping power.** Community logs keep stressing that rear-only braking just locks and skids; pair a strong front hydraulic with regen on both controllers whenever possible so emergency stops stay controllable.[^front-priority]
+- **Upgrade rotors for high voltage.** Shimano “resin only” 160 mm discs fade instantly on 72 V scooters—step up to 2 mm-thick metallic-ready rotors and full-hydraulic calipers before raising pack voltage.[^resin-rotor]
+- **Inspect hardware after heat events.** That same MT7/MT8 build now budgets pad checks and rotor swaps after every downhill session because fluid flash cooked fittings despite premium components.[^post-heat-service]
 
 ## Follow-Up Actions Needed
 - Write up an 80/100 H wheel-centering and dual-caliper setup guide (kit sourcing, torque, clearance checks) so track-focused Nami/Dualtron builds can copy the wobble fix.[^follow-centering]
@@ -152,3 +159,7 @@
 [^follow-centering]: Follow-up action to create wheel-centering and dual-caliper setup guide.【F:knowledge/notes/input_part013_review.md†L645-L647】
 [^follow-dual-disc]: Follow-up action to document dual-disc vs. dual-caliper decision matrix.【F:knowledge/notes/input_part013_review.md†L635-L637】
 - **Cool overheated brakes while rolling.** Riders who stop immediately after smoking a Magura caliper trap heat, boil fluid, and face a full re-bleed—keep the scooter moving to shed heat before coming to rest after heavy stops.【F:data/vesc_help_group/text_slices/input_part004.txt†L4146-L4156】
+[^bionol-flash]: Trickstuff Bionol flashed in a Magura MT7 stack, venting fluid through the banjo because the reservoir was overfilled before the descent.【F:knowledge/notes/input_part006_review.md†L12-L13】
+[^front-priority]: Riders reiterating that strong front hydraulics plus dual electronic braking provide real stopping power; rear-only braking just slides.【F:knowledge/notes/input_part006_review.md†L14-L14】
+[^resin-rotor]: Shimano “resin only” 160 mm rotors failing on 72 V scooters and the recommendation to run 2 mm metallic-ready discs with hydraulic calipers instead.【F:knowledge/notes/input_part006_review.md†L15-L15】
+[^post-heat-service]: Premium MT7/MT8 builds scheduling pad and rotor inspections after every downhill session once high-temp fluid flashes exposed weak hardware.【F:knowledge/notes/input_part006_review.md†L12-L13】

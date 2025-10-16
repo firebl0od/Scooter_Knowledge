@@ -19,7 +19,7 @@
 ## Chassis & Handling Priorities
 - Keep the platform in its comfort lane: riders still rank Dualtron Thunder geometry for >150 km/h sprints, while NAMI frames shine for long-range and off-road duty when paired with good dampers instead of chasing absolute top speed.[^3]
 - Budget steering dampers snap when preloaded for race pace; invest in motorcycle-grade Bitubo or similar hardware before upping currents and tire width.[^10]
-- Aftermarket shocks rarely match the Viper’s leverage curve—most MTB units feel nearly solid, so owners are still hunting purpose-built dampers instead of relying on drop-in swaps.【F:knowledge/notes/input_part006_review.md†L97-L97】
+- Aftermarket shocks rarely match the Viper’s leverage curve—most MTB units feel nearly solid, so owners are still hunting purpose-built dampers instead of relying on drop-in swaps.【F:knowledge/notes/input_part006_review.md†L136-L136】
 - Fabrication escalates quickly—22 S 10 P hybrids inspired by Rion builds required fork machining to clear 70H hubs and 3 mm rotors, so plan machine time before ordering oversized drivetrains.[^11]
 - Kaabo fork swaps remain largely cosmetic: the community confirmed 70 H hubs fit but 75 H is doubtful without extra machining, so most riders stick with stock hardware unless aesthetics trump effort.[^kaabo-swap]
 
@@ -36,6 +36,7 @@
 
 ## Battery Strategy & Pack Building
 - Documented GT2 rebuilds pair 20 S 9 P LG 40P packs with Daly smart BMS hardware and thick copper busbars—use this as a template when refreshing commuter modules.[^6]
+- A Chilean Blast Max mule now runs roughly 59 Ah by pairing the stock 35 Ah Panasonic deck with a 24 Ah SunPower bag; the crew only kept the add-on after securing it with foam and Velcro because earlier loose packs battered cells in the frame.【F:knowledge/notes/input_part006_review.md†L387-L387】
 - Mixed-chemistry packs (LG 40T + LG M50LT) demand conservative discharge ceilings and a robust 150 A smart BMS to keep 4 Ah and 5 Ah sticks in balance; many veterans still discourage blending chemistries at all.[^3]
 - OEM BMS retention is viable: Yoann’s customer conversion kept the NAMI BMS while adding dual Spintend Lite controllers for cleaner throttle response without altering the scooter’s appearance.[^8]
 - When aiming beyond stock output, log pack temperatures alongside controller data—Omar’s 20 S 10 P 50S build overheated both hubs and cells at 200 A battery, 310 A phase, and 380 A ABS.[^2]

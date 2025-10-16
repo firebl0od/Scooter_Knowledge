@@ -4,6 +4,7 @@
 - Lonnyo’s stator codes map cleanly to use cases: 17×4 torque, 22×3 “standard”, and 33×2 high-speed winds, with riders stepping up to 80H/100H cores when chasing 150 km/h builds or >300 A phase targets.【F:knowledge/notes/input_part011_review.md†L288-L293】【F:knowledge/notes/input_part011_review.md†L328-L329】
 - Real-world current envelopes show 22×3 hubs settling near 110–150 A battery and ~300 A phase on Spintend 75/200-class controllers, while single Ubox 85150 installs bump into a ~150 A firmware ceiling regardless of higher software limits.【F:knowledge/notes/input_part011_review.md†L309-L311】【F:knowledge/notes/input_part011_review.md†L340-L353】
 - Packaging is the gating factor above 70H: the 100H cans require ≈183 mm dropouts plus custom shock brackets, 80H swaps need 155 mm fork spacing and longer caliper studs, and even 70H hubs ship unsealed—expect a full bearing and weatherproofing job before first ride.【F:knowledge/notes/input_part011_review.md†L365-L417】【F:knowledge/notes/input_part011_review.md†L482-L483】【F:knowledge/notes/input_part011_review.md†L531-L536】【F:knowledge/notes/input_part011_review.md†L463-L465】
+- Traction, not thermal headroom, still limits many builds—70 H motors hold roughly 12 kW without overheating, yet even 350 A battery pushes spin the front tire first on 33×2 windings.【F:knowledge/notes/input_part006_review.md†L315-L315】
 - 80H 22×3 winds measure roughly 34.8 kV—good for ~141 km/h free spin at 80 V—but meaningful acceleration still demands dual motors or lighter rims once you move beyond 11" commuter tires.[^80h_kv]
 - New-gen 70H/75H hubs share axles with the 60H family, squeeze into G30 forks with minimal shimming, and route phases through the side cover—plus the 70H split rims now ship tubeless-ready while axle-exit variants remain tube-only.【F:knowledge/notes/input_part007_review.md†L328-L333】
 
@@ -51,7 +52,7 @@
 
 ## Commissioning & Maintenance Playbook
 - **Bearing & seal upgrade (70H).** Replace both bearings, pack fresh grease, and add gaskets or sealant before first ride. Document torque values during reassembly to avoid preloading the new races.【F:knowledge/notes/input_part011_review.md†L463-L465】
-- **Confirm bearing part numbers.** Lonnyo 70 H hubs run 6003 rotor-side and 6008 stator-side bearings, making spares easy to source before you tear down imports.【F:knowledge/notes/input_part006_review.md†L114-L114】
+- **Confirm bearing part numbers.** Lonnyo 70 H hubs run 6003 rotor-side and 6008 stator-side bearings, making spares easy to source before you tear down imports.【F:knowledge/notes/input_part006_review.md†L153-L153】
 - **Sensor verification (80H/100H).** Lonnyo 80H shipments include hall and temperature sensors; validate continuity before lacing into rims to avoid relacing later. Longer bolt kits also keep harnesses from pinching against brake mounts.【F:knowledge/notes/input_part011_review.md†L482-L483】【F:knowledge/notes/input_part011_review.md†L531-L536】
 - **Thermal logging.** Single-controller builds should log CAN data for commanded vs. delivered amps—many “weak” Lonnyo setups trace back to firmware ceilings, not motor limits. Pair phase-current logs with tire temperature checks after field-weakening pulls.【F:knowledge/notes/input_part011_review.md†L340-L353】
 

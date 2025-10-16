@@ -9,6 +9,7 @@
 - ANT owners still note 0.5–0.8 V pack settling after charge; pair those boards with latching throttles or breakers so VESC standby draw doesn’t drain winter storage scooters.【F:data/vesc_help_group/text_slices/input_part003.txt†L16080-L16102】
 - ANT units sip microamps with Bluetooth awake while Daly and LLT boards offer configurable sleep timers; trim status LEDs or use LLT’s hardware switch when parking packs for weeks to stop parasitic drain.【F:data/vesc_help_group/text_slices/input_part003.txt†L7690-L7712】
 - Pack size influences BMS choice: high-capacity 53 Ah+ builds stick with JK’s active shuttling for fast charging, smaller commuter packs tolerate ANT’s lighter balancing current, and JBD hardware remains feature-parity with LLT once sensors and harnesses are sized correctly.【F:data/vesc_help_group/text_slices/input_part003.txt†L10726-L10767】【F:data/vesc_help_group/text_slices/input_part003.txt†L11610-L11612】
+- Even 20 S ~7 kW builders asking for smart-BMS ideas keep getting steered back to LLT/JBD units, underscoring how often those boards anchor mid-power packs.【F:knowledge/notes/input_part006_review.md†L49-L49】
 
 ---
 
@@ -28,6 +29,7 @@
 
 ### VESC Tool Integration Status
 - **ANT gap today.** ANT smart BMS lines still lack native VESC Tool support, so telemetry lives in the vendor app until Vedder’s Bridge firmware adds CAN bindings—plan fallbacks for logging and regen validation on ANT-equipped packs.[^ant-gap]
+- **Third-party CAN bridges exist.** A plug-in adapter now lets LLT/JBD/Jabada boards stream telemetry over CAN to VESCs, simplifying pack monitoring without rewiring the harness.【F:knowledge/notes/input_part006_review.md†L404-L404】
 - **Emulator limits.** VESC Tool’s internal SoC emulator is a stopgap for dumb dual-BMS packs; it reads pack voltage and coulomb counts but cannot trip contactors or enforce charge ceilings, so treat it as supplemental telemetry, not protection.[^vesc-emulator]
 
 Field crews frustrated with Daly’s missing toggles and VAT-laden replacements now default to ANT’s 320 A 20 S board for compact decks—the smoother remote control and tighter packaging justify the price bump when downtime hurts more than hardware cost.【F:knowledge/notes/input_part000_review.md†L554-L554】
@@ -39,9 +41,10 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
    - When rebuilding tired MH1 packs, log per-parallel rest voltage before landing the harness so the new BMS isn’t blamed for sag that predates the swap.【F:knowledge/notes/input_part005_review.md†L420-L422】
 3. **Keep both FET banks enabled for regen tests.** Builders traced repeated ESC deaths to disabled charge FETs on JK smart boards—regen had nowhere to dump energy.[^4]
    *Tip:* ANT’s companion app is live on Apple’s App Store, so iPhone-based teams can configure boards without sideloading tools before sealing the deck.【F:knowledge/notes/input_part010_review.md†L182-L183】
-   - Daly display packs have latched their discharge MOSFETs after cells sag to ≈2.7 V; only the Bluetooth app (password 123456) can reopen them, so plan charger access before sealing the deck and remind riders the LCD power button won’t clear a trip.【F:knowledge/notes/input_part000_review.md†L368-L368】
-   - ANT quietly tucked its charge/discharge toggle behind an “I’m sure” confirmation prompt—show owners where it lives so they can shut packs down without yanking breakers.【F:knowledge/notes/input_part000_review.md†L578-L578】
-   - July 2021-and-newer ANT boards ignore the legacy mobile apps; insist on the refreshed client before handover so config writes actually stick.【F:knowledge/notes/input_part000_review.md†L579-L579】
+- Daly display packs have latched their discharge MOSFETs after cells sag to ≈2.7 V; only the Bluetooth app (password 123456) can reopen them, so plan charger access before sealing the deck and remind riders the LCD power button won’t clear a trip.【F:knowledge/notes/input_part000_review.md†L368-L368】
+- ANT quietly tucked its charge/discharge toggle behind an “I’m sure” confirmation prompt—show owners where it lives so they can shut packs down without yanking breakers.【F:knowledge/notes/input_part000_review.md†L578-L578】
+- July 2021-and-newer ANT boards ignore the legacy mobile apps; insist on the refreshed client before handover so config writes actually stick.【F:knowledge/notes/input_part000_review.md†L579-L579】
+*Reminder:* If a smart BMS was shut down over BLE, tapping it with a charger wakes the board—never “test” with an 84 V charger on 42 V/54.6 V packs or you risk blowing the BMS outright.【F:knowledge/notes/input_part006_review.md†L140-L140】
 4. **Stage first rides with logging.** Riders lost Spintend and Makerbase controllers the moment a BMS tripped under load; gather current and voltage traces to verify the protection stays latched through braking and launches.[^6]
 - When regen has previously latched undervoltage faults, enable the smart-BMS discharge MOSFET before reconnecting the controller and raise pre-charge targets toward 40 A on large 16 S packs so startups pass self-tests without brownouts.[^precharge40]
 - If smart-BMS telemetry suddenly reads nonsense after a teardown, hunt for conductive debris—metal shavings inside the deck have already scrambled SoC calculations until the harness was cleaned and pack curves recalibrated.【F:data/vesc_help_group/text_slices/input_part005.txt†L24123-L24169】
@@ -79,6 +82,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 
 ## Storage & Standby Planning
 - **Align controller cutoffs with BMS limits.** Keep VESC input-voltage ceilings ~5 V above pack max so Daly and ANT cutoff events do not nuke controller MOSFETs, and pair ANT boards with latching throttles or breakers to curb 0.5–0.8 V post-charge drift during winter storage.【F:data/vesc_help_group/text_slices/input_part003.txt†L16080-L16113】【F:data/vesc_help_group/text_slices/input_part003.txt†L21224-L21247】
+- **Know when builders bypass discharge FETs.** High-output scooters still run charge-only 40 A boards and route discharge directly to the pack, accepting manual monitoring because most failures happen while charging.【F:knowledge/notes/input_part006_review.md†L214-L214】
 
 ## Charging Infrastructure Updates
 - **Programmable supplies cover odd voltages.** Adjustable 22 S/18 A bricks paired with ANT sleep timers keep 21 S packs topped without drifting when scooters sit for weeks.[^adj_supply_smart]
@@ -92,6 +96,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 - **Document anti-theft workflows.** JK’s remote discharge disable doubles as a parking lock; confirm the board re-arms before rides to avoid brownouts.[^23]
 - **Install the optional JK display when range demands visibility.** Its long-range Bluetooth, remote charge/discharge toggles, and granular pack telemetry are saving time on high-current builds and becoming standard issue for field diagnostics.【F:knowledge/notes/input_part001_review.md†L558-L560】
 - **Log balance behavior after storage.** JK units can self-immolate while idle and Daly boards stop balancing once “full”—review app history after downtime before sending the pack back into service.[^2][^19]
+- **Set realistic current ceilings.** Even 20 kW builds lean on JBD smart boards and keep 18S7P Sony VTC6A packs near 200 A to stay inside thermal comfort zones.【F:knowledge/notes/input_part006_review.md†L239-L239】
 - **Teach recovery procedures.** Publish lead-order diagrams and wake-up checklists so drained JK packs (≈57 V on 20 s) or JBD miswires don’t strand riders without telemetry.[^17][^24]
 - **Exploit Daly Bluetooth toggles for safe shutdowns.** The Daly Bluetooth companion app can open outputs without sparks, giving antispark-free builds a tidy way to de-energise harnesses when parking.【F:data/vesc_help_group/text_slices/input_part002.txt†L9452-L9459】
 - **Reseat suspect balance leads.** A single cold joint on Artem’s JK install forced the board into alternating “short circuit” and “low voltage” alarms until the tap was reflowed—inspect and re-solder every lead after high-heat work before blaming firmware.【F:knowledge/notes/input_part000_review.md†L650-L650】【F:knowledge/notes/input_part000_review.md†L690-L690】

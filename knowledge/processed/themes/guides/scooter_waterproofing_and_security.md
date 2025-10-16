@@ -2,6 +2,7 @@
 
 ## Weatherproof the Chassis Before the Storm
 - **Seal every seam.** Run silicone along deck joints, cable pass-throughs, and the charge door, then coat hub interfaces with lithium grease so sustained rain rides don\'t wick water into the pack or motor bay.【F:knowledge/notes/all_part01_review.md†L86-L87】
+- **Repack leaky Kaabo hubs.** RTV the shell seam and stuff fresh lithium grease into the bearings—rusted motors often recover once water ingress is halted.【F:knowledge/notes/input_part006_review.md†L217-L217】
 - **Add moisture sentries.** Builders embed hydrometers on DC–DC converters that feed Arduinos driving buzzers; when the sensor trips, the alarm screams before corrosion sets in.【F:knowledge/notes/all_part01_review.md†L86-L87】
 - **Pack silica gel inside decks.** Rental-frame conversions stay dry longest when silica packets live beside the battery and automotive engine sealant closes the lid—silicone peels by hand for service yet seals better than chasing custom gaskets.【F:knowledge/notes/input_part000_review.md†L685-L685】
 - **Audit Kaabo decks for pooling.** Wolf inspections uncovered water trapped under 20 S packs that soaked LG M50LT modules despite shrink wrap—add drain checks, dielectric grease, and redundant silicone/Kapton layers around series bridges and BMS leads before chasing 20 S8 P upgrades.【F:knowledge/notes/input_part002_review.md†L159-L161】
@@ -9,22 +10,26 @@
 - **Inspect after every soak.** Error 28 beeps and erratic state-of-charge readings usually mean the controller or white battery plug corroded—scrub with contact cleaner, dry thoroughly, and don\'t trust factory IP54 stickers.【F:knowledge/notes/denis_all_part02_review.md†L419-L421】【F:knowledge/notes/denis_all_part02_review.md†L454-L455】
 - **Reseal deck mods.** Grinding Xiaomi/Ninebot ribs to fit BMS hardware opens new leak paths; reseal the deck lid and servo-lock cavity with silicone rather than leaving raw metal to rust.【F:knowledge/notes/input_part000_review.md†L292-L293】
 - **Copy proven enclosure designs.** Koxx’s latest SmartController case uses taller internal walls and TPU cable glands that survived a five-minute hose test—treat it as a template when weather-sealing other electronics.【F:knowledge/notes/input_part000_review.md†L513-L513】
+- **Waterproof methodically.** Scrape factory paste with care before recoating controllers in silicone—overdoing sealant complicates future repairs and traps moisture if the enclosure still leaks.【F:knowledge/notes/input_part006_review.md†L225-L225】
+- **Pressure-test new gaskets.** After resealing enclosures with custom gaskets, riders blast the deck with a pressure washer to confirm no leaks before going back to road duty.【F:knowledge/notes/input_part006_review.md†L330-L330】
 
 ## Layered Theft & Compliance Tactics
 - **Build loud, cheap alarms.** Pair gyroscopes with 120 dB buzzers tied to ignition keys or BLE presence so tampering keeps the siren blaring until the scooter rests motionless.【F:knowledge/notes/all_part01_review.md†L88-L88】
 - **Mount motion sensors in the battery bag.** Couriers hide Arduino-driven buzzers inside Wildman cases so cutting the strap or unzipping the bag triggers instant noise without alerting thieves to the electronics location.【F:knowledge/notes/all_part01_review.md†L86-L87】
 - **Carry layered locks.** Quick errands get a compact Master Lock cable that stays smooth with graphite; long stops call for hardened chains plus GPS trackers taped into the loom.【F:knowledge/notes/all_part01_review.md†L167-L167】【F:knowledge/notes/all_part01_review.md†L27392-L27407】
+- **Treat thin cables as token deterrents.** City riders report compact cable locks stop nothing—start with ≥8 mm hardened chains for real security.【F:knowledge/notes/input_part006_review.md†L252-L252】
 - **Pick proven trackers.** Invoxia GPS units remain the €100 gold standard because Bluetooth tags lose coverage away from crowds, while DIY LTE trackers powered off the scooter pack can log to self-hosted dashboards and fall back to roaming SIM batteries when unplugged.【F:knowledge/notes/input_part013_review.md†L794-L796】
 - **Expect opportunists.** Dense-city riders report scooters disappearing within minutes if left unlatched, so treat even short drop-offs like high-risk events and keep the alarm armed.【F:knowledge/notes/all_part01_review.md†L27392-L27407】
+- **Double up locks in theft hot spots.** Paris commuters now pair U-locks with Kryptonite chains and keep scooters within sight while obeying 25 km/h limits, lighting, and bike-lane rules to avoid roadside seizures.【F:knowledge/notes/input_part006_review.md†L170-L171】
 - **Upgrade hardpoints.** Builds pushing 8 kW+ torque now weld steel eyelets, use ≥10 mm hardened chains, and recess security bolts because factory aluminum tabs vanish under cordless grinders.【F:knowledge/notes/input_part005_review.md†L195-L200】
 - **Keep a mechanical kill switch.** Without native VESC shutdown, riders lean on keyed mains, throttle-disable switches, or Safe Start current limits—and Spintend’s ADC adapter v2 still needs loop keys or smart-BMS latches because it only ferries 5 V/12 V accessory power. Treat Bluetooth/relay locks as secondary deterrents that thieves can bypass quickly.【F:knowledge/notes/input_part005_review.md†L348-L350】【F:knowledge/notes/input_part005_review.md†L504-L506】
 - **Layer trackers by medium.** Mix AirTags or SmartTags for crowd-sourced pings with SIM trackers (TK806, SIM800) where IMEI registration allows ongoing data plans so a stolen scooter keeps reporting in real time.【F:knowledge/notes/input_part005_review.md†L350-L351】
 - **Prototype smarter telemetry.** Builders are testing ESP32-based 4G+GPS trackers that ride the scooter pack, broadcast IMEI-backed telemetry, and integrate alongside SmartDisplay so theft alerts keep flowing even when BLE trackers fail.【F:knowledge/notes/input_part000_review.md†L239-L239】
 - **Hide trackers inside the pack.** New SIM7600/BMW tracker builds live under the battery shrink with UART links to MOSFET cutoffs, letting riders remote-kill packs while thieves fumble for the enclosure.【F:knowledge/notes/input_part000_review.md†L506-L508】
-
 ## Protective Gear & Stealth Riding
 - **Dress for the crash, not the ride.** The crew leans on ECE 22.05/22.06 full-face helmets with MIPS-style protection and full moto gear because even 30 km/h lowsides can shatter chins; DOT stickers alone aren’t trusted.【F:knowledge/notes/input_part000_review.md†L364-L364】
 - **Stay discreet around police.** Choose understated frames, keep lighting subdued, and reserve police-mode or field-weakening bursts for brief escapes while cruising near rental speeds the rest of the time.【F:knowledge/notes/input_part000_review.md†L365-L365】
+- **Lock down digital attack surfaces.** Builders disguise scooters as stock with low-power brake profiles, MAC-filter Bluetooth modules behind PIN prompts, and add keyed or NFC power switches so pranksters can’t rewrite CAN settings while the scooter is parked.【F:knowledge/notes/input_part006_review.md†L79-L79】【F:knowledge/notes/input_part006_review.md†L428-L429】
 
 ## Regional Compliance Pressure
 - Ireland and UK riders report €1,500 fines and confiscations for overpowered scooters, so stealth builds and restrained riding remain the safest path in strict EU jurisdictions.【F:knowledge/notes/input_part005_review.md†L124-L124】
@@ -43,6 +48,7 @@
 - **Drain packs safely for flights.** Commuters running 24 Ah externals discharge with incandescent lamps for hours to hit airline targets, proving how long large packs need to reach “safe” storage levels.【F:knowledge/notes/denis_all_part02_review.md†L414-L415】
 - **Recharge before hibernation.** Rita draws a small standby current even when the scooter is off, so top packs to storage voltage if the build will sit for weeks rather than leaving it connected indefinitely.【F:knowledge/notes/denis_all_part02_review.md†L97264-L97268】
 - **Know the local rules.** Dutch riders remind visitors that stand-up scooters remain illegal without seats; expect enforcement even if locals still spot Xiaomi commuters around Venlo.【F:knowledge/notes/input_part006_review.md†L59-L59】
+- **Avoid backyard storage.** Dew-point swings push condensation into bearings and electronics—keep scooters under a roof and move packs indoors or into insulated boxes instead of leaving them outside overnight.【F:knowledge/notes/input_part006_review.md†L384-L384】
 - **Check accessory ergonomics.** Bolt-on saddles push weight rearward and complicate unloading speed bumps, and 2.5 L frame bags are shorter but wider than 3 L options—mock up foot room before committing.【F:knowledge/notes/input_part006_review.md†L94-L94】
 
 ## Field Checklist

@@ -8,6 +8,7 @@
 - Start with single-digit or 10–30 A FW setpoints validated by telemetry; riders jumping to 55–60 A routinely saturate hubs within an hour unless they raise phase current carefully, add cooling, and watch logs for current overshoot.[^6][^7]
 - Most builds arm FW against duty cycle—not throttle position—so expect the controller to inject current around 90 % duty and yank roughly the same extra 20 A from the battery while it fights back-EMF; reserve those bursts for cool motors only.【F:knowledge/notes/input_part000_review.md†L653-L655】
 - Face de Pin Sucé’s test bench confirmed 100 A of FW current at a 90 % duty trigger can spin a hub from 38 kERPM to 53 kERPM (~40 % more rpm) but still drags ~20 A battery while dumping heat—treat it as a short sprint tool on cool motors rather than a cruising aid.【F:knowledge/notes/input_part000_review.md†L742-L752】
+- European race organisers now cap packs at 22 S (≈35 kW nominal), so teams chase torque with stator area, FW amps, and lighter chassis while daily commuters still hover around 2.4 kW until higher-current 20 S batteries arrive.【F:knowledge/notes/input_part006_review.md†L127-L128】
 
 ## How Field Weakening Works
 - FW injects negative d-axis current to cancel back-EMF so the motor surpasses its natural base speed, which inherently reduces torque-per-amp and wastes power as heat.[^1]
@@ -49,6 +50,10 @@
 ## Risk Controls & Telemetry
 - **Thermal Watch:** Riders pushing 16 S commuter packs noted 150 °C stators at only 35 A FW, reinforcing that ferrofluid or temperature probes are mandatory if you insist on FW in enclosed hubs.[^18]
 - Makerbase 75100 aluminum boards are frying MOSFETs when riders hold 35 A FW on top of 130 A phase and 35 A battery during long 95–100 km/h pulls—cap FW around 20 A on air-cooled builds or switch to the aluminum-PCB/vented variants.【F:knowledge/notes/input_part005_review.md†L197-L197】
+- **Disable FW before steep descents.** VESC hub riders have locked wheels by lightly tapping brakes around 50 km/h while FW held them at the non-FW speed ceiling—either roll off FW or ease into braking before dropping big hills.【F:knowledge/notes/input_part006_review.md†L207-L207】
+- **Measure on the windings, not the shell.** 100 A battery draw never equals 100 A phase, on-winding thermistors expose the real ceiling, and veterans treat 25–40 % FW marketing claims as hype until the motor designer vouches for them with data.【F:knowledge/notes/input_part006_review.md†L454-L456】
+- **Embedded sensors only.** Shell probes lag winding heat badly—plant thermistors inside the motor before trusting FW headroom.【F:knowledge/notes/input_part006_review.md†L457-L457】
+- **Ignore 70 A FW “single-motor” recipes.** Veterans immediately shot down suggestions like 70 A of FW layered on 120 A battery limits because the combo risks blowing controllers or saturating single-motor stators.【F:knowledge/notes/input_part006_review.md†L357-L357】
 - **Plan AWD for single-drive heat saturation:** 3.6 kW single-motor builds backed off FW after hot-weather pulls saturated hubs and triggered plans for AWD conversions to spread load.【F:knowledge/notes/input_part008_review.md†L16099-L16129】
 - **Expect softer launches than Kelly even with aggressive FW.** Pumping 250 A+ phase into IPM hubs still delivers weaker 0 km/h torque than Kelly controllers, so chase hall tuning and ramp tweaks before blaming firmware.【F:knowledge/notes/input_part005_review.md†L38-L38】
 - **Voltage Monitoring:** Keep oscilloscope or high-speed logging on regen-heavy tests—22 S Spintend builds disable regen entirely when extending pack voltage to avoid BMS-induced surges.[^19]

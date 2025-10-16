@@ -6,7 +6,7 @@ This brief helps Varla Eagle One and Zero 10X owners who have already installed,
 ## Stock Pack Diagnosis
 - **Cell topology:** OEM packs use a 14S6P layout (≈52 V nominal) built from 3,000 mAh-class cells such as Samsung 32IR, yielding ≈18 Ah capacity but only ~50–70 A of safe continuous discharge for the entire pack.¹ ²
 - **Real-world limits:** When paired with a Ubox V2 (75 V, 100 A ×2), the stock pack tops out near 60–70 km/h because it can deliver only ≈10 A per cell before the BMS clamps output. Meaningful speed gains require a higher-current battery.³
-- **Frame constraints:** Zero 10X-class decks are cramped; OEM electronics boxes also pool water, so any upgrade plan must account for extra volume, sealing, and thermal mass.⁴
+- **Frame constraints:** Zero 10X-class decks are cramped; OEM electronics boxes also pool water, and long-time owners still report weak motors, harsh suspension, and snapping poles unless the frame is overhauled—plan volume, sealing, and reinforcement together.⁴ 【F:knowledge/notes/input_part006_review.md†L175-L175】
 
 ## Upgrade Targets
 | Goal | Minimum Requirement | Rationale |
@@ -39,6 +39,7 @@ This brief helps Varla Eagle One and Zero 10X owners who have already installed,
 4. **Hall sensors & traction:** Fit hall-equipped front motors or enable HFI only after verifying detection values; hall-less Dualtron fronts under-pull current versus sensored rears, making traction control tuning uneven.¹⁹
 5. **CAN synchronization:** Balance battery and phase amps across both controllers and run proper 120 Ω termination to avoid bus faults during high-load pulls.²⁰
 6. **Exploit CAN power sync:** Spintend 85-series controllers share a CAN power line, letting one ignition button wake both units once the harness is linked—wire it correctly before removing redundant switches.²⁶
+7. **Instrument shunt hacks before copying them.** Adjustable MOSFET shunts tied to the Eco/Turbo switch now deliver “wheelie mode” bursts on stock 10X controllers, but no one has published temperature or survivability logs—and a 12 FET board already blew MOSFETs around 30 A—so treat the mod as experimental until documented or move to proven VESC hardware.【F:knowledge/notes/input_part006_review.md†L402-L403】【F:knowledge/notes/input_part006_review.md†L403-L405】
 
 ## Mechanical & Handling Considerations
 - **Stem & chassis stress:** Stock stems crack at cable ports, and legacy twin-stem frames wobble above 60 km/h without dampers, reinforced handlebars, and balanced phase currents.²¹ ²²
@@ -47,6 +48,7 @@ This brief helps Varla Eagle One and Zero 10X owners who have already installed,
 - **Spring for weight and terrain:** Track riders like 165 mm/1,500 lb rear and 135–150 mm/1,500 lb front shocks, while 70 kg commuters still prefer stiff springs for asphalt stability; heavier racers (≈78 kg) stretch to 1,800 lb combos on rougher surfaces.【F:knowledge/notes/input_part008_review.md†L482-L488】
 - **Respect FW heat limits:** Dual-motor tunes running 60 A battery per side with 40 A FW hit ~2.8 s 0–50 km/h, but riders warn 50 H hubs overheat quickly in summer—prioritise phase current and monitoring over more FW.【F:knowledge/notes/input_part008_review.md†L15941-L15975】【F:knowledge/notes/input_part008_review.md†L16115-L16137】
 - **Suspension & clearance:** Machined swingarm axles and upgraded pivots are required for 11" hubs; failing to rework clearances twists calipers or fouls springs.²³
+- **Plan on pivot machining.** Zero 10X arms still rely on ~8 mm shafts—expect lathe work or resin-printed bushings to eliminate play when refreshing pivots for high-power duty.【F:knowledge/notes/input_part006_review.md†L253-L253】
 - **Waterproofing:** Resin-coat controller boxes or reroute harnesses—stock enclosures collect water and corrode upgrades quickly.⁴
 - **Earless 85/240 mounting:** New cases still ship without tabs; plan printed brackets, retapped threads, or adhesive adapters before rough roads shake loose under-deck installs.²⁷
 - **Limited edition packaging pitfalls:** The Zero 10X Limited ships dual Sabvoton controllers crammed in the deck with a secondary battery strapped to the stem, starving airflow; expect only 40–50 A before overheating unless you relocate electronics and rewire for higher-current packs.【F:data/vesc_help_group/text_slices/input_part001.txt†L2464-L2520】【F:data/vesc_help_group/text_slices/input_part001.txt†L2489-L2519】

@@ -35,10 +35,12 @@ Taming current limits is the difference between a scooter that rips for years an
 - 21700 availability and copper busbars now let Tudor’s crew stack 17 S 6 P 40T/50G arrays that tolerate high discharge despite €5–€7 per cell EU pricing—plan current targets around chemistry cost as well as thermal headroom.[^21700_push]
 - Keep Artem’s relationship in mind: `I_phase = I_batt × V_batt ÷ V_motor`, so phase torque fades as ERPM climbs—log both currents to confirm your battery caps aren’t starving the tune mid-pull.[^phase_equation]
 - Field-weakening still trades efficiency for speed—expect roughly 25 % higher losses and noticeable current spikes once it kicks in, which is why top-speed pulls suddenly heat controllers and packs.[^fw-losses]
+- Treat 45 A-per-cell marketing cautiously—P42A/P45B packs live closer to 30–38 A per cell in the real world, and builders rely on temperature probes and potting because scooters rarely sustain full load outside brief 100 km/h pulls.【F:knowledge/notes/input_part006_review.md†L308-L308】
    - For daily commuters, finish charges around 90 % if the BMS still balances there—you’ll quadruple pack lifespan versus living at 100 %.【F:knowledge/notes/input_part007_review.md†L307-L307】
 3. **Log, ride, iterate**
    - Capture VESC Tool live data plus Dragy/GPS logs, note duty-cycle ceilings, and adjust wheel circumference so controller and GPS speeds agree.⁹
 - Watch battery sag and motor temps; if the pack drops >10 % under your target load, reduce battery current or improve the pack.¹⁰
+- Cranking `iQ target` for harder launches can still trip pack protection—logs show some BMS boards dropping output to zero when the requested torque outpaces battery capability, so treat that setting as additive load on the cells.【F:knowledge/notes/input_part006_review.md†L147-L147】
 - Cross-check real-time power with an external meter or SmartDisplay—unfiltered VESC telemetry overshoots true watts by 10 kW or more on aggressive pulls.²⁴
 - Remember that phase current alone doesn’t define power; veterans called out logs boasting huge phase amps while battery current stayed flat—energy still comes from pack voltage × battery amps, and PWM waveforms muddy simple √3 conversions, so log both channels before chasing bragging rights.【F:data/vesc_help_group/text_slices/input_part005.txt†L23317-L23373】
 - Treat VESC Tool’s state-of-charge gauge as a rough helper—it linearly maps 4.2–3.3 V per cell (≈66 V on 20 S), so keep your cutoffs a few volts above the BMS trip to prevent surprise throttling once the display reads “empty.”²⁵
@@ -74,6 +76,7 @@ Taming current limits is the difference between a scooter that rips for years an
 
 ## Pack Protection & Monitoring
 - **Running pack-only is risky.** Riders skipping BMS boards to “save space” saw cell drift and failures within months—if you insist on BMS-less packs, log every group, schedule manual balancing, and accept the elevated fire risk.【F:data/vesc_help_group/text_slices/input_part004.txt†L9921-L9939】
+- **Charge-only boards aren’t immunity.** Charge-only ANT 40 A stacks still let cells spike toward 40 A each during burnouts, so add temperature sensors and plan manual monitoring before bypassing discharge FETs.【F:knowledge/notes/input_part006_review.md†L311-L311】
 - **Respect ANT precharge limits.** The onboard precharge FET taps out near 20 A; add external resistors or buttons for cold starts instead of raising firmware limits and cooking the device.【F:data/vesc_help_group/text_slices/input_part004.txt†L5880-L5893】【F:data/vesc_help_group/text_slices/input_part004.txt†L5933-L5940】
 - **Wake sleepy BMS boards with a charger.** Happy/Xiaomi protections sometimes latch off after inrush events—tickle the charge port briefly before condemning the controller.【F:knowledge/notes/input_part004_review.md†L301-L302】
 
