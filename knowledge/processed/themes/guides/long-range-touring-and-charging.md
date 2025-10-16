@@ -34,6 +34,8 @@
 - Jason’s alpine shakedown pushed a 30 S 6 P pack to ≈3 V per cell on steep climbs before regen only recovered a few percent on the descent.
   - proof that mountain routes drain small packs rapidly and require pre-planned mid-ride charging stops.[^12]
 - Yamal carries a fast charger into cafés on 100 km+ itineraries; his 20 S 10 P pack returns roughly 100 km of range in mild weather when he tops up partway through the day.[^13]
+- Long-range Vsett crews plan 125–200 mile weekends by chaining J1772 pedestals through ~2 kW Huawei supplies, accepting ~10 mph average speed once four partial charges are factored in while dual Spintend 85/250 controllers stay cool over 320 km of mixed riding.[^vsett_weekend_loop]
+- A 16 S 6 P Sanyo pack paired with dual Spintend 85/250 controllers still delivers roughly 10.8 kW and 54 mph when riders focus on voltage monitoring instead of full telemetry dashboards.[^sanyo_spintend_benchmark]
 - Denis’ production data puts a Pro 2 with his 36 V 10 Ah external “boat” pack around 50 km of real range, while mixed 10S3P/10S4P clone combos manage ≈30 km before tapering.
   - proof that pack health and chemistry drive perceived acceleration more than motor swaps on voltage-limited hubs.[^14][^15]
 
@@ -216,6 +218,8 @@
 
 ## References
 
+[^vsett_weekend_loop]: Source: knowledge/notes/input_part008_review.md†L464-L465
+[^sanyo_spintend_benchmark]: Source: knowledge/notes/input_part008_review.md†L466-L466
 [^1]: Source: knowledge/notes/input_part004_review.md†L225-L225
 [^2]: Source: knowledge/notes/input_part009_review.md†L325-L325
 [^3]: Source: data/vesc_help_group/text_slices/input_part013.txt†L16054-L16058

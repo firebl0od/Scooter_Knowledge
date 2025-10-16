@@ -8,6 +8,7 @@
 - Size busbars with real cross-sectional math instead of stacking nickel.
   - triple 0.30 mm stacks still run resistive at 70 A, so teams now flip to copper once welders are dialled.[^2][^3]
 - Nickel-plated steel strips remain serviceable when the welds are sealed under Kapton, fish paper, and shrink; leave plating exposed to humid decks and the steel rusts, while pure nickel keeps resistance lower if you can justify the cost.[^ip001-nickel-steel][^ip001-pure-nickel]
+- When copper busbars are mandatory, plate them or hit them with zinc-rich coatings; bare copper sags less than nickel but corrodes quickly without a barrier.[^copper_plating_guard]
 - Xiaomi Pro 2 and Navee conversions prove 20 S packs fit only when BMS and controllers move.
   - Gabe’s sleeper pack splits 11 S in-deck/9 S external with twin 6 AWG leads while controllers live in a 50 mm spacer and the BMS rides the stem; a 10 mm JBD board keeps Navee bays viable.[^4]
 - Budget worksheets should factor in consumables, BMS headroom, and future tariff shocks (e.g., QS8 connectors drifting toward $35) to avoid mid-build redesigns when scaling beyond 300 A continuous.[^4][^5]
@@ -65,6 +66,7 @@
 ### Chemistry Trade-Off Snapshots
 
 - Denis still leans on LG MJ1, Samsung 35E, and Sanyo energy cells for commuter packs, validating claims with lygte-info comparator data before publishing specs.[^23]
+- Cell hunters just spotted Molicel’s 5 Ah/65 A P50B alongside rumors of XA3 21700 cells rated around 50 A, but both need long-term cycle tests before they can displace proven P45B/P42A packs.[^p50b_watch]
 - **Sony VTC6A vs. Molicel P42A vs. Samsung 30T:** VTC6A delivers the lowest sag and coolest temps but runs roughly double the cost of P42A unless you buy ~10 k cells per month; 30T still hits hardest but sacrifices capacity, so reserve it for burst-focused builds.[^24]
 
 ### Compact Bag Builds & Blade Layouts
@@ -86,6 +88,7 @@
 
 ### Logistics Snapshots & Supplier QA
 
+- **Store fresh stock cold and at 30 % SoC.** Recent P42A lots landed around $1.80 per cell delivered, and veterans park them in refrigeration at partial charge until welding to preserve shelf life.[^p42a_storage_tip]
 - **Account for shipping cadence.** NKON’s EU warehouse can take up to a month to deliver popular 40PL lots, while Vapcell pushes the same cells in 3–5 days via DHL/UPS for roughly €150–€229 in freight with €2.2 per-cell pricing to Germany (≈€229 landed in Switzerland).
   - but Vapcell pallets have arrived with mixed voltages that need individual top-offs before welding.[^30][^31]
 - **Vet “Shenzhen Vapcell Technology” listings.** Verified resellers share the same name as counterfeit storefronts.
@@ -95,11 +98,14 @@
 - **Measure hub hardware on arrival.** Face de Pin Sucé logged Lonnyo axle variance beyond 5 mm across supposedly identical hubs; add thickness shims only after you mic both sides so brake-side offsets don’t trap rotors or misalign arms.[^34]
 - **Boutique drop-in packs set price anchors.** D’s nearly new EVE 50E 20 S 3 P module (≈1,080 Wh) with a JBD smart BMS shipped from Germany for about €400 and fits Xiaomi Pro 2, G30, and G2 decks with a spacer.
   - use it as a benchmark when pricing custom range extenders.[^35]
+- **Scrap compromised cells.** PuneDir binned water-soaked LG M26 pulls rather than gamble on hidden corrosion before restarting the build with fresh stock.[^pune_scrap_m26]
 
 ### Market Shifts & Pricing Signals
 
 - Nickel’s 2022 price surge (+250 %) pushed pack builders toward 0.1–0.15 mm copper strip.
   - it bends easier over cell tops, carries more current, and costs less than the remaining nickel stockpile.[^36]
+- ElectricPowa is quoting Samsung 50E at ~€3.20 and P42A at ~€2.90 per cell out of Spain, though overseas shipping often erases the bargain.[^electricpowa_prices]
+- Authentic EVE 40P lots keep testing at 5–7 mΩ IR and cooler temps than P42A pulls, while welded-but-unused Samsung 50E batches are clearing for ≈$0.80 per cell in 2 k-unit deals.[^eve40p_ir_fresh][^welded_50e_lots]
 - Telegram teardown threads just caught “nickel” strip that was actually plated steel.
    - plated stock measures roughly six times the resistance of pure nickel, so veterans now scratch-test every batch, source from trusted vendors such as Nkon, and favour pre-cut busbars or stacked pure nickel when targeting 5 kW outputs so counterfeit stock does not bottleneck current.[^37][^nkon-pure]
 - Sony VTC5D prototypes are landing alongside Samsung 35E/50G/50S, Molicel P28A/P42A, and Samsung 48X cells; Artem is sourcing fresh 40T/48X/50G stock at €4–5 per cell while group buys quote P42A around €4 and 50S near €12.95, setting the 2025 price floor for high-discharge packs.[^38]
@@ -154,6 +160,7 @@ High-current harness work still rewards oversized irons.
 - Copper strip thicker than ≈0.1 mm overwhelms hobby shears and improvised car-battery welders; shops either outsource laser/water-jet cutting or invest in Glitter-class welders instead of risking weak joints and blown cells.[^thick-copper-tooling]
 - Cheap 20 € control boards still demand ~€100 worth of 3 S high-rate packs or supercapacitors.
   - plan those hidden costs before assuming a bargain welder will fuse copper reliably.[^65]
+- Cihan priced the Docreate DO-02 capacitor welder around $108 shipped to Turkey (less with coupons) and confirmed ~0.36 mΩ capacitor ESR; crews recommend the foot-pedal bundle or Glitter 801D if you only ever weld 0.1–0.15 mm nickel.[^docreate]
 - Builders get by with inexpensive 230 V stick irons and €6 pencil irons for quick controller jobs, but aluminum-PCB MOSFET arrays still demand 200 W stations or hot air so the large pads heat evenly.[^66]
 - **Power the welder properly.** Car batteries sag after only a handful of welds; builders now favour CNHL 4S 9.5 Ah hardcase LiPos or similar high-C packs to keep K-weld pulses near 2 kA without undervoltage alarms, while aging RC packs and USB power banks overheat even with extra heatsinks.[^67]
 Builders comparing Glitter rigs noted 801D capacitor banks sag toward 5.7 V under load, so weld quality falls off unless you rotate packs or move to low-ESR capacitor supplies; the 801H’s twenty-transistor stack and stronger shunts justify the higher price when thick copper sandwiches are on the menu. Follow-up tests also confirm stock 801D hardware cannot reliably weld 0.15 mm copper.
@@ -390,6 +397,8 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 - **Respect connector gender standards:** Keep female shells on live battery leads and reserve male housings for chargers or controller-side harnesses; QS10’s 10 mm bullets support ≈400 A but only if polarity is consistent across every build.[^142]
 - **Print holders for heat, not looks.** PLA cradles slump once cells warm; switch to PETG or ASA around 230 °C/100 °C bed temps so 21700 honeycombs and Wildman bag sleds stay rigid in summer decks.[^143][^144]
 - **Bond prints with non-melting adhesives.** Epoxy, cyanoacrylate, or specialty plastics glue PETG/PLA parts without warping them.
+- 3M marine adhesive cures rock-solid; plan on mechanical removal or fresh holders during rework, and machine sub-millimetre pack notches before gluing because there is no “peel back” once it sets.[^3m_marine_glue]
+- Salvaged military packs hide soldered busbars and even fasteners—budget time for full desoldering or dremel work instead of assuming bolts will back out cleanly.[^soldered_busbars]
   - ideal for reinforcing phone mounts and pack accessories.[^145]
 - **Dress electrodes & stage practice stock.** Glitter 811H rigs reliably join 0.2 mm copper to nickel once the power is dialled back and probe tips are sharpened; builders rehearse on loose strip and dead cells, add a BMS before fielding real packs, and ignore myths that nickel-plated steel is acceptable for high-current copper sandwiches.[^146]
 - **Manage KWELD super-cap banks.** Keep parallel capacitor stacks to four modules to avoid over-current faults, use switched resistor banks on dual Meanwell LRS-350-4.2 supplies for charging and bleeding, and plan active cooling because seven heat-shrink layers still leave weld pens too hot for long sessions.[^147]
@@ -818,9 +827,17 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^187]: Source: knowledge/notes/input_part006_review.md†L246-L246
 [^188]: Source: knowledge/notes/input_part006_review.md†L247-L247
 [^189]: Source: knowledge/notes/input_part008_review.md†L15885-L15938
+[^3m_marine_glue]: Source: knowledge/notes/input_part008_review.md†L395-L395
+[^soldered_busbars]: Source: knowledge/notes/input_part008_review.md†L396-L396
 [^190]: Source: knowledge/notes/input_part008_review.md†L395-L396
 [^191]: Source: knowledge/notes/input_part008_review.md†L518-L522
 [^192]: Source: knowledge/notes/input_part008_review.md†L500-L503
+[^copper_plating_guard]: Source: knowledge/notes/input_part008_review.md†L409-L410
+[^p42a_storage_tip]: Source: knowledge/notes/input_part008_review.md†L412-L413
+[^electricpowa_prices]: Source: knowledge/notes/input_part008_review.md†L434-L435
+[^eve40p_ir_fresh]: Source: knowledge/notes/input_part008_review.md†L460-L461
+[^welded_50e_lots]: Source: knowledge/notes/input_part008_review.md†L462-L462
+[^pune_scrap_m26]: Source: knowledge/notes/input_part008_review.md†L498-L499
 [^193]: Source: knowledge/notes/denis_all_part02_review.md†L333-L333
 [^194]: Source: knowledge/notes/input_part007_review.md†L369-L369
 [^195]: Source: knowledge/notes/input_part007_review.md†L368-L368
@@ -895,6 +912,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^264]: Source: knowledge/notes/input_part008_review.md†L147-L148
 [^265]: Source: knowledge/notes/input_part008_review.md†L153-L153
 [^266]: Source: knowledge/notes/input_part008_review.md†L156-L158
+[^p50b_watch]: Source: knowledge/notes/input_part008_review.md†L314-L314
 [^267]: Source: knowledge/notes/input_part008_review.md†L158-L158
 [^268]: Source: knowledge/notes/input_part008_review.md†L159-L159
 [^269]: Source: knowledge/notes/input_part008_review.md†L188-L189

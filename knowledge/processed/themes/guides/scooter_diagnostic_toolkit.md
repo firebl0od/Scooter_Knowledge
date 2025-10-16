@@ -48,6 +48,7 @@
 2. **Inspect pack protection:** Cheap “25 A” eBay BMS boards routinely trip around 18 A despite balanced cell groups.
   - swap in reputable 20–30 A hardware before blaming Rita or the controller for brownouts.[^34]
 3. **Match radio gear:** Immobiliser and alarm kits ship in multiple frequencies; confirm your remote (315 MHz vs. 415 MHz) before hard-wiring to the scooter’s 5 V accessory tap so the system actually arms.[^35]
+- **Trace 5 V shorts methodically.** Face de Pin Sucé coaches techs to disconnect accessories and chase each lead until the short clears, then Lekrsu reminds riders to recalibrate throttle min/max even if the signal flickers once the fault is fixed.[^five_volt_short_workflow]
 4. **Treat locks as consumables:** Light cable locks such as compact Master Lock loops work for coffee stops only if they stay lubricated with graphite.
   - dry mechanisms jam quickly after rain or grit exposure.[^36]
 5. **Identify controller silicon before flashing.** New Xiaomi ESCs use GD32 MCUs; flashing STM firmware bricks them, so zoom in on chip markings and grab the GD image set before running ST-Link recoveries.[^37]
@@ -332,6 +333,8 @@
 - Clarify VESC Tool backup formats.
   - builders still lack a clear answer on whether XML, C, or UUID exports cover disaster recovery, so capture official guidance once Vedder or firmware maintainers respond.[^194]
 - Document four-controller CAN workflows for 4WD projects; Adrian Geanca is still hunting best practices for sequencing power and communication on quad 75100 Pro v2 stacks.[^195]
+
+[^five_volt_short_workflow]: Source: knowledge/notes/input_part008_review.md†L483-L485
 
 ## Mini-Bike & Fiido L3 Conversions
 

@@ -111,6 +111,9 @@ This guide distills field reports on powering lights, horns, and dashboards from
 - Analog gauge clusters look cool but add little.
   - VESC already logs current and voltage, so most riders simply mount a phone dash unless they crave retro styling.[^57]
 - **SimpleVescDisplay (ESP32).** Smart Repair recommends flashing the open-source SimpleVescDisplay and 3D-printing its mount as a reliable alternative when Flipsky Voyage units glitch; PuneDir and NetworkDir now run the firmware on a €9 ESP32 touch panel that mirrors VESC Tool over BLE/Wi‑Fi, refreshes telemetry every 10 ms, keeps odometer counts stable versus 6.05 firmware, and leaves CAN free by riding over UART.[^58][^esp32-panel]
+- NetworkDir surfaced the official Dualtron EY2 firmware hex and confirmed EY1/EY2/EY4 clusters run WCH CH582M MCUs that flash via WCHISPStudio, giving Dualtron owners a reproducible path to compile 6-series builds.[^dualtron_ey2_firmware]
+- Oreo huzky’s CarPlay retrofit mirrors VESC telemetry onto a jailbroken iPhone or custom Android script, offering a high-visibility dash option when you’d rather leave the main phone stowed.[^carplay_dash_demo]
+- **SimpleVescDisplay (ESP32).** Smart Repair recommends flashing the open-source SimpleVescDisplay and 3D-printing its mount as a reliable alternative when Flipsky Voyage units glitch.[^58]
 - **Tiny NRF boards have no range.** Flashing Vedder’s `nrf51_vesc` firmware onto ultra-small BLE boards left riders with unusable range, so they still buy the €2 full-size modules for dependable VESC Tool links.[^59]
 - **Vedder’s `code_server` is still the stable CAN bridge.** It automatically retries failed frames five times, but you must flip RX/TX leads when moving a Makerbase/Flipsky dash loom onto Spintend/UBOX controllers and flash `slave_esc.lisp` onto every CAN slave before the dash comes alive.[^code-server]
 - **SimpleVescDisplay odometer logging.** NetworkDir’s latest firmware now buffers odometer data locally on the ESP32 so riders keep mileage even if CAN frames drop, giving budget builds a telemetry path that still respects VESC Tool logs.[^60]
@@ -505,6 +508,8 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^141]: Source: data/vesc_help_group/text_slices/input_part003.txt†L4700-L4890
 [^142]: Source: knowledge/notes/input_part005_review.md†L127-L127
 [^143]: Source: data/vesc_help_group/text_slices/input_part005.txt†L22250-L22257
+[^dualtron_ey2_firmware]: Source: knowledge/notes/input_part008_review.md†L479-L480
+[^carplay_dash_demo]: Source: knowledge/notes/input_part008_review.md†L481-L481
 [^144]: Source: knowledge/notes/input_part005_review.md†L58-L59
 [^145]: Source: knowledge/notes/input_part000_review.md†L47-L48
 [^146]: Source: data/vesc_help_group/text_slices/input_part003.txt†L8188-L8223

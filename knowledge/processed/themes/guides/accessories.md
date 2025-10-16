@@ -20,6 +20,7 @@
 ## Power Control Ergonomics
 
 - The platform supports sleep mode, but implementing a physical power switch requires custom wiring; many builds still rely on anti-spark switches as manual cut-offs.[^sleep_wiring]
+- Riders chasing premium switchgear are adopting Tusk’s Compact Control Switch for lighting and horn duties because it survives vibration better than generic scooter pods.[^tusk_switch]
 
 ## Protective Gear & Comfort
 
@@ -35,3 +36,4 @@
 [^ey3_bridge]: Source: knowledge/notes/input_part009_review.md†L438-L439.
 [^usb_gps]: Source: knowledge/notes/input_part009_review.md†L441-L441.
 [^hv_buck]: Source: knowledge/notes/input_part009_review.md†L440-L440.
+[^tusk_switch]: Source: knowledge/notes/input_part008_review.md†L301-L302
