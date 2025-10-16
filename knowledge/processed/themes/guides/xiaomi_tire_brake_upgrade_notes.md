@@ -1,11 +1,14 @@
 # Xiaomi Tire, Brake & Handling Upgrade Notes
 
 ## Tire Selection & Pressures
-- **10" pneumatic upgrades:** CST 10×2.25, Wanda 10×2, and Xuancheng casings deliver the best grip once inflated toward 3.5–4.2 bar; running them near 36 psi dulls the expected 12 S speed gains and risks fender rub until clearances are checked.【F:knowledge/notes/all_part01_review.md†L226-L228】【F:knowledge/notes/all_part01_review.md†L369-L370】【F:knowledge/notes/all_part01_review.md†L696-L696】
-- **Solid vs. pneumatic:** Riders report roughly 20 % higher energy use, harsher ride quality, and accelerated fatigue on battery tabs when solid tires replace pneumatics—reserve solids for short-range emergency duty.【F:knowledge/notes/all_part01_review.md†L336-L337】
+- **10" pneumatic upgrades:** CST 10×2.25, Wanda 10×2, and Xuancheng casings deliver the best grip once inflated toward 3.5–4.2 bar; heavier riders specifically favour CST V3 and Wanda shells with thicker tubes, while running them near 36 psi dulls the expected 12 S speed gains and risks fender rub until clearances are checked.【F:knowledge/notes/all_part01_review.md†L226-L228】【F:knowledge/notes/all_part01_review.md†L337-L338】【F:knowledge/notes/all_part01_review.md†L369-L370】【F:knowledge/notes/all_part01_review.md†L696-L696】
+- **Case-specific fit notes:** CST 10×2.25 carcasses often need rim sanding, Kenda-branded 152 mm casings mount tight, and Wanda 10×2 options stay grippy at ~4.2 bar while outlasting ultra-soft red compounds.【F:knowledge/notes/all_part01_review.md†L185-L185】
+- **Solid vs. pneumatic:** Riders report roughly 20 % higher energy use, harsher ride quality, and accelerated fatigue on battery tabs when solid tires replace pneumatics—reserve solids for short-range emergency duty.【F:knowledge/notes/all_part01_review.md†L159-L159】【F:knowledge/notes/all_part01_review.md†L336-L337】
 - **Valve and rim prep:** Monorim 500 W hubs ship without valve holes; drill carefully and add angled stems before installing tubes. Sand thick CST beads or rim casting bumps so 10" conversions seat evenly and avoid wobble. Blade owners even notch the split rim so a beefier Schrader clears the casting—valve extensions help you inflate but still expect to relieve metal around the stem on compact rims.【F:knowledge/notes/all_part01_review.md†L337-L338】【F:knowledge/notes/all_part01_review.md†L696-L696】【F:data/vesc_help_group/text_slices/input_part007.txt†L512-L521】
 - **Match tire to rim width:** Stretching 6"-wide casings over 6.1" rims left beads off-center, valves fouled, and fenders rubbing; source true 155 mm tires or machine rims instead of forcing a mismatch. Stick with 10×2 tubes inside 10×2.125 casings—10×2.5 tubes balloon, wrinkle, and feel sketchy even if you manage to bolt the rim halves together.【F:knowledge/notes/denis_all_part02_review.md†L99284-L99353】【F:data/vesc_help_group/text_slices/input_part007.txt†L494-L515】【F:data/vesc_help_group/text_slices/input_part007.txt†L543-L547】
 - **Pressure by load:** Heavy riders stabilize handling by targeting ≈4 bar rear / 3.5 bar front once mudguard brackets and wiring are rerouted for the taller rubber.【F:knowledge/notes/all_part01_review.md†L369-L370】
+- **10" vs. 8.5" debate:** August workshop notes show consensus in favour of 10" pneumatic conversions for smoother rides and slightly higher top speed, provided braking upgrades keep pace, yet some riders revert to 8.5" rubber with Monorim V2 when XuanCheng 10" casings introduce S-shaped wobbles or pogoing on rough pavement.【F:knowledge/notes/all_part01_review.md†L381-L381】【F:knowledge/notes/all_part01_review.md†L447-L447】
+- **Bearing choice:** SKF-style 2RS bearings seal better than 2Z shields when you expect wet rides, keeping grit out of Xiaomi and Monorim hubs.【F:knowledge/notes/all_part01_review.md†L186-L186】
 - **Track pressures:** PMT 10×3 slicks settle around 2.4 bar for general track duty, Vsett racers push 3.5 bar, and dropping to 1.8 bar shreds cords—log rider weight alongside PSI when tuning Xiaomi race builds.【F:data/vesc_help_group/text_slices/input_part003.txt†L12150-L12156】【F:data/vesc_help_group/text_slices/input_part003.txt†L12214-L12226】
 
 ## Mounting & Sealant Tips
@@ -27,7 +30,7 @@
 - **Source race-proven tubeless hardware.** Rage Mechanics and RFP rims lock beads under race abuse—document part numbers plus the matching Amass 8 mm connectors so others can replicate the setup without guessing at components.【F:knowledge/notes/input_part007_review.md†L539-L539】
 
 ## Brake Packages
-- **Semi-metallic pads:** Gold-toned semi-metallic pads last longer and maintain bite in rain compared with organic pads bundled with XTech calipers; ceramics run hotter and demand rotor monitoring.【F:knowledge/notes/all_part01_review.md†L226-L227】
+- **Semi-metallic pads:** Gold-toned semi-metallic pads last longer and maintain bite in rain compared with organic pads bundled with XTech calipers; ceramics run hotter and demand rotor monitoring.【F:knowledge/notes/all_part01_review.md†L187-L187】【F:knowledge/notes/all_part01_review.md†L226-L227】
 - **Rotor sizing:** Community swaps standardize on 135–140 mm rotors for Pro decks and 120 mm for base models when installing X-Tech HB100s or higher-end hydraulics.【F:knowledge/notes/all_part01_review.md†L338-L338】
 - **Rear-disc conversions:** Konyk 40 mm magnet hubs clear Xiaomi dropouts with 120 mm spacing and accept 180 mm rotors once spacers are machined—capture final washer stacks and torque specs when documenting conversions.【F:data/vesc_help_group/text_slices/input_part003.txt†L20636-L20643】
 - **Controller mounting templates:** Community drills for hanging a Ubox 75 V 100 A under the deck rely on threaded inserts plus separate buck converters for 5 V tail lights—document hole spacing and enclosure choices before copying the layout.【F:data/vesc_help_group/text_slices/input_part003.txt†L20935-L20956】
@@ -39,10 +42,29 @@
 - **Torque lever bleeds properly.** Magura lever bleed screws only want 0.5 Nm; overtightening strips the threads and dumps pressure mid-ride.【F:knowledge/notes/input_part001_review.md†L683-L684】
 
 ## Suspension, Wheelbase & Handling Tweaks
-- **Rear suspension stretch:** Bolt-on rear suspension kits extend wheelbase roughly 10 cm, noticeably calming Xiaomi chassis at 35–40 km/h once brake adapters are spaced correctly.【F:knowledge/notes/all_part01_review.md†L226-L227】
-- **Stem stability:** Pair plastic shims with Foldster X-Lock or Phoenix clamps to eliminate wobble; trim or relocate latch hardware so Wildman battery bags clear the hook without scuffing packs.【F:knowledge/notes/all_part01_review.md†L272-L276】【F:knowledge/notes/all_part01_review.md†L399-L401】
-- **Lighting integration:** 3D-printed fender supports and extender housings can host sealed LED strips or ESP32-controlled animations, but route wiring inside the bag to protect it from tire splash.【F:knowledge/notes/all_part01_review.md†L276-L276】
+- **Free seized front hubs correctly:** Brace the scooter, apply penetrating lube, and use a long rigid wrench instead of soft Monorim tools; replace any rounded bolts with higher-grade hardware once the wheel is off.【F:knowledge/notes/all_part01_review.md†L367-L367】
+- **Monorim steering bind fix:** Back the centre stem bolt off a quarter turn, loosen the side clamps, or temporarily refit the stock bolt before reinserting the suspension pump when the fork feels sticky after install.【F:knowledge/notes/all_part01_review.md†L368-L368】
+- **Plan deck routing for 10" conversions:** Relocate rear-light wiring, seal fresh edges with epoxy, and trim mudguard plastics as needed; riders run ≈4 bar rear/3.5 bar front to keep taller rubber clear of the harness.【F:knowledge/notes/all_part01_review.md†L369-L369】
+- **Keep the deck rib when possible:** Lighter riders sometimes shave the rear rib for tire clearance, but heavier owners prefer leaving it intact and using spacers plus precise tire choices instead.【F:knowledge/notes/all_part01_review.md†L370-L370】
+- **Move and seal charge ports:** Many riders shift the charge port higher on the stem once 10" tires and rerouted wiring go in, resealing the deck to keep grit out.【F:knowledge/notes/all_part01_review.md†L371-L371】
+- **Rear suspension stretch:** Bolt-on rear suspension kits extend wheelbase roughly 10 cm, noticeably calming Xiaomi chassis at 35–40 km/h once brake adapters are spaced correctly.【F:knowledge/notes/all_part01_review.md†L188-L188】【F:knowledge/notes/all_part01_review.md†L226-L227】
+- **Stem stability:** Pair plastic shims with Foldster X-Lock or Phoenix clamps to eliminate wobble; trim or relocate latch hardware so Wildman battery bags clear the hook without scuffing packs.【F:knowledge/notes/all_part01_review.md†L272-L276】【F:knowledge/notes/all_part01_review.md†L378-L378】【F:knowledge/notes/all_part01_review.md†L399-L401】
+- **Source genuine suspension hardware:** 3D-printed supports and lock extender kits improve Wildman bag clearance, but genuine Monorim parts remain scarce and pricier through EU resellers—budget time and cost accordingly.【F:knowledge/notes/all_part01_review.md†L379-L380】
+- **Lighting integration:** 3D-printed fender supports and extender housings can host sealed LED strips, wireless turn-signal pods, Lumos Matrix helmet mounts, or DIY 12 V strobes—just route wiring inside the bag to protect it from tire splash.【F:knowledge/notes/all_part01_review.md†L276-L276】【F:knowledge/notes/all_part01_review.md†L404-L404】
 - **Beam pattern validation:** Budget Towwoo “8000 lm” lights produced narrow hotspots compared with Olight/OSRAM lamps—photograph beam patterns after upgrades so Xiaomi riders can trust claimed lumen figures.【F:data/vesc_help_group/text_slices/input_part003.txt†L23928-L23969】
+
+## Monitoring & Instrumentation
+- **Bluetooth temperature logging:** Coin-cell-powered Bluetooth probes provide live pack and ESC temperature data when stress-testing high-power builds.【F:knowledge/notes/all_part01_review.md†L372-L372】
+
+## Lighting & Visibility Upgrades
+- **Mount signals at eye level:** Helmet or backpack-mounted indicators remain visible in daylight, unlike low fender kits that sit below most drivers’ sightlines.【F:knowledge/notes/all_part01_review.md†L375-L375】
+- **Harden rear-light wiring:** Reroute the harness, pot exposed joints, hot-glue the tail-light connector after 10" conversions, and add reflective tape or low-profile sticker kits to boost conspicuity without bulky add-ons.【F:knowledge/notes/all_part01_review.md†L376-L376】【F:knowledge/notes/all_part01_review.md†L412-L412】
+
+## Range & Accessory Add-ons
+- **Pack for long rides:** Dual 12 S packs tied through multi-pack Rita adapters, anti-spark links, or backpack enclosures can stretch range toward 80 km while keeping total mass around 6 kg.【F:knowledge/notes/all_part01_review.md†L377-L377】
+
+## Performance Notes
+- **500 W hubs on 12 S:** Swapping to 500 W motors and 12 S packs holds 45–48 km/h on flats without the voltage sag that drags 300 W hubs toward ~44 km/h once heat builds.【F:knowledge/notes/all_part01_review.md†L200-L200】
 
 ## Setup Checklist
 1. **Mock clearances:** Dry-fit the chosen tire and suspension combo, confirming mudguard, brake, and harness spacing before inflating to full pressure.【F:knowledge/notes/all_part01_review.md†L337-L338】【F:knowledge/notes/all_part01_review.md†L369-L370】

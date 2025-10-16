@@ -6,6 +6,7 @@
 - **Equalise voltages before parallel connections.** Builders keep packs tied together once matched to avoid constant inrush surges; disconnecting after every ride accelerates balancing wear and exposes weak connectors.【F:knowledge/notes/denis_all_part02_review.md†L93340-L93386】
 - **Budget time for wiring and firmware work.** Purple-case dashboards, GD32 controllers, and clone BMS layouts all require ST-Link access, custom harnesses, and patient configuration before any performance firmware will stick.【F:knowledge/notes/denis_all_part02_review.md†L93680-L93705】【F:knowledge/notes/denis_all_part02_review.md†L95680-L95780】
 - **Rental-grade stems trade weight for durability.** Fleet-spec Xiaomi frames add roughly 10 kg with thicker stems, oversized fork hardware, and enlarged battery bays—portable no longer, but dual brakes and dense metal keep abuse-friendly builds alive.【F:knowledge/notes/input_part001_review.md†L64-L64】
+- **KCQ-style clones are inconsistent.** Alibaba listings vary wildly in motor quality and documentation—inspect internals or consider selling suspect frames to fund genuine M365 builds instead.【F:knowledge/notes/all_part01_review.md†L385-L385】
 
 ## Battery Expansion Options
 | Scenario | Recommended Action | Watchpoints |
@@ -13,6 +14,12 @@
 | Clone scooter needs more range | Parallel a second 10S pack with a quality Y-cable after matching voltage; keep the packs connected between rides so they stay equalised.【F:knowledge/notes/denis_all_part02_review.md†L93104-L93308】【F:knowledge/notes/denis_all_part02_review.md†L93548-L93558】 | Ensure both packs use common-port BMS boards; mismatched charge/discharge ports overfill cells during regen or charging.【F:knowledge/notes/denis_all_part02_review.md†L93604-L93636】 |
 | Rider wants hot-swappable packs | Route XT60 extensions out of the deck (≈50 cm) into a Wildman bag and charge each pack individually off-scooter.【F:knowledge/notes/denis_all_part02_review.md†L94820-L94873】 | Voltage-check every pack before reconnecting; clones lack Rita’s isolation so mis-matched packs spark instantly.【F:knowledge/notes/denis_all_part02_review.md†L94841-L94873】 |
 | Considering OEM Xiaomi packs in parallel | Avoid using stock packs without common ports—Rita and Y-cables cannot safely balance them, and regen will overcharge the weaker pack.【F:knowledge/notes/denis_all_part02_review.md†L122761-L122787】 | Install a proper common-port BMS or rebuild the pack before paralleling.【F:knowledge/notes/denis_all_part02_review.md†L93604-L93636】 |
+
+### Rita Adapter Integration on Clones
+- Doc Green/ESA owners confirm Rita works in analog mode with the stock harness, but telemetry needs Xiaomi dashboards and most riders migrate the entire M365 controller/loom to regain custom firmware support.【F:knowledge/notes/all_part01_review.md†L384-L384】
+- Rita behaves like a pair of smart diodes on non-M365 frames: only identical-series packs are supported, regenerative braking must stay disabled, and the adapter simply shares current once voltages match.【F:knowledge/notes/all_part01_review.md†L239-L239】
+- Serial configuration requires tying FTDI ground to Rita ground, TX to the yellow lead, RX to the white lead, and adding a 1–10 kΩ pull-up because Rita’s TX pin is open-drain; any battery pack can power the board during setup.【F:knowledge/notes/all_part01_review.md†L238-L238】
+- Denis’ repair BMS fits ESA-class clone battery bays without data lines, letting shops reuse analog frames or migrate customers toward full Xiaomi electronics when telemetry is desired.【F:knowledge/notes/all_part01_review.md†L386-L386】
 
 ### Wiring Discipline
 - **Use genuine connectors.** Replace anonymous banana plugs with 5–5.5 mm bullets or XT60 hardware rated for the current draw; cheap clones melt under 30 A continuous loads.【F:knowledge/notes/denis_all_part02_review.md†L101695-L101722】
