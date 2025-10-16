@@ -5,6 +5,7 @@
 - Spintend’s mature 85 V line still anchors budget 20–22 S builds, but unresolved throttle jitter, capacitor stress on heavy hubs, and a wave of 12-FET failures keep veterans steering high-mass projects toward larger "fat VESC" platforms or FarDriver-class hardware.[^1]
 - Stepping from 16 S to 20 S trims current draw and adds ≈2.5 km/h per series cell, yet 100 V-class MOSFETs carry ~33 % higher Rds(on) than 75 V parts while pack length, insulation, and safety checks all get harder.
   - plan enclosure space and thermal margin before chasing headline voltage gains.[^2]
+- Tronic X12 controllers budget only about 0.4 A at 5 V for logic, hide the 12 V rail on the harness, and lack CAN-based shutdown; tying dual units to one relay has already cooked both DC/DC modules, so lighting and accessories need independent converters.[^x12-dcdc]
 - Vedder’s new Maxim 120 V ecosystem (Maxim singles, Duet dual, and the companion smart BMS) finally gives builders an official high-voltage option, yet the ~€530 bundle, STM32F4 control, and limited field data spark debate against cheaper Chinese controllers.[^3]
 - Vedder also teased a palm-sized “VESC Express Micro” controller for 36–48 V scooters: it promises 50 A continuous / 100 A dual-channel output with onboard logging and Express integration, providing a compact option for youth builds despite offering roughly half the battery current of a Ubox 100/100.[^4]
 - 3Shul’s CL-series and Tronic X12 controllers occupy the premium tier for riders chasing 23 S+ or 500 A ambitions, but supply volatility, firmware transparency, and pricing nearly double that of Spintend/Ennoid alternatives require group-buy planning and spare telemetry gear for validation.[^5][^6]
@@ -33,7 +34,7 @@
   - treat the silicon upgrade as necessary but not sufficient | Budget single-motor builds that can clamp the case directly to the chassis or add external sinks before chasing >50 A battery[^23] |
 | **Ennoid MK8** | Footprint matches Spintend 85150; stretches toward 26 S / 500 A phase with IPTC017N12NM6 FET swaps | Requires component upgrades and careful assembly discipline championed by Smart Repair | Builders who can solder/pot Toll FETs and want Spintend-sized hardware with higher ceiling[^24][^25] |
 | **Ennoid compact single (teased)** | 100 V / 75 A in a 70 × 75 × 16 mm package (~$200) | Targeting builders waiting on Spintend singles; enclosure production slated for mid-year beta | Lightweight decks that need a standalone VESC before dual-controller budgets make sense[^26] |
-| **Tronic X12** | ≈24 S capable; ~20 kW from 12 FETs, eleven electrolytic caps, bundled 6 AWG leads, onboard ESP32/VESC Express, color-coded voltage SKUs (100 V blue, 24 S red, 150 V violet) | Considered a drop-in for high-output builds, but storefront outages and firmware access limit availability | Race scooters needing >400 A phase with proven logs and spare controllers on hand[^24][^6][^27] |
+| **Tronic X12** | ≈24 S capable; ~20 kW from 12 FETs, eleven electrolytic caps, bundled 6 AWG leads, onboard ESP32/VESC Express, color-coded voltage SKUs (100 V blue, 24 S red, 150 V violet) | Considered a drop-in for high-output builds, but storefront outages, closed firmware, and a fragile ≈0.4 A logic rail (no CAN-based shutdown) demand external DC/DCs and disciplined wiring | Race scooters needing >400 A phase with proven logs and spare controllers on hand[^24][^6][^27][^x12-dcdc] |
 | **3Shul CL350** | Comfortably runs 23 S+ with robust capacitor banks; community pegs it above Spintend for power headroom | Manufacturer transparency still thin; price nearly double Spintend, so teams lean on group buys and Voyage Megan dashboards for CAN telemetry | Heavy QS/LY hub builds where budget covers premium controllers and logging accessories[^5][^28] |
 | **Tronic X12** | ≈24 S capable; heavy-duty shunt sensing stock | Considered a drop-in for high-output builds, but storefront outages and firmware access limit availability; Paolo pegs real-world ceilings closer to 600 A battery despite 1,000 A marketing because the platform still leans on older MOSFET packages | Race scooters needing >400 A phase with proven logs and spare controllers on hand[^24][^6][^29] |
 | **VESC Express Micro (preview)** | 36–48 V target, ≈50 A continuous / 100 A dual-channel | Integrates Express telemetry in a notably compact footprint, drawing interest for Peak G30 youth builds that can live with the lower battery current ceiling | Lightweight scooters needing VESC tooling and logging without the bulk or amperage of full-size dual controllers[^4] |
@@ -76,6 +77,7 @@
 - Smart Repair traces many controller deaths to workmanship.
   - scratched insulation, loose bullets, unstable observers
   - so implementing checklist inspections before power-up is as important as choosing a premium ESC.[^25]
+- Pandalgns continues to flog Makerbase 84200s around 350 A battery on 60 V while waiting for the recalled 100300 model, framing the budget boards as consumables compared with premium controllers.[^mk84200]
 - Makerbase 84xxx HP controllers can survive 22 S punishment once wiring faults are resolved, yet the latest attrition logs underscore that harness diligence alone may not prevent catastrophic failure.[^56][^57][^58][^59]
 - New July reports show the opposite: 75100s failing at cruise, 75200s DOA, and stationary ignition fires reinforce that Makerbase remains a risky stopgap for anything above commuter power levels.[^57][^58][^59]
 - Persistent throttle jitter on Spintend 85/240 and 100/100 hardware, plus random spikes logged on refreshed 85/250 v2 units, point to lingering ADC filtering and grounding issues that must be solved before customer delivery.[^17]
@@ -93,7 +95,9 @@
 - Spintend 85/150 units mislabeled as 100 A have already popped input capacitors mid-ride and even melted CAN jumpers; budget time for RMA delays or pivot upmarket when planning 20 S commuters.[^69]
 - NetworkDir is steering Dualtron owners toward the dual Ubox 100 V/100 A kit plus ADC v3 lighting module after repeated Makerbase and Flipsky issues, highlighting a more reliable mid-tier path.[^70]
 - Jason’s MP2 roadmap clarifies that the six-FET-per-phase stack holds ≈300 A continuous with ~450 A hardware OC, giving DIYers an open-source alternative when commercial supply dries up.[^71]
+- French racers report the waterproofed 18-FET G300 runs happily on 22 S at roughly 250 A battery / 500 A phase but overheats if regen is hammered; treat it as a street or sprint controller rather than a sustained hill-climb unit.[^g300_use]
 - Even boutique Little FOCer/Tronic 250 lineage boards start dying near 200 A; Yamal recommends keeping them around 150 A per controller for longevity.[^72]
+- Yamal’s own 22 S shortlist (X12, Seven18, C350, G300, Trampa 100/250, Thor 400, MakerX, 3Shul, Tronic) plus his 85/250 “Uppsala” Nami tuned around 300 A phase per 80H hub gives builders a grounded procurement roadmap for high-voltage scooters.[^yamal_shortlist]
 - Cheap FOCer 3 controllers (≈70 A battery/120 A motor continuous with active cooling) tempt compact builds, but riders note that Flipsky minis already deliver higher power in smaller footprints.
   - budget testing time before switching platforms.[^73]
 - Flipsky 75350 hardware can hang with 19 kW bursts and 15 kW sustained loads once firmware spikes are tamed.
@@ -311,3 +315,7 @@
 [^121]: Source: data/vesc_help_group/text_slices/input_part014.txt†L10206-L10212
 [^122]: Source: data/vesc_help_group/text_slices/input_part014.txt†L9782-L9789
 [^123]: Source: data/vesc_help_group/text_slices/input_part014.txt†L9884-L9890
+[^x12-dcdc]: Source: knowledge/notes/input_part012_review.md, lines 404-405.
+[^mk84200]: Source: knowledge/notes/input_part012_review.md, lines 407.
+[^g300_use]: Source: knowledge/notes/input_part012_review.md, line 408.
+[^yamal_shortlist]: Source: knowledge/notes/input_part012_review.md, line 409.

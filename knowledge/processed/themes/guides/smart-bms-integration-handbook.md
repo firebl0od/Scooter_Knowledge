@@ -149,6 +149,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
   - document discharge protections and fuse sizing so future builds don’t repeat the mistake.[^53]
 - **Plan your upgrade path.** After the fire, Yamal started shopping high-current ANT/JBD options (~US $100) instead of running charge-only boards.
   - use his example when coaching riders off minimal protections.[^54]
+- **Retire charge-only boards after brownouts.** Yamal binned a 40 A charge-only BMS after a 35 km/h cutoff and rewired the temp sensors (temp-to-temp, GND-to-GND), underscoring that high-power scooters need full protection stages and tidy harnessing.[^charge_only_swap]
 - **Oversize protection for big packs.** Large scooters are already paralleling multiple BMS boards or choosing 200 A-class ANT/JK units even for 70 A packs, proving that headroom beats marketing limits when chasing reliability.[^3][^22]
 - **Track sag alongside regen.** Laotie “38 Ah” packs sagged ~10 V under load and tripped riders despite 20 % indicated SoC; log live voltage, adjust cutoffs toward 55 V, and avoid raising current ceilings until the pack is rebuilt.[^laotie-sag]
 - **Never parallel Daly packs against open negatives.** Common-port Daly units that momentarily open the discharge loop during regen have already blown controllers.
@@ -276,6 +277,7 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 [^cheap-externals]: Denis’ workshop found cheap “13 Ah” externals sagging immediately, forcing the primary battery to supply all current.
   - test them solo at low load before wiring them into parallel stacks or trusting their telemetry.[^127]
 [^no-fet-smart]: Jason’s 32 S-capable BMS board removes discharge FETs entirely, so downstream fusing/contactors remain the only short-circuit protection.[^128]
+[^charge_only_swap]: Source: knowledge/notes/input_part012_review.md, line 439.
 [^mixed_packs]: Source: knowledge/notes/input_part000_review.md, line 311.
 [^connector_trip]: Source: knowledge/notes/input_part000_review.md, line 312.
 [^jk-trip]: A JK smart BMS tripped at ~60 A on a C80 build when the rider demanded 70 A battery, proving the protection works and prompting a pack redesign instead of bypassing the board.[^129]

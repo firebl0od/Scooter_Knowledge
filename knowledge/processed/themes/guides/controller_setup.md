@@ -56,6 +56,16 @@
   - a useful safety margin for legal compliance checks.[^speed_alignment]
 - Use phase-current logging as a health check: veterans start commuter hubs around 90 A phase / 30 A battery and scale toward 120 A phase if cooling allows, noting that excessive phase amps raise EMI/noise stress on Ubox logic stages.[^phase_baseline]
 
+## Firmware Discipline & Safety Routines
+
+- Treat beta firmware as a matched bundle: one crew cleared recurring “limited mode” flags only after downloading the same 6.06 beta on desktop, reflashing both controllers, and rerunning detection so the mobile client and ESC firmware stayed in lockstep.[^firmware-match]
+- Keep a stealth profile on deck when jurisdictions cap speed—builders load a 25 km/h preset for roadside checks, then power-cycle to restore full output once police leave instead of tweaking menus in traffic.[^stealth-profile]
+- Populate Motor Current Max Brake/Max Regen and validate halls before trusting regen; AliExpress hall testers let riders confirm sensor health without opening sealed hubs, and temperature probes should land on the controller’s temp+GND pins rather than the 5 V rail.[^hall-tester]
+
+## Harness Mapping & Diagnostics
+
+- Vsett harness tear-downs map orange to pack voltage, pink to the on/off detect line, white to the brake signal, and black to ground—meter continuity before repinning so accessory wiring doesn’t backfeed logic rails.[^vsett-colors]
+
 [^build_example]: Source: knowledge/notes/input_part000_review.md, line 37.
 [^foc_advantages]: Source: knowledge/notes/input_part000_review.md, line 68.
 [^bms_cutout]: Source: knowledge/notes/input_part000_review.md, line 70.
@@ -69,6 +79,10 @@
 [^speed_alignment]: Source: knowledge/notes/input_part000_review.md, line 135.
 [^phase_baseline]: Source: knowledge/notes/input_part000_review.md, line 198.
 [^sensorless_22s]: Source: knowledge/notes/input_part009_review.md†L422-L422.
+[^firmware-match]: Source: knowledge/notes/input_part012_review.md, line 401.
+[^stealth-profile]: Source: knowledge/notes/input_part012_review.md, line 432.
+[^hall-tester]: Source: knowledge/notes/input_part012_review.md, line 433.
+[^vsett-colors]: Source: knowledge/notes/input_part012_review.md, line 431.
 
 
 ## References

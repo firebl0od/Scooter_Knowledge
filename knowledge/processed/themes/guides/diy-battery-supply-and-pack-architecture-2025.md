@@ -131,6 +131,9 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 - **Turnkey single-motor benchmark** – Baartu is selling a €1.5 k package (20 S 5 P EVE 40P pack, LY 17×4 65 H hub, Ubox 85150, PMT tires, Monorim suspension) that claims 10.5 kW, 0–50 km/h in 2.2 s, and 85 km/h with field weakening.
   - handy price/performance reference when quoting custom builds.[^98]
 - **22 S 10 P roadmaps** – Race builders still default to Molicel P45B for 22 S 10 P layouts but are already scouting 40–50 PL chemistries and Ampace JP40 cells for future 30–40 S experiments where higher voltage trims amp draw instead of chasing thicker busbars.[^99]
+- **Rob Ver’s JP40 proof point** – His 22 S 9 P Ampace JP40 pack holds roughly 45 A continuous and 140 A peak per cell with only ~6 V sag, staying under 30 °C at 500 A thanks to 0.2 mm copper laminations; a prior 21 S 9 P LG M58T pack with 0.1 mm copper plus 0.1 mm nickel still feeds dual 100 A around 40 °C.[^jp40_pack]
+- **Vsett/G30 packaging guardrail** – Forol squeezed 20 S 6 P (and maybe 7 P with printed spacers) into a dual-motor frame but warns newcomers not to tuck cell groups below the chassis ledge because the cover and BMS still need that volume.[^g30_ceiling]
+- **Forol’s dual-motor deck walkthrough** – Sliding a 20 S pack beneath one ledge frees the opposite ledge for the BMS, slim chargers, or even VESCs when every millimetre is planned.[^forol_walkthrough]
 - **Ninebot GT2 / Max G2 race builds** – Teams now pursue 26 S8 P P42A layouts feeding Tronic X12s; success hinges on clamping dual Ubox controllers to aluminum and retuning wheel diameter/kv for the higher voltage.[^100]
 - **Nami “hotdog” racers** – 22 S11 P P45 builds pair 100 H rear / 70 H front motors, 500 A phase, 550 A absolute, and 100 % front FW to sync wheel speed, netting 146 km/h GPS with manageable 61 °C stator temps.[^4]
 - **VSETT 10+ deck with external controllers** – Relocating controllers outside the deck makes room for a 20 S9 P Samsung 48X pack with ~2 mm side clearance in a 169 mm jig; builders pair it with JK active-balancing BMS boards, waterproof Higo/Julet harnesses, pre-welded copper-clad bus tabs (~$170 shipped), and QS8 anti-spark mains that tuck into copper-reinforced “W” busbars before the lid rises on PVC/acrylic spacers.[^101][^102][^103]
@@ -142,7 +145,10 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
   - plan harness routing before committing to multi-controller layouts, and capture the crossed-cell diagrams so others don’t pinch leads in the fork.[^110][^109]
 - **Noname’s 20 S 32 P moped pack** – The seated build balances ≈9.4 kWh (112 Ah) against a 350 lb curb weight; future iterations will target a lighter 32 S 20 P layout with Seven controllers for better torque, so log enclosure volume, dropout spacing (~165 mm), and weight-handling expectations before copying the stack.[^107][^111]
 - **Segway moped range lessons** – The same platform’s 32 S 20 P refresh plans to redistribute weight and revisit controller selection after the current pack forces awkward lifting; keep these ergonomic notes with your packaging drawings so seated conversions remain serviceable.[^111]
+- **Begode Q3 constraints** – The frame leaves minimal battery space, forcing glass-filled PETG housings and even key relocations to clear the bars when upsizing packs.[^begode_q3_pack]
 - **Turnkey superbike benchmark** – Russia’s billet RTV Ultra scooter ships with dual 3Shul controllers, 26 S 64 Ah packs, 115 mm stators, and 11×PMT130 tires while quoting six-month lead times, offering a reference for premium turnkey builds.[^112]
+- **Sleeper Vsett 11 packaging** – Rob Ver squeezed a 22 S 9 P (~37 Ah) pack and both controllers inside the deck by machining spacers down to the last millimetre, trading exposed hardware for stealth that dodges EU police scrutiny.[^vsett11_pack]
+- **Used Max G2 baseline** – A lightly cycled Segway Max G2 battery that lived indoors provides a sanity check when buying second-hand packs for donor builds.[^maxg2_baseline]
 - **VSETT 10+ deck with external controllers** – Relocating controllers outside the deck makes room for a 20 S9 P Samsung 48X pack with ~2 mm side clearance in a 169 mm jig; builders pair it with JK active-balancing BMS boards and waterproof Higo/Julet harnesses for serviceable installs.[^101][^102]
 - **Cell chemistry trade-offs** – Sony VTC6A cells sag less and run cooler than Molicel P42A but cost roughly twice as much unless ordering ~10 k pieces monthly, while Samsung 30T remains the punchiest option albeit with limited capacity.[^113]
 - **Ninebot G30 MAX** – Builders drill and trim 3 mm ePowerFun skid plates for €25 stopgap protection, map roughly 112–120 horizontal 21700 slots (~17 S8 P) with careful copper folding, swap in custom spacers, and plan 20 S4 P-to-22 S layouts once rails are clear and pack supports printed.
@@ -612,3 +618,9 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 [^244]: Source: knowledge/notes/input_part002_review.md†L145-L147
 [^245]: Source: knowledge/notes/input_part002_review.md†L148-L149
 [^246]: Source: knowledge/notes/input_part002_review.md†L205-L207
+[^jp40_pack]: Source: knowledge/notes/input_part012_review.md, lines 440-441.
+[^vsett11_pack]: Source: knowledge/notes/input_part012_review.md, line 442.
+[^g30_ceiling]: Source: knowledge/notes/input_part012_review.md, line 438.
+[^maxg2_baseline]: Source: knowledge/notes/input_part012_review.md, line 443.
+[^begode_q3_pack]: Source: knowledge/notes/input_part012_review.md, line 466.
+[^forol_walkthrough]: Source: knowledge/notes/input_part012_review.md, line 476.

@@ -11,6 +11,7 @@
 - Dual Minimotors controllers fed by a 54 Ah pack delivered ~90 km at 38 km/h, but riders noted VESC tunes feel more conservative and emphasised monitoring energy use when comparing platforms.[^minimotors_range]
 - 2 000 W hub motors begin to warm after ~3 km at 60 A battery / 100 A phase, pushing builders toward 3 000 W swaps to sustain 3–4 kW bursts without cooking stators.[^2000w_heat]
 - Dualtron Spider conversions are running 135 A motor / 35 A battery per channel with 100 A regen per motor, highlighting how easily stock packs sag when asked for ~260 A combined bursts.[^spider_current]
+- Rob Ver’s stock-motor Vsett 11 touched roughly 120 km/h by pairing a single Ublox 150 A controller with a 21 S 51 Ah LG M58T pack, dedicating one side of the deck to battery mass and the other to the controller.[^rob_vsett120]
 
 ## Voltage Strategy & Stress Tests
 
@@ -35,6 +36,8 @@
 - HM’s 60 V 1.6–3.5 kW hubs ship for ≈€160 from Spain but arrive with conservative 25/37 A current recommendations.
   - builders intend to validate phase-amp headroom before trusting the spec sheet.[^9]
 - PaoloWu’s Blade 10 hub remains the go-to Xiaomi drop-in: riders report 55–60 km/h on 13 S, ~65 km/h with field weakening, and reliable ~150 A phase tolerance for roughly €150 plus shipping, while Zero 10X and Boyueda alternatives cost more for similar kv.[^10]
+- Smart Repair keeps a spare 70H motor on hand but says the conversion isn’t worth the effort compared with jumping straight to an 80H hub fed by multiple ESCs when chasing big rear-wheel torque.[^smart_70h]
+- Matthew is eyeing Lonnyo 80H 33/2 rear hubs for a Yume Y11+ conversion, confirming the frame can house higher-output drivetrains if you stay ahead of thermal load and phase-current demand.[^lonnyo_y11]
 - Marketing wattage is meaningless on Vsett 10+ motors.
   - inspect winding fill and magnet stack height to judge headroom before pushing phase amps or buying donor wheels for AWD swaps.[^11]
 - Happy Giraffe logged key Blade hub dimensions (130 mm inner axle, ≈160 mm fork span, M12 threads with 10 mm flats, 12 mm rotor offset, 4 mm hex hardware) and confirmed the shell is tubeless-ready, giving Xiaomi builders a reference checklist before ordering forks and spacers.[^12]
@@ -79,3 +82,6 @@
 [^15]: Source: knowledge/notes/input_part000_review.md†L392-L392
 [^16]: Source: knowledge/notes/input_part000_review.md†L486-L489
 [^17]: Source: knowledge/notes/input_part000_review.md†L489-L493
+[^rob_vsett120]: Source: knowledge/notes/input_part012_review.md, line 463.
+[^smart_70h]: Source: knowledge/notes/input_part012_review.md, line 462.
+[^lonnyo_y11]: Source: knowledge/notes/input_part012_review.md, line 464.
