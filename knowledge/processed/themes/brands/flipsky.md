@@ -22,7 +22,9 @@
 
 ## Reliability & Failure Patterns
 - **Random early deaths remain common.** Multiple riders still see Flipsky stages fail within weeks—even under modest load—so budget time for burn-in and consider stocking spares before customer deployments.⁶
-- **Capacitor banks are a recurring weak link.** Units have dropped to 14 V readings on 20 S packs after repeated capacitor explosions; veterans like ‘lekrsu’ and Haku pin the failures on bargain components rather than layout, so simple cap swaps rarely hold.⁷
+- **4.2 hardware taps out early.** Pushing phase current to 150 A on 4.2 boards triggered repeated `fault_code_drv` errors and left BLDC mode as the only fallback, underscoring how quietly MOSFETs degrade when you exceed the published envelope.【F:knowledge/notes/input_part000_review.md†L379-L379】
+- **New enclosures still need help.** Upcoming GT100 and revised 75100 enclosures ship with higher-spec Magnachip FETs and tidier cases, yet riders warn performance still hinges on clamping the housing directly to the frame or stripping covers for tighter thermal contact.【F:knowledge/notes/input_part000_review.md†L494-L496】
+- **Capacitor banks are a recurring weak link.** Units have dropped to 14 V readings on 20 S packs after repeated capacitor explosions; simple cap swaps rarely hold.⁷
 - **Regen cutoffs can brick controllers.** Aggressive negative current spikes triggered logic-board shutdowns on otherwise healthy 75100s; tune regen ramps gently and log results before releasing builds.⁸
 - **Firmware 5.3 introduced a brake-lock scare.** One 75100 flashed to 5.3 locked the wheel at ~45 km/h despite unchanged current limits; double-check UART handbrake scripts, phase insulation, and wiring before road tests after a firmware jump.【F:data/vesc_help_group/text_slices/input_part001.txt†L25875-L25943】
 - **75100 provenance drama.** Community sleuthing ties the 75100 PCB to a student project that Flipsky allegedly cloned without fixing layout flaws; rumours of the original designer reclaiming rights surfaced after official listings disappeared, even though AliExpress resellers still show stock.【F:data/vesc_help_group/text_slices/input_part001.txt†L10395-L10571】
@@ -30,11 +32,14 @@
 - **Tear-down first, always.** Photos keep showing undersized housings, unsecured bus capacitors, and single-shunt sensing—clean stray solder balls, restake caps with silicone, and consider shunt upgrades before chasing >120 A.[^hardware-audit]
 - **QA misses extend beyond electronics.** Replacement controllers have arrived missing faceplate screws or hiding solder beads that later short logic boards; customers ended up machining their own hardware and filing PayPal claims when support stalled, underscoring why every unit needs a full tear-down before power-up.【F:data/vesc_help_group/text_slices/input_part001.txt†L1984-L2176】【F:data/vesc_help_group/text_slices/input_part001.txt†L2182-L2231】
 - **7550 capacitor grenades persist.** Fresh hardware has launched capacitors during the very first motor detection even on stock settings—treat “300 A” marketing claims skeptically and bench-burn every controller before field use.【F:data/vesc_help_group/text_slices/input_part001.txt†L9640-L9679】
+- **Logic-stage failures crop up without MOSFET damage.** Multiple 7550s have stopped spinning motors despite clean detection traces; vendors traced the issue to dead STM32/USB sections, so budget time for RMA escalation even when power stages look healthy.[^logic_fail]
 - **USB tuning crashes.** Several riders traced VESC Tool lockups under load to poor USB isolation on 75100 boards; if tethered sessions trigger faults, fall back to older PC builds or wireless tuning during road tests.【F:data/vesc_help_group/text_slices/input_part001.txt†L21516-L21532】
 - **Firmware mismatches plague fresh aluminum boards.** Multiple 75100 ALU units shipped with 75_300_R2 firmware, unwritable voltage limits, ABS overcurrent trips, and BLE dropouts until owners reflashed matching bootloader/firmware pairs, raised max-voltage ceilings, and enabled slow ABS limiters.[^fw_mismatch]
 - **CAN failures can be soft.** Some 75200 builds lost CAN comms but regained function after factory defaults and rerunning detection—try simple resets before swapping hardware.[^can_soft]
 - **Loose capacitors fail under vibration.** Repaired 75100s died from unsecured bus caps; stake every capacitor and refuse to power boards outside the 4–20 S window.[^cap_stake]
 - **Parameter persistence bugs.** Wattage and regen limits spontaneously reset to 500–700 W on some units until reflashing; suspect flash wear and document write/readback cycles.[^param_persist]
+- **Pack-side protections can mimic controller faults.** Scooters that free-spin but die under rider load often have BMS current limits set too low—raise pack capability or relax thresholds before blaming the VESC.[^bms_trip]
+- **Sensorless starts need aggressive tuning.** One 7550 only cleared “hashed” torque after phase current climbed toward 90 A, BLDC switching jumped to 20 kHz/35 kHz, and the rider accepted kick-starts around 11 km/h; lingering doubts about shunt or MOSFET health reinforce the brand’s sensorless fragility.[^sensorless_hash]
 
 ## Pre-Flight QA Checklist
 1. **Open the enclosure.** Verify 12 V converter solder joints, clean stray shavings, and apply full-coverage thermal pads/paste before the first power-up.¹
@@ -43,10 +48,10 @@
 4. **Conformal coat selectively.** Spot-protect exposed copper after inspection, but keep pads and connectors serviceable for future repairs.¹²
 
 ## Tuning Guardrails
+- **Stay on the warrantied firmware unless you accept the risk.** Flipsky’s official 100 A battery profile still delivers ~147 A phase bursts but keeps warranty support; the 300 A package voids coverage.[^fw_profiles]
 - **Manual detection beats wizard defaults.** Measure Rs/Ls with trusted meters and rerun detection on warmed motors; inaccurate auto-detect values have produced rough starts and ABS faults.¹³
 - **Disable the phase filter and switch observers.** Flipsky 75200 V2 installs stop idling hot once the phase filter is off, the `mxlemming` observer is active, and phase current is trimmed near 80–120 A.²
-- **Cap absolute current at or below 300 A.** Paolo’s 75100 disintegrated after 450–500 A ABS tests; community consensus keeps absolute current near 250–300 A with cooling mods logged before filing support tickets, and new logs of 75100 deaths above 300 A reinforce the ceiling.【F:data/vesc_help_group/text_slices/input_part003.txt†L11641-L11710】¹⁴
-- **Watch absolute spikes on singles.** A separate 75100 failed after 450–500 A absolute current despite upgrades—keep single-board builds below ~300 A ABS and log heatsink/shunt temps religiously.【F:data/vesc_help_group/text_slices/input_part003.txt†L11641-L11710】
+- **Cap absolute current at or below 300 A.** Teardown autopsies of 75100 boards that saw 450–500 A absolute ended in toasted MOSFETs—set `ABS Max Current` conservatively and verify logs after every firmware update.¹⁴
 - **Balance front/rear outputs.** Dual-drive builds stay predictable when battery and phase currents match across controllers; upping the rear ratio alone can free-spin fronts.¹⁵
 - **Respect motor-side limits.** Magic Pie 5 hubs, for example, regained launch torque at ~120 A phase while battery stayed near 25 A—chasing more just overheats the motor.¹⁶
 - **Field-weakening realities.** FW toggles remain locked to 5.2/5.3 firmware, so plan on SWD flashing beta binaries; BLDC mode is missing entirely on the 75100 branch, and attempting to drop in 75300 images still crashes VESC Tool.[^fw-lockout]
@@ -65,15 +70,10 @@
 
 ## Ecosystem & Accessories
 - **Displays:** The yellow ESP32 “Smart Display” clones work once flashed with SimpleVescDisplay firmware; stock apps remain unstable.⁶ ¹¹
-- **Upcoming dashboards:** Rage Mechanics previewed a native SmartDisplay UI in late 2022 alongside a 3.5 in navigation prototype and a Waze overlay proof-of-concept for Spintend CAN feeds—plan firmware support before promising customers integrated maps.²¹
-- **Mobile app regressions:** Flipsky’s Android app briefly dropped GPS logging on FW 5.3—keep trusted APK archives so you can sideload stable builds when updates regress features.【F:knowledge/notes/input_part003_review.md†L227-L227】
 - **Pedal assist & aux controls:** PAS harnesses expect a four-wire split (5 V, GND, signal, brake/enable) with cadence routed to ADC1. Confirm servo-pin voltage limits before powering sensors.¹¹
 - **Lighting rails:** Fuse every 12 V accessory lead—shorted aux rails have killed fresh controllers.¹²
 - **Profile switching:** Community ESP32 scripts now debounce CAN messages and validate voltage before toggling 1WD/2WD modes; adopt the revised code to avoid divide-by-zero bugs.¹²
 - **Power switching:** 75100-class boards ship without a low-voltage enable, so owners run XT90S loop keys or external anti-spark hardware; 20 S packs still arc without real pre-charge, making QS8 connectors or dedicated pre-charge adapters mandatory and pushing some builders toward controllers with onboard latching buttons.[^20]
-
-## Documentation Gaps
-- Riders continue to beg for a Flipsky 75100 regen-braking walkthrough that also covers PAS integration and suspension hardware references—the absence of a vetted guide keeps newcomers hunting paid Lisp scripts to regain basic features.【F:knowledge/notes/input_part013_review.md†L213-L219】
 
 ## When to Reach for Alternatives
 - **Need high uptime or warranty responsiveness?** MakerX singles and Spintend duals handle similar current with fewer early failures and better support pipelines.¹⁸
@@ -100,10 +100,14 @@
 [^17]: Saturation discussions and traction-control cautions at high phase currents.【F:knowledge/notes/input_part011_review.md†L475-L477】
 [^18]: Comparative MakerX reliability vs. Flipsky on similar amperage builds.【F:knowledge/notes/input_part003_review.md†L470-L470】
 [^19]: Spintend 22 S debates and recommendations to step up to C350/Thor-class controllers for higher voltage/current plans.【F:knowledge/notes/input_part011_review.md†L512-L514】
+[^fw_profiles]: Official 100 A firmware keeps warranty support and still outputs ~147 A phase, whereas the 300 A package voids warranty coverage.【F:knowledge/notes/input_part000_review.md†L42-L42】
 [^20]: Power-switching workarounds for 75100 hardware, including XT90S loop keys, QS8 pre-charge connectors, and preferences for controllers with onboard latching buttons when running dual units.【F:knowledge/notes/input_part001_review.md†L29-L31】
 [^hardware-audit]: Tear-down photos continue to show undersized housings, unsecured capacitors, and single-shunt sensing on 75100 boards—clean solder balls, restake caps with silicone, and plan shunt upgrades before exceeding 120 A.【F:knowledge/notes/input_part001_review.md†L37-L39】
 [^fw-lockout]: Field-weakening remains gated to firmware 5.2/5.3 flashed via SWD on 75100 hardware; BLDC mode is disabled and sideloading 75300 images still crashes VESC Tool.【F:knowledge/notes/input_part001_review.md†L33-L35】
 [^sensorless-surge]: Sensorless transition chatter, firmware ceilings, and 24 S field-weakening caution all stem from early 2022 rider logs detailing the 75100’s behaviour at 2 000 ERPM, regen-induced voltage spikes, and the hard-coded phase cap near 110 A.【F:data/vesc_help_group/text_slices/input_part001.txt†L1696-L2417】
+[^logic_fail]: Flipsky 7550 controllers that lost motor drive despite clean detections were traced to dead STM32/USB logic stages, prompting coordinated vendor follow-up.【F:knowledge/notes/input_part000_review.md†L88-L88】
+[^bms_trip]: Load-dependent shut-downs on Flipsky 7550 builds often point to BMS current limits rather than controller faults; successful fixes raise pack capacity or adjust protection thresholds.【F:knowledge/notes/input_part000_review.md†L70-L70】
+[^sensorless_hash]: Source: knowledge/notes/input_part000_review.md, lines 193-194.
 [^group-buy]: Coordinated orders leverage Flipsky’s one-time 20 % discount code, which support can manually reopen if the 24-hour window is missed.【F:knowledge/notes/input_part000_review.md†L30-L32】
 [^starter-kit]: Community starter list pairs twin 7550 controllers with Bluetooth v6, CAN cabling, anti-spark switches for ≥20 S packs, and spare JST leads for halls, throttle, and brake wiring.【F:knowledge/notes/input_part000_review.md†L31-L33】
 [^wiring-supplies]: Builders pre-stock XT60/XT90 plugs, JST assortments, and 4–6 mm motor bullet connectors to keep conversions moving.【F:knowledge/notes/input_part000_review.md†L33-L33】

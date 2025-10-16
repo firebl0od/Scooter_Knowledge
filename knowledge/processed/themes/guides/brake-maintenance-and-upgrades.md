@@ -31,10 +31,16 @@
 ### Four-Piston Caliper Benefits
 - Artem's freshly delivered Shimano M7120 four-piston set (≈€155 for the pair without rotors) brings stiffer one-finger levers and extra thermal mass that he plans to migrate from his trial bike to the scooter if he decides four pistons are overkill off-road.[^four-piston-cost]
 - Four-piston systems improve heat dissipation during repeated high-speed stops but may be excessive for commuter builds under 60 km/h where two-piston Magura MT5 or similar calipers provide adequate stopping power.[^four-piston-vs-two]
+- Zoom-branded hydraulics continue to underperform at speed—riders are standardising on Nutt, Magura MT5e, Shimano Saint, or Hope calipers paired with 3 mm reinforced 160 mm rotors to survive repeated 120→0 km/h stops, noting that Magura reservoirs can crack under extreme loads.【F:knowledge/notes/input_part000_review.md†L511-L511】
 
 ### Rotor Sizing Considerations
 - Brake discussions suggest upsizing rotors from 180 mm to 203 mm mainly boosts thermal mass and leverage but may be excessive for scooters; larger rotors require frame clearance checks and stronger mounting tabs to handle increased braking forces.[^rotor-sizing]
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
+- Tall brake adapters should use a single ring spacer instead of stacked washers so axial loads do not rock the disc bolts—5 mm steel rings have proven stable on custom Blade hubs, while 1.7 mm washer stacks remain a stopgap only.【F:knowledge/notes/input_part000_review.md†L520-L522】
+- Expect to budget CNC time for bespoke rotor shims because six-hole aftermarket rims rarely align with Xiaomi five-hole spacers when mixing OEM and custom hubs.【F:knowledge/notes/input_part000_review.md†L521-L522】
+
+### Fork & Adapter Fitment
+- Monorim fork swaps need custom torque arms, thin-head bolts, and stacked stainless shims so 140–160 mm discs clear the square legs without grinding away the casting—document CAD references before committing to the conversion.【F:knowledge/notes/input_part000_review.md†L512-L512】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -69,6 +75,7 @@
 
 ## Tire Inflation & Bead Seating
 - Haku's Xiaomi inflator couldn't seat 21×3 tires even with a ratchet strap, reinforcing that serious tubed slick installs demand higher-flow compressors (≥150 PSI, 2+ CFM) or shop assistance to pop beads properly.[^tire-inflation]
+- Roadside swaps go smoother when you break the bead with dish soap, dust tubes in talc or baby powder, and reassemble carefully—the combo stops inner-tube chafing after emergency tire pulls.【F:knowledge/notes/input_part000_review.md†L669-L670】
 - **Compressor requirements for large tires:**
   - Minimum 150 PSI working pressure for 21×3 and larger tires
   - 2+ CFM flow rate to seat beads quickly before air leaks past unseated tire

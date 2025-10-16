@@ -6,6 +6,8 @@
 - **Pack silica gel inside decks.** Rental-frame conversions stay dry longest when silica packets live beside the battery and automotive engine sealant closes the lid—silicone peels by hand for service yet seals better than chasing custom gaskets.【F:knowledge/notes/input_part000_review.md†L685-L685】
 - **Choose the right bearings.** Swap stock 2Z hubs for sealed 2RS units and refresh grease after wet weeks to keep Monorim and Xiaomi front ends from grinding themselves apart.【F:knowledge/notes/all_part01_review.md†L27274-L27275】
 - **Inspect after every soak.** Error 28 beeps and erratic state-of-charge readings usually mean the controller or white battery plug corroded—scrub with contact cleaner, dry thoroughly, and don\'t trust factory IP54 stickers.【F:knowledge/notes/denis_all_part02_review.md†L419-L421】【F:knowledge/notes/denis_all_part02_review.md†L454-L455】
+- **Reseal deck mods.** Grinding Xiaomi/Ninebot ribs to fit BMS hardware opens new leak paths; reseal the deck lid and servo-lock cavity with silicone rather than leaving raw metal to rust.【F:knowledge/notes/input_part000_review.md†L292-L293】
+- **Copy proven enclosure designs.** Koxx’s latest SmartController case uses taller internal walls and TPU cable glands that survived a five-minute hose test—treat it as a template when weather-sealing other electronics.【F:knowledge/notes/input_part000_review.md†L513-L513】
 
 ## Layered Theft & Compliance Tactics
 - **Build loud, cheap alarms.** Pair gyroscopes with 120 dB buzzers tied to ignition keys or BLE presence so tampering keeps the siren blaring until the scooter rests motionless.【F:knowledge/notes/all_part01_review.md†L88-L88】
@@ -16,6 +18,12 @@
 - **Upgrade hardpoints.** Builds pushing 8 kW+ torque now weld steel eyelets, use ≥10 mm hardened chains, and recess security bolts because factory aluminum tabs vanish under cordless grinders.【F:knowledge/notes/input_part005_review.md†L195-L200】
 - **Keep a mechanical kill switch.** Without native VESC shutdown, riders lean on keyed mains, throttle-disable switches, or Safe Start current limits—and Spintend’s ADC adapter v2 still needs loop keys or smart-BMS latches because it only ferries 5 V/12 V accessory power. Treat Bluetooth/relay locks as secondary deterrents that thieves can bypass quickly.【F:knowledge/notes/input_part005_review.md†L348-L350】【F:knowledge/notes/input_part005_review.md†L504-L506】
 - **Layer trackers by medium.** Mix AirTags or SmartTags for crowd-sourced pings with SIM trackers (TK806, SIM800) where IMEI registration allows ongoing data plans so a stolen scooter keeps reporting in real time.【F:knowledge/notes/input_part005_review.md†L350-L351】
+- **Prototype smarter telemetry.** Builders are testing ESP32-based 4G+GPS trackers that ride the scooter pack, broadcast IMEI-backed telemetry, and integrate alongside SmartDisplay so theft alerts keep flowing even when BLE trackers fail.【F:knowledge/notes/input_part000_review.md†L239-L239】
+- **Hide trackers inside the pack.** New SIM7600/BMW tracker builds live under the battery shrink with UART links to MOSFET cutoffs, letting riders remote-kill packs while thieves fumble for the enclosure.【F:knowledge/notes/input_part000_review.md†L506-L508】
+
+## Protective Gear & Stealth Riding
+- **Dress for the crash, not the ride.** The crew leans on ECE 22.05/22.06 full-face helmets with MIPS-style protection and full moto gear because even 30 km/h lowsides can shatter chins; DOT stickers alone aren’t trusted.【F:knowledge/notes/input_part000_review.md†L364-L364】
+- **Stay discreet around police.** Choose understated frames, keep lighting subdued, and reserve police-mode or field-weakening bursts for brief escapes while cruising near rental speeds the rest of the time.【F:knowledge/notes/input_part000_review.md†L365-L365】
 
 ## Regional Compliance Pressure
 - **Plan for roadside inspections.** Finnish police are confiscating scooters that exceed 25 km/h without registration and even checking bulb part numbers, while southern EU riders dodge €8–9 k fines by programming low-power “police modes” and swapping to halogen BA9S lamps to satisfy moped rules.【F:knowledge/notes/input_part005_review.md†L225-L227】

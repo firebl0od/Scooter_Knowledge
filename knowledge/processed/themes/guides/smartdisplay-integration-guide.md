@@ -46,6 +46,10 @@
 - **Lighting + Error Telemetry.** Kelly and VESC users receive controller error feedback (screenshots, codes) on SmartDisplay, easing remote debugging.[^2]
 - **Wearable fallback.** Riders who skip a dash lean on the XMatic VESC Apple Watch app when they want telemetry without mounting extra hardware.【F:data/vesc_help_group/text_slices/input_part004.txt†L15297-L15302】
 
+## Firmware & Profile Management
+- SmartDisplay “profiles” live inside the phone app—switching Eco/Sport rewrites live controller configs, so riders keep UART bridges (e.g., basti30’s Arduino tool) handy when they want on-scooter buttons that push alternate maps without cycling power.[^profile_bridge]
+- The single-channel Spintend ships without Bluetooth; SmartDisplay’s pass-through mode or an external module keeps VESC Tool access alive while the rugged one-wire bus handles remote IO where I²C runs fall over past ~15 cm.[^single_bt]
+
 - Production retail is targeting **€400–€600** with a €199.99 early-adopter slot for the first ten units; budget above €300 until volume ramps even though beta testers paid €300.【F:knowledge/notes/input_part004_review.md†L129-L131】
 - Rage Mechanics has logged 4,000+ development hours and keeps firmware closed-source while supporting Minimotors, VESC, Zero, VSETT, Kelly, and Kunteng buses—explaining the ~€500 price point despite open-hardware roots.【F:knowledge/notes/input_part004_review.md†L259-L259】
 - Beta batches sold at **300 €** for 15 testers with August assembly runs; production pricing remains under review.[^11]
@@ -102,6 +106,8 @@
 [^16]: Community STL packs and resin-print finishing steps keep the 3.5 in enclosure centred on the stem while preventing UV yellowing.[^15][^smartdisplay-stl]
 [^17]: CAN-linked presets such as “police mode” are being prototyped to mute the front motor while retaining rear torque for roadside compliance checks.【F:knowledge/notes/input_part000_review.md†L203-L203】
 [^18]: Koxx now hand-assembles SmartDisplay and SmartController batches, selling both the dash-mounted unit and a display-less deck module for riders who prefer phone dashboards over BLE.【F:knowledge/notes/input_part000_review.md†L264-L264】
+[^profile_bridge]: SmartDisplay profiles live on the phone; riders use UART bridges like basti30’s Arduino tool to push alternate maps without power-cycling the controller.【F:knowledge/notes/input_part000_review.md†L270-L271】
+[^single_bt]: Spintend’s single-channel controller lacks onboard Bluetooth, so builders lean on SmartDisplay pass-through or external modules and reserve the one-wire bus for remote IO because I²C fails past ~15 cm.【F:knowledge/notes/input_part000_review.md†L299-L299】
 [^smartdisplay-stl]: Shared 3.5 in SmartDisplay STL kits support SLA/SLS printing and stem-cap mounts; builders finish prints with opaque paint to avoid UV yellowing.【F:knowledge/notes/input_part000_review.md†L202-L202】【F:knowledge/notes/input_part000_review.md†L293-L293】
 
 ## Production Timeline & Pricing Updates

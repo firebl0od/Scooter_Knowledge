@@ -9,6 +9,7 @@
 ## Ferrofluid Selection & Handling
 - The VESC Help crew continues to vouch for ferrofluid/Statorade when the goal is winding-to-shell transfer, but they emphasise reading datasheets—some mixes flash at low temperature and budget hubs can demagnetise above ~80 °C—before flooding a motor.【F:knowledge/notes/input_part007_review.md†L48-L48】
 - Ferrotec APG1110 remains the benchmark for hub fillings, while Supermagnete’s 10 mL bottles offer reliable sourcing for EU riders upgrading Xiaomi and G30 hubs without importing large lots.【F:knowledge/notes/input_part007_review.md†L60-L60】
+- HeroDasH demonstrated clean application with magnetic bottles that pull fluid straight into magnet gaps and warned against overfilling because excess drag hurts efficiency; peers now lean on ebikes.ca’s simulator to visualize how kv and resistance tweaks shift the efficiency curve before sealing hubs.【F:knowledge/notes/input_part000_review.md†L597-L599】
 
 ## Hub Current Guardrails
 - Single Monorim 500 W hubs stay happy around 80 A phase—ideally with ferrofluid—while the crew’s Xiaomi-class builds overheat quickly once they push 65–73 A without battery temperature sensing or keep more than roughly 30–35 A combined draw from paired 12 S packs.【F:knowledge/notes/input_part007_review.md†L18-L19】
@@ -42,6 +43,9 @@
 - Skip brazing aluminum frames for heatsink bonding unless you have specialty tooling; even experienced metalworkers called it a last resort compared with mechanical fasteners.【F:knowledge/notes/input_part007_review.md†L78-L78】
 - When clamping copper blocks to aluminum frames, isolate them with silicone sheets or plating; bare copper-on-aluminum mounts trigger galvanic corrosion that quietly eats the chassis.【F:knowledge/notes/input_part007_review.md†L321-L322】
 - Dial in airflow paths after rework—builders now notch decks, tap fins, and bridge controllers to fresh-cut ducts so heat actually leaves the bay instead of recirculating behind sealed covers.【F:knowledge/notes/input_part007_review.md†L537-L537】
+- Dual Spintend installs on sealed Weped decks hit ~80 °C while delivering ~500 A phase, underlining how little thermal margin exists without direct deck contact and fresh paste.【F:knowledge/notes/input_part000_review.md†L623-L626】
+- Consensus from recent debates: bolt controllers flat to aluminium chassis plates with quality thermal paste—remote radiator boxes, thick spacers, and long external runs add heat, resistance, and failure points compared with a well-clamped deck or footrest mount.【F:knowledge/notes/input_part000_review.md†L626-L635】
+- Cracking deck vents alone only delays thermal cutback; re-bedding Ubox cases with paste against the deck proved to be the repeatable fix for 75 A battery / 190 A phase tunes that otherwise crept toward shutdown.【F:knowledge/notes/input_part000_review.md†L635-L639】
 
 ## Controller Cooling Case Studies
 - Jason resurrected an MP2 after a MOSFET failure and now caps the platform around 100 A battery / 250 A phase, acknowledging a 300 A launch cooked the board while chasing sensor cogging.【F:knowledge/notes/input_part012_review.md†L234-L235】
@@ -54,6 +58,8 @@
 - Makerbase 100/100-class controllers start current limiting once MOSFETs touch ~70 °C if the base plate lacks fresh thermal paste; the crew now treats 70 °C as the everyday limit and 100 °C as the hard ceiling for VESC MOSFETs to preserve lifespan.【F:data/vesc_help_group/text_slices/input_part007.txt†L123-L146】
 - Larger packs and long shocks trap heat around the deck; riders re-bend frames, add inner/outer steel plates, and swap to lower-rate springs instead of trimming coils so the chassis and cells stop cooking each other.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L90030-L90136】
 - Abuse tests that pumped 84 V/2 000 W into stock 250 W hubs demagnetised rotors once magnets crossed ~80 °C, permanently reducing speed—log stator temps on recycled hardware before chasing high-voltage experiments.【F:knowledge/notes/input_part000_review.md†L117-L117】
+- Treat 80–100 °C as the practical magnet ceiling even when windings temporarily tolerate 120 °C; ferrofluid’s real job is moving magnet heat into the shell, not lowering copper temperature.【F:knowledge/notes/input_part000_review.md†L531-L533】
+- Delta-wound Xiaomi hubs start to lose launch torque above ~80 °C even if they recover later, so add live temperature telemetry before pushing high phase current on compact stators.【F:knowledge/notes/input_part000_review.md†L534-L534】
 - Weped-mounted dual Uboxes still brushed ~80 °C delivering ~500 A phase until riders resurfaced the deck and clamped the controller directly with fresh thermal paste—remote radiator boxes and thick spacers only added heat soak.【F:knowledge/notes/input_part000_review.md†L614-L617】
 - Even robust controllers cannot save undersized hubs: a 750 W Boosted Rev on a Spintend single hit 55 °C controller / 80 °C stator in eight minutes at 120 A phase / 80 A battery, proving you must tune current to motor mass, not ESC ceiling.【F:knowledge/notes/input_part000_review.md†L304-L305】
 - Regen spikes add heat too—phase clipping kicked in around 25–30 km/h and each hard brake pulse lifted the stator roughly 5 °C, so log braking currents whenever you raise negative amps.【F:knowledge/notes/input_part000_review.md†L305-L305】
@@ -111,6 +117,11 @@
 ## Motor Temperature Instrumentation
 - **Install proper NTC sensors for accurate readings.** Installing EPCOS/TDK B57861S0502F040 2×4 mm NTCs against the hall/phase bundle, secured with thermal epoxy rated to 150 °C, delivered accurate phase readings in minutes and enables reliable over-temp cutbacks.[^ntc_install]
 - **Route temp leads away from phase bundles.** Gordan's Ubox V2 logs showed thermistor signals collapsing above 80 A until he chased the ground loop, underscoring the need to reroute sensor wiring or add shielding when phase currents spike.[^temp_routing]
+- **Relocate sensors toward the magnet gap when possible.** Artem is experimenting with moving hub thermistors into the air gap so readings reflect magnet temperature instead of coil hotspots—a better proxy for demag risk on ventilated rims.【F:knowledge/notes/input_part000_review.md†L533-L533】
+- **Trust embedded sensors over hand checks.** Artem’s Vsett logs showed hub shells barely warm while windings hit ~90 °C, proving that hand tests lag true winding temperature and that 100 kΩ NTC probes inside the hub are essential on high-power conversions.【F:knowledge/notes/input_part000_review.md†L676-L678】
+
+## Efficiency Planning
+- Artem pegs real-world BLDC outrunners around 86 % efficient in block commutation and higher under FOC; holding the motor near its rpm sweet spot pays off more than brute-force phase amps on small scooter hubs.【F:knowledge/notes/input_part000_review.md†L598-L598】
 
 ## 60H Hub Specific Notes
 - **60H builds prefer 50 A battery / 100 A phase with ferrofluid.** Riders reported smooth launches after sealing leads, adding ferrofluid, and pairing the tune with ~10 A field-weakening that engages around 91.5% duty while holding full duty near 95%; still install temperature sensors before chasing 16 S, 60 km/h targets on long hill routes.[^60h_baseline]
