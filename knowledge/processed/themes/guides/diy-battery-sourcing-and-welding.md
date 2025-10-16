@@ -11,10 +11,19 @@
 
 ## Workshop Pricing & BMS Baselines
 - Denis’ catalog still quotes ~€170 for a 10S4P Samsung 35E pack, €30 for the Wildman bag, and roughly €20 for EU shipping via DPD/UPS; he insists on genuine XT30 hardware and 20 A common-port BMS boards rather than AliExpress knock-offs.[^denis-pricing]
+- Match BMS boards to the intended series count—12S packs need true 12S PCM/PCB hardware rated around 30 A so Rita installs do not outrun protection stages.【F:knowledge/notes/all_part01_review.md†L316-L316】
+- Community teardown of a so-called “36 V 20 Ah” AliExpress pack revealed just 12 cells and sand filler—treat round-number claims or >42 V open-circuit readings as immediate scams unless the seller proves a 10S6P layout.[^aliexpress-sand]
+- Swap separate-port AliExpress BMS boards before paralleling with Rita; otherwise the discharge lead backfeeds chargers and overfills cells through the wrong path.【F:knowledge/notes/all_part01_review.md†L358-L358】
+- Expect honest 10S materials to cost roughly €100 before labor and tax—anything cheaper usually hides weak cells or flimsy protection hardware.【F:knowledge/notes/all_part01_review.md†L359-L359】
+- Tudor/VTA external packs arrive with same-port BMS wiring; tie Rita’s XT30 into C-/B- and leave P- empty so charge and discharge share the protected port without bypassing the board.[^tudor-common]
 - The workshop flags “fire emoji” AliExpress packs built from laptop pulls—builders cap Happy BMS builds near 53 V/40 A and lean on refurbished OEM modules plus externals for range instead of forcing Rita past spec.[^ali-pack-warning-diy]
+- Vet cheap-pack marketing claims with lab-grade tools—François leaned on a Hyperion 1420 charger, 800 W PSU, and a load bank to expose fraudulent capacity numbers, underscoring how expensive proper validation is.[^lab-gear]
 - Aerdu’s inexpensive 10S packs can deliver honest capacity when properly potted, but missing fish paper between series groups remains a fire risk—veterans still favour reputable cell sellers (e.g., NKON) and add insulation themselves before shipping customs builds.【F:knowledge/notes/denis_all_part02_review.md†L521-L522】
 - External packs stay on common-port BMSes so Rita can police charge flow—Denis refuses to ship his smart separate-port boards in range kits because they can’t stop overcharge through the discharge lead.[^common-port-chat]
+- Retrofit third-party externals with 40 A UART485 common-port boards (often AliExpress kits bundled with Bluetooth dongles) so adapters can monitor and tune pack behaviour safely.[^uart485-diy]
+- Among AliExpress vendors, Laudation remains one of the few delivering rated capacity—treat flashy “60 000 mAh” marketing as a red flag even when the listing looks professional.[^laudation-diy]
 - Production packs come from the m365Krakow workshop; Denis handles support and logistics while the partner assembles cells, so large orders should plan around their combined lead times.[^m365krakow]
+- Denis’ repair BMS defaults to ≈4.15 V/cell (≈4.14 V after its diode drop) yet lets riders raise or lower the ceiling to trade longevity for range; bench tests logged ≈37 A discharge headroom when paralleled with another 10S pack despite the older board’s 3 A charge limit.【F:knowledge/notes/all_part01_review.md†L360-L363】
 - LLT’s 100 A smart boards remain the viable option for 4 S boosters—cheaper BMSes brown out, and pushing Flipsky 75100 boxes to 20 S simply moves failure to the wiring long before the ESC runs out of headroom.【F:knowledge/notes/input_part004_review.md†L216-L216】
 - JK active-balancing boards keep outrunning Daly units on telemetry and balancing strength; builders now reserve Daly for budget builds and spec JK or LLT when 20 S packs need reliable comms and cell maintenance.【F:knowledge/notes/input_part004_review.md†L369-L369】
 - Daly’s 100Balance smart board can still support serious builds—Jerome’s 20 S 9 P EVE 40P pack pairs it with 0.2 mm copper busbars and keeps GT2 motors around 7–10 kW continuous before heat becomes the limit.【F:knowledge/notes/input_part011_review.md†L221-L227】
@@ -36,6 +45,7 @@
 | **BAK 2.5 Ah 20 A cells** | Budget-friendly yet capacity-limited options for dual 20 S packs (~17.5 Ah per half) | Continuous output around 40 A per pack; expect steep voltage sag at 100 A draws | Plan parallel 8 AWG-equivalent leads and set range expectations realistically.【F:knowledge/notes/input_part004_review.md†L236-L236】 |
 
 ### Chemistry Trade-Off Snapshots
+- Denis still leans on LG MJ1, Samsung 35E, and Sanyo energy cells for commuter packs, validating claims with lygte-info comparator data before publishing specs.【F:knowledge/notes/all_part01_review.md†L319-L319】
 - **Sony VTC6A vs. Molicel P42A vs. Samsung 30T:** VTC6A delivers the lowest sag and coolest temps but runs roughly double the cost of P42A unless you buy ~10 k cells per month; 30T still hits hardest but sacrifices capacity, so reserve it for burst-focused builds.【F:data/vesc_help_group/text_slices/input_part001.txt†L1603-L1655】
 
 ### Compact Bag Builds & Blade Layouts
@@ -257,6 +267,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 - **Prep salvage cells gently:** When stripping old solder from reclaimed P42A cans, use carbide burrs, copper braid, or metal cutoff wheels sparingly—overheating the top insulator ruins the cell, so plan for fresh Bak 45D stock if cleanup goes sideways and stage TVS repairs for welders before diving in.【F:knowledge/notes/input_part011_review.md†L311-L319】
 - **Wrap and isolate cells:** Heat-shrink each 21700, add Kapton plus wax/fish-paper between parallels, sheath the finished pack in epoxy board and giant heat-shrink, and add a cradle strap so it slides in/out without scuffing the deck.【F:data/vesc_help_group/text_slices/input_part001.txt†L8927-L8933】
 - **Document insulation stacks before sign-off:** Matte’s latest teardown shows Kapton backed with vulcanized fiber between parallels; reviewers now insist on photographing balance-lead routing (“the money shot”) before approving high-current packs.【F:knowledge/notes/input_part011_review.md†L352-L359】
+- **Stop short of 100 % and insulate glued packs.** Leaving the final few percent uncharged extends life, and dense bricks need fish paper or tape added during gluing so abrasion and heat do not chew through wraps.【F:knowledge/notes/all_part01_review.md†L363-L363】
 - **Balance lead soldering:** Flow ~0.5 s of 400 °C heat with solder paste so the copper strip soaks the thermal load—short pulses keep cells cool while locking balance wires into the copper bus.【F:data/vesc_help_group/text_slices/input_part001.txt†L8874-L8897】
 - **Telemetry cross-checks:** Pair CAN smart BMS data with VESC logs to validate current draw and spot calibration drift in shunt-based readings.[^7]
 - **Stay in the longevity window:** Artem keeps commuter packs between roughly 20 % and 85 % (≈3.6–4.1 V/cell) and under 40–45 °C; sag beyond ~3 V or repeated 70 °C peaks can cut lifespan to ~400 cycles.【F:knowledge/notes/input_part001_review.md†L698-L699】
@@ -278,6 +289,8 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 - **Know when BMSs sleep.** Happy BMS packs can latch their discharge MOSFETs off after reconnection; wake them with a brief charger tap before blaming wiring or the controller.【F:knowledge/notes/input_part004_review.md†L301-L302】
 - **Protect LiPo experiments.** A Daly-protected 4 Ah LiPo sank to 0.5 V per cell when left unattended, killing €120 worth of cells—treat LiPo scooters as supervised builds or upgrade the BMS hardware.【F:knowledge/notes/input_part004_review.md†L387-L387】
 - **Quarantine failing budget packs immediately:** Bargain eBay modules that vent or reignite during recharge attempts should be submerged in water and scrapped—continued charging risks burning down the entire scooter even in freezing weather.【F:knowledge/notes/input_part011_review.md†L325-L329】
+- **Store lithium packs at mid-SOC in fire-resistant containers.** Water-damaged groups left at 100 % stayed depressed; Denis now parks large assemblies near 50 %, replaces suspect cells, and keeps them in LiPo-safe bags with extinguishers nearby to mitigate runaway risk.[^storage-bags]
+- **Respect scooter charge-port limits.** Keep on-board charging near 2 A so the internal BMS handles the load, and top external packs off-scooter with dedicated 3 A+ chargers through their own leads when you need faster turnaround.[^charge-port-limit]
 
 ### 21700 Dimension Cheat Sheet
 - **Samsung 50E:** ≈21.12 mm with wrap.
@@ -420,11 +433,21 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^37]: Budget “smart” BMS boards shipped twice the size of ANT units while the 21 S 100 A JBD still fits between 18650 rows and cost ~€45 during recent sales, making it the better fit for tight decks.【F:knowledge/notes/input_part008_review.md†L189-L189】
 [^docreate]: Cihan priced the Docreate DO-02 capacitor welder around $108 delivered to Turkey (less with coupons) and confirmed ~0.36 mΩ capacitor ESR via teardown notes; peers recommend the foot-pedal bundle or Glitter 801D when welding only thin nickel.【F:knowledge/notes/input_part008_review.md†L398-L399】
 [^kweld-lipo]: kWeld owners retired car batteries after a few welds sagged voltage; CNHL 4S 9.5 Ah hardcase packs and other high-C LiPos sustained 2 kA pulses while old RC packs and power banks overheated despite extra heatsinks.【F:knowledge/notes/input_part008_review.md†L237-L238】
-[^denis-pricing]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1510-L1526】
-[^common-port-chat]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1545-L1594】
-[^m365krakow]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part01.txt†L1612-L1618】
+[^denis-pricing]: 【F:knowledge/notes/all_part01_review.md†L115-L116】
+[^denis-pricing]: 【F:knowledge/notes/all_part01_review.md†L115-L116】
+[^aliexpress-sand]: 【F:knowledge/notes/all_part01_review.md†L216-L216】
+[^tudor-common]: 【F:knowledge/notes/all_part01_review.md†L217-L217】
+[^ali-pack-warning-diy]: 【F:knowledge/notes/all_part01_review.md†L118-L118】
+[^lab-gear]: 【F:knowledge/notes/all_part01_review.md†L281-L281】
+[^common-port-chat]: 【F:knowledge/notes/all_part01_review.md†L217-L217】【F:knowledge/notes/all_part01_review.md†L258-L259】
+[^uart485-diy]: 【F:knowledge/notes/all_part01_review.md†L419-L419】
+[^laudation-diy]: 【F:knowledge/notes/all_part01_review.md†L420-L420】
+[^m365krakow]: 【F:knowledge/notes/all_part01_review.md†L260-L260】
 [^cnhl-booster]: CNHL and GNB 140 C–180 C LiPo bricks power kWeld launches and scooter booster packs but drain after a single sprint—parallel packs for repeated hits.【F:knowledge/notes/input_part001_review.md†L19-L21】
 [^holder-clamp]: Threaded rods, dots of superglue, and even duct tape keep PETG holders aligned until final wraps; clear packing tape is the last resort when Kapton runs out.【F:knowledge/notes/input_part007_review.md†L217-L224】
+[^storage-bags]: 【F:knowledge/notes/all_part01_review.md†L218-L219】
+[^charge-port-limit]: 【F:knowledge/notes/all_part01_review.md†L285-L285】
+[^bms-v3]: 【F:knowledge/notes/all_part01_review.md†L284-L284】
 
 ## Copper Busbar Best Practices
 - **Braze copper busbars with shielding gas.** Builders warned that nickel–copper "sandwich" welds oxidize and fail after a few years; brazing with tin while flooding the joint with argon (as micro-TIG stations do) keeps resistance low, whereas humidity alone can trigger corrosion if the pack isn't sealed.[^busbar_braze]

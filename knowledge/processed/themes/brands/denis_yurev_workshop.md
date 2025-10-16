@@ -23,12 +23,14 @@
 - Telemetry prioritizes whichever pack sits a few tenths of a volt higher; disconnect or top-charge the auxiliary pack to view its stats.[^rita-telemetry]
 - The adapter needs the external pack slightly above the internal before M365 BMS Tool will talk to it, and leaving the wrong cell count configured can disable electric braking or even damage the module when swapping between 10 S and 12 S packs.[^rita-bms-tool]
 - Rita tops the internal battery first while a charger is connected; quick-charging externals means unplugging them from Rita and using an XT30 harness or standalone brick.[^rita-charge-order]
+- Denis is deferring rider requests for heavier fuses and extra data lines until demand stabilizes—next-gen externals will instead ship with BLE-enabled smart BMS telemetry so the harness stays simple.[^smart-bms]
 - Keep the adapter PCB’s red charge lead connected even if you reroute the main positive elsewhere—the board still draws through that pad and will misbehave if it is omitted.[^rita-charge-lead]
 - AWD conversions must nominate a single Rita “master” controller, forward only the white data lead to the slave dash, and keep dashboard grounds common to avoid error 14/21 loops while doubling up ESCs, BLEs, motors, and matched batteries; riders also enforce ~3 km/h rolling starts so the hubs do not chatter from a dead stop.[^rita-awd][^awd-roll]
 - V4 hardware extends sensing up to 15S while still bottlenecking battery current near 25 A; newer boards add charger and regen over-voltage protection that only works when Rita stays inline with the scooter’s charge path.[^rita-v4]
 - Relocating the Xiaomi charge port outside the bag is acceptable if a three-way splitter remains so Rita can detect chargers and enforce safeguards.[^rita-v4]
 - Wireless anti-theft relays should interrupt the BLE/dashboard’s 5 V feed instead of the high-current battery line: route the controller’s red/black pair into the relay “in” and send the “out” pair back to the dash.[^rita-relay]
 - Leave Rita’s BMS emulation enabled even on analog packs unless you can manually watch voltage in real time; disabling it strips the adapter’s mixed-pack safeguards.[^rita-analog-safeguard]
+- Rita firmware still throws a cosmetic dash jump from ~25 % to ~60–70 % state of charge during heavy regen; the fix is queued, so treat the spike as a known quirk for now.【F:knowledge/notes/all_part01_review.md†L175-L175】
 
 ### Repair BMS Program
 - Current production supports 10S4P batteries with ongoing development toward 12S models; units are configurable over simple USB-UART adapters for clone scooters.[^bms-roadmap]
@@ -37,11 +39,30 @@
 
 ### External Battery Kits
 - Wildman 2 L hard cases remain the standard enclosure, cleanly fitting 8 Ah-class 10S or 12S packs; 3 L variants are reserved for future 5P customs once supply stabilizes.[^battery-enclosures]
+- Wildman E2 (≈180 × 105 × 83 mm) shells comfortably fit Denis’ 8 Ah-class bricks, while the 1 L case only houses compact 36 V hoverboard packs and the 3 L shell needs printed brackets to tame the extra bulk.[^wildman-e2]
 - Builds lean on Samsung 35E or equivalent 21700 cells, quality 12 AWG wiring, and Daly 25 A common-port BMS boards; XT30 connectors are intended for semi-permanent joints rather than frequent hot-swaps.[^battery-bom]
+- Turnkey 10S4P range kits land around €170 plus roughly €30 for the Wildman 2 L bag and €20 shipping, built from Samsung 35E cells on 20 A common-port BMS boards with genuine XT30 connectors sized to the Xiaomi inlet.[^price-10s]
 - Auxiliary packs keep their BMS inline but present a single XT30 common-port lead so Rita can top the internal and external batteries in parallel; unplug Rita and use a dedicated harness whenever the auxiliary pack charges off the scooter.[^common-port]
+- Dimitrij still warns that bypassing external BMS hardware or paralleling packs at mismatched voltages without Rita can end in catastrophic failure—keep every auxiliary pack’s protection board in circuit and lean on Rita’s permanent-emulator mode for analog scooters.【F:knowledge/notes/all_part01_review.md†L113-L113】
+- Range+Speed bundles hinge on a 50.4 V charger; Denis paused full kits when supplies dried up, steering builders toward resistor-modded OEM bricks or Mean Well ELG-240-48A-class chargers while keeping the 10 S range pack as a plug-and-play option.【F:knowledge/notes/all_part01_review.md†L106-L107】【F:knowledge/notes/all_part01_review.md†L114-L114】
+- Quality connectors matter—Denis’ harness length coils inside the Wildman bag, but if you relocate plugs stick with genuine Amass XT30 hardware and practice soldering on scrap to avoid melting shells.【F:knowledge/notes/all_part01_review.md†L182-L182】
+- Current 12S3P packs use Samsung 35E cells (≈10.35 Ah) and retail near €260 with bag, while standalone 12S4P builds sit around €230; chasing 3 L bag experiments escalates cost quickly as parallels increase.【F:knowledge/notes/all_part01_review.md†L115-L116】
+- 12S4P 21700 bricks roughly match 12S6P 18650 capacity but press against Wildman dimensions; Denis’ 13S4P modules barely fit the 2 L case and stacking two forms a 13S8P tower to tame sag for dual 500 W scooters, with Samsung 35E holding voltage better than LG MJ1 under the same load.【F:knowledge/notes/all_part01_review.md†L117-L117】【F:knowledge/notes/all_part01_review.md†L171-L171】
+- Rear mounting brackets are printed by 3Dway Kraków under a commercial license, so customers request custom current limits while Denis keeps the STL private.【F:knowledge/notes/all_part01_review.md†L133-L133】
+- Wildman 2 L shells remain the default enclosure because larger 3 L cases complicate cable clearance even though they exist for oversized builds.【F:knowledge/notes/all_part01_review.md†L132-L132】
+- Ultra-long-range experiments include 60 V 40 Ah externals that promise ~130 km at ≈11 kg, underscoring the weight/range trade-offs once riders leave Xiaomi’s 36 V ecosystem.【F:knowledge/notes/all_part01_review.md†L134-L134】
+
+### Research & Testing Backlog
+- Dual-motor builders still want dyno-style efficiency testing—community logs cannot answer whether km-per-mAh or watts-per-kilometre best capture AWD gains, so Denis notes the need for controlled bench work when time allows.【F:knowledge/notes/all_part01_review.md†L201-L201】
+
+### Fulfillment & Logistics (mid-2020 snapshot)
+- UK orders led demand in July 2020, with reseller Dimitrij coordinating Rita distribution and staging July 13 dispatches for preorders.【F:knowledge/notes/all_part01_review.md†L137-L137】
+- Charger shortages forced Denis to pause complete Range+Speed kits even while he debated emergency Wildman bag buys from Polish resellers; lithium shipping stayed ground-only via DPD/UPS/TNT because DHL air refused battery freight.【F:knowledge/notes/all_part01_review.md†L138-L138】
+- Payment-gateway outages later that month blocked battery and charger sales; Rita adapters, BMS boards, and bags remained available while Denis navigated Russian-to-Polish bank transfers and warned that Revolut workarounds were awkward stopgaps.【F:knowledge/notes/all_part01_review.md†L139-L140】
 - Range Boost bundles double an M365 Pro’s capacity by matching OEM pack size, while Range+Speed kits demand firmware tweaks whenever the auxiliary pack is removed.[^range-kits]
 - AliExpress packs with separate charge ports require BMS swaps before pairing with Rita to avoid uncontrolled overcharge through the discharge leads.[^separate-charge]
 - Community buyers now dispute “13.8 Ah” 10S2P listings and inspect harnesses closely after shorts traced back to unsoldered Y-cable joints inside Wildman bags—treat unbelievable capacity claims as fire risks.[^counterfeit]
+- Denis resells his battery catalog at cost and asks the community to surface vetted Chinese suppliers while independently verifying capacity claims before ordering elsewhere.[^resell-cost]
 - Cylindrical cells typically fail open when abused, while pouch cells demand compression and vent violently—Denis favors vetted Samsung 35E/50E refurb lots for midlife rebuilds over mystery pouch modules.【F:knowledge/notes/denis_all_part02_review.md†L224-L225】
 - Refurbished Samsung 35E/50E lots from NKON’s late-2021 inventory remain Denis’ go-to when new stock dries up—he logs batch codes so midlife rebuilds stay traceable.【F:knowledge/notes/denis_all_part02_review.md†L97241-L97259】
 - Secure the Wildman case upright with clamps or cages instead of glue fills so thieves cannot unzip the pack in seconds and technicians can still service the battery.[^bag-security]
@@ -65,6 +86,7 @@
 
 ### Workshop Hardware Notes
 - Cold-to-warm transitions deflate 10″ tubeless tires; top pressures off before leaving heated garages so thermal contraction doesn’t mimic a puncture on the first winter ride.[^thermal-expansion]
+- Base-model scooters can regain telemetry by swapping in Xiaomi dashboards—simple three-wire harness swaps or aftermarket boards such as m365dash.com restore data-line access even when Rita isn’t present.[^dash-retrofit]
 - Boyueda 2800 W/60 H hubs run on Kelly controllers at 200 + A for torque but need temperature monitoring and robust cooling before chasing long hill pulls.[^boyueda-torque]
 - Monorim-branded motors earn criticism for price versus output—builders stick with PMT, Vsett, or Blade-spec hubs paired with trusted controllers instead of paying a Monorim premium.[^monorim-motor]
 - PMT 10×3 casings need roughly 2 mm removed from Xiaomi rim sidewalls (or Dualtron-class wheels) to seat correctly, while PMT 10×2.125 rubber slips onto 6.1″ rims without machining.[^pmt-fitment]
@@ -146,8 +168,20 @@
 
 ### Firmware & Diagnostic Updates
 - Flash BLE 073/DRV 1.5.5 with standard DownG before loading Xiaogen’s modded bundle; Pro 2 dashboards resent aggressive downgrades, so keep a USB ST-Link ready in case a BLE write leaves only a blinking tail light.[^downg-workflow][^pro2-downgrade]
+- ST-Link with stock DRV 1.5.5 firmware revives controllers when mismatched images (e.g., BLE 126 on Denis’ BMS) trip error 21; follow the community recovery videos after failed DownG attempts.【F:knowledge/notes/all_part01_review.md†L121-L121】
+- Xiaomi drivetrains stay happiest near 27 A (≈800 W) sustained—higher battery or phase currents only deliver brief surges before heat climbs and packs sag, even with 350 W aftermarket hubs.【F:knowledge/notes/all_part01_review.md†L122-L122】
+- Modding Xiaomi’s charger with Vishay 14.3 kΩ feedback stacks demands flux, short checks, and careful soldering before trusting the new 50.4 V output.【F:knowledge/notes/all_part01_review.md†L123-L123】
+- Workshop cheat sheets map ESC error codes (e.g., 28 for HS FET faults) to likely root causes so post-mod anomalies are easier to triage.【F:knowledge/notes/all_part01_review.md†L124-L124】
 - Apple still blocks scooterhacking sideloads, leaving iOS riders dependent on an Android device (or emulator) for Xiaomi firmware tools unless they fall back to ST-Link reflashes.[^ios-android]
 - Target BLE 074 for stability on Pro dashboards, and remember VTA controllers shipping with ESC 1.5.5 cannot safely drop to BLE 0.90—stay on modern BLE builds and double-flash Xiaogen if the first pass misbehaves.[^ble074-stable][^vta-esc]
+- Pro 2 dashboards on firmware newer than DRV 2.2.3 clamp custom builds; stay on DRV 2.2.3 or temporarily downgrade to DRV 155 to configure Rita before returning to the latest release.【F:knowledge/notes/all_part01_review.md†L176-L176】
+- Denis’ Android Rita app still lacks native Pro 2 BLE support, so riders toggle permanent-emulator mode via desktop tools or flash XiaoGen 2.0.5 with m365Downgrade XG Mod 21 and keep an ST-Link handy for recovery.【F:knowledge/notes/all_part01_review.md†L177-L178】
+- Match Drive-mode current to pack voltage—32 A on 12 S pulls roughly 1.3 kW, so dial back if you want a ~900 W ceiling.【F:knowledge/notes/all_part01_review.md†L179-L179】
+- Lap (wet-sand) the ESC baseplate and deck mating surfaces before final assembly so thermal paste spreads evenly and MOSFETs survive 40 A peaks.【F:knowledge/notes/all_part01_review.md†L180-L180】
+- Dashboards misreport speed after 10" swaps unless you adjust the wheel constant (≈8.1 % in Xiaogen) and confirm against GPS; “Russian” throttle mode keeps lever travel mapped directly to torque for aggressive builds.【F:knowledge/notes/all_part01_review.md†L181-L181】
+- Inspect XT30/XT60 connectors first when scooters power-cycle after curb strikes—lifted phase pins or loose harnesses cause most symptoms before electronics fail.【F:knowledge/notes/all_part01_review.md†L195-L195】
+- Rain-damaged packs underscore waterproofing charge ports and dashboards; Denis quotes roughly eight hours to recharge his 13.8 Ah range kit with the stock brick once the scooter dries out.【F:knowledge/notes/all_part01_review.md†L196-L196】
+- Pro 2 riders chasing 12 S speed gains must reconfigure Rita’s pack parameters via M365 BMS Tool and often soften KERS (≈18 A) to keep the ESC alive during hard braking.【F:knowledge/notes/all_part01_review.md†L197-L197】
 - If a scooter stays dark after installing Rita, disconnect the dashboard, short the diagnostic pins to confirm the ESC still boots, inspect the controller underside for blown traces, and escalate to ST-Link probing to verify the 5 V rail.[^rita-dark]
 - Camilo’s BLE 074 v7 firmware adds throttle filtering and a slow mode but can trigger sluggish launches or random slow-mode engagement on Xiaogen tunes; riders disable cruise or roll back to earlier BLE revisions while waiting for fixes.[^ble074-v7]
 - Series-boosting a 10 S pack with an extra 3 S module can brown out on hills as sag or firmware limits trip—monitor current in M365 Dashboard, rein in custom firmware amp draws, and only re-enable boosters once voltages stay stable.[^series-booster-sag]
@@ -164,13 +198,19 @@
 - Custom pack counts such as 11 S require dropping the regen ceiling toward 47 V, matching Rita’s cell count, and charging with a dedicated 11 S supply because Xiaomi’s 10 S brick stops around 41.7 V and leaves the extra cell under-filled.[^11s-firmware]
 
 ## Tire, Brake & Chassis Upgrades
+- Plan mechanical brake upgrades alongside 12 S Rita builds—the combo touches ~40 km/h on flat ground when fully charged, so stronger stoppers keep the extra speed manageable.[^brake-upgrade]
 - Organic pads fade under repeated high-speed stops, so faster riders shift to sintered or ceramic compounds despite faster rotor wear; dual-disc conversions split a single lever’s cable to keep both calipers synchronised.[^sintered-pads]
 - Classic cable-disc brakes tighten via the lever’s barrel adjuster for fine tweaks and the caliper’s hex bolt for coarse moves; if levers start bottoming out, inspect pad thickness before chasing cable stretch.[^cable-disc-tuning]
 - Confirm Pro 2 hub bolt patterns before ordering 6-bolt MTB rotors, and note Tudor is gauging demand for a Monorim 500 W brake adapter once about 20 riders commit so machining costs pencil out.[^rotor-pattern][^monorim-adapter]
+- Ten-inch conversions vary by casing: CST 10×2.25 tyres often need rim sanding, Kenda-branded 152 mm carcasses mount tight, and Wanda 10×2 options stay grippy at ~4.2 bar while outlasting ultra-soft red compounds.【F:knowledge/notes/all_part01_review.md†L185-L185】
+- SKF-style 2RS bearings seal better for wet riding than 2Z shields, keeping grit out during rainy commutes.【F:knowledge/notes/all_part01_review.md†L186-L186】
+- Semi-metallic (gold) pads hold up in rain better than the organic sets bundled with Xtech calipers, whereas ceramic pads run hot and demand close rotor monitoring.【F:knowledge/notes/all_part01_review.md†L187-L187】
+- Rear-suspension kits stretch the wheelbase roughly 10 cm and noticeably stabilise Xiaomi frames for higher-speed builds.【F:knowledge/notes/all_part01_review.md†L188-L188】
 - Pull the side plate so the hub and tire slide off together, and match 10" solid rubber by inner diameter and width before trimming any metal.[^solid-removal]
 - Fitting Deli 10×2" tires on 1S/Pro 2 frames often means relocating or shaving the rear-light connector, extending wiring, and resealing the reroute with hot glue or deck grommets.[^deli-routing]
 - Mountain-bike cockpit swaps need oval-to-round stem adapters and relocating the BLE/display harness; expect to dig Xiaomi’s foam-packed frames clear before fishing fresh cabling or motor leads.[^stem-adapter][^frame-foam]
 - Monorim 500 W hubs that start vibrating after 45 km/h emergency stops usually implicate controller damage or clamping issues—inspect Rita braking current, MOSFET mounting pressure, and thermal paste coverage before blaming the bearings.[^monorim-vibration]
+- Solid tires remain a last resort: expect ~20 % more energy use, harsher rides, and the risk of fatiguing battery tabs; most riders revert to 10" CST or Wanda pneumatics with reinforced tubes and fair labour pricing.【F:knowledge/notes/all_part01_review.md†L159-L159】
 - Builders now coat controller fasteners with medium-strength thread locker, replace kapton under MOSFETs with high-conductivity pads, and even fill sealed hubs with mineral oil to beat external fin kits.[^controller-fasteners][^oil-cooling]
 - CST 10×2.25 tires sized for 152 mm rims refuse to seat on Xiaomi’s 155 mm wheels and can foul the frame even if forced—swap to scooter-specific casings instead of trimming hardware.[^cst-152mm]
 - Monorim 500 W tire options remain finicky: riders have reverted to 8" rubber or alternate casings after wobble-induced crashes because the motor bay leaves little clearance for standard pneumatics.[^monorim-tires]
@@ -189,8 +229,16 @@
 - Killing Monorim stem play starts with loosening the side bolts, tightening the central hinge screw just enough to remove wobble, then re-locking the pinch bolts—over-clamping snaps the fastener and causes crashes.[^stem-play-fix]
 - Monorim handlebar adapters raise the folded deck slightly; rotate or shim the bell hook so it still latches the rear fender.[^bell-hook]
 - Tire reliability improves with best practices: run Xuancheng 10" rubber at 4.0–4.2 bar, dust tubes with talc so they do not stick, and use slime or careful lever work to avoid pinch flats during swaps.[^tire-maintenance]
+- 500 W hub swaps paired with 12 S packs hold 45–48 km/h on flats without the sag toward ~44 km/h seen on 300 W motors once voltage droops.【F:knowledge/notes/all_part01_review.md†L200-L200】
 
 ## Battery Sourcing, Safety & Maintenance
+- Cheap eBay “25 A” BMS boards have tripped around 18 A and dropped externals offline despite balanced cells; swap to trusted 20–30 A units before pairing packs with Rita.【F:knowledge/notes/all_part01_review.md†L172-L172】
+- Firmware hacks that push Xiaomi charge current to 5 A cook legacy M365 BMS boards near 150 °C—stick with Samsung 35E cells and quality 20 A common-port modules when building auxiliaries.【F:knowledge/notes/all_part01_review.md†L151-L151】
+- 13 S and even 15 S are electrically possible on newer scooters, but older hardware needs resistor swaps and broader component upgrades before surviving the voltage jump.【F:knowledge/notes/all_part01_review.md†L152-L152】
+- Water-damaged M365 packs often revive after cleaning the BMS with isopropyl alcohol; Denis keeps compatible replacements on hand when telemetry refuses to recover.【F:knowledge/notes/all_part01_review.md†L155-L155】
+- External LED strips need proper step-down converters because most consumer strips are rated ≤24 V—tapping the 36 V bus directly is unsafe.【F:knowledge/notes/all_part01_review.md†L156-L156】
+- A regen-heavy stop without Rita protection scorched both BMS and controller on one customer build; disconnect immediately, recharge sub-2 V cells individually, and tidy any loose sensor wiring before blaming the board.【F:knowledge/notes/all_part01_review.md†L157-L157】
+- Dashboard brownouts triggered by headlight toggles usually signal BMS faults—swap in a known-good pack, inspect each parallel group, and replace fuses before chasing controller issues.【F:knowledge/notes/all_part01_review.md†L158-L158】
 - Community teardowns flagged “36 V 20 Ah” AliExpress packs stuffed with only 12 genuine cells; honest 20 Ah builds cost ~€350 and ship as 10S6P, so >42 V “36 V” packs are red flags.[^fake-pack]
 - Tudor/VTA common-port externals wire Rita’s XT30 to C-/B- while leaving P- unused so charge and discharge share the same port safely.[^common-port-routing]
 - Store packs near 3.7 V (≈50 % SOC), replace water-damaged groups, favor warm indoor storage over cold garages, and keep large assemblies in LiPo-safe bags with extinguishers on hand to curb thermal runaway risk.[^storage]
@@ -221,6 +269,10 @@
 - LiPo bricks can pair with Rita but only with protective BMS boards and tight current limits because the adapter’s 40 A fuse is the last line of defense—pouch packs vent violently compared with reputable 18650s.[^lipo-bms]
 - Point novices toward Micah Toll guides and Vruzend prototyping kits before attempting welded packs, and remind them that RC LiPos wired 6S+6S demand a dedicated 12 S BMS plus a non-Xiaomi charger to avoid fire risk.[^lipo-warning]
 - Match your BMS to the intended series count—12 S packs need purpose-built 12 S boards rated near Rita’s 30 A ceiling rather than repurposed 10 S modules.[^bms-match]
+
+### Security & Accessory Notes
+- Some immobilisers expect 415 MHz remotes; riders running 315 MHz keyfobs need matching radio modules before tapping the controller’s 5 V feed.【F:knowledge/notes/all_part01_review.md†L167-L167】
+- Compact Master Lock cables suffice for quick stops if you keep the mechanism lubricated with graphite, but couriers warn that leaving scooters unlocked in dense cities invites theft within minutes.【F:knowledge/notes/all_part01_review.md†L191-L192】
 - Expect reputable 10 S materials to cost at least €100 before labor or taxes; suspiciously cheap packs usually hide weak cells and bargain BMS hardware.[^pack-cost]
 - Denis’ go-to cell shortlist still spotlights LG MJ1, Samsung 35E, and Sanyo options vetted with lygte-info’s 18650 comparator before landing in Wildman builds.[^cell-shortlist]
 
@@ -279,6 +331,7 @@
 ## Charging, Connectivity & Instrumentation
 - Plug chargers into the scooter before the wall to reduce inrush sparks, and remember Rita automatically shares the stock charge port across both packs.[^charging-etiquette]
 - External packs tolerate up to ~10 A when charged directly, but keep the scooter inlet around 2 A to avoid stressing the OEM BMS; buy a dedicated high-current brick for faster off-scooter top-ups.[^charge-current]
+- Denis is prototyping an XT30-to-Xiaomi charger adapter so externals can charge independently while Rita still tops the internal pack first through the scooter port.[^xt30-adapter]
 - Scooter Companion/BLE telemetry may show blank data after rides unless the external pack sits ~0.5 V above the internal pack; kill competing apps, downgrade BLE if needed, or try older Android builds.[^ble-troubleshooting]
 - Rita only reports as the primary BMS when its pack voltage leads by roughly 0.5 V, so expect telemetry to toggle during mixed-charge scenarios.[^primary-bms]
 - Serial access needs FTDI ground tied to Rita ground, TX on yellow, RX on white, plus a 1–10 kΩ pull-up because Rita’s TX is open-drain; power the board from any battery during configuration.[^serial-pinout]
@@ -366,6 +419,7 @@
 
 ## Support & Documentation
 - Denis maintains installation guides for Rita, external batteries, and repair BMS builds on his storefront to avoid marketplace fees and centralize support.[^docs]
+- Community members loan ST-Link programmers around the workshop chats and remind newcomers the tools are cheap locally, so keep one on hand for 1S/Pro 2 dashboard recoveries instead of waiting on mail-order replacements.[^stlink-loaner]
 - He keeps sales off eBay/PayPal to dodge the ~20 % marketplace fee and associated chargeback exposure, steering buyers to m365.embedden.com where those guides live alongside the order form.[^storefront]
 - Customers are urged to include order IDs in support tickets while Denis manually reconciles payments during banking or payment-processor outages.[^support-ops]
 - Rita MAX remains on the roadmap as the variant that natively understands Ninebot Max voltage reporting; legacy hardware will need adapters if riders migrate to that platform.[^rita-max]
@@ -394,7 +448,7 @@
 - Dual-dash AWD builds treat Rita as the master: tie controller grounds together, forward a single data lead to the slave dash, and investigate any Error 14 immediately because it signals cross-pack leakage the adapter should block.[^awd]
 - Treat a sudden Error 14 or 21 on a secondary dash as a wiring or polarity fault—Denis warns it means packs are backfeeding and the scooter should stay parked until the harness and BMS are rechecked.[^error14]
 - XiaoFlasher’s 13 S BMS emulator can add throttle lag, whereas Rita’s emulation keeps instant response when blending large internal packs with the stock dashboard.[^xiaoflasher]
-- Recurrent thermal shutdowns after a Rita upgrade usually trace to dried controller paste; replace compound (not pads) and monitor logs before pushing harder firmware—quality paste between the deck and controller can add 4–5 km/h at the same amps while keeping temps under ~45 °C.[^thermal-paste]
+- Recurrent thermal shutdowns after a Rita upgrade usually trace to dried controller paste; replace compound (not pads) and monitor logs before pushing harder firmware—quality paste between the deck and controller can add 4–5 km/h at the same amps while keeping temps under ~45 °C.[^thermal-paste] If temps spike immediately after the install, dial back Sport-mode amps and watch motor heat until the tune settles.[^heat-spike]
 - Use non-conductive thermal compound between MOSFETs and controller housings to boost heat transfer without risking shorts on the power stage.[^nonconductive-paste]
 - Tally charge time when evaluating third-party packs: the stock 1.7 A Xiaomi brick adds roughly 1.7 Ah per hour, so a genuine 12 Ah module should take close to seven hours from empty.【F:knowledge/notes/denis_all_part02_review.md†L98595-L98598】
 - Refresh high-load builds regularly: even reinforced controllers run warm at 24–29 A when hauling ~150 kg, so keep thermal paste fresh and monitor temps on extended climbs.[^heavy-load-heat]
@@ -647,12 +701,14 @@
 [^uart-kit]: 【F:knowledge/notes/all_part01_review.md†L282-L282】
 [^thermal-fuse]: 【F:knowledge/notes/all_part01_review.md†L284-L284】【F:knowledge/notes/all_part01_review.md†L424-L424】
 [^charge-current]: 【F:knowledge/notes/all_part01_review.md†L285-L285】【F:knowledge/notes/all_part01_review.md†L428-L428】
+[^xt30-adapter]: 【F:knowledge/notes/all_part01_review.md†L429-L429】
 [^pack-inspection]: 【F:knowledge/notes/all_part01_review.md†L288-L290】【F:knowledge/notes/all_part01_review.md†L423-L423】
 [^workshop-power2]: 【F:knowledge/notes/all_part01_review.md†L298-L298】
 [^bms-warranty2]: 【F:knowledge/notes/all_part01_review.md†L299-L299】
-[^shipping-updates]: 【F:knowledge/notes/all_part01_review.md†L300-L300】
+[^shipping-updates]: 【F:knowledge/notes/all_part01_review.md†L300-L300】【F:knowledge/notes/all_part01_review.md†L452-L454】
 [^rita-low-pack]: 【F:knowledge/notes/all_part01_review.md†L304-L304】
 [^rita-charge-order]: 【F:knowledge/notes/all_part01_review.md†L305-L305】
+[^smart-bms]: 【F:knowledge/notes/all_part01_review.md†L306-L306】
 [^zero-watt]: 【F:knowledge/notes/all_part01_review.md†L310-L310】
 [^xiao1s]: 【F:knowledge/notes/all_part01_review.md†L311-L311】
 [^storage-telemetry]: 【F:knowledge/notes/all_part01_review.md†L312-L312】
@@ -707,6 +763,7 @@
 [^aug-pause]: 【F:knowledge/notes/all_part01_review.md†L327-L327】
 [^throttle-steps]: 【F:knowledge/notes/all_part01_review.md†L466-L467】
 [^power-constant]: 【F:knowledge/notes/all_part01_review.md†L443-L443】
+[^heat-spike]: 【F:knowledge/notes/all_part01_review.md†L445-L445】
 [^heavy-load-heat]: 【F:knowledge/notes/all_part01_review.md†L469-L469】
 [^water-diagnostics]: 【F:knowledge/notes/all_part01_review.md†L481-L481】
 [^deck-threads]: 【F:knowledge/notes/all_part01_review.md†L490-L490】
@@ -742,6 +799,7 @@
 [^bms-ceiling]: 【F:knowledge/notes/all_part01_review.md†L182】
 [^bms-headroom]: 【F:knowledge/notes/all_part01_review.md†L184】
 [^battery-enclosures]: 【F:knowledge/notes/all_part01_review.md†L45】【F:knowledge/notes/all_part01_review.md†L48】
+[^wildman-e2]: 【F:knowledge/notes/all_part01_review.md†L94-L97】
 [^battery-bom]: 【F:knowledge/notes/all_part01_review.md†L46】【F:knowledge/notes/all_part01_review.md†L61】【F:knowledge/notes/all_part01_review.md†L66】【F:knowledge/notes/all_part01_review.md†L102】【F:knowledge/notes/all_part01_review.md†L145】【F:knowledge/notes/all_part01_review.md†L238】
 [^common-port]: 【F:knowledge/notes/all_part01_review.md†L101-L105】
 [^range-kits]: 【F:knowledge/notes/all_part01_review.md†L18】【F:knowledge/notes/all_part01_review.md†L260】
@@ -796,15 +854,16 @@
 [^pack-pricing]: 【F:knowledge/notes/all_part01_review.md†L110-L111】
 [^regional-pricing]: 【F:knowledge/notes/all_part01_review.md†L176】【F:knowledge/notes/all_part01_review.md†L274】
 [^range-speed-charging]: 【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L46】
-[^shipping-scope]: 【F:knowledge/notes/all_part01_review.md†L27】【F:knowledge/notes/all_part01_review.md†L177】【F:knowledge/notes/all_part01_review.md†L275】
+[^shipping-scope]: 【F:knowledge/notes/all_part01_review.md†L27】【F:knowledge/notes/all_part01_review.md†L177】【F:knowledge/notes/all_part01_review.md†L275】【F:knowledge/notes/all_part01_review.md†L453-L453】
 [^batching]: 【F:knowledge/notes/all_part01_review.md†L29】【F:knowledge/notes/all_part01_review.md†L33】【F:knowledge/notes/all_part01_review.md†L174】
 [^lead-times]: 【F:knowledge/notes/all_part01_review.md†L32】【F:knowledge/notes/all_part01_review.md†L34】【F:knowledge/notes/all_part01_review.md†L35】【F:knowledge/notes/all_part01_review.md†L212】
 [^charging-telemetry]: 【F:knowledge/notes/all_part01_review.md†L172-L173】【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L46】
 [^docs]: 【F:knowledge/notes/all_part01_review.md†L17】
+[^stlink-loaner]: 【F:knowledge/notes/all_part01_review.md†L458-L458】
 [^storefront]: 【F:knowledge/notes/all_part01_review.md†L17-L18】
 [^support-ops]: 【F:knowledge/notes/all_part01_review.md†L150】
 [^rita-max]: 【F:knowledge/notes/denis_all_part02_review.md†L195-L196】
-[^serbia]: 【F:knowledge/notes/all_part01_review.md†L300-L300】
+[^serbia]: 【F:knowledge/notes/all_part01_review.md†L300-L300】【F:knowledge/notes/all_part01_review.md†L452-L454】
 [^workshop-power]: 【F:knowledge/notes/all_part01_review.md†L298-L298】
 [^bms-warranty]: 【F:knowledge/notes/all_part01_review.md†L299-L301】
 [^thirteen-steps]: 【F:knowledge/notes/all_part01_review.md†L162-L166】【F:knowledge/notes/all_part01_review.md†L217】
@@ -819,6 +878,7 @@
 [^rain-proof]: 【F:knowledge/notes/all_part01_review.md†L41-L41】
 [^stlink]: 【F:knowledge/notes/all_part01_review.md†L47-L49】
 [^dash-update]: 【F:knowledge/notes/all_part01_review.md†L48-L48】
+[^dash-retrofit]: 【F:knowledge/notes/all_part01_review.md†L93-L93】
 [^face-ltd]: 【F:knowledge/notes/all_part01_review.md†L50-L50】
 [^power-risks]: 【F:knowledge/notes/all_part01_review.md†L22】【F:knowledge/notes/all_part01_review.md†L155】【F:knowledge/notes/all_part01_review.md†L170-L171】
 [^legacy-boards]: 【F:knowledge/notes/denis_all_part02_review.md†L29-L33】【F:knowledge/notes/denis_all_part02_review.md†L153】
@@ -829,6 +889,8 @@
 [^error14]: 【F:knowledge/notes/denis_all_part02_review.md†L26-L31】【F:knowledge/notes/denis_all_part02_review.md†L6433-L6456】
 [^thermal-paste]: 【F:knowledge/notes/denis_all_part02_review.md†L32-L33】
 [^counterfeit]: 【F:knowledge/notes/denis_all_part02_review.md†L19-L23】
+[^resell-cost]: 【F:knowledge/notes/all_part01_review.md†L91-L92】
+[^price-10s]: 【F:knowledge/notes/all_part01_review.md†L110-L110】
 [^bag-security]: 【F:knowledge/notes/denis_all_part02_review.md†L42-L45】
 [^pack-charger]: 【F:knowledge/notes/denis_all_part02_review.md†L45-L46】
 [^tool-packs]: 【F:knowledge/notes/denis_all_part02_review.md†L235-L235】

@@ -5,13 +5,14 @@
 | --- | --- | --- |
 | Use a common-port BMS on every auxiliary pack | Separate charge ports let the charger overrun cells through the discharge lead. | Swap third-party boards before pairing AliExpress packs with Rita.[^common-port]
 | Inspect harness length and XT30 condition | Rita ships with XT30 pigtails sized for the enclosure; hot-swapping wears them quickly. | Reinforce joints and avoid repeated plugs/unplugs.[^xt30]
+| Plan anti-spark placement between Rita and the controller | Cutting power upstream of the adapter keeps Rita’s charge logic live. | Mount switches between Rita and the scooter controller instead of between the battery and Rita.[^antispark]
 | Vet pack specs and Y-cable build quality | Counterfeit “13.8 Ah” 10S2P packs and unsoldered Y-cables have already shorted bags. | Demand cell-level photos, dispute impossible ratings, and rework joints before mounting.[^ali-audit] |
 | Confirm donor packs are scooter-grade | Lawn mower/tool batteries overheat near 25 A and barely contribute unless voltage matches scooter packs. | Skip five-cell tool packs and verify wattage before strapping externals to Rita.[^tool-warning] |
 | Match external chemistry and wiring | Rita only tolerates identical external packs with common charge/discharge ports—mixing a factory pack and Litokala brick through one harness can pop the adapter. | Keep externals the same series count and BMS topology before paralleling.【F:knowledge/notes/denis_all_part02_review.md†L116206-L116215】 |
 | Never parallel 48 V and 36 V packs directly | Voltage deltas dump current violently without Rita handling the blend. | Equalise matching packs before connection and rely on Rita when mixing series counts; direct pairing invites huge inrush and pack damage.【F:knowledge/notes/denis_all_part02_review.md†L508-L508】 |
 | Leave modern jumpers intact | Current Rita harnesses ship ready for 13 S use—set cell count in the app before connecting packs instead of cutting jumpers on newer boards.【F:knowledge/notes/denis_all_part02_review.md†L122300-L122315】 | Prevents self-inflicted wiring faults on updated hardware. |
 | Stock up on 5–5.5 mm bullet connectors | Rita and Happy harnesses use common “banana” bullets—larger plugs reduce heating on 30 A builds. | Verify diameter before ordering; AliExpress listings vary wildly.[^bullet] |
-| Pre-fit the Wildman 2 L case or equivalent mount | Denis’ 8 Ah/12 S3P modules are sized to the 2 L shell; larger customs need 3 L brackets. | Pad the internal screws, route the lead upward, and print Denis’ updated 2 L/3 L STL mounts with bolt sleeves so externals stay fixed instead of floating on foam.[^cases][^wildman-stl]
+| Pre-fit the Wildman 2 L case or equivalent mount | Denis’ 8 Ah/12 S3P modules are sized to the 2 L shell; larger customs need 3 L brackets. | Pad the internal screws, route the lead upward, and note that the Wildman E2 (≈180 × 105 × 83 mm) fits 8 Ah bricks while the 1 L shell only swallows compact 36 V hoverboard packs; 3 L shells demand printed brackets plus bolt sleeves so externals stay fixed instead of floating on foam.[^cases][^wildman-stl]
 | Model bag volume for 13S customs | A 13S4P barely fits 3 L shells; Denis’ own 13S4P bricks just squeeze into the Wildman 2 L, and stacking two builds a 13S8P tower that tames voltage sag for dual 500 W hubs. Expect LG MJ1 cores to droop more than Samsung 35E under the same loads. | Mock up layouts before drilling hardware into the pack.[^bag-volume][^bag-stack]
 | Stage firmware tools (M365 BMS Tool or XiaFlasher) and plan BLE downgrades | Configuration toggles (e.g., permanent emulator, cell count) require legacy BLE versions. | BLE 073/090 restore connectivity when the latest dashboard blocks access.[^ble]
 | Reinforce controllers for ≥12 S or >27 A tunes | Stock traces and MOSFETs overheat above ~1 kW. | Pair firmware changes with soldered copper, thermal paste refresh, and conservative current ramps.[^thermal-prep]
@@ -27,6 +28,7 @@
 5. **Flash and configure**: Downgrade BLE, connect the M365 BMS Tool, enable the permanent-emulator mode for analog scooters, and set the correct series count before first ride.[^configure]
    - Reopen the app every time you swap external pack voltage—builders toggling between 36 V and 48 V externals update Rita’s series/capacity fields before reconnecting to keep braking protections alive.【F:knowledge/notes/denis_all_part02_review.md†L58-L59】
 6. **Perform voltage and regen checks**: Verify recuperation-off voltage (≈4.15 V for 12 S), confirm throttle response using conservative intensity-of-current-change values (~300–350 mA), and watch for error 39 beeps that indicate regen or battery current above Rita’s ceiling.[^regen-check][^current-cap]
+- Let new installs rest on the charger until they hit roughly 51 V before the first ride so the 12 S boost is evident and regen patches are validated under full voltage.[^first-ride]
 - Skip XiaoFlasher’s 13 S emulator for regular use—it adds throttle lag, whereas Rita’s own emulation keeps large internal packs responsive on the stock dash.[^xiaoflasher_lag]
 
 ## Configuration Scenarios
@@ -38,11 +40,12 @@
 - Expect telemetry to hop between packs during charge/discharge; disconnect or top-charge the external pack when you need to read its stats.[^telemetry-hop]
 
 ### 12 S Upgrade Path
-- Complete three prerequisites: flash 50.4 V-ready firmware, reinforce controller power rails, and secure a 12 S-capable charger (modding OEM bricks with a 14.3 kΩ resistor or sourcing 50.4 V CC/CV units).[^12s-steps]
+- Complete three prerequisites: flash 50.4 V-ready firmware, reinforce controller power rails, and secure a 12 S-capable charger—the stock 42 V Xiaomi brick stops at 10 S, so either add a 14.3 kΩ feedback stack to the OEM supply or adopt a Mean Well ELG-240-48A-class unit once you source the coaxial plug.[^12s-steps][^hv-charger]
 - Cut Rita’s pink jumper only when stepping beyond 10 S, retain XT30 hardware, and continue matching pack voltages before parallel connection.[^jumper]
 - Limit sustained draws near 27 A (~800 W) unless you have robust cooling (ferrofluid, thermal paste refresh) and MOSFET upgrades.[^current-limit]
 - Keep nominal voltage at 51 V in XiaoFlasher/XiaoGen profiles so Rita’s charge thresholds and protections remain aligned after the upgrade.[^fiftyone]
 - Reprogram Rita every time you swap between 10 S and 12 S externals; the workshop explicitly warned that leaving the adapter on 10 S while plugging a 12 S pack will disable braking protections until you correct the setting.[^swap-settings]
+- Pro 2 dashboards still need DRV2.2.3 (or a temporary downgrade to DRV155) to configure Rita, and the Android app lacks native Pro 2 BLE support—toggle permanent-emulator mode via desktop tools before returning to newer firmware.[^pro2-config]
 
 ### Clone Scooters without Data Lines
 - Rita can operate as paired smart diodes, sharing current between packs while blocking reverse flow; regenerative braking must remain disabled in this analog mode.[^analog-mode]
@@ -58,9 +61,10 @@
 ## Operational Practices
 
 ### Charging & Energy Management
-- Rita charges whichever pack sits lower, continuing to top batteries after the scooter powers down; rely on charger LEDs to confirm completion.[^charge-flow]
+- Rita charges whichever pack sits lower and will sequence mixed 10S/12S stacks—expect the internal pack to plateau around 42 V before higher-voltage externals continue climbing. The adapter keeps topping packs after shutdown, so rely on charger LEDs and unplug externals when you need standalone charging because both packs share the scooter inlet.[^charge-flow][^mixed-charge]
 - Treat 13 S chargers on 12 S packs as emergency-only top-ups—unplug early or use a timer, because survival depends on the BMS tripping before the pack overcharges.[^13s-emergency]
-- Non-common-port externals still need standalone charging—Rita prioritises the lower-voltage pack first, but feeding a charger through the discharge lead bypasses the external BMS entirely.[^lower-pack-first]
+- Non-common-port externals still need standalone charging—Rita prioritises the lower-voltage pack first, but feeding a charger through the discharge lead bypasses the external BMS entirely.[^lower-pack-first][^common-port-split]
+- External-only charge sessions demand manual harness swaps once the auxiliary pack leaves the scooter; use a dedicated XT30 adapter rather than expecting Rita to backfeed a loose pack.[^harness-swap]
 - Capacity tests happen with a constant-current load while the internal pack stays connected—only reconnect externals once voltages sit within about 1 V to avoid hammering the weaker BMS.【F:knowledge/notes/denis_all_part02_review.md†L335-L336】
 - Dual 10 S packs do not strictly require Rita inline, but conservative builders leave it in place for monitoring—expect charge sessions to plateau around 41.2 V because the adapter’s diodes mirror the stock charger behaviour.【F:knowledge/notes/denis_all_part02_review.md†L97-L98】
 - Charging through Rita tops the internal pack first; unplug externals and use a dedicated XT30 harness when you need to fast-charge auxiliary batteries.[^fast-charge]
@@ -76,6 +80,7 @@
 - Treat the internal pack as a rider, not a charger—repurposing it to backfeed other batteries without current limiting is a documented fire risk; build dedicated externals with their own BMS instead.[^pack-fire]
 - External packs support direct charging via dedicated harnesses; Denis is developing XT30-to-Xiaomi adapters for easier off-scooter top-ups.[^offboard-charge]
 - Cap shared-port charging around 2 A to protect the OEM BMS; use dedicated high-current chargers when faster turnaround is needed.[^charge-limit]
+- Budget for a real 50.4 V supply—Mean Well ELG-240-48A-class bricks or modded Xiaomi chargers with 14.3 kΩ feedback stacks—and source the OEM coaxial plug before final assembly; acquiring the connector is often the hardest step.[^hv-charger]
 - Check pack SOC when shipments arrive—warehouses often target 30–50 % for long-term compliance even if some scooters ship near full, so balance packs before hard use.【F:knowledge/notes/input_part006_review.md†L39-L39】
 - Keep packs above ~10 °C in winter with heated bags or external warmers to stop Molicel-equipped builds from sagging on cold commutes.【F:knowledge/notes/input_part006_review.md†L40-L40】
 - Store packs near 3.7 V per cell in temperate spaces—cold garages accelerate degradation.[^storage]
@@ -108,6 +113,7 @@
 ## Troubleshooting Quick Reference
 | Symptom | Likely Cause | Corrective Actions |
 | --- | --- | --- |
+| Rita ignores an external pack showing ~27 V | The adapter treats sub-32 V inputs as empty or the pack uses a separate-port BMS. | Top-charge toward nominal voltage and swap to a common-port board so Rita recognises the pack before trying again.【F:knowledge/notes/all_part01_review.md†L304-L305】
 | M365 BMS Tool cannot connect | Dashboard on latest BLE firmware blocks access. | Downgrade BLE to 073/090 and close other Bluetooth apps before retrying.[^ble]
 | Error 14 on dual dashboards | Cross-pack current leakage after Rita install. | Re-check polarity, isolate each controller, and verify Rita blocks inter-pack flow before commuting.[^error14] |
 | Error 18 after controller swap | Damaged hall harness | Replace the hall cable when multiple controllers throw the same fault post-upgrade.[^error18] |
@@ -116,6 +122,7 @@
 | Adapter loses BMS telemetry after flashing | Rita needs a clean reset to the stock harness before reflashing the battery BMS. | Remove the adapter, restore factory wiring, flash the 12800 image via ST-Link, recharge to ≈41–42 V, then reinstall Rita.[^bms-reflash] |
 | Telemetry shows 0 W or flips between packs | Rita reports whichever pack sits ~0.5 V higher; current sensor design hides wattage. | Match voltages, disconnect the higher pack temporarily, or use the pack’s BMS app for readings.[^telemetry-hop]
 | External telemetry disappears while charging | Rita hides the auxiliary pack indicator whenever a charger is connected. | Treat blank readings as normal until the charger is unplugged; rely on charger LEDs or the Rita app for confirmation.【F:knowledge/notes/denis_all_part02_review.md†L408-L409】 |
+| Pro 2 setups still cannot open the M365 BMS Tool | The platform lacks BLE support even after flashing paid firmware. | Configure Rita with XiaoFlasher or desktop tools instead of relying on the M365 BMS Tool when working on Pro 2 dashboards.【F:knowledge/notes/all_part01_review.md†L344-L344】 |
 | Regen jerks throttle after full charge | Recuperation threshold too low on 12 S/13 S setups. | Raise recuperation-off voltage to ≈4.15 V and retest braking intensity.[^regen-check]
 | Rita fuse blows or pack overheats | Non-common-port BMS or miswired external battery. | Rewire with common-port boards and verify polarity before reconnecting.[^common-port]
 | Controller thermal shutdowns | Excessive current or insufficient reinforcement. | Reduce current-change intensity, add cooling mods, and inspect solder reinforcements.[^thermal-prep]
@@ -127,9 +134,11 @@
 ## Source Notes
 
 [^parallel]: 【F:knowledge/notes/all_part01_review.md†L16-L21】【F:knowledge/notes/all_part01_review.md†L133】
-[^common-port]: 【F:knowledge/notes/all_part01_review.md†L19】【F:knowledge/notes/all_part01_review.md†L180】【F:knowledge/notes/all_part01_review.md†L241-L242】
+[^antispark]: 【F:knowledge/notes/all_part01_review.md†L104-L104】
+[^common-port]: 【F:knowledge/notes/all_part01_review.md†L19】【F:knowledge/notes/all_part01_review.md†L101-L102】【F:knowledge/notes/all_part01_review.md†L180】【F:knowledge/notes/all_part01_review.md†L241-L242】
 [^xt30]: 【F:knowledge/notes/all_part01_review.md†L20】【F:knowledge/notes/all_part01_review.md†L24】【F:knowledge/notes/all_part01_review.md†L61】【F:knowledge/notes/all_part01_review.md†L223】
-[^cases]: 【F:knowledge/notes/all_part01_review.md†L45】【F:knowledge/notes/all_part01_review.md†L48】【F:knowledge/notes/all_part01_review.md†L221-L223】
+[^cases]: 【F:knowledge/notes/all_part01_review.md†L45】【F:knowledge/notes/all_part01_review.md†L48】【F:knowledge/notes/all_part01_review.md†L94-L97】【F:knowledge/notes/all_part01_review.md†L221-L223】
+[^common-port-split]: 【F:knowledge/notes/all_part01_review.md†L101-L102】
 [^wildman-stl]: 【F:knowledge/notes/denis_all_part02_review.md†L345-L346】
 [^ble]: 【F:knowledge/notes/all_part01_review.md†L12】【F:knowledge/notes/all_part01_review.md†L23】【F:knowledge/notes/all_part01_review.md†L219】
 [^thermal-prep]: 【F:knowledge/notes/all_part01_review.md†L22】【F:knowledge/notes/all_part01_review.md†L73】【F:knowledge/notes/all_part01_review.md†L123】【F:knowledge/notes/all_part01_review.md†L155】
@@ -140,11 +149,13 @@
 [^balance-wiring]: 【F:knowledge/notes/denis_all_part02_review.md†L7028-L7068】
 [^telemetry-setup]: 【F:knowledge/notes/all_part01_review.md†L16】【F:knowledge/notes/all_part01_review.md†L44】【F:knowledge/notes/all_part01_review.md†L206】
 [^configure]: 【F:knowledge/notes/all_part01_review.md†L23】【F:knowledge/notes/all_part01_review.md†L71】【F:knowledge/notes/all_part01_review.md†L219】
+[^harness-swap]: 【F:knowledge/notes/all_part01_review.md†L105-L105】
 [^regen-check]: 【F:knowledge/notes/all_part01_review.md†L169-L171】【F:knowledge/notes/all_part01_review.md†L265】
 [^current-cap]: 【F:knowledge/notes/denis_all_part02_review.md†L22】【F:knowledge/notes/denis_all_part02_review.md†L31-L33】【F:knowledge/notes/denis_all_part02_review.md†L135】【F:knowledge/notes/denis_all_part02_review.md†L153】
 [^range-boost]: 【F:knowledge/notes/all_part01_review.md†L18】【F:knowledge/notes/all_part01_review.md†L260】
 [^range-speed-firmware]: 【F:knowledge/notes/all_part01_review.md†L18-L18】
 [^regen-risk]: 【F:knowledge/notes/all_part01_review.md†L171】
+[^mixed-charge]: 【F:knowledge/notes/all_part01_review.md†L103-L103】【F:knowledge/notes/all_part01_review.md†L112-L112】
 [^telemetry-hop]: 【F:knowledge/notes/all_part01_review.md†L25】【F:knowledge/notes/all_part01_review.md†L139】【F:knowledge/notes/all_part01_review.md†L219】【F:knowledge/notes/all_part01_review.md†L261】
 [^error39]: 【F:knowledge/notes/denis_all_part02_review.md†L22】【F:knowledge/notes/denis_all_part02_review.md†L29-L33】【F:knowledge/notes/denis_all_part02_review.md†L199】
 [^13s-emergency]: Emergency-only note about nudging 12 S packs with 13 S chargers; Denis warns survival depends on the BMS tripping before overcharge.【F:knowledge/notes/denis_all_part02_review.md†L509-L509】
@@ -157,6 +168,7 @@
 [^jumper]: 【F:knowledge/notes/all_part01_review.md†L123-L124】【F:knowledge/notes/all_part01_review.md†L162-L166】
 [^current-limit]: 【F:knowledge/notes/all_part01_review.md†L22】【F:knowledge/notes/all_part01_review.md†L73】【F:knowledge/notes/all_part01_review.md†L123】【F:knowledge/notes/all_part01_review.md†L155】
 [^fiftyone]: 【F:knowledge/notes/denis_all_part02_review.md†L27】【F:knowledge/notes/denis_all_part02_review.md†L122】
+[^first-ride]: 【F:knowledge/notes/all_part01_review.md†L307-L307】
 [^analog-mode]: 【F:knowledge/notes/all_part01_review.md†L19】【F:knowledge/notes/all_part01_review.md†L114】
 [^serial]: 【F:knowledge/notes/all_part01_review.md†L112-L114】
 [^clone-upgrade]: 【F:knowledge/notes/all_part01_review.md†L117】【F:knowledge/notes/all_part01_review.md†L206】【F:knowledge/notes/all_part01_review.md†L208】
@@ -166,7 +178,7 @@
 [^swap-settings]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L20056-L20058】【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L122582-L122584】
 [^smd-lock]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L202-L223】【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L60029-L60033】
 [^g2-charge]: 【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L131278-L131301】
-[^charge-flow]: 【F:knowledge/notes/all_part01_review.md†L54】【F:knowledge/notes/all_part01_review.md†L172】【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L46】
+[^charge-flow]: 【F:knowledge/notes/all_part01_review.md†L54】【F:knowledge/notes/all_part01_review.md†L103】【F:knowledge/notes/all_part01_review.md†L172】【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L46】
 [^lower-pack-first]: 【F:knowledge/notes/denis_all_part02_review.md†L443-L444】
 [^charging-telemetry-guide]: 【F:knowledge/notes/denis_all_part02_review.md†L33】【F:knowledge/notes/denis_all_part02_review.md†L46】【F:knowledge/notes/denis_all_part02_review.md†L127】
 [^schottky]: 【F:knowledge/notes/denis_all_part02_review.md†L103-L104】【F:knowledge/notes/denis_all_part02_review.md†L108-L110】
@@ -203,6 +215,8 @@
 [^recutoff]: 【F:knowledge/notes/all_part01_review.md†L212-L213】
 [^ghost-pack]: 【F:knowledge/notes/all_part01_review.md†L210-L210】
 [^soc-swing]: 【F:knowledge/notes/all_part01_review.md†L175-L175】
+[^hv-charger]: 【F:knowledge/notes/all_part01_review.md†L106-L107】【F:knowledge/notes/all_part01_review.md†L123-L123】
+[^pro2-config]: 【F:knowledge/notes/all_part01_review.md†L176-L177】
 [^happy-35a-ext]: 【F:knowledge/notes/denis_all_part02_review.md†L401-L401】
 [^happy-charge-limit]: 【F:knowledge/notes/denis_all_part02_review.md†L476-L476】
 [^bms-balancing]: 【F:knowledge/notes/denis_all_part02_review.md†L479-L481】

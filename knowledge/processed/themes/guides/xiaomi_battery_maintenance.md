@@ -13,6 +13,7 @@
 | --- | --- | --- |
 | Pack delta >150 mV | Use TP4056 boards or a bench supply with crocodile clips to top each weak parallel group before reconnecting the charger; leave the BMS in-circuit so protections stay active.【F:knowledge/notes/all_part01_review.md†L10-L11】 | Prevents unnecessary BMS swaps and restores balance after deep storage. |
 | Happy BMS pack reads 0 % with energy remaining | Keep riding cautiously—its coulomb counter saturates near 32 Ah but ~3 Ah remain; recalibrate during the next full charge cycle.【F:knowledge/notes/denis_all_part02_review.md†L16-L17】【F:knowledge/notes/denis_all_part02_review.md†L399-L401】 | Avoids panic over false-empty displays on oversized packs. |
+| Dash shows ≈91 % at 50.1 V on a 12S pack | Treat it as a UI quirk—the pack is effectively full even though the percentage lags. | Prevents unnecessary troubleshooting when full-charge voltage already confirms capacity.【F:knowledge/notes/all_part01_review.md†L361-L361】 |
 | Pack rests around 3.0–3.3 V per cell and refuses to charge | Treat the cutoff as normal Happy/Ninebot protection; bring voltage up gently and resume balancing before chasing a BMS replacement.【F:knowledge/notes/denis_all_part02_review.md†L101-L101】 | Prevents unnecessary board swaps when the pack simply hit its low-voltage guardrail. |
 | BMS emulation hides error 21 but charger still blinks | Inspect the battery for imbalance instead of reflashing—bypassing the data line never fixes mismatched cell groups.【F:knowledge/notes/denis_all_part02_review.md†L19-L20】 | Prevents overcharging damaged packs behind spoofed telemetry. |
 | Cell groups replaced piecemeal | Rebuild the entire pack; mixed-age cells fall out of balance quickly and waste the repair effort.【F:knowledge/notes/denis_all_part02_review.md†L67-L68】 | Ensures parallel groups age uniformly after service. |
@@ -28,6 +29,7 @@
 - Winter commutes can double energy use (~30 Wh/km vs. 18–20 Wh/km); keep packs warm indoors or add gentle heaters so cold batteries deliver rated capacity.【F:knowledge/notes/denis_all_part02_review.md†L161-L165】
 
 ### Water Intrusion & Corrosion Checks
+- Water-damaged M365 packs often recover after flushing the BMS with isopropyl alcohol; if telemetry still misreports, Denis keeps compatible replacements ready.【F:knowledge/notes/all_part01_review.md†L155-L155】
 - Error 28 beeps often trace to a shorted high-side MOSFET after water ingress; repeated wet/dry cycles leave pink stickers and white corrosion, so swap the controller instead of chasing intermittent faults.【F:knowledge/notes/denis_all_part02_review.md†L307-L308】
 - Power resets and false-low battery readings usually come from oxidation under the white battery plug—flush with contact cleaner, dry thoroughly, and improve sealing before riding in rain again.【F:knowledge/notes/denis_all_part02_review.md†L309-L309】
 
@@ -55,6 +57,7 @@
 - **Direct-to-XT30 charging:** Topping a Happy-equipped pack via the controller lead works in emergencies but bypasses over-voltage protection—monitor manually and disconnect once you hit the target voltage.【F:knowledge/notes/denis_all_part02_review.md†L185-L186】
 - **Backfeeding depleted packs:** Only nudge a 44 V pack with a 36 V charger when its open-circuit voltage sits under ~41 V; otherwise you risk over-voltage damage.【F:knowledge/notes/denis_all_part02_review.md†L37-L38】
 - **Accessory power:** Dashboards expose just 5 V logic—use dedicated DC/DC converters for 12 V lighting, stress-relieve converter leads with RTV or zip ties, and avoid pulling power from charge ports to keep protections intact.【F:knowledge/notes/denis_all_part02_review.md†L28-L32】【F:knowledge/notes/denis_all_part02_review.md†L70-L71】
+- **Step-down LED strips:** Most consumer LED kits are rated ≤24 V; use a buck converter when tapping scooter packs because direct 36 V feeds cook the strip and risk shorts.【F:knowledge/notes/all_part01_review.md†L156-L156】
 - **Swap flaky “purple” dashboards:** If headlights sag throttle voltage and cap speed, replace the dash—regen current into 36–40 V lamps is safe, but faulty boards throttle output under load.【F:knowledge/notes/denis_all_part02_review.md†L486-L487】
 
 ## Safety & Upgrade Guardrails
@@ -69,6 +72,8 @@
 - **Never tie 48 V and 36 V packs directly together.** The workshop treats Rita as the only safe bridge—direct paralling dumps current violently and risks pack fires.【F:knowledge/notes/denis_all_part02_review.md†L508-L508】
 - **LiPo discipline:** RC LiPo bricks puff when stored at full charge and develop high internal resistance within days—treat them as short-term boosters, not daily commuter batteries.【F:knowledge/notes/denis_all_part02_review.md†L158-L159】
 - **Respect BMS ceilings.** Even 80 A-capable cells sag and trip protection if the pack still uses a 40 A BMS—raise ratings alongside parallel count to avoid false cut-outs.【F:knowledge/notes/all_part01_review.md†L93571-L93578】
+- **Respond quickly to regen-induced faults.** A regen-heavy stop without Rita scorched a customer’s BMS and controller—disconnect immediately, recharge sub-2 V cells individually, and tidy sloppy sensor wiring before condemning hardware.【F:knowledge/notes/all_part01_review.md†L157-L157】
+- **Treat headlight-triggered brownouts as BMS clues.** If toggling lights kills the dash or cuts throttle, test with a known-good pack, inspect every parallel group, and replace fuses before blaming the scooter electronics.【F:knowledge/notes/all_part01_review.md†L158-L158】
 - **Environmental prep:** Seal deck seams, cable ports, and hub joints with silicone plus lithium grease; add humidity sensors or alarms if you commute in heavy rain.【F:knowledge/notes/all_part01_review.md†L41-L41】【F:knowledge/notes/all_part01_review.md†L86-L88】
 
 ### Sleeper Packaging Templates
