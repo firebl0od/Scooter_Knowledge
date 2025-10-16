@@ -158,7 +158,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 - **Lock down the Express bridge.** New hardware enforces BLE passwords and exposes a Wi-Fi gateway, but the documentation lags.
   - capture setup steps so commuters don’t leave dashboards open to opportunistic pairing.[^98]
 - **Raspberry Pi dash bridge.** Yoann’s Pi-powered display now ships with a TCP bridge because the Pi Zero UART is tied up by the touchscreen; dropping baud to 9,600 cleared timeouts temporarily, but USB restored the original speed and a shared 3D case is on the way.[^99]
-- **Budget BLE bridges.** Generic nRF51 and ESP32 modules remain drop-in VESC Tool adapters once flashed with Vedder’s firmware, saving buyers from pricey Bluetooth dongles.[^100][^101]
+- **Budget BLE bridges.** Generic nRF51 and ESP32 modules remain drop-in VESC Tool adapters once flashed with Vedder’s firmware, saving buyers from pricey Bluetooth dongles—and Mirono keeps steering newcomers toward reflashed ESP32s instead of branded dongles when they want reliable telemetry on a budget.[^100][^101][^esp32-ble-swap]
 - **Stabilise nRF51822 boards.** A €2 BLE module held a 10 m connection through walls after a 10 µF ceramic decoupler was soldered across its supply rails, curing the random crashes riders saw on bare modules.[^102]
 - **Track emerging CAN dashboards.** JPPL is test-driving the Titaone X10 controller plus Bluetooth module to see if it exposes VESC telemetry while sharing power with a 20 S 4 P commuter pack at 60 A.
   - log compatibility findings before promising customers a drop-in alt-dash.[^103]
@@ -261,6 +261,7 @@ This guide distills field reports on powering lights, horns, and dashboards from
 
 - Choose 12 V-friendly WS2815 or similar pixel strips so a single buck can feed both controller logic and the lighting rail without brownouts; they still need ESP32/WLED drivers and regulated supplies or the strips overheat.[^159]
 - Flash ESP32/WLED controllers with per-mode current caps, set boot presets that default to dim commuter profiles, and isolate the data line with a logic-level shifter when the strip sits far from the controller harness.[^159]
+- **Repurpose failed controllers as CAN/BLE hubs.** Even with the power stage removed, a VESC still runs dashboards, BLE bridges, and other peripherals when its DC/DC section is intact, letting travelers keep telemetry alive while waiting on replacement ESCs.[^vesc-can-bridge]
 - Budget fusing and surge suppression.
   - inline 3–5 A fuses plus TVS diodes on the buck output prevent decorative installs from collapsing the accessory rail when pixels short or moisture enters connectors.[^159]
 
@@ -418,6 +419,8 @@ This guide distills field reports on powering lights, horns, and dashboards from
 [^61]: Source: data/vesc_help_group/text_slices/input_part009.txt†L12510-L12513
 [^62]: Source: knowledge/notes/input_part003_review.md†L108-L163
 [^63]: Source: knowledge/notes/input_part003_review.md†L192-L192
+[^esp32-ble-swap]: Source: data/vesc_help_group/text_slices/input_part004.txt†L20350-L20370
+[^vesc-can-bridge]: Source: data/vesc_help_group/text_slices/input_part004.txt†L23039-L23042
 [^64]: Source: data/vesc_help_group/text_slices/input_part003.txt†L26600-L26606
 [^65]: Source: knowledge/notes/input_part012_review.md†L170-L170
 [^66]: Source: data/vesc_help_group/text_slices/input_part003.txt†L21249-L21272

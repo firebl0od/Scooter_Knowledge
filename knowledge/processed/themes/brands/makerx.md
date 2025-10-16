@@ -29,7 +29,7 @@
 - Field logs put Hi200 “200 A continuous” claims in check: Mirono saw ~70 °C after 30 minutes at 45 A battery / 150 A phase inside a bag, so plan external heatsinks, shorter phase leads, and MOSFET part verification before trusting marketing brochures.[^26]
 - Sabvoton’s recurring DOA shipments—throttle loops, sloppy Kapton layering, hall failures—are pushing riders toward MakerX despite the need for torque arms and careful QC, especially when paired with proper controller mounting.[^27]
 - CAN connectors and isolated low-voltage domains also earned praise in the teardown thread; riders noted MakerX detected halls and throttle immediately while the Sabvoton needed reflashing and days of unanswered tickets.[^28]
-- Fire incidents on GO-FOC boards—even at 96 V / 80 A battery with added fans—show new batches need staged validation before matching Spintend or 3Shul duty cycles.[^29]
+- Fire incidents on GO-FOC boards—even at 96 V / 80 A battery with added fans—show new batches need staged validation before matching Spintend or 3Shul duty cycles; Simone’s success hinges on aggressive cooling, while Face de Pin Sucé already logged four catastrophic failures from the same production run.[^29][^gofoc-caution]
 - MakerX’s MOSFET choices (e.g., NECP045N85GU) mirror failure-prone Flipsky runs; continuous current should stay conservative unless the build adds serious heatsinking and airflow.[^24][^25]
 - Blade 10 and Nucular controllers share the same 2.8 mΩ Magnachip devices, so upgrade expectations should be tempered—MakerX singles still survive only ~70–100 A battery / 150 A phase without aggressive cooling. [^30]
 - Resellers are rebadging MakerX hardware at hefty markups—the Sur-Ron focused “MTO K2000” is simply a G300 in a cheap aluminium shell—so budget purchases accordingly and verify firmware provenance before assuming you’re getting unique electronics.[^31]
@@ -95,6 +95,7 @@
 [^5]: Push-button workflow, ADC daughterboard failures, and high-voltage saturation limits recorded on MakerX G300 platforms. Source: knowledge/notes/input_part013_review.md, L302 to L329. Source: knowledge/notes/input_part013_review.md, L326 to L329. Source: knowledge/notes/input_part013_review.md, L407 to L409. Source: knowledge/notes/input_part013_review.md, L416 to L417
 [^6]: Resin-backed Ubox cooling observations and conservative current targets from field reports. Source: knowledge/notes/input_part011_review.md, L221 to L224
 [^7]: MakerX GO-FOC fire reports under 96 V testing and broader warnings about unvetted high-voltage firmware like the rumoured K900 release. Source: knowledge/notes/input_part004_review.md, L321 to L321. Source: knowledge/notes/input_part013_review.md, L462 to L462
+[^gofoc-caution]: Source: data/vesc_help_group/text_slices/input_part004.txt†L21907-L21961 and L21918-L21955
 [^8]: Mini FOC voltage headroom discussion confirming it remains a 12 S-class controller and recommending Spintend or other ≥16 S hardware for >50 V packs. Source: knowledge/notes/input_part001_review.md, L11 to L11
 [^g300-abs]: G300 ABS overcurrent mitigation steps including slow ramp enable and positive throttle ramping. Source: knowledge/notes/input_part013_review.md, L514 to L514
 [^g300-fw63]: Firmware 6.3 throttle response fixes and motor detection requirements on G300 platforms. Source: knowledge/notes/input_part013_review.md, L262 to L262
