@@ -16,6 +16,8 @@
 - The compact V100 revision leans on higher-Rdson MOSFETs plus revised copper tracing to shed heat, yet riders still beg for smaller cases, front-facing connectors, integrated Bluetooth, and direct MOSFET-to-heatsink clamps with copper bars.【F:knowledge/notes/input_part001_review.md†L592-L593】
 - Stock MOSFETs still fail when builders push >40 A of field weakening on 20 S packs; plan on HY- or HSBL-class swaps before chasing high-ERPM targets on 85150/85250 hardware.[^20]
 - Random throttle surges continue to surface on 85 V/240 A, 100 V/100 A, and even v2 85 V/250 A units, so budget time for filtering, shielded cabling, and harness inspections when diagnosing jitter complaints.[^17]
+- The latest single-board revision lands on an aluminium PCB with G015N10 MOSFETs—stick with the matching gate network instead of improvising swaps or you’ll destabilise the driver stage.【F:data/vesc_help_group/text_slices/input_part004.txt†L4241-L4268】
+- Singles without the integrated BLE module reserve the NRF header for Bluetooth because the lone RX/TX pair is often claimed by dashboards or ADC adapters—plan harnesses accordingly.【F:data/vesc_help_group/text_slices/input_part004.txt†L8813-L8818】
 - Spintend sunset the 85/250 and now routes the 85/240 through a New Jersey hub for U.S. buyers—stock spares if you rely on the higher-rated board because the replacement is easier to source but capped a touch lower.[^logistics_update]
 - Product management is leaning heavily on group feedback—including Russian-language experimenters—to steer new scooter-specific screens and throttle accessories.[^community_feedback]
 - The single-channel preview shares twin-Ubox DNA but still needs active cooling above ~30–50 A; expect ≈100 A with a fan, Bluetooth sold separately, and ~$150 pricing once anodised cases ship.[^single_preview]
@@ -40,6 +42,8 @@
    - Rowan’s 4WD build cooked a CAN transceiver when controllers were energised separately—power every VESC before plugging in CAN or add isolation relays when singles live in different enclosures.【F:knowledge/notes/input_part000_review.md†L235-L235】
 5. **Document baseline idle draw.** Expect roughly 20 mA standby current with the latching power button off—any illuminated switch LED signals a wiring fault.[^45]
 6. **Capture fault codes before pulling power.** Ubox singles store the last fault until a reboot; pop the deck and read VESC Tool’s terminal over USB before cycling the controller so you do not erase the evidence.【F:knowledge/notes/input_part000_review.md†L592-L594】
+6. **Plan upstream isolation for singles.** The single-board UBOX still relies on its MOSFET stack as the master switch; there’s no dedicated latch rail to intercept, so add a real contactor, loop key, or smart-BMS disconnect instead of cutting traces or bodging low-voltage relays onto the logic feed.【F:knowledge/notes/input_part004_review.md†L24-L24】
+- Builders retrofitting keyed ignitions splice the switch in series with the red power-button lead and power dash voltmeters from the battery—expect the display to stay lit until the key cuts pack power.【F:knowledge/notes/input_part004_review.md†L203-L203】
 7. **Only enable the phase filter during detection.** Spintend confirmed the toggle exists to stabilise the motor wizard; leaving it on while riding injects noise and can resurrect ABS overcurrent faults.[^54]
 8. **Check for copper busbars and debris on arrival.** Early 75 V betas exposed copper bars while some 100 V runs hide higher-Rds(on) MOSFETs under resin and ship with loose solder balls—open every case and confirm the busbar stack before trusting marketing photos.[^u75_vs100]
 9. **Bench-test current-sense offsets before installation.** Three of four UBOX Single 100/100 boards arrived with shorted op-amps reporting nonsensical offsets (30–4,000 counts), and a working unit blew input capacitors during a routine reconnect—validate sensor readings before trusting controllers in builds.[^qc_input004]
@@ -47,7 +51,7 @@
 11. **Repin the single-channel JST harness thoughtfully.** The single Ubox shares its eight-pin header between the ADC throttle board and Bluetooth module—borrow ground from elsewhere and keep UART accessories off the CAN header when you shuffle plugs.【F:knowledge/notes/input_part000_review.md†L588-L588】
 12. **Lock ADC daughterboard switches before sealing.** The single-channel JST shares the ADC throttle board with Bluetooth; epoxy or tape the 3.3 V/5 V selector so vibration cannot flip it mid-ride and brick the adapter.【F:knowledge/notes/input_part000_review.md†L588-L589】
 13. **Disable traction control on single-motor installs.** The “anti-slip” flag is for dual builds—leaving it enabled on a lone controller cuts power with red/green blink codes at low speed.【F:knowledge/notes/input_part000_review.md†L592-L593】
-
+>>>>>>> pr-142
 ## Product Line Cheat Sheet
 | Model | Nominal Pack Window | Field Envelope & Use Case | Distinguishing Notes |
 | --- | --- | --- | --- |
@@ -57,7 +61,6 @@
 | Ubox 85/240 (rev.) | 18–22 S (marketing 24 S with care) | Targeting ~240 A battery in a smaller shell for tight decks | New single-chassis revision ships with 8 AWG leads, reversible exits, and a lower price than the outgoing 250 A model, prompting direct-import demand.[^7] |
 | Dual 75/100 (early rev.) | 16–20 S | Needs external filtering for the noisiest installs | First batches omitted phase filters; retrofit boards or external filters tame switching noise on sensitive builds.[^8] |
 | Single-board prototype | 16–22 S (target) | Paolo estimates ≈150 A battery on flat roads once firmware stabilises | Current revision is ~60 mm wide without the case, adds capacitance versus a Nucular 12F, and still needs external sealing before living in wet decks.[^single-proto] |
-
 =======
 Spintend now colour-codes dual Ubox trims—red prioritises current for commuter tunes, purple adds TVS protection for safer 18 S work, and black pairs with 22 S builds so long as e-brake regen is capped under ~80 V—so log the shell colour before assuming voltage headroom.【F:knowledge/notes/input_part003_review.md†L223-L223】
 ## Spin-Y Control Ecosystem
@@ -65,7 +68,6 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Batch-2 firmware adds OEM controller dead-zone compensation, one-minute calibration, and steadier cruise behaviour, consolidated through a new Spin-Y Facebook group.【F:data/vesc_help_group/text_slices/input_part003.txt†L9349-L9352】
 - The Gen2 throttle roadmap doubles useful throw (≈65° drive / 35° regen), adds internal cruise wiring, dead-zone compensation for legacy controllers, longer harness options, and forthcoming textured wheels sized for gloved riders.【F:data/vesc_help_group/text_slices/input_part003.txt†L11768-L11824】【F:data/vesc_help_group/text_slices/input_part003.txt†L11972-L12033】
 - Adding a 1 mm spacer between magnets and hall sensors removed saturation and shrank dead zones by roughly two-thirds, reinforcing the need for updated calibration guides and retrofit instructions.【F:data/vesc_help_group/text_slices/input_part003.txt†L12202-L12209】
->>>>>>> pr-141
 ## Operating Guardrails
 ### Battery & Phase Current Targets
 - Stock firmware keeps 85‑250 hardware near 150 A battery / 200 A phase continuous, with seasoned tuners only flashing no-limit binaries once motors and cooling can stomach 400 A phase spikes.[^9]
@@ -158,6 +160,14 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 7. **Stage regen carefully on 22 S builds.** Drop charge voltage a few volts or cap braking current until you validate pack and controller headroom with logs.[^11]
 8. **Inspect phase filters on older duals.** Populate missing components or add external LC filters if noise, thermal, or EMI issues surface on early 75/100 hardware.[^8]
 9. **Verify accessory wiring.** Keep lighting loads within the ADC bridge limits and route any kill-switch expectations through smart-BMS logic or physical loop keys.[^3]
+3. **Reflash the stock bootloader before jumping to VESC 6.0.** Stubborn 5.3 installs accept the official 6.0 binary only after VESC Tool restores the default bootloader—skip the step and you may end up chasing ST-Link fixes unnecessarily.【F:knowledge/notes/input_part004_review.md†L32-L32】
+4. **Validate motor detection results.** Limited-edition hubs have returned ~270 A recommendations despite ~200 A safe limits, and some Ubox V2 units only auto-detect ~88 A versus ~135 A on V1—log outputs and set limits manually when they drift.[^47][^48]
+5. **Disable regen during PSU testing.** Spinning up field-weakening on a bench supply can over-voltage the source; keep regen off until testing on a full battery stack.[^49]
+6. **Capture fault codes before power-cycling.** If ABS overcurrent trips during early rides, dump VESC `faults` logs before rebooting so you can correlate spikes with wiring or observer changes.[^50]
+7. **Log both controllers on every shakedown.** Aggregate CAN data to verify commanded vs. actual amps; many “weak” builds simply read one side and miss per-motor dropouts.[^10]
+8. **Stage regen carefully on 22 S builds.** Drop charge voltage a few volts or cap braking current until you validate pack and controller headroom with logs.[^11]
+9. **Inspect phase filters on older duals.** Populate missing components or add external LC filters if noise, thermal, or EMI issues surface on early 75/100 hardware.[^8]
+10. **Verify accessory wiring.** Keep lighting loads within the ADC bridge limits and route any kill-switch expectations through smart-BMS logic or physical loop keys.[^3]
 ## Procurement & Support Signals
 - Warranty debates flared when a rider refused to return hardware; moderators reiterated that Spintend covers repairs with paid return shipping and contrasted the turnaround with slower Rion/Tronic replacements before issuing a ban.【F:data/vesc_help_group/text_slices/input_part003.txt†L2209-L2223】【F:data/vesc_help_group/text_slices/input_part003.txt†L231-L297】
 - Storefront reputation took a hit after community members spotted deleted negative Spin-Y reviews despite active Telegram support—set expectations around official response cadence before promising service levels.【F:data/vesc_help_group/text_slices/input_part003.txt†L5746-L5754】
