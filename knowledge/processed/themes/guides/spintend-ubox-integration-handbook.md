@@ -73,7 +73,8 @@
   - plan extra cooling above those loads. Square-wave Zero 11X controllers still out-launch under-cooled 60 V Ubox setups until phase limits rise and airflow improves, underscoring the need for fans in cramped decks.[^6][^20][^zero-launch]
 - **Strip paint before mounting enclosures.** GT-series decks that mount Ubox Lite/MP2 controllers against painted steel trap heat.
   - grind to bare metal, add thermal glue or pads, and avoid single PETG brackets that leave cases at ~64 °C under load.[^15]
-- **Plan hardware for earless cases.** 85/240 housings still ship without mounting ears and rely on tiny M2.5 hardware, so riders print brackets, retap threads, or glue adapters before long-travel suspensions knock under-deck mounts loose.[^31]
+- **Plan hardware for earless cases.** 85/240 housings still ship without mounting ears and rely on tiny M2.5 hardware, so riders print brackets, retap threads, or glue adapters before long-travel suspensions knock under-deck mounts loose; ’lekrsu even 3D-printed a charger-mount adapter and slipped a 0.5 mm thermal pad under the Lite case when bolts were scarce.[^31][^lite_mount]
+- **Skip silicone potting.** Rob Ver now seals controllers with covers and perimeter silicone instead of insulation gel because potted boards become impossible to service once a MOSFET fails.[^no_potting]
 - **Repurpose retired baseplates.** Builders are bolting dead 75/200 heatsinks under live controllers.
   - stacking aluminium shims and thin pads or even radiators tied into Dualtron side plates
   - to add surface area without redesigning the deck.[^baseplate_spreader]
@@ -129,6 +130,9 @@
 - **Remember to switch the app to ADC.** Multimeter tests show throttle voltage on the adapter even when VESC Tool ignores it—set the input mode to ADC before tearing the loom apart.[^adapter_mode]
 - **ADC lighting headroom:** The adapter already flashes LED strips for turn indicators, so custom amber side strips mostly need channel routing rather than bespoke firmware.
   - just stay within the ≈3 A rail and isolate heavier lamps on an external converter.[^adc_lighting]
+- **Follow the factory wiring map.** One owner cleared stuck buttons only after repinning the ADC lighting board to match Spintend’s published diagram, a reminder to verify loom order before chasing firmware ghosts.[^adc_wiring]
+- **Blinker channel limits:** Sequential LED strips cannot share the blinker output without extra logic, so some builders rewire lighting looms from scratch to keep the adapter’s tiny signal wires safe.[^sequential_led]
+- **Dualtron LED adapters:** Mario-supplied Dualtron motors arrive with only two wires for decorative LEDs, so installers must adapt the factory three-wire harness if they expect OEM-style lighting behaviour.[^dualtron_leds]
 - **Spin Y-2 throttle checklist:** Batch-two throttles still leave the factory without calibration on occasion.
   - verify which ADC port is populated (older looms expect ADC2, current harnesses ship pinned for ADC3), remap the side buttons before adding regen or lighting loads, keep phase leads equal-length when shortening looms, and log a pre/post-calibration throttle curve so customer bikes ship with crisp response when wired directly to the ESC instead of detouring through displays.[^35][^36]
 - **Single-button wake behaviour:** Leave the dual-controller interconnect in place when wiring a shared latching switch.
@@ -274,6 +278,11 @@
 [^qs8_arcing]: Plugging Ubox controllers without QS8 anti-sparks still dumps inrush into capacitors even when builders disable the BMS discharge FET first.
   - document safe connect/disconnect sequences instead of “quick tapping” the connector.[^132]
 [^adc_lighting]: The Spintend ADC board already drives LED strips for turn indicators, so custom amber lighting mainly needs channel routing while heavier loads move to an external converter.[^133]
+[^adc_wiring]: Source: knowledge/notes/input_part012_review.md, line 434.
+[^lite_mount]: Source: knowledge/notes/input_part012_review.md, lines 429 and 475.
+[^no_potting]: Source: knowledge/notes/input_part012_review.md, line 488.
+[^sequential_led]: Source: knowledge/notes/input_part012_review.md, line 491.
+[^dualtron_leds]: Source: knowledge/notes/input_part012_review.md, line 492.
 [^dual_switch]: Leaving the dual-controller interconnect cable in place lets a single latching switch wake both Spintend 100 V/100 A units; unplugging it isolates one controller but stops shared-button startups.[^134]
 [^phase_guardrail]: Community tuning still caps Spintend 100/100 controllers near 130 A phase and stock 85150 hardware around 220 A phase unless silicon and cooling are upgraded.[^135]
 [^rim_fitment]: Detachable 110 mm Spintend rims favour 13×5.00-6.5 tyres; Hope Tech GR4 calipers clear 3 mm rotors, but most owners stick with 160 mm, ≈2.7–3 mm discs to maintain clearance and common spares.[^136][^137]

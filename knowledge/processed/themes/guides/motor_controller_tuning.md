@@ -17,6 +17,7 @@
   - rewire the lead for Zero-style harnesses or pair it with an NC key, and treat the replaceable 0 Ω links as sacrificial fuses that protect the logic rails.[^84100-nc]
 - Makerbase 75100 V2 units run about €75 delivered versus ~€150 for Spintend 12-fet controllers; Izuna's custom firmware already fixes the aluminum-case voltage readout bug.[^75100-pricing]
 - Makerbase 75200 V2 now includes a built-in shutdown input, sparing budget builds from external antisparks.[^75200-shutdown]
+- Flipsky’s 75100 Pro V2 still reports as a 75300 inside VESC Tool; the mislabel mirrors v1 behaviour and is normal.[^fs75300]
 - Makerbase engineers are now iterating an 84 V/200 A INA241 board in the open via esk8.news threads.
   - expect layout tweaks and firmware revisions before treating the higher-voltage lineup as production-ready.[^1]
 - Fardriver controllers deliver multi-kiloamp capability (up to 2,600 A) and appear on production Weped Sonic builds; VESC hardware is still pricier and more delicate at those power levels.[^fardriver]
@@ -59,6 +60,7 @@
 - Replace corroded XT60s outright; when soldering bullet connectors, heat the connector (not the wire) so solder flows, then slide the molded cover to shield the last ~3 mm before shrinking insulation.[^soldering]
 - For hall chattering Monorim builds, re-detect halls, raise the sensored→sensorless handoff to ~3,000 ERPM, and switch observers to Ortega for clean transitions.[^monorim-chatter]
 - Stay in hall-sensor mode when pushing high phase current; Mxlemming observers can launch at 150 A on 10 s 5 p packs but saturate sooner than Ortega, so revisit observer and current-coupling parameters when saturation appears.[^hall-mode]
+  - Dimos now steers riders toward Ortega or lower phase amps when mxlemming trips ABS, reserving saturation compensation as the last resort.[^mxlemming-abs]
 - Investigate hall sensor "absent" errors by checking the thin hall leads and verifying continuity with a multimeter's beep mode before rerunning setup.[^hall-diagnostics]
 - Before re-energizing suspect controllers, beep-test between pack leads and every phase to catch shorts, confirm 5 V accessory output, isolate hall supplies with dual 1N4148 diodes if needed, and inspect resettable fuses guarding the Ubox's 12 V/5 V/3.3 V rails.[^prepower-checks]
 - Cold-soldered phase leads can melt and short, killing FETs; test each MOSFET drain-to-source, inspect both sides of the board, and verify Bluetooth plus the 5 V rail before reconnecting.[^phase-meltdown]
@@ -97,6 +99,7 @@
 - Temper regen/battery limits on Makerbase 75100 V2 controllers when stretching to 100 V packs—Rogerio destroyed one by braking a 22 s build at ~5 km/h.[^regen-75100]
 - Keep spare STM32 MCUs on hand for aging FlipSky 75100s.
   - Asyan4ik lost a logic chip without warning yet had the controller running again within an hour after swapping the $30 part.[^8]
+- Matthew’s controller began throttling around 91 °C and shut down at 95 °C despite a 105 °C limit, suggesting sensor calibration or firmware clamps need verification during thermal diagnostics.[^thermal_clamp]
 
 ## Track & Chassis Notes
 
@@ -110,6 +113,11 @@
 - Track crews still avoid monoarm forks on high-power scooters despite motorcycle examples—dual legs remain the safer choice when stability is the priority.[^monofork]
 - Miniwalker’s race win underscored how lighter packs help on technical circuits; big batteries reduce sag but add enough mass to slow lap times when rider skill is equal.[^light-pack]
 - Even die-hard drag builders concede most race scooters use chain drives today—treat belt-drive concepts as experimental until they prove durability.[^chain-drive]
+- Rob Ver’s 22 S Spintend 240A setup is touching 35 kW and 132 km/h with ~80 A field weakening, but he is still roasting tyres and has already swapped MOSFETs twice—once after a 22 S BMS failure mid-launch.[^rob35kw]
+- His aging Dualtron chassis shows the limit of legacy front hubs: even at 116 A per controller the GT1 wheel free-spins, forcing tyre upgrades and aggressive weight transfer to find grip.[^rob_front]
+- Smart Repair’s GT1 build now runs 420 A phase on the rear and just 120 A up front (both capped around 85 A battery) because the front tyre spins at 80 km/h—traction, not controller ceiling, is the bottleneck.[^smart_traction]
+- EU riders keep reminding each other that public roads remain capped at 25 km/h despite 22 S/200 A builds, so stealth profiles and gentle launches stay part of compliance strategy.[^eu_cap]
+- Builders still want data on VESC traction control mid-corner—the community is logging tests to confirm whether it prevents burnouts or can stabilise lean angles too.[^tc_question]
 
 ---
 [^hub-lineup]: knowledge/notes/input_part007_review.md lines 12-16.
@@ -158,6 +166,14 @@
 [^donor-frame]: knowledge/notes/input_part007_review.md lines 89-89.
 [^tubeless]: knowledge/notes/input_part007_review.md lines 90-90, 166-166.
 [^hub-magnet-stack]: knowledge/notes/input_part007_review.md lines 105-105.
+[^mxlemming-abs]: Source: knowledge/notes/input_part012_review.md, line 434.
+[^fs75300]: Source: knowledge/notes/input_part012_review.md, line 430.
+[^rob35kw]: Source: knowledge/notes/input_part012_review.md, line 445.
+[^rob_front]: Source: knowledge/notes/input_part012_review.md, line 447.
+[^smart_traction]: Source: knowledge/notes/input_part012_review.md, line 448.
+[^eu_cap]: Source: knowledge/notes/input_part012_review.md, line 449.
+[^tc_question]: Source: knowledge/notes/input_part012_review.md, line 469.
+[^thermal_clamp]: Source: knowledge/notes/input_part012_review.md, line 470.
 [^spintend-85250]: knowledge/notes/input_part007_review.md lines 139-140.
 [^saturation-logging]: knowledge/notes/input_part007_review.md lines 104-104.
 [^thermal-60c]: knowledge/notes/input_part007_review.md lines 123-123.

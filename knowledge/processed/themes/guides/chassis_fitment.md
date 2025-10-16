@@ -23,9 +23,34 @@
   - complete with 60 V packs and heavy-duty motors
   - illustrating how friendships and group buys keep premium frames affordable.[^7]
 
+## Tire Clearance & Suspension Packaging
+
+- Jumbo tires can clear swingarms with about 4″ per side, but slicks get unforgiving on wet pavement—rain wheels need conservative throttle maps or treaded rubber to stay upright.[^jumbo-clearance]
+- Rob Ver’s Vsett 11 stretches 80 mm rubber over 100 mm rims, drops the suspension, and favours 130/40 PMTs to keep tyre and controller temps near 40 °C during hard street riding.[^rob-vsett-packaging]
+- High-travel (≈150 mm) suspensions pushed Ausias to move controllers up into the chassis and rely on model-specific O-rings to seal tubeless split rims; under-deck mounts were scraping at full compression.[^ausias-travel]
+- Ambrosini/LY CNC rims still hover around €100–€120 each, expect 155 mm axles for 6.5″ fitments, and ship with hefty AWG 7–8 phase sleeves in the harness.[^ly-rims]
+
+## Legal Compliance & Model Selection
+
+- Spain’s 2027 homologation wave keeps Thunder 3 scooters road-legal while sidelining many Nami models; enforcement remains spotty, but the 25 km/h cap still applies on public roads.[^spain-homologation]
+- Achilleus Limited editions hover around €3,200 versus roughly €4,300 for a homologated Thunder 3, making Achilleus a roomy, VESC-ready base with Thunder arms and 11″ tyre support.[^achilleus-pricing]
+- Victor Luxury + owners log about 20 S 8 P capacity once controllers move outside the deck, whereas Achilleus builders can machine an aluminium neck box to hide VESC hardware for stealth and legality.[^victor-capacity][^achilleus-neck]
+- Anything above ~4 kW still falls under motorcycle registration rules in many EU locales even if day-to-day enforcement is lax, so keep paperwork in mind before chasing headline power figures.[^eu-motorcycle]
+- Yamal notes how quickly dual VESC builds, premium cells, brakes, and backup scooters inflate project budgets—plan for a spare vehicle while the main chassis is torn down.[^project-costs]
+
 [^bearing_sizes]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^tire_clearance]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^dualtron_spider]: Source: knowledge/notes/input_part000_review.md, line 187.
+[^jumbo-clearance]: Source: knowledge/notes/input_part012_review.md, line 423.
+[^rob-vsett-packaging]: Source: knowledge/notes/input_part012_review.md, lines 424 and 481.
+[^ausias-travel]: Source: knowledge/notes/input_part012_review.md, lines 425 and 477.
+[^ly-rims]: Source: knowledge/notes/input_part012_review.md, line 426.
+[^spain-homologation]: Source: knowledge/notes/input_part012_review.md, line 452.
+[^achilleus-pricing]: Source: knowledge/notes/input_part012_review.md, line 453.
+[^victor-capacity]: Source: knowledge/notes/input_part012_review.md, line 454.
+[^achilleus-neck]: Source: knowledge/notes/input_part012_review.md, line 478.
+[^eu-motorcycle]: Source: knowledge/notes/input_part012_review.md, line 455.
+[^project-costs]: Source: knowledge/notes/input_part012_review.md, line 456.
 
 
 ## References
