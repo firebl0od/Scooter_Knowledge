@@ -31,11 +31,12 @@
 2. **Route Lighting Bus.** The companion light board feeds both 5 V and 12 V lighting branches and reports controller faults back through SmartDisplay, so land CAN and the accessory power leads in the same session.[^2]
 3. **Budget CAN power for add-ons.** The SmartRepair harness can back-feed 5 V lighting from the CAN header—drop an inline resistor and remember the servo header’s PWM pads if you want blinkers instead of always-on lamps.[^can-backfeed]
 3. **Program OTA Chain.** Firmware updates publish to a web server; once the display flashes over Wi‑Fi, it cascades the new build to every detected expansion board via CAN.[^2][^7]
-4. **Choose controller roles intentionally.** Race teams sometimes assign the rear controller as the slave so SmartDisplay keeps the features they want (traction control, telemetry overlays) while the front stays the master—validate the pairing before track days.【F:knowledge/notes/input_part006_review.md†L54-L54】
+4. **Choose controller roles intentionally.** Race teams sometimes assign the rear controller as the slave so SmartDisplay keeps the features they want (traction control, telemetry overlays) while the front stays the master—validate the pairing before track days.【F:knowledge/notes/input_part006_review.md†L86-L86】
 4. **Map Hotkeys & External Buttons.** Internal buttons can act as hotkeys, but external latching or momentary switches are supported for mode toggles and lighting; riders often park lighting on the auxiliary harness instead of the face buttons.[^7]
 5. **Speed Modes via ADC2.** Tie ADC2 “eco” limits to SmartDisplay’s virtual throttle ceilings when mixing with ADC-based throttles—the display writes percentage caps that VESC enforces as duty/phase ceilings.[^7]
 6. **Log UART throttle packets before rewiring.** SmartDisplay streams CRC-protected commands over UART, so capture the live data to confirm dips originate upstream before blaming harness noise or shielding.[^uart-crc]
 7. **Finish the enclosure.** The shared 3.5 in STL pack suits SLS/SLA printing, and builders now sand, paint, or resin-coat the housing to prevent translucent shells from yellowing under UV before bolting stem-cap mounts in place.[^16]
+- **Grab the right dashboard firmware.** Xiaomi M365 owners running VESC 6.05 hardware rely on the `6_05_adc` community branch to fix braking/current bugs—GitHub mirrors can lag a few minutes, so re-download if the patch fails on first flash.【F:knowledge/notes/input_part006_review.md†L148-L148】
 
 ## Feature Set & Navigation
 - **Integrated GPS + Nav Prompts.** The 3.5 in unit houses turn-by-turn guidance to keep phones off the bars; builders cite 10 × 6.5 cm packaging as a sweet spot for 100 km/h scooters.[^8]

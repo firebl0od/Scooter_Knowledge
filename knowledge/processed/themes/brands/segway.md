@@ -1,8 +1,9 @@
 # Segway Platform Dossier
 
 - Segway's G- and GT-series frames still anchor the community's "minimum viable" commuter and sport builds thanks to stable geometry, roomy decks, and a deep spare-parts ecosystem, but every chassis demands reinforcement checks around stems, braces, and controller mounts before accepting more power.[^1][^2]
+- North American shoppers still treat the Xiaomi Pro 2 and Segway G30 as the entry-level commuter floor; Segway F-series and supermarket clones arrive with weak frames, sensorless motors, and limited spares that rarely justify upgrades.【F:knowledge/notes/input_part006_review.md†L83-L83】
 - GT-class scooters ship with a 14 S 12 P Lishen pack, single-MCU 24‑FET controller, 10 AWG phase leads, and adjustable suspension hardware—good bones that tolerate 70 km/h stock and 100 km/h+ once packs, bearings, and stem hardware are upgraded, yet stem bearings, axle machining, shock packaging, and deck cooling must be addressed up front.[^3][^4][^5][^6][^gt_shock][^gt_teardown]
-- Segway's seated C80 platform and forthcoming ST line show the brand stretching into moped territory: C80 conversions already hide 9 kWh packs and 6–7 kW charging while ST2 prototypes promise factory 72 V drivetrains, making Segway a rare OEM path from commuter scooters to turn-key high-voltage builds.[^11][^12][^13]
+- Segway's seated C80 platform and forthcoming ST line show the brand stretching into moped territory: C80 conversions already hide 9 kWh packs and 6–7 kW charging, while the ST1 keeps a straight fork for ~40–50 km/h commuters and the ST2 steps to a 72 V drivetrain aiming near 85 km/h with factory hydraulics.[^11][^12][^13]
 - For Ninebot Max builds, Denis Yurev's crew now steers riders toward a single 13 S pack on the stock motor paired with Rita/Happy BMS current logging instead of chasing dual hubs—quality pneumatics and Monorim + DNM suspension upgrades keep 50 km/h conversions stable while foam "solid" tires are blamed for magnet failures.[^new-13s][^new-suspension]
 
 ## Platform Map
@@ -20,6 +21,9 @@
 - The F2 Pro's stock over-current protection trips near 30 A even if higher limits are set in the utility app, so riders planning power upgrades must accept this hardware ceiling or plan controller swaps.[^f2pro-ocp]
 - Because the F2's BMS cannot detect externally paralleled packs, riders planning add-on batteries were advised to share current through the auxiliary pack while respecting the native 25–30 A ceiling to avoid tripping the internal protection mid-ride.[^f2pro-limits]
 - Commuter builds should keep current demands below 30 A and leverage sensorless mode for reliable launches rather than chasing dual-motor complexity on this entry-level platform.[^f2pro-shfw][^f2pro-limits]
+- F2 Pro front hubs ship nearly dry—open the wheel, repack the 6001RS bearings with polyurea or marine grease, and swap in SKF RSH 2RS hardware instead of smearing silicone on the caps, which only drags on the races.【F:knowledge/notes/input_part006_review.md†L409-L409】
+- Ninebot F-series hubs still spin on 6203 bearings; stock a quality SKF/Koyo/Nachi/NSK set during the first teardown because OEM parts are treated as disposable wear items.【F:knowledge/notes/input_part006_review.md†L410-L410】
+- The platform’s smart BMS enforces roughly 2.4 A charge current; adjustable chargers set higher simply shut off mid-session.【F:knowledge/notes/input_part006_review.md†L183-L183】
 
 ## Chassis & Handling Insights
 - GT-class stability stems from generous wheelbase and rake, but riders still reinforce the deck and stem interfaces before high-power conversions; controller-mount fractures have occurred on GT and SNSC rental frames when extra weight is added up the stem.[^3][^2]
@@ -28,7 +32,10 @@
 - Rotor diameter tops out near 140 mm without trimming the trailing arm; larger discs and reservoir shocks demand custom brackets or welded arms even on long-wheelbase GT frames.[^gt_packaging]
 - Foam-filled "solid" tires vibrate enough to loosen magnets and shake packs apart on high-speed G30 conversions—pair quality 10-inch pneumatics with a Monorim front fork and DNM rear damper, or Sharkset forks if you stay below ~45 km/h.[^new-suspension]
 - Builders chasing GT acceleration are already machining thicker stainless dropouts and custom Monorim plates so Xiaomi-class forks can fit ever-wider hubs without tearing the swingarm.【F:data/vesc_help_group/text_slices/input_part001.txt†L26146-L26158】【F:data/vesc_help_group/text_slices/input_part001.txt†L26395-L26399】
+- Max G2 owners are machining swingarm extensions to swallow larger rear hubs while keeping 20 S 5 P packs inside the frame with only a 2 mm spacer—proof the chassis can host sleeper upgrades without external battery boxes when fabrication time is budgeted.【F:knowledge/notes/input_part006_review.md†L349-L349】
+- Grinding G30 forks for 11″ tires weakens the structure; veterans add triangulated reinforcement or welded plates instead of relying on hollow webbing after clearancing the castings.【F:knowledge/notes/input_part006_review.md†L350-L350】
 - F-series and budget Segways exhibit rough welds and cracked deck braces near the folding joint, so inspections, gussets, or protective film are prerequisites for commuter-duty reliability.[^14]
+- When reworking folding joints that were epoxied from the factory, strip the assembly, heat the glue thoroughly, and only then press components apart to avoid cracking the stem casting or leaving hidden voids.【F:knowledge/notes/input_part006_review.md†L449-L449】
 - C80 riders note the stretched saddle forces a forward hunch; taller bars or switching foot placement onto the passenger pegs straightens posture for long rides.【F:knowledge/notes/input_part012_review.md†L338-L339】
 - Rear-end stability improves when builders bend a 10 mm aluminum rod under the axle nut to brace wide mudguards; swapping in full-width G30 fenders (~11.5 cm) keeps 2.5″ tires from blasting commuters with spray.【F:knowledge/notes/all_part01_review.md†L91065-L91070】【F:knowledge/notes/all_part01_review.md†L91188-L91224】
 
@@ -37,6 +44,7 @@
 - Ninebot Max G2 motors shed heat no better than legacy G30 hubs, so serious power targets still rely on larger hub swaps; even throttle detection needs a full sweep in VESC Tool to keep hall checks from failing during setup.【F:knowledge/notes/input_part010_review.md†L110-L111】
 - 2.42 mm rotors and Hope V4 calipers are proven upgrades for repeated high-speed stops; the thicker discs avoid the warp-prone 1.8–2.0 mm hardware common on smaller scooters.[^3][^5]
 - Segway GT2 riders log 70 km/h down to ~10 % SOC on the factory setup; pushing beyond that range requires higher-current packs or field-weakening, so plan for thermal headroom if adding torque or speed.[^4]
+- Track officials now ban external battery bags at 100 km/h events because loose packs eject and ignite in crashes—serious GT/G-series builds need fully integrated compartments before showing up to scrutineering.【F:knowledge/notes/input_part006_review.md†L385-L385】
 - Advertised 6 kW GT2 figures stem from brief inverter-side peaks and field-weakening—expect ~65–70 km/h stability stock and treat triple-digit ambitions as field-weakening experiments until higher-voltage packs or rewound hubs are fitted.【F:data/vesc_help_group/text_slices/input_part003.txt†L1325-L1533】【F:data/vesc_help_group/text_slices/input_part003.txt†L1499-L1700】
 - Geared hubs like the Navee S65 add torque for heavier riders but introduce noise and mechanical complexity, so set expectations before recommending them over proven direct-drive swaps.[^s65]
 - High-power GT conversions now prove out 22 S8 P P42A trays (~485 × 210 × 86 mm), 400 A ANT BMS installs, QS10/QS8 leads, dual motor NTCs, and 155 mm×3.1 mm rotors with Hope V4 calipers; plan enclosure depth, rotor spacing, and wiring clearances before committing to 20 kW-class builds.[^gt_packaging]
@@ -84,6 +92,7 @@
 
 ## Procurement & Roadmap Signals
 - Upcoming ST1/ST2 models are expected to sit above GT pricing with factory hydraulics and 72 V options, making them potential turnkey platforms for riders who want OEM-grade frames before VESC swaps.[^13]
+- Before recommending premium-looking Segway P-series or NIU/Nami alternatives to family, confirm aftermarket parts availability—community veterans warn support lags behind the proven G-series/Xiaomi ecosystem.【F:knowledge/notes/input_part006_review.md†L84-L84】
 - Segway’s widespread aftermarket support keeps GT and G-series parts available, but heavier GT builds still require machining (axles, rotors, spacers) and thermal rework, so budget workshop time alongside electronics upgrades.[^4][^10]
 - Mid-tier dual-motor imports (Dualtron, Vsett, Zero) still demand controller overhauls despite high resale pricing; Denis’ crew often steers buyers toward sleeper G30/G2 builds with 13 S/35 A tunes that hold 40–45 km/h while remaining discreet and mechanically robust.[^dual-motor]
 - Denis still cannot export lithium packs outside the EU; overseas owners order Rita and bags separately, then lean on VTA, Scootermode, or local builders for compliant battery packs.【F:knowledge/notes/all_part01_review.md†L92935-L92960】
@@ -102,7 +111,7 @@
 [^10]: Segway C80 battery packaging, dropout dimensions, and retained drum/sprocket hardware for future drivetrain swaps.【F:knowledge/notes/input_part012_review.md†L340-L341】
 [^11]: Weight, BMS limits, and range benchmarks for Segway-based moped builds with 32 P Samsung 35E packs.【F:knowledge/notes/input_part012_review.md†L324-L327】【F:knowledge/notes/input_part012_review.md†L343-L344】
 [^12]: C80 fast-charge validation (≈6–7 kW) on the stock 100/100 Lite controller.【F:knowledge/notes/input_part012_review.md†L266-L266】
-[^13]: Overview of Segway’s upcoming ST line with 72 V architecture ambitions.【F:knowledge/notes/input_part006_review.md†L382-L382】
+[^13]: Overview of Segway’s upcoming ST line noting the ST1’s commuter fork and the ST2’s 72 V target near 85 km/h.【F:knowledge/notes/input_part006_review.md†L421-L421】
 [^14]: F-series weld inspections and reinforcement reminders before heavy-duty use.【F:knowledge/notes/input_part006_review.md†L408-L409】
 [^p100]: Ninebot P100 teardown and range report showing the 52 V 23 Ah pack only returns ~25 mi at 30 mph despite the stiffer chassis and shared cockpit hardware with G30 builds.【F:knowledge/notes/input_part003_review.md†L701-L748】
 [^stem_swap]: Rosheee’s stem upgrade log covering thicker G30D v2 latches, P100 hybrid welding steps, and SNSC controller-mount failures when handlebar battery packs add leverage.【F:knowledge/notes/input_part003_review.md†L705-L748】

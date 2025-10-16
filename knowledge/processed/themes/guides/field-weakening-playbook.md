@@ -6,6 +6,7 @@
 - Stable implementations rely on firmware 5.3-era builds, instrumented temperature and voltage logging, and conservative regen; high-voltage packs or 24S conversions demand extra surge headroom because regen spikes can brick controllers when FW is active.[^4][^5]
 - Start with single-digit or 10–30 A FW setpoints validated by telemetry; riders jumping to 55–60 A routinely saturate hubs within an hour unless they raise phase current carefully, add cooling, and watch logs for current overshoot.[^6][^7]
 - Most builds arm FW against duty cycle—not throttle position—so expect the controller to inject current around 90 % duty and yank roughly the same extra 20 A from the battery while it fights back-EMF; reserve those bursts for cool motors only.【F:knowledge/notes/input_part000_review.md†L653-L655】
+- European race organisers now cap packs at 22 S (≈35 kW nominal), so teams chase torque with stator area, FW amps, and lighter chassis while daily commuters still hover around 2.4 kW until higher-current 20 S batteries arrive.【F:knowledge/notes/input_part006_review.md†L127-L128】
 
 ## How Field Weakening Works
 - FW injects negative d-axis current to cancel back-EMF so the motor surpasses its natural base speed, which inherently reduces torque-per-amp and wastes power as heat.[^1]
@@ -42,6 +43,10 @@
 
 ## Risk Controls & Telemetry
 - **Thermal Watch:** Riders pushing 16 S commuter packs noted 150 °C stators at only 35 A FW, reinforcing that ferrofluid or temperature probes are mandatory if you insist on FW in enclosed hubs.[^18]
+- **Disable FW before steep descents.** VESC hub riders have locked wheels by lightly tapping brakes around 50 km/h while FW held them at the non-FW speed ceiling—either roll off FW or ease into braking before dropping big hills.【F:knowledge/notes/input_part006_review.md†L207-L207】
+- **Measure on the windings, not the shell.** 100 A battery draw never equals 100 A phase, on-winding thermistors expose the real ceiling, and veterans treat 25–40 % FW marketing claims as hype until the motor designer vouches for them with data.【F:knowledge/notes/input_part006_review.md†L454-L456】
+- **Embedded sensors only.** Shell probes lag winding heat badly—plant thermistors inside the motor before trusting FW headroom.【F:knowledge/notes/input_part006_review.md†L457-L457】
+- **Ignore 70 A FW “single-motor” recipes.** Veterans immediately shot down suggestions like 70 A of FW layered on 120 A battery limits because the combo risks blowing controllers or saturating single-motor stators.【F:knowledge/notes/input_part006_review.md†L357-L357】
 - **Plan AWD for single-drive heat saturation:** 3.6 kW single-motor builds backed off FW after hot-weather pulls saturated hubs and triggered plans for AWD conversions to spread load.【F:knowledge/notes/input_part008_review.md†L16099-L16129】
 - **Voltage Monitoring:** Keep oscilloscope or high-speed logging on regen-heavy tests—22 S Spintend builds disable regen entirely when extending pack voltage to avoid BMS-induced surges.[^19]
 - **Fault Masking:** Sudden current drops or pothole-induced cut-outs that disappear when FW is enabled can signal mechanical faults (loose magnets, wiring) rather than firmware bugs; investigate hardware first.[^16]

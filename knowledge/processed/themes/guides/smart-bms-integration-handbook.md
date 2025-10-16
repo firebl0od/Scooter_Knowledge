@@ -7,6 +7,7 @@
 - Treat balancing and calibration as routine maintenance: Daly boards need full charge/discharge learning and higher voltage to balance, while JK hardware wakes via the accessory display, runs active shuttling above ~0.015 V delta, and benefits from monthly thermal/IR audits.[^7][^8][^9]
 - ANT owners still note 0.5–0.8 V pack settling after charge; pair those boards with latching throttles or breakers so VESC standby draw doesn’t drain winter storage scooters.【F:data/vesc_help_group/text_slices/input_part003.txt†L16080-L16102】
 - Pack size influences BMS choice: high-capacity 53 Ah+ builds stick with JK’s active shuttling for fast charging, smaller commuter packs tolerate ANT’s lighter balancing current, and JBD hardware remains feature-parity with LLT once sensors and harnesses are sized correctly.【F:data/vesc_help_group/text_slices/input_part003.txt†L10726-L10767】【F:data/vesc_help_group/text_slices/input_part003.txt†L11610-L11612】
+- Even 20 S ~7 kW builders asking for smart-BMS ideas keep getting steered back to LLT/JBD units, underscoring how often those boards anchor mid-power packs.【F:knowledge/notes/input_part006_review.md†L49-L49】
 
 ---
 
@@ -22,6 +23,7 @@
 
 ### VESC Tool Integration Status
 - **ANT gap today.** ANT smart BMS lines still lack native VESC Tool support, so telemetry lives in the vendor app until Vedder’s Bridge firmware adds CAN bindings—plan fallbacks for logging and regen validation on ANT-equipped packs.[^ant-gap]
+- **Third-party CAN bridges exist.** A plug-in adapter now lets LLT/JBD/Jabada boards stream telemetry over CAN to VESCs, simplifying pack monitoring without rewiring the harness.【F:knowledge/notes/input_part006_review.md†L404-L404】
 - **Emulator limits.** VESC Tool’s internal SoC emulator is a stopgap for dumb dual-BMS packs; it reads pack voltage and coulomb counts but cannot trip contactors or enforce charge ceilings, so treat it as supplemental telemetry, not protection.[^vesc-emulator]
 
 ## Commissioning & Wiring Guardrails
@@ -31,6 +33,7 @@
    - When rebuilding tired MH1 packs, log per-parallel rest voltage before landing the harness so the new BMS isn’t blamed for sag that predates the swap.【F:knowledge/notes/input_part005_review.md†L420-L422】
 3. **Keep both FET banks enabled for regen tests.** Builders traced repeated ESC deaths to disabled charge FETs on JK smart boards—regen had nowhere to dump energy.[^4]
    *Tip:* ANT’s companion app is live on Apple’s App Store, so iPhone-based teams can configure boards without sideloading tools before sealing the deck.【F:knowledge/notes/input_part010_review.md†L182-L183】
+   *Reminder:* If a smart BMS was shut down over BLE, tapping it with a charger wakes the board—never “test” with an 84 V charger on 42 V/54.6 V packs or you risk blowing the BMS outright.【F:knowledge/notes/input_part006_review.md†L140-L140】
 4. **Stage first rides with logging.** Riders lost Spintend and Makerbase controllers the moment a BMS tripped under load; gather current and voltage traces to verify the protection stays latched through braking and launches.[^6]
 5. **Load-test bargain externals before trusting telemetry.** Denis’ workshop found “13 Ah” packs sagging instantly, leaving the internal battery carrying the ride—bench suspect modules alone before wiring them into a smart-BMS stack.[^cheap-externals]
 5. **Oversize connectors and plan airflow.** High-current boards warm noticeably near their limits—route copper planes into moving air or heatsinks, especially on JK units that reinforce traces with bus rods.[^10]
@@ -60,6 +63,7 @@
 
 ## Storage & Standby Planning
 - **Align controller cutoffs with BMS limits.** Keep VESC input-voltage ceilings ~5 V above pack max so Daly and ANT cutoff events do not nuke controller MOSFETs, and pair ANT boards with latching throttles or breakers to curb 0.5–0.8 V post-charge drift during winter storage.【F:data/vesc_help_group/text_slices/input_part003.txt†L16080-L16113】【F:data/vesc_help_group/text_slices/input_part003.txt†L21224-L21247】
+- **Know when builders bypass discharge FETs.** High-output scooters still run charge-only 40 A boards and route discharge directly to the pack, accepting manual monitoring because most failures happen while charging.【F:knowledge/notes/input_part006_review.md†L214-L214】
 
 ## Charging Infrastructure Updates
 - **Programmable supplies cover odd voltages.** Adjustable 22 S/18 A bricks paired with ANT sleep timers keep 21 S packs topped without drifting when scooters sit for weeks.[^adj_supply_smart]
@@ -70,6 +74,7 @@
 - **Document anti-theft workflows.** JK’s remote discharge disable doubles as a parking lock; confirm the board re-arms before rides to avoid brownouts.[^23]
 - **Install the optional JK display when range demands visibility.** Its long-range Bluetooth, remote charge/discharge toggles, and granular pack telemetry are saving time on high-current builds and becoming standard issue for field diagnostics.【F:knowledge/notes/input_part001_review.md†L558-L560】
 - **Log balance behavior after storage.** JK units can self-immolate while idle and Daly boards stop balancing once “full”—review app history after downtime before sending the pack back into service.[^2][^19]
+- **Set realistic current ceilings.** Even 20 kW builds lean on JBD smart boards and keep 18S7P Sony VTC6A packs near 200 A to stay inside thermal comfort zones.【F:knowledge/notes/input_part006_review.md†L239-L239】
 - **Teach recovery procedures.** Publish lead-order diagrams and wake-up checklists so drained JK packs (≈57 V on 20 s) or JBD miswires don’t strand riders without telemetry.[^17][^24]
 - **Reseat suspect balance leads.** A single cold joint on Artem’s JK install forced the board into alternating “short circuit” and “low voltage” alarms until the tap was reflowed—inspect and re-solder every lead after high-heat work before blaming firmware.【F:knowledge/notes/input_part000_review.md†L650-L650】【F:knowledge/notes/input_part000_review.md†L690-L690】
 - **Escalate when firmware toggles misbehave.** ANT app glitches that trip discharge FETs or JK UIs that freeze mid-session warrant immediate vendor contact and a fallback BMS plan.[^11][^14]

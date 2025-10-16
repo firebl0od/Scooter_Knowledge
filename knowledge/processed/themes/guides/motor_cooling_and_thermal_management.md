@@ -17,6 +17,7 @@
 - Doubling a Xiaomi/Ninebot commuter from 10 S to 20 S roughly doubles the free-spin speed but repeatedly burns the stock hub from heat saturation, so builders now treat 18 S as the limit unless they add serious cooling or swap motors.【F:data/vesc_help_group/text_slices/input_part011.txt†L19101-L19145】
 - Fiido L3 rear hubs emerged as the go-to drop-in upgrade for 20 S experiments because their wider stator and exposed shell shed heat far better than Xiaomi-class cans—veterans report killing three narrow hubs in two days while the Fiido survived on a Spintend 100 V Lite.【F:data/vesc_help_group/text_slices/input_part011.txt†L19136-L19173】
 - GABE is also sandwiching aluminium plates with thermal paste around a 10 mm 3D-printed spacer to keep his 250 W commuter hub cool after widening the dropout, showing how thin filler plates can restore conduction when packaging changes add air gaps.【F:knowledge/notes/input_part011_review.md†L768-L769】
+- Stock Ninebot G30 hubs top out around 80 km/h solo and ~98 km/h in dual-motor builds, but a single motor hauling two riders at 40 A cooked its insulation—treat heavy two-up duty as a thermal red line without upgraded cooling.【F:knowledge/notes/input_part006_review.md†L152-L152】
 
 ## Controller Interface Refresh Checklist
 - When raising voltage, replace Kapton tape with 0.5 mm thermal pads so MOSFETs stay isolated yet shed heat; stacking pads on top of Kapton just adds resistance.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L202-L223】

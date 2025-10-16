@@ -17,7 +17,7 @@
 | CL700 / CL1000 (preview) | 18–32 S (marketing) | Projected 800–1 000 A peaks | Larger ToLL stages pitched at 30 S superbikes, but durability and regen behavior remain unverified.[^cl500_preview] |
 
 ## Voltage & Current Guardrails
-- Treat 32 S marketing as experimental: CL-series failures after 120 V charging prompted veterans to cap operation near 29–30 S without regen and to add external DC/DC rails when voltage climbs.[^voltage_cap]
+- Treat 32 S marketing as experimental: CL-series failures after 120 V charging prompted veterans to cap operation near 29–30 S without regen, pointing out that the 135 V FETs leave little spike headroom and the onboard 12 V supply sags below 1 A unless you add external rails.【F:knowledge/notes/input_part006_review.md†L156-L156】[^voltage_cap]
 - Full-race telemetry keeps 22 S C350 builds alive by disabling regen, holding per-controller battery current near 200 A, and auditing wiring so BMS trips do not hard-cut the power stage.[^race22s]
 - Field logs that chase 400 A phase still lean on traction control, balanced CAN settings, and thorough CSV exports to confirm both controllers share the load before raising limits further.[^tc_fw]
 - CL350-class controllers ride out split-second pack dropouts better than Makerbase peers when riders add auxiliary 12 V capacitance, but the margin is thin—treat BMS trips as faults to fix, not normal operating behavior.[^supply_margin]

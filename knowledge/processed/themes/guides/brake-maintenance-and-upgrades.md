@@ -35,6 +35,8 @@
 ### Rotor Sizing Considerations
 - Brake discussions suggest upsizing rotors from 180 mm to 203 mm mainly boosts thermal mass and leverage but may be excessive for scooters; larger rotors require frame clearance checks and stronger mounting tabs to handle increased braking forces.[^rotor-sizing]
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
+- Custom rotor projects now target 203 mm discs cut from 2.3–2.5 mm acid-proof steel, but Magura calipers only clear ≈2.1 mm—budget runout checks and pad clearance before ordering thicker hardware.【F:knowledge/notes/input_part006_review.md†L375-L375】
+- Magura and TRP four-piston setups expect 2.0–2.3 mm rotors, and AliExpress Brembo clones often ship in left/right-specific pairs—verify orientation when ordering for right-hand-drive scooters to avoid fitment surprises.【F:knowledge/notes/input_part006_review.md†L123-L123】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -69,6 +71,7 @@
 
 ## Tire Inflation & Bead Seating
 - Haku's Xiaomi inflator couldn't seat 21×3 tires even with a ratchet strap, reinforcing that serious tubed slick installs demand higher-flow compressors (≥150 PSI, 2+ CFM) or shop assistance to pop beads properly.[^tire-inflation]
+- PMT 110/55 R6.5 slicks feel vague at the 2.2 bar sidewall spec; experienced tuners run ~3.5 bar for crisp handling without reported failures.【F:knowledge/notes/input_part006_review.md†L162-L162】
 - **Compressor requirements for large tires:**
   - Minimum 150 PSI working pressure for 21×3 and larger tires
   - 2+ CFM flow rate to seat beads quickly before air leaks past unseated tire
@@ -82,6 +85,12 @@
   - **Hope, Hayes, Avid:** DOT 4 or DOT 5.1 (never DOT 5 silicone-based)
   - **Never mix fluids:** Contamination causes seal swelling and brake failure
   - Store mineral oil in sealed containers away from light to prevent oxidation[^fluid-compat]
+
+### High-Heat Hydraulic Practices
+- **Leave reservoir headroom.** Mountain-pass riders boiling 360 °C Trickstuff Bionol in Magura MT7 stacks watched the banjo burp once expansion had nowhere to go—bleed with a visible air gap so thermal growth doesn’t pop seals mid-descent.[^bionol-flash]
+- **Prioritise front stopping power.** Community logs keep stressing that rear-only braking just locks and skids; pair a strong front hydraulic with regen on both controllers whenever possible so emergency stops stay controllable.[^front-priority]
+- **Upgrade rotors for high voltage.** Shimano “resin only” 160 mm discs fade instantly on 72 V scooters—step up to 2 mm-thick metallic-ready rotors and full-hydraulic calipers before raising pack voltage.[^resin-rotor]
+- **Inspect hardware after heat events.** That same MT7/MT8 build now budgets pad checks and rotor swaps after every downhill session because fluid flash cooked fittings despite premium components.[^post-heat-service]
 
 ## Follow-Up Actions Needed
 - Write up an 80/100 H wheel-centering and dual-caliper setup guide (kit sourcing, torque, clearance checks) so track-focused Nami/Dualtron builds can copy the wobble fix.[^follow-centering]
@@ -105,3 +114,7 @@
 [^fluid-compat]: Brake fluid compatibility chart for common hydraulic brake systems.
 [^follow-centering]: Follow-up action to create wheel-centering and dual-caliper setup guide.【F:knowledge/notes/input_part013_review.md†L645-L647】
 [^follow-dual-disc]: Follow-up action to document dual-disc vs. dual-caliper decision matrix.【F:knowledge/notes/input_part013_review.md†L635-L637】
+[^bionol-flash]: Trickstuff Bionol flashed in a Magura MT7 stack, venting fluid through the banjo because the reservoir was overfilled before the descent.【F:knowledge/notes/input_part006_review.md†L12-L13】
+[^front-priority]: Riders reiterating that strong front hydraulics plus dual electronic braking provide real stopping power; rear-only braking just slides.【F:knowledge/notes/input_part006_review.md†L14-L14】
+[^resin-rotor]: Shimano “resin only” 160 mm rotors failing on 72 V scooters and the recommendation to run 2 mm metallic-ready discs with hydraulic calipers instead.【F:knowledge/notes/input_part006_review.md†L15-L15】
+[^post-heat-service]: Premium MT7/MT8 builds scheduling pad and rotor inspections after every downhill session once high-temp fluid flashes exposed weak hardware.【F:knowledge/notes/input_part006_review.md†L12-L13】
