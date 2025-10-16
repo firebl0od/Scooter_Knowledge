@@ -92,12 +92,9 @@
 ## Ecosystem & Accessories
 - **Spintend BLE modules plug straight in.** When the stock Bluetooth dongle is missing, Spintend’s module drops onto the 75100 header without rewiring, giving builders another telemetry option while they source official replacements.【F:knowledge/notes/input_part002_review.md†L35-L35】
 - **Displays:** The yellow ESP32 “Smart Display” clones work once flashed with SimpleVescDisplay firmware; stock apps remain unstable.⁶ ¹¹
-<<<<<<< HEAD
-=======
 - Flipsky’s own yellow ESP32 display remains under evaluation, but riders point to the open-source SimpleVescDisplay firmware as the safer path until the bundle proves itself.【F:knowledge/notes/input_part011_review.md†L466-L466】
 - **Upcoming dashboards:** Rage Mechanics previewed a native SmartDisplay UI in late 2022 alongside a 3.5 in navigation prototype and a Waze overlay proof-of-concept for Spintend CAN feeds—plan firmware support before promising customers integrated maps.²¹
 - **Mobile app regressions:** Flipsky’s Android app briefly dropped GPS logging on FW 5.3—keep trusted APK archives so you can sideload stable builds when updates regress features.【F:knowledge/notes/input_part003_review.md†L227-L227】
->>>>>>> pr-149
 - **Pedal assist & aux controls:** PAS harnesses expect a four-wire split (5 V, GND, signal, brake/enable) with cadence routed to ADC1. Confirm servo-pin voltage limits before powering sensors.¹¹
 - **Lighting rails:** Fuse every 12 V accessory lead—shorted aux rails have killed fresh controllers.¹²
 - **Profile switching:** Community ESP32 scripts now debounce CAN messages and validate voltage before toggling 1WD/2WD modes; adopt the revised code to avoid divide-by-zero bugs.¹²

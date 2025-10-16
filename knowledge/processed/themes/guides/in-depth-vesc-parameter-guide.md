@@ -683,10 +683,7 @@ Params: foc_encoder_inverted, foc_encoder_offset, foc_encoder_ratio
 - Riders report the Virtual Speed Sensor works reliably once selected, configured, and paired with the right pole count—hall-less scooters perform markedly better than open-loop fallback when sensors fail.【F:knowledge/notes/input_part014_review.md†L4211-L4215】
 **How / When to Modify**
 - If you have physical halls, choose “Hall Sensors.”
-<<<<<<< HEAD
-=======
 - 41F/43F/413 hall boards still cover 800 W–3 kW hubs; beyond roughly 20 km/h most riders let VESC hand off to sensorless FOC and keep the halls only for launch torque.【F:knowledge/notes/input_part003_review.md†L105-L105】
->>>>>>> pr-141
 - If sensorless is desired with high torque from standstill, consider 45 Deg V0V7 HFI or Coupled HFI.
 
 **Potential Side Effects**
