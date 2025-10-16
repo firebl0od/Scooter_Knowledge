@@ -1,6 +1,19 @@
-# Rita External Battery Integration Field Manual
+# Rita External Battery Integration
 
-## Core Capabilities at a Glance
+## Overview
+
+The Rita adapter enables parallel external battery packs on Xiaomi-style electric scooters, effectively doubling range without controller modifications. Designed by Denis Yurev, Rita manages charging across internal and external packs, handles voltage differences automatically, and supports both smart and analog scooter dashboards through BMS emulation.
+
+## What You Need to Know
+
+- **Parallel only**: Rita adds external packs in parallel, not series
+- **Current capacity**: Supports approximately 30A output
+- **Automatic charging**: Shares stock charge inlet between internal and external packs
+- **Voltage management**: Automatically balances packs within ~0.5V
+- **Common-port BMS required**: External packs must use common-port BMS boards
+- **Configuration via Bluetooth**: Setup through Denis' BMS Tool app
+
+## Core Capabilities
 
 - Works with Xiaomi-style data lines, supports only parallel pack additions, and offers a "permanent BMS emulator" mode for scooters without telemetry, configurable over Bluetooth or a serial tool.[^1]
 - Sustains roughly 30 A output and tolerates an anti-spark switch between the adapter and controller without upsetting charge management.[^2]

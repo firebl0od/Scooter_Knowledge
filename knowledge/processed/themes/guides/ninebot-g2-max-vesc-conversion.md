@@ -1,4 +1,17 @@
-# Ninebot G2 Max VESC Conversion Blueprint
+# Ninebot G2 Max VESC Conversion
+
+## Overview
+
+The Ninebot G2 Max provides an excellent platform for VESC conversion, offering a larger deck than the G30, better suspension geometry, and room for substantial battery upgrades. This guide covers converting the G2 from its stock controller to VESC-based control, targeting either stealthy single-motor commuters or high-performance dual-motor builds. The G2's mechanical advantages make it ideal for riders seeking 40-80 km/h performance while maintaining a legal-looking profile.
+
+## What You'll Learn
+
+- Component selection for G2 VESC conversions (motors, controllers, batteries)
+- Mechanical modifications (dropout widening, suspension upgrades, brake mounting)
+- Electrical integration including Smart Repair's G2↔VESC CAN bridge
+- Battery packaging strategies for 20S packs
+- Firmware and configuration requirements
+- Performance targets from stealth commuter to 80+ km/h builds
 
 ## Build Objectives & Performance Targets
 

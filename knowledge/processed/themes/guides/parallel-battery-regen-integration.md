@@ -1,6 +1,19 @@
-# Parallel Battery & Regen Integration Manual
+# Parallel Battery & Regen Integration
 
-## TL;DR
+## Overview
+
+Running multiple battery packs in parallel on electric scooters can double range and power capacity, but requires careful voltage matching, proper BMS configuration, and conservative regen settings. This guide covers field-tested practices for safely paralleling packs while maintaining regenerative braking functionality. Whether adding an external battery or running dual internal packs, these techniques will help you avoid common failures and optimize performance.
+
+## What You'll Learn
+
+- How to safely parallel battery packs with matching voltages
+- Why ideal diodes cause problems and should be avoided
+- Proper regen current budgeting across multiple packs
+- BMS configuration requirements for parallel operation
+- Troubleshooting common issues with parallel pack setups
+- Hardware selection (connectors, fuses, wiring)
+
+## Key Safety Principles
 
 - Match pack voltages before paralleling and avoid ideal diodes; real-world tests on 17 S/16 S stacks caused throttle cut-outs and offered no regen benefits compared with direct, voltage-matched links.[^1][^2]
 - Treat regen as a controller- and battery-limited budget: split braking current across packs, keep the combined limit within both packs’ safe charge rates, and raise BMS regen ceilings (e.g., 100 A on JBD units) so the controller does not dump energy into MOSFETs instead.[^3][^4]
