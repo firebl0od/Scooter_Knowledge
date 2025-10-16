@@ -11,6 +11,15 @@
 - Sustained cut-outs under load may point to BMS current limits: scooters that pass bench tests but trip under rider weight likely need higher-capacity packs or relaxed protection thresholds.[^bms_cutout]
 - Logs from 12 S setups show ~45 km/h at 32.5 A; raising voltage to 15 S and reducing current is recommended for better efficiency and lower heat.[^voltage_swap]
 
+## Xiaomi Firmware Workflows (Denis Part 02 Lines 3 001–4 500 & 7 501–9 000)
+
+- **Follow the XiaoGen migration order.** Keep the original BLE board, run the m365Downgrade XG Mod migrator once on Pro 2/1S/Essential scooters, then load custom configs—future updates skip the migrate package entirely to avoid bricks.[^denis-xiaogen-flow]
+- **SpeedBoost isn’t free power.** XiaoDash’s paid field-weakening mode mimics Ninebot’s magic serial trick, boosting speed 35–40 % at the cost of range, heat, and a requirement for uprated batteries, MOSFETs, and cabling.[^denis-speedboost]
+- **20S emulation is still vaporware.** XiaoDash’s promised 20S BMS mode remains “coming soon”; veterans warn that extreme 6S booster packs and 20S trace-cut builds keep killing hardware despite the marketing.[^denis-20s-emu]
+- **Clone controller checklist.** Spoofed DRV/BLE boards often need their serial re-entered in DownG before XiaoGen will flash—load the migrate package twice on Pro 1 hardware, but run the dedicated migrator first on Pro 2 units.[^denis-clone-serial]
+- **Recover missing telemetry by rebuilding firmware.** If XiaoGen flashes leave the battery gauge blank, read the UID from DownG with a stock pack, rebuild the firmware, reflash, and restore single-tap mode by assigning the same action to every press profile in the generator.[^denis-xiaogen-uid]
+- **Kill power before rewiring trace cuts.** Never reconnect a trace-cut harness with the wheel spinning; tests have torched the U4 regulator instantly, so power down before touching Rita leads or jumpers.[^denis-tracecut-warning]
+
 ## Current Relationships & Cruise Options
 
 - Artem’s relationship `I_phase = I_batt × V_batt ÷ V_motor` explains why phase torque fades as ERPM rises; expect battery current to climb from ~16 A at launch toward the configured limit as motor voltage increases, and keep phase current above battery current for predictable torque.[^phase_relationship]
@@ -26,8 +35,10 @@
 
 ## Thermal Management & Regen Safety
 
+- Xiaomi V3 controller upgrades still start with hard parts: swap in IRFB4110 or NCEP85T14 MOSFETs, replace Kapton tape with 0.5 mm thermal pads, flood copper traces with solder or supplemental wire, and direct-solder phase leads instead of stacking adapters; Mirono’s reinforced build held roughly 55 °C continuous before the motor became the thermal limit.[^denis-controller-hardening]
 - Flipsky’s compact single begins brushing 60 °C on the MOSFETs within 3 km at 50 A battery / 85 A phase, pushing owners to improve heatsink pressure, refresh thermal paste, and add 40 mm fans before experimenting with 100–120 A tunes.[^6]
 - Keep battery-side regen at or below the pack’s amp-hour rating (e.g., ≤10 A on a 10 Ah block) and set controller regen roughly 15 A higher so excess energy bleeds off as heat instead of spiking the cells or BMS.[^7]
+- Paolo’s 15 S-ready ESC mod cuts the feed trace to U4 and strings diodes in series; double-check the ≈3 W dissipation across 21 diodes and log NTC temps before treating it as production-ready.[^denis-u4]
 - Manual hall detection on warm motors at ≈70 A finally cleared Mirono’s off-the-line clonk; rerun both motor wizards on a full battery and road-test immediately after detection so sensor faults surface before a commute.[^8]
 - When sensorless detection misbehaves, unplug the hall loom and rerun the test.
   - Wheelway and Spintend owners found that leaving halls connected during “sensorless” detection corrupted profiles until they re-detected with the harness removed.[^9]
@@ -59,6 +70,12 @@
 [^accel_logging]: Source: knowledge/notes/input_part000_review.md, line 133.
 [^speed_alignment]: Source: knowledge/notes/input_part000_review.md, line 135.
 [^phase_baseline]: Source: knowledge/notes/input_part000_review.md, line 198.
+[^denis-xiaogen-flow]: Source: knowledge/notes/denis_all_part02_review.md†L910-L910
+[^denis-speedboost]: Source: knowledge/notes/denis_all_part02_review.md†L912-L912
+[^denis-20s-emu]: Source: knowledge/notes/denis_all_part02_review.md†L917-L917
+[^denis-clone-serial]: Source: knowledge/notes/denis_all_part02_review.md†L958-L958
+[^denis-xiaogen-uid]: Source: knowledge/notes/denis_all_part02_review.md†L1028-L1028
+[^denis-tracecut-warning]: Source: knowledge/notes/denis_all_part02_review.md†L959-L959
 
 
 ## References
@@ -74,3 +91,5 @@
 [^9]: Source: knowledge/notes/input_part000_review.md†L720-L725
 [^10]: Source: knowledge/notes/input_part000_review.md†L734-L739
 [^11]: Source: knowledge/notes/input_part000_review.md†L688-L690
+[^denis-u4]: Source: knowledge/notes/denis_all_part02_review.md†L700-L700
+[^denis-controller-hardening]: Source: knowledge/notes/denis_all_part02_review.md†L702-L724

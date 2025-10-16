@@ -3,6 +3,9 @@
 ## Weatherproof the Chassis Before the Storm
 
 - **Seal every seam.** Run silicone along deck joints, cable pass-throughs, and the charge door, then coat hub interfaces with lithium grease so sustained rain rides don\'t wick water into the pack or motor bay.[^1]
+- **Choose durable sealants.** Veterans skip Sikaflex in favour of PU50-class marine urethanes (Illbruck/Enfy) because they cure even underwater, stay elastic for years, can be sanded smooth, and pair with neutral silicones where joints must reopen later.[^pu50]
+- **Deploy Tec7 on harness entries.** The crew runs Tec7 sealant around loom penetrations and external pack cases, lets it cure fully, and accepts they’ll need to cut and reapply it each time the chassis reopens to avoid trapped moisture.[^tec7]
+- **Keep PCB-safe 704 on hand.** The workshop leans on 704 (Liveall/Heinkel) sealant for tubeless builds and electronics because it cures rubbery, with Loctite variants reserved when budgets allow.[^sealant-704]
 - **Repack leaky Kaabo hubs.** RTV the shell seam and stuff fresh lithium grease into the bearings.
   - rusted motors often recover once water ingress is halted.[^2]
 - **Weatherproof external packs thoroughly.** Riders strapping batteries to rear suspensions silicone every seam to keep exposed packs dry on long commutes.
@@ -13,6 +16,7 @@
 - **Audit Kaabo decks for pooling.** Wolf inspections uncovered water trapped under 20 S packs that soaked LG M50LT modules despite shrink wrap.
   - add drain checks, dielectric grease, and redundant silicone/Kapton layers around series bridges and BMS leads before chasing 20 S8 P upgrades.[^5]
 - **Relocate or seal storm-vulnerable modules.** Recent rain rides soaked CAN adapters and accessory bucks until builders moved them above the deck line, potted JST backshells, and added drain paths before the next storm season.[^6]
+- **Inspect charge-port wiring before sealing the deck.** Misrouted leads and hasty silicone blobs have already shorted chargers or started fires; verify polarity and clearance before you close the lid.[^charge-port-audit]
 - **Choose the right bearings.** Swap stock 2Z hubs for sealed 2RS units and refresh grease after wet weeks to keep Monorim and Xiaomi front ends from grinding themselves apart.[^7]
 - **Choose the right bearings.** Swap stock 2Z hubs for sealed 2RS units rated for 80–100 °C, then refresh grease after wet weeks so rain rides don’t cook Xiaomi or Monorim front ends.[^7][^8]
 - **Revive soaked motors methodically.** Niu hubs that sat underwater came back after thorough drying and fresh grease, but the crew now treats sealed bearings and upgraded seals as mandatory before splashing through floods again.[^9]
@@ -26,6 +30,7 @@
   - overdoing sealant complicates future repairs and traps moisture if the enclosure still leaks.[^16]
 - **Pressure-test new gaskets.** After resealing enclosures with custom gaskets, riders blast the deck with a pressure washer to confirm no leaks before going back to road duty.[^17]
 - **Keep custom builds out of storms.** High-power scooters with relocated electronics still struggle in heavy rain; veterans wait for weather breaks and save storm commutes for stock Ninebots to avoid water-logged controllers.[^18]
+- **Route rear lights from the controller.** Tapping battery negative and ESC-positive at fuse F1 replaces the fragile deck lead, but insulate the new run and add strain relief before sealing the lid.[^rear-light]
 - **Map relocation priorities before storm season.** The latest review calls for a rainproofing guide that spells out which controllers, converters, and connectors need sealing or relocation on custom builds.
   - capture those lists with your wiring diagrams so water mitigation isn’t improvised after the first downpour.[^19]
 - **Cut water-diversion grooves.** Jason now machines shallow channels into axle exits so runoff can’t wick straight into 65 H hubs after wet rides.
@@ -42,6 +47,7 @@
 - **Carry layered locks.** Quick errands get a compact Master Lock cable that stays smooth with graphite; long stops call for hardened chains plus GPS trackers taped into the loom.[^25][^26]
 - **Treat thin cables as token deterrents.** City riders report compact cable locks stop nothing.
   - start with ≥8 mm hardened chains for real security.[^27]
+- **Pad battery-bag cages.** Stainless cable ties or cages still help, but wrap them in heat-shrink or foam so they don’t saw into the pack while slowing opportunists.[^bag-padding]
 - **Gig riders budget time for serious locks.** European couriers report food-delivery pay dipping from ≈€20/h toward “slavery” wages post-acquisitions, so they now stage 2–3 heavy chains and padlocks at regular stops to keep scooters secured between orders.[^28]
 - **Pick proven trackers.** Invoxia GPS units remain the €100 gold standard because Bluetooth tags lose coverage away from crowds, while DIY LTE trackers powered off the scooter pack can log to self-hosted dashboards and fall back to roaming SIM batteries when unplugged.[^29]
 - **Expect opportunists.** Dense-city riders report scooters disappearing within minutes if left unlatched, so treat even short drop-offs like high-risk events and keep the alarm armed.[^26]
@@ -51,12 +57,16 @@
   - and Spintend’s ADC adapter v2 still needs loop keys or smart-BMS latches because it only ferries 5 V/12 V accessory power. Treat Bluetooth/relay locks as secondary deterrents that thieves can bypass quickly.[^32][^33]
 - **Layer trackers by medium.** Mix AirTags or SmartTags for crowd-sourced pings with SIM trackers (TK806, SIM800) where IMEI registration allows ongoing data plans so a stolen scooter keeps reporting in real time.[^34]
 - **Prototype smarter telemetry.** Builders are testing ESP32-based 4G+GPS trackers that ride the scooter pack, broadcast IMEI-backed telemetry, and integrate alongside SmartDisplay so theft alerts keep flowing even when BLE trackers fail.[^35]
+- Denis’ shop is iterating plug-and-play immobilisers with onboard 5 V regulators, fingerprint readers, and alarm speakers so scooters can sound off or cut power if moved without authorisation.[^denis-tracker-proto]
 - **Hide trackers inside the pack.** New SIM7600/BMW tracker builds live under the battery shrink with UART links to MOSFET cutoffs, letting riders remote-kill packs while thieves fumble for the enclosure.[^36]
 
 ## Protective Gear & Stealth Riding
 
 - **Dress for the crash, not the ride.** The crew leans on ECE 22.05/22.06 full-face helmets with MIPS-style protection and full moto gear because even 30 km/h lowsides can shatter chins; DOT stickers alone aren’t trusted.[^37]
+- **Read traffic early.** Riders trading road stories focus on scanning for blind bike-lane entries, staging full gear, and respecting how quickly tuned scooters hit 60 km/h—seven-second launches demand motorcycle-grade awareness.[^denis-road-awareness]
+- **Audit hardware while you suit up.** Replace any missing suspension bolts immediately, add a pea-sized dab of blue threadlocker, and run weekly clamp checks; veterans pair that routine with motorcycle armor, gloves, and Kevlar-lined pants so 50 km/h confiscations or marketing-tempted speed runs don’t end in hospital visits.[^denis-hardware-gear]
 - **Stay discreet around police.** Choose understated frames, keep lighting subdued, and reserve police-mode or field-weakening bursts for brief escapes while cruising near rental speeds the rest of the time.[^38]
+- **Plan for battery fires.** Lithium packs burn independently of water, so shops consider safer chemistries like LiFePO₄ where packaging allows and keep fire-response drills focused on evacuation, not hose lines.[^denis-lifepo4]
 - **Lock down digital attack surfaces.** Builders disguise scooters as stock with low-power brake profiles, MAC-filter Bluetooth modules behind PIN prompts, and add keyed or NFC power switches so pranksters can’t rewrite CAN settings while the scooter is parked.[^39][^40]
 - **Budget layered tracking at ~€50 per scooter.** Riders pair Samsung SmartTags with Apple AirTags and plan a GPS IoT beacon for higher-value builds; the combo already recovered a stolen e-bike, but veterans still warn against confronting thieves in person.
   - share location intel with authorities instead.[^41]
@@ -89,6 +99,8 @@
 - **Know the local rules.** Dutch riders remind visitors that stand-up scooters remain illegal without seats; expect enforcement even if locals still spot Xiaomi commuters around Venlo.[^56]
 - **Avoid backyard storage.** Dew-point swings push condensation into bearings and electronics.
   - keep scooters under a roof and move packs indoors or into insulated boxes instead of leaving them outside overnight.[^57]
+- **Plan spacer height when stuffing the deck.** 46 mm 3D-printed shims support some external cases, internal 13S6P builds cleared with roughly 27 mm, and VESC conversions needed about 30 mm—measure before printing or machining.[^spacer-height]
+- **Weatherproof XT30 charge-port swaps.** When replacing the coax jack, add a weatherproof cap, sealant, and ideally an inline fuse so exposed male pins can’t short in rain or debris.[^xt30-port]
 - **Check accessory ergonomics.** Bolt-on saddles push weight rearward and complicate unloading speed bumps, and 2.5 L frame bags are shorter but wider than 3 L options.
   - mock up foot room before committing.[^58]
 
@@ -140,6 +152,17 @@
 [^36]: Source: knowledge/notes/input_part000_review.md†L506-L508
 [^37]: Source: knowledge/notes/input_part000_review.md†L364-L364
 [^38]: Source: knowledge/notes/input_part000_review.md†L365-L365
+[^denis-hardware-gear]: Source: knowledge/notes/denis_all_part02_review.md†L710-L711
+[^denis-road-awareness]: Source: knowledge/notes/denis_all_part02_review.md†L1097-L1097
+[^denis-lifepo4]: Source: knowledge/notes/denis_all_part02_review.md†L713-L713
+[^pu50]: Source: knowledge/notes/denis_all_part02_review.md†L528-L528
+[^tec7]: Source: knowledge/notes/denis_all_part02_review.md†L658-L658
+[^charge-port-audit]: Source: knowledge/notes/denis_all_part02_review.md†L632-L632
+[^rear-light]: Source: knowledge/notes/denis_all_part02_review.md†L659-L659
+[^bag-padding]: Source: knowledge/notes/denis_all_part02_review.md†L660-L660
+[^spacer-height]: Source: knowledge/notes/denis_all_part02_review.md†L661-L661
+[^xt30-port]: Source: knowledge/notes/denis_all_part02_review.md†L662-L662
+[^sealant-704]: Source: knowledge/notes/denis_all_part02_review.md†L681-L681
 [^39]: Source: knowledge/notes/input_part006_review.md†L79-L79
 [^40]: Source: knowledge/notes/input_part006_review.md†L428-L429
 [^41]: Source: knowledge/notes/input_part012_review.md†L201-L203
@@ -162,3 +185,4 @@
 [^58]: Source: knowledge/notes/input_part006_review.md†L94-L94
 [^59]: Source: knowledge/notes/all_part01_review.md†L86-L88
 [^60]: Source: knowledge/notes/all_part01_review.md†L896-L896
+[^denis-tracker-proto]: Source: knowledge/notes/denis_all_part02_review.md†L932-L932

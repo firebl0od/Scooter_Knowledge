@@ -7,6 +7,8 @@
 - Wheel-centering kits and dual-caliper setups eliminate rotor wobble and improve braking consistency on racing builds, but add complexity and weight that commuter riders may not need.[^centering-kits]
 - Keep at least one mechanical brake active even on regen-heavy builds.
   - logs show regen-only riding overheats controllers quickly, and dual-motor setups still rely on mechanical rotors to stop safely when electronics fault.[^1][^2]
+- After wet rides, flush rotors and calipers with brake cleaner—it is safe on pads—and retorque folding pins or other fasteners so grit and fatigue cracks do not sneak in after rain sessions.[^denis-brake-clean]
+- Riders pushing 40 km/h+ speed builds pair full motorcycle armor with pneumatic tires; the crew now labels solid tires a “death wish” at those speeds because the carcass can unseat mid-ride.[^denis-armor]
 
 ## Bleeding Techniques
 
@@ -51,6 +53,7 @@
 - Four-piston systems improve heat dissipation during repeated high-speed stops but may be excessive for commuter builds under 60 km/h where two-piston Magura MT5 or similar calipers provide adequate stopping power.[^four-piston-vs-two]
 - Zoom-branded hydraulics continue to underperform at speed.
   - riders are standardising on Nutt, Magura MT5e, Shimano Saint, or Hope calipers paired with 3 mm reinforced 160 mm rotors to survive repeated 120→0 km/h stops, noting that Magura reservoirs can crack under extreme loads.[^6]
+- Xiaomi riders chasing >50 km/h treat a second hydraulic brake as mandatory; flimsy Monorim adapters flex and 135 mm rotors warp, so upgrade to stiff adapters and 140 mm five-bolt discs or quality dual-caliper setups.[^denis-dual-brake]
 
 ### Motorcycle-Caliper Imports (Kotto Example)
 
@@ -98,6 +101,9 @@
 
 ### Semi-Hydraulic Caliper Limitations
 
+- Aftermarket Xtech calipers bite hard in the dry but rely on cheap seals that rust quickly in rain—daily commuters keep rebuild kits or spares ready for wet-weather riding, flush them seasonally, and still report leaks once road salt enters the mix.[^denis-xtech-seals]
+- Pair X-Tech calipers with quality 140 mm rotors; cheap 135 mm AliExpress discs feel weak until you upgrade the hardware.[^denis-xtech-rotor]
+- **Budget hybrids keep failing.** Shop owners keep seeing piston corrosion and fluid leaks on Xtech-style hybrids, so high-speed builds increasingly jump straight to full hydraulics (Magura) or quality mechanical calipers instead of trusting the semi-hydraulic compromise.[^xtech-corrosion]
 - XTech-style semi-hydraulic calipers carry minimal oil volume, rely on rattly auto-centering hardware, and have warped rotors on scooters above 60 km/h.
   - upgrade to sturdier discs, avoid flimsy quad calipers, and inspect the whole brake stack after flats or heavy emergency stops.[^25]
 - Track abuse already pushed Magura calipers past the Curie point (>700 °C), wiping magnetism and underscoring the need for engine braking or larger rotors on race builds before mechanical fade sets in.[^26]
@@ -330,6 +336,12 @@
 [^8]: Source: knowledge/notes/input_part008_review.md†L249-L249
 [^9]: Source: knowledge/notes/input_part008_review.md†L250-L251
 [^10]: Source: knowledge/notes/denis_all_part02_review.md†L433-L433
+[^denis-dual-brake]: Source: knowledge/notes/denis_all_part02_review.md†L752-L752
+[^denis-xtech-seals]: Source: knowledge/notes/denis_all_part02_review.md†L933-L933
+[^denis-xtech-rotor]: Source: knowledge/notes/denis_all_part02_review.md†L962-L962
+[^denis-front-disc]: Source: knowledge/notes/denis_all_part02_review.md†L1056-L1056
+[^denis-fork-reinforce]: Source: knowledge/notes/denis_all_part02_review.md†L1057-L1057
+[^denis-mixed-brake]: Source: knowledge/notes/denis_all_part02_review.md†L1079-L1079
 [^11]: Source: knowledge/notes/input_part002_review.md†L141-L142
 [^12]: Source: data/vesc_help_group/text_slices/input_part002.txt†L11088-L11137
 [^13]: Source: data/vesc_help_group/text_slices/input_part002.txt†L11406-L11455
@@ -416,3 +428,9 @@
 [^94]: Source: knowledge/notes/input_part007_review.md†L238-L238
 [^95]: Source: knowledge/notes/input_part014_review.md†L10356-L10365
 [^96]: Source: knowledge/notes/denis_all_part02_review.md†L348-L349
+[^xtech-corrosion]: Source: knowledge/notes/denis_all_part02_review.md†L518-L518
+[^denis-brake-clean]: Source: knowledge/notes/denis_all_part02_review.md†L867-L867
+[^denis-armor]: Source: knowledge/notes/denis_all_part02_review.md†L868-L868
+- **Front disc conversions demand discipline.** Learn modulation before hammering the lever, then upgrade calipers, spacers, and suspension brackets so heavier motors and wider tires clear without washing the front wheel.[^denis-front-disc]
+- Reinforce Monorim and custom forks with thicker torque plates or “sandwich” steel stacks, relocate shocks, and consider Nutt calipers with sintered pads to carve clearance for 10×3.0 tires on AWD builds.[^denis-fork-reinforce]
+- Mixed braking setups still work: some riders pair hydraulic fronts with Xiaomi e-brake levers in the rear for stable 50 km/h commutes, while others add Nutt calipers and brake-disc spacers to clear 80/65-6 tires without loose washer stacks.[^denis-mixed-brake]
