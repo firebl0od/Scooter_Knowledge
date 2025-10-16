@@ -40,13 +40,13 @@
 
 ## Source Notes
 
-[^lineup]: Seven 18 product outline covering 24 S/30 S variants with 18 or 30 FETs, onboard logging, and a 12 V / 4 A rail, plus plans to benchmark them alongside Maxim launches.Source: knowledge/notes/input_part014_review.md, L52 to L54Source: knowledge/notes/input_part014_review.md, L27 to L27
-[^fw_baseline]: Reported Seven/Spintend tuning baseline of ≈180 A battery, 300 A phase, and ~50 A FW at 87 % duty for 16 S builds.Source: knowledge/notes/input_part014_review.md, L54 to L54
-[^firmware]: Seven 18 prototypes arriving with VESC Tool 6.06 firmware but no source release, prompting GPL compliance reminders and firmware-tracking discipline.Source: knowledge/notes/input_part014_review.md, L147 to L148
-[^express]: Bundled VESC Express boards failing to enumerate, forcing installers to hang separate CAN-connected modules for telemetry until firmware and header maps are fixed.Source: knowledge/notes/input_part014_review.md, L146 to L148Source: knowledge/notes/input_part014_review.md, L180 to L180
-[^supply]: Alibaba listings shipping Seven/Tronic controllers directly from the contract manufacturer with historical pricing but uncertain official support.Source: knowledge/notes/input_part014_review.md, L163 to L164
-[^thermal]: Paolo’s assessment that the 18-FET Seven sandwiches Toll-class MOSFETs on 1.6 mm FR-4, yielding only ~15–20 % thermal improvement over X12 heat-sink mounting and keeping racers interested in alternatives like the K900.Source: knowledge/notes/input_part014_review.md, L164 to L164
-[^tracking]: Community focus on logging Seven availability, pricing, and verified current limits as testing pushes past 210 A battery / 310 A phase baselines.Source: knowledge/notes/input_part014_review.md, L217 to L217
+[^lineup]: Seven 18 product outline covering 24 S/30 S variants with 18 or 30 FETs, onboard logging, and a 12 V / 4 A rail, plus plans to benchmark them alongside Maxim launches. Source: knowledge/notes/input_part014_review.md, L52 to L54. Source: knowledge/notes/input_part014_review.md, L27 to L27
+[^fw_baseline]: Reported Seven/Spintend tuning baseline of ≈180 A battery, 300 A phase, and ~50 A FW at 87 % duty for 16 S builds. Source: knowledge/notes/input_part014_review.md, L54 to L54
+[^firmware]: Seven 18 prototypes arriving with VESC Tool 6.06 firmware but no source release, prompting GPL compliance reminders and firmware-tracking discipline. Source: knowledge/notes/input_part014_review.md, L147 to L148
+[^express]: Bundled VESC Express boards failing to enumerate, forcing installers to hang separate CAN-connected modules for telemetry until firmware and header maps are fixed. Source: knowledge/notes/input_part014_review.md, L146 to L148. Source: knowledge/notes/input_part014_review.md, L180 to L180
+[^supply]: Alibaba listings shipping Seven/Tronic controllers directly from the contract manufacturer with historical pricing but uncertain official support. Source: knowledge/notes/input_part014_review.md, L163 to L164
+[^thermal]: Paolo’s assessment that the 18-FET Seven sandwiches Toll-class MOSFETs on 1.6 mm FR-4, yielding only ~15–20 % thermal improvement over X12 heat-sink mounting and keeping racers interested in alternatives like the K900. Source: knowledge/notes/input_part014_review.md, L164 to L164
+[^tracking]: Community focus on logging Seven availability, pricing, and verified current limits as testing pushes past 210 A battery / 310 A phase baselines. Source: knowledge/notes/input_part014_review.md, L217 to L217
 
 ## References
 

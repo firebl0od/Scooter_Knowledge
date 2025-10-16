@@ -116,42 +116,42 @@
 
 ## Source Notes
 
-[^1]: Converter repair anecdotes, aluminum-board revision notes, and repaste requirements for 75100 units.Source: knowledge/notes/input_part003_review.md, L435 to L439
-[^2]: Phase-filter disable, `mxlemming` observer workflow, and commuter current caps for 75200 V2 installs.Source: knowledge/notes/input_part008_review.md, L103 to L106Source: knowledge/notes/input_part009_review.md, L47 to L47
-[^3]: MakerX vs. Flipsky current envelopes and heat comparisons on dual installs.Source: knowledge/notes/input_part003_review.md, L470 to L474
-[^4]: Field reports on Makerbase/Flipsky 84xxx limits and failures under elevated currents.Source: knowledge/notes/input_part009_review.md, L118 to L126
-[^5]: Community skepticism about the FT85KS “non-VESC” controller variant.Source: knowledge/notes/input_part011_review.md, L668 to L669
-[^6]: Ongoing QC complaints and display experiments around Flipsky controllers.Source: knowledge/notes/input_part011_review.md, L452 to L454
-[^7]: Repeated capacitor explosions and component-quality concerns on 20 S builds.Source: knowledge/notes/input_part011_review.md, L753 to L755
-[^8]: Regen-triggered shutdown anecdotes on 75100 hardware.Source: knowledge/notes/input_part011_review.md, L764 to L765Source: knowledge/notes/input_part011_review.md, L58 to L60
-[^9]: Hall-detection failures tied to 5 V rail issues.Source: knowledge/notes/input_part011_review.md, L569 to L571
-[^10]: Harness part-number cataloging for aluminum 75100 revisions.Source: knowledge/notes/input_part003_review.md, L520 to L520
-[^11]: PAS integration threads and standby-draw measurements on Flipsky hardware.Source: knowledge/notes/input_part011_review.md, L484 to L486Source: knowledge/notes/input_part001_review.md, L913 to L916
-[^12]: Aux-rail shorts, conformal-coating practices, and CAN profile-switch debugging notes.Source: knowledge/notes/input_part011_review.md, L723 to L724Source: knowledge/notes/input_part011_review.md, L460 to L461
-[^13]: Manual detection guidance and warnings about bad auto-tune values.Source: knowledge/notes/input_part009_review.md, L111 to L129
-[^14]: ABS failure case reinforcing the 300 A absolute ceiling.Source: knowledge/notes/input_part003_review.md, L474 to L474
-[^15]: Current-balancing advice for dual-drive stability.Source: knowledge/notes/input_part003_review.md, L449 to L449
-[^16]: Magic Pie current ratio tuning example on 75100 hardware.Source: knowledge/notes/input_part003_review.md, L508 to L508
-[^17]: Saturation discussions and traction-control cautions at high phase currents.Source: knowledge/notes/input_part011_review.md, L475 to L477
-[^18]: Comparative MakerX reliability vs. Flipsky on similar amperage builds.Source: knowledge/notes/input_part003_review.md, L470 to L470
-[^19]: Spintend 22 S debates and recommendations to step up to C350/Thor-class controllers for higher voltage/current plans.Source: knowledge/notes/input_part011_review.md, L512 to L514
-[^fw_profiles]: Official 100 A firmware keeps warranty support and still outputs ~147 A phase, whereas the 300 A package voids warranty coverage.Source: knowledge/notes/input_part000_review.md, L42 to L42
-[^20]: Power-switching workarounds for 75100 hardware, including XT90S loop keys, QS8 pre-charge connectors, and preferences for controllers with onboard latching buttons when running dual units.Source: knowledge/notes/input_part001_review.md, L29 to L31
-[^mirono-hall]: Mirono’s shorted hall harness against a brake rotor killed the 5 V rail on a Flipsky 4.2 and confirmed the boards lack inline protection, reinforcing routing discipline and the need for spares.Source: knowledge/notes/input_part002_review.md, L421 to L421
-[^hardware-audit]: Tear-down photos continue to show undersized housings, unsecured capacitors, and single-shunt sensing on 75100 boards—clean solder balls, restake caps with silicone, and plan shunt upgrades before exceeding 120 A.Source: knowledge/notes/input_part001_review.md, L37 to L39
-[^fw-lockout]: Field-weakening remains gated to firmware 5.2/5.3 flashed via SWD on 75100 hardware; BLDC mode is disabled and sideloading 75300 images still crashes VESC Tool.Source: knowledge/notes/input_part001_review.md, L33 to L35
-[^sensorless-surge]: Sensorless transition chatter, firmware ceilings, and 24 S field-weakening caution all stem from early 2022 rider logs detailing the 75100’s behaviour at 2 000 ERPM, regen-induced voltage spikes, and the hard-coded phase cap near 110 A.Source: data/vesc_help_group/text_slices/input_part001.txt, L1696 to L2417
-[^logic_fail]: Flipsky 7550 controllers that lost motor drive despite clean detections were traced to dead STM32/USB logic stages, prompting coordinated vendor follow-up.Source: knowledge/notes/input_part000_review.md, L88 to L88
-[^bms_trip]: Load-dependent shut-downs on Flipsky 7550 builds often point to BMS current limits rather than controller faults; successful fixes raise pack capacity or adjust protection thresholds.Source: knowledge/notes/input_part000_review.md, L70 to L70
+[^1]: Converter repair anecdotes, aluminum-board revision notes, and repaste requirements for 75100 units. Source: knowledge/notes/input_part003_review.md, L435 to L439
+[^2]: Phase-filter disable, `mxlemming` observer workflow, and commuter current caps for 75200 V2 installs. Source: knowledge/notes/input_part008_review.md, L103 to L106. Source: knowledge/notes/input_part009_review.md, L47 to L47
+[^3]: MakerX vs. Flipsky current envelopes and heat comparisons on dual installs. Source: knowledge/notes/input_part003_review.md, L470 to L474
+[^4]: Field reports on Makerbase/Flipsky 84xxx limits and failures under elevated currents. Source: knowledge/notes/input_part009_review.md, L118 to L126
+[^5]: Community skepticism about the FT85KS “non-VESC” controller variant. Source: knowledge/notes/input_part011_review.md, L668 to L669
+[^6]: Ongoing QC complaints and display experiments around Flipsky controllers. Source: knowledge/notes/input_part011_review.md, L452 to L454
+[^7]: Repeated capacitor explosions and component-quality concerns on 20 S builds. Source: knowledge/notes/input_part011_review.md, L753 to L755
+[^8]: Regen-triggered shutdown anecdotes on 75100 hardware. Source: knowledge/notes/input_part011_review.md, L764 to L765. Source: knowledge/notes/input_part011_review.md, L58 to L60
+[^9]: Hall-detection failures tied to 5 V rail issues. Source: knowledge/notes/input_part011_review.md, L569 to L571
+[^10]: Harness part-number cataloging for aluminum 75100 revisions. Source: knowledge/notes/input_part003_review.md, L520 to L520
+[^11]: PAS integration threads and standby-draw measurements on Flipsky hardware. Source: knowledge/notes/input_part011_review.md, L484 to L486. Source: knowledge/notes/input_part001_review.md, L913 to L916
+[^12]: Aux-rail shorts, conformal-coating practices, and CAN profile-switch debugging notes. Source: knowledge/notes/input_part011_review.md, L723 to L724. Source: knowledge/notes/input_part011_review.md, L460 to L461
+[^13]: Manual detection guidance and warnings about bad auto-tune values. Source: knowledge/notes/input_part009_review.md, L111 to L129
+[^14]: ABS failure case reinforcing the 300 A absolute ceiling. Source: knowledge/notes/input_part003_review.md, L474 to L474
+[^15]: Current-balancing advice for dual-drive stability. Source: knowledge/notes/input_part003_review.md, L449 to L449
+[^16]: Magic Pie current ratio tuning example on 75100 hardware. Source: knowledge/notes/input_part003_review.md, L508 to L508
+[^17]: Saturation discussions and traction-control cautions at high phase currents. Source: knowledge/notes/input_part011_review.md, L475 to L477
+[^18]: Comparative MakerX reliability vs. Flipsky on similar amperage builds. Source: knowledge/notes/input_part003_review.md, L470 to L470
+[^19]: Spintend 22 S debates and recommendations to step up to C350/Thor-class controllers for higher voltage/current plans. Source: knowledge/notes/input_part011_review.md, L512 to L514
+[^fw_profiles]: Official 100 A firmware keeps warranty support and still outputs ~147 A phase, whereas the 300 A package voids warranty coverage. Source: knowledge/notes/input_part000_review.md, L42 to L42
+[^20]: Power-switching workarounds for 75100 hardware, including XT90S loop keys, QS8 pre-charge connectors, and preferences for controllers with onboard latching buttons when running dual units. Source: knowledge/notes/input_part001_review.md, L29 to L31
+[^mirono-hall]: Mirono’s shorted hall harness against a brake rotor killed the 5 V rail on a Flipsky 4.2 and confirmed the boards lack inline protection, reinforcing routing discipline and the need for spares. Source: knowledge/notes/input_part002_review.md, L421 to L421
+[^hardware-audit]: Tear-down photos continue to show undersized housings, unsecured capacitors, and single-shunt sensing on 75100 boards—clean solder balls, restake caps with silicone, and plan shunt upgrades before exceeding 120 A. Source: knowledge/notes/input_part001_review.md, L37 to L39
+[^fw-lockout]: Field-weakening remains gated to firmware 5.2/5.3 flashed via SWD on 75100 hardware; BLDC mode is disabled and sideloading 75300 images still crashes VESC Tool. Source: knowledge/notes/input_part001_review.md, L33 to L35
+[^sensorless-surge]: Sensorless transition chatter, firmware ceilings, and 24 S field-weakening caution all stem from early 2022 rider logs detailing the 75100’s behaviour at 2 000 ERPM, regen-induced voltage spikes, and the hard-coded phase cap near 110 A. Source: data/vesc_help_group/text_slices/input_part001.txt, L1696 to L2417
+[^logic_fail]: Flipsky 7550 controllers that lost motor drive despite clean detections were traced to dead STM32/USB logic stages, prompting coordinated vendor follow-up. Source: knowledge/notes/input_part000_review.md, L88 to L88
+[^bms_trip]: Load-dependent shut-downs on Flipsky 7550 builds often point to BMS current limits rather than controller faults; successful fixes raise pack capacity or adjust protection thresholds. Source: knowledge/notes/input_part000_review.md, L70 to L70
 [^sensorless_hash]: Source: knowledge/notes/input_part000_review.md, lines 193-194.
-[^group-buy]: Coordinated orders leverage Flipsky’s one-time 20 % discount code, which support can manually reopen if the 24-hour window is missed.Source: knowledge/notes/input_part000_review.md, L30 to L32
-[^starter-kit]: Community starter list pairs twin 7550 controllers with Bluetooth v6, CAN cabling, anti-spark switches for ≥20 S packs, and spare JST leads for halls, throttle, and brake wiring.Source: knowledge/notes/input_part000_review.md, L31 to L33
-[^wiring-supplies]: Builders pre-stock XT60/XT90 plugs, JST assortments, and 4–6 mm motor bullet connectors to keep conversions moving.Source: knowledge/notes/input_part000_review.md, L33 to L33
-[^budget-plan]: Expect roughly €940 including VAT for a dual-controller upgrade and plan insurance or reserve funds accordingly.Source: knowledge/notes/input_part000_review.md, L34 to L34
-[^fw_mismatch]: Flipsky 75100 ALU firmware mismatch issues requiring bootloader and firmware pair reflashing.Source: knowledge/notes/input_part004_review.md, L60 to L60Source: knowledge/notes/input_part004_review.md, L327 to L327
-[^can_soft]: Flipsky 75200 CAN communication soft failures resolved with factory defaults.Source: knowledge/notes/input_part004_review.md, L89 to L89
-[^cap_stake]: Loose bus capacitors and low-voltage bench test failures on repaired 75100 units.Source: knowledge/notes/input_part004_review.md, L312 to L312
-[^param_persist]: Parameter persistence issues with wattage/regen limits resetting on 75100 boards.Source: knowledge/notes/input_part004_review.md, L283 to L283
+[^group-buy]: Coordinated orders leverage Flipsky’s one-time 20 % discount code, which support can manually reopen if the 24-hour window is missed. Source: knowledge/notes/input_part000_review.md, L30 to L32
+[^starter-kit]: Community starter list pairs twin 7550 controllers with Bluetooth v6, CAN cabling, anti-spark switches for ≥20 S packs, and spare JST leads for halls, throttle, and brake wiring. Source: knowledge/notes/input_part000_review.md, L31 to L33
+[^wiring-supplies]: Builders pre-stock XT60/XT90 plugs, JST assortments, and 4–6 mm motor bullet connectors to keep conversions moving. Source: knowledge/notes/input_part000_review.md, L33 to L33
+[^budget-plan]: Expect roughly €940 including VAT for a dual-controller upgrade and plan insurance or reserve funds accordingly. Source: knowledge/notes/input_part000_review.md, L34 to L34
+[^fw_mismatch]: Flipsky 75100 ALU firmware mismatch issues requiring bootloader and firmware pair reflashing. Source: knowledge/notes/input_part004_review.md, L60 to L60. Source: knowledge/notes/input_part004_review.md, L327 to L327
+[^can_soft]: Flipsky 75200 CAN communication soft failures resolved with factory defaults. Source: knowledge/notes/input_part004_review.md, L89 to L89
+[^cap_stake]: Loose bus capacitors and low-voltage bench test failures on repaired 75100 units. Source: knowledge/notes/input_part004_review.md, L312 to L312
+[^param_persist]: Parameter persistence issues with wattage/regen limits resetting on 75100 boards. Source: knowledge/notes/input_part004_review.md, L283 to L283
 
 ## References
 

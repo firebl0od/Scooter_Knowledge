@@ -64,19 +64,19 @@
 
 ## Source Notes
 
-[^1]: Jetson Bolt dropout width, stock battery cavity limits, and second-motor mounting points plus warnings against 10″ QS hub swaps.Source: data/vesc_help_group/text_slices/input_part010.txt, L8423 to L8438
-[^2]: Community guidance to hold phase current near 30–50 A on 72 V Jetson builds and sustained-current anecdotes around 72 V Sabvoton conversions.Source: data/vesc_help_group/text_slices/input_part010.txt, L8459 to L8463Source: data/vesc_help_group/text_slices/input_part010.txt, L9553 to L9559
-[^3]: Jetson 20 S 3 P Samsung 35E pack performance, 1.6 kW cap, high-voltage faults despite 85 V limits, long-range usage notes, and field-weakening burnout cautions.Source: knowledge/notes/input_part011_review.md, L15 to L15Source: knowledge/notes/input_part011_review.md, L55 to L58Source: knowledge/notes/input_part011_review.md, L301 to L304
-[^4]: Printable Jetson battery carriers, compartment extensions, and mesh-protected holders for compact frames.Source: data/vesc_help_group/text_slices/input_part010.txt, L6769 to L6807Source: data/vesc_help_group/text_slices/input_part010.txt, L8120 to L8139
-[^5]: Mini-format VESC requirements, lack of internal space for full-size controllers, and hub fitment cautions for wide motors.Source: data/vesc_help_group/text_slices/input_part010.txt, L9745 to L9749Source: data/vesc_help_group/text_slices/input_part010.txt, L8423 to L8438
-[^6]: Bench-supply spin tests, dual-motor mounting provisions, and confirmation that the Jetson hub is direct drive with proven four-piston brake upgrades.Source: data/vesc_help_group/text_slices/input_part010.txt, L8423 to L8438
-[^7]: Recommended VESC low-voltage start/end values for 22 S Jetson experiments to avoid undervoltage flags.Source: knowledge/notes/input_part010_review.md, L343 to L343
-[^8]: Controller failures tied to BMS cut-offs and regen spikes on Flipsky hardware plus general caution about sudden pack disconnects.Source: knowledge/notes/input_part011_review.md, L15 to L15Source: knowledge/notes/input_part011_review.md, L53 to L53
-[^9]: Jetson hall-detection troubleshooting, sensorless zero-start fallback, post-detection electrical measurements, and the need to re-run motor detection after wiring fixes.Source: knowledge/notes/input_part011_review.md, L10 to L14
-[^10]: Community reminder to power suspect hardware on a 30–50 mA current-limited bench supply before connecting full packs.Source: knowledge/notes/input_part011_review.md, L186 to L187
-[^11]: Advice to power Jetson lighting from dedicated DC-DC converters because ADC expanders are space-constrained in this chassis.Source: knowledge/notes/input_part011_review.md, L142 to L142
-[^12]: Delivery-range planning discussions weighing higher-capacity cells versus packaging limits for commuter duty.Source: knowledge/notes/input_part011_review.md, L145 to L147
-[^13]: OEM Jetson hub current tolerance (~30 A at 72 V), dropout measurement, and 12×6 (60 H) hub recommendations for higher-torque 20 S builds.Source: data/vesc_help_group/text_slices/input_part010.txt, L8423 to L8463Source: data/vesc_help_group/text_slices/input_part010.txt, L9553 to L9559
+[^1]: Jetson Bolt dropout width, stock battery cavity limits, and second-motor mounting points plus warnings against 10″ QS hub swaps. Source: data/vesc_help_group/text_slices/input_part010.txt, L8423 to L8438
+[^2]: Community guidance to hold phase current near 30–50 A on 72 V Jetson builds and sustained-current anecdotes around 72 V Sabvoton conversions. Source: data/vesc_help_group/text_slices/input_part010.txt, L8459 to L8463. Source: data/vesc_help_group/text_slices/input_part010.txt, L9553 to L9559
+[^3]: Jetson 20 S 3 P Samsung 35E pack performance, 1.6 kW cap, high-voltage faults despite 85 V limits, long-range usage notes, and field-weakening burnout cautions. Source: knowledge/notes/input_part011_review.md, L15 to L15. Source: knowledge/notes/input_part011_review.md, L55 to L58. Source: knowledge/notes/input_part011_review.md, L301 to L304
+[^4]: Printable Jetson battery carriers, compartment extensions, and mesh-protected holders for compact frames. Source: data/vesc_help_group/text_slices/input_part010.txt, L6769 to L6807. Source: data/vesc_help_group/text_slices/input_part010.txt, L8120 to L8139
+[^5]: Mini-format VESC requirements, lack of internal space for full-size controllers, and hub fitment cautions for wide motors. Source: data/vesc_help_group/text_slices/input_part010.txt, L9745 to L9749. Source: data/vesc_help_group/text_slices/input_part010.txt, L8423 to L8438
+[^6]: Bench-supply spin tests, dual-motor mounting provisions, and confirmation that the Jetson hub is direct drive with proven four-piston brake upgrades. Source: data/vesc_help_group/text_slices/input_part010.txt, L8423 to L8438
+[^7]: Recommended VESC low-voltage start/end values for 22 S Jetson experiments to avoid undervoltage flags. Source: knowledge/notes/input_part010_review.md, L343 to L343
+[^8]: Controller failures tied to BMS cut-offs and regen spikes on Flipsky hardware plus general caution about sudden pack disconnects. Source: knowledge/notes/input_part011_review.md, L15 to L15. Source: knowledge/notes/input_part011_review.md, L53 to L53
+[^9]: Jetson hall-detection troubleshooting, sensorless zero-start fallback, post-detection electrical measurements, and the need to re-run motor detection after wiring fixes. Source: knowledge/notes/input_part011_review.md, L10 to L14
+[^10]: Community reminder to power suspect hardware on a 30–50 mA current-limited bench supply before connecting full packs. Source: knowledge/notes/input_part011_review.md, L186 to L187
+[^11]: Advice to power Jetson lighting from dedicated DC-DC converters because ADC expanders are space-constrained in this chassis. Source: knowledge/notes/input_part011_review.md, L142 to L142
+[^12]: Delivery-range planning discussions weighing higher-capacity cells versus packaging limits for commuter duty. Source: knowledge/notes/input_part011_review.md, L145 to L147
+[^13]: OEM Jetson hub current tolerance (~30 A at 72 V), dropout measurement, and 12×6 (60 H) hub recommendations for higher-torque 20 S builds. Source: data/vesc_help_group/text_slices/input_part010.txt, L8423 to L8463. Source: data/vesc_help_group/text_slices/input_part010.txt, L9553 to L9559
 
 ## References
 

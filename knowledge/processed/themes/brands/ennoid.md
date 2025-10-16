@@ -32,7 +32,7 @@
 
 ## Source Notes
 
-[^mk8_swap]: Ennoid MK8 shares the Spintend 85150 footprint but relies on Infineon IPTC017N12NM6 Toll MOSFET swaps to stretch toward 26 S / 500 A phase capability.Source: knowledge/notes/input_part014_review.md, L12 to L13
-[^ct_vs_shunt]: Smart Repair’s diagnosis that Spintend’s current-transformer sensing saturates near 100 A and their recommendation to pivot heavy builds to shunt-based MK8/X12 hardware until an 18-FET refresh arrives.Source: knowledge/notes/input_part014_review.md, L12 to L13
-[^museum]: JPPL’s “VESC museum” inventory—Thor, MakerX, Tronic, Ennoid—maintained to benchmark future Maxim/Seven releases under identical conditions.Source: knowledge/notes/input_part014_review.md, L27 to L27
+[^mk8_swap]: Ennoid MK8 shares the Spintend 85150 footprint but relies on Infineon IPTC017N12NM6 Toll MOSFET swaps to stretch toward 26 S / 500 A phase capability. Source: knowledge/notes/input_part014_review.md, L12 to L13
+[^ct_vs_shunt]: Smart Repair’s diagnosis that Spintend’s current-transformer sensing saturates near 100 A and their recommendation to pivot heavy builds to shunt-based MK8/X12 hardware until an 18-FET refresh arrives. Source: knowledge/notes/input_part014_review.md, L12 to L13
+[^museum]: JPPL’s “VESC museum” inventory—Thor, MakerX, Tronic, Ennoid—maintained to benchmark future Maxim/Seven releases under identical conditions. Source: knowledge/notes/input_part014_review.md, L27 to L27
 [^single_75a]: Source: knowledge/notes/input_part000_review.md, line 211.

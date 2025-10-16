@@ -66,17 +66,17 @@ Community audits describe new Wepeds as expensive kits: owners routinely replace
 
 ## Source Notes
 
-[^1]: Factory GTS/Fold pack configuration and required pre-delivery rework.Source: knowledge/notes/input_part001_review.md, L24 to L25
-[^2]: Planned 21S11P upgrades for Weped SS high-speed builds.Source: knowledge/notes/input_part000_review.md, L717 to L717
-[^3]: Long-term 50E performance data and chemistry debates on Weped FS builds.Source: knowledge/notes/input_part007_review.md, L286 to L286
-[^4]: Dual Spintend thermal logs inside Weped decks at ~500 A phase.Source: knowledge/notes/input_part000_review.md, L610 to L614
-[^5]: OEM fan-assisted cooling layout on high-speed Wepeds.Source: knowledge/notes/input_part007_review.md, L26 to L26
-[^6]: Sonic deliveries with QS hubs and Fardriver controllers plus European sightings.Source: knowledge/notes/input_part006_review.md, L195 to L195Source: knowledge/notes/input_part007_review.md, L395 to L395
-[^7]: Weped service reputation and Fold 3 chassis quality assessments.Source: knowledge/notes/input_part009_review.md, L75 to L76
-[^8]: Premium pricing contrasted with bargain-spec cockpit hardware on shipped units.Source: knowledge/notes/input_part001_review.md, L787 to L787
-[^9]: Guidance to approach Weped about VESC integration with revised cooling plans.Source: knowledge/notes/input_part010_review.md, L354 to L354
-[^10]: Repeated controller failures on a Weped Wepoor linked to suspected ANT BMS/regen events.Source: knowledge/notes/input_part011_review.md, L227 to L229
-[^11]: Rage Mechanics and FF-spec motor sourcing costs for Weped platforms.Source: knowledge/notes/input_part000_review.md, L449 to L449Source: knowledge/notes/input_part000_review.md, L698 to L698
+[^1]: Factory GTS/Fold pack configuration and required pre-delivery rework. Source: knowledge/notes/input_part001_review.md, L24 to L25
+[^2]: Planned 21S11P upgrades for Weped SS high-speed builds. Source: knowledge/notes/input_part000_review.md, L717 to L717
+[^3]: Long-term 50E performance data and chemistry debates on Weped FS builds. Source: knowledge/notes/input_part007_review.md, L286 to L286
+[^4]: Dual Spintend thermal logs inside Weped decks at ~500 A phase. Source: knowledge/notes/input_part000_review.md, L610 to L614
+[^5]: OEM fan-assisted cooling layout on high-speed Wepeds. Source: knowledge/notes/input_part007_review.md, L26 to L26
+[^6]: Sonic deliveries with QS hubs and Fardriver controllers plus European sightings. Source: knowledge/notes/input_part006_review.md, L195 to L195. Source: knowledge/notes/input_part007_review.md, L395 to L395
+[^7]: Weped service reputation and Fold 3 chassis quality assessments. Source: knowledge/notes/input_part009_review.md, L75 to L76
+[^8]: Premium pricing contrasted with bargain-spec cockpit hardware on shipped units. Source: knowledge/notes/input_part001_review.md, L787 to L787
+[^9]: Guidance to approach Weped about VESC integration with revised cooling plans. Source: knowledge/notes/input_part010_review.md, L354 to L354
+[^10]: Repeated controller failures on a Weped Wepoor linked to suspected ANT BMS/regen events. Source: knowledge/notes/input_part011_review.md, L227 to L229
+[^11]: Rage Mechanics and FF-spec motor sourcing costs for Weped platforms. Source: knowledge/notes/input_part000_review.md, L449 to L449. Source: knowledge/notes/input_part000_review.md, L698 to L698
 
 ## References
 

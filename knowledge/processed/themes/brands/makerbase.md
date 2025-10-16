@@ -126,16 +126,16 @@
 
 - Makerbase reliability notes, firmware quirks, and ignition wiring guidance consolidate the VESC Help Group reviews covering 2024–2025 slices on firmware misidentification, ADC voltage safety, and ignition latch requirements for 75100/84100HP controllers.[^120][^121][^122]
 - Thermal management, regen tuning, and accessory integration recommendations pull from the same Smart Repair logs detailing paste refreshes, 12 V rail dropouts, and ADC adapter limits when pushing Makerbase hardware near its current ceiling.[^123][^94][^101]
-[^printed_housings]: Community CAD drops document PLA+/PETG housings and jet-duct side pods that add splash protection for Makerbase 75100 decks while keeping airflow over the aluminum PCB.Source: knowledge/notes/input_part005_review.md, L72 to L72
-[^can_first]: Makerbase dual-drive owners advising to wire CAN high/low between controllers before pairing BLE modules so both nodes stay in sync.Source: knowledge/notes/input_part012_review.md, L359 to L360
-[^adc_load]: Makerbase/Spintend horn outputs sourcing only a couple of amps—insufficient for 35 W halogens—so riders trigger relays and power lights from dedicated converters.Source: knowledge/notes/input_part012_review.md, L97 to L98
-[^adc_adapter]: Roby MacGyver’s ADC Adapter V3 workflow for keyed ignition, fused lighting, and profile control on Makerbase hardware without back-powering the BMS.Source: knowledge/notes/input_part011_review.md, L687 to L687
-[^alt_consumable]: Veterans treating Makerbase 84xxx controllers as consumables while they chase 300 A logs or wait for higher-rated hardware, steering commuters to Spintend, Tronic, or Seven alternatives instead.Source: knowledge/notes/input_part012_review.md, L374 to L378Source: knowledge/notes/input_part012_review.md, L397 to L398
-[^kapton_static]: Kapton isolation preventing static discharge from killing a Makerbase 75100’s 3.3 V rail after the Bluetooth module touched the case.Source: knowledge/notes/input_part008_review.md, L45 to L45
-[^binary_accessory]: Makerbase 75×100 owners bridging throttle shunt leads or adding ADC pulldowns to drive binary accessories with clean 0/100 % duty behaviour.Source: knowledge/notes/input_part006_review.md, L197 to L197
-[^dead_5v]: Makerbase 75100 Alu board with dead 5 V rail losing hall detection until DC/DC stage repair.Source: knowledge/notes/input_part004_review.md, L325 to L325
-[^mcu_reflow]: GD32 MCU reflow fixing intermittent boot on 75 100 Alu boards with poor factory solder joints.Source: knowledge/notes/input_part004_review.md, L294 to L294
-[^mosfet_hotplate]: Hotplate technique for replacing cracked G015N10 MOSFETs on aluminum-PCB Makerbase boards.Source: knowledge/notes/input_part004_review.md, L282 to L282
+[^printed_housings]: Community CAD drops document PLA+/PETG housings and jet-duct side pods that add splash protection for Makerbase 75100 decks while keeping airflow over the aluminum PCB. Source: knowledge/notes/input_part005_review.md, L72 to L72
+[^can_first]: Makerbase dual-drive owners advising to wire CAN high/low between controllers before pairing BLE modules so both nodes stay in sync. Source: knowledge/notes/input_part012_review.md, L359 to L360
+[^adc_load]: Makerbase/Spintend horn outputs sourcing only a couple of amps—insufficient for 35 W halogens—so riders trigger relays and power lights from dedicated converters. Source: knowledge/notes/input_part012_review.md, L97 to L98
+[^adc_adapter]: Roby MacGyver’s ADC Adapter V3 workflow for keyed ignition, fused lighting, and profile control on Makerbase hardware without back-powering the BMS. Source: knowledge/notes/input_part011_review.md, L687 to L687
+[^alt_consumable]: Veterans treating Makerbase 84xxx controllers as consumables while they chase 300 A logs or wait for higher-rated hardware, steering commuters to Spintend, Tronic, or Seven alternatives instead. Source: knowledge/notes/input_part012_review.md, L374 to L378. Source: knowledge/notes/input_part012_review.md, L397 to L398
+[^kapton_static]: Kapton isolation preventing static discharge from killing a Makerbase 75100’s 3.3 V rail after the Bluetooth module touched the case. Source: knowledge/notes/input_part008_review.md, L45 to L45
+[^binary_accessory]: Makerbase 75×100 owners bridging throttle shunt leads or adding ADC pulldowns to drive binary accessories with clean 0/100 % duty behaviour. Source: knowledge/notes/input_part006_review.md, L197 to L197
+[^dead_5v]: Makerbase 75100 Alu board with dead 5 V rail losing hall detection until DC/DC stage repair. Source: knowledge/notes/input_part004_review.md, L325 to L325
+[^mcu_reflow]: GD32 MCU reflow fixing intermittent boot on 75 100 Alu boards with poor factory solder joints. Source: knowledge/notes/input_part004_review.md, L294 to L294
+[^mosfet_hotplate]: Hotplate technique for replacing cracked G015N10 MOSFETs on aluminum-PCB Makerbase boards. Source: knowledge/notes/input_part004_review.md, L282 to L282
 
 ## References
 

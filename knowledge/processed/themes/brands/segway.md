@@ -115,32 +115,32 @@
 
 ## Source Notes
 
-[^1]: Community consensus on Segway G30 viability and F-series weaknesses for North American commuters.Source: knowledge/notes/input_part006_review.md, L45 to L48
-[^2]: GT deck sag, stem reinforcement needs, and SNSC frame fracture anecdotes under high load.Source: knowledge/notes/input_part003_review.md, L285 to L288
-[^3]: Segway GT teardown showing 14 S 12 P pack, 24‑FET controller, and braking upgrades with Hope V4 hardware.Source: knowledge/notes/input_part003_review.md, L232 to L233
-[^4]: Kirill’s GT2 ride log documenting 70 km/h stock performance and rotor clearance for 180 mm Magura setups.Source: knowledge/notes/input_part002_review.md, L188 to L188
-[^5]: Measurement of GT2’s 2.42 mm six-bolt rotors as an upgrade over commuter-class discs.Source: knowledge/notes/input_part006_review.md, L357 to L357
-[^6]: GT2 stem bearing fragility, axle machining requirements, and GT3 chassis comparisons.Source: knowledge/notes/input_part011_review.md, L439 to L441
-[^7]: Guidance on grinding deck paint, adding thermal glue, and mounting Ubox/MP2 controllers in Segway GT bays.Source: knowledge/notes/input_part012_review.md, L92 to L92
-[^8]: Recommendations for sparing ferrofluid application and temperature-probe installs on Segway hubs.Source: knowledge/notes/input_part012_review.md, L191 to L191
-[^9]: GT pack sag under 500 A phase and copper busbar reinforcement details for future 22 S upgrades.Source: knowledge/notes/input_part011_review.md, L467 to L469
-[^g30-blueprint]: Twin MP2 conversions stack 20 S 12 P bricks to roughly 14.5 cm, stand the smart BMS vertically up front, and split current across parallel QS8/8 AWG harnesses while a welded rear controller box preserves the deck arches.Source: data/vesc_help_group/text_slices/input_part009.txt, L21845 to L21939
-[^10]: Segway C80 battery packaging, dropout dimensions, and retained drum/sprocket hardware for future drivetrain swaps.Source: knowledge/notes/input_part012_review.md, L340 to L341
-[^11]: Weight, BMS limits, and range benchmarks for Segway-based moped builds with 32 P Samsung 35E packs.Source: knowledge/notes/input_part012_review.md, L324 to L327Source: knowledge/notes/input_part012_review.md, L343 to L344
-[^12]: C80 fast-charge validation (≈6–7 kW) on the stock 100/100 Lite controller.Source: knowledge/notes/input_part012_review.md, L266 to L266
-[^13]: Overview of Segway’s upcoming ST line noting the ST1’s commuter fork and the ST2’s 72 V target near 85 km/h.Source: knowledge/notes/input_part006_review.md, L421 to L421
-[^14]: F-series weld inspections and reinforcement reminders before heavy-duty use.Source: knowledge/notes/input_part006_review.md, L408 to L409
-[^p100]: Ninebot P100 teardown and range report showing the 52 V 23 Ah pack only returns ~25 mi at 30 mph despite the stiffer chassis and shared cockpit hardware with G30 builds.Source: knowledge/notes/input_part003_review.md, L701 to L748
-[^stem_swap]: Rosheee’s stem upgrade log covering thicker G30D v2 latches, P100 hybrid welding steps, and SNSC controller-mount failures when handlebar battery packs add leverage.Source: knowledge/notes/input_part003_review.md, L705 to L748
-[^s65]: Navee S65 geared-hub teardown outlining added torque, noise, and service complexity versus direct-drive swaps.Source: knowledge/notes/input_part003_review.md, L701 to L746
-[^gt_dash]: GT2 dashboard integration gaps requiring protocol sniffing or donor assemblies before CAN overlays function reliably.Source: knowledge/notes/input_part003_review.md, L744 to L745
-[^15]: SmartDisplay CAN overlay and VESC Express station-mode networking guidance for Segway dashboards.Source: knowledge/notes/input_part003_review.md, L304 to L308Source: knowledge/notes/input_part012_review.md, L100 to L101
-[^16]: MakerX footpad and dashboard wiring expectations around 3.3 V logic on Segway conversions.Source: knowledge/notes/input_part012_review.md, L349 to L349
-[^17]: Limits of ADC horn outputs on Makerbase/Spintend harnesses used in Segway conversions.Source: knowledge/notes/input_part012_review.md, L96 to L97
+[^1]: Community consensus on Segway G30 viability and F-series weaknesses for North American commuters. Source: knowledge/notes/input_part006_review.md, L45 to L48
+[^2]: GT deck sag, stem reinforcement needs, and SNSC frame fracture anecdotes under high load. Source: knowledge/notes/input_part003_review.md, L285 to L288
+[^3]: Segway GT teardown showing 14 S 12 P pack, 24‑FET controller, and braking upgrades with Hope V4 hardware. Source: knowledge/notes/input_part003_review.md, L232 to L233
+[^4]: Kirill’s GT2 ride log documenting 70 km/h stock performance and rotor clearance for 180 mm Magura setups. Source: knowledge/notes/input_part002_review.md, L188 to L188
+[^5]: Measurement of GT2’s 2.42 mm six-bolt rotors as an upgrade over commuter-class discs. Source: knowledge/notes/input_part006_review.md, L357 to L357
+[^6]: GT2 stem bearing fragility, axle machining requirements, and GT3 chassis comparisons. Source: knowledge/notes/input_part011_review.md, L439 to L441
+[^7]: Guidance on grinding deck paint, adding thermal glue, and mounting Ubox/MP2 controllers in Segway GT bays. Source: knowledge/notes/input_part012_review.md, L92 to L92
+[^8]: Recommendations for sparing ferrofluid application and temperature-probe installs on Segway hubs. Source: knowledge/notes/input_part012_review.md, L191 to L191
+[^9]: GT pack sag under 500 A phase and copper busbar reinforcement details for future 22 S upgrades. Source: knowledge/notes/input_part011_review.md, L467 to L469
+[^g30-blueprint]: Twin MP2 conversions stack 20 S 12 P bricks to roughly 14.5 cm, stand the smart BMS vertically up front, and split current across parallel QS8/8 AWG harnesses while a welded rear controller box preserves the deck arches. Source: data/vesc_help_group/text_slices/input_part009.txt, L21845 to L21939
+[^10]: Segway C80 battery packaging, dropout dimensions, and retained drum/sprocket hardware for future drivetrain swaps. Source: knowledge/notes/input_part012_review.md, L340 to L341
+[^11]: Weight, BMS limits, and range benchmarks for Segway-based moped builds with 32 P Samsung 35E packs. Source: knowledge/notes/input_part012_review.md, L324 to L327. Source: knowledge/notes/input_part012_review.md, L343 to L344
+[^12]: C80 fast-charge validation (≈6–7 kW) on the stock 100/100 Lite controller. Source: knowledge/notes/input_part012_review.md, L266 to L266
+[^13]: Overview of Segway’s upcoming ST line noting the ST1’s commuter fork and the ST2’s 72 V target near 85 km/h. Source: knowledge/notes/input_part006_review.md, L421 to L421
+[^14]: F-series weld inspections and reinforcement reminders before heavy-duty use. Source: knowledge/notes/input_part006_review.md, L408 to L409
+[^p100]: Ninebot P100 teardown and range report showing the 52 V 23 Ah pack only returns ~25 mi at 30 mph despite the stiffer chassis and shared cockpit hardware with G30 builds. Source: knowledge/notes/input_part003_review.md, L701 to L748
+[^stem_swap]: Rosheee’s stem upgrade log covering thicker G30D v2 latches, P100 hybrid welding steps, and SNSC controller-mount failures when handlebar battery packs add leverage. Source: knowledge/notes/input_part003_review.md, L705 to L748
+[^s65]: Navee S65 geared-hub teardown outlining added torque, noise, and service complexity versus direct-drive swaps. Source: knowledge/notes/input_part003_review.md, L701 to L746
+[^gt_dash]: GT2 dashboard integration gaps requiring protocol sniffing or donor assemblies before CAN overlays function reliably. Source: knowledge/notes/input_part003_review.md, L744 to L745
+[^15]: SmartDisplay CAN overlay and VESC Express station-mode networking guidance for Segway dashboards. Source: knowledge/notes/input_part003_review.md, L304 to L308. Source: knowledge/notes/input_part012_review.md, L100 to L101
+[^16]: MakerX footpad and dashboard wiring expectations around 3.3 V logic on Segway conversions. Source: knowledge/notes/input_part012_review.md, L349 to L349
+[^17]: Limits of ADC horn outputs on Makerbase/Spintend harnesses used in Segway conversions. Source: knowledge/notes/input_part012_review.md, L96 to L97
 [^g2-shfw]: Source: knowledge/notes/denis_all_part02_review.md, L149 to L153
 [^dual-motor]: Source: knowledge/notes/denis_all_part02_review.md, L191 to L193
-[^new-13s]: Guidance from Denis Yurev and Happy Giraffe to favor a single 13 S Max pack on the stock hub, logging 30–40 A pulls with Rita/Happy BMS rather than chasing dual-motor swaps.Source: knowledge/notes/denis_all_part02_review.md, L10 to L12
-[^new-suspension]: Community consensus against foam “solid” tires and in favor of quality 10-inch pneumatics with Monorim front/DNM rear suspension for 50 km/h Ninebot builds; Sharkset forks remain comfortable but wobble above ~45 km/h.Source: knowledge/notes/denis_all_part02_review.md, L13 to L14
+[^new-13s]: Guidance from Denis Yurev and Happy Giraffe to favor a single 13 S Max pack on the stock hub, logging 30–40 A pulls with Rita/Happy BMS rather than chasing dual-motor swaps. Source: knowledge/notes/denis_all_part02_review.md, L10 to L12
+[^new-suspension]: Community consensus against foam “solid” tires and in favor of quality 10-inch pneumatics with Monorim front/DNM rear suspension for 50 km/h Ninebot builds; Sharkset forks remain comfortable but wobble above ~45 km/h. Source: knowledge/notes/denis_all_part02_review.md, L13 to L14
 - **Stack external packs only with BMS parity.** Pairing a stock 10 S G30 pack with a DIY 4 S extender demands healthy BMS boards charged to similar voltages; the stock pack still clamps around 20 A, and VESC detection fails until proper voltage support restores power.[^pack_stack]
 - **Expect 45–48 km/h from dual-motor G30s at 48 V.** Riders warned that voltage headroom is generous (enamel withstands kilovolt spikes), but phase amps cook motors—75100 builds stay around 70 A battery / 150 A phase to avoid smoking stators.[^dual_g30_speed]
 - **Set 20 S G30 cutoffs near 56.5 V (~2.85 V/cell) to ride through sag.** This value keeps dual stock packs alive under load while bypassed BMS boards stay clear of 2.5 V absolute limits.[^g30_cutoff]
@@ -148,16 +148,16 @@
 - **Ninebot hub thermal ceiling is ~40–45 A battery.** Paolo confirmed OG Ninebot motors burn above this threshold even on 20 S—cap phase/battery settings and resist feeding dual 15 A controllers continuous load without upgraded hubs.[^ninebot_thermal]
 - **F-series stems bend under load.** The elongated aluminum steering tube will bend where factory drilling weakened it for harness routing—inspect for flex before hard riding and treat as weaker than Xiaomi's 45° pipe assembly.[^f_stem]
 - **ARS suspension stretches the wheelbase.** Italian-made front and rear kits push the G30 chassis outward, accept 125 mm hubs, and pair cleanly with 160 mm rotors; the rear kit is shipping while the zero-play front assembly is still in beta.[^ars_suspension]
-[^pack_stack]: Stacking Ninebot G30 packs with DIY extenders requires BMS parity and matched voltages.Source: knowledge/notes/input_part004_review.md, L14 to L14
-[^dual_g30_speed]: Dual-motor G30 speed expectations at 48 V with thermal management warnings.Source: knowledge/notes/input_part004_review.md, L74 to L74
-[^g30_cutoff]: Recommended VESC battery cutoff voltage for 20 S stacked Ninebot packs.Source: knowledge/notes/input_part004_review.md, L48 to L48Source: knowledge/notes/input_part004_review.md, L70 to L70
-[^dual_pack_fitment]: Dual Ninebot pack packaging with tall spacers and flipped SNSC suspension.Source: knowledge/notes/input_part004_review.md, L47 to L47
-[^ninebot_thermal]: Ninebot hub motor thermal ceiling around 40–45 A battery current.Source: knowledge/notes/input_part004_review.md, L298 to L298
-[^f_stem]: Ninebot F-series stem bending cautions due to factory harness routing holes.Source: knowledge/notes/input_part004_review.md, L346 to L346
-[^ars_suspension]: ARS front/rear suspension kits extend the G30 wheelbase, fit 125 mm hubs, and support 160 mm rotors with zero-play linkages once the front beta ships.Source: knowledge/notes/input_part004_review.md, L26 to L26
-[^f2pro-shfw]: ScooterHacking Firmware confirming sensorless launch reliability on F2 Pro with hall emulation noise during controller switching.Source: knowledge/notes/input_part013_review.md, L146 to L148
-[^f2pro-ocp]: F2 Pro over-current protection tripping near 30 A regardless of utility app settings.Source: knowledge/notes/input_part013_review.md, L146 to L148
-[^f2pro-limits]: F2 Pro external pack current sharing guidance to avoid BMS trips while respecting 25–30 A ceiling.Source: knowledge/notes/input_part013_review.md, L148 to L150
+[^pack_stack]: Stacking Ninebot G30 packs with DIY extenders requires BMS parity and matched voltages. Source: knowledge/notes/input_part004_review.md, L14 to L14
+[^dual_g30_speed]: Dual-motor G30 speed expectations at 48 V with thermal management warnings. Source: knowledge/notes/input_part004_review.md, L74 to L74
+[^g30_cutoff]: Recommended VESC battery cutoff voltage for 20 S stacked Ninebot packs. Source: knowledge/notes/input_part004_review.md, L48 to L48. Source: knowledge/notes/input_part004_review.md, L70 to L70
+[^dual_pack_fitment]: Dual Ninebot pack packaging with tall spacers and flipped SNSC suspension. Source: knowledge/notes/input_part004_review.md, L47 to L47
+[^ninebot_thermal]: Ninebot hub motor thermal ceiling around 40–45 A battery current. Source: knowledge/notes/input_part004_review.md, L298 to L298
+[^f_stem]: Ninebot F-series stem bending cautions due to factory harness routing holes. Source: knowledge/notes/input_part004_review.md, L346 to L346
+[^ars_suspension]: ARS front/rear suspension kits extend the G30 wheelbase, fit 125 mm hubs, and support 160 mm rotors with zero-play linkages once the front beta ships. Source: knowledge/notes/input_part004_review.md, L26 to L26
+[^f2pro-shfw]: ScooterHacking Firmware confirming sensorless launch reliability on F2 Pro with hall emulation noise during controller switching. Source: knowledge/notes/input_part013_review.md, L146 to L148
+[^f2pro-ocp]: F2 Pro over-current protection tripping near 30 A regardless of utility app settings. Source: knowledge/notes/input_part013_review.md, L146 to L148
+[^f2pro-limits]: F2 Pro external pack current sharing guidance to avoid BMS trips while respecting 25–30 A ceiling. Source: knowledge/notes/input_part013_review.md, L148 to L150
 
 ## References
 

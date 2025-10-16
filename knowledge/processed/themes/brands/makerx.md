@@ -88,18 +88,18 @@
 
 ## Source Notes
 
-[^1]: MakerX commuter current envelopes, thermistor fixes, water-damage recovery workflow, and BLE power sourcing guidance.Source: knowledge/notes/input_part003_review.md, L93 to L120Source: knowledge/notes/input_part003_review.md, L136 to L136Source: knowledge/notes/input_part003_review.md, L151 to L152Source: knowledge/notes/input_part003_review.md, L552 to L552
-[^2]: Mini FOC teardown quality, torque-arm reminders, and MOSFET limit cautions from controller comparison threads.Source: knowledge/notes/input_part002_review.md, L135 to L142Source: knowledge/notes/input_part002_review.md, L166 to L168
-[^3]: Phase-limit failure on MakerX M100 and ongoing QC/resale warnings for MakerX vs. competitors.Source: knowledge/notes/input_part009_review.md, L169 to L177Source: knowledge/notes/input_part004_review.md, L46 to L46
-[^4]: Accessory-voltage expectations across MakerX hardware, including S100 footpads and logic-rail short cautions.Source: knowledge/notes/input_part012_review.md, L248 to L249Source: knowledge/notes/input_part012_review.md, L255 to L256Source: knowledge/notes/input_part012_review.md, L347 to L349
-[^5]: Push-button workflow, ADC daughterboard failures, and high-voltage saturation limits recorded on MakerX G300 platforms.Source: knowledge/notes/input_part013_review.md, L302 to L329Source: knowledge/notes/input_part013_review.md, L326 to L329Source: knowledge/notes/input_part013_review.md, L407 to L409Source: knowledge/notes/input_part013_review.md, L416 to L417
-[^6]: Resin-backed Ubox cooling observations and conservative current targets from field reports.Source: knowledge/notes/input_part011_review.md, L221 to L224
-[^7]: MakerX GO-FOC fire reports under 96 V testing and broader warnings about unvetted high-voltage firmware like the rumoured K900 release.Source: knowledge/notes/input_part004_review.md, L321 to L321Source: knowledge/notes/input_part013_review.md, L462 to L462
-[^8]: Mini FOC voltage headroom discussion confirming it remains a 12 S-class controller and recommending Spintend or other ≥16 S hardware for >50 V packs.Source: knowledge/notes/input_part001_review.md, L11 to L11
-[^g300-abs]: G300 ABS overcurrent mitigation steps including slow ramp enable and positive throttle ramping.Source: knowledge/notes/input_part013_review.md, L514 to L514
-[^g300-fw63]: Firmware 6.3 throttle response fixes and motor detection requirements on G300 platforms.Source: knowledge/notes/input_part013_review.md, L262 to L262
-[^g300-button]: MakerX G300 push-button configuration using timed auto-off shutdown method.Source: knowledge/notes/input_part013_review.md, L302 to L302
-[^g300-led]: G300 red LED fault codes indicating various failure modes requiring diagnostic reference.Source: knowledge/notes/input_part013_review.md, L654 to L654
+[^1]: MakerX commuter current envelopes, thermistor fixes, water-damage recovery workflow, and BLE power sourcing guidance. Source: knowledge/notes/input_part003_review.md, L93 to L120. Source: knowledge/notes/input_part003_review.md, L136 to L136. Source: knowledge/notes/input_part003_review.md, L151 to L152. Source: knowledge/notes/input_part003_review.md, L552 to L552
+[^2]: Mini FOC teardown quality, torque-arm reminders, and MOSFET limit cautions from controller comparison threads. Source: knowledge/notes/input_part002_review.md, L135 to L142. Source: knowledge/notes/input_part002_review.md, L166 to L168
+[^3]: Phase-limit failure on MakerX M100 and ongoing QC/resale warnings for MakerX vs. competitors. Source: knowledge/notes/input_part009_review.md, L169 to L177. Source: knowledge/notes/input_part004_review.md, L46 to L46
+[^4]: Accessory-voltage expectations across MakerX hardware, including S100 footpads and logic-rail short cautions. Source: knowledge/notes/input_part012_review.md, L248 to L249. Source: knowledge/notes/input_part012_review.md, L255 to L256. Source: knowledge/notes/input_part012_review.md, L347 to L349
+[^5]: Push-button workflow, ADC daughterboard failures, and high-voltage saturation limits recorded on MakerX G300 platforms. Source: knowledge/notes/input_part013_review.md, L302 to L329. Source: knowledge/notes/input_part013_review.md, L326 to L329. Source: knowledge/notes/input_part013_review.md, L407 to L409. Source: knowledge/notes/input_part013_review.md, L416 to L417
+[^6]: Resin-backed Ubox cooling observations and conservative current targets from field reports. Source: knowledge/notes/input_part011_review.md, L221 to L224
+[^7]: MakerX GO-FOC fire reports under 96 V testing and broader warnings about unvetted high-voltage firmware like the rumoured K900 release. Source: knowledge/notes/input_part004_review.md, L321 to L321. Source: knowledge/notes/input_part013_review.md, L462 to L462
+[^8]: Mini FOC voltage headroom discussion confirming it remains a 12 S-class controller and recommending Spintend or other ≥16 S hardware for >50 V packs. Source: knowledge/notes/input_part001_review.md, L11 to L11
+[^g300-abs]: G300 ABS overcurrent mitigation steps including slow ramp enable and positive throttle ramping. Source: knowledge/notes/input_part013_review.md, L514 to L514
+[^g300-fw63]: Firmware 6.3 throttle response fixes and motor detection requirements on G300 platforms. Source: knowledge/notes/input_part013_review.md, L262 to L262
+[^g300-button]: MakerX G300 push-button configuration using timed auto-off shutdown method. Source: knowledge/notes/input_part013_review.md, L302 to L302
+[^g300-led]: G300 red LED fault codes indicating various failure modes requiring diagnostic reference. Source: knowledge/notes/input_part013_review.md, L654 to L654
 
 ## References
 

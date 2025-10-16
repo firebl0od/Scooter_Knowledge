@@ -31,10 +31,10 @@
 
 ## Source Notes
 
-[^deck_specs]: Rage Mechanics’ Dualtron deck pricing, dimensions, and usable floor length once the lips are removed.Source: knowledge/notes/input_part012_review.md, L19 to L19
-[^fitment_caveats]: Builder comparisons knocking FastRide decks for tolerance issues and Sonken swingarms for awkward geometry versus Rage Mechanics or RFP options.Source: knowledge/notes/input_part012_review.md, L20 to L20
-[^fork_machining]: Mirko’s deck install required machining the Dualtron rear forks before the hardware would seat correctly.Source: knowledge/notes/input_part012_review.md, L18 to L18
-[^victor_transplant]: Skrtt paid ≈€200 for a used Thunder battery box that bolts straight to the Victor’s 7.5 cm mounts and planned Thunder swingarms plus shorter phase leads for incoming 70 H/11" hardware.Source: knowledge/notes/input_part012_review.md, L215 to L219
+[^deck_specs]: Rage Mechanics’ Dualtron deck pricing, dimensions, and usable floor length once the lips are removed. Source: knowledge/notes/input_part012_review.md, L19 to L19
+[^fitment_caveats]: Builder comparisons knocking FastRide decks for tolerance issues and Sonken swingarms for awkward geometry versus Rage Mechanics or RFP options. Source: knowledge/notes/input_part012_review.md, L20 to L20
+[^fork_machining]: Mirko’s deck install required machining the Dualtron rear forks before the hardware would seat correctly. Source: knowledge/notes/input_part012_review.md, L18 to L18
+[^victor_transplant]: Skrtt paid ≈€200 for a used Thunder battery box that bolts straight to the Victor’s 7.5 cm mounts and planned Thunder swingarms plus shorter phase leads for incoming 70 H/11" hardware. Source: knowledge/notes/input_part012_review.md, L215 to L219
 
 ## References
 

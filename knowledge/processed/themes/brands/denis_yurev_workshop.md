@@ -629,7 +629,7 @@
 [^frame-foam]: Source: knowledge/notes/all_part01_review.md, L507 to L507
 [^monorim-vibration]: Source: knowledge/notes/all_part01_review.md, L508 to L508
 [^controller-fasteners]: Source: knowledge/notes/all_part01_review.md, L509 to L509
-[^oil-cooling]: Source: knowledge/notes/all_part01_review.md, L510 to L510Source: knowledge/notes/all_part01_review.md, L586 to L586
+[^oil-cooling]: Source: knowledge/notes/all_part01_review.md, L510 to L510. Source: knowledge/notes/all_part01_review.md, L586 to L586
 [^rita-priority]: Source: knowledge/notes/all_part01_review.md, L513 to L513
 [^voltage-amps]: Source: knowledge/notes/all_part01_review.md, L514 to L514
 [^12s-14s-swap]: Source: knowledge/notes/all_part01_review.md, L515 to L515
@@ -641,7 +641,7 @@
 [^pro2-downgrade]: Source: knowledge/notes/all_part01_review.md, L523 to L523
 [^ios-android]: Source: knowledge/notes/all_part01_review.md, L524 to L524
 [^ble074-stable]: Source: knowledge/notes/all_part01_review.md, L525 to L525
-[^vta-esc]: Source: knowledge/notes/all_part01_review.md, L526 to L526Source: knowledge/notes/all_part01_review.md, L533 to L533
+[^vta-esc]: Source: knowledge/notes/all_part01_review.md, L526 to L526. Source: knowledge/notes/all_part01_review.md, L533 to L533
 [^tudor-express]: Source: knowledge/notes/all_part01_review.md, L527 to L527
 [^wattmeter]: Source: knowledge/notes/all_part01_review.md, L528 to L528
 [^rita-dark]: Source: knowledge/notes/all_part01_review.md, L534 to L534
@@ -693,7 +693,7 @@
 [^hub-upgrades]: Source: knowledge/notes/all_part01_review.md, L223 to L224
 [^fake-pack]: Source: knowledge/notes/all_part01_review.md, L216 to L216
 [^common-port-routing]: Source: knowledge/notes/all_part01_review.md, L217 to L217
-[^storage]: Source: knowledge/notes/all_part01_review.md, L218 to L219Source: knowledge/notes/all_part01_review.md, L430 to L430
+[^storage]: Source: knowledge/notes/all_part01_review.md, L218 to L219. Source: knowledge/notes/all_part01_review.md, L430 to L430
 [^twelve-s-chargers]: Source: knowledge/notes/all_part01_review.md, L232 to L232
 [^shipping-charge]: Source: knowledge/notes/all_part01_review.md, L233 to L233
 [^pack-topology]: Source: knowledge/notes/all_part01_review.md, L234 to L234
@@ -727,16 +727,16 @@
 [^hub-coolers]: Source: knowledge/notes/all_part01_review.md, L267 to L267
 [^stem-locks]: Source: knowledge/notes/all_part01_review.md, L272 to L274
 [^prints-lighting]: Source: knowledge/notes/all_part01_review.md, L275 to L276
-[^lipo-warning]: Source: knowledge/notes/all_part01_review.md, L279 to L279Source: knowledge/notes/all_part01_review.md, L415 to L415
-[^pack-rec]: Source: knowledge/notes/all_part01_review.md, L280 to L283Source: knowledge/notes/all_part01_review.md, L416 to L416
+[^lipo-warning]: Source: knowledge/notes/all_part01_review.md, L279 to L279. Source: knowledge/notes/all_part01_review.md, L415 to L415
+[^pack-rec]: Source: knowledge/notes/all_part01_review.md, L280 to L283. Source: knowledge/notes/all_part01_review.md, L416 to L416
 [^uart-kit]: Source: knowledge/notes/all_part01_review.md, L282 to L282
-[^thermal-fuse]: Source: knowledge/notes/all_part01_review.md, L284 to L284Source: knowledge/notes/all_part01_review.md, L424 to L424
-[^charge-current]: Source: knowledge/notes/all_part01_review.md, L285 to L285Source: knowledge/notes/all_part01_review.md, L428 to L428
+[^thermal-fuse]: Source: knowledge/notes/all_part01_review.md, L284 to L284. Source: knowledge/notes/all_part01_review.md, L424 to L424
+[^charge-current]: Source: knowledge/notes/all_part01_review.md, L285 to L285. Source: knowledge/notes/all_part01_review.md, L428 to L428
 [^xt30-adapter]: Source: knowledge/notes/all_part01_review.md, L429 to L429
-[^pack-inspection]: Source: knowledge/notes/all_part01_review.md, L288 to L290Source: knowledge/notes/all_part01_review.md, L423 to L423
+[^pack-inspection]: Source: knowledge/notes/all_part01_review.md, L288 to L290. Source: knowledge/notes/all_part01_review.md, L423 to L423
 [^workshop-power2]: Source: knowledge/notes/all_part01_review.md, L298 to L298
 [^bms-warranty2]: Source: knowledge/notes/all_part01_review.md, L299 to L299
-[^shipping-updates]: Source: knowledge/notes/all_part01_review.md, L300 to L300Source: knowledge/notes/all_part01_review.md, L452 to L454
+[^shipping-updates]: Source: knowledge/notes/all_part01_review.md, L300 to L300. Source: knowledge/notes/all_part01_review.md, L452 to L454
 [^rita-low-pack]: Source: knowledge/notes/all_part01_review.md, L304 to L304
 [^rita-charge-order]: Source: knowledge/notes/all_part01_review.md, L305 to L305
 [^smart-bms]: Source: knowledge/notes/all_part01_review.md, L306 to L306
@@ -758,14 +758,14 @@
 [^nonconductive-paste]: Source: knowledge/notes/all_part01_review.md, L366 to L366
 [^front-bolts]: Source: knowledge/notes/all_part01_review.md, L367 to L367
 [^monorim-bind]: Source: knowledge/notes/all_part01_review.md, L368 to L368
-[^rear-wiring]: Source: knowledge/notes/all_part01_review.md, L369 to L369Source: knowledge/notes/all_part01_review.md, L412 to L412
+[^rear-wiring]: Source: knowledge/notes/all_part01_review.md, L369 to L369. Source: knowledge/notes/all_part01_review.md, L412 to L412
 [^deck-rib]: Source: knowledge/notes/all_part01_review.md, L370 to L370
 [^charge-port-relocate]: Source: knowledge/notes/all_part01_review.md, L371 to L371
 [^bt-logger]: Source: knowledge/notes/all_part01_review.md, L372 to L372
 [^high-mount-signal]: Source: knowledge/notes/all_part01_review.md, L375 to L375
 [^rear-tape]: Source: knowledge/notes/all_part01_review.md, L376 to L376
 [^dual-pack-range]: Source: knowledge/notes/all_part01_review.md, L377 to L377
-[^foldster-clearance]: Source: knowledge/notes/all_part01_review.md, L378 to L378Source: knowledge/notes/all_part01_review.md, L401 to L401Source: knowledge/notes/all_part01_review.md, L411 to L411
+[^foldster-clearance]: Source: knowledge/notes/all_part01_review.md, L378 to L378. Source: knowledge/notes/all_part01_review.md, L401 to L401. Source: knowledge/notes/all_part01_review.md, L411 to L411
 [^lighting-diy]: Source: knowledge/notes/all_part01_review.md, L404 to L404
 [^uart485]: Source: knowledge/notes/all_part01_review.md, L419 to L419
 [^laudation]: Source: knowledge/notes/all_part01_review.md, L420 to L420
@@ -816,48 +816,48 @@
 [^series-boosters]: Source: knowledge/notes/all_part01_review.md, L493 to L493
 [^rita-brake-limit]: Source: knowledge/notes/all_part01_review.md, L500 to L500
 
-[^rita-capabilities]: Source: knowledge/notes/all_part01_review.md, L16 to L18Source: knowledge/notes/all_part01_review.md, L23
-[^rita-emulator]: Source: knowledge/notes/all_part01_review.md, L19Source: knowledge/notes/all_part01_review.md, L114
-[^rita-current-limit]: Source: knowledge/notes/all_part01_review.md, L20 to L24Source: knowledge/notes/denis_all_part02_review.md, L22Source: knowledge/notes/denis_all_part02_review.md, L31 to L33Source: knowledge/notes/denis_all_part02_review.md, L153
-[^rita-soh]: Source: knowledge/notes/all_part01_review.md, L21Source: knowledge/notes/all_part01_review.md, L133
+[^rita-capabilities]: Source: knowledge/notes/all_part01_review.md, L16 to L18. Source: knowledge/notes/all_part01_review.md, L23
+[^rita-emulator]: Source: knowledge/notes/all_part01_review.md, L19. Source: knowledge/notes/all_part01_review.md, L114
+[^rita-current-limit]: Source: knowledge/notes/all_part01_review.md, L20 to L24. Source: knowledge/notes/denis_all_part02_review.md, L22. Source: knowledge/notes/denis_all_part02_review.md, L31 to L33. Source: knowledge/notes/denis_all_part02_review.md, L153
+[^rita-soh]: Source: knowledge/notes/all_part01_review.md, L21. Source: knowledge/notes/all_part01_review.md, L133
 [^rita-overvoltage]: Source: knowledge/notes/denis_all_part02_review.md, L29 to L33
-[^rita-telemetry]: Source: knowledge/notes/all_part01_review.md, L25Source: knowledge/notes/all_part01_review.md, L139Source: knowledge/notes/all_part01_review.md, L219Source: knowledge/notes/denis_all_part02_review.md, L33Source: knowledge/notes/denis_all_part02_review.md, L100
+[^rita-telemetry]: Source: knowledge/notes/all_part01_review.md, L25. Source: knowledge/notes/all_part01_review.md, L139. Source: knowledge/notes/all_part01_review.md, L219. Source: knowledge/notes/denis_all_part02_review.md, L33. Source: knowledge/notes/denis_all_part02_review.md, L100
 [^rita-config]: Source: knowledge/notes/denis_all_part02_review.md, L315 to L316
-[^rita-awd]: Source: knowledge/notes/denis_all_part02_review.md, L26 to L28Source: knowledge/notes/denis_all_part02_review.md, L197
+[^rita-awd]: Source: knowledge/notes/denis_all_part02_review.md, L26 to L28. Source: knowledge/notes/denis_all_part02_review.md, L197
 [^rita-dual]: Source: knowledge/notes/denis_all_part02_review.md, L385 to L387
 [^rita-charge-ui]: Source: knowledge/notes/denis_all_part02_review.md, L408 to L409
-[^bms-roadmap]: Source: knowledge/notes/all_part01_review.md, L13Source: knowledge/notes/all_part01_review.md, L117
+[^bms-roadmap]: Source: knowledge/notes/all_part01_review.md, L13. Source: knowledge/notes/all_part01_review.md, L117
 [^bms-ceiling]: Source: knowledge/notes/all_part01_review.md, L182
 [^bms-headroom]: Source: knowledge/notes/all_part01_review.md, L184
-[^battery-enclosures]: Source: knowledge/notes/all_part01_review.md, L45Source: knowledge/notes/all_part01_review.md, L48
+[^battery-enclosures]: Source: knowledge/notes/all_part01_review.md, L45. Source: knowledge/notes/all_part01_review.md, L48
 [^wildman-e2]: Source: knowledge/notes/all_part01_review.md, L94 to L97
-[^battery-bom]: Source: knowledge/notes/all_part01_review.md, L46Source: knowledge/notes/all_part01_review.md, L61Source: knowledge/notes/all_part01_review.md, L66Source: knowledge/notes/all_part01_review.md, L102Source: knowledge/notes/all_part01_review.md, L145Source: knowledge/notes/all_part01_review.md, L238
+[^battery-bom]: Source: knowledge/notes/all_part01_review.md, L46. Source: knowledge/notes/all_part01_review.md, L61. Source: knowledge/notes/all_part01_review.md, L66. Source: knowledge/notes/all_part01_review.md, L102. Source: knowledge/notes/all_part01_review.md, L145. Source: knowledge/notes/all_part01_review.md, L238
 [^common-port]: Source: knowledge/notes/all_part01_review.md, L101 to L105
-[^range-kits]: Source: knowledge/notes/all_part01_review.md, L18Source: knowledge/notes/all_part01_review.md, L260
+[^range-kits]: Source: knowledge/notes/all_part01_review.md, L18. Source: knowledge/notes/all_part01_review.md, L260
 [^separate-charge]: Source: knowledge/notes/all_part01_review.md, L180
 [^pack-wrap]: Source: knowledge/notes/denis_all_part02_review.md, L329 to L330
 [^refurb-triage]: Source: knowledge/notes/denis_all_part02_review.md, L333 to L333
 [^parallel-test]: Source: knowledge/notes/denis_all_part02_review.md, L335 to L336
 [^happy-13s]: Source: knowledge/notes/denis_all_part02_review.md, L345 to L345
 [^wildman-stl]: Source: knowledge/notes/denis_all_part02_review.md, L345 to L346
-[^adc-16s]: Controller voltage debates around 13–16 S builds, including resistor swaps and XiaoDash firmware handling without legacy jumpers.Source: knowledge/notes/denis_all_part02_review.md, L501 to L504
-[^rita-49v]: Rita charge discussions noting 12 S externals plateau around 49.2 V (~4.1 V/cell) to preserve regen headroom.Source: knowledge/notes/denis_all_part02_review.md, L503 to L504
-[^temp-sensors]: Split-charging diagnostics pointing to failed OEM temperature sensors that lock the internal BMS until replaced.Source: knowledge/notes/denis_all_part02_review.md, L505 to L505
-[^winter-tyres]: Winter tire recommendations covering 10×2 tubeless off-road casings, Amalibay 9.2″ treads, and studding cautions plus cold-weather range loss.Source: knowledge/notes/denis_all_part02_review.md, L513 to L514
-[^monorim-hardware]: Monorim hardware upkeep reminders to upgrade to 12.9-grade bolts, trim excess, and check for play.Source: knowledge/notes/denis_all_part02_review.md, L515 to L515
-[^xtech]: Reports of Xtech hybrid brake corrosion/leaks pushing shops toward Magura hydraulics or premium mechanical calipers.Source: knowledge/notes/denis_all_part02_review.md, L517 to L518
-[^paolo-hubs]: Paolo’s 1.2 kW+ hub sourcing notes and fork clearance requirements for 10″ tires.Source: knowledge/notes/denis_all_part02_review.md, L523 to L525
-[^pu50]: Preference for PU50 marine urethane over Sikaflex for deck sealing plus neutral silicone guidance.Source: knowledge/notes/denis_all_part02_review.md, L527 to L528
-[^50e2]: Shenzhen front-pack anecdote using Samsung 50E2 cells while reiterating Rita/BMS safety requirements.Source: knowledge/notes/denis_all_part02_review.md, L531 to L533
+[^adc-16s]: Controller voltage debates around 13–16 S builds, including resistor swaps and XiaoDash firmware handling without legacy jumpers. Source: knowledge/notes/denis_all_part02_review.md, L501 to L504
+[^rita-49v]: Rita charge discussions noting 12 S externals plateau around 49.2 V (~4.1 V/cell) to preserve regen headroom. Source: knowledge/notes/denis_all_part02_review.md, L503 to L504
+[^temp-sensors]: Split-charging diagnostics pointing to failed OEM temperature sensors that lock the internal BMS until replaced. Source: knowledge/notes/denis_all_part02_review.md, L505 to L505
+[^winter-tyres]: Winter tire recommendations covering 10×2 tubeless off-road casings, Amalibay 9.2″ treads, and studding cautions plus cold-weather range loss. Source: knowledge/notes/denis_all_part02_review.md, L513 to L514
+[^monorim-hardware]: Monorim hardware upkeep reminders to upgrade to 12.9-grade bolts, trim excess, and check for play. Source: knowledge/notes/denis_all_part02_review.md, L515 to L515
+[^xtech]: Reports of Xtech hybrid brake corrosion/leaks pushing shops toward Magura hydraulics or premium mechanical calipers. Source: knowledge/notes/denis_all_part02_review.md, L517 to L518
+[^paolo-hubs]: Paolo’s 1.2 kW+ hub sourcing notes and fork clearance requirements for 10″ tires. Source: knowledge/notes/denis_all_part02_review.md, L523 to L525
+[^pu50]: Preference for PU50 marine urethane over Sikaflex for deck sealing plus neutral silicone guidance. Source: knowledge/notes/denis_all_part02_review.md, L527 to L528
+[^50e2]: Shenzhen front-pack anecdote using Samsung 50E2 cells while reiterating Rita/BMS safety requirements. Source: knowledge/notes/denis_all_part02_review.md, L531 to L533
 [^happy-stepup]: Happy BMS red-blink troubleshooting and DC step-up charger setup (start below pack voltage, ease toward ≈1 A).Source: knowledge/notes/denis_all_part02_review.md, L535 to L537
-[^parallel-jst]: JST charge-lead Y-splitting guidance, current limits, and XT60 recommendations for ≥40 A discharge runs.Source: knowledge/notes/denis_all_part02_review.md, L539 to L541
-[^happy-fw]: Scootermode 14 S error 24 recovery via 10 S flashing and Mi Electric 3 BLE/UUID checks before ST-Link work.Source: knowledge/notes/denis_all_part02_review.md, L543 to L545
-[^highspeed-brakes]: High-speed brake/tire lessons covering Roscheeee adapters, 160–180 mm rotors, brake fluid boiling, and PMT/CST tire overheating above 80 km/h.Source: knowledge/notes/denis_all_part02_review.md, L547 to L549
-[^winter-range]: Winter energy planning with 600 W caps, 80 % throttle, ferrofluid fills, and comprehensive waterproofing.Source: knowledge/notes/denis_all_part02_review.md, L551 to L553
-[^40t-bms]: 48 V pack planning (Samsung 40T 13S5P, 60 A BMS, XT60 upgrades) plus Happy BMS 32 Ah register limit and Pro 2 firmware 126 guidance.Source: knowledge/notes/denis_all_part02_review.md, L555 to L559
-[^harness-slime]: Harness upgrades to AWG12, cautions against thin motor leads, and slime dosing for 10″ tires.Source: knowledge/notes/denis_all_part02_review.md, L558 to L558Source: knowledge/notes/denis_all_part02_review.md, L578 to L578
-[^vendor]: Voltride shipping praise and steering buyers toward Scootermode/Paolo controllers over MaxMods.Source: knowledge/notes/denis_all_part02_review.md, L581 to L582
-[^charger-chain]: TL431 charger mod resistor values, capacitor swaps, transformer limits, Android 12 sideload workaround, and YZPOWER vs. anonymous charger recommendations with soldered connector swaps.Source: knowledge/notes/denis_all_part02_review.md, L585 to L600
+[^parallel-jst]: JST charge-lead Y-splitting guidance, current limits, and XT60 recommendations for ≥40 A discharge runs. Source: knowledge/notes/denis_all_part02_review.md, L539 to L541
+[^happy-fw]: Scootermode 14 S error 24 recovery via 10 S flashing and Mi Electric 3 BLE/UUID checks before ST-Link work. Source: knowledge/notes/denis_all_part02_review.md, L543 to L545
+[^highspeed-brakes]: High-speed brake/tire lessons covering Roscheeee adapters, 160–180 mm rotors, brake fluid boiling, and PMT/CST tire overheating above 80 km/h. Source: knowledge/notes/denis_all_part02_review.md, L547 to L549
+[^winter-range]: Winter energy planning with 600 W caps, 80 % throttle, ferrofluid fills, and comprehensive waterproofing. Source: knowledge/notes/denis_all_part02_review.md, L551 to L553
+[^40t-bms]: 48 V pack planning (Samsung 40T 13S5P, 60 A BMS, XT60 upgrades) plus Happy BMS 32 Ah register limit and Pro 2 firmware 126 guidance. Source: knowledge/notes/denis_all_part02_review.md, L555 to L559
+[^harness-slime]: Harness upgrades to AWG12, cautions against thin motor leads, and slime dosing for 10″ tires. Source: knowledge/notes/denis_all_part02_review.md, L558 to L558. Source: knowledge/notes/denis_all_part02_review.md, L578 to L578
+[^vendor]: Voltride shipping praise and steering buyers toward Scootermode/Paolo controllers over MaxMods. Source: knowledge/notes/denis_all_part02_review.md, L581 to L582
+[^charger-chain]: TL431 charger mod resistor values, capacitor swaps, transformer limits, Android 12 sideload workaround, and YZPOWER vs. anonymous charger recommendations with soldered connector swaps. Source: knowledge/notes/denis_all_part02_review.md, L585 to L600
 [^happy-fuse]: Source: knowledge/notes/denis_all_part02_review.md, L322 to L323
 [^stlink-ble]: Source: knowledge/notes/denis_all_part02_review.md, L304 to L305
 [^xiaodash-reset]: Source: knowledge/notes/denis_all_part02_review.md, L408 to L408
@@ -873,37 +873,37 @@
 [^emulator-34v]: Source: knowledge/notes/denis_all_part02_review.md, L402 to L402
 [^fan-mod-risk]: Source: knowledge/notes/denis_all_part02_review.md, L417 to L421
 [^ali-pack-warning]: Source: knowledge/notes/denis_all_part02_review.md, L457 to L459
-[^hydraulic-upgrade]: Source: knowledge/notes/denis_all_part02_review.md, L428 to L428Source: knowledge/notes/denis_all_part02_review.md, L461 to L462
-[^serial-reset]: Source: knowledge/notes/denis_all_part02_review.md, L430 to L431Source: knowledge/notes/denis_all_part02_review.md, L464 to L465
-[^suspension-extender]: Source: knowledge/notes/denis_all_part02_review.md, L433 to L435Source: knowledge/notes/denis_all_part02_review.md, L467 to L468
+[^hydraulic-upgrade]: Source: knowledge/notes/denis_all_part02_review.md, L428 to L428. Source: knowledge/notes/denis_all_part02_review.md, L461 to L462
+[^serial-reset]: Source: knowledge/notes/denis_all_part02_review.md, L430 to L431. Source: knowledge/notes/denis_all_part02_review.md, L464 to L465
+[^suspension-extender]: Source: knowledge/notes/denis_all_part02_review.md, L433 to L435. Source: knowledge/notes/denis_all_part02_review.md, L467 to L468
 [^accessory-dash]: Source: knowledge/notes/denis_all_part02_review.md, L486 to L487
 [^tcs-hazard]: Source: knowledge/notes/denis_all_part02_review.md, L489 to L490
 [^dual-motor-plan]: Source: knowledge/notes/denis_all_part02_review.md, L492 to L494
 [^pack-teardown]: Source: knowledge/notes/denis_all_part02_review.md, L496 to L497
 [^no-rita-emulation]: Source: knowledge/notes/denis_all_part02_review.md, L500 to L500
-[^pricing]: Source: knowledge/notes/all_part01_review.md, L30Source: knowledge/notes/all_part01_review.md, L61
+[^pricing]: Source: knowledge/notes/all_part01_review.md, L30. Source: knowledge/notes/all_part01_review.md, L61
 [^pack-pricing]: Source: knowledge/notes/all_part01_review.md, L110 to L111
-[^regional-pricing]: Source: knowledge/notes/all_part01_review.md, L176Source: knowledge/notes/all_part01_review.md, L274
-[^range-speed-charging]: Source: knowledge/notes/denis_all_part02_review.md, L33Source: knowledge/notes/denis_all_part02_review.md, L46
-[^shipping-scope]: Source: knowledge/notes/all_part01_review.md, L27Source: knowledge/notes/all_part01_review.md, L177Source: knowledge/notes/all_part01_review.md, L275Source: knowledge/notes/all_part01_review.md, L453 to L453
-[^batching]: Source: knowledge/notes/all_part01_review.md, L29Source: knowledge/notes/all_part01_review.md, L33Source: knowledge/notes/all_part01_review.md, L174
-[^lead-times]: Source: knowledge/notes/all_part01_review.md, L32Source: knowledge/notes/all_part01_review.md, L34Source: knowledge/notes/all_part01_review.md, L35Source: knowledge/notes/all_part01_review.md, L212
-[^charging-telemetry]: Source: knowledge/notes/all_part01_review.md, L172 to L173Source: knowledge/notes/denis_all_part02_review.md, L33Source: knowledge/notes/denis_all_part02_review.md, L46
+[^regional-pricing]: Source: knowledge/notes/all_part01_review.md, L176. Source: knowledge/notes/all_part01_review.md, L274
+[^range-speed-charging]: Source: knowledge/notes/denis_all_part02_review.md, L33. Source: knowledge/notes/denis_all_part02_review.md, L46
+[^shipping-scope]: Source: knowledge/notes/all_part01_review.md, L27. Source: knowledge/notes/all_part01_review.md, L177. Source: knowledge/notes/all_part01_review.md, L275. Source: knowledge/notes/all_part01_review.md, L453 to L453
+[^batching]: Source: knowledge/notes/all_part01_review.md, L29. Source: knowledge/notes/all_part01_review.md, L33. Source: knowledge/notes/all_part01_review.md, L174
+[^lead-times]: Source: knowledge/notes/all_part01_review.md, L32. Source: knowledge/notes/all_part01_review.md, L34. Source: knowledge/notes/all_part01_review.md, L35. Source: knowledge/notes/all_part01_review.md, L212
+[^charging-telemetry]: Source: knowledge/notes/all_part01_review.md, L172 to L173. Source: knowledge/notes/denis_all_part02_review.md, L33. Source: knowledge/notes/denis_all_part02_review.md, L46
 [^docs]: Source: knowledge/notes/all_part01_review.md, L17
 [^stlink-loaner]: Source: knowledge/notes/all_part01_review.md, L458 to L458
 [^storefront]: Source: knowledge/notes/all_part01_review.md, L17 to L18
 [^support-ops]: Source: knowledge/notes/all_part01_review.md, L150
 [^rita-max]: Source: knowledge/notes/denis_all_part02_review.md, L195 to L196
-[^serbia]: Source: knowledge/notes/all_part01_review.md, L300 to L300Source: knowledge/notes/all_part01_review.md, L452 to L454
+[^serbia]: Source: knowledge/notes/all_part01_review.md, L300 to L300. Source: knowledge/notes/all_part01_review.md, L452 to L454
 [^workshop-power]: Source: knowledge/notes/all_part01_review.md, L298 to L298
 [^bms-warranty]: Source: knowledge/notes/all_part01_review.md, L299 to L301
-[^thirteen-steps]: Source: knowledge/notes/all_part01_review.md, L162 to L166Source: knowledge/notes/all_part01_review.md, L217
+[^thirteen-steps]: Source: knowledge/notes/all_part01_review.md, L162 to L166. Source: knowledge/notes/all_part01_review.md, L217
 [^tp4056]: Source: knowledge/notes/all_part01_review.md, L10 to L11
 [^ble073]: Source: knowledge/notes/all_part01_review.md, L12 to L12
 [^bms-belgium]: Source: knowledge/notes/all_part01_review.md, L13 to L13
-[^anti-spark]: Source: knowledge/notes/all_part01_review.md, L20 to L20Source: knowledge/notes/all_part01_review.md, L104 to L104
+[^anti-spark]: Source: knowledge/notes/all_part01_review.md, L20 to L20. Source: knowledge/notes/all_part01_review.md, L104 to L104
 [^rita-12s-config]: Source: knowledge/notes/all_part01_review.md, L42 to L43
-[^charger-upgrade]: Source: knowledge/notes/all_part01_review.md, L106 to L107Source: knowledge/notes/all_part01_review.md, L123 to L123
+[^charger-upgrade]: Source: knowledge/notes/all_part01_review.md, L106 to L107. Source: knowledge/notes/all_part01_review.md, L123 to L123
 [^brake-upgrade]: Source: knowledge/notes/all_part01_review.md, L44 to L44
 [^fake-60ah]: Source: knowledge/notes/all_part01_review.md, L40 to L40
 [^rain-proof]: Source: knowledge/notes/all_part01_review.md, L41 to L41
@@ -911,13 +911,13 @@
 [^dash-update]: Source: knowledge/notes/all_part01_review.md, L48 to L48
 [^dash-retrofit]: Source: knowledge/notes/all_part01_review.md, L93 to L93
 [^face-ltd]: Source: knowledge/notes/all_part01_review.md, L50 to L50
-[^power-risks]: Source: knowledge/notes/all_part01_review.md, L22Source: knowledge/notes/all_part01_review.md, L155Source: knowledge/notes/all_part01_review.md, L170 to L171
-[^legacy-boards]: Source: knowledge/notes/denis_all_part02_review.md, L29 to L33Source: knowledge/notes/denis_all_part02_review.md, L153
+[^power-risks]: Source: knowledge/notes/all_part01_review.md, L22. Source: knowledge/notes/all_part01_review.md, L155. Source: knowledge/notes/all_part01_review.md, L170 to L171
+[^legacy-boards]: Source: knowledge/notes/denis_all_part02_review.md, L29 to L33. Source: knowledge/notes/denis_all_part02_review.md, L153
 [^rita-v4]: Source: knowledge/notes/denis_all_part02_review.md, L22 to L33
 [^controller-thermals]: Source: knowledge/notes/denis_all_part02_review.md, L10 to L13
 [^rita-hill]: Source: knowledge/notes/denis_all_part02_review.md, L31 to L33
 [^awd]: Source: knowledge/notes/denis_all_part02_review.md, L25 to L28
-[^error14]: Source: knowledge/notes/denis_all_part02_review.md, L26 to L31Source: knowledge/notes/denis_all_part02_review.md, L6433 to L6456
+[^error14]: Source: knowledge/notes/denis_all_part02_review.md, L26 to L31. Source: knowledge/notes/denis_all_part02_review.md, L6433 to L6456
 [^thermal-paste]: Source: knowledge/notes/denis_all_part02_review.md, L32 to L33
 [^counterfeit]: Source: knowledge/notes/denis_all_part02_review.md, L19 to L23
 [^resell-cost]: Source: knowledge/notes/all_part01_review.md, L91 to L92
@@ -927,15 +927,15 @@
 [^tool-packs]: Source: knowledge/notes/denis_all_part02_review.md, L235 to L235
 [^lawn-pack]: Source: knowledge/notes/denis_all_part02_review.md, L6610 to L6635
 [^balance-leads]: Source: knowledge/notes/denis_all_part02_review.md, L7028 to L7068
-[^parallel-risk]: Source: knowledge/notes/all_part01_review.md, L113 to L113Source: knowledge/notes/all_part01_review.md, L569 to L569
+[^parallel-risk]: Source: knowledge/notes/all_part01_review.md, L113 to L113. Source: knowledge/notes/all_part01_review.md, L569 to L569
 [^lifepo4]: Source: knowledge/notes/denis_all_part02_review.md, L7080 to L7089
-[^rita-schottky]: Rita’s Schottky drop leaving internal packs near 97 % unless bypassed during off-scooter charging, which Denis still recommends for pack longevity.Source: knowledge/notes/denis_all_part02_review.md, L103 to L103Source: knowledge/notes/denis_all_part02_review.md, L108 to L108
+[^rita-schottky]: Rita’s Schottky drop leaving internal packs near 97 % unless bypassed during off-scooter charging, which Denis still recommends for pack longevity. Source: knowledge/notes/denis_all_part02_review.md, L103 to L103. Source: knowledge/notes/denis_all_part02_review.md, L108 to L108
 [^sequential-charging]: Source: knowledge/notes/all_part01_review.md, L103 to L113
-[^rita-underreport]: Small Rita Gen 4 batch that under-reported current above ~20 A while redundant sensing still tripped overcurrent protection on Ninebot Max validation builds.Source: knowledge/notes/denis_all_part02_review.md, L198 to L198
-[^rita-soc]: Dashboard state of charge drifting after Rita installs, prompting Denis to treat 50 % on the display as the return threshold while using the app for actual voltage.Source: knowledge/notes/denis_all_part02_review.md, L127 to L127
+[^rita-underreport]: Small Rita Gen 4 batch that under-reported current above ~20 A while redundant sensing still tripped overcurrent protection on Ninebot Max validation builds. Source: knowledge/notes/denis_all_part02_review.md, L198 to L198
+[^rita-soc]: Dashboard state of charge drifting after Rita installs, prompting Denis to treat 50 % on the display as the return threshold while using the app for actual voltage. Source: knowledge/notes/denis_all_part02_review.md, L127 to L127
 [^rita-undercharge]: Source: knowledge/notes/denis_all_part02_review.md, L220 to L229
 [^rita-60v]: Source: knowledge/notes/denis_all_part02_review.md, L256 to L257
-[^harness_staging]: Source: knowledge/notes/denis_all_part02_review.md, L7534 to L7589Source: knowledge/notes/denis_all_part02_review.md, L7567 to L7589Source: knowledge/notes/denis_all_part02_review.md, L11671 to L11676
+[^harness_staging]: Source: knowledge/notes/denis_all_part02_review.md, L7534 to L7589. Source: knowledge/notes/denis_all_part02_review.md, L7567 to L7589. Source: knowledge/notes/denis_all_part02_review.md, L11671 to L11676
 [^cheap-packs]: Source: knowledge/notes/denis_all_part02_review.md, L5499 to L5526
 [^large-format]: Source: knowledge/notes/all_part01_review.md, L116 to L117
 [^xiaoflasher]: Source: knowledge/notes/denis_all_part02_review.md, L2467 to L2470

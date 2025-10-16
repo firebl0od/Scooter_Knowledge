@@ -39,6 +39,6 @@
 
 ## Source Notes
 
-[^1]: Aerlang stock feature breakdown, pricing, and deck failure reports captured in the curated review notes.Source: knowledge/notes/input_part000_review.md, L121 to L123
-[^2]: Commentary on encrypted firmware limiting modifications to shunt tweaks and motivating controller swaps.Source: knowledge/notes/input_part000_review.md, L122 to L122
-[^3]: Eight-click limiter override procedure enabling quick toggling between legal and full-power modes.Source: knowledge/notes/input_part000_review.md, L123 to L123
+[^1]: Aerlang stock feature breakdown, pricing, and deck failure reports captured in the curated review notes. Source: knowledge/notes/input_part000_review.md, L121 to L123
+[^2]: Commentary on encrypted firmware limiting modifications to shunt tweaks and motivating controller swaps. Source: knowledge/notes/input_part000_review.md, L122 to L122
+[^3]: Eight-click limiter override procedure enabling quick toggling between legal and full-power modes. Source: knowledge/notes/input_part000_review.md, L123 to L123

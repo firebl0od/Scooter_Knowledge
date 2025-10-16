@@ -74,23 +74,23 @@
 
 ## Source Notes
 
-[^1]: Guardrails for Tronic 250 current limits and race usage on 24 S packs.Source: knowledge/notes/input_part007_review.md, L43 to L55
-[^2]: Field-weakening failures and practical phase ceilings for Tronic 250-class hardware.Source: knowledge/notes/input_part009_review.md, L340 to L341
-[^3]: X12 power targets, logic-rail limits, and wiring upgrades from Smart Repair and Rob Ver.Source: knowledge/notes/input_part013_review.md, L359 to L362
-[^4]: Tronic traction-control surges, DC-DC enable pad repairs, and moisture mitigation lessons across rear and front-controller failures.Source: knowledge/notes/input_part003_review.md, L116 to L124Source: knowledge/notes/input_part003_review.md, L167 to L179
-[^5]: Contract-manufacturer sourcing now handling Tronic/Seven sales directly.Source: knowledge/notes/input_part013_review.md, L790 to L793
-[^6]: Seven-branded cooling architecture and Toll-package MOSFET notes.Source: knowledge/notes/input_part014_review.md, L163 to L165
-[^7]: X12 failure after toggling ANT discharge and the need for manual harness/thermal prep on Dualtron installs.Source: knowledge/notes/input_part010_review.md, L315 to L324
-[^8]: Community caution around Tronic 750 specifications and warranty disclaimers.Source: knowledge/notes/input_part003_review.md, L687 to L737
-[^9]: Shared 20 S current baselines for Tronic/Spintend 85‑250 hardware.Source: knowledge/notes/input_part010_review.md, L565 to L568
-[^10]: Tronic 250 auxiliary 5 V rail behaviour keeping lights powered.Source: knowledge/notes/input_part009_review.md, L12 to L12
-[^11]: Instrumentation reminders to monitor actual current when tuning high-power scooters.Source: knowledge/notes/input_part009_review.md, L351 to L352
-[^12]: Accessory power sequencing guidance to avoid frying ADC/Spinny boards.Source: knowledge/notes/input_part013_review.md, L795 to L796
-[^13]: Secondary-market pricing and support expectations for bare X12 boards.Source: knowledge/notes/input_part013_review.md, L822 to L823
-[^14]: Community request to log verified limits for Toll-FET Seven/Tronic builds as testing expands.Source: knowledge/notes/input_part014_review.md, L212 to L218
-[^15]: 117 km/h Rion front-controller fire and ensuing DC-DC diagnostics highlighting paste quality and connector choices.Source: knowledge/notes/input_part003_review.md, L178 to L179
-[^winter_tests]: Rosheee’s plan to re-bench Tronic 250 v2, 250R, and Little FOCer v3.1 hardware once temperatures climb above -6 °C so winter pack limits stop masking controller reliability.Source: knowledge/notes/input_part003_review.md, L716 to L718
-[^lfocer-v31]: Rosheee secured Little FOCer V3.1 controllers rated around 290 A phase / 190 A battery for his G30/Rion hybrid while waiting on a 450 A Rion shipment, signalling boutique 100 V stock is moving again albeit in limited batches.Source: knowledge/notes/input_part002_review.md, L163 to L164
+[^1]: Guardrails for Tronic 250 current limits and race usage on 24 S packs. Source: knowledge/notes/input_part007_review.md, L43 to L55
+[^2]: Field-weakening failures and practical phase ceilings for Tronic 250-class hardware. Source: knowledge/notes/input_part009_review.md, L340 to L341
+[^3]: X12 power targets, logic-rail limits, and wiring upgrades from Smart Repair and Rob Ver. Source: knowledge/notes/input_part013_review.md, L359 to L362
+[^4]: Tronic traction-control surges, DC-DC enable pad repairs, and moisture mitigation lessons across rear and front-controller failures. Source: knowledge/notes/input_part003_review.md, L116 to L124. Source: knowledge/notes/input_part003_review.md, L167 to L179
+[^5]: Contract-manufacturer sourcing now handling Tronic/Seven sales directly. Source: knowledge/notes/input_part013_review.md, L790 to L793
+[^6]: Seven-branded cooling architecture and Toll-package MOSFET notes. Source: knowledge/notes/input_part014_review.md, L163 to L165
+[^7]: X12 failure after toggling ANT discharge and the need for manual harness/thermal prep on Dualtron installs. Source: knowledge/notes/input_part010_review.md, L315 to L324
+[^8]: Community caution around Tronic 750 specifications and warranty disclaimers. Source: knowledge/notes/input_part003_review.md, L687 to L737
+[^9]: Shared 20 S current baselines for Tronic/Spintend 85‑250 hardware. Source: knowledge/notes/input_part010_review.md, L565 to L568
+[^10]: Tronic 250 auxiliary 5 V rail behaviour keeping lights powered. Source: knowledge/notes/input_part009_review.md, L12 to L12
+[^11]: Instrumentation reminders to monitor actual current when tuning high-power scooters. Source: knowledge/notes/input_part009_review.md, L351 to L352
+[^12]: Accessory power sequencing guidance to avoid frying ADC/Spinny boards. Source: knowledge/notes/input_part013_review.md, L795 to L796
+[^13]: Secondary-market pricing and support expectations for bare X12 boards. Source: knowledge/notes/input_part013_review.md, L822 to L823
+[^14]: Community request to log verified limits for Toll-FET Seven/Tronic builds as testing expands. Source: knowledge/notes/input_part014_review.md, L212 to L218
+[^15]: 117 km/h Rion front-controller fire and ensuing DC-DC diagnostics highlighting paste quality and connector choices. Source: knowledge/notes/input_part003_review.md, L178 to L179
+[^winter_tests]: Rosheee’s plan to re-bench Tronic 250 v2, 250R, and Little FOCer v3.1 hardware once temperatures climb above -6 °C so winter pack limits stop masking controller reliability. Source: knowledge/notes/input_part003_review.md, L716 to L718
+[^lfocer-v31]: Rosheee secured Little FOCer V3.1 controllers rated around 290 A phase / 190 A battery for his G30/Rion hybrid while waiting on a 450 A Rion shipment, signalling boutique 100 V stock is moving again albeit in limited batches. Source: knowledge/notes/input_part002_review.md, L163 to L164
 
 ## References
 

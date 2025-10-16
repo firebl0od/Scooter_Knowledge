@@ -83,29 +83,29 @@
 
 ## Source Notes
 
-[^1]: Dual vs. single-drive thermal observations on Tronic 250-equipped NAMI builds.Source: knowledge/notes/input_part008_review.md, L24 to L31
-[^2]: Omar’s 200 A/310 A Spintend build overheating hubs and AYÓ’s reminder about the stock LG M50LT pack’s ≈116 A continuous rating with ≤135 A peak guidance.Source: knowledge/notes/input_part013_review.md, L118 to L123
-[^3]: Mixed-chemistry caution, chassis use-cases, and handling priorities for NAMI frames versus other race platforms.Source: knowledge/notes/input_part008_review.md, L188 to L190Source: knowledge/notes/input_part008_review.md, L227 to L236
-[^4]: 65H track benchmarks near 100 km/h without field weakening and 26 S dual-motor success restoring traction on GT2 builds.Source: knowledge/notes/input_part012_review.md, L103 to L107Source: knowledge/notes/input_part011_review.md, L204 to L218
-[^5]: OEM connector specifications and upgrade practices for NAMI scooters.Source: knowledge/notes/input_part002_review.md, L430 to L445
-[^6]: GT2 pack rebuild using Daly 100Balance BMS, 20 S 9 P LG 40P cells, and copper busbars.Source: knowledge/notes/input_part011_review.md, L204 to L206
-[^7]: NAMI GT2 running 26 S packs again with stock motors and Makerbase X12 controllers online.Source: knowledge/notes/input_part011_review.md, L204 to L218
-[^8]: Yoann’s stealth dual Spintend Lite conversion retaining the NAMI BMS and stock exterior.Source: knowledge/notes/input_part009_review.md, L253 to L256
-[^9]: Dual-controller power logging plateau around 19 kW without aggregated telemetry.Source: knowledge/notes/input_part013_review.md, L454 to L459
-[^10]: Reports of cheap steering dampers failing and recommendations for motorcycle-grade replacements on NAMI chassis.Source: knowledge/notes/input_part008_review.md, L293 to L296
-[^11]: Fabrication needs when merging NAMI Viper and Rion components for 22 S 10 P builds.Source: knowledge/notes/input_part008_review.md, L205 to L208
-[^12]: Controller horn/aux channels sourcing only a few amps—relay heavy lighting loads instead of direct wiring.Source: knowledge/notes/input_part012_review.md, L96 to L99
-[^13]: Accessory-rail documentation gaps and current-limit questions on Ubox 85240/85250 harnesses.Source: knowledge/notes/input_part013_review.md, L116 to L130
-[^14]: Visual differences between cracked first-gen NAMI frames and reinforced 72/40 chassis.Source: knowledge/notes/input_part012_review.md, L129 to L132
-[^kaabo-swap]: NAMI riders debating Kaabo fork swaps concluded the mod is mostly for looks—70 H motors fit, but 75 H clearance is uncertain without extra machining.Source: knowledge/notes/input_part009_review.md, L228 to L233
-[^c350-case]: Face de Pin Sucé’s race team sealed their NAMI’s C350 in a custom waterproof enclosure, kept lapping Albaida in the rain, and now machines most replacement frame parts in-house to shore up Thunder-family hinges.Source: data/vesc_help_group/text_slices/input_part009.txt, L22034 to L22072
-[^hotdog]: Latest NAMI hotdog builds with 100 H rears and 70 H fronts running 22 S 11 P P45 packs, 500 A phase / 550 A absolute limits, 100 % front FW, and ~61 °C stator temps while traction control prevents front-wheel lift beyond 120 km/h.Source: knowledge/notes/input_part014_review.md, L8930 to L8933Source: knowledge/notes/input_part014_review.md, L10001 to L10055
-[^bms_ceiling]: 22 S 11 P 50PL pack planning noting today’s smart BMS hardware caps ≈500 A continuous, requiring dual-BMS or pyrofuse strategies when targeting ≈770 A nominal current.Source: knowledge/notes/input_part014_review.md, L2965 to L2974Source: knowledge/notes/input_part014_review.md, L3427 to L3434
-[^rim_warning]: Community warning that 12" AliExpress rims interfere with NAMI suspension, so 65 mm front / 80 mm rear LY combos remain the preferred setup.Source: knowledge/notes/input_part014_review.md, L5103 to L5113
-[^burp_fix]: Tubeless Ambrosini rims occasionally burp air after potholes; reseat by pulling the valve core and blasting the bead clean with a compressor.Source: knowledge/notes/input_part014_review.md, L4610 to L4619
-[^pmt_rain]: PMT rain-specific tires in 90 mm and 100 mm widths cost roughly $80 each but deliver the wet grip racers need versus cheaper slicks.Source: knowledge/notes/input_part014_review.md, L5359 to L5399
-[^tronic_harness]: Rob Ver’s harness refresh swapped the NAMI loom to 10 AWG phases so dual Tronic X12 controllers could sustain 116 A battery and 240 A phase without overheating.Source: knowledge/notes/input_part013_review.md, L33 to L33
-[^tronic_logic]: Tronic X12 accessory rails only deliver about 5 V at 150 mA, so builders still power horns and lighting from dedicated buck converters.Source: knowledge/notes/input_part013_review.md, L32 to L33
+[^1]: Dual vs. single-drive thermal observations on Tronic 250-equipped NAMI builds. Source: knowledge/notes/input_part008_review.md, L24 to L31
+[^2]: Omar’s 200 A/310 A Spintend build overheating hubs and AYÓ’s reminder about the stock LG M50LT pack’s ≈116 A continuous rating with ≤135 A peak guidance. Source: knowledge/notes/input_part013_review.md, L118 to L123
+[^3]: Mixed-chemistry caution, chassis use-cases, and handling priorities for NAMI frames versus other race platforms. Source: knowledge/notes/input_part008_review.md, L188 to L190. Source: knowledge/notes/input_part008_review.md, L227 to L236
+[^4]: 65H track benchmarks near 100 km/h without field weakening and 26 S dual-motor success restoring traction on GT2 builds. Source: knowledge/notes/input_part012_review.md, L103 to L107. Source: knowledge/notes/input_part011_review.md, L204 to L218
+[^5]: OEM connector specifications and upgrade practices for NAMI scooters. Source: knowledge/notes/input_part002_review.md, L430 to L445
+[^6]: GT2 pack rebuild using Daly 100Balance BMS, 20 S 9 P LG 40P cells, and copper busbars. Source: knowledge/notes/input_part011_review.md, L204 to L206
+[^7]: NAMI GT2 running 26 S packs again with stock motors and Makerbase X12 controllers online. Source: knowledge/notes/input_part011_review.md, L204 to L218
+[^8]: Yoann’s stealth dual Spintend Lite conversion retaining the NAMI BMS and stock exterior. Source: knowledge/notes/input_part009_review.md, L253 to L256
+[^9]: Dual-controller power logging plateau around 19 kW without aggregated telemetry. Source: knowledge/notes/input_part013_review.md, L454 to L459
+[^10]: Reports of cheap steering dampers failing and recommendations for motorcycle-grade replacements on NAMI chassis. Source: knowledge/notes/input_part008_review.md, L293 to L296
+[^11]: Fabrication needs when merging NAMI Viper and Rion components for 22 S 10 P builds. Source: knowledge/notes/input_part008_review.md, L205 to L208
+[^12]: Controller horn/aux channels sourcing only a few amps—relay heavy lighting loads instead of direct wiring. Source: knowledge/notes/input_part012_review.md, L96 to L99
+[^13]: Accessory-rail documentation gaps and current-limit questions on Ubox 85240/85250 harnesses. Source: knowledge/notes/input_part013_review.md, L116 to L130
+[^14]: Visual differences between cracked first-gen NAMI frames and reinforced 72/40 chassis. Source: knowledge/notes/input_part012_review.md, L129 to L132
+[^kaabo-swap]: NAMI riders debating Kaabo fork swaps concluded the mod is mostly for looks—70 H motors fit, but 75 H clearance is uncertain without extra machining. Source: knowledge/notes/input_part009_review.md, L228 to L233
+[^c350-case]: Face de Pin Sucé’s race team sealed their NAMI’s C350 in a custom waterproof enclosure, kept lapping Albaida in the rain, and now machines most replacement frame parts in-house to shore up Thunder-family hinges. Source: data/vesc_help_group/text_slices/input_part009.txt, L22034 to L22072
+[^hotdog]: Latest NAMI hotdog builds with 100 H rears and 70 H fronts running 22 S 11 P P45 packs, 500 A phase / 550 A absolute limits, 100 % front FW, and ~61 °C stator temps while traction control prevents front-wheel lift beyond 120 km/h. Source: knowledge/notes/input_part014_review.md, L8930 to L8933. Source: knowledge/notes/input_part014_review.md, L10001 to L10055
+[^bms_ceiling]: 22 S 11 P 50PL pack planning noting today’s smart BMS hardware caps ≈500 A continuous, requiring dual-BMS or pyrofuse strategies when targeting ≈770 A nominal current. Source: knowledge/notes/input_part014_review.md, L2965 to L2974. Source: knowledge/notes/input_part014_review.md, L3427 to L3434
+[^rim_warning]: Community warning that 12" AliExpress rims interfere with NAMI suspension, so 65 mm front / 80 mm rear LY combos remain the preferred setup. Source: knowledge/notes/input_part014_review.md, L5103 to L5113
+[^burp_fix]: Tubeless Ambrosini rims occasionally burp air after potholes; reseat by pulling the valve core and blasting the bead clean with a compressor. Source: knowledge/notes/input_part014_review.md, L4610 to L4619
+[^pmt_rain]: PMT rain-specific tires in 90 mm and 100 mm widths cost roughly $80 each but deliver the wet grip racers need versus cheaper slicks. Source: knowledge/notes/input_part014_review.md, L5359 to L5399
+[^tronic_harness]: Rob Ver’s harness refresh swapped the NAMI loom to 10 AWG phases so dual Tronic X12 controllers could sustain 116 A battery and 240 A phase without overheating. Source: knowledge/notes/input_part013_review.md, L33 to L33
+[^tronic_logic]: Tronic X12 accessory rails only deliver about 5 V at 150 mA, so builders still power horns and lighting from dedicated buck converters. Source: knowledge/notes/input_part013_review.md, L32 to L33
 
 ## References
 
