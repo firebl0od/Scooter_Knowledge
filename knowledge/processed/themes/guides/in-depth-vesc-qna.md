@@ -1,10 +1,14 @@
 # 🏆 The Ultimate In-Depth VESC Q&A
-Below is a massive Q&A covering a wide array of topics around VESC-based controllers—ranging from beginner-level queries to advanced technical discussions. It draws on the 3000+ lines of chat knowledge, real-world usage, and the official VESC parameter descriptions.
+
+Below is a massive Q&A covering a wide array of topics around VESC-based controllers.
+  - ranging from beginner-level queries to advanced technical discussions. It draws on the 3000+ lines of chat knowledge, real-world usage, and the official VESC parameter descriptions.
 
 Use the collapsible sections below to jump straight to the answers that matter most to you.
 
 ## Table of Contents
+
 ### Part 1 – Core Topics (Q1–30)
+
 - [1. Basic Getting Started](#1-basic-getting-started)
 - [2. Battery & Current Limits](#2-battery--current-limits)
 - [3. Voltage Cutoffs & Regen](#3-voltage-cutoffs--regen)
@@ -17,6 +21,7 @@ Use the collapsible sections below to jump straight to the answers that matter m
 - [10. Troubleshooting & Misc.](#10-troubleshooting--misc)
 
 ### Part 2 – Advanced Scenarios (Q31–50)
+
 - [31. Partial Meltdown or “Soft Failure”](#31-partial-meltdown-or-soft-failure)
 - [32. High Inductance or Low Inductance Motors](#32-high-inductance-or-low-inductance-motors)
 - [33. Traction Control for Dual Motors](#33-traction-control-for-dual-motors)
@@ -39,6 +44,7 @@ Use the collapsible sections below to jump straight to the answers that matter m
 - [50. Final Best Practices](#50-final-best-practices)
 
 ### Part 3 – Additional 50 High-Quality Q&A
+
 - [1. FOC Current KP/KI Manual Tuning](#1-foc-current-kpki-manual-tuning)
 - [2. Motor Has Multiple Winding Options](#2-motor-has-multiple-winding-options)
 - [3. High-Speed Drones or eJets](#3-high-speed-drones-or-ejets)
@@ -164,6 +170,7 @@ These steps ensure you have the correct fundamental data for your motor and keep
 </details>
 
 ## 3. VOLTAGE CUTOFFS & REGEN
+
 <details>
 <summary><strong>Q7. I keep hitting “ABS Over Voltage” if I brake hard on a full battery. How to fix that?</strong></summary>
 
@@ -195,7 +202,8 @@ These steps ensure you have the correct fundamental data for your motor and keep
 
 - Stage 1 (“Cutoff Start”) simply tapers output—it reduces available torque so you feel the scooter softening while voltage approaches the limit.
 - Stage 2 (“Cutoff End”) stops motor drive but keeps controller logic alive, letting you coast and retain telemetry instead of hard-shutting the ESC.
-- Because the controller stays powered, you can safely set the software cutoff a bit below the BMS threshold—as long as you keep monitoring pack voltage to avoid tripping the discharge FETs.[^cutoff_stages]
+- Because the controller stays powered, you can safely set the software cutoff a bit below the BMS threshold.
+  - as long as you keep monitoring pack voltage to avoid tripping the discharge FETs.[^cutoff_stages]
 
 </details>
 
@@ -262,6 +270,7 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 </details>
 
 ## 6. ADVANCED TORQUE FEATURES: MTPA & FIELD WEAKENING
+
 <details>
 <summary><strong>Q14. What is MTPA (Maximum Torque per Amp) and do I need it for my motor?</strong></summary>
 
@@ -316,7 +325,8 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 
 - Fix the mechanical interface before raising limits: swap thick stock pads for 0.5 mm interfaces or direct paste, clamp the case to real metal, and add airflow so the controller stops rocketing past 80 °C within minutes.[^14]
 - Most crews treat ~70 °C MOSFET case temperature as the everyday ceiling; once logs show 85 °C after a short pull, they cut phase/battery current or move the controller to a better heat sink instead of chasing higher firmware thresholds.[^15]
-- High-power builds still reserve 90/110 °C start/end only for short tests—race teams log case and stator temps continuously and back off once controller or motor temps brush 90–100 °C to avoid demagnetizing hardware.[^16]
+- High-power builds still reserve 90/110 °C start/end only for short tests.
+  - race teams log case and stator temps continuously and back off once controller or motor temps brush 90–100 °C to avoid demagnetizing hardware.[^16]
 
 </details>
 
@@ -342,7 +352,7 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 2. Observer Gain – You might lower foc_observer_gain if it’s overshooting angle at near-zero speed. 
 3. Startup Current – If it saturates, reduce the startup current or use openloop_rpm/time to ramp more gently.
 4. Add HFI or use hall sensors if physically possible.
-5. Expect compromises on heavy hubs today – even with HFI/VSS, riders still cap launch torque or give a light push because zero-speed starts tend to chatter on sensorless-only scooters.【F:knowledge/notes/input_part012_review.md†L14-L14】
+5. Expect compromises on heavy hubs today – even with HFI/VSS, riders still cap launch torque or give a light push because zero-speed starts tend to chatter on sensorless-only scooters.[^1]
 
 </details>
 
@@ -461,7 +471,8 @@ Most modern e-scooter/e-bike conversions use FOC for the quiet operation and adv
 3. Set gentle cutoffs (voltage, current, thermal) to avoid abrupt BMS or ESC-level fault cutouts. 
 4. Use properly rated connectors (phase & battery) so you don’t melt them at high current. 
 5. If running advanced features like MTPA or Field Weakening, do incremental tests in a safe area, watch for voltage spikes, and confirm it’s stable.
-6. Release the throttle when a fault appears—VESC clears the fault automatically once input drops to zero, but holding the trigger keeps the controller in a prolonged shutdown state.【F:knowledge/notes/input_part009_review.md†L100-L100】
+6. Release the throttle when a fault appears.
+  - VESC clears the fault automatically once input drops to zero, but holding the trigger keeps the controller in a prolonged shutdown state.[^2]
 
 </details>
 
@@ -542,6 +553,7 @@ Below are more advanced or niche questions (continuing from Q30), focusing on ed
 </details>
 
 ## 36. FIELD WEAKENING TIPS
+
 <details>
 <summary><strong>Q30. Any final best practices to avoid random faults or damage?</strong></summary>
 
@@ -632,6 +644,7 @@ Below are more advanced or niche questions (continuing from Q30), focusing on ed
 </details>
 
 ## 36. FIELD WEAKENING TIPS
+
 <details>
 <summary><strong>Q36. Any practical tips to keep Field Weakening safe on a mid-voltage setup (say 18S ~ 75V)?</strong></summary>
 
@@ -682,8 +695,8 @@ Below are more advanced or niche questions (continuing from Q30), focusing on ed
 2. Calibrate – The min and max voltage for the throttle to ensure 0-100% range.
 3. Filter – You can add a small throttle ramp or filter to smooth out noise in analog signals.
 4. Hall Throttle vs. Potentiometer – Some throttles are hall-based with ~1–4V output, others are purely resistive. Make sure your wiring and supply voltage match.
-5. Input sources – VESC Tool can drive the scooter from the Balance app, UART remotes, or CAN clients even without a physical throttle; lock Bluetooth or power down when you walk away so nobody nearby rewrites settings mid-session.【F:knowledge/notes/input_part009_review.md†L80-L80】
-6. Keyboard override – Desktop VESC Tool keeps the keyboard control toggle on the right side; enable it after detection before expecting WASD/arrow inputs to move the motor.【F:knowledge/notes/input_part009_review.md†L83-L83】
+5. Input sources – VESC Tool can drive the scooter from the Balance app, UART remotes, or CAN clients even without a physical throttle; lock Bluetooth or power down when you walk away so nobody nearby rewrites settings mid-session.[^3]
+6. Keyboard override – Desktop VESC Tool keeps the keyboard control toggle on the right side; enable it after detection before expecting WASD/arrow inputs to move the motor.[^4]
 
 </details>
 
@@ -714,6 +727,7 @@ Below are more advanced or niche questions (continuing from Q30), focusing on ed
 </details>
 
 ## 42. WHEN TO USE “HIGH CURRENT SAMPLING MODE”
+
 <details>
 <summary><strong>Q42. In FOC, there’s a param foc_current_sample_mode with ‘Longest Zero Time, All Sensors Combined, High Current.’ Which is best for big motors?</strong></summary>
 
@@ -794,6 +808,7 @@ Below are more advanced or niche questions (continuing from Q30), focusing on ed
 </details>
 
 ## 48. HARDWARE LIMITS & SHUNTS
+
 <details>
 <summary><strong>Q48. Why does some hardware claim 200A but the VESC Tool only shows 100A capability?</strong></summary>
 
@@ -854,6 +869,7 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
   1. Test ride on flat ground, accelerate from 0–50% throttle, watch for stutter or squeal.
   2. If stable, push 75%–100% throttle. If abrupt surges or oscillations, keep halving KP.
   3. After stable KP, raise KI in small steps to restore torque tracking; too low KI leads to sluggish current ramp.
+
 - Watch Temps: Overly high KI can cause big current spikes at transitions.
 
 </details>
@@ -872,6 +888,7 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 </details>
 
 ## 3. High-Speed Drones or eJets
+
 <details>
 <summary><strong>Q3. I’m using VESC for a high-speed EDF (Electric Ducted Fan) drone. Any particular settings?</strong></summary>
 
@@ -983,6 +1000,7 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 </details>
 
 ## 11. Pushing Motor beyond its Nameplate Voltage
+
 <details>
 <summary><strong>Q11. If a motor is rated 48 V, can I run it at 60 V with a VESC?</strong></summary>
 
@@ -1003,7 +1021,8 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 **Answer**
 
 - Sensorless at zero speed is tricky: the ESC initially uses open loop. If the rotor isn’t matched, current can spike before the observer locks.
-- On dual drives you can let the sensored wheel push first—tune VSS/HFI so the sensorless motor joins once rolling, or script a PWM disable below a set ERPM if rewiring halls is impractical.【F:knowledge/notes/input_part011_review.md†L540-L542】
+- On dual drives you can let the sensored wheel push first.
+  - tune VSS/HFI so the sensorless motor joins once rolling, or script a PWM disable below a set ERPM if rewiring halls is impractical.[^5]
 - Fix: Slight ramp or “foc_sl_openloop_time” to avoid big slam.
 - Or use HFI/halls for immediate lock.
 - Lower l_abs_current_max or enable slow_abs_current to reduce false triggers.
@@ -1092,6 +1111,7 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 </details>
 
 ## 19. “FOC Sample in V0 and V7 Interpolation”
+
 <details>
 <summary><strong>Q19. Does enabling V0+V7 Interpolation significantly improve performance or just reduce noise?</strong></summary>
 
@@ -1201,6 +1221,7 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 </details>
 
 ## 27. Fine-Tuning Position Controller Gains
+
 <details>
 <summary><strong>Q27. I’m using position PID for a CNC-like setup. How do I keep it from overshooting?</strong></summary>
 
@@ -1223,7 +1244,8 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 - If your battery is 100 A total, four ESCs means ideally each is ~25 A for stable operation if all can run full.
 - In reality, some do keep each at 100 A because it’s unlikely all four motors pull max simultaneously, but that can be risky.
 - You might do partial offset: 50 A each, to not exceed 200 A total if two motors heavily load. Understand your BMS and acceptance of risk.
-- Remember that a single VESC cannot run two motors simultaneously—plan one controller per hub plus CAN (or another coordination layer) for multi-motor vehicles.【F:data/vesc_help_group/text_slices/input_part009.txt†L12486-L12489】
+- Remember that a single VESC cannot run two motors simultaneously.
+  - plan one controller per hub plus CAN (or another coordination layer) for multi-motor vehicles.[^6]
 
 </details>
 
@@ -1312,6 +1334,7 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 </details>
 
 ## 35. NTC 100k vs. PTC 1k in Motor Temp
+
 <details>
 <summary><strong>Q35. My motor data says it has a KTY84 sensor. Which param do I pick for m_motor_temp_sens_type?</strong></summary>
 
@@ -1400,7 +1423,7 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 - DRV Fault: The DRV chip signaled an overcurrent or under/overvoltage condition.
 - MOSFET Short or Gate Driver Error: Usually results in immediate destructive fault—ESC might not just code an error but physically fail.
 - For repeated DRV fault, suspect hardware or config mismatch. For repeated ABS Over Current, adjust or slow down current ramp.
-- Once wiring and observers check out, lift `l_abs_current_max` (and optionally disable the slow ABS filter) so transient phase spikes stop tripping the controller mid-launch.【F:knowledge/notes/input_part009_review.md†L82-L82】
+- Once wiring and observers check out, lift `l_abs_current_max` (and optionally disable the slow ABS filter) so transient phase spikes stop tripping the controller mid-launch.[^7]
 
 </details>
 
@@ -1418,6 +1441,7 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 </details>
 
 ## 43. Legacy 4.xx + Field Weakening?
+
 <details>
 <summary><strong>Q43. Is FW recommended on older 4.12-based hardware?</strong></summary>
 
@@ -1427,7 +1451,8 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 - If you do attempt it, keep a small margin.
 - A 4.12 at 12S is safer for FW than 4.12 at 14 or 16S.
 - Many prefer a 6-based hardware or higher voltage rating for stable FW.
-- Trampa’s legacy VESC MK6 firmware effectively caps the platform at 12 S—13 S experiments killed braking outright, forcing riders back onto low-power Xiaomi hubs until they sourced modern controllers.【F:knowledge/notes/input_part001_review.md†L85-L85】
+- Trampa’s legacy VESC MK6 firmware effectively caps the platform at 12 S.
+  - 13 S experiments killed braking outright, forcing riders back onto low-power Xiaomi hubs until they sourced modern controllers.[^8]
 
 </details>
 
@@ -1526,25 +1551,62 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 
 ## Source Notes
 
-[^1]: Sensorless FOC riders still need a push start or intensive HFI tuning to avoid low-speed stalls on Flipsky/MakerX hardware.【F:knowledge/notes/input_part009_review.md†L80-L87】
-[^2]: “Bad FOC hall detection” investigations traced launch issues to failed hall boards that forced riders toward HFI until the sensors were replaced.【F:knowledge/notes/input_part013_review.md†L113-L135】
-[^3]: Effective sensorless launches hinge on at least ~15 % Ld/Lq separation so HFI can lock reliably.【F:knowledge/notes/input_part000_review.md†L377-L381】
-[^4]: Vedder’s FW 6.0 45° V0/V7 HFI profile delivers repeatable hall-less zero starts when the ESC samples both zero vectors at high frequency.【F:knowledge/notes/input_part003_review.md†L221-L224】
-[^5]: VESC Tool 6.02 widens hall hysteresis, calms sampling noise, and improves CAN logging, making silent HFI practical on phase-shunt controllers.【F:knowledge/notes/input_part004_review.md†L49-L55】
-[^6]: Builders continue to iterate on hall-less tunes by combining HFI, saturation compensation, and trimmed start currents before trusting premium scooters without sensors.【F:knowledge/notes/input_part012_review.md†L229-L232】
-[^7]: Riders differentiate Vedder Sensorless Start from continuous HFI—VSS injects a short burst, requires temperature inputs, and then hands control back to the observer.【F:knowledge/notes/input_part001_review.md†L304-L307】
-[^8]: Hub-motor MTPA trials showed surface-magnet commuters mostly generate heat, whereas saliency-rich motors benefit once settings are logged carefully.【F:knowledge/notes/input_part007_review.md†L235-L239】【F:knowledge/notes/input_part008_review.md†L114-L114】
-[^9]: Blade hub owners log ~6 kW per motor and ~20 km/h extra top speed at 15–17 S when MTPA is dialed with ~250 A phase headroom.【F:knowledge/notes/input_part001_review.md†L228-L229】
-[^10]: Stacking MTPA and heavy field weakening on 20 S Spintend 85150 builds has blown MOSFETs, so veterans now demand upgraded silicon or milder tunes.【F:knowledge/notes/input_part014_review.md†L21-L22】
-[^11]: Dual-motor commuter logs captured only ~8 km/h gain from field weakening while power draw nearly doubled, reinforcing that gearing or voltage changes are more efficient.【F:knowledge/notes/input_part003_review.md†L205-L205】
-[^12]: Racers chasing 30 A+ of FW reported hubs overheating despite traction control, prompting airflow, ferrofluid, or stator upgrades before lifting FW ceilings.【F:knowledge/notes/input_part009_review.md†L178-L179】【F:knowledge/notes/input_part013_review.md†L783-L788】
-[^13]: Daly and ANT BMS boards can hard-cut during regen, back-feeding controllers unless the ESC tapers current first.【F:knowledge/notes/input_part000_review.md†L372-L380】【F:knowledge/notes/input_part014_review.md†L98-L101】
-[^cutoff_stages]: Paolo clarified that Stage 1 tapering simply soft-limits output while Stage 2 halts motor drive but leaves the controller powered, letting riders set software cutoffs slightly under BMS limits if they continue monitoring pack voltage.【F:knowledge/notes/input_part014_review.md†L173-L173】
-[^14]: Swapping thick stock pads for thin interfaces or paste and clamping the case to metal keeps Ubox/Makerbase controllers from spiking past 80 °C immediately.【F:knowledge/notes/input_part008_review.md†L547-L548】
-[^15]: Community thermal guidelines keep MOSFET cases under ~70 °C for daily riding and flag sustained 85 °C spikes as a sign to cut current or improve cooling.【F:knowledge/notes/input_part007_review.md†L198-L202】
-[^16]: Race telemetry targets ≤45 °C controller cases and ≤90–100 °C stators to avoid demagnetizing hubs or cooking controllers during long pulls.【F:knowledge/notes/input_part014_review.md†L75-L76】
-[^17]: Installing EPCOS/TDK 2 × 4 mm NTCs at the hall bundle provides accurate 150 °C-capable stator telemetry for VESC cutbacks.【F:knowledge/notes/input_part004_review.md†L69-L70】
-[^18]: Poorly routed sensor leads collapse above 80 A; rerouting and shielding stop thermistor signals from dropping out under load.【F:knowledge/notes/input_part004_review.md†L49-L55】
-[^19]: Paolo and others log CAN-connected smart BMS data to capture true pack power because VESC low-side shunts under-report at high output.【F:knowledge/notes/input_part014_review.md†L80-L82】
-[^20]: Daly/ANT packs have latched off mid-ride from regen spikes, so crews rely on ESC-side limit modes to taper current before the BMS hard-cuts.【F:knowledge/notes/input_part000_review.md†L372-L380】【F:knowledge/notes/input_part014_review.md†L98-L101】
-[^21]: Smart-BMS telemetry can drop frames or drift; builders recalibrate sensors and inspect boards for damage when CAN data suddenly zeros out.【F:knowledge/notes/input_part014_review.md†L82-L83】【F:knowledge/notes/input_part014_review.md†L100-L101】
+[^1]: Sensorless FOC riders still need a push start or intensive HFI tuning to avoid low-speed stalls on Flipsky/MakerX hardware.[^9]
+[^2]: “Bad FOC hall detection” investigations traced launch issues to failed hall boards that forced riders toward HFI until the sensors were replaced.[^10]
+[^3]: Effective sensorless launches hinge on at least ~15 % Ld/Lq separation so HFI can lock reliably.[^11]
+[^4]: Vedder’s FW 6.0 45° V0/V7 HFI profile delivers repeatable hall-less zero starts when the ESC samples both zero vectors at high frequency.[^12]
+[^5]: VESC Tool 6.02 widens hall hysteresis, calms sampling noise, and improves CAN logging, making silent HFI practical on phase-shunt controllers.[^13]
+[^6]: Builders continue to iterate on hall-less tunes by combining HFI, saturation compensation, and trimmed start currents before trusting premium scooters without sensors.[^14]
+[^7]: Riders differentiate Vedder Sensorless Start from continuous HFI.
+  - VSS injects a short burst, requires temperature inputs, and then hands control back to the observer.[^15]
+[^8]: Hub-motor MTPA trials showed surface-magnet commuters mostly generate heat, whereas saliency-rich motors benefit once settings are logged carefully.[^16][^17]
+[^9]: Blade hub owners log ~6 kW per motor and ~20 km/h extra top speed at 15–17 S when MTPA is dialed with ~250 A phase headroom.[^18]
+[^10]: Stacking MTPA and heavy field weakening on 20 S Spintend 85150 builds has blown MOSFETs, so veterans now demand upgraded silicon or milder tunes.[^19]
+[^11]: Dual-motor commuter logs captured only ~8 km/h gain from field weakening while power draw nearly doubled, reinforcing that gearing or voltage changes are more efficient.[^20]
+[^12]: Racers chasing 30 A+ of FW reported hubs overheating despite traction control, prompting airflow, ferrofluid, or stator upgrades before lifting FW ceilings.[^21][^22]
+[^13]: Daly and ANT BMS boards can hard-cut during regen, back-feeding controllers unless the ESC tapers current first.[^23][^24]
+[^cutoff_stages]: Paolo clarified that Stage 1 tapering simply soft-limits output while Stage 2 halts motor drive but leaves the controller powered, letting riders set software cutoffs slightly under BMS limits if they continue monitoring pack voltage.[^25]
+[^14]: Swapping thick stock pads for thin interfaces or paste and clamping the case to metal keeps Ubox/Makerbase controllers from spiking past 80 °C immediately.[^26]
+[^15]: Community thermal guidelines keep MOSFET cases under ~70 °C for daily riding and flag sustained 85 °C spikes as a sign to cut current or improve cooling.[^27]
+[^16]: Race telemetry targets ≤45 °C controller cases and ≤90–100 °C stators to avoid demagnetizing hubs or cooking controllers during long pulls.[^28]
+[^17]: Installing EPCOS/TDK 2 × 4 mm NTCs at the hall bundle provides accurate 150 °C-capable stator telemetry for VESC cutbacks.[^29]
+[^18]: Poorly routed sensor leads collapse above 80 A; rerouting and shielding stop thermistor signals from dropping out under load.[^13]
+[^19]: Paolo and others log CAN-connected smart BMS data to capture true pack power because VESC low-side shunts under-report at high output.[^30]
+[^20]: Daly/ANT packs have latched off mid-ride from regen spikes, so crews rely on ESC-side limit modes to taper current before the BMS hard-cuts.[^23][^24]
+[^21]: Smart-BMS telemetry can drop frames or drift; builders recalibrate sensors and inspect boards for damage when CAN data suddenly zeros out.[^31][^32]
+
+
+## References
+
+[^1]: Source: knowledge/notes/input_part012_review.md†L14-L14
+[^2]: Source: knowledge/notes/input_part009_review.md†L100-L100
+[^3]: Source: knowledge/notes/input_part009_review.md†L80-L80
+[^4]: Source: knowledge/notes/input_part009_review.md†L83-L83
+[^5]: Source: knowledge/notes/input_part011_review.md†L540-L542
+[^6]: Source: data/vesc_help_group/text_slices/input_part009.txt†L12486-L12489
+[^7]: Source: knowledge/notes/input_part009_review.md†L82-L82
+[^8]: Source: knowledge/notes/input_part001_review.md†L85-L85
+[^9]: Source: knowledge/notes/input_part009_review.md†L80-L87
+[^10]: Source: knowledge/notes/input_part013_review.md†L113-L135
+[^11]: Source: knowledge/notes/input_part000_review.md†L377-L381
+[^12]: Source: knowledge/notes/input_part003_review.md†L221-L224
+[^13]: Source: knowledge/notes/input_part004_review.md†L49-L55
+[^14]: Source: knowledge/notes/input_part012_review.md†L229-L232
+[^15]: Source: knowledge/notes/input_part001_review.md†L304-L307
+[^16]: Source: knowledge/notes/input_part007_review.md†L235-L239
+[^17]: Source: knowledge/notes/input_part008_review.md†L114-L114
+[^18]: Source: knowledge/notes/input_part001_review.md†L228-L229
+[^19]: Source: knowledge/notes/input_part014_review.md†L21-L22
+[^20]: Source: knowledge/notes/input_part003_review.md†L205-L205
+[^21]: Source: knowledge/notes/input_part009_review.md†L178-L179
+[^22]: Source: knowledge/notes/input_part013_review.md†L783-L788
+[^23]: Source: knowledge/notes/input_part000_review.md†L372-L380
+[^24]: Source: knowledge/notes/input_part014_review.md†L98-L101
+[^25]: Source: knowledge/notes/input_part014_review.md†L173-L173
+[^26]: Source: knowledge/notes/input_part008_review.md†L547-L548
+[^27]: Source: knowledge/notes/input_part007_review.md†L198-L202
+[^28]: Source: knowledge/notes/input_part014_review.md†L75-L76
+[^29]: Source: knowledge/notes/input_part004_review.md†L69-L70
+[^30]: Source: knowledge/notes/input_part014_review.md†L80-L82
+[^31]: Source: knowledge/notes/input_part014_review.md†L82-L83
+[^32]: Source: knowledge/notes/input_part014_review.md†L100-L101
