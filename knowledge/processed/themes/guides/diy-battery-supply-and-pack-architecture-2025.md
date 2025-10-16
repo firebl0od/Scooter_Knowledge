@@ -144,6 +144,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 - **Turnkey superbike benchmark** – Russia’s billet RTV Ultra scooter ships with dual 3Shul controllers, 26 S 64 Ah packs, 115 mm stators, and 11×PMT130 tires while quoting six-month lead times, offering a reference for premium turnkey builds.[^112]
 - **VSETT 10+ deck with external controllers** – Relocating controllers outside the deck makes room for a 20 S9 P Samsung 48X pack with ~2 mm side clearance in a 169 mm jig; builders pair it with JK active-balancing BMS boards and waterproof Higo/Julet harnesses for serviceable installs.[^101][^102]
 - **Cell chemistry trade-offs** – Sony VTC6A cells sag less and run cooler than Molicel P42A but cost roughly twice as much unless ordering ~10 k pieces monthly, while Samsung 30T remains the punchiest option albeit with limited capacity.[^113]
+- **8–9 P performance packs** – Brief riders on how P42A and P45B deliver the best blend of discharge headroom and cycle life for 20 S builds, when Samsung 50S makes sense for fast-charging commuters, and why long-range chemistries like LG M50LT/Samsung 50E still need larger parallels if you expect sustained 300 A duty.[^p42a_brief]
 - **Ninebot G30 MAX** – Builders drill and trim 3 mm ePowerFun skid plates for €25 stopgap protection, map roughly 112–120 horizontal 21700 slots (~17 S8 P) with careful copper folding, swap in custom spacers, and plan 20 S4 P-to-22 S layouts once rails are clear and pack supports printed.
   - just avoid mixing aged grey and purple LG M26 variants that upset balance.[^114][^115][^116]
 - **Xiaomi Pro 2 packaging example** – Relocating the ESC lets a 13 S8 P (104-cell) pack fit with side-mounted BMS modules, highlighting the gains from asymmetrical stacking inside cramped decks.[^117]
@@ -477,6 +478,7 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 [^111]: Source: knowledge/notes/input_part012_review.md†L322-L323
 [^112]: Source: knowledge/notes/input_part012_review.md†L191-L191
 [^113]: Source: data/vesc_help_group/text_slices/input_part001.txt†L1603-L1655
+[^p42a_brief]: Cell-selection TODO capturing P42A/P45B vs. Samsung 50S and LG/Samsung long-range chemistries for 8–9 P scooter packs, including when premium cells justify cost versus leaning on faster charging. Source: data/vesc_help_group/text_slices/input_part005.txt†L24420-L24451.
 [^114]: Source: knowledge/notes/input_part014_review.md†L151-L151
 [^115]: Source: knowledge/notes/input_part014_review.md†L118-L118
 [^116]: Source: knowledge/notes/input_part008_review.md†L184-L184

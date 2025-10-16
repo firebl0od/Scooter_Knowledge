@@ -51,6 +51,7 @@ Taming current limits is the difference between a scooter that rips for years an
 - For 12 S 5 P Xiaomi decks pulling 60–80 A, Samsung 48X or 50G deliver more usable energy at 15 A than P42A while staying cool; Samsung 50E overheats once cell current tops 10–12 A, so reserve it for gentler builds.[^48x_choice]
 - 21700 availability and copper busbars now let Tudor’s crew stack 17 S 6 P 40T/50G arrays that tolerate high discharge despite €5–€7 per cell EU pricing.
   - plan current targets around chemistry cost as well as thermal headroom.[^21700_push]
+- Molicel P45B still anchors the premium high-current slot, yet plenty of builders stick with cheaper Samsung/LG long-range cells unless they truly need 35–40 A per cell or aggressive fast-charging workflows—proof that chemistry budgets should track the actual current profile, not hype.[^p45b_trade]
 - Keep Artem’s relationship in mind: `I_phase = I_batt × V_batt ÷ V_motor`, so phase torque fades as ERPM climbs.
   - log both currents to confirm your battery caps aren’t starving the tune mid-pull.[^phase_equation]
 - Field-weakening still trades efficiency for speed.
@@ -136,6 +137,8 @@ Taming current limits is the difference between a scooter that rips for years an
 - **Audit adjustable chargers.** The Celler-branded 20 S bench supply landed on voltage with steady thermals, but log fan duty and case temps during long charges before endorsing it for customers.[^33]
 - **Replace sketchy 22 S supplies.** Refurbished Meanwell stacks have failed under load.
   - source purpose-built 22 S chargers or vetted lab supplies instead of gambling on patched industrial gear.[^34]
+- **Document CC/CV verification for brick chargers.** Stock Wate/YZPOWER units have arrived with sloppy current regulation; meter output current through the constant-current and constant-voltage phases and reject bricks that never taper before 4.2 V per cell.[^cccv_wate]
+  - Pair every adjustable bench supply with a pre-charge checklist (wall outlet → charger → pack) so voltage trim mistakes or live-plug arcs do not spike the controller.[^cccv_wate]
 - **Isolation test series chargers.** Before stacking power supplies, meter the earth-to-output resistance; only run them in series once you confirm floating outputs and add fuses on both legs.[^35]
 - **Acceptance test every bench supply.** Check ground continuity, breaker reset behaviour, and voltage accuracy under load before deploying adjustable chargers to customers.[^36]
 - **Label Meanwell-style VR pots.** Adjust VR1 for output voltage, VR2 for current, and VR3 for cutoff while the charger powers a partially discharged pack.
@@ -189,6 +192,7 @@ Taming current limits is the difference between a scooter that rips for years an
 [^amazon-pack]: Amazon bargain 20 S pack arrived at 81.8 V with mixed 4.1 V/3.8 V groups, proving low-cost assemblies can ship badly unbalanced when chargers/BMSs are cheap.[^51]
 [^slow-brick]: Zero 10X owners clock ~11 hours for a 1.75–2 A stock charger to refill an 18.2 Ah pack from ~50 V to 54 V.
   - long charge times alone aren’t proof of pack failure.[^52]
+[^cccv_wate]: Charger QA request covering Wate/YZPOWER bricks with sloppy CC/CV behaviour plus the reminder to stage wall → charger → pack when energising adjustable supplies so trim errors do not over-voltage a scooter. Source: data/vesc_help_group/text_slices/input_part005.txt†L24033-L24058; L24046-L24055.
 [^1]: Parallel-pack surge warnings when mixed BMS boards trip under load.[^53]
 [^2]: Connector and heatsink best practices for high-current builds.[^54][^55]
 [^3]: Manual detection workflow and bad auto-tune case studies.[^56]
@@ -226,6 +230,7 @@ Taming current limits is the difference between a scooter that rips for years an
 [^wh_math]: Source: knowledge/notes/input_part000_review.md, line 225.
 [^48x_choice]: Source: knowledge/notes/input_part000_review.md, line 226.
 [^21700_push]: Source: knowledge/notes/input_part000_review.md, line 227.
+[^p45b_trade]: Source: data/vesc_help_group/text_slices/input_part005.txt†L24380-L24405
 [^regen_baseline]: Source: knowledge/notes/input_part000_review.md, line 255.
 [^regen_bursts]: Source: knowledge/notes/input_part000_review.md, line 256.
 [^tc_heat_2022]: Traction-control heat audit on 20 September 2022 showed Ubox singles running hotter under automated slip control than manual launches, prompting plans for better cooling or softer slip targets during long straights.[^92]

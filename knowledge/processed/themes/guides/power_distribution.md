@@ -22,6 +22,8 @@
 - Heavy 90–150 A phase runs are shifting toward XT150 bullets or AS150U anti-spark leads.
   - roughly 0.20 mΩ resistance and spare signal pins
   - so controllers can feed trackers or smart BMS links without extra connectors while keeping voltage drop minimal.[^5]
+- QS8 main leads that regularly see ~350 A peaks now step up to 6 AWG when a single connector carries the pack current; dual-QS8 layouts can stay on paired 8 AWG runs, but the crew keeps warning newcomers not to trust “100 A” house wire marketing on cheap silicone leads.
+  - budget the thicker copper before finalising harness lengths.[^qs8_awg]
 - Treat solder as mechanical filler, not the conductor: twist or fold AWG12 leads to double their contact area before wetting bullets, because even silver-bearing solder conducts two to five times worse than copper.[^6]
 - Builders graduating dual VESC setups beyond 150 A phase are standardising on Amass AS150U anti-spark pairs with 8 AWG tails and XT150/AS150 mains once burst logs show 500 A phase.
   - XT90s are now treated as temporary jumpers to avoid the 200–300 A desoldering failures others recorded.[^7]
@@ -41,3 +43,4 @@
 [^5]: Source: knowledge/notes/input_part000_review.md†L546-L548
 [^6]: Source: knowledge/notes/input_part000_review.md†L548-L549
 [^7]: Source: knowledge/notes/input_part000_review.md†L618-L627
+[^qs8_awg]: Source: data/vesc_help_group/text_slices/input_part005.txt†L24298-L24309

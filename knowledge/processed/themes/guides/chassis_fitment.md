@@ -22,6 +22,8 @@
 - Community salvage runs keep surfacing Dualtron, Etwow, and Xiaomi donor parts.
   - complete with 60 V packs and heavy-duty motors
   - illustrating how friendships and group buys keep premium frames affordable.[^7]
+- SNSC 2.3 rental frames are drying up as fleets pivot to Okai hardware, so builders now scout Brussels, Düsseldorf, and other
+operator auctions to stockpile Ninebot donor chassis before the supply disappears.[^sns_supply]
 
 [^bearing_sizes]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^tire_clearance]: Source: knowledge/notes/input_part000_review.md, line 74.
@@ -37,3 +39,4 @@
 [^5]: Source: knowledge/notes/input_part000_review.md†L517-L517
 [^6]: Source: knowledge/notes/input_part000_review.md†L706-L710
 [^7]: Source: knowledge/notes/input_part000_review.md†L710-L714
+[^sns_supply]: Source: data/vesc_help_group/text_slices/input_part005.txt†L24537-L24551

@@ -13,6 +13,9 @@
 - PETG battery holders crack when printed wet or too fast; veterans dry filament, slow to 80–120 mm/s with 0.6 mm nozzles, run 240–260 °C hotends, and tune retraction/fan settings before trusting cages to hold 21700 cells.[^4]
 - Printing transparent PETG carriers demands ~13 mm/s speeds, minimal cooling, and post-polish to avoid haze.
   - stock Bambu profiles run too hot and cloud the parts immediately.[^5]
+- Shops chasing quick turnaround on fixtures keep praising the Bambu P1S because its enclosed chamber and turnkey slicer profil
+es spit out ABS/ASA spacers, insulation trays, and lighting brackets without weeks of tuning—handy when you need fresh mounts b
+etween test rides.[^bambu_p1s]
 - Stuffing twin 12 AWG leads into QS8 shells is notoriously tight.
   - use plenty of flux, fully wet both conductors, and layer heat-shrink when the plastic lid refuses to latch cleanly.[^6]
 - Keep textured PEI sheets spotless (dish soap or IPA) and hold the bed near 95 °C so PETG grips without warping; too much adhesion still calls for careful part removal despite the texture.[^7]
@@ -30,3 +33,4 @@
 [^6]: Source: knowledge/notes/input_part006_review.md†L194-L194
 [^7]: Source: knowledge/notes/input_part006_review.md†L362-L362
 [^8]: Source: knowledge/notes/input_part006_review.md†L363-L363
+[^bambu_p1s]: Source: data/vesc_help_group/text_slices/input_part005.txt†L24552-L24554

@@ -330,9 +330,18 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 2. **Interconnects & welding** – include copper/nickel, insulation, weld probe maintenance, and PPE alongside the welder cost or rental fees.[^3][^10]
 3. **BMS & protection** – today’s compact boards cap around 500 A continuous; large packs may need dual-BMS or fuse-plus-charge solutions until 700 A hardware lands.[^7]
 4. **Connectors & harnessing** – QS8 connectors, 8–10 AWG silicone wire, and panel mounts are trending upward in price due to tariffs—stockpile early.[^5][^9]
+   - Reference the QS8 harness sizing cheatsheet below before committing to new layouts.[^qs8_chart]
 5. **Copper inventory** – Nickel-copper laminate pricing swung from ~€15 to €45 per roll within weeks and is climbing again alongside copper-strip inflation debates; secure stock ahead of builds or budget fallbacks that rely on pure nickel when costs spike.[^23】[^121]
 6. **Enclosure & structural supports** – CNC plates, 3D spacers, and adhesives trump hot glue for 22 S builds; treat mechanical retention as part of the electrical budget.[^8][^14]
 7. **Labor or outsourcing** – weigh the tooling investment against commissioning vetted builders when customs, shipping, or learning curves threaten schedules.[^11]
+
+#### QS8 Harness Sizing Cheatsheet
+
+| Target Battery Current | Recommended Harness | Installation Notes |
+| --- | --- | --- |
+| ≤300 A burst / 200 A continuous | Dual 8 AWG (≈8 mm² each) into one QS8 | Split load across both cups and keep lead lengths under 300 mm to curb voltage drop.[^qs8_chart] |
+| 350–400 A burst / 250 A continuous | Single 6 AWG (≈13 mm²) or parallel 2×8 AWG per QS8 | Stagger heatshrink and anchor the cable with clamps so the silicone jacket doesn’t lever the solder joint inside shallow decks.[^qs8_chart] |
+| 450–500 A burst / 300 A continuous | Dual QS8s with 4 AWG (≈21 mm²) shared across packs | Route paired leads through opposite deck walls and secure them with printed saddles so short harnesses stay cool and vibration-free.[^qs8_chart] |
 
 ### Supplier Dispute Playbook
 
@@ -749,6 +758,7 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^134]: Source: data/vesc_help_group/text_slices/input_part001.txt†L8927-L8933
 [^135]: Source: knowledge/notes/input_part011_review.md†L352-L359
 [^136]: Source: knowledge/notes/all_part01_review.md†L363-L363
+[^qs8_chart]: Source: data/vesc_help_group/text_slices/input_part005.txt†L24287-L24336
 [^137]: Source: data/vesc_help_group/text_slices/input_part001.txt†L8874-L8897
 [^138]: Source: knowledge/notes/input_part001_review.md†L698-L699
 [^139]: Source: knowledge/notes/input_part000_review.md†L605-L605
