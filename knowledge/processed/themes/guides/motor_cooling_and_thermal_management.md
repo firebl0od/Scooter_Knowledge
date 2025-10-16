@@ -29,6 +29,7 @@
 
 ## Hub Current Guardrails
 - Single Monorim 500 W hubs stay happy around 80 A phase—ideally with ferrofluid—while the crew’s Xiaomi-class builds overheat quickly once they push 65–73 A without battery temperature sensing or keep more than roughly 30–35 A combined draw from paired 12 S packs.【F:knowledge/notes/input_part007_review.md†L18-L19】
+- Gen 4 Ninebot G30 hubs have already squealed and overheated after 30 km of 35 A battery riding in 35 °C ambient without temp sensors on the motor or ESC—treat instrumentation as mandatory before chasing high-phase tunes on commuter hubs.【F:data/vesc_help_group/text_slices/input_part009.txt†L15009-L15026】
 
 ## Micro-Hub Voltage Stress Signals
 - Doubling a Xiaomi/Ninebot commuter from 10 S to 20 S roughly doubles the free-spin speed but repeatedly burns the stock hub from heat saturation, so builders now treat 18 S as the limit unless they add serious cooling or swap motors.【F:data/vesc_help_group/text_slices/input_part011.txt†L19101-L19145】

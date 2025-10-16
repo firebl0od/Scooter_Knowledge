@@ -139,7 +139,8 @@
 [^24]: Illuminated AliExpress switch pods leak voltage into ADC signal lines and require major rewiring to behave.【F:knowledge/notes/input_part010_review.md†L74-L77】
 [^spintend-diodes]: Smart Repair’s wiring log shows the Spintend ADC adapter happily sharing a single lamp when the reverse feed is diode-isolated and paralleled with the headlight output.【F:knowledge/notes/input_part008_review.md†L84-L86】
 [^aux-port]: 🇪🇸AYO#74 warned that the auxiliary port beside the CAN header stays powered until shutdown, so tapping it leaves lights on unless you add a dedicated switch.【F:knowledge/notes/input_part008_review.md†L85-L85】
-[^dash-coexist]: The same build ran the Spintend adapter on ADC1/ADC2 and left the Xiaomi dash on UART without conflicts once wiring was tidied.【F:knowledge/notes/input_part008_review.md†L86-L86】
+[^dash-coexist]: The same build ran the Spintend adapter on ADC1/ADC2 and left the Xiaomi dash on UART without conflicts once wiring was tidied.【F:knowledge/notes/input_part008_review.md†L86-L86】【F:knowledge/notes/input_part009_review.md†L14-L14】
+[^adc-high-side]: VESC ADC harness brake outputs source battery positive, so pair anodes with the function pins and common grounds or isolation diodes to combine lighting modes safely.【F:knowledge/notes/input_part009_review.md†L12-L13】
 [^adc-noise]: Compressing throttle activation windows to ~0.83–1.2 V cleared ADC-trigger noise on Spintend builds; some riders grounded the chassis for extra stability but warn the practice risks shorts if insulation fails.【F:knowledge/notes/input_part014_review.md†L85-L86】
 [^adapter-idle]: Spintend’s adapter manual targets ~0.8 V idle readings—seeing ~3 V idle means the channel is wired wrong and will act like a stuck brake.【F:knowledge/notes/input_part008_review.md†L21846-L21848】
 [^storage-cal]: Re-running the ADC wizard and clearing stale inversion flags resolved Xiaomi brake/throttle glitches after long storage.【F:knowledge/notes/input_part011_review.md†L16211-L16217】
@@ -172,6 +173,7 @@
 
 ## Brake Light Wiring
 - **Understand brake light output behavior.** One rider's 12 V tail lamp powered up via the ADC V2 adapter (ground/12 V/brake leads) but never entered brake mode, underscoring the need to clarify how the board sinks brake current and which firmware settings drive the output.[^brake_light_wiring]
+- **Remember the ADC harness switches positive.** The brake output sources pack voltage and shares ground with the headlight, so tie lamp anodes to the function pins and cathodes to ground; add diodes or resistors when combining tail and brake channels to prevent backfeeding.[^adc-high-side]
 
 ## Source Notes (continued)
 [^little_focer_3v3]: Little FOCer throttle voltage requirements and WOT prevention.【F:knowledge/notes/input_part004_review.md†L18-L18】【F:knowledge/notes/input_part004_review.md†L90-L90】

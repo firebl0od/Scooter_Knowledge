@@ -168,6 +168,7 @@ Structure for each parameter:
 - Some Makerbase 75100 batches under-report real draw by roughly half to one-third; trust verified shunt-calibrated logs from a smart BMS or clamp meter before assuming the GUI shows the truth.[^makerbase-current]
 - Added capacitance on the low-voltage rails can stabilize telemetry on noisy controllers, so confirm current readings only after solving any brownout behaviour.[^makerbase-cap-fix]
 - VESC real-time power traces exaggerate peaks without filtering—compare against SmartDisplay or external meters before assuming a current limit is safe.[^vesc-power]
+- Realtime “Power” readings multiply pack voltage by phase amps, so they overshoot true battery watts until you corroborate with BMS pack current or the logged `l_in_current` channel.【F:data/vesc_help_group/text_slices/input_part009.txt†L9504-L9514】
 - Spintend 85150 builds have plateaued around 150 A battery despite 210–280 A commands, signalling firmware ABS caps or BMS enforcement before hardware saturation—validate those clamps before assuming controller failure.[^spintend-85150-cap]
 
 **How / When to Modify**

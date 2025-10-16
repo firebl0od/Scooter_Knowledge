@@ -68,11 +68,17 @@
 - Brakestuff 3 mm rotors reward precise setup—Magura Saints squeal if runout isn’t near perfect, but Hope Tech 4 V4 calipers on the same discs delivered the strongest stops the testers have measured so far.【F:data/vesc_help_group/text_slices/input_part004.txt†L7401-L7405】【F:data/vesc_help_group/text_slices/input_part004.txt†L7469-L7472】
 - Custom rotor projects now target 203 mm discs cut from 2.3–2.5 mm acid-proof steel, but Magura calipers only clear ≈2.1 mm—budget runout checks and pad clearance before ordering thicker hardware.【F:knowledge/notes/input_part006_review.md†L375-L375】
 - Magura and TRP four-piston setups expect 2.0–2.3 mm rotors, and AliExpress Brembo clones often ship in left/right-specific pairs—verify orientation when ordering for right-hand-drive scooters to avoid fitment surprises.【F:knowledge/notes/input_part006_review.md†L123-L123】
-
 ### Magura MT5e Kits & Setup
 - Community carts keep landing full MT5e front/rear kits around $200, and Jenson USA ships globally via DHL—several riders noted the pricing is better than expected for four-piston hydraulics.[^mt5e-pricing]
 - Burnout-focused builders sometimes leave the MT5e e-brake sensors unplugged or repurpose a single caliper while waiting on replacements; strip non-essential electrical loads when testing to confirm the new hydraulics clear the fork and wiring bundles.[^mt5e-sensors]
 - Inspect bundled levers before trusting them—Jan flagged one aftermarket lever as “the worst” thanks to plastic threads and screws despite pairing with Magura calipers, so budget for higher-quality levers if the kit feels flimsy.[^bad-lever]
+- Rotor slot orientation matters—aim the cooling slots forward on the front wheel, but flip a rear rotor if the slots face the wrong direction after a wheel swap so debris clears properly.【F:data/vesc_help_group/text_slices/input_part009.txt†L12472-L12477】
+- Rim brakes gouged paint and underperformed on Haku’s 20 mph minibike conversion—plan disc-ready wheels or fabricate caliper mounts if you need real stopping power beyond low-speed duty.【F:data/vesc_help_group/text_slices/input_part009.txt†L21004-L21007】
+### Compact Lever & Sensor Options
+- For builds that cannot fit full-size brake levers, the crew recommends child-sized handles with built-in e-brake switches or even spare thumb throttles rewired as brake inputs to keep regen triggers within reach on narrow cockpits.【F:data/vesc_help_group/text_slices/input_part009.txt†L20306-L20327】
+- Wuxing’s budget 115PDD lever closes a simple loop when pulled, making it a drop-in cut-off option for commuters that need electrical braking without hunting premium hardware.【F:data/vesc_help_group/text_slices/input_part009.txt†L20306-L20327】
+- Whenever possible, choose hall-based brake levers over binary switches—especially for small hands—and pair hydraulic setups with magnetic two-pin sensors like the modules 🇪🇸AYO#74 installs on high-power scooters to guarantee consistent regen cues.【F:data/vesc_help_group/text_slices/input_part009.txt†L20536-L20556】【F:data/vesc_help_group/text_slices/input_part009.txt†L20928-L20934】【F:data/vesc_help_group/text_slices/input_part009.txt†L21186-L21187】
+- Riders pushing highway pulls on a single rear brake, such as Shlomozero’s Zero running a lone Nutt caliper plus regen, were urged to upgrade to Magura or Shimano Saint-class dual setups before continuing 100 km/h testing.【F:data/vesc_help_group/text_slices/input_part009.txt†L21214-L21232】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -110,11 +116,14 @@
 ### When to Consider Dual-Caliper Systems
 - Dual-caliper or dual-rotor configurations make sense for racing builds where consistent braking at 100+ km/h justifies the added weight and complexity, but commuter riders below 70 km/h see diminishing returns from the upgrade.[^dual-caliper-when]
 - Matthew's regen-assisted braking setup suggests that well-tuned regenerative braking can supplement or even replace hydraulic brakes for routine speed control, reserving mechanical brakes for emergencies and final stops.[^regen-braking]
+- Don’t run highway speeds on a single rear brake—Shlomozero’s Zero 10X is still on a lone Nutt four-piston with regen, and the crew keeps pushing riders toward Magura or Saint-class dual setups before continuing 100 km/h pulls.【F:data/vesc_help_group/text_slices/input_part009.txt†L21214-L21232】
 
 ## Tire Inflation & Bead Seating
 - Haku's Xiaomi inflator couldn't seat 21×3 tires even with a ratchet strap, reinforcing that serious tubed slick installs demand higher-flow compressors (≥150 PSI, 2+ CFM) or shop assistance to pop beads properly.[^tire-inflation]
 - Roadside swaps go smoother when you break the bead with dish soap, dust tubes in talc or baby powder, and reassemble carefully—the combo stops inner-tube chafing after emergency tire pulls.【F:knowledge/notes/input_part000_review.md†L669-L670】
 - PMT 110/55 R6.5 slicks feel vague at the 2.2 bar sidewall spec; experienced tuners run ~3.5 bar for crisp handling without reported failures.【F:knowledge/notes/input_part006_review.md†L162-L162】
+- Ratchet straps or belts cinched around 11–12″ tubeless tires let portable pumps pop beads once the carcass is preloaded—ideal when you need a trail-side seating trick without a shop compressor.【F:data/vesc_help_group/text_slices/input_part009.txt†L6281-L6333】
+- Installing solid tires goes faster if you heat the tire (boiling water or a microwave for ~10–15 minutes), brace the hub on the floor, lever with two irons, then finish with soapy water so the bead seats evenly.【F:data/vesc_help_group/text_slices/input_part009.txt†L8387-L8398】
 - **Compressor requirements for large tires:**
   - Minimum 150 PSI working pressure for 21×3 and larger tires
   - 2+ CFM flow rate to seat beads quickly before air leaks past unseated tire

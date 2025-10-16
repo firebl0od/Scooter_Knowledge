@@ -11,6 +11,7 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 - Tool and lawnmower packs bring little to the table—Rita waits for ≈36 V before blending, so five-cell modules barely contribute and run dangerously hot under scooter loads.[^tool-pack]
 - Ignore bargain “48 V 62 Ah” bundles—builders calculated that the advertised capacity requires non-existent 21 Ah cells and the included controllers rarely survive 48 V operation.[^ali48]
 - Delta-wound 10 S builds already touch ~55 km/h and pull 50–100 A spikes; one rider logged 91 km/h on 16 S before the stock controller died, so plan VESC swaps or limit OEM boards to ≈15 S when chasing top speed.【F:knowledge/notes/input_part000_review.md†L229-L230】
+- Xiaomi-class ESCs get flaky above 12 S—GABE’s 13 S conversion tripped repeatedly until he rebuilt it as a 12 S 6 P pack, trading headline voltage for reliable commuting.【F:data/vesc_help_group/text_slices/input_part009.txt†L14989-L14998】
 
 ## 2. Hardware Pre-Flight Inspection
 | Checkpoint | Requirement | Notes |

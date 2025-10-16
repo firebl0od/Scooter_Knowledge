@@ -8,6 +8,7 @@
 
 ## Long-Range Riding Benchmarks
 - Noname logged an 18-hour Appalachian ride covering roughly 150 miles at 50 mph bursts, noting the VESC stayed cool and demonstrating that high-capacity packs (likely 10+ kWh class given the distance) enable extended touring when thermal management is dialed in.[^appalachian]
+- Yamal squeezes about 100 km from a 40 Ah pack by planning two 10 A charge stops each way on weekend tours and now considers a 20 A fast charger plus a spare pack the key upgrades for quicker turnarounds between legs.【F:knowledge/notes/input_part009_review.md†L325-L325】
 - Pack sizing for 150+ mile rides typically requires 7–10 kWh or more depending on terrain, speed, and rider weight; builders planning tours should log Wh/mi consumption during shorter test rides to estimate realistic range before committing to long routes.[^pack-sizing]
 - Mirono’s 3D-printed deck extender now houses 260 cells (~15 S 17 P) to chase 120 km coastal rides, while the group prototypes cargo trailers for hauling auxiliary batteries, logging ~2 A at 36 V from 80 W folding solar panels during scouting runs.[^deck-extender]
 - Artem’s Xiaomi/Ninebot controller shootout underscores tuning impact on Wh/km: the stock 52 V 13 Ah square-wave build burned ~26 Wh/km flat out, his dual-motor VESC swap held ~22.5 Wh/km at higher speeds, and a sine-modulated Vsett managed ~17 Wh/km cruising 25–35 km/h on a 676 Wh pack.【F:knowledge/notes/input_part000_review.md†L486-L489】
@@ -26,6 +27,7 @@
 2. **Communicate charge rate expectations.** Inform station operators or fellow users when drawing only 2–3 A for safety testing versus full-rate charging to avoid confusion about bay availability.[^charge-rate]
 3. **Plan for single-handle sessions.** Budget extra time when touring in groups, as most app-based systems won't release multiple handles simultaneously from the same account.[^app-locks]
 4. **Monitor thermal margins.** Long charging sessions at high rates (≥6 A per pack) can heat cells and BMS hardware, so log temperatures and adjust charge current if ambient temps exceed 30 °C or packs show elevated thermal readings.[^thermal-charging]
+5. **Confirm facility headroom before promising fast turns.** Typical European three-phase residential feeds offer roughly 16 A per leg (~11 kW total), so 40 C “minutes-long” home charges still demand industrial service upgrades or external venues.【F:knowledge/notes/input_part009_review.md†L349-L349】
 
 ### Adapter & Hardware Recommendations
 - **J1772 to scooter pack adapter:** Verify pin compatibility, voltage range (most scooters charge at 48–100 V), and current rating before purchasing or fabricating custom adapters.

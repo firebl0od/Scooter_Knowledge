@@ -20,6 +20,8 @@
 - Keep the platform in its comfort lane: riders still rank Dualtron Thunder geometry for >150 km/h sprints, while NAMI frames shine for long-range and off-road duty when paired with good dampers instead of chasing absolute top speed.[^3]
 - Budget steering dampers snap when preloaded for race pace; invest in motorcycle-grade Bitubo or similar hardware before upping currents and tire width.[^10]
 - Aftermarket shocks rarely match the Viper’s leverage curve—most MTB units feel nearly solid, so owners are still hunting purpose-built dampers instead of relying on drop-in swaps.【F:knowledge/notes/input_part006_review.md†L136-L136】
+- Aftermarket shocks rarely match the Viper’s leverage curve—most MTB units feel nearly solid, so owners are still hunting purpose-built dampers instead of relying on drop-in swaps.【F:knowledge/notes/input_part006_review.md†L97-L97】
+- Track chassis revisions before trusting hand-me-down frames: V1 “Pringle” necks shipped without reinforcement, mid-generation updates added a metal battery box plus thicker side plates, and the latest “Tesla reinforcement” necks have survived 20 k+ miles once braced—inspect welds before pushing highway power.【F:knowledge/notes/input_part009_review.md†L385-L385】
 - Fabrication escalates quickly—22 S 10 P hybrids inspired by Rion builds required fork machining to clear 70H hubs and 3 mm rotors, so plan machine time before ordering oversized drivetrains.[^11]
 - Kaabo fork swaps remain largely cosmetic: the community confirmed 70 H hubs fit but 75 H is doubtful without extra machining, so most riders stick with stock hardware unless aesthetics trump effort.[^kaabo-swap]
 
