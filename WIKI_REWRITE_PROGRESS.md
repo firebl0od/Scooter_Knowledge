@@ -69,14 +69,10 @@ This project transforms 72 technical knowledge files from dense, expert-focused 
    - Formatting patterns
    - Quality checklist
 
-2. **wiki_rewrite_guide.md** (/tmp, working doc)
-   - Initial planning document
-   - Implementation guidelines
-
-3. **wiki_rewriter.py** (/tmp, analysis tool)
-   - Analyzes files to track progress
-   - Identifies rewrite priorities
-   - Generates status reports
+2. **WIKI_REWRITE_PROGRESS.md** (this document)
+   - Progress tracking
+   - Status reports
+   - Completion recommendations
 
 ## Remaining Work
 
@@ -158,7 +154,7 @@ Every rewritten file verified to contain:
 
 ### Option 1: Continue Systematic Rewrite (Full Quality)
 - Continue current approach file-by-file
-- Estimated: 120-180 hours remaining (62 files × 2-3 hours)
+- Estimated: 124-186 hours remaining (62 files × 2-3 hours each)
 - Pro: Consistent high quality throughout
 - Con: Significant time investment
 
