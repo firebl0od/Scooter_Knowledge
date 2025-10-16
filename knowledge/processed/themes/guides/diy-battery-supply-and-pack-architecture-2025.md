@@ -11,6 +11,7 @@
 
 ## Cell & Component Sourcing Reference
 - **Keep the high-power roster current.** Community testers just flagged EVE 40PL/50PL, Molicel P50B, and BAK 45D as the modern reference set for 300 A+ packs—refresh comparison sheets with Mooch’s latest lab data before committing to older chemistries.【F:knowledge/notes/input_part013_review.md†L523-L524】
+- **Log per-cell sag realities.** LG MJ1 parallels started drooping once draws topped ~7–10 A per cell, whereas Samsung 35E banks held voltage better at the same load—document chemistry limits before promising 16 S commuters big torque numbers.【F:knowledge/notes/input_part003_review.md†L121-L121】
 | Component | EU Pricing & Availability | North America Reality | Immediate Actions |
 | --- | --- | --- | --- |
 | **EVE 50PL 21700** | Salvaged Stark Varg modules deliver grade-A cells for ~1 € each after labor; retail bulk hovers 1.5 € with logos shaved yet still grade A.【F:knowledge/notes/input_part014_review.md†L35-L36】 | ~$9 per cell retail with looming import duties.【F:knowledge/notes/input_part014_review.md†L36-L38】 | Form cooperative buys, pre-clear customs brokers, and reserve storage for incoming pallets. |
@@ -84,6 +85,8 @@
 - Cap fast-charging on 10 P Samsung 40T commuter packs around 20 A (~1.6 kW); experienced builders call 50 A sessions abusive for both the cells and typical household circuits despite the 60 A discharge rating.【F:knowledge/notes/input_part010_review.md†L50-L52】
 - 95 A EV charger demos look impressive, but a 20 S6 P pack already draws ~6.3 kW at that rate—treat 1 C as the ceiling and watch cell temps if you experiment beyond it.【F:knowledge/notes/input_part010_review.md†L245-L246】
 - Telecom-derived chargers (Huawei 60 A bricks around US$340 or touchscreen 50 A models near US$260) remain repackaged rectifiers—verify cooling, isolation, and safety claims instead of trusting the marketing gloss.【F:knowledge/notes/input_part010_review.md†L247-L247】
+- Treat telecom 100 V bench supplies as bare rectifiers until you add earth bonding and precharge—the community now grounds the chassis and energises AC before connecting packs to avoid arcs and tingling housings.【F:data/vesc_help_group/text_slices/input_part003.txt†L18612-L18636】
+- Nudging Xiaomi/Ninebot chargers toward 61.5 V via trim pots demands upgraded output capacitors and manual cut-off monitoring; these CC bricks never stop automatically at the higher voltage.【F:data/vesc_help_group/text_slices/input_part003.txt†L18653-L18671】
 
 ## Structural & Safety Fundamentals
 - Never rely on hot glue alone; use 3D-printed spacers or structural adhesives so weld strips don’t carry mechanical load during transport or crashes.【F:knowledge/notes/input_part014_review.md†L172-L172】

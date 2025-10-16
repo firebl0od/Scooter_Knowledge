@@ -21,6 +21,7 @@
 - **Plan for roadside inspections.** Finnish police are confiscating scooters that exceed 25 km/h without registration and even checking bulb part numbers, while southern EU riders dodge €8–9 k fines by programming low-power “police modes” and swapping to halogen BA9S lamps to satisfy moped rules.【F:knowledge/notes/input_part005_review.md†L225-L227】
 
 ## Post-Ride Water Diagnostics
+- **Run the emergency dry-out drill immediately.** Kill power, open the deck, and disconnect the battery as soon as water reaches board level; forced air, alcohol rinses, and fresh desiccant beat passive “rice bag” drying before you reseal seams with silicone.【F:data/vesc_help_group/text_slices/input_part003.txt†L337-L345】【F:data/vesc_help_group/text_slices/input_part003.txt†L345-L346】
 - **Track regen-related faults.** Error 21 after a panic stop usually points to a cooked data line, not a dead BMS—bench-test packs on a known-good scooter before blaming Happy BMS or Rita.【F:knowledge/notes/denis_all_part02_review.md†L368-L369】
 - **Recognize Rita\'s behavior.** External packs lose regen while full by design; bleed a few percent off the top and confirm series-count settings before chasing wiring ghosts.【F:knowledge/notes/denis_all_part02_review.md†L374-L375】
 - **Keep electronics dry when folding.** Monorim and Mi 3 dashboards that auto-boot after rain usually revive after 99 % isopropyl baths and patient drying—never fold a wet stem onto the deck where water can pool around the button PCB.【F:knowledge/notes/denis_all_part02_review.md†L455-L455】

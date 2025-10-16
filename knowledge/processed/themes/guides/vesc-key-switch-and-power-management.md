@@ -4,6 +4,7 @@
 - VESC controllers keep the logic rail live whenever the pack is connected—true power-off requires BMS latching, loop keys, or external contactors, not just VESC's 5 V enable pin.[^vesc_latch]
 - Keyed switches hung on the K-line ignition leads have exploded because they're rated for milliamps, not battery-level current—size switches properly or move them to DC/DC enable lines instead of main power.[^antispark_fail]
 - Spintend singles lack a true latch rail—the MOSFET stack acts as the "switch," so riders need proper upstream contactors rather than relay hacks on low-voltage wiring.[^spintend_latch]
+- Treat the pack-side switch as a latching device and drive lighting loads through relays—Spintend/Flipsky enable leads source 12 V and will back-feed accessories if you hang them directly off the harness.【F:knowledge/notes/input_part003_review.md†L101-L101】【F:knowledge/notes/input_part003_review.md†L128-L128】
 
 ## Power Architecture Understanding
 
@@ -28,6 +29,7 @@
 - **Size switches for actual current.** If hanging switches on ignition lines, verify they're rated for the actual current path—most "anti-spark" switches are only rated for signal-level currents.
 - **Use DC/DC enable or BMS control.** The safest approach is to switch the DC/DC enable pin or use smart-BMS control rather than trying to interrupt main battery power with undersized switches.
 - **External contactors for true power-off.** For genuine power isolation, use loop keys (XT90S), smart-BMS latching, or external contactors rated for the pack voltage and current.
+- **Latch the main feed, not the logic rail.** Momentary toggles forced riders to hold the key closed; a real latching switch keeps VESC hardware powered without timing games.【F:knowledge/notes/input_part003_review.md†L101-L101】
 
 ## ANT BMS Precharge Considerations
 
@@ -46,6 +48,7 @@
 1. **Document baseline idle draw.** Expect roughly 20 mA standby current with latching power buttons off—any illuminated LED signals a wiring fault.
 2. **Use proper anti-spark connectors.** XT90S loop keys or AS150 anti-spark variants provide reliable make/break without arcing on high-current connections.
 3. **Verify polarity before power-up.** Fresh Ubox units have shipped with reversed Bluetooth harnesses, killing modules instantly—check continuity before energizing boards.
+4. **Relay heavy lighting loads.** Spintend light clusters source 12 V; run headlamps and fans through a DC/DC and relay so they actually shut off when the pack key opens.【F:knowledge/notes/input_part003_review.md†L128-L128】
 
 ### Safety Checklist
 1. **Never use ADC lines for power switching.** Breaking ADC throttle lines can cause runaway acceleration—only switch DC/DC enable or use e-brake failsafes.

@@ -14,6 +14,7 @@
 - Random throttle surges continue to surface on 85 V/240 A, 100 V/100 A, and even v2 85 V/250 A units, so budget time for filtering, shielded cabling, and harness inspections when diagnosing jitter complaints.[^17]
 - Spintend sunset the 85/250 and now routes the 85/240 through a New Jersey hub for U.S. buyers—stock spares if you rely on the higher-rated board because the replacement is easier to source but capped a touch lower.[^logistics_update]
 - EU buyers still shoulder VAT and customs surprises on accessories—expect €30 invoices on €20 parcels until Spintend rolls IOSS collection or a prepaid tax option into checkout.【F:data/vesc_help_group/text_slices/input_part001.txt†L20979-L21033】
+- Upcoming aluminum-core singles are on the roadmap: expect fdbl MOSFET options, thicker copper, SH8/6 AWG support, and firmware-locked tiers up to 300 A phase / 150 A battery once production lands.【F:data/vesc_help_group/text_slices/input_part003.txt†L12321-L12355】【F:data/vesc_help_group/text_slices/input_part003.txt†L12890-L12957】
 - V2 thermal telemetry reads hotter than V1 under the same rides because of NTC placement and extra phase current; reverting to stock pads outperformed fancy Thermal Grizzly swaps, so fix clamp pressure before chasing exotic materials.[^v2_ntc]
 - The public 5.3 firmware drop split testers—some love the smoother acoustics, others are holding 5.2 until side-by-side runs prove the update isn’t hiding regressions, so archive binaries and logs before flashing.[^fw53_release]
 - V2 boards ship with self-reset fuses on every 5 V/12 V/3.3 V rail, but VESC Tool 3.01 still crashes during ADC calibration if 5 V throttles land on the STM32 input—stick to 3.00/5.2 firmware or add dividers before sealing decks.【F:data/vesc_help_group/text_slices/input_part001.txt†L8424-L8453】
@@ -42,6 +43,12 @@
 | Single-board prototype | 16–22 S (target) | Paolo estimates ≈150 A battery on flat roads once firmware stabilises | Current revision is ~60 mm wide without the case, adds capacitance versus a Nucular 12F, and still needs external sealing before living in wet decks.[^single-proto] |
 
 Spintend now colour-codes dual Ubox trims—red prioritises current for commuter tunes, purple adds TVS protection for safer 18 S work, and black pairs with 22 S builds so long as e-brake regen is capped under ~80 V—so log the shell colour before assuming voltage headroom.【F:knowledge/notes/input_part003_review.md†L223-L223】
+
+## Spin-Y Control Ecosystem
+- Builders continue to ask for clearer Spin-Y wiring and voltage diagrams; Spintend responded with linked manuals, promised improved graphics, and is iterating clamp geometry for 22.2 mm bars with shims and relief cuts.【F:data/vesc_help_group/text_slices/input_part003.txt†L3006-L3084】【F:data/vesc_help_group/text_slices/input_part003.txt†L3231-L3249】
+- Batch-2 firmware adds OEM controller dead-zone compensation, one-minute calibration, and steadier cruise behaviour, consolidated through a new Spin-Y Facebook group.【F:data/vesc_help_group/text_slices/input_part003.txt†L9349-L9352】
+- The Gen2 throttle roadmap doubles useful throw (≈65° drive / 35° regen), adds internal cruise wiring, dead-zone compensation for legacy controllers, longer harness options, and forthcoming textured wheels sized for gloved riders.【F:data/vesc_help_group/text_slices/input_part003.txt†L11768-L11824】【F:data/vesc_help_group/text_slices/input_part003.txt†L11972-L12033】
+- Adding a 1 mm spacer between magnets and hall sensors removed saturation and shrank dead zones by roughly two-thirds, reinforcing the need for updated calibration guides and retrofit instructions.【F:data/vesc_help_group/text_slices/input_part003.txt†L12202-L12209】
 
 ## Operating Guardrails
 ### Battery & Phase Current Targets
@@ -152,6 +159,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 ## Commissioning & Diagnostics Checklist
 1. **Audit firmware limits before tuning.** Confirm the phase ceiling in VESC Tool; early 85/200 units stall at ~300 A until reflashed, and Lite boards mirror duals so mismatched limits skew traction control.[^12][^5]
 2. **Flash vendor firmware and let auto-detection pick the hardware profile.** Spintend-supplied BINs and automatic R3 detection remain the safe path; forcing V6 targets or manual overrides has bricked controllers on the bench.[^46]
+   - The phone app hides alternative firmware once connected—enable “Show non-default firmware” on desktop builds or compile binaries locally before flashing bootloaders over USB.【F:data/vesc_help_group/text_slices/input_part003.txt†L18185-L18336】【F:data/vesc_help_group/text_slices/input_part003.txt†L18775-L19035】
 3. **Validate motor detection results.** Limited-edition hubs have returned ~270 A recommendations despite ~200 A safe limits, and some Ubox V2 units only auto-detect ~88 A versus ~135 A on V1—log outputs and set limits manually when they drift.[^47][^48]
 4. **Disable regen during PSU testing.** Spinning up field-weakening on a bench supply can over-voltage the source; keep regen off until testing on a full battery stack.[^49]
 5. **Capture fault codes before power-cycling.** If ABS overcurrent trips during early rides, dump VESC `faults` logs before rebooting so you can correlate spikes with wiring or observer changes.[^50]
@@ -161,6 +169,8 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 9. **Verify accessory wiring.** Keep lighting loads within the ADC bridge limits and route any kill-switch expectations through smart-BMS logic or physical loop keys.[^3]
 
 ## Procurement & Support Signals
+- Warranty debates flared when a rider refused to return hardware; moderators reiterated that Spintend covers repairs with paid return shipping and contrasted the turnaround with slower Rion/Tronic replacements before issuing a ban.【F:data/vesc_help_group/text_slices/input_part003.txt†L2209-L2223】【F:data/vesc_help_group/text_slices/input_part003.txt†L231-L297】
+- Storefront reputation took a hit after community members spotted deleted negative Spin-Y reviews despite active Telegram support—set expectations around official response cadence before promising service levels.【F:data/vesc_help_group/text_slices/input_part003.txt†L5746-L5754】
 - ExpressLine DDP shipments are clearing customs in about a week for EU buyers, yet import offices still assess duties despite the “duty paid” label.[^14]
 - Regional mark-ups can double MSRP—Israeli riders now see ~$575 street pricing, pushing them toward direct factory orders or alternative brands when budgets are tight.[^14]
 - Sellers occasionally under-declare controller value (e.g., listing €160 modules at €55); while it trims duties, buyers carry the audit risk if customs spot the mismatch.[^14]
@@ -176,7 +186,14 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Diagnose ADC rail failures before reflashing—throttle noise can short the 3.3 V rail to ground and kill STM32 ADC inputs, so check resistance between 5 V/3.3 V and ground, then attempt MCU swaps only if you own hot-air gear and magnification.[^adc_short]
 
 ## Roadmap Signals & Known Pain Points (Aug–Oct 2022)
+- **Copper single production cadence.** Artem is finishing roughly 100 pre-order units (≈500 Spin-Y throttles) with seven-wire looms, copper spreaders, and onboarding media while planning a modular “integrator” accessory board that preserves the 3 A 12 V rail for riders who depend on onboard lighting.【F:data/vesc_help_group/text_slices/input_part003.txt†L2-L55】【F:data/vesc_help_group/text_slices/input_part003.txt†L372-L391】
+- **Packaging feedback loop.** Community teardown photos pushed for slimmer housings, vertical MOSFET stacks, deck-bolt mounting, and even aluminum alternatives under a $119 target price to keep harness runs short without sacrificing cooling.【F:data/vesc_help_group/text_slices/input_part003.txt†L348-L392】【F:data/vesc_help_group/text_slices/input_part003.txt†L2233-L2364】【F:data/vesc_help_group/text_slices/input_part003.txt†L2717-L2746】
+- **Thermal rethink in progress.** Long pulls still drive copper singles past 80 °C, so testers are trialling graphite pads, potting gaps, and direct-mount heatsinks while waiting on the promised aluminum PCB revision to mitigate galvanic corrosion risk.【F:data/vesc_help_group/text_slices/input_part003.txt†L4089-L4128】【F:data/vesc_help_group/text_slices/input_part003.txt†L4500-L5176】【F:data/vesc_help_group/text_slices/input_part003.txt†L5443-L5468】
+- **FET-sourcing strategy.** Spintend plans parallel 80 V “performance” and 100 V “headroom” trims for refreshed singles, keeping the removable integrator board optional so the accessory rail stays intact for early adopters.【F:data/vesc_help_group/text_slices/input_part003.txt†L6860-L6867】
+- **Aluminum enclosure watch-outs.** Reports of metal shavings inside Flipsky aluminum housings have Spintend collecting QA incidents before copying the material change for future singles.【F:data/vesc_help_group/text_slices/input_part003.txt†L6873-L6878】
+- **Spin-Y batch-two refresh.** Shipments paused to add logarithmic throttle curves, 0.05-step calibration cues, internal cruise control, and wheel-clearance tweaks before resuming sales at the €59 intro price.【F:data/vesc_help_group/text_slices/input_part003.txt†L7540-L7567】【F:data/vesc_help_group/text_slices/input_part003.txt†L8580-L8664】
 - **Production cadence:** Artem’s August 2022 status update confirmed 500 Spin-Y throttles were moving through hand-soldering while copper-backed singles entered onboarding—expect staggered deliveries and keep install guides handy for first-time buyers.[^2022_prod_update]
+- **Spin-Y firmware refresh:** Batch-two plans locked in logarithmic throttle curves, 0.05-step calibration, internal cruise logic, wider wheel clearances, and tighter metal tolerances, with Artem reminding testers to verify NTC sensors in boiling water before deployment.【F:knowledge/notes/input_part003_review.md†L84-L84】
 - **Traction-control heat spikes:** September test logs showed traction-control pulls heating Ubox singles faster than manual throttle launches; Artem said the next single would ship in 80 V and 100 V MOSFET flavours until the integrator board is ready, so plan cooling plates before flashing aggressive slip control.[^tc_heat]
 
 ## Late-2022 Iteration Highlights
@@ -188,6 +205,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - **Traction-control caution.** Rosheee’s rear Tronic fire after a traction-control slip renewed guidance to dial phase/battery limits and prefer front-only slip control when experimenting on Spintend duals.[^tc_failure]
 - **ADC accessory budget.** Builders toasted the ADC adapter by adding 12 V fans to the board; treat it as a signal bridge and keep heavier loads on dedicated converters.[^adc_overload]
 - **Diagnostics & rescue.** Mirono mapped the single’s unpopulated SWD pads to STM32 pins 46/49 and reminded rescuers to clean flux before micro-soldering, while SmartDisplay testers layered Waze alerts over Spintend CAN data for richer nav dashboards.[^stlink_waze]
+- **Mind firmware tooling.** VESC Tool 6.0.11 mobile flags “limited mode” on 5.3 firmware until you USB-flash the 6.0 bootloader and reload vendor bins—keep desktop access handy when mobiles hide the packages.【F:knowledge/notes/input_part003_review.md†L143-L143】
 
 ## Source Notes
 [^1]: Makerbase/Flipsky QC issues versus Spintend reliability, plus reports that Ubox controllers coast through BMS trips instead of locking wheels.【F:knowledge/notes/input_part005_review.md†L17-L20】【F:knowledge/notes/input_part008_review.md†L31-L36】

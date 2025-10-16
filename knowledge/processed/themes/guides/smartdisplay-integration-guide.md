@@ -40,6 +40,8 @@
 ## Feature Set & Navigation
 - **Integrated GPS + Nav Prompts.** The 3.5 in unit houses turn-by-turn guidance to keep phones off the bars; builders cite 10 × 6.5 cm packaging as a sweet spot for 100 km/h scooters.[^8]
 - **Waze Overlay.** Beta firmware already overlays Waze police alerts directly on the dashboard, foreshadowing richer third-party integrations once CAN message catalogs stabilize.[^9]
+- **Active dev logs map the roadmap.** Weekly SmartDisplay diaries document layout experiments, overlay prototypes, and the Waze alert workflow so installers can reproduce CAN dashboards without waiting on formal docs.【F:data/vesc_help_group/text_slices/input_part003.txt†L11850-L11955】【F:data/vesc_help_group/text_slices/input_part003.txt†L26600-L26606】
+- **Production gearing up.** Koxx shared assembly photos and UI previews while Rage Mechanics prepared commercial support, signalling that plug-in TFT units with temperature alarms and custom icon packs are nearly ready for wider release.【F:data/vesc_help_group/text_slices/input_part003.txt†L11046-L11048】【F:data/vesc_help_group/text_slices/input_part003.txt†L11852-L11872】
 - **Theme editor & live switching.** Rage Mechanics now ships a web-based theme designer that can push new skins over Wi‑Fi and swap layouts in real time on the scooter, making it easier to brand race fleets or share telemetry presets.【F:knowledge/notes/input_part010_review.md†L312-L314】
 - **Telemetry Dashboards.** Race teams log throttle position, per-motor phase amps, traction-control response, and segment comparisons from SmartDisplay sessions—handy for coaching and driver swaps.[^10]
 - **Fast boot sequence.** Unlike Raspberry Pi-based dashboards that slog through a 45–95 s OS boot, SmartDisplay’s MCU firmware brings up telemetry in about 10 s once CAN current initializes.[^boot]
@@ -57,6 +59,7 @@
 
 ## Telemetry Interpretation Notes
 - SmartDisplay power numbers trend ~6–7 kW below VESC RT Tool because it calculates from CAN-reported battery amps × voltage without VESC’s instantaneous filtering; align on one source before publishing specs.[^10]
+- Bench telemetry already logged 332 A / 21.4 kW peaks from a 20 S6 P Molicel 40T pack with heavy sag (~55 A per parallel), so capture per-parallel stress in your logs when validating high-power bursts.【F:data/vesc_help_group/text_slices/input_part003.txt†L21249-L21283】
 - Phase-current overlays highlight traction-control activity (e.g., 189 A front vs. 317 A rear mid-corner) and help tune duty-cycle ramps after firmware changes.[^10]
 
 ## Safety, Service & Troubleshooting
