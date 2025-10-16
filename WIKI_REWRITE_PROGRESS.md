@@ -6,18 +6,24 @@ This project transforms 72 technical knowledge files from dense, expert-focused 
 
 ## Current Status
 
-**Completed**: 19 of 72 files (26.4%)
-**Remaining**: 53 files (73.6%)
-**Estimated Time for Remaining**: ~106-159 hours (53 files × 2-3 hours each)
+**Completed**: 25 of 72 files (34.7%)
+**Remaining**: 47 files (65.3%)
+**Estimated Time for Remaining**: ~94-141 hours (47 files × 2-3 hours each)
 
-## Completed Files (19/72)
+## Completed Files (25/72)
 
-### Guides (5/44)
+### Guides (11/44)
 1. ✅ xiaomi_fold_and_pole_repair.md
 2. ✅ 3d-printing-and-materials.md
 3. ✅ daly-bms-waterproofing.md
 4. ✅ accessories.md
 5. ✅ lithium_shipping_compliance.md
+6. ✅ throttle_brake_signals.md
+7. ✅ rita-external-battery-integration.md
+8. ✅ parallel-battery-regen-integration.md
+9. ✅ ninebot-g2-max-vesc-conversion.md
+10. ✅ xiaomi_clone_upgrade_caveats.md
+11. ✅ varla-zero10x-ubox-upgrade-brief.md
 
 ### Brand Dossiers (14/28)
 1. ✅ medhi_cantin.md (already had overview)
@@ -219,11 +225,11 @@ Plus supporting documentation:
 
 ## Conclusion
 
-The wiki-style transformation significantly improves readability while maintaining technical accuracy. 19 files completed demonstrate the approach works well. Remaining 53 files represent substantial work but will deliver consistent, professional documentation throughout the knowledge base.
+The wiki-style transformation significantly improves readability while maintaining technical accuracy. 25 files completed demonstrate the approach works well. Remaining 47 files represent substantial work but will deliver consistent, professional documentation throughout the knowledge base.
 
 The transformation follows documented patterns and can be continued systematically or scaled through community involvement based on project priorities and resources.
 
-**Current Progress: 26.4% complete**
-**Momentum: Strong**
+**Current Progress: 34.7% complete** (up from 26.4%)
+**Momentum: Strong** - 6 files added in latest session
 **Quality: High**
 **Knowledge Preservation: 100%**
