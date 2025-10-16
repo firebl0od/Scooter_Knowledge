@@ -4,6 +4,8 @@
 - Community veterans now default to Spintend when budget Makerbase/Flipsky boards melt down—the Ubox lineup shrugs off BMS trips and keeps scooters rolling where 75xxx-class ESCs lock wheels or self-destruct under the same abuse.[^1]
 - Ubox V2 hardware now ships with resettable fuses on each auxiliary rail, isolated 3.3 V logic, dedicated 12 V lighting/horn/brake outputs, a fan header, CAN power jumpers for 4WD builds, and an external NRF/BLE slot—removing the need for firmware hacks to stay under the STM32’s logic ceiling.【F:knowledge/notes/input_part000_review.md†L502-L504】
 - New ALU batches squeeze dual 10 AWG battery leads into a single 8 mm bullet and ship accessory pigtails on tiny keyed connectors, so installs now budget proper crimpers, heavy soldering, or larger bullets to avoid cooking the joint during assembly.【F:knowledge/notes/input_part006_review.md†L107-L107】
+- NetworkDir even steers budget dual-motor Xiaomi builds toward paired Ubox controllers because Flipsky/Makerbase 75100s keep dying after pack cut-offs—dual Lites have become the reliable mid-tier choice when riders can’t stretch to premium controllers.【F:knowledge/notes/input_part010_review.md†L32-L33】
+- The legacy dual Ubox remains a 75 V-class workhorse that comfortably feeds roughly 150 A phase per side, while the refreshed single 85 V/240 A shell ships with 8 AWG outputs, reversible exits, and pricing below the outgoing 250 A block—teams are already mixing the new singles with older duals on tight decks.[^dual-75v]
 - Riders note that even when undersized hubs fail catastrophically, Spintend’s 100 V Lite shrugged off the shorts—GABE killed three commuter motors in two days without harming the controller, underscoring the brand’s resilience to motor-side faults.[^motor-survival]
 - Yamal has already logged roughly 2,500 km hammering 200 A battery/phase on a Spintend build without failures, highlighting how meticulous wiring and conservative validation keep the hardware alive even for heavy daily use.【F:knowledge/notes/input_part011_review.md†L759-L765】
 - Even with the shared “no limits” firmware, single Ubox installs treat ~80 A battery and 130 A phase as the sensible ceiling—the hardware clamp near 300 A still applies, so cooling and telemetry matter more than chasing the unlocked config file.[^40]
@@ -26,6 +28,7 @@
 - Product management is leaning heavily on group feedback—including Russian-language experimenters—to steer new scooter-specific screens and throttle accessories.[^community_feedback]
 - The single-channel preview shares twin-Ubox DNA but still needs active cooling above ~30–50 A; expect ≈100 A with a fan, Bluetooth sold separately, and ~$150 pricing once anodised cases ship.[^single_preview]
 - Twelve-FET Spintend stacks are still marketed at 400 A but field logs keep them around ~250 A battery / 450 A phase with real heatsinking—riders treat claims of 400 A per side as marketing bravado rather than a daily target.【F:knowledge/notes/input_part006_review.md†L188-L188】
+- ExpressLine DDP orders are landing in Germany within about a week, but riders still see surprise import invoices even on “duty paid” shipments—budget customs padding despite the expedited route.【F:data/vesc_help_group/text_slices/input_part010.txt†L17340-L17348】
 - EU buyers still shoulder VAT and customs surprises on accessories—expect €30 invoices on €20 parcels until Spintend rolls IOSS collection or a prepaid tax option into checkout.【F:data/vesc_help_group/text_slices/input_part001.txt†L20979-L21033】
 - DHL eCommerce has stranded multiple RMAs for five weeks and returned singles with recurring capacitor failures, so veteran buyers now film unboxings and pay for FedEx or AliExpress Standard with prepaid VAT despite the surcharge.【F:knowledge/notes/input_part000_review.md†L505-L509】
 - The V2 sales launch kept MSRP at $300 but deleted onboard Bluetooth to avoid metal-deck interference, making external dongles mandatory for sealed builds and signalling that future cases will stay radio-transparent.【F:knowledge/notes/input_part000_review.md†L562-L563】
@@ -77,6 +80,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 ### Battery & Phase Current Targets
 - Stock firmware keeps 85‑250 hardware near 150 A battery / 200 A phase continuous, with seasoned tuners only flashing no-limit binaries once motors and cooling can stomach 400 A phase spikes.[^9]
 - Real-world logs show dual Lite builds requesting 160/140 A phase yet barely topping 100 A peaks, underscoring the need to capture data from both controllers before chasing higher numbers.[^10]
+- Dualtron GT riders running Ubox Lite hardware corroborate those peaks: 55–60 A battery per motor with 160/140 A phase commands only logged ~100 A, offering a realistic ceiling for keeping stock hubs alive at highway pace.【F:knowledge/notes/input_part010_review.md†L66-L67】
 - Solo commuters copying the shared 300 A hardware-limit BIN still hold tunes near 80 A battery / 130 A phase until they validate heatsinking and airflow; the file only removes software clamps—it does not grant extra headroom.[^40]
 - Veterans cap single-channel phase current around 115–125 A until more telemetry lands, noting that even dual Ubox stacks rarely stay clean above ~130 A without short phase leads and strong thermal coupling.【F:knowledge/notes/input_part000_review.md†L380-L380】
 - Early field testing shows MOSFET temps climbing to ~50 °C within seconds at 50 A battery draw before pack protection intervenes, so validate heatsinking before raising thermal cutbacks above stock.[^rapid_heat]
@@ -185,6 +189,7 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 - Treat the €140 “Spintend” AliExpress storefront as a likely scam—new account, no replies, and a bill of materials that already costs more than the asking price.【F:knowledge/notes/input_part000_review.md†L348-L348】
 - Single-channel boards still ship without Bluetooth; riders bolt on external modules (shared over CAN) or email Spintend for a forgotten dongle, and the CAN harness ships with paired singles so accessories live on the master controller.【F:knowledge/notes/input_part000_review.md†L333-L334】
 - Spintend’s 500 W water pump supplier stalled during lockdowns; 350 W replacements run hot and sparked bait-and-switch complaints, so builders now chase alternative pumps or budget for active cooling redesigns.【F:data/vesc_help_group/text_slices/input_part002.txt†L2691-L2716】
+- Sellers occasionally under-declare controller value (e.g., listing €160 modules at €55); Paolo’s latest shipment sat in customs for weeks before full duties were applied anyway, so he stopped falsifying invoices despite vendor offers.[^14][^customs-warning]
 - Expect warranty friction on unexplained failures—retailers are already pointing at firmware versions (e.g., 6.05) to deny coverage—so document software builds, logs, and install photos before submitting RMAs.[^19]
 - Spintend’s capacitor bank remains thin for oversized QS hubs; heavy builders increasingly migrate to shunt-sensed platforms (Ennoid MK8, Tronic X12) when repeated gate-driver deaths surface.[^16]
 ## Failure Watchlist & Logging Habits
@@ -226,7 +231,8 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^4]: Dual Ubox 75/100 capabilities and continued 75 V-class usage in race builds.【F:knowledge/notes/input_part010_review.md†L189-L190】
 [^5]: Packaging flexibility and current targets for Ubox Lite singles versus the dual 100/100 chassis.【F:knowledge/notes/input_part010_review.md†L92-L98】
 [^6]: Field logs showing 12‑FET Ubox battery and phase limits when cooled.【F:knowledge/notes/input_part010_review.md†L190-L190】
-[^7]: Details on the revised 85 V/240 A single Ubox with 8 AWG leads and reversible exits.【F:knowledge/notes/input_part010_review.md†L535-L536】
+[^7]: Details on the revised 85 V/240 A single Ubox with 8 AWG leads and reversible exits.【F:knowledge/notes/input_part010_review.md†L202-L203】
+[^dual-75v]: Legacy dual Ubox safe envelope (~150 A phase per side) plus refreshed 85 V/240 A single with AWG 8 leads and reversible exits priced below the retired 250 A block.【F:knowledge/notes/input_part010_review.md†L201-L203】
 [^8]: Early dual 75/100 revisions shipping without populated phase filters.【F:knowledge/notes/input_part005_review.md†L167-L167】
 [^v2_downgrade]: Raphaël confirmed Spintend swapped 4 A Infineon gate drivers for 1.5 A generics and removed the BLE daughterboard on cost-reduced V2 hardware, explaining weaker high-duty performance.【F:knowledge/notes/input_part002_review.md†L129-L132】
 [^single_lid_limit]: The single Ubox enclosure still bolts MOSFETs to the lid, leaving roughly half the thermal mass of the dual case—fans now remind riders it was designed for ~30 A continuous one-wheel builds, not 100 A dual-motor pulls.【F:data/vesc_help_group/text_slices/input_part002.txt†L9689-L9697】
@@ -236,6 +242,11 @@ Spintend now colour-codes dual Ubox trims—red prioritises current for commuter
 [^12]: Firmware-imposed ~300 A phase ceiling on early 85/200 controllers and the risks of flashing unofficial builds.【F:knowledge/notes/input_part007_review.md†L236-L236】
 [^13]: Documented throttle pinout and NRF/Bluetooth layout for Spintend controllers.【F:knowledge/notes/input_part010_review.md†L526-L526】
 [^14]: Shipping timelines, regional price hikes, and customs under-valuation practices affecting Spintend buyers.【F:knowledge/notes/input_part010_review.md†L179-L179】【F:knowledge/notes/input_part010_review.md†L361-L361】【F:knowledge/notes/input_part005_review.md†L100-L100】
+<<<<<<< HEAD
+=======
+[^customs-warning]: Paolo’s reminder that under-declared packages still drew full duties after weeks in customs, so he no longer accepts falsified invoices.【F:knowledge/notes/input_part010_review.md†L372-L373】
+[^motor-survival]: GABE killed three commuter-grade hubs in two days while his Spintend 100 V Lite kept running, highlighting the controller’s tolerance of motor-side faults.【F:data/vesc_help_group/text_slices/input_part011.txt†L19136-L19173】
+>>>>>>> pr-148
 [^16]: Heavy QS hub loads overheating undersized Spintend capacitor banks and the push toward heavier-duty controllers.【F:knowledge/notes/input_part014_review.md†L16-L16】
 [^firmware-bins]: Official Spintend firmware offers 100 A and 300 A battery-limit variants; the hotter bin voids warranty and still shows ≈60 A battery ceilings with ~147 A phase bursts in field logs.【F:knowledge/notes/input_part000_review.md†L42-L42】
 [^ct_limit]: Early 85250 V1 current-transformer sensing saturating near 100 A and Smart Repair’s recommendation to pivot to shunt-based MK8/X12 footprints (with IPTC017N12NM6 swaps for Ennoid builds) until the 18-FET revision ships.【F:knowledge/notes/input_part014_review.md†L12-L13】

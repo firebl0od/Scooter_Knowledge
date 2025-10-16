@@ -23,10 +23,12 @@
 - ScooterHacking Firmware users confirmed that fully sensorless launches are acceptable—the initial "brr" noise is simply the controller switching from hall emulation—and this firmware path unlocks speed ceilings without sacrificing factory indicators and buzzers.[^f2pro-shfw]
 - The F2 Pro's stock over-current protection trips near 30 A even if higher limits are set in the utility app, so riders planning power upgrades must accept this hardware ceiling or plan controller swaps.[^f2pro-ocp]
 - Because the F2's BMS cannot detect externally paralleled packs, riders planning add-on batteries were advised to share current through the auxiliary pack while respecting the native 25–30 A ceiling to avoid tripping the internal protection mid-ride.[^f2pro-limits]
+- Firmware updates bumped the Ninebot F2 Pro fast-charge ceiling from roughly 2.4 A to 3.2 A, but the crew still warns against 5–6 A experiments until the BMS proves it can dissipate the extra heat.【F:data/vesc_help_group/text_slices/input_part010.txt†L10734-L10738】
 - Commuter builds should keep current demands below 30 A and leverage sensorless mode for reliable launches rather than chasing dual-motor complexity on this entry-level platform.[^f2pro-shfw][^f2pro-limits]
 - F2 Pro front hubs ship nearly dry—open the wheel, repack the 6001RS bearings with polyurea or marine grease, and swap in SKF RSH 2RS hardware instead of smearing silicone on the caps, which only drags on the races.【F:knowledge/notes/input_part006_review.md†L409-L409】
 - Ninebot F-series hubs still spin on 6203 bearings; stock a quality SKF/Koyo/Nachi/NSK set during the first teardown because OEM parts are treated as disposable wear items.【F:knowledge/notes/input_part006_review.md†L410-L410】
 - The platform’s smart BMS enforces roughly 2.4 A charge current; adjustable chargers set higher simply shut off mid-session.【F:knowledge/notes/input_part006_review.md†L183-L183】
+- Keep F2 Pro pressures realistic—Cihan’s 46/48 psi slide on polished asphalt prompted the crew to drop a few PSI for wet grip while remembering worn CST casings and rain still erode traction, so log surface conditions alongside pressure changes.【F:knowledge/notes/input_part010_review.md†L35-L36】
 
 ## Chassis & Handling Insights
 - GT-class stability stems from generous wheelbase and rake, but riders still reinforce the deck and stem interfaces before high-power conversions; controller-mount fractures have occurred on GT and SNSC rental frames when extra weight is added up the stem.[^3][^2]
@@ -46,7 +48,7 @@
 
 ## Powertrain & Upgrade Guardrails
 - Stock GT electronics (14 S 12 P pack, single 24‑FET controller, 10 AWG phases) support reliable 70 km/h operation; pushing past 8–10 kW demands deck stiffening, improved dampers, and monitored pack sag to avoid chassis fatigue.[^3][^2]
-- Ninebot Max G2 motors shed heat no better than legacy G30 hubs, so serious power targets still rely on larger hub swaps; even throttle detection needs a full sweep in VESC Tool to keep hall checks from failing during setup.【F:knowledge/notes/input_part010_review.md†L110-L111】
+- Ninebot Max G2 motors shed heat no better than legacy G30 hubs, so serious power targets still rely on larger hub swaps; even throttle detection needs a full sweep in VESC Tool to keep hall checks from failing during setup.【F:data/vesc_help_group/text_slices/input_part010.txt†L10379-L10413】【F:data/vesc_help_group/text_slices/input_part010.txt†L10726-L10728】
 - 2.42 mm rotors and Hope V4 calipers are proven upgrades for repeated high-speed stops; the thicker discs avoid the warp-prone 1.8–2.0 mm hardware common on smaller scooters.[^3][^5]
 - Segway GT2 riders log 70 km/h down to ~10 % SOC on the factory setup; pushing beyond that range requires higher-current packs or field-weakening, so plan for thermal headroom if adding torque or speed.[^4]
 - Track officials now ban external battery bags at 100 km/h events because loose packs eject and ignite in crashes—serious GT/G-series builds need fully integrated compartments before showing up to scrutineering.【F:knowledge/notes/input_part006_review.md†L385-L385】
