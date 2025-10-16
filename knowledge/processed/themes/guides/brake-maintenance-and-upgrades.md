@@ -35,6 +35,10 @@
 ### Rotor Sizing Considerations
 - Brake discussions suggest upsizing rotors from 180 mm to 203 mm mainly boosts thermal mass and leverage but may be excessive for scooters; larger rotors require frame clearance checks and stronger mounting tabs to handle increased braking forces.[^rotor-sizing]
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
+- Hope Tech Evo calipers routinely sell for €260–€300 (≈$300) per end; racers have found 3 mm rotors clear the four-piston bodies when regen remains primary braking, reinforcing that premium stopping power demands both budget planning and rotor-thickness checks.[^hope-pricing]
+ - Paolo’s rotor group buy keeps blanks at 2 mm so stock calipers bolt up; builders confirm Magura MT5 Pro units can swallow 2.7 mm rotors and trimmed Nutt four-piston calipers clear 3 mm, but thicker discs raise costs and require caliper mods many riders skip.[^rotor-thickness]
+ - Jan’s hardened 420C 160 mm rotors landed at 45 € plus shipping; prototypes survived light bicycle testing but still need scooter-load validation—log bedding, braking torque, and temperature before committing to fleet orders.【F:data/vesc_help_group/text_slices/input_part014.txt†L10221-L10228】
+ - Spintend detachable rims still favour 160 mm, ≈2.7 mm rotors so riders can stock one spare width; jumping to 180 mm adds leverage but risks front-wheel skids unless chassis geometry and modulation keep up.【F:data/vesc_help_group/text_slices/input_part014.txt†L10613-L10622】【F:data/vesc_help_group/text_slices/input_part014.txt†L10616-L10619】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -95,6 +99,7 @@
 [^four-piston-vs-two]: Four-piston caliper benefits for high-performance builds vs. two-piston sufficiency for commuters.
 [^rotor-sizing]: Rotor sizing from 180 mm to 203 mm for thermal mass and leverage, with frame clearance warnings.【F:knowledge/notes/input_part014_review.md†L43-L43】
 [^gt2-rotors]: Segway GT2 2.42 mm rotors providing warp resistance for repeated high-speed stops.【F:knowledge/notes/input_part006_review.md†L357-L357】
+[^hope-pricing]: Hope Tech Evo pricing and 3 mm rotor clearance observations from group buys.【F:knowledge/notes/input_part014_review.md†L3124-L3163】
 [^hope-service]: Hope Tech/Tesch 3 caliper service covering piston re-greasing and pad compatibility.【F:knowledge/notes/input_part013_review.md†L677-L678】
 [^f2-upgrade]: Ninebot F2 Pro brake upgrade using sintered pads and compatible rotors.【F:knowledge/notes/input_part013_review.md†L653-L653】
 [^centering-kits]: Wheel-centering kits and dual-caliper setups for wobble elimination on 80/100H racing builds.【F:knowledge/notes/input_part013_review.md†L645-L647】
@@ -105,3 +110,4 @@
 [^fluid-compat]: Brake fluid compatibility chart for common hydraulic brake systems.
 [^follow-centering]: Follow-up action to create wheel-centering and dual-caliper setup guide.【F:knowledge/notes/input_part013_review.md†L645-L647】
 [^follow-dual-disc]: Follow-up action to document dual-disc vs. dual-caliper decision matrix.【F:knowledge/notes/input_part013_review.md†L635-L637】
+[^rotor-thickness]: Paolo’s rotor group buy sticking with 2 mm blanks and caliper clearance notes for 2.7–3 mm discs.【F:knowledge/notes/input_part014_review.md†L10356-L10365】

@@ -99,6 +99,10 @@
 ## Compliance & Field Interaction
 - Prepare polite proof-of-compliance for roadside checks. Rosheee’s 16 S scooter was seized until officers confirmed it held 22 km/h in eco mode despite 1.5 kW logs; homologation stickers and slow-mode profiles diffused the situation.【F:knowledge/notes/input_part003_review.md†L705-L707】
 
+## Follow-up Tasks
+- Capture Paolo’s pricing tiers and lead times for the 2 mm versus 3 mm rotor batches so riders can budget machining versus bolt-on fitment before committing to the group buy.【F:knowledge/notes/input_part014_review.md†L10356-L10365】
+- Gather wiring diagrams showing how the front “local” controller shares throttle input over CAN so dual G300/Spintend stacks stay synchronised during future installs.【F:knowledge/notes/input_part014_review.md†L10352-L10352】
+
 ## Source Notes
 - G30 conversion strategy, firmware prep, and traction-control tuning synthesize the late-2025 review of controller behaviour, positive ramp targets, and BMS firmware requirements logged by Smart Repair, Yamal, and fellow builders.【F:knowledge/notes/input_part014_review.md†L79-L119】【F:knowledge/notes/input_part014_review.md†L84-L108】
 - Battery sourcing, tariff impacts, and accessory planning pull from the same discussion covering premium cell costs, ANT BMS guardrails, and Voyage Megan/Express integration for 20–22 S projects.【F:knowledge/notes/input_part014_review.md†L27-L114】【F:knowledge/notes/input_part014_review.md†L98-L200】

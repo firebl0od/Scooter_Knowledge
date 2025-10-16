@@ -122,6 +122,7 @@ Structure for each parameter:
 - Setting too high can overheat the motor or saturate the ESC’s thermal limits.
 - Real-time telemetry over CAN aggregates both controllers, so dual-motor builds will see summed phase amps (e.g., two 300 A stacks display ≈600 A) even though each ESC enforces its own limit.【F:data/vesc_help_group/text_slices/input_part014.txt†L10429-L10498】
 - Dual 85250/100-100 stacks keep the front controller’s ABS Max lower—racers bump it to ≈165 A so the smaller hub stops tripping while the rear holds 300 A, then retune traction once logs confirm balance.【F:data/vesc_help_group/text_slices/input_part014.txt†L10456-L10498】
+- When CAN-linked controllers stream together, VESC Tool doubles the displayed phase current; program each ESC individually (skip the multi-setup wizard), then sync limits so the dash reflects true per-motor draw.【F:data/vesc_help_group/text_slices/input_part014.txt†L10429-L10437】
 
 **How / When to Modify**
 - Check motor’s continuous & peak ratings.
@@ -672,6 +673,7 @@ Params: foc_encoder_inverted, foc_encoder_offset, foc_encoder_ratio
 **Deeper Insights**
 - Hall Sensors = instant start with no guess. 
 - HFI or VSS helps sensorless start from 0 rpm if the motor has enough saliency.
+- Riders report the Virtual Speed Sensor works reliably once selected, configured, and paired with the right pole count—hall-less scooters perform markedly better than open-loop fallback when sensors fail.【F:knowledge/notes/input_part014_review.md†L4211-L4215】
 **How / When to Modify**
 - If you have physical halls, choose “Hall Sensors.” 
 - If sensorless is desired with high torque from standstill, consider 45 Deg V0V7 HFI or Coupled HFI.
@@ -1093,8 +1095,22 @@ Params: m_bldc_f_sw_min, m_bldc_f_sw_max
 - If using adaptive switching in BLDC, it can move between min & max freq.
 
 **Deeper Insights**
-- Default range ~3 kHz to 35 kHz. 
+- Default range ~3 kHz to 35 kHz.
 - Lower freq => audible noise, higher => more heat in MOSFETs.
+
+### 9.6 Virtual Speed Sensor (VSS)
+
+**What It Does**
+- Synthesises hall pulses from the observer so the controller still reports accurate wheel speed when physical sensors are missing or damaged.
+
+**Deeper Insights**
+- Once enabled and configured, VSS delivers steadier launches than open-loop fallback on scooters that have lost their hall boards, making it a practical hall-less safety net.【F:knowledge/notes/input_part014_review.md†L124-L124】
+
+**How / When to Modify**
+- Select the VSS mode in the sensor port menu when you want the ESC to infer speed without real hall sensors, then set motor pole pairs and wheel circumference so speed and traction-control features stay calibrated.
+
+**Potential Side Effects**
+- Poorly tuned observer gains or incorrect wheel data will still skew traction control and dashboards, so validate against GPS logs after switching to VSS.
 
 **Potential Side Effects**
 - Too high freq on old boards => driver errors or MOSFET overheating.

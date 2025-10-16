@@ -28,6 +28,7 @@
 
 ### Deck Radiator & Thermal Interface Experiments
 - Community photos comparing thick paste bridges against bare ergal vs. 6061 plates showed paste still outperforms air gaps, but PCB-mounted probes can lag case temperature by several degrees—treat onboard telemetry as relative trends, not absolute hotspots.【F:data/vesc_help_group/text_slices/input_part003.txt†L7540-L7582】
+- Longitudinal skid plates without thermal paste plateaued around 54 °C even with solid airflow; crews now spread paste across the plate and step up to 25 mm fins or thicker stock before expecting meaningful heat transfer gains.【F:knowledge/notes/input_part014_review.md†L119-L119】
 - VSETT stator rewinds revealed lacquer-shelled star points barely wetted from the factory; torch the enamel, brush clean, and fully re-solder before running fresh motor detection to cut resistance and heat soak.【F:data/vesc_help_group/text_slices/input_part003.txt†L23963-L24010】
 - Heat-pipe arrays are supplanting water loops on compact decks; builders now pair finned pipes with QS8-class harnesses and 10 mm² (≈8 AWG) leads when paralleling external packs so 80 A continuous transfers without cooking insulation.【F:data/vesc_help_group/text_slices/input_part003.txt†L16419-L16455】
 
@@ -39,6 +40,8 @@
 ## Controller Mounting & Airflow Discipline
 - Track-focused builders now strip paint, drill fresh bolt holes, clamp controllers with washers and threadlocker, add thermal paste, and route heat into the chassis or external sinks; relying on foam or internal fans in sealed bays just cooks the controllers.【F:knowledge/notes/input_part007_review.md†L26-L26】【F:knowledge/notes/input_part007_review.md†L28-L28】
 - External fins need real airflow—drop the heatsink through the deck, drill and tap anchors, and bolt the controller straight to the frame with paste; leaving fins flush inside the deck traps hot air.【F:knowledge/notes/input_part007_review.md†L83-L83】
+- Flush-mounted fan kits inside sealed decks simply recirculate warm air; racers relocate fans externally or add ducts so airflow actually sweeps across the heatsink before trusting the upgrade.【F:knowledge/notes/input_part014_review.md†L120-L120】
+- Bond compact Spintend cases to the frame with thermal adhesive and log front/rear motor temps; mismatched readings often trace to wiring or observer faults before the controller itself overheats.【F:knowledge/notes/input_part014_review.md†L45-L45】
 - Skip brazing aluminum frames for heatsink bonding unless you have specialty tooling; even experienced metalworkers called it a last resort compared with mechanical fasteners.【F:knowledge/notes/input_part007_review.md†L78-L78】
 - When clamping copper blocks to aluminum frames, isolate them with silicone sheets or plating; bare copper-on-aluminum mounts trigger galvanic corrosion that quietly eats the chassis.【F:knowledge/notes/input_part007_review.md†L321-L322】
 - Dial in airflow paths after rework—builders now notch decks, tap fins, and bridge controllers to fresh-cut ducts so heat actually leaves the bay instead of recirculating behind sealed covers.【F:knowledge/notes/input_part007_review.md†L537-L537】
@@ -69,6 +72,8 @@
 ## Cooling Accessory Reality Checks
 - 3D-printed “hub fin” shells draw criticism because blocked airflow paths limit their effectiveness—testers prefer spacing the fins with washers or pivoting to ferrofluid/oil cooling when they need real thermal headroom.【F:knowledge/notes/input_part001_review.md†L672-L674】
 - Judge cooling tweaks only with controlled A/B runs on fully cooled motors; hub-shell surface temperature alone says little about magnet health, so embed sensors or log winding temps before declaring success.【F:knowledge/notes/input_part001_review.md†L674-L674】
+- Longitudinal skid plates need real thermal interfaces: a 3 mm aluminum plate ran 54 °C without paste even with decent airflow, so builders now add high-quality compound, consider 25 mm fins or thicker stock, and clamp controllers hard against the plate before trusting it for sustained pulls.【F:knowledge/notes/input_part014_review.md†L3792-L3858】
+- Deck-mounted fan kits struggle when they blow straight into enclosure walls; tuners wedge spacers or relocate fans externally so airflow actually crosses heat sinks instead of recirculating warm air inside sealed decks.【F:knowledge/notes/input_part014_review.md†L3588-L3636】
 
 ## Overload Warning Signs
 - Pushing a stock 350 W Ninebot MAX hub to ~5 kW on 72 V/35 A tunes cooks magnets and windings—the rotor feels “full of honey” when spun by hand, signalling demagnetisation or shorts that no amount of firmware tweaking will fix.【F:knowledge/notes/input_part006_review.md†L42-L42】
@@ -96,6 +101,7 @@
 
 ## Coil Retention & Harness Dressing
 - Inside hub motors, standard nylon cable ties survive stator temperatures when cinched correctly; some builders still wrap phases with cotton rope for redundancy, so combining both methods keeps windings tight without melting ties.【F:knowledge/notes/input_part014_review.md†L185-L185】
+- Rewind workflows fold 0.2 mm copper into 0.8 mm busbars, crimp then solder the phases, and bury thermistors deep in the windings so thermal feedback reacts quickly during high-load pulls.【F:knowledge/notes/input_part014_review.md†L123-L123】
 
 ## Axle Retainers & Circlips
 - Reinstall the axle circlip before sealing a hub—omitting it lets the stator drift along the shaft under load despite magnetic drag, risking rotor contact or bearing wear. Builders now reopen freshly sealed motors to refit the ring rather than gambling on friction alone.【F:data/vesc_help_group/text_slices/input_part000.txt†L22955-L22991】

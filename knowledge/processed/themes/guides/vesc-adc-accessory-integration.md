@@ -23,6 +23,7 @@
 2. **Match lever logic.** Magura’s MT5e ships in normally-closed (2700985) and normally-open (2700984) variants, and the Spintend ADC board can flip between switch and hall sensing with onboard toggles plus 5 V/3.3 V selection—confirm the lever SKU before crimping harnesses.[^25]
 3. **Spin-Y & other multi-button throttles:** Version 1 units need custom JST‑1.0 leads into ADC2/COMM2; version 2 ships with a four-conductor harness that lands cleanly on the adapter board.[^2]
 3. **Spintend adapter v3 harness:** Modern boards arrive with keyed plugs—no more screw terminals—so match the supplied loom instead of hand-crimping tiny JST shells.[^3]
+4. **Blinker/lighting channels:** The adapter already drives LED strips for turn indicators; repurpose the outputs for custom amber lighting and move heavier lamps to an external buck to stay within the ≈3 A rail.[^spintend_led]
 4. **Makerbase accessory headers use GH 1.27 mm.** Izuna confirmed the tiny Makerbase harness lands on GH-series plugs—order JST-GH pigtails instead of trying to force JST-PH shells onto the board.【F:knowledge/notes/input_part004_review.md†L328-L328】
 4. **MakerX footpads & 3.3 V-only sensors:** Confirm both ADC rails output 3.3 V before blaming pads; swapping to 5 V kills the hall board.[^4]
 5. **Trim dual-hall start voltage.** Dual-controller Vsett builds needed manual tweaks to throttle start voltage after calibration so brake and throttle channels stay stable across master/slave VESCs.【F:knowledge/notes/input_part009_review.md†L270-L270】
@@ -73,6 +74,7 @@
 - **Fuse the adapter output:** One builder shorted the 12 V rail on a brand-new Spintend 85240 while wiring lights and killed the buck stage; add inline fuses or external bucks so a single mistake doesn’t scrap the controller.[^16][^23]
 - **Respect the adapter’s voltage ceiling.** Keep the kill-switch lead under ≈60 V, route high-voltage latches through a smart BMS or loop key, and only parallel momentary buttons that share the adapter’s common ground (e.g., ANT/JK power toggles) so you don’t backfeed pack voltage into the logic board; treat the module as a logic-level relay and let contactors or smart-BMS buttons handle full-pack isolation.【F:knowledge/notes/input_part005_review.md†L603-L603】
 - **Treat buttons as triggers only:** The ADC adapter does not replace a loop key or smart-BMS latch; plan a real kill switch for theft deterrence or maintenance.[^17][^18]
+- **Lean on the adapter for logic features, not efficiency gains.** The Spintend ADC board remains the quickest way to wire kill-switch logic or single-motor limp modes, but veterans note dual-motor operation stays more efficient at a given current draw—reserve single-motor toggles for fault recovery, not everyday riding.【F:knowledge/notes/input_part014_review.md†L5313-L5316】
 - **Leverage DAC outputs.** Spintend 75/300 firmware can repurpose the PPM pin into a DAC brake-light feed, but expect to lean on community firmware drops until official docs land.[^31]
 
 ## Configuration & Validation Workflow
@@ -128,6 +130,7 @@
 [^dash-coexist]: The same build ran the Spintend adapter on ADC1/ADC2 and left the Xiaomi dash on UART without conflicts once wiring was tidied.【F:knowledge/notes/input_part008_review.md†L86-L86】
 [^adc-noise]: Compressing throttle activation windows to ~0.83–1.2 V cleared ADC-trigger noise on Spintend builds; some riders grounded the chassis for extra stability but warn the practice risks shorts if insulation fails.【F:knowledge/notes/input_part014_review.md†L85-L86】
 [^adapter-idle]: Spintend’s adapter manual targets ~0.8 V idle readings—seeing ~3 V idle means the channel is wired wrong and will act like a stuck brake.【F:knowledge/notes/input_part008_review.md†L21846-L21848】
+[^spintend_led]: Spintend’s ADC adapter already drives LED strips for turn indicators, so builders can route custom amber lighting through existing outputs and keep heavier loads on a dedicated converter.【F:data/vesc_help_group/text_slices/input_part014.txt†L6907-L6913】
 [^storage-cal]: Re-running the ADC wizard and clearing stale inversion flags resolved Xiaomi brake/throttle glitches after long storage.【F:knowledge/notes/input_part011_review.md†L16211-L16217】
 [^analog-halls]: Hall-based brake levers (Xiaomi or custom SS49E builds) let SmartDisplay/ADC boards blend braking force; digital microswitch levers pulse the motor instead of delivering progressive regen.【F:knowledge/notes/input_part000_review.md†L113-L113】
 [^25]: Magura MT5e lever SKU guidance plus Spintend ADC toggle support for normally-open or normally-closed brake sensors.【F:knowledge/notes/input_part000_review.md†L206-L206】
