@@ -1418,9 +1418,10 @@ Below are 50 more advanced or practical questions with in-depth responses, cover
 **Answer**
 
 - Often discouraged if you push near the hardware’s voltage limit. The DRV8302 can be fragile with voltage spikes. 
-- If you do attempt it, keep a small margin. 
-- A 4.12 at 12S is safer for FW than 4.12 at 14 or 16S. 
+- If you do attempt it, keep a small margin.
+- A 4.12 at 12S is safer for FW than 4.12 at 14 or 16S.
 - Many prefer a 6-based hardware or higher voltage rating for stable FW.
+- Trampa’s legacy VESC MK6 firmware effectively caps the platform at 12 S—13 S experiments killed braking outright, forcing riders back onto low-power Xiaomi hubs until they sourced modern controllers.【F:knowledge/notes/input_part001_review.md†L85-L85】
 
 </details>
 

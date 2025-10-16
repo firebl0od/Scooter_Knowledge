@@ -35,6 +35,17 @@
 ### Rotor Sizing Considerations
 - Brake discussions suggest upsizing rotors from 180 mm to 203 mm mainly boosts thermal mass and leverage but may be excessive for scooters; larger rotors require frame clearance checks and stronger mounting tabs to handle increased braking forces.[^rotor-sizing]
 - Segway GT2 rotors measure 2.42 mm thick (versus typical 1.8–2.0 mm commuter discs), providing superior warp resistance for repeated high-speed stops once Hope V4 or equivalent calipers are installed.[^gt2-rotors]
+- Sombre_enfant warned that custom brackets held on with M5 bolts will ovalise mounts under MT7 loads—upgrade to snug M6/M8 hardware and machined adapters before trusting 100 km/h stops.[^m6-brackets]
+- VSETT riders swapping the stock 140 mm rotors for 160 mm SRAM Cleansweep or 180 mm Magura MDR-P discs report dramatically better torque and heat rejection, but the upgrade only works if you retire washer stacks for purpose-built brackets and re-align pads to prevent warped rotors.【F:data/vesc_help_group/text_slices/input_part001.txt†L8211-L8253】
+
+### External Hose Routing & Quick-Disconnect Hardware
+- Rerouting Magura hoses outside the fork demands the correct short banjo bolts and bleed screws; mixing long/short clamp screws has already shorted controller phases, so standardise hardware before final assembly.【F:data/vesc_help_group/text_slices/input_part001.txt†L9208-L9211】
+- The Elvedes Hydro Parts Kit supplies dual M8 banjos for clean fork exits, while Jagwire’s quick-disconnect system costs roughly $120–$125 for enough hose and couplers to outfit dual-motor scooters and requires committing to Jagwire hose diameters.【F:data/vesc_help_group/text_slices/input_part001.txt†L9522-L9538】【F:data/vesc_help_group/text_slices/input_part001.txt†L9901-L10054】
+- Hope’s HFA701 kit bundles the correct M6 banjos and bleed screws; if you piece together individual fittings from Venhill, Trickstuff, or AliExpress, match barb dimensions to hose ID or you will fight leaks during the first bleed.【F:data/vesc_help_group/text_slices/input_part001.txt†L9947-L10216】
+- Even with premium hardware, external routing can crush Magura MT7 lines after flats or tire swaps—inspect clearance after every wheel service and carry spare banjos plus hoses for roadside replacements.【F:knowledge/notes/input_part001_review.md†L642-L644】
+
+### Semi-Hydraulic Caliper Limitations
+- XTech-style semi-hydraulic calipers carry minimal oil volume, rely on rattly auto-centering hardware, and have warped rotors on scooters above 60 km/h—upgrade to sturdier discs, avoid flimsy quad calipers, and inspect the whole brake stack after flats or heavy emergency stops.【F:data/vesc_help_group/text_slices/input_part001.txt†L20680-L20760】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -95,6 +106,7 @@
 [^four-piston-vs-two]: Four-piston caliper benefits for high-performance builds vs. two-piston sufficiency for commuters.
 [^rotor-sizing]: Rotor sizing from 180 mm to 203 mm for thermal mass and leverage, with frame clearance warnings.【F:knowledge/notes/input_part014_review.md†L43-L43】
 [^gt2-rotors]: Segway GT2 2.42 mm rotors providing warp resistance for repeated high-speed stops.【F:knowledge/notes/input_part006_review.md†L357-L357】
+[^m6-brackets]: Oversized hydraulic setups demand M6/M8 hardware and tight-tolerance adapters; M5 bolts quickly elongate mounts under MT7 braking loads.【F:data/vesc_help_group/text_slices/input_part001.txt†L4671-L4707】
 [^hope-service]: Hope Tech/Tesch 3 caliper service covering piston re-greasing and pad compatibility.【F:knowledge/notes/input_part013_review.md†L677-L678】
 [^f2-upgrade]: Ninebot F2 Pro brake upgrade using sintered pads and compatible rotors.【F:knowledge/notes/input_part013_review.md†L653-L653】
 [^centering-kits]: Wheel-centering kits and dual-caliper setups for wobble elimination on 80/100H racing builds.【F:knowledge/notes/input_part013_review.md†L645-L647】

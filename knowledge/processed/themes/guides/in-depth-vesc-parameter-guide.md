@@ -670,10 +670,11 @@ Params: foc_encoder_inverted, foc_encoder_offset, foc_encoder_ratio
 - For FOC, chooses “Sensorless, Encoder, Hall Sensors, HFI, VSS, 45 Deg HFI, Coupled HFI,” etc.
 
 **Deeper Insights**
-- Hall Sensors = instant start with no guess. 
+- Hall Sensors = instant start with no guess.
 - HFI or VSS helps sensorless start from 0 rpm if the motor has enough saliency.
+- Vedder Sensorless Start (VSS) actually lives under the sensorless encoder profile and expects motor-temperature telemetry; without it the controller falls back to noisy hall-only launches and hill-starts stretch toward five seconds.【F:data/vesc_help_group/text_slices/input_part001.txt†L7351-L7415】
 **How / When to Modify**
-- If you have physical halls, choose “Hall Sensors.” 
+- If you have physical halls, choose “Hall Sensors.”
 - If sensorless is desired with high torque from standstill, consider 45 Deg V0V7 HFI or Coupled HFI.
 
 **Potential Side Effects**
@@ -873,6 +874,21 @@ Params: foc_fw_current_max, foc_fw_duty_start, etc.
 
 **Potential Side Effects**
 - Slightly rougher waveforms = more motor heat or noise at top speed.
+
+### 6.16 Scooter Launch Recipes & Throttle Feel
+**What It Does**
+- Packages the community’s go-to wizard settings, ramps, and PID tweaks for heavier scooter hubs so FOC starts feel closer to square-wave ESC launches.
+
+**Deeper Insights**
+- VSETT/Blade clinics default to the motor-wizard’s 1,200 W preset with current limits unchecked, 20 kHz switching, hall interpolation tweaks, and aggressive PID gains; logs show 90 kg riders holding full throttle above 30 km/h while pulling roughly 100 A less than stock curves once the tune is in place.【F:data/vesc_help_group/text_slices/input_part001.txt†L6990-L7058】【F:data/vesc_help_group/text_slices/input_part001.txt†L7003-L7028】【F:data/vesc_help_group/text_slices/input_part001.txt†L7220-L7256】
+- Compared with square-wave controllers, FOC throttle maps feel softer until you raise start current, adjust duty ramps, or reshape throttle curves—without those changes, sensorless surges around 25 km/h return as soon as the controller transitions off halls.【F:data/vesc_help_group/text_slices/input_part001.txt†L6860-L6899】
+
+**How / When to Modify**
+- Start with the wizard baseline, then extend start current or shorten positive ramps in 0.05–0.1 s steps until launches feel responsive without tripping ABS faults.
+- Re-run detection whenever you change observers or hall interpolation; the same clinics rerun the wizard after every hardware swap to keep KV, flux, and PID values aligned with the new setup.【F:data/vesc_help_group/text_slices/input_part001.txt†L6990-L7058】
+
+**Potential Side Effects**
+- Too much start current or an unchecked PID loop still causes wheel hop on high-grip tires; pair launch tweaks with traction-control or ramp limits if riders complain about sudden surges.
 
 ## 7. SPEED & POSITION PID
 
