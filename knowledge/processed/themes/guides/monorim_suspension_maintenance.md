@@ -9,8 +9,10 @@
 - **KKE shocks beat EXA 388/291 for light riders.** 60 kg owners are starting around 650–850 lb springs (1,000 lb on twin-shock setups) and only stepping up if they want a firmer feel, noting better damping than EXA units in the same weight class.[^5]
 - **Recreate the factory hardware stack.** Reinstall the short upper screw, small top ring, and fresh bearings during stem assemblies.
   - missing parts are the leading cause of Monorim wobble.[^6]
+- **Watch for Monorim’s grey mast revision.** The double-welded tube fixes early cracking but still needs a notch in the controller box to route wiring cleanly.[^grey_mast_revision]
 - **Upgrade fasteners immediately.** Swap the kit’s soft bolts for grade 12.9 hardware, trim overly long screws, and add washers/Loctite so pivots stop loosening and knocking after a few rides.[^7][^8]
 - **Spec proper shoulder hardware for fork swaps.** Grade 12.9 shoulder bolts or custom stainless axles hold alignment far better than the inconsistent AliExpress kits, and missing inner washers or soft brackets twist calipers until custom steel plates replace the stock hardware.[^monorim_axle][^monorim_bracket]
+- **Kill stem play without over-torquing.** Loosen the side bolts, snug the centre hinge screw just enough to remove wobble, then re-lock the pinch bolts—over-clamping snaps the bolt and causes crashes.[^stem_play_fix]
 - **Match spring hardware to rider weight.** EXA 291 coils (150–350 lb springs) stay supple for ~90 kg riders, while RockShox or Fox air shocks add adjustability.
   - just confirm leverage ratios and clearance before swapping hardware.[^9]
 - **Lightweight rider coils:** ≈55 kg riders report the best compliance with 150–250 lb EXA/DNM coils around 90–95 mm length sourced from AliExpress for ~€20; stock 650 lb Monorim springs prove too harsh once speeds climb.[^10]
@@ -19,6 +21,7 @@
 - **Treat Monorim-branded packs and AWD kits as projects, not plug-and-play.** External batteries ship without brake/BMS harnesses, cheap charge-line diodes waste voltage, and the 48 V AWD bundle under-delivers.
   - build your own pack/controller stack instead.[^11][^12][^14]
 - **Mind brake adapters and clearance.** The 500 W disc adapter replaces the dust cover (don’t stack it), expect to machine or source custom rear spacers because Monorim won’t sell the bracket separately, budget a second hydraulic brake for 50 km/h builds, and remember that premium Braking Incas 2 kits can strike the ground unless banjos are flipped and clearances double-checked on extended Monorim arms.[^15][^16][^17][^18][^19]
+- **Reinforce Monorim’s bolt-on front caliper bracket.** The two small screws struggle with 120 mm rotors; add adhesive or aftermarket hardware and keep the hub bearings packed with grease—stock units run nearly dry and fail around 1 000 km without service.[^front_bracket_warning]
 - **Redesign clamp spacers when stems interfere.** Builders are revising the front clamp block and adding extenders so Sokil/Konyk stem hardware clears the fork arms without killing the folding lock.[^20]
 - **Reinforce long-shock installs with full “sandwich” plates and softer springs.** Welding gussets on one side just drives the rear arm into the deck; add inner/outer steel plates, re-bend the chassis with the battery removed, and source lower-rate springs instead of cutting coils.[^21]
 - **Size coils for rider weight.** ~55 kg riders are swapping stock 650 lb coils for 150–250 lb EXA/DNM options (~90–95 mm length) sourced for ~€20 on AliExpress to improve small-bump response.[^10]
@@ -65,6 +68,7 @@
 - Expect iglidur bushings to flatten quickly under heavy scooters.
   - police training laps deformed them within weeks, so treat the plastic sleeves as consumables and keep bronze or nylon replacements ready for long-term durability.[^47][^48]
 - Expect maintenance on brake adapters: sand mounts square, shorten bolts so XTech calipers clear, and check torque frequently because soft kit hardware loosens quickly.[^49][^50]
+- Handlebar adapters can lift the folded deck slightly—rotate or shim the bell hook so the rear fender still latches after the conversion.[^handlebar_adapter]
 - When rotor spacing grows beyond a few millimetres, machine a single-piece steel ring (≈5–10 mm thick) instead of stacking loose washers.
   - builders still experimenting with 1.7 mm washer stacks under Blade rotors quickly see alignment drift; confirm whether your hub uses Xiaomi’s 5-bolt or aftermarket 6-bolt pattern before cutting the spacer.[^51][^52]
 - Add foam over the shallow Wildman bag screws and orient power leads upward so clamps and levers cannot puncture packs once the suspension stretches the cockpit.[^53]
@@ -105,6 +109,7 @@
 [^6]: Source: knowledge/notes/denis_all_part02_review.md†L22-L23
 [^7]: Source: knowledge/notes/denis_all_part02_review.md†L515-L515
 [^8]: Source: knowledge/notes/denis_all_part02_review.md†L1171-L1171
+[^stem_play_fix]: Source: knowledge/notes/all_part01_review.md†L694-L694
 [^9]: Source: data/vesc_help_group/text_slices/input_part003.txt†L23160-L23216
 [^10]: Source: data/vesc_help_group/text_slices/input_part001.txt†L25245-L25272
 [^11]: Source: knowledge/notes/denis_all_part02_review.md†L82-L83
@@ -121,6 +126,7 @@
 [^22]: Source: data/vesc_help_group/text_slices/input_part001.txt†L10470-L10603
 [^23]: Source: data/vesc_help_group/text_slices/input_part001.txt†L11300-L11400
 [^24]: Source: data/vesc_help_group/text_slices/input_part001.txt†L11338-L11395
+[^grey_mast_revision]: Source: knowledge/notes/all_part01_review.md†L892-L892
 [^25]: Source: knowledge/notes/input_part005_review.md†L318-L320
 [^26]: Source: knowledge/notes/denis_all_part02_review.md†L25-L26
 [^27]: Source: knowledge/notes/denis_all_part02_review.md†L312-L312
@@ -135,6 +141,7 @@
 [^36]: Source: knowledge/notes/denis_all_part02_review.md†L31-L32
 [^37]: Source: knowledge/notes/denis_all_part02_review.md†L761-L761
 [^38]: Source: knowledge/notes/denis_all_part02_review.md†L650-L650
+[^front_bracket_warning]: Source: knowledge/notes/all_part01_review.md†L861-L861
 [^39]: Source: data/vesc_help_group/text_slices/input_part001.txt†L7093-L7147
 [^40]: Source: data/vesc_help_group/text_slices/input_part003.txt†L19446-L19510
 [^41]: Source: knowledge/notes/all_part01_review.md†L171-L171
@@ -152,6 +159,7 @@
 [^53]: Source: knowledge/notes/all_part01_review.md†L274-L276
 [^54]: Source: knowledge/notes/denis_all_part02_review.md†L966-L966
 [^55]: Source: knowledge/notes/input_part006_review.md†L98-L98
+[^handlebar_adapter]: Source: knowledge/notes/all_part01_review.md†L695-L695
 [^56]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L90030-L90136
 [^57]: Source: knowledge/notes/denis_all_part02_review.md†L553-L553
 [^58]: Source: knowledge/notes/denis_all_part02_review.md†L440-L441

@@ -61,6 +61,8 @@
 - Riders toying with automatic transmission fluid (ATF) were warned it will leak through cable glands and bearings.
   - stick with ferrofluid for controllable rotor-gap transfer unless you have data proving a hybrid fill can stay sealed.[^atf-leak]
 - Mirono’s wrap-and-fluid test showed thermal tape fins plus ferrofluid kept a bag-mounted VESC near ambient (≈42 °C heatsink in 34 °C weather) while the hub shell matched coil temps, confirming the stator finally dumps heat into the case efficiently.[^25][^26]
+- Denis’ crew reports simple mineral-oil fills outperform 3D-printed external fins on sealed Xiaomi hubs—just reseal the case carefully afterwards to prevent leaks.[^mineral_oil]
+- Community testing dismissed decorative 3D-printed “motor heatsinks”; real gains came from ferrofluid fills and backing off the last 1–2 km/h instead of wrapping hubs with plastic fins.[^printed_heatsink_myth]
 - Builders reseating ferrofluid-treated stators set the rim between their feet, slide the stator straight in, and tape XT150 terminations with Kapton to avoid slicing insulation while keeping service access.[^27]
 - Street builds are skipping vented covers even when welding fins because grit intrusion outweighs the airflow gains; sealed ferrofluid hubs remain the safer path despite a bit of drag.[^vented-grit]
 - Community debate over branded Statorade vs. generic ferrofluids continues: premium mixes claim tuned viscosity, yet budget blends still deliver major gains unless you’re chasing Rosheee-level power, provided there’s a solid path from stator to ambient air.[^28]
@@ -68,6 +70,8 @@
 - Late-2022 teardown logs converged on dosing sealed 10″ hubs with roughly 2.5–5 ml of ferrofluid (3–4 ml for 11″ cans), applied between magnets after pulling the stator so the air gap fills without spraying grit into open-frame motors.[^31]
   - Avoid metal syringe tips, reseat the stator before injecting so magnets level the fill, and wipe covers clean before sealing them with silicone to keep grit out and fluid in.[^ff_syringe]
 - **Service & reseal workflow (2022 refresher).** Photograph stator joints on arrival, resolder undersized leads, inject 2.5–5 ml of ferrofluid between the magnets on sealed hubs, refresh bearings and thermal paste, then pressure-wash or silicone-seal swingarms and cable exits before reinstalling the wheel.[^32][^33][^34][^35][^36]
+- Seal opened hub motors with a thin bead of automotive silicone and upgrade to sealed SKF 6001-2RSH-class bearings if you ride in wet climates; stock bearings ship nearly dry.[^hub_silicone]
+- Clamp hubs upside-down in a vise with penetrating oil and walk a punch around the race to drift stubborn bearings out before pressing replacements in evenly—hammering the stator risks bent laminations.[^bearing_removal_vise]
 - Fresh logs show ferrofluid’s benefit is immediate: once heat soaks into the side plates you can cool an overheated hub by spinning it unloaded instead of riding it harder.
   - hand-test inputs first, then let the wheel freewheel until case temps fall.[^37]
 - Ferrofluid refreshes should be sparing.
@@ -155,6 +159,8 @@
 - Hard-mounting works better than bags: bolting a MakerX case to an aluminium cradle dropped sprint temps to ~23 °C where the same controller hit 60–80 °C inside a soft pack, and logs reminded builders to cross-check VESC telemetry against BMS readings when validating those gains.[^hard_mount]
 - Rosheee’s full-copper deck plates and housings for Ubox controllers remain experimental; early feedback says thin AliExpress spacers deform and that simply bolting the case to bare chassis metal with solid airflow is still the most reliable cooling upgrade.[^ip001-copper-deck]
 - A carbon-fibre specialist sketched Kaabo fenders with heat pipes, yet Paolo reminded the crew that without direct MOSFET-to-baseplate contact, exotic coolers barely outperform the stock resin-bound layout—focus on clamping pressure before chasing composites.[^carbon_heatpipe]
+- Denis’ crew now coats controller PCBs with varnish for splash resistance, torques fasteners evenly so housings seat flat, and sets thermal cutbacks near 65 °C—stock ECUs that spike toward 88 °C are treated as overdue for derating or hardware upgrades.[^pcb_varnish]
+- Xiaomi Essential-class scooters sustain 22–24 A tunes once the yellow factory tape is replaced with 1 mm non-conductive pads and fresh paste between the controller housing and deck, so long as temps stay in check.[^essential_pad_refresh]
 - Nucular 12-FET controllers happily sustain roughly 210 A battery current while holding ~48 °C when they are clamped firmly to deck aluminium, underscoring the payoff from rigid mounting pressure on MOSFET plates.[^77]
 - Lightweight shrouds still help: a 12 V/0.6 A fan with mesh filters kept a Vsett single near 50 °C during 6.2 kW, 8 °C rain rides and doubled as a reminder to add motor NTCs before lifting current limits.[^vsett_fan]
 - Refresh thermal interfaces on a schedule: the community now treats ESC paste like desktop-PC maintenance.
@@ -174,6 +180,7 @@
 - Builders stacking 500 g aluminium slabs, vapor chambers, and external radiators onto Uboxes and Tronics are chasing 400 A bursts, but even they admit hand-soldered construction limits reliability once the thermal path leaves the MOSFET plates.[^thermal_mass]
 - Happy Giraffe also cautions that surface probes on a uBox only reflect heatsink skin temperature; log VESC telemetry and treat the battery tray as part of the thermal system instead of trusting plate readings alone.[^controller_probe_caution]
 - When clamping copper blocks to aluminum frames, isolate them with silicone sheets or plating; bare copper-on-aluminum mounts trigger galvanic corrosion that quietly eats the chassis.[^89]
+- Stock paste and Kapton give way to high-conductivity compounds (e.g., Phobya NanoGrease) and 0.5–1 mm Gelid-style silicone pads when builders refresh controller interfaces for cooler operation.[^thermal_consumables]
 - Dial in airflow paths after rework.
   - builders now notch decks, tap fins, and bridge controllers to fresh-cut ducts so heat actually leaves the bay instead of recirculating behind sealed covers.[^90]
 - Dual Spintend installs on sealed Weped decks hit ~80 °C while delivering ~500 A phase, underlining how little thermal margin exists without direct deck contact and fresh paste.[^91]
@@ -626,3 +633,10 @@
 [^inox_dead_end]: Source: data/vesc_help_group/text_slices/input_part002.txt†L20620-L20655; data/vesc_help_group/text_slices/input_part002.txt†L20959-L20965
 [^rtv_reseal]: Source: data/vesc_help_group/text_slices/input_part002.txt†L20262-L20328
 [^flir_emissivity]: Source: data/vesc_help_group/text_slices/input_part002.txt†L25844-L25858
+[^mineral_oil]: Source: knowledge/notes/all_part01_review.md†L510-L510
+[^printed_heatsink_myth]: Source: knowledge/notes/all_part01_review.md†L858-L858
+[^hub_silicone]: Source: knowledge/notes/all_part01_review.md†L820-L820
+[^bearing_removal_vise]: Source: knowledge/notes/all_part01_review.md†L821-L821
+[^pcb_varnish]: Source: knowledge/notes/all_part01_review.md†L613-L613
+[^essential_pad_refresh]: Source: knowledge/notes/all_part01_review.md†L732-L732
+[^thermal_consumables]: Source: knowledge/notes/all_part01_review.md†L614-L614

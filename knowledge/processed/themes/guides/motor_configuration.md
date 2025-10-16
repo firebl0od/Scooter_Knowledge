@@ -8,18 +8,30 @@
 
 ## Real-World Power Benchmarks
 
+- Xiaomi commuters chasing 50–70 km/h keep stressing that the small tires, modest brakes, and lightweight chassis leave no safety margin—treat protective gear and realistic targets as part of every high-speed plan.[^xiaomi_speed_risk]
 - Dual Minimotors controllers fed by a 54 Ah pack delivered ~90 km at 38 km/h, but riders noted VESC tunes feel more conservative and emphasised monitoring energy use when comparing platforms.[^minimotors_range]
+- Monorim is prototyping a dual-motor controller that drives two hubs from a single ECU, while proven AWD scooters such as François’ build still split roughly 65 A across twin controllers to stay cool.[^monorim_dual]
 - 2 000 W hub motors begin to warm after ~3 km at 60 A battery / 100 A phase, pushing builders toward 3 000 W swaps to sustain 3–4 kW bursts without cooking stators.[^2000w_heat]
+- Sustained 27 A hill climbs have already shaken magnets loose inside Pro 2 hubs, leaving the motor howling and efficiency permanently down—active cooling or beefier hubs are mandatory for that duty cycle.[^magnet_shake]
+- Stock 300 W Pro hubs cook within minutes once power climbs past 1 kW, whereas Monorim’s 500 W motor tolerates ~2 kW bursts much better under wind loads, underscoring why higher-current tunes pair with hub upgrades.[^monorim_500w_margin]
+- Motor Kv dictates trade-offs: the 250 W stator keeps torque with less heat but caps speed, the 300 W Pro motor balances torque and pace, and the 350 W hub overvolts well but demands far more current and cooling for hill climbs—reinforced 13 S/10″ builds have touched 60–70 km/h downhill when everything holds together.[^motor_kv_tradeoffs]
+- Monorim’s 500 W solid tire collapses under hard launches; either drill the rim for pneumatic rubber or stay on genuine Xuancheng tires before chasing 48 V tunes.[^monorim_solid_collapse]
+- Ninebot Max Gen 2 hubs have hit 5 kW and 125 km/h unloaded on 16 S VESC benches, but the casing does not bolt into Xiaomi frames without Monorim brackets or welding, and early Gen 1 wheels trade top speed for torque.[^g30_overvolt_benchmark]
+- Rita-based AWD builds essentially double everything—two ESCs, BLEs, motors, and matched batteries—to avoid voltage sag, while single-motor riders smooth launches by rolling at ~3 km/h before hitting the throttle.[^rita_awd]
 - Dualtron Spider conversions are running 135 A motor / 35 A battery per channel with 100 A regen per motor, highlighting how easily stock packs sag when asked for ~260 A combined bursts.[^spider_current]
 - Rob Ver’s stock-motor Vsett 11 touched roughly 120 km/h by pairing a single Ublox 150 A controller with a 21 S 51 Ah LG M58T pack, dedicating one side of the deck to battery mass and the other to the controller.[^rob_vsett120]
 
 ## Voltage Strategy & Stress Tests
 
+- Dual 13 S packs plateau around 40–42 km/h because Xiaomi controllers clamp speed internally even when voltage rises—plan controller swaps if higher top speed is the goal.[^dual13s_plateau]
+- 12 S 350 W hubs record ~47 km/h at ≈28 A, while 14 S builds with 75 kg riders nudge 49–52 km/h; the extra pace demands cooling upgrades and stronger brakes.[^12s_14s_speed]
+- VTA 14 S controllers keep drive current near 32 A but limit regen around 20 A to spare VBEC stages and MOSFETs; braking feels stronger than 12 S tunes even at lower negative amps.[^vta_regen_cap]
 - Stepping from 16 S to 20 S trims current for the same wattage and adds roughly 2.5 km/h per extra series cell, but 100 V-rated MOSFETs run ~33 % higher Rds(on) than 75 V parts and longer packs demand better insulation and safety checks.
   - plan enclosure space before chasing headline voltage gains.[^1]
 - Chasing extreme speed on low voltage pushes currents to impractical levels; balance motor geometry, series/parallel splits, and packaging rather than fixating on a single voltage target.[^2]
 - Overvolting small hubs is unforgiving.
   - feeding an 800 W Citycoco motor with 26 S and 100 A cooked it on an uphill pull, underscoring how quickly winding heat saturates when voltage and current climb together.[^3]
+- Nameplate wattage assumes nominal voltage: a “1 000 W 48 V” hub draws roughly 1.75 kW on 84 V (20 S), so size controllers and MOSFETs—think IRFB4110-class or VESC hardware—before chasing headline voltage.[^nameplate_scaling]
 
 ## Sensorless & Hall Workflow
 
@@ -36,6 +48,9 @@
 - HM’s 60 V 1.6–3.5 kW hubs ship for ≈€160 from Spain but arrive with conservative 25/37 A current recommendations.
   - builders intend to validate phase-amp headroom before trusting the spec sheet.[^9]
 - Race teams warn that stuffing dual 80 H hubs alongside individual 20 S 4 P packs drags efficiency; they favour 70 H rears with lighter front motors on 20 S packs and note well-tuned 70 H builds have beaten 80 H machines in circuit and drag events.[^70h_vs_80h]
+- Monorim’s 500 W hub is built for 48 V—on 10 S it behaves like a 375 W motor—so pair it with 13 S packs and reinforced controllers (caps, MOSFETs, traces) if you expect it to survive.[^monorim_48v]
+- Trampa VESC upgrades can deliver ~78 km/h bursts on 12 S ebike builds but require extra cooling, torque arms, and motorcycle-grade protection before exploring 70–80 A targets.[^trampa_highspeed]
+- Seat phase connectors firmly: solder the flat side of each lug to the controller pins so heat does not build and melt housings on high-current stems.[^phase_connector_solder]
 - PaoloWu’s Blade 10 hub remains the go-to Xiaomi drop-in: riders report 55–60 km/h on 13 S, ~65 km/h with field weakening, and reliable ~150 A phase tolerance for roughly €150 plus shipping, while Zero 10X and Boyueda alternatives cost more for similar kv.[^10]
 - Smart Repair keeps a spare 70H motor on hand but says the conversion isn’t worth the effort compared with jumping straight to an 80H hub fed by multiple ESCs when chasing big rear-wheel torque.[^smart_70h]
 - Matthew is eyeing Lonnyo 80H 33/2 rear hubs for a Yume Y11+ conversion, confirming the frame can house higher-output drivetrains if you stay ahead of thermal load and phase-current demand.[^lonnyo_y11]
@@ -49,6 +64,7 @@
 - Jetson minibike 72 V Sabvoton swaps pull about 30 A but still demand vigilant motor temperature monitoring until a cleaner all-internal VESC solution lands.[^jetson-minibike]
 - Rage Mechanics’ 75 mm stator motors are sustaining 10 kW per wheel on Weped platforms but cost ≈€650 each and require wider axles.
   - plan chassis spacing before chasing 120 km/h builds with them.[^13]
+- Fitting Ninebot G30 hubs into Xiaomi frames means mixing two Monorim kits, machining spacers, lengthening phase leads, and slightly enlarging controller plugs before the motor seats reliably.[^g30_swap_fitment]
 
 ## Hall Sensor Repair & Orientation
 
@@ -66,8 +82,24 @@
 [^delta_spikes]: Source: knowledge/notes/input_part000_review.md, line 40.
 [^delta_failures]: Source: knowledge/notes/input_part000_review.md, line 41.
 [^minimotors_range]: Source: knowledge/notes/input_part000_review.md, line 165.
+[^monorim_dual]: Source: knowledge/notes/all_part01_review.md†L618-L618
 [^2000w_heat]: Source: knowledge/notes/input_part000_review.md, line 166.
+[^magnet_shake]: Source: knowledge/notes/all_part01_review.md†L686-L686
+[^rita_awd]: Source: knowledge/notes/all_part01_review.md†L688-L688
+[^monorim_48v]: Source: knowledge/notes/all_part01_review.md†L689-L689
+[^xiaomi_speed_risk]: Source: knowledge/notes/all_part01_review.md†L701-L701
+[^monorim_500w_margin]: Source: knowledge/notes/all_part01_review.md†L728-L728
+[^dual13s_plateau]: Source: knowledge/notes/all_part01_review.md†L729-L729
+[^12s_14s_speed]: Source: knowledge/notes/all_part01_review.md†L730-L730
+[^vta_regen_cap]: Source: knowledge/notes/all_part01_review.md†L731-L731
+[^phase_connector_solder]: Source: knowledge/notes/all_part01_review.md†L737-L737
 [^spider_current]: Source: knowledge/notes/input_part000_review.md, line 167.
+[^motor_kv_tradeoffs]: Source: knowledge/notes/all_part01_review.md†L855-L855
+[^monorim_solid_collapse]: Source: knowledge/notes/all_part01_review.md†L811-L811
+[^g30_overvolt_benchmark]: Source: knowledge/notes/all_part01_review.md†L812-L812
+[^nameplate_scaling]: Source: knowledge/notes/all_part01_review.md†L857-L857
+[^trampa_highspeed]: Source: knowledge/notes/all_part01_review.md†L859-L859
+[^g30_swap_fitment]: Source: knowledge/notes/all_part01_review.md†L891-L891
 
 
 ## References

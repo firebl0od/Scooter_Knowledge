@@ -51,6 +51,13 @@
 - Xiaomi Xtech calipers grab harder once the rotor is wet, so riders plan fresh bleeds and bedding cycles after rain to restore predictable modulation.[^xtech_wet]
 - Logan four-piston calipers on NAMI scooters already deliver Magura-level stopping, so owners only switch brands if they prefer MT-series lever feel or pad options.[^logan_caliper]
 
+### Xiaomi / Pro Brake Fitment Updates
+
+- Stock organic pads on Xiaomi/Pro platforms fade quickly once speeds climb, so fast riders are shifting to sintered or ceramic compounds and, when chasing dual-disc conversions, splitting a single lever’s cable into matched housings so both calipers pull evenly.[^m365_pad_compounds]
+- Classic cable-disc setups dial fine tension with the barrel adjuster and reserve the caliper’s hex bolt for coarse tweaks; if levers start bottoming out, veterans inspect pad wear before blaming cables.[^barrel_adjust]
+- Confirm rotor bolt patterns before importing mountain-bike discs for a Pro 2: that hub uses six bolts while classic M365 rims only offer five, so mismatched hardware will not seat correctly.[^pro2_rotor_pattern]
+- Tudor is gauging interest in a CNC’d Monorim 500 W brake adapter and plans to machine the first batch once roughly 20 riders commit, so builders eyeing dual-disc Monorim setups should register early or organize a group buy.[^monorim_adapter_batch]
+
 ### Lever Durability Notes
 
 - Magura composite lever hardware can snap with hand force.
@@ -78,6 +85,7 @@
   - switching to metallic compounds such as Galfer keeps feel consistent when regen is dialed back for wet roads.[^9]
 - Denis’ workshop now treats Magura-class hydraulics as mandatory once Pro 2 builds creep toward 80 km/h.
   - Xtech hybrids can’t arrest the extra energy, so riders add lever sensors if they still want regen without sacrificing lever feel and plan a careful bleed after rerouting hoses.[^10]
+- Riders retiring Xiaomi e-brake sensors after repeated controller pops at ~45 km/h now switch to full-hydraulic Shimano or Magura systems and upgrade mechanical cables to tougher bicycle housings when hydraulics are not yet installed.[^sensor_pop]
 
 ### Rotor Sizing Considerations
 
@@ -87,6 +95,7 @@
   - so many riders stick with stock Zoom calipers or thinner discs when chasing upgrades.[^11]
 - A Brakestuff rotor cracked after just a few races, sparking debate over its twin-ring design and whether added venting is needed to stop flipping/warping under race heat.[^brakestuff_rotor_debate]
 - Magura Storm HC rotors measure about 1.9 mm new and get replaced near 1.8 mm; setting reach adjusters fully out, bleeding with piston blocks, and holding the caliper above the lever while closing ports prevents rubbing when fitting thicker MDR-C or MDR-P rotors with Kool Stop pads.[^storm_hc]
+- X-Tech calipers quickly expose flimsy bargain rotors—if the disc warps after a ride, replace it with bike-shop-grade hardware rather than blaming the caliper.[^xtech_rotor_upgrade]
 - Repeated 80–90 km/h stops roasted 120 mm rotors and overheated Magura MT8s; the crew now defaults to dual front brakes or 203 mm discs on heavy scooters to regain thermal margin.[^12]
 - When rotors need a millimetre of offset, riders cut thin shim plates (nickel strip or torque-arm washers) instead of stacking round washers that flex loose under repeated braking loads.[^13]
 - Premium rotors from Shimano, Magura, or Galfer stay on the shopping list while AliExpress specials are avoided for 70 km/h builds despite the price gap.[^14]
@@ -476,3 +485,9 @@
 [^stahlflex]: Source: knowledge/notes/input_part002_review.md†L571-L571
 [^ebc_pads]: Source: knowledge/notes/input_part002_review.md†L572-L572
 [^trp_spyke]: Source: knowledge/notes/input_part002_review.md†L600-L600
+[^m365_pad_compounds]: Source: knowledge/notes/all_part01_review.md†L501-L503
+[^barrel_adjust]: Source: knowledge/notes/all_part01_review.md†L602-L602
+[^pro2_rotor_pattern]: Source: knowledge/notes/all_part01_review.md†L502-L502
+[^monorim_adapter_batch]: Source: knowledge/notes/all_part01_review.md†L503-L503
+[^xtech_rotor_upgrade]: Source: knowledge/notes/all_part01_review.md†L736-L736
+[^sensor_pop]: Source: knowledge/notes/all_part01_review.md†L628-L628

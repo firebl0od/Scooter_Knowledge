@@ -60,6 +60,8 @@
 ### BMS Reset & Hardware Recovery
 
 - **Use the onboard reset before replacement.** A Pro pack that refuses to charge after overheating often revives by opening the case and pressing the BMS’s tactile button; if LEDs still blink red/green, charge through Rita’s XT30 to confirm whether the internal charge path failed.[^37]
+- **Solid blue LEDs usually point to the BMS.** Pop the case, reset or inspect the board, and rule out condensation or controller faults before declaring the pack dead.[^blue_led_reset]
+- **Read the BMS LED before swapping hardware.** A steady red indicator or floating sense wire explains many externals that still ride but refuse to charge; re-seat the harness before blaming the charger.[^bms_led_indicator]
 - **Fall back to the XT30 harness when diagnosing.** When the stock charge inlet won’t engage, top the pack via Rita’s XT30 while testing.
   - owners rotate between charge jack and XT30 until a failing BMS or harness is replaced.[^38][^39]
 - **Split factory shells methodically.** Slice both bottom seams, warm the glue, and drift the brick out before metering CF-series capacitors.
@@ -71,6 +73,7 @@
 - **Respect the charge port ceiling:** The factory Xiaomi inlet safely handles ≈3 A; bigger bricks heat the harness unless you upgrade wiring and connectors, so 42 V 3 A chargers remain the practical limit on stock hardware.[^42]
 - **Refresh tired charge leads before blaming the jack.** A “burned” 3 A port turned out to have cooked wiring.
   - replace the short pigtail with heavier (~24 AWG) leads and inspect the socket for looseness once plastic melts.[^43]
+- **Verify polarity on replacement charge ports.** Multiple “won’t charge” cases traced back to aftermarket jacks shipped with reversed leads or loose harness connectors that only Rita exposed; refit the OEM inlet before condemning the pack.[^charge_port_polarity]
 - **Upgrade charge connectors when raising current:** Swap the slim JST input for XT30/XT60 or XT90S hardware before running 5 A chargers, solder and heat-shrink every joint, and keep JST-only harnesses below ≈3 A even when paralleled for balancing.[^44][^45]
 - **Tame DC step-up chargers:** Start with output voltage below pack voltage, connect, then ramp to ≈1 A before adjusting the current-limit pot to avoid sparks and overheated LEDs.[^46]
 - **Trust vetted CC/CV bricks:** Anonymous “48 V” chargers frequently skip documented CC/CV stages; the workshop sticks with YZPOWER 13 S supplies and soldered connector swaps instead of taped adapters.[^47]
@@ -169,6 +172,9 @@
 [^35]: Source: knowledge/notes/denis_all_part02_review.md†L618-L618
 [^36]: Source: knowledge/notes/denis_all_part02_review.md†L40-L41
 [^37]: Source: knowledge/notes/all_part01_review.md†L107001-L107105
+[^blue_led_reset]: Source: knowledge/notes/all_part01_review.md†L611-L611
+[^charge_port_polarity]: Source: knowledge/notes/all_part01_review.md†L804-L804
+[^bms_led_indicator]: Source: knowledge/notes/all_part01_review.md†L850-L850
 [^38]: Source: knowledge/notes/all_part01_review.md†L107545-L107548
 [^39]: Source: knowledge/notes/all_part01_review.md†L107577-L107586
 [^40]: Source: knowledge/notes/denis_all_part02_review.md†L496-L497

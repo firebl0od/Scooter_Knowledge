@@ -24,6 +24,7 @@
   - Pending: Capture any actionable import tips if Yamal’s transport network successfully moves high-discharge cells or motors into South Korea without customs snags.[^yamal-korea]
 - **Document every parcel.** Keep copies of declarations, MSDS sheets, and carrier acknowledgements so you can prove due diligence if an incident occurs; Denis captures these records alongside order IDs during manual payment reconciliation.[^11][^5]
 - **Plan for stock outages.** Charger shortages, bag delays, and hazmat paperwork slowdowns can halt complete-kit sales; maintain communication channels (newsletters, storefront notices) to reset expectations before customers escalate.[^3]
+- **Expect semiconductor bottlenecks and Brexit friction.** Rita adapters and smart packs hit production delays through March 2021 because of chip shortages, and UK-bound lithium parcels were routinely stalled or returned even while non-battery shipments still cleared to Canada faster than parts of the EU.[^rita_shipping_delays]
 - **Budget postal routes accordingly.** Returning a controller via national post cost roughly €15 versus €60–€80 with DHL/UPS, but EMS recently bounced electronics out of Guangzhou.
   - expect rerouted shipments when mail centres tighten lithium rules.[^12]
 - **Compare rail vs. air for heavy parts.** EU resellers quote roughly $90–$165 for 9–10 kg motors via rail against $160–$203 by air (plus ~€500 customs on resale stock), while hobbyists lean on DDP services to dodge VAT when importing personal builds.[^ip001-freight]
@@ -37,6 +38,7 @@
 
 - **Spain’s 2024–2027 crackdown.** Cheap Xiaomi clones with flimsy 110 mm rotors and bargain electronics triggered fires and are being banned; by 2027 riders must shift to plated, certified models such as the Xiaomi 4 series to stay legal.[^15]
 - **Israel’s importer-license rule.** Enthusiasts have to bring RM-class scooters in as parts and source batteries locally unless they hold an importer permit, stretching timelines and budgets.[^israel-import]
+- **UK/Australia logistics remain tight.** Shipping lithium packs into the UK or Australia is still difficult; UK builders lean on local fabricators like Tudor and even push petitions for broader legalisation.[^uk_aus_shipping]
 
 
 
@@ -61,3 +63,5 @@
 [^15]: Source: knowledge/notes/input_part007_review.md†L410-L410
 [^ip001-freight]: Source: data/vesc_help_group/text_slices/input_part001.txt†L22896-L22924
 [^israel-import]: Source: knowledge/notes/input_part010_review.md†L678-L678
+[^uk_aus_shipping]: Source: knowledge/notes/all_part01_review.md†L631-L631
+[^rita_shipping_delays]: Source: knowledge/notes/all_part01_review.md†L744-L746
