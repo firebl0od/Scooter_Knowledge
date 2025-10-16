@@ -1,5 +1,18 @@
 # Throttle and Brake Signal Integration
 
+## Overview
+
+This guide covers the integration of throttle and brake sensors with VESC controllers on electric scooters. Understanding signal types, voltage levels, and proper wiring is essential for smooth acceleration, responsive braking, and controller safety. Whether you're converting a stock scooter or building a custom high-power setup, these field-tested techniques will help you avoid common pitfalls.
+
+## What You'll Learn
+
+- How to wire brake sensors to prevent surging and controller damage
+- Differences between digital and proportional braking systems
+- Proper voltage level management for ADC inputs (3.3V vs 5V)
+- Regen braking configuration and safety limits
+- Throttle calibration and maintenance best practices
+- Hardware options for improved control and ergonomics
+
 ## Brake Sensor Requirements
 
 - Faulty or missing brake sensors can cause rhythmic surging every one to two seconds under throttle, so maintaining functional brake inputs is critical before road testing.[^brake_surge]
