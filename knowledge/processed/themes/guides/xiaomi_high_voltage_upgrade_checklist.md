@@ -5,10 +5,12 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 ## 1. Decide Whether More Voltage Is Worth It
 - External 36 V packs only extend range; meaningful speed gains begin with 12S/13S packs paired with matching chargers and firmware.[^1]
 - Doubling pack voltage roughly doubles no-load speed, but veterans report stock Xiaomi/Ninebot hubs overheat or fail quickly if you jump straight from 10 S to 20 S without major cooling or motor upgrades—treat 18 S as the practical ceiling unless you swap in a beefier hub.[^20s-burn]
+- Swapping from 36 V to 48 V at the same amp-hour rating still increases watt-hours and torque, helping heavier riders keep pace even when scooters start from identical hardware.【F:knowledge/notes/denis_all_part02_review.md†L118600-L118609】
 - A 13S6P pack built from 2,500 mAh cells roughly doubles the energy of a stock Pro battery while remaining within Rita’s 5 A shared charging envelope when chargers are split.[^2]
 - Riders chasing 40 km/h+ targets often graduate to 14S or dual-motor builds—confirm you have the braking, tires, and frame reinforcement to match the higher kinetic energy.[^1][^3]
 - A 16S5P Samsung 35E pack safely feeds about 50 A; chasing 100 km/h on a single-motor Xiaomi with that chemistry is unrealistic without higher-voltage packs, better brakes, and wider forks to house VSETT-class hubs.【F:data/vesc_help_group/text_slices/input_part001.txt†L6015-L6114】
 - Tool and lawnmower packs bring little to the table—Rita waits for ≈36 V before blending, so five-cell modules barely contribute and run dangerously hot under scooter loads.[^tool-pack]
+- Skip 2S/3S “speed booster” bricks strapped in series with the stock pack; the add-ons backfeed once voltage sags and riders have blown OEM ESCs around 54.6 V without heavy reinforcement.【F:knowledge/notes/denis_all_part02_review.md†L302-L302】【F:knowledge/notes/denis_all_part02_review.md†L393-L394】
 - Ignore bargain “48 V 62 Ah” bundles—builders calculated that the advertised capacity requires non-existent 21 Ah cells and the included controllers rarely survive 48 V operation.[^ali48]
 - Delta-wound 10 S builds already touch ~55 km/h and pull 50–100 A spikes; one rider logged 91 km/h on 16 S before the stock controller died, so plan VESC swaps or limit OEM boards to ≈15 S when chasing top speed.【F:knowledge/notes/input_part000_review.md†L229-L230】
 - Xiaomi-class ESCs get flaky above 12 S—GABE’s 13 S conversion tripped repeatedly until he rebuilt it as a 12 S 6 P pack, trading headline voltage for reliable commuting.【F:data/vesc_help_group/text_slices/input_part009.txt†L14989-L14998】
@@ -27,6 +29,7 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 | Deck packaging | Splitting a 20 S pack 11 S internal/9 S external kept Gabe’s Pro 2 sleeper build within the deck—twin 6 AWG feeds, a 50 mm controller spacer, and relocating the BMS into the stem free the cavity for cells.【F:knowledge/notes/input_part007_review.md†L309-L314】 | Keep electronics outside the main battery bay when chasing 20 S layouts. |
 | Controller mounting | Bolt controllers flat with fresh thermal paste, lap the ESC baseplate and deck for full contact, and clear wiring; lifted plates overheat on the first long ride and can pinch the brake line.[^mounting][^lap-base]
 | Aftermarket ESC installs | Grind standoffs or add thick plates so VESC-class controllers clamp like heat sinks; thin adapter plates let 75100 boards spike within seconds.[^vesc-plate]
+| STM32 ADC protection debate | Denis trusts the factory 10 MΩ divider on 13–16 S builds, but other techs still swap ≈160 kΩ resistors to avoid error 24 or protect STM inputs when emulating a Xiaomi BMS—document whichever approach you choose for future servicing.【F:knowledge/notes/denis_all_part02_review.md†L492-L493】 |
 
 ## 3. Build Recipes
 ### 3.1 12S Range+Speed Combo (10S internal + 12S external)
@@ -42,6 +45,13 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 4. Pre-configure XiaoDash/XiaoGen for 13 cells and ~20 Ah before plugging Denis’ 48 V internal pack in; leaving defaults set to 36 V locks performance.[^xiaodash]
 5. Limit charging to ~7.5 A (≈2 h) to balance pack longevity with turnaround; one-hour fast charges accelerate degradation.[^2][^15]
 6. Smooth throttle maps (quadratic/smart) tame twitchiness on delivery routes once extra voltage is online.[^16]
+2. Order Denis’ 44 V Pro battery kit and note you need the 48 V variant—his store swaps the pack and harness at fulfillment; generic 48 V bricks fit but waste deck volume and require custom padding.【F:knowledge/notes/denis_all_part02_review.md†L99777-L99795】
+3. Cut Rita’s pink sense lead, open the surge jumper, and reinforce controller traces plus wiring before applying 48–54 V externals.[^7][^13]
+4. Set controller limits realistically—Denis caps Xiaomi ESCs around 55 A phase and 30 A battery current once 48 V packs are installed to stay inside hardware limits.【F:knowledge/notes/denis_all_part02_review.md†L329-L330】
+5. Maintain common-port BMS wiring and avoid charging 13S packs through Rita’s onboard jack—use dedicated XT30 harnesses or split chargers.[^14]
+6. Pre-configure XiaoDash/XiaoGen for 13 cells and ~20 Ah before plugging Denis’ 48 V internal pack in; leaving defaults set to 36 V locks performance.【F:knowledge/notes/denis_all_part02_review.md†L114513-L114519】[^xiaodash]
+7. Limit charging to ~7.5 A (≈2 h) to balance pack longevity with turnaround; one-hour fast charges accelerate degradation.[^2][^15]
+8. Smooth throttle maps (quadratic/smart) tame twitchiness on delivery routes once extra voltage is online.[^16]
 
 ### 3.3 17S Samsung 40T Trials
 1. Plan for dual XT150 phase connectors, thicker insulation, and brake upgrades before jumping to 17 S6 P—budget Daly replacements if the existing BMS forces 4.18 V/cell to balance and accept ~20 V sag until wiring is upsized.【F:data/vesc_help_group/text_slices/input_part001.txt†L21680-L21840】【F:data/vesc_help_group/text_slices/input_part001.txt†L21780-L21868】
@@ -64,6 +74,7 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 | --- | --- | --- |
 | Static inspection | Verify XT30/XT60 joints, enclosure clearances, and bag strain relief before power-up. | Prevents shorts from vibrating connectors.[^6]
 | Firmware validation | Confirm XiaoGen reports correct series count and nominal voltage; rerun m365_DownG “intermediate” package if DRV200 blocks flashing, and lean on the Scooter Companion iOS beta when Android tools are unavailable.[^9][^20][^ios-companion] | Keep ST-Link pogo pins clamped to the ESC pads—floating leads cause most failed reflashes before the board ever sees new firmware.【F:knowledge/notes/all_part01_review.md†L331-L331】 |
+| Firmware validation | Confirm XiaoGen reports correct series count and nominal voltage; rerun m365_DownG “intermediate” package if DRV200 blocks flashing, lean on the Scooter Companion iOS beta when Android tools are unavailable, and remember new Pro 2 dashboards still need an ST-Link flash or temporary old-dash swap before custom firmware sticks.【F:knowledge/notes/denis_all_part02_review.md†L409-L411】[^9][^20][^ios-companion]
 | Thermal shakedown | Perform a short hill climb and log controller temps; repeated cutbacks indicate dried paste or inadequate cooling.[^5][^21]
 | Current logging | Use Rita or XiaoDash logs to confirm battery current stays below 30 A continuous. | Exceeding 30 A fries controllers despite firmware settings.[^11][^22]
 | Regen sanity check | Set recuperation thresholds so regen stays off above 4.15 V per cell; monitor for error 39 spikes after aggressive braking.[^12][^23]
@@ -78,15 +89,23 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 - Delta rewinds demand roughly double the phase current for the same torque—upgrade hub leads and consider star reconnections if you want >70 km/h without melting stock windings.【F:knowledge/notes/input_part000_review.md†L253-L253】
 - Monitor pack temperature after charging—freshly topped 12S4P bricks have hit 50 °C on hard climbs. Let packs rest or dial back firmware before commuting.[^21]
 - Park packs around 3.7 V for storage and expect Rita telemetry to favour whichever battery sits roughly 0.5 V higher—those swings are normal once externals stay plugged in.【F:knowledge/notes/all_part01_review.md†L312-L312】
+- Aggressive regen on 48 V packs can still blow “reinforced” Xiaomi controllers—the back-EMF spike after panic stops has shorted 85 V MOSFETs and 60 V capacitors, so budget controller upgrades or soften e-brake settings on high-voltage builds.【F:knowledge/notes/denis_all_part02_review.md†L99966-L99999】
 - Treat ≈60 °C as a practical ceiling for battery cores; the workshop logged 41 °C packs as healthy but warned that sustained climbs past 60 °C shorten cell life quickly.[^pack-temps]
 - High-voltage builds magnify braking and tire demands; run quality CST/Xuancheng casings at 36–50 psi and inspect bearings regularly to keep speed stable.[^25][^26]
 - Treat Xiaomi/Monorim hubs as ~25–30 A battery / 50–70 A phase devices even with ferrofluid—higher currents overheat hall sensors and thin leads, so plan motor swaps or new datasheets before exceeding those guardrails.【F:knowledge/notes/input_part003_review.md†L170-L170】
+- Evaluate external-pack health with a constant-current load while the internal battery stays connected; reconnect only when voltages sit within ~1 V to avoid slamming the weaker BMS.【F:knowledge/notes/denis_all_part02_review.md†L335-L336】
 - Treat Rita error 14 as a hard stop when dual dashboards share a pack; re-check polarity and harness routing before riding again so the isolation hardware can still block cross-pack faults.[^27]
 - Pro 2 dashboards on firmware newer than DRV2.2.3 clamp custom builds; stay on DRV2.2.3 or temporarily downgrade to DRV155 to configure Rita before returning to the latest release.【F:knowledge/notes/all_part01_review.md†L176-L176】
 - Stock Xiaomi dashboards speak half-duplex UART and still cannot talk directly to Flipsky 75100 controllers—flash VESC firmware onto the OEM ESC if you want the factory dash to stay on the bus during VESC swaps.【F:knowledge/notes/input_part001_review.md†L528-L529】
 - Custom dashboards (dual displays, Wi-Fi logging) remain experimental—plan on Android-first tooling because Apple’s developer program keeps iOS support lagging behind.【F:knowledge/notes/all_part01_review.md†L313-L313】
 - After 10" swaps, adjust Xiaogen’s wheel constant by ≈8.1 % and confirm against GPS; “Russian” throttle mode keeps the lever mapped directly to torque for aggressive high-voltage builds.【F:knowledge/notes/all_part01_review.md†L181-L181】
 - 60 V experiments remain strictly provisional—monitor Rita’s alarms, confirm firmware, and stage launches before trusting the higher voltage for daily riding.[^rita60v_xiaomi]
+- Skip 3S “powercube” add-ons on Xiaomi 1S boards—lifting pack voltage past 56 V invites regen spikes that kill the stock controller unless KERS is disabled and braking stays mechanical; veterans reinforce traces or jump directly to 15 S packs instead.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L97446-L97459】
+- 84 V/25 A tunes belong on reinforced frames: the crew found 30 S tests really demand an 11-inch chassis, avoid regen entirely, and accept that Xiaomi controllers eventually fail if you chase triple-digit speed on stock hardware.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L89361-L89420】【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L89576-L89578】
+- When pairing Rita with external packs, connect the internal (boat) battery first so the adapter “sees” the right baseline, cap output near 25 A continuous/30 A peak, and disable or soften e-brake regen on 84 V builds to keep trace-cut controllers alive.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L89652-L89661】【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L89576-L89578】【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L90181-L90183】
+- XiaoDash’s Speed Boost adds 6–7 km/h only when battery current climbs toward 27 A; ScooterHacking firmware lacks the feature, so migrate to XiaoDash for field weakening while respecting Rita’s ~30 A ceiling.【F:knowledge/notes/denis_all_part02_review.md†L389-L390】
+- Field weakening retimes PWM to counter back-EMF rather than raising pack voltage; plan for extra current headroom and proper cooling if you chase the added speed on higher-turn motors.【F:knowledge/notes/denis_all_part02_review.md†L390-L391】
+- First-generation Xiaomi hubs plateau around 32 km/h even with field weakening; later Pro 2 motors deliver higher top speed without sacrificing torque when you push voltage.【F:knowledge/notes/denis_all_part02_review.md†L430-L430】
 - Export VESC Tool CSV/XLS logs after climbs to quantify sag before raising limits; riders now retune current using data instead of guessing mid-ride.【F:knowledge/notes/input_part000_review.md†L300-L300】
 - Give the motor a running start on steep hills—keeping it near 80 % of top speed prevents 48 V builds from cooking hall sensors during full-throttle climbs.[^hill-technique]
 - Park RC LiPo bricks back on the shelf for commuting—they puff when stored full and gain resistance within days, making them poor daily scooter batteries.[^lipo]
@@ -118,7 +137,7 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 [^11]: 【F:knowledge/notes/all_part01_review.md†L73-L74】
 [^12]: 【F:knowledge/notes/all_part01_review.md†L169-L170】
 [^13]: 【F:knowledge/notes/denis_all_part02_review.md†L110-L111】
-[^xiaodash]: 【F:knowledge/notes/denis_all_part02_review.md†L149-L151】
+[^xiaodash]: 【F:knowledge/notes/denis_all_part02_review.md†L114513-L114519】
 [^14]: 【F:knowledge/notes/denis_all_part02_review.md†L23】【F:knowledge/notes/denis_all_part02_review.md†L124】
 [^return-jumper]: 【F:knowledge/notes/all_part01_review.md†L343-L343】
 [^15]: 【F:knowledge/notes/denis_all_part02_review.md†L101-L102】
@@ -135,12 +154,12 @@ A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36�
 [^24]: 【F:knowledge/notes/all_part01_review.md†L122-L123】
 [^25]: 【F:knowledge/notes/denis_all_part02_review.md†L15-L17】【F:knowledge/notes/denis_all_part02_review.md†L56-L57】
 [^26]: 【F:knowledge/notes/denis_all_part02_review.md†L56-L57】【F:knowledge/notes/denis_all_part02_review.md†L171-L175】
-[^lipo]: 【F:knowledge/notes/denis_all_part02_review.md†L158-L160】
+[^lipo]: 【F:knowledge/notes/denis_all_part02_review.md†L115837-L115845】
 [^winter]: 【F:knowledge/notes/denis_all_part02_review.md†L160-L162】
 [^27]: 【F:knowledge/notes/denis_all_part02_review.md†L10541-L10598】
 [^charger-led]: 【F:knowledge/notes/input_part011_review.md†L18-L18】
 [^tool-pack]: 【F:knowledge/notes/denis_all_part02_review.md†L8873-L8893】
-[^ali48]: 【F:knowledge/notes/denis_all_part02_review.md†L146-L148】
+[^ali48]: 【F:knowledge/notes/denis_all_part02_review.md†L114472-L114485】
 [^rita60v_xiaomi]: 【F:knowledge/notes/denis_all_part02_review.md†L9495-L9520】
 [^connector-ceiling]: 【F:knowledge/notes/all_part01_review.md†L206-L207】
 [^ios-companion]: 【F:knowledge/notes/all_part01_review.md†L213-L213】

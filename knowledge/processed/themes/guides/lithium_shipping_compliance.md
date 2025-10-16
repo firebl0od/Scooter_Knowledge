@@ -1,7 +1,7 @@
 # Lithium Battery Shipping Compliance Brief
 
 ## Why It Matters
-- Undeclared lithium consignments expose shippers to severe liability: Denis’ crew reminds builders that EU ADR/IATA rules still require full declaration, certification, and often a contracted safety advisor—UPS will carry the freight, but a fire on an undeclared parcel can result in six-figure damages charged back to the sender.【F:knowledge/notes/denis_all_part02_review.md†L188-L193】
+- Undeclared lithium consignments expose shippers to severe liability: Denis’ crew reminds builders that EU ADR/IATA rules still require full declaration, certification, and often a contracted safety advisor—UPS will carry the freight, but a fire on an undeclared parcel can result in six-figure damages charged back to the sender.【F:knowledge/notes/denis_all_part02_review.md†L119042-L119143】
 - Ground carriers remain the practical option for most workshop-scale packs. Denis routinely leans on DPD/UPS/TNT for EU routes because DHL and other air carriers refuse untreated lithium freight, and even DPD limits batteries to intra-EU deliveries (blocking Norway, for example).【F:knowledge/notes/all_part01_review.md†L33-L33】【F:knowledge/notes/all_part01_review.md†L138-L138】
 - European resellers increasingly demand UL-certified battery packs and expect pending regulation to mirror U.S. safety pushes, so document compliance artifacts before exporting DIY assemblies.【F:knowledge/notes/input_part006_review.md†L58-L58】
 
@@ -19,6 +19,7 @@
 - **Plan for stock outages.** Charger shortages, bag delays, and hazmat paperwork slowdowns can halt complete-kit sales; maintain communication channels (newsletters, storefront notices) to reset expectations before customers escalate.【F:knowledge/notes/all_part01_review.md†L138-L138】
 - **Budget postal routes accordingly.** Returning a controller via national post cost roughly €15 versus €60–€80 with DHL/UPS, but EMS recently bounced electronics out of Guangzhou—expect rerouted shipments when mail centres tighten lithium rules.【F:knowledge/notes/input_part000_review.md†L399-L399】
 - **Pay with strong buyer protection.** AliExpress disputes can idle for months—Mirono’s €80 controller sat at “processing” indefinitely—so the crew now favours PayPal or chargeback-friendly cards and documents faulty halls or motors aggressively to retain leverage.【F:knowledge/notes/input_part000_review.md†L401-L404】
+- **Drain large externals before flights.** Riders moving 24 Ah packs by air spent ~70 km of riding to reach 30 % and used incandescent lamps for final discharge—plan the time and proof-of-compliance paperwork so security sees a genuinely “empty” pack.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L90969-L91040】
 
 ## Regional Compliance Watch
 - **Spain’s 2024–2027 crackdown.** Cheap Xiaomi clones with flimsy 110 mm rotors and bargain electronics triggered fires and are being banned; by 2027 riders must shift to plated, certified models such as the Xiaomi 4 series to stay legal.【F:knowledge/notes/input_part007_review.md†L410-L410】

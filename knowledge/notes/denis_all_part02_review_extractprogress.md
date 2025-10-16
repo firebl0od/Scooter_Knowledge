@@ -1,0 +1,69 @@
+# Extraction Progress – denis_all_part02_review.md
+
+## 2025-10-15
+- Covered lines 1-101 (Key Findings intro through Happy/Ninebot BMS cutoff expectations).
+- Documented new guidance in:
+  - `knowledge/processed/themes/guides/diy-battery-supply-and-pack-architecture-2025.md`
+  - `knowledge/processed/themes/guides/rita_adapter_integration.md`
+  - `knowledge/processed/themes/guides/smart-bms-integration-handbook.md`
+  - `knowledge/processed/themes/guides/scooter_diagnostic_toolkit.md`
+- Verified earlier extracts already captured the remaining insights in existing processed dossiers.
+- Covered lines 102-201 (G30 ST-Link unlock requirements through hill-climb heat management).
+- Logged updates in:
+  - `knowledge/processed/themes/guides/ninebot-g30-vesc-conversion-playbook.md`
+  - `knowledge/processed/themes/guides/ninebot-g2-max-vesc-conversion.md`
+  - `knowledge/processed/themes/guides/xiaomi_clone_upgrade_caveats.md`
+  - `knowledge/processed/themes/guides/xiaomi_high_voltage_upgrade_checklist.md`
+  - `knowledge/processed/themes/guides/xiaomi_tire_brake_upgrade_notes.md`
+  - `knowledge/processed/themes/guides/monorim_suspension_maintenance.md`
+  - `knowledge/processed/themes/guides/rita_external_battery_playbook.md`
+  - `knowledge/processed/themes/guides/motor_cooling_and_thermal_management.md`
+  - `knowledge/processed/themes/guides/long-range-touring-and-charging.md`
+  - `knowledge/processed/themes/guides/lithium_shipping_compliance.md`
+  - `knowledge/processed/themes/guides/scooter_waterproofing_and_security.md`
+- Covered lines 202-301 (Ubox vs. Flipsky debates through clone pack charging etiquette).
+- Logged updates in:
+  - `knowledge/processed/themes/guides/high-power-vesc-scooter-reliability-guide.md`
+  - `knowledge/processed/themes/guides/rita_external_battery_playbook.md`
+  - `knowledge/processed/themes/guides/xiaomi_high_voltage_upgrade_checklist.md`
+  - `knowledge/processed/themes/guides/xiaomi_battery_maintenance.md`
+  - `knowledge/processed/themes/guides/diy-battery-supply-and-pack-architecture-2025.md`
+  - `knowledge/processed/themes/guides/scooter_diagnostic_toolkit.md`
+  - `knowledge/processed/themes/guides/brake-maintenance-and-upgrades.md`
+  - `knowledge/processed/themes/guides/xiaomi_tire_brake_upgrade_notes.md`
+  - `knowledge/processed/themes/guides/lithium_shipping_compliance.md`
+  - `knowledge/processed/themes/guides/long-range-touring-and-charging.md`
+  - `knowledge/processed/themes/guides/parallel-battery-regen-integration.md`
+- Covered lines 302-401 (serial booster cautions through Happy BMS charger troubleshooting).
+- Logged updates in:
+  - `knowledge/processed/themes/guides/ninebot-g30-vesc-conversion-playbook.md`
+  - `knowledge/processed/themes/guides/scooter_diagnostic_toolkit.md`
+  - `knowledge/processed/themes/guides/scooter_waterproofing_and_security.md`
+  - `knowledge/processed/themes/guides/monorim_suspension_maintenance.md`
+  - `knowledge/processed/themes/guides/rita_adapter_integration.md`
+  - `knowledge/processed/themes/guides/rita_external_battery_playbook.md`
+  - `knowledge/processed/themes/guides/smart-bms-integration-handbook.md`
+  - `knowledge/processed/themes/guides/xiaomi_high_voltage_upgrade_checklist.md`
+  - `knowledge/processed/themes/guides/xiaomi_tire_brake_upgrade_notes.md`
+  - `knowledge/processed/themes/guides/diy-battery-supply-and-pack-architecture-2025.md`
+  - `knowledge/processed/themes/guides/motor_cooling_and_thermal_management.md`
+  - `knowledge/processed/themes/guides/high-power-vesc-scooter-reliability-guide.md`
+  - `knowledge/processed/themes/guides/brake-maintenance-and-upgrades.md`
+  - `knowledge/processed/themes/guides/xiaomi_battery_maintenance.md`
+  - `knowledge/processed/themes/guides/parallel-battery-regen-integration.md`
+- Covered lines 402-501 (BMS emulator behavior through high-voltage resistor debates and dual-motor cautions).
+- Logged updates in:
+  - `knowledge/processed/themes/guides/smart-bms-integration-handbook.md`
+  - `knowledge/processed/themes/guides/diy-battery-supply-and-pack-architecture-2025.md`
+  - `knowledge/processed/themes/guides/motor_cooling_and_thermal_management.md`
+  - `knowledge/processed/themes/guides/xiaomi_tire_brake_upgrade_notes.md`
+  - `knowledge/processed/themes/guides/brake-maintenance-and-upgrades.md`
+  - `knowledge/processed/themes/guides/scooter_diagnostic_toolkit.md`
+  - `knowledge/processed/themes/guides/high-power-vesc-scooter-reliability-guide.md`
+  - `knowledge/processed/themes/guides/rita_external_battery_playbook.md`
+  - `knowledge/processed/themes/guides/rita_adapter_integration.md`
+  - `knowledge/processed/themes/guides/monorim_suspension_maintenance.md`
+  - `knowledge/processed/themes/guides/xiaomi_high_voltage_upgrade_checklist.md`
+  - `knowledge/processed/themes/guides/xiaomi_battery_maintenance.md`
+  - `knowledge/processed/themes/guides/scooter_waterproofing_and_security.md`
+  - `knowledge/processed/themes/guides/field-weakening-playbook.md`

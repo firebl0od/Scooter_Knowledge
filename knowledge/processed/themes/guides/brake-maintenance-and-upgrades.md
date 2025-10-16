@@ -40,13 +40,12 @@
 - Artem's freshly delivered Shimano M7120 four-piston set (≈€155 for the pair without rotors) brings stiffer one-finger levers and extra thermal mass that he plans to migrate from his trial bike to the scooter if he decides four pistons are overkill off-road.[^four-piston-cost]
 - Four-piston systems improve heat dissipation during repeated high-speed stops but may be excessive for commuter builds under 60 km/h where two-piston Magura MT5 or similar calipers provide adequate stopping power.[^four-piston-vs-two]
 - Zoom-branded hydraulics continue to underperform at speed—riders are standardising on Nutt, Magura MT5e, Shimano Saint, or Hope calipers paired with 3 mm reinforced 160 mm rotors to survive repeated 120→0 km/h stops, noting that Magura reservoirs can crack under extreme loads.【F:knowledge/notes/input_part000_review.md†L511-L511】
-
 ### Motorcycle-Caliper Imports (Kotto Example)
 - Kotto’s 3 mm motorcycle kits deliver fierce bite out of the box but ship dry and oversized—expect to bleed them immediately and clearance thick rotors or caliper mounts so the hardware sits square on scooter forks.【F:knowledge/notes/input_part004_review.md†L221-L221】
-
 ### Regen Modulation Lessons
 - Riders experimenting with high-force regen reported −80 A electronic braking nearly pitching them over the bars; most now tune Spinny/ADC profiles so regen complements (rather than replaces) hydraulic stoppers.【F:knowledge/notes/input_part008_review.md†L249-L249】
 - Heavy scooters devour cheap pads even with regen assist—switching to metallic compounds such as Galfer keeps feel consistent when regen is dialed back for wet roads.【F:knowledge/notes/input_part008_review.md†L250-L251】
+- Denis’ workshop now treats Magura-class hydraulics as mandatory once Pro 2 builds creep toward 80 km/h—Xtech hybrids can’t arrest the extra energy, so riders add lever sensors if they still want regen without sacrificing lever feel and plan a careful bleed after rerouting hoses.【F:knowledge/notes/denis_all_part02_review.md†L433-L433】
 
 ### Rotor Sizing Considerations
 - Brake discussions suggest upsizing rotors from 180 mm to 203 mm mainly boosts thermal mass and leverage but may be excessive for scooters; larger rotors require frame clearance checks and stronger mounting tabs to handle increased braking forces.[^rotor-sizing]
@@ -101,6 +100,7 @@
 - Paolo’s rotor group buy keeps blanks at 2 mm so stock calipers bolt up; builders confirm Magura MT5 Pro units can swallow 2.7 mm rotors and trimmed Nutt four-piston calipers clear 3 mm, but thicker discs raise costs and require caliper mods many riders skip.[^rotor-thickness]
 - Jan’s hardened 420C 160 mm rotors landed at 45 € plus shipping; prototypes survived light bicycle testing but still need scooter-load validation—log bedding, braking torque, and temperature before committing to fleet orders.【F:data/vesc_help_group/text_slices/input_part014.txt†L10221-L10228】
 - Spintend detachable rims still favour 160 mm, ≈2.7 mm rotors so riders can stock one spare width; jumping to 180 mm adds leverage but risks front-wheel skids unless chassis geometry and modulation keep up.【F:data/vesc_help_group/text_slices/input_part014.txt†L10613-L10622】【F:data/vesc_help_group/text_slices/input_part014.txt†L10616-L10619】
+- 160 mm rotor upgrades on Xiaomi frames need careful spacing—builders raised calipers or machined thicker adapters so disc bolts stop striking tire adapters after aggressive braking tests on AWD/RWD conversions.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L89952-L90018】
 
 ### Hope Tech/Tesch 3 Caliper Service
 - 🇪🇸AYO#74's first successful Hope Tech/Tesch 3 rebuild covered piston re-greasing, compatible pad sizes, and bedding procedures that other riders can replicate for improved braking on high-power builds.[^hope-service]
@@ -221,3 +221,4 @@
 [^post-heat-service]: Premium MT7/MT8 builds scheduling pad and rotor inspections after every downhill session once high-temp fluid flashes exposed weak hardware.【F:knowledge/notes/input_part006_review.md†L12-L13】
 [^shimano-mt]: Shimano MT-series kits still need hoses re-threaded through stems, a fresh bleed, and either the €15 EZ-MTB kit or improvised tools; Total LHM Plus or baby oil has stood in for mineral fluid in a pinch.【F:knowledge/notes/input_part007_review.md†L238-L238】
 [^rotor-thickness]: Paolo’s rotor group buy sticking with 2 mm blanks and caliper clearance notes for 2.7–3 mm discs.【F:knowledge/notes/input_part014_review.md†L10356-L10365】
+- **Support cable housing runs.** Zip-tie the housing to the frame and trim excess slack before chasing pad or caliper issues—every bit of housing flex steals lever travel and torpedoes braking force.【F:knowledge/notes/denis_all_part02_review.md†L348-L349】

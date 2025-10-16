@@ -21,6 +21,7 @@
 - Real-world comparisons between Wepoor and dual Lonnyo 22×3 builds highlight how gearing, tire size, and pack capacity shape usable range: a 12 P Wepoor returns roughly 50 miles at 35–50 mph but drains quickly past 65 mph, while a 10 P 22×3 setup stretches to ~100 km per charge at similar cruising speeds.【F:knowledge/notes/input_part011_review.md†L301-L305】
 - Jason’s alpine shakedown pushed a 30 S 6 P pack to ≈3 V per cell on steep climbs before regen only recovered a few percent on the descent—proof that mountain routes drain small packs rapidly and require pre-planned mid-ride charging stops.【F:knowledge/notes/input_part012_review.md†L208-L213】
 - Yamal carries a fast charger into cafés on 100 km+ itineraries; his 20 S 10 P pack returns roughly 100 km of range in mild weather when he tops up partway through the day.【F:knowledge/notes/input_part012_review.md†L209-L213】
+- Denis’ production data puts a Pro 2 with his 36 V 10 Ah external “boat” pack around 50 km of real range, while mixed 10S3P/10S4P clone combos manage ≈30 km before tapering—proof that pack health and chemistry drive perceived acceleration more than motor swaps on voltage-limited hubs.【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L91124-L91132】【F:data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L93450-L93478】
 
 ## Public Charging Strategies
 
@@ -90,15 +91,14 @@
 - 8. **Adjust tire pressure for load.** Fleet technicians keep commuter tires at ≥20 psi and push heavy riders toward ~3.6 bar rear pressure when aiming for 60 km/h travel to fend off chronic punctures.【F:knowledge/notes/input_part006_review.md†L174-L174】
 - 9. **Prioritise torque and thermal resilience.** Even burnout-focused city builds lean on manageable 20 S10 P packs with regen, valuing heat margin over chasing absolute top speed.【F:knowledge/notes/input_part006_review.md†L229-L229】
 - 10. **Integrate track-safe enclosures.** Race officials now ban external battery bags at 100 km/h events because loose packs eject and ignite in crashes—touring builds destined for track days need fully enclosed compartments.【F:knowledge/notes/input_part006_review.md†L385-L385】
-
 ### Tour Readiness Checklist (Latest Review Actions)
 - **Pack an adapter kit that covers public pedestals and cafes.** The crew now keeps J1772 adapters, travel bricks, and café-friendly extension cords grouped so mid-route stops don’t sag small packs below ≈3 V per cell on mountain grades.【F:knowledge/notes/input_part012_review.md†L307-L307】
 - **Brush up on fast-charging etiquette.** Revisit how you’ll brief café staff, share bays, and shuffle scooters before rain rolls in; the latest review explicitly called for folding etiquette reminders into the touring checklist rather than leaving them scattered across chat threads.【F:knowledge/notes/input_part012_review.md†L307-L308】
 - **Note ferrofluid and hub-prep chores.** A fresh maintenance list now ties Segway-class hub service (ferrofluid fills, temp probes) to tour prep so high-mileage weeks don’t start with neglected drivetrains.【F:knowledge/notes/input_part012_review.md†L306-L306】【F:knowledge/notes/input_part012_review.md†L309-L309】
-
 ## Regional Compliance & Planning Pressure
 - Spanish riders are already budgeting stealthier frames, €3 k shell swaps, or downsized scooters ahead of the 2027 crackdown—expect to validate deck dimensions (e.g., Achilleus vs. Thunder) and controller placements against DGT listings when planning tours across stricter jurisdictions.【F:knowledge/notes/input_part013_review.md†L238-L239】
 - Local enforcement is already citing micromobility capable of >35 mph in Las Vegas after a fatal crash; high-speed builds need route plans that respect posted limits and rider training when sharing public streets.【F:data/vesc_help_group/text_slices/input_part013.txt†L15064-L15090】【F:data/vesc_help_group/text_slices/input_part013.txt†L15084-L15086】
+5. **Prep for winter efficiency hits.** Riders report Wh/km nearly doubling in freezing conditions (≈30 Wh/km vs. 18–20 Wh/km in summer); keep packs warm indoors or add gentle heaters before rolling out in sub-zero weather.【F:knowledge/notes/denis_all_part02_review.md†L115861-L115872】
 
 ## Follow-Up Actions Needed
 - Draft EV-charger etiquette notes covering time limits, single-handle session restrictions, and communication protocols for mixed scooter/EV charging scenarios.[^follow-etiquette]
