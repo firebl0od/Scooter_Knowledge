@@ -71,6 +71,7 @@
 - Magura MT7/MT5 calipers barely clear 2.9 mm Kaabo rotors.
   - fresh pads or 3 mm aftermarket discs often rub unless you machine custom spacers
   - so many riders stick with stock Zoom calipers or thinner discs when chasing upgrades.[^11]
+- A Brakestuff rotor cracked after just a few races, sparking debate over its twin-ring design and whether added venting is needed to stop flipping/warping under race heat.[^brakestuff_rotor_debate]
 - Repeated 80–90 km/h stops roasted 120 mm rotors and overheated Magura MT8s; the crew now defaults to dual front brakes or 203 mm discs on heavy scooters to regain thermal margin.[^12]
 - When rotors need a millimetre of offset, riders cut thin shim plates (nickel strip or torque-arm washers) instead of stacking round washers that flex loose under repeated braking loads.[^13]
 - Premium rotors from Shimano, Magura, or Galfer stay on the shopping list while AliExpress specials are avoided for 70 km/h builds despite the price gap.[^14]
@@ -283,6 +284,7 @@
 [^four-piston-cost]: Shimano M7120 four-piston caliper pricing and thermal mass benefits.[^74]
 [^four-piston-vs-two]: Four-piston caliper benefits for high-performance builds vs. two-piston sufficiency for commuters.
 [^rotor-sizing]: Rotor sizing from 180 mm to 203 mm for thermal mass and leverage, with frame clearance warnings.[^75]
+[^brakestuff_rotor_debate]: Source: knowledge/notes/input_part008_review.md†L456-L457
 [^gt2-rotors]: Segway GT2 2.42 mm rotors providing warp resistance for repeated high-speed stops.[^76]
 [^m6-brackets]: Oversized hydraulic setups demand M6/M8 hardware and tight-tolerance adapters; M5 bolts quickly elongate mounts under MT7 braking loads.[^77]
 [^mt5e-pricing]: Magura MT5e front/rear kits hovering around $200 shipped via Jenson USA/DHL impressed riders expecting higher prices.[^78]

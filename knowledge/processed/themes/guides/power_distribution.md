@@ -25,6 +25,7 @@
 - Treat solder as mechanical filler, not the conductor: twist or fold AWG12 leads to double their contact area before wetting bullets, because even silver-bearing solder conducts two to five times worse than copper.[^6]
 - Builders graduating dual VESC setups beyond 150 A phase are standardising on Amass AS150U anti-spark pairs with 8 AWG tails and XT150/AS150 mains once burst logs show 500 A phase.
   - XT90s are now treated as temporary jumpers to avoid the 200–300 A desoldering failures others recorded.[^7]
+- Kelly 7230 harnesses cram doubled 4 AWG phase leads into 8 mm bullets; seasoned racers instead rewire with slimmer conductors or 10 mm hardware rather than forcing oversized plugs that compromise safety.[^kelly_bullet_debate]
 
 [^long_leads]: Source: knowledge/notes/input_part000_review.md, line 84.
 [^emi_routing]: Source: knowledge/notes/input_part000_review.md, line 85.
@@ -41,3 +42,4 @@
 [^5]: Source: knowledge/notes/input_part000_review.md†L546-L548
 [^6]: Source: knowledge/notes/input_part000_review.md†L548-L549
 [^7]: Source: knowledge/notes/input_part000_review.md†L618-L627
+[^kelly_bullet_debate]: Source: knowledge/notes/input_part008_review.md†L488-L490

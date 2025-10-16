@@ -22,16 +22,31 @@
 - Track controller and stator telemetry together.
   - Koxx’s logs showed phase current clipping once battery limits were reached around 25–30 km/h and that hard regen pulses add ≈5 °C to the stator, highlighting why current math and temperature logging must be reviewed together after every tune change.[^3]
 - Treat field-weakening as a high-speed tool only; riders are still seeing 20–40 km/h gains but warn that the extra current draw demands tight temperature monitoring and duty-cycle triggers so launch torque and controller temps stay manageable.[^4]
+- Back-to-back pulls comparing pure current control, MTPA, and +40 A field-weakening on dual Ubox hardware showed how 16 S 6 P test packs respond when FW engages near 90 % duty—use staged tests to document the trade-offs before shipping aggressive tunes.[^rosheee_fw]
+- Izuna’s MP2 v0.5 cleared repeated ABS overcurrent faults only after trimming battery current and switching to hall sensors, highlighting how firmware sample modes interact with current limits on high-speed runs.[^izuna_abs]
 - Dual Spintend crews treat 120–130 A phase per motor (≈160 A ABS max) as the realistic ceiling; if a hub “stutters” above ~85 A, assume a blown MOSFET or loose phase and inspect wiring or rerun sensorless detection before simply lowering limits.[^5]
 
 ## Thermal Management & Regen Safety
 
 - Flipsky’s compact single begins brushing 60 °C on the MOSFETs within 3 km at 50 A battery / 85 A phase, pushing owners to improve heatsink pressure, refresh thermal paste, and add 40 mm fans before experimenting with 100–120 A tunes.[^6]
 - Keep battery-side regen at or below the pack’s amp-hour rating (e.g., ≤10 A on a 10 Ah block) and set controller regen roughly 15 A higher so excess energy bleeds off as heat instead of spiking the cells or BMS.[^7]
+- Makerbase 84100 riders have yanked live XT60s at speed without killing the controller, but they now cap maximum throttle voltage in VESC Tool instead of adding pull-down resistors—ADC adapters top out around 2.1 V anyway.[^makerbase_disconnect]
+- Regen tuning notes from recent 22 S builds keep battery braking near 3 A per cell and phase braking around 70 % of forward phase current, stepping changes gradually and pairing strong regen with a dedicated throttle so brake pads still share the load.[^regen_phase_ratio]
 - Manual hall detection on warm motors at ≈70 A finally cleared Mirono’s off-the-line clonk; rerun both motor wizards on a full battery and road-test immediately after detection so sensor faults surface before a commute.[^8]
+- If motor detection spits out huge inductance values on undersized hubs, override them to roughly 150–300 µH to calm jitter and recover torque on Ubox Lite 100 V/100 A builds.[^manual_inductance_override]
 - When sensorless detection misbehaves, unplug the hall loom and rerun the test.
   - Wheelway and Spintend owners found that leaving halls connected during “sensorless” detection corrupted profiles until they re-detected with the harness removed.[^9]
 - If Spintend’s external ADC module feeds nonsense values, temporarily bypass it by wiring 3.3 V, signal, and ground straight from the VESC to the throttle or brake; just avoid slamming 5 V accessories onto the 3.3 V rail to protect the board.[^10]
+
+## Wiring & Dual-Controller Notes
+
+- Flipsky 75350 riders keep the throttle on ADC1, the brake switch on ADC2 with “Current No Reverse Brake ADC2,” and avoid tying hall 5 V rails between controllers unless absolutely necessary to prevent ground loops.[^flipsky_75350_wiring]
+- Mixed-brand 75-series controllers share CAN only when they run identical firmware builds; Spintend’s ADC splitter forces stand-alone mode and kills traction control, so crews now pursue Lisp toggles or direct button wiring that preserves CAN where possible.[^mixed_can_fw]
+- Dual-motor scooters that haze the front tire above ~100 A phase are taming launches by enabling Motor Current Scale profiles alongside traction control to soften initial torque without sacrificing top-end power.[^motor_current_scale]
+
+## Firmware & Resources
+
+- 3Shul CL350 owners hunting firmware can pull the official V3 sources from the Drive share community members unearthed to build 6.2-capable binaries even when the vendor site is silent.[^cl350_drive_share]
 
 ## Example Tuning Profiles
 
@@ -59,6 +74,15 @@
 [^accel_logging]: Source: knowledge/notes/input_part000_review.md, line 133.
 [^speed_alignment]: Source: knowledge/notes/input_part000_review.md, line 135.
 [^phase_baseline]: Source: knowledge/notes/input_part000_review.md, line 198.
+[^rosheee_fw]: Source: knowledge/notes/input_part008_review.md†L327-L327
+[^izuna_abs]: Source: knowledge/notes/input_part008_review.md†L328-L328
+[^flipsky_75350_wiring]: Source: knowledge/notes/input_part008_review.md†L317-L317
+[^mixed_can_fw]: Source: knowledge/notes/input_part008_review.md†L352-L354
+[^motor_current_scale]: Source: knowledge/notes/input_part008_review.md†L355-L355
+[^cl350_drive_share]: Source: knowledge/notes/input_part008_review.md†L417-L417
+[^makerbase_disconnect]: Source: knowledge/notes/input_part008_review.md†L446-L447
+[^regen_phase_ratio]: Source: knowledge/notes/input_part008_review.md†L447-L448
+[^manual_inductance_override]: Source: knowledge/notes/input_part008_review.md†L450-L451
 
 
 ## References

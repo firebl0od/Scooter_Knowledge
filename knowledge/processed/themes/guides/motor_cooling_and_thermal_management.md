@@ -78,6 +78,7 @@
 - When raising voltage, replace Kapton tape with 0.5 mm thermal pads so MOSFETs stay isolated yet shed heat; stacking pads on top of Kapton just adds resistance.[^49]
 - Sand controller bases, clean MOSFET tabs, and reinstall paste before clamping the box.
   - loose wiring under the plate prevents full contact and spikes temperatures on the first ride.[^50]
+- Budget MF52B/MF52D 10 kΩ B3950 NTC probes wired between hall ground and the thermistor input; polarity doesn’t matter and they play nicely with VESC hardware for reliable winding temperature data.[^mf52_ntc_tip]
 - Keep silicone pads on hand when chasing 48 V/15 S tunes; the crew pairs IRFB4110 MOSFETs with 100 V 1,000 µF and 47 µF capacitors and swaps pads plus paste before closing the case.[^51]
 - Deck-mounted controller plates should be sanded to bare metal and paired with thin thermal pads; open-vent decks plus 15 mm aluminum plates have proven the most repeatable way to keep single- and dual-motor builds near 50 °C under 190 A phase loads.[^4]
 - Paolo swaps thick thermal pads for thin Kapton plus paste on CNC-machined housings to maximise contact, reserving pads for rough castings where gap filling matters more.[^52]
@@ -265,6 +266,7 @@
 ## Motor Temperature Instrumentation
 
 - **Install proper NTC sensors for accurate readings.** Installing EPCOS/TDK B57861S0502F040 2×4 mm NTCs against the hall/phase bundle, secured with thermal epoxy rated to 150 °C, delivered accurate phase readings in minutes and enables reliable over-temp cutbacks.[^ntc_install]
+- Cheap 10 kΩ B3950 probes work when landed between hall ground and the thermistor lead; polarity is irrelevant because the sensor is just a resistor.[^hall_ntc]
 - **Embed 100 k probes under the windings.** Builders settled on epoxy-coated 100 k B3950 NTC sensors with one-metre leads, gluing them beneath the windings with silicone before routing a single temp wire through the axle alongside phase and hall conductors to keep telemetry stable at high current.[^155]
 - **Route temp leads away from phase bundles.** Gordan's Ubox V2 logs showed thermistor signals collapsing above 80 A until he chased the ground loop, underscoring the need to reroute sensor wiring or add shielding when phase currents spike.[^temp_routing]
 - **Relocate sensors toward the magnet gap when possible.** Artem is experimenting with moving hub thermistors into the air gap so readings reflect magnet temperature instead of coil hotspots.
@@ -481,6 +483,8 @@
 [^153]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L31-L32
 [^154]: Source: data/E-scooter upgrade workshop by denis yurev/text_slices/all.part02.txt†L131265-L131275
 [^155]: Source: data/vesc_help_group/text_slices/input_part001.txt†L11104-L11181
+[^hall_ntc]: Source: knowledge/notes/input_part008_review.md†L309-L309
+[^mf52_ntc_tip]: Source: knowledge/notes/input_part008_review.md†L425-L426
 [^156]: Source: knowledge/notes/input_part000_review.md†L533-L533
 [^157]: Source: knowledge/notes/input_part000_review.md†L676-L678
 [^158]: Source: knowledge/notes/input_part000_review.md†L598-L598

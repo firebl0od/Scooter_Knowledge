@@ -37,7 +37,13 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - **Boutique ceilings:** Tronic X12 (24 S), Ubox 240, and Spintend 85250 builds all share MOSFET and shunt limits around 331 A; most racers cap hubs near 150–200 A battery and 310–360 A phase even after swapping to upgraded silicon.[^33]
 - **Hall sensors are now stock on Dualtron Storm/X2 frames.** Current production runs ship with hall-equipped hubs, so VESC conversions can skip aftermarket sensor retrofits and jump straight to tuning once the harness is verified.[^19]
 - **Pick Ubox over Flipsky for 14 S torque pulls.** Denis’ workshop rated Spintend’s Ubox ahead of Flipsky thanks to beefier MOSFETs and cooling; early Ubox units benefit from thicker thermal pads, and 14 S packs built on Samsung 30Q/40T cells can sustain ≈70 A battery draw as long as you respect the motor’s thermal limits.[^denis-ubox]
-- **Mind 22 S on Makerbase 85/250s:** Multiple racers have already popped Ubox 85/250 controllers on 22 S packs even with regen disabled, whereas C350 hardware survives full race weekends so long as regen stays off; CL350s run hotter and now circulate official firmware links community members had to dig up themselves.[^20]
+- **Mind 22 S on Makerbase 85/250s:** Multiple racers have already popped Ubox 85/250 controllers on 22 S packs even with regen disabled, whereas C350 hardware survives full race weekends so long as regen stays off; CL350s run hotter and now circulate official firmware links community members had to dig up themselves.[^makerbase_22s_fail][^cl350_drive_links]
+- **Expect DOA CAN rails on Tronic 250 batches.** Several fresh units have arrived with dead CAN buses; the stopgap is to feed both controllers the same throttle signal while leaving the second ESC’s 3.3 V rail disconnected so you do not fry the accelerator while waiting for warranty replacements.[^tronic_can_doas]
+- **Inspect Ubox V2 sensorless inputs.** Outdoor-mounted dual Ubox builds that suddenly lose sensorless detection have traced the failure to a cracked A6 diode feeding the EG3112 gate driver; replacing or bridging the diode restored detection and highlighted mediocre stock soldering on that rail.[^ubox_a6_diode]
+- **FarDriver ND72450 field report.** A dual ND72450 Roadrunner running half of its battery capability still delivers 450 A phase, 32 kW peaks, working field-weakening, and cool motors—performance the builder preferred over comparable Tronic stacks.[^fardriver_nd72450]
+- **Log field-weakening runaways.** A 75100 stayed spinning after throttle close when FW was active, underscoring the need to capture and report reproducible regressions to Vedder instead of assuming configuration error.[^fw_runaway]
+- **Size Ninebot/GT2 packs for the current you want.** 26 S 8 P P42A builds feeding Tronic X12s already fight thermal issues until dual Uboxes are clamped to aluminum and wheel diameter/kv are tuned for the higher pack voltage.[^gt2_pack]
+- **Validate MXlemming thermal gains.** Aluminum PCBs kept a 3.2 kW setup near 29 °C, and MXlemming tuning on 30 S gear cut controller temps from 80 °C to ~60 °C at ~150 A, though some racers bailed because the algorithm trimmed top speed on high-power hubs.[^mxlemming_thermal]
 - **Keep Kaabo Thunder 2 controllers matched.** Mixing the 45 A front and 60 A rear boards leaves the scooter voltage-limited on top speed and saps launch thrust; either shunt the 45 A unit to match or source a twin 60 A module before raising current limits.[^21]
 - **Burn E2 hub swaps need rotor spacers.** Fry the Guy’s conversion showed Kaabo 2 kW hubs clear the Burn E2 caliper only after adding rotor spacing, and ZAITUO 100/65-6.5 tires drop straight into the chassis.
   - add the note to fitment guides so builders order spacers and tires with the hubs.[^22]
@@ -64,6 +70,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - **G300 toggles need firmware tweaks.** The controller ships with a momentary power input; change App → General shutdown settings so a quick button press truly latches the ESC instead of leaving it permanently live when the battery is connected, and treat six red LED blinks as a low-voltage warning until MakerX patches the auto-off fault.[^38][^39][^40]
 - **Respect Spintend 85/150 voltage headroom:** The light 85/150 ships with 100 V-rated components and proven logs only on 20 S packs.
   - stacking high-kV hubs, MTPA, and FW near its ceiling has already popped stages, so plan drop-in HY/Huayi MOSFET swaps or step up to 3Shul/Tronic hardware for sustained spikes.[^spintend-85150]
+- **Spintend 85/150 reliability watch.** One mislabeled “100 A” unit blew three input capacitors mid-ride and melted the CAN harness that backfeeds 12 V from the partner controller; pursue an RMA and audit CAN wiring before tying controllers together.[^spintend_85150_rma]
 - **Overvolting 75 V hardware needs extra capacitance.** Paolo’s FlipSky clone failures and Ubox warnings show 17 S pushes demand more input capacitance plus lower charge targets (~4.1 V/cell) to keep regen spikes from nuking the sparse 220 µF bank.
   - most veterans stop at 16 S unless they retrofit the front end.[^41][^42]
 - **Plan for BMS fault behaviour.** MKSESC 84/200 HP controllers have been blowing MOSFETs the moment a pack BMS opens under load, while Spintend Ubox and 3Shul hardware typically coast through the interruption; riders now favour Ubox 85/150 over Makerbase 84/200 HP despite the price gap, and CL350-class controllers ride out brief supply drops more gracefully when you add extra 12 V capacitance at the input.[^43]
@@ -1006,6 +1013,11 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^18]: Source: data/vesc_help_group/text_slices/input_part013.txt†L5254-L5271
 [^19]: Source: knowledge/notes/input_part013_review.md†L31-L31
 [^20]: Source: knowledge/notes/input_part008_review.md†L305-L305
+[^tronic_can_doas]: Source: knowledge/notes/input_part008_review.md†L419-L420
+[^ubox_a6_diode]: Source: knowledge/notes/input_part008_review.md†L428-L429
+[^fw_runaway]: Source: knowledge/notes/input_part008_review.md†L311-L311
+[^gt2_pack]: Source: knowledge/notes/input_part008_review.md†L312-L312
+[^mxlemming_thermal]: Source: knowledge/notes/input_part008_review.md†L313-L313
 [^21]: Source: knowledge/notes/input_part013_review.md†L47-L47
 [^22]: Source: knowledge/notes/input_part013_review.md†L101-L101
 [^23]: Source: knowledge/notes/input_part013_review.md†L66-L66
@@ -1407,6 +1419,10 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 [^419]: Source: data/vesc_help_group/text_slices/input_part000.txt†L17960-L17982
 [^420]: Source: knowledge/notes/input_part007_review.md†L452-L452
 [^421]: Source: knowledge/notes/input_part007_review.md†L244-L244
+[^makerbase_22s_fail]: Source: knowledge/notes/input_part008_review.md†L416-L416
+[^cl350_drive_links]: Source: knowledge/notes/input_part008_review.md†L417-L417
+[^fardriver_nd72450]: Source: knowledge/notes/input_part008_review.md†L453-L454
+[^spintend_85150_rma]: Source: knowledge/notes/input_part008_review.md†L492-L493
 [^422]: Source: data/vesc_help_group/text_slices/input_part005.txt†L24287-L24336
 [^423]: Source: knowledge/notes/input_part004_review.md†L225-L225
 [^424]: Source: knowledge/notes/input_part007_review.md†L242-L242

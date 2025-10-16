@@ -46,6 +46,7 @@
 - Laboratory power supplies lack internal resistance, so unloaded regen spikes can exceed supply voltage; rely on real batteries or load banks when validating braking tunes.[^lab_supply]
 - Koxx’s baseline for dual-motor commuters lands near −30 A battery/−80 A phase on the rear and −25 A/−55 A on the front, balancing strong braking with controller safety; log stator temps during early shakedowns.[^baseline_regen]
 - Field tests on a 10 S 2 P P42A pack produced 2.55 kW regen bursts and rapid motor/MOSFET heating, reinforcing why aggressive profiles need live temperature logging rather than bench guesses.[^regen_heat]
+- Recent 22 S tuning notes keep battery regen near 3 A per cell and phase braking around 70 % of forward phase limits, easing adjustments in small increments and pairing strong regen with a dedicated throttle so mechanical brakes stay healthy.[^regen_phase_ratio]
 - Riders reminded each other that regen-only configurations are unsafe on 20 S builds.
   - keep mechanical brakes adjusted and in service before trusting wheel-locking e-brakes at 50–65 km/h.[^4]
 
@@ -80,6 +81,7 @@
 [^regen_heat]: Source: knowledge/notes/input_part000_review.md, line 256.
 [^boosted_profile]: Source: knowledge/notes/input_part000_review.md, line 247.
 [^shielded_looms]: Source: knowledge/notes/input_part000_review.md, line 261.
+[^regen_phase_ratio]: Source: knowledge/notes/input_part008_review.md†L447-L448
 
 
 ## References

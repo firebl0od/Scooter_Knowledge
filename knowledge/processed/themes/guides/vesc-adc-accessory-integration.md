@@ -47,10 +47,13 @@
 2. **Match lever logic.** Magura’s MT5e ships in normally-closed (2700985) and normally-open (2700984) variants, and the Spintend ADC board can flip between switch and hall sensing with onboard toggles plus 5 V/3.3 V selection.
   - confirm the lever SKU before crimping harnesses.[^25]
 3. **Spin-Y & other multi-button throttles:** Version 1 units need custom JST‑1.0 leads into ADC2/COMM2; version 2 ships with a four-conductor harness that lands cleanly on the adapter board.[^2]
+- Dualtron riders debugging Spin-Y2 throttles found ESC A’s ADC1 dormant—moving the plug to ESC B’s ADC1 and feeding it 5 V finally registered the signal.[^spin_y2_adc1]
 3. **QS-S4 throttles wire like any hall lever.** Land 3.3 V, signal, and ground on the ADC harness, then recalibrate SOC maths.
   - controllers still read pack voltage while dashboards may show 13 % after a cold-weather BMS cut near freezing.[^20]
 - 🇪🇸✨عمر still ranks the Spin-Y2 as the premium hall-with-regen option on Xiaomi-class builds, while Haku points budget riders to a $3 AliExpress thumb throttle that has survived months on a Peak G30.
   - use the high-end pod when you want dual-action mapping and keep the cheap spare for commuter spares.[^21]
+- When fitting Spin-Y throttles to Makerbase 75100s, meter the signal line before landing it on ADC—anything over ≈3.8 V risks killing the STM32 MCU, so power the harness from the controller’s 5 V rail while you test.[^spin_y_signal_check]
+- 1Zuna’s Xiaomi dash Lisp still needs a 1 k–1.2 kΩ pull-down on the button harness to stop ghost presses; builders now solder the resistor inline so the dash works with both G30 and Makerbase controllers.[^dash_pulldown]
 3. **Spintend adapter v3 harness:** Modern boards arrive with keyed plugs—no more screw terminals—so match the supplied loom instead of hand-crimping tiny JST shells.[^3]
 4. **Flip the ADC app mode first:** When the throttle shows activity but VESC Tool still ignores input, switch the App to “ADC” and confirm the adapter’s 5 V/3.3 V toggle matches your hall sensors before tearing the harness apart.[^8]
 4. **Blinker/lighting channels:** The adapter already drives LED strips for turn indicators; repurpose the outputs for custom amber lighting and move heavier lamps to an external buck to stay within the ≈3 A rail.[^spintend_led]
@@ -122,6 +125,7 @@
 
 ### Dash & Display Options
 
+- Xiaomi Pro 2 builders running dual 75100s keep the stock dash by relocating the ESC and splicing lighting into AUX power while custom scripts bridge the UART header—proof the dash and lighting can coexist with direct ADC throttles.[^xiaomi_dash_dual75100]
 - **CrowPanel touch dashboards free up IO.** Builders moving to CrowPanel’s 5" 800×480 ESP32-S3 display route the VESC BMS over CAN and dedicate UART to the dash; plan for LVGL-based touch controls plus extra GPIO for profile switching when the stock dash already consumes UART.[^55]
 
 ### Profile & Gear Switching
@@ -132,6 +136,7 @@
   - have repeatedly blown MakerX ADC3 daughterboards. Treat profile toggles as signal bridges that need proper wiring diagrams and pull-downs before testing.[^gear-toggle]
 - **Validate community scripts before publishing.** ’lekrsu’s Xiaomi Pro 2 “gear shift” macro maps ADC2 as a mode selector but he cannot run it himself due to noisy analog lines; bench-test the workflow before sharing it beyond early adopters.[^xiaomi-gear-script]
 - **Latching profile toggles:** ADC2 can host a latching switch that feeds a distinct voltage, letting commuters flip between limited and unlimited profiles with the five-press brake logic while leaving ADC1 dedicated to throttle.[^57]
+- For on-the-fly 2WD toggles, builders either feed Spintend’s ADC adapter from the controller’s 12 V rail or script a small Arduino on the UART `setCurrent` example so a handlebar switch drops the front motor to 0 A.[^setcurrent_toggle]
 
 ### Lighting, Horns & Aux Loads
 
@@ -174,6 +179,8 @@
 
 ## Safety & Troubleshooting Checklist
 
+- Lisa’s dual 75100 build still sounded rough after disabling phase filters, and the 1Zuna CAN dashboard stopped reporting speed—rerun detection, verify CAN scaling, and confirm firmware 6.05 mappings before trusting telemetry.[^dual75100_noise]
+- Dual-ADC scripts have let rear motors ignore 20 km/h limits while the front obeys; bake speed caps into both CAN nodes whenever you adapt Ninebot macros to dual-controller scooters.[^dual_adc_speed_caps]
 - **Mount adapters beside the controller.** Parking the ADC board near the ESC and running shielded cables kept long throttle runs quiet; Vedder’s mid-June firmware now times out detach scripts (~3 s) so Xiaomi dash integrations hand inputs back automatically once the ADC board is unplugged.[^66][^67][^68]
 - **Chase “missing module” faults at the harness first.** After firmware updates, swap the UART TX/RX pair or re-enable Bluetooth in VESC Tool before assuming hardware failure; several Spintend adapters came back online immediately, and their throttles landed on VAL2 until the app mapping was refreshed.[^69][^70]
 - **Separate controller rails:** Do not tie CAN-connected controllers’ 5 V rails together unless they share the same ignition path; mismatched power buttons have already killed hardware.[^14]
@@ -198,6 +205,13 @@
 
 [^1]: Routing throttle and brake halls directly into ADC1/ADC2 preserves control without the OEM dash.[^77]
 [^2]: Spin Y throttle versions and wiring expectations for Spintend/Ubox adapters.[^78]
+[^spin_y2_adc1]: Source: knowledge/notes/input_part008_review.md†L337-L337
+[^spin_y_signal_check]: Source: knowledge/notes/input_part008_review.md†L339-L339
+[^dash_pulldown]: Source: knowledge/notes/input_part008_review.md†L340-L340
+[^xiaomi_dash_dual75100]: Source: knowledge/notes/input_part008_review.md†L338-L338
+[^setcurrent_toggle]: Source: knowledge/notes/input_part008_review.md†L392-L392
+[^dual75100_noise]: Source: knowledge/notes/input_part008_review.md†L390-L390
+[^dual_adc_speed_caps]: Source: knowledge/notes/input_part008_review.md†L391-L391
 [^3]: Spintend v3 adapter now ships with keyed harness connectors.[^79]
 [^4]: MakerX S100 footpads require the controller’s 3.3 V rail.
   - missing the regulated feed leaves the sensor dead even when wiring diagrams look correct.[^80]
@@ -228,7 +242,7 @@
 [^dash-coexist]: The same build ran the Spintend adapter on ADC1/ADC2 and left the Xiaomi dash on UART without conflicts once wiring was tidied.[^107][^108]
 [^adc-high-side]: VESC ADC harness brake outputs source battery positive, so pair anodes with the function pins and common grounds or isolation diodes to combine lighting modes safely.[^109]
 [^adc-noise]: Compressing throttle activation windows to ~0.83–1.2 V cleared ADC-trigger noise on Spintend builds; some riders grounded the chassis for extra stability but warn the practice risks shorts if insulation fails.[^110]
-[^adapter-idle]: Spintend’s adapter manual targets ~0.8 V idle readings.
+[^adapter-idle]: Spintend’s adapter manual targets ~0.8 V idle readings.[^111][^adapter-idle-source]
   - seeing ~3 V idle means the channel is wired wrong and will act like a stuck brake.[^111]
 [^spintend_led]: Spintend’s ADC adapter already drives LED strips for turn indicators, so builders can route custom amber lighting through existing outputs and keep heavier loads on a dedicated converter.[^112]
 [^storage-cal]: Re-running the ADC wizard and clearing stale inversion flags resolved Xiaomi brake/throttle glitches after long storage.[^113]
@@ -396,6 +410,7 @@
 [^109]: Source: knowledge/notes/input_part009_review.md†L12-L13
 [^110]: Source: knowledge/notes/input_part014_review.md†L85-L86
 [^111]: Source: knowledge/notes/input_part008_review.md†L21846-L21848
+[^adapter-idle-source]: Source: knowledge/notes/input_part008_review.md†L485-L485
 [^112]: Source: data/vesc_help_group/text_slices/input_part014.txt†L6907-L6913
 [^113]: Source: knowledge/notes/input_part011_review.md†L16211-L16217
 [^114]: Source: knowledge/notes/input_part000_review.md†L113-L113

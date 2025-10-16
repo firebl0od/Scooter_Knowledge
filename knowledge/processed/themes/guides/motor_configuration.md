@@ -33,6 +33,7 @@
 - Artem catalogued the Vsett 9/9+ hub (92 mm stator, 30 magnets, 9/7 wind with 0.5 mm strands, RUWH 6003RS bearings) and logged the 10+ wheel around 62 km/h on 48 V at 35 A despite 60 V marketing claims, so plan gearing or voltage upgrades if you need more top speed.[^8]
 - HM’s 60 V 1.6–3.5 kW hubs ship for ≈€160 from Spain but arrive with conservative 25/37 A current recommendations.
   - builders intend to validate phase-amp headroom before trusting the spec sheet.[^9]
+- Race teams warn that stuffing dual 80 H hubs alongside individual 20 S 4 P packs drags efficiency; they favour 70 H rears with lighter front motors on 20 S packs and note well-tuned 70 H builds have beaten 80 H machines in circuit and drag events.[^70h_vs_80h]
 - PaoloWu’s Blade 10 hub remains the go-to Xiaomi drop-in: riders report 55–60 km/h on 13 S, ~65 km/h with field weakening, and reliable ~150 A phase tolerance for roughly €150 plus shipping, while Zero 10X and Boyueda alternatives cost more for similar kv.[^10]
 - Marketing wattage is meaningless on Vsett 10+ motors.
   - inspect winding fill and magnet stack height to judge headroom before pushing phase amps or buying donor wheels for AWD swaps.[^11]
@@ -70,6 +71,7 @@
 [^8]: Source: knowledge/notes/input_part000_review.md†L387-L387
 [^9]: Source: knowledge/notes/input_part000_review.md†L388-L388
 [^10]: Source: knowledge/notes/input_part000_review.md†L434-L440
+[^70h_vs_80h]: Source: knowledge/notes/input_part008_review.md†L422-L423
 [^11]: Source: knowledge/notes/input_part000_review.md†L440-L443
 [^12]: Source: knowledge/notes/input_part000_review.md†L502-L505
 [^13]: Source: knowledge/notes/input_part000_review.md†L494-L498
