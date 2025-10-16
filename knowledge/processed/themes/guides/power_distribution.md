@@ -1,85 +1,426 @@
-# Power Distribution and Wiring Hygiene
+# Power Distribution & Wiring Guide
 
-## Cable Management
+## Overview
 
-- Long 16 AWG leads paired with XT30 connectors caused ~0.5 V per-cell drops at 40 A on a 12 S 7 P pack; shortening runs, upgrading to XT60/XT90, and using 10–12 AWG wiring markedly improves voltage sag.[^long_leads]
-- Routing high-current cabling on one deck side and signal/brake harnesses on the other reduces EMI in tight Vsett installations, especially once connectors are upsized.[^emi_routing]
-- Stainless “metal zip ties” stay flexible in cold garages and secure battery looms without the bulk of hose clamps—handy when plastic ties crack in winter storage.[^metal_zipties]
+Proper power distribution is critical for safety, performance, and reliability in electric scooters. This guide covers cable sizing, connector selection, wiring hygiene, signal filtering, and best practices for managing high-current electrical systems.
 
-## Signal Filtering & Parallel Pack Discipline
+## What You'll Learn
 
-- For throttle-signal filtering, the crew scavenges ~100 nF ceramic capacitors from dead electronics instead of grafting oversized drone caps; always discharge and meter salvaged parts before bridging signal-to-ground so you know the exact capacitance you are adding.[^ceramic_scavenge]
-- When paralleling 16 S packs, tie all grounds together, match series counts and capacities, pre-balance voltages, and watch for cross-charging so the smaller pack is not over-stressed despite individual BMS protection.[^parallel_rules]
-- Rita-style Y cables should present two female battery legs feeding a single male controller lead, with both packs matched in voltage before connection; poorly soldered joints in moving bags have already shorted externals and scarred decks.[^denis-y-cable]
+- Cable gauge selection for different current levels
+- Connector types and their current ratings
+- EMI management and signal routing
+- Parallel pack wiring discipline
+- Lighting and accessory power distribution
+- Safety considerations and common failures
 
-## 48 V Lighting Quick Reference
+## Cable Management Fundamentals
 
-- Publish a quick sheet with 48 V lighting fuse sizing, gauge picks, and load math so commuters stop oversizing harnesses or skipping inline protection on accessory runs.[^lighting_quickref]
+### Voltage Drop Issues
 
-## High-Current Harness Upgrades
+**Long Cable Runs**:[^long_leads]
+- 16 AWG leads with XT30 connectors caused ~0.5V per-cell drops at 40A
+- Occurred on 12S7P pack
+- **Solutions**:
+  - Shorten cable runs
+  - Upgrade to XT60/XT90 connectors
+  - Use 10-12 AWG wiring
+  - Markedly improves voltage sag
 
-- Once current climbs past stock limits, treat connector upgrades as mandatory: swap Xiaomi motor plugs for 4 mm bullets and replace long XT30 harnesses with AWG12 + XT60 leads to keep voltage sag in check on dual-motor or external-pack builds.[^connector-upgrade]
-- External battery riders are graduating to 4 mm gold bullets, AS120 mains, and even direct-soldered phase leads after discovering stock 2 mm conductors and MR60 plugs overheat above ~80–100 A; backpack packs stay cool once the heavier hardware is in place.[^1]
-- XT90S anti-sparks remain handy for light builds, but repeated hot-plugs cook their in-line resistors; high-power crews step up to AS150 bullets or QS8/QS10 connectors that comfortably ride out 300–600 A bursts once the crimps and strain relief are done properly.[^antispark_tradeoff]
-- For 90 A packs, default to AWG10 main leads (or dual AWG12 runs) and consider 3–3.5 mm solid-core copper between pack negatives and BMS plates for roughly 40 % more ampacity.
-  - as long as the runs stay short.[^2]
-- 12 AWG phase leads remain comfortable around 100 A continuous, yet light riders have logged 150 A bursts on 13 S hubs with post-ride temps near 45 °C.
-  - plan short duty cycles or forced cooling if you intend to exceed the published ampacity.[^3]
-- Community Amass connector testing now pegs 10 AWG as the practical minimum for 60 A continuous, with AS120 shells running cooler than AS150 in scooter-duty cycles thanks to their contact geometry.
-  - size wiring and connectors accordingly before chasing 70 A+ battery limits.[^4]
-- Heavy 90–150 A phase runs are shifting toward XT150 bullets or AS150U anti-spark leads.
-  - roughly 0.20 mΩ resistance and spare signal pins
-  - so controllers can feed trackers or smart BMS links without extra connectors while keeping voltage drop minimal.[^5]
-- Paolo has already incinerated XT90S loop keys when feeding >2,000 µF cap banks at 16 S+, pushing builders toward QS8/AS150 connectors paired with beefier pre-charge resistors before heavy current spikes melt solder joints.[^xt90_failure]
-- Treat single XT90S plugs as roughly 50 A continuous (~65 A burst) ceiling; 120–180 A batteries demand dual XT60s, XT150/AS150 bullets, or QS8 pairs plus 6–8 AWG leads to keep contact temperatures in check.[^ip001-xt90-headroom]
-- JK smart BMS antispark stages make XT150 hot-plugging viable, while AS150 split shells simplify dual-controller routing inside cramped VSETT decks.[^ip001-xt150-routing]
-- Higo L1019 retrofit looms bundle 4 mm² (≈11 AWG) phases with halls and a temp lead in one jacket that still fits VSETT axles; map the color swap before landing XT150 bullets and keep the plug on 50 mm-class hubs where it stays cool.[^ip001-l1019]
-- Avoid dropping L1019 connectors into 60–70 mm motors without reworking the solder—builders are desoldering the factory “blob” and upsizing leads before higher-current installs.[^ip001-l1019-limit]
-- QS8 main leads that regularly see ~350 A peaks now step up to 6 AWG when a single connector carries the pack current; dual-QS8 layouts can stay on paired 8 AWG runs, but the crew keeps warning newcomers not to trust “100 A” house wire marketing on cheap silicone leads.
-  - budget the thicker copper before finalising harness lengths.[^qs8_awg]
-- Jason still specs XT150 bullets on motor phases while leaving XT90s on the battery feed, and `lekrsu` reminds builders that MT60 plugs bundle three XT60-style bullets for tidy triple-phase hookups.[^xt150-guidance]
-- Dualtron riders trying 150 A battery per uBox v2 watched 10 AWG leads, XT150 connectors, and the controllers themselves overheat or current-limit, so the crew now caps daily setups around 70–90 A per ESC even on stout 20 S packs.[^ubox_battery_limits]
-- Oversized phase wires can chafe against axle exits; stick with 11 AWG Higo looms proven to survive 80/225 A tunes without nicking insulation.[^phase_wire_clearance]
-- Treat solder as mechanical filler, not the conductor: twist or fold AWG12 leads to double their contact area before wetting bullets, because even silver-bearing solder conducts two to five times worse than copper.[^6]
-- A melted MT60 phase plug that shorted a Kelly controller at ~200 A convinced the crew to retire drone-class connectors above 72 V; step up to XT150/AS150 bullets or lugs once battery demand enters the 150–200 A bracket.[^ip001-mt60-failure]
-- Builders graduating dual VESC setups beyond 150 A phase are standardising on Amass AS150U anti-spark pairs with 8 AWG tails and XT150/AS150 mains once burst logs show 500 A phase.
-  - XT90s are now treated as temporary jumpers to avoid the 200–300 A desoldering failures others recorded.[^7]
-- Keep 190 A-class scooters on dual 7 AWG battery leads (or single 6 AWG) and remember that wire gauge requirements follow current draw, not pack series count; undersized looms turn shrink wrap brittle around 135–145 °C in weeks.[^ip001-awg]
+### EMI Reduction
 
-## Lighting & Instrumentation Loads
+**Cable Routing Strategy**:[^emi_routing]
+- Route high-current cables on one side of deck
+- Route signal/brake harnesses on opposite side
+- Reduces electromagnetic interference
+- Especially important in tight Vsett installations
+- Upsize connectors to reduce resistance
 
-- Compact 25 W/3 500 lm headlights and parallel-wired high/low beams fit scooter cockpits but demand honest current budgets; the touted 3 A step-downs need heatsinking, each Nucular controller only supplies 12 V/3 A (≈6 A dual), and many riders prefer lamps with integrated buck converters to avoid voltage drop across long runs.[^ip001-lighting]
-- Popular mini voltmeters cap at 35 V and expect a 12 V feed, forcing 72–100 V builds to add dedicated step-downs or repurpose throttle displays since control rails only provide ~3.3 V.[^ip001-voltmeter]
-- Kelly 7230 harnesses cram doubled 4 AWG phase leads into 8 mm bullets; seasoned racers instead rewire with slimmer conductors or 10 mm hardware rather than forcing oversized plugs that compromise safety.[^kelly_bullet_debate]
-- Wolf-class hubs ship with roughly 4 mm (≈AWG 11–12) phase leads that tolerate about 130 A once properly cooled; measure the copper cross-section and frame clearance before ordering 11-inch wheel kits or drilling axles for thicker wiring.[^wolf-phase]
-- Genuine Amass 8 mm bullets clamp dual 10 AWG phases far tighter than generic 8 mm copies; expect to hand-fit or even shave 10 mm bullets if you mix brands on high-current leads, and budget space for 10 mm hardware when controllers ship with doubled 10 AWG phase tails.[^amass-fit]
-- QS8 mains remain the right call for triple-digit amp peaks, but riders chasing slimmer harnesses are flattening HXT 8 mm bullets directly onto conductors so copper, not solder, carries 120 A-class loads while XT90s are demoted to ≈45 A continuous service.[^qs8_hxt]
-- Vsett 9 owners stepping up from stock banana leads now favour XT150 housings because their 6 mm bullets stay cool around 35–40 A battery and 95 A phase without sacrificing ease of service.[^xt150_vsett9]
-- Splitting 60–70 A batteries between dual controllers still calls for AWG10 feeders, XT90 mains, and MR60 phase connectors; heat both sides of each joint for solid solder wicks and treat Daly BMS “50 A” ratings as optimistic short-burst figures.[^dual-feed]
+### Securing Cables
 
-## Accessory Loads (Denis Part 02)
+**Metal Zip Ties**:[^metal_zipties]
+- Stainless "metal zip ties" stay flexible in cold
+- Secure battery looms without hose clamp bulk
+- Plastic ties crack in winter storage
+- Good for garage-stored scooters
 
-- Budget roughly 1–1.5 A for 12 V horns and fuse their supply; many riders pair the loud horn with a polite bell for pedestrian zones.[^denis-horn]
-- Hidden trackers need their own low-dropout regulator (e.g., AMS1117-3.3) tied directly to the main battery because Xiaomi controllers don’t expose a standby 5 V rail.[^denis-tracker-ldo]
+> **💡 Pro Tip**: Plan cable routing before final assembly. Separating power and signal cables prevents many EMI-related issues.
 
-## Charging Interfaces
+## Cable Gauge Selection
 
-- Feeding 13 S builds through Xiaomi’s RCA Type X charge jack overheats the OEM wiring above ~3 A; higher-power projects either request custom connectors from charger vendors or convert to GX12-class ports.[^charge-port-13s]
+### Current Capacity Guidelines
+
+**AWG vs Current Ratings**:
+
+| Gauge | Continuous Current | Burst Current | Typical Use |
+|-------|-------------------|---------------|-------------|
+| 16 AWG | ~15A | ~25A | Low-power accessories |
+| 12 AWG | ~35A | ~55A | Medium power, short runs |
+| 10 AWG | ~55A | ~85A | 60A continuous applications |
+| 8 AWG | ~75A | ~115A | High power, dual feeds |
+| 6 AWG | ~100A | ~150A | Very high current mains |
+
+> **⚠️ Warning**: These ratings assume good cooling and short runs. Enclosed cables or long runs require derating.
+
+### Specific Applications
+
+**90A Battery Packs**:[^2]
+- Default to AWG10 main leads
+- Or dual AWG12 runs
+- Consider 3-3.5mm solid copper between pack negative and BMS
+- 40% more ampacity than single run
+- Keep runs short
+
+**100A Continuous Phase**:[^3]
+- 12 AWG phase leads comfortable at 100A
+- Light riders logged 150A bursts successfully
+- Post-ride temps near 45°C
+- **Requirements**:
+  - Short duty cycles
+  - Forced cooling if exceeding published ampacity
+
+**60A Continuous Applications**:[^4]
+- 10 AWG practical minimum
+- AS120 connectors run cooler than AS150
+- Contact geometry matters
+- Size wiring before chasing 70A+ limits
+
+### Heavy Current Applications
+
+**90-150A Phase Runs**:[^5]
+- Shift toward XT150 bullets or AS150U anti-spark
+- ~0.20 mΩ resistance
+- Spare signal pins for accessories
+- Controllers can feed trackers/smart BMS
+- Minimal voltage drop
+
+**120-180A Batteries**:[^ip001-xt90-headroom]
+- Demand dual XT60s
+- Or XT150/AS150 bullets
+- Or QS8 pairs
+- Plus 6-8 AWG leads
+- Keeps contact temperatures safe
+
+**190A-Class Scooters**:[^ip001-awg]
+- Dual 7 AWG battery leads
+- Or single 6 AWG
+- Wire gauge follows current, not voltage
+- Undersized looms make shrink brittle at 135-145°C
+
+> **📝 Definition**: Ampacity - The maximum current a conductor can carry continuously without exceeding its temperature rating.
+
+## Connector Selection
+
+### Understanding Ratings
+
+**XT90S Limitations**:[^ip001-xt90-headroom]
+- Single XT90S: ~50A continuous
+- ~65A burst ceiling
+- Paolo incinerated XT90S with >2,000µF cap banks at 16S+
+- **Lesson**: Step up to QS8/AS150 with better precharge
+
+**XT90 Real-World Limits**:[^qs8_hxt]
+- Demoted to ~45A continuous service
+- Good for light builds
+- Repeated hot-plugs cook in-line resistors
+- High-power crews use AS150 or QS8/QS10
+
+### Connector Recommendations by Current
+
+**Light Duty (<50A)**:
+- XT30: Adequate for accessories
+- XT60: Good for moderate power
+- XT90S: Anti-spark option
+
+**Medium Duty (50-100A)**:
+- XT90: Solid choice
+- AS120: Better thermal performance
+- MR60: Phase connectors
+
+**Heavy Duty (100-180A)**:
+- Dual XT60s
+- XT150: Clean and effective
+- AS150: Anti-spark capable
+- QS8: Proven at high current
+
+**Extreme Duty (180A+)**:
+- QS8 pairs
+- XT150/AS150 bullets
+- Direct soldered (inspected regularly)
+- 6-8 AWG minimum
+
+### Special Purpose Connectors
+
+**Higo L1019 Retrofit**:[^ip001-l1019]
+- 4mm² (~11 AWG) phases
+- Halls and temp lead in one jacket
+- Fits VSETT axles
+- Map color swap before installing
+- Keep on 50mm-class hubs (stays cool)
+
+**L1019 Limitations**:[^ip001-l1019-limit]
+- Avoid 60-70mm motors without rework
+- Factory "blob" solder inadequate
+- Desolder and upsize for high current
+
+**MT60 Phase Connectors**:[^xt150-guidance]
+- Bundle three XT60-style bullets
+- Tidy triple-phase hookups
+- Jason specs XT150 on phases, XT90 on battery
+
+**MT60 Failures**:[^ip001-mt60-failure]
+- Melted at ~200A, shorted Kelly controller
+- Retire drone-class connectors above 72V
+- Step up to XT150/AS150 or lugs at 150-200A
+
+### AS150U Anti-Spark
+
+**For Dual VESC >150A Phase**:[^7]
+- Standardizing on AS150U anti-spark pairs
+- 8 AWG tails
+- XT150/AS150 mains for 500A phase bursts
+- XT90s treated as temporary jumpers
+
+## Signal Filtering & Conditioning
+
+### Throttle Signal Filtering
+
+**Capacitor Selection**:[^ceramic_scavenge]
+- Scavenge ~100nF ceramic capacitors from dead electronics
+- Don't use oversized drone caps
+- **Critical**: Discharge and meter salvaged parts first
+- Bridge signal-to-ground with known capacitance
+
+### Parallel Pack Signal Discipline
+
+**When Paralleling Packs**:[^parallel_rules]
+1. **Tie all grounds together**
+2. **Match series counts and capacities**
+3. **Pre-balance voltages**
+4. **Watch for cross-charging**
+5. **Individual BMS protection doesn't prevent pack stress**
+
+### Rita-Style Y Cables
+
+**Proper Configuration**:[^denis-y-cable]
+- Two female battery legs
+- Single male controller lead
+- **Critical**: Match voltages before connection
+- Poorly soldered joints have shorted externals
+- Can scar decks
+
+> **⚠️ Safety Warning**: Voltage mismatch between parallel packs can cause dangerous cross-charging currents. Always pre-balance.
+
+## Phase Wire Management
+
+### Clearance Issues
+
+**Oversized Phase Wires**:[^phase_wire_clearance]
+- Can chafe against axle exits
+- Stick with 11 AWG Higo looms
+- Proven to survive 80/225A tunes
+- No insulation damage
+
+### Kelly 7230 Special Case
+
+**Cramped Harness**:[^kelly_bullet_debate]
+- Doubled 4 AWG phase leads
+- Crammed into 8mm bullets
+- Seasoned racers rewire with:
+  - Slimmer conductors
+  - Or 10mm hardware
+- Don't force oversized plugs
+
+### Wolf-Class Hubs
+
+**Stock Configuration**:[^wolf-phase]
+- Ship with ~4mm (AWG 11-12) phase leads
+- Tolerate ~130A once properly cooled
+- Measure copper cross-section first
+- Check frame clearance before upgrades
+
+### Amass Bullet Fitment
+
+**Quality Matters**:[^amass-fit]
+- Genuine Amass 8mm bullets superior
+- Clamp dual 10 AWG phases tighter
+- Generic 8mm copies looser
+- May need hand-fit or shaving for mixed brands
+- Budget space for 10mm hardware
+
+## Accessory Power Distribution
+
+### 48V Lighting Systems
+
+**Power Requirements**:[^ip001-lighting]
+- Compact 25W/3,500lm headlights common
+- Parallel high/low beams possible
+- **Critical Considerations**:
+  - 3A step-downs need heatsinking
+  - Nucular controllers: 12V/3A (~6A dual)
+  - Prefer lamps with integrated buck converters
+  - Avoid voltage drop on long runs
+
+### Voltmeter Integration
+
+**Limitations**:[^ip001-voltmeter]
+- Popular mini voltmeters cap at 35V
+- Expect 12V feed
+- 72-100V builds need dedicated step-downs
+- Or repurpose throttle displays
+- Control rails only provide ~3.3V
+
+### Horns
+
+**Current Budget**:[^denis-horn]
+- Budget ~1-1.5A for 12V horns
+- Fuse the supply
+- Pair loud horn with polite bell
+- Bell for pedestrian zones
+
+### Hidden Trackers
+
+**Power Requirements**:[^denis-tracker-ldo]
+- Need own low-dropout regulator
+- Example: AMS1117-3.3
+- Tie directly to main battery
+- Xiaomi controllers lack standby 5V rail
+
+### Quick Reference Sheet
+
+**Publish 48V Lighting Guide**:[^lighting_quickref]
+- Fuse sizing
+- Gauge picks
+- Load calculations
+- Prevents oversizing harnesses
+- Reminds about inline protection
+
+## Charging Infrastructure
+
+### 13S Limitations
+
+**Xiaomi RCA Type X**:[^charge-port-13s]
+- Overheats above ~3A on 13S builds
+- OEM wiring inadequate
+- **Solutions**:
+  - Request custom connectors from charger vendors
+  - Convert to GX12-class ports
+
+## Anti-Spark Systems
+
+### XT150 with JK BMS
+
+**Smart Integration**:[^ip001-xt150-routing]
+- JK smart BMS antispark stages enable XT150 hot-plugging
+- AS150 split shells simplify routing
+- Good for cramped VSETT decks
+
+### QS8 High-Current Applications
+
+**When Current Hits ~350A**:[^qs8_awg]
+- Step up to 6 AWG for single QS8
+- Dual-QS8 layouts: Paired 8 AWG acceptable
+- **Warning**: Don't trust "100A" cheap silicone marketing
+- Budget thicker copper before finalizing lengths
+
+## Soldering Best Practices
+
+### Mechanical Strength
+
+**Solder as Filler, Not Conductor**:[^6]
+- Twist or fold AWG12 leads
+- Double contact area before wetting
+- Silver-bearing solder conducts 2-5x worse than copper
+- Mechanical connection carries current
 
 ## Service Safety
 
-- After high-current rides, expect phase connectors to “weld” together—kill pack power, discharge controller capacitors, and be ready for sparks on reconnection to protect BLE boards and ESCs.[^phase-safety]
+### After High-Current Rides
 
-[^long_leads]: Source: knowledge/notes/input_part000_review.md, line 84.
-[^emi_routing]: Source: knowledge/notes/input_part000_review.md, line 85.
-[^metal_zipties]: Source: knowledge/notes/input_part010_review.md†L672-L673
-[^ceramic_scavenge]: Source: knowledge/notes/input_part000_review.md, line 126.
-[^parallel_rules]: Source: knowledge/notes/input_part000_review.md, line 127.
-[^antispark_tradeoff]: Source: knowledge/notes/input_part003_review.md†L511-L515
+**Phase Connector "Welding"**:[^phase-safety]
+1. **Kill pack power**
+2. **Discharge controller capacitors**
+3. **Expect sparks on reconnection**
+4. **Protect BLE boards and ESCs**
 
+### Dual Ubox Stacks
+
+**Capacitor Energy Storage**:
+- Briefly wake from stored capacitor energy
+- Even with pack unplugged
+- Watch status LEDs go dark
+- Depower accessories before unplugging
+
+## Troubleshooting Guide
+
+### Voltage Sag Issues
+
+**Symptoms**:
+- Significant voltage drop under load
+- Reduced performance
+- Early battery cutoff
+
+**Causes & Solutions**:
+1. Long cable runs → Shorten or upsize
+2. Undersized wire → Increase gauge
+3. Poor connectors → Upgrade to higher current rating
+4. High resistance joints → Reflow solder, ensure mechanical connection
+
+### Overheating Connectors
+
+**Symptoms**:
+- Warm/hot connectors after riding
+- Discolored housings
+- Melted plastic
+
+**Causes & Solutions**:
+1. Undersized for current → Upsize connector
+2. Poor contact → Clean and reseat
+3. Damaged pins → Replace connector
+4. Multiple joints in series → Minimize connections
+
+### EMI/Signal Issues
+
+**Symptoms**:
+- Throttle glitches
+- Display interference
+- Brake signal dropouts
+
+**Causes & Solutions**:
+1. Poor cable routing → Separate power/signal
+2. Missing grounds → Ensure common ground
+3. Unshielded cables → Use shielded for sensitive signals
+4. Missing filtering → Add appropriate capacitors
+
+## Connector Upgrade Checklist
+
+### When Upgrading Connectors
+
+- [ ] Calculate actual current requirements
+- [ ] Select connectors rated for 150-200% of nominal current
+- [ ] Choose appropriate wire gauge for connector
+- [ ] Plan cable routing before cutting
+- [ ] Test fit connectors before soldering
+- [ ] Use proper crimping tools
+- [ ] Apply heat shrink for strain relief
+- [ ] Label all connections
+- [ ] Test continuity before powering
+- [ ] Monitor temperatures on first ride
+
+## Related Guides
+
+- [Motor Controller Tuning](motor_controller_tuning.md)
+- [Battery Pack Design](battery_pack_design.md)
+- [Controller Setup](controller_setup.md)
+- [Accessories](accessories.md)
 
 ## References
 
+[^long_leads]: Source: knowledge/notes/input_part000_review.md, line 84
+[^emi_routing]: Source: knowledge/notes/input_part000_review.md, line 85
+[^metal_zipties]: Source: knowledge/notes/input_part010_review.md†L672-L673
+[^ceramic_scavenge]: Source: knowledge/notes/input_part000_review.md, line 126
+[^parallel_rules]: Source: knowledge/notes/input_part000_review.md, line 127
+[^antispark_tradeoff]: Source: knowledge/notes/input_part003_review.md†L511-L515
 [^1]: Source: knowledge/notes/input_part000_review.md†L325-L325
 [^2]: Source: knowledge/notes/input_part000_review.md†L373-L373
 [^3]: Source: knowledge/notes/input_part000_review.md†L468-L472

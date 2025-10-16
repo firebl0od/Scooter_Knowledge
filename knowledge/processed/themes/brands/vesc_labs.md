@@ -1,45 +1,294 @@
-# VESC Labs High-Voltage Portfolio (2025 Launch)
+# VESC Labs High-Voltage Controllers (2025 Launch)
 
-## TL;DR
+## Overview
 
-- August 2025 saw VESC Labs debut the Maxim 120 V family alongside the dual-channel VESC Duet (100 V peak, 150 A phase per side) and a matching smart BMS, signalling an official high-voltage stack from Vedder’s team and sparking immediate price-to-performance debates against Chinese imports.[^1]
-- Datasheet drops highlight STM32F4 control silicon, exposed capacitor bays for ventilation, and integrated balancing, but early adopters still question whether the roughly €530 Duet bundle justifies the current headroom relative to similarly priced competitors.[^2]
-- Compact e-moped builders now weigh the Minim 100 V’s tidy harnessing (≈180 A phase, ~35 A battery) against higher-battery-limit FarDriver boxes, forcing a choice between polished VESC firmware and trapezoidal brute force.[^3]
-- Community labs plan teardowns and telemetry comparisons—JPPL’s “VESC museum” already lines up Thor, MakerX, Tronic, and Ennoid controllers to benchmark Maxim hardware once shipments land.[^4]
+In August 2025, VESC Labs (Vedder's team) launched their official high-voltage controller lineup, including the Maxim 120V, VESC Duet dual controller, and matching Smart BMS. This marks the first official high-voltage VESC hardware from the original developers. However, pricing and performance relative to Chinese alternatives remain subjects of debate.
 
-## Product Line Snapshot
+## What You Need to Know
 
-| Product | Voltage Window | Continuous Phase / Battery Guidance | Distinguishing Features | Ideal Use Cases |
-| --- | --- | --- | --- | --- |
-| Maxim 120 V | Up to 120 V packs | Targeted at high-voltage single-motor builds (field data pending) | Official Vedder hardware with documented capacitor arrays and STM32F4 control | Flagship race scooters needing native VESC support |
-| VESC Duet | 100 V peak dual | 150 A phase per side (bundle pricing around €530) | Dual stack with vented capacitor bays and integrated balancing channels | Dual-motor commuters seeking turnkey CAN coordination |
-| Smart BMS | 120 V-class | Matching the Maxim ecosystem (current limits TBD) | Capacitor-equipped management with VESC-native telemetry | Builders wanting a single-vendor control + BMS stack |
-| Minim 100 V | 100 V packs | ≈180 A phase / ~35 A battery | Compact footprint for e-mopeds; firmware-aligned with VESC Tool | Lightweight scooters or mopeds prioritizing tidy harnessing |
+- Official VESC hardware from Benjamin Vedder's team
+- STM32F4-based controllers with documented design
+- Higher pricing than Chinese alternatives
+- Limited field testing data so far
+- Community actively benchmarking against competitors
 
-## Launch & Competitive Context
+## Product Line
 
-- Early adopters are benchmarking Maxim/Duet pricing against Tronic, Spintend, and FarDriver options while planning teardown logs to verify FET choices, capacitor count, and MCU resources versus launch claims.[^1]
-- Community curators such as JPPL maintain comparison fleets spanning Thor, MakerX, Tronic, and Ennoid controllers, ensuring consistent testbeds once Maxim and Seven 18 shipments arrive.[^4]
-- Seven 18 previews mirror Tronic X12 offerings—24 S or 30 S stacks with 18 or 30 FETs, bundled logging memory, and 12 V/4 A auxiliary rails—so Maxim pricing and telemetry need to be benchmarked against those imminent alternatives as well.[^seven_specs]
-- Builder wishlists already include detailed teardowns—photograph capacitor stacks, log MOSFET part numbers, and capture MCU identifiers so launch marketing can be validated against real hardware.[^5]
+### Maxim 120V (Single Controller)
 
-## Integration & Field Priorities
+**Specifications**:[^1][^2]
+- **Voltage**: Up to 120V packs
+- **MCU**: STM32F4 control silicon
+- **Design**: Exposed capacitor bays for ventilation
+- **Status**: Flagship single-motor option
 
-- Document Maxim/Duet installations with photos of capacitor bay airflow paths and thermal interface choices to validate how the vented design performs in enclosed decks.[^2]
-- Log CAN behavior when mixing Duet or Minim controllers with VESC Express or third-party telemetry; early Seven 18 bundles needed separate Express modules to handshake reliably, highlighting the value of validating Maxim interoperability before field deployment.[^4][^6]
-- Capture duty cycle, phase current, and battery sag data on Minim vs. FarDriver builds so commuters can decide whether firmware polish outweighs the higher current ceiling of trapezoidal controllers.[^3]
-- Track open-source obligations alongside hardware tests—early Seven 18 firmware shipped without source drops, prompting calls to publish the .c/.h files before wide Maxim deployments follow the same path.[^licensing]
-- Confirm firmware tooling before first power-ups—VESC Tool 6.06 Android releases briefly broke Bluetooth pairing (fixed in 6.06.4), so early Maxim adopters should plan desktop flashes and document software builds alongside their telemetry.[^tooling]
-- Budget clean power and firmware for bundled VESC Express boards—the modules only sip 5 V / 150 mA from Spintend rails, logging auto-restarts every three seconds on 6.06, and Seven’s pinned headers still need CAN adapters until firmware catches up.[^express_logging]
+**Target Use**: High-voltage race scooters needing native VESC support and official hardware.
 
-## Source Notes
+### VESC Duet (Dual Controller)
 
-- Product launch details, pricing context, and benchmarking plans pull from the 2025 VESC Labs review slices outlining Maxim/Duet announcements, STM32F4 hardware notes, and JPPL’s comparison fleet for upcoming telemetry tests.[^7]
-- Minim 100 V positioning and FarDriver comparisons derive from the same discussions of e-moped harness packaging, phase/battery targets, and controller trade-offs for compact builds.[^3]
-[^seven_specs]: Seven 18 product outline covering 24 S/30 S variants with 18 or 30 FETs, bundled logging, and 12 V/4 A auxiliary rails—context for benchmarking Maxim pricing and telemetry. Source: knowledge/notes/input_part014_review.md, L52 to L54
-[^tooling]: VESC Tool 6.06 updates temporarily broke Bluetooth pairing for some Spintend/Maxim testers until 6.06.4 landed, prompting a fallback to desktop flashing for new hardware rollouts. Source: knowledge/notes/input_part014_review.md, L4519 to L4524. Source: knowledge/notes/input_part014_review.md, L5111 to L5114
-[^licensing]: Seven 18 prototypes landed with VESC Tool 6.06 firmware but no accompanying source release, so testers are pressing vendors to publish code as required by the VESC license before broader rollouts. Source: knowledge/notes/input_part014_review.md, L147 to L147
-[^express_logging]: VESC Express modules need external buck converters for 5 V supply, log cleanly on 6.05 (6.06 restarts every three seconds), and still rely on separate CAN modules to talk to Seven’s controllers until header mappings are fixed. Source: knowledge/notes/input_part014_review.md, L138 to L140. Source: knowledge/notes/input_part014_review.md, L146 to L148. Source: knowledge/notes/input_part014_review.md, L180 to L180
+**Specifications**:[^1][^2]
+- **Voltage**: 100V peak (dual channel)
+- **Phase Current**: 150A per side
+- **Price**: ~€530 bundle
+- **Features**:
+  - Vented capacitor bays
+  - Integrated balancing channels
+  - Turnkey CAN coordination
+
+**Target Use**: Dual-motor commuters seeking integrated solution with official support.
+
+### Smart BMS
+
+**Specifications**:[^1]
+- **Voltage**: 120V-class packs
+- **Features**:
+  - Capacitor-equipped management
+  - VESC-native telemetry
+  - Integrated with Maxim ecosystem
+
+**Target Use**: Builders wanting single-vendor control + BMS stack with seamless integration.
+
+### Minim 100V (Compact)
+
+**Specifications**:[^3]
+- **Voltage**: 100V packs
+- **Phase Current**: ~180A
+- **Battery Current**: ~35A
+- **Form Factor**: Compact for e-mopeds
+- **Firmware**: VESC Tool aligned
+
+**Target Use**: Lightweight scooters or mopeds prioritizing tidy packaging and VESC features.
+
+## Price-to-Performance Debate
+
+### The Question
+
+At ~€530 for the Duet bundle, early adopters are asking:[^1]
+- Does official hardware justify the premium?
+- How does it compare to Chinese imports?
+- Is the current headroom worth the cost?
+
+### What Needs Validation
+
+**Community Priorities**:[^1][^5]
+1. Detailed teardowns with photos
+2. Capacitor stack documentation
+3. MOSFET part number verification
+4. MCU resource confirmation
+5. Real-world thermal testing
+6. Performance data vs. competitors
+
+> **📝 Note**: Launch marketing needs field validation. Community is actively testing to verify claims.
+
+### Competitive Context
+
+**Alternatives Being Compared**:[^1]
+- Tronic controllers
+- Spintend high-voltage options
+- FarDriver for raw current capability
+- Seven 18 (similar specs, different pricing)
+
+## Field Testing Priorities
+
+### Documentation Requirements
+
+**For Every Installation**:[^2][^5]
+- [ ] Photograph capacitor bay airflow paths
+- [ ] Document thermal interface choices
+- [ ] Note MOSFET part numbers
+- [ ] Capture MCU identifiers
+- [ ] Log vented design performance in enclosed decks
+
+### Thermal Validation
+
+**First Ride Testing**:[^2]
+1. Monitor temperatures closely
+2. Verify vented design effectiveness
+3. Compare to alternatives if available
+4. Document thermal throttling behavior
+5. Test in enclosed deck installations
+
+### CAN Integration Testing
+
+**Interoperability Checks**:[^4][^6]
+- Test with VESC Express modules
+- Try third-party telemetry
+- Verify reliable handshaking
+- Compare to Seven 18 experiences (needed separate modules)
+
+> **⚠️ Learning from Seven 18**: Early units needed separate Express modules for telemetry. Validate Maxim interoperability before deployment.
+
+### Performance Logging
+
+**Critical Data to Capture**:[^3]
+- Duty cycle behavior
+- Phase current actuals vs. commanded
+- Battery sag under load
+- Thermal performance
+- Comparison with FarDriver (for Minim users)
+
+## Firmware & Software
+
+### VESC Tool Compatibility
+
+**Known Issues**:[^tooling]
+- VESC Tool 6.06 Android temporarily broke Bluetooth pairing
+- Fixed in 6.06.4
+- Desktop flashing recommended for new hardware
+- Document software builds with telemetry
+
+**Best Practice**:
+- Test firmware before field deployment
+- Keep backup of working versions
+- Plan desktop flashes initially
+- Join community for compatibility updates
+
+### Open Source Compliance
+
+**Important Consideration**:[^licensing]
+- VESC firmware is GPL-licensed
+- Seven 18 shipped without source code
+- Press vendors to publish `.c/.h` files
+- Community expects GPL compliance
+
+**Why This Matters**:
+- Enables modifications and fixes
+- Supports community development
+- Legal requirement under GPL
+- Critical for long-term support
+
+### VESC Express Boards
+
+**Power Requirements**:[^express_logging]
+- Needs external buck converter for 5V supply
+- Only draws 5V / 150mA from Spintend rails
+- Clean logging on 6.05
+- 6.06 restarts every 3 seconds (firmware issue)
+
+**Workarounds**:
+- Use separate CAN modules if needed
+- Budget for external power supplies
+- Test thoroughly before deployment
+
+## Comparison: Minim vs. FarDriver
+
+### Decision Factors
+
+**Minim 100V Advantages**:[^3]
+- Tidy harnessing
+- VESC firmware features
+- Better integration
+- ~180A phase / ~35A battery
+
+**FarDriver Advantages**:[^3]
+- Higher battery current limit
+- Trapezoidal brute force
+- Proven for high-current applications
+
+**Choose Minim If**:
+- You value firmware polish
+- You want VESC Tool features
+- Compact packaging is priority
+- 35A battery is sufficient
+
+**Choose FarDriver If**:
+- You need maximum battery current
+- Simplicity over features
+- Proven track record matters
+- Current is the limiting factor
+
+## Community Benchmarking
+
+### VESC Museum Project
+
+**JPPL's Comparison Fleet**:[^4]
+Currently includes:
+- Thor controllers
+- MakerX hardware
+- Tronic controllers
+- Ennoid platforms
+
+**Adding for Comparison**:
+- VESC Labs Maxim/Duet
+- Seven 18 controllers
+
+**Purpose**: Consistent testbed for validating new controller releases against known-good hardware.
+
+### How to Contribute
+
+1. **Share thermal data** from installations
+2. **Post detailed teardowns** with photos
+3. **Log performance metrics** (phase/battery current, temps)
+4. **Document failures and successes**
+5. **Help others troubleshoot** issues
+
+## Installation Checklist
+
+### Pre-Installation
+
+- [ ] Research available reviews and field reports
+- [ ] Join community forums for latest updates
+- [ ] Archive firmware before installation
+- [ ] Budget validation time and testing
+- [ ] Have backup controller plan
+
+### During Installation
+
+- [ ] Document capacitor configuration
+- [ ] Photograph thermal interfaces
+- [ ] Note all part numbers
+- [ ] Record firmware versions
+- [ ] Test CAN communication
+
+### Post-Installation
+
+- [ ] Log first ride temperatures
+- [ ] Capture performance data
+- [ ] Compare to expected specs
+- [ ] Share findings with community
+- [ ] Document any issues
+
+## When to Choose VESC Labs
+
+**Good Fit If**:
+- You want official VESC hardware
+- You value Benjamin Vedder's support
+- You need documented, vetted design
+- You're willing to pay premium
+- You want to support open-source development
+
+**Consider Alternatives If**:
+- Budget is primary concern
+- You need proven track record
+- Higher current limits required
+- Chinese import pricing more attractive
+- Immediate availability critical
+
+## Current Limitations
+
+### Field Testing
+
+**What We Don't Know Yet**:[^1]
+- Long-term reliability data
+- Real-world thermal performance in various climates
+- Comparative performance vs. competitors
+- Failure modes and weak points
+- Optimal tuning parameters
+
+**Community actively gathering this data.**
+
+### Availability
+
+- Recently launched (August 2025)
+- Shipping status varies by region
+- Lead times unknown
+- Stock levels unclear
+
+## Related Guides
+
+- [High-Voltage VESC Controller Market](../guides/high-voltage-vesc-controller-market-2025.md)
+- [Controller Setup](../guides/controller_setup.md)
+- [Motor Controller Tuning](../guides/motor_controller_tuning.md)
 
 ## References
 
@@ -50,3 +299,6 @@
 [^5]: Source: knowledge/notes/input_part014_review.md, L213 to L213
 [^6]: Source: knowledge/notes/input_part014_review.md, L146 to L148
 [^7]: Source: knowledge/notes/input_part014_review.md, L24 to L148
+[^tooling]: Source: knowledge/notes/input_part014_review.md, L4519 to L4524; L5111 to L5114
+[^licensing]: Source: knowledge/notes/input_part014_review.md, L147 to L147
+[^express_logging]: Source: knowledge/notes/input_part014_review.md, L138 to L140; L146 to L148; L180 to L180

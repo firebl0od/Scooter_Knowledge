@@ -1,39 +1,190 @@
-# 3D Printing & Materials Playbook
+# 3D Printing & Materials for E-Scooter Builds
 
-## Filament Selection & Tooling
+## Overview
 
-- PETG and carbon-filled PETG handle deck spacers and mounts, but CF blends demand ≥0.6 mm hardened-steel nozzles, heated chambers, and filament dryers to fight brittleness; PLA survives storage yet warps in high-heat climates like Las Vegas.[^1]
-- Tinmorry’s true chopped-fibre PETG-CF prints significantly tougher than powder-filled “carbon” blends.
-  - builders even turn the parts on lathes, whereas filler-only filaments offer little benefit beyond marketing.[^2]
-- Keep epoxy, cyanoacrylate, or specialty plastic adhesives on hand when reinforcing PETG/PLA accessories.
-  - these glues bond without melting the print and keep commuter hardware intact.[^3]
-- Smooth PEI sheets grip PETG aggressively—bump Z offset ~0.1 mm or switch to glass, textured PEI, FR4, or a glue-stick barrier before ripping the coating during enclosure runs.[^smooth_pei_offset]
+This guide covers 3D printing best practices for creating custom e-scooter parts, including material selection, print settings, and quality control. Whether you're making battery spacers, mounting brackets, or enclosure parts, these field-tested techniques will help you produce durable components.
 
-## Production Discipline
+## What You'll Learn
 
-- PETG battery holders crack when printed wet or too fast; veterans dry filament, slow to 80–120 mm/s with 0.6 mm nozzles, run 240–260 °C hotends, and tune retraction/fan settings before trusting cages to hold 21700 cells.[^4]
-- Artem finally tamed PETG stringing by running 0.3 mm layers at 0.4 mm width around 140 mm/s (~14 mm³/s) and cycling rolls within two days so the filament never needs drying on current tooling.[^petg_fast]
-- Printing transparent PETG carriers demands ~13 mm/s speeds, minimal cooling, and post-polish to avoid haze.
-  - stock Bambu profiles run too hot and cloud the parts immediately.[^5]
-- Shops chasing quick turnaround on fixtures keep praising the Bambu P1S because its enclosed chamber and turnkey slicer profil
-es spit out ABS/ASA spacers, insulation trays, and lighting brackets without weeks of tuning—handy when you need fresh mounts b
-etween test rides.[^bambu_p1s]
-- Stuffing twin 12 AWG leads into QS8 shells is notoriously tight.
-  - use plenty of flux, fully wet both conductors, and layer heat-shrink when the plastic lid refuses to latch cleanly.[^6]
-- Working aluminium or PETG parts throws fine particulates; wear gloves, wash thoroughly, and avoid eating until you clean up to limit microplastic exposure.[^microplastic-ppe]
-- Keep textured PEI sheets spotless (dish soap or IPA) and hold the bed near 95 °C so PETG grips without warping; too much adhesion still calls for careful part removal despite the texture.[^7]
-- Skip exotic PEEK or metal prints for high-load gearboxes.
-  - builders remind 130 kg riders pushing 150 A at 10 krpm that plastic reducers fail fast, while chain drives with QS90 hubs survive cramped frames far better.[^8]
+- Which filaments work best for different applications
+- Print settings that prevent failures
+- How to achieve strong, durable parts
+- Safety considerations when working with materials
 
-## Battery Fixtures & Hardware
+## Recommended Materials
 
-- Xiaomi-class PETG carriers still relax with heat; Finn sizes the cups for 21.4 mm P42A vs. tighter 21.15 mm 40P cans and runs high infill so the pack flexes before cracking when warm.[^petg-holders]
-- Pandalgns’ modular battery cases add BMS service holes and screw-linked columns with mesh caps for triangular 10 S6 P bike packs, keeping nickel clamped while leaving room for a dedicated BMS plate.[^pandalgns-triangle]
-- Builders are still hunting thin thrust washers to sit between hub shafts and end caps—call out the sourcing gap when assembling maintenance kits alongside spare controller boards.[^thrust-washers]
-## Shared Print Assets
+### PETG (Polyethylene Terephthalate Glycol)
 
-- Community brace kits for Ninebot G30 decks now circulate as `middle.stl` plus `front/left/right/rear.3mf` files so builders can reinforce ground decks after heavy grinding without redrawing the geometry from scratch.[^g30_brace]
+**Best For**: Deck spacers, mounting brackets, battery holders, general structural parts
 
+**Properties**:
+- Good strength and flexibility balance
+- Resistant to impacts and vibration
+- Works in most climates (but can warp in extreme heat like Las Vegas)[^1]
+- Bonds with mechanical fasteners or specialized adhesives[^3]
+
+**Print Settings**:
+- **Temperature**: 240-260°C hotend
+- **Speed**: 80-120 mm/s with 0.6mm nozzle
+- **Layer Height**: 0.3mm at 0.4mm width for strength
+- **Bed**: 95°C on textured PEI[^7]
+- **Critical**: Dry your filament first! Wet PETG cracks easily[^4]
+
+> **💡 Pro Tip**: Artem's fast PETG profile runs 0.3mm layers at 140 mm/s (~14 mm³/s) and uses filament within 2 days to avoid needing a dryer.[^petg_fast]
+
+### Carbon Fiber PETG
+
+**Best For**: High-strength brackets, motor mounts, load-bearing structural parts
+
+**Two Types**:
+1. **True Chopped Fiber** (e.g., Tinmorry): Significantly stronger, can even be turned on a lathe[^2]
+2. **Powder-Filled**: Minimal strength benefit, mostly cosmetic
+
+**Requirements**:
+- ≥0.6mm hardened steel nozzle (CF is abrasive)
+- Heated chamber for best results
+- Filament dryer to maintain quality
+
+> **⚠️ Material Note**: Don't waste money on "carbon-filled" filaments that only contain powder. True chopped-fiber versions provide real strength improvements.
+
+### PLA (Polylactic Acid)
+
+**Best For**: Prototypes, jigs, temporary parts, storage fixtures
+
+**Limitations**:
+- Warps in high heat environments
+- Not suitable for parts exposed to sun or motor heat
+- Use for testing designs before printing in PETG
+
+### Specialty Materials
+
+**PEEK & Metal Prints**: Skip these for high-load applications. Even at 150A and 10krpm with heavy riders (130kg), plastic gearboxes fail quickly. Chain drives with QS90 hubs work better in tight spaces.[^8]
+
+**ABS/ASA**: Good for enclosed chamber printing (Bambu P1S) when you need quick turnaround on fixtures and brackets.[^bambu_p1s]
+
+## Critical Print Quality Settings
+
+### For Battery Holders
+
+Battery holders are safety-critical—they must not crack during riding vibration.
+
+**Requirements**:[^4]
+1. **Dry filament** - Store in sealed containers with desiccant
+2. **Slow down** - 80-120 mm/s prevents layer adhesion issues
+3. **Optimize temperature** - 240-260°C for PETG
+4. **Tune retraction** - Reduce stringing without causing gaps
+5. **Control cooling** - Balance layer adhesion with dimensional accuracy
+
+**Sizing Considerations**:
+- Size cups for actual cell diameter (e.g., 21.4mm for P42A vs. 21.15mm for 40P)
+- Use high infill so parts flex slightly rather than crack when warm[^petg-holders]
+
+### For Transparent Parts
+
+**Special Requirements**:[^5]
+- Print at ~13 mm/s (very slow)
+- Minimal cooling fan
+- Post-process with polishing for clarity
+- Stock Bambu profiles run too hot and cause clouding
+
+### Bed Adhesion
+
+**PEI Sheet Tips**:
+- **Smooth PEI**: Grips PETG very aggressively
+  - Increase Z-offset by ~0.1mm
+  - Or use glass, textured PEI, or glue stick barrier to prevent damage[^smooth_pei_offset]
+- **Textured PEI**: Keep clean with dish soap or IPA
+  - Heat bed to 95°C for PETG
+  - Good grip without excessive adhesion[^7]
+
+## Practical Applications
+
+### Battery Pack Fixtures
+
+**Modular Cases**: Pandalgns' designs include BMS service holes, screw-linked columns, and mesh caps for triangular 10S6P e-bike packs. These keep nickel strips clamped while providing access for maintenance.[^pandalgns-triangle]
+
+**Cell Retention**: PETG relaxes with heat, so design holders with appropriate clearance and high infill for flex without cracking.
+
+### Deck Reinforcement
+
+**Community Files Available**: Ninebot G30 deck brace kits circulate as `middle.stl` plus `front/left/right/rear.3mf` files. These let you reinforce ground decks after heavy use without redrawing geometry.[^g30_brace]
+
+### Sourcing Gap
+
+**Thrust Washers**: Builders are still hunting thin thrust washers to sit between hub shafts and end caps. Stock these in maintenance kits alongside spare controller boards.[^thrust-washers]
+
+## Assembly & Finishing
+
+### Adhesives
+
+When parts need bonding:[^3]
+- **Epoxy**: Best for structural joints
+- **Cyanoacrylate (Super Glue)**: Quick fixes
+- **Specialty plastic adhesives**: For flexible connections
+- These bond without melting prints like solvent-based methods
+
+### Connector Assembly
+
+**QS8 Connectors**: Stuffing twin 12 AWG leads is notoriously tight:[^6]
+1. Use plenty of flux
+2. Fully wet both conductors with solder
+3. Layer heat-shrink tubing
+4. Be patient when the plastic lid resists latching
+
+## Safety & Health
+
+### Material Handling
+
+**Microplastic Exposure**:[^microplastic-ppe]
+- Wear gloves when sanding aluminum or PETG parts
+- Wash hands thoroughly before eating
+- Fine particulates from working these materials can accumulate
+- Consider respiratory protection for heavy sanding
+
+### Print Environment
+
+**Enclosed Printers**: Help contain fumes and maintain temperature
+- Especially important for ABS/ASA printing
+- Improves part quality and consistency
+
+## Recommended Equipment
+
+### Why Bambu P1S?
+
+The community praises this printer for scooter work:[^bambu_p1s]
+- Enclosed chamber for ABS/ASA
+- Turnkey slicer profiles
+- Fast production of spacers, trays, and brackets
+- Minimal tuning needed between prints
+- Quick turnaround for test iterations
+
+## Troubleshooting
+
+### PETG Stringing
+
+Artem's solution: Use filament within 2 days of opening so it never needs drying. Alternatively, invest in a good filament dryer and sealed storage.[^petg_fast]
+
+### Cracked Battery Holders
+
+If your holders crack:
+1. Verify filament is completely dry
+2. Slow print speed to 80-100 mm/s
+3. Increase hotend temperature slightly
+4. Check that cooling isn't too aggressive
+5. Ensure bed adhesion is good (no warping stress)
+
+### Part Warping
+
+- Increase bed temperature
+- Ensure drafts aren't cooling parts unevenly  
+- Use an enclosure for temperature-sensitive materials
+- Add brims or rafts for better first-layer adhesion
+
+## Related Guides
+
+- [Battery Pack Design](battery_pack_design.md) - For battery holder dimensions
+- [Chassis Fitment](chassis_fitment.md) - Mounting considerations
+- [Power Distribution](power_distribution.md) - Cable routing and brackets
 
 ## References
 

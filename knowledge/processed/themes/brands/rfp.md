@@ -1,18 +1,152 @@
-# RFP Controller & Frame Notes
+# RFP Controllers & Custom Frames
 
-## TL;DR
+## Overview
 
-- Production RFP controllers have earned a “set-and-forget” reputation for daily Jetson/commuter duty so long as battery current stays moderate, standing out as one of the few plug-and-ride options in the group’s mixed fleets.[^1]
-- RFP’s extended frame leaves roughly 15 cm more battery bay than stock Thunder layouts, opening space for dual Tronic Seven-class controllers and 22 S 11 P Eve 40PL packs as builders stage their upgrades.[^2]
+RFP produces aftermarket electric scooter controllers and custom chassis designs. They're particularly known for reliable daily-driver controllers and extended frames that accommodate larger battery packs and dual-controller setups.
 
-## Upgrade Roadmap
+## Product Line
 
-- Yamal plans to validate high-KV motors on his Nami before moving them into the RFP chassis; if torque or thermal headroom falls short he’ll swap to 75H 22/3 hubs and chase ~600 A phase / 350–400 A battery per controller once the bay is reworked.[^3]
+### Controllers
 
-## Integration Checklist
+**RFP VESC Controllers**: Production units have earned a "set-and-forget" reputation for daily Jetson and commuter duty, provided battery current stays at moderate levels. They stand out as one of the few plug-and-ride options in mixed fleet environments.[^1]
 
-1. **Map controller placement early.** The longer bay makes dual-controller layouts practical—reserve mounting points and airflow paths for front and rear stages before wiring.[^2]
-2. **Stage pack upgrades.** Begin with the 22 S 11 P Eve 40PL pack the frame was dimensioned around, then revisit traction-control and thermal limits before pushing currents toward the planned 600 A phase target.[^4]
+**Key Strength**: Reliability for daily commuting without constant tuning.
+
+### Custom Frames
+
+**RFP Extended Frame**: The signature feature is approximately 15cm more battery bay space compared to stock Thunder layouts. This extra room enables:
+- Dual Tronic Seven-class controllers
+- Large battery packs (22S11P Eve 40PL configurations)
+- Staged upgrade paths as builds evolve[^2]
+
+## Applications
+
+### Daily Commuting
+
+RFP controllers excel in practical, reliable transportation:
+- Set conservative current limits
+- Minimal ongoing maintenance
+- Consistent performance across weather conditions
+- Good for riders who want reliability over peak performance
+
+### High-Performance Builds
+
+The extended frame opens possibilities for serious power:
+- **Target Configuration**: 75H 22/3 hubs
+- **Projected Power**: ~600A phase / 350-400A battery per controller
+- **Battery**: 22S11P Eve 40PL packs[^3]
+
+> **📝 Note**: These are staged upgrade targets. Start conservative and validate each step before pushing limits.
+
+## Building with RFP Components
+
+### Planning Checklist
+
+When planning a dual-controller RFP frame build:[^2][^4]
+
+1. **Controller Placement**
+   - Map mounting points early in the design phase
+   - Reserve adequate space for airflow around both controllers
+   - Plan cable routing before finalizing positions
+   - Consider heat management from the start
+
+2. **Battery Staging**
+   - Begin with the 22S11P Eve 40PL pack the frame was designed for
+   - This provides baseline performance and proves the packaging
+   - Validates thermal performance before increasing power
+
+3. **Progressive Tuning**
+   - Start with conservative current limits
+   - Log temperature and performance data
+   - Only increase power after confirming cooling is adequate
+   - Implement traction control before chasing 600A phase targets
+
+### Motor Selection Strategy
+
+Yamal's approach provides a good model:[^3]
+1. Validate high-KV motors on existing platform (e.g., Nami)
+2. If torque or thermal performance is inadequate, upgrade
+3. Step to 75H 22/3 hubs for better heat handling
+4. Only then push toward 600A phase per controller
+5. Maintain 350-400A battery current limits
+
+## Integration Tips
+
+### Dual Controller Setup
+
+**Space Requirements**:
+- Front and rear controllers need independent mounting
+- Each requires thermal pathway to chassis or air
+- Plan CAN bus wiring between controllers
+- Allow access for service and adjustments
+
+**Thermal Management**:
+- Extended bay helps, but active cooling may still be needed
+- Monitor both controller temperatures independently
+- Consider airflow direction through the bay
+- Don't assume more space automatically means better cooling
+
+### Upgrade Path
+
+**Phase 1 - Establish Baseline**:
+- Install RFP controllers with conservative settings
+- Install properly sized battery pack (22S11P)
+- Validate all systems work together
+- Collect thermal and performance data
+
+**Phase 2 - Optimize Current Setup**:
+- Fine-tune current limits based on real data
+- Implement traction control
+- Ensure cooling is adequate
+- Verify BMS can handle power levels
+
+**Phase 3 - Consider Motor Upgrades**:
+- Only if current motors limit performance
+- Test on another platform first if possible
+- Plan for increased thermal load
+- Budget for proper integration
+
+## Comparison with Other Options
+
+### vs. Stock Thunder Frame
+- **RFP**: +15cm battery bay, dual controller friendly
+- **Thunder**: More compact, simpler integration
+
+### vs. Boutique Controllers
+- **RFP**: Proven reliability, plug-and-play
+- **High-end**: More tuning potential, higher peak power
+
+## Maintenance & Support
+
+**Daily Use**:
+- RFP controllers require minimal intervention
+- Standard VESC firmware updates apply
+- Community support available for common issues
+
+**Availability**:
+- Controllers are production items, not custom orders
+- Extended frames may have longer lead times
+- Check with RFP directly for current availability
+
+## When to Choose RFP
+
+**Good Fit If**:
+- You prioritize reliability over peak performance
+- You're building a high-power dual-motor setup
+- You need more battery space than stock frames offer
+- You want proven components for daily use
+
+**Consider Alternatives If**:
+- You need absolute maximum performance
+- Stock frame dimensions work for your pack
+- You prefer single-controller simplicity
+- You're on a tight budget
+
+## Related Resources
+
+- [Controller Setup Guide](../guides/controller_setup.md)
+- [Battery Pack Design](../guides/battery_pack_design.md)
+- [Power Distribution](../guides/power_distribution.md)
 
 ## References
 
