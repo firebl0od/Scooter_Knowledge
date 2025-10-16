@@ -1,23 +1,123 @@
-# Xiaomi Fold & Pole Repair Notes
+# Xiaomi Folding Mechanism & Handlebar Pole Repair
 
-## Diagnosing Loose Poles
+## Overview
 
-- A wandering folding-pin usually means the factory epoxy let go.
-  - inspect the pole-to-stem joint and the pin carrier instead of overtightening the latch, which only chews the aluminum.[^1]
-- Xiaomi rarely sells complete pole assemblies, so be ready to source aftermarket hardware or rebuild the existing tube with metal-filled epoxy and stainless clamps.[^2]
+This guide covers diagnosis and repair of loose or failing folding mechanisms on Xiaomi electric scooters (M365, Pro, Pro 2). The most common issue is epoxy failure at the pole-to-stem joint, which causes play in the handlebar and an unsafe riding experience.
 
-## Repair Workflow
+## What You'll Learn
 
-- Strip the pole, clean away the failed adhesive, and reset the insert with high-strength epoxy (two-part metal formulas held up best in field repairs). Allow full cure before reinstalling the latch to keep play from returning on the first ride.[^2]
-- When dealing with factory epoxy-bonded clamps, warm the joint gently with a heat gun, wick in IPA to soften the bond, and use wooden wedges to separate the halves so you avoid gouging aluminum before pressing hardware back together.[^3]
-- If you cannot source OEM parts, reinforce the joint with inner and outer collars plus stainless hardware; riders have 3D-printed mockups before handing the design to local metal shops for permanent braces.[^4]
+- How to identify the source of handlebar wobble
+- Step-by-step repair procedures
+- Material recommendations for lasting fixes
+- Troubleshooting accessory port issues after repair
 
-## Accessory Considerations
+## Understanding the Problem
 
-- The Max G30 accessory port shares traces with the rear light.
-  - when it shows 5 V but no current, trace continuity back to the buck converter before blaming the port itself.[^5]
-- After reassembly, reapply waterproofing around the latch slot and wiring pass-throughs; uncured epoxy and missing silicone gaskets let spray back into the stem and undo the repair.[^2]
+### Common Symptoms
 
+**Loose Folding Pin**: If your folding mechanism pin moves around or the handlebars have excessive play, this usually indicates that the factory epoxy bond has failed.[^1]
+
+> **⚠️ Safety Warning**: A loose pole can cause sudden steering failure. Address this issue immediately.
+
+### Root Cause
+
+The Xiaomi factory uses epoxy to bond the folding pin carrier to the stem. Over time, vibration, stress from folding/unfolding, and temperature cycling cause this bond to fail. Overtightening the folding latch only damages the soft aluminum threads—it won't fix the underlying problem.[^1]
+
+### Parts Availability
+
+**Important Note**: Xiaomi rarely sells complete pole assemblies as replacement parts. You'll likely need to either source aftermarket components or perform a structural repair on your existing pole using metal-filled epoxy and stainless steel reinforcement.[^2]
+
+## Repair Procedure
+
+### Materials Needed
+
+- Two-part metal-filled epoxy (recommended: marine-grade or structural adhesive)
+- Isopropyl alcohol (IPA) for cleaning
+- Heat gun (for disassembly)
+- Wooden wedges
+- Stainless steel clamps or collars (if fabricating custom reinforcement)
+- Waterproofing sealant (silicone or equivalent)
+
+### Step 1: Disassembly
+
+1. **Strip the handlebar pole** completely
+2. **Apply gentle heat** to the failed joint using a heat gun
+3. **Apply IPA** to soften the old epoxy bond
+4. **Use wooden wedges** to carefully separate components
+   - *Why wooden?* They won't gouge or damage the aluminum surfaces[^3]
+
+### Step 2: Cleaning
+
+1. Remove all traces of the old adhesive
+2. Clean aluminum surfaces thoroughly with IPA
+3. Allow surfaces to dry completely
+4. Lightly roughen bonding surfaces (optional, improves adhesion)
+
+### Step 3: Reassembly
+
+**Using Epoxy Repair**:[^2]
+1. Apply two-part metal-filled epoxy to the joint
+   - *Field experience shows* metal-filled formulas provide the best durability
+2. Clamp or position components carefully
+3. **Allow full cure time** before proceeding (follow manufacturer's instructions)
+4. Only reinstall the folding latch after epoxy has fully cured
+
+**Using Mechanical Reinforcement**:[^4]
+If OEM parts aren't available or you want a more permanent solution:
+1. Design inner and outer collar reinforcements
+   - Many riders 3D-print prototypes first
+2. Take the proven design to a local machine shop
+3. Have collars fabricated from aluminum or steel
+4. Install with stainless steel hardware for maximum strength
+
+> **💡 Pro Tip**: Document your repair process with photos. If the fix works well, share your design with the community so others can benefit.
+
+### Step 4: Waterproofing
+
+After repairs are complete, restore water resistance:[^2]
+1. Apply fresh sealant around the folding latch slot
+2. Seal any wiring pass-throughs
+3. Ensure silicone gaskets are properly seated
+4. Allow sealant to cure before riding in wet conditions
+
+> **⚠️ Important**: Missing or poorly applied waterproofing allows water spray into the stem assembly, which can undo your mechanical repairs through corrosion.
+
+## Troubleshooting Accessory Issues
+
+### Max G30 Accessory Port Problems
+
+**Symptom**: Accessory port shows 5V but provides no current.
+
+**Cause**: The Max G30 accessory port shares circuit traces with the rear light. The issue may not be the port itself.[^5]
+
+**Diagnosis Steps**:
+1. Verify rear light function
+2. Trace continuity from the port back to the buck converter
+3. Check for damaged traces or poor solder joints
+4. Test buck converter output under load
+
+## Maintenance Tips
+
+To prevent future issues:
+- Avoid repeatedly folding/unfolding unless necessary
+- Don't overtighten the folding latch
+- Periodically inspect the joint for play
+- Keep the mechanism clean and dry
+- Consider preventive reinforcement if you frequently transport the scooter folded
+
+## When to Seek Professional Help
+
+Consider professional assistance if:
+- You're uncomfortable working with epoxy and structural repairs
+- The aluminum stem shows cracks or severe damage
+- You need custom metal parts fabricated
+- The scooter has been in a crash that may have compromised the frame
+
+## Related Guides
+
+- [Xiaomi Tire & Brake Upgrades](xiaomi_tire_brake_upgrade_notes.md)
+- [Xiaomi Battery Maintenance](xiaomi_battery_maintenance.md)
+- [Xiaomi High Voltage Upgrade Checklist](xiaomi_high_voltage_upgrade_checklist.md)
 
 ## References
 
