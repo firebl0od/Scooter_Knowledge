@@ -16,6 +16,7 @@
 ## Media Capture & Logging
 
 - Insta360 cameras still provide native GPS overlays, whereas GoPro’s Hero 12 dropped the feature, so riders chasing on-screen speed data favour Insta360 hardware for documentation runs.[^insta360]
+- Arduino-driven dashboards are emerging for VESC swaps—Koxx demoed a Xiaomi running custom VESC firmware with an auxiliary microcontroller handling display duties, proving open hardware can backfill Rita telemetry gaps.[^vesc-arduino-dash]
 
 ## Lighting Upgrades
 
@@ -23,6 +24,13 @@
 - When pack marketing claims prove inflated, commuters repack MagicShine-style lights with quality 18650/21700 cells or jump to budget 5×P90 AliExpress headlights so night rides aren’t riding on dying “10 000 mAh” packs.[^magicshine_repack]
 - Compact, E-marked motorcycle turn signals from AliExpress pair cleanly with dedicated DC-DC converters when you need discreet road-legal flashers on scooter builds.[^emark_signals]
 - 🇪🇸AYO#74’s parts list now includes low-cost motorcycle brake lights, waterproof COB strips, and inline three-button dimmers that drop straight onto 12 V rails or reducers for custom lighting suites.[^ayo_lighting]
+- Xiaomi’s rear light rail only delivers ~3–5 V with tight current limiting, so bright LED strips need a separate 5 V/12 V buck or relay off the controller; otherwise you’re limited to careful lens alignment on the stock rail.[^denis-tail-rail]
+- Dense LED strips can pull ~10 A at 5 V (≈100 LED/m), so plan dedicated DC/DC converters with enable pins or pivot to electroluminescent tape to avoid overloading scooter accessory rails.[^led-strip-load]
+
+## Security & Tracking Concepts
+
+- Denis is prototyping plug-and-play tracker/immobilizer modules with onboard 5 V supplies, fingerprint readers, and alarm speakers so scooters can sound off or cut power when moved without authorisation.[^denis-tracker-proto]
+- Hidden trackers should run through a low-dropout regulator such as an AMS1117-3.3, fed directly from the main battery because Xiaomi controllers lack standby 5 V rails.[^denis-tracker-ldo]
 
 ## Power Control Ergonomics
 
@@ -36,6 +44,10 @@
 ## Security & Immobilisers
 
 - Spintend owners are actively hunting NFC-based locks so they can ditch physical keys on premium builds—document plug-and-play immobiliser options as soon as vetted hardware appears.[^nfc-lock]
+
+## Winter Comfort Planning
+
+- Heated grips borrow power directly from the scooter pack and stay convenient for long rides, while heated gloves add off-scooter utility but require charging routines and extra wiring bulk.[^heated-grips]
 
 [^dashboard_gap]: Source: knowledge/notes/input_part000_review.md, line 38.
 [^tft_mounts]: Source: knowledge/notes/input_part000_review.md, line 46.
@@ -53,3 +65,9 @@
 [^ayo_lighting]: Source: knowledge/notes/input_part010_review.md†L587-L590
 [^insta360]: Source: knowledge/notes/input_part010_review.md†L629-L630
 [^nfc-lock]: Source: knowledge/notes/input_part013_review.md†L723-L723
+[^denis-tail-rail]: Source: knowledge/notes/denis_all_part02_review.md†L704-L704
+[^denis-tracker-proto]: Source: knowledge/notes/denis_all_part02_review.md†L932-L932
+[^denis-tracker-ldo]: Source: knowledge/notes/denis_all_part02_review.md†L934-L934
+[^vesc-arduino-dash]: Source: knowledge/notes/denis_all_part02_review.md†L1043-L1043
+[^led-strip-load]: Source: knowledge/notes/denis_all_part02_review.md†L1044-L1044
+[^heated-grips]: Source: knowledge/notes/denis_all_part02_review.md†L1048-L1048

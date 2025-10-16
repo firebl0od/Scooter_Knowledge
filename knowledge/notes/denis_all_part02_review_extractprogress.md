@@ -65,5 +65,96 @@
   - `knowledge/processed/themes/guides/monorim_suspension_maintenance.md`
   - `knowledge/processed/themes/guides/xiaomi_high_voltage_upgrade_checklist.md`
   - `knowledge/processed/themes/guides/xiaomi_battery_maintenance.md`
+- `knowledge/processed/themes/guides/scooter_waterproofing_and_security.md`
+- `knowledge/processed/themes/guides/field-weakening-playbook.md`
+- Covered lines 502-601 (Rita charging discipline through charger quality and external-pack logistics).
+- Logged updates in:
+  - `knowledge/processed/themes/guides/xiaomi_tire_brake_upgrade_notes.md`
+  - `knowledge/processed/themes/guides/monorim_suspension_maintenance.md`
+  - `knowledge/processed/themes/guides/brake-maintenance-and-upgrades.md`
+  - `knowledge/processed/themes/guides/chassis_fitment.md`
   - `knowledge/processed/themes/guides/scooter_waterproofing_and_security.md`
-  - `knowledge/processed/themes/guides/field-weakening-playbook.md`
+  - `knowledge/processed/themes/guides/xiaomi_battery_maintenance.md`
+  - `knowledge/processed/themes/guides/rita_adapter_integration.md`
+  - `knowledge/processed/themes/guides/scooter_diagnostic_toolkit.md`
+- Covered lines 602-701 (battery sourcing cautions through STLink recovery tips).
+- Logged updates in:
+  - `knowledge/processed/themes/guides/diy-battery-supply-and-pack-architecture-2025.md`
+  - `knowledge/processed/themes/guides/rita_external_battery_playbook.md`
+  - `knowledge/processed/themes/guides/battery_pack_design.md`
+  - `knowledge/processed/themes/guides/scooter_waterproofing_and_security.md`
+  - `knowledge/processed/themes/guides/motor_configuration.md`
+  - `knowledge/processed/themes/guides/xiaomi_tire_brake_upgrade_notes.md`
+  - `knowledge/processed/themes/guides/power_distribution.md`
+  - `knowledge/processed/themes/guides/xiaomi_battery_maintenance.md`
+  - `knowledge/processed/themes/guides/monorim_suspension_maintenance.md`
+  - `knowledge/processed/themes/guides/scooter_diagnostic_toolkit.md`
+  - `knowledge/processed/themes/guides/controller_setup.md`
+  - `knowledge/processed/themes/guides/chassis_fitment.md`
+- Covered lines 702-801 (controller hardening refreshers through XiaoGen flashing quirks).
+- Logged updates in:
+  - `knowledge/processed/themes/guides/controller_setup.md`
+  - `knowledge/processed/themes/guides/scooter_diagnostic_toolkit.md`
+  - `knowledge/processed/themes/guides/accessories.md`
+  - `knowledge/processed/themes/guides/motor_configuration.md`
+  - `knowledge/processed/themes/guides/scooter_waterproofing_and_security.md`
+  - `knowledge/processed/themes/guides/monorim_suspension_maintenance.md`
+  - `knowledge/processed/themes/guides/xiaomi_tire_brake_upgrade_notes.md`
+  - `knowledge/processed/themes/guides/battery_pack_design.md`
+  - `knowledge/processed/themes/guides/diy-battery-sourcing-and-welding.md`
+  - `knowledge/processed/themes/guides/rita_adapter_integration.md`
+  - `knowledge/processed/themes/guides/rita_external_battery_playbook.md`
+  - `knowledge/processed/themes/guides/power_distribution.md`
+  - `knowledge/processed/themes/guides/daly-bms-waterproofing.md`
+  - `knowledge/processed/themes/guides/chassis_fitment.md`
+  - `knowledge/processed/themes/guides/brake-maintenance-and-upgrades.md`
+- Covered lines 802-901 (spot-welding refinements through Xiaomi error-code triage).
+- Logged updates in:
+  - `knowledge/processed/themes/guides/battery_pack_design.md`
+  - `knowledge/processed/themes/guides/diy-battery-sourcing-and-welding.md`
+  - `knowledge/processed/themes/guides/xiaomi_tire_brake_upgrade_notes.md`
+  - `knowledge/processed/themes/guides/motor_configuration.md`
+  - `knowledge/processed/themes/guides/monorim_suspension_maintenance.md`
+  - `knowledge/processed/themes/guides/chassis_fitment.md`
+  - `knowledge/processed/themes/guides/brake-maintenance-and-upgrades.md`
+  - `knowledge/processed/themes/guides/rita_adapter_integration.md`
+  - `knowledge/processed/themes/guides/rita_external_battery_playbook.md`
+  - `knowledge/processed/themes/guides/scooter_diagnostic_toolkit.md`
+- Covered lines 902-1001 (Rita current ceilings through Monorim hardware refreshes).
+- Logged updates in:
+  - `knowledge/processed/themes/guides/accessories.md`
+  - `knowledge/processed/themes/guides/battery_pack_design.md`
+  - `knowledge/processed/themes/guides/brake-maintenance-and-upgrades.md`
+  - `knowledge/processed/themes/guides/chassis_fitment.md`
+  - `knowledge/processed/themes/guides/controller_setup.md`
+  - `knowledge/processed/themes/guides/diy-battery-sourcing-and-welding.md`
+  - `knowledge/processed/themes/guides/diy-battery-supply-and-pack-architecture-2025.md`
+  - `knowledge/processed/themes/guides/motor_configuration.md`
+  - `knowledge/processed/themes/guides/motor_cooling_and_thermal_management.md`
+  - `knowledge/processed/themes/guides/monorim_suspension_maintenance.md`
+  - `knowledge/processed/themes/guides/power_distribution.md`
+  - `knowledge/processed/themes/guides/rita_adapter_integration.md`
+  - `knowledge/processed/themes/guides/rita_external_battery_playbook.md`
+  - `knowledge/processed/themes/guides/scooter_diagnostic_toolkit.md`
+  - `knowledge/processed/themes/guides/scooter_waterproofing_and_security.md`
+  - `knowledge/processed/themes/guides/xiaomi_battery_maintenance.md`
+  - `knowledge/processed/themes/guides/xiaomi_tire_brake_upgrade_notes.md`
+- Covered lines 1002-1101 (Rita HV experiments through 16S Boyueda rebuild results).
+- Logged updates in:
+  - `knowledge/processed/themes/guides/accessories.md`
+  - `knowledge/processed/themes/guides/battery_pack_design.md`
+  - `knowledge/processed/themes/guides/brake-maintenance-and-upgrades.md`
+  - `knowledge/processed/themes/guides/chassis_fitment.md`
+  - `knowledge/processed/themes/guides/controller_setup.md`
+  - `knowledge/processed/themes/guides/diy-battery-sourcing-and-welding.md`
+  - `knowledge/processed/themes/guides/lithium_shipping_compliance.md`
+  - `knowledge/processed/themes/guides/monorim_suspension_maintenance.md`
+  - `knowledge/processed/themes/guides/motor_configuration.md`
+  - `knowledge/processed/themes/guides/motor_cooling_and_thermal_management.md`
+  - `knowledge/processed/themes/guides/power_distribution.md`
+  - `knowledge/processed/themes/guides/rita_adapter_integration.md`
+  - `knowledge/processed/themes/guides/rita_external_battery_playbook.md`
+  - `knowledge/processed/themes/guides/scooter_diagnostic_toolkit.md`
+  - `knowledge/processed/themes/guides/scooter_waterproofing_and_security.md`
+  - `knowledge/processed/themes/guides/xiaomi_battery_maintenance.md`
+  - `knowledge/processed/themes/guides/xiaomi_tire_brake_upgrade_notes.md`

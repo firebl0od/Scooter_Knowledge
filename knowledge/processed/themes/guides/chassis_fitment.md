@@ -12,6 +12,7 @@
 - High-speed hub refreshes now favor 2RS seals as the balance between drag and protection, keep ZZ for minimal resistance, and skip RSH unless you accept extra drag—Vsett bearings cooked after ~17 000 km without timely swaps.[^bearing_seals]
 - Updated Vsett 10+ service lists now call for SKF 6202/6004 2RSH wheel bearings, 20 × 28 × 6 and 15 × 25 × 5 simmering seals, 16287 2RS swingarm bearings, and 30 × 41 × 6.5 36°×45° headset bearings to replace the rust-prone stock hardware.[^vsett10_bearings]
 - SKF clarified that C3-clearance 2Z bearings leave extra race spacing for thermal growth, making them suitable for racing hubs despite the limited sealing compared with 2RS options.[^c3_clearance]
+- Oversize 10×2.5 in CST casings on 155 mm rims usually need 2–2.5 mm of machining for a safe bead seat—take material from the rim, not the tire, to avoid hidden cuts that explode at speed.[^denis-cst-machining]
 
 ## Frame Stiffness Checks
 
@@ -34,6 +35,13 @@
 - A 203 mm rotor adapter that sits high usually means the axle isn’t fully seated; custom torque arms that sit flush on the dropout solved repeat pop-outs once the frame was tilted.[^torque_arm_flush]
 - Monorim AWD conversions require flipping the suspension sides or spacing/bending the arms to clear Blade 10" hubs, plus at least 6 P of 50E/50G-class cells (or stronger) per wheel so 40 A battery feeds don’t cook marginal packs.[^monorim_swap]
 
+## High-Power Motor Fitment
+
+- Builders stepping up to 72 V 1,000–1,500 W swaps lean on PaoloWu’s 1.2 kW hub motors with larger magnet stacks to cut copper loss and boost torque versus stock cans.[^paolo72v]
+- Mirono reminds newcomers those wide motors usually need inverted Monorim forks or a rear-drive conversion to clear 10" rubber, so plan fork and chassis work alongside the motor purchase.[^mirono-fork]
+- Dropping a 1 000 W hub into a Xiaomi deck means flipping the Monorim fork so the larger rim and six-bolt rotor clear the chassis; the stock fork orientation simply lacks space.[^denis-1000w-fit]
+- Ninebot Max frames swallow 1 000 W hubs (with or without suspension) thanks to wider dropouts, while Xiaomi rears still lack clearance even with Monorim shocks—front installs remain the practical Xiaomi option.[^denis-1000w-max]
+
 ## Deck Fabrication & Accessories
 
 - Builders experimenting with transparent deck plates pair 6 mm acrylic lids with foam bedding or CNC 12 mm plexiglass spacers to hide LED strips; plan for eventual cracking and reinforce mounts before sealing the deck.[^1]
@@ -41,11 +49,14 @@
 - Rental G30 frames accept printed battery extenders, but high BMS harnesses can foul vertical cells.
   - rewire harness exits or add 2 mm spacers so deck lids close without pinching leads.[^2]
 - Vsett headlight retrofits need stiffer stem brackets to keep elevated lamps from shaking and to shorten the dark “dead zone”; CAD the mount before drilling to preserve the OEM look.[^3]
+- Francois splits his 13 S8 P pack between the deck and an external half because the Xiaomi frame can’t swallow the whole module; he bolts dual VESCs to the deck as a heatsink and warns that bag-mounted controllers sacrifice cooling and theft resistance.[^denis-francois]
 - Ninebot rental chassis hide factory silicone seams, lockable battery latches, and swappable pack harnesses.
   - making them attractive donors for high-power conversions once you add disc-compatible brake mounts.[^4]
 - Riders comparing Ninebot Max G2 and G30 frames noted the G2’s suspension improves vibration longevity, while SNSC rental frames shrugged off ~80 km/h guardrail hits with only peripheral damage; the same thread shared DNM shock fitment tips, 13"×7" tire swaps, and a lever-free hub tire removal method to avoid scratching rims.[^sns_c_service]
 - Boosted Rev decks only swallow roughly 60×21700 cells (≈12 S5 P) plus an underslung controller, so builders often pair charge-only BMS + fuse strategies when ANT smart boards exceed the 100 mm × 40 mm envelope.[^5]
-- Ninebot G30 rental frames remain coveted donor chassis thanks to non-folding stems, dual brakes, oil suspension, thicker tubing, and ~10 kg of extra steel that swallows 13 S 5 P 21700 packs and 1.2 kW hubs without flexing like stock Xiaomi frames.[^6]
+- Ninebot G30 rental frames remain coveted donor chassis thanks to non-folding stems, dual brakes, oil suspension, thicker tubing, and ~10 kg of extra steel that swallows 13 S 5 P 21700 packs and 1.2 kW hubs without flexing like stock Xiaomi frames—but budget time for drilling, longer hardware, and pricey OEM parts when you swap motors or poles.[^6][^denis-rental-weight]
+- Portable AWD Xiaomi builds creep toward 29 kg once dual batteries, locks, and beefy motors are installed—many riders settle on stout rear-wheel-drive G30 conversions instead of lugging dual-motor frames upstairs.[^denis-awd-weight]
+- G30 Max decks are still wider than Xiaomi Pro trays, so cross-platform motor or deck swaps need custom spacer stacks even when the housings look identical.[^denis-g30-width-fit]
 - Community salvage runs keep surfacing Dualtron, Etwow, and Xiaomi donor parts.
   - complete with 60 V packs and heavy-duty motors
   - illustrating how friendships and group buys keep premium frames affordable.[^7]
@@ -129,6 +140,7 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 - CST 10×2.25 tires cut for 152 mm rims refuse to seat on the Xiaomi 155 mm wheel and can foul the frame, so resell them or swap to scooter-specific casings instead of forcing the fit.[^cst_mismatch]
 - Riders have squeezed CST 10×2.5 inch tires onto Pro/1S frames without deck spacers, but centering the carcass is tedious and benefits from suspension travel to clear the added width.[^cst_10x25]
 - Ninebot G30 hub swaps into Xiaomi frames mean mixing two Monorim kits, machining spacers, lengthening motor leads, and slightly opening the controller plug before the axle seats reliably.[^g30_swap_fitment_chassis]
+- Converting Xiaomi rear dropouts to driven hubs means drilling the axle slot, fitting adapter plates, and committing with threadlocked hardware—the change is effectively irreversible once the opening is enlarged.[^denis-rear-drive]
 
 [^bearing_sizes]: Source: knowledge/notes/input_part000_review.md, line 74.
 [^tire_clearance]: Source: knowledge/notes/input_part000_review.md, line 74.
@@ -175,6 +187,12 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 [^monorim_swap]: Source: knowledge/notes/input_part002_review.md†L688-L690
 [^c3_clearance]: Source: knowledge/notes/input_part002_review.md†L19835-L19839
 [^vsett10_bearings]: Source: data/vesc_help_group/text_slices/input_part002.txt†L20580-L20591
+[^paolo72v]: Source: knowledge/notes/denis_all_part02_review.md†L524-L524
+[^mirono-fork]: Source: knowledge/notes/denis_all_part02_review.md†L525-L525
+[^denis-1000w-fit]: Source: knowledge/notes/denis_all_part02_review.md†L819-L819
+[^denis-1000w-max]: Source: knowledge/notes/denis_all_part02_review.md†L927-L927
+[^denis-cst-machining]: Source: knowledge/notes/denis_all_part02_review.md†L963-L963
+[^denis-francois]: Source: knowledge/notes/denis_all_part02_review.md†L656-L657
 
 
 ## References
@@ -215,3 +233,7 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 [^cst_mismatch]: Source: knowledge/notes/all_part01_review.md†L554-L554
 [^cst_10x25]: Source: knowledge/notes/all_part01_review.md†L556-L556
 [^g30_swap_fitment_chassis]: Source: knowledge/notes/all_part01_review.md†L891-L891
+[^denis-rental-weight]: Source: knowledge/notes/denis_all_part02_review.md†L750-L750
+[^denis-awd-weight]: Source: knowledge/notes/denis_all_part02_review.md†L1034-L1034
+[^denis-g30-width-fit]: Source: knowledge/notes/denis_all_part02_review.md†L820-L820
+[^denis-rear-drive]: Source: knowledge/notes/denis_all_part02_review.md†L751-L751

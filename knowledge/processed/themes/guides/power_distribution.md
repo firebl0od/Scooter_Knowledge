@@ -10,6 +10,7 @@
 
 - For throttle-signal filtering, the crew scavenges ~100 nF ceramic capacitors from dead electronics instead of grafting oversized drone caps; always discharge and meter salvaged parts before bridging signal-to-ground so you know the exact capacitance you are adding.[^ceramic_scavenge]
 - When paralleling 16 S packs, tie all grounds together, match series counts and capacities, pre-balance voltages, and watch for cross-charging so the smaller pack is not over-stressed despite individual BMS protection.[^parallel_rules]
+- Rita-style Y cables should present two female battery legs feeding a single male controller lead, with both packs matched in voltage before connection; poorly soldered joints in moving bags have already shorted externals and scarred decks.[^denis-y-cable]
 
 ## 48 V Lighting Quick Reference
 
@@ -17,6 +18,7 @@
 
 ## High-Current Harness Upgrades
 
+- Once current climbs past stock limits, treat connector upgrades as mandatory: swap Xiaomi motor plugs for 4 mm bullets and replace long XT30 harnesses with AWG12 + XT60 leads to keep voltage sag in check on dual-motor or external-pack builds.[^connector-upgrade]
 - External battery riders are graduating to 4 mm gold bullets, AS120 mains, and even direct-soldered phase leads after discovering stock 2 mm conductors and MR60 plugs overheat above ~80–100 A; backpack packs stay cool once the heavier hardware is in place.[^1]
 - XT90S anti-sparks remain handy for light builds, but repeated hot-plugs cook their in-line resistors; high-power crews step up to AS150 bullets or QS8/QS10 connectors that comfortably ride out 300–600 A bursts once the crimps and strain relief are done properly.[^antispark_tradeoff]
 - For 90 A packs, default to AWG10 main leads (or dual AWG12 runs) and consider 3–3.5 mm solid-core copper between pack negatives and BMS plates for roughly 40 % more ampacity.
@@ -53,6 +55,20 @@
 - Genuine Amass 8 mm bullets clamp dual 10 AWG phases far tighter than generic 8 mm copies; expect to hand-fit or even shave 10 mm bullets if you mix brands on high-current leads, and budget space for 10 mm hardware when controllers ship with doubled 10 AWG phase tails.[^amass-fit]
 - QS8 mains remain the right call for triple-digit amp peaks, but riders chasing slimmer harnesses are flattening HXT 8 mm bullets directly onto conductors so copper, not solder, carries 120 A-class loads while XT90s are demoted to ≈45 A continuous service.[^qs8_hxt]
 - Vsett 9 owners stepping up from stock banana leads now favour XT150 housings because their 6 mm bullets stay cool around 35–40 A battery and 95 A phase without sacrificing ease of service.[^xt150_vsett9]
+- Splitting 60–70 A batteries between dual controllers still calls for AWG10 feeders, XT90 mains, and MR60 phase connectors; heat both sides of each joint for solid solder wicks and treat Daly BMS “50 A” ratings as optimistic short-burst figures.[^dual-feed]
+
+## Accessory Loads (Denis Part 02)
+
+- Budget roughly 1–1.5 A for 12 V horns and fuse their supply; many riders pair the loud horn with a polite bell for pedestrian zones.[^denis-horn]
+- Hidden trackers need their own low-dropout regulator (e.g., AMS1117-3.3) tied directly to the main battery because Xiaomi controllers don’t expose a standby 5 V rail.[^denis-tracker-ldo]
+
+## Charging Interfaces
+
+- Feeding 13 S builds through Xiaomi’s RCA Type X charge jack overheats the OEM wiring above ~3 A; higher-power projects either request custom connectors from charger vendors or convert to GX12-class ports.[^charge-port-13s]
+
+## Service Safety
+
+- After high-current rides, expect phase connectors to “weld” together—kill pack power, discharge controller capacitors, and be ready for sparks on reconnection to protect BLE boards and ESCs.[^phase-safety]
 
 [^long_leads]: Source: knowledge/notes/input_part000_review.md, line 84.
 [^emi_routing]: Source: knowledge/notes/input_part000_review.md, line 85.
@@ -90,3 +106,10 @@
 [^xt150_vsett9]: Source: knowledge/notes/input_part002_review.md†L525-L526
 [^ubox_battery_limits]: Source: data/vesc_help_group/text_slices/input_part002.txt†L24622-L24692
 [^phase_wire_clearance]: Source: data/vesc_help_group/text_slices/input_part002.txt†L24711-L24715
+[^denis-y-cable]: Source: knowledge/notes/denis_all_part02_review.md†L769-L769
+[^denis-horn]: Source: knowledge/notes/denis_all_part02_review.md†L645-L645
+[^denis-tracker-ldo]: Source: knowledge/notes/denis_all_part02_review.md†L934-L934
+[^connector-upgrade]: Source: knowledge/notes/denis_all_part02_review.md†L1018-L1020
+[^dual-feed]: Source: knowledge/notes/denis_all_part02_review.md†L1073-L1073
+[^charge-port-13s]: Source: knowledge/notes/denis_all_part02_review.md†L1063-L1063
+[^phase-safety]: Source: knowledge/notes/denis_all_part02_review.md†L1091-L1091

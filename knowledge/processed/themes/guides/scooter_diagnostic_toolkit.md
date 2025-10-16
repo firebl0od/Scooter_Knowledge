@@ -6,14 +6,17 @@
   - stock replacements and keep a sturdier backup such as the Mustool MT111 on hand for daily troubleshooting.[^1]
 - **Cell testing bench:** Pair LiitoKala or Opus bays with a 3.3 Ω / 25 W Ohmite resistor block so you can discharge or capacity-test loose 18650s before grouping them into packs, especially when customer batteries arrive full.[^2]
 - **Firmware lifeline:** ST-Link V2 programmers remain the fastest recovery path for bricked dashboards, ESCs, and Rita-linked BMS boards.
-  - clip onto the pads, flash stock firmware, then resume Bluetooth updates once communications return. Modern Ninebot Max dashboards also demand ST-Link access because recent BLE revisions block OTA downgrades, and Mi 3 dashboards that lock themselves “on” after 48 V swaps only recover after flashing stock firmware in XiaoDash, reactivating, and then reapplying the performance profile.[^3][^4][^5][^6][^7]
+  - clip onto the pads, flash stock firmware, then resume Bluetooth updates once communications return. Modern Ninebot Max dashboards also demand ST-Link access because recent BLE revisions block OTA downgrades, Mi 3 dashboards that lock themselves “on” after 48 V swaps only recover after flashing stock firmware in XiaoDash, reactivating, and then reapplying the performance profile, and ScooterHacking’s generator still throws “no binary detected” on some Pro dashboards—paid XiaoFlasher/XiaoGen packages or direct ST-Link reflashes stay the fallback.[^3][^4][^5][^6][^7][^denis-generator]
+  - “Target not found” errors almost always trace back to reversed pin order or an unpowered controller; double-check wiring before blaming the board, and remember that flashing generic `rec.bin` images wipes odometer data until you restore the serial manually.[^denis-stlink-wiring]
 - **Express flashing workflow:** Smart Repair now flashes VESC Express modules by powering them over USB alone, picking the COM port inside the ESP Programmer panel, and only then reconnecting CAN; if a controller’s USB-C port dies you can still stream live data over CAN/BLE, but configuration changes require a direct USB session to the ESC.[^8]
+- **Locked-controller recovery:** When replacement Xiaomi controllers ship with DRV200 locks, enter the serial, hit “make FW,” flash with m365_DownG, power-cycle, and, if needed, run Downg’s “repair SN” before generating a fresh XiaoGen package.[^denis-drv200-workflow]
 - **Windows installer caveat:** VESC Tool 6.05 packages still fail to launch on some Windows machines even though the build runs under Ubuntu.
   - ship dependency notes or known workarounds with the binaries so support doesn’t stall at install time.[^9][^10]
 - **VESC Express automation tests:** Builders are cloning Spintend’s green board logic with VESC Express plus LispBM.
   - brake lights and CAN-triggered motor braking already work, with latency tuning underway before wider deployment.[^11]
 - **Capture the visuals.** The next deliverable asks for screenshot walkthroughs, USB-C failure triage, and CAN-only telemetry expectations.
   - bake them into the guide so riders aren’t guessing how to recover a module that only boots over Wi‑Fi.[^12]
+- **Treat XiaoDash betas cautiously.** Recent builds have silently rewritten parameters and gutted torque; stick to XiaoFlasher presets or stable releases until the developers publish a fixed version.[^denis-xiaodash-beta]
 - **Low-voltage logging:** Keep Bluetooth thermometers or CR2032-powered loggers in the spares bin when validating experimental packs so you can capture temperature spikes before they cook cells.[^13]
 - **ESC error crib sheet:** Keep Denis’ error table handy.
   - codes such as 28 for HS FET faults speed up post-mod triage before you pull controllers apart.[^14]
@@ -71,15 +74,26 @@
 9. **Use drilling jigs when precision holes matter.** Off-the-shelf square-hole guides keep controller and bracket installs tidy for builders who struggle to drill straight freehand.[^44]
 
 - **Step drills for control hardware.** Enlarging round switch holes stays cleanest with step bits, while rectangular cut-outs still need files or nibblers; finish with a hand ratchet on axle nuts to feel clamp load instead of hammering them with an impact.[^45]
+- **Error 21 basics:** Start with the XT30 battery connector and confirm the BMS status LED still blinks—both faults throw the code before deeper diagnostics.[^denis-error21-xt30]
+- **Error 18 after rebuilds:** Swap the hall-sensor harness before blaming controllers; two separate ESCs cleared the code instantly with a fresh cable.[^denis-error18-harness]
+- **Error 24 reset:** Power-cycle for ten seconds after verifying pack wiring; the fault simply flags supply voltage out of range.[^denis-error24-reset]
 - **Throttle extensions hold up.** Two-metre throttle runs on quality silicone cable have stayed noise-free, so shielded loom is optional for most scooters.[^46]
 - **Parallel smaller leads when space is tight.** Doubling up 12 AWG silicone wire handled ~80 A battery current on GABE’s compact pack, making parallel runs a workable compromise when harness routing is constrained.[^47]
 - **Reflow noisy bullet connectors.** Yamal chased front-hub grinding back to oxidised bullets—reflow or replace the joints whenever a motor squeals before blaming windings.[^bullet-reflow]
+- **Inspect F2 on surging dashboards.** Lighting-triggered surges often point to a weak dashboard resettable fuse—bridge it temporarily with a 0 Ω link or confirm the 5 V rail stays solid before ordering BLE replacements.[^denis-f2-fuse]
+- **Confirm emulation jumpers on Max-to-M365 conversions.** Persistent error 21 cleared once installers re-enabled battery-data emulation and reseated the control-harness jumper after waterproofing.[^denis-error21-emulation]
+- **Probe Xiaomi BMS capacitors when output sags.** Balanced cell groups with low pack current usually hide failed sensing capacitors; replace any RC network that doesn’t mirror its cell voltage.[^denis-bms-capacitors]
+- **Dry flooded packs thoroughly.** Water ingress through the rear-fender grommet can pause a pack for days; week-long drying plus a charger “jump-start” revived the module without a BMS swap.[^denis-water-dry]
+- **Revive Pro 2 batteries with the BMS button first.** Ten-second BMS resets bring many “dead” packs back online; if red LEDs persist, gather per-cell voltages before planning repairs.[^denis-bms-button]
+- **Triage Aerdu zero-volt groups cautiously.** Splitting the glued case exposes the failed parallel group; run the pack as 12 S until rebuilt and treat bargain assemblies as suspect when welds look weak.[^denis-aerdu-zero]
+- **Wake “sleeping” AliExpress BMS boards.** Reflash firmware, swap any failed 1001 Ω balance resistors, and confirm per-cell voltages before trusting the pack again—overnight naps are a known fault mode.[^denis-ali-bms]
 - **Inspect anti-spark connectors periodically.** Noname spotted the precharge strip inside an XT90S-style plug browning after repeated use.
   - retire housings that show discoloration or heat damage before they melt during high-current launches.[^48]
 10. **Prefer controlled hand crimpers for JST signal pins.** Manual “non-ratcheting” tools let you feel the conductor and insulation wings seat properly.
   - ratcheting jaws kept crushing insulation and hiding bad contacts on MP2/75100 harnesses until the team switched tools.[^49]
 11. **Match connector families on MakerX harnesses.** The 75100 V2 signal looms use JST-PH (2.0 mm) shells rather than larger JST-XH housings.
   - order the right housings and dies before recrimping.[^50]
+12. **Stock JST PAP-0xV-S shells for Xiaomi repairs.** The BMS, BLE, and hall harnesses use 3-, 4-, and 5-pin PAP housings respectively, so you can drop in fresh connectors instead of reusing brittle stock shells.[^denis-jst]
 10. **Add abrasion armor to oversized leads.** 6 mm² cable upgrades can tear PTFE insulation as they pass through motor axles.
   - wrap them in abrasion-resistant sleeving or PTFE-lined braid before reassembly so the insulation survives vibration and axle edges.[^51]
 11. **Upsize motor leads thoughtfully.** 🇪🇸AYO#74 recommends AWG 11 silicone for hot climates because AWG 10 rarely fits through scooter axles, and Paolo reminded everyone that “AWG” is just a gauge label.
@@ -187,6 +201,7 @@
 - **Chase “stuck at 135 A” complaints with logs.** When a Dualtron Achilleus plateaued around 135 A despite a 220 A target, the crew pulled fresh motor detections and overlaid battery voltage/current to confirm whether pack sag or magnetic saturation was the real bottleneck before touching firmware.[^achilleus_diag]
 - **3Shul ABS fixes need manual detection.** CL350 V4 owners cleared ABS overcurrent faults by rerunning detection with a 500 µs timing step, switching from `mxlemming` to the Ortega observer, and dialing the tune in manually per Vedder’s demos.[^106]
 - **Data-line triage after regen faults:** Error 21 that appears immediately after an emergency stop usually points to a cooked controller data line. Bench-test the pack on a known-good scooter or send it in rather than reflashing firmware blindly.[^107]
+- **Isolate jerky hubs mechanically first.** Spin the wheel with motor leads disconnected to check for MOSFET drag, then inspect hall wiring—error 18 often traces to damaged cables or sensors rather than the controller.[^denis-jerky-hub]
 - **Backfeed with care:** A depleted 44 V pack can be nudged awake with a 36 V charger only when its open-circuit voltage sits under ~41 V. Anything higher risks over-voltage damage once the charger’s CV phase kicks in.[^54]
 - **Log Rita/Happy current spikes:** Error 39 beeps and thermal cutbacks appear when firmware demands exceed Rita’s ~30 A ceiling; capture live amps with m365Tools before dialing tuning back.[^108]
 - **Replace scorched hubs outright.** A motor that screeched after 33 A hill climbs revealed melted slot insulation.
@@ -228,11 +243,13 @@
 
 - **Wake sleeping packs:** Happy BMS batteries ship dormant.
   - tap them with a charger to enable the discharge MOSFETs before chasing wiring faults.[^132]
+- **Isolate the controller after a red-blinking Happy BMS.** A hard brake that latches the board calls for disconnecting the controller, safely discharging the main capacitors on a non-conductive surface, and metering the power stage before reconnecting so you don’t stack more shorts on a damaged ESC.[^happy-red-blink]
 - **Revive latched Happy BMS boards.** After reconnecting a pack, some Happy BMS units keep discharge off until they see the charger.
   - expect to “tickle” the pack briefly before the controller wakes.[^133]
 - **Reconnect stubborn externals:** If Rita “ghosts” an auxiliary pack, blip the throttle for a second to force rediscovery before tearing down wiring.[^134]
 - **Let Kaabo CAN bridges sleep.** A Kaabo King GT’s legacy 100 V/100 A bridge revived CAN comms after sitting unpowered overnight.
   - sometimes patience beats a full tear-down when chasing phantom bus faults.[^135]
+- **Use “connect under reset” when STLink balks.** Short capacitor C35 (MCU pin 7) to ground while reconnecting to revive locked ESCs before reflashing.[^denis-connect-reset]
 - **Time full charges when vetting replacements:** Stock Xiaomi bricks add ≈1.7 Ah per hour; a legitimate 12 Ah Pro 2 pack should need nearly seven hours from empty, so a “full” light in 90 minutes signals a counterfeit pack.[^136]
 - **Restore serials after bad flashes.** ScooterHacking or XiaoDash updates that wipe the serial/odometer recover quickly by writing the ID back with DownG; only reach for ST-Link if you truly need to reinstate lifetime mileage counters.[^137]
 - **Probe every series group on dead packs:** When a fresh build refuses to wake, crack the wrap and meter each group.
@@ -472,6 +489,7 @@
 [^104]: Source: knowledge/notes/input_part000_review.md†L635-L635
 [^105]: Source: knowledge/notes/input_part000_review.md†L663-L664
 [^achilleus_diag]: Source: knowledge/notes/input_part011_review.md†L517-L518
+[^denis-jst]: Source: knowledge/notes/denis_all_part02_review.md†L703-L703
 [^106]: Source: data/vesc_help_group/text_slices/input_part009.txt†L17692-L17699
 [^107]: Source: knowledge/notes/denis_all_part02_review.md†L368-L369
 [^108]: Source: knowledge/notes/denis_all_part02_review.md†L55-L57
@@ -568,3 +586,20 @@
 [^199]: Source: knowledge/notes/input_part008_review.md†L56-L56
 [^code-server]: Source: knowledge/notes/input_part006_review.md†L21-L21
 [^motor_detect_flow]: Source: data/vesc_help_group/text_slices/input_part005.txt†L24741-L24763
+[^happy-red-blink]: Source: knowledge/notes/denis_all_part02_review.md†L536-L536
+[^denis-connect-reset]: Source: knowledge/notes/denis_all_part02_review.md†L701-L701
+[^denis-error21-xt30]: Source: knowledge/notes/denis_all_part02_review.md†L899-L899
+[^denis-error18-harness]: Source: knowledge/notes/denis_all_part02_review.md†L900-L900
+[^denis-error24-reset]: Source: knowledge/notes/denis_all_part02_review.md†L901-L901
+[^denis-stlink-wiring]: Source: knowledge/notes/denis_all_part02_review.md†L911-L911
+[^denis-generator]: Source: knowledge/notes/denis_all_part02_review.md†L1029-L1029
+[^denis-xiaodash-beta]: Source: knowledge/notes/denis_all_part02_review.md†L915-L915
+[^denis-drv200-workflow]: Source: knowledge/notes/denis_all_part02_review.md†L916-L916
+[^denis-f2-fuse]: Source: knowledge/notes/denis_all_part02_review.md†L921-L921
+[^denis-error21-emulation]: Source: knowledge/notes/denis_all_part02_review.md†L922-L922
+[^denis-bms-capacitors]: Source: knowledge/notes/denis_all_part02_review.md†L923-L923
+[^denis-water-dry]: Source: knowledge/notes/denis_all_part02_review.md†L924-L924
+[^denis-bms-button]: Source: knowledge/notes/denis_all_part02_review.md†L983-L983
+[^denis-aerdu-zero]: Source: knowledge/notes/denis_all_part02_review.md†L1037-L1037
+[^denis-ali-bms]: Source: knowledge/notes/denis_all_part02_review.md†L1038-L1038
+[^denis-jerky-hub]: Source: knowledge/notes/denis_all_part02_review.md†L955-L955

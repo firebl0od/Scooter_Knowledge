@@ -5,6 +5,7 @@
 - Builders are migrating from Samsung 40T 15 S 6 P packs to denser 15 S 10 P VTC6 or pending Samsung 50S cells to curb voltage sag, accepting higher per-cell costs for improved current handling.[^pack_cells]
 - Abuse testing on recycled 250 W hub motors with 84 V/2 000 W inputs demagnetised rotors past ~80 °C, so builders now favour fresh Samsung 35E/50S/48X cells or 21700 formats when repacking Xiaomi decks to keep thermal headroom and energy density balanced.[^cell_refresh]
 - Mirono’s teardown of Vsett-sourced packs shows DynaVolt-built 14 S 6 P modules with BAK 2 600 mAh cells staying near ambient at ~30 A (≈2.3 C); they are viable donor bricks so long as the original BMS current limits remain in place.[^1]
+- NKON-sourced EVE and BAK cells continue to meet spec for budget packs, whereas random AliExpress batteries or mystery LG bundles often arrive damaged or underperform—stick with reputable builders even if prices climb.[^denis-cell-vetting]
 - High-current discharge tests demand Kelvin (four-wire) probing.
   - thin alligator clips dropped a healthy P42A to a false 1.9 V at 20 A until the team clamped directly to the tabs
   - so upgrade leads and meters before condemning cells.[^2]
@@ -47,6 +48,19 @@
 - High-current race packs now treat ~40 A per P45B as acceptable when cooling is dialled: skrtt’s 18 S 9 P plan for 350 A drew green lights so long as logging confirmed sag and phase limits—not pack voltage—were the real bottleneck.[^p45b_current]
 - Lipoly pouch packs promise huge C-rates but force builders to break series links for charging because hobby chargers top out around 6–7 S; even with a BMS, puncture risk keeps 20 kg RC packs a niche pick compared with cylindrical Li-ion or LiFePO₄ bricks.[^lipoly_tradeoffs]
 - LiFePO₄ remains attractive for crash resilience on motorcycle-scale builds, yet riders still weigh Wh/L penalties against Samsung 48X-class Li-ion cells before committing to the chemistry.[^lifepo_tradeoffs]
+- Denis equates a 13 S 6 P stack of 2 500 mAh cells to roughly 20 Ah at 10 S, giving Pro-class decks about double the stock range so long as you respect Rita’s 5 A shared charging limit.[^denis-13s6p-pack]
+- Budget Liitokala LiFePO₄ cells arrive unbalanced, sag heavily above ≈12 A, and often ship slowly by boat.
+  - reserve them for stationary projects unless you can package much larger scooter enclosures.[^7]
+- Lithium fires are effectively self-sustaining, so crews only trust water for cooling nearby equipment; where packaging allows, they spec LiFePO₄ blocks to tame thermal runaway risk despite the weight penalty.[^denis-fire]
+
+## Booster & Repair Safeguards (Denis Part 02, Lines 15 001–16 500)
+
+- Extending Xiaomi internals with 2S2P “booster” bricks only works when the add-on carries its own BMS and dedicated charge plug—never backfeed the stock harness.[^booster-bms]
+- Don’t tack spare cells across finished packs: Denis only tolerates soldering after you rebuild each parallel group properly, otherwise the sub-pack stays unprotected and charges awkwardly.[^solder-parallel]
+- Retire recycled laptop cells from traction duty; stick with fresh high-discharge parts such as EVE INR18650-26V sourced from NKON or similar vetted vendors.[^fresh-cells]
+- The Rita BMS Tool’s amp-hour fields are cosmetic; only the series configuration changes scooter behavior, so mis-entered capacity values won’t fix range math.[^rita-capacity]
+- Cheap handheld spot welders still struggle with EV-grade interconnects—budget for K-weld-class tools if you expect durable joints, especially when stepping up to 21700 builds.[^welder-upgrade]
+- Portable capacitor welders behave far better when you shorten the leads, reinforce high-current traces, and feed them with ≥180 C LiPo packs while keeping pulses at or below ~30 J; overshooting toward 50 J on soft 80 C bricks scorches 0.1–0.15 mm nickel and overheats MOSFETs.[^portable-welder-tuning]
 
 ## Layout and Interconnects
 
@@ -56,6 +70,8 @@
 - MP2-based 22S2P (~650 Wh) cores drop straight into compact frames, and builders are stacking six more cells under the ESC to reach 24S while preserving regen space inside the deck.[^mp2-22s]
 - Packing experts now double-layer shrink (mixing lighter “Albert” sleeves with thicker “Denis” stock) and add intermediate padding so balance leads don’t chafe in transit; shrink damage usually signals loose clamping rather than weak material.[^double_shrink][^pack_clamp]
 - Tudor’s latest measurements confirm a Xiaomi Pro deck accepts 13 S5 P 18650 packs without relocating electronics, while 13 S7 P or 12 S4 P 21700 layouts typically need 20–25 mm deck extensions to clear the shell.[^tudor_deck_maps]
+- Square 10S3P bricks slip into 2 L cases while 10S4P packs demand honeycomb spacing; reuse OEM spacers only when you add ≥8 mm multi-path nickel links so every cell has its own series bridge.[^denis-10s-spacing]
+- Route balance leads along the pack underside, keep harness lengths within ~50 % of each other, and solder power leads across the full nickel bus so load spreads evenly instead of concentrating on a single strip.[^denis-balance-routing]
 - Ninebot Max and Xiaomi Pro deck extensions can accommodate up to 16 S 5 P 21700 modules with ~27 mm spacers, though installers often trim or rotate controller housings to keep packaging tidy.[^deck_extension]
 - Stock G30 frames already hide 20 S 6 P packs internally, but stretching to 20 S 9 P by machining deck rails and deleting the OEM ESC introduces convoluted busbars and structural compromises—seasoned builders steer first-timers toward simple rectangular stacks instead of chasing every last cell.[^g30-20s9p]
 - Backpack commuters still squeeze folded 20 S4 P modules into stripped 5 L packs, but aluminium quick-release racks need reinforcement before they can safely haul the extra mass.[^backpack-20s]
@@ -65,6 +81,7 @@
 - Koxx’s 14 S 6 P build uses RePackr-balanced groups, glued cells, and glass-fibre spacers between layers to equalise resistance across parallels inside cramped decks.
   - mirror the approach when you need uniform discharge in tight enclosures.[^9]
 - Xiaomi and Ninebot decks swallow 12 S 4 P–5 P 21700 packs if you stand the cells vertically, add deck spacers, wrap every edge in fish paper, and insulate the tray so the aluminium shell cannot abrade nickel; even sub-millimetre gaps around magnets become failure points without that prep.[^10]
+- Xiaomi Pro frames will even accept 15 S 4 P 21700 bricks (16 S 4 P is the realistic ceiling) when you chase high-voltage internals; favour high-discharge cells such as Samsung 50E/40T, Molicel P42A, or Sony VTC6A to keep sag in check on aggressive tunes.[^denis-21700-fit]
 - EU builders are struggling to source sub-kilogram lots of 21700 honeycomb nickel, so crews now pool half-kilo group buys or pay ~€40 to EU suppliers rather than wait for AliExpress consolidation when deadlines loom.[^11]
 - Mirono refuses to assemble small packs without rigid holders or honeycomb cages, pairing the structure with rubber liners whenever Xiaomi frame rails are sanded so 12 S 4 P packs and controller looms can share the tray without chafing.[^12]
 - Denis measured that a Xiaomi Pro deck comfortably houses 12 S4 P (48 cells), squeezes 13 S4 P with tight tolerances, and picks up space for roughly 17 extra 21700s (≈13 S5 P) once a 2 cm spacer is added—nearly matching 33 Ah 10 S packs without sacrificing deck integrity.[^pro_deck_capacity]
@@ -88,6 +105,11 @@
 - Equal-length nickel links alone do not balance 13 S stacks—follow Micah Toll’s series routing diagrams and confirm weld quality to spread current evenly across parallels.[^equal_length_myth]
 - High-capacity builds expose tradeoffs: 12 S 9 P 21700 packs sag like compact 13 S 3 P arrays, Wildman 3 L bags accept dense sideways PCB layouts, and Essential-class scooters tuned for 30 km/h at 100 kg still realise only 8–10 km of usable range.[^large_pack_tradeoffs]
 - Secure heavy frame bags mechanically—triangle bags bolted with U-bolts and internal plates hold massive packs steadier than 3D-printed brackets alone.[^bag_mounting]
+- Denis, Hero, and Rumi are prototyping rigid external cases while others test riveted aluminium shells as theft-resistant alternatives to Wildman pouches—treat metal bag concepts as in-progress until durability testing lands.[^denis-metal-bag]
+- Even copper-sandwiched 20S10P builds demand robust fusing and monitoring—Paolo’s Murata packs can still light off if an ESC faults and shorts the bus, so treat protection hardware as mandatory, not optional.[^denis-paolo-fuse]
+- Rental G30 conversions swallow "thick" 13 S 5 P 21700 packs once the spacer grows the cavity to ≈155 mm × 400 mm, but EU builders struggle to source 220 mm shrink locally.
+  - plan packaging and consumables early for long-range decks.[^14]
+- Battery refurbishers now glue reclaimed cells into rigid cages with Gorilla or Sikaflex-class adhesives instead of relying on bare Kapton, pairing the structure with individual cell testing so vibration does not tear packs apart mid-ride.[^adhesive-cages]
 
 ## Testing & Service Notes
 
@@ -177,6 +199,10 @@
 [^bench_fire]: Source: knowledge/notes/all_part01_review.md†L886-L886
 [^12s3p_small]: Source: knowledge/notes/all_part01_review.md†L887-L887
 [^dual20a_bms]: Source: knowledge/notes/all_part01_review.md†L888-L888
+[^denis-cell-vetting]: Source: knowledge/notes/denis_all_part02_review.md†L1068-L1069
+[^denis-10s-spacing]: Source: knowledge/notes/denis_all_part02_review.md†L1023-L1023
+[^denis-balance-routing]: Source: knowledge/notes/denis_all_part02_review.md†L1024-L1024
+[^denis-metal-bag]: Source: knowledge/notes/denis_all_part02_review.md†L1025-L1025
 
 
 ## References
@@ -218,3 +244,14 @@
 [^ant_downpop]: Source: knowledge/notes/input_part009_review.md†L403-L403
 [^bms128_upgrade]: Source: knowledge/notes/all_part01_review.md†L539-L539
 [^hybrid_range]: Source: knowledge/notes/all_part01_review.md†L543-L543
+[^booster-bms]: Source: knowledge/notes/denis_all_part02_review.md†L626-L626
+[^solder-parallel]: Source: knowledge/notes/denis_all_part02_review.md†L627-L627
+[^fresh-cells]: Source: knowledge/notes/denis_all_part02_review.md†L628-L628
+[^rita-capacity]: Source: knowledge/notes/denis_all_part02_review.md†L629-L629
+[^welder-upgrade]: Source: knowledge/notes/denis_all_part02_review.md†L630-L630
+[^denis-fire]: Source: knowledge/notes/denis_all_part02_review.md†L713-L713
+[^denis-paolo-fuse]: Source: knowledge/notes/denis_all_part02_review.md†L741-L741
+[^portable-welder-tuning]: Source: knowledge/notes/denis_all_part02_review.md†L803-L803
+[^adhesive-cages]: Source: knowledge/notes/denis_all_part02_review.md†L895-L895
+[^denis-13s6p-pack]: Source: knowledge/notes/denis_all_part02_review.md†L906-L906
+[^denis-21700-fit]: Source: knowledge/notes/denis_all_part02_review.md†L997-L997

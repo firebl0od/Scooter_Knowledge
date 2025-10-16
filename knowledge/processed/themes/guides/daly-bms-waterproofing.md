@@ -9,6 +9,7 @@
 - Keep the Daly Bluetooth app handy (default password 123456) to re-enable charge/discharge MOSFETs after moisture-induced trips once the hardware is verified.[^4]
 - Daly smart boards only balance at ~30 mA and struggle during 25 A charges.
   - pair them with monitored 4 A active balancers and watch for reverse-current experiments that can fry the helper board.[^1]
+- If a Daly 10S board stops balancing after only a week of service, replace it—Rita won’t cover the fault—and double-check the balance-lead pinout when you install the new hardware.[^denis-daly-balance]
 
 ## Failure Signals to Watch
 
@@ -62,3 +63,4 @@
 [^3]: Source: knowledge/notes/input_part000_review.md†L155-L155
 [^4]: Source: knowledge/notes/input_part000_review.md†L156-L156
 [^5]: Source: knowledge/notes/input_part000_review.md†L367-L367
+[^denis-daly-balance]: Source: knowledge/notes/denis_all_part02_review.md†L740-L740

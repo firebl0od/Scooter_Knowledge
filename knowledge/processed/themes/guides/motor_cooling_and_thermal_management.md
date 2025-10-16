@@ -6,10 +6,12 @@
 - Riders debating CPU-style blowers learned that evaporation-driven skin cooling does not apply to dry aluminum shells; without a wet surface the only lever is temperature delta, so focus on conductive paths instead of add-on spinners.[^2]
 - Veterans recommended ferrofluid or oil-fill experiments (with leak safeguards) if you need real winding-to-shell transfer.
   - simply drilling covers or gluing “windmills” to the hub only cools the outer case.[^3]
+- Polish builders are sourcing Statorade directly from Nexun and stress that ferrofluid or oil only helps after you’ve addressed the stator-to-shell bottleneck with solid thermal interfaces.[^denis-nexun-ferro]
 - Community case studies still favour passive conduction upgrades over active plumbing: Mirko’s 15 mm aluminum deck plate plus open vents held dual 190 A phase / 70 A battery runs near 52 °C, while heat-pipe experiments outperformed vibration-prone water loops on cramped decks.[^4][^5]
 - Skip deck-mounted water loops unless you have room for pumps and vibration isolation.
   - track crews found the plumbing rarely fits scooter decks and prefer heat pipes with thin pads for reliable thermal headroom.[^6]
 - Builders now relocate controllers into clean airflow before entertaining radiator loops; leaks can kill a VESC outright and the coolant mass is a heavy penalty on already weighty builds.[^relocate-before-water]
+  - recent builders concluded sealed PC-style kits rattle apart under scooter vibration; bolting MOSFETs to the frame or adding copper spreaders remains the safer path.[^6][^denis-waterloop-risk]
 - Fresh water-cooled, resin-potted controller builds with INA181 current sensors promise better cut-off behaviour, yet veterans still warn that MOSFET-to-heatsink transfer is the real bottleneck until someone logs sustained high-power runs on the new hardware.[^7]
 - When water cooling is unavoidable, Smart Repair’s X12 loop blueprint calls for a 40 × 80 mm block on the MOSFET bank, a PWM-controlled ~800 L/h pump, small radiator, and roughly 1 kg total system mass (≈300 g coolant, 300 g pump, 500 g hardware) with conformal coating and Kapton to harden the controller after prior water damage.[^8]
 - High-speed roadsters are treating controller cooling as the ceiling—Lieven keeps pushing full radiator loops because a VESC sitting in airflow lacks surface area, and CPU-style AIO kits still bottleneck unless you engineer the entire loop for continuous load.[^controller-loop]
@@ -45,6 +47,7 @@
 - HeroDasH demonstrated clean application with magnetic bottles that pull fluid straight into magnet gaps and warned against overfilling because excess drag hurts efficiency; peers now lean on ebikes.ca’s simulator to visualize how kv and resistance tweaks shift the efficiency curve before sealing hubs.[^15]
 - Fresh top-ups that leave covers noticeably warmer after short shakedowns confirm improved heat transfer, but veterans still cap scooter hubs near 5 mL and reseal with silicone so excess ferrofluid doesn’t leak out and cook bearings.[^ff_dose]
 - Grin’s Statorade has logged roughly 30 % winding-temperature drops with 6 ml doses and no noticeable drag, whereas bargain ferrofluids risk conductivity, residue, and magnet damage once they bake inside the hub.[^16][^17]
+- Denis’ crew only adds about a quarter bottle of ferrofluid per motor; they report identical top speed with less heat but still caution that repeated full-power climbs can melt valve stems once you stop abruptly.[^denis-quarter-bottle]
 - Budget “educational” ferrofluids coming from lab suppliers carry lower flash points and unknown additives.
   - stick with Statorade/Grin blends even on 60 mm hubs, which still respond well to roughly 5–6 ml fills when you need winding-to-shell transfer.[^18][^19]
 - Most scooter builds keep fills between 3–6 ml per hub (≈6 ml in VSETT motors), reseal covers after every inspection, and top off occasionally as small leaks or evaporation appear.[^fill_guidance]
@@ -201,6 +204,7 @@
 - Paolo still pairs “hole-drilled” hub covers with ferrofluid but warns vented lids must be completely dry before reapplication; otherwise the fluid hardens and wrecks the stator.[^hole_drilled]
 - Jason resurrected an MP2 after a MOSFET failure and now caps the platform around 100 A battery / 250 A phase, acknowledging a 300 A launch cooked the board while chasing sensor cogging.[^97]
 - Finn keeps an Ubox Lite below 50 °C while pulling 160 A phase / 90 A battery by swapping in Arctic MX4 paste and bolting through the controller’s M2 bosses into a 3 mm aluminum belly pan.[^98][^99]
+- Abs’ dual-controller build clamps MOSFETs to a 3–4 mm aluminum bar with mica insulators and filtered 12 V push-pull fans, dropping case temps from ~67 °C to ~40 °C during 60 A, 20 S runs; he recommends skipping the complexity on mild 12–13 S tunes.[^denis-abs-cooling]
 - Matthew’s DIY water loop dropped his VESC enclosure from ~90 °C cutbacks to ~26–28 °C during 45 mph pulls; Noname is planning a moped-sized radiator, pump, and expansion tank to scale the concept.[^100]
 - Swapping to higher-grade thermal paste still nets ~5 °C improvements, but veterans stress optimizing airflow before escalating to liquid cooling complexity.[^101]
 - Rosheee’s latest Ninebot Max rebuild sandwiches the Ubox under springs, thermal pads, a vapor chamber, and long heatpipes; the duct keeps MOSFETs chilly yet dumps heat into the battery plate, so the crew is stress-testing whether budget heatpipes or fatigued solder joints will rupture and undo the gains.[^g30_heatpipe_trial][^g30_heatpipe_followup]
@@ -221,6 +225,7 @@
 - Expect extra labour when inheriting epoxy-bonded controllers: Matthew had to gut the case and mechanically break adhesive rails before refitting larger 85× boards, so budget time for careful grinding if you plan thermal upgrades.[^epoxy-removal]
 - 🇪🇸AYO#74 and Arnau discovered that dual 70 H 33×2 hubs on 22 S 11 P packs still current-limit after three hard launches around 90/100 A—race gearing overwhelms cooling fast even with large stators.[^dual-70h-limit]
 - Arnau also cooked a 50 H hub at 60 V/110 A phase while riding without temperature telemetry, a reminder to wire sensors before single-motor track sessions.[^50h-telemetry]
+- Stock Xiaomi controllers paired with 16 S packs and 500 W hubs have already logged ~99 °C under heavier riders—plan controller upgrades instead of trusting case mods alone for 60 km/h builds.[^xiaomi-99c]
 - Larger packs and long shocks trap heat around the deck; riders re-bend frames, add inner/outer steel plates, and swap to lower-rate springs instead of trimming coils so the chassis and cells stop cooking each other.[^109]
 - Abuse tests that pumped 84 V/2 000 W into stock 250 W hubs demagnetised rotors once magnets crossed ~80 °C, permanently reducing speed.
   - log stator temps on recycled hardware before chasing high-voltage experiments.[^110]
@@ -391,6 +396,11 @@
 [^magnet-inspect]: Magnet inspection recommendations for cracks or chips before installation on high-torque builds.[^181]
 [^magnet-shipping]: European race hardware shipping to Israel via separate rim/stator shipments to avoid customs classification.[^182]
 [^atf-leak]: Community members reported ATF seeping out of hubs and prefer ferrofluid-only fills while they wait for real hybrid-temperature data.[^183]
+[^denis-nexun-ferro]: Source: knowledge/notes/denis_all_part02_review.md†L931-L931
+[^denis-quarter-bottle]: Source: knowledge/notes/denis_all_part02_review.md†L989-L989
+[^denis-abs-cooling]: Source: knowledge/notes/denis_all_part02_review.md†L941-L941
+[^denis-waterloop-risk]: Source: knowledge/notes/denis_all_part02_review.md†L942-L942
+[^xiaomi-99c]: Source: knowledge/notes/denis_all_part02_review.md†L1075-L1075
 
 
 ## References

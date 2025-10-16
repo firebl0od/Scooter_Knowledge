@@ -4,6 +4,10 @@
 
 - **10" pneumatic upgrades:** CST 10×2.25, Wanda 10×2, and Xuancheng casings deliver the best grip once inflated toward 3.5–4.2 bar; running them near 36 psi dulls the expected 12 S speed gains and risks fender rub until clearances are checked.[^1][^2][^3]
   - Genuine Xuancheng tires reuse the stock 8.5" tube, run happily around 45–50 psi, and last roughly 700 km—verify the factory label to avoid counterfeit casings.[^xuancheng_factory]
+- Commuters chasing comfort keep pairing 10" pneumatics with quality suspension (Konyk, dual-air setups) and warn that Monorim-branded solid tires remain a crash hazard even at moderate speeds.[^denis-comfort]
+- **Skip gimmicks like water-filled tires.** Heavy riders chasing winter stability simply pump CST V3 casings toward 5 bar or move to 10" Xuancheng/9×2 off-road tread, trading a touch of range for rim protection and predictable grip.[^denis-5bar]
+- **Pair 10×3 tires with real braking.** Denis’ crew still insists on higher pressures and sorted brakes before loading faster firmware maps on 10×3 upgrades.[^denis-10x3-brake]
+- **Heavy riders run 10×3 above 45 psi without blowouts.** 100 kg commuters are holding those pressures safely but warn that suspension and braking upgrades must keep pace as speeds climb.[^denis-10x3-psi]
 - **Artem’s 10-inch benchmark:** PMT 10×3 remains the gold-standard VSETT tire at roughly 48 psi, with CST 10×3 the value pick.
   - just remember the CST bead runs small, so seat it evenly to avoid wobble.[^4]
 - **Premium compound trade-offs:** PMT E-Fire 10×3 radials land around $175 per pair shipped from Italy, while PMT Stradales can feel skittish on Weped frames where softer Shinko rubber hooks up better.
@@ -15,7 +19,7 @@
 - **Regional Sava slick sourcing:** Yamal found 90 mm Sava slicks through local motorcycle shops; they’re beefier than Ulip tyres yet still trail PMT T41/Juniors for outright grip and remain scarce on AliExpress.[^sava-slick]
 - **Stradale Junior vs. regular:** Noname and skrtt logged that PMT Stradale Juniors grip harder yet flatten quickly under straight-line riding, so they’re waiting on new rims to keep daily-driver profiles round.[^pmt-stradale]
 - **Solid vs. pneumatic:** Riders report roughly 20 % higher energy use, harsher ride quality, and accelerated fatigue on battery tabs when solid tires replace pneumatics.
-  - reserve solids for short-range emergency duty.[^8]
+  - reserve solids for short-range emergency duty.[^8][^denis-solid-danger]
 - **10" pneumatic upgrades:** CST 10×2.25, Wanda 10×2, and Xuancheng casings deliver the best grip once inflated toward 3.5–4.2 bar; heavier riders specifically favour CST V3 and Wanda shells with thicker tubes, while running them near 36 psi dulls the expected 12 S speed gains and risks fender rub until clearances are checked.[^1][^9][^2][^3]
 - **Case-specific fit notes:** CST 10×2.25 carcasses often need rim sanding, Kenda-branded 152 mm casings mount tight, and Wanda 10×2 options stay grippy at ~4.2 bar while outlasting ultra-soft red compounds.[^10]
 - **Solid vs. pneumatic:** Riders report roughly 20 % higher energy use, harsher ride quality, and accelerated fatigue on battery tabs when solid tires replace pneumatics.
@@ -25,12 +29,21 @@
 - **Valve and rim prep:** Monorim 500 W hubs ship without valve holes; drill carefully and add angled stems before installing tubes. Sand thick CST beads or rim casting bumps so 10" conversions seat evenly and avoid wobble. Blade owners even notch the split rim so a beefier Schrader clears the casting.
   - valve extensions help you inflate but still expect to relieve metal around the stem on compact rims.[^9][^3][^13]
 - **CST 10×2.5″ remains the go-to pneumatic swap** for Pro/1S scooters, but cloning Monorim suspension geometry or mixing Sharkset hardware demands careful bolt sizing and occasional metalwork so travel stays smooth.[^cst_go_to]
+  - reserve solids for short-range emergency duty and treat them as unsafe above ~20 km/h.[^11][^8][^denis-solid-warning]
+- **Solid vs. pneumatic:** Riders report roughly 20 % higher energy use, harsh ride quality, and accelerated battery-tab fatigue on solid tires; Denis’ crew now calls 9.5-inch solids dangerous and steers commuters toward quality pneumatic or tubeless casings instead.[^8][^12]
+- **Valve and rim prep:** Monorim 500 W hubs ship without valve holes; drill carefully and add angled stems before installing tubes. Sand thick CST beads or rim casting bumps so 10" conversions seat evenly and avoid wobble. Blade owners even notch the split rim so a beefier Schrader clears the casting.
+  - valve extensions help you inflate but still expect to relieve metal around the stem on compact rims.[^9][^3][^13]
+  - oversize 10 in CST casings on 155 mm rims usually need 2–2.5 mm of machining for a safe bead seat—grind the rim, not the tire carcass, to avoid micro-cuts that later explode at speed.[^denis-cst-machining]
+- **Tube prep:** 10 × 2.5 in tubes want 45° or 90° stems plus talcum-powder dusting to prevent valve tearing, and front Xuancheng casings tend to wear faster than rears—commuters budget replacements around 1 500 km.[^denis-tube-care]
+- **Monorim 500 W hubs accept air tires.** Swap the stock solid for CST 10×2.5 or 10×3 rubber before raising power—they fit the rim and instantly tame the sketchy factory tire.[^denis-monorim-air]
 - **Budget hub sourcing:** Blade-branded Longyu 60 V motors are landing around €180 each (hub only), but factor in rim/tire costs and scarce Weped-spec 75 mm variants.
   - forwarders or local dealers often bundle tires to avoid inflated AliExpress freight.[^14]
 - **Dropout prep for VSETT hubs:** Reversing Monorim swingarms, drilling fresh axle slots, and trimming dropouts for security washers are mandatory when fitting VSETT 10+ hubs; bent retainers or cheap sliders won’t hold torque without that rework.[^15]
 - **Match tire to rim width:** Stretching 6"-wide casings over 6.1" rims left beads off-center, valves fouled, and fenders rubbing; source true 155 mm tires or machine rims instead of forcing a mismatch. Stick with 10×2 tubes inside 10×2.125 casings.
   - 10×2.5 tubes balloon, wrinkle, and feel sketchy even if you manage to bolt the rim halves together.[^16][^17][^18]
 - **Plan tubeless upgrades thoughtfully:** Budget Xuancheng slicks work for frugal builds, but riders prefer PMT or Wanda P1069 casings for grip; keep stock Xuancheng fronts until worn, then migrate to true tubeless sets with sealant-safe rims for better stability.[^12]
+- **Tubeless conversions remain finicky on high-power hubs.** Expect slow leaks, rim dents, and bead-seat issues unless you machine the rim or return to talc-dusted tubes.[^denis-tubeless-issues]
+- **Tubeless slick caution:** Veterans dislike 50 km/h tubeless slick experiments—rim dents or poor sealing dump air instantly, so they steer speed seekers toward CST 10×2.5 or PMT V-pattern tires unless the rim is meticulously sealed with slime and inspected after jumps.[^denis-slicks]
 - **Bin out-of-round bargains.** Builders junk visibly lopsided 10" casings instead of grinding rubber.
   - reputable ULIP and PMT sets seat correctly on 6.1" rims even if they cost more.[^19][^20]
 - **Pressure by load:** Heavy riders stabilize handling by targeting ≈4 bar rear / 3.5 bar front once mudguard brackets and wiring are rerouted for the taller rubber.[^2]
@@ -42,6 +55,14 @@
 - **Validate oversized fitment.** 11×3″ tyres reportedly clear Monorim 6″ forks up front, but the rear still needs axle extenders.
   - measure before ordering expensive rubber.[^26]
 - **Pre-ride cold checks:** Moving a warmed scooter into sub-zero air can deflate tubeless 10" casings through thermal contraction, so top pressures before rolling out in winter to keep grip consistent.[^27]
+- **Winter tread picks:** Riders facing snow lean on 10×2 tubeless off-road casings or Amalibay 9.2" treaded tires sourced from AliExpress; they warn studded DIY conversions chew through thin scooter rubber if screws ever touch bare pavement.[^winter-offroad][^winter-amalibay]
+- **Cold-weather range reality:** Expect slower top speeds and shortened range below freezing—the chemistry simply slows down even when the tires still hook up.[^winter-range]
+
+## High-Speed Brake & Tire Safeguards
+
+- **Spec fluid and hardware for race temps.** Roscheeee’s custom adapter lets Xiaomi builds stretch to 160–180 mm rotors alongside 10×2.5–10×3.0 or 110/65 tires, but conventional brake fluid boils long before a glowing 700 °C rotor cools—budget premium hydraulics and realistic fade expectations.[^roscheeee]
+- **Keep gentle KERS engaged for pad life.** Riders disable throttle-off regen in sport mode but leave lever-activated KERS enabled because it only nets roughly 1 km per 50 km of riding yet saves brake pads on commuter routes.[^denis-kers]
+- **Cycle race rubber often.** 80 km/h testers burn through CST and PMT tires quickly; once the carcass heat-soaks, grip collapses even on premium compounds, so stage spare sets and pair them with aramid riding gear for track duty.[^highspeed-rotation]
 
 ## Mounting & Sealant Tips
 
@@ -55,6 +76,7 @@
 - Spin the wheel off the ground and watch for tread wobble before blaming balance weights—most vibrations trace back to uneven bead seating.[^32]
 - **Warm and center stubborn casings.** Dust rims and tubes with talc, pre-warm Xuancheng/PMT shells with a heat gun, and cinch the tread with zip ties so beads drop into the rim center before levering the tire home.[^33][^34]
 - **Pull the brake disc before tackling a puncture.** Removing the rotor prevents scratches, and dusting tubes plus using plastic spoons keeps CST V3 and other 8.5"/10" casings from slicing replacements during reinstallation.[^disc_off_first]
+- **Warm and center stubborn casings.** Dust rims and tubes with talc, pre-warm Xuancheng/PMT shells with a heat gun, and cinch the tread with zip ties so beads drop into the rim center before levering the tire home; longer tire irons help avoid tearing beads on tight fits.[^33][^34][^denis-long-irons]
 - **Use air volume, not pressure spikes.** Hand pumps stall near 105 psi.
   - seat tubeless tires with high-flow foot pumps, station compressors, or ratchet straps that momentarily seal the beads.[^35]
 - **Blast stubborn tubeless beads.** For 11 in conversions, remove the valve core, flood the bead with soapy water, cinch the tread, and dump ~150 psi from a bead bazooka or large compressor.
@@ -117,6 +139,8 @@
 - Build a Monorim brake adapter template—torque arm profile, shim stack, and bolt lengths—for 140–160 mm discs so installers stop grinding fork legs to clear rotors.[^monorim_adapter]
 - **Semi-metallic pads:** Gold-toned semi-metallic pads last longer and maintain bite in rain compared with organic pads bundled with XTech calipers; ceramics run hotter and demand rotor monitoring.[^66]
 - **Semi-metallic pads:** Gold-toned semi-metallic pads last longer and maintain bite in rain compared with organic pads bundled with XTech calipers; ceramics run hotter and demand rotor monitoring.[^67][^66]
+- **Front-disc conversions:** Aftermarket 500 W hubs need the Monorim adapter plus XTech calipers, and builders routinely replace Monorim’s mis-machined brake/suspension hardware with self-locking fasteners to stop repeated bending failures.[^denis-front-disc]
+- **Mind TRP Spyke clearance.** The dual-piston caliper fouls Wheelway 500 W rims on Xiaomi builds; riders downsize the rear brake or switch pad compounds before the housing chews the tire.[^denis-trp-spyke]
 - **Rotor sizing:** Community swaps standardize on 135–140 mm rotors for Pro decks and 120 mm for base models when installing X-Tech HB100s or higher-end hydraulics.[^68]
 - **Rear-disc conversions:** Konyk 40 mm magnet hubs clear Xiaomi dropouts with 120 mm spacing and accept 180 mm rotors once spacers are machined.
   - capture final washer stacks and torque specs when documenting conversions.[^69]
@@ -131,6 +155,7 @@
 - **Support brake housing runs.** Tie the cable housing to the frame and trim excess length.
   - loose housing eats lever travel and ruins braking force no matter the caliper upgrade.[^73]
 - **Chase brake chatter methodically.** Pinched housings under the controller or damaged cable sheaths caused most squeal—refresh the housing, lubricate barrel adjusters, and consider TRP Spyke or NUTT calipers with proper spring tension.[^brake_chatter_diagnostic]
+- **Stock brake cables reach.** You can run the OEM cable through 2 m of housing if the scooter lacks rear suspension, keeping routing clean on dual-disc conversions.[^denis-cables]
 - **Graduate to full hydraulics for 80 km/h builds.** Xtech hybrids struggle to slow tuned Pro 2 conversions at highway speed; riders switch to Magura-class brakes and add lever sensors if they still want regen without killing lever feel, finishing with a proper bleed after routing new hoses.[^74]
 - **Watch Magura clearance.** MT7/MT8 calipers squeezed onto Xiaomi G30 and VSETT frames can lose their <5 mm tire gap as the casing flexes.
   - check clearance regularly, keep spare banjos/hardware, and reconsider external hose reroutes that rub 10×3 tires after flats.[^75]
@@ -143,6 +168,7 @@
 - **Free seized front hubs correctly:** Brace the scooter, apply penetrating lube, and use a long rigid wrench instead of soft Monorim tools; replace any rounded bolts with higher-grade hardware once the wheel is off.[^78]
 - **Monorim steering bind fix:** Back the centre stem bolt off a quarter turn, loosen the side clamps, or temporarily refit the stock bolt before reinserting the suspension pump when the fork feels sticky after install.[^79]
 - **Plan deck routing for 10" conversions:** Relocate rear-light wiring, seal fresh edges with epoxy, and trim mudguard plastics as needed; riders run ≈4 bar rear/3.5 bar front to keep taller rubber clear of the harness.[^80]
+- **Use spacer kits with 10×3 swingarms.** Stack the supplied spacers and add thin washers between the fork and hub on Monorim swingarms so 500 W motors don’t rub the tire once inflated.[^denis-monorim-spacers]
 - **Keep the deck rib when possible:** Lighter riders sometimes shave the rear rib for tire clearance, but heavier owners prefer leaving it intact and using spacers plus precise tire choices instead.[^81]
 - **Move and seal charge ports:** Many riders shift the charge port higher on the stem once 10" tires and rerouted wiring go in, resealing the deck to keep grit out.[^82]
 - **Rear suspension stretch:** Bolt-on rear suspension kits extend wheelbase roughly 10 cm, noticeably calming Xiaomi chassis at 35–40 km/h once brake adapters are spaced correctly.[^83][^66]
@@ -173,6 +199,10 @@
 - **500 W hubs on 12 S:** Swapping to 500 W motors and 12 S packs holds 45–48 km/h on flats without the voltage sag that drags 300 W hubs toward ~44 km/h once heat builds.[^96]
 - **Mixed-wheel combos:** Running a 10" front with an 8.5" rear still delivers 48–50 km/h when pack voltage stays high, but inspect hall sensors and brake hardware frequently—neglect leads to repeated ESC failures.[^mixed_wheel_upkeep]
 
+## Vendor & Support Notes
+
+- **Stick with proven shippers.** Voltride earned shout-outs for rapid PMT deliveries, and Mirono keeps steering buyers toward Scootermode or PaoloWu’s 50 mm hub/controller upgrades instead of overpriced MaxMods resellers.[^voltride][^paolowu]
+
 ## Setup Checklist
 
 1. **Mock clearances:** Dry-fit the chosen tire and suspension combo, confirming mudguard, brake, and harness spacing before inflating to full pressure.[^9][^2]
@@ -201,8 +231,21 @@
 [^8]: Source: knowledge/notes/all_part01_review.md†L336-L337
 [^9]: Source: knowledge/notes/all_part01_review.md†L337-L338
 [^10]: Source: knowledge/notes/all_part01_review.md†L185-L185
+[^denis-5bar]: Source: knowledge/notes/denis_all_part02_review.md†L806-L806
+[^denis-solid-danger]: Source: knowledge/notes/denis_all_part02_review.md†L868-L868
+[^denis-monorim-air]: Source: knowledge/notes/denis_all_part02_review.md†L832-L832
+[^denis-monorim-spacers]: Source: knowledge/notes/denis_all_part02_review.md†L844-L844
+[^denis-trp-spyke]: Source: knowledge/notes/denis_all_part02_review.md†L841-L841
 [^11]: Source: knowledge/notes/all_part01_review.md†L159-L159
 [^12]: Source: knowledge/notes/denis_all_part02_review.md†L325-L327
+[^denis-10x3-psi]: Source: knowledge/notes/denis_all_part02_review.md†L755-L755
+[^denis-kers]: Source: knowledge/notes/denis_all_part02_review.md†L707-L707
+[^denis-comfort]: Source: knowledge/notes/denis_all_part02_review.md†L1013-L1013
+[^denis-solid-warning]: Source: knowledge/notes/denis_all_part02_review.md†L1039-L1039
+[^denis-tubeless-issues]: Source: knowledge/notes/denis_all_part02_review.md†L1014-L1014
+[^denis-long-irons]: Source: knowledge/notes/denis_all_part02_review.md†L1015-L1015
+[^denis-cst-wear]: Source: knowledge/notes/denis_all_part02_review.md†L1082-L1082
+[^denis-egg-tube]: Source: knowledge/notes/denis_all_part02_review.md†L1083-L1083
 [^13]: Source: data/vesc_help_group/text_slices/input_part007.txt†L512-L521
 [^14]: Source: data/vesc_help_group/text_slices/input_part001.txt†L6912-L6963
 [^15]: Source: data/vesc_help_group/text_slices/input_part001.txt†L7093-L7147
@@ -306,3 +349,18 @@
 [^brake_chatter_diagnostic]: Source: knowledge/notes/all_part01_review.md†L817-L817
 [^steering_damper_bracket]: Source: knowledge/notes/all_part01_review.md†L815-L815
 [^rim_truing_technique]: Source: knowledge/notes/all_part01_review.md†L893-L893
+[^winter-offroad]: Source: knowledge/notes/denis_all_part02_review.md†L513-L513
+[^winter-amalibay]: Source: knowledge/notes/denis_all_part02_review.md†L513-L513
+[^winter-range]: Source: knowledge/notes/denis_all_part02_review.md†L514-L514
+[^roscheeee]: Source: knowledge/notes/denis_all_part02_review.md†L548-L548
+[^highspeed-rotation]: Source: knowledge/notes/denis_all_part02_review.md†L549-L549
+[^voltride]: Source: knowledge/notes/denis_all_part02_review.md†L582-L582
+[^paolowu]: Source: knowledge/notes/denis_all_part02_review.md†L582-L582
+[^denis-front-disc]: Source: knowledge/notes/denis_all_part02_review.md†L611-L612
+[^denis-cables]: Source: knowledge/notes/denis_all_part02_review.md†L612-L612
+[^denis-slicks]: Source: knowledge/notes/denis_all_part02_review.md†L684-L684
+[^denis-10x3-brake]: Source: knowledge/notes/denis_all_part02_review.md†L612-L612
+[^denis-cst-machining]: Source: knowledge/notes/denis_all_part02_review.md†L975-L975
+[^denis-tube-care]: Source: knowledge/notes/denis_all_part02_review.md†L977-L977
+- **CST 10×2.5 wears quickly.** Aggressive riders swap to Tuovt or PMT casings with thicker nylon plies and deeper tread even though the stiffer tires demand more effort to mount.[^denis-cst-wear]
+- **Reseat lumpy tubes.** “Egg-shaped” wheels usually recover after deflating, talc-dusting, and reseating tubes multiple times.[^denis-egg-tube]

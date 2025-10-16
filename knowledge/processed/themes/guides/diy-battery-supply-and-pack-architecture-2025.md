@@ -21,10 +21,21 @@
   - log both approaches so new builders balance ergonomics, legality, and style goals before welding a pack around one camp.[^18]
 - AWD newcomers should stage upgrades: 12 S 3 P commuter packs brown out on VESC duals, so run a single motor until a 16 S 5–7 P pack (or paired internal/external strings) is ready, and treat 13 S 5 P builds as 50–75 A battery systems despite the 15 A-rated cells.[^19][^20]
 
+## Field Failure Watchlist (Denis Part 02, Lines 42 101–44 300 & 15 001–16 500)
+
+- Monorim-branded “upgrade” packs keep arriving with mystery cells, sloppy harness polarity, and poor QC; Denis’ crew now funnels EU buyers toward Scootermode, VTA, or EtorroS packs instead of gambling on the label.[^monorim-battery]
+- Daly Bluetooth boards showing up today often hide SouthROL silicon: expect weak balancing and bogus telemetry unless you can trace provenance or swap to ANT/JK hardware.[^daly-clone]
+- EtorroS’ Kaabo Wolf teardown exposed undersized nickel and collapsing MJ1 parallels once riders maxed controller P-settings; his fix triples the weak groups, keeps P7 ≥ 5, and ends rides near 20 % SoC to avoid repeat failures.[^etorros-wolf]
+- “Dead” Xiaomi packs usually wake when you attach a charger normally—skip risky bypass-charging unless diagnostics confirm the BMS is truly offline.[^sleeping-packs]
+- Serial booster bricks still choke their tiny BMS stages around 25–30 A; red-blinking dashboards or cutouts call for higher-current cells/BMS (60–100 A) rather than firmware hacks, and never parallel packs of different voltages.[^serial-booster]
+- Aerdu-branded externals remain divisive—some 12 Ah packs behave, others arrive imbalanced—so EU riders still lean on Scootermode or Denis’ workshop despite the premium.[^denis-aerdu]
+- A Mirono external pack cooked its BMS and warped the enclosure after field-weakening amps; the shop now doubles heatsinks, underscoring the need for robust wiring, MOSFET cooling, and warranty support on hobby-level builds.[^denis-mirono-overheat]
+
 ## Cell & Component Sourcing Reference
 
 - **Keep the high-power roster current.** Community testers just flagged EVE 40PL/50PL, Molicel P50B, and BAK 45D as the modern reference set for 300 A+ packs.
   - refresh comparison sheets with Mooch’s latest lab data before committing to older chemistries.[^21]
+- **Stock Smart Ant BMS as a Daly fallback.** Mirono rates Xiaoxiang “Smart Ant” boards as a reliable EU-sourced option when Daly lacks 12 S Li-ion hardware.[^denis-smartant]
 - **Log per-cell sag realities.** LG MJ1 parallels started drooping once draws topped ~7–10 A per cell, whereas Samsung 35E banks held voltage better at the same load.
   - document chemistry limits before promising 16 S commuters big torque numbers.[^22]
 - **Budget Xiaomi rebuilds still bottleneck at ~40 A per half-pack.** Dual 20 S stacks built from repacked Xiaomi cells only yield ~17.5 Ah and 40 A per section, so Zero 10X upgrades need parallel 8 AWG-equivalent harnesses at 100 A draws to avoid voltage sag.[^23]
@@ -35,6 +46,8 @@
   - refresh comparison sheets with Mooch’s latest lab data before committing to older chemistries.[^21][^26]
 - **Budget trustworthy refurb lots.** Denis steers budget builds toward refurbished Samsung 35E/50E batches from NKON’s late-2021 stock as a reliable midlife option when premium chemistries are unobtainable.
   - document provenance and avoid mixing them with tired originals.[^27]
+- **Wire Daly boards exactly as printed.** Recent failures traced to doubled balance leads and skipping the negative-first sequence; follow the diagram step by step to avoid instantly popping the BMS.[^denis-daly-wiring]
+- **Don’t cross chemistries on BMS hardware.** LiFePO₄ boards can’t protect Li-ion strings because of voltage-window differences—return them or build a dedicated LiFePO₄ pack instead.[^denis-lifepo4-bms]
 - **Match AWD chemistries to the target current.** Denis steers 15 S all-wheel-drive packs toward LG M29 or EVE 33V cells, while Arsenus adds proven high-draw staples.
   - Molicel P42A/P40T, Samsung 25R/30Q, and Sony VTC5/VTC6
   - keeping 21700 formats as the preferred baseline for sustained torque.[^28]
@@ -647,3 +660,13 @@ Alibaba-listed A123 20 Ah LiFePO₄ prismatics still tout 200 A charge capab
 [^eu_cell_sourcing]: Source: knowledge/notes/input_part011_review.md†L614-L615
 [^vfbms32_eval]: Source: knowledge/notes/input_part011_review.md†L625-L626
 [^eu_solder]: Source: knowledge/notes/input_part011_review.md†L620-L620
+[^monorim-battery]: Source: knowledge/notes/denis_all_part02_review.md†L603-L612
+[^daly-clone]: Source: knowledge/notes/denis_all_part02_review.md†L604-L607
+[^etorros-wolf]: Source: knowledge/notes/denis_all_part02_review.md†L605-L606
+[^sleeping-packs]: Source: knowledge/notes/denis_all_part02_review.md†L607-L607
+[^serial-booster]: Source: knowledge/notes/denis_all_part02_review.md†L631-L631
+[^denis-aerdu]: Source: knowledge/notes/denis_all_part02_review.md†L692-L692
+[^denis-mirono-overheat]: Source: knowledge/notes/denis_all_part02_review.md†L996-L996
+[^denis-smartant]: Source: knowledge/notes/denis_all_part02_review.md†L907-L907
+[^denis-daly-wiring]: Source: knowledge/notes/denis_all_part02_review.md†L953-L953
+[^denis-lifepo4-bms]: Source: knowledge/notes/denis_all_part02_review.md†L954-L954

@@ -31,6 +31,8 @@
 - **Pay with strong buyer protection.** AliExpress disputes can idle for months.
   - Mirono’s €80 controller sat at “processing” indefinitely
   - so the crew now favours PayPal or chargeback-friendly cards and documents faulty halls or motors aggressively to retain leverage.[^13]
+- **Respect airline watt-hour caps.** Passenger airlines still limit carry-on lithium to roughly 100 Wh, so veterans plan to ship scooters via ground carriers that accept lithium (DPD, UPS) or line up rental scooters at the destination instead of gambling with oversized packs at security checkpoints.[^air-100wh]
+- **Reinforce parcels for rough ground handling.** Even approved couriers can toss boxes; hard cases and honest declarations reduce the risk of a dropped shipment igniting in transit.[^ground-handling]
 - **Drain large externals before flights.** Riders moving 24 Ah packs by air spent ~70 km of riding to reach 30 % and used incandescent lamps for final discharge.
   - plan the time and proof-of-compliance paperwork so security sees a genuinely “empty” pack.[^14]
 
@@ -65,3 +67,5 @@
 [^israel-import]: Source: knowledge/notes/input_part010_review.md†L678-L678
 [^uk_aus_shipping]: Source: knowledge/notes/all_part01_review.md†L631-L631
 [^rita_shipping_delays]: Source: knowledge/notes/all_part01_review.md†L744-L746
+[^air-100wh]: Source: knowledge/notes/denis_all_part02_review.md†L1009-L1009
+[^ground-handling]: Source: knowledge/notes/denis_all_part02_review.md†L1010-L1010

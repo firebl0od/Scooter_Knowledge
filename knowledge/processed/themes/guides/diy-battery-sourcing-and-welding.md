@@ -7,6 +7,7 @@
 - Mirono steers newcomers toward Docreate’s ~€100 capacitor welder and copper-under-nickel sandwiches (≈40 J for nickel, 60–70 J for copper) because LSUC-branded caps underdeliver and bare copper strips fail pull tests without a nickel cap.[^1]
 - Before committing to copper busbars, Pandalgns is test-firing a €100–€120 welder at ≈0.1 s pulses to confirm it can join copper reliably—proof that bench tests should precede full 20 S10 P builds.[^welder-trials]
 - Pack shops now expect reinforced printed holders and pro-grade tooling; Pandalgns is redesigning 20S8P cages after flimsy STLs failed, and Noname is pricing a $17 k laser welder to keep precision builds moving.[^stiff-holders]
+- Community veterans call quality AliExpress packs a lottery—without cell provenance, they prefer building from verified cells even if Aerdu customs occasionally arrive “fine.”[^denis-ali-lottery]
 - Size busbars with real cross-sectional math instead of stacking nickel.
   - triple 0.30 mm stacks still run resistive at 70 A, so teams now flip to copper once welders are dialled.[^2][^3]
 - Nickel-plated steel strips remain serviceable when the welds are sealed under Kapton, fish paper, and shrink; leave plating exposed to humid decks and the steel rusts, while pure nickel keeps resistance lower if you can justify the cost.[^ip001-nickel-steel][^ip001-pure-nickel]
@@ -17,6 +18,7 @@
 - One builder left boards on the hotplate briefly without visible damage, but the scare reinforced double-checking preheat routines before solder prep.
   - treat hotplate stages as live-fire operations every time.[^5]
 - Samsung 50E vs. 35E debates continue: the 50E sags less but caps around 30 A on a 3 P string, global shortages hit both cells, and some branded Liitokala packs arrived with mystery “BICO” cells unfit for high-current builds.[^50e_supply]
+- Seasoned welders still crown kWeld as the reliable benchmark and warn that Sunkko-style rigs barely clear 0.12 mm nickel unless you upgrade the power stage.[^denis-kweld-standard]
 
 ## Workshop Pricing & BMS Baselines
 
@@ -30,6 +32,7 @@
 - Swap separate-port AliExpress BMS boards before paralleling with Rita; otherwise the discharge lead backfeeds chargers and overfills cells through the wrong path.[^7]
 - Wary of flaky AliExpress “smart” boards, veterans are swapping to Daly hardware and only editing per-group internal-resistance tables after confirming wiring and cycling the pack.[^daly_swap]
 - Expect honest 10S materials to cost roughly €100 before labor and tax—anything cheaper usually hides weak cells or flimsy protection hardware.[^8]
+- Veterans now skip “brandless” AliExpress 18650s altogether, noting that even small external packs should budget well over €100 in quality cells and that suspiciously cheap bricks may be stuffed with sand or exhausted pulls.[^denis-brandless]
 - Tudor/VTA external packs arrive with same-port BMS wiring; tie Rita’s XT30 into C-/B- and leave P- empty so charge and discharge share the protected port without bypassing the board.[^tudor-common]
 - The workshop flags “fire emoji” AliExpress packs built from laptop pulls.
   - builders cap Happy BMS builds near 53 V/40 A and lean on refurbished OEM modules plus externals for range instead of forcing Rita past spec.[^ali-pack-warning-diy]
@@ -58,6 +61,8 @@
 - **Pick the right welding process.** Halo deck and Nami frame repairs favour TIG work or professional shops; budget MIG rigs spatter excessively and stick welders simply cannot penetrate scooter aluminium without compromising strength.[^16][^17]
 - **Size soldering irons for busbar work.** High-current harnesses solder cleanly with 200–300 W handheld irons or 350 W “3 kg” stations proven on QS8 connectors.
   - tiny 65 W wands only cope if you overdrive them, which risks cold joints and melted insulation.[^18]
+- Practice high-current soldering on scrap first: Denis’ crew leans on ≥60 W irons, rosin-core solder, disciplined flux cleanup, and heavy bullet/banana connectors to avoid melting insulation or leaving cold joints when upgrading phase leads.[^denis-highcurrent-solder]
+- Desolder nickel before prying welded brackets off recycled packs so you don’t tear cell tabs during teardown.[^denis-desolder]
 
 ## Cell Market Benchmarks
 
@@ -558,6 +563,8 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^ip009-holders]: Multiple builders reiterated that tight-tolerance 3D-printed holders (PETG/ASA/ABS) improve spacing and thermal paths over hot glue, especially for long packs.[^217]
 [^ip009-makaron]: Double-layer “makaron” shrink can replace fishpaper between rows but still scuffs faster, so veterans still prefer fishpaper for series barriers.[^218]
 [^ip009-g30]: Squeezing a 20 S 6 P 21700 pack plus twin MP2 controllers into a G30 required a 36 mm deck extender and ~1 mm of grinding around the rail opening.[^219]
+[^denis-ali-lottery]: Source: knowledge/notes/denis_all_part02_review.md†L993-L993
+[^denis-kweld-standard]: Source: knowledge/notes/denis_all_part02_review.md†L994-L994
 [^ip009-fiberboard]: Sliding thin fiberboard into 0.20–0.25 mm copper folds keeps the busbars separated until epoxy spacers land.[^220]
 [^ip009-barley]: Builders finish each series strip with barley paper so heavy copper stacks don’t chafe insulation when the pack flexes.[^221]
 [^ip009-pretension]: Pre-tensioning copper by bending it over a table edge keeps springy sheets seated once the first welds land.[^222]
@@ -725,6 +732,8 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^58]: Source: knowledge/notes/input_part007_review.md†L529-L529
 [^59]: Source: knowledge/notes/denis_all_part02_review.md†L76-L77
 [^60]: Source: knowledge/notes/input_part011_review.md†L369-L374
+[^denis-highcurrent-solder]: Source: knowledge/notes/denis_all_part02_review.md†L714-L714
+[^denis-desolder]: Source: knowledge/notes/denis_all_part02_review.md†L1090-L1090
 [^61]: Source: knowledge/notes/input_part010_review.md†L257-L258
 [^62]: Source: knowledge/notes/input_part006_review.md†L306-L306
 [^63]: Source: data/vesc_help_group/text_slices/input_part001.txt†L25425-L25518
@@ -986,3 +995,4 @@ Glitter 811A/811H rigs promise 6 kA bursts with 35 mm² cables for 0.2 m
 [^daly_swap]: Source: knowledge/notes/all_part01_review.md†L722-L722
 [^15s_common_port]: Source: knowledge/notes/all_part01_review.md†L609-L609
 [^liitokala_warning]: Source: knowledge/notes/all_part01_review.md†L610-L610
+[^denis-brandless]: Source: knowledge/notes/denis_all_part02_review.md†L894-L894
