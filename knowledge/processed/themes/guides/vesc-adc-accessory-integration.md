@@ -155,7 +155,8 @@
 - **Check your multimeter mode before probing.** Accidentally measuring resistance on a live harness has shorted throttle rails and fried ADC inputs.
   - double-check the dial before touching controller pins.[^60]
 - **Fuse the adapter output:** One builder shorted the 12 V rail on a brand-new Spintend 85240 while wiring lights and killed the buck stage; add inline fuses or external bucks so a single mistake doesn’t scrap the controller.[^16][^23]
-- **Respect the adapter’s voltage ceiling.** Keep the kill-switch lead under ≈60 V, route high-voltage latches through a smart BMS or loop key, and only parallel momentary buttons that share the adapter’s common ground (e.g., ANT/JK power toggles) so you don’t backfeed pack voltage into the logic board; treat the module as a logic-level relay and let contactors or smart-BMS buttons handle full-pack isolation.[^61]
+- **Respect the adapter’s voltage ceiling.** The board is only rated for roughly 60 V kill loops—use it to mirror low-voltage latches while heavy pack isolation stays on a loop key, contactor, or smart BMS.[^61]
+  - JK and ANT power buttons can share the adapter ground safely, but keep every trigger on the logic side and never backfeed full pack voltage into the daughterboard.[^61]
 - **Treat buttons as triggers only:** The ADC adapter does not replace a loop key or smart-BMS latch; plan a real kill switch for theft deterrence or maintenance.[^17][^18]
 - **Lean on the adapter for logic features, not efficiency gains.** The Spintend ADC board remains the quickest way to wire kill-switch logic or single-motor limp modes, but veterans note dual-motor operation stays more efficient at a given current draw.
   - reserve single-motor toggles for fault recovery, not everyday riding.[^62]
@@ -359,7 +360,7 @@
 [^58]: Source: data/vesc_help_group/text_slices/input_part003.txt†L15008-L15017
 [^59]: Source: knowledge/notes/input_part001_review.md†L508-L510
 [^60]: Source: data/vesc_help_group/text_slices/input_part013.txt†L5805-L5813
-[^61]: Source: knowledge/notes/input_part005_review.md†L603-L603
+[^61]: Spintend ADC adapter reminder that the kill loop is limited to ≈60 V and should only switch JK/ANT-style logic buttons while real pack isolation stays on external hardware. Source: data/vesc_help_group/text_slices/input_part005.txt†L24198-L24224; L24281-L24282.
 [^62]: Source: knowledge/notes/input_part014_review.md†L5313-L5316
 [^63]: Source: knowledge/notes/input_part005_review.md†L434-L436
 [^64]: Source: knowledge/notes/input_part003_review.md†L248-L248

@@ -184,6 +184,9 @@ Field crews frustrated with Daly’s missing toggles and VAT-laden replacements 
 - **Document platform quirks.** Ninebot Max G2 packs balance reliably with passive bleeders (~5 mV delta), while Navee N65 packs can drift 0.7 V because their protection-only BMS rarely equalises.
   - budget JK/ANT retrofits when swapping between the two platforms.[^62]
 - **Recalibrate VESC SoC after deck work.** Grinding or drilling inside the deck rains conductive dust onto harnesses; vacuum the bay, flush boards with IPA, and then reset coulomb counters or retune voltage curves (or switch to SmartDisplay dashboards) so telemetry lines up once stray metal no longer fools the BMS.[^63]
+  - Run the full contamination checklist afterward: vacuum, wipe with 99 % IPA, and inspect for solder whiskers before powering the pack.[^63]
+  - Rebuild the VESC Tool voltage curve (or switch to SmartDisplay/JK dashboards) so SoC follows the refreshed BMS math instead of the dust-contaminated baseline.[^63]
+  - Re-zero coulomb counters only after the deck is clean and the pack is charged to the new ceiling; this keeps Daly/JBD learning cycles from drifting further.[^63]
 - **Evaluate Bribms drop-ins for rentals.** Paolo’s “Bribms” replacement keeps the Ninebot footprint while adding 15 S support, 50–60 A discharge, 100 mA balancing, and Bluetooth telemetry.
   - handy when upgrading shared-fleet frames without redesigning the deck.[^64]
 

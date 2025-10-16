@@ -708,7 +708,7 @@ A distilled playbook for keeping race-level VESC builds dependable when running 
 - PuneDir’s Zero 12″ experiments showed upsized tyres exacerbate wobble on marginal trail—fix geometry before chasing larger rubber.[^408]
 - Retire Wheelway hubs when magnet adhesive browns.
   - overheated units have cooked halls clean off and are safer replaced with high-KV Blade motors for 12 S speed builds targeting 35–40 A battery / ~120 A phase.[^409]
-- **Log where rental frames are still available.** SNSC 2.3 chassis are drying up as EU fleets pivot to Okai hardware, so builders are hoarding spares and investing in Bambu P1S printers to fabricate brackets, insulation, and lighting hardware in-house.[^410][^411]
+- **Log where rental frames are still available.** SNSC 2.3 chassis are drying up as EU fleets pivot to Okai hardware, so builders are hoarding spares, cataloguing which operators still auction frames, and standardising Bambu P1S print profiles for spacers, lighting pods, and harness saddles that drop straight onto the rental geometry.[^410][^411]
 - Upgrade braking hardware for 100 km/h stops: thin 1.8 mm bicycle rotors deform under sustained heat, so move to 3 mm+ rotors, fresh pads, and even moped-grade calipers while logging GPS-backed deceleration data to validate gains.[^brake-data]
 - On VSETT-class builds, jump from stock 140 mm discs to 160 mm SRAM Cleansweep or 180 mm Magura MDR-P rotors, align pads with purpose-made brackets, and swap washer stacks for machined mounts to avoid warping under heavy loads.[^412]
 - Routing Magura hoses externally demands short banjos and matched kits.

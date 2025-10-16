@@ -50,6 +50,7 @@
 - **Upgrade hardpoints.** Builds pushing 8 kW+ torque now weld steel eyelets, use ≥10 mm hardened chains, and recess security bolts because factory aluminum tabs vanish under cordless grinders.[^31]
 - **Keep a mechanical kill switch.** Without native VESC shutdown, riders lean on keyed mains, throttle-disable switches, or Safe Start current limits.
   - and Spintend’s ADC adapter v2 still needs loop keys or smart-BMS latches because it only ferries 5 V/12 V accessory power. Treat Bluetooth/relay locks as secondary deterrents that thieves can bypass quickly.[^32][^33]
+  - veterans now layer loop keys, smart-BMS latching buttons, and even VESC Tool’s software power-off so a thief has to defeat multiple systems before the pack energises again.[^adc_layers]
 - **Layer trackers by medium.** Mix AirTags or SmartTags for crowd-sourced pings with SIM trackers (TK806, SIM800) where IMEI registration allows ongoing data plans so a stolen scooter keeps reporting in real time.[^34]
 - **Prototype smarter telemetry.** Builders are testing ESP32-based 4G+GPS trackers that ride the scooter pack, broadcast IMEI-backed telemetry, and integrate alongside SmartDisplay so theft alerts keep flowing even when BLE trackers fail.[^35]
 - **Hide trackers inside the pack.** New SIM7600/BMW tracker builds live under the battery shrink with UART links to MOSFET cutoffs, letting riders remote-kill packs while thieves fumble for the enclosure.[^36]
@@ -137,6 +138,7 @@
 [^31]: Source: knowledge/notes/input_part005_review.md†L195-L200
 [^32]: Source: knowledge/notes/input_part005_review.md†L348-L350
 [^33]: Source: knowledge/notes/input_part005_review.md†L504-L506
+[^adc_layers]: Source: data/vesc_help_group/text_slices/input_part005.txt†L24596-L24612
 [^34]: Source: knowledge/notes/input_part005_review.md†L350-L351
 [^35]: Source: knowledge/notes/input_part000_review.md†L239-L239
 [^36]: Source: knowledge/notes/input_part000_review.md†L506-L508

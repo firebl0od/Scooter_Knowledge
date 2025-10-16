@@ -19,6 +19,7 @@
 - Stage an ST-Link and legacy BLE packages before teardown.
   - DE-market Pro 2 dashboards on BLE 1.55+ refuse OTA downgrades, clone controllers spoof serials yet still block flashes, and forcing new Xiaomi BMS firmware through ST-Link has bricked boards mid-conversion.[^10]
 - Measure the deck cavity early: builders logged ~120 mm width and 74 mm depth, giving clear constraints before committing to dual controllers or double-stack battery layouts.[^11]
+- Map your layout before cutting: document whether the project keeps everything internal (20 S 4 P deck packs, controller at the nose) or adds external 20 S boosters, and capture CNC stem dimensions plus star-nut installation steps when adapting SNSC forks so future builds don’t guess at hardware order.[^g30_layouts]
 - Build a spacer/pack checklist before welding: 20 S 4 P layouts fit with printed or CNC spacers plus minor cable reroutes, while 20 S 5 P bricks demand tray trimming, recessed fasteners, and harness standoffs to preserve deck clearance.[^12]
 - 20 S 6 P attempts demand 30 mm frame extensions, ultra-low ride height, and ruthless wire pruning.
   - racers still call the setup risky without spacers and reinforced lids, so weigh ground clearance before copying it.[^13]
@@ -151,6 +152,7 @@
 - Track tire availability: true 12″ tubeless slicks remain limited to rare Touvt 12×4.5‑6.5 listings, so expect lead times or plan alternate wheelsets when chasing maximum footprint on VESC builds.[^73]
 - Evaluate braking upgrades alongside power mods; 203 mm rotors add leverage but may be overkill.
   - pair regen tuning with quality hydraulic calipers and DOT 4/5 fluid first.[^74]
+- **Front-disc conversions without Monorim.** Repurpose a Ninebot Pro 2 front motor to gain the factory disc mount, then design spacers and caliper mounts around the stock fork so you avoid bulky Monorim swaps.[^g30_front_disc]
 - Use the €25 ePowerFun 3 mm aluminum floor plate as a quick cooling stopgap.
   - drill five mounting holes, trim the nose to clear JREV spacers, and plan a thicker custom plate once testing confirms heat loads.[^epowerfun]
 - Transparent plexiglass lids look great but need threadlocker, silicone seals, and stronger epoxy/two-part adhesive for LED strips.
@@ -174,6 +176,7 @@
 - Consider Voyage Megan or other CAN dashboards for consolidated telemetry once controllers are upgraded; validate compatibility when mixing CL350 or Express accessories with Ubox hardware.[^84][^85]
 - Budget a dedicated buck converter if you add VESC Express boards.
   - the modules only accept 5 V at ~150 mA and currently reset logging every few seconds on 6.06 firmware, so plan CAN updates or stay on 6.05 for stable telemetry.[^express_power]
+- Track where SNSC rental frames are still available and catalogue printable accessories (battery spacers, lighting pods, cable saddles) that fit Bambu P1S-class beds so builders can fabricate replacements in-house when fleet stock dries up.[^sns_prints]
 - Document J1772 travel adapters as part of the charging kit: a proven harness uses 12 AWG silicone leads plus 2.5 mm² wiring with 2.74 kΩ/1.3 kΩ pilot resistors so public stations handshake cleanly at 3 kW.[^86][^87]
 - Happy Giraffe logged key Blade 10 hub dimensions.
   - 130 mm inner axle, ≈160 mm fork span, M12 threads with 10 mm flats, 12 mm rotor offset, and 4 mm hardware
@@ -323,3 +326,6 @@
 [^108]: Source: knowledge/notes/input_part004_review.md†L13-L19
 [^109]: Source: data/raw/telegram_exports/vesc_help_group/input_part007.json†L410572-L410744
 [^deadword-pitfalls]: Source: knowledge/notes/input_part007_review.md†L413-L413
+[^g30_layouts]: Deck-layout and SNSC stem workflow reminder covering internal/external 20 S pack combos plus CNC stem/star-nut steps for fork swaps. Source: data/vesc_help_group/text_slices/input_part005.txt†L24505-L24536; L24652-L24661.
+[^g30_front_disc]: Guidance on using a Ninebot Pro 2 front motor and custom spacers to add a front disc without a Monorim fork swap. Source: data/vesc_help_group/text_slices/input_part005.txt†L24468-L24477.
+[^sns_prints]: SNSC sourcing and Bambu P1S accessory printing cues for rental-frame conversions. Source: data/vesc_help_group/text_slices/input_part005.txt†L24537-L24568; L24552-L24565.

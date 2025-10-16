@@ -125,6 +125,8 @@
 - **Graph phase current for MOSFET health.** VESC Tool’s phase-current traces flag dead drivers immediately.
   - a blown DRV forced one controller into noisy BLDC-only operation and shut down above ~10 % throttle until the failed MOSFETs were replaced.[^70]
 - **Keep Vedder’s `code_server` for CAN telemetry.** It automatically retries failed frames five times and stays more reliable than legacy scripts as long as firmware is current; just remember to swap RX/TX when moving Makerbase/Flipsky looms to Spintend/UBOX controllers and flash `slave_esc.lisp` on every CAN slave before logging.[^71][^code-server]
+- **Motor-detection MOSFET triage.** When detection pops FETs, pause and meter gate drivers, confirm phase-filter components, and rerun detection with conservative parameters before applying power again; the crew now treats this flowchart as mandatory after every detection fault.[^motor_detect_flow]
+- **Keep Vedder’s `code_server` for CAN telemetry.** Riders still trust it over legacy scripts so long as firmware stays current and they capture logs during faults for later review.[^71]
 - **Quick hall re-detection:** 🇪🇸AYO#74 confirmed you can rerun hall detection without a full motor calibration, but remember to disable the VESC Tool hand-test once inputs check out or throttle/brake channels stay latched in test mode.[^72]
 - **SmartESC UI caveat:** NetworkDir reminded riders that Xiaomi SmartESC firmware only mimics the VESC Tool interface.
   - it does not run VESC code
@@ -546,3 +548,4 @@
 [^198]: Source: knowledge/notes/input_part008_review.md†L383-L383
 [^199]: Source: knowledge/notes/input_part008_review.md†L56-L56
 [^code-server]: Source: knowledge/notes/input_part006_review.md†L21-L21
+[^motor_detect_flow]: Source: data/vesc_help_group/text_slices/input_part005.txt†L24741-L24763

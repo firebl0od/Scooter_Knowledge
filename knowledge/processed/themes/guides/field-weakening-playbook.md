@@ -43,7 +43,7 @@
 3. **Pair with quicker ramps judiciously.** Dropping acceleration ramping to 0.05 s sharpens launches alongside FW, but only apply it if the chassis and rider can tolerate the snappier response without spinning tires.[^6]
 4. **Re-verify Current Limits:** After each change, check live logs for battery spikes above set limits and rerun detection if overshoot appears.
   - the VESC Tool wizard reset resolved a 60 A ceiling breach on one build.[^8]
-5. **Test Regen:** Perform controlled braking drills to confirm bus voltage stays within component ratings; Spintend riders retain regen at 80–100 km/h with FW but still watch voltage sag for surprises.[^13]
+5. **Test Regen:** Perform controlled braking drills to confirm bus voltage stays within component ratings; log against Spintend’s ≈100 V ceiling so 80–100 km/h stops with FW don’t spike the DC link beyond the hardware limit.[^13]
 6. **Fault Review:** After hard pulls, run the `faults` command and inspect absolute current headroom (200–250 A for 120–130 A phase tunes) to avoid ABS cut-outs at high duty cycle.[^fw-faults]
 7. **Duty Cycle Discipline:** Keep maximum duty near firmware defaults (~95 %); stretching toward 99–100 % has produced abrupt cut-outs above 70 km/h on FW-enabled builds.[^fw-duty]
 8. **Duty-trigger experiments:** Genuine FW sliders stay locked behind firmware 5.3, so early adopters sideload 300 A bins and set duty-cycle triggers around 70 % to push past the 95–98 % plateau.
@@ -220,7 +220,7 @@
 [^10]: Source: knowledge/notes/input_part006_review.md†L207-L207
 [^11]: Source: knowledge/notes/input_part006_review.md†L454-L456
 [^12]: Source: knowledge/notes/input_part006_review.md†L457-L457
-[^13]: Source: knowledge/notes/input_part006_review.md†L357-L357
+[^13]: Source: knowledge/notes/input_part006_review.md†L357-L357; data/vesc_help_group/text_slices/input_part005.txt†L24644-L24651
 [^14]: Source: knowledge/notes/input_part008_review.md†L128-L128
 [^15]: Source: knowledge/notes/input_part012_review.md†L151-L151
 [^16]: Source: knowledge/notes/input_part008_review.md†L16099-L16129

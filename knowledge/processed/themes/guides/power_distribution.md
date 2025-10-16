@@ -28,6 +28,8 @@
 - JK smart BMS antispark stages make XT150 hot-plugging viable, while AS150 split shells simplify dual-controller routing inside cramped VSETT decks.[^ip001-xt150-routing]
 - Higo L1019 retrofit looms bundle 4 mm² (≈11 AWG) phases with halls and a temp lead in one jacket that still fits VSETT axles; map the color swap before landing XT150 bullets and keep the plug on 50 mm-class hubs where it stays cool.[^ip001-l1019]
 - Avoid dropping L1019 connectors into 60–70 mm motors without reworking the solder—builders are desoldering the factory “blob” and upsizing leads before higher-current installs.[^ip001-l1019-limit]
+- QS8 main leads that regularly see ~350 A peaks now step up to 6 AWG when a single connector carries the pack current; dual-QS8 layouts can stay on paired 8 AWG runs, but the crew keeps warning newcomers not to trust “100 A” house wire marketing on cheap silicone leads.
+  - budget the thicker copper before finalising harness lengths.[^qs8_awg]
 - Treat solder as mechanical filler, not the conductor: twist or fold AWG12 leads to double their contact area before wetting bullets, because even silver-bearing solder conducts two to five times worse than copper.[^6]
 - A melted MT60 phase plug that shorted a Kelly controller at ~200 A convinced the crew to retire drone-class connectors above 72 V; step up to XT150/AS150 bullets or lugs once battery demand enters the 150–200 A bracket.[^ip001-mt60-failure]
 - Builders graduating dual VESC setups beyond 150 A phase are standardising on Amass AS150U anti-spark pairs with 8 AWG tails and XT150/AS150 mains once burst logs show 500 A phase.
@@ -64,3 +66,4 @@
 [^ip001-mt60-failure]: Source: data/vesc_help_group/text_slices/input_part001.txt†L17850-L17910
 [^ip001-lighting]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24157-L24216
 [^ip001-voltmeter]: Source: data/vesc_help_group/text_slices/input_part001.txt†L24411-L24421
+[^qs8_awg]: Source: data/vesc_help_group/text_slices/input_part005.txt†L24298-L24309
