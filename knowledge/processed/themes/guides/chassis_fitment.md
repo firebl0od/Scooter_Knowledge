@@ -14,6 +14,43 @@ Proper chassis fitment and maintenance are critical for scooter safety, performa
 - When to upgrade from stock to aftermarket components
 - Quality markers for replacement parts
 
+## 🔧 Critical Fitment Principles
+
+⚠️ **Measure twice, order once**: Wrong bearing sizes or axle diameters mean expensive returns.
+
+## 📋 Quick Reference: Common Bearing Sizes
+
+| Application | Bearing Size | Inner Diameter | Outer Diameter | Width |
+|-------------|-------------|----------------|----------------|-------|
+| Front wheel hub | 6001 | 12mm | 28mm | 8mm |
+| Rear wheel hub | 6202 | 15mm | 35mm | 11mm |
+| Steering column | 6900 series | Varies | Varies | Varies |
+| Suspension pivot | 608 | 8mm | 22mm | 7mm |
+
+💡 **Pro Tip**: Buy sealed (2RS) bearings, not open or shielded. They last 3-5x longer in outdoor conditions.
+
+## 📋 Wheel Compatibility Chart
+
+| Rim Size | Compatible Motors | Tire Options | Best For |
+|----------|------------------|--------------|----------|
+| 8-inch | 40-50H motors | Limited selection | Compact commuters |
+| 10-inch | 60-70H motors | Good selection (PMT, CST) | Most builds |
+| 11-inch | 70-80H motors | Excellent selection | Performance builds |
+| 12-inch | 90H+ motors | Limited, heavy-duty | Race/extreme builds |
+
+## ⚠️ Common Fitment Mistakes
+
+🔴 **Axle too short** - Motor won't seat properly, caliper won't align
+🔴 **Dropout width mismatch** - Motor won't fit without frame mods
+🔴 **Brake rotor size** - Caliper may not reach larger rotors
+🔴 **Tire width** - Wide tires may rub fenders or deck
+
+## 🔧 Related Guides
+
+- [Brake Maintenance & Upgrades](brake-maintenance-and-upgrades.md) - Caliper and rotor fitment
+- [Motor Configuration](motor_configuration.md) - Selecting motor size
+- [Xiaomi Tire & Brake Upgrades](xiaomi_tire_brake_upgrade_notes.md) - Platform-specific fitment
+
 ## Bearing and Wheel Upgrades
 
 - Monorim 500 W hub motors accept 6001 rear bearings and 16003 stainless fronts when refreshing the rolling hardware, supporting wider tire conversions.[^bearing_sizes]
