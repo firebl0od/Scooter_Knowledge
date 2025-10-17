@@ -1,6 +1,21 @@
-# SmartDisplay Integration & Operations Guide
+# SmartDisplay Integration & Operations
 
-## TL;DR
+## Overview
+
+SmartDisplay is a universal scooter display and telemetry system that works with VESC, Kelly, Minimotors, and other controllers. It provides configurable speed modes, real-time data logging, GPS navigation, and OTA firmware updates through a modern touchscreen interface. This guide covers installation, configuration, compatibility, and troubleshooting for SmartDisplay systems.
+
+## What You'll Learn
+
+- SmartDisplay hardware revisions and compatibility
+- Wiring requirements (UART, CAN, power)
+- Controller integration procedures
+- Configuration and speed mode setup
+- Accessory integration (lights, buttons)
+- OTA update procedures
+- Troubleshooting common issues
+- Safety considerations and ground loop prevention
+
+## Key Capabilities
 
 - SmartDisplay now ships with modular harnesses that bridge VESC Tool, Minimotors, Kelly, Zero, and VSETT controllers while logging GPS, RTC, and media controls, so plan UART + CAN runs even if you start with legacy hardware.[^1]
 - Current production firmware bundles Kelly KLS profiles and police-mode button combos, with Sabvoton and BAC support queued once hardware output stabilises; OTA updates arrive over HTTPS with encrypted images to deter cloning.[^2]

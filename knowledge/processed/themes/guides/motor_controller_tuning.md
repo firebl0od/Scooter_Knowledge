@@ -1,4 +1,19 @@
-# VESC Scooter Motor & Controller Tuning (Part 007 Extracts)
+# VESC Motor & Controller Tuning
+
+## Overview
+
+Tuning VESC-based scooter controllers requires understanding motor characteristics, controller capabilities, and the relationship between current limits, thermal management, and performance. This guide covers motor selection, controller pairing, current limit configuration, and field-proven tuning strategies. Proper tuning maximizes performance while maintaining reliability and safety.
+
+## What You'll Learn
+
+- Motor winding selection (Kv, pole count, magnet size)
+- Controller selection criteria and capability limits
+- Current limit configuration (battery vs. phase current)
+- Thermal management requirements
+- Motor detection procedures and parameters
+- Field weakening configuration
+- Dual-motor synchronization
+- Common tuning mistakes to avoid
 
 ## Hub Motor & Winding Selection
 

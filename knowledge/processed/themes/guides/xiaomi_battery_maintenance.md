@@ -1,6 +1,21 @@
-# Xiaomi Battery Maintenance & Recovery Playbook
+# Xiaomi Battery Maintenance & Recovery
 
-## TL;DR
+## Overview
+
+Xiaomi scooter battery packs require specific maintenance and troubleshooting procedures due to their integrated BMS and common cell chemistries. This guide covers balancing deeply discharged packs, BMS troubleshooting, capacity recovery, and charging system modifications. Understanding these procedures prevents unnecessary pack replacements and extends battery life.
+
+## What You'll Learn
+
+- External balancing techniques for unbalanced packs
+- BMS compatibility with firmware versions
+- Current limitations of Happy BMS and Rita adapters
+- Safe charging voltage modifications
+- State-of-charge calibration procedures
+- Common failure modes and diagnostics
+- When to replace cells vs. repair BMS
+- Temperature sensor troubleshooting
+
+## Key Principles
 
 - **Balance stubborn packs externally before blaming the BMS.** Clip TP4056 or lab-charger leads onto the weakest parallel groups without removing the board.
   - severely unbalanced M365 packs usually recover once every group tops off within a few millivolts.[^1]

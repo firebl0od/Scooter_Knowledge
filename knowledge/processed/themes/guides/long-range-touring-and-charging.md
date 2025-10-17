@@ -1,6 +1,21 @@
-# Long-Range Touring & Public Charging Guide
+# Long-Range Touring & Public Charging
 
-## TL;DR
+## Overview
+
+Long-distance electric scooter touring requires careful planning of battery capacity, charging infrastructure access, and thermal management. This guide covers real-world range benchmarks, public EV charger compatibility, charging strategies, and multi-day tour planning. With proper preparation, 150+ mile days and multi-day tours are achievable using existing charging infrastructure.
+
+## What You'll Learn
+
+- Battery capacity requirements for long-distance touring (5-10+ kWh)
+- Public EV charging infrastructure compatibility (J1772, Tesla adapters)
+- Fast charging strategies and thermal limits
+- Real-world range benchmarks and efficiency metrics
+- Multi-day tour planning and support vehicle coordination
+- Charging etiquette and station access
+- Weather and terrain impact on range
+- Emergency backup power options
+
+## Key Touring Principles
 
 - Multi-hundred-mile scooter tours are feasible with proper pack sizing (≥5 kWh), thermal management, and access to Level 2 EV charging infrastructure, but riders must plan charging etiquette, adapter compatibility, and backup power strategies before leaving home base.[^tour-viable][^ev-infra]
 - Public charging demands J1772 adapters, protocol triggers for Tesla plugs (FoCcci boards or equivalent), and awareness that app-locked stations typically release only one handle per session.

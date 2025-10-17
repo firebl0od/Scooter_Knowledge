@@ -1,5 +1,19 @@
 # Chassis Fitment and Maintenance
 
+## Overview
+
+Proper chassis fitment and maintenance are critical for scooter safety, performance, and longevity. This guide covers bearing selection and replacement, wheel/tire fitment, frame stiffness considerations, and front-end stability upgrades. Understanding these mechanical fundamentals helps prevent failures and ensures reliable operation, especially on high-power builds where stress on components increases significantly.
+
+## What You'll Learn
+
+- Bearing selection criteria (seal types, clearances, sizing)
+- Wheel and tire fitment considerations and clearances
+- Frame stiffness evaluation and when reinforcement is needed
+- Front-end geometry and stability at different speed ranges
+- Proper bearing installation and maintenance procedures
+- When to upgrade from stock to aftermarket components
+- Quality markers for replacement parts
+
 ## Bearing and Wheel Upgrades
 
 - Monorim 500 W hub motors accept 6001 rear bearings and 16003 stainless fronts when refreshing the rolling hardware, supporting wider tire conversions.[^bearing_sizes]
