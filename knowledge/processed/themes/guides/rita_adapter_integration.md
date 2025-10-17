@@ -15,6 +15,35 @@ The Rita adapter, designed by Denis Yurev, enables parallel external battery pac
 - Rita MAX differences for Ninebot G30 platform
 - When Rita is appropriate vs. alternatives
 
+## 🔋 Rita at a Glance
+
+💡 **What Rita Does**: Manages parallel auxiliary packs on Xiaomi scooters with intelligent load sharing, BMS emulation, and charge protection.
+
+⚠️ **What Rita Doesn't Do**: Balance cells, replace pack BMS, or support series voltage upgrades.
+
+## 📋 Quick Reference: Rita Capabilities
+
+| Feature | Rita v4 | Rita MAX (G30) | Notes |
+|---------|---------|----------------|-------|
+| Max battery current | 25A continuous | 30A continuous | Error 39 triggers at ~25A |
+| Voltage range | 10S-15S (36-63V) | 10S-15S | Update app profile when changing packs |
+| Platform support | Xiaomi M365/Pro/1S | Ninebot G30 | Requires matching data lines |
+| Charge protection | ✅ Yes (with splitter) | ✅ Yes | Needs 3-way charge splitter |
+| BMS emulation | ✅ Xiaomi protocol | ✅ G30 protocol | Permanent emulator mode available |
+| Pack balancing | ❌ No | ❌ No | Packs need own BMS |
+
+## ⚠️ Critical Pre-Installation Requirements
+
+1. **Voltage matching**: Both packs must be within 0.1V before first connection
+2. **Common-port BMS**: External pack must charge/discharge through same connector
+3. **Firmware limits raised**: Set Xiaomi firmware nominal voltage to 51-55V for 12S+ builds
+4. **App voltage profile**: Update Rita app for correct pack voltage before each swap
+
+## 🔧 Related Guides
+- [Parallel Battery Regen Integration](parallel-battery-regen-integration.md) - Parallel pack safety
+- [Rita External Battery Playbook](rita_external_battery_playbook.md) - Deployment procedures
+- [Smart BMS Integration](smart-bms-integration-handbook.md) - BMS selection
+
 ## Core Capabilities & Limits
 
 - Designed around Xiaomi's CAN/data-line behavior: it only supports parallel auxiliary packs, can masquerade as the scooter BMS via the "permanent emulator" mode, and still accepts serial or BLE configuration when the stock dashboard is missing.[^1]

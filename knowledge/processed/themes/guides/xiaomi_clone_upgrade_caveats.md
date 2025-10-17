@@ -13,6 +13,32 @@ Xiaomi-style clone scooters (ESA, Doc Green, KCQ, and others) look similar to ge
 - **Wiring discipline required**: Poor connectors and thin wires are common failure points
 - **Mechanical inconsistencies**: Suspension and tire fitment varies widely between batches
 
+## ⚠️ Before You Start: Budget Reality Check
+
+| Upgrade Goal | Recommended Approach | Cost Estimate | Difficulty |
+|-------------|---------------------|---------------|------------|
+| More range (basic) | Y-cable + matched 10S pack | €150-250 | ⭐⭐ |
+| Rita integration | Transplant full Xiaomi electronics | €250-350 | ⭐⭐⭐⭐ |
+| VESC conversion | Sell clone, buy genuine M365 | €300-500 | ⭐⭐⭐⭐⭐ |
+
+💡 **Reality Check**: Budget €100-150 just for genuine Xiaomi electronics (controller, BMS, dashboard) before tackling Rita or custom firmware. Many builders find it cheaper to sell the clone and buy a genuine M365.
+
+## 📋 Quick Reference: Clone vs Genuine Xiaomi
+
+| Feature | Genuine Xiaomi | ESA/Doc Green Clone | KCQ Clone |
+|---------|----------------|---------------------|-----------|
+| Data lines (CAN/UART) | ✅ Yes | ❌ No | ❌ No |
+| Rita compatible (out of box) | ✅ Yes | ❌ No (needs transplant) | ❌ No |
+| Custom firmware | ✅ Easy (XiaoFlasher) | ⚠️ Needs ST-Link | ⚠️ Hit or miss |
+| Connector quality | Good | Variable | Poor |
+| Wire gauge | Adequate | Often undersized | Very thin |
+| Build consistency | High | Medium | Low |
+
+## 🔧 Related Guides
+- [Rita Adapter Integration](rita_adapter_integration.md) - Full Rita installation guide
+- [Battery Pack Design](battery_pack_design.md) - Parallel pack safety
+- [Power Distribution](power_distribution.md) - Wire gauge and connector sizing
+
 ## Key Principles
 
 - **Treat clone scooters as bare frames.** Without Xiaomi dashboards or data lines, Rita cannot be configured.

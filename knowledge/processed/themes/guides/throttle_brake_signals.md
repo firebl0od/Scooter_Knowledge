@@ -13,6 +13,26 @@ This guide covers the integration of throttle and brake sensors with VESC contro
 - Throttle calibration and maintenance best practices
 - Hardware options for improved control and ergonomics
 
+## ⚡ Critical Voltage Warning
+
+⚠️ **5V signal destroys 3.3V ADC inputs!** Direct 5V throttle or brake signals to VESC ADC pins will permanently damage the STM32 microcontroller. Always use level-shifter boards or the controller's 3.3V reference for ADC signals, even when sensors prefer 5V supply voltage.
+
+## 📋 Quick Reference: Brake Sensor Wiring
+
+| Sensor Type | Voltage | Wiring Notes | Use Case |
+|------------|---------|--------------|----------|
+| Reed switch (Nutt, generic) | 5-12V | Needs 5-10kΩ pull-up to logic rail | Simple on/off braking |
+| Hall-effect (SS49E) | 5V supply, 3.3V signal | Requires level shifter for ADC | Proportional regen |
+| MT5e HIGO | 5V or 3.3V selectable | Check SKU: 2700985 (NC) vs 2700984 (NO) | Plug-and-play option |
+| AG.racing switch | 12V | Simple on/off, no regen support | Budget mechanical cutoff |
+
+💡 **Pro Tip**: Power hall sensors with 5V and use a level shifter to output 3.3V signal—this gives best sensor sensitivity while protecting your controller.
+
+## 🔧 Related Guides
+- [VESC ADC Accessory Integration](vesc-adc-accessory-integration.md) - Complete ADC wiring guide
+- [Motor Controller Tuning](motor_controller_tuning.md) - Regen configuration
+- [Brake Maintenance and Upgrades](brake-maintenance-and-upgrades.md) - Mechanical brake systems
+
 ## Brake Sensor Requirements
 
 - Faulty or missing brake sensors can cause rhythmic surging every one to two seconds under throttle, so maintaining functional brake inputs is critical before road testing.[^brake_surge]
