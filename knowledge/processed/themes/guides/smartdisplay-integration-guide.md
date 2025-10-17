@@ -15,6 +15,50 @@ SmartDisplay is a universal scooter display and telemetry system that works with
 - Troubleshooting common issues
 - Safety considerations and ground loop prevention
 
+## 📱 Display Integration Overview
+
+💡 **Universal displays** work with most VESC controllers via CAN or UART connection.
+
+## 📋 Quick Display Comparison
+
+| Display Type | Connection | Data Available | Cost | Difficulty |
+|--------------|------------|----------------|------|------------|
+| VESC Tool (phone) | Bluetooth | Everything | Free | ⭐ Very Easy |
+| Cycle Analyst | UART/analog | Comprehensive | ~$150 | ⭐⭐⭐ Hard |
+| Generic VESC display | CAN bus | Basic vitals | $30-50 | ⭐⭐ Medium |
+| Stock scooter dash (modded) | Custom wiring | Limited | Varies | ⭐⭐⭐⭐ Expert |
+
+## ⚡ Power Requirements
+
+| Display | Voltage | Current Draw | Power Source |
+|---------|---------|--------------|--------------|
+| VESC Tool (BT) | N/A (phone powered) | N/A | N/A |
+| Cycle Analyst | 9-60V | ~30mA | Battery main |
+| Generic VESC display | 5-12V | ~50-100mA | Controller 5V rail or buck |
+| Color TFT displays | 5V | 200-500mA | Dedicated buck converter |
+
+⚠️ **Warning**: Don't overload controller accessory rails. Use external buck converters for >100mA loads.
+
+## 📋 Data Fields Priority
+
+For quick glanceable info during riding:
+
+| Priority | Field | Why |
+|----------|-------|-----|
+| ⭐⭐⭐⭐⭐ Critical | Speed | Legal compliance, safety |
+| ⭐⭐⭐⭐⭐ Critical | Battery voltage | Avoid over-discharge |
+| ⭐⭐⭐⭐ High | Battery % / Ah remaining | Range planning |
+| ⭐⭐⭐ Medium | Power consumption (W) | Efficiency monitoring |
+| ⭐⭐ Low | Trip distance | Nice to have |
+| ⭐ Optional | Motor temp | Only if pushing limits |
+
+💡 **Pro Tip**: Keep critical data large and easy to read at a glance. Complex screens distract from riding.
+
+## 🔧 Related Guides
+
+- [VESC Accessory Power & Display Integration](vesc-accessory-power-and-display-integration.md) - Power budgets
+- [VESC ADC Accessory Integration](vesc-adc-accessory-integration.md) - Wiring displays
+
 ## Key Capabilities
 
 - SmartDisplay now ships with modular harnesses that bridge VESC Tool, Minimotors, Kelly, Zero, and VSETT controllers while logging GPS, RTC, and media controls, so plan UART + CAN runs even if you start with legacy hardware.[^1]

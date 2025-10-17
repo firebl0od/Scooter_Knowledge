@@ -14,6 +14,37 @@ Rion produces premium carbon-fiber scooters targeting ultra-high performance, bu
 - When Rion platforms justify their premium pricing
 - Alternative sourcing for replacement motors
 
+
+## 🏁 Why Choose Rion?
+
+✅ **Carbon construction**: Lightest performance scooters
+✅ **Race proven**: Competition-tested platform
+⚠️ **Expensive**: $4k-8k+ pricing
+⚠️ **Fragile**: Carbon cracks if crashed
+⚠️ **Support issues**: Limited warranty, expensive parts
+
+## 📋 Model Comparison
+
+| Model | Weight | Motor Config | Top Speed | Price Range | Best For |
+|-------|--------|-------------|-----------|-------------|----------|
+| RE60 | ~20 kg | Single QS | ~80 km/h | $4-5k | Track days, racing |
+| RE90 | ~22 kg | Dual QS | ~100+ km/h | $6-8k | Serious racing |
+
+💡 **Pro Tip**: Budget $1-2k for upgrades and spares. Stock Rions need QC and component upgrades.
+
+## ⚠️ Critical Rion Realities
+
+🔴 **Carbon repairs are expensive** - $500-1500 for frame damage
+🔴 **Parts availability poor** - Long waits, high costs
+🔴 **Not for commuting** - Too fragile for daily abuse
+🔴 **Requires track knowledge** - Not beginner-friendly
+
+## 🔧 Related Brand Dossiers
+
+- [Weped Scooters](weped.md) - Alternative performance platform
+- [VSETT Scooters](vsett.md) - More practical performance option
+- [NAMI Scooters](nami.md) - Robust high-power alternative
+
 ## Key Considerations
 
 - RE90 buyers should budget well above the sticker: VAT, customs, and freight push the $6 800 base toward roughly €7 500 even before spares, which makes Paris pickup runs or hand-carrying attractive to avoid repeat taxes.[^1]

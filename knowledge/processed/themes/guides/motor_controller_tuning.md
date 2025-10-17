@@ -15,6 +15,63 @@ Tuning VESC-based scooter controllers requires understanding motor characteristi
 - Dual-motor synchronization
 - Common tuning mistakes to avoid
 
+## 🎯 Tuning Philosophy
+
+⚠️ **Start conservative, work up carefully**: Blown controllers cost more than lost performance.
+
+## 📋 Quick Reference: Controller-Motor Pairing
+
+| Motor Size | Min Controller | Recommended | Peak Capability |
+|------------|---------------|-------------|-----------------|
+| 40-50H hub | 12-FET (100A phase) | 18-FET (150A phase) | 200A phase bursts |
+| 60-70H hub | 18-FET (150A phase) | 24-FET (200A phase) | 300A phase bursts |
+| 80-100H hub | 24-FET (200A phase) | 30-FET+ (250A+ phase) | 400A+ phase bursts |
+
+## 📋 Tuning Progression Checklist
+
+✅ **Phase 1: Baseline** (30 minutes)
+- [ ] Motor detection with proper warmup
+- [ ] Verify hall sensors working
+- [ ] Test at 50% of target current
+- [ ] Check for unusual noises/vibration
+
+✅ **Phase 2: Current Ramp** (1-2 hours)
+- [ ] Increase battery current by 10A increments
+- [ ] Test acceleration and braking each step
+- [ ] Monitor temps every 5 minutes
+- [ ] Log any faults or cutouts
+
+✅ **Phase 3: Thermal Testing** (30-60 minutes)
+- [ ] Sustained load test (hill climb or high speed)
+- [ ] Monitor controller MOSFET temps
+- [ ] Monitor motor winding temps
+- [ ] Back off if >80°C controller, >100°C motor
+
+✅ **Phase 4: Field Weakening** (if needed)
+- [ ] Start with 20A FW current
+- [ ] Test top speed runs
+- [ ] Monitor controller temps closely
+- [ ] Increase only if temps permit
+
+💡 **Pro Tip**: Take notes at each step. You'll forget what settings caused what behavior.
+
+## ⚠️ Critical Warning Signs
+
+🔴 **STOP IMMEDIATELY if you experience:**
+- Controller cutouts or fault codes
+- Burning smell from controller or motor
+- Controller temps >90°C
+- Motor temps >120°C  
+- Rhythmic surging or cogging
+- Loss of torque or power
+
+## 🔧 Related Guides
+
+- [Motor Configuration](motor_configuration.md) - Choosing the right motor
+- [Battery Current Tuning](battery_current_tuning.md) - Setting current limits
+- [Field Weakening Playbook](field-weakening-playbook.md) - Advanced top speed tuning
+- [Motor Cooling & Thermal Management](motor_cooling_and_thermal_management.md) - Keeping temps safe
+
 ## Hub Motor & Winding Selection
 
 - Default production hubs remain 60H 22/3 windings; Nami's 17/4 stock motors trade top speed for brutal launches just under 100 km/h, while 33/2 rewinds are the crew's choice where circuits reward higher peak speed.[^hub-lineup]

@@ -14,6 +14,47 @@ The Jetson Bolt is a compact folding scooter that serves as an interesting platf
 - VESC configuration and hall sensor setup
 - When to upgrade motors vs. working within stock limitations
 
+
+## 🔌 Why Choose Jetson Bolt?
+
+✅ **20S battery stock**: Rare in budget scooters
+✅ **Simple platform**: Easy to work on
+✅ **VESC-ready**: Good conversion candidate
+⚠️ **Limited power**: Stock setup is basic
+⚠️ **Small wheels**: 8-inch limits performance
+
+## 📋 Jetson Bolt Specs Summary
+
+| Specification | Stock | VESC Upgrade Potential |
+|---------------|-------|----------------------|
+| Battery | 20S (72V) stock | Keep or upgrade capacity |
+| Controller | Generic FOC | VESC 75V+ |
+| Motor | Basic hub | Upgrade to 60-70H Lonnyo |
+| Top speed | ~40 km/h | 60-80 km/h with VESC |
+| Range | 20-30 km | 30-50 km with capacity upgrade |
+
+## 💡 Upgrade Path
+
+**Budget VESC Conversion** (~$400-600):
+1. Flipsky or Makerbase 75V controller ($150-200)
+2. Keep stock 20S battery (verify BMS rating)
+3. Keep stock motor initially
+4. Add proper cooling and mounting
+
+**Performance Build** (~$1000-1500):
+1. Spintend or better 85V controller ($300-400)
+2. Upgrade to Lonnyo 60H motor ($200-300)
+3. Upgrade battery to 20S 8P+ ($400-600)
+4. Proper deck mounts and cooling
+
+⚠️ **Warning**: Verify your Bolt has 20S battery. Some models ship with 16S or 13S.
+
+## 🔧 Related Brand Dossiers
+
+- [Segway Platforms](segway.md) - Similar entry-level VESC platform
+- [Spintend Controllers](spintend.md) - Recommended controller upgrade
+- [Lonnyo Hub Motors](lonnyo.md) - Motor upgrade options
+
 ## Platform Snapshot
 
 - Stock Jetson Bolt frames provide roughly 230 mm of dropout width, ship with a 36 V/6 Ah pack, and retain mounting points for a second motor, but the narrow “bean” battery cavity limits on-board electronics volume without printed enclosures or spacers.[^1]
