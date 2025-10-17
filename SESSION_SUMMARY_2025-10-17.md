@@ -61,7 +61,7 @@ Continue the knowledge extraction work started in the previous PR by processing 
 
 ### Quantitative
 - **Files completed**: 4 (2 new extractions + 2 verified)
-- **Lines of knowledge integrated**: ~23 new lines across 6 guides
+- **Lines of knowledge integrated**: 23 new lines across 7 guides
 - **Guide files enhanced**: 7 with new technical content
 - **Footnote citations added**: 10+ new source references
 - **Knowledge preservation**: 100% - all technical content maintained with proper attribution
@@ -104,7 +104,7 @@ Continue the knowledge extraction work started in the previous PR by processing 
 - all_part01_review.md - 1,171 lines (0.0% done)
 - input_part001_review.md - 583 lines (46.2% done)
 
-**Overall Progress**: ~29% of review files complete (5/17), ~50% if weighted by file size
+**Overall Progress**: 29% of review files complete (5/17), approximately 44% if weighted by content volume based on original EXTRACTION_STATUS.md estimates
 
 ## Git Commits
 1. "Complete extraction from input_part005 and partial extraction from input_part006 review files"
