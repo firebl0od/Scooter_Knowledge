@@ -14,6 +14,36 @@ Designing custom battery packs for electric scooters requires careful cell selec
 - Chemistry-specific guardrails (Samsung, Molicel, LG, etc.)
 - Pack longevity and maintenance considerations
 
+## 📋 Quick Reference: Cell Selection by Use Case
+
+| Application | Recommended Cells | Typical Config | Key Reason |
+|-------------|------------------|----------------|------------|
+| Long-range commuter | Samsung 35E, LG MH1 | 16S 6-7P | Cost-effective, good range |
+| High-discharge sport | Molicel P42A, P45B | 20S 5-6P | 35-40A per cell capability |
+| Budget performance | Samsung 50S, LG M50LT | 16S 5-6P | Balance of cost and performance |
+| Premium long-range | Samsung 50E | 20S 7-8P | High capacity, moderate discharge |
+
+## ⚠️ Critical Design Principles
+
+🔴 **Cell Matching**: Sort cells by internal resistance (<5mΩ spread)
+⚡ **Voltage Limits**: Never exceed chemistry maximums (4.2V for most Li-ion)
+🔧 **Busbar Sizing**: 0.15mm nickel minimum, copper for >70A per strip
+📝 **BMS Rating**: Must exceed peak discharge + regen current
+
+## 💡 Pro Tips
+
+- **Start conservative**: Easier to upgrade pack than replace burned cells
+- **Test before building**: Verify cell IR and capacity on samples
+- **Plan for expansion**: Leave room for future voltage/capacity upgrades
+- **Document everything**: Take photos at each assembly stage
+
+## 🔧 Related Guides
+
+- [DIY Battery Sourcing & Welding](diy-battery-sourcing-and-welding.md) - Building the pack
+- [DIY Battery Supply & Architecture 2025](diy-battery-supply-and-pack-architecture-2025.md) - Market trends
+- [Smart BMS Integration](smart-bms-integration-handbook.md) - BMS selection
+- [Battery Current Tuning](battery_current_tuning.md) - Safe discharge limits
+
 ## Cell Selection Strategies
 
 - Builders are migrating from Samsung 40T 15 S 6 P packs to denser 15 S 10 P VTC6 or pending Samsung 50S cells to curb voltage sag, accepting higher per-cell costs for improved current handling.[^pack_cells]

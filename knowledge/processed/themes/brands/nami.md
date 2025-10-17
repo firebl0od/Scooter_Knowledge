@@ -14,6 +14,29 @@ NAMI scooters provide robust dual-motor platforms with good build quality, but t
 - Chassis reinforcement and frame variations
 - When NAMI platforms make sense vs. alternatives
 
+## 🏆 Why Choose NAMI?
+
+✅ **Quality build**: Better than budget brands
+✅ **Dual-motor ready**: Good thermal management with two controllers
+✅ **Suspension**: Real dampers, not toys
+⚠️ **Cost**: Premium pricing for premium hardware
+
+## ⚠️ Critical Thermal Limits
+
+| Configuration | Safe Battery Current | Thermal Behavior |
+|---------------|---------------------|------------------|
+| Single motor uphill | ~40°C+ | Can overheat |
+| Dual motor uphill | ~40°C max | Good thermal sharing |
+| Stock 40Ah pack | 135A limit | Avoid sustained >135A |
+
+🔴 **Warning**: Stock LG M50LT cells overheat above ~135A. Plan upgrades for higher power.
+
+## 🔧 Related Brand Dossiers
+
+- [VSETT Scooters](vsett.md) - Performance comparison
+- [Weped Scooters](weped.md) - Premium alternative
+- [Tronic Controllers](tronic.md) - Controller upgrade option
+
 ## Key Platform Characteristics
 
 - Dual-motor load sharing keeps Tronic 250-equipped NAMI builds under ~40 °C on steep climbs, while single-drive hill assaults crest ~60 °C—treat high-power setups as two-controller platforms to stay within thermal margins.[^1]

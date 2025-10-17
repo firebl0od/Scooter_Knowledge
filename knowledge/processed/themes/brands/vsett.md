@@ -15,6 +15,28 @@ VSETT scooters (especially the 9+ and 10+) provide stiff frames, split-rim servi
 - Brake upgrades and rotor sizing
 - Pack packaging strategies (20S9P internal builds)
 
+## 🏆 Why Choose VSETT?
+
+✅ **Stiff frames**: Best-in-class stem rigidity
+✅ **Split rims**: Easy roadside tire service
+✅ **VESC-friendly**: Good controller relocation options  
+✅ **Parts availability**: Strong aftermarket support
+
+## 📋 Quick Model Comparison
+
+| Model | Stock Motor | Best For | Controller Space | Max Pack Size |
+|-------|-------------|----------|------------------|---------------|
+| VSETT 9 | 92mm stator, 15PP | Commuter comfort | Deck or neck mount | 20S 9P internal |
+| VSETT 10+ | Larger stator | Performance upgrade | Neck relocation ideal | 20S 9P + externals |
+
+💡 **Pro Tip**: The 92mm VSETT 9 motor is an excellent value at €120 and fits most 10" builds.
+
+## 🔧 Related Brand Dossiers
+
+- [NAMI Scooters](nami.md) - Performance alternative
+- [Segway Platforms](segway.md) - Budget-friendly option
+- [Lonnyo Hub Motors](lonnyo.md) - Motor upgrade options
+
 ## Key Platform Strengths
 
 - VSETT 10+ frames remain one of the stiffest production stems—only two rear shock mount failures were logged before the factory revision—and relocating controllers to the neck frees the deck for 20 S 9 P 21700 packs without compromising rigidity.[^1]

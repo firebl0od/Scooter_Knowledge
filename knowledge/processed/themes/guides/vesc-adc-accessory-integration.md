@@ -15,6 +15,47 @@ Integrating throttles, brakes, displays, and accessories with VESC controllers r
 - Signal isolation and ground loop prevention
 - Common ADC failures and troubleshooting
 
+## ⚡ Critical Voltage Warning
+
+🔴 **DANGER**: Feeding 5V into 3.3V ADC pins WILL destroy your STM32 microcontroller!
+
+## 📋 Quick Reference: Voltage Compatibility
+
+| Component Type | Required Voltage | STM32 ADC Max | Solution if 5V |
+|----------------|-----------------|---------------|----------------|
+| Xiaomi throttle | 3.3V | 3.3V max | ✅ Direct connection OK |
+| Generic hall throttle | Often 5V | 3.3V max | ⚠️ Needs resistor divider |
+| Hall brake sensor | Often 5V | 3.3V max | ⚠️ Needs resistor divider |
+| Display | Varies | N/A | Check spec sheet |
+
+## 🔧 Resistor Divider for 5V Sensors
+
+To safely use 5V sensors on 3.3V ADC:
+
+```
+5V sensor → [4.7kΩ] → ADC pin → [10kΩ] → GND
+                              ↓
+                          Gives ~3.3V max
+```
+
+💡 **Pro Tip**: When in doubt, measure the sensor output voltage with a multimeter before connecting!
+
+## 📋 ADC Power Rail Limits
+
+| Rail | Voltage | Current Limit | Safe For |
+|------|---------|---------------|----------|
+| ADC 3.3V | 3.3V | <100mA | Sensors only |
+| Spintend 5V | 5V | ~150mA | Light accessories |
+| Spintend 12V | 12V | ~3A | Lighting, horn (with fusing) |
+
+⚠️ **Warning**: Never pull more than spec from accessory rails. Add external buck converters for heavy loads.
+
+## 🔧 Related Guides
+
+- [VESC Accessory Power & Display Integration](vesc-accessory-power-and-display-integration.md) - Power budgets
+- [VESC Key Switch & Power Management](vesc-key-switch-and-power-management.md) - Safe power control
+- [Power Distribution](power_distribution.md) - Wiring and fusing
+
 ## Key Principles
 
 - Wire throttles, brakes, and regen controls straight into the controller’s ADC pins and keep everything on 3.3 V logic.
