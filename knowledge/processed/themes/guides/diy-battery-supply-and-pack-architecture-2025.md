@@ -69,6 +69,7 @@ This playbook covers current battery supply strategies, pack architecture trends
 - **Monitor Denis’ in-house Pro/Pro 2 pack program.** His custom internal battery just entered production with hand-braided heavy-gauge charge/discharge looms that mirror the earlier 36 V kits.
   - expect vetted harness lengths and drop-in Xiaomi fitment once inventory lands.[^29]
 - Even premium scooters rarely ship high-discharge cells beyond names like Nami, so builders plan sleeper 20 S 3 P Molicel packs or full 20 S 9 P 21700 conversions whenever packaging allows.[^premium-cells]
+- **Weight premium cells against charging strategy for 8–9 P packs.** When planning commuter packs with 8–9 P parallels, compare P42A/P45B and Samsung 50S against long-range LG/Samsung chemistries; premium high-discharge cells justify their cost when sustained power matters, but budget builders can lean on faster-charging strategies (≥1 C rates) with mid-tier cells and still meet daily range targets.[^p42a_brief]
 | Component | EU Pricing & Availability | North America Reality | Immediate Actions |
 | --- | --- | --- | --- |
 | **EVE 50PL 21700** | Salvaged Stark Varg modules deliver grade-A cells for ~1 € each after labor; retail bulk hovers 1.5 € with logos shaved yet still grade A.[^30] | ~$9 per cell retail with looming import duties.[^31] | Form cooperative buys, pre-clear customs brokers, and reserve storage for incoming pallets. |

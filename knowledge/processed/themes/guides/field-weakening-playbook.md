@@ -132,6 +132,7 @@ Field weakening (FW) trades efficiency for top speed by weakening the magnetic f
 - **Expect softer launches than Kelly even with aggressive FW.** Pumping 250 A+ phase into IPM hubs still delivers weaker 0 km/h torque than Kelly controllers, so chase hall tuning and ramp tweaks before blaming firmware.[^17]
 - **Dial FW back when the observer complains.** Mixed-wind Zero 10X builds survived highway pulls only after the crew told Shlomozero10 to drop FW toward ~20 A, raise phase current to ≈120 A at 30–35 kHz, and swap to the `mxlemming` observer.
   - log duty and temps after every tweak so similar setups do not cook mismatched hubs.[^fw-coaching]
+- **Budget D-axis current carefully.** Field-weakening tuning demands proper D-axis current allocation, continuous thermal monitoring, and conservative safe percentages; commuter hubs typically limit FW to 15–25% of total current budget while drag builds may push 30–40%, but every configuration requires temperature logging to validate thermal headroom.[^fw-d-axis]
 - **Voltage Monitoring:** Keep oscilloscope or high-speed logging on regen-heavy tests—22 S Spintend builds disable regen entirely when extending pack voltage to avoid BMS-induced surges.[^19]
 - **Validate gains before chasing higher FW.** Happy Giraffe’s single-Ubox tests saw only ~3 km/h gains going from 10 A to 40 A FW while battery draw stayed near 45 A; peers reminded Gigolo Joe that more phase or pack voltage beats stacking FW when motors have not yet hit duty-cycle limits.[^fw-plateau]
 - **Fault Masking:** Sudden current drops or pothole-induced cut-outs that disappear when FW is enabled can signal mechanical faults (loose magnets, wiring) rather than firmware bugs; investigate hardware first.[^16]
@@ -349,3 +350,4 @@ Field weakening (FW) trades efficiency for top speed by weakening the magnetic f
 [^83]: Source: data/vesc_help_group/text_slices/input_part004.txt†L21108-L21182
 [^84]: Source: knowledge/notes/input_part010_review.md†L403-L404
 [^85]: Source: knowledge/notes/input_part010_review.md†L405-L405
+[^fw-d-axis]: Source: knowledge/notes/input_part006_review.md†L510-L510

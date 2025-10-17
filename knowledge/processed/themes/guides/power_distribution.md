@@ -138,6 +138,13 @@ Proper power distribution is critical for safety, performance, and reliability i
 - Wire gauge follows current, not voltage
 - Undersized looms make shrink brittle at 135-145°C
 
+**300–500A QS8 Harness Sizing**:[^qs8-sizing]
+- Plan AWG/mm² recommendations for high-power scooter packs
+- Keep deck runs short to minimize voltage drop
+- Use 4–6 AWG (21–13 mm²) for 300A continuous
+- Use 2–4 AWG (33–21 mm²) for 400–500A applications
+- Install with proper strain relief and heat-resistant sleeving
+
 > **📝 Definition**: Ampacity - The maximum current a conductor can carry continuously without exceeding its temperature rating.
 
 ## Connector Selection
@@ -486,3 +493,4 @@ Proper power distribution is critical for safety, performance, and reliability i
 [^dual-feed]: Source: knowledge/notes/denis_all_part02_review.md†L1073-L1073
 [^charge-port-13s]: Source: knowledge/notes/denis_all_part02_review.md†L1063-L1063
 [^phase-safety]: Source: knowledge/notes/denis_all_part02_review.md†L1091-L1091
+[^qs8-sizing]: Source: knowledge/notes/input_part005_review.md†L604-L604

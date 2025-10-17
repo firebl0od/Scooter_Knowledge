@@ -135,6 +135,7 @@ Long-distance electric scooter touring requires careful planning of battery capa
 - **Plan ahead for 20 S chargers.** 84 V chargers remain scarce outside China, so touring riders stock adjustable lab supplies, series-stack smaller bricks, or wait on AliExpress shipments rather than overvolting 67.2 V units; upgrade thin Xiaomi charge ports to XT60 leads when pushing beyond ~3 A.[^19]
 - **Inspect third-party chargers on arrival.** One “500 W” AliExpress brick arrived labeled 350 W (~70 V×5 A) with lower voltage limits, forcing a partial refund; test and document hardware before the dispute window closes.[^ip001-ali-bait]
 - **Stick with proven CC‑CV bricks.** The group keeps defaulting to Wate or YZPower chargers because bargain adjustables wander off voltage set-points and cook packs unless you meter every session; CC-only supplies still leave passive-balancing BMSs short of a full charge.[^20]
+- **Vet chargers before tours.** Compare Wate/yzpower units with adjustable lab supplies, always perform pre-charge voltage checks to prevent accidental overvoltage events, and confirm output stability under load before trusting hardware on multi-day rides.[^charger-vet]
 - **Treat series-stacked chargers as a stopgap.** Builders will stack dual 10 S bricks only while waiting for proper 20 S units and even then monitor them closely.
   - dedicated charge ports and sealed enclosures remain the commuter-friendly solution for high-voltage packs.[^21][^22]
 
@@ -351,3 +352,4 @@ Long-distance electric scooter touring requires careful planning of battery capa
 [^56]: Source: knowledge/notes/input_part006_review.md†L76-L76
 [^57]: Source: knowledge/notes/input_part006_review.md†L77-L77
 [^58]: Source: knowledge/notes/input_part013_review.md†L516-L516
+[^charger-vet]: Source: knowledge/notes/input_part005_review.md†L601-L601
