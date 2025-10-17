@@ -1,6 +1,20 @@
-# Monorim Suspension & Hardware Field Manual
+# Monorim Suspension & Hardware Guide
 
-## TL;DR
+## Overview
+
+Monorim produces popular aftermarket suspension kits and performance upgrades for Xiaomi, Ninebot, and other compact scooters. This guide covers installation, maintenance, and common issues with Monorim front forks, rear shocks, and related hardware. Understanding these upgrades' limitations and proper setup procedures is essential for safe operation, especially on high-power builds. Quality suspension dramatically improves ride comfort and handling, but requires careful assembly and regular maintenance.
+
+## What You'll Learn
+
+- Recommended suspension combinations (forks, shocks, tires)
+- When to upgrade from budget to premium suspension arms
+- Proper installation procedures and common assembly mistakes
+- Hardware quality issues and necessary upgrades
+- Spring and shock tuning for different rider weights
+- Compatibility considerations for motor and brake upgrades
+- Maintenance requirements and spare parts to stock
+
+## Core Principles
 
 - **Build around quality pneumatics and matched shocks.** Pair Monorim front forks with DNM or EXA dampers and a proper rear shock; foam “solid” tires and mismatched hardware shake magnets loose above ~45 km/h.[^1][^2]
 - **Know when to upgrade arms.** Budget Monorim castings keep costs low but flex under 3 kW loads; European-made Konyk or Dereza arms cost about €100 per end yet deliver better travel and durability for <60 km/h builds that need reliable torque-arm integration.[^3]

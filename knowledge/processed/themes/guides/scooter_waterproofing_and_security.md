@@ -1,4 +1,18 @@
-# Scooter Waterproofing & Security Field Manual
+# Scooter Waterproofing & Security
+
+## Overview
+
+Protecting electric scooters from water ingress and theft requires systematic sealing, proper component selection, and security measures. This guide covers field-tested waterproofing techniques, sealant recommendations, bearing upgrades, and anti-theft strategies. Whether commuting in rain or storing outdoors, these practices will help prevent corrosion, electrical failures, and theft while maintaining serviceability.
+
+## What You'll Learn
+
+- How to seal decks, charge ports, and cable penetrations
+- Recommended sealants and when to use each type
+- Bearing selection for wet conditions
+- Post-ride inspection and maintenance procedures
+- Controller and pack waterproofing strategies
+- Anti-theft hardware and security best practices
+- Emergency recovery procedures for water-damaged components
 
 ## Weatherproof the Chassis Before the Storm
 

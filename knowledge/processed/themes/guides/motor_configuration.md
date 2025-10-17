@@ -1,5 +1,18 @@
 # Motor Configuration Insights
 
+## Overview
+
+This guide covers essential motor configuration considerations for electric scooter conversions, including winding configurations, voltage strategies, and real-world power benchmarks. Understanding motor limitations, thermal management, and the relationship between voltage, current, and performance is critical for safe, reliable builds. Whether upgrading a stock Xiaomi or building a high-performance dual-motor setup, these field-tested insights will help you make informed decisions.
+
+## What You'll Learn
+
+- Delta vs. star winding configurations and their reliability implications
+- Real-world power benchmarks for various motor and voltage combinations
+- Voltage strategy trade-offs (higher voltage vs. higher current)
+- Thermal limits of stock motors and when to upgrade
+- Sensorless vs. hall sensor operation
+- Motor pairing considerations for AWD builds
+
 ## Delta Winding Considerations
 
 - Delta-configured hub motors on 36 V systems produced voltage spikes exceeding 100 V, and long-term reliability with VESC hardware remains unproven without alternative firmware or controller pairings.[^delta_spikes]
