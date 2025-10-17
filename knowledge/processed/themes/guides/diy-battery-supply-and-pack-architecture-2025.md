@@ -1,6 +1,21 @@
-# DIY Battery Supply & Pack Architecture Playbook (2025)
+# DIY Battery Supply & Pack Architecture (2025)
 
-## TL;DR
+## Overview
+
+This playbook covers current battery supply strategies, pack architecture trends, and cell sourcing for 2025 DIY builds. It addresses pricing volatility, regional availability differences, pack sizing for different applications, and emerging chemistry options. Understanding these market dynamics and design patterns helps you plan cost-effective, reliable battery systems.
+
+## What You'll Learn
+
+- Current cell pricing and availability (2025)
+- Regional sourcing strategies (EU vs US)
+- Pack architecture trends (voltage, parallel count)
+- Chemistry selection for different applications
+- Busbar and BMS sizing
+- Voltage vs current trade-offs
+- Pack packaging and mechanical considerations
+- Sag characteristics of popular cells
+
+## Key Market Trends
 
 - Europe’s salvage stream of EVE 50PL cells pushes landed costs near 1 € per cell while U.S. buyers still face ~$9 retail, so teams are forming cross-border partnerships and stockpiling QS8 hardware ahead of tariff hikes.[^1]
 - High-power scooters are converging on 22–30 S frames with 8–11 P parallels: Dualtron Achilleus decks accept 22 S9 P packs once controllers move outboard, Nami race builds run 22 S11 P Molicel layouts toward 40 kW, and G30 conversions rely on upgraded skid plates, spacers, and cardboard pack mockups before committing to 20 S12 P experiments.[^2][^3][^4][^5]

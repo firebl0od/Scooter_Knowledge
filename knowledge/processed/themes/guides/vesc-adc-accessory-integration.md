@@ -1,6 +1,21 @@
-# VESC ADC & Accessory Power Integration Playbook
+# VESC ADC & Accessory Power Integration
 
-## TL;DR
+## Overview
+
+Integrating throttles, brakes, displays, and accessories with VESC controllers requires careful voltage management and proper signal wiring. This guide covers ADC input configuration, accessory power budgets, signal routing best practices, and common wiring mistakes that damage controllers. Understanding the 3.3V logic requirements and proper isolation prevents most integration failures.
+
+## What You'll Learn
+
+- ADC input voltage requirements (3.3V vs 5V)
+- Throttle and brake sensor wiring
+- Resistor divider calculations for 5V sensors
+- Accessory power rail capabilities and limits
+- Profile toggle and mode switch configuration
+- Dashboard integration procedures
+- Signal isolation and ground loop prevention
+- Common ADC failures and troubleshooting
+
+## Key Principles
 
 - Wire throttles, brakes, and regen controls straight into the controller’s ADC pins and keep everything on 3.3 V logic.
   - dash adapters and 5 V accessories routinely add lag or kill channels when they fail, and even hall throttles that creep toward 3.5 V need resistor tweaks before they clip the MCU’s ADC ceiling.[^1][^1][^2][^4]

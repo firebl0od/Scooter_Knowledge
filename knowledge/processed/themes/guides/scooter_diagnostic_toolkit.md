@@ -1,5 +1,20 @@
 # Scooter Diagnostic Toolkit & Field Practices
 
+## Overview
+
+Building and maintaining high-performance electric scooters requires proper diagnostic tools and field practices. This guide covers essential instruments, firmware flashing procedures, troubleshooting workflows, and common diagnostic scenarios. Understanding these tools and techniques enables faster problem resolution and prevents costly mistakes during builds and repairs.
+
+## What You'll Learn
+
+- Essential diagnostic instruments for scooter work
+- Firmware flashing procedures (ST-Link, VESC Tool)
+- Multimeter and cell testing techniques
+- Controller recovery workflows
+- GPS and data logging tools
+- Component testing procedures
+- Common error codes and diagnostics
+- Field troubleshooting best practices
+
 ## Core Instruments
 
 - **Handheld multimeter:** Expect budget meters to ship with 12 V A23 cells and fragile F200 mA fuses.

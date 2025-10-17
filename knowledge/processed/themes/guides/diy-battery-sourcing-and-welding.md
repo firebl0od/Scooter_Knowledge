@@ -1,6 +1,21 @@
-# DIY Battery Sourcing & Welding Playbook (2025)
+# DIY Battery Sourcing & Welding (2025)
 
-## TL;DR
+## Overview
+
+Building custom battery packs requires understanding cell sourcing, spot welding techniques, busbar materials, and pack assembly best practices. This guide covers current cell pricing and availability, welding equipment selection, copper vs nickel busbar trade-offs, and common assembly pitfalls. Proper welding technique and quality components are essential for safe, reliable packs.
+
+## What You'll Learn
+
+- Current cell pricing and sourcing strategies (2025)
+- Spot welder selection and capability testing
+- Copper vs nickel busbar considerations
+- Welding parameters for different materials
+- Pack holder and fixture requirements
+- BMS selection for DIY packs
+- Cell matching and quality verification
+- Common welding failures and prevention
+
+## Key Principles
 
 - Grade-A 50PL and P45B cells now define the performance ceiling, but prices swing from €1–1.5 in the EU to ~$9 in the US, so teams must align sourcing tactics with customs realities before scoping pack power levels.[^1][^2]
 - Copper spot welding remains the gating competency: bargain 90 € welders rarely prove 0.15 mm claims, while K-Weld or Glitter rigs with proper maintenance reliably join 0.1 mm copper for 22 S packs.[^3][^10]

@@ -1,5 +1,21 @@
 # VESC Accessory Power & Display Integration Checklist
 
+
+## Overview
+
+Powering accessories and displays from VESC controllers requires understanding rail capabilities, voltage limits, and proper load distribution. This guide covers power budgets for different controller families, display integration procedures, and strategies for safely powering lights, horns, and other accessories without overloading onboard regulators.
+
+## What You'll Learn
+
+- Controller power rail capabilities by brand
+- When to use external buck converters
+- Display wiring procedures (UART vs CAN)
+- Accessory load budgeting
+- Voltage requirements for different components
+- Telemetry accuracy and filtering
+- Common power distribution failures
+- Safe wiring practices for high-current accessories
+
 ## Purpose
 
 This guide distills field reports on powering lights, horns, and dashboards from aftermarket VESC controllers so builders avoid overloading regulator rails or frying logic accessories during swaps. Recent X12 case studies underline how little headroom exists on their 5 V rails and why every accessory deserves its own buck converter.[^1]

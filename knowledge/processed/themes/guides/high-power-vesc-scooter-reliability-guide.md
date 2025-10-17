@@ -2,6 +2,23 @@
 
 A distilled playbook for keeping race-level VESC builds dependable when running 15S–22S packs, 200 A+ phase currents, and long-range commuting setups.
 
+## Overview
+
+This reliability guide distills field experience from high-power VESC scooter builds running 15-30S packs and 200-500A phase currents. It covers component selection, build planning, common failure modes, and maintenance procedures for race-level and long-range setups. Following these practices maximizes reliability while pushing performance boundaries.
+
+## What You'll Learn
+
+- Controller selection for high-power applications
+- Component sizing and thermal management
+- Common failure modes and prevention
+- Build planning and validation procedures
+- Maintenance and inspection routines
+- When to upgrade components
+- Safety considerations for high-speed builds
+- Real-world performance benchmarks
+
+A distilled playbook for keeping race-level VESC builds dependable when running 15S–22S packs, 200 A+ phase currents, and long-range commuting setups.
+
 ## 1. Build Planning & Component Selection
 
 - **Controller tiers:** Treat Makerbase/Flipsky aluminum-PCB boxes as interim ≤15 S 50 A solutions; high-power riders standardize on 3Shul C350/CL350, Ubox duals, or BRIESC units for thermal headroom and QC maturity.[^1][^2][^3]

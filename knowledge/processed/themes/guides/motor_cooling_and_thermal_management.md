@@ -1,4 +1,19 @@
-# Motor Cooling & Thermal Management Notes
+# Motor Cooling & Thermal Management
+
+## Overview
+
+Managing motor thermal limits is essential for reliability and performance on high-power electric scooters. This guide covers passive and active cooling strategies, thermal transfer principles, oil and ferrofluid cooling, and why most active cooling approaches fail on scooters. Understanding heat transfer from windings to shell helps you choose effective cooling methods while avoiding expensive mistakes.
+
+## What You'll Learn
+
+- Why fans and external blowers are ineffective for hub motors
+- Passive conduction vs. active cooling trade-offs
+- Oil and ferrofluid cooling procedures and results
+- Motor insulation temperature limits
+- Thermal rollback configuration
+- Heat pipe and water cooling considerations
+- Stator-to-shell thermal interface improvements
+- Common cooling myths and mistakes
 
 ## Why Fans Rarely Help Scooter Hubs
 

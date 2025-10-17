@@ -1,5 +1,21 @@
 # 📌 Ultimate In-Depth VESC Parameter Guide
 
+
+## Overview
+
+This comprehensive parameter reference explains every significant VESC configuration setting with real-world context and tuning guidance. Understanding these parameters enables precise controller tuning, troubleshooting configuration issues, and optimizing performance for specific applications. Each parameter includes definition, practical insights, modification guidelines, and potential pitfalls.
+
+## What You'll Learn
+
+- Complete VESC parameter definitions
+- When and how to modify each setting
+- Real-world tuning strategies
+- Common configuration mistakes
+- Parameter interaction effects
+- FOC vs BLDC mode differences
+- Current, voltage, and thermal limits
+- Observer and sensorless operation
+
 Use GitHub’s in-page search or the table of contents below to jump to the parameter you need.
 
 Structure for each parameter:
