@@ -15,6 +15,37 @@ The Spintend Ubox is a popular dual-motor VESC controller for electric scooters,
 - CAN bus synchronization for dual setups
 - Shipping, warranty, and support considerations
 
+## ⚠️ Critical QC Warning
+
+🔴 **Inspect BEFORE power-up!** Multiple Uboxes have shipped with solder balls, missing hardware, or phase wires touching the case. Full disassembly and photography before first power-on is non-negotiable—Spintend honors RMAs when you document QC issues.
+
+## 📋 Quick Reference: Ubox Specifications
+
+| Model | Voltage | Phase Current | Battery Current | Bluetooth | Best For |
+|-------|---------|---------------|----------------|-----------|----------|
+| Dual 75V (red case) | 20S-22S max | ~120A per motor | 25-30A per motor | ✅ Yes | Standard dual-motor builds |
+| Dual Lite | 18S-20S | ~150A per motor | 20-25A per motor | ✅ Yes | Budget dual-motor |
+| Single | 20S-22S | ~180A | 30-40A | ❌ No (needs bridge) | Single-motor conversions |
+| 12-FET (85V/240A) | 24S max | ~240A | ~85A | ✅ Yes | High-power builds (~26kW) |
+
+💡 **Pro Tip**: The Lite boards are realistically 150A-per-motor hardware despite dual housing. Plan upgrades to full Spin tend or 3Shul if you need more than ~120A sustained per motor.
+
+## 📋 Pre-Delivery QC Checklist (Budget 1-2 Hours)
+
+- [ ] **Full disassembly**: Remove case, inspect for solder balls, flux residue, loose screws
+- [ ] **Photograph internals**: Document serial numbers and condition before power-up
+- [ ] **Check phase lead insulation**: Verify silicone isn't cut by case edges
+- [ ] **Verify MOSFET thermal contact**: Ensure pads touch MOSFETs evenly
+- [ ] **Document hardware revision**: Note PCB color (FR4 vs aluminum), FET type
+- [ ] **Test current-sense offsets**: Power on bench, verify readings are sane (not 30 or 4000 counts)
+- [ ] **Check standby draw**: Should be ~20mA with switch off, no LED glow
+- [ ] **Verify connector pinouts**: Especially important for used/revised units
+
+## 🔧 Related Guides
+- [Controller Setup](controller_setup.md) - VESC configuration basics
+- [Motor Controller Tuning](motor_controller_tuning.md) - Current limit tuning
+- [High-Power VESC Reliability](high-power-vesc-scooter-reliability-guide.md) - Build planning
+
 ## Key Principles
 
 - Treat every unit as a kit: tear it down before energising, photograph QC issues for support, and follow VESC-safe power-up rituals (precharge, discharge caps, avoid hot-plugging) to prevent latent shorts or MCU damage.[^1][^2][^3]
