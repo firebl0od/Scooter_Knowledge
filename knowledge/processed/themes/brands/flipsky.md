@@ -1,6 +1,21 @@
-# Flipsky Controllers Brand Dossier
+# Flipsky Controllers
 
-## TL;DR
+## Overview
+
+Flipsky produces budget-friendly VESC controllers that can deliver 20-30kW peaks, but they suffer from inconsistent quality control and require careful inspection before deployment. This brand dossier covers Flipsky's product lineup (75100, 75200, 84100, 7550), real-world reliability patterns, thermal management requirements, and bulk purchasing strategies. Understanding Flipsky's quirks helps you decide when they're appropriate vs. premium alternatives.
+
+## What You'll Learn
+
+- Flipsky model comparison and capabilities
+- Quality control issues and inspection procedures
+- Real vs. rated current limits
+- Thermal management and repasting requirements
+- Common failure modes and prevention
+- Bulk purchasing coordination
+- When Flipsky makes sense vs. Spintend/3Shul
+- Required documentation for support
+
+## Key Considerations
 
 - Budget-friendly VESC hardware that can deliver 20–30 kW peaks, but quality control remains inconsistent and requires hands-on inspection before trust.[^qc-2025]
 - Treat 75100/75200-class units as 300 A absolute-max controllers unless you invest heavily in cooling, QA, and conservative regen ramping.

@@ -1,6 +1,20 @@
-# Tronic Controllers Brand Dossier
+# Tronic Controllers
 
-## TL;DR
+## Overview
+
+Tronic produces high-voltage VESC-compatible controllers for performance scooters, but they require careful thermal management and conservative tuning to avoid failures. This brand dossier covers the Tronic 250, X12, and emerging models, including real-world current limits, thermal constraints, and common reliability issues. Understanding Tronic's quirks and limitations helps you decide when they're appropriate vs. alternatives like 3Shul or Spintend.
+
+## What You'll Learn
+
+- Real-world current limits vs. marketing specifications
+- Tronic 250 vs. X12 capabilities and applications
+- Thermal management requirements and cooling strategies
+- Field weakening limitations and failure modes
+- Wiring upgrades and accessory power constraints
+- Configuration challenges and hall detection issues
+- When to choose Tronic vs. competing controllers
+
+## Key Principles
 
 - Race tuners now treat the six-FET Tronic 250 family as ~200 A hardware—pushing toward the marketing 250 A claims triggers thermal cutouts or outright failures, especially once heavy field weakening is layered on top.[^1][^2]
 - The Tronic X12 remains the flagship, delivering just under 30 kW on 24 S packs, but its onboard 5 V rail only sources about 150 mA and the stock looms melt without 10 AWG upgrades, so accessories still need dedicated bucks.[^3]

@@ -1,4 +1,18 @@
-# Jetson Bolt 20S Conversion Dossier
+# Jetson Bolt 20S Conversion
+
+## Overview
+
+The Jetson Bolt is a compact folding scooter that serves as an interesting platform for 20S (72V) VESC conversions despite space constraints. This brand dossier covers the mechanical limitations, packaging strategies, and electrical guardrails for converting Jetson Bolts to high-voltage operation. While the narrow battery cavity and limited dropout width present challenges, successful builds demonstrate 50+ mile range with proper component selection and conservative tuning.
+
+## What You'll Learn
+
+- Mechanical fitment constraints (dropouts, battery cavity, controller placement)
+- Recommended voltage and current limits for stock and upgraded motors
+- 20S battery packaging strategies and custom enclosure designs
+- Controller selection for compact installations
+- Thermal management requirements
+- VESC configuration and hall sensor setup
+- When to upgrade motors vs. working within stock limitations
 
 ## Platform Snapshot
 

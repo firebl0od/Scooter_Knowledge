@@ -1,6 +1,20 @@
-# 3Shul Controllers Brand Dossier
+# 3Shul Controllers
 
-## TL;DR
+## Overview
+
+3Shul produces high-end VESC-compatible controllers (C350, R350, CL-series) favored by racers for their reliability and power handling, but they require proper cooling and come with boutique pricing and support. This brand dossier covers the 3Shul controller lineup, real-world current limits, voltage capabilities, thermal management requirements, and support expectations. Understanding 3Shul's strengths and limitations helps you decide when they're worth the premium over alternatives.
+
+## What You'll Learn
+
+- 3Shul model comparison (C350, R350, CL350, CL500+)
+- Real-world current and voltage limits
+- Thermal management requirements for race applications
+- Traction control and field weakening behavior
+- Support model and warranty considerations
+- When 3Shul justifies premium pricing vs. Spintend/Makerbase
+- Upcoming CL500/700/1000 roadmap
+
+## Key Principles
 
 - G300 controllers remain easier to source than boutique R-series stock in Europe, but they still demand aggressive cooling; JPPL calls the unit a “rock” provided the case can dump heat, while race teams lean on the rarer R350 when they can secure it.[^g300_stock]
 - C350-class stacks keep surviving 22 S race weekends around 400 A phase / 200 A battery provided regen stays off and installs are logged meticulously, while CL350 revisions still run hotter and deserve conservative envelopes until proven otherwise.[^race22s]

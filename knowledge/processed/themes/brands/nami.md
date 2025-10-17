@@ -1,6 +1,20 @@
-# NAMI Electric Scooters Brand Dossier
+# NAMI Electric Scooters
 
-## TL;DR
+## Overview
+
+NAMI scooters provide robust dual-motor platforms with good build quality, but they require controller upgrades and thermal management improvements to realize their potential. This brand dossier covers NAMI GT2, Viper, and related models, examining stock configurations, upgrade paths, suspension requirements, and real-world performance limits. Understanding these platforms helps you plan cost-effective upgrades without exceeding thermal or mechanical limits.
+
+## What You'll Learn
+
+- Stock motor and battery configurations by model
+- Thermal limits for single vs. dual-motor operation
+- Controller upgrade paths (VESC, Makerbase, Spintend)
+- Suspension tuning and damper selection
+- High-power builds (22-26S, 35-40kW targets)
+- Chassis reinforcement and frame variations
+- When NAMI platforms make sense vs. alternatives
+
+## Key Platform Characteristics
 
 - Dual-motor load sharing keeps Tronic 250-equipped NAMI builds under ~40 °C on steep climbs, while single-drive hill assaults crest ~60 °C—treat high-power setups as two-controller platforms to stay within thermal margins.[^1]
 - The stock 40 Ah module’s eight-way LG M50LT parallel pack is happiest below ~135 A; community pushes toward 200 A/310 A phase quickly overheat hubs and batteries unless the pack is rebuilt and monitored closely.[^2]

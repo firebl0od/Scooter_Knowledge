@@ -1,6 +1,20 @@
-# Makerbase Controllers Brand Dossier
+# Makerbase Controllers
 
-## TL;DR
+## Overview
+
+Makerbase produces budget VESC controllers that offer good value for moderate-power builds, but they require quality control inspection and thermal upgrades to achieve reliability. This brand dossier covers Makerbase's lineup (75100, 75200, 84100 HP, 60100 HP), real-world current limits, common quality issues, and when they're appropriate vs. premium controllers. Understanding Makerbase's strengths and weaknesses helps you deploy them successfully on appropriate builds.
+
+## What You'll Learn
+
+- Makerbase model comparison and capabilities
+- Quality control issues (solder, thermal paste, shunt calibration)
+- Real vs. rated current limits by model
+- Required thermal management and repasting
+- Voltage and regen limitations
+- When Makerbase makes sense vs. Spintend/Flipsky
+- Common failures and prevention strategies
+
+## Key Principles
 
 - Aluminum-PCB 75100 boards remain the go-to budget dual-controller option for 60 V commuters, but they only stay reliable when capped around 70 A battery / 170–180 A phase and kept below ≈22 S; bumping currents higher has popped freshly installed units in a single launch. [^1][^2][^3]
 - The refreshed “Pro” 75100 revision finally ships with AWG10 leads, Bluetooth, and tidier thermistors, yet it still omits a real enable pin—plan external latching or contactors despite the nicer harness.[^75100-pro-refresh]

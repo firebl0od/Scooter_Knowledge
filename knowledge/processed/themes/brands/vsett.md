@@ -1,6 +1,21 @@
-# VSETT Performance Scooter Dossier
+# VSETT Performance Scooters
 
-## TL;DR
+## Overview
+
+VSETT scooters (especially the 9+ and 10+) provide stiff frames, split-rim serviceability, and good upgrade potential for VESC conversions. This brand dossier covers VSETT models, motor specifications, tire selection, suspension tuning, controller relocation strategies, and pack packaging options. Understanding these platforms helps you plan reliable high-performance builds without exceeding mechanical or thermal limits.
+
+## What You'll Learn
+
+- VSETT 9/10+ platform comparison and capabilities
+- Stock motor specifications and upgrade paths
+- Tire selection and pressure recommendations (PMT, CST)
+- Split-rim service procedures
+- Controller relocation for larger battery packs
+- Suspension tuning (Matris dampers, EXA shocks)
+- Brake upgrades and rotor sizing
+- Pack packaging strategies (20S9P internal builds)
+
+## Key Platform Strengths
 
 - VSETT 10+ frames remain one of the stiffest production stems—only two rear shock mount failures were logged before the factory revision—and relocating controllers to the neck frees the deck for 20 S 9 P 21700 packs without compromising rigidity.[^1]
 - The 92 mm stator VSETT 9 motor (15 pole pairs, 0.5 mm air gap) hits the sweet spot for 10-inch comfort and is still sourced around €120 inside the EU, making it a go-to upgrade hub.[^2]

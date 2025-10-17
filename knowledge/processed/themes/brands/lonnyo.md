@@ -1,6 +1,20 @@
-# Lonnyo Hub Motor Dossier
+# Lonnyo Hub Motors
 
-## TL;DR
+## Overview
+
+Lonnyo produces a range of hub motors (40H-100H) with different winding configurations (17×4 torque, 22×3 standard, 33×2 high-speed) for various performance applications. This brand dossier covers Lonnyo's motor lineup, mechanical fitment requirements, current envelopes, sourcing strategies, and common integration challenges. Understanding these motors' capabilities and packaging constraints helps you choose appropriate specifications and avoid costly mistakes.
+
+## What You'll Learn
+
+- Winding code selection (17×4, 22×3, 33×2)
+- Stator size comparison (40H, 65H, 70H, 80H, 100H)
+- Mechanical fitment requirements (dropout width, fork spacing)
+- Real-world current limits and thermal performance
+- Sourcing strategies and price signals
+- Bearing and weatherproofing requirements
+- When to upgrade motor size vs. winding configuration
+
+## Motor Selection Guide
 
 - Lonnyo’s stator codes map cleanly to use cases: 17×4 torque, 22×3 “standard”, and 33×2 high-speed winds, with riders stepping up to 80H/100H cores when chasing 150 km/h builds or >300 A phase targets.[^1][^2]
 - Real-world current envelopes show 22×3 hubs settling near 110–150 A battery and ~300 A phase on Spintend 75/200-class controllers, while single Ubox 85150 installs bump into a ~150 A firmware ceiling regardless of higher software limits.[^3][^4]

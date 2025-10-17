@@ -1,6 +1,20 @@
-# Rion Performance Scooters Brand Dossier
+# Rion Performance Scooters
 
-## TL;DR
+## Overview
+
+Rion produces premium carbon-fiber scooters targeting ultra-high performance, but buyers face significant costs beyond the base price and limitations in verified specifications. This brand dossier covers the RE90 and related models, examining real-world performance vs. marketing claims, battery limitations, motor specifications, and the true cost of ownership including import duties and upgrades. Understanding these factors is essential before investing €7,500+ in Rion hardware.
+
+## What You'll Learn
+
+- Total cost of ownership including VAT, customs, and freight
+- Real vs. marketed performance specifications
+- LY 60H motor limitations and current restrictions
+- 23S battery constraints and upgrade paths
+- Carbon chassis strengths and waterproofing requirements
+- When Rion platforms justify their premium pricing
+- Alternative sourcing for replacement motors
+
+## Key Considerations
 
 - RE90 buyers should budget well above the sticker: VAT, customs, and freight push the $6 800 base toward roughly €7 500 even before spares, which makes Paris pickup runs or hand-carrying attractive to avoid repeat taxes.[^1]
 - Marketing claims of 400 A phase output and 136 PS motors remain unverified; community consensus is that the 23 S 6 P (~3 kWh) battery is the true bottleneck, so treat stock performance promises as aspirational until logs prove otherwise.[^1][^2]

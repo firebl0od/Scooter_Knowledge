@@ -1,6 +1,20 @@
-# Spintend Controllers Brand Dossier
+# Spintend Controllers
 
-## TL;DR
+## Overview
+
+Spintend produces popular VESC controllers (Ubox V2, 85/150, 85/250) known for reliability and resilience to BMS cut-outs, making them a default choice when budget controllers fail. This brand dossier covers the Spintend lineup, real-world current limits, thermal management requirements, accessory integration, and common failure modes. Understanding Spintend's strengths and limitations helps you choose appropriate models and configure them safely.
+
+## What You'll Learn
+
+- Spintend model comparison (Ubox V2, singles, duals, Lite)
+- Real vs. rated current capabilities
+- Thermal management and mounting best practices
+- Accessory power integration (ADC board, lighting, BLE)
+- Firmware capabilities and "no limits" builds
+- Common failures and prevention strategies
+- When Spintend justifies its popularity vs. alternatives
+
+## Key Advantages
 
 - Community veterans now default to Spintend when budget Makerbase/Flipsky boards melt down—the Ubox lineup shrugs off BMS trips and keeps scooters rolling where 75xxx-class ESCs lock wheels or self-destruct under the same abuse.[^1]
 - Ubox V2 hardware now ships with resettable fuses on each auxiliary rail, isolated 3.3 V logic, dedicated 12 V lighting/horn/brake outputs, a fan header, CAN power jumpers for 4WD builds, and an external NRF/BLE slot—removing the need for firmware hacks to stay under the STM32’s logic ceiling.[^1]

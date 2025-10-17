@@ -1,6 +1,20 @@
-# MakerX Controllers Brand Dossier
+# MakerX Controllers
 
-## TL;DR
+## Overview
+
+MakerX produces compact VESC controllers with good build quality but inconsistent reliability, particularly on dual-controller models. This brand dossier covers MakerX's lineup (Mini FOC, HI100/HI200, G300/D100S), voltage limitations, thermal management requirements, and quality control issues. Understanding MakerX's capabilities and failure modes helps you decide when they're appropriate and how to deploy them safely.
+
+## What You'll Learn
+
+- MakerX model comparison and voltage limits
+- Real vs. rated current capabilities
+- Common failure modes (DOA rates, MOSFET failures)
+- Thermal management and heatsinking requirements
+- 3.3V accessory power constraints
+- When MakerX makes sense vs. alternatives
+- Required burn-in and QC procedures
+
+## Key Considerations
 
 - Mini FOC hardware is still a 12 S design; running 13 S (~54.6 V) leaves almost no regen headroom, so builders moving past 50 V should pivot to ≥16 S-rated controllers like Spintend before pushing voltage experiments.[^1]
 - Well-cooled MakerX singles routinely handle ~60 A battery and 180–200 A phase, but recurring DOA duals and MOSFET blowouts mean every install needs bench burn-in and spares on hand.[^2][^3]

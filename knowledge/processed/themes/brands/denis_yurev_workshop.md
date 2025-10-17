@@ -1,5 +1,20 @@
 # Denis Yurev Workshop (Rita Ecosystem)
 
+## Overview
+
+Denis Yurev's workshop produces the Rita smart battery adapter and related products for Xiaomi-platform scooters, enabling parallel external packs while retaining stock dashboards and BMS emulation. This comprehensive brand dossier covers the Rita adapter ecosystem, repair BMS products, external battery packs, firmware tools, and integration best practices. Understanding Rita's capabilities and limitations is essential for safe Xiaomi platform upgrades.
+
+## What You'll Learn
+
+- Rita adapter capabilities and current limits (~25-30A)
+- BMS emulation modes and data-line requirements
+- External pack selection and compatibility
+- Charge management and voltage balancing
+- Firmware tools (XiaoGen, XiaoFlasher, M365 BMS Tool)
+- Common integration issues and solutions
+- AWD conversion considerations
+- When Rita makes sense vs. controller replacement
+
 ## Quick Facts
 
 | Topic | Details |

@@ -1,6 +1,20 @@
-# Weped Performance Scooter Brand Dossier
+# Weped Performance Scooters
 
-## TL;DR
+## Overview
+
+Weped produces high-performance scooters targeting 100+ km/h speeds, but they require extensive quality control and upgrades to achieve their potential safely. This brand dossier covers common issues with factory builds, battery chemistry considerations, thermal management requirements, and upgrade paths for Weped GTS, Fold, and Sonic models. Understanding these platforms' strengths and weaknesses is essential before investing in premium-priced Weped hardware.
+
+## What You'll Learn
+
+- Required QC checks before riding (fork alignment, fasteners, wiring)
+- Samsung 50E vs. high-discharge cell chemistry trade-offs
+- Thermal management for dual-controller setups
+- 21S pack upgrade procedures and packaging
+- QS hub and Fardriver controller characteristics
+- Common failure modes and prevention
+- When Weped platforms make sense vs. alternatives
+
+## Key Platform Characteristics
 
 - Factory GTS units arrive with 16S6P Samsung 50E packs but demand comprehensive QC—fork alignment, fastener swaps, and harness inspections—before they are safe at the triple-digit speeds owners expect from 21S-class rebuilds.[^1][^2]
 - The community still argues over the stock 50E chemistry: veteran Weped FS riders log 240 A peaks with minimal sag after >10 000 km, yet tuners warn the cells only behave when deployed in large parallel groups and prefer 40T/P42A for high-discharge projects.[^3]
