@@ -6,13 +6,13 @@ This project transforms 72 technical knowledge files from dense, expert-focused 
 
 ## Current Status
 
-**Completed**: 34 of 72 files (47.2%)
-**Remaining**: 38 files (52.8%)
-**Estimated Time for Remaining**: ~76-114 hours (38 files × 2-3 hours each)
+**Completed**: 44 of 72 files (61.1%)
+**Remaining**: 28 files (38.9%)
+**Estimated Time for Remaining**: ~56-84 hours (28 files × 2-3 hours each)
 
-## Completed Files (34/72)
+## Completed Files (44/72)
 
-### Guides (20/44)
+### Guides (30/44)
 1. ✅ xiaomi_fold_and_pole_repair.md
 2. ✅ 3d-printing-and-materials.md
 3. ✅ daly-bms-waterproofing.md
@@ -33,6 +33,18 @@ This project transforms 72 technical knowledge files from dense, expert-focused 
 18. ✅ xiaomi_battery_maintenance.md
 19. ✅ motor_controller_tuning.md
 20. ✅ long-range-touring-and-charging.md
+21. ✅ battery_pack_design.md
+22. ✅ controller_setup.md
+23. ✅ field-weakening-playbook.md
+24. ✅ rita_adapter_integration.md
+25. ✅ xiaomi_high_voltage_upgrade_checklist.md
+26. ✅ ninebot-g30-vesc-conversion-playbook.md
+27. ✅ xiaomi_tire_brake_upgrade_notes.md
+28. ✅ battery_current_tuning.md
+29. ✅ high-voltage-vesc-controller-market-2025.md
+30. ✅ spintend-ubox-integration-handbook.md
+31. ✅ vesc-key-switch-and-power-management.md
+32. ✅ power_distribution.md
 
 ### Brand Dossiers (14/28)
 1. ✅ medhi_cantin.md (already had overview)
@@ -234,11 +246,11 @@ Plus supporting documentation:
 
 ## Conclusion
 
-The wiki-style transformation significantly improves readability while maintaining technical accuracy. 34 files completed demonstrate the approach works well. Remaining 38 files represent substantial work but will deliver consistent, professional documentation throughout the knowledge base.
+The wiki-style transformation significantly improves readability while maintaining technical accuracy. 44 files completed demonstrate the approach works well. Remaining 28 files represent substantial work but will deliver consistent, professional documentation throughout the knowledge base.
 
 The transformation follows documented patterns and can be continued systematically or scaled through community involvement based on project priorities and resources.
 
-**Current Progress: 47.2% complete** (up from 26.4%)
-**Momentum: Very Strong** - 15 files added in latest session
+**Current Progress: 61.1% complete** (up from 26.4%)
+**Momentum: Very Strong** - 25 files added in latest session
 **Quality: High**
 **Knowledge Preservation: 100%**

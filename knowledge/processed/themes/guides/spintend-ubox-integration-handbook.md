@@ -1,6 +1,21 @@
-# Spintend Ubox Reliability & Integration Handbook
+# Spintend Ubox Integration Handbook
 
-## TL;DR
+## Overview
+
+The Spintend Ubox is a popular dual-motor VESC controller for electric scooters, offering high power in a compact package. However, it requires careful QC inspection, proper thermal management, and disciplined setup procedures to avoid common failures. This handbook covers pre-delivery inspection, installation, configuration, thermal management, and troubleshooting based on extensive field experience.
+
+## What You'll Learn
+
+- Pre-delivery QC inspection procedures
+- Proper thermal management and mounting
+- Power-up sequences and safety protocols
+- Accessory wiring (lighting, cruise, BLE)
+- Current limit configuration
+- Common failure modes and prevention
+- CAN bus synchronization for dual setups
+- Shipping, warranty, and support considerations
+
+## Key Principles
 
 - Treat every unit as a kit: tear it down before energising, photograph QC issues for support, and follow VESC-safe power-up rituals (precharge, discharge caps, avoid hot-plugging) to prevent latent shorts or MCU damage.[^1][^2][^3]
 - Spintend says the red 75 V dual still uses its best FETs and is teasing a 66 × 83 × 29 mm single-100 V controller to bridge current supply gaps while resale units circulate; brass baseplate concepts were shelved in favour of aluminium or copper spreaders.[^single_proto][^brass_swap]
