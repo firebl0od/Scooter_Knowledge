@@ -73,6 +73,7 @@ Proper chassis fitment and maintenance are critical for scooter safety, performa
 - Slack Core 920R frames have snapped before upgrade work even began; inspect boutique chassis for hidden damage before pouring money into power mods.[^slack_core_fail]
 - Dualtron race builds still require heavy frame, fork, and motor rework despite the platform’s popularity, because Minimotors outsources much of the hardware.[^dualtron_outsource]
 - Raising the rear ride height without a quality damper has triggered wobble on Dualtrons; balanced geometry can still reach 150 km/h damper-free, but the Spanish crew noted stricter policing as another reason to keep setups stable and discreet.[^dualtron-geometry]
+- **Segway F-series weld inspection checklist for commuters.** Budget F-series decks benefit from systematic weld inspection and reinforcement at stress points; check for cracks at folding mechanisms, apply protective films to prevent paint damage, and follow torque limits when upgrading to avoid compromising frame integrity.[^segway-f-weld]
 
 ## Front-End Stability Upgrades
 
@@ -288,3 +289,4 @@ operator auctions to stockpile Ninebot donor chassis before the supply disappear
 [^denis-awd-weight]: Source: knowledge/notes/denis_all_part02_review.md†L1034-L1034
 [^denis-g30-width-fit]: Source: knowledge/notes/denis_all_part02_review.md†L820-L820
 [^denis-rear-drive]: Source: knowledge/notes/denis_all_part02_review.md†L751-L751
+[^segway-f-weld]: Source: knowledge/notes/input_part006_review.md†L508-L508

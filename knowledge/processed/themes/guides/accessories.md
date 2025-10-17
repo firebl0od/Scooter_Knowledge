@@ -149,6 +149,13 @@ This guide covers displays, lighting, security, power management, and comfort ac
 - Inline three-button dimmers
 - Drop straight onto 12V rails or reducers
 
+**Addressable LED Integration**:[^addressable-led]
+- WS2815 strip selection for reliability (5V strips with backup data line)
+- ESP32 + WLED configuration for flexible effects and mobile control
+- Power conditioning essentials to prevent electrical system overload
+- Proper mounting and weatherproofing for decorative installs
+- Keep decorative lighting on separate circuits from critical systems
+
 > **💡 Pro Tip**: Combine multiple small lights rather than one big one for redundancy and better visibility angles.
 
 ## Media Capture & Logging
@@ -324,3 +331,4 @@ This guide covers displays, lighting, security, power management, and comfort ac
 [^vesc-arduino-dash]: Source: knowledge/notes/denis_all_part02_review.md†L1043-L1043
 [^led-strip-load]: Source: knowledge/notes/denis_all_part02_review.md†L1044-L1044
 [^heated-grips]: Source: knowledge/notes/denis_all_part02_review.md†L1048-L1048
+[^addressable-led]: Source: knowledge/notes/input_part006_review.md†L511-L511
