@@ -14,6 +14,31 @@ Spintend produces popular VESC controllers (Ubox V2, 85/150, 85/250) known for r
 - Common failures and prevention strategies
 - When Spintend justifies its popularity vs. alternatives
 
+## 💡 Why Choose Spintend?
+
+✅ **Proven Reliability**: Survives BMS cut-outs that kill other controllers
+✅ **Thermal Resilience**: Better heat management than budget alternatives  
+✅ **Active Development**: Regular firmware updates and community support
+⚠️ **Trade-offs**: Higher cost, some QC issues, requires proper mounting
+
+## 📋 Quick Model Comparison
+
+| Model | Voltage | Real Battery Current | Real Phase Current | Best Use Case |
+|-------|---------|---------------------|-------------------|---------------|
+| Ubox V2 Dual | 75V | 150A per side | ~300A combined | Budget dual-motor builds |
+| 85/150 Single | 85V | 80A | 130A (sensible max) | Single motor commuter |
+| 85/250 Single | 85V | ~80-100A | ~200A | Higher power single motor |
+| Lite 100/100 | 100V | 55A per side | 170A per side | Compact dual build |
+
+💡 **Pro Tip**: Start with 80% of rated current and work up based on thermal testing.
+
+## 🔧 Related Brand Dossiers
+
+- [Makerbase Controllers](makerbase.md) - Budget alternative comparison
+- [3Shul Controllers](3shul.md) - Premium racing option
+- [Flipsky Controllers](flipsky.md) - Another budget option
+- [MakerX Controllers](makerx.md) - Mid-range alternative
+
 ## Key Advantages
 
 - Community veterans now default to Spintend when budget Makerbase/Flipsky boards melt down—the Ubox lineup shrugs off BMS trips and keeps scooters rolling where 75xxx-class ESCs lock wheels or self-destruct under the same abuse.[^1]

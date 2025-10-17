@@ -15,6 +15,13 @@ Smart BMS selection and integration is critical for safe, reliable battery opera
 - Common BMS failures and prevention
 - When to choose each BMS type
 
+## 🔧 Related Guides
+
+- [Battery Pack Design](battery_pack_design.md) - Cell selection and pack architecture
+- [DIY Battery Sourcing & Welding](diy-battery-sourcing-and-welding.md) - Building custom packs
+- [Battery Current Tuning](battery_current_tuning.md) - Setting safe discharge/regen limits
+- [Power Distribution](power_distribution.md) - Wiring from BMS to controller
+
 ## Key Principles
 
 - Oversize protection hardware and choose the right architecture for the pack: JK active-balancing boards bring dual 7 AWG busbars, 1 A or 2 A shuttling variants, and remote toggles, but recent self-burn reports push installers toward JBD/LLT or ANT units when decks are cramped or uptime is critical.[^1][^1][^2][^3]

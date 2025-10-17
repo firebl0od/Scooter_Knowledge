@@ -15,6 +15,13 @@ Setting up VESC and other controllers for electric scooters involves choosing co
 - Troubleshooting common setup issues
 - BMS interaction and cut-out prevention
 
+## 🔧 Related Guides
+
+- [Motor Configuration](motor_configuration.md) - Motor selection and winding choices
+- [Battery Current Tuning](battery_current_tuning.md) - Setting safe current limits
+- [VESC Key Switch & Power Management](vesc-key-switch-and-power-management.md) - Safe power control
+- [In-Depth VESC Parameter Guide](in-depth-vesc-parameter-guide.md) - Complete parameter reference
+
 ## Baseline Build Profiles
 
 - Dual 1 000 W motors paired with a 15 S 8 P battery and 40 A BMS deliver a proven commuting setup, with some builders planning 13 S packs initially and leaving room to scale back up to 15 S.[^build_example]

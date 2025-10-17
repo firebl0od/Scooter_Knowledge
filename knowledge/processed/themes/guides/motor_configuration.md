@@ -13,6 +13,13 @@ This guide covers essential motor configuration considerations for electric scoo
 - Sensorless vs. hall sensor operation
 - Motor pairing considerations for AWD builds
 
+## 🔧 Related Guides
+
+- [Motor Controller Tuning](motor_controller_tuning.md) - Pairing controllers with motors
+- [Battery Current Tuning](battery_current_tuning.md) - Setting safe current limits
+- [Motor Cooling & Thermal Management](motor_cooling_and_thermal_management.md) - Keeping motors cool
+- [Field Weakening Playbook](field-weakening-playbook.md) - Advanced high-speed tuning
+
 ## Delta Winding Considerations
 
 - Delta-configured hub motors on 36 V systems produced voltage spikes exceeding 100 V, and long-term reliability with VESC hardware remains unproven without alternative firmware or controller pairings.[^delta_spikes]
