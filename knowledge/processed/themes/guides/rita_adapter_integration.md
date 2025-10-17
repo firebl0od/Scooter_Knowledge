@@ -1,6 +1,19 @@
-# Rita Adapter Integration Playbook
+# Rita Adapter Integration
 
-A structured checklist for planning, installing, and operating Denis Yurev's Rita adapter on Xiaomi-class scooters.
+## Overview
+
+The Rita adapter, designed by Denis Yurev, enables parallel external battery packs on Xiaomi-class scooters with intelligent charge management and BMS emulation. This guide provides a structured checklist for planning, installing, and operating Rita adapters safely. Understanding Rita's capabilities, limitations, and proper configuration is essential for reliable dual-pack operation.
+
+## What You'll Learn
+
+- Rita's core capabilities and current limitations
+- Pre-installation requirements and pack matching
+- Wiring and harness layout procedures
+- Configuration via app or serial connection
+- Voltage profile setup for different pack sizes
+- Troubleshooting error codes and cut-outs
+- Rita MAX differences for Ninebot G30 platform
+- When Rita is appropriate vs. alternatives
 
 ## Core Capabilities & Limits
 

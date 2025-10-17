@@ -1,5 +1,21 @@
 # Xiaomi High-Voltage Upgrade Checklist
 
+
+## Overview
+
+Upgrading Xiaomi M365/Pro-class scooters from 36V (10S) to higher voltages (12S, 13S, or beyond) requires careful planning of electrical, mechanical, and firmware modifications. This step-by-step checklist covers decision criteria, hardware inspection, component upgrades, and safety considerations. Higher voltage brings speed gains but demands proportional improvements in cooling, braking, and structural reinforcement.
+
+## What You'll Learn
+
+- When higher voltage is worth the complexity and cost
+- Practical voltage limits for stock vs. upgraded hardware
+- Required hardware modifications (controller, BMS, wiring)
+- Firmware configuration for higher voltages
+- Mechanical reinforcement requirements
+- Cooling and thermal management needs
+- Braking upgrades to match increased speed
+- Common failure modes and how to avoid them
+
 A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36 V (10S) systems to 12S or 13S configurations without sacrificing reliability.
 
 ## 1. Decide Whether More Voltage Is Worth It

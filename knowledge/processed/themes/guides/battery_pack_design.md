@@ -1,4 +1,18 @@
-# Battery Pack Design Notes
+# Battery Pack Design
+
+## Overview
+
+Designing custom battery packs for electric scooters requires careful cell selection, capacity planning, and understanding of chemistry limitations. This guide covers field-tested strategies for choosing cells, sizing parallel groups, managing thermal stress, and avoiding common failure modes. Whether building a commuter pack or a high-performance setup, these insights will help you create reliable, long-lasting battery systems.
+
+## What You'll Learn
+
+- Cell selection criteria (chemistry, discharge ratings, sourcing)
+- Capacity planning for different use cases and power levels
+- Parallel and series configuration strategies
+- BMS selection and thermal management
+- Cost-effective sourcing and avoiding counterfeit cells
+- Chemistry-specific guardrails (Samsung, Molicel, LG, etc.)
+- Pack longevity and maintenance considerations
 
 ## Cell Selection Strategies
 

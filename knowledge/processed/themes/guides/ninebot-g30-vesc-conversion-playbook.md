@@ -1,6 +1,22 @@
-# Ninebot G30 VESC Conversion Playbook
+# Ninebot G30 VESC Conversion
 
-## TL;DR
+## Overview
+
+The Ninebot G30 Max is one of the best platforms for VESC conversion, offering generous deck space, strong aftermarket support, and proven geometry. This playbook covers the complete conversion process from stock to high-performance VESC-based control, including battery upgrades, controller selection, motor options, and integration procedures. The G30's robust frame and available space make it ideal for builds ranging from mild commuters to 20S race machines.
+
+## What You'll Learn
+
+- Why the G30 is ideal for VESC conversions
+- Battery capacity limits and pack configurations
+- Controller selection and dual-controller setups
+- Motor upgrade options and fitment
+- Firmware and BMS unlock procedures
+- Traction control and throttle tuning
+- Mechanical preparation and reinforcement
+- Thermal management strategies
+- Common build configurations and their performance
+
+## Key Advantages
 
 - The G30 Max remains the friendliest chassis for VESC swaps thanks to abundant deck space, aftermarket spacers, and new BMS firmware that unlocks >20 A discharge without extra comms harnesses.[^1]
 - Expect roughly 140 loose 18650s to fit without grinding the rails.

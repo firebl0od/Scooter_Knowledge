@@ -1,6 +1,21 @@
-# Field Weakening Tuning Playbook
+# Field Weakening Tuning
 
-## TL;DR
+## Overview
+
+Field weakening (FW) is an advanced tuning technique that allows motors to exceed their base speed by injecting negative d-axis current to counter back-EMF. While it can provide 10-15% speed gains, FW significantly increases heat generation and reduces efficiency. This guide covers when to use field weakening, how to configure it safely, and why it's often better to increase voltage instead. Proper FW tuning requires careful monitoring and conservative limits.
+
+## What You'll Learn
+
+- How field weakening works and its trade-offs
+- When FW is appropriate vs. other speed upgrades
+- Safe configuration procedures and current limits
+- Thermal management requirements
+- VESC firmware version compatibility
+- Monitoring and logging during FW operation
+- Common mistakes and failure modes
+- Duty cycle vs. throttle position triggering
+
+## Key Principles
 
 - Treat field weakening (FW) as a last-mile speed tool: it trades torque and efficiency for extra ERPM, rapidly heating motors and controllers, so only enable it once the drive system runs cool at target duty cycles.[^1][^2][^3]
 - Expect diminishing returns on commuter voltages.
