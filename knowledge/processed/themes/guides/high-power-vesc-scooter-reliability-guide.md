@@ -17,7 +17,28 @@ This reliability guide distills field experience from high-power VESC scooter bu
 - Safety considerations for high-speed builds
 - Real-world performance benchmarks
 
-A distilled playbook for keeping race-level VESC builds dependable when running 15S–22S packs, 200 A+ phase currents, and long-range commuting setups.
+## ⚡ High-Power Philosophy
+
+⚠️ **Critical**: This guide is for builds exceeding 10kW continuous. Below 10kW, standard VESC practices apply.
+
+## 📋 Quick Reference: Controller Power Tiers
+
+| Controller Class | Real Continuous | Phase Current | Best Use | QC Risk |
+|-----------------|----------------|---------------|----------|---------|
+| Makerbase/Flipsky Aluminum | ≤5kW | ≤150A | Budget/interim | ⭐⭐ High |
+| Spintend Ubox 85-series | 8-12kW | 200-300A | Daily performance | ⭐⭐⭐ Medium |
+| 3Shul C350/CL350 | 12-15kW | 300-400A | Race/reliability | ⭐⭐⭐⭐ Low |
+| BRIESC/Nucular 24F | 15-20kW+ | 400-500A | Track/extreme | ⭐⭐⭐⭐⭐ Very Low |
+
+💡 **Pro Tip**: Always test new controllers at 50% rated current for 30 minutes before pushing limits. Log MOSFET temps via CAN.
+
+## 🔧 Related Guides
+
+- [Controller Setup](controller_setup.md)
+- [Motor Configuration](motor_configuration.md)
+- [Battery Current Tuning](battery_current_tuning.md)
+- [Motor Cooling and Thermal Management](motor_cooling_and_thermal_management.md)
+- [Field Weakening Playbook](field-weakening-playbook.md)
 
 ## 1. Build Planning & Component Selection
 
