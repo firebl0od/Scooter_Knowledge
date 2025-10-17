@@ -13,6 +13,65 @@ The Ninebot G2 Max provides an excellent platform for VESC conversion, offering 
 - Firmware and configuration requirements
 - Performance targets from stealth commuter to 80+ km/h builds
 
+## 🔌 Why G2/Max for VESC?
+
+💡 **Best budget platform**: Large battery compartment, sturdy frame, readily available.
+
+## 📋 Quick Platform Comparison
+
+| Platform | Battery Space | Frame Strength | Part Availability | VESC Difficulty | Best For |
+|----------|---------------|----------------|-------------------|-----------------|----------|
+| G30 Max | ⭐⭐⭐⭐⭐ Excellent | ⭐⭐⭐⭐ Strong | ⭐⭐⭐⭐⭐ Easy | ⭐⭐ Easy | First VESC build |
+| G2 | ⭐⭐⭐⭐ Good | ⭐⭐⭐⭐ Strong | ⭐⭐⭐ Moderate | ⭐⭐ Easy | Budget conversion |
+| Xiaomi | ⭐⭐ Limited | ⭐⭐ Weak | ⭐⭐⭐⭐⭐ Easy | ⭐⭐⭐ Medium | Learning platform |
+
+## 📋 Conversion Budget Breakdown
+
+| Component | Budget Option | Premium Option | Notes |
+|-----------|--------------|----------------|-------|
+| Controller | Flipsky 75V ($150) | Spintend Ubox 100V ($350) | Start budget, upgrade later |
+| Battery | Keep stock 13S (~15Ah) | 20S 10P+ (~$600) | Stock sufficient for learning |
+| Motor | Keep stock initially | Lonnyo 60-70H ($250) | Upgrade after mastering VESC |
+| Display | VESC Tool app (Free) | Generic VESC display ($40) | App works fine |
+| Misc wiring | $30-50 | $30-50 | Connectors, heat shrink |
+| **Total** | **~$200-250** | **~$1300-1400** | Progressive upgrade path |
+
+💡 **Pro Tip**: Start with controller-only upgrade using stock battery and motor. Master VESC configuration before spending on battery/motor upgrades.
+
+## ⚠️ G30/G2 Conversion Gotchas
+
+🔴 **Dashboard incompatible** - Stock display won't work with VESC
+🔴 **Brake switches need adaptation** - May require additional wiring
+🔴 **Deck space tight** - Controller mounting requires planning
+🔴 **Stock motor weak** - Fine for learning, but limits top speed
+
+## 📋 Conversion Progression Checklist
+
+✅ **Phase 1: Controller Swap** (Weekend project)
+- [ ] Order VESC controller and wiring kit
+- [ ] Plan controller mounting location
+- [ ] Install and connect to stock battery/motor
+- [ ] Configure via VESC Tool app
+- [ ] Test at conservative settings
+
+✅ **Phase 2: Motor Upgrade** (3-6 months later)
+- [ ] Master VESC tuning on stock motor
+- [ ] Select appropriate hub motor
+- [ ] Swap motor and retune
+- [ ] Gradually increase performance
+
+✅ **Phase 3: Battery Upgrade** (6-12 months later)
+- [ ] Identify capacity/voltage needs
+- [ ] Source or build custom pack
+- [ ] Install with proper BMS
+- [ ] Final tuning for full potential
+
+## 🔧 Related Guides
+
+- [Ninebot G30 VESC Conversion Playbook](ninebot-g30-vesc-conversion-playbook.md) - Detailed G30 procedure
+- [Controller Setup](controller_setup.md) - VESC configuration basics
+- [Motor Controller Tuning](motor_controller_tuning.md) - Tuning procedures
+
 ## Build Objectives & Performance Targets
 
 - **Stealth commuter spec:** Base conversion keeps the platform single-motor with a rear Q5 Evo hub, 20S 6P Molicel pack, and Magura MT7 brake with a Shimano Deore lever so the scooter stays nimble, wheelie-friendly, and outside DGT registration triggers while matching high-power peers for acceleration.[^1]

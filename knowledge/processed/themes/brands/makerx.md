@@ -14,6 +14,45 @@ MakerX produces compact VESC controllers with good build quality but inconsisten
 - When MakerX makes sense vs. alternatives
 - Required burn-in and QC procedures
 
+
+## ⚡ Why Choose MakerX?
+
+✅ **Price/performance leader**: Best value VESC controllers
+✅ **Good support**: Active community, firmware updates
+✅ **Feature-rich**: CAN, UART, ADC, hall sensors all supported
+⚠️ **QC variable**: Some batches have issues
+⚠️ **Thermal limits**: Conservative ratings needed
+
+## 📋 MakerX Model Comparison
+
+| Model | Voltage | Battery Current | Phase Current | Realistic Use | Price | Best For |
+|-------|---------|----------------|---------------|---------------|-------|----------|
+| DV6 | 12S-14S | 60A | 120A | 50A battery, 100A phase | ~$100 | Budget 48V builds |
+| DV6 Pro | 12S-20S | 70A | 180A | 60A battery, 150A phase | ~$130 | Mid-power 60-72V |
+| FOC100 | 12S-20S | 100A | 240A | 80A battery, 200A phase | ~$180 | High-power street |
+
+💡 **Pro Tip**: Buy from authorized resellers with warranty. AliExpress direct can have hit-or-miss support.
+
+## ⚠️ MakerX Gotchas
+
+🔴 **Phase wire connectors**: Some need resoldering (poor factory joints)
+🔴 **Heatsink mounting**: Verify thermal paste applied properly
+🔴 **Advertised limits**: Use 70-80% of rated specs for reliability
+🔴 **Firmware**: Update immediately - factory firmware has bugs
+
+## 💡 MakerX Optimization Tips
+
+**Cooling**: Add 40mm fan for high-power use (>60A battery current)
+**Mounting**: Use thermal pad between controller and metal deck
+**Settings**: Enable temperature limiting in VESC Tool
+**Wiring**: Replace phase bullet connectors with soldered joints
+
+## 🔧 Related Brand Dossiers
+
+- [Spintend Controllers](spintend.md) - Premium alternative
+- [Flipsky Controllers](flipsky.md) - Similar price range
+- [Makerbase Controllers](makerbase.md) - Budget alternative
+
 ## Key Considerations
 
 - Mini FOC hardware is still a 12 S design; running 13 S (~54.6 V) leaves almost no regen headroom, so builders moving past 50 V should pivot to ≥16 S-rated controllers like Spintend before pushing voltage experiments.[^1]
