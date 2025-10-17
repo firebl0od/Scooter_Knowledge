@@ -15,6 +15,24 @@ Building and maintaining high-performance electric scooters requires proper diag
 - Common error codes and diagnostics
 - Field troubleshooting best practices
 
+## 📋 Quick Reference: Diagnostic Tools Priority
+
+| Tool | Priority | Cost | Use Case |
+|------|----------|------|----------|
+| Multimeter | ⭐⭐⭐ | $15-50 | Voltage/continuity checks |
+| ST-Link V2 | ⭐⭐⭐ | $5-15 | Firmware recovery |
+| Cell tester | ⭐⭐ | $20-40 | Battery diagnostics |
+| GPS logger | ⭐ | $100+ | Performance validation |
+
+💡 **Pro Tip**: Start with a quality multimeter and ST-Link V2. These two tools solve 90% of diagnostic scenarios and cost under $50 combined.
+
+## 🔧 Related Guides
+
+- [Controller Setup](controller_setup.md) - VESC configuration procedures
+- [Battery Pack Design](battery_pack_design.md) - Cell testing and selection
+- [Motor Controller Tuning](motor_controller_tuning.md) - Performance tuning workflow
+- [High-Power VESC Reliability](high-power-vesc-scooter-reliability-guide.md) - QC procedures
+
 ## Core Instruments
 
 - **Handheld multimeter:** Expect budget meters to ship with 12 V A23 cells and fragile F200 mA fuses.
