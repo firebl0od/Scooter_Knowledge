@@ -26,6 +26,36 @@ Segway produces a range of electric scooters from entry-level commuters to sport
 - For Ninebot Max builds, Denis Yurev's crew now steers riders toward a single 13 S pack on the stock motor paired with Rita/Happy BMS current logging instead of chasing dual hubs—quality pneumatics and Monorim + DNM suspension upgrades keep 50 km/h conversions stable while foam "solid" tires are blamed for magnet failures.[^new-13s][^new-suspension]
 - Fleet SNSC 2.3 frames are drying up as operators pivot to Okai hardware, so builders keen on rental-grade donors are scouting Brussels, Düsseldorf, and bulk fleet deals before stocks disappear.[^4]
 
+
+## 🏆 Why Choose Segway/Ninebot?
+
+✅ **Parts availability**: Best aftermarket support
+✅ **Stable geometry**: Proven commuter platform
+✅ **VESC documentation**: Extensive conversion guides
+✅ **Entry-level friendly**: G30 is beginner-friendly
+
+## 📋 Platform Comparison
+
+| Model | Stock Pack | Best For | VESC Difficulty | Max Voltage |
+|-------|------------|----------|-----------------|-------------|
+| G30 (Max) | 36V, 551Wh | Commuter base | ⭐ Easy | 13S (48V) tested |
+| P100 | 52V, 1.2kWh | Longer range | ⭐⭐ Medium | 16S possible |
+| GT1/GT2 | 60V, dual hub | Performance | ⭐⭐⭐ Complex | 20S+ |
+| C80 (seated) | 60V+ | High capacity | ⭐⭐⭐⭐ Advanced | 24S tested |
+
+💡 **Pro Tip**: The G30 is the most documented VESC conversion platform. Start here for your first build.
+
+## ⚠️ Critical G30 Warnings
+
+🔴 **Foam tires shake magnets loose** - Switch to pneumatic
+🔴 **Frame welds crack under overload** - Reinforce stem
+🔴 **Stock controller mount is weak** - Add bracing
+
+## 🔧 Related Brand Dossiers
+
+- [VSETT Scooters](vsett.md) - Performance alternative  
+- [Denis Yurev Workshop](denis_yurev_workshop.md) - Rita battery expansion for Xiaomi/Segway
+
 ## Platform Map
 
 | Model | Stock Electrical Architecture | Known Strengths | Critical Watchpoints | First-Line Upgrades |

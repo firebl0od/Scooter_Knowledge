@@ -15,6 +15,29 @@ Xiaomi scooter battery packs require specific maintenance and troubleshooting pr
 - When to replace cells vs. repair BMS
 - Temperature sensor troubleshooting
 
+## ⚠️ Common Battery Failures
+
+🔴 **Deep discharge** - Most common killer of Xiaomi packs
+🔴 **BMS moisture** - Second most common failure
+🔴 **Cell imbalance** - Causes reduced range and cutouts
+
+## 📋 Quick Troubleshooting
+
+| Symptom | Likely Cause | Solution |
+|---------|--------------|----------|
+| Won't charge | BMS protection trip | Recovery charge procedure |
+| Ghost voltages | BMS moisture | Dry-out and conformal coat |
+| Reduced range | Cell imbalance | Balance charge cycle |
+| Random cutouts | Weak cells | Replace pack or cells |
+
+💡 **Pro Tip**: Most "dead" Xiaomi packs can be recovered with proper procedures. Don't throw them away!
+
+## 🔧 Related Guides
+
+- [Daly BMS Waterproofing](daly-bms-waterproofing.md) - Moisture recovery
+- [Rita External Battery Integration](rita-external-battery-integration.md) - Range extension
+- [DIY Battery Pack Design](battery_pack_design.md) - Custom pack build
+
 ## Key Principles
 
 - **Balance stubborn packs externally before blaming the BMS.** Clip TP4056 or lab-charger leads onto the weakest parallel groups without removing the board.
