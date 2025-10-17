@@ -1,4 +1,18 @@
-# Xiaomi Tire, Brake & Handling Upgrade Notes
+# Xiaomi Tire, Brake & Handling Upgrades
+
+## Overview
+
+Upgrading tires, brakes, and suspension on Xiaomi scooters dramatically improves safety, comfort, and handling, especially on high-power conversions. This guide covers tire selection and sizing, brake upgrade options, pressure recommendations, and common fitment issues. Proper tire and brake upgrades are essential before increasing speed or power, as stock components quickly become inadequate.
+
+## What You'll Learn
+
+- Tire options (10" pneumatic, tubeless, solid) and their trade-offs
+- Recommended tire pressures for different rider weights
+- Brake upgrade paths (hydraulic, drum, disc)
+- Tire fitment considerations and rim compatibility
+- Common tire and brake failure modes
+- When to upgrade suspension alongside tires
+- Valve installation and rim preparation
 
 ## Tire Selection & Pressures
 

@@ -1,6 +1,21 @@
-# High-Voltage VESC Controller Market (2025 Snapshot)
+# High-Voltage VESC Controller Market (2025)
 
-## TL;DR
+## Overview
+
+The high-voltage (84-120V) VESC controller market is rapidly evolving, with new options targeting 20-30S scooter builds. This guide surveys current controller options, their real-world performance, pricing, and suitability for different applications. Understanding the trade-offs between brands helps you choose reliable hardware that matches your voltage, current, and budget requirements.
+
+## What You'll Learn
+
+- Available high-voltage VESC controllers (Spintend, Tronic, 3Shul, Makerbase, etc.)
+- Voltage and current ratings vs. real-world capability
+- Pricing and availability considerations
+- Quality control and reliability differences
+- Thermal management requirements
+- When to choose VESC vs. alternative controllers (FarDriver, Kelly, etc.)
+- Emerging options and prototypes
+- Common failure modes by brand
+
+## Market Overview
 
 - Spintend’s mature 85 V line still anchors budget 20–22 S builds, but unresolved throttle jitter, capacitor stress on heavy hubs, and a wave of 12-FET failures keep veterans steering high-mass projects toward larger "fat VESC" platforms or FarDriver-class hardware.[^1]
 - Stepping from 16 S to 20 S trims current draw and adds ≈2.5 km/h per series cell, yet 100 V-class MOSFETs carry ~33 % higher Rds(on) than 75 V parts while pack length, insulation, and safety checks all get harder.
