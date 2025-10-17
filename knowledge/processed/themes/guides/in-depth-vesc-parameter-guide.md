@@ -1625,3 +1625,12 @@ Ride Safely and enjoy the benefits of a finely tuned VESC-based controller. If s
 [^50]: Source: knowledge/notes/input_part013_review.md†L329-L337
 [^51]: Source: knowledge/notes/input_part012_review.md†L423-L431
 [^52]: Source: knowledge/notes/input_part005_review.md†L202-L214
+
+## 🔧 Related Guides
+
+- [Controller Setup](controller_setup.md) - Initial VESC configuration
+- [Motor Controller Tuning](motor_controller_tuning.md) - Progressive tuning workflow
+- [Battery Current Tuning](battery_current_tuning.md) - Current limit configuration
+- [Field-Weakening Playbook](field-weakening-playbook.md) - Advanced FW tuning
+- [Motor Configuration](motor_configuration.md) - Motor-specific settings
+- [In-Depth VESC Q&A](in-depth-vesc-qna.md) - Common VESC questions answered

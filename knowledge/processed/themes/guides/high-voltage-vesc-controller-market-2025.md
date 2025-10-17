@@ -15,6 +15,19 @@ The high-voltage (84-120V) VESC controller market is rapidly evolving, with new 
 - Emerging options and prototypes
 - Common failure modes by brand
 
+## 📋 Quick Reference: High-Voltage Controller Comparison
+
+| Brand/Model | Voltage | Battery Current | Price Range | Reliability | Best For |
+|-------------|---------|-----------------|-------------|-------------|----------|
+| Spintend 85/150 | 20-22S | 75-85A | €300-400 | ⭐⭐⭐ Moderate | Budget 20S builds |
+| Makerbase 84xxx HP | 22S+ | 100A+ | €400-500 | ⭐⭐⭐⭐ Good | Dependable mid-budget |
+| Tronic X12 | 23S+ | 150A+ | €700-900 | ⭐⭐⭐⭐ Good | Premium performance |
+| 3Shul CL-series | 23S+ | 200A+ | €800-1000 | ⭐⭐⭐⭐⭐ Excellent | Race builds |
+| Vedder Maxim | 30S (120V) | 100A | €530 | ⭐⭐⭐ TBD | Official high-voltage |
+| Rage C350 | 28S | 200A battery, 700A phase | €1200+ | ⭐⭐⭐⭐⭐ Excellent | Extreme builds |
+
+💡 **Pro Tip**: Budget controllers (Spintend) work for most riders, but high-mass hub motor builds need thermal headroom of Makerbase/Tronic class hardware.
+
 ## Market Overview
 
 - Spintend’s mature 85 V line still anchors budget 20–22 S builds, but unresolved throttle jitter, capacitor stress on heavy hubs, and a wave of 12-FET failures keep veterans steering high-mass projects toward larger "fat VESC" platforms or FarDriver-class hardware.[^1]
@@ -358,3 +371,19 @@ The high-voltage (84-120V) VESC controller market is rapidly evolving, with new 
 [^yamal_shortlist]: Source: knowledge/notes/input_part012_review.md, line 409.
 [^mp2-scam]: Source: knowledge/notes/input_part013_review.md†L722-L722
 [^tronic-oem]: Source: knowledge/notes/input_part013_review.md†L790-L791
+
+## 🔧 Related Guides
+
+- [Controller Setup](controller_setup.md) - Initial configuration and tuning
+- [High-Power VESC Scooter Reliability Guide](high-power-vesc-scooter-reliability-guide.md) - Reliability considerations for high-power builds
+- [Battery Pack Design](battery_pack_design.md) - Matching pack voltage to controller
+- [Motor Configuration](motor_configuration.md) - Motor-controller pairing
+- [In-Depth VESC Parameter Guide](in-depth-vesc-parameter-guide.md) - Advanced parameter tuning
+
+## 🔧 Related Brand Dossiers
+
+- [Spintend](../brands/spintend.md) - Spintend controller lineup
+- [Tronic](../brands/tronic.md) - Tronic controller details
+- [3Shul](../brands/3shul.md) - 3Shul high-performance controllers
+- [Makerbase](../brands/makerbase.md) - Makerbase controller options
+- [MakerX](../brands/makerx.md) - MakerX controller lineup
