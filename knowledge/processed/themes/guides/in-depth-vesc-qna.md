@@ -20,6 +20,18 @@ This comprehensive Q&A addresses hundreds of common and advanced questions about
 Below is a massive Q&A covering a wide array of topics around VESC-based controllers.
   - ranging from beginner-level queries to advanced technical discussions. It draws on the 3000+ lines of chat knowledge, real-world usage, and the official VESC parameter descriptions.
 
+## 💡 How to Use This Q&A
+
+💡 **Pro Tip**: Use Ctrl+F (Cmd+F on Mac) to search for keywords related to your specific issue. Most answers include practical examples and field-tested values.
+
+## 🔧 Related Guides
+
+- [In-Depth VESC Parameter Guide](in-depth-vesc-parameter-guide.md)
+- [Controller Setup](controller_setup.md)
+- [Motor Controller Tuning](motor_controller_tuning.md)
+- [Field Weakening Playbook](field-weakening-playbook.md)
+- [Battery Current Tuning](battery_current_tuning.md)
+
 Use the collapsible sections below to jump straight to the answers that matter most to you.
 ## Table of Contents
 
