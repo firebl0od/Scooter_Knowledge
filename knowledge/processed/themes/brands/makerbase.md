@@ -14,6 +14,38 @@ Makerbase produces budget VESC controllers that offer good value for moderate-po
 - When Makerbase makes sense vs. Spintend/Flipsky
 - Common failures and prevention strategies
 
+## 💰 Why Choose Makerbase?
+
+✅ **Budget-friendly**: ~€75 for aluminum 75100
+✅ **Adequate performance**: Works well at moderate currents
+⚠️ **QC issues**: Solder, thermal paste, shunt calibration problems
+⚠️ **Limited headroom**: Caps around 70A battery / 180A phase
+
+## ⚠️ Critical QC Steps Before Use
+
+🔴 **ALWAYS inspect before first power-up:**
+
+1. **Open the case** - Check for solder balls and shorts
+2. **Repaste thermal interface** - Factory paste is often watery
+3. **Test shunt calibration** - Some boards have incorrect current sensing
+4. **Check firmware version** - Older firmware has known bugs
+
+💡 **Pro Tip**: Budget 1-2 hours for inspection and rework on every new Makerbase controller.
+
+## 📋 Quick Model Comparison
+
+| Model | Voltage | Safe Battery | Safe Phase | Best Use |
+|-------|---------|-------------|------------|----------|
+| 75100 Alu | 48-84V (≤22S) | 60-70A | 160-180A | Budget dual CAN builds |
+| 84100 HP | 60-84V (≤20S) | 60-80A | 150-180A | Mid-power singles |
+| 60100 HP | ≤15S | 50A | - | Commuters keeping OEM dash |
+
+## 🔧 Related Brand Dossiers
+
+- [Spintend Controllers](spintend.md) - More reliable alternative
+- [Flipsky Controllers](flipsky.md) - Similar budget option
+- [MakerX Controllers](makerx.md) - Better QC, similar price range
+
 ## Key Principles
 
 - Aluminum-PCB 75100 boards remain the go-to budget dual-controller option for 60 V commuters, but they only stay reliable when capped around 70 A battery / 170–180 A phase and kept below ≈22 S; bumping currents higher has popped freshly installed units in a single launch. [^1][^2][^3]

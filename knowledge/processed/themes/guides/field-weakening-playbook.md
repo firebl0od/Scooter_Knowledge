@@ -15,6 +15,33 @@ Field weakening (FW) is an advanced tuning technique that allows motors to excee
 - Common mistakes and failure modes
 - Duty cycle vs. throttle position triggering
 
+## ⚡ What is Field Weakening?
+
+Field weakening (FW) trades efficiency for top speed by weakening the magnetic field, allowing higher RPM. Think of it as "overdriving" your motor.
+
+## ⚠️ Critical FW Warnings
+
+🔴 **Efficiency Loss**: Expect ~25% higher power consumption during FW operation
+🔴 **Heat Generation**: Both motor and controller run hotter
+🔴 **Current Spikes**: Can push controllers beyond safe limits
+🔴 **MOSFET Stress**: >40A FW on budget controllers kills MOSFETs
+
+## 📋 Quick Reference: FW Current Limits by Controller
+
+| Controller Class | Safe FW Current | Absolute Max FW | Notes |
+|------------------|----------------|-----------------|-------|
+| Budget (Flipsky, Makerbase) | 20-30A | 40A | Above 40A kills boards |
+| Mid-range (Spintend) | 30-40A | 60A | Needs MOSFET upgrade for >40A |
+| Premium (3Shul, Tronic) | 40-60A | 80A+ | Still needs cooling |
+
+💡 **Pro Tip**: Start with 20A FW current and work up based on thermal testing. Monitor controller temps closely.
+
+## 🔧 Related Guides
+
+- [Motor Configuration](motor_configuration.md) - Understanding motor Kv and winding
+- [Motor Controller Tuning](motor_controller_tuning.md) - Controller pairing
+- [Battery Current Tuning](battery_current_tuning.md) - Total current budget planning
+
 ## Key Principles
 
 - Treat field weakening (FW) as a last-mile speed tool: it trades torque and efficiency for extra ERPM, rapidly heating motors and controllers, so only enable it once the drive system runs cool at target duty cycles.[^1][^2][^3]

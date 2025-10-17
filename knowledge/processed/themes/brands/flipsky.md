@@ -15,6 +15,40 @@ Flipsky produces budget-friendly VESC controllers that can deliver 20-30kW peaks
 - When Flipsky makes sense vs. Spintend/3Shul
 - Required documentation for support
 
+## 💰 Why Choose Flipsky?
+
+✅ **Budget pricing**: Cheapest VESC option
+✅ **Adequate power**: Can do 20-30kW peaks
+⚠️ **QC lottery**: Inconsistent quality batch-to-batch
+⚠️ **Early failures**: DOA and early deaths common
+
+## ⚠️ Critical Pre-Flight Checklist
+
+🔴 **Before powering any Flipsky controller:**
+
+1. **Inspect solder joints** - Look for cold joints, especially on 12V rail
+2. **Repaste MOSFETs** - Factory paste is inadequate
+3. **Check for shorts** - Use multimeter before connecting battery
+4. **Test on bench supply** - Current-limited test before full power
+5. **Document condition** - Photos for warranty claims
+
+## 📋 Quick Model Comparison
+
+| Model | Voltage | Conservative Limit | Notes |
+|-------|---------|-------------------|-------|
+| 75100 | 75V | 80A batt / 270A phase | Repaste before use |
+| 75200 | 75-84V | 50-60A batt / 120A phase | Disable phase filter |
+| 7550 (dual) | 75V | 60A batt / 200A phase per side | Hard-mount to deck |
+| 84100 | 84-100V | 60-80A batt / 135A phase | High failure rate |
+
+💡 **Pro Tip**: Buy extra units for spares. Early failures are common enough to budget for replacements.
+
+## 🔧 Related Brand Dossiers
+
+- [Makerbase Controllers](makerbase.md) - Similar budget tier
+- [Spintend Controllers](spintend.md) - More reliable, higher cost
+- [MakerX Controllers](makerx.md) - Mid-range alternative
+
 ## Key Considerations
 
 - Budget-friendly VESC hardware that can deliver 20–30 kW peaks, but quality control remains inconsistent and requires hands-on inspection before trust.[^qc-2025]
