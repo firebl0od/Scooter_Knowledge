@@ -1,6 +1,59 @@
-# Long-Range Touring & Public Charging Guide
+# Long-Range Touring & Public Charging
 
-## TL;DR
+## Overview
+
+Long-distance electric scooter touring requires careful planning of battery capacity, charging infrastructure access, and thermal management. This guide covers real-world range benchmarks, public EV charger compatibility, charging strategies, and multi-day tour planning. With proper preparation, 150+ mile days and multi-day tours are achievable using existing charging infrastructure.
+
+## What You'll Learn
+
+- Battery capacity requirements for long-distance touring (5-10+ kWh)
+- Public EV charging infrastructure compatibility (J1772, Tesla adapters)
+- Fast charging strategies and thermal limits
+- Real-world range benchmarks and efficiency metrics
+- Multi-day tour planning and support vehicle coordination
+- Charging etiquette and station access
+- Weather and terrain impact on range
+- Emergency backup power options
+
+## 🔋 Range Planning Philosophy
+
+💡 **Conservative planning**: Plan for 70% of rated range to account for terrain, weight, and pack aging.
+
+## 📋 Quick Reference: Range Factors
+
+| Factor | Impact on Range | Mitigation |
+|--------|----------------|------------|
+| Cold weather (<10°C) | -20% to -40% | Warm battery before ride, lower assist |
+| Hills (sustained climbs) | -30% to -50% | Lower voltage/current, rest on descents |
+| High speed (>40 km/h) | -25% to -35% | Moderate speed, use regen |
+| Rider weight (+10 kg) | -5% to -10% | N/A - physics |
+| Pack aging (>200 cycles) | -10% to -20% per year | Monitor IR, replace weak cells |
+
+## 📋 Charging Strategy Comparison
+
+| Strategy | Range Extension | Equipment Needed | Cost | Complexity |
+|----------|----------------|------------------|------|------------|
+| Carry spare pack | +100% | Parallel adapter, spare pack | High ($300+) | ⭐⭐ Easy |
+| Fast charger (6A) | +60% per hour | Fast charger, outlets | Medium ($150) | ⭐ Very Easy |
+| Solar panel | +10-20% daily | Panel, MPPT controller | Medium ($200) | ⭐⭐⭐ Hard |
+| Standard charger (2A) | +20% per hour | Stock charger, outlets | Low ($0) | ⭐ Very Easy |
+
+💡 **Pro Tip**: Fast charging to 80% takes ~1 hour with 6A charger. 80-100% takes another hour. Stop at 80% for faster turnaround.
+
+## ⚠️ Charging Safety
+
+🔴 **Never leave charging unattended** - Battery fires start during charging
+⚡ **Use BMS-rated charger only** - Voltage mismatch destroys packs
+🔥 **Charge on non-flammable surface** - Concrete, not carpet or wood
+💧 **Don't charge wet batteries** - Let dry completely first
+
+## 🔧 Related Guides
+
+- [Battery Pack Design](battery_pack_design.md) - Maximizing pack capacity
+- [DIY Battery Supply & Architecture 2025](diy-battery-supply-and-pack-architecture-2025.md) - Cell selection for range
+- [Smart BMS Integration](smart-bms-integration-handbook.md) - Parallel pack management
+
+## Key Touring Principles
 
 - Multi-hundred-mile scooter tours are feasible with proper pack sizing (≥5 kWh), thermal management, and access to Level 2 EV charging infrastructure, but riders must plan charging etiquette, adapter compatibility, and backup power strategies before leaving home base.[^tour-viable][^ev-infra]
 - Public charging demands J1772 adapters, protocol triggers for Tesla plugs (FoCcci boards or equivalent), and awareness that app-locked stations typically release only one handle per session.

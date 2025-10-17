@@ -1,6 +1,91 @@
-# Ninebot G30 VESC Conversion Playbook
+# Ninebot G30 VESC Conversion
 
-## TL;DR
+## Overview
+
+The Ninebot G30 Max is one of the best platforms for VESC conversion, offering generous deck space, strong aftermarket support, and proven geometry. This playbook covers the complete conversion process from stock to high-performance VESC-based control, including battery upgrades, controller selection, motor options, and integration procedures. The G30's robust frame and available space make it ideal for builds ranging from mild commuters to 20S race machines.
+
+## What You'll Learn
+
+- Why the G30 is ideal for VESC conversions
+- Battery capacity limits and pack configurations
+- Controller selection and dual-controller setups
+- Motor upgrade options and fitment
+- Firmware and BMS unlock procedures
+- Traction control and throttle tuning
+- Mechanical preparation and reinforcement
+- Thermal management strategies
+- Common build configurations and their performance
+
+## 🛠️ G30 Conversion Overview
+
+⭐⭐ **Difficulty**: Moderate - Requires soldering, basic wiring, VESC tuning skills
+
+⏱️ **Time**: 4-8 hours for first conversion, 2-3 hours once experienced
+
+## 📋 Required Tools & Materials
+
+| Category | Essential | Nice to Have |
+|----------|-----------|--------------|
+| **Tools** | Soldering iron, wire strippers, multimeter | Heat gun, crimper, helping hands |
+| **Consumables** | XT60/XT90 connectors, heat shrink, wire | Silicone wire, conformal coat |
+| **Safety** | Safety glasses, fire extinguisher nearby | Anti-static wrist strap |
+
+## 📋 Component Checklist
+
+✅ **Must Have**:
+- [ ] VESC controller (75V+ rated for 13S)
+- [ ] XT60 or XT90 battery connector
+- [ ] Brake sensor adapter or resistor for cutoff
+- [ ] Throttle signal adapter (if needed)
+- [ ] Wire for phase and battery connections
+- [ ] Heat shrink tubing assortment
+
+💡 **Optional but Recommended**:
+- [ ] External display or use phone app
+- [ ] Temperature sensors for monitoring
+- [ ] Upgraded silicone phase wires
+- [ ] Cable organizers and mounts
+
+## ⚠️ Critical Pre-Flight Checks
+
+Before first test ride:
+
+🔴 **Electrical**:
+- [ ] Phase wire connections secure and insulated
+- [ ] Battery polarity correct (measure with multimeter)
+- [ ] No shorts between phases or to ground
+- [ ] All connectors properly crimped/soldered
+- [ ] Brake sensor functioning (if installed)
+
+🔴 **Mechanical**:
+- [ ] Controller securely mounted
+- [ ] No wires touching moving parts or hot surfaces
+- [ ] Deck reassembled with all screws
+- [ ] Wheels spin freely, no rubbing
+
+🔴 **VESC Configuration**:
+- [ ] Motor detection completed successfully
+- [ ] Current limits set conservatively (50% of target)
+- [ ] Battery voltage cutoff configured
+- [ ] Brake function tested at standstill
+
+## 💡 Pro Tips for G30 Conversion
+
+**Mounting**: Controller fits under deck near rear. Use vibration-damping foam.
+
+**Wiring**: Keep phase wires as short as possible. Use quality connectors.
+
+**Testing**: First test in hand-drill mode (wheel off ground) before riding.
+
+**Tuning**: Start with 30A battery, 80A phase limits. Work up gradually.
+
+## 🔧 Related Guides
+
+- [Ninebot G2 Max VESC Conversion](ninebot-g2-max-vesc-conversion.md) - Overview and comparison
+- [Controller Setup](controller_setup.md) - VESC configuration guide
+- [Motor Controller Tuning](motor_controller_tuning.md) - Tuning procedures
+
+## Key Advantages
 
 - The G30 Max remains the friendliest chassis for VESC swaps thanks to abundant deck space, aftermarket spacers, and new BMS firmware that unlocks >20 A discharge without extra comms harnesses.[^1]
 - Expect roughly 140 loose 18650s to fit without grinding the rails.

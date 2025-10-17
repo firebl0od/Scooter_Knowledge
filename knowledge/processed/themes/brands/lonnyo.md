@@ -1,6 +1,53 @@
-# Lonnyo Hub Motor Dossier
+# Lonnyo Hub Motors
 
-## TL;DR
+## Overview
+
+Lonnyo produces a range of hub motors (40H-100H) with different winding configurations (17×4 torque, 22×3 standard, 33×2 high-speed) for various performance applications. This brand dossier covers Lonnyo's motor lineup, mechanical fitment requirements, current envelopes, sourcing strategies, and common integration challenges. Understanding these motors' capabilities and packaging constraints helps you choose appropriate specifications and avoid costly mistakes.
+
+## What You'll Learn
+
+- Winding code selection (17×4, 22×3, 33×2)
+- Stator size comparison (40H, 65H, 70H, 80H, 100H)
+- Mechanical fitment requirements (dropout width, fork spacing)
+- Real-world current limits and thermal performance
+- Sourcing strategies and price signals
+- Bearing and weatherproofing requirements
+- When to upgrade motor size vs. winding configuration
+
+## 🔧 Why Choose Lonnyo?
+
+✅ **Clear winding codes**: Easy to select right motor for your needs
+✅ **Good availability**: Direct from manufacturer
+✅ **Range of sizes**: 40H to 100H stators
+⚠️ **Ships unsealed**: Need to add bearings and weatherproofing
+⚠️ **Fitment work**: Larger sizes need custom mounting
+
+## 📋 Winding Selection Guide
+
+| Wind Code | Kv | Best Speed Range | Torque | Best For |
+|-----------|-----|------------------|--------|----------|
+| 17×4 | Low | 0-100 km/h | ⭐⭐⭐⭐⭐ | Hills, cargo, launches |
+| 22×3 | Medium | 40-120 km/h | ⭐⭐⭐⭐ | Balanced street use |
+| 33×2 | High | 80-150 km/h | ⭐⭐⭐ | Highway, top speed |
+
+## 📋 Stator Size Guide
+
+| Size | Dropout Width | Current Capacity | Best For |
+|------|--------------|------------------|----------|
+| 40H-60H | Standard (~140mm) | ~150-200A phase | Most builds |
+| 70H | 145-150mm | ~250A phase | Performance upgrade |
+| 80H | 155mm+ | ~300A phase | High-power builds |
+| 100H | 183mm+ | 400A+ phase | Extreme race builds |
+
+💡 **Pro Tip**: The 22×3 winding balances torque and top speed for most street riding. Go 17×4 only if you need hill-climbing grunt.
+
+## 🔧 Related Brand Dossiers
+
+- [VSETT Scooters](vsett.md) - Common Lonnyo motor host platform
+- [NAMI Scooters](nami.md) - Another Lonnyo-compatible platform
+- [Segway Platforms](segway.md) - Can fit Lonnyo motors with mods
+
+## Motor Selection Guide
 
 - Lonnyo’s stator codes map cleanly to use cases: 17×4 torque, 22×3 “standard”, and 33×2 high-speed winds, with riders stepping up to 80H/100H cores when chasing 150 km/h builds or >300 A phase targets.[^1][^2]
 - Real-world current envelopes show 22×3 hubs settling near 110–150 A battery and ~300 A phase on Spintend 75/200-class controllers, while single Ubox 85150 installs bump into a ~150 A firmware ceiling regardless of higher software limits.[^3][^4]

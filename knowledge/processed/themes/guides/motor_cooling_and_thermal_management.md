@@ -1,4 +1,56 @@
-# Motor Cooling & Thermal Management Notes
+# Motor Cooling & Thermal Management
+
+## Overview
+
+Managing motor thermal limits is essential for reliability and performance on high-power electric scooters. This guide covers passive and active cooling strategies, thermal transfer principles, oil and ferrofluid cooling, and why most active cooling approaches fail on scooters. Understanding heat transfer from windings to shell helps you choose effective cooling methods while avoiding expensive mistakes.
+
+## What You'll Learn
+
+- Why fans and external blowers are ineffective for hub motors
+- Passive conduction vs. active cooling trade-offs
+- Oil and ferrofluid cooling procedures and results
+- Motor insulation temperature limits
+- Thermal rollback configuration
+- Heat pipe and water cooling considerations
+- Stator-to-shell thermal interface improvements
+- Common cooling myths and mistakes
+
+## 🌡️ Thermal Management Philosophy
+
+💡 **Key Insight**: Focus on heat transfer FROM windings TO shell, not external cooling.
+
+## 📋 Quick Reference: Cooling Methods by Effectiveness
+
+| Method | Effectiveness | Cost | Complexity | Best For |
+|--------|--------------|------|------------|----------|
+| Ferrofluid fill | ⭐⭐⭐⭐⭐ | Medium | Low | All high-power builds |
+| Oil fill (~40ml) | ⭐⭐⭐⭐ | Low | Low | Budget thermal improvement |
+| Thermal paste improvement | ⭐⭐⭐ | Low | Low | Easy win for all builds |
+| External fans | ⭐ | Low | Low | Cosmetic only, skip it |
+| Water cooling loops | ⭐⭐ | High | Very High | Race only, prone to leaks |
+
+## ⚠️ Critical Temperature Limits
+
+| Component | Conservative Limit | Absolute Max | Consequence of Exceeding |
+|-----------|-------------------|--------------|-------------------------|
+| Copper windings | 100°C | 120-155°C (enamel) | Insulation breakdown |
+| Magnets | 80°C | 120°C+ | Permanent demagnetization |
+| Controller MOSFETs | 70°C | 100°C+ | Thermal shutdown, failure |
+
+🔴 **Warning**: Magnets can permanently lose strength if overheated. This cannot be reversed.
+
+## 💡 Pro Tips
+
+- **Set thermal rollback at 100°C** with hard stop at 115°C
+- **Monitor winding temps** - they can be 40°C hotter than magnets
+- **Oil/ferrofluid** work best when axle seals are healthy
+- **Skip fans** - scooters already move air at riding speed
+
+## 🔧 Related Guides
+
+- [Motor Configuration](motor_configuration.md) - Motor selection and winding
+- [Battery Current Tuning](battery_current_tuning.md) - Preventing thermal overload
+- [High-Power VESC Reliability](high-power-vesc-scooter-reliability-guide.md) - Thermal strategies for race builds
 
 ## Why Fans Rarely Help Scooter Hubs
 

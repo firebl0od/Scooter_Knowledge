@@ -1,6 +1,52 @@
-# DIY Battery Sourcing & Welding Playbook (2025)
+# DIY Battery Sourcing & Welding (2025)
 
-## TL;DR
+## Overview
+
+Building custom battery packs requires understanding cell sourcing, spot welding techniques, busbar materials, and pack assembly best practices. This guide covers current cell pricing and availability, welding equipment selection, copper vs nickel busbar trade-offs, and common assembly pitfalls. Proper welding technique and quality components are essential for safe, reliable packs.
+
+## What You'll Learn
+
+- Current cell pricing and sourcing strategies (2025)
+- Spot welder selection and capability testing
+- Copper vs nickel busbar considerations
+- Welding parameters for different materials
+- Pack holder and fixture requirements
+- BMS selection for DIY packs
+- Cell matching and quality verification
+- Common welding failures and prevention
+
+## ⚠️ DIY Pack Safety
+
+🔴 **Critical**: Battery pack assembly carries fire risk. Work in a fire-safe area with ABC extinguisher nearby. Never parallel-charge mismatched cells.
+
+## 📋 Quick Reference: Spot Welder Selection
+
+| Welder Class | Price Range | Copper Capability | Best For | Limitation |
+|-------------|-------------|-------------------|----------|------------|
+| Budget capacitor (LSUC-branded) | €90-120 | ≤0.15mm unreliable | Learning/nickel only | Fails copper pull tests |
+| Docreate/quality capacitor | €100-150 | 0.10-0.15mm copper + nickel sandwich | DIY packs | Requires parameter tuning |
+| K-Weld / Glitter rigs | €300-500+ | 0.10mm copper reliable | High-current packs | Higher investment |
+| Professional laser | $17k+ | Any thickness | Production | Cost prohibitive for DIY |
+
+💡 **Pro Tip**: Test your welder on scrap copper before starting a 20S build. Failed welds discovered mid-assembly waste hours.
+
+## 📋 Cell Sourcing Strategy (2025)
+
+| Source | Price per Cell | Grade | Lead Time | Risk Level |
+|--------|---------------|-------|-----------|------------|
+| EU Wholesale (50PL) | €1.00-1.50 | Grade A | 1-2 weeks | ⭐ Very Low |
+| US Resellers (50PL) | $8-9 | Grade A | 1 week | ⭐⭐ Low |
+| AliExpress "Grade A" | $3-5 | Unknown/pulls | 3-6 weeks | ⭐⭐⭐⭐⭐ Very High |
+| Salvage modules (Stark Varg) | €1-1.20 | Tested pulls | Variable | ⭐⭐⭐ Medium (requires testing) |
+
+## 🔧 Related Guides
+
+- [Battery Pack Design](battery_pack_design.md)
+- [Smart BMS Integration Handbook](smart-bms-integration-handbook.md)
+- [DIY Battery Supply and Pack Architecture 2025](diy-battery-supply-and-pack-architecture-2025.md)
+- [Power Distribution](power_distribution.md)
+
+## Key Principles
 
 - Grade-A 50PL and P45B cells now define the performance ceiling, but prices swing from €1–1.5 in the EU to ~$9 in the US, so teams must align sourcing tactics with customs realities before scoping pack power levels.[^1][^2]
 - Copper spot welding remains the gating competency: bargain 90 € welders rarely prove 0.15 mm claims, while K-Weld or Glitter rigs with proper maintenance reliably join 0.1 mm copper for 22 S packs.[^3][^10]

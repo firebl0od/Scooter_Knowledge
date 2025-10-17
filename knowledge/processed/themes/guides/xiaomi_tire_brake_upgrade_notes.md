@@ -1,4 +1,32 @@
-# Xiaomi Tire, Brake & Handling Upgrade Notes
+# Xiaomi Tire, Brake & Handling Upgrades
+
+## Overview
+
+Upgrading tires, brakes, and suspension on Xiaomi scooters dramatically improves safety, comfort, and handling, especially on high-power conversions. This guide covers tire selection and sizing, brake upgrade options, pressure recommendations, and common fitment issues. Proper tire and brake upgrades are essential before increasing speed or power, as stock components quickly become inadequate.
+
+## What You'll Learn
+
+- Tire options (10" pneumatic, tubeless, solid) and their trade-offs
+- Recommended tire pressures for different rider weights
+- Brake upgrade paths (hydraulic, drum, disc)
+- Tire fitment considerations and rim compatibility
+- Common tire and brake failure modes
+- When to upgrade suspension alongside tires
+- Valve installation and rim preparation
+
+## 📋 Quick Reference: Tire Selection Guide
+
+| Tire Type | Size | Pressure (PSI) | Best For | Trade-offs |
+|-----------|------|----------------|----------|------------|
+| CST 10×2.25 | 10" pneumatic | 50-60 | Comfort, grip | Puncture risk |
+| Xuancheng 10" | 10" pneumatic | 45-50 | All-around, longevity | Moderate grip |
+| PMT 10×3 | 10" premium | 48 | Best grip, handling | $$$ expensive |
+| CST 10×3 | 10" value | 45-50 | Budget performance | Bead fitment issues |
+| Solid tires | Various | N/A | Zero punctures | ⚠️ **Crash hazard** - avoid |
+
+⚠️ **Critical**: Always upgrade brakes BEFORE increasing speed or power. Stock drum brakes are inadequate above 35 km/h.
+
+💡 **Pro Tip**: Heavy riders (100+ kg) should run 10×3 tires at 45+ PSI and budget for hydraulic brake upgrades.
 
 ## Tire Selection & Pressures
 
@@ -364,3 +392,12 @@
 [^denis-tube-care]: Source: knowledge/notes/denis_all_part02_review.md†L977-L977
 - **CST 10×2.5 wears quickly.** Aggressive riders swap to Tuovt or PMT casings with thicker nylon plies and deeper tread even though the stiffer tires demand more effort to mount.[^denis-cst-wear]
 - **Reseat lumpy tubes.** “Egg-shaped” wheels usually recover after deflating, talc-dusting, and reseating tubes multiple times.[^denis-egg-tube]
+
+
+## 🔧 Related Guides
+
+- [Chassis Fitment](chassis_fitment.md) - Bearing and wheel compatibility
+- [Brake Maintenance and Upgrades](brake-maintenance-and-upgrades.md) - Brake upgrade procedures
+- [Xiaomi High Voltage Upgrade Checklist](xiaomi_high_voltage_upgrade_checklist.md) - High-power Xiaomi conversions
+- [Xiaomi Clone Upgrade Caveats](xiaomi_clone_upgrade_caveats.md) - Clone scooter considerations
+- [Monorim Suspension Maintenance](monorim_suspension_maintenance.md) - Suspension tuning

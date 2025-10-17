@@ -1,5 +1,20 @@
 # Rita External Battery Deployment Playbook
 
+## Overview
+
+This playbook provides a complete reference for deploying Rita external battery adapters on Xiaomi-style scooters. It covers pre-build checks, pack selection, wiring procedures, and common integration pitfalls. Following these field-tested procedures ensures safe parallel pack operation and reliable charge management.
+
+## What You'll Learn
+
+- Pre-build checklist and requirements
+- Pack selection and BMS compatibility
+- Wiring and connector requirements
+- Voltage matching procedures
+- Charge port modifications
+- Anti-spark placement
+- Common failure modes and prevention
+- Pack sourcing and quality verification
+
 ## Pre-Build Checklist
 
 | Check | Why it Matters | Notes |

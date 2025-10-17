@@ -1,6 +1,55 @@
-# Weped Performance Scooter Brand Dossier
+# Weped Performance Scooters
 
-## TL;DR
+## Overview
+
+Weped produces high-performance scooters targeting 100+ km/h speeds, but they require extensive quality control and upgrades to achieve their potential safely. This brand dossier covers common issues with factory builds, battery chemistry considerations, thermal management requirements, and upgrade paths for Weped GTS, Fold, and Sonic models. Understanding these platforms' strengths and weaknesses is essential before investing in premium-priced Weped hardware.
+
+## What You'll Learn
+
+- Required QC checks before riding (fork alignment, fasteners, wiring)
+- Samsung 50E vs. high-discharge cell chemistry trade-offs
+- Thermal management for dual-controller setups
+- 21S pack upgrade procedures and packaging
+- QS hub and Fardriver controller characteristics
+- Common failure modes and prevention
+- When Weped platforms make sense vs. alternatives
+
+
+## 🏁 Why Choose Weped?
+
+✅ **Premium performance**: Triple-digit speeds possible
+✅ **QS hubs + Fardriver**: Proven powertrain
+⚠️ **Expensive**: Premium pricing
+⚠️ **Requires extensive QC**: Ships needing fork alignment, fastener swaps
+⚠️ **Support inconsistent**: Even fans rank support as hit-or-miss
+
+## ⚠️ Critical Pre-Ride QC
+
+🔴 **NEVER ride a Weped without checking:**
+
+1. **Fork alignment** - Factory alignment often off
+2. **Fastener torque** - Lengths and torque need verification
+3. **Harness inspection** - Wiring needs review
+4. **Thermal system** - Controllers need proper cooling
+
+💡 **Pro Tip**: Budget 4-8 hours for thorough inspection and correction on ANY new Weped delivery.
+
+## 📋 Battery Chemistry Reality Check
+
+| Cell Type | Weped Use | Pros | Cons |
+|-----------|-----------|------|------|
+| Samsung 50E | Stock 16S6P | Long range, proven | Only 10A/cell, overheats >135A |
+| Molicel 40T/P42A | Upgrade path | 35-40A/cell | Expensive, less range |
+
+🔴 **Warning**: Stock 50E cells overheat above ~10-12A per cell. Plan pack upgrade for >8kW builds.
+
+## 🔧 Related Brand Dossiers
+
+- [Rion Scooters](rion.md) - Premium carbon alternative
+- [NAMI Scooters](nami.md) - More reliable high-power platform
+- [VSETT Scooters](vsett.md) - Better value performance platform
+
+## Key Platform Characteristics
 
 - Factory GTS units arrive with 16S6P Samsung 50E packs but demand comprehensive QC—fork alignment, fastener swaps, and harness inspections—before they are safe at the triple-digit speeds owners expect from 21S-class rebuilds.[^1][^2]
 - The community still argues over the stock 50E chemistry: veteran Weped FS riders log 240 A peaks with minimal sag after >10 000 km, yet tuners warn the cells only behave when deployed in large parallel groups and prefer 40T/P42A for high-discharge projects.[^3]

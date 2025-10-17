@@ -1,5 +1,22 @@
 # Segway Platform Dossier
 
+## Overview
+
+Segway produces a range of electric scooters from entry-level commuters to sport platforms, with the G30 (Ninebot Max) and GT-series representing the most popular upgrade platforms. This brand dossier covers Segway/Ninebot models including the G30, GT1/GT2/GT3, P100, C80, F-series, and upcoming ST-series, examining stock configurations, upgrade potential, common issues, and best practices. Segway platforms offer stable geometry and good parts availability, making them solid foundations for VESC conversions.
+
+## What You'll Learn
+
+- Model comparison and platform selection
+- Stock electrical architectures and upgrade paths
+- G30 (Max) VESC conversion considerations
+- GT-series mechanical limitations and fixes
+- Rental frame recovery and reconditioning
+- C80 seated platform for high-capacity builds
+- Common failure points and reinforcement strategies
+- When Segway platforms justify their popularity
+
+# Segway Platform Dossier
+
 - Segway's G- and GT-series frames still anchor the community's "minimum viable" commuter and sport builds thanks to stable geometry, roomy decks, and a deep spare-parts ecosystem, but every chassis demands reinforcement checks around stems, braces, and controller mounts before accepting more power.[^1][^2]
 - North American shoppers still treat the Xiaomi Pro 2 and Segway G30 as the entry-level commuter floor; Segway F-series and supermarket clones arrive with weak frames, sensorless motors, and limited spares that rarely justify upgrades.[^1]
 - GT-class scooters ship with a 14 S 12 P Lishen pack, single-MCU 24‑FET controller, 10 AWG phase leads, and adjustable suspension hardware—good bones that tolerate 70 km/h stock and 100 km/h+ once packs, bearings, and stem hardware are upgraded, yet stem bearings, axle machining, shock packaging, and deck cooling must be addressed up front.[^3][^4][^5][^6][^gt_shock][^gt_teardown]
@@ -8,6 +25,36 @@
 - Segway's seated C80 platform and forthcoming ST line show the brand stretching into moped territory: C80 conversions already hide 9 kWh packs and 6–7 kW charging, while the ST1 keeps a straight fork for ~40–50 km/h commuters and the ST2 steps to a 72 V drivetrain aiming near 85 km/h with factory hydraulics.[^11][^12][^13]
 - For Ninebot Max builds, Denis Yurev's crew now steers riders toward a single 13 S pack on the stock motor paired with Rita/Happy BMS current logging instead of chasing dual hubs—quality pneumatics and Monorim + DNM suspension upgrades keep 50 km/h conversions stable while foam "solid" tires are blamed for magnet failures.[^new-13s][^new-suspension]
 - Fleet SNSC 2.3 frames are drying up as operators pivot to Okai hardware, so builders keen on rental-grade donors are scouting Brussels, Düsseldorf, and bulk fleet deals before stocks disappear.[^4]
+
+
+## 🏆 Why Choose Segway/Ninebot?
+
+✅ **Parts availability**: Best aftermarket support
+✅ **Stable geometry**: Proven commuter platform
+✅ **VESC documentation**: Extensive conversion guides
+✅ **Entry-level friendly**: G30 is beginner-friendly
+
+## 📋 Platform Comparison
+
+| Model | Stock Pack | Best For | VESC Difficulty | Max Voltage |
+|-------|------------|----------|-----------------|-------------|
+| G30 (Max) | 36V, 551Wh | Commuter base | ⭐ Easy | 13S (48V) tested |
+| P100 | 52V, 1.2kWh | Longer range | ⭐⭐ Medium | 16S possible |
+| GT1/GT2 | 60V, dual hub | Performance | ⭐⭐⭐ Complex | 20S+ |
+| C80 (seated) | 60V+ | High capacity | ⭐⭐⭐⭐ Advanced | 24S tested |
+
+💡 **Pro Tip**: The G30 is the most documented VESC conversion platform. Start here for your first build.
+
+## ⚠️ Critical G30 Warnings
+
+🔴 **Foam tires shake magnets loose** - Switch to pneumatic
+🔴 **Frame welds crack under overload** - Reinforce stem
+🔴 **Stock controller mount is weak** - Add bracing
+
+## 🔧 Related Brand Dossiers
+
+- [VSETT Scooters](vsett.md) - Performance alternative  
+- [Denis Yurev Workshop](denis_yurev_workshop.md) - Rita battery expansion for Xiaomi/Segway
 
 ## Platform Map
 

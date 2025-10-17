@@ -1,5 +1,21 @@
 # 📌 Ultimate In-Depth VESC Parameter Guide
 
+
+## Overview
+
+This comprehensive parameter reference explains every significant VESC configuration setting with real-world context and tuning guidance. Understanding these parameters enables precise controller tuning, troubleshooting configuration issues, and optimizing performance for specific applications. Each parameter includes definition, practical insights, modification guidelines, and potential pitfalls.
+
+## What You'll Learn
+
+- Complete VESC parameter definitions
+- When and how to modify each setting
+- Real-world tuning strategies
+- Common configuration mistakes
+- Parameter interaction effects
+- FOC vs BLDC mode differences
+- Current, voltage, and thermal limits
+- Observer and sensorless operation
+
 Use GitHub’s in-page search or the table of contents below to jump to the parameter you need.
 
 Structure for each parameter:
@@ -1609,3 +1625,12 @@ Ride Safely and enjoy the benefits of a finely tuned VESC-based controller. If s
 [^50]: Source: knowledge/notes/input_part013_review.md†L329-L337
 [^51]: Source: knowledge/notes/input_part012_review.md†L423-L431
 [^52]: Source: knowledge/notes/input_part005_review.md†L202-L214
+
+## 🔧 Related Guides
+
+- [Controller Setup](controller_setup.md) - Initial VESC configuration
+- [Motor Controller Tuning](motor_controller_tuning.md) - Progressive tuning workflow
+- [Battery Current Tuning](battery_current_tuning.md) - Current limit configuration
+- [Field-Weakening Playbook](field-weakening-playbook.md) - Advanced FW tuning
+- [Motor Configuration](motor_configuration.md) - Motor-specific settings
+- [In-Depth VESC Q&A](in-depth-vesc-qna.md) - Common VESC questions answered

@@ -1,6 +1,28 @@
 # Smart BMS Integration Handbook
 
-## TL;DR
+## Overview
+
+Smart BMS selection and integration is critical for safe, reliable battery operation on electric scooters. This guide compares major BMS families (JK, JBD/LLT, ANT, Daly), covers installation procedures, balancing strategies, and common failure modes. Understanding BMS capabilities and limitations helps you choose appropriate hardware and avoid dangerous failures.
+
+## What You'll Learn
+
+- BMS family comparison (JK, JBD/LLT, ANT, Daly)
+- Active vs passive balancing trade-offs
+- Proper sizing for voltage and current requirements
+- Installation and commissioning procedures
+- Charge FET and discharge FET management
+- Balancing configuration and monitoring
+- Common BMS failures and prevention
+- When to choose each BMS type
+
+## 🔧 Related Guides
+
+- [Battery Pack Design](battery_pack_design.md) - Cell selection and pack architecture
+- [DIY Battery Sourcing & Welding](diy-battery-sourcing-and-welding.md) - Building custom packs
+- [Battery Current Tuning](battery_current_tuning.md) - Setting safe discharge/regen limits
+- [Power Distribution](power_distribution.md) - Wiring from BMS to controller
+
+## Key Principles
 
 - Oversize protection hardware and choose the right architecture for the pack: JK active-balancing boards bring dual 7 AWG busbars, 1 A or 2 A shuttling variants, and remote toggles, but recent self-burn reports push installers toward JBD/LLT or ANT units when decks are cramped or uptime is critical.[^1][^1][^2][^3]
 - Oversize protection hardware and choose the right architecture for the pack: JK active-balancing boards bring dual 7 AWG busbars, per-channel charge/discharge/balance toggles, and harness-resistance telemetry while still leaving room for GPS/4G trackers once rewired with silicone pigtails, but recent self-burn reports push installers toward JBD/LLT or ANT units when decks are cramped or uptime is critical.[^2][^3][^1][^2][^3]

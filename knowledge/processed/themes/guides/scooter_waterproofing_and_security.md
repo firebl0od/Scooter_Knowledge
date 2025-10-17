@@ -1,4 +1,66 @@
-# Scooter Waterproofing & Security Field Manual
+# Scooter Waterproofing & Security
+
+## Overview
+
+Protecting electric scooters from water ingress and theft requires systematic sealing, proper component selection, and security measures. This guide covers field-tested waterproofing techniques, sealant recommendations, bearing upgrades, and anti-theft strategies. Whether commuting in rain or storing outdoors, these practices will help prevent corrosion, electrical failures, and theft while maintaining serviceability.
+
+## What You'll Learn
+
+- How to seal decks, charge ports, and cable penetrations
+- Recommended sealants and when to use each type
+- Bearing selection for wet conditions
+- Post-ride inspection and maintenance procedures
+- Controller and pack waterproofing strategies
+- Anti-theft hardware and security best practices
+- Emergency recovery procedures for water-damaged components
+
+## 💧 Why Waterproofing Matters
+
+🔴 **Water kills electronics**: Most controller and BMS failures trace to moisture ingress.
+
+## 📋 Quick Reference: Waterproofing Priority
+
+| Component | Priority | Method | Cost | Difficulty |
+|-----------|----------|--------|------|------------|
+| Controller | ⭐⭐⭐⭐⭐ Critical | Conformal coat + silicone | $20 | ⭐⭐ Easy |
+| BMS | ⭐⭐⭐⭐⭐ Critical | Conformal coat + heat shrink | $15 | ⭐⭐ Easy |
+| Connectors | ⭐⭐⭐⭐ High | Dielectric grease + heat shrink | $10 | ⭐ Very Easy |
+| Display | ⭐⭐⭐ Medium | Silicone gasket + seal | $5 | ⭐⭐ Easy |
+| Deck seams | ⭐⭐⭐ Medium | Silicone sealant | $10 | ⭐⭐ Easy |
+
+## 📋 Recommended Products
+
+| Product | Use Case | Application | Cost |
+|---------|----------|-------------|------|
+| MG Chemicals 422B | Conformal coat for PCBs | Spray or brush | ~$15 |
+| Dielectric grease | Connector weatherproofing | Thin layer | ~$5 |
+| Silicone sealant | Deck and cable entry sealing | Bead application | ~$8 |
+| Heat shrink tubing | Connector and wire protection | Heat gun | ~$10 |
+
+💡 **Pro Tip**: Apply conformal coat BEFORE your first wet ride. Fixing water damage is 10x harder than preventing it.
+
+## ⚠️ Common Mistakes
+
+🔴 **Over-coating**: Too much conformal coat can trap heat and cause failures
+🔴 **Sealing before testing**: Seal after confirming everything works
+🔴 **Forgetting cable entries**: Where cables enter the deck is the #1 water entry point
+🔴 **Cheap conformal coat**: Bargain coatings crack or peel quickly
+
+## 🔒 Security Best Practices
+
+💡 **Layered security**: No single method stops all theft - use multiple layers
+
+📋 **Security Hierarchy**:
+1. **Insurance** - Most cost-effective for expensive builds
+2. **GPS tracker** - Recovery if stolen (hidden mount essential)
+3. **U-lock + cable** - Deters casual thieves
+4. **Alarm** - Audible deterrent
+5. **Hidden kill switch** - Prevents joy-riding
+
+## 🔧 Related Guides
+
+- [Daly BMS Waterproofing](daly-bms-waterproofing.md) - Specific BMS moisture recovery
+- [VESC ADC Accessory Integration](vesc-adc-accessory-integration.md) - Connector weatherproofing
 
 ## Weatherproof the Chassis Before the Storm
 

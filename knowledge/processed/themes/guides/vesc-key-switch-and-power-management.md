@@ -13,9 +13,17 @@ VESC controllers require proper power management understanding to implement safe
 - Anti-spark system requirements
 - BMS integration for power control
 
-## Critical Safety Warning
 
-> **⚠️ DANGER**: Improper key switch implementation can cause:
+## 🔧 Related Guides
+
+- [Power Distribution](power_distribution.md) - Wiring and connector sizing
+- [VESC Accessory Power](vesc-accessory-power-and-display-integration.md) - Accessory power budgets
+- [Controller Setup](controller_setup.md) - Initial VESC configuration
+- [Smart BMS Integration](smart-bms-integration-handbook.md) - BMS-based power control
+
+## ⚠️ Critical Safety Warning
+
+> **🔥 DANGER**: Improper key switch implementation can cause:
 > - Switch explosions
 > - Full-throttle runaways
 > - Controller damage

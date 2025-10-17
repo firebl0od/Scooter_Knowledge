@@ -1,6 +1,73 @@
-# Parallel Battery & Regen Integration Manual
+# Parallel Battery & Regen Integration
 
-## TL;DR
+## Overview
+
+Running multiple battery packs in parallel on electric scooters can double range and power capacity, but requires careful voltage matching, proper BMS configuration, and conservative regen settings. This guide covers field-tested practices for safely paralleling packs while maintaining regenerative braking functionality. Whether adding an external battery or running dual internal packs, these techniques will help you avoid common failures and optimize performance.
+
+## What You'll Learn
+
+- How to safely parallel battery packs with matching voltages
+- Why ideal diodes cause problems and should be avoided
+- Proper regen current budgeting across multiple packs
+- BMS configuration requirements for parallel operation
+- Troubleshooting common issues with parallel pack setups
+- Hardware selection (connectors, fuses, wiring)
+
+## ⚡ Parallel Pack Philosophy
+
+⚠️ **Critical**: Regen with parallel packs requires careful BMS and current management to avoid cell damage.
+
+## 📋 Parallel Pack Configurations
+
+| Config | Total Capacity | BMS per Pack | Regen Strategy | Complexity |
+|--------|---------------|--------------|----------------|------------|
+| Single large pack | High | Single BMS | Simple | ⭐⭐ Easy |
+| 2x parallel (matched) | High | BMS per pack | Balanced regen | ⭐⭐⭐ Medium |
+| 2x parallel (Rita-style) | High | BMS per pack + adapter logic | Complex but safe | ⭐⭐⭐⭐ Hard |
+| 3+ parallel | Very high | BMS per pack | Expert only | ⭐⭐⭐⭐⭐ Expert |
+
+## ⚠️ Regen Risks with Parallel Packs
+
+🔴 **SOC mismatch**: Packs at different voltages fight each other
+🔴 **Current imbalance**: One pack takes all regen current
+🔴 **BMS false protection**: BMS cuts off during regen, causing voltage spike
+🔴 **Cell overcharge**: Weak cells in one pack overcharge while strong pack is fine
+
+## 📋 Safe Regen Configuration
+
+| Parameter | Single Pack | Parallel Packs | Why Different |
+|-----------|-------------|----------------|---------------|
+| Regen current | -10A to -15A | -5A to -8A | Spread across packs unevenly |
+| Cutoff start | 4.15V/cell | 4.10V/cell | Prevent weak pack overcharge |
+| Cutoff end | 4.20V/cell | 4.15V/cell | Safety margin for imbalance |
+| BMS regen rating | Match controller | 2x controller regen | One BMS may see full current |
+
+💡 **Pro Tip**: Test regen with fully charged packs separately first. If one trips BMS protection, it's not suitable for parallel regen.
+
+## 📋 Parallel Pack Checklist
+
+Before parallel connection:
+
+✅ **Matching Requirements**:
+- [ ] Cell chemistry identical (same model, manufacturer)
+- [ ] Pack voltage within 0.1V of each other
+- [ ] Internal resistance within 10% (measure with load test)
+- [ ] BMS regen current rating adequate
+- [ ] Both packs same age and cycle count (ideally)
+
+✅ **Electrical Safety**:
+- [ ] Blocking diodes if using different chemistries (NOT recommended)
+- [ ] Fuses on each pack's positive line
+- [ ] Ability to disconnect packs individually
+- [ ] Voltage monitoring on each pack
+
+## 🔧 Related Guides
+
+- [Rita External Battery Integration](rita-external-battery-integration.md) - Rita's parallel approach
+- [Battery Pack Design](battery_pack_design.md) - Pack sizing and selection
+- [Smart BMS Integration](smart-bms-integration-handbook.md) - BMS configuration
+
+## Key Safety Principles
 
 - Match pack voltages before paralleling and avoid ideal diodes; real-world tests on 17 S/16 S stacks caused throttle cut-outs and offered no regen benefits compared with direct, voltage-matched links.[^1][^2]
 - Treat regen as a controller- and battery-limited budget: split braking current across packs, keep the combined limit within both packs’ safe charge rates, and raise BMS regen ceilings (e.g., 100 A on JBD units) so the controller does not dump energy into MOSFETs instead.[^3][^4]

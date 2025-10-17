@@ -1,10 +1,38 @@
 # 🏆 The Ultimate In-Depth VESC Q&A
 
+## Overview
+
+This comprehensive Q&A addresses hundreds of common and advanced questions about VESC controllers for electric scooters. Drawing from thousands of lines of community knowledge and real-world experience, it provides detailed answers on setup, tuning, troubleshooting, and optimization. Use the searchable format to quickly find solutions to specific problems.
+
+## What You'll Learn
+
+- Answers to 100+ VESC configuration questions
+- Setup and commissioning procedures
+- Current limit tuning strategies
+- FOC vs BLDC mode selection
+- Sensorless operation and HFI
+- Field weakening and MTPA
+- Thermal management techniques
+- BMS integration best practices
+- Troubleshooting common issues
+- Advanced parameter tuning
+
 Below is a massive Q&A covering a wide array of topics around VESC-based controllers.
   - ranging from beginner-level queries to advanced technical discussions. It draws on the 3000+ lines of chat knowledge, real-world usage, and the official VESC parameter descriptions.
 
-Use the collapsible sections below to jump straight to the answers that matter most to you.
+## 💡 How to Use This Q&A
 
+💡 **Pro Tip**: Use Ctrl+F (Cmd+F on Mac) to search for keywords related to your specific issue. Most answers include practical examples and field-tested values.
+
+## 🔧 Related Guides
+
+- [In-Depth VESC Parameter Guide](in-depth-vesc-parameter-guide.md)
+- [Controller Setup](controller_setup.md)
+- [Motor Controller Tuning](motor_controller_tuning.md)
+- [Field Weakening Playbook](field-weakening-playbook.md)
+- [Battery Current Tuning](battery_current_tuning.md)
+
+Use the collapsible sections below to jump straight to the answers that matter most to you.
 ## Table of Contents
 
 ### Part 1 – Core Topics (Q1–30)

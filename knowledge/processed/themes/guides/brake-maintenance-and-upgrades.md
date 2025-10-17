@@ -1,6 +1,42 @@
 # Brake Maintenance & Upgrade Guide
 
-## TL;DR
+## Overview
+
+Proper brake maintenance and strategic upgrades are critical for safe high-speed scooter operation. This guide covers hydraulic brake bleeding, pad maintenance, caliper upgrades, rotor sizing, and the integration of mechanical brakes with regenerative braking systems. Understanding brake system limitations and maintenance requirements prevents failures during emergency stops.
+
+## What You'll Learn
+
+- Hydraulic brake bleeding procedures (Magura, Shimano, Hope)
+- Four-piston caliper benefits and installation
+- Rotor sizing and clearance considerations
+- Pad selection and wear monitoring
+- Mechanical brake backup requirements
+- Regen braking integration best practices
+- Thermal management for high-power stops
+- Common brake failures and prevention
+
+## ⚠️ Safety First
+
+🔴 **Critical**: Always test brakes in a safe environment before riding at speed. Brake failure at high speed can be fatal.
+
+## 📋 Quick Reference: Brake Upgrades by Performance Level
+
+| Build Type | Front Brake | Rear Brake | Rotor Size | Priority |
+|------------|-------------|------------|------------|----------|
+| Stock commuter | Mechanical drum | Mechanical drum | Stock | Keep one mechanical active |
+| Mid-power (5-10kW) | Hydraulic 2-piston | Drum or hydraulic | 160mm | Upgrade front first |
+| High-power (10-20kW) | Hydraulic 4-piston | Hydraulic 2-piston | 180-203mm | Dual hydraulic required |
+| Race (20kW+) | Hydraulic 4-piston | Hydraulic 4-piston | 203mm+ | Full race setup |
+
+💡 **Pro Tip**: The front brake handles 70-80% of stopping force. Upgrade it before the rear.
+
+## 🔧 Related Guides
+
+- [Xiaomi Tire & Brake Upgrades](xiaomi_tire_brake_upgrade_notes.md) - Platform-specific brake options
+- [High-Power VESC Reliability](high-power-vesc-scooter-reliability-guide.md) - Matching brakes to power
+- [Motor Controller Tuning](motor_controller_tuning.md) - Regen braking configuration
+
+## Key Safety Principles
 
 - Hydraulic brake systems demand proper bleeding technique (level levers, flick hoses to vent micro-bubbles, patient lever cycling) and proactive seal maintenance to avoid spongy feel or sudden failures during high-speed stops.[^bleed-technique]
 - Four-piston calipers provide superior thermal mass and stopping power for high-performance builds but require careful rotor sizing (180–203 mm) and clearance checks to avoid frame interference.[^four-piston]

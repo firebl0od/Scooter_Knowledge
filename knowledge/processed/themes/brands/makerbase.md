@@ -1,6 +1,52 @@
-# Makerbase Controllers Brand Dossier
+# Makerbase Controllers
 
-## TL;DR
+## Overview
+
+Makerbase produces budget VESC controllers that offer good value for moderate-power builds, but they require quality control inspection and thermal upgrades to achieve reliability. This brand dossier covers Makerbase's lineup (75100, 75200, 84100 HP, 60100 HP), real-world current limits, common quality issues, and when they're appropriate vs. premium controllers. Understanding Makerbase's strengths and weaknesses helps you deploy them successfully on appropriate builds.
+
+## What You'll Learn
+
+- Makerbase model comparison and capabilities
+- Quality control issues (solder, thermal paste, shunt calibration)
+- Real vs. rated current limits by model
+- Required thermal management and repasting
+- Voltage and regen limitations
+- When Makerbase makes sense vs. Spintend/Flipsky
+- Common failures and prevention strategies
+
+## 💰 Why Choose Makerbase?
+
+✅ **Budget-friendly**: ~€75 for aluminum 75100
+✅ **Adequate performance**: Works well at moderate currents
+⚠️ **QC issues**: Solder, thermal paste, shunt calibration problems
+⚠️ **Limited headroom**: Caps around 70A battery / 180A phase
+
+## ⚠️ Critical QC Steps Before Use
+
+🔴 **ALWAYS inspect before first power-up:**
+
+1. **Open the case** - Check for solder balls and shorts
+2. **Repaste thermal interface** - Factory paste is often watery
+3. **Test shunt calibration** - Some boards have incorrect current sensing
+4. **Check firmware version** - Older firmware has known bugs
+
+💡 **Pro Tip**: Budget 1-2 hours for inspection and rework on every new Makerbase controller.
+
+## 📋 Quick Model Comparison
+
+| Model | Voltage | Safe Battery | Safe Phase | Best Use |
+|-------|---------|-------------|------------|----------|
+| 75100 Alu | 48-84V (≤22S) | 60-70A | 160-180A | Budget dual CAN builds |
+| 84100 HP | 60-84V (≤20S) | 60-80A | 150-180A | Mid-power singles |
+| 60100 HP | ≤15S | 50A | - | Commuters keeping OEM dash |
+
+## 🔧 Related Brand Dossiers
+
+- [Spintend Controllers](spintend.md) - More reliable alternative
+- [Flipsky Controllers](flipsky.md) - Similar budget option
+- [MakerX Controllers](makerx.md) - Better QC, similar price range
+
+## Key Principles
 
 - Aluminum-PCB 75100 boards remain the go-to budget dual-controller option for 60 V commuters, but they only stay reliable when capped around 70 A battery / 170–180 A phase and kept below ≈22 S; bumping currents higher has popped freshly installed units in a single launch. [^1][^2][^3]
 - The refreshed “Pro” 75100 revision finally ships with AWG10 leads, Bluetooth, and tidier thermistors, yet it still omits a real enable pin—plan external latching or contactors despite the nicer harness.[^75100-pro-refresh]

@@ -1,6 +1,43 @@
-# NAMI Electric Scooters Brand Dossier
+# NAMI Electric Scooters
 
-## TL;DR
+## Overview
+
+NAMI scooters provide robust dual-motor platforms with good build quality, but they require controller upgrades and thermal management improvements to realize their potential. This brand dossier covers NAMI GT2, Viper, and related models, examining stock configurations, upgrade paths, suspension requirements, and real-world performance limits. Understanding these platforms helps you plan cost-effective upgrades without exceeding thermal or mechanical limits.
+
+## What You'll Learn
+
+- Stock motor and battery configurations by model
+- Thermal limits for single vs. dual-motor operation
+- Controller upgrade paths (VESC, Makerbase, Spintend)
+- Suspension tuning and damper selection
+- High-power builds (22-26S, 35-40kW targets)
+- Chassis reinforcement and frame variations
+- When NAMI platforms make sense vs. alternatives
+
+## 🏆 Why Choose NAMI?
+
+✅ **Quality build**: Better than budget brands
+✅ **Dual-motor ready**: Good thermal management with two controllers
+✅ **Suspension**: Real dampers, not toys
+⚠️ **Cost**: Premium pricing for premium hardware
+
+## ⚠️ Critical Thermal Limits
+
+| Configuration | Safe Battery Current | Thermal Behavior |
+|---------------|---------------------|------------------|
+| Single motor uphill | ~40°C+ | Can overheat |
+| Dual motor uphill | ~40°C max | Good thermal sharing |
+| Stock 40Ah pack | 135A limit | Avoid sustained >135A |
+
+🔴 **Warning**: Stock LG M50LT cells overheat above ~135A. Plan upgrades for higher power.
+
+## 🔧 Related Brand Dossiers
+
+- [VSETT Scooters](vsett.md) - Performance comparison
+- [Weped Scooters](weped.md) - Premium alternative
+- [Tronic Controllers](tronic.md) - Controller upgrade option
+
+## Key Platform Characteristics
 
 - Dual-motor load sharing keeps Tronic 250-equipped NAMI builds under ~40 °C on steep climbs, while single-drive hill assaults crest ~60 °C—treat high-power setups as two-controller platforms to stay within thermal margins.[^1]
 - The stock 40 Ah module’s eight-way LG M50LT parallel pack is happiest below ~135 A; community pushes toward 200 A/310 A phase quickly overheat hubs and batteries unless the pack is rebuilt and monitored closely.[^2]

@@ -1,5 +1,21 @@
 # Battery, Phase & Regen Current Mastery
 
+
+## Overview
+
+Properly configuring battery, phase, and regen current limits is critical for controller and battery longevity while maximizing performance. This guide provides a systematic workflow for tuning current limits on VESC-based scooters, covering prerequisites, step-by-step procedures, and common failure modes. Understanding the relationship between these currents and how to balance them prevents the majority of electrical failures.
+
+## What You'll Learn
+
+- Difference between battery current, phase current, and motor current
+- How to set safe current limits for your specific hardware
+- BMS interaction and avoiding protection trips
+- Regen current configuration and thermal considerations
+- Connector and wiring requirements for different current levels
+- Motor detection and parameter validation
+- Common current-related failures and solutions
+- Progressive tuning methodology
+
 ## Why This Guide Exists
 
 Taming current limits is the difference between a scooter that rips for years and one that torches controllers, packs, or riders. The chat logs surface dozens of real-world failures.

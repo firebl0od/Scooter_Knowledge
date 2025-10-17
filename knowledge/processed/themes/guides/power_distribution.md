@@ -13,6 +13,38 @@ Proper power distribution is critical for safety, performance, and reliability i
 - Lighting and accessory power distribution
 - Safety considerations and common failures
 
+## ⚡ Critical Safety Principles
+
+🔴 **Undersized wiring causes fires**. Always size for peak current + safety margin.
+
+## 📋 Quick Reference: Wire Gauge by Current
+
+| Current Range | Minimum AWG | Recommended AWG | Connector Type |
+|--------------|-------------|-----------------|----------------|
+| 0-30A | 14 AWG | 12 AWG | XT60 |
+| 30-60A | 12 AWG | 10 AWG | XT90, AS150 |
+| 60-100A | 10 AWG | 8 AWG | QS8, AS150 |
+| 100-200A | 8 AWG | 6 AWG | QS8, Anderson |
+| 200-350A | 6 AWG | 4 AWG | QS10, Anderson |
+
+💡 **Pro Tip**: Go one size larger than minimum for heat management and longevity.
+
+## 📋 Connector Current Ratings (Real-World)
+
+| Connector | Rated | Conservative Real-World | Notes |
+|-----------|-------|------------------------|-------|
+| XT30 | 30A | 20A continuous | Commuter use only |
+| XT60 | 60A | 40A continuous | Mid-power builds |
+| XT90 | 90A | 60A continuous | Common for battery mains |
+| AS150 | 150A | 100A continuous | Anti-spark available |
+| QS8 | 200A+ | 150A continuous | Heavy-duty, good contact |
+
+## 🔧 Related Guides
+
+- [Battery Current Tuning](battery_current_tuning.md) - Determining current requirements
+- [VESC ADC Accessory Integration](vesc-adc-accessory-integration.md) - Low-current signal wiring
+- [Smart BMS Integration](smart-bms-integration-handbook.md) - BMS to controller wiring
+
 ## Cable Management Fundamentals
 
 ### Voltage Drop Issues

@@ -1,5 +1,48 @@
 # Xiaomi High-Voltage Upgrade Checklist
 
+
+## Overview
+
+Upgrading Xiaomi M365/Pro-class scooters from 36V (10S) to higher voltages (12S, 13S, or beyond) requires careful planning of electrical, mechanical, and firmware modifications. This step-by-step checklist covers decision criteria, hardware inspection, component upgrades, and safety considerations. Higher voltage brings speed gains but demands proportional improvements in cooling, braking, and structural reinforcement.
+
+## What You'll Learn
+
+- When higher voltage is worth the complexity and cost
+- Practical voltage limits for stock vs. upgraded hardware
+- Required hardware modifications (controller, BMS, wiring)
+- Firmware configuration for higher voltages
+- Mechanical reinforcement requirements
+- Cooling and thermal management needs
+- Braking upgrades to match increased speed
+- Common failure modes and how to avoid them
+
+## ⚡ Voltage Upgrade Overview
+
+Moving from 36V (10S) to higher voltages requires systematic component upgrades:
+
+## 📋 Voltage Tier Upgrade Requirements
+
+| Target Voltage | Series Count | BMS | Controller | Motor | Difficulty |
+|----------------|--------------|-----|------------|-------|------------|
+| 48V | 13S | Upgrade | VESC required | Stock OK (short term) | ⭐⭐ Medium |
+| 60V | 16S-17S | Upgrade | VESC required | Upgrade recommended | ⭐⭐⭐ Hard |
+| 72V+ | 20S+ | Upgrade | VESC required | Upgrade required | ⭐⭐⭐⭐ Expert |
+
+## ⚠️ Critical Warnings
+
+🔴 **Stock motors burn quickly on 13S+** - Budget motor upgrade
+🔴 **Dashboard requires workarounds** - Rita or VESC display needed
+🔴 **Brake cutoff complex** - Requires additional wiring
+🔴 **Connector ratings** - XT30 inadequate for high voltage
+
+💡 **Pro Tip**: Start with 13S (48V) to learn the system before jumping to 20S builds.
+
+## 🔧 Related Guides
+
+- [Ninebot G2 Max VESC Conversion](ninebot-g2-max-vesc-conversion.md) - Similar platform
+- [Rita External Battery Integration](rita-external-battery-integration.md) - Alternative to full conversion
+- [Controller Setup](controller_setup.md) - VESC configuration basics
+
 A step-by-step reference for converting Xiaomi M365/Pro-class scooters from 36 V (10S) systems to 12S or 13S configurations without sacrificing reliability.
 
 ## 1. Decide Whether More Voltage Is Worth It

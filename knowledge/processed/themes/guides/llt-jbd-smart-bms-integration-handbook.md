@@ -1,5 +1,18 @@
 # LLT/JBD Smart BMS Integration Handbook
 
+## Overview
+
+LLT (also marketed as JBD) smart BMS boards are the most popular choice for electric scooter battery management, offering Bluetooth connectivity, configurable limits, and compact packaging at reasonable prices. This guide covers selection, installation, configuration, and troubleshooting of LLT/JBD smart BMS units for scooter applications. Understanding these boards' capabilities and limitations is essential for safe, reliable battery integration.
+
+## What You'll Learn
+
+- Why LLT/JBD boards are the community standard
+- Which board models suit different voltage and current requirements
+- Pre-installation planning for mechanical packaging
+- Configuration best practices (discharge limits, regen settings, temperature protection)
+- Troubleshooting common issues (charge FET trips, balance problems)
+- When to choose alternatives like JK or ANT BMS
+
 ## TL;DR
 
 - LLT/JBD smart boards remain the community’s compact, configurable baseline: integrated Bluetooth, programmable limits, and a 20 A soft-start pre-charge protect controllers without consuming deck space.[^1]

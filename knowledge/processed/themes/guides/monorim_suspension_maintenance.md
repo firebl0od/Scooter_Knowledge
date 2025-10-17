@@ -1,6 +1,57 @@
-# Monorim Suspension & Hardware Field Manual
+# Monorim Suspension & Hardware Guide
 
-## TL;DR
+## Overview
+
+Monorim produces popular aftermarket suspension kits and performance upgrades for Xiaomi, Ninebot, and other compact scooters. This guide covers installation, maintenance, and common issues with Monorim front forks, rear shocks, and related hardware. Understanding these upgrades' limitations and proper setup procedures is essential for safe operation, especially on high-power builds. Quality suspension dramatically improves ride comfort and handling, but requires careful assembly and regular maintenance.
+
+## What You'll Learn
+
+- Recommended suspension combinations (forks, shocks, tires)
+- When to upgrade from budget to premium suspension arms
+- Proper installation procedures and common assembly mistakes
+- Hardware quality issues and necessary upgrades
+- Spring and shock tuning for different rider weights
+- Compatibility considerations for motor and brake upgrades
+- Maintenance requirements and spare parts to stock
+
+## 🔧 Suspension Basics
+
+💡 **Key principle**: Suspension setup is personal - what works for one rider won't work for another.
+
+## 📋 Quick Reference: Spring Setup by Rider Weight
+
+| Rider Weight | Front Spring Rate | Rear Spring Rate | Sag Target |
+|--------------|------------------|------------------|------------|
+| <60 kg | Softer (stock or -10%) | Softer (stock or -10%) | 25-30% |
+| 60-80 kg | Stock | Stock | 20-25% |
+| 80-100 kg | Stiffer (+10-20%) | Stiffer (+10-20%) | 20-25% |
+| >100 kg | Stiffer (+20-30%) | Stiffer (+20-30%) | 15-20% |
+
+💡 **Pro Tip**: Measure sag with rider gear on. Full gear adds 5-10 kg.
+
+## 📋 Maintenance Schedule
+
+| Task | Frequency | Difficulty | Time | Critical? |
+|------|-----------|------------|------|-----------|
+| Visual inspection | Weekly | ⭐ Easy | 2 min | ✅ Yes |
+| Clean stanchions | Monthly | ⭐ Easy | 10 min | ✅ Yes |
+| Check preload | Monthly | ⭐⭐ Medium | 15 min | ✅ Yes |
+| Oil change | 6 months / 1000km | ⭐⭐⭐ Hard | 1 hour | ✅ Yes |
+| Seal replacement | Annually / 2000km | ⭐⭐⭐⭐ Expert | 2 hours | ✅ Yes |
+
+## ⚠️ Common Mistakes
+
+🔴 **Too much preload** - Makes ride harsh, damages seals
+🔴 **Wrong oil viscosity** - Causes either harsh or mushy feel
+🔴 **Dirty stanchions** - Scratches seals, causes leaks
+🔴 **Skipping seal lubrication** - Premature seal wear
+
+## 🔧 Related Guides
+
+- [Chassis Fitment](chassis_fitment.md) - Suspension mounting and compatibility
+- [Scooter Diagnostic Toolkit](scooter_diagnostic_toolkit.md) - Tools for suspension work
+
+## Core Principles
 
 - **Build around quality pneumatics and matched shocks.** Pair Monorim front forks with DNM or EXA dampers and a proper rear shock; foam “solid” tires and mismatched hardware shake magnets loose above ~45 km/h.[^1][^2]
 - **Know when to upgrade arms.** Budget Monorim castings keep costs low but flex under 3 kW loads; European-made Konyk or Dereza arms cost about €100 per end yet deliver better travel and durability for <60 km/h builds that need reliable torque-arm integration.[^3]

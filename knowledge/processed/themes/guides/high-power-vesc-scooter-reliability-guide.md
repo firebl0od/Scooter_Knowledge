@@ -2,6 +2,44 @@
 
 A distilled playbook for keeping race-level VESC builds dependable when running 15S–22S packs, 200 A+ phase currents, and long-range commuting setups.
 
+## Overview
+
+This reliability guide distills field experience from high-power VESC scooter builds running 15-30S packs and 200-500A phase currents. It covers component selection, build planning, common failure modes, and maintenance procedures for race-level and long-range setups. Following these practices maximizes reliability while pushing performance boundaries.
+
+## What You'll Learn
+
+- Controller selection for high-power applications
+- Component sizing and thermal management
+- Common failure modes and prevention
+- Build planning and validation procedures
+- Maintenance and inspection routines
+- When to upgrade components
+- Safety considerations for high-speed builds
+- Real-world performance benchmarks
+
+## ⚡ High-Power Philosophy
+
+⚠️ **Critical**: This guide is for builds exceeding 10kW continuous. Below 10kW, standard VESC practices apply.
+
+## 📋 Quick Reference: Controller Power Tiers
+
+| Controller Class | Real Continuous | Phase Current | Best Use | QC Risk |
+|-----------------|----------------|---------------|----------|---------|
+| Makerbase/Flipsky Aluminum | ≤5kW | ≤150A | Budget/interim | ⭐⭐ High |
+| Spintend Ubox 85-series | 8-12kW | 200-300A | Daily performance | ⭐⭐⭐ Medium |
+| 3Shul C350/CL350 | 12-15kW | 300-400A | Race/reliability | ⭐⭐⭐⭐ Low |
+| BRIESC/Nucular 24F | 15-20kW+ | 400-500A | Track/extreme | ⭐⭐⭐⭐⭐ Very Low |
+
+💡 **Pro Tip**: Always test new controllers at 50% rated current for 30 minutes before pushing limits. Log MOSFET temps via CAN.
+
+## 🔧 Related Guides
+
+- [Controller Setup](controller_setup.md)
+- [Motor Configuration](motor_configuration.md)
+- [Battery Current Tuning](battery_current_tuning.md)
+- [Motor Cooling and Thermal Management](motor_cooling_and_thermal_management.md)
+- [Field Weakening Playbook](field-weakening-playbook.md)
+
 ## 1. Build Planning & Component Selection
 
 - **Controller tiers:** Treat Makerbase/Flipsky aluminum-PCB boxes as interim ≤15 S 50 A solutions; high-power riders standardize on 3Shul C350/CL350, Ubox duals, or BRIESC units for thermal headroom and QC maturity.[^1][^2][^3]
