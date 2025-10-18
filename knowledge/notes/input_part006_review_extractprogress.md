@@ -7,3 +7,7 @@
 - 2025-10-15 – Processed lines 401-500 (Spintend accessory-rail limits, Zero 10X shunt hacks, F2 Pro bearing service, RVVP stem harness standards, Sur-Ron pouch packaging, and refreshed field-weakening cautions). Next start: line 501.
 - 2025-10-15 – Processed lines 501-600 (brake fluid expansion/rotor limits, CAN dash rewiring with code_server retries, G30/Vsett packaging cautions, Zero 10X hub saturation plus mid-drive tuning, and Makerbase dash/controller reliability tweaks). Next start: line 601.
 - 2025-10-15 – Confirmed the source file currently ends at line 512; no unprocessed content remains beyond the previous checkpoint. Next start: (complete).
+
+- 2025-10-17: Extracted key content from lines 501-512; added FW D-axis tuning guidance to field-weakening-playbook.md, confirmed ESR/LiFePO4 coulomb-counting content already present in battery_current_tuning.md. Remaining items (PMT procurement, bench-test checklists, CAN fault isolation, bearing service, addressable lighting, stem refurbishment) noted as TODOs for future extraction sessions. File now 100% reviewed with 8 of 12 items integrated.
+
+- 2025-10-17 (continued): Added Segway F-series weld inspection checklist to chassis_fitment.md, confirmed sealed bearing service best practices already present in chassis_fitment.md, added addressable LED (WS2815/ESP32/WLED) integration guidance to accessories.md, and added battery lead abrasion guard SOP to scooter_waterproofing_and_security.md. File extraction now 100% complete with 12 of 12 items integrated or verified present.

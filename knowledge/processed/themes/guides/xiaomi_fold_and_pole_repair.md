@@ -11,6 +11,35 @@ This guide covers diagnosis and repair of loose or failing folding mechanisms on
 - Material recommendations for lasting fixes
 - Troubleshooting accessory port issues after repair
 
+## 📋 Quick Reference: Repair Options
+
+| Method | Cost | Difficulty | Durability | When to Use |
+|--------|------|------------|------------|-------------|
+| Metal-filled epoxy | €10-20 | ⭐⭐ Medium | Good (1-2 years) | Quick fix, limited tools |
+| Mechanical collar reinforcement | €50-100 | ⭐⭐⭐⭐ Hard | Excellent (permanent) | Machine shop access, best fix |
+| OEM part replacement | €80-150 | ⭐⭐⭐ Medium | Excellent | If parts available (rare) |
+| Temporary threadlock | €5 | ⭐ Easy | Poor (weeks) | Emergency only |
+
+## ⚠️ Critical Safety Notes
+
+🔴 **Immediate Action**: Loose pole = steering failure risk—don't ride until fixed
+🔴 **No Overtightening**: Soft aluminum threads strip easily—mechanical fix required
+🔴 **Waterproof After**: Unsealed repairs corrode quickly—seal thoroughly
+🔴 **Full Cure Time**: Wait 24+ hours for epoxy cure before riding
+
+## 💡 Pro Tips
+
+- **Heat gun helps**: Gentle heat softens old epoxy for clean disassembly
+- **Wooden wedges**: Prevent aluminum damage during separation
+- **Document process**: Take photos for reinstallation reference
+- **Test before sealing**: Dry-fit everything before applying final waterproofing
+
+## 🔧 Related Guides
+
+- [Scooter Waterproofing & Security](scooter_waterproofing_and_security.md) - Sealing procedures
+- [Xiaomi Battery Maintenance](xiaomi_battery_maintenance.md) - General Xiaomi maintenance
+- [Xiaomi High Voltage Upgrade Checklist](xiaomi_high_voltage_upgrade_checklist.md) - Performance upgrades
+
 ## Understanding the Problem
 
 ### Common Symptoms

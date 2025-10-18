@@ -6,7 +6,14 @@ Happy BMS is a smart battery management system developed by Denis Yurev and Happ
 
 **Price**: ~€69 plus shipping (sold direct by Denis Yurev)
 
-## Quick Specifications
+## 💡 Why Choose Happy BMS?
+
+✅ **Coulomb Counting**: Embedded state-of-charge tracking
+✅ **Xiaomi Integration**: Native telemetry for stock dashboards
+✅ **Denis Quality**: Designed by community expert Happy Giraffe/Denis Yurev
+⚠️ **Trade-offs**: 44A current limit, large pack capacity readout issues
+
+## 📋 Quick Specifications
 
 | Feature | Specification |
 |---------|--------------|
@@ -16,6 +23,25 @@ Happy BMS is a smart battery management system developed by Denis Yurev and Happ
 | **Form Factor** | Compact Xiaomi-compatible PCB |
 | **Connectors** | XT30/XT60 harness options |
 | **Features** | Coulomb counting, Xiaomi telemetry, USB/UART app access |
+
+## ⚠️ Critical Happy BMS Warnings
+
+🔴 **44A Trip Point**: Not suitable for >3kW builds—trips after 1 second at 44A
+🔴 **60A Fuse Limit**: Hard limit at fuse—plan external contactors for high power
+🔴 **Large Pack Issues**: Display shows 0% with ~3Ah remaining—use voltage monitoring
+🔴 **32Ah Rating**: Works with larger packs but capacity display bottoms out early
+
+## 💡 Pro Tips
+
+- **Voltage monitoring**: Use pack voltage for range on >32Ah builds
+- **3kW limit**: Step up to LLT/JBD or ANT for higher power applications
+- **Coulomb counting value**: Best feature for accurate SoC on Xiaomi platforms
+- **Denis support**: Direct from designer—good for troubleshooting
+
+## 🔧 Related Brand Dossiers
+
+- [LLT/JBD Smart BMS](../guides/llt-jbd-smart-bms-integration-handbook.md) - Higher current alternative
+- [Denis Yurev Workshop](denis_yurev_workshop.md) - Designer's other products
 
 ## Key Features
 

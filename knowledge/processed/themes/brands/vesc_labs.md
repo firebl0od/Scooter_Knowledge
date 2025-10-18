@@ -12,6 +12,41 @@ In August 2025, VESC Labs (Vedder's team) launched their official high-voltage c
 - Limited field testing data so far
 - Community actively benchmarking against competitors
 
+## 💡 Why Choose VESC Labs?
+
+✅ **Official Hardware**: Direct from VESC creator Benjamin Vedder
+✅ **Documented Design**: STM32F4-based with open documentation
+✅ **Native Support**: Direct manufacturer support channel
+⚠️ **Trade-offs**: Premium pricing (~€530 for Duet), limited field data vs Chinese alternatives
+
+## 📋 Quick Product Lineup
+
+| Product | Voltage | Current | Price | Key Feature | Best For |
+|---------|---------|---------|-------|-------------|----------|
+| Maxim 120V | 120V | TBD | High | Official flagship | High-voltage racing |
+| VESC Duet | 100V | 150A/side | ~€530 | Integrated dual | Plug-and-play dual motor |
+| Smart BMS | Varies | Varies | TBD | Official BMS | Integrated VESC ecosystem |
+
+## ⚠️ Critical VESC Labs Notes
+
+🔴 **Premium Pricing**: ~€530 for Duet vs cheaper Chinese alternatives
+🔴 **Limited Field Data**: 2025 launch means few community builds yet
+🔴 **STM32F4**: Older MCU than some competitors—evaluate for your needs
+🔴 **Active Benchmarking**: Community still comparing vs Spintend/Tronic/3Shul
+
+## 💡 Pro Tips
+
+- **Official support**: Worth premium if you value direct manufacturer backing
+- **Documentation advantage**: Open design helps troubleshooting
+- **Wait for field data**: Consider delaying until more community builds validate performance
+- **Price comparison**: Evaluate against proven Spintend/Tronic options
+
+## 🔧 Related Brand Dossiers
+
+- [Spintend Controllers](spintend.md) - Established high-voltage alternative
+- [Tronic Controllers](tronic.md) - Another high-voltage option
+- [3Shul Controllers](3shul.md) - Premium racing controllers
+
 ## Product Line
 
 ### Maxim 120V (Single Controller)

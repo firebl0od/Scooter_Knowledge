@@ -4,6 +4,41 @@
 
 RFP produces aftermarket electric scooter controllers and custom chassis designs. They're particularly known for reliable daily-driver controllers and extended frames that accommodate larger battery packs and dual-controller setups.
 
+## 💡 Why Choose RFP?
+
+✅ **Set-and-Forget**: Reliable daily commuter controllers
+✅ **Extended Frames**: +15cm battery space vs stock Thunder
+✅ **Dual Controller Ready**: Accommodates Tronic Seven-class hardware
+⚠️ **Trade-offs**: Conservative performance focus, limited high-power field data
+
+## 📋 Quick Product Overview
+
+| Product | Key Feature | Best For | Price Point |
+|---------|-------------|----------|-------------|
+| RFP VESC Controller | Reliable daily-driver | Commuter builds | Mid-range |
+| Extended Frame | +15cm battery bay | Large packs, dual controllers | Premium |
+| Upgrade Path | Staged build support | 22S11P Eve 40PL capable | Flexible |
+
+## ⚠️ Critical RFP Notes
+
+🔴 **Conservative Tuning**: Controllers optimized for reliability over peak performance
+🔴 **Extended Frame Planning**: +15cm space enables serious builds—plan from start
+🔴 **Staged Approach**: Start conservative, validate each upgrade step
+🔴 **Limited High-Power Data**: 600A phase projections not yet field-proven
+
+## 💡 Pro Tips
+
+- **Daily reliability**: Best choice for riders prioritizing uptime over peak power
+- **Frame first**: Extended chassis worth investment if planning staged upgrades
+- **22S11P capable**: Frame accommodates serious battery capacity
+- **Dual controller space**: Plan Tronic Seven or similar class from beginning
+
+## 🔧 Related Brand Dossiers
+
+- [Tronic Controllers](tronic.md) - Controllers that fit RFP extended frame
+- [Minimotors Platforms](minimotors.md) - Base Thunder platform comparison
+- [Rage Mechanics](rage_mechanics.md) - Alternative custom frame option
+
 ## Product Line
 
 ### Controllers

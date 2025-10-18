@@ -4,6 +4,39 @@
 
 Briesc produces Italian-built VESC controllers for high-performance electric scooters. Their compact controllers are known for impressive power density, with some models running 150A battery / 350A phase in minimal packaging. They're particularly suited for tight deck installations where traditional larger controllers won't fit.
 
+## 💡 Why Choose Briesc?
+
+✅ **Italian Quality**: EU manufacturing with attention to detail
+✅ **Power Density**: 150A battery / 350A phase in compact form
+✅ **Thermal Headroom**: 55°C at rated load leaves room for cooling upgrades
+⚠️ **Trade-off**: No integrated Bluetooth—requires external BLE module
+
+## 📋 Quick Model Comparison
+
+| Model | Status | Battery Current | Phase Current | Voltage | Form Factor | Key Feature |
+|-------|--------|----------------|---------------|---------|-------------|-------------|
+| Standard Briesc | Production | 150A | 350A | ~20S | Compact | Tight-deck friendly |
+| 100/200 | Pre-production | 210A (tested) | 420A+ | Higher | Dual setup | Oil-cooled hub ready |
+
+## ⚠️ Critical Briesc Notes
+
+🔴 **No Built-in Bluetooth**: Budget for external BLE dongle or SmartDisplay
+🔴 **Pre-Production Models**: 100/200 needs serious thermal management for scooter use
+🔴 **Lab vs Real-World**: 900A phase lab test ≠ scooter-suitable configuration
+
+## 💡 Pro Tips
+
+- **External BLE required**: Plan for VESC BLE module or SmartDisplay integration
+- **Thermal margin good**: 55°C bench test means room for airflow improvements
+- **Compact advantage**: Fits where Spintend/Flipsky won't
+- **Wait for production**: Let 100/200 mature before high-power scooter builds
+
+## 🔧 Related Brand Dossiers
+
+- [Spintend Controllers](spintend.md) - Similar power class with BLE
+- [Ennoid Controllers](ennoid.md) - Alternative high-voltage option
+- [3Shul Controllers](3shul.md) - Premium racing controllers
+
 ## Product Line
 
 ### Standard Briesc Controller

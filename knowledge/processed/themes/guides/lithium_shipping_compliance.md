@@ -12,6 +12,35 @@ Shipping lithium batteries requires strict compliance with international regulat
 - Documentation and proper classification are mandatory
 - Penalties for violations can reach six figures
 
+## 📋 Quick Reference: Shipping Decision Matrix
+
+| Pack Size | Voltage | Best Method | Documentation | Cost | Risk Level |
+|-----------|---------|-------------|---------------|------|------------|
+| <100Wh | Any | Standard post (with declaration) | UN3481 label + MSDS | € Low | ⭐ Low |
+| 100-300Wh | <60V | Ground carrier (declared) | Full ADR/IATA + cert | €€ Medium | ⭐⭐ Medium |
+| >300Wh | Any | Professional freight only | Safety advisor required | €€€ High | ⭐⭐⭐⭐⭐ Very High |
+| >500Wh | >60V | Dangerous goods specialist | Full certification + testing | €€€€ Very High | 🔴 Critical |
+
+## ⚠️ Critical Compliance Warnings
+
+🔴 **Six-Figure Liability**: Fire on undeclared parcel = damages charged to sender
+🔴 **Criminal Penalties**: Intentional misdeclaration can result in prosecution
+🔴 **Insurance Void**: Undeclared batteries void all carrier insurance
+🔴 **Permanent Ban**: Carriers will blacklist repeat violators
+
+## 💡 Pro Tips
+
+- **Declare everything**: Even "small" 36V packs require documentation
+- **Use ground transport**: Air freight adds complexity and cost
+- **Get quotes first**: Professional freight often cheaper than you think for large packs
+- **Keep records**: Document all shipments for liability protection
+
+## 🔧 Related Guides
+
+- [Battery Pack Design](battery_pack_design.md) - Safe pack construction
+- [DIY Battery Sourcing & Welding](diy-battery-sourcing-and-welding.md) - Cell procurement
+- [Scooter Waterproofing & Security](scooter_waterproofing_and_security.md) - Pack protection
+
 ## Why Compliance Matters
 
 ### Legal Liability

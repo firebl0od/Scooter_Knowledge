@@ -4,11 +4,36 @@
 
 Heatbox produces high-voltage VESC-compatible motor controllers for electric scooters and e-bikes. Their legacy 100V/100A units are known for robust hardware but have specific wiring considerations that builders need to understand before installation.
 
-## Product Line
+## 💡 Why Choose Heatbox?
 
-| Model | Voltage Rating | Current Rating | Key Features |
-|-------|----------------|----------------|--------------|
-| Heatbox 100V/100A | 100V | 100A | Keyed three-wire ignition harness, legacy design |
+✅ **High Voltage**: 100V rating for multi-series builds
+✅ **Robust Hardware**: Legacy design with proven reliability
+⚠️ **Trade-offs**: Wiring quirks, mis-pinned harnesses common, limited modern features
+
+## 📋 Quick Specifications
+
+| Model | Voltage Rating | Current Rating | Key Features | Common Issue |
+|-------|----------------|----------------|--------------|--------------|
+| Heatbox 100V/100A | 100V | 100A | Keyed three-wire ignition | Mis-pinned harnesses |
+
+## ⚠️ Critical Heatbox Warnings
+
+🔴 **Red Wire ≠ Positive**: Supply positive NOT always red—verify every wire with multimeter
+🔴 **Mis-Pinned Common**: Low voltage at ignition = wiring problem, not firmware brick
+🔴 **Legacy Design**: No firmware-selectable jumpers—physical wiring must be perfect
+🔴 **Verify Before Power**: Trace and document all leads before first power-up
+
+## 💡 Pro Tips
+
+- **Multimeter first**: Test every wire before assuming color coding
+- **Photo reference**: Find community wiring diagrams before touching harness
+- **Document your unit**: Color codes may vary—label everything
+- **Repinning OK**: Don't fear connector rework if mis-pinned
+
+## 🔧 Related Brand Dossiers
+
+- [Spintend Controllers](spintend.md) - Modern 100V alternative
+- [Ennoid Controllers](ennoid.md) - High-voltage VESC option
 
 ## Known Issues & Solutions
 

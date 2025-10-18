@@ -4,6 +4,41 @@
 
 Wheelway manufactures hub motors for electric scooters. While their motors can deliver good performance, they have documented quality control issues that require careful inspection and often sensor replacements. This guide helps you identify and fix common problems before they cause failures.
 
+## 💡 Why Choose Wheelway?
+
+✅ **Available**: Accessible hub motor option for conversions
+✅ **Decent Performance**: Works well once QC issues addressed
+⚠️ **QC Problems**: Requires pre-installation inspection and likely sensor replacement
+⚠️ **VESC Sensitive**: Marginal sensors that work on stock controllers fail on VESC
+
+## 📋 Quick Quality Checklist
+
+| Issue | Frequency | Fix Difficulty | Cost | Must Fix Before? |
+|-------|-----------|----------------|------|------------------|
+| Metal debris in stator | Very Common | ⭐⭐ Medium | €0 (cleaning) | First install |
+| Hall sensor mismatch | Common | ⭐⭐⭐ Medium | €10-20 (SS41F set) | VESC use |
+| Sensor failure <25km | Common | ⭐⭐⭐ Medium | €10-20 | Rebuild/replace |
+| Heat damage (crash) | Varies | N/A | New motor | Retire hub |
+
+## ⚠️ Critical Wheelway Warnings
+
+🔴 **Pre-Install Inspection Mandatory**: Clean stator and test halls before first ride
+🔴 **VESC Incompatibility**: Marginal halls that work on stock controllers desync on VESC
+🔴 **Heat Damage = Replace**: Don't rewind heat-damaged motors—magnets and windings are compromised
+🔴 **Sensor Replacement Standard**: Budget for SS41F sensor upgrades on every motor
+
+## 💡 Pro Tips
+
+- **Open and clean first**: Inspect stator for metal debris before installation
+- **Upgrade sensors proactively**: Replace questionable halls with known-good SS41F before VESC conversion
+- **Test on stock controller**: Validate motor function with simple controller first
+- **Add thermistors**: Use empty mounting slots for temperature monitoring
+
+## 🔧 Related Brand Dossiers
+
+- [Lonnyo Motors](lonnyo.md) - Higher-quality alternative
+- [Minimotors Platforms](minimotors.md) - Chassis for motor upgrades
+
 ## Known Quality Issues
 
 ### Manufacturing Defects

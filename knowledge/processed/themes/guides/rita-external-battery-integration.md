@@ -13,6 +13,36 @@ The Rita adapter enables parallel external battery packs on Xiaomi-style electri
 - **Common-port BMS required**: External packs must use common-port BMS boards
 - **Configuration via Bluetooth**: Setup through Denis' BMS Tool app
 
+## 📋 Quick Reference: Rita Deployment Decision
+
+| Your Scooter | Rita Recommended? | Best External Pack | Key Requirements | Difficulty |
+|--------------|-------------------|-------------------|------------------|------------|
+| Xiaomi M365/Pro (smart dash) | ✅ Yes | Denis 10S4P kit (€170) | Firmware update to 51V limit | ⭐⭐ Medium |
+| Xiaomi clone (no data line) | ⚠️ Conditional | Any 10S common-port | Permanent emulation mode | ⭐⭐⭐ Hard |
+| Ninebot Max G30 | ✅ Yes | Denis 12S3P (upgrade) | 50.4V charger + firmware | ⭐⭐⭐ Hard |
+| Non-Xiaomi scooter | ❌ No | N/A | Rita requires Xiaomi data protocol | N/A |
+
+## ⚠️ Critical Rita Warnings
+
+🔴 **Common-Port BMS Mandatory**: Separate charge ports prevent Rita from managing overvoltage
+🔴 **Voltage Matching**: Start with packs within 0.5V—large differences cause inrush current
+🔴 **30A Current Limit**: Don't exceed Rita's 30A capacity—size packs accordingly
+🔴 **Firmware Updates Required**: Xiaomi firmware must allow higher voltage (51V+ for 12S)
+
+## 💡 Pro Tips
+
+- **Start with 10S**: Simpler firmware changes, proven compatibility
+- **Quality cells matter**: Samsung 35E packs more reliable than budget AliExpress cells
+- **Wildman 2L bags**: Industry-standard external pack enclosure
+- **Test before sealing**: Verify charging logic before final waterproofing
+
+## 🔧 Related Guides
+
+- [Rita Adapter Integration](rita_adapter_integration.md) - Full technical integration guide
+- [Rita External Battery Playbook](rita_external_battery_playbook.md) - Advanced Rita configurations
+- [Battery Pack Design](battery_pack_design.md) - External pack construction
+- [Xiaomi Clone Upgrade Caveats](xiaomi_clone_upgrade_caveats.md) - Clone compatibility issues
+
 ## Core Capabilities
 
 - Works with Xiaomi-style data lines, supports only parallel pack additions, and offers a "permanent BMS emulator" mode for scooters without telemetry, configurable over Bluetooth or a serial tool.[^1]

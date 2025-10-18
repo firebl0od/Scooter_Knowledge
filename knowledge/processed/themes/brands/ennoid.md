@@ -4,6 +4,41 @@
 
 Ennoid produces high-voltage VESC controllers designed for extreme performance electric scooter builds. Their MK8 model shares the Spintend 85150 footprint but requires significant modifications to reach its advertised 26S / 500A phase capability. Ennoid controllers use shunt-based current sensing, which provides more accurate motor detection than current-transformer designs.
 
+## 💡 Why Choose Ennoid?
+
+✅ **Shunt Sensing**: More accurate motor detection than CT-based controllers
+✅ **High Voltage**: 26S capable after MOSFET upgrade
+✅ **Proven Platform**: MK8 shares Spintend 85150 footprint
+⚠️ **Trade-off**: Requires Toll FET swap to reach advertised specs
+
+## 📋 Quick Model Status
+
+| Model | Status | Voltage | Current | Sensing Method | Ready to Use? |
+|-------|--------|---------|---------|----------------|---------------|
+| MK8 (stock) | Production | ~20S | Limited | Shunt (accurate) | ❌ Needs MOSFET upgrade |
+| MK8 (Toll FET upgraded) | Modified | 26S | 500A phase | Shunt | ✅ Community-proven |
+| 100V/75A Single | Teased | 100V | 75A | TBD | ⏳ Awaiting release |
+
+## ⚠️ Critical Ennoid Warnings
+
+🔴 **MK8 Requires Upgrade**: Stock MOSFETs don't support advertised 26S/500A specs
+🔴 **MOSFET Swap Needed**: Infineon IPTC017N12NM6 Toll FETs + rework mandatory
+🔴 **Advanced DIY**: Power stage modification requires soldering skills
+🔴 **CT vs Shunt**: Advantage only matters for high-current (>100A) auto-detect
+
+## 💡 Pro Tips
+
+- **Start with upgrade plan**: Factor MOSFET swap cost into total build budget
+- **Shunt advantage**: Solves motor detection issues that plague CT controllers at 100A+
+- **MK8 footprint**: Shares Spintend 85150 mounting—easy substitution
+- **Single model soon**: Wait for 100V/75A single if small-deck build
+
+## 🔧 Related Brand Dossiers
+
+- [Spintend Controllers](spintend.md) - CT sensing alternative
+- [Briesc Controllers](briesc.md) - Compact EU option
+- [MakerX Controllers](makerx.md) - Budget alternative
+
 ## Product Line
 
 ### MK8 Controller

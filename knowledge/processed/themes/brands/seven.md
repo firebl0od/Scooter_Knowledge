@@ -4,6 +4,40 @@
 
 Seven produces high-voltage VESC controllers designed for extreme performance electric scooters. Their controllers mirror Tronic X12 offerings with 24S and 30S capabilities. However, Seven is a new brand with limited field testing, firmware availability issues, and uncertain support infrastructure. This guide helps you understand what you're getting into if you choose Seven hardware.
 
+## 💡 Why Choose Seven?
+
+✅ **High Voltage**: 24S and 30S capability
+✅ **VESC Express**: Bundled telemetry daughterboard
+✅ **Toll MOSFETs**: 18-30 FET count
+⚠️ **Trade-offs**: New brand, limited field data, firmware support uncertain, higher cost than Chinese alternatives
+
+## 📋 Quick Model Comparison
+
+| Model | FET Count | Voltage | Aux Power | Key Feature | Status |
+|-------|-----------|---------|-----------|-------------|--------|
+| Seven 18 | 18 Toll FETs | 24S target | 12V/4A | Express board | Limited availability |
+| Seven 30 | 30 FETs | 30S ambitions | 12V/4A | Onboard memory | Rumored inventory |
+
+## ⚠️ Critical Seven Warnings
+
+🔴 **New Brand Risk**: Limited field testing and community knowledge
+🔴 **Firmware Issues**: Support and documentation scarce
+🔴 **Tronic Mirror**: Similar to X12—only 15-20% thermal advantage
+🔴 **Conservative Start**: 16S baseline: 180A battery / 300A phase—work up slowly
+
+## 💡 Pro Tips
+
+- **Early adopter risk**: Budget for potential firmware/support issues
+- **Conservative tuning**: Start with proven 16S recipe, increase carefully
+- **Documentation sparse**: Expect to pioneer rather than follow guides
+- **Price comparison**: Evaluate against established Tronic/Spintend options
+
+## 🔧 Related Brand Dossiers
+
+- [Tronic Controllers](tronic.md) - Similar X12 design baseline
+- [Spintend Controllers](spintend.md) - Established high-voltage alternative
+- [3Shul Controllers](3shul.md) - Premium racing option
+
 ## Product Line
 
 ### Seven 18 (18-FET)

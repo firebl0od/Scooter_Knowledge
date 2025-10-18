@@ -93,6 +93,7 @@ Protecting electric scooters from water ingress and theft requires systematic se
 - **Copy proven enclosure designs.** Koxx’s latest SmartController case uses taller internal walls and TPU cable glands that survived a five-minute hose test.
   - treat it as a template when weather-sealing other electronics.[^15]
 - **Waterproof methodically.** Scrape factory paste with care before recoating controllers in silicone.
+- **Protect battery leads from abrasion.** Apply secondary heat-resistant sleeving over silicone battery leads, add strain relief at connection points, and perform post-service inspections before reinstalling decks to catch wear before insulation failures cause shorts or fires.[^battery-lead-protection]
   - overdoing sealant complicates future repairs and traps moisture if the enclosure still leaks.[^16]
 - **Pressure-test new gaskets.** After resealing enclosures with custom gaskets, riders blast the deck with a pressure washer to confirm no leaks before going back to road duty.[^17]
 - **Keep custom builds out of storms.** High-power scooters with relocated electronics still struggle in heavy rain; veterans wait for weather breaks and save storm commutes for stock Ninebots to avoid water-logged controllers.[^18]
@@ -266,3 +267,4 @@ Protecting electric scooters from water ingress and theft requires systematic se
 [^59]: Source: knowledge/notes/all_part01_review.md†L86-L88
 [^60]: Source: knowledge/notes/all_part01_review.md†L896-L896
 [^denis-tracker-proto]: Source: knowledge/notes/denis_all_part02_review.md†L932-L932
+[^battery-lead-protection]: Source: knowledge/notes/input_part006_review.md†L501-L501

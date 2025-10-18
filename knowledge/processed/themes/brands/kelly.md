@@ -4,6 +4,41 @@
 
 Kelly produces motor controllers for electric vehicles including scooters. Their controllers are known for solid basic performance but require careful attention to accessory power management and wiring practices. Kelly controllers use a simpler control approach than VESC systems, with different strengths and limitations.
 
+## 💡 Why Choose Kelly?
+
+✅ **Simpler Setup**: No CAN bridge needed for dual controller AWD
+✅ **Proven Reliability**: Older tech, well-understood failure modes
+✅ **Strong Phase Current**: ~200A phase from 48V packs
+⚠️ **Trade-offs**: Weak aux rails, requires careful autotune, less flexible than VESC
+
+## 📋 Quick Model Comparison
+
+| Model | Voltage | Phase Current | Battery Current | Best Use Case | Key Limitation |
+|-------|---------|---------------|-----------------|---------------|----------------|
+| Kelly 7212 | 48V | ~200A | ~100A (50% rule) | Single motor commuter | Weak DC/DC rail |
+| KLS7230 Dual | 48-84V | ~350A total | ~175A | AWD conversions | Requires frame reinforcement |
+| CL/Kelly High-Spec | Various | 350A continuous | 700A peak (claimed) | High power builds | Conservative tuning needed |
+
+## ⚠️ Critical Kelly Warnings
+
+🔴 **Accessory Power Failure**: DC/DC rail brownouts—wire lights/horn direct to battery via relay
+🔴 **Autotune Carefully**: Hand-tune gradually—aggressive autotune can brick controller
+🔴 **50% Current Rule**: Battery current ≈ 50% of phase current—plan accordingly
+🔴 **Water Sensitivity**: Use sealed Higo/JST connectors—water kills Kelly controllers
+
+## 💡 Pro Tips
+
+- **Direct battery wiring**: Bypass weak DC/DC for accessories >1A
+- **Conservative autotune**: Start low, work up slowly to avoid bricking
+- **Sealed connectors**: Worth the cost—water intrusion is common failure mode
+- **Phase current focus**: Kelly excels at high phase current, less at battery efficiency
+
+## 🔧 Related Brand Dossiers
+
+- [Spintend Controllers](spintend.md) - VESC alternative with more features
+- [Makerbase Controllers](makerbase.md) - Budget VESC option
+- [3Shul Controllers](3shul.md) - Premium high-power alternative
+
 ## Product Line
 
 ### Kelly 7212 Single Controller

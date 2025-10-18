@@ -4,6 +4,40 @@
 
 Rage Mechanics specializes in high-performance custom parts for Dualtron and Thunder-based electric scooters, including extended decks, precision chassis components, and race-spec motors. They're known for premium quality and exact fitment, though prices reflect the boutique nature of their offerings.
 
+## 💡 Why Choose Rage Mechanics?
+
+✅ **Precision Fit**: Exact compatibility with Dualtron/Thunder platforms
+✅ **Quality Materials**: Carbon and machined aluminum options
+✅ **Extended Capacity**: Longer decks for bigger packs
+⚠️ **Trade-offs**: Premium pricing (€410-470 for decks), machining required
+
+## 📋 Quick Product Overview
+
+| Product | Dimensions | Price | Key Feature | Installation |
+|---------|------------|-------|-------------|--------------|
+| Extended Deck | 622mm usable | €410-470 | More battery space | Requires machining |
+| Long Victor Chassis | Fits 21-22S packs | TBD | Thunder-compatible | Thunder swingarms fit |
+| Victor Swingarm Kit | 7.5cm mounting | ~€200 used | Bolt-on upgrade | Phase lead shortening |
+
+## ⚠️ Critical Rage Mechanics Notes
+
+🔴 **Machining Required**: Decks need controller plate and harness routing cuts
+🔴 **Premium Pricing**: Quality comes at boutique prices
+🔴 **Thunder Compatibility**: Verify swingarm and box fitment before ordering
+🔴 **Phase Lead Mods**: 70H or 11" drives need shortened phase wiring
+
+## 💡 Pro Tips
+
+- **Carbon worth it**: €60 premium for carbon version justified by weight savings
+- **Victor chassis option**: Cheaper path to extended frame than buying Thunder 3
+- **Used Thunder parts**: Save money sourcing used swingarms and boxes (€200 vs new)
+- **Plan machining**: Factor machining costs into deck purchase budget
+
+## 🔧 Related Brand Dossiers
+
+- [Minimotors Platforms](minimotors.md) - Original Dualtron/Thunder frames
+- [RFP Controllers](rfp.md) - Alternative custom frame option
+
 ## Product Line
 
 ### Extended Dualtron Deck

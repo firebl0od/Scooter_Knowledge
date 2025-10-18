@@ -11,6 +11,36 @@ This guide covers 3D printing best practices for creating custom e-scooter parts
 - How to achieve strong, durable parts
 - Safety considerations when working with materials
 
+## 📋 Quick Reference: Material Selection
+
+| Part Type | Material | Nozzle Size | Temp | Speed | Why This Works |
+|-----------|----------|-------------|------|-------|----------------|
+| Battery spacers | PETG | 0.6mm | 240-260°C | 80-120mm/s | Balance of strength and flexibility |
+| Motor mounts | CF-PETG | 0.6mm+ hardened | 250-270°C | 60-100mm/s | Maximum load-bearing strength |
+| Prototypes | PLA | 0.4mm | 200-220°C | 60mm/s | Fast, easy, disposable |
+| Deck brackets | PETG | 0.6mm | 240-260°C | 80-120mm/s | Vibration resistant |
+| Cable management | TPU/PETG | 0.4mm | 230-250°C | 30-50mm/s | Flexibility or rigidity as needed |
+
+## ⚠️ Critical Print Safety
+
+🔴 **Dry Filament**: Wet PETG cracks under load—store in sealed containers with desiccant
+🔴 **Hardened Nozzles**: CF materials destroy brass nozzles—use hardened steel ≥0.6mm
+🔴 **Heat Limits**: PLA warps in sun/motor heat—use PETG for anything near batteries or motors
+🔴 **Load Testing**: Test structural parts before installation—don't trust first prints for safety-critical uses
+
+## 💡 Pro Tips
+
+- **Dry immediately**: Open new PETG, use within 2 days, or store with desiccant
+- **Slow for strength**: Drop to 60-80mm/s for critical structural parts
+- **Test fit first**: Print a single layer outline to verify dimensions before full print
+- **Document settings**: Save working profiles—filament variations require re-tuning
+
+## 🔧 Related Guides
+
+- [Battery Pack Design](battery_pack_design.md) - Designing spacers and holders
+- [Chassis Fitment](chassis_fitment.md) - Custom mounting solutions
+- [Ninebot G30 VESC Conversion](ninebot-g30-vesc-conversion-playbook.md) - Spacer requirements
+
 ## Recommended Materials
 
 ### PETG (Polyethylene Terephthalate Glycol)

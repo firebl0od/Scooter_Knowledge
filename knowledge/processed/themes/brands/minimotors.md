@@ -4,6 +4,41 @@
 
 Minimotors is a major manufacturer of premium electric scooters, producing the Dualtron and Thunder model lines. This page covers technical notes for upgrading and maintaining their platforms, particularly focusing on VESC conversions and high-performance builds.
 
+## 💡 Why Choose Minimotors?
+
+✅ **Premium Build**: Industry-leading chassis quality and suspension
+✅ **VESC-Friendly**: Popular conversion platform with proven upgrades
+✅ **Legal Options**: Thunder 3 homologated in Spain (2027+)
+⚠️ **Trade-offs**: High cost, heavy weight, complex electronics
+
+## 📋 Quick Platform Comparison
+
+| Series | Voltage | Weight | Price Range | Best For | Key Feature |
+|--------|---------|--------|-------------|----------|-------------|
+| Thunder 3 | 72V | ~35-40kg | €3,500-4,500 | Legal Spain builds | First 72V homologated |
+| Dualtron Achilleus | 60-72V | ~42kg | €3,200-3,500 | VESC conversions | Roomy deck for big packs |
+| Dualtron Victor/Luxury | 60V | ~30-35kg | €2,500-3,500 | Premium commuter | Refined suspension |
+
+## ⚠️ Critical Minimotors Notes
+
+🔴 **Frame Certification**: Thunder 3 requires certified frame for Spanish roads (2027+)
+🔴 **Display Bridge Required**: EY3 displays need VSETT Lisp bridge—throttle passthrough is mandatory
+🔴 **Motor Fork Width**: Lonnyo 80H motors need 155mm fork opening—verify before ordering
+🔴 **Heavy Builds**: Plan dual-person handling for battery removal
+
+## 💡 Pro Tips
+
+- **Test motors first**: Validate new hubs on known-good chassis before custom builds
+- **Budget for wheels**: Lonnyo motors ship without rims—add €200-300 for wheel assemblies
+- **VESC popular**: Community default for Achilleus/Victor conversions
+- **Legal advantage**: Thunder 3 certification makes it viable long-term in Spain
+
+## 🔧 Related Brand Dossiers
+
+- [Lonnyo Motors](lonnyo.md) - Popular motor upgrade option
+- [Spintend Controllers](spintend.md) - Common VESC choice for conversions
+- [Nami Scooters](nami.md) - Premium alternative platform
+
 ## Product Lines
 
 ### Thunder Series
