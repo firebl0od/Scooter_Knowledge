@@ -12,6 +12,39 @@ Kaabo produces electric scooters including the Wolf King GT and Mantis series. K
 - Deck packaging constrains dual-controller installations
 - Regular steering column maintenance required
 
+## 💡 Why Choose Kaabo?
+
+✅ **All-Weather Durability**: Wolf King GT proven in harsh conditions
+✅ **High-Power Ready**: Mantis handles 21S-24S, ~32kW peaks
+✅ **Deck Space**: Good for large battery packs
+⚠️ **Trade-offs**: Mantis fire risk, deck too narrow for dual controllers without external mounting
+
+## 📋 Quick Model Comparison
+
+| Model | Stock Config | Deck Volume | Best For | Critical Issue |
+|-------|-------------|-------------|----------|----------------|
+| Wolf King GT | 20S7P 21700 | 172×70×430mm | All-weather commuter | Narrow deck for duals |
+| Mantis | Varies | Good | High-power builds | **Fire safety concerns** |
+
+## ⚠️ Critical Kaabo Warnings
+
+🔴 **Mantis Fire Risk**: Recurring fires blamed on underspec batteries and poor crimps
+🔴 **Deck Width Limit**: Only 70mm usable—forces external controller mounting for duals
+🔴 **Stock Welding Weak**: Reinforce before high-power upgrades
+🔴 **BMS Inadequate**: Replace stock BMS for performance builds
+
+## 💡 Pro Tips
+
+- **Wolf King for reliability**: Proven commuter platform over Mantis
+- **External controllers**: Plan external mounting for dual-motor builds
+- **Battery replacement**: Budget for quality pack rebuild on Mantis
+- **Regular inspection**: Check steering column and welds frequently
+
+## 🔧 Related Brand Dossiers
+
+- [Minimotors Platforms](minimotors.md) - Alternative premium platform
+- [Segway Platforms](segway.md) - Safer commuter alternative
+
 ## Product Line
 
 ### Wolf King GT
