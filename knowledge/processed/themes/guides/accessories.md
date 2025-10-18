@@ -13,6 +13,37 @@ This guide covers displays, lighting, security, power management, and comfort ac
 - Power control ergonomics
 - Winter comfort accessories
 
+## 📋 Quick Reference: Accessory Power Budget
+
+| Accessory | Power Draw | Voltage | Mounting Complexity | Notes |
+|-----------|------------|---------|---------------------|-------|
+| TFT Display | 0.2-0.5A @ 5V | 5V (buck from pack) | ⭐⭐ Medium | Mount with zip ties or 3D print |
+| USB GPS Speed | 0.1-0.2A @ 5V | 5V USB | ⭐ Easy | Budget option, 1min boot |
+| Headlight (high) | 1-3A @ 12V | 12V (buck from pack) | ⭐⭐⭐ Hard | Requires separate circuit |
+| LED strips | 0.5-2A @ 12V | 12V or 5V | ⭐⭐ Medium | Plan dedicated converter |
+| Horn | 0.5-1A @ 12V | 12V | ⭐ Easy | Brief pulses only |
+| 4G Tracker | 0.1-0.3A @ 5V | 5V | ⭐⭐⭐ Hard | Hidden installation |
+
+## ⚠️ Critical Power Warnings
+
+🔴 **Voltage Protection**: Never feed 5V accessories from 12V rail—use proper buck converters
+🔴 **Current Limits**: Controller aux rails typically 2-3A max—plan external converters for high-power accessories
+🔴 **Isolation**: Keep high-current accessories (lights, horn) separate from logic circuits (displays, GPS)
+🔴 **Fusing**: Protect every accessory circuit with appropriately-rated fuses
+
+## 💡 Pro Tips
+
+- **Test on bench first**: Verify all accessories work before permanent installation
+- **Plan wire routing**: Keep high-current and signal wires separated to avoid interference
+- **Label everything**: Mark voltages and polarity on every connector
+- **Budget conservatively**: Assume 70% of rated current capacity for planning
+
+## 🔧 Related Guides
+
+- [VESC ADC Accessory Integration](vesc-adc-accessory-integration.md) - Detailed ADC board wiring
+- [Power Distribution](power_distribution.md) - Wire sizing and fusing
+- [Scooter Waterproofing & Security](scooter_waterproofing_and_security.md) - Protecting accessories
+
 ## Display & Dashboard Solutions
 
 ### The VESC Display Gap

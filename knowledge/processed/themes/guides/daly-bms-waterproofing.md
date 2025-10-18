@@ -12,6 +12,36 @@ This guide covers diagnosis, recovery, and waterproofing procedures for Daly sma
 - Post-recovery validation steps
 - Preventive maintenance practices
 
+## 📋 Quick Diagnosis: Moisture vs Other Failures
+
+| Symptom | Moisture Damage | Other Cause | Quick Test |
+|---------|----------------|-------------|------------|
+| Ghost 5V on cells | ✅ Likely | ❌ Unlikely | Dry out board, retest |
+| Random shutoffs | ✅ Possible | ✅ Possible | Check balance connector moisture |
+| Voltage mismatch (BMS vs dash) | ✅ Likely | ⚠️ Possible | Inspect for water in connectors |
+| MOSFETs won't enable | ⚠️ Possible | ✅ Likely | Check for corrosion on traces |
+| Blue smoke | ❌ No | ✅ Yes | BMS is toast, replace |
+
+## ⚠️ Critical Safety Warnings
+
+🔴 **Disconnect Pack**: Always disconnect battery before working on wet BMS
+🔴 **No Forced Operation**: Never bypass protections on moisture-damaged boards
+🔴 **Corrosion Risk**: Water + voltage = permanent trace damage—dry immediately
+🔴 **Retest Everything**: Verify cell voltages with multimeter after recovery
+
+## 💡 Pro Tips
+
+- **Act fast**: Dry within 24 hours to prevent corrosion
+- **Use rice/silica**: Pack wet BMS with desiccant in sealed container
+- **Heat carefully**: Warm air only—no direct heat gun on components
+- **Test before sealing**: Run pack through charge/discharge cycles before final waterproofing
+
+## 🔧 Related Guides
+
+- [Smart BMS Integration Handbook](llt-jbd-smart-bms-integration-handbook.md) - Alternative BMS options
+- [Scooter Waterproofing & Security](scooter_waterproofing_and_security.md) - Preventive measures
+- [Battery Pack Design](battery_pack_design.md) - BMS selection criteria
+
 ## Understanding Moisture Damage
 
 ### Common Symptoms
