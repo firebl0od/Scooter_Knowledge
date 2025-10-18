@@ -4,6 +4,35 @@
 
 Aerlang produces budget-friendly electric scooters targeting the legal commuter market. Their 500W model offers impressive features for the price point but has a critical structural weakness that requires attention. This guide covers what you need to know about the platform, its strengths, and how to prevent catastrophic deck failures.
 
+## 💡 Why Consider Aerlang?
+
+✅ **Budget-Friendly**: ~€400 for legal 500W platform
+✅ **Smart Features**: Built-in Bluetooth, app control, lighting
+✅ **Legal Compliance**: 25 km/h mode for regulated areas
+⚠️ **Trade-off**: Deck structural issues require preventive reinforcement
+
+## 📋 Quick Specs at a Glance
+
+| Specification | Value | Notes |
+|---------------|-------|-------|
+| Power | 500W nominal | ~48V/25A controller |
+| Battery | 48V 17.5Ah | ~840Wh capacity |
+| Top Speed | 45 km/h | 25 km/h legal mode available |
+| Wheels | 10 inches | Pneumatic tires |
+| Price | ~€400 | Budget commuter segment |
+| **Critical Issue** | **Deck cracks** | **Requires reinforcement!** |
+
+## ⚠️ Critical Warnings
+
+🔴 **Deck Failure Risk**: Aluminum deck plate work-hardens and cracks—reinforce before high-speed use
+🔴 **Inspect Regularly**: Check welds at neck and rear suspension weekly
+🔴 **Speed Limit Until Fixed**: Stay under 35 km/h until reinforcement complete
+
+## 🔧 Related Brand Dossiers
+
+- [Kaabo Controllers](kaabo.md) - Alternative budget platform
+- [Segway Platforms](segway.md) - More reliable commuter option
+
 ## Product Specifications
 
 ### Stock Configuration
