@@ -16,6 +16,38 @@ Powering accessories and displays from VESC controllers requires understanding r
 - Common power distribution failures
 - Safe wiring practices for high-current accessories
 
+## 📋 Quick Reference: When to Use External Buck Converter
+
+| Accessory Type | Current Draw | Controller Built-in OK? | External Buck Needed? |
+|----------------|-------------|------------------------|---------------------|
+| TFT Display | 0.3-0.5A @ 5V | ⚠️ Borderline | ✅ Recommended |
+| LED Headlight | 1-3A @ 12V | ❌ No | ✅ Required |
+| Horn | 0.5-1A @ 12V | ⚠️ Maybe (brief pulses) | ✅ Safer |
+| GPS Tracker | 0.1-0.2A @ 5V | ✅ Usually OK | ⚠️ If using display too |
+| Cooling Fan | 0.2-0.5A @ 12V | ⚠️ Borderline | ✅ Recommended |
+| Wireless Switch | 1.5A @ 12V | ⚠️ Check controller | ✅ Often needed |
+
+## ⚠️ Critical Voltage Warnings
+
+🔴 **5V into 3.3V = Dead ADC**: Never connect 5V throttle directly to 3.3V ADC pins
+🔴 **Regulator Overload**: Controller aux rails typically 1.5-3A max—external buck for anything higher
+🔴 **Brownout Risk**: Overloading 5V rail can reset controller mid-ride
+🔴 **Fuse Everything**: Single short on aux rail can kill entire controller
+
+## 💡 Pro Tips
+
+- **Measure first**: Check throttle output voltage before connecting to ADC
+- **External for lights**: Always use dedicated buck converter for headlights
+- **CAN over UART**: CAN communication more reliable in high-current environments
+- **Power budget**: Add up all accessory current draws before finalizing wiring
+
+## 🔧 Related Guides
+
+- [VESC ADC Accessory Integration](vesc-adc-accessory-integration.md) - ADC board setup
+- [Accessories & UX Planning](accessories.md) - Display and accessory selection
+- [Power Distribution](power_distribution.md) - Wire sizing and fusing
+- [Throttle & Brake Signals](throttle_brake_signals.md) - Signal voltage management
+
 ## Purpose
 
 This guide distills field reports on powering lights, horns, and dashboards from aftermarket VESC controllers so builders avoid overloading regulator rails or frying logic accessories during swaps. Recent X12 case studies underline how little headroom exists on their 5 V rails and why every accessory deserves its own buck converter.[^1]

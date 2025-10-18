@@ -13,6 +13,36 @@ LLT (also marketed as JBD) smart BMS boards are the most popular choice for elec
 - Troubleshooting common issues (charge FET trips, balance problems)
 - When to choose alternatives like JK or ANT BMS
 
+## 📋 Quick Reference: BMS Selection by Build
+
+| Pack Config | Recommended BMS | Continuous Rating | Key Features | Price Range |
+|-------------|----------------|-------------------|--------------|-------------|
+| 10-17S commuter | JBD 10-17S 100A slim | ~60A discharge, 100A discharge | Compact, fits tight spaces | €35-50 |
+| 18-21S mid-power | JBD 21S 100A | ~80A continuous | 27mm thick with heatsinks | €40-55 |
+| 17S high-power | JBD-SP17S005 150A | ~100A continuous | Better regen handling | €50-70 |
+| Dual motor >200A | Jiabada 230A | ~150A continuous | Dual heatsinks, higher capacity | €70-90 |
+| Active balancing | JK Smart BMS | Varies | 1A+ active balancing | €60-100 |
+
+## ⚠️ Critical Integration Warnings
+
+🔴 **Regen Trips**: Start with -5A battery / -40A phase regen—aggressive settings trip charge FET
+🔴 **Thickness Planning**: JBD boards are 27mm with hardware—measure before welding pack
+🔴 **Current Limits**: Headline ratings ≠ continuous—budget 60-70% for thermal safety
+🔴 **Balance Current**: 100-160mA passive balancing only—active balancing needs JK hardware
+
+## 💡 Pro Tips
+
+- **Pre-charge protection**: 20A soft-start protects controllers during power-up
+- **Bluetooth security**: Disable cloud features or lock with password when unattended
+- **Spare boards**: Keep backup BMS—charge FET failures can strand you
+- **Conservative tuning**: Start low on discharge/regen limits, increase based on testing
+
+## 🔧 Related Guides
+
+- [Smart BMS Integration Handbook](smart-bms-integration-handbook.md) - Alternative BMS platforms
+- [Battery Pack Design](battery_pack_design.md) - Pack construction with BMS
+- [Daly BMS Waterproofing](daly-bms-waterproofing.md) - Moisture protection strategies
+
 ## TL;DR
 
 - LLT/JBD smart boards remain the community’s compact, configurable baseline: integrated Bluetooth, programmable limits, and a 20 A soft-start pre-charge protect controllers without consuming deck space.[^1]
